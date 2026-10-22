@@ -145,6 +145,7 @@ namespace DungeonCrawlerTactics.Unity
                     HandleKeyboard();
                     DrawHeader();
                     if (view.screen == "camp") DrawCamp();
+                    else if (view.screen == "explore") DrawExploration();
                     else if (view.screen == "battle") DrawBattle();
                     else DrawOutcome();
                     DrawFooter();
@@ -161,6 +162,20 @@ namespace DungeonCrawlerTactics.Unity
             if (!string.IsNullOrEmpty(modal))
             {
                 if (ev.keyCode == KeyCode.Escape) { modal = ""; GUI.FocusControl(null); ev.Use(); }
+                return;
+            }
+            if (view.screen == "explore" && view.exploration != null)
+            {
+                int dx = 0, dy = 0;
+                if (ev.keyCode == KeyCode.LeftArrow) dx = -1;
+                if (ev.keyCode == KeyCode.RightArrow) dx = 1;
+                if (ev.keyCode == KeyCode.UpArrow) dy = -1;
+                if (ev.keyCode == KeyCode.DownArrow) dy = 1;
+                if (dx != 0 || dy != 0)
+                {
+                    ev.Use();
+                    Submit(new GameCommand { type = "explore_move", x = view.exploration.x + dx, y = view.exploration.y + dy });
+                }
                 return;
             }
             if (view.screen != "battle") return;

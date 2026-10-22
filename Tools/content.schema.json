@@ -62,6 +62,7 @@
       "properties": {
         "id": {"$ref": "#/$defs/id"},
         "priority": {"type": "integer", "minimum": -2147483648, "maximum": 2147483647},
+        "damageReduction": {"$ref": "#/$defs/natural"},
         "incoming": {"$ref": "#/$defs/query"}, "target": {"$ref": "#/$defs/query"},
         "consumeTags": {"$ref": "#/$defs/ids"}, "effects": {"$ref": "#/$defs/effects"}, "emitTags": {"$ref": "#/$defs/ids"}
       }

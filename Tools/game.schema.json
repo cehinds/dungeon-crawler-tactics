@@ -1,74 +1,517 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Dungeon Crawler Tactics campaign v1",
-  "type": "object", "additionalProperties": false,
-  "required": ["schemaVersion", "contentVersion", "partySize", "energyPerRound", "roster", "classStats", "encounters", "startingInventory", "rewards", "tagRules"],
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contentVersion",
+    "partySize",
+    "energyPerRound",
+    "roster",
+    "classStats",
+    "encounters",
+    "startingInventory",
+    "rewards",
+    "tagRules"
+  ],
   "properties": {
-    "schemaVersion": {"const": 1},
-    "contentVersion": {"type": "string", "minLength": 1},
-    "partySize": {"type": "integer", "minimum": 1, "maximum": 8},
-    "energyPerRound": {"type": "integer", "minimum": 0, "maximum": 100},
-    "roster": {"type": "array", "maxItems": 32, "items": {"$ref": "#/$defs/roster"}},
-    "classStats": {"type": "array", "items": {"$ref": "#/$defs/stats"}},
-    "encounters": {"type": "array", "minItems": 1, "maxItems": 100, "items": {"$ref": "#/$defs/encounter"}},
-    "startingInventory": {"type": "array", "items": {"$ref": "#/$defs/inventory"}},
-    "rewards": {"type": "array", "items": {"$ref": "#/$defs/reward"}},
-    "tagRules": {"type": "array", "items": {"$ref": "#/$defs/tagRule"}}
+    "schemaVersion": {
+      "const": 1
+    },
+    "contentVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "partySize": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8
+    },
+    "energyPerRound": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "roster": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/roster"
+      }
+    },
+    "classStats": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stats"
+      }
+    },
+    "encounters": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/encounter"
+      }
+    },
+    "startingInventory": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/inventory"
+      }
+    },
+    "rewards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reward"
+      }
+    },
+    "tagRules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tagRule"
+      }
+    }
   },
   "$defs": {
-    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"},
-    "label": {"type": "string", "minLength": 1},
-    "coord": {"type": "integer", "minimum": 0, "maximum": 29},
-    "hp": {"type": "integer", "minimum": 1, "maximum": 10000},
-    "energy": {"type": "integer", "minimum": 0, "maximum": 1000},
-    "move": {"type": "integer", "minimum": 1, "maximum": 20},
-    "tags": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "coord": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 29
+    },
+    "hp": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "energy": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "move": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
     "roster": {
-      "type": "object", "additionalProperties": false, "required": ["id", "label", "classId", "selected"],
-      "properties": {"id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"}, "classId": {"$ref": "#/$defs/id"}, "selected": {"type": "boolean"}}
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "classId",
+        "selected"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "classId": {
+          "$ref": "#/$defs/id"
+        },
+        "selected": {
+          "type": "boolean"
+        }
+      }
     },
     "stats": {
-      "type": "object", "additionalProperties": false, "required": ["classId", "hp", "energy", "move"],
-      "properties": {"classId": {"$ref": "#/$defs/id"}, "hp": {"$ref": "#/$defs/hp"}, "energy": {"$ref": "#/$defs/energy"}, "move": {"$ref": "#/$defs/move"}}
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classId",
+        "hp",
+        "energy",
+        "move"
+      ],
+      "properties": {
+        "classId": {
+          "$ref": "#/$defs/id"
+        },
+        "hp": {
+          "$ref": "#/$defs/hp"
+        },
+        "energy": {
+          "$ref": "#/$defs/energy"
+        },
+        "move": {
+          "$ref": "#/$defs/move"
+        }
+      }
     },
     "cell": {
-      "type": "object", "additionalProperties": false, "required": ["x", "y"],
-      "properties": {"x": {"$ref": "#/$defs/coord"}, "y": {"$ref": "#/$defs/coord"}, "cost": {"type": "integer", "minimum": 0}}
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "cost": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
     },
     "tile": {
-      "type": "object", "additionalProperties": false, "required": ["x", "y", "blocked", "tags"],
-      "properties": {"x": {"$ref": "#/$defs/coord"}, "y": {"$ref": "#/$defs/coord"}, "blocked": {"type": "boolean"}, "tags": {"$ref": "#/$defs/tags"}}
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "blocked",
+        "tags"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "blocked": {
+          "type": "boolean"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
     },
     "enemy": {
-      "type": "object", "additionalProperties": false, "required": ["id", "label", "classId", "x", "y", "hp", "energy", "move", "tags"],
-      "properties": {"id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"}, "classId": {"$ref": "#/$defs/id"}, "x": {"$ref": "#/$defs/coord"}, "y": {"$ref": "#/$defs/coord"}, "hp": {"$ref": "#/$defs/hp"}, "energy": {"$ref": "#/$defs/energy"}, "move": {"$ref": "#/$defs/move"}, "tags": {"$ref": "#/$defs/tags"}}
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "classId",
+        "x",
+        "y",
+        "hp",
+        "energy",
+        "move",
+        "tags"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "classId": {
+          "$ref": "#/$defs/id"
+        },
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "hp": {
+          "$ref": "#/$defs/hp"
+        },
+        "energy": {
+          "$ref": "#/$defs/energy"
+        },
+        "move": {
+          "$ref": "#/$defs/move"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
     },
     "encounter": {
-      "type": "object", "additionalProperties": false, "required": ["id", "label", "description", "width", "height", "xp", "playerSpawns", "tiles", "enemies"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "width",
+        "height",
+        "xp",
+        "playerSpawns",
+        "tiles",
+        "enemies",
+        "exploration"
+      ],
       "properties": {
-        "id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"}, "description": {"type": "string"},
-        "width": {"type": "integer", "minimum": 4, "maximum": 30}, "height": {"type": "integer", "minimum": 4, "maximum": 30},
-        "xp": {"type": "integer", "minimum": 0, "maximum": 10000},
-        "playerSpawns": {"type": "array", "items": {"$ref": "#/$defs/cell"}},
-        "tiles": {"type": "array", "items": {"$ref": "#/$defs/tile"}},
-        "enemies": {"type": "array", "minItems": 1, "maxItems": 30, "items": {"$ref": "#/$defs/enemy"}}
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 30
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 30
+        },
+        "xp": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "playerSpawns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cell"
+          }
+        },
+        "tiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tile"
+          }
+        },
+        "enemies": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/$defs/enemy"
+          }
+        },
+        "exploration": {
+          "$ref": "#/$defs/exploration"
+        }
       }
     },
     "inventory": {
-      "type": "object", "additionalProperties": false, "required": ["itemId", "count"],
-      "properties": {"itemId": {"$ref": "#/$defs/id"}, "count": {"type": "integer", "minimum": 0, "maximum": 1000}}
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "itemId",
+        "count"
+      ],
+      "properties": {
+        "itemId": {
+          "$ref": "#/$defs/id"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        }
+      }
     },
     "reward": {
-      "type": "object", "additionalProperties": false, "required": ["id", "label", "description", "itemId", "count", "heal"],
-      "properties": {"id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"}, "description": {"type": "string"}, "itemId": {"type": "string"}, "count": {"type": "integer", "minimum": 0, "maximum": 100}, "heal": {"type": "integer", "minimum": 0, "maximum": 10000}}
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "itemId",
+        "count",
+        "heal"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "heal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      }
     },
     "tagRule": {
-      "type": "object", "additionalProperties": false, "required": ["tag", "durationRounds"],
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "durationRounds"
+      ],
       "properties": {
-        "tag": {"$ref": "#/$defs/id"}, "occupantTag": {"type": "string"},
-        "durationRounds": {"type": "integer", "minimum": 0, "maximum": 100},
-        "entryDamage": {"type": "integer", "minimum": 0, "maximum": 10000}, "turnDamage": {"type": "integer", "minimum": 0, "maximum": 10000},
-        "movePenalty": {"type": "integer", "minimum": 0, "maximum": 100}, "energyPenalty": {"type": "integer", "minimum": 0, "maximum": 100}
+        "tag": {
+          "$ref": "#/$defs/id"
+        },
+        "occupantTag": {
+          "type": "string"
+        },
+        "durationRounds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "entryDamage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "turnDamage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "movePenalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "energyPenalty": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "explorationPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "kind",
+        "x",
+        "y",
+        "itemId",
+        "count"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "encounter",
+            "cache",
+            "lore"
+          ]
+        },
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "itemId": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "exploration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "width",
+        "height",
+        "startX",
+        "startY",
+        "discoveryRadius",
+        "walls",
+        "points"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 30
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 30
+        },
+        "startX": {
+          "$ref": "#/$defs/coord"
+        },
+        "startY": {
+          "$ref": "#/$defs/coord"
+        },
+        "discoveryRadius": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "walls": {
+          "type": "array",
+          "maxItems": 900,
+          "items": {
+            "$ref": "#/$defs/cell"
+          }
+        },
+        "points": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/explorationPoint"
+          }
+        }
       }
     }
   }

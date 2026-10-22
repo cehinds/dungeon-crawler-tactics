@@ -104,6 +104,38 @@ internal static class Program
         noRevive.abilities.Single(a=>a.id=="ability.firebolt").effects = new[]{new EffectDef{op="Damage",amount=30},new EffectDef{op="Heal",amount=30}};
         state = Battle(); commit = new RulesEngine(new Catalog(noRevive)).Execute(state,"hero","ability.firebolt","enemy");
         Check(commit.State.Entities["enemy"].Hp == 0,"lethal damage followed by healing in one event cannot revive");
+        Content combat = JsonSerializer.Deserialize<Content>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")), new JsonSerializerOptions { IncludeFields = true });
+        RulesEngine playable = new RulesEngine(new Catalog(combat));
+        foreach (var kit in new[]{("class.guardian", "ability.bulwark"), ("class.bard", "ability.rally"), ("class.necromancer", "ability.siphon_ward")})
+        {
+            state = Battle(kit.Item1); state.Entities["hero"].Hp = 5;
+            commit = playable.Execute(state, "hero", kit.Item2, "hero");
+            Check(commit.State.Entities["hero"].Hp > 5 && commit.State.Entities["hero"].Tags.Contains("status.guarded"), kit.Item1 + " support heals and grants protection");
+        }
+        state = Battle(); state.Entities["enemy"].Hp = 5; state.Entities["enemy"].Tags.Add("status.guarded");
+        before = Snapshot(state); preview = playable.Preview(state, "hero", "ability.firebolt", "enemy"); commit = playable.Execute(state, "hero", "ability.firebolt", "enemy");
+        Check(commit.State.Entities["enemy"].Hp == 1 && !commit.State.Entities["enemy"].Tags.Contains("status.guarded"), "guard prevents lethal damage and consumes on hit");
+        Check(Snapshot(preview.State) == Snapshot(commit.State) && Snapshot(state) == before, "guard forecast matches commit without mutation");
+        state.Entities["enemy"].Hp = 30; state.Entities["enemy"].Immunities.Add("element.fire");
+        Check(playable.Execute(state, "hero", "ability.firebolt", "enemy").State.Entities["enemy"].Tags.Contains("status.guarded"), "immune attacks preserve guard");
+        state = Battle("class.cleric"); state.Entities["hero"].Hp = 5; state.Entities["hero"].Tags.Add("status.guarded");
+        Check(playable.Execute(state, "hero", "ability.mend", "hero").State.Entities["hero"].Tags.Contains("status.guarded"), "healing preserves guard");
+        combat.abilities.Single(a => a.id == "ability.firebolt").effects = new[]{new EffectDef{op="AddTag",tag="status.wet"},new EffectDef{op="Damage",amount=0}};
+        state = Battle(); state.Entities["enemy"].Tags.Add("status.guarded");
+        commit = new RulesEngine(new Catalog(combat)).Execute(state,"hero","ability.firebolt","enemy");
+        Check(commit.State.Entities["enemy"].Tags.Contains("status.guarded") && !commit.Log.Contains("reaction.guarded_blocks"), "tag-only event with matching element and zero damage preserves guard");
+        combat.abilities.Single(a => a.id == "ability.firebolt").effects = new[]{new EffectDef{op="Damage",amount=4},new EffectDef{op="Damage",amount=4}};
+        playable = new RulesEngine(new Catalog(combat)); state = Battle(); state.Entities["enemy"].Tags.Add("status.guarded");
+        commit = playable.Execute(state,"hero","ability.firebolt","enemy");
+        Check(commit.State.Entities["enemy"].Hp == 28, "guard budget shared across multiple damage effects");
+        commit = playable.Execute(commit.State,"hero","ability.firebolt","enemy");
+        Check(commit.State.Entities["enemy"].Hp == 20, "consumed guard does not protect a second attack");
+        ReactionDef guard = combat.reactions.Single(r => r.id == "reaction.guarded_blocks");
+        combat.reactions = new[]{guard,new ReactionDef{id="reaction.lower_guard",priority=100,damageReduction=20,incoming=new TagQuery{all=new[]{"element.fire"}},target=new TagQuery{all=new[]{"status.guarded"}},consumeTags=new[]{"status.guarded"}}};
+        state = Battle(); state.Entities["enemy"].Tags.Add("status.guarded"); commit = new RulesEngine(new Catalog(combat)).Execute(state,"hero","ability.firebolt","enemy");
+        Check(commit.State.Entities["enemy"].Hp == 28 && !commit.Log.Contains("reaction.lower_guard"), "higher priority protection consumes shared prerequisite");
+        guard.damageReduction = -1;
+        Check(Rejects(() => new Catalog(combat)), "negative damage reduction rejected");
         Console.WriteLine(passed + " semantic checks passed.");
     }
 }

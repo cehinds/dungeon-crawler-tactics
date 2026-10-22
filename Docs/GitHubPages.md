@@ -1,10 +1,10 @@
 # Host the browser game on GitHub Pages
 
-The intended public source repository is `cehinds/dungeon-crawler-tactics`, with `main` as its default branch. Once that repository exists and deployment succeeds, the expected game URL is:
+The public source is [cehinds/dungeon-crawler-tactics](https://github.com/cehinds/dungeon-crawler-tactics), with `main` as its default branch. The game is hosted at:
 
 <https://cehinds.github.io/dungeon-crawler-tactics/>
 
-This URL is a deployment target, not evidence that publication has completed. Repository creation, pushing the source and a successful Pages workflow run are required before it is live.
+The initial deployment succeeded on 2026-10-22. Every source push runs validation, builds the browser artifact and deploys it. The latest Actions result identifies which revision is live.
 
 ## First deployment
 

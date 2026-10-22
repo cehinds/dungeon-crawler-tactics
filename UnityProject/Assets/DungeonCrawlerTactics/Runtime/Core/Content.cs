@@ -42,6 +42,8 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class ReactionDef
     {
         public string id; public int priority;
+        // A reaction may prevent this much damage from its triggering event, before HP changes.
+        public int damageReduction;
         public TagQuery incoming = new TagQuery();
         public TagQuery target = new TagQuery();
         public string[] consumeTags = new string[0];
@@ -78,6 +80,7 @@ namespace DungeonCrawlerTactics
             foreach (ReactionDef r in content.reactions)
             {
                 Require(r != null && ValidId(r.id) && ids.Add(r.id), "Invalid or duplicate reaction.");
+                Require(r.damageReduction >= 0, "Reaction damage reduction cannot be negative.");
                 CheckQuery(r.incoming); CheckQuery(r.target); CheckTags(r.consumeTags); CheckTags(r.emitTags); CheckEffects(r.effects); Reactions.Add(r);
             }
             Reactions.Sort((a, b) => { int priority = b.priority.CompareTo(a.priority); return priority != 0 ? priority : StringComparer.Ordinal.Compare(a.id, b.id); });

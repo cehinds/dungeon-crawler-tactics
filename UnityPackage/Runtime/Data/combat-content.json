@@ -382,6 +382,11 @@
           "op": "Heal",
           "amount": 12,
           "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.guarded"
         }
       ]
     },
@@ -581,6 +586,11 @@
           "op": "Heal",
           "amount": 10,
           "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.guarded"
         }
       ]
     },
@@ -631,6 +641,11 @@
           "op": "Heal",
           "amount": 11,
           "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.guarded"
         }
       ]
     },
@@ -941,6 +956,33 @@
       },
       "consumeTags": [
         "surface.burning"
+      ],
+      "effects": [],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.guarded_blocks",
+      "priority": 200,
+      "damageReduction": 6,
+      "incoming": {
+        "all": [],
+        "any": [
+          "damage.physical",
+          "element.fire",
+          "element.cold",
+          "element.lightning"
+        ],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.guarded"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.guarded"
       ],
       "effects": [],
       "emitTags": []

@@ -42,6 +42,23 @@ class CampaignValidationTests(unittest.TestCase):
         room['tiles'] += [{'x':8,'y':7,'blocked':True,'tags':[]},{'x':9,'y':6,'blocked':True,'tags':[]}]
         self.assertTrue(any('isolated' in e for e in validate_game(self.game,self.content)))
 
+    def test_exploration_requires_reachable_unique_door(self):
+        room = self.game['encounters'][0]['exploration']
+        room['points'][0]['x'] = 0
+        self.assertTrue(any('unreachable' in e for e in validate_game(self.game,self.content)))
+
+    def test_exploration_cache_requires_known_supply(self):
+        self.game['encounters'][0]['exploration']['points'][1]['itemId'] = 'item.typo'
+        self.assertTrue(any('item.typo' in e for e in validate_game(self.game,self.content)))
+
+    def test_exploration_sector_ids_are_unique(self):
+        self.game['encounters'][1]['exploration']['id'] = self.game['encounters'][0]['exploration']['id']
+        self.assertTrue(any('duplicate' in e for e in validate_game(self.game,self.content)))
+
+    def test_exploration_rejects_unknown_authoring_fields(self):
+        self.game['encounters'][0]['exploration']['procedural'] = True
+        self.assertTrue(any('procedural' in e for e in validate_game(self.game,self.content)))
+
 
 if __name__ == '__main__':
     unittest.main()

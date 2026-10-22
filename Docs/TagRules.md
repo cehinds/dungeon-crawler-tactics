@@ -38,9 +38,10 @@ All three clauses must pass. An entirely empty query matches everything, so use 
 3. Dequeue FIFO. If processed events exceed the configured budget (default 64), throw and discard the working clone.
 4. If any incoming tag appears in the target's immunity set, skip this whole event, including its effects and reaction matching. The valid cast's energy was still paid.
 5. Find eligible reactions using incoming tags and target tags **before** applying event effects. Sort by descending priority, then ascending ordinal reaction ID. Catalog sorting establishes this order once.
-6. Apply the event's effects in listed order. Damage and heal affect units; tile HP is ignored. Add/remove mutate the target's tag set.
-7. For each previously eligible reaction, check its target query again. An earlier rule consuming a prerequisite or this event removing it can suppress the rule. New tags do not make previously ineligible rules eligible retroactively. Mark the rule used for this action, remove `consumeTags` immediately, and enqueue its effects plus `emitTags` as a child event.
-8. Continue until the queue is empty. Return state and the ordered event log.
+6. For eligible reactions with optional `damageReduction > 0`, if the incoming event has positive Damage, recheck prerequisites, consume tags and mark the defensive rule used before HP changes. Defenses use the catalog order and share one reduction budget across this event's Damage effects (clamped at integer maximum). Queue their child events. Non-damaging events never consume defensive rules.
+7. Apply the event's effects in listed order. Damage and heal affect units; tile HP is ignored. Add/remove mutate the target's tag set.
+8. For each previously eligible ordinary reaction (`damageReduction == 0`), check its target query again. An earlier rule consuming a prerequisite or this event removing it can suppress the rule. New tags do not make previously ineligible rules eligible retroactively. Mark the rule used for this action, remove `consumeTags` immediately, and enqueue its effects plus `emitTags` as a child event.
+9. Continue until the queue is empty. Return state and the ordered event log.
 
 A rule fires at most once per action chain. The deduplication set resets on the next ability use; it is sufficient per rule here because this kernel has one target per action. Future area effects must key deduplication by rule and target. The event budget is a second guard against broad content growth. Budget failure rolls back both effects and resource cost because the original state was never modified.
 
@@ -59,3 +60,5 @@ Consumed tags are removed when a reaction is scheduled. If a child event is immu
 The fixture provides Oil Flask and Ignite Surface as tile abilities. Douse marks an enemy wet, then Spark/Frostbite can react; frozen enemies can be shattered by a Brawler. Water-extinguish is a supported generic rule, but no current water-on-tile ability is granted in the seed, so it requires a new tile ability or future targeting expansion to use against a burning tile. Surfaces never spread to neighbors. Wet does not grant fire resistance unless a future explicit reaction says so.
 
 Tags describe reactive facts. Class grants, damage values, team relation, resource budgets, targeting, and later turn permissions remain explicit systems. Avoid encoding every numerical stat or UI state as a tag.
+
+The playable pack adds Guarded: physical/fire/cold/lightning events against `status.guarded` consume that tag and reduce their damage by 6 before HP is lost. Defensive eligibility, immunity and the shared preview/commit resolver use the same rules as other reactions. `GameSession` expires unused Guarded after two full rounds.

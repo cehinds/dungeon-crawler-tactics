@@ -21,7 +21,7 @@ namespace DungeonCrawlerTactics
                 if (member.selected) selected++;
             }
             Need(selected <= data.partySize, "Too many default party members.");
-            HashSet<string> encounters = new HashSet<string>();
+            HashSet<string> encounters = new HashSet<string>(), sectors = new HashSet<string>();
             foreach (EncounterDef encounter in data.encounters)
             {
                 Need(encounter != null && !string.IsNullOrEmpty(encounter.id) && encounters.Add(encounter.id) && !string.IsNullOrEmpty(encounter.label) && encounter.width >= 4 && encounter.height >= 4 && encounter.width <= 30 && encounter.height <= 30 && encounter.xp >= 0 && encounter.xp <= 10000, "Invalid encounter.");
@@ -39,6 +39,24 @@ namespace DungeonCrawlerTactics
                     Need(spawn != null && !string.IsNullOrEmpty(spawn.id) && !spawn.id.StartsWith("tile.", StringComparison.Ordinal) && !roster.Contains(spawn.id) && enemies.Add(spawn.id) && !string.IsNullOrEmpty(spawn.label) && spawn.classId != null && catalog.Classes.ContainsKey(spawn.classId) && spawn.hp > 0 && spawn.hp <= 10000 && spawn.energy >= 0 && spawn.energy <= 1000 && spawn.move > 0 && spawn.move <= 20, "Invalid enemy.");
                     Need(Inside(spawn.x, spawn.y, encounter) && !walls.Contains(Key(spawn.x, spawn.y)) && occupied.Add(Key(spawn.x, spawn.y)), "Invalid enemy spawn."); Tags(spawn.tags, catalog);
                 }
+                ExplorationDef map = encounter.exploration;
+                Need(map != null && !string.IsNullOrEmpty(map.id) && !string.IsNullOrEmpty(map.label) && map.width >= 4 && map.height >= 4 && map.width <= 30 && map.height <= 30 && map.discoveryRadius >= 1 && map.discoveryRadius <= 3 && map.walls != null && map.points != null && map.points.Length > 0 && map.points.Length <= 100, "Invalid exploration sector.");
+                Func<int, int, bool> inside = (x, y) => x >= 0 && y >= 0 && x < map.width && y < map.height;
+                HashSet<string> mapWalls = new HashSet<string>(), pointIds = new HashSet<string>(), pointCells = new HashSet<string>();
+                foreach (CellView wall in map.walls) Need(wall != null && inside(wall.x, wall.y) && mapWalls.Add(Key(wall.x, wall.y)), "Invalid exploration wall.");
+                Need(inside(map.startX, map.startY) && !mapWalls.Contains(Key(map.startX, map.startY)), "Invalid exploration start.");
+                HashSet<string> mapReached = new HashSet<string>(); Queue<CellView> mapQueue = new Queue<CellView>(); mapQueue.Enqueue(new CellView { x = map.startX, y = map.startY }); mapReached.Add(Key(map.startX, map.startY));
+                while (mapQueue.Count > 0) { CellView c = mapQueue.Dequeue(); int[] dx = { 0, -1, 1, 0 }, dy = { -1, 0, 0, 1 }; for (int i = 0; i < 4; i++) { int x = c.x + dx[i], y = c.y + dy[i]; if (inside(x, y) && !mapWalls.Contains(Key(x, y)) && mapReached.Add(Key(x, y))) mapQueue.Enqueue(new CellView { x = x, y = y }); } }
+                int doors = 0;
+                foreach (ExplorationPointDef point in map.points)
+                {
+                    Need(point != null && !string.IsNullOrEmpty(point.id) && pointIds.Add(point.id) && !string.IsNullOrEmpty(point.label) && point.description != null && inside(point.x, point.y) && pointCells.Add(Key(point.x, point.y)) && mapReached.Contains(Key(point.x, point.y)), "Invalid or unreachable exploration discovery.");
+                    Need(point.kind == "encounter" || point.kind == "cache" || point.kind == "lore", "Unknown discovery kind.");
+                    if (point.kind == "encounter") doors++;
+                    Need(point.kind == "cache" ? point.itemId != null && catalog.Items.ContainsKey(point.itemId) && point.count > 0 && point.count <= 100 : string.IsNullOrEmpty(point.itemId) && point.count == 0, "Invalid discovery supplies.");
+                }
+                Need(doors == 1, "Exploration requires exactly one encounter door.");
+                Need(sectors.Add(map.id), "Duplicate exploration sector ID.");
                 // Every starting cell must share a connected walkable board; this prevents authored softlocks.
                 HashSet<string> reached = new HashSet<string>(); Queue<CellView> pending = new Queue<CellView>();
                 pending.Enqueue(encounter.playerSpawns[0]); reached.Add(Key(encounter.playerSpawns[0].x, encounter.playerSpawns[0].y));

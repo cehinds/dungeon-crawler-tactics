@@ -45,8 +45,34 @@ def validate_game(data, content):
         ref(rule['tag'], 'tags', f'tagRules.{i}.tag')
         if rule.get('occupantTag'):
             ref(rule['occupantTag'], 'tags', f'tagRules.{i}.occupantTag')
+    unique([e['exploration'] for e in data['encounters']], 'id', 'exploration')
     for i, encounter in enumerate(data['encounters']):
         base = f'encounters.{i}'
+        m = encounter['exploration']
+        unique(m['points'], 'id', base+'.exploration.points')
+        walls = {(c['x'], c['y']) for c in m['walls']}
+        inside = lambda xy: 0 <= xy[0] < m['width'] and 0 <= xy[1] < m['height']
+        start = (m['startX'], m['startY'])
+        if len(walls) != len(m['walls']) or any(not inside(c) for c in walls) or not inside(start) or start in walls:
+            errors.append(base+': invalid exploration walls/start')
+        reached = {start}; queue = [start]
+        for x,y in queue:
+            for c in ((x,y-1),(x-1,y),(x+1,y),(x,y+1)):
+                if inside(c) and c not in walls and c not in reached:
+                    reached.add(c); queue.append(c)
+        positions = set()
+        for p in m['points']:
+            xy = p['x'],p['y']
+            if xy not in reached or xy in positions:
+                errors.append(base+': unreachable/duplicate exploration discovery')
+            positions.add(xy)
+            if p['kind'] == 'cache':
+                ref(p['itemId'], 'items', base+'.exploration.points')
+                if p['count'] <= 0: errors.append(base+': cache must grant supplies')
+            elif p['itemId'] or p['count']: errors.append(base+': only caches grant supplies')
+        if sum(p['kind']=='encounter' for p in m['points']) != 1:
+            errors.append(base+': exploration requires one encounter door')
+
         if len(encounter['playerSpawns']) != data['partySize']:
             errors.append(f'{base}.playerSpawns: must match partySize')
         coordinates = set()

@@ -212,6 +212,15 @@
       "tag": "status.shocked",
       "durationRounds": 1,
       "energyPenalty": 2
+    },
+    {
+      "tag": "status.guarded",
+      "occupantTag": "",
+      "durationRounds": 2,
+      "entryDamage": 0,
+      "turnDamage": 0,
+      "movePenalty": 0,
+      "energyPenalty": 0
     }
   ],
   "encounters": [
@@ -334,7 +343,203 @@
           "move": 3,
           "tags": []
         }
-      ]
+      ],
+      "exploration": {
+        "id": "sector.passages_1",
+        "label": "Service Passages",
+        "description": "Scout branching passages. Caches are optional; the marked door leads into combat. Return to camp to change the party.",
+        "width": 9,
+        "height": 7,
+        "startX": 1,
+        "startY": 1,
+        "discoveryRadius": 1,
+        "walls": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 4,
+            "y": 0
+          },
+          {
+            "x": 5,
+            "y": 0
+          },
+          {
+            "x": 6,
+            "y": 0
+          },
+          {
+            "x": 7,
+            "y": 0
+          },
+          {
+            "x": 8,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 4,
+            "y": 1
+          },
+          {
+            "x": 8,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 6,
+            "y": 2
+          },
+          {
+            "x": 8,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 6,
+            "y": 3
+          },
+          {
+            "x": 8,
+            "y": 3
+          },
+          {
+            "x": 0,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 6,
+            "y": 4
+          },
+          {
+            "x": 8,
+            "y": 4
+          },
+          {
+            "x": 0,
+            "y": 5
+          },
+          {
+            "x": 8,
+            "y": 5
+          },
+          {
+            "x": 0,
+            "y": 6
+          },
+          {
+            "x": 1,
+            "y": 6
+          },
+          {
+            "x": 2,
+            "y": 6
+          },
+          {
+            "x": 3,
+            "y": 6
+          },
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 6,
+            "y": 6
+          },
+          {
+            "x": 7,
+            "y": 6
+          },
+          {
+            "x": 8,
+            "y": 6
+          }
+        ],
+        "points": [
+          {
+            "id": "discovery.door_1",
+            "label": "Service Corridor 13",
+            "description": "Ignite the oil, shock a wet target, or freeze then shatter. Defeat every enemy to open the lift.",
+            "kind": "encounter",
+            "x": 7,
+            "y": 5,
+            "itemId": "",
+            "count": 0
+          },
+          {
+            "id": "discovery.cache_1",
+            "label": "Sponsor supply cache",
+            "description": "A sealed delivery yields one health tonic for the shared pack.",
+            "kind": "cache",
+            "x": 3,
+            "y": 1,
+            "itemId": "item.health_tonic",
+            "count": 1
+          },
+          {
+            "id": "discovery.inscription_1",
+            "label": "Crawler field notes",
+            "description": "Wet targets conduct lightning. Your class actions and consumables can set up reactions before the first clash.",
+            "kind": "lore",
+            "x": 1,
+            "y": 3,
+            "itemId": "",
+            "count": 0
+          }
+        ]
+      }
     },
     {
       "id": "encounter.foundry",
@@ -464,7 +669,203 @@
           "move": 3,
           "tags": []
         }
-      ]
+      ],
+      "exploration": {
+        "id": "sector.passages_2",
+        "label": "Flooded Junction",
+        "description": "Scout branching passages. Caches are optional; the marked door leads into combat. Return to camp to change the party.",
+        "width": 9,
+        "height": 7,
+        "startX": 1,
+        "startY": 1,
+        "discoveryRadius": 1,
+        "walls": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 4,
+            "y": 0
+          },
+          {
+            "x": 5,
+            "y": 0
+          },
+          {
+            "x": 6,
+            "y": 0
+          },
+          {
+            "x": 7,
+            "y": 0
+          },
+          {
+            "x": 8,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 4,
+            "y": 1
+          },
+          {
+            "x": 8,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 6,
+            "y": 2
+          },
+          {
+            "x": 8,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 6,
+            "y": 3
+          },
+          {
+            "x": 8,
+            "y": 3
+          },
+          {
+            "x": 0,
+            "y": 4
+          },
+          {
+            "x": 6,
+            "y": 4
+          },
+          {
+            "x": 8,
+            "y": 4
+          },
+          {
+            "x": 0,
+            "y": 5
+          },
+          {
+            "x": 1,
+            "y": 5
+          },
+          {
+            "x": 2,
+            "y": 5
+          },
+          {
+            "x": 8,
+            "y": 5
+          },
+          {
+            "x": 0,
+            "y": 6
+          },
+          {
+            "x": 1,
+            "y": 6
+          },
+          {
+            "x": 2,
+            "y": 6
+          },
+          {
+            "x": 3,
+            "y": 6
+          },
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 6,
+            "y": 6
+          },
+          {
+            "x": 7,
+            "y": 6
+          },
+          {
+            "x": 8,
+            "y": 6
+          }
+        ],
+        "points": [
+          {
+            "id": "discovery.door_2",
+            "label": "The Sponsor Foundry",
+            "description": "The foundry floor is burning. Reach the enemies through the northern or southern passage.",
+            "kind": "encounter",
+            "x": 7,
+            "y": 5,
+            "itemId": "",
+            "count": 0
+          },
+          {
+            "id": "discovery.cache_2",
+            "label": "Sponsor supply cache",
+            "description": "A sealed delivery yields one health tonic for the shared pack.",
+            "kind": "cache",
+            "x": 3,
+            "y": 1,
+            "itemId": "item.health_tonic",
+            "count": 1
+          },
+          {
+            "id": "discovery.inscription_2",
+            "label": "Crawler field notes",
+            "description": "Oil burns when ignited. Inspect your terrain abilities and use a water or frost supply to shape the next fight.",
+            "kind": "lore",
+            "x": 1,
+            "y": 3,
+            "itemId": "",
+            "count": 0
+          }
+        ]
+      }
     },
     {
       "id": "encounter.boss",
@@ -581,7 +982,199 @@
             "status.wet"
           ]
         }
-      ]
+      ],
+      "exploration": {
+        "id": "sector.passages_3",
+        "label": "Boss Approach",
+        "description": "Scout branching passages. Caches are optional; the marked door leads into combat. Return to camp to change the party.",
+        "width": 9,
+        "height": 7,
+        "startX": 1,
+        "startY": 1,
+        "discoveryRadius": 1,
+        "walls": [
+          {
+            "x": 0,
+            "y": 0
+          },
+          {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 4,
+            "y": 0
+          },
+          {
+            "x": 5,
+            "y": 0
+          },
+          {
+            "x": 6,
+            "y": 0
+          },
+          {
+            "x": 7,
+            "y": 0
+          },
+          {
+            "x": 8,
+            "y": 0
+          },
+          {
+            "x": 0,
+            "y": 1
+          },
+          {
+            "x": 8,
+            "y": 1
+          },
+          {
+            "x": 0,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 6,
+            "y": 2
+          },
+          {
+            "x": 8,
+            "y": 2
+          },
+          {
+            "x": 0,
+            "y": 3
+          },
+          {
+            "x": 4,
+            "y": 3
+          },
+          {
+            "x": 6,
+            "y": 3
+          },
+          {
+            "x": 8,
+            "y": 3
+          },
+          {
+            "x": 0,
+            "y": 4
+          },
+          {
+            "x": 1,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 8,
+            "y": 4
+          },
+          {
+            "x": 0,
+            "y": 5
+          },
+          {
+            "x": 8,
+            "y": 5
+          },
+          {
+            "x": 0,
+            "y": 6
+          },
+          {
+            "x": 1,
+            "y": 6
+          },
+          {
+            "x": 2,
+            "y": 6
+          },
+          {
+            "x": 3,
+            "y": 6
+          },
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 6,
+            "y": 6
+          },
+          {
+            "x": 7,
+            "y": 6
+          },
+          {
+            "x": 8,
+            "y": 6
+          }
+        ],
+        "points": [
+          {
+            "id": "discovery.door_3",
+            "label": "The Audience Retention Engine",
+            "description": "Boss room: bring down the Retention Engine and its handlers. No special key or consumable is required.",
+            "kind": "encounter",
+            "x": 7,
+            "y": 5,
+            "itemId": "",
+            "count": 0
+          },
+          {
+            "id": "discovery.cache_3",
+            "label": "Sponsor supply cache",
+            "description": "A sealed delivery yields one health tonic for the shared pack.",
+            "kind": "cache",
+            "x": 3,
+            "y": 1,
+            "itemId": "item.health_tonic",
+            "count": 1
+          },
+          {
+            "id": "discovery.inscription_3",
+            "label": "Crawler field notes",
+            "description": "Frozen targets can be shattered. Prepare a class combination at camp and check the exact forecast before committing.",
+            "kind": "lore",
+            "x": 1,
+            "y": 3,
+            "itemId": "",
+            "count": 0
+          }
+        ]
+      }
     }
   ]
 }

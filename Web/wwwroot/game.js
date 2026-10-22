@@ -11,6 +11,8 @@ let inspectedTile = null;
 let targetTile = false;
 let toastTimeout;
 let chosenReward = false;
+let drawer = null;
+let drawerReturn = null;
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 const e = escapeHtml;
 const call = (method, ...args) => DotNet.invokeMethodAsync(assembly, method, ...args);
@@ -25,6 +27,17 @@ const hpBar = (u) => `<span class="health${u.team === 'enemy' ? ' enemy-hp' : ''
 const displayLog = (text) => text.replace(/(?:ability|reaction|surface|status|element|damage|impact)\.[a-z0-9_]+/g, id => content?.abilities.find(a => a.id === id)?.label ?? id.replace(/^[^.]+\./, '').replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()));
 const selectedAction = () => localAction?.itemId ? view.items.find(a => a.id === localAction.itemId) : view.abilities.find(a => a.id === localAction?.abilityId);
 
+function abilityDescription(a) {
+  if (!a) return '';
+  const label = id => shortTag(id).toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  const effects = (a.effects ?? []).map(x => {
+    if (x.op === 'Damage') return `Deal ${x.amount} damage`;
+    if (x.op === 'Heal') return `Restore ${x.amount} HP`;
+    const protection = content.reactions?.find(r => r.damageReduction > 0 && r.consumeTags?.includes(x.tag));
+    return `${x.op === 'AddTag' ? 'Apply' : 'Remove'} ${label(x.tag)}${x.op === 'AddTag' && protection ? ` (prevents ${protection.damageReduction} damage from the next matching hit)` : ''}`;
+  });
+  return effects.join(' · ') || `Trigger ${(a.incomingTags ?? []).map(label).join(', ') || 'elemental'} reactions on ${a.target === 'tile' ? 'terrain' : 'the target'}`;
+}
 function toast(message) {
   $('#toast').textContent = message;
   $('#toast').hidden = false;
@@ -50,7 +63,7 @@ async function command(type, args = {}, { preserveAction = false, save = true } 
     const previousScreen = view.screen;
     const result = await call('Dispatch', JSON.stringify({ type, ...args }));
     view = JSON.parse(result);
-    if (!preserveAction) localAction = null;
+    if (!preserveAction) { localAction = null; inspectedTile = null; targetTile = false; }
     if (type === 'choose_reward' && previousScreen === 'victory') chosenReward = view.rewards.length === 0;
     if (type === 'continue' || type === 'start' || type === 'new_run' || type === 'retry') {
       chosenReward = false;
@@ -76,7 +89,9 @@ function renderProgress() {
 }
 function render() {
   renderProgress();
-  $('#game').innerHTML = view.screen === 'camp' ? renderCamp() : view.screen === 'battle' ? renderBattle() : view.screen === 'victory' ? renderVictory() : renderEnding();
+  if (view.screen !== 'battle') drawer = null;
+  document.body.dataset.screen = view.screen;
+  $('#game').innerHTML = view.screen === 'camp' ? renderCamp() : view.screen === 'explore' ? renderExploration() : view.screen === 'battle' ? renderBattle() : view.screen === 'victory' ? renderVictory() : renderEnding();
   bindScreen();
   window.dungeonView = view;
 }
@@ -85,15 +100,35 @@ function renderCamp() {
   focusedRoster = focused?.id;
   const focusClass = view.classes.find(c => c.id === focused?.classId);
   const encounter = gameData.encounters[view.encounterIndex];
-  return `<section aria-labelledby="screen-title"><div class="screen-heading"><div><h2 id="screen-title">A little preparation. A little mayhem.</h2><p>Choose ${view.partyCapacity} crawlers and their classes. The next room won’t clear itself.</p></div><div class="status-group"><span class="tag gold">CAMP / FLOOR 01</span><span class="small muted mono">${view.xp} XP EARNED</span></div></div>
+  return `<section class="camp-screen" aria-labelledby="screen-title"><div class="screen-heading"><div><h2 id="screen-title">A little preparation. A little mayhem.</h2><p>Choose ${view.partyCapacity} crawlers and their classes. The next room won’t clear itself.</p></div><div class="status-group"><span class="tag gold">CAMP / FLOOR 01</span><span class="small muted mono">${view.xp} XP EARNED</span></div></div>
   <div class="camp-layout"><section class="panel"><div class="panel-head"><h3>YOUR ROSTER</h3><span class="small mono ${view.partyCount === view.partyCapacity ? '' : 'muted'}">${view.partyCount} / ${view.partyCapacity} DEPLOYED</span></div><div class="roster-grid">${view.roster.map(r => `<button class="roster-card${r.selected ? ' chosen' : ''}${r.id === focused.id ? ' focused' : ''}" data-roster="${e(r.id)}" aria-pressed="${r.id === focused.id}">${portrait(r)}<span><strong>${e(r.label)}</strong><small>${e(classLabel(r.classId))}</small><small>${r.selected ? 'DEPLOYED' : 'RESERVE'} · ${r.hp} / ${r.maxHp} HP</small></span><span class="choice-marker" aria-hidden="true">${r.selected ? '✓' : ''}</span></button>`).join('')}</div><div class="roster-bottom"><span>Select a crawler to edit their class or deployment.</span><span class="mono">${view.roster.length} CRAWLERS · ${view.classes.length} CLASSES</span></div></section>
-  <aside class="panel"><div class="panel-body"><div class="loadout-head">${portrait(focused)}<div><h2>${e(focused.label)}</h2><p>${focused.selected ? 'Deployed for the next encounter' : 'Resting in reserve'}</p><div class="tags" style="margin-top:8px"><span class="tag good">${focused.hp} / ${focused.maxHp} HP</span></div></div></div><label class="field" for="class-select">ACTIVE CLASS<select id="class-select">${view.classes.map(c => `<option value="${e(c.id)}" ${c.id === focused.classId ? 'selected' : ''}>${e(c.label)}</option>`).join('')}</select></label><div class="class-abilities">${(focusClass?.abilityIds ?? []).map(id => `<span title="${e(content.abilities.find(a => a.id === id)?.effects.map(x => x.op).join(', ') ?? '')}">${e(content.abilities.find(a => a.id === id)?.label ?? id)}</span>`).join('')}</div><button class="camp-party-toggle" id="toggle-party">${focused.selected ? 'Move to reserve' : 'Deploy this crawler'}</button><div class="encounter-brief"><span class="section-label">NEXT / ENCOUNTER ${view.encounterIndex + 1} OF ${view.encounterCount}</span><h3>${e(encounter?.label ?? view.encounterName)}</h3><p>${e(encounter?.description ?? 'Defeat every enemy to advance. Scout the surfaces and watch your energy.')}</p><button class="primary" id="enter-battle" ${view.partyCount !== view.partyCapacity ? 'disabled' : ''}>Enter encounter <span aria-hidden="true">→</span></button>${view.partyCount !== view.partyCapacity ? `<p class="small">Deploy exactly ${view.partyCapacity} crawlers to enter.</p>` : ''}</div><p class="camp-note">Camp restores your crawlers. Classes can change freely here. Consumables carry through the run.</p></div></aside></div>
-  <section class="panel inventory-strip"><h3>SHARED SUPPLIES</h3><div class="tags">${view.items.map(i => `<span class="tag">${e(i.label)} ×${i.count}</span>`).join('') || '<span class="small muted">No consumables remaining.</span>'}</div></section>${view.message ? `<div class="board-message" role="status">${e(view.message)}</div>` : ''}</section>`;
+  <aside class="panel"><div class="panel-body"><div class="loadout-head">${portrait(focused)}<div><h2>${e(focused.label)}</h2><p>${focused.selected ? 'Deployed for the next encounter' : 'Resting in reserve'}</p><div class="tags" style="margin-top:8px"><span class="tag good">${focused.hp} / ${focused.maxHp} HP</span></div></div></div><label class="field" for="class-select">ACTIVE CLASS<select id="class-select">${view.classes.map(c => `<option value="${e(c.id)}" ${c.id === focused.classId ? 'selected' : ''}>${e(c.label)}</option>`).join('')}</select></label><div class="class-abilities">${(focusClass?.abilityIds ?? []).map(id => `<span><strong>${e(content.abilities.find(a => a.id === id)?.label ?? id)}</strong><small>${e(abilityDescription(content.abilities.find(a => a.id === id)))}</small></span>`).join('')}</div><button class="camp-party-toggle" id="toggle-party">${focused.selected ? 'Move to reserve' : 'Deploy this crawler'}</button><div class="encounter-brief"><span class="section-label">NEXT / ENCOUNTER ${view.encounterIndex + 1} OF ${view.encounterCount}</span><h3>${e(encounter?.label ?? view.encounterName)}</h3><p>${e(encounter?.description ?? 'Defeat every enemy to advance. Scout the surfaces and watch your energy.')}</p><button class="primary" id="enter-battle" ${view.partyCount !== view.partyCapacity ? 'disabled' : ''}>Explore the dungeon <span aria-hidden="true">→</span></button>${view.partyCount !== view.partyCapacity ? `<p class="small">Deploy exactly ${view.partyCapacity} crawlers to enter.</p>` : ''}</div><p class="camp-note">Camp restores your crawlers. Classes can change freely here. Consumables carry through the run.</p></div></aside></div>
+  <details class="panel inventory-strip"><summary>SHARED SUPPLIES</summary><div class="tags">${view.items.map(i => `<span class="tag">${e(i.label)} ×${i.count}</span>`).join('') || '<span class="small muted">No consumables remaining.</span>'}</div></details>${view.message ? `<div class="board-message" role="status">${e(view.message)}</div>` : ''}</section>`;
+}
+function renderParty() {
+  return `<div class="party-strip" style="--party-columns:${Math.min(4,view.units.filter(u => u.team === 'player').length)}" aria-label="Select a crawler">${view.units.filter(u => u.team === 'player').map(u => `<button class="party-chip${u.selected ? ' active' : ''}" data-unit="${e(u.id)}" ${u.hp <= 0 ? 'disabled' : ''} aria-pressed="${u.selected}">${portrait(u)}<span><strong>${e(u.label)}</strong><small class="party-class">${e(classLabel(u.classId))}</small><small class="party-vitals">${u.hp} HP · ${u.energy} EN</small><small class="party-budget">${u.hp <= 0 ? 'Fallen' : u.acted ? 'Activation spent' : u.moved ? 'Move spent · ability ready' : 'Move + ability ready'}</small></span></button>`).join('')}</div>`;
 }
 function renderBattle() {
   const selected = unit();
-  const remaining = view.units.filter(u => u.team === 'player' && u.hp > 0 && !u.acted).length;
-  return `<section aria-labelledby="screen-title"><div class="screen-heading"><div><h2 id="screen-title">${e(view.encounterName)}</h2><p>Defeat every hostile. Keep your crawlers standing.</p></div><div class="status-group"><span class="round-status"><i class="status-dot"></i>YOUR TURN / ROUND ${String(view.round).padStart(2, '0')}</span><span class="tag">ENCOUNTER ${view.encounterIndex + 1} / ${view.encounterCount}</span></div></div><div class="battle-layout"><aside class="panel party-panel"><div class="panel-head"><h3>YOUR CRAWLERS</h3><span class="small muted">${remaining} ready</span></div><div class="party-list">${view.units.filter(u => u.team === 'player').map(u => `<button class="unit-row${u.selected ? ' active' : ''}" data-unit="${e(u.id)}" ${u.hp <= 0 ? 'disabled' : ''} aria-pressed="${u.selected}">${portrait(u)}<span><strong>${e(u.label)}</strong><small>${e(classLabel(u.classId))}</small>${hpBar(u)}<span class="unit-stats"><span>${u.hp} / ${u.maxHp} HP</span><span>${u.energy} EN</span></span><span class="unit-stats">${u.hp <= 0 ? 'FALLEN' : u.acted ? 'ACTION SPENT' : u.moved ? 'READY TO ACT' : 'MOVE + ACT'}</span></span></button>`).join('')}</div><div class="rules-strip"><strong>Any crawler. Any order.</strong><br>Move once, then use one action.<br>Acting ends that crawler’s activation.<br>Forecast first. Confirm when ready.</div></aside><div class="board-column"><div class="map-top"><span>FLOOR 01 / ${e(view.encounterName.toUpperCase())}</span><span>${view.width} × ${view.height}</span></div>${renderBoard()}<div class="legend"><span><i></i>MOVE RANGE</span><span><i class="oil"></i>OIL</span><span><i class="wet"></i>WET</span><span><i class="frozen"></i>FROST</span></div><div class="board-message" role="status">${e(view.message || 'Select a crawler. Blue tiles are reachable; choose an action to target.')}</div></div><aside class="panel inspector-panel"><div class="panel-head"><h3>${e(selected?.label.toUpperCase() ?? 'SELECT A CRAWLER')}</h3><span class="tag ${view.canAct ? 'gold' : ''}">${selected?.acted ? 'SPENT' : 'READY'}</span></div><div class="panel-body inspector">${renderInspector(selected)}</div></aside></div><div class="turn-bar"><div class="turn-info"><strong>${remaining} CRAWLER${remaining === 1 ? '' : 'S'} READY</strong>Enemies act after you end the party turn.</div><div class="button-row"><button id="wait-button" ${!view.canAct ? 'disabled' : ''}>Wait crawler</button><button id="end-turn" class="primary">End party turn <span aria-hidden="true">→</span></button></div></div>${renderLog()}</section>`;
+  return `<section class="battle-screen" aria-labelledby="screen-title"><div class="battle-heading"><h2 id="screen-title">${e(view.encounterName)}</h2><span class="round-status">ROUND ${view.round} · YOUR TURN</span><button data-drawer="log">Log</button></div>${renderParty()}<div class="battle-stage"><div class="playfield">${renderBoard()}<div class="battle-hint" role="status">${e(view.message || 'Select a crawler → Move or ability → highlighted target → confirm.')}</div></div><section class="action-dock" aria-label="Crawler actions and forecast">${renderInspector(selected)}</section></div><div class="battle-turn"><span>${view.units.filter(u => u.team === 'player' && u.hp > 0 && !u.acted).length} ready · Enemies act when the party ends its turn</span><button id="wait-button" ${!view.canAct ? 'disabled' : ''}>Wait crawler</button><button id="end-turn" class="primary">End party turn →</button></div>${renderDrawer()}</section>`;
+}
+function renderDrawer() {
+  if (!drawer) return '';
+  return `<dialog class="drawer-backdrop" id="game-drawer-dialog"><section class="game-drawer" aria-label="${drawer === 'items' ? 'Shared supplies' : 'Combat log'}"><div class="dialog-head"><h2>${drawer === 'items' ? 'Shared supplies' : 'Combat log'}</h2><button id="close-drawer" aria-label="Close drawer">×</button></div>${drawer === 'items' ? `<p class="small muted">Using a supply spends this crawler’s action.</p><div class="action-list">${view.items.map(i => `<button data-item="${e(i.id)}" ${i.count <= 0 || !view.canAct ? 'disabled' : ''}><strong>${e(i.label)} ×${i.count}</strong><small>${e(i.description || 'Target: ' + i.target)} · range ${i.range}</small></button>`).join('')}</div>` : `<div class="log-lines">${view.log.slice(-30).map(l => `<p>${e(displayLog(l))}</p>`).join('')}</div>`}</section></dialog>`;
+}
+function closeDrawer() {
+  const selector = drawerReturn;
+  drawer = null; render();
+  if (selector) $(selector)?.focus();
+}
+function renderExploration() {
+  const map = view.exploration;
+  if (!map) return '<p>Preparing exploration…</p>';
+  return `<section class="exploration-screen"><div class="battle-heading"><h2>${e(map.label)}</h2><button id="return-camp">Return to camp</button></div><p class="explore-description">${e(map.description)}</p><div class="exploration-field"><div class="board exploration-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Dungeon exploration map">${map.tiles.map(t => {
+    const point = map.points.find(p => p.x === t.x && p.y === t.y);
+    const here = map.x === t.x && map.y === t.y;
+    return `<button class="tile${!t.revealed ? ' fog' : ''}${t.blocked ? ' blocked' : ''}${t.reachable ? ' reachable' : ''}${here ? ' selected' : ''}${point?.claimed ? ' claimed' : ''}" data-explore-cell="${t.x},${t.y}" ${!t.reachable || here ? 'disabled' : ''} aria-label="${e(here ? 'Your party' : !t.revealed ? 'Unexplored' : t.blocked ? 'Wall' : point?.label || 'Corridor')}">${here ? portrait(view.roster.find(r => r.selected) ?? {classId:'class.brawler'}, 'tile-portrait') : point ? `<span class="point-symbol">${point.kind === 'encounter' ? '⚔' : point.kind === 'cache' ? '◇' : '✦'}</span><span class="point-label">${e(point.label)}</span>` : !t.revealed ? '<span class="fog-mark">?</span>' : ''}</button>`;
+  }).join('')}</div></div><div class="exploration-prompt" role="status"><p>${e(view.message || 'Click a highlighted tile to explore. Approach a landmark to interact.')}</p><div>${map.points.filter(p => p.canInteract && !p.claimed).map(p => `<button class="primary" data-explore-interact="${e(p.id)}">${p.kind === 'encounter' ? 'Enter' : 'Investigate'} ${e(p.label)}</button><small>${e(p.description)}</small>`).join('') || '<small>Click blue paths or use arrow keys / WASD to walk. Approach a landmark to interact.</small>'}</div></div></section>`;
 }
 function renderBoard() {
   const action = selectedAction();
@@ -104,7 +139,7 @@ function renderBoard() {
   for (let y = 0; y < view.height; y++) for (let x = 0; x < view.width; x++) {
     const t = tileMap.get(`${x},${y}`) ?? { id: `tile.${x}.${y}`, tags: [], blocked: false, x, y };
     const u = units.get(`${x},${y}`);
-    const isTarget = localAction && action && (action.target === 'tile' || targetTile || u && (action.target === 'ally' ? u.team === 'player' : action.target === 'enemy' ? u.team === 'enemy' : u.id === view.selectedUnitId));
+    const isTarget = localAction && action && (action.targetIds ?? []).includes(action.target === 'tile' ? t.id : u?.id);
     const coord = `${String.fromCharCode(65 + x)}${y + 1}`;
     rows.push(`<button class="tile${t.blocked ? ' blocked' : ''}${t.tags.some(t => /oil/.test(t)) ? ' oil' : ''}${t.tags.some(t => /wet/.test(t)) ? ' wet' : ''}${t.tags.some(t => /frozen|frost/.test(t)) ? ' frozen' : ''}${t.tags.some(t => /burning/.test(t)) ? ' burning' : ''}${!localAction && reachable.has(`${x},${y}`) ? ' reachable' : ''}${u?.selected ? ' selected' : ''}${u?.team === 'enemy' ? ' enemy' : ''}${isTarget ? ' valid-target' : ''}${inspectedTile?.id === t.id ? ' targeted' : ''}" data-cell="${x},${y}" aria-label="${e(`${coord}: ${t.blocked ? 'blocked wall' : t.tags.map(shortTag).join(', ') || 'stone floor'}${u ? ', ' + u.label + ', ' + u.hp + ' HP, ' + u.team : ''}${!localAction && reachable.has(`${x},${y}`) ? ', reachable' : ''}`)}"><span class="coord">${coord}</span>${u ? `${portrait(u, 'tile-portrait')}<span class="unit-label">${e(u.label.toUpperCase())}</span><span class="tile-health"><span style="width:${u.hp / u.maxHp * 100}%"></span></span>${u.acted && u.team === 'player' ? '<span class="action-spent" aria-hidden="true">✓</span>' : ''}` : ''}</button>`);
   }
@@ -112,8 +147,9 @@ function renderBoard() {
 }
 function renderInspector(selected) {
   const action = selectedAction();
-  const targetText = !localAction ? view.canMove ? 'Click a blue outlined tile to move.' : 'Choose another crawler, or end the party turn.' : action?.target === 'self' ? 'Forecast targets this crawler.' : `Select ${targetTile || action?.target === 'tile' ? 'a terrain tile' : action?.target === 'ally' ? 'an allied crawler' : 'an enemy'} to forecast ${action?.label ?? 'the action'}.`;
-  return `<div><p class="selected-subtitle">${e(classLabel(selected?.classId))} · ${selected?.energy ?? 0} / ${selected?.maxEnergy ?? 0} ENERGY</p><div class="budget-row"><span class="budget${selected?.moved ? ' spent' : ''}">${selected?.moved ? '✓ MOVE SPENT' : '◇ MOVE READY'}</span><span class="budget${selected?.acted ? ' spent' : ''}">${selected?.acted ? '✓ ACTION SPENT' : '◇ ACTION READY'}</span></div><div class="tags" style="margin-bottom:12px">${tags(selected?.tags)}</div><span class="section-label">ABILITIES / 1 ACTION EACH</span><div class="action-list">${view.abilities.map(a => `<button data-ability="${e(a.id)}" class="${localAction?.abilityId === a.id ? 'active' : ''}" ${!a.enabled ? 'disabled' : ''} title="${e(a.description)}"><strong>${e(a.label)}</strong><small>${a.cost} ENERGY · RANGE ${a.range}</small></button>`).join('')}</div><div class="mode-row"><button id="move-mode" class="${!localAction ? 'active' : ''}" ${!view.canMove && !localAction ? 'disabled' : ''}>${localAction ? 'Cancel targeting' : 'Move crawler'}</button></div><details class="consumables" ${localAction?.itemId ? 'open' : ''}><summary class="section-label">SHARED CONSUMABLES <span>${view.items.reduce((sum, i) => sum + i.count, 0)} charges</span></summary><div class="action-list">${view.items.map(i => `<button data-item="${e(i.id)}" class="${localAction?.itemId === i.id ? 'active' : ''}" ${i.count <= 0 || !view.canAct ? 'disabled' : ''} title="${e(i.label)} · ${i.target} · range ${i.range}"><strong>${e(i.label)} ×${i.count}</strong><small>1 ACTION · RANGE ${i.range}</small></button>`).join('') || '<span class="small muted">None remaining</span>'}</div></details><p class="target-help">${e(targetText)}</p></div><div class="forecast"><h3>${view.canConfirm ? 'ACTION FORECAST' : 'FORECAST'}</h3>${view.canConfirm ? `${view.forecast.filter(f => f.beforeHp !== f.afterHp || f.beforeEnergy !== f.afterEnergy || JSON.stringify(f.beforeTags) !== JSON.stringify(f.afterTags)).map(f => `<div class="forecast-target"><strong>${e(f.label)}</strong>${f.beforeHp !== f.afterHp ? `<div class="forecast-number"><span>Health</span><b>${f.beforeHp} → ${f.afterHp}</b></div>` : ''}${f.beforeEnergy !== f.afterEnergy ? `<div class="forecast-number"><span>Energy</span><b>${f.beforeEnergy} → ${f.afterEnergy}</b></div>` : ''}<div class="tags">${f.afterTags.filter(t => !f.beforeTags.includes(t)).map(t => `<span class="tag ${tagClass(t)}">+ ${e(shortTag(t))}</span>`).join('')}${f.beforeTags.filter(t => !f.afterTags.includes(t)).map(t => `<span class="tag">− ${e(shortTag(t))}</span>`).join('')}</div></div>`).join('') || '<p class="forecast-empty">No numeric change. This action may still alter a surface or status.</p>'}<ol class="forecast-chain">${view.log.filter(l => l.startsWith('Forecast:')).slice(-5).map(l => `<li>${e(displayLog(l.slice(10)))}</li>`).join('')}</ol><div class="button-row"><button id="cancel-forecast">Cancel <span class="key">Esc</span></button><button id="confirm-forecast" class="primary">Confirm</button></div><p class="small muted" style="margin-top:9px">Exact C# result. Confirm spends the action.</p>` : `<p class="forecast-empty">Choose an ability or consumable, then click a valid target. Review the result here before you commit.</p><div class="tags" style="margin-top:15px"><span class="tag fire">FIRE + OIL</span><span class="tag water">ARC + WET</span><span class="tag frost">IMPACT + FROZEN</span></div>${localAction ? '<button class="quiet full" id="cancel-forecast" style="margin-top:15px">Cancel targeting <span class="key">Esc</span></button>' : ''}`}</div>${inspectedTile ? `<div class="inspect-tile"><strong>${String.fromCharCode(65 + inspectedTile.x)}${inspectedTile.y + 1} · ${inspectedTile.blocked ? 'Blocked wall' : 'Terrain'}</strong><div class="tags">${tags(inspectedTile.tags) || '<span class="small muted">Stone · no surface tags</span>'}</div></div>` : ''}`;
+  const info = view.classes.find(c => c.id === selected?.classId);
+  const forecast = view.forecast.filter(f => f.beforeHp !== f.afterHp || f.beforeEnergy !== f.afterEnergy || JSON.stringify(f.beforeTags) !== JSON.stringify(f.afterTags));
+  return `<div class="dock-identity"><strong>${e(selected?.label || 'Select a crawler')} <span>${e(classLabel(selected?.classId))}${info?.role ? ' · ' + e(info.role) : ''}</span></strong><small>${selected?.energy ?? 0} / ${selected?.maxEnergy ?? 0} energy · ${selected?.acted ? 'Activation spent' : selected?.moved ? 'Move spent · ability ready' : 'Move + ability ready'}</small>${info?.description ? `<small>${e(info.description)}</small>` : ''}</div><div class="dock-modes"><button id="move-mode" class="${!localAction ? 'active' : ''}" ${!view.canMove && !localAction ? 'disabled' : ''}>Move${selected?.moved ? ' · spent' : ''}</button><span>ABILITIES · 1 ACTION</span><button data-drawer="items">Supplies</button></div><div class="dock-abilities">${view.abilities.map(a => `<button data-ability="${e(a.id)}" class="${localAction?.abilityId === a.id ? 'active' : ''}" ${!a.enabled ? 'disabled' : ''}><strong>${e(a.label)} <small>${a.cost} EN · ${a.range} range</small></strong><span>${e(a.description)}${a.disabledReason ? ` · ${e(a.disabledReason)}` : ''}</span></button>`).join('')}</div><div class="dock-forecast" aria-live="polite"><strong>${view.canConfirm ? 'Confirm ' + e(action?.label || 'action') : localAction ? (action?.targetIds?.length ? 'Choose a highlighted ' + e(action?.target || 'target') : 'No legal targets in range · cancel to move') : view.canMove ? 'Move: choose a blue tile, or select an ability' : selected?.acted ? 'Choose another crawler or end the party turn' : 'Choose an ability'}</strong><div class="forecast-results">${view.canConfirm ? forecast.map(f => `<span><b>${e(f.label)}</b>${f.beforeHp !== f.afterHp ? ` HP ${f.beforeHp} → ${f.afterHp}` : ''}${f.beforeEnergy !== f.afterEnergy ? ` EN ${f.beforeEnergy} → ${f.afterEnergy}` : ''}${tags(f.afterTags.filter(t => !f.beforeTags.includes(t)))}${f.beforeTags.filter(t => !f.afterTags.includes(t)).map(t => `<small>−${e(shortTag(t))}</small>`).join('')}</span>`).join('') || '<span>Surface or status change. See log for details.</span>' : `<span>${e(localAction ? action?.description || 'Select a valid target. Nothing is spent until you confirm.' : 'Each crawler moves once and uses one ability. Acting ends their activation.')}</span>`}</div>${localAction || view.canConfirm ? `<div class="forecast-buttons"><button id="cancel-forecast">Cancel <span class="key">Esc</span></button>${view.canConfirm ? '<button id="confirm-forecast" class="primary">Confirm action</button>' : ''}</div>` : ''}</div>`;
 }
 function renderLog() {
   return `<details class="log" ${view.canConfirm ? 'open' : ''}><summary>COMBAT LOG / ${view.log.length} EVENTS</summary><div class="log-lines">${view.log.slice(-24).map(l => `<p>${e(displayLog(l))}</p>`).join('') || '<p>No actions yet.</p>'}</div></details>`;
@@ -129,9 +165,40 @@ function renderEnding() {
   return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${complete ? '♜' : '†'}</div><h2 id="screen-title">${complete ? 'The floor is yours.' : 'The dungeon wins. For now.'}</h2><p>${complete ? `All three encounters cleared. Your crawlers earned ${view.xp} XP, exploited the elements, and made it back in one piece. The audience will want a sequel.` : 'Your deployed crawlers have fallen. Retry the encounter with the same starting party and supplies, or rebuild from the beginning.'}</p><div class="tags" style="justify-content:center"><span class="tag gold">${complete ? 'FLOOR 01 COMPLETE' : 'PARTY DEFEATED'}</span><span class="tag">${view.xp} XP EARNED</span></div><div class="button-row">${!complete ? '<button class="primary" id="retry-button">Retry encounter</button>' : ''}<button id="ending-new-run" ${complete ? 'class="primary"' : ''}>Start a new run</button></div><button class="quiet" id="ending-export">Export this run</button></div>${renderSurvivors()}${renderLog()}</section>`;
 }
 function bindScreen() {
+  document.querySelectorAll('.board').forEach(board => {
+    const cells = [...board.querySelectorAll('button')];
+    const entry = cells.find(cell => !cell.disabled && cell.classList.contains('selected')) ?? cells.find(cell => !cell.disabled);
+    cells.forEach(cell => {
+      cell.tabIndex = cell === entry ? 0 : -1;
+      cell.addEventListener('keydown', event => {
+        const movement = {ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[event.key];
+        if (!movement) return;
+        if (view.screen === 'explore') return;
+        event.preventDefault();
+        const attr = cell.dataset.cell !== undefined ? 'data-cell' : 'data-explore-cell';
+        const [x,y] = cell.getAttribute(attr).split(',').map(Number);
+        const next = board.querySelector(`[${attr}="${x+movement[0]},${y+movement[1]}"]`);
+        if (next && !next.disabled) { cell.tabIndex=-1; next.tabIndex=0; next.focus(); }
+      });
+    });
+  });
   document.querySelectorAll('[data-roster]').forEach(b => b.addEventListener('click', () => { focusedRoster = b.dataset.roster; render(); }));
   $('#class-select')?.addEventListener('change', event => command('set_class', { unitId: focusedRoster, classId: event.target.value }));
   $('#toggle-party')?.addEventListener('click', () => command('toggle_party', { unitId: focusedRoster }));
+  document.querySelectorAll('[data-drawer]').forEach(b => b.addEventListener('click', () => { drawerReturn = `[data-drawer="${b.dataset.drawer}"]`; drawer = b.dataset.drawer; render(); }));
+  $('#close-drawer')?.addEventListener('click', closeDrawer);
+  const drawerDialog = $('#game-drawer-dialog');
+  if (drawerDialog) { drawerDialog.showModal(); $('#close-drawer').focus(); drawerDialog.addEventListener('cancel', event => {event.preventDefault();closeDrawer();});
+    drawerDialog.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const focusable = [...drawerDialog.querySelectorAll('button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),[tabindex="0"]')];
+      const first = focusable[0], last = focusable[focusable.length-1];
+      if (event.shiftKey && document.activeElement === first) {event.preventDefault();last?.focus();}
+      else if (!event.shiftKey && document.activeElement === last) {event.preventDefault();first?.focus();}
+    }); }
+  document.querySelectorAll('[data-explore-cell]').forEach(b => b.addEventListener('click', () => { const [x,y] = b.dataset.exploreCell.split(',').map(Number); command('explore_move', {x,y}); }));
+  document.querySelectorAll('[data-explore-interact]').forEach(b => b.addEventListener('click', () => command('explore_interact', {targetId:b.dataset.exploreInteract})));
+  $('#return-camp')?.addEventListener('click', () => command('return_camp'));
   $('#enter-battle')?.addEventListener('click', () => command('start'));
   document.querySelectorAll('[data-unit]').forEach(b => b.addEventListener('click', () => { targetTile = false; command('select', { unitId: b.dataset.unit }); }));
   document.querySelectorAll('[data-cell]').forEach(b => b.addEventListener('click', () => clickCell(...b.dataset.cell.split(',').map(Number))));
@@ -152,6 +219,7 @@ function bindScreen() {
 async function chooseAction(action) {
   if (busy) return;
   if (view.canConfirm) await command('cancel', {}, { save: false });
+  drawer = null;
   localAction = action;
   targetTile = false;
   if (selectedAction()?.target === 'self') {
@@ -165,7 +233,7 @@ async function clickCell(x, y) {
   const action = selectedAction();
   if (localAction && action) {
     const targetId = targetTile || action.target === 'tile' ? inspectedTile?.id ?? `tile.${x}.${y}` : occupant?.id;
-    if (!targetId) { toast('This action needs a unit target. Choose a valid crawler or enemy. Use a terrain ability to target a surface.'); render(); return; }
+    if (!targetId || !(action.targetIds ?? []).includes(targetId)) { if (view.canConfirm) await command('cancel', {}, {preserveAction:true,save:false}); toast('This action needs a unit target. Choose a valid crawler or enemy. Use a terrain ability to target a surface.'); render(); return; }
     await command('preview', { ...localAction, targetId }, { preserveAction: true, save: false });
   } else if (occupant?.team === 'player') {
     await command('select', { unitId: occupant.id });
@@ -257,7 +325,12 @@ $('#reload-save-button').addEventListener('click', async () => {
 $('#restart-button').addEventListener('click', () => { closeDialog('#save-dialog'); openDialog('#restart-dialog'); });
 $('#confirm-restart').addEventListener('click', async () => { closeDialog('#restart-dialog'); focusedRoster = null; await command('new_run'); });
 document.addEventListener('keydown', event => {
+  if (view?.screen === 'explore' && !busy && !document.querySelector('dialog[open]') && !['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName) && !event.ctrlKey && !event.metaKey && !event.altKey) {
+    const direction = {ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0],ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1]}[event.key];
+    if (direction) { event.preventDefault(); const map = view.exploration; const x=map.x+direction[0], y=map.y+direction[1]; if (map.tiles.some(t => t.x===x && t.y===y && t.reachable)) command('explore_move',{x,y}); }
+  }
+
   if (event.key === '?' && !event.ctrlKey && !event.metaKey && !['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) { event.preventDefault(); openDialog('#help-dialog'); }
-  if (event.key === 'Escape' && !document.querySelector('dialog[open]') && view?.screen === 'battle') cancelTargeting();
+  if (event.key === 'Escape' && !document.querySelector('dialog[open]')) { if (drawer) { closeDrawer(); } else if (view?.screen === 'battle') cancelTargeting(); }
 });
 boot();

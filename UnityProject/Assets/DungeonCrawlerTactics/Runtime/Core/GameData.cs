@@ -23,10 +23,21 @@ namespace DungeonCrawlerTactics
     {
         public string id, label, description;
         public int width = 10, height = 8, xp = 30;
+        public ExplorationDef exploration;
         public CellView[] playerSpawns = new CellView[0];
         public TileDef[] tiles = new TileDef[0];
         public SpawnDef[] enemies = new SpawnDef[0];
     }
+    [Serializable] public sealed class ExplorationDef
+    {
+        public string id, label, description; public int width, height, startX, startY, discoveryRadius = 1;
+        public CellView[] walls = new CellView[0]; public ExplorationPointDef[] points = new ExplorationPointDef[0];
+    }
+    [Serializable] public sealed class ExplorationPointDef { public string id, label, description, kind, itemId; public int x, y, count; }
+    [Serializable] public sealed class ExplorationTileView { public int x, y; public bool revealed, blocked, reachable; }
+    [Serializable] public sealed class ExplorationPointView { public string id, label, description, kind; public int x, y; public bool claimed, canInteract; }
+    [Serializable] public sealed class ExplorationView { public string id, label, description; public int width, height, x, y; public ExplorationTileView[] tiles; public ExplorationPointView[] points; }
+    [Serializable] public sealed class ExplorationSave { public string sectorId; public int x, y; public CellView[] revealed = new CellView[0]; public string[] claimed = new string[0]; }
     [Serializable] public sealed class InventoryEntry { public string itemId; public int count; }
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
@@ -39,8 +50,8 @@ namespace DungeonCrawlerTactics
         public bool selected, moved, acted; public string[] tags = new string[0];
     }
     [Serializable] public sealed class TileView { public string id; public int x, y; public bool blocked; public string[] tags = new string[0]; }
-    [Serializable] public sealed class AbilityView { public string id, label, target, description; public int range, cost; public bool enabled; }
-    [Serializable] public sealed class ItemView { public string id, label, abilityId, target; public int count, range; }
+    [Serializable] public sealed class AbilityView { public string id, label, target, description, disabledReason; public string[] targetIds = new string[0]; public int range, cost; public bool enabled; }
+    [Serializable] public sealed class ItemView { public string id, label, abilityId, target, description, disabledReason; public string[] targetIds = new string[0]; public int count, range; }
     [Serializable] public sealed class RosterView { public string id, label, classId; public bool selected; public int hp, maxHp; }
     [Serializable] public sealed class ClassView { public string id, label; public string[] abilityIds = new string[0]; }
     [Serializable] public sealed class ForecastView
@@ -51,6 +62,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardView { public string id, label, description; }
     [Serializable] public sealed class GameView
     {
+        public ExplorationView exploration;
         public string screen, message, encounterName, phase, selectedUnitId;
         public int encounterIndex, encounterCount, round, width, height, xp, partyCount, partyCapacity;
         public bool canConfirm, canMove, canAct;
@@ -68,6 +80,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class TimedTag { public string entityId, tag, source; public int remainingRounds; }
     [Serializable] public sealed class GameSave
     {
+        public ExplorationSave[] exploration = new ExplorationSave[0];
         public int schemaVersion = 1; public string contentVersion, screen, phase, selectedUnitId;
         public int encounterIndex, round, xp; public bool rewardChosen;
         public RosterView[] roster = new RosterView[0]; public InventoryEntry[] inventory = new InventoryEntry[0];

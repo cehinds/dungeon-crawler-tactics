@@ -40,6 +40,14 @@ class ContentValidationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             json.loads('{"cost": 1, "cost": 2}', object_pairs_hook=no_duplicate_keys)
 
+    def test_damage_reduction_is_optional_and_nonnegative(self):
+        self.content["reactions"][0]["damageReduction"] = 6
+        self.assertEqual([], validate(self.content))
+        self.content["reactions"][0]["damageReduction"] = -1
+        self.assertTrue(validate(self.content))
+        self.content["reactions"][0]["damageReduction"] = 2**31
+        self.assertTrue(validate(self.content))
+
     def test_boolean_not_accepted_as_integer(self):
         self.content["abilities"][0]["cost"] = True
         self.assertTrue(validate(self.content))

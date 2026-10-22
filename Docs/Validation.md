@@ -6,9 +6,9 @@ The delivered browser build is an executable .NET WebAssembly game using the sam
 
 | Check | Result |
 |---|---|
-| Original rules regression harness | 30 checks passed |
-| Playable game harness | 50 checks passed |
-| Strict content/campaign validation regressions | 16 tests passed |
+| Rules and defense regression harness | 42 checks passed |
+| Playable game and exploration harness | 67 checks passed |
+| Strict content/campaign validation regressions | 21 tests passed |
 | Current combat and campaign JSON | Valid: 12 classes, 36 abilities, 8 items, 8 crawlers, 3 encounters |
 | Core, .NET Standard 2.1 / C# 8 | Build succeeded, no warnings or errors |
 | Unity runtime presenter against actual Unity 2021.3.33 reference DLLs | Build succeeded; one expected unused Inspector-field warning in original RulesDemo |
@@ -18,11 +18,11 @@ The delivered browser build is an executable .NET WebAssembly game using the sam
 
 The complete-floor tests use legal commands and forecasts, with no HP edits or instant-win bypass. The default party clears all three rooms including the boss. Independent QA also cleared the floor without items using the default party and two alternate class compositions.
 
-Coverage includes party selection and configurable party capacity, class grants, legal BFS movement, walls/occupancy, team command ownership, activation consumption, exact preview/commit behavior, canceled items, charge spending, hazard damage along both player and enemy paths, water contact, frozen and shocked lifetimes, same-chain death/healing behavior, deterministic chains and event budgets, full-floor XP/rewards, valid save roundtrips, corrupted save rejection, defeat and retry.
+Coverage includes fog discovery without revealing through walls, cache-once rewards, exploration save validation and legacy battle resume, legal target views without state mutation, pre-damage defenses and lethal-hit protection, party selection and configurable party capacity, class grants, legal BFS movement, walls/occupancy, team command ownership, activation consumption, exact preview/commit behavior, canceled items, charge spending, hazard damage along both player and enemy paths, water contact, frozen and shocked lifetimes, same-chain death/healing behavior, deterministic chains and event budgets, full-floor XP/rewards, valid save roundtrips, corrupted save rejection, defeat and retry.
 
 ## Browser environment
 
-Local static build at `http://127.0.0.1:5173`, tested using Playwright with system Chromium in headless mode. The Browser skill was read and available tools were searched; no connected Browser/js/CUA tool was exposed, so local Chromium was used. Desktop viewport 1440×900 and mobile-width viewport 390×844. This does not establish support across every browser or mobile device.
+Revised local static build at `http://127.0.0.1:5188`, tested using Playwright with system Chromium in headless mode. The Browser skill was read and available tools were searched; no connected Browser/js/CUA tool was exposed, so local Chromium was used. Current revision checked at desktop 1366×768 and phone sizes 390×844 and 360×740; original full-floor testing also used 1440×900. This does not establish support across every browser or mobile device.
 
 ## Browser verification
 
@@ -42,9 +42,9 @@ Local static build at `http://127.0.0.1:5173`, tested using Playwright with syst
 | Mobile horizontal overflow | None at tested width |
 | Pixel assets, equal grid cells and forecast layout | Screenshots inspected |
 
-A second browser test played the actual WASM C# runtime through all three encounters with the default party: **3 victories, 150 XP, 43 planner iterations, 21 moves, 7 potions and 115 legal previews**. It saved the completed floor, refreshed the browser and restored the completed screen. No JavaScript errors occurred. This scripted traversal uses the same public command bridge as the visible controls; the smoke test separately exercises those controls.
+A second browser test played the actual WASM C# runtime through all three encounters with the default party: **3 victories, 150 XP, 86 planner iterations including exploration, 21 combat moves, 8 potions and 122 legal previews**. It saved the completed floor, refreshed the browser and restored the completed screen. No JavaScript errors occurred. This scripted traversal uses the same public command bridge as the visible controls; the smoke test separately exercises those controls.
 
-Screenshots were inspected at `/tmp/dungeon-web-forecast.png`, `/tmp/dungeon-web-mobile.png`, and `/tmp/dungeon-complete.png`. These are local verification artifacts, not production assets.
+The compact battle/camp layouts were inspected in `/tmp/live-battle.png` and `/tmp/camp-360.png`. The board and confirmation remain visible while a bounded ability list may scroll on smaller phones. See [Playability-Review.md](Playability-Review.md). Earlier screenshots were inspected at `/tmp/dungeon-web-forecast.png`, `/tmp/dungeon-web-mobile.png`, and `/tmp/dungeon-complete.png`. These are local verification artifacts, not production assets.
 
 ## Unity limitations
 
@@ -64,4 +64,12 @@ dotnet build Tools/Compatibility/Core.Compatibility.csproj
 dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
 python3 Tools/prepare_unity_project.py
 python3 Tools/serve_game.py
+```
+
+Optional full browser traversal (requires Playwright and a local Chromium executable):
+
+```sh
+python3 -m pip install playwright
+python3 Tools/playtest_floor.py --url http://localhost:8000 --browser /usr/bin/chromium
+python3 Tools/playtest_ui.py --url http://localhost:8000 --browser /usr/bin/chromium
 ```

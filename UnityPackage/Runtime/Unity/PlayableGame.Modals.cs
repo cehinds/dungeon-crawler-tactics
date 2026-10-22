@@ -15,8 +15,8 @@ namespace DungeonCrawlerTactics.Unity
             {
                 GUI.Label(new Rect(298, 189, 842, 490),
                     "1. Assemble four crawlers at camp. Select a crawler, choose a class, then enter the dungeon.\n\n" +
-                    "2. Select a crawler on the board or party list. Click a highlighted cell to move around walls and other units.\n\n" +
-                    "3. Choose an ability or item. Click its target to see the resolver's forecast. Confirm to commit, or cancel without spending energy.\n\n" +
+                    "2. Explore first: click reachable corridor tiles or use arrow keys. Approach caches and notes to interact. Enter the encounter door when ready.\n\n" +
+                    "3. In battle, select a crawler and move on highlighted cells. Choose a class ability or item, click a legal target and review the forecast. Confirm to commit, or cancel without spending energy.\n\n" +
                     "4. Move before acting: an action ends that crawler’s activation. Wait ends that crawler's activation. End team turn lets the enemies respond.\n\n" +
                     "5. Conditions create combinations: fire ignites oil; lightning conducts through a wet target; physical attacks shatter frozen targets. Tile effects and unit conditions are shown separately.\n\n" +
                     "6. Defeat the room's enemies, choose a sponsor reward, and prepare for the next room. Clear all three rooms to finish the floor.", bodyStyle);

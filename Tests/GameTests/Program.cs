@@ -14,7 +14,32 @@ static class GameTests
     static void Check(bool value, string name) { if (!value) throw new Exception("FAILED: " + name); checks++; Console.WriteLine("PASS " + name); }
     static T Clone<T>(T value) { return JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(value, Json), Json); }
     static GameSession Session() { return new GameSession(Clone(Content), Clone(Data)); }
-    static GameView Command(GameSession game, string type, string unit = null, string target = null, string ability = null, string item = null, int x = 0, int y = 0) { return game.Handle(new GameCommand { type = type, unitId = unit, targetId = target, abilityId = ability, itemId = item, x = x, y = y }); }
+    static GameView RawCommand(GameSession game, string type, string unit = null, string target = null, string ability = null, string item = null, int x = 0, int y = 0) { return game.Handle(new GameCommand { type = type, unitId = unit, targetId = target, abilityId = ability, itemId = item, x = x, y = y }); }
+    static GameView Command(GameSession game, string type, string unit = null, string target = null, string ability = null, string item = null, int x = 0, int y = 0)
+    {
+        GameView view = RawCommand(game, type, unit, target, ability, item, x, y);
+        if (type == "start" && view.screen == "explore") return EnterDoor(game);
+        return view;
+    }
+    static GameView EnterDoor(GameSession game)
+    {
+        GameView view = game.GetView(); int attempts = 0;
+        while (view.screen == "explore" && attempts++ < 100)
+        {
+            ExplorationView map = view.exploration;
+            ExplorationPointView door = map.points.FirstOrDefault(p => p.kind == "encounter" && p.canInteract);
+            if (door != null) return RawCommand(game, "explore_interact", target: door.id);
+            // Test driver explores nearest frontier in stable order; it cannot see hidden POIs.
+            ExplorationTileView next = map.tiles.Where(t => t.reachable && !t.revealed).OrderBy(t => Math.Abs(t.x-map.x)+Math.Abs(t.y-map.y)).ThenBy(t => t.y).ThenBy(t => t.x).FirstOrDefault();
+            if (next == null)
+            {
+                door = map.points.First(p => p.kind == "encounter");
+                next = map.tiles.Where(t => t.reachable).OrderBy(t => Math.Abs(t.x-door.x)+Math.Abs(t.y-door.y)).First();
+            }
+            view = RawCommand(game, "explore_move", x: next.x, y: next.y);
+        }
+        throw new Exception("Exploration driver did not reach door: " + view.message);
+    }
     static void Main()
     {
         Content = JsonSerializer.Deserialize<Content>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")), Json);
@@ -22,8 +47,40 @@ static class GameTests
         GameDataValidator.Validate(Data, new Catalog(Content));
         Check(Content.classes.All(c => c.abilityIds.Length >= 3), "all twelve classes have functional kits");
         Check(Content.items.Length == 8 && Content.abilities.Length >= 18, "release inventory and ability breadth");
-        ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
+        Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
+    }
+    static void Exploration()
+    {
+        GameData wider = Clone(Data); wider.encounters[0].exploration.discoveryRadius = 3;
+        GameSession wide = new GameSession(Clone(Content), wider); RawCommand(wide, "start");
+        GameSave wideSave = Clone(wide.ExportSave()); wide.ImportSave(wideSave);
+        Check(wide.GetView().screen == "explore" && !wide.GetView().message.Contains("rejected"), "larger discovery radius roundtrips without revealing through walls");
+        GameSession game = Session(); GameView view = RawCommand(game, "start");
+        Check(view.screen == "explore" && view.units.Length == 0 && view.exploration.points.All(p => p.kind != "encounter"), "camp opens fogged exploration without exposing encounter door");
+        int revealed = view.exploration.tiles.Count(t => t.revealed);
+        view = RawCommand(game, "explore_move", x: 7, y: 5);
+        Check(view.exploration.x == 1 && view.exploration.y == 1, "cannot path directly to hidden goal");
+        view = RawCommand(game, "explore_move", x: 0, y: 1);
+        Check(view.exploration.x == 1, "exploration walls block movement");
+        view = RawCommand(game, "explore_move", x: 3, y: 1);
+        Check(view.exploration.x == 3 && view.exploration.tiles.Count(t => t.revealed) > revealed, "BFS walking reveals traversed passage");
+        string cache = view.exploration.points.First(p => p.kind == "cache").id;
+        int supply = view.items.First(i => i.id == "item.health_tonic").count;
+        view = RawCommand(game, "explore_interact", target: cache); view = RawCommand(game, "explore_interact", target: cache);
+        Check(view.items.First(i => i.id == "item.health_tonic").count == supply + 1, "optional cache grants supply exactly once");
+        GameSave checkpoint = Clone(game.ExportSave()); GameSession restored = Session(); restored.ImportSave(checkpoint);
+        Check(restored.GetView().screen == "explore" && restored.GetView().exploration.x == 3 && restored.GetView().exploration.tiles.Count(t => t.revealed) == view.exploration.tiles.Count(t => t.revealed) && restored.GetView().exploration.points.First(p => p.id == cache).claimed, "exploration position fog and claims persist");
+        string before = JsonSerializer.Serialize(restored.ExportSave(), Json); checkpoint.exploration[0].x = 0;
+        restored.ImportSave(checkpoint); Check(JsonSerializer.Serialize(restored.ExportSave(), Json) == before, "wall exploration save rejected atomically");
+        checkpoint = Clone(game.ExportSave()); checkpoint.exploration[0].claimed = new[] { cache, cache };
+        restored.ImportSave(checkpoint); Check(JsonSerializer.Serialize(restored.ExportSave(), Json) == before, "duplicate exploration claims rejected atomically");
+        checkpoint = Clone(game.ExportSave()); checkpoint.exploration[0].sectorId = Data.encounters[1].exploration.id;
+        restored.ImportSave(checkpoint); Check(JsonSerializer.Serialize(restored.ExportSave(), Json) == before, "future sector checkpoint rejected atomically");
+        RawCommand(game, "return_camp"); game.Handle(new GameCommand { type = "set_class", unitId = "crawler.carl", classId = "class.ranger" }); RawCommand(game, "start");
+        Check(game.GetView().exploration.x == 3, "camp revisit preserves exploration progress");
+        view = EnterDoor(game); Check(view.units.First(u => u.id == "crawler.carl").classId == "class.ranger", "chosen class persists through exploration into combat");
+        GameSave legacy = Clone(game.ExportSave()); legacy.exploration = new ExplorationSave[0]; restored.ImportSave(legacy); Check(restored.GetView().screen == "battle", "legacy battle checkpoint resumes without exploration history");
     }
     static void ConfigurableParty()
     {
@@ -61,7 +118,10 @@ static class GameTests
         GameSession game = Session(); Command(game, "start");
         string actor = "crawler.donut", target = "enemy.goblin_two";
         Command(game, "move", actor, x: 3, y: 3); Command(game, "select", actor);
-        GameSave before = game.ExportSave(); GameView view = Command(game, "preview", actor, target, "ability.spark");
+        GameSave before = game.ExportSave(); GameView legal = game.GetView();
+        Check(legal.abilities.First(a => a.id == "ability.spark").targetIds.Contains(target) && legal.abilities.All(a => a.targetIds.All(id => legal.units.Any(u => u.id == id) || legal.tiles.Any(t => t.id == id))), "core exposes authoritative legal action targets");
+        Check(JsonSerializer.Serialize(before, Json) == JsonSerializer.Serialize(game.ExportSave(), Json), "legal target view does not mutate committed state");
+        GameView view = Command(game, "preview", actor, target, "ability.spark");
         Check(view.canConfirm && view.forecast.Any(f => f.targetId == target && f.beforeHp - f.afterHp == 13), "wet lightning exact reaction forecast");
         Check(JsonSerializer.Serialize(before, Json) == JsonSerializer.Serialize(game.ExportSave(), Json), "preview leaves live state unchanged");
         GameView predicted = view; view = Command(game, "confirm");
@@ -143,7 +203,9 @@ static class GameTests
             if (view.screen == "victory")
             {
                 victories++; if (view.rewards.Length > 0) game.Handle(new GameCommand { type = "choose_reward", rewardId = view.rewards[0].id });
-                GameSave checkpoint = Clone(game.ExportSave()); game.ImportSave(checkpoint); Command(game, "continue"); continue;
+                GameSave checkpoint = Clone(game.ExportSave()); game.ImportSave(checkpoint); view = Command(game, "continue");
+                if (view.screen == "camp") { view = RawCommand(game, "start"); Check(view.screen == "explore" && view.exploration.x == 1 && view.exploration.y == 1, "next victory opens a fresh exploration sector"); EnterDoor(game); }
+                continue;
             }
             UnitView actor = view.units.FirstOrDefault(u => u.team == "player" && u.hp > 0 && !u.acted);
             if (actor == null) { Command(game, "end_turn"); continue; }

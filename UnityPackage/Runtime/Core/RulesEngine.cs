@@ -79,11 +79,23 @@ namespace DungeonCrawlerTactics
                 List<ReactionDef> matched = new List<ReactionDef>();
                 foreach (ReactionDef rule in catalog.Reactions)
                     if (!fired.Contains(rule.id) && rule.incoming.Matches(incoming) && rule.target.Matches(target.Tags)) matched.Add(rule);
-                Apply(target, current.Effects); log.Add(current.Label);
+                // Defensive reactions resolve before damage, so protection can prevent lethal hits.
+                // Their single budget is shared across every Damage effect in this event.
+                long reduction = 0;
+                bool damaging = Array.Exists(current.Effects, effect => effect.op == "Damage" && effect.amount > 0);
+                foreach (ReactionDef rule in matched)
+                {
+                    if (rule.damageReduction == 0 || !damaging || !rule.target.Matches(target.Tags)) continue;
+                    fired.Add(rule.id);
+                    foreach (string tag in rule.consumeTags) target.Tags.Remove(tag);
+                    reduction = Math.Min(int.MaxValue, reduction + rule.damageReduction);
+                    queue.Enqueue(new RuleEvent { Tags = rule.emitTags, Effects = rule.effects, Label = rule.id });
+                }
+                Apply(target, current.Effects, reduction); log.Add(current.Label);
                 foreach (ReactionDef rule in matched)
                 {
                     // Earlier rules can consume a prerequisite and suppress later rules.
-                    if (!rule.target.Matches(target.Tags)) continue;
+                    if (rule.damageReduction > 0 || !rule.target.Matches(target.Tags)) continue;
                     fired.Add(rule.id);
                     foreach (string tag in rule.consumeTags) target.Tags.Remove(tag);
                     queue.Enqueue(new RuleEvent { Tags = rule.emitTags, Effects = rule.effects, Label = rule.id });
@@ -91,13 +103,16 @@ namespace DungeonCrawlerTactics
             }
             return new ActionResult(next, log);
         }
-        private static void Apply(EntityState target, EffectDef[] effects)
+        private static void Apply(EntityState target, EffectDef[] effects, long reduction)
         {
             foreach (EffectDef effect in effects)
             {
                 switch (effect.op)
                 {
-                    case "Damage": if (!target.IsTile) target.Hp = (int)Math.Max(0L, (long)target.Hp - effect.amount); break;
+                    case "Damage":
+                        long prevented = Math.Min(reduction, effect.amount); reduction -= prevented;
+                        if (!target.IsTile) target.Hp = (int)Math.Max(0L, (long)target.Hp - (effect.amount - prevented));
+                        break;
                     case "Heal": if (!target.IsTile && target.Hp > 0) target.Hp = (int)Math.Min((long)target.MaxHp, (long)target.Hp + effect.amount); break;
                     case "AddTag": target.Tags.Add(effect.tag); break;
                     case "RemoveTag": target.Tags.Remove(effect.tag); break;

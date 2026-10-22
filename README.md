@@ -2,7 +2,9 @@
 
 A small complete Dungeon Crawler Carl fan tactics game: four deployed crawlers, a configurable eight-character roster, twelve class kits, three encounters ending in a boss, environmental reactions, shared consumables and sponsor rewards.
 
-**Play now:** run `./play.sh` on macOS/Linux, or `Play-Windows.bat` on Windows, then open **http://localhost:8000**. Python 3 is required for the local static server. The download archive includes the published game; a source checkout needs the `dotnet publish` command below first.
+**Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
+
+**Play locally:** run `./play.sh` on macOS/Linux, or `Play-Windows.bat` on Windows, then open **http://localhost:8000**. Python 3 is required for the local static server. The download archive includes the published game; a source checkout needs the `dotnet publish` command below first.
 
 **Unity:** open `UnityProject/` in Unity 6, choose **Dungeon Crawler → Create Playable Scene**, then press Play. Choose **Build Web Player** from the same menu to export using your installed Unity Web Build Support module.
 
@@ -11,8 +13,10 @@ The included playable browser build runs the actual shared C# game through .NET 
 ## What you can play
 
 - Select four of eight crawlers and change their classes at camp.
+- Explore three fog-covered corridor maps, discover optional supply caches and notes, and choose when to enter each encounter.
 - Move on three authored 10×8 boards, use class abilities or shared items, inspect the exact forecast, confirm or cancel.
-- Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage.
+- Keep the battle map, class abilities and confirmation controls together in a compact viewport layout.
+- Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage. Guardian, Bard and Necromancer support abilities now grant real single-hit protection.
 - Fight deterministic enemies, collect sponsor supplies, reach the boss, finish the floor, or retry after defeat.
 - Autosave, reload, and export/import a portable JSON save.
 

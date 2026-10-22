@@ -35,7 +35,7 @@ Generated from the current combat-content.json and game-content.json. The JSON i
 | `ability.heavy_blow` | Heavy Blow | enemy / 1 / 3 | Damage 15 | damage.physical, impact.shatter |
 | `ability.second_wind` | Second Wind | self / 0 / 2 | Heal 10 | — |
 | `ability.shield_bash` | Shield Bash | enemy / 1 / 1 | Damage 10; AddTag status.shocked | damage.physical |
-| `ability.bulwark` | Bulwark Recovery | self / 0 / 3 | Heal 12 | — |
+| `ability.bulwark` | Bulwark Recovery | self / 0 / 3 | Heal 12; AddTag status.guarded | — |
 | `ability.knife_throw` | Knife Throw | enemy / 3 / 1 | Damage 8 | damage.physical |
 | `ability.backstab` | Backstab | enemy / 1 / 2 | Damage 13 | damage.physical, impact.shatter |
 | `ability.aimed_shot` | Aimed Shot | enemy / 5 / 1 | Damage 9 | damage.physical |
@@ -46,10 +46,10 @@ Generated from the current combat-content.json and game-content.json. The JSON i
 | `ability.thunderclap` | Thunderclap | enemy / 3 / 4 | Damage 13 | element.lightning |
 | `ability.greater_mend` | Greater Mend | ally / 4 / 4 | Heal 16 | — |
 | `ability.cleanse` | Cleanse | ally / 4 / 1 | RemoveTag status.frozen; RemoveTag status.shocked; RemoveTag status.wet | — |
-| `ability.rally` | Rallying Song | ally / 4 / 2 | Heal 10 | — |
+| `ability.rally` | Rallying Song | ally / 4 / 2 | Heal 10; AddTag status.guarded | — |
 | `ability.dirge` | Dissonant Note | enemy / 4 / 2 | Damage 8; AddTag status.shocked | — |
 | `ability.grave_bolt` | Grave Bolt | enemy / 4 / 2 | Damage 11 | — |
-| `ability.siphon_ward` | Siphon Ward | self / 0 / 2 | Heal 11 | — |
+| `ability.siphon_ward` | Siphon Ward | self / 0 / 2 | Heal 11; AddTag status.guarded | — |
 | `ability.beast_rend` | Beast Rend | enemy / 2 / 2 | Damage 12 | damage.physical |
 | `ability.tonic` | Health Tonic | ally / 3 / 0 | Heal 14 | — |
 | `ability.elixir` | Mega Tonic | ally / 3 / 0 | Heal 26 | — |
@@ -80,6 +80,10 @@ Generated from the current combat-content.json and game-content.json. The JSON i
 | Service Corridor 13 | Maintenance Goblin, Coolant Goblin, Security Sentry | 30 |
 | The Sponsor Foundry | Foundry Foreman, Fuel Technician, Catwalk Stalker, Live Coil | 45 |
 | The Audience Retention Engine | Audience Retention Engine, Fire Handler, Coil Handler | 75 |
+
+## Exploration
+
+Each encounter has an authored fog-covered corridor sector with an encounter door, optional supply caches and a note describing a tactical combination. Movement reveals reachable passages; discoveries and supplies persist in saves. Maps, discovery radius and rewards are edited in `game-content.json`.
 
 ## Art source
 

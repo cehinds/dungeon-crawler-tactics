@@ -5,7 +5,7 @@ namespace DungeonCrawlerTactics
 {
     // A deterministic application boundary shared by the Unity and browser presenters.
     // Presenters submit commands; only this class owns inventory, turns, movement and combat.
-    public sealed class GameSession
+    public sealed partial class GameSession
     {
         private readonly Catalog catalog;
         private readonly GameData data;
@@ -53,7 +53,10 @@ namespace DungeonCrawlerTactics
                     case "start":
                         Require(screen == "camp", "Start an encounter from camp.");
                         Require(PartyCount() == data.partySize, "Choose exactly " + data.partySize + " crawlers.");
-                        StartEncounter(); break;
+                        StartExploration(); break;
+                    case "explore_move": ExploreMove(command.x, command.y); break;
+                    case "explore_interact": ExploreInteract(command.targetId); break;
+                    case "return_camp": Require(screen == "explore", "Return from exploration only."); screen = "camp"; break;
                     case "select":
                         RequirePlayer();
                         EntityState selection = GetUnit(command.unitId);
@@ -118,7 +121,7 @@ namespace DungeonCrawlerTactics
         }
         private void Reset()
         {
-            roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); battle = new BattleState();
+            roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); exploration.Clear(); battle = new BattleState();
             foreach (RosterDef member in data.roster)
             {
                 int hp = Stats(member.classId).hp;
@@ -465,11 +468,11 @@ namespace DungeonCrawlerTactics
             List<AbilityView> abilityViews = new List<AbilityView>();
             if (actor != null) foreach (string id in catalog.Classes[actor.ClassId].abilityIds)
             {
-                AbilityDef a = catalog.Abilities[id]; abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = a.range, cost = a.cost, enabled = active && actor.Energy >= a.cost, description = Describe(a) });
+                AbilityDef a = catalog.Abilities[id]; abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = a.range, cost = a.cost, enabled = active && actor.Energy >= a.cost, description = Describe(a), disabledReason = !active ? "Activation unavailable" : actor.Energy < a.cost ? "Insufficient energy" : "", targetIds = active && actor.Energy >= a.cost ? LegalTargets(actor, a, null) : new string[0] });
             }
             view.abilities = abilityViews.ToArray();
             List<ItemView> itemViews = new List<ItemView>(); foreach (ItemDef item in catalog.Items.Values)
-            { AbilityDef a = catalog.Abilities[item.abilityId]; itemViews.Add(new ItemView { id = item.id, label = item.label, abilityId = item.abilityId, count = inventory[item.id], target = a.target, range = a.range }); }
+            { AbilityDef a = catalog.Abilities[item.abilityId]; itemViews.Add(new ItemView { id = item.id, label = item.label, abilityId = item.abilityId, count = inventory[item.id], target = a.target, range = a.range, description = Describe(a), disabledReason = !active ? "Activation unavailable" : inventory[item.id] == 0 ? "No charges" : "", targetIds = active && inventory[item.id] > 0 ? LegalTargets(actor, a, item.id) : new string[0] }); }
             view.items = itemViews.ToArray();
             if (forecast != null)
             {
@@ -485,14 +488,51 @@ namespace DungeonCrawlerTactics
             List<string> visibleLog = new List<string>(log); if (forecast != null) foreach (string entry in forecast.Log) visibleLog.Add("Forecast: " + entry); view.log = visibleLog.ToArray();
             if (screen == "victory" && !rewardChosen)
             { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); view.rewards = rewards.ToArray(); }
+            if (screen == "explore") view.exploration = ExplorationView();
             return view;
         }
-        private static string Describe(AbilityDef ability)
+        private string[] LegalTargets(EntityState actor, AbilityDef ability, string itemId)
+        {
+            List<string> targets = new List<string>();
+            foreach (EntityState target in battle.Entities.Values)
+            {
+                if (Math.Abs(actor.X - target.X) + Math.Abs(actor.Y - target.Y) > ability.range) continue;
+                if ((ability.target == "tile") != target.IsTile) continue;
+                try { ResolveAction(new GameCommand { unitId = actor.Id, abilityId = ability.id, itemId = itemId, targetId = target.Id }); targets.Add(target.Id); }
+                catch (ArgumentException) { }
+                catch (InvalidOperationException) { }
+            }
+            targets.Sort(StringComparer.Ordinal); return targets.ToArray();
+        }
+        private string Describe(AbilityDef ability)
         {
             List<string> parts = new List<string>();
-            foreach (EffectDef effect in ability.effects) parts.Add(effect.op == "Damage" || effect.op == "Heal" ? effect.op + " " + effect.amount : effect.op + " " + effect.tag);
-            if (ability.incomingTags.Length > 0) parts.Add("Triggers: " + string.Join(", ", ability.incomingTags));
+            foreach (EffectDef effect in ability.effects)
+            {
+                if (effect.op == "Damage") parts.Add(effect.amount + " damage");
+                else if (effect.op == "Heal") parts.Add("Restore " + effect.amount + " HP");
+                else
+                {
+                    string label = DisplayTag(effect.tag);
+                    string protection = "";
+                    if (effect.op == "AddTag") foreach (ReactionDef rule in catalog.Reactions)
+                        if (rule.damageReduction > 0 && Array.IndexOf(rule.target.all, effect.tag) >= 0)
+                        { protection = " (" + rule.damageReduction + " damage protection on a matching hit)"; break; }
+                    parts.Add((effect.op == "AddTag" ? "Apply " : "Remove ") + label + protection);
+                }
+            }
+            if (ability.incomingTags.Length > 0)
+            {
+                List<string> labels = new List<string>(); foreach (string tag in ability.incomingTags) labels.Add(DisplayTag(tag));
+                parts.Add("Triggers " + string.Join(" / ", labels) + " reactions");
+            }
             return string.Join(". ", parts) + ".";
+        }
+        private static string DisplayTag(string tag)
+        {
+            if (string.IsNullOrEmpty(tag)) return "condition";
+            int dot = tag.LastIndexOf('.'); string name = tag.Substring(dot + 1).Replace('_', ' ');
+            return char.ToUpperInvariant(name[0]) + name.Substring(1);
         }
         public GameSave ExportSave()
         {
@@ -508,14 +548,14 @@ namespace DungeonCrawlerTactics
             save.units = savedUnits.ToArray();
             if (battle.Entities.Count > 0) save.tiles = GetView().tiles;
             List<TimedTag> layers = new List<TimedTag>(); foreach (TimedTag layer in timed) layers.Add(new TimedTag { entityId = layer.entityId, tag = layer.tag, source = layer.source, remainingRounds = layer.remainingRounds }); save.timedTags = layers.ToArray();
-            save.log = log.ToArray(); return save;
+            save.exploration = ExportExploration(); save.log = log.ToArray(); return save;
         }
         public GameView ImportSave(GameSave save)
         {
             try
             {
                 Require(save != null && save.schemaVersion == 1 && save.contentVersion == data.contentVersion, "Save version does not match this content pack.");
-                Require(save.screen == "camp" || save.screen == "battle" || save.screen == "victory" || save.screen == "defeat" || save.screen == "complete", "Invalid save screen.");
+                Require(save.screen == "camp" || save.screen == "explore" || save.screen == "battle" || save.screen == "victory" || save.screen == "defeat" || save.screen == "complete", "Invalid save screen.");
                 Require(save.phase == "player" || (save.phase == "enemy" && (save.screen == "victory" || save.screen == "defeat")), "Invalid save phase.");
                 Require(save.encounterIndex >= 0 && save.encounterIndex < data.encounters.Length + (save.screen == "complete" ? 1 : 0), "Invalid encounter index.");
                 Require(save.screen != "complete" || save.encounterIndex == data.encounters.Length, "Incomplete floor marked complete.");
@@ -543,7 +583,8 @@ namespace DungeonCrawlerTactics
                     Require(item != null && item.itemId != null && catalog.Items.ContainsKey(item.itemId) && !nextInventory.ContainsKey(item.itemId) && item.count >= 0 && item.count <= 10000, "Invalid saved inventory.");
                     nextInventory.Add(item.itemId, item.count);
                 }
-                bool hasBattle = save.screen != "camp";
+                List<ExplorationSave> nextExploration = ValidateExploration(save);
+                bool hasBattle = save.screen != "camp" && save.screen != "explore";
                 EncounterDef encounter = data.encounters[Math.Min(save.encounterIndex, data.encounters.Length - 1)];
                 Require(save.units.Length == (hasBattle ? data.partySize + encounter.enemies.Length : 0), "Saved unit count does not match encounter.");
                 Require(save.tiles.Length == (hasBattle ? encounter.width * encounter.height : 0), "Saved map size does not match encounter.");
@@ -614,6 +655,7 @@ namespace DungeonCrawlerTactics
                     }
                 foreach (string entry in save.log) Require(entry != null && entry.Length <= 1000, "Invalid saved log.");
                 // All validation is complete before replacing any live state.
+                exploration.Clear(); foreach (ExplorationSave sector in nextExploration) exploration.Add(sector.sectorId, sector);
                 roster.Clear(); foreach (var pair in nextRoster) roster.Add(pair.Key, pair.Value);
                 inventory.Clear(); foreach (var pair in nextInventory) inventory.Add(pair.Key, pair.Value);
                 units.Clear(); foreach (var pair in nextUnits) units.Add(pair.Key, pair.Value);
