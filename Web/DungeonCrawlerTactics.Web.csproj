@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>DungeonCrawlerTactics.Web</AssemblyName>
+    <RunAOTCompilation>false</RunAOTCompilation>
+    <BlazorEnableCompression>false</BlazorEnableCompression>
+    <PublishTrimmed>false</PublishTrimmed>
+    <DefaultItemExcludes>$(DefaultItemExcludes);publish/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="publish/**" />
+    <None Remove="publish/**" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.32" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.32" PrivateAssets="all" />
+    <Compile Include="../UnityPackage/Runtime/Core/*.cs" Link="Core/%(Filename)%(Extension)" />
+    <Content Include="../UnityPackage/Runtime/Data/combat-content.json" Link="wwwroot/data/combat-content.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../UnityPackage/Runtime/Data/game-content.json" Link="wwwroot/data/game-content.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

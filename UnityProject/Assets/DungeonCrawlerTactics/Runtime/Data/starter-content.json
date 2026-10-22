@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "tags": [
+    {
+      "id": "element.fire",
+      "label": "Fire"
+    },
+    {
+      "id": "element.cold",
+      "label": "Cold"
+    },
+    {
+      "id": "element.lightning",
+      "label": "Lightning"
+    },
+    {
+      "id": "element.water",
+      "label": "Water"
+    },
+    {
+      "id": "damage.physical",
+      "label": "Physical"
+    },
+    {
+      "id": "impact.shatter",
+      "label": "Shatter"
+    },
+    {
+      "id": "surface.oil",
+      "label": "Oil"
+    },
+    {
+      "id": "surface.burning",
+      "label": "Burning"
+    },
+    {
+      "id": "status.wet",
+      "label": "Wet"
+    },
+    {
+      "id": "status.frozen",
+      "label": "Frozen"
+    },
+    {
+      "id": "status.shocked",
+      "label": "Shocked"
+    }
+  ],
+  "classes": [
+    {
+      "id": "class.brawler",
+      "label": "Brawler",
+      "abilityIds": [
+        "ability.strike",
+        "ability.shatter"
+      ]
+    },
+    {
+      "id": "class.guardian",
+      "label": "Guardian",
+      "abilityIds": [
+        "ability.strike"
+      ]
+    },
+    {
+      "id": "class.rogue",
+      "label": "Rogue",
+      "abilityIds": [
+        "ability.strike"
+      ]
+    },
+    {
+      "id": "class.ranger",
+      "label": "Ranger",
+      "abilityIds": [
+        "ability.strike"
+      ]
+    },
+    {
+      "id": "class.pyromancer",
+      "label": "Pyromancer",
+      "abilityIds": [
+        "ability.strike",
+        "ability.firebolt",
+        "ability.fire_surface"
+      ]
+    },
+    {
+      "id": "class.cryomancer",
+      "label": "Cryomancer",
+      "abilityIds": [
+        "ability.strike",
+        "ability.frostbite"
+      ]
+    },
+    {
+      "id": "class.stormcaller",
+      "label": "Stormcaller",
+      "abilityIds": [
+        "ability.strike",
+        "ability.spark"
+      ]
+    },
+    {
+      "id": "class.cleric",
+      "label": "Cleric",
+      "abilityIds": [
+        "ability.strike",
+        "ability.mend"
+      ]
+    },
+    {
+      "id": "class.alchemist",
+      "label": "Alchemist",
+      "abilityIds": [
+        "ability.strike",
+        "ability.oil_flask",
+        "ability.douse"
+      ]
+    },
+    {
+      "id": "class.bard",
+      "label": "Bard",
+      "abilityIds": [
+        "ability.strike"
+      ]
+    },
+    {
+      "id": "class.necromancer",
+      "label": "Necromancer",
+      "abilityIds": [
+        "ability.strike"
+      ]
+    },
+    {
+      "id": "class.beastmaster",
+      "label": "Beastmaster",
+      "abilityIds": [
+        "ability.strike"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "id": "ability.strike",
+      "label": "Strike",
+      "target": "enemy",
+      "range": 1,
+      "cost": 0,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 6,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.firebolt",
+      "label": "Firebolt",
+      "target": "enemy",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 8,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.spark",
+      "label": "Spark",
+      "target": "enemy",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.lightning"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 5,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.oil_flask",
+      "label": "Oil Flask",
+      "target": "tile",
+      "range": 3,
+      "cost": 1,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.oil"
+        }
+      ]
+    },
+    {
+      "id": "ability.frostbite",
+      "label": "Frostbite",
+      "target": "enemy",
+      "range": 3,
+      "cost": 2,
+      "incomingTags": [
+        "element.cold"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 4,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.mend",
+      "label": "Mend",
+      "target": "ally",
+      "range": 3,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 8,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.douse",
+      "label": "Douse",
+      "target": "enemy",
+      "range": 3,
+      "cost": 1,
+      "incomingTags": [
+        "element.water"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.wet"
+        }
+      ]
+    },
+    {
+      "id": "ability.shatter",
+      "label": "Shatter",
+      "target": "enemy",
+      "range": 1,
+      "cost": 1,
+      "incomingTags": [
+        "impact.shatter",
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 5,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.fire_surface",
+      "label": "Ignite Surface",
+      "target": "tile",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": []
+    }
+  ],
+  "reactions": [
+    {
+      "id": "reaction.oil_ignites",
+      "priority": 100,
+      "incoming": {
+        "all": [
+          "element.fire"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "surface.oil"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "surface.oil"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.burning"
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.wet_conducts",
+      "priority": 90,
+      "incoming": {
+        "all": [
+          "element.lightning"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.wet"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.wet"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 5,
+          "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.shocked"
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.wet_freezes",
+      "priority": 90,
+      "incoming": {
+        "all": [
+          "element.cold"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.wet"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.wet"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.frozen"
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.frozen_shatters",
+      "priority": 100,
+      "incoming": {
+        "all": [
+          "impact.shatter"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.frozen"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.frozen"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 10,
+          "tag": ""
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.water_extinguishes",
+      "priority": 100,
+      "incoming": {
+        "all": [
+          "element.water"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "surface.burning"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "surface.burning"
+      ],
+      "effects": [],
+      "emitTags": []
+    }
+  ],
+  "items": [
+    {
+      "id": "item.oil_flask",
+      "label": "Oil Flask",
+      "abilityId": "ability.oil_flask"
+    }
+  ]
+}

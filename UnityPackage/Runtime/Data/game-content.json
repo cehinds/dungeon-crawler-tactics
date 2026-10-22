@@ -1,0 +1,587 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "floor-one-1.0.0",
+  "partySize": 4,
+  "energyPerRound": 3,
+  "roster": [
+    {
+      "id": "crawler.carl",
+      "label": "Carl",
+      "classId": "class.brawler",
+      "selected": true
+    },
+    {
+      "id": "crawler.donut",
+      "label": "Princess Donut",
+      "classId": "class.stormcaller",
+      "selected": true
+    },
+    {
+      "id": "crawler.katia",
+      "label": "Katia",
+      "classId": "class.pyromancer",
+      "selected": true
+    },
+    {
+      "id": "crawler.mordecai",
+      "label": "Mordecai",
+      "classId": "class.cleric",
+      "selected": true
+    },
+    {
+      "id": "crawler.elle",
+      "label": "Elle",
+      "classId": "class.cryomancer",
+      "selected": false
+    },
+    {
+      "id": "crawler.iman",
+      "label": "Imani",
+      "classId": "class.guardian",
+      "selected": false
+    },
+    {
+      "id": "crawler.louis",
+      "label": "Louis",
+      "classId": "class.ranger",
+      "selected": false
+    },
+    {
+      "id": "crawler.brittany",
+      "label": "Brittany",
+      "classId": "class.alchemist",
+      "selected": false
+    }
+  ],
+  "classStats": [
+    {
+      "classId": "class.brawler",
+      "hp": 42,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.guardian",
+      "hp": 42,
+      "energy": 12,
+      "move": 3
+    },
+    {
+      "classId": "class.rogue",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.ranger",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.pyromancer",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.cryomancer",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.stormcaller",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.cleric",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.alchemist",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.bard",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.necromancer",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.beastmaster",
+      "hp": 34,
+      "energy": 12,
+      "move": 4
+    }
+  ],
+  "startingInventory": [
+    {
+      "itemId": "item.health_tonic",
+      "count": 3
+    },
+    {
+      "itemId": "item.mega_tonic",
+      "count": 1
+    },
+    {
+      "itemId": "item.water_bomb",
+      "count": 1
+    },
+    {
+      "itemId": "item.oil_flask",
+      "count": 1
+    },
+    {
+      "itemId": "item.frost_vial",
+      "count": 1
+    },
+    {
+      "itemId": "item.fire_bomb",
+      "count": 1
+    },
+    {
+      "itemId": "item.thunder_flask",
+      "count": 1
+    },
+    {
+      "itemId": "item.cleansing_tonic",
+      "count": 1
+    }
+  ],
+  "rewards": [
+    {
+      "id": "reward.medical",
+      "label": "Emergency care package",
+      "description": "Two health tonics for your shared inventory.",
+      "itemId": "item.health_tonic",
+      "count": 2,
+      "heal": 0
+    },
+    {
+      "id": "reward.volatile",
+      "label": "Questionable sponsor crate",
+      "description": "Two fire bombs. Probably safe to carry.",
+      "itemId": "item.fire_bomb",
+      "count": 2,
+      "heal": 0
+    },
+    {
+      "id": "reward.frost",
+      "label": "Cold comfort",
+      "description": "Two frost vials to set up a shatter.",
+      "itemId": "item.frost_vial",
+      "count": 2,
+      "heal": 0
+    }
+  ],
+  "tagRules": [
+    {
+      "tag": "surface.burning",
+      "entryDamage": 4,
+      "turnDamage": 3,
+      "durationRounds": 0
+    },
+    {
+      "tag": "surface.water",
+      "occupantTag": "status.wet",
+      "durationRounds": 0
+    },
+    {
+      "tag": "status.wet",
+      "durationRounds": 3
+    },
+    {
+      "tag": "status.frozen",
+      "durationRounds": 2,
+      "movePenalty": 20
+    },
+    {
+      "tag": "status.shocked",
+      "durationRounds": 1,
+      "energyPenalty": 2
+    }
+  ],
+  "encounters": [
+    {
+      "id": "encounter.service",
+      "label": "Service Corridor 13",
+      "description": "Ignite the oil, shock a wet target, or freeze then shatter. Defeat every enemy to open the lift.",
+      "width": 10,
+      "height": 8,
+      "xp": 30,
+      "playerSpawns": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "tiles": [
+        {
+          "x": 4,
+          "y": 1,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 4,
+          "y": 6,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "tags": [
+            "surface.oil"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "tags": [
+            "surface.oil"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "enemy.goblin_one",
+          "label": "Maintenance Goblin",
+          "classId": "class.brawler",
+          "x": 5,
+          "y": 3,
+          "hp": 18,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "id": "enemy.goblin_two",
+          "label": "Coolant Goblin",
+          "classId": "class.rogue",
+          "x": 6,
+          "y": 4,
+          "hp": 18,
+          "energy": 12,
+          "move": 3,
+          "tags": [
+            "status.wet"
+          ]
+        },
+        {
+          "id": "enemy.sentry",
+          "label": "Security Sentry",
+          "classId": "class.ranger",
+          "x": 7,
+          "y": 2,
+          "hp": 20,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "encounter.foundry",
+      "label": "The Sponsor Foundry",
+      "description": "The foundry floor is burning. Reach the enemies through the northern or southern passage.",
+      "width": 10,
+      "height": 8,
+      "xp": 45,
+      "playerSpawns": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "tiles": [
+        {
+          "x": 4,
+          "y": 2,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "tags": [
+            "surface.burning"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "tags": [
+            "surface.oil"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "tags": [
+            "surface.oil"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "enemy.foreman",
+          "label": "Foundry Foreman",
+          "classId": "class.guardian",
+          "x": 6,
+          "y": 2,
+          "hp": 24,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "id": "enemy.arsonist",
+          "label": "Fuel Technician",
+          "classId": "class.pyromancer",
+          "x": 7,
+          "y": 4,
+          "hp": 20,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "id": "enemy.stalker",
+          "label": "Catwalk Stalker",
+          "classId": "class.rogue",
+          "x": 6,
+          "y": 5,
+          "hp": 20,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "id": "enemy.coil",
+          "label": "Live Coil",
+          "classId": "class.stormcaller",
+          "x": 8,
+          "y": 3,
+          "hp": 18,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "encounter.boss",
+      "label": "The Audience Retention Engine",
+      "description": "Boss room: bring down the Retention Engine and its handlers. No special key or consumable is required.",
+      "width": 10,
+      "height": 8,
+      "xp": 75,
+      "playerSpawns": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "tiles": [
+        {
+          "x": 4,
+          "y": 2,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "tags": [],
+          "blocked": true
+        },
+        {
+          "x": 6,
+          "y": 1,
+          "tags": [
+            "surface.oil"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "tags": [
+            "surface.oil"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "tags": [
+            "surface.burning"
+          ],
+          "blocked": false
+        }
+      ],
+      "enemies": [
+        {
+          "id": "enemy.retention_engine",
+          "label": "Audience Retention Engine",
+          "classId": "class.guardian",
+          "x": 7,
+          "y": 3,
+          "hp": 64,
+          "energy": 12,
+          "move": 2,
+          "tags": []
+        },
+        {
+          "id": "enemy.handler_fire",
+          "label": "Fire Handler",
+          "classId": "class.pyromancer",
+          "x": 6,
+          "y": 2,
+          "hp": 24,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "id": "enemy.handler_coil",
+          "label": "Coil Handler",
+          "classId": "class.stormcaller",
+          "x": 6,
+          "y": 5,
+          "hp": 24,
+          "energy": 12,
+          "move": 3,
+          "tags": [
+            "status.wet"
+          ]
+        }
+      ]
+    }
+  ]
+}

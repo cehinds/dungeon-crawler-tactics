@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dungeon Crawler Tactics content v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "tags", "classes", "abilities", "reactions", "items"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "tags": {"type": "array", "items": {"$ref": "#/$defs/tag"}},
+    "classes": {"type": "array", "items": {"$ref": "#/$defs/class"}},
+    "abilities": {"type": "array", "items": {"$ref": "#/$defs/ability"}},
+    "reactions": {"type": "array", "items": {"$ref": "#/$defs/reaction"}},
+    "items": {"type": "array", "items": {"$ref": "#/$defs/item"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"},
+    "label": {"type": "string", "minLength": 1},
+    "natural": {"type": "integer", "minimum": 0, "maximum": 2147483647},
+    "ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "tag": {
+      "type": "object", "additionalProperties": false, "required": ["id", "label"],
+      "properties": {"id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"}}
+    },
+    "class": {
+      "type": "object", "additionalProperties": false, "required": ["id", "label", "abilityIds"],
+      "properties": {"id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"}, "abilityIds": {"$ref": "#/$defs/ids"}}
+    },
+    "item": {
+      "type": "object", "additionalProperties": false, "required": ["id", "label", "abilityId"],
+      "properties": {"id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"}, "abilityId": {"$ref": "#/$defs/id"}}
+    },
+    "query": {
+      "type": "object", "additionalProperties": false, "required": ["all", "any", "none"],
+      "properties": {"all": {"$ref": "#/$defs/ids"}, "any": {"$ref": "#/$defs/ids"}, "none": {"$ref": "#/$defs/ids"}}
+    },
+    "effect": {
+      "type": "object", "additionalProperties": false, "required": ["op", "amount", "tag"],
+      "properties": {
+        "op": {"enum": ["Damage", "Heal", "AddTag", "RemoveTag"]},
+        "amount": {"$ref": "#/$defs/natural"},
+        "tag": {"type": "string"}
+      },
+      "allOf": [
+        {"if": {"properties": {"op": {"enum": ["AddTag", "RemoveTag"]}}}, "then": {"properties": {"tag": {"$ref": "#/$defs/id"}, "amount": {"const": 0}}}},
+        {"if": {"properties": {"op": {"enum": ["Damage", "Heal"]}}}, "then": {"properties": {"tag": {"const": ""}}}}
+      ]
+    },
+    "effects": {"type": "array", "items": {"$ref": "#/$defs/effect"}},
+    "ability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "label", "target", "range", "cost", "incomingTags", "effects"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/label"},
+        "target": {"enum": ["self", "ally", "enemy", "tile"]},
+        "range": {"$ref": "#/$defs/natural"}, "cost": {"$ref": "#/$defs/natural"},
+        "incomingTags": {"$ref": "#/$defs/ids"}, "effects": {"$ref": "#/$defs/effects"}
+      }
+    },
+    "reaction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "priority", "incoming", "target", "consumeTags", "effects", "emitTags"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "priority": {"type": "integer", "minimum": -2147483648, "maximum": 2147483647},
+        "incoming": {"$ref": "#/$defs/query"}, "target": {"$ref": "#/$defs/query"},
+        "consumeTags": {"$ref": "#/$defs/ids"}, "effects": {"$ref": "#/$defs/effects"}, "emitTags": {"$ref": "#/$defs/ids"}
+      }
+    }
+  }
+}

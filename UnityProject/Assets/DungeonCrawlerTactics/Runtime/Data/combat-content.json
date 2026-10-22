@@ -1,0 +1,991 @@
+{
+  "schemaVersion": 1,
+  "tags": [
+    {
+      "id": "element.fire",
+      "label": "Fire"
+    },
+    {
+      "id": "element.cold",
+      "label": "Cold"
+    },
+    {
+      "id": "element.lightning",
+      "label": "Lightning"
+    },
+    {
+      "id": "element.water",
+      "label": "Water"
+    },
+    {
+      "id": "damage.physical",
+      "label": "Physical"
+    },
+    {
+      "id": "impact.shatter",
+      "label": "Shatter"
+    },
+    {
+      "id": "surface.oil",
+      "label": "Oil"
+    },
+    {
+      "id": "surface.burning",
+      "label": "Burning"
+    },
+    {
+      "id": "status.wet",
+      "label": "Wet"
+    },
+    {
+      "id": "status.frozen",
+      "label": "Frozen"
+    },
+    {
+      "id": "status.shocked",
+      "label": "Shocked"
+    },
+    {
+      "id": "surface.water",
+      "label": "Coolant water"
+    },
+    {
+      "id": "status.guarded",
+      "label": "Guarded"
+    }
+  ],
+  "classes": [
+    {
+      "id": "class.brawler",
+      "label": "Brawler",
+      "abilityIds": [
+        "ability.strike",
+        "ability.shatter",
+        "ability.heavy_blow",
+        "ability.second_wind"
+      ]
+    },
+    {
+      "id": "class.guardian",
+      "label": "Guardian",
+      "abilityIds": [
+        "ability.strike",
+        "ability.shield_bash",
+        "ability.bulwark"
+      ]
+    },
+    {
+      "id": "class.rogue",
+      "label": "Rogue",
+      "abilityIds": [
+        "ability.strike",
+        "ability.knife_throw",
+        "ability.backstab"
+      ]
+    },
+    {
+      "id": "class.ranger",
+      "label": "Ranger",
+      "abilityIds": [
+        "ability.strike",
+        "ability.aimed_shot",
+        "ability.piercing_shot"
+      ]
+    },
+    {
+      "id": "class.pyromancer",
+      "label": "Pyromancer",
+      "abilityIds": [
+        "ability.strike",
+        "ability.firebolt",
+        "ability.fire_surface",
+        "ability.flame_lance"
+      ]
+    },
+    {
+      "id": "class.cryomancer",
+      "label": "Cryomancer",
+      "abilityIds": [
+        "ability.strike",
+        "ability.frostbite",
+        "ability.deep_freeze",
+        "ability.ice_lance"
+      ]
+    },
+    {
+      "id": "class.stormcaller",
+      "label": "Stormcaller",
+      "abilityIds": [
+        "ability.strike",
+        "ability.spark",
+        "ability.douse",
+        "ability.thunderclap"
+      ]
+    },
+    {
+      "id": "class.cleric",
+      "label": "Cleric",
+      "abilityIds": [
+        "ability.strike",
+        "ability.mend",
+        "ability.greater_mend",
+        "ability.cleanse"
+      ]
+    },
+    {
+      "id": "class.alchemist",
+      "label": "Alchemist",
+      "abilityIds": [
+        "ability.strike",
+        "ability.oil_flask",
+        "ability.douse",
+        "ability.fire_surface"
+      ]
+    },
+    {
+      "id": "class.bard",
+      "label": "Bard",
+      "abilityIds": [
+        "ability.strike",
+        "ability.rally",
+        "ability.dirge"
+      ]
+    },
+    {
+      "id": "class.necromancer",
+      "label": "Necromancer",
+      "abilityIds": [
+        "ability.strike",
+        "ability.grave_bolt",
+        "ability.siphon_ward"
+      ]
+    },
+    {
+      "id": "class.beastmaster",
+      "label": "Beastmaster",
+      "abilityIds": [
+        "ability.strike",
+        "ability.beast_rend",
+        "ability.second_wind"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "id": "ability.strike",
+      "label": "Strike",
+      "target": "enemy",
+      "range": 1,
+      "cost": 0,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 9,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.firebolt",
+      "label": "Firebolt",
+      "target": "enemy",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 10,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.spark",
+      "label": "Spark",
+      "target": "enemy",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.lightning"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 8,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.oil_flask",
+      "label": "Oil Flask",
+      "target": "tile",
+      "range": 3,
+      "cost": 1,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.oil"
+        }
+      ]
+    },
+    {
+      "id": "ability.frostbite",
+      "label": "Frostbite",
+      "target": "enemy",
+      "range": 3,
+      "cost": 2,
+      "incomingTags": [
+        "element.cold"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 4,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.mend",
+      "label": "Mend",
+      "target": "ally",
+      "range": 3,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 8,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.douse",
+      "label": "Douse",
+      "target": "enemy",
+      "range": 3,
+      "cost": 1,
+      "incomingTags": [
+        "element.water"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.wet"
+        }
+      ]
+    },
+    {
+      "id": "ability.shatter",
+      "label": "Shatter",
+      "target": "enemy",
+      "range": 1,
+      "cost": 1,
+      "incomingTags": [
+        "impact.shatter",
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 5,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.fire_surface",
+      "label": "Ignite Surface",
+      "target": "tile",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": []
+    },
+    {
+      "id": "ability.heavy_blow",
+      "label": "Heavy Blow",
+      "target": "enemy",
+      "range": 1,
+      "cost": 3,
+      "incomingTags": [
+        "damage.physical",
+        "impact.shatter"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 15,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.second_wind",
+      "label": "Second Wind",
+      "target": "self",
+      "range": 0,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 10,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.shield_bash",
+      "label": "Shield Bash",
+      "target": "enemy",
+      "range": 1,
+      "cost": 1,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 10,
+          "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.shocked"
+        }
+      ]
+    },
+    {
+      "id": "ability.bulwark",
+      "label": "Bulwark Recovery",
+      "target": "self",
+      "range": 0,
+      "cost": 3,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 12,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.knife_throw",
+      "label": "Knife Throw",
+      "target": "enemy",
+      "range": 3,
+      "cost": 1,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 8,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.backstab",
+      "label": "Backstab",
+      "target": "enemy",
+      "range": 1,
+      "cost": 2,
+      "incomingTags": [
+        "damage.physical",
+        "impact.shatter"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 13,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.aimed_shot",
+      "label": "Aimed Shot",
+      "target": "enemy",
+      "range": 5,
+      "cost": 1,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 9,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.piercing_shot",
+      "label": "Piercing Shot",
+      "target": "enemy",
+      "range": 4,
+      "cost": 3,
+      "incomingTags": [
+        "damage.physical",
+        "impact.shatter"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 13,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.flame_lance",
+      "label": "Flame Lance",
+      "target": "enemy",
+      "range": 3,
+      "cost": 4,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 16,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.ice_lance",
+      "label": "Ice Lance",
+      "target": "enemy",
+      "range": 4,
+      "cost": 3,
+      "incomingTags": [
+        "element.cold",
+        "impact.shatter"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 10,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.deep_freeze",
+      "label": "Deep Freeze",
+      "target": "enemy",
+      "range": 3,
+      "cost": 3,
+      "incomingTags": [
+        "element.cold"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 3,
+          "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.frozen"
+        }
+      ]
+    },
+    {
+      "id": "ability.thunderclap",
+      "label": "Thunderclap",
+      "target": "enemy",
+      "range": 3,
+      "cost": 4,
+      "incomingTags": [
+        "element.lightning"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 13,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.greater_mend",
+      "label": "Greater Mend",
+      "target": "ally",
+      "range": 4,
+      "cost": 4,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 16,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.cleanse",
+      "label": "Cleanse",
+      "target": "ally",
+      "range": 4,
+      "cost": 1,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.frozen"
+        },
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.shocked"
+        },
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.wet"
+        }
+      ]
+    },
+    {
+      "id": "ability.rally",
+      "label": "Rallying Song",
+      "target": "ally",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 10,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.dirge",
+      "label": "Dissonant Note",
+      "target": "enemy",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 8,
+          "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.shocked"
+        }
+      ]
+    },
+    {
+      "id": "ability.grave_bolt",
+      "label": "Grave Bolt",
+      "target": "enemy",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 11,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.siphon_ward",
+      "label": "Siphon Ward",
+      "target": "self",
+      "range": 0,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 11,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.beast_rend",
+      "label": "Beast Rend",
+      "target": "enemy",
+      "range": 2,
+      "cost": 2,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 12,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.tonic",
+      "label": "Health Tonic",
+      "target": "ally",
+      "range": 3,
+      "cost": 0,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 14,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.elixir",
+      "label": "Mega Tonic",
+      "target": "ally",
+      "range": 3,
+      "cost": 0,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 26,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.water_bomb",
+      "label": "Coolant Bomb",
+      "target": "enemy",
+      "range": 4,
+      "cost": 0,
+      "incomingTags": [
+        "element.water"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.wet"
+        }
+      ]
+    },
+    {
+      "id": "ability.oil_bomb",
+      "label": "Oil Flask",
+      "target": "tile",
+      "range": 4,
+      "cost": 0,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.oil"
+        }
+      ]
+    },
+    {
+      "id": "ability.frost_vial",
+      "label": "Frost Vial",
+      "target": "enemy",
+      "range": 4,
+      "cost": 0,
+      "incomingTags": [
+        "element.cold"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 5,
+          "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.frozen"
+        }
+      ]
+    },
+    {
+      "id": "ability.fire_bomb",
+      "label": "Fire Bomb",
+      "target": "enemy",
+      "range": 4,
+      "cost": 0,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 12,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.thunder_flask",
+      "label": "Thunder Flask",
+      "target": "enemy",
+      "range": 4,
+      "cost": 0,
+      "incomingTags": [
+        "element.lightning"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 8,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.cleansing_tonic",
+      "label": "Cleansing Tonic",
+      "target": "ally",
+      "range": 4,
+      "cost": 0,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 6,
+          "tag": ""
+        },
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.frozen"
+        },
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.shocked"
+        },
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.wet"
+        }
+      ]
+    }
+  ],
+  "reactions": [
+    {
+      "id": "reaction.oil_ignites",
+      "priority": 100,
+      "incoming": {
+        "all": [
+          "element.fire"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "surface.oil"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "surface.oil"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.burning"
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.wet_conducts",
+      "priority": 90,
+      "incoming": {
+        "all": [
+          "element.lightning"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.wet"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.wet"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 5,
+          "tag": ""
+        },
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.shocked"
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.wet_freezes",
+      "priority": 90,
+      "incoming": {
+        "all": [
+          "element.cold"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.wet"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.wet"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.frozen"
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.frozen_shatters",
+      "priority": 100,
+      "incoming": {
+        "all": [
+          "impact.shatter"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.frozen"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.frozen"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 10,
+          "tag": ""
+        }
+      ],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.water_extinguishes",
+      "priority": 100,
+      "incoming": {
+        "all": [
+          "element.water"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "surface.burning"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "surface.burning"
+      ],
+      "effects": [],
+      "emitTags": []
+    }
+  ],
+  "items": [
+    {
+      "id": "item.health_tonic",
+      "label": "Health Tonic",
+      "abilityId": "ability.tonic"
+    },
+    {
+      "id": "item.mega_tonic",
+      "label": "Mega Tonic",
+      "abilityId": "ability.elixir"
+    },
+    {
+      "id": "item.water_bomb",
+      "label": "Coolant Bomb",
+      "abilityId": "ability.water_bomb"
+    },
+    {
+      "id": "item.oil_flask",
+      "label": "Oil Flask",
+      "abilityId": "ability.oil_bomb"
+    },
+    {
+      "id": "item.frost_vial",
+      "label": "Frost Vial",
+      "abilityId": "ability.frost_vial"
+    },
+    {
+      "id": "item.fire_bomb",
+      "label": "Fire Bomb",
+      "abilityId": "ability.fire_bomb"
+    },
+    {
+      "id": "item.thunder_flask",
+      "label": "Thunder Flask",
+      "abilityId": "ability.thunder_flask"
+    },
+    {
+      "id": "item.cleansing_tonic",
+      "label": "Cleansing Tonic",
+      "abilityId": "ability.cleansing_tonic"
+    }
+  ]
+}
