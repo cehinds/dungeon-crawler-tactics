@@ -14,7 +14,7 @@ import json
 from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=args.browser,headless=True,args=['--no-sandbox'])
-    for w,h in [(1366,768),(390,844),(360,740)]:
+    for w,h in [(1366,768),(390,844),(360,640),(844,390)]:
         page=browser.new_page(viewport={'width':w,'height':h}); errors=[]
         page.on('pageerror',lambda e: errors.append(str(e)))
         page.goto(args.url,wait_until='networkidle')
@@ -24,6 +24,16 @@ with sync_playwright() as p:
         page.locator('#class-select').select_option('class.guardian')
         page.wait_for_function('window.dungeon.getView().roster.find(r=>r.id==="crawler.carl").classId==="class.guardian"')
         assert '6 damage' in page.locator('.class-abilities').inner_text()
+        page.wait_for_function('document.querySelector(".toast-success")?.textContent.includes("Guardian")')
+        page.locator('.toast-dismiss').click()
+        # Export feedback must stay visible above the native dialog's backdrop.
+        page.locator('#save-button').click()
+        with page.expect_download():
+            page.locator('#export-button').click()
+        page.wait_for_function('document.querySelector("#save-dialog .toast-success")?.textContent.includes("exported")')
+        page.locator('.toast-dismiss').click()
+        page.keyboard.press('Escape')
+        assert page.evaluate('document.activeElement.id === "save-button"')
         if w<500:
             assert page.evaluate('document.documentElement.scrollHeight <= innerHeight'), 'Camp page scroll'
         page.locator('#enter-battle').click()
@@ -48,6 +58,14 @@ with sync_playwright() as p:
         if w<500:
             chips=page.locator('.party-chip').evaluate_all('(els)=>els.map(e=>{let r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth})')
             assert all(chips) and len(chips)==4
+        before_preview=page.evaluate('window.dungeon.getSave()')
+        page.locator('[data-ability="ability.bulwark"]').click()
+        page.wait_for_function('window.dungeon.getView().canConfirm')
+        assert page.locator('#forecast-dialog').evaluate('(el)=>el.open')
+        page.keyboard.press('Escape')
+        page.wait_for_function('!window.dungeon.getView().canConfirm')
+        assert page.evaluate('window.dungeon.getSave()') == before_preview, 'Cancel spent resources'
+        assert page.evaluate('document.activeElement.dataset.ability === "ability.bulwark"')
         page.locator('[data-ability="ability.bulwark"]').click()
         page.wait_for_function('window.dungeon.getView().canConfirm')
         confirm=page.locator('#confirm-forecast'); box=confirm.bounding_box()
@@ -56,12 +74,15 @@ with sync_playwright() as p:
         page.screenshot(path=str(Path(tempfile.gettempdir()) / f'dungeon-final-{w}.png'))
         confirm.click()
         page.wait_for_function('window.dungeon.getView().units.find(u=>u.id==="crawler.carl").tags.includes("status.guarded")')
+        page.wait_for_function('document.querySelector(".toast-success")?.textContent.includes("Action confirmed")')
+        assert page.locator('#forecast-dialog').count() == 0
+        page.locator('.toast-dismiss').click()
         page.locator('[data-unit="crawler.donut"]').click()
         page.locator('[data-drawer="items"]').click()
         assert page.locator('#game-drawer-dialog').evaluate('(el)=>el.open')
         page.keyboard.press('Escape')
         assert page.evaluate('document.activeElement.dataset.drawer === "items"')
         assert not errors, errors
-        print(json.dumps({'viewport':[w,h],'camp':'class changed','exploration':'keyboard+clicked traversal','battle':'Guarded applied via forecast','pageScroll':False,'pageErrors':errors}))
+        print(json.dumps({'viewport':[w,h],'camp':'class changed','exploration':'keyboard+clicked traversal','battle':'cancel preserves save; confirm applies Guarded','feedback':'class, export inside dialog, confirm; dismiss and focus','pageScroll':False,'pageErrors':errors}))
         page.close()
     browser.close()

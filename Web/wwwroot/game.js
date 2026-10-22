@@ -1,3 +1,4 @@
+import { notify, syncFeedbackHost } from './feedback.js';
 const $ = (selector) => document.querySelector(selector);
 const assembly = 'DungeonCrawlerTactics.Web';
 const saveKey = 'dungeon-crawler-tactics.save.v1';
@@ -9,10 +10,10 @@ let localAction = null;
 let focusedRoster = null;
 let inspectedTile = null;
 let targetTile = false;
-let toastTimeout;
 let chosenReward = false;
 let drawer = null;
 let drawerReturn = null;
+let battleReturn = null;
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 const e = escapeHtml;
 const call = (method, ...args) => DotNet.invokeMethodAsync(assembly, method, ...args);
@@ -38,13 +39,22 @@ function abilityDescription(a) {
   });
   return effects.join(' · ') || `Trigger ${(a.incomingTags ?? []).map(label).join(', ') || 'elemental'} reactions on ${a.target === 'tile' ? 'terrain' : 'the target'}`;
 }
-function toast(message) {
-  $('#toast').textContent = message;
-  $('#toast').hidden = false;
-  clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => $('#toast').hidden = true, 4200);
+function toast(message, severity = 'info') { notify(message, severity); }
+function openDialog(id) {
+  const dialog=$(id);
+  if (!dialog.dataset.focusManaged) {
+    dialog.dataset.focusManaged = 'true';
+    dialog.addEventListener('keydown', event => {
+      if (event.key !== 'Tab') return;
+      const controls = [...dialog.querySelectorAll('button:not(:disabled),a[href],input:not([hidden]):not(:disabled),select:not(:disabled),[tabindex="0"]')].filter(control => control.getClientRects().length);
+      const first=controls[0], last=controls[controls.length-1];
+      if (event.shiftKey && document.activeElement === first) {event.preventDefault();last?.focus();}
+      else if (!event.shiftKey && document.activeElement === last) {event.preventDefault();first?.focus();}
+    });
+  }
+  if (!dialog.open) dialog.showModal();
+  syncFeedbackHost();
 }
-function openDialog(id) { if (!$(id).open) $(id).showModal(); }
 function closeDialog(id) { $(id).close(); }
 async function persist() {
   try {
@@ -61,6 +71,7 @@ async function command(type, args = {}, { preserveAction = false, save = true } 
   $('#game').setAttribute('aria-busy', 'true');
   try {
     const previousScreen = view.screen;
+    const before = view;
     const result = await call('Dispatch', JSON.stringify({ type, ...args }));
     view = JSON.parse(result);
     if (!preserveAction) { localAction = null; inspectedTile = null; targetTile = false; }
@@ -72,12 +83,41 @@ async function command(type, args = {}, { preserveAction = false, save = true } 
     if (save && type !== 'preview' && type !== 'cancel') await persist();
     busy = false;
     render();
+    if (before.canConfirm && !view.canConfirm && battleReturn) $(battleReturn)?.focus();
+    commandFeedback(type, args, before, view);
   } catch (error) {
-    toast(`The command could not be completed: ${error.message}`);
+    toast(`The command could not be completed: ${error.message}`, 'error');
   } finally {
     busy = false;
     $('#game').setAttribute('aria-busy', 'false');
   }
+}
+function commandFeedback(type, args, before, after) {
+  const beforeClass = before.roster.find(r => r.id === args.unitId);
+  const afterClass = after.roster.find(r => r.id === args.unitId);
+  if (type === 'set_class' && beforeClass?.classId !== afterClass?.classId) {
+    toast(`${afterClass.label} is now a ${classLabel(afterClass.classId)}.`, 'success'); return;
+  }
+  if (type === 'choose_reward' && before.rewards.length > after.rewards.length) {
+    const reward = before.rewards.find(r => r.id === args.rewardId);
+    toast(`${reward?.label ?? 'Sponsor reward'} claimed.`, 'success'); return;
+  }
+  if (type === 'explore_interact') {
+    const point = after.exploration?.points.find(p => p.id === args.targetId);
+    const previous = before.exploration?.points.find(p => p.id === args.targetId);
+    if (point?.claimed && !previous?.claimed) {
+      const loot = after.items.filter(i => i.count > (before.items.find(old => old.id === i.id)?.count ?? 0)).map(i => `+${i.count - (before.items.find(old => old.id === i.id)?.count ?? 0)} ${i.label}`).join(', ');
+      toast(loot || `${point.label} discovered.`, 'success'); return;
+    }
+  }
+  const signature = state => JSON.stringify([state.screen,state.units,state.roster,state.items.map(i => [i.id,i.count]),state.round,state.xp,state.exploration]);
+  const changed = signature(before) !== signature(after);
+  if (type === 'confirm' && before.canConfirm && changed) {
+    toast(after.screen === 'victory' ? 'Room cleared. Choose your sponsor reward.' : 'Action confirmed.', 'success'); return;
+  }
+  // Core returns rejected commands as a message rather than a thrown exception.
+  // A changed presentation message with unchanged game state is not a successful action.
+  if (!changed && after.message && before.message !== after.message && !['select','cancel'].includes(type) && !(type === 'preview' && after.canConfirm)) toast(after.message, 'warning');
 }
 function renderProgress() {
   const progress = $('#run-progress');
@@ -110,7 +150,7 @@ function renderParty() {
 }
 function renderBattle() {
   const selected = unit();
-  return `<section class="battle-screen" aria-labelledby="screen-title"><div class="battle-heading"><h2 id="screen-title">${e(view.encounterName)}</h2><span class="round-status">ROUND ${view.round} · YOUR TURN</span><button data-drawer="log">Log</button></div>${renderParty()}<div class="battle-stage"><div class="playfield">${renderBoard()}<div class="battle-hint" role="status">${e(view.message || 'Select a crawler → Move or ability → highlighted target → confirm.')}</div></div><section class="action-dock" aria-label="Crawler actions and forecast">${renderInspector(selected)}</section></div><div class="battle-turn"><span>${view.units.filter(u => u.team === 'player' && u.hp > 0 && !u.acted).length} ready · Enemies act when the party ends its turn</span><button id="wait-button" ${!view.canAct ? 'disabled' : ''}>Wait crawler</button><button id="end-turn" class="primary">End party turn →</button></div>${renderDrawer()}</section>`;
+  return `<section class="battle-screen" aria-labelledby="screen-title"><div class="battle-heading"><h2 id="screen-title">${e(view.encounterName)}</h2><span class="round-status">ROUND ${view.round} · YOUR TURN</span><button data-drawer="log">Log</button></div>${renderParty()}<div class="battle-stage"><div class="playfield">${renderBoard()}<div class="battle-hint" role="status">${e(view.message || 'Select a crawler → Move or ability → highlighted target → confirm.')}</div></div><section class="action-dock" aria-label="Crawler actions and forecast">${renderInspector(selected)}</section></div><div class="battle-turn"><span>${view.units.filter(u => u.team === 'player' && u.hp > 0 && !u.acted).length} ready · Enemies act when the party ends its turn</span><button id="wait-button" ${!view.canAct ? 'disabled' : ''}>Wait crawler</button><button id="end-turn" class="primary">End party turn →</button></div>${renderDrawer()}${renderForecastDialog()}</section>`;
 }
 function renderDrawer() {
   if (!drawer) return '';
@@ -149,7 +189,12 @@ function renderInspector(selected) {
   const action = selectedAction();
   const info = view.classes.find(c => c.id === selected?.classId);
   const forecast = view.forecast.filter(f => f.beforeHp !== f.afterHp || f.beforeEnergy !== f.afterEnergy || JSON.stringify(f.beforeTags) !== JSON.stringify(f.afterTags));
-  return `<div class="dock-identity"><strong>${e(selected?.label || 'Select a crawler')} <span>${e(classLabel(selected?.classId))}${info?.role ? ' · ' + e(info.role) : ''}</span></strong><small>${selected?.energy ?? 0} / ${selected?.maxEnergy ?? 0} energy · ${selected?.acted ? 'Activation spent' : selected?.moved ? 'Move spent · ability ready' : 'Move + ability ready'}</small>${info?.description ? `<small>${e(info.description)}</small>` : ''}</div><div class="dock-modes"><button id="move-mode" class="${!localAction ? 'active' : ''}" ${!view.canMove && !localAction ? 'disabled' : ''}>Move${selected?.moved ? ' · spent' : ''}</button><span>ABILITIES · 1 ACTION</span><button data-drawer="items">Supplies</button></div><div class="dock-abilities">${view.abilities.map(a => `<button data-ability="${e(a.id)}" class="${localAction?.abilityId === a.id ? 'active' : ''}" ${!a.enabled ? 'disabled' : ''}><strong>${e(a.label)} <small>${a.cost} EN · ${a.range} range</small></strong><span>${e(a.description)}${a.disabledReason ? ` · ${e(a.disabledReason)}` : ''}</span></button>`).join('')}</div><div class="dock-forecast" aria-live="polite"><strong>${view.canConfirm ? 'Confirm ' + e(action?.label || 'action') : localAction ? (action?.targetIds?.length ? 'Choose a highlighted ' + e(action?.target || 'target') : 'No legal targets in range · cancel to move') : view.canMove ? 'Move: choose a blue tile, or select an ability' : selected?.acted ? 'Choose another crawler or end the party turn' : 'Choose an ability'}</strong><div class="forecast-results">${view.canConfirm ? forecast.map(f => `<span><b>${e(f.label)}</b>${f.beforeHp !== f.afterHp ? ` HP ${f.beforeHp} → ${f.afterHp}` : ''}${f.beforeEnergy !== f.afterEnergy ? ` EN ${f.beforeEnergy} → ${f.afterEnergy}` : ''}${tags(f.afterTags.filter(t => !f.beforeTags.includes(t)))}${f.beforeTags.filter(t => !f.afterTags.includes(t)).map(t => `<small>−${e(shortTag(t))}</small>`).join('')}</span>`).join('') || '<span>Surface or status change. See log for details.</span>' : `<span>${e(localAction ? action?.description || 'Select a valid target. Nothing is spent until you confirm.' : 'Each crawler moves once and uses one ability. Acting ends their activation.')}</span>`}</div>${localAction || view.canConfirm ? `<div class="forecast-buttons"><button id="cancel-forecast">Cancel <span class="key">Esc</span></button>${view.canConfirm ? '<button id="confirm-forecast" class="primary">Confirm action</button>' : ''}</div>` : ''}</div>`;
+  return `<div class="dock-identity"><strong>${e(selected?.label || 'Select a crawler')} <span>${e(classLabel(selected?.classId))}${info?.role ? ' · ' + e(info.role) : ''}</span></strong><small>${selected?.energy ?? 0} / ${selected?.maxEnergy ?? 0} energy · ${selected?.acted ? 'Activation spent' : selected?.moved ? 'Move spent · ability ready' : 'Move + ability ready'}</small>${info?.description ? `<small>${e(info.description)}</small>` : ''}</div><div class="dock-modes"><button id="move-mode" class="${!localAction ? 'active' : ''}" ${!view.canMove && !localAction ? 'disabled' : ''}>Move${selected?.moved ? ' · spent' : ''}</button><span>ABILITIES · 1 ACTION</span><button data-drawer="items">Supplies</button></div><div class="dock-abilities">${view.abilities.map(a => `<button data-ability="${e(a.id)}" class="${localAction?.abilityId === a.id ? 'active' : ''}" ${!a.enabled ? 'disabled' : ''}><strong>${e(a.label)} <small>${a.cost} EN · ${a.range} range</small></strong><span>${e(a.description)}${a.disabledReason ? ` · ${e(a.disabledReason)}` : ''}</span></button>`).join('')}</div><div class="dock-forecast" aria-live="polite"><strong>${view.canConfirm ? 'Confirm ' + e(action?.label || 'action') : localAction ? (action?.targetIds?.length ? 'Choose a highlighted ' + e(action?.target || 'target') : 'No legal targets in range · cancel to move') : view.canMove ? 'Move: choose a blue tile, or select an ability' : selected?.acted ? 'Choose another crawler or end the party turn' : 'Choose an ability'}</strong><div class="forecast-results">${view.canConfirm ? forecast.map(f => `<span><b>${e(f.label)}</b>${f.beforeHp !== f.afterHp ? ` HP ${f.beforeHp} → ${f.afterHp}` : ''}${f.beforeEnergy !== f.afterEnergy ? ` EN ${f.beforeEnergy} → ${f.afterEnergy}` : ''}${tags(f.afterTags.filter(t => !f.beforeTags.includes(t)))}${f.beforeTags.filter(t => !f.afterTags.includes(t)).map(t => `<small>−${e(shortTag(t))}</small>`).join('')}</span>`).join('') || '<span>Surface or status change. See log for details.</span>' : `<span>${e(localAction ? action?.description || 'Select a valid target. Nothing is spent until you confirm.' : 'Each crawler moves once and uses one ability. Acting ends their activation.')}</span>`}</div>${view.canConfirm ? '<button id="review-forecast">Review forecast</button>' : localAction ? '<div class="forecast-buttons"><button id="cancel-forecast">Cancel targeting <span class="key">Esc</span></button></div>' : ''}</div>`;
+}
+function renderForecastDialog() {
+  if (!view.canConfirm) return '';
+  const action = selectedAction();
+  return `<dialog id="forecast-dialog" class="forecast-dialog" aria-labelledby="forecast-title"><div class="dialog-head"><div><span class="section-label">EXACT ACTION FORECAST</span><h2 id="forecast-title">${e(action?.label || 'Review action')}</h2></div><button class="icon-button" id="close-forecast" aria-label="Cancel forecast">×</button></div><div class="modal-body"><p class="modal-intro">${e(action?.description || 'Review the exact result before spending this crawler’s action.')}</p><div class="forecast-detail-list">${view.forecast.filter(f => f.beforeHp !== f.afterHp || f.beforeEnergy !== f.afterEnergy || JSON.stringify(f.beforeTags) !== JSON.stringify(f.afterTags)).map(f => `<section class="forecast-detail"><h3>${e(f.label)}</h3>${f.beforeHp !== f.afterHp ? `<div class="forecast-number"><span>Health</span><b>${f.beforeHp} → ${f.afterHp}</b></div>` : ''}${f.beforeEnergy !== f.afterEnergy ? `<div class="forecast-number"><span>Energy</span><b>${f.beforeEnergy} → ${f.afterEnergy}</b></div>` : ''}<div class="tags">${f.afterTags.filter(t => !f.beforeTags.includes(t)).map(t => `<span class="tag good">+ ${e(shortTag(t))}</span>`).join('')}${f.beforeTags.filter(t => !f.afterTags.includes(t)).map(t => `<span class="tag">− ${e(shortTag(t))}</span>`).join('')}</div></section>`).join('') || '<p>The action changes terrain or status without changing health or energy.</p>'}</div><ol class="forecast-chain">${view.log.filter(l => l.startsWith('Forecast:')).slice(-8).map(l => `<li>${e(displayLog(l.slice(10)))}</li>`).join('')}</ol><p class="small muted">Confirm spends the action and ends this crawler’s activation. Cancel spends nothing.</p></div><div class="modal-actions"><button id="cancel-forecast">Cancel <span class="key">Esc</span></button><button id="confirm-forecast" class="primary">Confirm action</button></div></dialog>`;
 }
 function renderLog() {
   return `<details class="log" ${view.canConfirm ? 'open' : ''}><summary>COMBAT LOG / ${view.log.length} EVENTS</summary><div class="log-lines">${view.log.slice(-24).map(l => `<p>${e(displayLog(l))}</p>`).join('') || '<p>No actions yet.</p>'}</div></details>`;
@@ -206,6 +251,10 @@ function bindScreen() {
   document.querySelectorAll('[data-item]').forEach(b => b.addEventListener('click', () => chooseAction({ itemId: b.dataset.item })));
   $('#move-mode')?.addEventListener('click', () => { targetTile = false; command('cancel'); });
   $('#terrain-mode')?.addEventListener('click', () => { targetTile = !targetTile; render(); });
+  const forecastDialog = $('#forecast-dialog');
+  if (forecastDialog) { openDialog('#forecast-dialog'); $('#cancel-forecast').focus(); forecastDialog.addEventListener('cancel', event => {event.preventDefault();cancelTargeting();}); }
+  $('#review-forecast')?.addEventListener('click', () => openDialog('#forecast-dialog'));
+  $('#close-forecast')?.addEventListener('click', cancelTargeting);
   $('#cancel-forecast')?.addEventListener('click', cancelTargeting);
   $('#confirm-forecast')?.addEventListener('click', () => command('confirm'));
   $('#wait-button')?.addEventListener('click', () => command('wait'));
@@ -220,6 +269,7 @@ async function chooseAction(action) {
   if (busy) return;
   if (view.canConfirm) await command('cancel', {}, { save: false });
   drawer = null;
+  battleReturn = action.itemId ? '[data-drawer="items"]' : `[data-ability="${action.abilityId}"]`;
   localAction = action;
   targetTile = false;
   if (selectedAction()?.target === 'self') {
@@ -228,12 +278,13 @@ async function chooseAction(action) {
 }
 async function clickCell(x, y) {
   if (busy) return;
+  battleReturn = `[data-cell="${x},${y}"]`;
   inspectedTile = view.tiles.find(t => t.x === x && t.y === y);
   const occupant = view.units.find(u => u.x === x && u.y === y && u.hp > 0);
   const action = selectedAction();
   if (localAction && action) {
     const targetId = targetTile || action.target === 'tile' ? inspectedTile?.id ?? `tile.${x}.${y}` : occupant?.id;
-    if (!targetId || !(action.targetIds ?? []).includes(targetId)) { if (view.canConfirm) await command('cancel', {}, {preserveAction:true,save:false}); toast('This action needs a unit target. Choose a valid crawler or enemy. Use a terrain ability to target a surface.'); render(); return; }
+    if (!targetId || !(action.targetIds ?? []).includes(targetId)) { if (view.canConfirm) await command('cancel', {}, {preserveAction:true,save:false}); toast('This action needs a unit target. Choose a valid crawler or enemy. Use a terrain ability to target a surface.', 'warning'); render(); return; }
     await command('preview', { ...localAction, targetId }, { preserveAction: true, save: false });
   } else if (occupant?.team === 'player') {
     await command('select', { unitId: occupant.id });
@@ -254,8 +305,8 @@ async function exportSave() {
     a.download = 'dungeon-crawler-tactics-save.json';
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    toast('Save file exported.');
-  } catch (error) { $('#save-error').textContent = `Could not export save: ${error.message}`; }
+    toast('Save file exported.', 'success');
+  } catch (error) { $('#save-error').textContent = `Could not export save: ${error.message}`; toast(`Could not export save: ${error.message}`, 'error'); }
 }
 async function loadSerializedSave(serialized) {
   const result = await call('LoadSave', serialized);
@@ -283,7 +334,7 @@ async function boot() {
     try { saved = localStorage.getItem(saveKey); } catch { /* Export remains available. */ }
     if (saved) {
       try { await loadSerializedSave(saved); toast('Your run has been restored.'); }
-      catch (error) { render(); toast('Your stored save could not be restored. A new party is ready; the stored file has been preserved.'); $('#save-status').textContent = 'Stored save invalid · import or start fresh'; }
+      catch (error) { render(); toast('Your stored save could not be restored. A new party is ready; the stored file has been preserved.', 'warning'); $('#save-status').textContent = 'Stored save invalid · import or start fresh'; }
     } else {
       render();
       await persist();
@@ -302,6 +353,7 @@ $('#save-button').addEventListener('click', () => { $('#save-error').textContent
 $('#begin-button').addEventListener('click', () => { closeDialog('#welcome-dialog'); openDialog('#help-dialog'); });
 document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeDialog(`#${b.dataset.close}`)));
 $('#export-button').addEventListener('click', exportSave);
+$('#import-button').addEventListener('click', () => $('#import-file').click());
 $('#import-file').addEventListener('change', async event => {
   const file = event.target.files[0];
   if (!file) return;
@@ -309,8 +361,8 @@ $('#import-file').addEventListener('change', async event => {
     if (file.size > 2_000_000) throw new Error('Save files must be smaller than 2 MB.');
     await loadSerializedSave(await file.text());
     closeDialog('#save-dialog');
-    toast('Save imported. Your run is ready.');
-  } catch (error) { $('#save-error').textContent = `Could not import save: ${error.message}`; }
+    toast('Save imported. Your run is ready.', 'success');
+  } catch (error) { $('#save-error').textContent = `Could not import save: ${error.message}`; toast(`Could not import save: ${error.message}`, 'error'); }
   event.target.value = '';
 });
 $('#reload-save-button').addEventListener('click', async () => {
@@ -319,8 +371,8 @@ $('#reload-save-button').addEventListener('click', async () => {
     if (!serialized) throw new Error('No local save was found.');
     await loadSerializedSave(serialized);
     closeDialog('#save-dialog');
-    toast('Local save restored.');
-  } catch (error) { $('#save-error').textContent = `Could not reload save: ${error.message}`; }
+    toast('Local save restored.', 'success');
+  } catch (error) { $('#save-error').textContent = `Could not reload save: ${error.message}`; toast(`Could not reload save: ${error.message}`, 'error'); }
 });
 $('#restart-button').addEventListener('click', () => { closeDialog('#save-dialog'); openDialog('#restart-dialog'); });
 $('#confirm-restart').addEventListener('click', async () => { closeDialog('#restart-dialog'); focusedRoster = null; await command('new_run'); });
@@ -330,7 +382,7 @@ document.addEventListener('keydown', event => {
     if (direction) { event.preventDefault(); const map = view.exploration; const x=map.x+direction[0], y=map.y+direction[1]; if (map.tiles.some(t => t.x===x && t.y===y && t.reachable)) command('explore_move',{x,y}); }
   }
 
-  if (event.key === '?' && !event.ctrlKey && !event.metaKey && !['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) { event.preventDefault(); openDialog('#help-dialog'); }
+  if (event.key === '?' && !document.querySelector('dialog[open]') && !event.ctrlKey && !event.metaKey && !['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) { event.preventDefault(); openDialog('#help-dialog'); }
   if (event.key === 'Escape' && !document.querySelector('dialog[open]')) { if (drawer) { closeDrawer(); } else if (view?.screen === 'battle') cancelTargeting(); }
 });
 boot();

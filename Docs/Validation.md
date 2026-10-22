@@ -46,6 +46,10 @@ A second browser test played the actual WASM C# runtime through all three encoun
 
 The compact battle/camp layouts were inspected in `/tmp/live-battle.png` and `/tmp/camp-360.png`. The board and confirmation remain visible while a bounded ability list may scroll on smaller phones. See [Playability-Review.md](Playability-Review.md). Earlier screenshots were inspected at `/tmp/dungeon-web-forecast.png`, `/tmp/dungeon-web-mobile.png`, and `/tmp/dungeon-complete.png`. These are local verification artifacts, not production assets.
 
+## Responsive dialogs and notifications
+
+The published local WASM build passed `Tools/playtest_ui.py` at 1366×768, 390×844, 360×640 and 844×390. The checks use visible controls to change class, export a save, explore corridors, cancel and confirm a Guardian forecast, and open/close supplies. Cancel preserves the exact serialized save and restores focus; confirm applies Guarded and produces success feedback. Export feedback remains inside the active native dialog. Confirmation buttons fit the viewport, battle pages do not scroll, short portrait camp fits, and no JavaScript page errors occurred. JavaScript syntax checks also passed. See [Modal-Feedback-QA.md](Modal-Feedback-QA.md) for focused feedback checks and limitations.
+
 ## Unity limitations
 
 No Unity Editor or Unity MCP bridge was available. Editor compilation, scene creation, Play Mode, Unity Web player export, and the native WebGL save bridge in a real exported Unity player have not been executed. The scene/build menus use Editor APIs and the runtime was compiled against real reference assemblies, but that does not replace those checks. Use the included Unity project and run the documented Editor workflow before shipping a Unity Web release.
