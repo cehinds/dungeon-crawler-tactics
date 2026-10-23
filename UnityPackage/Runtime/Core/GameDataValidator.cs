@@ -114,9 +114,13 @@ namespace DungeonCrawlerTactics
             foreach (InventoryEntry item in data.startingInventory) Need(item != null && item.itemId != null && catalog.Items.ContainsKey(item.itemId) && inventory.Add(item.itemId) && item.count >= 0 && item.count <= 1000, "Invalid starting inventory.");
             HashSet<string> rewards = new HashSet<string>();
             foreach (RewardDef reward in data.rewards) Need(reward != null && !string.IsNullOrEmpty(reward.id) && rewards.Add(reward.id) && !string.IsNullOrEmpty(reward.label) && reward.count >= 0 && reward.count <= 100 && reward.heal >= 0 && reward.heal <= 10000 && (string.IsNullOrEmpty(reward.itemId) ? reward.count == 0 : catalog.Items.ContainsKey(reward.itemId)), "Invalid reward.");
+            Need(data.sponsorChallenges != null && data.sponsorChallenges.Length <= 16, "Invalid sponsor challenges.");
+            HashSet<string> sponsorIds = new HashSet<string>();
+            foreach (SponsorChallengeDef c in data.sponsorChallenges) Need(c != null && !string.IsNullOrEmpty(c.id) && sponsorIds.Add(c.id) && !string.IsNullOrEmpty(c.label) && !string.IsNullOrEmpty(c.description) && (c.eventType == "reaction" || c.eventType == "rescue" || c.eventType == "victory") && c.rewardItemId != null && catalog.Items.ContainsKey(c.rewardItemId) && c.rewardCount > 0 && c.rewardCount <= 100, "Invalid sponsor challenge.");
             HashSet<string> rules = new HashSet<string>();
             foreach (TagRuleDef rule in data.tagRules) Need(rule != null && catalog.HasTag(rule.tag) && rules.Add(rule.tag) && rule.durationRounds >= 0 && rule.durationRounds <= 100 && rule.entryDamage >= 0 && rule.entryDamage <= 10000 && rule.turnDamage >= 0 && rule.turnDamage <= 10000 && rule.movePenalty >= 0 && rule.movePenalty <= 100 && rule.energyPenalty >= 0 && rule.energyPenalty <= 100, "Invalid tag rule.");
             foreach (TagRuleDef rule in data.tagRules) Need(string.IsNullOrEmpty(rule.occupantTag) || catalog.HasTag(rule.occupantTag), "Unknown occupant tag.");
+            foreach (TagRuleDef rule in data.tagRules) Need(!rule.consumeOnEntry || rule.durationRounds == 0 && rule.turnDamage == 0 && !string.IsNullOrEmpty(rule.occupantTag), "Traps require persistent single-entry effects and no round damage.");
             ValidateSkillTreeDefinitions(data, catalog);
             ScenarioDefinitionValidator.Validate(data, catalog);
             ExpeditionDefinitionValidator.Validate(data, catalog);

@@ -56,6 +56,14 @@
     {
       "id": "element.arcane",
       "label": "Arcane"
+    },
+    {
+      "id": "surface.trap_coolant",
+      "label": "Coolant Snare (one use; applies wet to any entrant)"
+    },
+    {
+      "id": "surface.trap_shock",
+      "label": "Shock Snare (one use; affects any entrant)"
     }
   ],
   "classes": [
@@ -3070,6 +3078,36 @@
           "tag": ""
         }
       ]
+    },
+    {
+      "id": "ability.coolant_snare",
+      "label": "Place Coolant Snare",
+      "target": "tile",
+      "range": 3,
+      "cost": 0,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.trap_coolant"
+        }
+      ]
+    },
+    {
+      "id": "ability.shock_snare",
+      "label": "Place Shock Snare",
+      "target": "tile",
+      "range": 3,
+      "cost": 0,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.trap_shock"
+        }
+      ]
     }
   ],
   "reactions": [
@@ -3264,7 +3302,8 @@
     {
       "id": "item.oil_flask",
       "label": "Oil Flask",
-      "abilityId": "ability.oil_bomb"
+      "abilityId": "ability.oil_bomb",
+      "favorEligible": true
     },
     {
       "id": "item.frost_vial",
@@ -3285,6 +3324,18 @@
       "id": "item.cleansing_tonic",
       "label": "Cleansing Tonic",
       "abilityId": "ability.cleansing_tonic"
+    },
+    {
+      "id": "item.coolant_snare",
+      "label": "Coolant Snare (one use; wet to any entrant)",
+      "abilityId": "ability.coolant_snare",
+      "favorEligible": true
+    },
+    {
+      "id": "item.shock_snare",
+      "label": "Shock Snare (one-use trap; any entrant)",
+      "abilityId": "ability.shock_snare",
+      "favorEligible": true
     }
   ]
 }

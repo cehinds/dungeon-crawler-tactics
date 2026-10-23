@@ -156,7 +156,7 @@ namespace DungeonCrawlerTactics.Unity
             if (view.canConfirm)
             {
                 forecastScroll = GUI.BeginScrollView(new Rect(977, 573, 421, 173), forecastScroll,
-                    new Rect(0, 0, 395, Mathf.Max(160, view.forecast.Length * 112)));
+                    new Rect(0, 0, 395, Mathf.Max(160, view.forecast.Length * 112 + 34 + (view.audience == null ? 0 : view.audience.forecastRewards.Length * 52))));
                 float y = 0;
                 foreach (ForecastView change in view.forecast)
                 {
@@ -168,6 +168,8 @@ namespace DungeonCrawlerTactics.Unity
                     y += 112;
                 }
                 if (view.forecast.Length == 0) GUI.Label(new Rect(2, 0, 389, 100), "No HP, mana, or condition changes. You can cancel and choose another target.", bodyStyle);
+                if (view.forecast.Length == 0) y = 108;
+                DrawAudienceForecast(ref y);
                 GUI.EndScrollView();
                 GUI.SetNextControlName("ConfirmAction");
                 if (Button(new Rect(980, 762, 202, 48), "Confirm action", true)) Command("confirm");

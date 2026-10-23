@@ -80,6 +80,7 @@ namespace DungeonCrawlerTactics.Unity
         {
             GUI.Label(new Rect(26, 16, 700, 38), "DUNGEON CRAWLER CARL", titleStyle);
             GUI.Label(new Rect(28, 58, 680, 28), "TACTICS  /  THE FIRST FLOOR", smallStyle);
+            if (Button(new Rect(730, 26, 260, 44), "Audience & Favor " + (view.audience == null ? "" : view.audience.favor.ToString()))) modal = "audience";
             if (Button(new Rect(1000, 26, 126, 44), "How to play")) modal = "help";
             if (Button(new Rect(1136, 26, 126, 44), "Settings")) modal = "settings";
             if (Button(new Rect(1272, 26, 140, 44), "Save / Load")) { modal = "save"; saveText = JsonUtility.ToJson(session.ExportSave(), true); }

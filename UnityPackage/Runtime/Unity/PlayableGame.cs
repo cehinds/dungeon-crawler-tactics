@@ -61,9 +61,9 @@ namespace DungeonCrawlerTactics.Unity
             try
             {
                 view = session.Handle(command);
-                notice = view.message;
+                notice = AudienceNotice(view.message);
                 if (clearTarget) { actionId = ""; itemId = ""; }
-                if (command.type != "preview" && command.type != "cancel" && command.type != "select") StoreCheckpoint(false);
+                if (command.type != "preview" && command.type != "preview_favor" && command.type != "cancel" && command.type != "select") StoreCheckpoint(false);
             }
             catch (Exception ex) { notice = "Action rejected: " + ex.Message; }
             GUI.FocusControl(null);

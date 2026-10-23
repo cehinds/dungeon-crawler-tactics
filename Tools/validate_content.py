@@ -60,6 +60,10 @@ def validate(content):
         references(record["abilityIds"], "abilities", f"classes.{index}.abilityIds")
     for index, record in enumerate(content["items"]):
         references([record["abilityId"]], "abilities", f"items.{index}.abilityId")
+        if record.get("favorEligible"):
+            ability = next((a for a in content["abilities"] if a["id"] == record["abilityId"]), None)
+            if ability and (ability["target"] != "tile" or ability["incomingTags"] or any(e["op"] != "AddTag" for e in ability["effects"])):
+                errors.append(f"items.{index}: Favor supplies must only add environmental tags without incoming reactions")
     for index, record in enumerate(content["abilities"]):
         references(record["incomingTags"], "tags", f"abilities.{index}.incomingTags")
         effects(record["effects"], f"abilities.{index}.effects")

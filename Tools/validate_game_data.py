@@ -37,6 +37,9 @@ def validate_game(data, content):
                 ref(mode['rosterId'], 'roster', name+'.rosterId')
             if name == 'forms' and not mode.get('rosterId'):
                 errors.append('forms: require an explicit rosterId')
+    unique(data.get("sponsorChallenges", []), "id", "sponsorChallenges")
+    for challenge in data.get("sponsorChallenges", []):
+        ref(challenge["rewardItemId"], "items", "sponsorChallenges.rewardItemId")
     development = data.get('development', {})
     stats = development.get('stats', [])
     unique(stats, 'id', 'development.stats')

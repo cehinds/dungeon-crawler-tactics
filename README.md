@@ -6,6 +6,8 @@ A playable Dungeon Crawler Carl fan tactics prototype with a shared C# engine: a
 
 **Lore codex:** [Classes, rank tables, floors, enemies and housing evidence](https://cehinds.github.io/dungeon-crawler-tactics/codex.html) · [Story and housing guide](Docs/Journey-and-Home.md).
 
+**Completion checklist:** [Implemented, tested and still unfinished](Docs/Completion-Checklist.md) · [Expanded story levels](Docs/Story-Levels.md) · [Sponsors, Favor and traps](Docs/Audience-and-Traps.md).
+
 **Tabletop inspiration:** [Official RPG research and prioritized gameplay changes](Docs/Tabletop-Inspiration.md) · [Playable Over City neighborhood: Lantern Row](Docs/Over-City-Neighborhood.md).
 
 **Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md) · [Playable boss scenarios and sprite sources](Docs/Boss-Concepts.md).
@@ -23,7 +25,7 @@ The included playable browser build runs the actual shared C# game through .NET 
 ## What you can play
 
 - Start with Carl, Princess Donut, Katia and Mongo; Mordecai advises from camp. Select four of eight field characters and customize optional classes while retaining personal abilities.
-- Follow the story through floors 1–8 with branching exploration, floor objectives and a floor-7 bypass. The original three-room campaign remains available.
+- Follow the story through floors 1–8 with six distinct expanded 17×13 exploration approaches, 24 additional discoveries (12 functional supply caches), Lantern Row, floor objectives and a floor-7 bypass. The original three-room campaign remains available.
 - Fight on authored story boards or six optional expedition maps. Use class abilities or shared items, inspect the exact forecast, confirm or cancel.
 - Watch actual walk/attack/hit sprite frames and visual reactions on the map. Inspect HP, Mana/MP, movement, conditions, range and exact forecasts in a compact HUD.
 - Choose actions in a responsive modal with labeled category colors, Mana costs and legal-target counts. Review the exact forecast in its confirmation modal; end-turn confirmation names the next actor.
@@ -33,16 +35,17 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Buy a shared house on floor 4, open eight bedrooms, install training/crafting facilities and a social screen, and claim eligible personal club credentials. Gold income and tactical benefits are labeled adaptations.
 - Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage. Guardian, Bard and Necromancer support abilities now grant real single-hit protection.
 - Fight deterministic enemies, collect sponsor supplies, reach the boss, finish the floor, or retry after defeat.
+- Earn once-per-run sponsor deliveries, then use bounded AI Favor for eligible environmental supplies. Craft and place one-use Coolant/Shock snares; traps affect either team and persist in saves.
 - Choose Katia's four forms and three tactical stances through character sheets, with exact stat tradeoffs. Selected abilities expose descriptions and targeting information.
 - Explore the original Lantern Row neighborhood through the safe-room entry or its optional floor 3 discovery. Prepare supplies, follow connected streets, barter or bypass the trapped store, rescue a crawler, and earn saved challenge rewards.
-- Follow individual enemy declarations and impact messages; five saved first-time achievements trigger NEW ACHIEVEMENT feedback. Open earned fixed-content boxes and craft two supply recipes in the safe room.
+- Follow individual enemy declarations and impact messages; five saved first-time achievements trigger NEW ACHIEVEMENT feedback. Open earned fixed-content boxes and craft four supply recipes in the safe room.
 - Try separate Hoarder, Juicer and Ball of Swine scenarios with objective briefings and special interactions, then return to the preserved campaign.
 - Explore six optional training expeditions with distinct layouts and enemy kits; your selected build carries in and the campaign restores exactly on return.
 - Choose two-branch, six-node skill trees for each of eight crawlers, with stat forecasts, prerequisite checks and saved unlocks.
 - Start the optional story campaign from the eighteen-floor guide. Floors 1–8 include seven battles and the destroyed floor-7 bypass, with route, quadrant and capture objectives.
 - Autosave, reload, and export/import a portable JSON save.
 
-There are **142 selectable class kits (122 source-attested names plus 20 original kits), six enemy-only kits, 88 ability definitions, 1,988 class-tree nodes, 8 consumables, 6 equipment pieces and 96 directional character frames**. Stat formulas, early allocation timing, skill ranks, recipes and scenario rules are tactical adaptations, not canonical book formulas. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). The catalog is a sourced survey, not an exhaustive full-text audit. Numerical rank curves and class trees are game adaptations; unknown canonical ranks stay unknown. Floors 9–18, a complete T’Ghee deck battle system, full club interiors, advanced summons, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
+There are **142 selectable class kits (122 source-attested names plus 20 original kits), six enemy-only kits, 90 ability definitions, 1,988 class-tree nodes, 10 consumables, 6 equipment pieces, 96 base directional character frames and 36 Katia form frames**. Stat formulas, early allocation timing, skill ranks, recipes and scenario rules are tactical adaptations, not canonical book formulas. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). The catalog is a sourced survey, not an exhaustive full-text audit. Numerical rank curves and class trees are game adaptations; unknown canonical ranks stay unknown. Floors 9–18, a complete T’Ghee deck battle system, full club interiors, advanced summons, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
 
 ## Start here
 
@@ -83,6 +86,8 @@ python3 -m pip install -r Tools/requirements.txt
 python3 Tools/validate_content.py UnityPackage/Runtime/Data/combat-content.json
 python3 Tools/validate_game_data.py
 python3 Tools/validate_directional_art.py
+python3 Tools/validate_form_art.py
+python3 Tools/expand_story_levels.py --check
 python3 Tools/validate_scenario_art.py
 python3 Tools/validate_expansion_art.py
 python3 -m unittest discover -s Tools -p 'test_*.py'
@@ -95,6 +100,7 @@ dotnet run --project Tests/RankTests/RankTests.csproj
 dotnet run --project Tests/JourneyTests/JourneyTests.csproj
 dotnet run --project Tests/HomeTests/HomeTests.csproj
 dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj
+dotnet run --project Tests/AudienceTests/AudienceTests.csproj
 dotnet build Tools/Compatibility/Core.Compatibility.csproj
 dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
 python3 Tools/prepare_unity_project.py

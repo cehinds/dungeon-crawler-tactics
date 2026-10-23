@@ -41,6 +41,7 @@ namespace DungeonCrawlerTactics
             Action<string, int> add = (id, count) => { if (count != 0) result[id] = (result.ContainsKey(id) ? result[id] : 0) + count; };
             add(option.costItemId, -option.costCount); add(option.rewardItemId, option.rewardCount);
             foreach (NeighborhoodChallengeDef c in data.neighborhood.challenges) if (c.interactionId == interaction.id && (string.IsNullOrEmpty(c.optionId) || c.optionId == option.id) && Array.IndexOf(neighborhoodState.challengeIds, c.id) < 0) add(c.rewardItemId, c.rewardCount);
+            if (interaction.id == "neighborhood.over_city.rescue") foreach (SponsorChallengeDef c in data.sponsorChallenges) if (c.eventType == "rescue" && Array.IndexOf(audienceState.receipts, c.id) < 0) add(c.rewardItemId, Math.Max(0, Math.Min(c.rewardCount, 10000 - inventory[c.rewardItemId] - (result.ContainsKey(c.rewardItemId) ? result[c.rewardItemId] : 0))));
             return result;
         }
         private NeighborhoodForecast ResolveNeighborhood(GameCommand command)
@@ -64,6 +65,7 @@ namespace DungeonCrawlerTactics
             var challenges = new List<string>(neighborhoodState.challengeIds); foreach (string id in forecast.challengeIds) { challenges.Add(id); presentationEvents.Add(new PresentationEvent { type = "achievement", tag = id }); } neighborhoodState.challengeIds = challenges.ToArray();
             NeighborhoodInteractionDef interaction = NeighborhoodInteraction(forecast.interactionId);
             if (!interaction.camp) { ExplorationSave state = exploration[data.neighborhood.sectorId]; var claimed = new List<string>(state.claimed); claimed.Add(interaction.pointId); state.claimed = claimed.ToArray(); }
+            if (forecast.interactionId == "neighborhood.over_city.rescue") AudienceCommitted("rescue", true);
             pendingNeighborhood = null; message = forecast.description + (string.IsNullOrEmpty(forecast.clue) ? "" : " Clue: " + forecast.clue); AddLog(interaction.label + ": " + message); return true;
         }
         private NeighborhoodView BuildNeighborhoodView()

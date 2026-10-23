@@ -52,7 +52,7 @@ static class GameTests
         Data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "game-content.json")), Json);
         GameDataValidator.Validate(Data, new Catalog(Content));
         Check(Content.classes.All(c => c.abilityIds.Length > 0), "all optional and identity classes have functional kits");
-        Check(Content.items.Length == 8 && Content.abilities.Length >= 18, "release inventory and ability breadth");
+        Check(Content.items.Length == 10 && Content.abilities.Length >= 90, "release inventory and ability breadth");
         BranchingSkillTrees(); AuthoredMechanicsValidation(); CrawlerDevelopment(); IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
     }

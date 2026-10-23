@@ -4,6 +4,7 @@ namespace DungeonCrawlerTactics
 {
     [Serializable] public sealed class GameData
     {
+        public SponsorChallengeDef[] sponsorChallenges = new SponsorChallengeDef[0];
         public NeighborhoodDef neighborhood;
         public HomeDef home;
         public JourneyDef journey;
@@ -68,7 +69,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class InventoryEntry { public string itemId; public int count; }
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
-    [Serializable] public sealed class TagRuleDef { public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, energyPenalty; }
+    [Serializable] public sealed class TagRuleDef { public bool consumeOnEntry; public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, energyPenalty; }
     [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public CustomMapData customMap; public int x, y; }
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
@@ -82,7 +83,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class PresentationEvent { public int sequence; public string type, actorId, targetId, abilityId, reactionId, tag; public int fromX, fromY, toX, toY, amount, before, after; public bool preview; }
     [Serializable] public sealed class TileView { public string id; public int x, y; public bool blocked; public string[] tags = new string[0]; }
     [Serializable] public sealed class AbilityView { public string id, label, target, description, disabledReason; public string[] targetIds = new string[0]; public int range, cost; public bool enabled; }
-    [Serializable] public sealed class ItemView { public string id, label, abilityId, target, description, disabledReason; public string[] targetIds = new string[0]; public int count, range; }
+    [Serializable] public sealed class ItemView { public string[] favorTargetIds = new string[0]; public string id, label, abilityId, target, description, disabledReason; public string[] targetIds = new string[0]; public int count, range; }
     [Serializable] public sealed class RosterView { public string id, label, classId, artId, stanceId, formId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; public int hp, maxHp, energy, maxEnergy, move, effectiveMove, level; public string[] equippedIds = new string[0]; }
     [Serializable] public sealed class ClassView { public string id, label, disabledReason; public int minimumFloor = 1; public bool enabled = true; public string[] abilityIds = new string[0]; }
     [Serializable] public sealed class ForecastView
@@ -95,7 +96,7 @@ namespace DungeonCrawlerTactics
     {
         public TacticalModeView[] stances = new TacticalModeView[0], forms = new TacticalModeView[0];
         public NeighborhoodView neighborhood; public HomeView home; public JourneyView journey; public ExpeditionView expedition; public ExpeditionOptionView[] expeditions = new ExpeditionOptionView[0]; public SkillTreeView skillTree; public DevelopmentView development; public CustomMapData customMap; public ScenarioOptionView[] scenarios = new ScenarioOptionView[0]; public ScenarioView scenario;
-        public string[] achievementIds = new string[0];
+        public AudienceView audience; public string[] achievementIds = new string[0];
         public ExplorationView exploration;
         public ProgressionView progression; public SafeRoomView safeRoom;
         public EquipmentView[] equipment = new EquipmentView[0]; public QuestView[] quests = new QuestView[0];
@@ -119,7 +120,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class GameSave
     {
         public NeighborhoodSave neighborhood; public HomeSave home; public JourneySave journey; public ExpeditionSave expedition; public SkillTreeSave skillTree; public DevelopmentSave development; public CustomMapData customMap; public ScenarioSave scenario;
-        public string[] achievementIds = new string[0];
+        public AudienceSave audience; public string[] achievementIds = new string[0];
         public ExplorationSave[] exploration = new ExplorationSave[0];
         public int activationVersion; public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];
         public int schemaVersion = 1; public string contentVersion, screen, phase, selectedUnitId;

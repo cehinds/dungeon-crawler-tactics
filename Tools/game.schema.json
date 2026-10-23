@@ -161,6 +161,48 @@
     },
     "neighborhood": {
       "$ref": "#/$defs/neighborhood"
+    },
+    "sponsorChallenges": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "description",
+          "eventType",
+          "rewardItemId",
+          "rewardCount"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "eventType": {
+            "enum": [
+              "reaction",
+              "rescue",
+              "victory"
+            ]
+          },
+          "rewardItemId": {
+            "type": "string"
+          },
+          "rewardCount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      }
     }
   },
   "$defs": {
@@ -519,6 +561,9 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 100
+        },
+        "consumeOnEntry": {
+          "type": "boolean"
         }
       }
     },

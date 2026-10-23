@@ -92,6 +92,8 @@ namespace DungeonCrawlerTactics.Unity
 
         private static string SurfaceSymbol(string[] tags)
         {
+            if (HasTag(tags, "surface.trap_shock")) return "SHOCK TRAP";
+            if (HasTag(tags, "surface.trap_coolant")) return "WET TRAP";
             if (HasTag(tags, "surface.burning")) return "FIRE";
             if (HasTag(tags, "surface.oil")) return "OIL";
             if (HasTag(tags, "surface.water")) return "WATER";

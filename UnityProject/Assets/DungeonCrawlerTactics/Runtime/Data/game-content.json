@@ -1110,6 +1110,20 @@
       "turnDamage": 0,
       "movePenalty": 0,
       "energyPenalty": 0
+    },
+    {
+      "tag": "surface.trap_coolant",
+      "occupantTag": "status.wet",
+      "consumeOnEntry": true,
+      "entryDamage": 0,
+      "durationRounds": 0
+    },
+    {
+      "tag": "surface.trap_shock",
+      "occupantTag": "status.shocked",
+      "consumeOnEntry": true,
+      "entryDamage": 5,
+      "durationRounds": 0
     }
   ],
   "encounters": [
@@ -3433,6 +3447,40 @@
         "outputs": [
           {
             "itemId": "item.fire_bomb",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "recipe.coolant_snare",
+        "label": "Assemble Coolant Snare",
+        "description": "One-use trap on an empty tile within 3. Triggers for any entrant; applies wet for cold/lightning reactions. Uses an action or 1 AI Favor; no Mana. Adapted recipe.",
+        "ingredients": [
+          {
+            "itemId": "item.frost_vial",
+            "count": 1
+          }
+        ],
+        "outputs": [
+          {
+            "itemId": "item.coolant_snare",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "recipe.shock_snare",
+        "label": "Assemble Shock Snare",
+        "description": "One-use trap on an empty tile within 3. Triggers for any entrant; deals 5 damage and applies shocked. Uses an action or 1 AI Favor; no Mana. Adapted recipe.",
+        "ingredients": [
+          {
+            "itemId": "item.thunder_flask",
+            "count": 1
+          }
+        ],
+        "outputs": [
+          {
+            "itemId": "item.shock_snare",
             "count": 1
           }
         ]
@@ -42425,10 +42473,10 @@
           ],
           "exploration": {
             "id": "sector.journey_1",
-            "label": "First Floor — Tutorial Passage approach",
-            "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
-            "width": 11,
-            "height": 9,
+            "label": "Tutorial supply galleries",
+            "description": "Original tactical adaptation: explore the connected tutorial supply galleries, collect optional supplies and inspect route advice before entering the encounter. Exploration has no enemy turns or damage; the safe-room camp remains available between floors.",
+            "width": 17,
+            "height": 13,
             "startX": 1,
             "startY": 4,
             "discoveryRadius": 2,
@@ -42478,11 +42526,35 @@
                 "y": 0
               },
               {
+                "x": 11,
+                "y": 0
+              },
+              {
+                "x": 12,
+                "y": 0
+              },
+              {
+                "x": 13,
+                "y": 0
+              },
+              {
+                "x": 14,
+                "y": 0
+              },
+              {
+                "x": 15,
+                "y": 0
+              },
+              {
+                "x": 16,
+                "y": 0
+              },
+              {
                 "x": 0,
                 "y": 1
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 1
               },
               {
@@ -42498,7 +42570,11 @@
                 "y": 2
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 2
+              },
+              {
+                "x": 16,
                 "y": 2
               },
               {
@@ -42514,7 +42590,11 @@
                 "y": 3
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 3
+              },
+              {
+                "x": 16,
                 "y": 3
               },
               {
@@ -42522,7 +42602,7 @@
                 "y": 4
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 4
               },
               {
@@ -42538,7 +42618,11 @@
                 "y": 5
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 5
+              },
+              {
+                "x": 16,
                 "y": 5
               },
               {
@@ -42554,7 +42638,11 @@
                 "y": 6
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 6
+              },
+              {
+                "x": 16,
                 "y": 6
               },
               {
@@ -42562,7 +42650,7 @@
                 "y": 7
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 7
               },
               {
@@ -42570,44 +42658,120 @@
                 "y": 8
               },
               {
-                "x": 1,
+                "x": 11,
                 "y": 8
               },
               {
-                "x": 2,
+                "x": 16,
                 "y": 8
               },
               {
-                "x": 3,
-                "y": 8
+                "x": 0,
+                "y": 9
+              },
+              {
+                "x": 11,
+                "y": 9
+              },
+              {
+                "x": 16,
+                "y": 9
+              },
+              {
+                "x": 0,
+                "y": 10
               },
               {
                 "x": 4,
-                "y": 8
-              },
-              {
-                "x": 5,
-                "y": 8
+                "y": 10
               },
               {
                 "x": 6,
-                "y": 8
+                "y": 10
               },
               {
                 "x": 7,
-                "y": 8
+                "y": 10
+              },
+              {
+                "x": 16,
+                "y": 10
+              },
+              {
+                "x": 0,
+                "y": 11
+              },
+              {
+                "x": 16,
+                "y": 11
+              },
+              {
+                "x": 0,
+                "y": 12
+              },
+              {
+                "x": 1,
+                "y": 12
+              },
+              {
+                "x": 2,
+                "y": 12
+              },
+              {
+                "x": 3,
+                "y": 12
+              },
+              {
+                "x": 4,
+                "y": 12
+              },
+              {
+                "x": 5,
+                "y": 12
+              },
+              {
+                "x": 6,
+                "y": 12
+              },
+              {
+                "x": 7,
+                "y": 12
               },
               {
                 "x": 8,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 9,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 10,
-                "y": 8
+                "y": 12
+              },
+              {
+                "x": 11,
+                "y": 12
+              },
+              {
+                "x": 12,
+                "y": 12
+              },
+              {
+                "x": 13,
+                "y": 12
+              },
+              {
+                "x": 14,
+                "y": 12
+              },
+              {
+                "x": 15,
+                "y": 12
+              },
+              {
+                "x": 16,
+                "y": 12
               }
             ],
             "points": [
@@ -42616,8 +42780,8 @@
                 "label": "Enter First Floor — Tutorial Passage",
                 "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
                 "kind": "encounter",
-                "x": 9,
-                "y": 4,
+                "x": 15,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               },
@@ -42633,13 +42797,53 @@
               },
               {
                 "id": "discovery.journey_1_cache",
-                "label": "Optional shared supply",
+                "label": "Entry supply: Health Tonic",
                 "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
                 "kind": "cache",
                 "x": 3,
                 "y": 4,
                 "itemId": "item.health_tonic",
                 "count": 1
+              },
+              {
+                "id": "discovery.journey_1_level_recon",
+                "label": "Route reconnaissance",
+                "description": "Try the short central approach or the longer side galleries. Water can extinguish burning tiles; inspect action forecasts before committing.",
+                "kind": "lore",
+                "x": 9,
+                "y": 10,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_1_level_supply",
+                "label": "Field supply: Coolant Bomb",
+                "description": "One Coolant Bomb added to the shared pack. This optional supply placement is a tactical adaptation.",
+                "kind": "cache",
+                "x": 15,
+                "y": 2,
+                "itemId": "item.water_bomb",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_1_level_recovery",
+                "label": "Reserve supply: Health Tonic",
+                "description": "One Health Tonic added to the shared pack. Collect this reserve before entering battle; exploration itself does not heal the party.",
+                "kind": "cache",
+                "x": 3,
+                "y": 10,
+                "itemId": "item.health_tonic",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_1_level_exit",
+                "label": "Encounter staging point",
+                "description": "The encounter is ahead. Check the shared pack and formation before entry. Battle victory returns to the existing safe-room camp for supplies, build changes and progression.",
+                "kind": "lore",
+                "x": 14,
+                "y": 10,
+                "itemId": "",
+                "count": 0
               }
             ]
           }
@@ -43076,10 +43280,10 @@
           ],
           "exploration": {
             "id": "sector.journey_2",
-            "label": "Second Floor — Training Sewers approach",
-            "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
-            "width": 11,
-            "height": 9,
+            "label": "Sewer maintenance circuit",
+            "description": "Original tactical adaptation: explore the connected sewer maintenance circuit, collect optional supplies and inspect route advice before entering the encounter. Exploration has no enemy turns or damage; the safe-room camp remains available between floors.",
+            "width": 17,
+            "height": 13,
             "startX": 1,
             "startY": 4,
             "discoveryRadius": 2,
@@ -43129,11 +43333,35 @@
                 "y": 0
               },
               {
+                "x": 11,
+                "y": 0
+              },
+              {
+                "x": 12,
+                "y": 0
+              },
+              {
+                "x": 13,
+                "y": 0
+              },
+              {
+                "x": 14,
+                "y": 0
+              },
+              {
+                "x": 15,
+                "y": 0
+              },
+              {
+                "x": 16,
+                "y": 0
+              },
+              {
                 "x": 0,
                 "y": 1
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 1
               },
               {
@@ -43149,7 +43377,11 @@
                 "y": 2
               },
               {
-                "x": 10,
+                "x": 13,
+                "y": 2
+              },
+              {
+                "x": 16,
                 "y": 2
               },
               {
@@ -43165,7 +43397,11 @@
                 "y": 3
               },
               {
-                "x": 10,
+                "x": 13,
+                "y": 3
+              },
+              {
+                "x": 16,
                 "y": 3
               },
               {
@@ -43173,7 +43409,7 @@
                 "y": 4
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 4
               },
               {
@@ -43189,7 +43425,11 @@
                 "y": 5
               },
               {
-                "x": 10,
+                "x": 13,
+                "y": 5
+              },
+              {
+                "x": 16,
                 "y": 5
               },
               {
@@ -43205,7 +43445,11 @@
                 "y": 6
               },
               {
-                "x": 10,
+                "x": 13,
+                "y": 6
+              },
+              {
+                "x": 16,
                 "y": 6
               },
               {
@@ -43213,7 +43457,7 @@
                 "y": 7
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 7
               },
               {
@@ -43221,44 +43465,140 @@
                 "y": 8
               },
               {
-                "x": 1,
+                "x": 16,
                 "y": 8
+              },
+              {
+                "x": 0,
+                "y": 9
               },
               {
                 "x": 2,
-                "y": 8
+                "y": 9
               },
               {
                 "x": 3,
-                "y": 8
+                "y": 9
               },
               {
                 "x": 4,
-                "y": 8
-              },
-              {
-                "x": 5,
-                "y": 8
+                "y": 9
               },
               {
                 "x": 6,
-                "y": 8
+                "y": 9
               },
               {
                 "x": 7,
-                "y": 8
+                "y": 9
               },
               {
                 "x": 8,
-                "y": 8
-              },
-              {
-                "x": 9,
-                "y": 8
+                "y": 9
               },
               {
                 "x": 10,
-                "y": 8
+                "y": 9
+              },
+              {
+                "x": 11,
+                "y": 9
+              },
+              {
+                "x": 12,
+                "y": 9
+              },
+              {
+                "x": 14,
+                "y": 9
+              },
+              {
+                "x": 16,
+                "y": 9
+              },
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 16,
+                "y": 10
+              },
+              {
+                "x": 0,
+                "y": 11
+              },
+              {
+                "x": 16,
+                "y": 11
+              },
+              {
+                "x": 0,
+                "y": 12
+              },
+              {
+                "x": 1,
+                "y": 12
+              },
+              {
+                "x": 2,
+                "y": 12
+              },
+              {
+                "x": 3,
+                "y": 12
+              },
+              {
+                "x": 4,
+                "y": 12
+              },
+              {
+                "x": 5,
+                "y": 12
+              },
+              {
+                "x": 6,
+                "y": 12
+              },
+              {
+                "x": 7,
+                "y": 12
+              },
+              {
+                "x": 8,
+                "y": 12
+              },
+              {
+                "x": 9,
+                "y": 12
+              },
+              {
+                "x": 10,
+                "y": 12
+              },
+              {
+                "x": 11,
+                "y": 12
+              },
+              {
+                "x": 12,
+                "y": 12
+              },
+              {
+                "x": 13,
+                "y": 12
+              },
+              {
+                "x": 14,
+                "y": 12
+              },
+              {
+                "x": 15,
+                "y": 12
+              },
+              {
+                "x": 16,
+                "y": 12
               }
             ],
             "points": [
@@ -43267,8 +43607,8 @@
                 "label": "Enter Second Floor — Training Sewers",
                 "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
                 "kind": "encounter",
-                "x": 9,
-                "y": 4,
+                "x": 15,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               },
@@ -43284,13 +43624,53 @@
               },
               {
                 "id": "discovery.journey_2_cache",
-                "label": "Optional shared supply",
+                "label": "Entry supply: Health Tonic",
                 "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
                 "kind": "cache",
                 "x": 3,
                 "y": 4,
                 "itemId": "item.health_tonic",
                 "count": 1
+              },
+              {
+                "id": "discovery.journey_2_level_recon",
+                "label": "Route reconnaissance",
+                "description": "Dry ledges provide an alternative to the flooded combat lanes. Wet targets conduct lightning; the Arc Sentry makes spacing valuable.",
+                "kind": "lore",
+                "x": 9,
+                "y": 10,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_2_level_supply",
+                "label": "Field supply: Shock Tonic",
+                "description": "One Shock Tonic added to the shared pack. This optional supply placement is a tactical adaptation.",
+                "kind": "cache",
+                "x": 15,
+                "y": 2,
+                "itemId": "item.thunder_flask",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_2_level_recovery",
+                "label": "Reserve supply: Health Tonic",
+                "description": "One Health Tonic added to the shared pack. Collect this reserve before entering battle; exploration itself does not heal the party.",
+                "kind": "cache",
+                "x": 3,
+                "y": 10,
+                "itemId": "item.health_tonic",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_2_level_exit",
+                "label": "Encounter staging point",
+                "description": "The encounter is ahead. Check the shared pack and formation before entry. Battle victory returns to the existing safe-room camp for supplies, build changes and progression.",
+                "kind": "lore",
+                "x": 14,
+                "y": 10,
+                "itemId": "",
+                "count": 0
               }
             ]
           }
@@ -44564,10 +44944,10 @@
           ],
           "exploration": {
             "id": "sector.journey_4",
-            "label": "Fourth Floor — Iron Tangle Transfer approach",
-            "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
-            "width": 11,
-            "height": 9,
+            "label": "Rail transfer concourse",
+            "description": "Original tactical adaptation: explore the connected rail transfer concourse, collect optional supplies and inspect route advice before entering the encounter. Exploration has no enemy turns or damage; the safe-room camp remains available between floors.",
+            "width": 17,
+            "height": 13,
             "startX": 1,
             "startY": 4,
             "discoveryRadius": 2,
@@ -44617,11 +44997,35 @@
                 "y": 0
               },
               {
+                "x": 11,
+                "y": 0
+              },
+              {
+                "x": 12,
+                "y": 0
+              },
+              {
+                "x": 13,
+                "y": 0
+              },
+              {
+                "x": 14,
+                "y": 0
+              },
+              {
+                "x": 15,
+                "y": 0
+              },
+              {
+                "x": 16,
+                "y": 0
+              },
+              {
                 "x": 0,
                 "y": 1
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 1
               },
               {
@@ -44637,7 +45041,15 @@
                 "y": 2
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 2
+              },
+              {
+                "x": 13,
+                "y": 2
+              },
+              {
+                "x": 16,
                 "y": 2
               },
               {
@@ -44653,7 +45065,15 @@
                 "y": 3
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 3
+              },
+              {
+                "x": 16,
                 "y": 3
               },
               {
@@ -44661,7 +45081,7 @@
                 "y": 4
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 4
               },
               {
@@ -44677,7 +45097,15 @@
                 "y": 5
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 5
+              },
+              {
+                "x": 13,
+                "y": 5
+              },
+              {
+                "x": 16,
                 "y": 5
               },
               {
@@ -44693,7 +45121,15 @@
                 "y": 6
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 6
+              },
+              {
+                "x": 13,
+                "y": 6
+              },
+              {
+                "x": 16,
                 "y": 6
               },
               {
@@ -44701,52 +45137,132 @@
                 "y": 7
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 7
               },
               {
                 "x": 0,
                 "y": 8
+              },
+              {
+                "x": 11,
+                "y": 8
+              },
+              {
+                "x": 13,
+                "y": 8
+              },
+              {
+                "x": 16,
+                "y": 8
+              },
+              {
+                "x": 0,
+                "y": 9
+              },
+              {
+                "x": 11,
+                "y": 9
+              },
+              {
+                "x": 13,
+                "y": 9
+              },
+              {
+                "x": 16,
+                "y": 9
+              },
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 11,
+                "y": 10
+              },
+              {
+                "x": 13,
+                "y": 10
+              },
+              {
+                "x": 16,
+                "y": 10
+              },
+              {
+                "x": 0,
+                "y": 11
+              },
+              {
+                "x": 16,
+                "y": 11
+              },
+              {
+                "x": 0,
+                "y": 12
               },
               {
                 "x": 1,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 2,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 3,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 4,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 5,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 6,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 7,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 8,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 9,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 10,
-                "y": 8
+                "y": 12
+              },
+              {
+                "x": 11,
+                "y": 12
+              },
+              {
+                "x": 12,
+                "y": 12
+              },
+              {
+                "x": 13,
+                "y": 12
+              },
+              {
+                "x": 14,
+                "y": 12
+              },
+              {
+                "x": 15,
+                "y": 12
+              },
+              {
+                "x": 16,
+                "y": 12
               }
             ],
             "points": [
@@ -44755,8 +45271,8 @@
                 "label": "Enter Fourth Floor — Iron Tangle Transfer",
                 "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
                 "kind": "encounter",
-                "x": 9,
-                "y": 4,
+                "x": 15,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               },
@@ -44772,7 +45288,7 @@
               },
               {
                 "id": "discovery.journey_4_cache",
-                "label": "Optional shared supply",
+                "label": "Entry supply: Health Tonic",
                 "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
                 "kind": "cache",
                 "x": 3,
@@ -44787,6 +45303,46 @@
                 "kind": "lore",
                 "x": 9,
                 "y": 1,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_4_level_recon",
+                "label": "Route reconnaissance",
+                "description": "The route control is still required. Parallel transfer galleries join before the encounter; oil and fire interactions can threaten either team.",
+                "kind": "lore",
+                "x": 9,
+                "y": 10,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_4_level_supply",
+                "label": "Field supply: Oil Flask",
+                "description": "One Oil Flask added to the shared pack. This optional supply placement is a tactical adaptation.",
+                "kind": "cache",
+                "x": 15,
+                "y": 2,
+                "itemId": "item.oil_flask",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_4_level_recovery",
+                "label": "Reserve supply: Health Tonic",
+                "description": "One Health Tonic added to the shared pack. Collect this reserve before entering battle; exploration itself does not heal the party.",
+                "kind": "cache",
+                "x": 3,
+                "y": 10,
+                "itemId": "item.health_tonic",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_4_level_exit",
+                "label": "Encounter staging point",
+                "description": "The encounter is ahead. Check the shared pack and formation before entry. Battle victory returns to the existing safe-room camp for supplies, build changes and progression.",
+                "kind": "lore",
+                "x": 14,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               }
@@ -45222,10 +45778,10 @@
           ],
           "exploration": {
             "id": "sector.journey_5",
-            "label": "Fifth Floor — Four Beacon Bubble approach",
-            "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
-            "width": 11,
-            "height": 9,
+            "label": "Four-quarter survey ring",
+            "description": "Original tactical adaptation: explore the connected four-quarter survey ring, collect optional supplies and inspect route advice before entering the encounter. Exploration has no enemy turns or damage; the safe-room camp remains available between floors.",
+            "width": 17,
+            "height": 13,
             "startX": 1,
             "startY": 4,
             "discoveryRadius": 2,
@@ -45275,11 +45831,35 @@
                 "y": 0
               },
               {
+                "x": 11,
+                "y": 0
+              },
+              {
+                "x": 12,
+                "y": 0
+              },
+              {
+                "x": 13,
+                "y": 0
+              },
+              {
+                "x": 14,
+                "y": 0
+              },
+              {
+                "x": 15,
+                "y": 0
+              },
+              {
+                "x": 16,
+                "y": 0
+              },
+              {
                 "x": 0,
                 "y": 1
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 1
               },
               {
@@ -45295,7 +45875,11 @@
                 "y": 2
               },
               {
-                "x": 10,
+                "x": 12,
+                "y": 2
+              },
+              {
+                "x": 16,
                 "y": 2
               },
               {
@@ -45311,7 +45895,11 @@
                 "y": 3
               },
               {
-                "x": 10,
+                "x": 12,
+                "y": 3
+              },
+              {
+                "x": 16,
                 "y": 3
               },
               {
@@ -45319,7 +45907,7 @@
                 "y": 4
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 4
               },
               {
@@ -45335,7 +45923,11 @@
                 "y": 5
               },
               {
-                "x": 10,
+                "x": 12,
+                "y": 5
+              },
+              {
+                "x": 16,
                 "y": 5
               },
               {
@@ -45351,7 +45943,11 @@
                 "y": 6
               },
               {
-                "x": 10,
+                "x": 12,
+                "y": 6
+              },
+              {
+                "x": 16,
                 "y": 6
               },
               {
@@ -45359,15 +45955,11 @@
                 "y": 7
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 7
               },
               {
                 "x": 0,
-                "y": 8
-              },
-              {
-                "x": 1,
                 "y": 8
               },
               {
@@ -45383,10 +45975,6 @@
                 "y": 8
               },
               {
-                "x": 5,
-                "y": 8
-              },
-              {
                 "x": 6,
                 "y": 8
               },
@@ -45399,12 +45987,116 @@
                 "y": 8
               },
               {
-                "x": 9,
+                "x": 10,
                 "y": 8
               },
               {
-                "x": 10,
+                "x": 11,
                 "y": 8
+              },
+              {
+                "x": 12,
+                "y": 8
+              },
+              {
+                "x": 14,
+                "y": 8
+              },
+              {
+                "x": 16,
+                "y": 8
+              },
+              {
+                "x": 0,
+                "y": 9
+              },
+              {
+                "x": 16,
+                "y": 9
+              },
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 16,
+                "y": 10
+              },
+              {
+                "x": 0,
+                "y": 11
+              },
+              {
+                "x": 16,
+                "y": 11
+              },
+              {
+                "x": 0,
+                "y": 12
+              },
+              {
+                "x": 1,
+                "y": 12
+              },
+              {
+                "x": 2,
+                "y": 12
+              },
+              {
+                "x": 3,
+                "y": 12
+              },
+              {
+                "x": 4,
+                "y": 12
+              },
+              {
+                "x": 5,
+                "y": 12
+              },
+              {
+                "x": 6,
+                "y": 12
+              },
+              {
+                "x": 7,
+                "y": 12
+              },
+              {
+                "x": 8,
+                "y": 12
+              },
+              {
+                "x": 9,
+                "y": 12
+              },
+              {
+                "x": 10,
+                "y": 12
+              },
+              {
+                "x": 11,
+                "y": 12
+              },
+              {
+                "x": 12,
+                "y": 12
+              },
+              {
+                "x": 13,
+                "y": 12
+              },
+              {
+                "x": 14,
+                "y": 12
+              },
+              {
+                "x": 15,
+                "y": 12
+              },
+              {
+                "x": 16,
+                "y": 12
               }
             ],
             "points": [
@@ -45413,8 +46105,8 @@
                 "label": "Enter Fifth Floor — Four Beacon Bubble",
                 "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
                 "kind": "encounter",
-                "x": 9,
-                "y": 4,
+                "x": 15,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               },
@@ -45430,7 +46122,7 @@
               },
               {
                 "id": "discovery.journey_5_cache",
-                "label": "Optional shared supply",
+                "label": "Entry supply: Health Tonic",
                 "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
                 "kind": "cache",
                 "x": 3,
@@ -45475,6 +46167,46 @@
                 "kind": "lore",
                 "x": 9,
                 "y": 7,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_5_level_recon",
+                "label": "Route reconnaissance",
+                "description": "Inspect all four existing quadrant markers before battle. This connected survey is an adaptation, not four complete canonical castle campaigns. Wet targets can be frozen.",
+                "kind": "lore",
+                "x": 9,
+                "y": 10,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_5_level_supply",
+                "label": "Field supply: Frost Vial",
+                "description": "One Frost Vial added to the shared pack. This optional supply placement is a tactical adaptation.",
+                "kind": "cache",
+                "x": 15,
+                "y": 2,
+                "itemId": "item.frost_vial",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_5_level_recovery",
+                "label": "Reserve supply: Health Tonic",
+                "description": "One Health Tonic added to the shared pack. Collect this reserve before entering battle; exploration itself does not heal the party.",
+                "kind": "cache",
+                "x": 3,
+                "y": 10,
+                "itemId": "item.health_tonic",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_5_level_exit",
+                "label": "Encounter staging point",
+                "description": "The encounter is ahead. Check the shared pack and formation before entry. Battle victory returns to the existing safe-room camp for supplies, build changes and progression.",
+                "kind": "lore",
+                "x": 14,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               }
@@ -45937,10 +46669,10 @@
           ],
           "exploration": {
             "id": "sector.journey_6",
-            "label": "Sixth Floor — Hunting Grounds approach",
-            "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
-            "width": 11,
-            "height": 9,
+            "label": "Hunting blind perimeter",
+            "description": "Original tactical adaptation: explore the connected hunting blind perimeter, collect optional supplies and inspect route advice before entering the encounter. Exploration has no enemy turns or damage; the safe-room camp remains available between floors.",
+            "width": 17,
+            "height": 13,
             "startX": 1,
             "startY": 4,
             "discoveryRadius": 2,
@@ -45990,11 +46722,35 @@
                 "y": 0
               },
               {
+                "x": 11,
+                "y": 0
+              },
+              {
+                "x": 12,
+                "y": 0
+              },
+              {
+                "x": 13,
+                "y": 0
+              },
+              {
+                "x": 14,
+                "y": 0
+              },
+              {
+                "x": 15,
+                "y": 0
+              },
+              {
+                "x": 16,
+                "y": 0
+              },
+              {
                 "x": 0,
                 "y": 1
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 1
               },
               {
@@ -46010,7 +46766,19 @@
                 "y": 2
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 2
+              },
+              {
+                "x": 12,
+                "y": 2
+              },
+              {
+                "x": 13,
+                "y": 2
+              },
+              {
+                "x": 16,
                 "y": 2
               },
               {
@@ -46026,7 +46794,11 @@
                 "y": 3
               },
               {
-                "x": 10,
+                "x": 13,
+                "y": 3
+              },
+              {
+                "x": 16,
                 "y": 3
               },
               {
@@ -46034,7 +46806,7 @@
                 "y": 4
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 4
               },
               {
@@ -46050,7 +46822,7 @@
                 "y": 5
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 5
               },
               {
@@ -46066,7 +46838,19 @@
                 "y": 6
               },
               {
-                "x": 10,
+                "x": 11,
+                "y": 6
+              },
+              {
+                "x": 12,
+                "y": 6
+              },
+              {
+                "x": 13,
+                "y": 6
+              },
+              {
+                "x": 16,
                 "y": 6
               },
               {
@@ -46074,7 +46858,11 @@
                 "y": 7
               },
               {
-                "x": 10,
+                "x": 13,
+                "y": 7
+              },
+              {
+                "x": 16,
                 "y": 7
               },
               {
@@ -46082,44 +46870,112 @@
                 "y": 8
               },
               {
-                "x": 1,
+                "x": 16,
                 "y": 8
               },
               {
-                "x": 2,
-                "y": 8
+                "x": 0,
+                "y": 9
               },
               {
-                "x": 3,
-                "y": 8
+                "x": 16,
+                "y": 9
+              },
+              {
+                "x": 0,
+                "y": 10
               },
               {
                 "x": 4,
-                "y": 8
+                "y": 10
               },
               {
                 "x": 5,
-                "y": 8
+                "y": 10
               },
               {
                 "x": 6,
-                "y": 8
+                "y": 10
+              },
+              {
+                "x": 16,
+                "y": 10
+              },
+              {
+                "x": 0,
+                "y": 11
+              },
+              {
+                "x": 16,
+                "y": 11
+              },
+              {
+                "x": 0,
+                "y": 12
+              },
+              {
+                "x": 1,
+                "y": 12
+              },
+              {
+                "x": 2,
+                "y": 12
+              },
+              {
+                "x": 3,
+                "y": 12
+              },
+              {
+                "x": 4,
+                "y": 12
+              },
+              {
+                "x": 5,
+                "y": 12
+              },
+              {
+                "x": 6,
+                "y": 12
               },
               {
                 "x": 7,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 8,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 9,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 10,
-                "y": 8
+                "y": 12
+              },
+              {
+                "x": 11,
+                "y": 12
+              },
+              {
+                "x": 12,
+                "y": 12
+              },
+              {
+                "x": 13,
+                "y": 12
+              },
+              {
+                "x": 14,
+                "y": 12
+              },
+              {
+                "x": 15,
+                "y": 12
+              },
+              {
+                "x": 16,
+                "y": 12
               }
             ],
             "points": [
@@ -46128,8 +46984,8 @@
                 "label": "Enter Sixth Floor — Hunting Grounds",
                 "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
                 "kind": "encounter",
-                "x": 9,
-                "y": 4,
+                "x": 15,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               },
@@ -46145,13 +47001,53 @@
               },
               {
                 "id": "discovery.journey_6_cache",
-                "label": "Optional shared supply",
+                "label": "Entry supply: Health Tonic",
                 "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
                 "kind": "cache",
                 "x": 3,
                 "y": 4,
                 "itemId": "item.health_tonic",
                 "count": 1
+              },
+              {
+                "id": "discovery.journey_6_level_recon",
+                "label": "Route reconnaissance",
+                "description": "Inspect the visible enemy intentions during battle. The perimeter offers a supply detour; coolant can extinguish fire, and burning ground is hazardous to both teams.",
+                "kind": "lore",
+                "x": 9,
+                "y": 10,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_6_level_supply",
+                "label": "Field supply: Coolant Bomb",
+                "description": "One Coolant Bomb added to the shared pack. This optional supply placement is a tactical adaptation.",
+                "kind": "cache",
+                "x": 15,
+                "y": 2,
+                "itemId": "item.water_bomb",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_6_level_recovery",
+                "label": "Reserve supply: Health Tonic",
+                "description": "One Health Tonic added to the shared pack. Collect this reserve before entering battle; exploration itself does not heal the party.",
+                "kind": "cache",
+                "x": 3,
+                "y": 10,
+                "itemId": "item.health_tonic",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_6_level_exit",
+                "label": "Encounter staging point",
+                "description": "The encounter is ahead. Check the shared pack and formation before entry. Battle victory returns to the existing safe-room camp for supplies, build changes and progression.",
+                "kind": "lore",
+                "x": 14,
+                "y": 10,
+                "itemId": "",
+                "count": 0
               }
             ]
           }
@@ -46686,10 +47582,10 @@
           ],
           "exploration": {
             "id": "sector.journey_8",
-            "label": "Eighth Floor — Ghosts of Earth Capture approach",
-            "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
-            "width": 11,
-            "height": 9,
+            "label": "Ghost collection archive",
+            "description": "Original tactical adaptation: explore the connected ghost collection archive, collect optional supplies and inspect route advice before entering the encounter. Exploration has no enemy turns or damage; the safe-room camp remains available between floors.",
+            "width": 17,
+            "height": 13,
             "startX": 1,
             "startY": 4,
             "discoveryRadius": 2,
@@ -46739,11 +47635,35 @@
                 "y": 0
               },
               {
+                "x": 11,
+                "y": 0
+              },
+              {
+                "x": 12,
+                "y": 0
+              },
+              {
+                "x": 13,
+                "y": 0
+              },
+              {
+                "x": 14,
+                "y": 0
+              },
+              {
+                "x": 15,
+                "y": 0
+              },
+              {
+                "x": 16,
+                "y": 0
+              },
+              {
                 "x": 0,
                 "y": 1
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 1
               },
               {
@@ -46763,6 +47683,14 @@
                 "y": 2
               },
               {
+                "x": 13,
+                "y": 2
+              },
+              {
+                "x": 16,
+                "y": 2
+              },
+              {
                 "x": 0,
                 "y": 3
               },
@@ -46776,6 +47704,14 @@
               },
               {
                 "x": 10,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 3
+              },
+              {
+                "x": 16,
                 "y": 3
               },
               {
@@ -46783,7 +47719,7 @@
                 "y": 4
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 4
               },
               {
@@ -46799,7 +47735,7 @@
                 "y": 5
               },
               {
-                "x": 10,
+                "x": 16,
                 "y": 5
               },
               {
@@ -46816,6 +47752,14 @@
               },
               {
                 "x": 10,
+                "y": 6
+              },
+              {
+                "x": 13,
+                "y": 6
+              },
+              {
+                "x": 16,
                 "y": 6
               },
               {
@@ -46824,51 +47768,131 @@
               },
               {
                 "x": 10,
+                "y": 7
+              },
+              {
+                "x": 13,
+                "y": 7
+              },
+              {
+                "x": 16,
                 "y": 7
               },
               {
                 "x": 0,
                 "y": 8
+              },
+              {
+                "x": 16,
+                "y": 8
+              },
+              {
+                "x": 0,
+                "y": 9
+              },
+              {
+                "x": 10,
+                "y": 9
+              },
+              {
+                "x": 13,
+                "y": 9
+              },
+              {
+                "x": 16,
+                "y": 9
+              },
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 10,
+                "y": 10
+              },
+              {
+                "x": 13,
+                "y": 10
+              },
+              {
+                "x": 16,
+                "y": 10
+              },
+              {
+                "x": 0,
+                "y": 11
+              },
+              {
+                "x": 16,
+                "y": 11
+              },
+              {
+                "x": 0,
+                "y": 12
               },
               {
                 "x": 1,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 2,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 3,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 4,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 5,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 6,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 7,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 8,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 9,
-                "y": 8
+                "y": 12
               },
               {
                 "x": 10,
-                "y": 8
+                "y": 12
+              },
+              {
+                "x": 11,
+                "y": 12
+              },
+              {
+                "x": 12,
+                "y": 12
+              },
+              {
+                "x": 13,
+                "y": 12
+              },
+              {
+                "x": 14,
+                "y": 12
+              },
+              {
+                "x": 15,
+                "y": 12
+              },
+              {
+                "x": 16,
+                "y": 12
               }
             ],
             "points": [
@@ -46877,8 +47901,8 @@
                 "label": "Enter Eighth Floor — Ghosts of Earth Capture",
                 "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
                 "kind": "encounter",
-                "x": 9,
-                "y": 4,
+                "x": 15,
+                "y": 10,
                 "itemId": "",
                 "count": 0
               },
@@ -46894,13 +47918,53 @@
               },
               {
                 "id": "discovery.journey_8_cache",
-                "label": "Optional shared supply",
+                "label": "Entry supply: Health Tonic",
                 "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
                 "kind": "cache",
                 "x": 3,
                 "y": 4,
                 "itemId": "item.health_tonic",
                 "count": 1
+              },
+              {
+                "id": "discovery.journey_8_level_recon",
+                "label": "Route reconnaissance",
+                "description": "Capture all six weakened ghosts from within three tiles. Capture uses preview and confirmation. Defeated ghosts reform weakened; save damage resources for weakening, then close the distance.",
+                "kind": "lore",
+                "x": 9,
+                "y": 10,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_8_level_supply",
+                "label": "Field supply: Cleansing Tonic",
+                "description": "One Cleansing Tonic added to the shared pack. This optional supply placement is a tactical adaptation.",
+                "kind": "cache",
+                "x": 15,
+                "y": 2,
+                "itemId": "item.cleansing_tonic",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_8_level_recovery",
+                "label": "Reserve supply: Health Tonic",
+                "description": "One Health Tonic added to the shared pack. Collect this reserve before entering battle; exploration itself does not heal the party.",
+                "kind": "cache",
+                "x": 3,
+                "y": 10,
+                "itemId": "item.health_tonic",
+                "count": 1
+              },
+              {
+                "id": "discovery.journey_8_level_exit",
+                "label": "Encounter staging point",
+                "description": "The encounter is ahead. Check the shared pack and formation before entry. Battle victory returns to the existing safe-room camp for supplies, build changes and progression.",
+                "kind": "lore",
+                "x": 14,
+                "y": 10,
+                "itemId": "",
+                "count": 0
               }
             ]
           }
@@ -47568,5 +48632,31 @@
         }
       ]
     }
-  }
+  },
+  "sponsorChallenges": [
+    {
+      "id": "sponsor.reaction",
+      "label": "Chemistry lesson",
+      "description": "Commit a terrain or status reaction. Once per run: one Oil Flask.",
+      "eventType": "reaction",
+      "rewardItemId": "item.oil_flask",
+      "rewardCount": 1
+    },
+    {
+      "id": "sponsor.rescue",
+      "label": "Crawler solidarity",
+      "description": "Rescue the Lantern Row crawler by either approach. Once per run: one Mega Tonic.",
+      "eventType": "rescue",
+      "rewardItemId": "item.mega_tonic",
+      "rewardCount": 1
+    },
+    {
+      "id": "sponsor.victory",
+      "label": "Survive the broadcast",
+      "description": "Win a battle. Once per run: one Shock Snare.",
+      "eventType": "victory",
+      "rewardItemId": "item.shock_snare",
+      "rewardCount": 1
+    }
+  ]
 }

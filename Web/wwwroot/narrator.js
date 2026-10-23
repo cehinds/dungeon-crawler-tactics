@@ -28,6 +28,9 @@ export function createNarrator({getView,content}) {
     if(event.type==='achievement'){if(!achievements.has(event.tag)){achievements.add(event.tag);enqueue(`NEW ACHIEVEMENT · ${current?.neighborhood?.challenges?.find(c=>c.id===(event.tag||event.targetId))?.label??achievementLabels[event.tag]??(event.tag||event.targetId||'Neighborhood challenge completed').replace(/^achievement\./,'').replace(/_/g,' ')}`,'achievement');}return;}
     const actor=labelFor(event.actorId),target=labelFor(event.targetId);
     const actorUnit=(afterView??getView())?.units.find(unit=>unit.id===event.actorId);
+    if(event.type==='favor'){enqueue(`AI Favor earned: +${event.amount}. Place an eligible environmental supply without using your action. Open Sponsors to review.`,'achievement');return;}
+    if(event.type==='sponsor_challenge'){const challenge=current?.audience?.challenges?.find(c=>c.id===event.tag);const supply=current?.items?.find(i=>i.id===challenge?.rewardItemId);enqueue(`SPONSOR DELIVERY · ${challenge?.label??'Challenge complete'} · ${challenge?.rewardCount??event.amount} × ${supply?.label??'supplies'}. Saved once for this run.`,'achievement');return;}
+    if(event.type==='trap_trigger'){enqueue(`${target} triggers the trap. Its one-use surface is consumed.`,'impact');return;}
     if(event.type==='scenario_intent'){const intent=beforeView?.scenario?.intent??current?.scenario?.intent;enqueue(`${actor} declares ${intent?.label??'a special attack'}. ${intent?.description??''}`);return;}
     if(event.type==='scenario_spawn'){enqueue(`${target} emerges. Watch the marked nests.`);return;}
     if(event.type==='scenario_interact'){const object=current?.scenario?.interactables.find(item=>item.id===event.targetId);enqueue(`${actor} uses ${object?.label??'a room interaction'}. Action spent; unused movement remains.`);return;}

@@ -18,11 +18,11 @@ namespace DungeonCrawlerTactics
             foreach (PresentationEvent ev in committed)
             {
                 if (ev.type == "move" && ev.actorId != null && units.ContainsKey(ev.actorId) && units[ev.actorId].team == "player") AwardAchievement("achievement.first_move");
-                if (ev.type == "reaction") AwardAchievement("achievement.first_reaction");
+                if (ev.type == "reaction" && ev.actorId != null && units.ContainsKey(ev.actorId) && units[ev.actorId].team == "player") { AwardAchievement("achievement.first_reaction"); AudienceCommitted("reaction"); }
                 if (ev.type == "adaptation" && ev.tag != null && Array.Exists(data.forms, f => f.id == ev.tag)) AwardAchievement("achievement.first_form");
                 if (ev.type == "level_up") AwardAchievement("achievement.first_level");
             }
-            if (command.type == "confirm" && screen == "victory") AwardAchievement("achievement.first_victory");
+            if (command.type == "confirm" && screen == "victory") { AwardAchievement("achievement.first_victory"); }
         }
         private void ValidateAchievements(string[] ids)
         {

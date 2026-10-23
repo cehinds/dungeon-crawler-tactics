@@ -16,7 +16,7 @@ namespace DungeonCrawlerTactics
     }
     [Serializable] public sealed class TagDef { public string id; public string label; }
     [Serializable] public sealed class ClassDef { public string id; public string label; public int minimumFloor = 1; public bool playerSelectable = true; public string[] abilityIds = new string[0]; }
-    [Serializable] public sealed class ItemDef { public string id; public string label; public string abilityId; }
+    [Serializable] public sealed class ItemDef { public bool favorEligible; public string id; public string label; public string abilityId; }
     [Serializable] public sealed class EffectDef { public string op; public int amount; public string tag; }
     [Serializable] public sealed class TagQuery
     {
@@ -88,6 +88,7 @@ namespace DungeonCrawlerTactics
             foreach (ItemDef item in content.items)
             {
                 Require(item != null && ValidId(item.id) && ids.Add(item.id) && item.abilityId != null && Abilities.ContainsKey(item.abilityId), "Invalid item or unknown item ability.");
+                if (item.favorEligible) { AbilityDef utility = Abilities[item.abilityId]; Require(utility.target == "tile" && utility.incomingTags.Length == 0, "Favor supply must be an explicit tile utility without reaction triggers."); foreach (EffectDef effect in utility.effects) Require(effect.op == "AddTag", "Favor supplies may only place environmental tags."); }
                 Items.Add(item.id, item);
             }
         }

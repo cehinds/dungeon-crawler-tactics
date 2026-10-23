@@ -1,5 +1,16 @@
 # Playable build validation
 
+## Current visual, level and environmental utility release
+
+**598 C# checks** pass: rules 42, game 205, scenarios 44, custom maps 20, expeditions 43, ranks/classes 43, journey 80, home 52, neighborhood 43, audience/traps 26. The 80 journey checks include all seven victories and floor-8 captures. **83 Python checks** pass (77 tools + 6 cross-validator). Strict authored catalogs, researched catalog generation checks, 36 distinct form frames and all story-map connectivity checks pass.
+
+The shared-C# WebAssembly publish succeeds. Unity source compiles against runtime reference assemblies with only the existing `RulesDemo.contentJson` Inspector-field warning. Unity Editor Play Mode and a native Unity Web export remain unverified.
+
+`Tools/playtest_finish.py` passes four Chromium lanes: fresh campaign at 1440×900 and 390×844, plus earned-Favor UI flows at both widths. It checks legal exploration, real canvas picking through four rotations, actual action preview/cancel/commit, movement after acting, full-party ordering before enemy movement, four shape options, both trap recipes, exact reload, real custom-map import, earned sponsor/Favor, Favor target preview/cancel/commit and preserved action/movement budgets. All lanes report zero JavaScript errors and no horizontal overflow. An overlapping desktop camp advisor row was found and fixed, then specifically rechecked. Separate committed-form and progression/menu visual checks passed. See [release QA](Finish-QA.md).
+
+These checks establish implemented behavior, not complete novel coverage, human balance approval or pixel-perfect concept parity. The [completion checklist](Completion-Checklist.md) retains unfinished work.
+
+
 ## Lantern Row tabletop-inspired neighborhood
 
 The final shared-core run passes **572 checks**, including 43 new neighborhood checks alongside the existing 529. All **83 Python validation tests** pass. The neighborhood suite walks the connected map through legal commands, verifies trained and fallback rescue options, resolves all three optional locations, earns all three challenges, wins the encounter through legal forecasts and commits, and restores the exact original campaign. It checks preview/cancel purity, repeated rewards, reloads, innate skills after optional class changes, malformed receipts, cyclic backups and migration of published floor-three exploration saves without changing inventory or the input checkpoint.

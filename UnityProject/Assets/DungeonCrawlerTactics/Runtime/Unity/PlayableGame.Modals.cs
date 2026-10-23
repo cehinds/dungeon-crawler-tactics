@@ -9,9 +9,10 @@ namespace DungeonCrawlerTactics.Unity
         {
             Fill(new Rect(0, 0, 1440, 900), new Color(0, 0, 0, .84f));
             Rect panel = new Rect(270, 108, 900, 696);
-            Card(panel, modal == "help" ? "HOW TO SURVIVE THE SHOW" : modal == "save" ? "SAVE / LOAD" : modal == "reset" ? "START A NEW RUN?" : "SETTINGS");
+            Card(panel, modal == "audience" ? "AUDIENCE, FAVOR & CRAFTING" : modal == "help" ? "HOW TO SURVIVE THE SHOW" : modal == "save" ? "SAVE / LOAD" : modal == "reset" ? "START A NEW RUN?" : "SETTINGS");
             if (ModalButton(new Rect(1040, 124, 110, 44), "Close [Esc]")) { modal = ""; GUI.FocusControl(null); return; }
-            if (modal == "help")
+            if (modal == "audience") DrawAudienceModal();
+            else if (modal == "help")
             {
                 GUI.Label(new Rect(298, 189, 842, 490),
                     "1. Assemble four crawlers at camp. Select a crawler, choose a class, then enter the dungeon.\n\n" +

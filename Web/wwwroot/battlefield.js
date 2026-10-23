@@ -17,6 +17,19 @@ const roomReady = fetch('assets/room-kit/manifest.json').then(r=>r.json()).then(
 const legacyImages = {};
 let spriteFrames = {};
 const directionalArt = {};
+const formArt = {};
+const trapArt = new Map();
+const trapsReady = Promise.all([fetch('data/game-content.json').then(r=>r.json()),fetch('data/combat-content.json').then(r=>r.json())]).then(([game,combat])=>{
+  for(const rule of game.tagRules??[]){
+    if(!rule.consumeOnEntry)continue;
+    const ability=(combat.abilities??[]).find(a=>(a.effects??[]).some(e=>e.op==='AddTag'&&e.tag===rule.tag));
+    const item=(combat.items??[]).find(i=>i.abilityId===ability?.id);
+    trapArt.set(rule.tag,{...rule,abilityId:ability?.id,label:item?.label??ability?.label??short(rule.tag)});
+  }
+}).catch(()=>{});
+const formsReady = fetch('assets/forms/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(Object.entries(manifest.forms??{}).map(([id,definition])=>new Promise(resolve=>{
+  const image=new Image();image.onload=()=>{formArt[id]={...definition,image};resolve();};image.onerror=resolve;image.src='assets/forms/'+definition.file;
+})))).catch(()=>{});
 const bossArt = {};
 const scenarioArt = {};
 const scenarioArtReady=fetch('assets/scenario-props/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(Object.entries(manifest.sprites??{}).map(([key,definition])=>new Promise(resolve=>{
@@ -40,7 +53,7 @@ const imageLoads = ['terrain','characters','enemies','ui','effects','mongo'].map
   image.onerror = resolve;
   image.src = ROOT + name + '.png';
 }));
-const ready = Promise.all([expeditionArtReady,scenarioArtReady,bossReady,roomReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
+const ready = Promise.all([trapsReady,formsReady,expeditionArtReady,scenarioArtReady,bossReady,roomReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
   fetch(ROOT+file).then(r=>r.json()).then(data=>Object.assign(spriteFrames,data)).catch(()=>{}))]);
 
 export function createBattlefield(canvas, {onCell, onHover} = {}) {
@@ -48,7 +61,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let view = null, options = {}, visualUnits = [], visualTiles = [];
   let width = 1, height = 1, scale = 1, originX = 0, originY = 0;
-  let hover = null, cursor = null, disposed = false, animation = null;
+  let hover = null, trapFocus = null, cursor = null, disposed = false, animation = null;
   let floating = [], effects = [], queue = Promise.resolve(), generation = 0;
   let missiles = [];
   let lastTime = 0, frameId = 0;
@@ -105,9 +118,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if (!map) return;
     const corners=[[0,0],[map.width-1,0],[0,map.height-1],[map.width-1,map.height-1]].map(([x,y])=>project(x,y));
     const minX=Math.min(...corners.map(p=>p.x))-TILE_W/2,maxX=Math.max(...corners.map(p=>p.x))+TILE_W/2;
-    const minY=Math.min(...corners.map(p=>p.y))-112,maxY=Math.max(...corners.map(p=>p.y))+TILE_H/2;
+    const minY=Math.min(...corners.map(p=>p.y))-136,maxY=Math.max(...corners.map(p=>p.y))+TILE_H/2;
     const mapWidth=maxX-minX,mapHeight=maxY-minY;
-    if(!cameraReady){zoomLevel=width<600?1.7:1;cameraReady=true;}
+    if(!cameraReady){zoomLevel=width<600?1.55:1;cameraReady=true;}
     scale=Math.max(.05,Math.min((width-28)/mapWidth,(height-24)/mapHeight)*zoomLevel);
     originX=width/2-(minX+maxX)/2*scale+panX;
     originY=height/2-(minY+maxY)/2*scale+panY;
@@ -171,7 +184,10 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.drawImage(asset.image,-asset.anchor.x,-asset.anchor.y,asset.width,asset.height);
     context.restore();
   }
-  function floor(x,y,index,alpha=1) { component(['stone-a','stone-b','water-floor','oil-floor'][index],x,y,alpha); }
+  function floor(x,y,index,alpha=1) {
+    // A solid mortar bed joins the padded PNG edges into one continuous room.
+    context.save();context.globalAlpha=alpha;diamond(x,y,{fill:index===2?'#124955':'#48443b'});context.restore();
+    component(['stone-a','stone-b','water-floor','oil-floor'][index],x,y,alpha); }
   function prop(x,y,index,size=128,alpha=1) {
     component(({4:'wall-ne',5:'wall-nw',6:'pillar',8:'crate',9:'oil-overlay',10:'chest',11:'stairs'})[index]??'rubble',x,y,alpha);
   }
@@ -194,8 +210,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(actor && ['move','push','teleport'].includes(current.type)) col=enemy?Math.floor(time/105)%2:2+Math.floor(time/95)%3;
     if(actor && current?.type==='attack') col=enemy?2:(animation.progress<.38?5:6);
     if(target && ['damage','guard'].includes(current?.type)) col=enemy?3:7;
-    if(key==='katia' && (unit.tags??[]).includes('status.guarded') && !actor && !target) col=5;
     const p=project(unit.x,unit.y), selected=unit.id===view.selectedUnitId;
+    // Ground silhouettes and explicit faction shapes stay legible beneath large sprites.
+    context.save();context.fillStyle='#050b14a6';context.beginPath();context.ellipse(p.x,p.y+1,enemy?29:34,12,0,0,Math.PI*2);context.fill();context.restore();
     if(enemy){
       const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
       const dx=(direction.x-direction.y)*22,dy=(direction.x+direction.y)*11;
@@ -203,13 +220,14 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     }
     const pose=(enemy?['idle','walk','attack','hit']:['idle','idle2','walk1','walk2','walk3','windup','attack','hit'])[col];
     const atlasName=key==='mongo' && images.mongo && spriteFrames.mongo ? 'mongo' : enemy?'enemies':'characters';
-    const directional=!enemy?directionalArt[key]:null;
+    const selectedForm=!enemy&&formArt[unit.formId]?.rosterId===unit.id?formArt[unit.formId]:null;
+    const directional=!enemy?(selectedForm??directionalArt[key]):null;
     const walking=exploringWalk || (actor && ['move','push','teleport'].includes(current?.type));
     const directionalPose=walking?`walk${1+Math.floor(time/105)%2}`:'idle';
     const directionalFrame=directional?.frames?.[screenFacing(unit.id)]?.[directionalPose];
     const actionPose=actor&&current?.type==='attack'||target&&['damage','guard'].includes(current?.type);
     const legacyFrame=spriteFrames[atlasName]?.frames?.[key]?.[pose];
-    const useDirectional=directionalFrame&&(!actionPose||!legacyFrame||screenFacing(unit.id)!=='se');
+    const useDirectional=directionalFrame&&(selectedForm||!actionPose||!legacyFrame||screenFacing(unit.id)!=='se');
     const frame=useDirectional?directionalFrame:legacyFrame;
     const boss=bossArt[key];
     const size=boss?boss.bodyHeight??168:useDirectional ? directional.bodyHeight ?? frame.drawHeight : frame?.drawHeight ?? (key==='boss'?148:100);
@@ -219,7 +237,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if((unit.tags??[]).includes('status.guarded')) {
       context.globalAlpha=.46;atlas('ui',14,4,4,p.x-45,p.y-95,90,90);context.globalAlpha=1;
     }
-    const enlarged=(unit.tags??[]).some(t=>/shapeshift|transformed/.test(t)) || key==='katia'&&(unit.tags??[]).includes('status.guarded')?1.12:1;
+    const enlarged=1.27;
     const image=useDirectional?directional.image:images[atlasName];
     if(useDirectional&&actor&&current?.type==='attack'){
       const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
@@ -241,9 +259,14 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     } else atlas(enemy?'enemies':'characters',row*(enemy?4:8)+col,enemy?4:8,enemy?3:4,
       p.x-size*enlarged/2,p.y-size*enlarged*.91,size*enlarged,size*enlarged);
     context.globalAlpha=1;
-    const healthY=p.y-size*.91-5;
+    context.beginPath();
+    if(enemy){context.moveTo(p.x,p.y+22);context.lineTo(p.x-11,p.y+8);context.lineTo(p.x+11,p.y+8);}
+    else{context.moveTo(p.x,p.y+7);context.lineTo(p.x+11,p.y+14);context.lineTo(p.x,p.y+21);context.lineTo(p.x-11,p.y+14);}
+    context.closePath();context.fillStyle=enemy?'#f25d50':'#35cfff';context.fill();context.strokeStyle='#071421';context.lineWidth=2;context.stroke();
+    const healthY=p.y-size*(boss?.91:enlarged)-8;
     context.fillStyle='#08131e';context.fillRect(p.x-24,healthY,48,5);
     context.fillStyle=enemy?hostile:'#80d8a4';context.fillRect(p.x-23,healthY+1,46*clamp(unit.hp/unit.maxHp,0,1),3);
+    if(!enemy&&view.screen!=='explore')text(key==='donut'?'DONUT':short(unit.label||key).toUpperCase(),p.x,healthY-12,selected?'#fff0ba':'#bceaff',11);
     if(unit.acted && !enemy)text('DONE',p.x,p.y+14,'#a4b1bd',10);
     if(hover?.x===Math.round(unit.x)&&hover?.y===Math.round(unit.y)) text(`${unit.label} ${unit.hp}/${unit.maxHp}`,p.x,healthY-13,enemy?'#ffb3a3':'#e3f5ff',13);
     const tags=unit.tags??[];
@@ -331,26 +354,92 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(age<0)return;
     const p=project(x,y),row=type==='fire'?0:type==='explosion'?2:1;
     const index=row*4+Math.min(3,Math.floor(age/duration*4));
-    const size=type==='explosion'?154:100;
+    const size=type==='explosion'?184:125;
+    context.save();context.globalCompositeOperation='screen';glow(p.x,p.y-44,size*.65,type==='fire'||type==='explosion'?'#ffac47':'#53dfff',Math.sin(clamp(age/duration,0,1)*Math.PI));context.restore();
     atlas('effects',index,4,3,p.x-size/2,p.y-size*(type==='fire'?.96:.72),size,size);
+  }
+  function polygon(points,fill,stroke) {
+    context.beginPath();points.forEach((p,i)=>i?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y));context.closePath();
+    context.fillStyle=fill;context.fill();if(stroke){context.strokeStyle=stroke;context.lineWidth=1;context.stroke();}
+  }
+  function masonry(a,b,height=84) {
+    // Joined courses follow the exact projected boundary, so rotated walls cannot drift.
+    const lift=p=>({x:p.x,y:p.y-height});
+    polygon([a,b,lift(b),lift(a)],b.x>a.x?'#34414a':'#293641','#18272e');
+    for(let row=0;row<4;row++){
+      const y=height-row*20;
+      context.beginPath();context.moveTo(a.x,a.y-y);context.lineTo(b.x,b.y-y);context.strokeStyle=row===0?'#78818a':'#182830';context.lineWidth=row===0?3:2;context.stroke();
+      for(let j=0;j<2;j++){
+        const t=(j+(row%2?.25:.7))/2;
+        const x=a.x+(b.x-a.x)*t,base=a.y+(b.y-a.y)*t-y;
+        context.beginPath();context.moveTo(x,base);context.lineTo(x,base+19);context.strokeStyle='#182830';context.lineWidth=2;context.stroke();
+      }
+    }
+    // Stable tiny mineral flecks add texture at world scale without flicker.
+    for(let k=0;k<54;k++){
+      const t=((k*37+Math.round(a.x))%97+97)%97/97;
+      const rise=((k*23+Math.round(a.y))%79+79)%79;
+      context.fillStyle=k%3?'#8f9a9b20':'#030e1645';
+      context.fillRect(Math.round(a.x+(b.x-a.x)*t),Math.round(a.y+(b.y-a.y)*t-rise),k%4===0?3:1,1);
+    }
+    polygon([lift(a),lift(b),{x:b.x,y:b.y-height-8},{x:a.x,y:a.y-height-8}],'#55626b','#839095');
+  }
+  function glow(x,y,radius,color,power=1) {
+    const g=context.createRadialGradient(x,y,0,x,y,radius);g.addColorStop(0,color+Math.round(65*power).toString(16).padStart(2,'0'));g.addColorStop(1,color+'00');context.fillStyle=g;context.fillRect(x-radius,y-radius,radius*2,radius*2);
+  }
+  function torch(x,y,time) {
+    const p=project(x,y),f=reduced.matches?1:1+Math.sin(time*.007+x*3)*.08;
+    context.save();context.globalCompositeOperation='screen';glow(p.x,p.y-38,112*f,'#ffa947',.75);context.restore();
+    component('torch',x,y);
+    context.save();context.globalCompositeOperation='screen';glow(p.x,p.y-56,32*f,'#ffca58',1.7);context.restore();
+  }
+  function trapMarker(tile,time) {
+    for(const tag of tile.tags??[]){
+      const trap=trapArt.get(tag);if(!trap)continue;
+      const p=project(tile.x,tile.y),shock=trap.occupantTag==='status.shocked',color=shock?'#ffd077':'#69efff';
+      diamond(tile.x,tile.y,{fill:shock?'#d58c192d':'#1aa8c82d',stroke:color,weight:2,inset:18});
+      context.save();context.strokeStyle=color;context.lineWidth=3;context.beginPath();
+      if(shock){context.moveTo(p.x+5,p.y-14);context.lineTo(p.x-7,p.y+1);context.lineTo(p.x+4,p.y+1);context.lineTo(p.x-5,p.y+14);}
+      else{context.moveTo(p.x,p.y-14);context.bezierCurveTo(p.x-19,p.y+3,p.x-10,p.y+14,p.x,p.y+14);context.bezierCurveTo(p.x+10,p.y+14,p.x+19,p.y+3,p.x,p.y-14);}
+      context.stroke();context.restore();
+      text('TRAP',p.x,p.y+29,color,10);
+    }
+  }
+  function trapTooltip() {
+    const cell=hover??trapFocus;if(!cell)return;
+    const tile=visualTiles.find(t=>t.x===cell.x&&t.y===cell.y),trap=(tile?.tags??[]).map(t=>trapArt.get(t)).find(Boolean);if(!trap)return;
+    const p=screen(cell.x,cell.y),w=Math.min(320,width-20),x=clamp(p.x-w/2,10,width-w-10),y=clamp(p.y-120,85,height-95);
+    context.fillStyle='#071521f2';context.fillRect(x,y,w,76);context.strokeStyle='#72dbea';context.lineWidth=1;context.strokeRect(x,y,w,76);
+    context.textAlign='left';context.textBaseline='top';context.font='bold 13px monospace';context.fillStyle='#fff1c1';context.fillText(trap.label,x+11,y+10,w-22);
+    context.font='12px monospace';context.fillStyle='#d5e6eb';context.fillText('Next entrant · either team · one use',x+11,y+31,w-22);
+    context.fillText(`${trap.entryDamage} damage · ${short(trap.occupantTag).toUpperCase()}`,x+11,y+51,w-22);
   }
   function draw(time) {
     if(disposed)return;
     frameId=requestAnimationFrame(draw);
     // Idle artwork animates at a modest rate; moving events still use the display refresh rate.
     if(!animation && time-lastTime<32)return;lastTime=time;
-    context.fillStyle='#080f1b';context.fillRect(0,0,width,height);
+    context.fillStyle='#0b1116';context.fillRect(0,0,width,height);
+    const backdrop=context.createRadialGradient(width*.5,height*.5,20,width*.5,height*.5,width*.65);backdrop.addColorStop(0,'#17242a');backdrop.addColorStop(1,'#060c12');context.fillStyle=backdrop;context.fillRect(0,0,width,height);
     if(!view || !roomArt.size)return;
     context.save();
     const shake=!reduced.matches&&time<shakeUntil?Math.sin(time*.1)*2:0;
     context.translate(originX+shake,originY);context.scale(scale,scale);
     const explore=view.screen==='explore', map=explore?view.exploration:view;
     const tiles=explore?map.tiles:visualTiles;
+    if(!explore){
+      const corners=[project(-.5,-.5),project(map.width-.5,-.5),project(map.width-.5,map.height-.5),project(-.5,map.height-.5)];
+      for(let i=0;i<4;i++){const a=corners[i],b=corners[(i+1)%4];polygon([a,b,{x:b.x,y:b.y+22},{x:a.x,y:a.y+22}],'#272e2a','#141d1c');}
+    }
     for(const tile of tiles) {
       const tags=tile.tags??[];
       const known=!explore||tile.revealed;
       const terrain=tags.includes('surface.water')?2:tags.includes('surface.oil')?3:(tile.x*3+tile.y)%4===0?1:0;
-      if(known)floor(tile.x,tile.y,terrain);
+      if(known){floor(tile.x,tile.y,terrain);
+        // Deterministic patina gives the stone variation without animated visual noise.
+        diamond(tile.x,tile.y,{fill:`rgba(8,16,20,${((tile.x*13+tile.y*7)%7)*.014})`});
+        if(terrain===2){const p=project(tile.x,tile.y);context.save();context.globalAlpha=reduced.matches?.3:.2+Math.sin(time*.0018+tile.x+tile.y)*.08;diamond(tile.x,tile.y,{fill:'#41d6dc'});context.strokeStyle='#a7ffff';context.lineWidth=1;for(let i=0;i<3;i++){context.beginPath();context.moveTo(p.x-26+i*17,p.y-9+i*8);context.lineTo(p.x-12+i*17,p.y-9+i*8);context.stroke();}context.restore();}
+      }
       else if(tile.reachable)floor(tile.x,tile.y,0,.22);
     }
     const placements=!explore?(view.customMap?.placements??[]):[];
@@ -367,6 +456,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const groundDecoration=piece=>['floor','surface','ground'].includes(piece.layer)||['moss','grate'].includes(piece.assetId);
     for(const piece of decorations)if(groundDecoration(piece))component(piece.assetId,piece.x,piece.y,1,piece.rotation??0);
     highlights();
+    if(!explore)for(const tile of tiles)trapMarker(tile,time);
     const drawables=[];
     // Border components sit on the half-cell edge of the floor, never a full
     // unsupported cell outside it. Consecutive wall segments overlap their end
@@ -374,8 +464,10 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(!explore&&!placements.length) {
       const farY=rotation===1||rotation===2?map.height-.5:-.5;
       const farX=rotation===2||rotation===3?map.width-.5:-.5;
-      for(let x=0;x<map.width;x++)drawables.push({depth:depth(x,farY),draw:()=>component('wall-ne',x,farY)});
-      for(let y=0;y<map.height;y++)drawables.push({depth:depth(farX,y),draw:()=>component('wall-nw',farX,y)});
+      for(let x=0;x<map.width;x++)drawables.push({depth:depth(x,farY),draw:()=>masonry(project(x-.5,farY),project(x+.5,farY))});
+      for(let y=0;y<map.height;y++)drawables.push({depth:depth(farX,y),draw:()=>masonry(project(farX,y-.5),project(farX,y+.5))});
+      for(let x=1;x<map.width;x+=3)drawables.push({depth:depth(x,farY)+.1,draw:()=>torch(x,farY,time)});
+      for(let y=1;y<map.height;y+=3)drawables.push({depth:depth(farX,y)+.1,draw:()=>torch(farX,y,time)});
     }
     for(const tile of tiles) {
       if(explore&&!tile.revealed)continue;
@@ -433,6 +525,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     floating=floating.filter(f=>time-f.started<1100);
     for(const f of floating) {const p=project(f.x,f.y),age=time-f.started;context.globalAlpha=Math.min(1,(1100-age)/250);text(f.text,p.x,p.y-68-age*.027,f.color,18);context.globalAlpha=1;}
     context.restore();
+    if(!explore)trapTooltip();
   }
   function eventUnit(event) {return visualUnits.find(u=>u.id===(event.targetId||event.actorId))??visualTiles.find(t=>t.id===event.targetId);}
   function float(message,unit,color='#ffdc93') {if(unit)floating.push({text:message,x:unit.x,y:unit.y,started:performance.now(),color});}
@@ -462,10 +555,18 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       if(actor&&/missile|spark/.test(id))missiles.push({fromX:actor.x,fromY:actor.y,toX:target.x,toY:target.y,started:performance.now()+70,duration:260});
       if(/shapeshift/.test(id))effects.push({type:'magic',x:target.x,y:target.y,started:performance.now(),duration:350});
     }
+    if(event.type==='trap_trigger'){
+      const tile=visualTiles.find(t=>t.x===event.toX&&t.y===event.toY);
+      if(tile)tile.tags=(tile.tags??[]).filter(tag=>tag!==event.tag);
+      const position={x:event.toX,y:event.toY};
+      effects.push({type:'magic',...position,started:performance.now(),duration:650});
+      float('TRAP!',target??position,'#fff0a0');
+      duration=reduced.matches?0:430;
+    }
     if(event.type==='tag_add'||event.type==='tag_remove') {
       const entity=target??visualTiles.find(t=>t.id===event.targetId);
       if(entity)entity.tags=event.type==='tag_add'?[...new Set([...(entity.tags??[]),event.tag])]:(entity.tags??[]).filter(t=>t!==event.tag);
-      if(event.type==='tag_add')float(short(event.tag).toUpperCase(),target,'#bce8ff');
+      if(event.type==='tag_add')float(trapArt.has(event.tag)?'TRAP ARMED':short(event.tag).toUpperCase(),target,'#bce8ff');
     }
     if(event.type==='scenario_intent')float('DANGER: '+short(event.tag||'INCOMING').toUpperCase(),actor,'#ffaf70');
     if(event.type==='projectile'){missiles.push({fromX:event.fromX,fromY:event.fromY,toX:event.toX,toY:event.toY,started:performance.now(),duration:380});effects.push({type:'explosion',x:event.toX,y:event.toY,started:performance.now()+300,duration:420});}
@@ -498,7 +599,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function centerSelected() {
     const unit=view?.screen==='explore'?view.exploration:view?.units?.find(u=>u.id===view.selectedUnitId);
     if(!unit)return;
-    const pos=screen(unit.x,unit.y);panX+=width/2-pos.x;panY+=height*.56-pos.y;fit();
+    const pos=screen(unit.x,unit.y);panX+=width/2-pos.x;panY+=height*(width<600?.43:.56)-pos.y;fit();
   }
   function zoom(delta) {zoomLevel=clamp(zoomLevel+delta,.7,3.2);fit();centerSelected();}
   const down=event=>{drag={id:event.pointerId,x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY};suppressClick=false;canvas.setPointerCapture(event.pointerId);};
@@ -510,7 +611,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     hover=cellAt(event.clientX,event.clientY);if(hover)onHover?.(hover.x,hover.y);
   };
   const leave=()=>{hover=null;onHover?.(null,null);};
-  const click=event=>{if(suppressClick){suppressClick=false;return;}const cell=cellAt(event.clientX,event.clientY);if(cell){cursor=cell;onCell?.(cell.x,cell.y);}};
+  const click=event=>{if(suppressClick){suppressClick=false;return;}const cell=cellAt(event.clientX,event.clientY);if(cell){cursor=cell;trapFocus=cell;onCell?.(cell.x,cell.y);}};
   const wheel=event=>{event.preventDefault();zoom(event.deltaY>0?-.15:.15);};
   const key=event=>{
     if(!view)return;

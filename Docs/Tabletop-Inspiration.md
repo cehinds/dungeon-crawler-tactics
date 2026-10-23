@@ -1,6 +1,6 @@
 # Tabletop inspiration for Dungeon Crawler Tactics
 
-Research date: 2026-10-23. This document records research and the current adaptation roadmap. The first connected Over City neighborhood is now playable; its original scenario, entry points, choices and limits are documented in [Over City neighborhood: Lantern Row](Over-City-Neighborhood.md). The other proposed systems remain design targets unless described as implemented in [Playable game](PlayableGame.md). Use Renegade's official Dungeon Crawler Carl RPG as an additional design reference, alongside the novels and our existing tactics rules.
+Research date: 2026-10-23. This document records research and the current adaptation roadmap. The first connected Over City neighborhood is now playable; its original scenario, entry points, choices and limits are documented in [Over City neighborhood: Lantern Row](Over-City-Neighborhood.md). Saved sponsor offers, bounded Favor and two placeable traps are now implemented as described in [Audience and traps](Audience-and-Traps.md); other proposed systems remain design targets unless described as implemented in [Playable game](PlayableGame.md). Use Renegade's official Dungeon Crawler Carl RPG as an additional design reference, alongside the novels and our existing tactics rules.
 
 ## What the sources establish
 
@@ -71,10 +71,11 @@ The player still moves and acts in either order, explicitly ends each crawler's 
 - [x] Map the proposed features to the existing shared-C# architecture.
 - [x] Playable connected Over City neighborhood with alternative routes. See [Lantern Row](Over-City-Neighborhood.md).
 - [ ] Broader skill-based noncombat interactions with fallback solutions. Lantern Row has the authored Heavy Blow rescue check and manual winch fallback, plus a fixed bypass for its supply latch.
-- [ ] Contextual achievement challenges and sponsor offers.
-- [ ] Saved AI Favor with an exact spend forecast.
-- [ ] Modular improvised recipes and placeable traps.
+- [x] Three saved contextual sponsor offers with explicit conditions and once-per-run rewards. Broader authored offers remain future work.
+- [x] Saved bounded AI Favor with an exact spend forecast for eligible environmental supplies.
+- [x] Two authored placeable one-use traps and safe-room recipes.
+- [ ] Modular material-tag recipe combinations and arbitrary improvised inventions.
 - [ ] Boss clues linked to exploration and visible mechanisms.
 - [ ] House social screen showing earned audience consequences.
 
-The existing house, gold purchases, personal/class trees, rank practice, loot boxes, tag reactions, boss scenarios and eight-floor route remain implemented as documented in [Journey and home](Journey-and-Home.md). Lantern Row is the completed neighborhood slice. Its clue links exploration to existing reactions; visible boss mechanisms remain future work. Broader noncombat skill interactions, contextual sponsor offers, saved AI Favor, modular improvised recipes and general placeable traps, and a house social screen showing audience consequences remain design targets.
+The existing house, gold purchases, personal/class trees, rank practice, loot boxes, tag reactions, boss scenarios and eight-floor route remain implemented as documented in [Journey and home](Journey-and-Home.md). Lantern Row is the completed neighborhood slice. Its clue links exploration to existing reactions; visible boss mechanisms remain future work. Broader noncombat skill interactions, material-tag improvised crafting, additional boss mechanisms and audience progression remain design targets. The social screen now includes local sponsor delivery receipts; it does not simulate a live audience.
