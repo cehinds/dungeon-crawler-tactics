@@ -19,3 +19,7 @@ Inspected the rendered desktop battle and exploration captures, the 360×640 saf
 The exploration party is a compact formation representing one shared map position; combat positions are individual cells. Campaign encounters remain authored, and enemy sprites still use the earlier action atlas rather than four-direction artwork. Native Unity still needs a matching presentation implementation and Editor validation.
 
 Also deployed the four reserve characters into a real encounter and visually inspected `/tmp/reserve-party-current.png`: Elle, Imani, Louis and Britney each use their own sprite, with no browser page errors.
+
+## Forms and mechanics-review delivery
+
+Root inspected the corrected runtime map (`/tmp/revamp-current.png`): floor diamonds align, the exterior wall meets the floor continuously, and interior props contact the grid. Fire/impact effects render above the character layer. Phone narrator history now appears immediately (`/tmp/narrator-before-390.png`); its opacity animation was removed after screenshot inspection exposed a blank first frame. The 7-image concept gallery and 45-feature checklist passed desktop/phone loading, filtering and overflow checks. Every concept is explicitly illustrative; future boss encounters, manual stats, skill practice, crafting and runtime custom-map import remain unchecked. The corrected combat concept assigns Magic Missile to Donut, and the progression concept separates individual skill practice from crawler XP rather than inventing class XP.

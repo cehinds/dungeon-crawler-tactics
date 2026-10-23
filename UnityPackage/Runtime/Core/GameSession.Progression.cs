@@ -15,7 +15,7 @@ namespace DungeonCrawlerTactics
             foreach (EquipmentSlotSave slot in loadout) if (slot.unitId == id) { EquipmentDef gear = Gear(slot.equipmentId); result.hp += gear.hpBonus; result.energy += gear.manaBonus; result.move += gear.moveBonus; }
             return result;
         }
-        private ClassStats PlayerStats(string id, string classId) { return PlayerStats(id, classId, xp, equipped); }
+        private ClassStats PlayerStats(string id, string classId) { ClassStats stats = PlayerStats(id, classId, xp, equipped); RosterView member; if (roster.TryGetValue(id, out member)) ApplyModes(stats, id, member.stanceId, member.formId); return stats; }
         private EquipmentDef Gear(string id) { EquipmentDef result = Array.Find(data.equipment, e => e.id == id); Require(result != null, "Unknown equipment."); return result; }
         private string[] Grants(string id, int experience, List<EquipmentSlotSave> loadout)
         {

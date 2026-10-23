@@ -53,3 +53,7 @@ For Unity sprites, set Texture Type to Sprite (2D and UI), keep the PNG at its a
 ## Exported room recipe
 
 The download is a JSON document with `schemaVersion: 1`, `kind: "dungeon-room-authoring"`, the manifest path, seed, width, height, density, tile dimensions, start and exit cells, entrance/exit doors, `clearRoute`, `blockedCells`, and `placements`. Each placement references a manifest `assetId` and includes its own ID, layer, integer `x`/`y`, movement-blocking flag, and optional kind such as `wall`, `door`, or `exit`. Keep this recipe separate from campaign content: it is an authoring preview, not a save file or encounter definition.
+
+## Manual authoring and rotation
+
+Choose an asset in the palette, then click a cell to paint its layer. Erase removes the selected layer. Piece rotation and map-camera rotation are separate controls; camera changes preserve world coordinates. Import validates room recipe IDs, positions and layers. Export room JSON retains decorative placements/rotations. Export game tiles writes `{width,height,tiles:[{x,y,blocked,tags}]}` compatible with the encounter definition: merge these fields into an authored encounter, preserve or relocate its player/enemy spawns, clear blocked spawn cells, validate content, and rebuild. Decorative placements are not automatically loaded by this collision/surface export. Runtime custom-map import is still planned.

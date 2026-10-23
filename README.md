@@ -4,7 +4,9 @@ A small complete Dungeon Crawler Carl fan tactics game: an animated isometric du
 
 **Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
 
-**Build rooms:** [Room workshop](https://cehinds.github.io/dungeon-crawler-tactics/room-kit.html) · [Download 25 layerable PNGs](https://cehinds.github.io/dungeon-crawler-tactics/assets/room-kit/room-kit.zip). Seeded previews export room recipes; campaign maps remain authored. See [Room kit guide](Docs/RoomKit.md) for anchors, layers and Unity import settings.
+**Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md).
+
+**Build rooms:** [Room workshop](https://cehinds.github.io/dungeon-crawler-tactics/room-kit.html) · [Download 25 layerable PNGs](https://cehinds.github.io/dungeon-crawler-tactics/assets/room-kit/room-kit.zip). Paint/erase tiles and components, rotate pieces or the camera, and import/export recipes. Export game-compatible tile data, merge into an encounter and rebuild; campaign maps remain authored. See [Room kit guide](Docs/RoomKit.md) for anchors, layers and Unity import settings.
 
 **Play locally:** run `./play.sh` on macOS/Linux, or `Play-Windows.bat` on Windows, then open **http://localhost:8000**. Python 3 is required for the local static server. The download archive includes the published game; a source checkout needs the `dotnet publish` command below first.
 
@@ -19,11 +21,13 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Move on three authored 10×8 boards, use class abilities or shared items, inspect the exact forecast, confirm or cancel.
 - Watch actual walk/attack/hit sprite frames and visual reactions on the map. Inspect HP, Mana/MP, movement, conditions, range and exact forecasts in a compact HUD.
 - Choose actions in a responsive modal with labeled category colors, Mana costs and legal-target counts. Review the exact forecast in its confirmation modal; end-turn confirmation names the next actor.
-- End the current character's turn to select the next ready ally; enemies act after the whole party finishes. Watch enemies navigate around walls during a clearly labeled enemy phase.
+- Move and act in either order; actions preserve unused movement. Explicitly end the current character's turn to select the next ready ally; enemies act after the whole party finishes. Watch enemies navigate around walls during a clearly labeled enemy phase.
 - Rotate the map through four views, preview movement paths, and pan/zoom on phones. All eight field characters have four-direction idle and walking sprites.
 - Earn shared party XP, reach levels 1–4, unlock personal skills, and equip weapons, armor and charms. Rest and manage loadouts in Mordecai's safe room; follow objectives in the quest journal.
 - Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage. Guardian, Bard and Necromancer support abilities now grant real single-hit protection.
 - Fight deterministic enemies, collect sponsor supplies, reach the boss, finish the floor, or retry after defeat.
+- Choose Katia's four forms and three tactical stances through character sheets, with exact stat tradeoffs. Selected abilities expose descriptions and targeting information.
+- Follow original narrator declarations and impact messages; five saved first-time achievements trigger NEW ACHIEVEMENT feedback.
 - Autosave, reload, and export/import a portable JSON save.
 
 There are **20 selectable class kits, 66 ability definitions, 8 consumables, 6 equipment pieces and 96 directional character frames**. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). Advanced summons, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.

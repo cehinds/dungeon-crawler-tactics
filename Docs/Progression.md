@@ -21,3 +21,9 @@ The map rotates through four camera views. Pointer picking uses the inverse proj
 All eight deployable characters have four authored directional views with idle and two walking frames each. `Tools/build_directional_sprites.py` rebuilds normalized sheets and their manifest from retained GPT-generated source art using `Tools/art-requirements.txt`. Frames share a foot anchor; `bodyHeight` keeps health bars near the visible head. Southeast attacks retain compatible earlier action poses; other directions use directional art with motion and effects. Enemy art has the earlier walk/attack poses rather than four authored directional sets.
 
 The browser locks player actions during enemy playback and labels the enemy phase. Explicit Skip animation remains available. The shared C# state and autosave commit independently of animation timing.
+
+## Tactical forms and feedback update
+
+Character sheets expose three stances and Katia's four shape presets. These choices preview and commit through C#, consume the action, preserve unused movement, and save their IDs. Increased caps do not heal or refill Mana; Defensive and Bulwark grant existing Guarded protection. Their tactical bonuses are invented adaptations of the character identity. New form silhouettes and a physical mass-budget simulation remain planned. Five committed achievement milestones are serialized per run; the UI narrator displays them without re-awarding on reload.
+
+The lore review and future manual-stat/skill-practice plan are in [Mechanics-Plan.md](Mechanics-Plan.md). Current shared party levels remain the compact implementation.

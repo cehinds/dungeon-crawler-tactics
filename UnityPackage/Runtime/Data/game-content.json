@@ -1465,5 +1465,71 @@
       "abilityIds": [],
       "unlockEncounter": 2
     }
+  ],
+  "stances": [
+    {
+      "id": "stance.balanced",
+      "label": "Balanced stance",
+      "description": "Neutral posture; no stat tradeoff. Tactical adaptation.",
+      "hpBonus": 0,
+      "manaBonus": 0,
+      "moveBonus": 0
+    },
+    {
+      "id": "stance.defensive",
+      "label": "Defensive stance",
+      "description": "Brace for danger: +5 maximum HP, -1 movement. Does not heal. Tactical adaptation. Grants Guarded against the next tagged hit (up to 6 damage).",
+      "hpBonus": 5,
+      "manaBonus": 0,
+      "moveBonus": -1,
+      "grantTag": "status.guarded"
+    },
+    {
+      "id": "stance.mobile",
+      "label": "Mobile stance",
+      "description": "Travel light: +1 movement, -5 maximum HP. Tactical adaptation.",
+      "hpBonus": -5,
+      "manaBonus": 0,
+      "moveBonus": 1
+    }
+  ],
+  "forms": [
+    {
+      "id": "form.baseline",
+      "label": "Baseline shape",
+      "description": "Return to an even distribution of body mass. Tactical adaptation.",
+      "rosterId": "crawler.katia",
+      "hpBonus": 0,
+      "manaBonus": 0,
+      "moveBonus": 0
+    },
+    {
+      "id": "form.bulwark",
+      "label": "Bulwark shape",
+      "description": "Concentrate mass into a sturdy silhouette: +8 maximum HP, -1 movement, -2 maximum mana. No healing. Tactical adaptation. Grants Guarded against the next tagged hit (up to 6 damage).",
+      "rosterId": "crawler.katia",
+      "hpBonus": 8,
+      "manaBonus": -2,
+      "moveBonus": -1,
+      "grantTag": "status.guarded"
+    },
+    {
+      "id": "form.strider",
+      "label": "Strider shape",
+      "description": "Redistribute mass into longer limbs: +1 movement, -4 maximum HP. Tactical adaptation.",
+      "rosterId": "crawler.katia",
+      "hpBonus": -4,
+      "manaBonus": 0,
+      "moveBonus": 1
+    },
+    {
+      "id": "form.focused",
+      "label": "Focused shape",
+      "description": "Streamline the silhouette: +3 maximum mana, -4 maximum HP. Does not restore mana. Tactical adaptation.",
+      "rosterId": "crawler.katia",
+      "hpBonus": -4,
+      "manaBonus": 3,
+      "moveBonus": 0
+    }
   ]
 }

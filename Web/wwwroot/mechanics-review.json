@@ -1,0 +1,323 @@
+{
+  "title": "Closer to the books. Clearer to play.",
+  "summary": "A source-linked mechanics review, seven GPT-generated concept sheets, and an implementation checklist. Checked means implemented in the browser build; unchecked means planned. Concept images are design targets, not screenshots or exact specifications.",
+  "groups": [
+    {
+      "title": "Readable tactical combat",
+      "items": [
+        {
+          "done": true,
+          "title": "Move and act in either order",
+          "detail": "One move and one action per crawler; End Turn explicitly advances the party."
+        },
+        {
+          "done": true,
+          "title": "Selected ability descriptions",
+          "detail": "Persistent cost, range, target and effect text, plus a full details dialog for touch and keyboard."
+        },
+        {
+          "done": true,
+          "title": "Complete ability book",
+          "detail": "Expose personal, class, unlocked and equipment actions instead of relying on a few quick slots."
+        },
+        {
+          "done": true,
+          "title": "Exact preview before committing",
+          "detail": "Show HP, Mana, tags and stat-cap changes; cancel spends nothing."
+        },
+        {
+          "done": true,
+          "title": "Enemy movement and declarations",
+          "detail": "Play movement and action events with an enemy-phase banner and original narration."
+        },
+        {
+          "done": true,
+          "title": "Impact layer above sprites",
+          "detail": "Fire, projectiles, reaction effects and floating combat text draw after units and walls."
+        },
+        {
+          "done": true,
+          "title": "Party turn state",
+          "detail": "Separate move used, action used and turn finished; enemy team follows all finished allies."
+        },
+        {
+          "done": false,
+          "title": "Enemy intent before the next round",
+          "detail": "Show prospective target lanes and interrupt conditions, not just declarations during playback."
+        },
+        {
+          "done": false,
+          "title": "Area effects and chain reactions",
+          "detail": "Shared resolver must preview all affected cells, friendly fire and bounded spread."
+        },
+        {
+          "done": false,
+          "title": "Potion cooldowns",
+          "detail": "Add readable cooldown/overuse rules with book-grounded terminology and tested balance."
+        }
+      ]
+    },
+    {
+      "title": "Characters, shapes and progression",
+      "items": [
+        {
+          "done": true,
+          "title": "Katia chooses a form",
+          "detail": "Baseline, Bulwark, Strider and Focused presets with explicit HP/Mana/movement tradeoffs. Tactical adaptations."
+        },
+        {
+          "done": true,
+          "title": "Every crawler has a character sheet",
+          "detail": "Inspect stats, current stance, skills, equipment, party level and XP; Mordecai remains an advisor."
+        },
+        {
+          "done": true,
+          "title": "Three tactical stances",
+          "detail": "Balanced, Defensive and Mobile. These are game rules, not a canonical universal stance system."
+        },
+        {
+          "done": true,
+          "title": "Party levels and skill unlocks",
+          "detail": "Current compact demo reaches levels 1–4 and unlocks personal skills at authored thresholds."
+        },
+        {
+          "done": true,
+          "title": "Equipment changes actual stats",
+          "detail": "Weapon, armor and charm ownership, granted abilities and save persistence."
+        },
+        {
+          "done": true,
+          "title": "All eight characters have directional walking art",
+          "detail": "Four directions with idle and walking frames; base identities retained."
+        },
+        {
+          "done": false,
+          "title": "Distinct form animation sets",
+          "detail": "Author a full directional/attack set per Katia shape, with a mass/silhouette budget. Current form stats do not imply new authored sprites."
+        },
+        {
+          "done": false,
+          "title": "Five core stats and allocated points",
+          "detail": "Strength, Intelligence, Constitution, Dexterity, Charisma; separate saved points, with race/class timing made explicit."
+        },
+        {
+          "done": false,
+          "title": "Individual skill practice levels",
+          "detail": "Track use/training separately from crawler XP; define caps and gear boosts without copying unexplained formulas."
+        },
+        {
+          "done": false,
+          "title": "Race and class milestone selection",
+          "detail": "Introduce prerequisite previews and save-safe choices at a deliberate campaign stage."
+        },
+        {
+          "done": false,
+          "title": "Katia momentum and engineering",
+          "detail": "Model equipped mass, Rush, bracing and carried platforms; verify timing and costs before authoring."
+        },
+        {
+          "done": false,
+          "title": "Expanded personal kits",
+          "detail": "Carl traps/improvised explosives, Donut spell progression and social abilities, Mongo companion commands; each needs resolver support and source notes."
+        }
+      ]
+    },
+    {
+      "title": "Narrator, exploration and rewards",
+      "items": [
+        {
+          "done": true,
+          "title": "Compact original System narration",
+          "detail": "Queue committed actor/action/target and impact messages; dismiss and revisit history."
+        },
+        {
+          "done": true,
+          "title": "NEW ACHIEVEMENT notices",
+          "detail": "Five first-time milestones are saved per run; previews and reloads do not repeatedly award them."
+        },
+        {
+          "done": true,
+          "title": "Protected preparation hub",
+          "detail": "Safe-room Rest, equipment and skills access; actual HP/Mana restoration."
+        },
+        {
+          "done": true,
+          "title": "Objective journal and discoveries",
+          "detail": "Floor progress, encounter door, optional caches/notes and enemy defeats reflect game state."
+        },
+        {
+          "done": false,
+          "title": "Loot-box inventory and safe-room opening",
+          "detail": "Pending boxes, rarity, deterministic rewards, collection preview and a visible empty state."
+        },
+        {
+          "done": false,
+          "title": "Crafting and workbench recipes",
+          "detail": "Simple combinations versus specialized benches; materials, recipe previews and consumed inputs."
+        },
+        {
+          "done": false,
+          "title": "Audience and sponsor rewards",
+          "detail": "Visible, bounded reward rules tied to achievements and choices; avoid hidden compulsory popularity gates."
+        },
+        {
+          "done": false,
+          "title": "Companion progression",
+          "detail": "Separate Mongo/pet growth, gear and commands from crawler race/class allocation."
+        },
+        {
+          "done": false,
+          "title": "Floor clock and descent pressure",
+          "detail": "Communicate collapse risk and evacuation objectives without punishing time spent in menus."
+        },
+        {
+          "done": false,
+          "title": "Interactive environmental puzzles",
+          "detail": "Levers, doors, destructible supports, traps and discovery descriptions must affect shared state."
+        }
+      ]
+    },
+    {
+      "title": "Book-grounded boss scenarios — concepts, not playable yet",
+      "items": [
+        {
+          "done": false,
+          "title": "Hoarder: stockpile and Scatterers",
+          "detail": "Book 1 boss identity; propose capped minions, garbage lanes, telegraphed emergence and explosive opportunities."
+        },
+        {
+          "done": false,
+          "title": "Juicer: gym and flaming weight plates",
+          "detail": "Book 1 scaly gym boss; propose visible throw lanes, cover interception and equipment obstacles."
+        },
+        {
+          "done": false,
+          "title": "Ball of Swine: cooperative Speedbump",
+          "detail": "Book 1 borough threat; propose rolling lanes, carried parts, shared barricade construction and Meadow Lark assistance."
+        },
+        {
+          "done": false,
+          "title": "Scenario briefing and adaptation labels",
+          "detail": "Show source setting, current objective, special interaction and invented rules before entry."
+        },
+        {
+          "done": false,
+          "title": "Large-unit occupancy and boss phases",
+          "detail": "Shared footprint/collision rules, deterministic phase transitions, clear defeat/retry and alternate recovery paths."
+        }
+      ]
+    },
+    {
+      "title": "Tile authoring and delivery",
+      "items": [
+        {
+          "done": true,
+          "title": "Shared tile footprint and anchors",
+          "detail": "Use measured room-kit PNG anchors in both runtime and workshop; one 128×64 logical diamond grid."
+        },
+        {
+          "done": true,
+          "title": "Paint and erase room components",
+          "detail": "Choose an asset and layer, place or erase cells, and rotate components."
+        },
+        {
+          "done": true,
+          "title": "Four camera orientations",
+          "detail": "Rotate the map while preserving world coordinates, picking and screen-relative movement."
+        },
+        {
+          "done": true,
+          "title": "Room recipe import/export",
+          "detail": "Keep visual placements and rotation in a validated JSON authoring recipe."
+        },
+        {
+          "done": true,
+          "title": "Game-compatible tile export",
+          "detail": "Export encounter width, height and tiles; merge into authored game data, validate spawns and rebuild."
+        },
+        {
+          "done": false,
+          "title": "Play edited maps without rebuilding",
+          "detail": "A validated runtime map-import path and full visual recipe persistence are still needed."
+        },
+        {
+          "done": false,
+          "title": "Procedural playable campaign",
+          "detail": "Generate connected rooms, objectives, enemy budgets and rewards through the same validated format."
+        },
+        {
+          "done": false,
+          "title": "Full Unity presentation parity",
+          "detail": "Port the browser character sheets, effects, editor and narration UI into native Unity, then run Editor/Web export checks."
+        }
+      ]
+    }
+  ],
+  "art": [
+    {
+      "file": "assets/concepts/forms-and-stances.png",
+      "title": "Choose a shape",
+      "caption": "Form selection, character sheets and stance tradeoffs. Illustrative names/bonuses may differ from the tested implementation."
+    },
+    {
+      "file": "assets/concepts/progression-safe-room.png",
+      "title": "Grow, equip, prepare",
+      "caption": "Future five-stat allocation, separate skill practice, loot boxes and crafting. These planned systems are not yet playable."
+    },
+    {
+      "file": "assets/concepts/combat-feedback.png",
+      "title": "Every action has an answer",
+      "caption": "Selected-ability information, separate move/action budgets, intent, impacts and compact AI feedback. Numbers are mock data."
+    },
+    {
+      "file": "assets/concepts/tile-authoring.png",
+      "title": "Build the room",
+      "caption": "Tile anchors, layers, piece rotation and camera rotation. Use the real exporter schema, not text drawn inside the concept image."
+    },
+    {
+      "file": "assets/concepts/boss-hoarder-concept.png",
+      "title": "Hoarder",
+      "caption": "Book 1 scenario concept: stockpile, giant human-ish boss and Scatterer minions. Not a playable encounter."
+    },
+    {
+      "file": "assets/concepts/boss-juicer-concept.png",
+      "title": "Juicer",
+      "caption": "Book 1 gym scenario concept: scaly boss and flaming weight plates. Not a playable encounter."
+    },
+    {
+      "file": "assets/concepts/boss-swine-concept.png",
+      "title": "Ball of Swine",
+      "caption": "Book 1 cooperative Speedbump scenario concept with Meadow Lark helpers. Not a playable encounter."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Publisher Book 2 sample: classes, skill training and Primal cap",
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241816219/9780241816219-sample.pdf"
+    },
+    {
+      "title": "Katia: mass-conserving reshaping (secondary; later spoilers on page)",
+      "url": "https://www.novelpantheon.com/novels/dungeon-crawler-carl/characters/katia"
+    },
+    {
+      "title": "Five core stats and allocation timing (secondary)",
+      "url": "https://www.dccdatabase.com/wiki/player_stats/"
+    },
+    {
+      "title": "Three points per level (secondary)",
+      "url": "https://www.dungeoncrawlercarl.nl/en/news/the-five-player-stats-explained/"
+    },
+    {
+      "title": "Hoarder (secondary)",
+      "url": "https://www.dccdatabase.com/wiki/hoarder/"
+    },
+    {
+      "title": "Juicer (secondary)",
+      "url": "https://www.dccdatabase.com/wiki/juicer/"
+    },
+    {
+      "title": "Ball of Swine (secondary)",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Ball_of_Swine"
+    }
+  ]
+}

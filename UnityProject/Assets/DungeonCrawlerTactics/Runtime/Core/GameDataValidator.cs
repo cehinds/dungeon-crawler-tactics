@@ -11,6 +11,19 @@ namespace DungeonCrawlerTactics
             Need(data.compatibleContentVersions != null, "Compatible versions cannot be null.");
             Need(data.roster != null && data.classStats != null && data.encounters != null && data.startingInventory != null && data.rewards != null && data.tagRules != null, "Game arrays cannot be null.");
             Need(data.partySize > 0 && data.partySize <= 8 && data.roster.Length >= data.partySize && data.roster.Length <= 32 && data.encounters.Length > 0 && data.encounters.Length <= 100 && data.energyPerRound >= 0 && data.energyPerRound <= 100, "Invalid game limits.");
+            Need(data.stances != null && data.forms != null, "Tactical adaptation arrays cannot be null.");
+            foreach (TacticalModeDef[] modes in new[] { data.stances, data.forms })
+            {
+                HashSet<string> ids = new HashSet<string>(); Need(modes.Length <= 16, "Too many tactical adaptations.");
+                foreach (TacticalModeDef mode in modes)
+                {
+                    Need(mode != null && !string.IsNullOrEmpty(mode.id) && ids.Add(mode.id) && !string.IsNullOrEmpty(mode.label) && !string.IsNullOrEmpty(mode.description), "Invalid tactical adaptation.");
+                    Need(string.IsNullOrEmpty(mode.grantTag) || catalog.HasTag(mode.grantTag), "Unknown tactical adaptation tag.");
+                    Need(Math.Abs(mode.hpBonus) <= 10 && Math.Abs(mode.manaBonus) <= 3 && Math.Abs(mode.moveBonus) <= 1, "Tactical adaptation exceeds bounded stats.");
+                    Need(string.IsNullOrEmpty(mode.rosterId) || Array.Exists(data.roster, r => r.id == mode.rosterId && r.deployable), "Unknown tactical adaptation owner.");
+                    Need(modes != data.forms || !string.IsNullOrEmpty(mode.rosterId), "Forms require a roster owner.");
+                }
+            }
             HashSet<string> stats = new HashSet<string>();
             foreach (ClassStats entry in data.classStats)
                 Need(entry != null && entry.classId != null && catalog.Classes.ContainsKey(entry.classId) && stats.Add(entry.classId) && entry.hp > 0 && entry.hp <= 10000 && entry.energy >= 0 && entry.energy <= 1000 && entry.move > 0 && entry.move <= 20, "Invalid class stats.");

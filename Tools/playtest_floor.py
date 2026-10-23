@@ -59,9 +59,19 @@ with sync_playwright() as p:
           if(v.message.startsWith('Save rejected'))throw Error(v.message);
           v=await send('continue');continue;
         }
-        const actor=v.units.find(u=>u.team==='player'&&u.hp>0&&!u.acted);
-        if(!actor){v=await send('end_turn');continue;}
+        const actor=v.units.find(u=>u.team==='player'&&u.hp>0&&!u.finished);
+        if(!actor){if(v.phase==='player')throw Error('Player phase has no unfinished crawler');continue;}
         v=await send('select',{unitId:actor.id});
+        const current=v.units.find(u=>u.id===actor.id);
+        // Actions no longer end a crawler's activation. Use any remaining move
+        // after the action, then explicitly finish the actor's turn.
+        if(current.acted){
+          if(!current.moved&&v.canMove){
+            const cells=v.reachable.filter(c=>c.cost>0).sort((a,b)=>nearest(a,v.units)-nearest(b,v.units)||a.cost-b.cost);
+            if(cells.length){v=await send('move',{unitId:actor.id,x:cells[0].x,y:cells[0].y});moves++;continue;}
+          }
+          v=await send('end_turn',{unitId:actor.id});continue;
+        }
         const desired=Math.max(...v.abilities.filter(a=>a.target==='enemy').map(a=>a.range));
         if(v.canMove&&nearest(actor,v.units)>desired){
           const base=v;

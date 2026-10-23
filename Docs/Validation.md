@@ -1,6 +1,16 @@
 # Playable build validation
 
-## Progression and movement update
+## Forms, turn freedom and mechanics review
+
+The new shared-core harness passes **140 game checks**, including both action orders, explicit activation completion, default enemy attacks, form/stance forecasts, no-op mode rejection, achievement uniqueness and Guarded mode save roundtrips. The rules harness passes 42 checks; all 27 Python validation tests pass. Unity runtime reference compilation succeeds with zero errors and one existing Inspector-field warning. Native Unity Editor/Play Mode/Web export remain unverified.
+
+The browser full-floor driver completed 3 victories, 150 XP and level 4 using legal commands: 116 driver ticks, 39 moves, 7 potions and 997 legal previews. The completed save survived refresh with no page errors. Visible campaign checks passed at 1366×768, 390×844 and 844×390, including selected-ability details, action then movement, explicit End Turn, all character sheets, form cancel/confirm, achievement history and reload. A real enemy Heavy Blow produced the corresponding narrator declaration and HP change. A movement fixture captured six enemy movement events across 74 changing frames, with the phase banner and input lock.
+
+The tile workshop passed painting/erasing, four component/camera rotations, JSON roundtrip and campaign-tile export checks on all three viewport sizes. Node coverage includes 450 seeded layouts, 640 rotated projection/picking checks, layer/export checks and acceptance by the canonical campaign validator. Root inspected the corrected continuous perimeter meeting the floor, layered fire, and immediately visible history dialogs.
+
+The review gallery loaded all seven images and all 45 checklist entries at 1440×1000 and 390×844; status filters worked, no horizontal overflow or JavaScript errors occurred. Its unchecked boss scenarios and advanced progression systems remain proposed.
+
+## Earlier progression and movement update
 
 The shared-C# game harness passed 122 checks and the rules harness passed 42 checks. Both authored catalogs validate (20 classes, 66 abilities, 8 consumables, 9 roster entries and 3 encounters); all 27 Python validator tests pass. The directional-art validator checks 96 distinct frames across all eight deployable characters. Netstandard2.1 compatibility succeeds, and Unity runtime reference compilation succeeds with zero errors and one existing Inspector-field warning. Unity Editor execution remains unverified.
 

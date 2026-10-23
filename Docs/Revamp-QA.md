@@ -1,6 +1,14 @@
 # Revamp browser QA
 
-## Progression, directional movement and enemy turns
+## Forms, independent action/movement and narrator update
+
+`Tools/playtest_mechanics.py` passed campaign and editor interactions at 1366×768, 390×844 and 844×390. It covers all nine character sheets, persistent selected-ability information, exact form forecasts, cancel/confirm, a committed action followed by movement, explicit End Turn, and narrated achievements. Bulwark’s +8 maximum HP / −1 movement and its one first-form achievement survived an actual browser reload without save rejection. The Shapeshift quick action opens the form chooser.
+
+`Tools/playtest_revamp.py` passed the updated party turn order and Wet + Lightning scenario. A separated-enemy fixture captured six movement events and 74 changing rendered frames with a visible phase banner and disabled player actions. A separate actual attack fixture verified Heavy Blow damaged Carl and narrator history named the enemy, ability and target. No JavaScript errors occurred.
+
+Visual inspection caught and fixed two issues beyond DOM assertions: the narrator history dialog initially faded from invisible, and exterior wall/pillar placements floated beyond the floor. Dialogs now appear immediately; continuous perimeter walls share the floor boundary. Root inspected `/tmp/revamp-current.png` and `/tmp/narrator-before-390.png` after these fixes. Form-specific sprite sets remain planned; current shapes change real stats and tags.
+
+## Earlier progression, directional movement and enemy turns
 
 The final combined visible-UI suite passed at 1366×768, 390×844 and 844×390, including all four rotations, movement and spell forecasts/commits, turn order, cancellation, touch inspection and Wet + Lightning. No JavaScript errors occurred.
 

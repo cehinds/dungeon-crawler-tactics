@@ -152,7 +152,7 @@ def click_ability(page, ability_id):
     if ability(view(page), ability_id)["target"] == "self":
         page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
     else:
-        page.wait_for_function("document.querySelector('.hud-target')?.textContent.includes('CHOOSE TARGET')")
+        page.wait_for_function("document.querySelector('#ability-details')?.textContent.includes('MP')")
 
 
 def end_turn_with_cancel_check(page, expected_next):
@@ -169,7 +169,7 @@ def end_turn_with_cancel_check(page, expected_next):
     after_cancel = view(page)
     unchanged = unit(after_cancel, actor_id)
     assert after_cancel["selectedUnitId"] == actor_id and after_cancel["phase"] == before["phase"]
-    assert unchanged["energy"] == actor["energy"] and unchanged["moved"] == actor["moved"] and unchanged["acted"] == actor["acted"], "Canceling end turn spent an action, mana, or movement."
+    assert unchanged["energy"] == actor["energy"] and unchanged["moved"] == actor["moved"] and unchanged["acted"] == actor["acted"] and unchanged["finished"] == actor["finished"], "Canceling end turn spent an action, mana, movement, or activation."
     page.locator("#end-turn").click()
     page.wait_for_function("document.querySelector('#end-turn-dialog')?.open === true")
     page.locator("#confirm-end-turn").click()
@@ -274,12 +274,32 @@ def run_viewport(browser, directory, width, height):
     page.keyboard.press("Escape")
     initial_shot = save_screenshot(page, directory, width, height, "battle")
 
-    # Move Carl through a real projected pointer click and retain a frame from
-    # the movement animation for visual review.
+    # Commit a tile-targeted ability first, then move with Carl's remaining
+    # movement. Actions and movement are independent within one activation.
     game = view(page)
     actor = unit(game, "crawler.carl")
-    destinations = [t for t in game["reachable"] if t["cost"] > 0]
-    assert destinations, "Carl has no reachable movement cells."
+    bomb=ability(game,"ability.carl_bomb")
+    assert bomb["enabled"] and bomb["target"]=="tile" and bomb["targetIds"],f"Carl's bomb is unavailable: {bomb}"
+    occupied={(u["x"],u["y"]) for u in game["units"] if u["hp"]>0}
+    safe_tiles=[]
+    for target_id in bomb["targetIds"]:
+        match=re.fullmatch(r"tile\.(\d+)\.(\d+)",target_id)
+        if match:
+            xy=(int(match.group(1)),int(match.group(2)))
+            tile=next((t for t in game["tiles"] if (t["x"],t["y"])==xy),None)
+            if xy not in occupied and tile and "surface.burning" not in tile["tags"]:safe_tiles.append(xy)
+    assert safe_tiles,"Carl has no empty legal tile for a harmless bomb action-then-move check."
+    bomb_cell=safe_tiles[0]
+    click_ability(page,"ability.carl_bomb")
+    click_cell(page,*bomb_cell)
+    page.wait_for_function("window.dungeon.getView().canConfirm")
+    page.locator("#detail-confirm-forecast").click()
+    page.wait_for_function("""() => {const v=window.dungeon.getView(),u=v.units.find(x=>x.id==='crawler.carl');
+      return !v.canConfirm&&v.selectedUnitId==='crawler.carl'&&u.acted&&!u.moved&&!u.finished&&v.canMove;}""")
+    after_bomb=view(page)
+    assert unit(after_bomb,"crawler.carl")["energy"]<actor["energy"]
+    destinations = [t for t in after_bomb["reachable"] if t["cost"] > 0]
+    assert destinations, "Carl has no movement remaining after using his action."
     destination = max(destinations, key=lambda t: (t["cost"], t["x"], -t["y"]))
     move_start = canvas_signature(page)
     move_started = time.perf_counter()
@@ -353,7 +373,8 @@ def run_viewport(browser, directory, width, height):
     missile_confirm_started = time.perf_counter()
     page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
     page.locator("#detail-confirm-forecast").click()
-    page.wait_for_function("!window.dungeon.getView().canConfirm && window.dungeon.getView().selectedUnitId === 'crawler.katia'")
+    page.wait_for_function("""() => {const v=window.dungeon.getView(),u=v.units.find(x=>x.id==='crawler.donut');
+      return !v.canConfirm&&v.selectedUnitId==='crawler.donut'&&u.acted&&u.moved&&!u.finished;}""")
     missile_commit_ms = round((time.perf_counter() - missile_confirm_started) * 1000, 1)
     committed = view(page)
     missile_events = assert_ordered_events(committed)
@@ -365,19 +386,27 @@ def run_viewport(browser, directory, width, height):
     actual_wet_enemy = unit(committed, wet_enemy["id"])
     assert actual_wet_enemy["hp"] == target_forecast["afterHp"]
 
-    # Katia's Shapeshift is previewed and commits the intended guarded state.
-    katia = unit(committed, "crawler.katia")
-    shapeshift = ability(committed, "ability.katia_shapeshift")
-    assert shapeshift["enabled"] and shapeshift["target"] == "self", f"Shapeshift not legal: {shapeshift}"
-    click_ability(page, "ability.katia_shapeshift")
-    page.wait_for_function("window.dungeon.getView().canConfirm")
-    guard_preview = view(page)
-    guard = next(f for f in guard_preview["forecast"] if f["targetId"] == "crawler.katia")
-    assert "status.guarded" in guard["afterTags"]
-    shapeshift_shot = save_screenshot(page, directory, width, height, "shapeshift-forecast")
-    page.locator("#detail-confirm-forecast").click()
-    page.wait_for_function("window.dungeon.getView().units.find(u=>u.id==='crawler.katia').tags.includes('status.guarded') && window.dungeon.getView().selectedUnitId === 'crawler.mongo'")
-    assert any(e["type"] in ("tag_add", "guard") for e in assert_ordered_events(view(page)))
+    # Katia's defensive stance is previewed in her character sheet and changes
+    # actual stats only after confirming the mode forecast.
+    end_turn_with_cancel_check(page,"Katia")
+    page.wait_for_function("window.dungeon.getView().selectedUnitId==='crawler.katia'")
+    katia_before=unit(view(page),"crawler.katia")
+    page.locator('#open-character-sheet').click();page.wait_for_function("document.querySelector('#character-sheet-dialog')?.open===true")
+    page.locator('[data-sheet-section="sheet-forms"]').click()
+    stance=page.locator('[data-sheet-stance="stance.defensive"]')
+    assert stance.count()==1 and stance.is_enabled(), 'Katia defensive stance is not available in the character sheet.'
+    stance.click();page.wait_for_function("document.querySelector('#forecast-dialog')?.open===true")
+    guard_preview=view(page);delta=next(f for f in guard_preview['forecast'] if f['targetId']=='crawler.katia')
+    assert delta['afterMaxHp']==delta['beforeMaxHp']+5 and delta['afterMove']==delta['beforeMove']-1
+    page.locator('#detail-confirm-forecast').click()
+    page.wait_for_function("""() => {const v=window.dungeon.getView(),u=v.units.find(x=>x.id==='crawler.katia');
+      return u.stanceId==='stance.defensive'&&v.selectedUnitId==='crawler.katia'&&u.acted&&!u.finished&&v.canMove;}""")
+    page.wait_for_function("document.querySelector('#forecast-dialog')?.open!==true")
+    assert unit(view(page),"crawler.katia")["maxHp"]==katia_before["maxHp"]+5
+    stance_shot=save_screenshot(page,directory,width,height,'character-sheet-stance')
+    if page.locator('#done-character-sheet').count(): page.locator('#done-character-sheet').click()
+    end_turn_with_cancel_check(page,"Mongo")
+    page.wait_for_function("window.dungeon.getView().selectedUnitId==='crawler.mongo'")
 
     # Enemy turn must follow Mongo only after Carl, Donut and Katia have all ended.
     before_end = view(page)
@@ -458,11 +487,12 @@ def run_viewport(browser, directory, width, height):
         "campOnly": "Mordecai",
         "manaLabel": "MP",
         "moveEvent": True,
+        "actionThenMove": {"ability":"ability.carl_bomb","tile":list(bomb_cell),"thenMoved":True},
         "uiLatencyMs": {"moveToState": move_latency_ms, "missileTargetPreview": missile_preview_ms,
                         "missileConfirmToState": missile_commit_ms, "puddleConfirmToState": puddle_commit_ms,
                         "puddleTargetPreview": puddle_preview_ms},
         "magicMissile": {"target": wet_enemy["label"], "forecastCommitted": True},
-        "shapeshift": "status.guarded forecast and commit",
+        "characterMode": {"stance": "stance.defensive", "maximumHpChange": 5, "movementChange": -1},
         "turnOrder": "Carl -> Donut -> Katia -> Mongo -> enemy -> round 2 Carl",
         "enemyPlayback": {"enemyMoves": len(enemy_moves), "distinctCanvasFrames": len({f["hash"] for f in enemy_frames}), "actionsLocked": True},
         "mapRotations": rotations_tested,
@@ -470,7 +500,7 @@ def run_viewport(browser, directory, width, height):
         "reactionSeen": reaction_seen,
         "atlas": images,
         "sampledCanvasColors": canvas_colors,
-        "screenshots": [camp_shot, initial_shot, move_shot, forecast_shot, attack_shot, shapeshift_shot, jumper_shot, final_shot],
+        "screenshots": [camp_shot, initial_shot, move_shot, forecast_shot, attack_shot, stance_shot, jumper_shot, final_shot],
         "pageErrors": errors,
     }
     page.close()
@@ -501,7 +531,7 @@ def run_reaction_case(browser, directory):
     assert item.is_enabled() and "1 action" in item_text and "legal target" in item_text, f"Shock Tonic action state: enabled={item.is_enabled()}, text={item_text!r}"
     item.click()
     page.wait_for_function("document.querySelector('#action-dialog')?.open !== true")
-    page.wait_for_function("document.querySelector('.hud-target')?.textContent.includes('CHOOSE TARGET')")
+    page.wait_for_function("document.querySelector('#ability-details')?.textContent.includes('MP')")
     click_cell(page, wet["x"], wet["y"])
     page.wait_for_function("window.dungeon.getView().canConfirm")
     forecast = view(page)
@@ -510,7 +540,8 @@ def run_reaction_case(browser, directory):
     shot = save_screenshot(page, directory, 1366, 768, "wet-lightning-forecast")
     page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
     page.locator("#detail-confirm-forecast").click()
-    page.wait_for_function("!window.dungeon.getView().canConfirm && window.dungeon.getView().selectedUnitId === 'crawler.katia'")
+    page.wait_for_function("""() => {const v=window.dungeon.getView(),u=v.units.find(x=>x.id==='crawler.donut');
+      return !v.canConfirm&&v.selectedUnitId==='crawler.donut'&&u.acted&&!u.finished;}""")
     events = assert_ordered_events(view(page))
     assert any(e["type"] == "reaction" and e["reactionId"] == "reaction.wet_conducts" for e in events), f"Wet/lightning reaction missing: {events}"
     assert any(e["type"] == "damage" and e["targetId"] == wet["id"] for e in events)
@@ -549,15 +580,22 @@ def run_enemy_movement_case(browser, directory):
         points = [(x,y),(x+1,y),(x,y+1),(x+1,y+1)]
         if all(point in floors for point in points): clusters.append(points)
     assert len(clusters)>=2, "Encounter map has no separated open 2x2 areas for enemy movement fixture."
-    player_cluster, enemy_cluster = max(((a,b) for a in clusters for b in clusters if a is not b),
+    neighbor_cells={id(cluster):[xy for xy in floors if xy not in cluster and min(abs(x-px)+abs(y-py) for px,py in cluster)==1] for cluster in clusters}
+    player_cluster, enemy_cluster = max(((a,b) for a in clusters for b in clusters if a is not b and neighbor_cells[id(a)]),
         key=lambda pair:min(abs(x-u)+abs(y-v) for x,y in pair[0] for u,v in pair[1]))
     for index,player in enumerate([u for u in fixture["units"] if u["team"]=="player"]):
         player["x"],player["y"]=player_cluster[index]
         player["moved"]=index<3; player["acted"]=index<3
+        player["finished"]=index<3
     for index,enemy in enumerate([u for u in fixture["units"] if u["team"]=="enemy"]):
         enemy["x"],enemy["y"]=enemy_cluster[index%4]
         enemy["moved"]=False; enemy["acted"]=False
-    fixture["selectedUnitId"]="crawler.mongo";fixture["phase"]="player"
+        enemy["finished"]=False
+    enemy_units=[u for u in fixture["units"] if u["team"]=="enemy"]
+    adjacent=neighbor_cells[id(player_cluster)][0]
+    assert adjacent,"Encounter map has no free floor cell beside the party for an enemy declaration check."
+    enemy_units[0]["x"],enemy_units[0]["y"]=adjacent
+    fixture["selectedUnitId"]="crawler.mongo";fixture["phase"]="player";fixture["activationVersion"]=1
     page.evaluate("s=>window.dungeon.loadSave(JSON.stringify(s))",fixture)
     page.wait_for_function("window.dungeon.getView().screen==='battle'&&window.dungeon.getView().selectedUnitId==='crawler.mongo'")
     page.evaluate("""() => {
@@ -572,7 +610,7 @@ def run_enemy_movement_case(browser, directory):
     }""")
     page.locator("#end-turn").click()
     page.wait_for_function("document.querySelector('#end-turn-dialog')?.open===true")
-    assert "Enemy phase" in page.locator("#end-turn-dialog").inner_text()
+    assert "enemy phase" in page.locator("#end-turn-dialog").inner_text().lower(), f"Final actor confirmation does not explain next enemy phase: {page.locator('#end-turn-dialog').inner_text()}"
     page.locator("#confirm-end-turn").click()
     page.wait_for_function("!document.querySelector('#enemy-phase-banner')?.hidden", timeout=10000)
     page.wait_for_function("window.__enemyFrames.length>=3", timeout=10000)
@@ -584,13 +622,61 @@ def run_enemy_movement_case(browser, directory):
     game=view(page);events=assert_ordered_events(game)
     enemy_ids={u["id"] for u in game["units"] if u["team"]=="enemy"}
     moves=[e for e in events if e["type"]=="move" and e["actorId"] in enemy_ids]
+    attacks=[e for e in events if e["type"]=="attack" and e["actorId"] in enemy_ids]
     frames=page.evaluate("window.__enemyFrames")
     assert moves, f"Separated enemy team did not walk toward the party: {events}"
     assert len({f["hash"] for f in frames})>=2, f"No changing rendered frame observed during enemy movement: {frames}"
     assert frames and all(f["banner"] and f["locked"] for f in frames), f"Enemy movement was not covered by visible banner and locked actions: {frames}"
+    page.locator('#narrator-history').click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
+    history=page.locator('.narrator-history-list').inner_text()
+    assert 'Enemy turn' in history and 'advances toward' in history, f'Enemy phase history omitted actual movement declarations: {history}'
+    if attacks: assert 'declares' in history, f'Enemy attack event was not narrated: {history}'
     assert not errors, f"Browser page errors: {errors}"
     page.close()
-    return {"enemyMoves":len(moves),"frames":len({f["hash"] for f in frames}),"actionsLocked":True,"screenshot":shot}
+    return {"enemyMoves":len(moves),"enemyAttacks":len(attacks),"frames":len({f["hash"] for f in frames}),"actionsLocked":True,"narratorDeclarations":True,"screenshot":shot}
+
+
+def run_enemy_attack_narration_case(browser,directory):
+    """Put one real enemy in legal strike range, then end turns through the UI."""
+    page=browser.new_page(viewport={"width":1366,"height":768});errors=[]
+    page.on("pageerror",lambda error:errors.append(str(error)))
+    page.goto(args.url,wait_until="domcontentloaded",timeout=60000);dismiss_intro(page);page.locator("#quick-enter").click()
+    page.wait_for_function("window.dungeon.getView().screen==='explore'")
+    for _ in range(100):
+        game=view(page)
+        if game["screen"]=="battle":break
+        ev=game["exploration"];door=next((p for p in ev["points"] if p["kind"]=="encounter" and p["canInteract"]),None)
+        if door:
+            page.locator(f"[data-explore-interact='{door['id']}']").click();page.wait_for_function("window.dungeon.getView().screen==='battle'");break
+        tile=min((t for t in ev["tiles"] if t["reachable"] and not t["revealed"]),key=lambda t:(abs(t["x"]-ev["x"])+abs(t["y"]-ev["y"]),t["y"],t["x"]))
+        click_cell(page,tile["x"],tile["y"]);page.wait_for_function("([x,y])=>{const m=window.dungeon.getView().exploration;return m.x===x&&m.y===y}",arg=[tile["x"],tile["y"]])
+    fixture=json.loads(state(page));players=[u for u in fixture["units"] if u["team"]=="player"]
+    enemies=[u for u in fixture["units"] if u["team"]=="enemy"]
+    occupied={(u["x"],u["y"]) for u in players}
+    adjacent=next((t for t in view(page)["tiles"] if not t["blocked"] and (t["x"],t["y"]) not in occupied and min(abs(t["x"]-u["x"])+abs(t["y"]-u["y"]) for u in players)==1),None)
+    assert adjacent,"Encounter has no adjacent open cell for an enemy attack declaration."
+    attacker=next((u for u in enemies if u["classId"]=="class.brawler"),enemies[0])
+    attacker["hp"]=attacker.get("maxHp",attacker["hp"]);attacker["x"]=adjacent["x"];attacker["y"]=adjacent["y"]
+    attacker["energy"]=attacker.get("maxEnergy",attacker.get("energy",12));attacker["moved"]=False;attacker["acted"]=False;attacker["finished"]=False
+    for enemy in enemies:
+        if enemy is not attacker: enemy["hp"]=0;enemy["finished"]=False
+    for player in players: player["moved"]=False;player["acted"]=False;player["finished"]=False
+    fixture["activationVersion"]=1;fixture["phase"]="player";fixture["selectedUnitId"]="crawler.carl"
+    page.evaluate("s=>window.dungeon.loadSave(JSON.stringify(s))",fixture)
+    page.wait_for_function("window.dungeon.getView().screen==='battle'&&window.dungeon.getView().selectedUnitId==='crawler.carl'")
+    for actor_id,next_id in zip(("crawler.carl","crawler.donut","crawler.katia","crawler.mongo"),("crawler.donut","crawler.katia","crawler.mongo",None)):
+        page.locator("#end-turn").click();page.locator("#confirm-end-turn").click()
+        if next_id:page.wait_for_function("id=>window.dungeon.getView().selectedUnitId===id",arg=next_id)
+    page.wait_for_function("window.dungeon.getView().round>=2&&window.dungeon.getView().phase==='player'&&document.querySelector('#enemy-phase-banner')?.hidden&&!document.body.classList.contains('enemy-playback')",timeout=25000)
+    game=view(page);events=assert_ordered_events(game);attacks=[e for e in events if e["type"]=="attack" and e["actorId"]==attacker["id"]]
+    assert attacks,f"Adjacent enemy produced no attack event: {events}; enemy state={next(u for u in game['units'] if u['id']==attacker['id'])}"
+    page.locator("#narrator-history").click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
+    history=page.locator('.narrator-history-list').inner_text()
+    assert 'declares' in history and 'Enemy turn' in history,f'Actual enemy attack was not narrated: {history}'
+    shot=save_screenshot(page,directory,1366,768,'enemy-attack-narrator')
+    assert not errors,f'Enemy attack browser errors: {errors}'
+    page.close()
+    return {"enemy":attacker["id"],"attackEvent":True,"narrated":True,"history":history,"screenshot":shot}
 
 
 if __name__ == "__main__":
@@ -601,9 +687,11 @@ if __name__ == "__main__":
         results = ([run_viewport(browser, screenshot_dir, width, height) for width, height in VIEWPORTS]
                    if args.suite == "all" else [])
         enemy_playback = run_enemy_movement_case(browser, screenshot_dir) if args.suite in ("all", "enemy") else None
+        enemy_attack = run_enemy_attack_narration_case(browser,screenshot_dir) if args.suite in ("all","enemy") else None
         reaction = run_reaction_case(browser, screenshot_dir) if args.suite in ("all", "reaction") else None
         browser.close()
     for result in results:
         print(json.dumps(result))
     if enemy_playback: print(json.dumps({"enemyMovementCase": enemy_playback}))
+    if enemy_attack: print(json.dumps({"enemyAttackCase": enemy_attack}))
     if reaction: print(json.dumps({"explicitReactionCase": reaction}))

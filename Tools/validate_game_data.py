@@ -28,6 +28,15 @@ def validate_game(data, content):
 
     for name, field in [('roster','id'),('classStats','classId'),('encounters','id'),('startingInventory','itemId'),('rewards','id'),('tagRules','tag')]:
         unique(data[name], field, name)
+    for name in ('stances', 'forms'):
+        unique(data.get(name, []), 'id', name)
+        for mode in data.get(name, []):
+            if mode.get('grantTag'):
+                ref(mode['grantTag'], 'tags', name+'.grantTag')
+            if mode.get('rosterId'):
+                ref(mode['rosterId'], 'roster', name+'.rosterId')
+            if name == 'forms' and not mode.get('rosterId'):
+                errors.append('forms: require an explicit rosterId')
     progression = data['progression']
     thresholds = progression['xpThresholds']
     if not thresholds or thresholds[0] != 0 or any(a >= b for a, b in zip(thresholds, thresholds[1:])):

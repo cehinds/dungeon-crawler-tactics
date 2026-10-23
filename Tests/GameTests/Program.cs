@@ -53,8 +53,47 @@ static class GameTests
         GameDataValidator.Validate(Data, new Catalog(Content));
         Check(Content.classes.All(c => c.abilityIds.Length > 0), "all optional and identity classes have functional kits");
         Check(Content.items.Length == 8 && Content.abilities.Length >= 18, "release inventory and ability breadth");
-        EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
+        IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
+    }
+    static void IndependentActionsAndModes()
+    {
+        GameSession game = Session(); GameView view = Command(game, "start");
+        string katia = Data.forms[0].rosterId;
+        view = Command(game, "select", katia); string before = JsonSerializer.Serialize(game.ExportSave(), Json);
+        Check(view.forms.Single(f => f.id == "form.baseline").selected && !view.forms.Single(f => f.id == "form.baseline").enabled, "implicit baseline mode is selected and disabled");
+        view = game.Handle(new GameCommand { type = "preview", unitId = katia, formId = "form.baseline" });
+        Check(!view.canConfirm && JsonSerializer.Serialize(game.ExportSave(), Json) == before, "preview rejects unchanged baseline without spending or mutating save");
+        view = game.Handle(new GameCommand { type = "preview", unitId = katia, formId = "form.strider" });
+        Check(view.canConfirm && JsonSerializer.Serialize(game.ExportSave(), Json) == before && view.forecast.Single().afterMove == view.forecast.Single().beforeMove + 1, "form forecast reports movement tradeoff without mutating save");
+        view = Command(game, "confirm"); UnitView unit = view.units.Single(u => u.id == katia);
+        Check(unit.acted && !unit.moved && !unit.finished && view.canMove && !view.canAct && view.selectedUnitId == katia && unit.formId == "form.strider", "form spends action while retaining movement and current actor");
+        CellView cell = view.reachable.First(c => c.cost > 0); view = Command(game, "move", katia, x: cell.x, y: cell.y);
+        Check(view.units.Single(u => u.id == katia).moved && view.phase == "player" && view.selectedUnitId == katia, "action then move waits for explicit end turn");
+        GameSession loaded = Session();
+        Check(!loaded.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected") && loaded.GetView().units.Single(u => u.id == katia).formId == "form.strider", "form stats and independent activation survive save validation");
+        Check(view.achievementIds.Contains("achievement.first_form") && view.achievementIds.Contains("achievement.first_move"), "committed form and movement award persistent achievement IDs");
+        view = loaded.GetView(); Check(view.achievementIds.Contains("achievement.first_form") && !view.events.Any(e => e.type == "achievement"), "restoring achievement ledger does not announce unlock again");
+        view = Command(game, "end_turn", katia);
+        Check(view.selectedUnitId != katia && view.units.Single(u => u.id == katia).finished, "explicit end turn advances after both resources spent");
+        view = Command(game, "select", view.selectedUnitId); string actor = view.selectedUnitId;
+        view = game.Handle(new GameCommand { type = "preview", unitId = actor, stanceId = "stance.defensive" }); view = Command(game, "confirm");
+        Check(view.units.Single(u => u.id == actor).stanceId == "stance.defensive" && view.stances.Length == 3, "all characters expose real persistent tactical stances");
+        Check(view.units.Single(u => u.id == actor).tags.Contains("status.guarded") && game.ExportSave().timedTags.Any(t => t.entityId == actor && t.tag == "status.guarded"), "defensive stance grants existing real single-hit protection with timed bookkeeping");
+        Check(!Session().ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected") && game.ExportSave().timedTags.Any(t => t.entityId == actor && t.source == "stance.defensive"), "guarded stance checkpoint roundtrips with authored source ID");
+        GameSession bulwarkGame = Session(); Command(bulwarkGame, "start");
+        bulwarkGame.Handle(new GameCommand { type = "preview", unitId = katia, formId = "form.bulwark" }); Command(bulwarkGame, "confirm");
+        GameSave bulwarkSave = Clone(bulwarkGame.ExportSave()); GameSession bulwarkLoaded = Session();
+        Check(!bulwarkLoaded.ImportSave(bulwarkSave).message.StartsWith("Save rejected") && bulwarkLoaded.GetView().units.Single(u => u.id == katia).tags.Contains("status.guarded") && bulwarkSave.timedTags.Any(t => t.entityId == katia && t.source == "form.bulwark"), "guarded Bulwark form restores exact stats, protection and valid form source");
+        GameSave forged = Clone(game.ExportSave()); forged.roster.Single(r => r.id == actor).formId = "form.bulwark";
+        Check(loaded.ImportSave(forged).message.StartsWith("Save rejected"), "nonowner cannot forge a shapeshift form in save");
+        GameSession itemGame = Session(); view = Command(itemGame, "start"); string itemActor = view.selectedUnitId;
+        ItemView supply = view.items.First(i => i.count > 0 && i.targetIds.Contains(itemActor));
+        view = Command(itemGame, "preview", itemActor, itemActor, item: supply.id); view = Command(itemGame, "confirm");
+        Check(view.canMove && !view.canAct && !view.units.Single(u => u.id == itemActor).finished, "consumable spends action independently of movement and end turn");
+        GameSave badLedger = Clone(game.ExportSave()); badLedger.achievementIds = new[] { "achievement.forged" };
+        Check(loaded.ImportSave(badLedger).message.StartsWith("Save rejected"), "unknown achievement save rejects atomically");
+        view = Command(game, "new_run"); Check(view.achievementIds.Length == 0, "new run resets achievement ledger");
     }
     static void EnemyMovementRegression()
     {
@@ -438,8 +477,12 @@ static class GameTests
     }
     static void DefeatRetry()
     {
-        GameSession game = Session(); Command(game, "start"); int turns = 0;
-        while (game.GetView().screen == "battle" && turns++ < 80) EndRound(game);
+        GameSession game = Session(); Command(game, "start"); int turns = 0; bool defaultEnemyAttacked = false;
+        while (game.GetView().screen == "battle" && turns++ < 80)
+        {
+            GameView roundView = EndRound(game); defaultEnemyAttacked |= roundView.events.Any(e => e.type == "attack" && e.actorId != null && e.actorId.StartsWith("enemy."));
+        }
+        Check(defaultEnemyAttacked, "actual authored enemies emit attack events while a passive party waits");
         Check(game.GetView().screen == "defeat" && turns < 80, "passive party reaches defeat without AI softlock");
         GameSession restored = Session(); restored.ImportSave(Clone(game.ExportSave())); Check(restored.GetView().screen == "defeat", "defeat checkpoint restores");
         GameView view = Command(game, "retry"); Check(view.screen == "battle" && view.round == 1 && view.units.Where(u => u.team == "player").All(u => u.hp == u.maxHp), "retry restores playable encounter");
