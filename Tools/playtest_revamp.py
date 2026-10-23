@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--url", default="http://127.0.0.1:5188")
 parser.add_argument("--browser", default="/usr/bin/chromium")
 parser.add_argument("--screenshots", default="/tmp/dct-revamp")
+parser.add_argument("--suite", choices=("all", "reaction"), default="all")
 args = parser.parse_args()
 
 VIEWPORTS = [(1366, 768), (390, 844), (844, 390)]
@@ -99,19 +100,45 @@ def ability(game_view, ability_id):
 
 
 def click_ability(page, ability_id):
-    button = page.locator(f"[data-ability='{ability_id}']")
+    page.locator("#open-actions").click()
+    page.wait_for_function("document.querySelector('#action-dialog')?.open === true")
+    button = page.locator(f"[data-modal-ability='{ability_id}']")
     assert button.count() == 1 and button.is_enabled(), f"{ability_id} is missing or disabled."
     assert "MP" in button.inner_text(), f"{ability_id} does not show its mana cost in MP."
+    assert "legal target" in button.inner_text(), f"{ability_id} does not expose current target availability."
     button.click()
-    page.wait_for_function(
-        "id => document.querySelector(`[data-ability='${id}']`)?.classList.contains('active')",
-        arg=ability_id,
-    )
+    page.wait_for_function("document.querySelector('#action-dialog')?.open !== true")
+    if ability(view(page), ability_id)["target"] == "self":
+        page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
+    else:
+        page.wait_for_function("document.querySelector('.hud-target')?.textContent.includes('CHOOSE TARGET')")
+
+
+def end_turn_with_cancel_check(page, expected_next):
+    before = view(page)
+    actor_id = before["selectedUnitId"]
+    actor = unit(before, actor_id)
+    page.locator("#end-turn").click()
+    page.wait_for_function("document.querySelector('#end-turn-dialog')?.open === true")
+    dialog = page.locator("#end-turn-dialog")
+    assert actor["label"] in dialog.inner_text(), "End-turn modal omitted the current actor."
+    assert expected_next in dialog.inner_text(), "End-turn modal omitted the next actor/phase."
+    page.locator("#cancel-end-turn").click()
+    page.wait_for_function("document.querySelector('#end-turn-dialog')?.open !== true")
+    after_cancel = view(page)
+    unchanged = unit(after_cancel, actor_id)
+    assert after_cancel["selectedUnitId"] == actor_id and after_cancel["phase"] == before["phase"]
+    assert unchanged["energy"] == actor["energy"] and unchanged["moved"] == actor["moved"] and unchanged["acted"] == actor["acted"], "Canceling end turn spent an action, mana, or movement."
+    page.locator("#end-turn").click()
+    page.wait_for_function("document.querySelector('#end-turn-dialog')?.open === true")
+    page.locator("#confirm-end-turn").click()
+    page.wait_for_function("document.querySelector('#end-turn-dialog')?.open !== true")
 
 
 def assert_ordered_events(game_view):
     events = game_view["events"]
-    assert [e["sequence"] for e in events] == list(range(len(events))), "Presentation event sequence is not ordered."
+    sequences = [e["sequence"] for e in events]
+    assert sequences == list(range(len(events))), f"Presentation events are not numbered in order: {sequences}"
     return events
 
 
@@ -211,7 +238,7 @@ def run_viewport(browser, directory, width, height):
     assert move_frame != move_start, "Canvas frame did not change during/after a committed move."
 
     # One end-turn advances to the next crawler and cannot start the enemy phase.
-    page.locator("#end-turn").click()
+    end_turn_with_cancel_check(page, "Princess Donut")
     page.wait_for_function("window.dungeon.getView().selectedUnitId === 'crawler.donut'")
     game = view(page)
     assert game["phase"] == "player" and game["selectedUnitId"] == "crawler.donut"
@@ -248,11 +275,26 @@ def run_viewport(browser, directory, width, height):
     preview = view(page)
     target_forecast = next(f for f in preview["forecast"] if f["targetId"] == wet_enemy["id"])
     assert target_forecast["afterHp"] < target_forecast["beforeHp"]
+    energy_before_cancel = unit(preview, "crawler.donut")["energy"]
+    page.keyboard.press("Escape")
+    page.wait_for_function("document.querySelector('#forecast-dialog')?.open !== true && !window.dungeon.getView().canConfirm")
+    cancelled = view(page)
+    cancelled_donut = unit(cancelled, "crawler.donut")
+    assert cancelled["selectedUnitId"] == "crawler.donut" and cancelled_donut["energy"] == energy_before_cancel and not cancelled_donut["acted"], "Escape canceled the forecast but spent mana or the action."
+    click_ability(page, "ability.donut_magic_missile")
+    missile_started = time.perf_counter()
+    click_cell(page, wet_enemy["x"], wet_enemy["y"])
+    page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
+    missile_preview_ms = round((time.perf_counter() - missile_started) * 1000, 1)
+    preview = view(page)
+    target_forecast = next(f for f in preview["forecast"] if f["targetId"] == wet_enemy["id"])
+    assert target_forecast["afterHp"] < target_forecast["beforeHp"]
     assert "MP" in page.locator(".target-forecast").inner_text()
     forecast_shot = save_screenshot(page, directory, width, height, "magic-missile-forecast")
     canvas_before_attack = canvas_signature(page)
     missile_confirm_started = time.perf_counter()
-    page.locator("#confirm-forecast").click()
+    page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
+    page.locator("#detail-confirm-forecast").click()
     page.wait_for_function("!window.dungeon.getView().canConfirm && window.dungeon.getView().selectedUnitId === 'crawler.katia'")
     missile_commit_ms = round((time.perf_counter() - missile_confirm_started) * 1000, 1)
     committed = view(page)
@@ -275,14 +317,14 @@ def run_viewport(browser, directory, width, height):
     guard = next(f for f in guard_preview["forecast"] if f["targetId"] == "crawler.katia")
     assert "status.guarded" in guard["afterTags"]
     shapeshift_shot = save_screenshot(page, directory, width, height, "shapeshift-forecast")
-    page.locator("#confirm-forecast").click()
+    page.locator("#detail-confirm-forecast").click()
     page.wait_for_function("window.dungeon.getView().units.find(u=>u.id==='crawler.katia').tags.includes('status.guarded') && window.dungeon.getView().selectedUnitId === 'crawler.mongo'")
     assert any(e["type"] in ("tag_add", "guard") for e in assert_ordered_events(view(page)))
 
     # Enemy turn must follow Mongo only after Carl, Donut and Katia have all ended.
     before_end = view(page)
     assert before_end["selectedUnitId"] == "crawler.mongo" and before_end["phase"] == "player"
-    page.locator("#end-turn").click()
+    end_turn_with_cancel_check(page, "Enemy phase")
     page.wait_for_function("window.dungeon.getView().round >= 2 || window.dungeon.getView().screen !== 'battle'", timeout=15000)
     after_enemies = view(page)
     assert after_enemies["screen"] == "battle" and after_enemies["round"] >= 2
@@ -303,7 +345,7 @@ def run_viewport(browser, directory, width, height):
     page.goto(args.url, wait_until="domcontentloaded", timeout=60000)
     dismiss_intro(page)
     enter_encounter(page)
-    page.locator("#end-turn").click()
+    end_turn_with_cancel_check(page, "Princess Donut")
     page.wait_for_function("window.dungeon.getView().selectedUnitId === 'crawler.donut'")
     game = view(page)
     jumper = ability(game, "ability.donut_puddle_jumper")
@@ -326,7 +368,8 @@ def run_viewport(browser, directory, width, height):
     assert (moved_forecast["afterX"], moved_forecast["afterY"]) == (tx, ty)
     jumper_shot = save_screenshot(page, directory, width, height, "puddle-jumper-forecast")
     puddle_confirm_started = time.perf_counter()
-    page.locator("#confirm-forecast").click()
+    page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
+    page.locator("#detail-confirm-forecast").click()
     page.wait_for_function("x => !window.dungeon.getView().canConfirm && window.dungeon.getView().units.find(u=>u.id==='crawler.donut').x === x", arg=tx)
     puddle_commit_ms = round((time.perf_counter() - puddle_confirm_started) * 1000, 1)
     final = view(page)
@@ -366,15 +409,22 @@ def run_reaction_case(browser, directory):
     page.goto(args.url, wait_until="domcontentloaded", timeout=60000)
     dismiss_intro(page)
     enter_encounter(page)
-    page.locator("#end-turn").click()
+    end_turn_with_cancel_check(page, "Princess Donut")
     page.wait_for_function("window.dungeon.getView().selectedUnitId === 'crawler.donut'")
     game = view(page)
     wet = next(u for u in game["units"] if u["team"] == "enemy" and "status.wet" in u["tags"])
     destination = min(game["reachable"], key=lambda t: abs(t["x"]-wet["x"])+abs(t["y"]-wet["y"]))
     click_cell(page, destination["x"], destination["y"])
     page.wait_for_function("([x,y]) => {const u=window.dungeon.getView().units.find(u=>u.id==='crawler.donut');return u.x===x&&u.y===y;}", arg=[destination["x"],destination["y"]])
-    page.locator("[data-drawer='items']").click()
-    page.locator("[data-item='item.thunder_flask']").click()
+    page.locator("#open-actions").click()
+    page.wait_for_function("document.querySelector('#action-dialog')?.open === true")
+    page.locator(".modal-item-section summary").click()
+    item = page.locator("[data-modal-item='item.thunder_flask']")
+    page.wait_for_function("document.querySelector('[data-modal-item=\"item.thunder_flask\"]')?.offsetHeight > 0")
+    item_text = item.inner_text()
+    assert item.is_enabled() and "1 action" in item_text and "legal target" in item_text, f"Shock Tonic action state: enabled={item.is_enabled()}, text={item_text!r}"
+    item.click()
+    page.wait_for_function("document.querySelector('#action-dialog')?.open !== true")
     page.wait_for_function("document.querySelector('.hud-target')?.textContent.includes('CHOOSE TARGET')")
     click_cell(page, wet["x"], wet["y"])
     page.wait_for_function("window.dungeon.getView().canConfirm")
@@ -382,7 +432,8 @@ def run_reaction_case(browser, directory):
     target_forecast = next(f for f in forecast["forecast"] if f["targetId"] == wet["id"])
     assert target_forecast["afterHp"] < target_forecast["beforeHp"]
     shot = save_screenshot(page, directory, 1366, 768, "wet-lightning-forecast")
-    page.locator("#confirm-forecast").click()
+    page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
+    page.locator("#detail-confirm-forecast").click()
     page.wait_for_function("!window.dungeon.getView().canConfirm && window.dungeon.getView().selectedUnitId === 'crawler.katia'")
     events = assert_ordered_events(view(page))
     assert any(e["type"] == "reaction" and e["reactionId"] == "reaction.wet_conducts" for e in events), f"Wet/lightning reaction missing: {events}"
@@ -397,7 +448,8 @@ if __name__ == "__main__":
     screenshot_dir.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path=args.browser, headless=True, args=["--no-sandbox"])
-        results = [run_viewport(browser, screenshot_dir, width, height) for width, height in VIEWPORTS]
+        results = ([run_viewport(browser, screenshot_dir, width, height) for width, height in VIEWPORTS]
+                   if args.suite == "all" else [])
         reaction = run_reaction_case(browser, screenshot_dir)
         browser.close()
     for result in results:

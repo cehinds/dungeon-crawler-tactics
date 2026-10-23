@@ -4,6 +4,8 @@ A small complete Dungeon Crawler Carl fan tactics game: an animated isometric du
 
 **Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
 
+**Build rooms:** [Room workshop](https://cehinds.github.io/dungeon-crawler-tactics/room-kit.html) · [Download 25 layerable PNGs](https://cehinds.github.io/dungeon-crawler-tactics/assets/room-kit/room-kit.zip). Seeded previews export room recipes; campaign maps remain authored. See [Room kit guide](Docs/RoomKit.md) for anchors, layers and Unity import settings.
+
 **Play locally:** run `./play.sh` on macOS/Linux, or `Play-Windows.bat` on Windows, then open **http://localhost:8000**. Python 3 is required for the local static server. The download archive includes the published game; a source checkout needs the `dotnet publish` command below first.
 
 **Unity:** open `UnityProject/` in Unity 6, choose **Dungeon Crawler → Create Playable Scene**, then press Play. Choose **Build Web Player** from the same menu to export using your installed Unity Web Build Support module.
@@ -16,6 +18,7 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Explore three fog-covered corridor maps, discover optional supply caches and notes, and choose when to enter each encounter.
 - Move on three authored 10×8 boards, use class abilities or shared items, inspect the exact forecast, confirm or cancel.
 - Watch actual walk/attack/hit sprite frames and visual reactions on the map. Inspect HP, Mana/MP, movement, conditions, range and exact forecasts in a compact HUD.
+- Choose actions in a responsive modal with labeled category colors, Mana costs and legal-target counts. Review the exact forecast in its confirmation modal; end-turn confirmation names the next actor.
 - End the current character's turn to select the next ready ally; enemies act after the whole party finishes. Pan/zoom the map on phones.
 - Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage. Guardian, Bard and Necromancer support abilities now grant real single-hit protection.
 - Fight deterministic enemies, collect sponsor supplies, reach the boss, finish the floor, or retry after defeat.

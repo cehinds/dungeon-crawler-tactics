@@ -1,5 +1,13 @@
 # Revamp browser QA
 
+## Room kit and modal update
+
+The updated visible-UI suite passes at 1366×768, 390×844 and 844×390. It opens the action chooser, checks Mana costs and legal-target counts, cancels a forecast with Escape without spending resources, reselects and confirms, and checks end-turn confirmation/cancellation and next-actor labels. The Wet + Lightning item scenario still commits the forecast reaction. A separate modal check at 360×640 also verified footer controls fit.
+
+`Tools/playtest_room_kit.py` passes against the published local files at desktop and phone sizes: all 25 PNGs load, seed changes and repeated inputs behave correctly, entrance/exit routes stay clear, layer and route toggles work, and JSON, individual PNG and ZIP downloads succeed. The ZIP contains 25 sprites. No page errors or horizontal overflow were found. `node Tools/test_room_generator.mjs` passes 461 checks covering 450 seeded layouts. PNG validation checks transparency, dimensions, unique IDs and layer metadata. Unity import settings are documented but were not tested in the Unity Editor.
+
+## Earlier animated-dungeon verification
+
 Verified against the newly published WASM build at `http://127.0.0.1:5188` with headless Chromium (`/usr/bin/chromium`) and Python Playwright. The automated pass used 1366×768, 390×844, and 844×390 viewports. `Tools/playtest_revamp.py` performs actions through the visible camp, exploration, map canvas, party controls, item drawer, and forecast controls; `window.dungeon.getView()` is used to choose legal cells and check results.
 
 All three viewports passed the following flows:

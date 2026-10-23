@@ -180,7 +180,10 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       const targets=new Set(options.action?.targetIds??[]);
       for(const tile of visualTiles) {
         const unit=visualUnits.find(u=>u.hp>0&&u.x===tile.x&&u.y===tile.y);
-        if(targets.has(tile.id)||targets.has(unit?.id)) diamond(tile.x,tile.y,{stroke:unit?.team==='player'?'#9bdfa3':'#ffae79',fill:'#f4a74b23',weight:2,inset:4});
+        if(targets.has(tile.id)||targets.has(unit?.id)) {
+          const color=unit?.team==='player'?'#82e7a1':unit?.team==='enemy'?'#ff777c':'#6ddfff';
+          diamond(tile.x,tile.y,{stroke:color,fill:color+'28',weight:2,inset:4});
+        }
       }
     }
     if(hover) {
@@ -190,7 +193,11 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         if(path.length) {context.beginPath();path.forEach(([x,y],i)=>{const p=project(x,y);i?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y);});context.lineWidth=3;context.strokeStyle='#96efff';context.stroke();}
       }
     }
-    for(const item of options.preview??[]) if(item.beforeX!==item.afterX||item.beforeY!==item.afterY) diamond(item.afterX,item.afterY,{stroke:'#e7c9ff',fill:'#ac76e330',weight:3,inset:8});
+    for(const item of options.preview??[]) {
+      if(item.beforeX!==item.afterX||item.beforeY!==item.afterY) diamond(item.afterX,item.afterY,{stroke:'#e7c9ff',fill:'#ac76e330',weight:3,inset:8});
+    }
+    const previewTarget=visualUnits.find(u=>u.id===options.targetId)??visualTiles.find(t=>t.id===options.targetId);
+    if(previewTarget)diamond(previewTarget.x,previewTarget.y,{stroke:'#ffc16b',fill:'#ffc16b30',weight:3,inset:8});
   }
   function effectSprite(type,x,y,age,duration) {
     if(age<0)return;
