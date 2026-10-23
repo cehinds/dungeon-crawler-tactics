@@ -286,6 +286,22 @@
           "type": "integer",
           "minimum": 1,
           "maximum": 20
+        },
+        "specialtyClassIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "combatTags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     },
@@ -564,6 +580,11 @@
         },
         "consumeOnEntry": {
           "type": "boolean"
+        },
+        "moveBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
         }
       }
     },
@@ -746,6 +767,11 @@
           "type": "integer",
           "minimum": 2,
           "maximum": 50
+        },
+        "minimumFloor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18
         }
       }
     },

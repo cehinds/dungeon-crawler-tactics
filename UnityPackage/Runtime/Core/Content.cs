@@ -17,7 +17,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class TagDef { public string id; public string label; }
     [Serializable] public sealed class ClassDef { public string id; public string label; public int minimumFloor = 1; public bool playerSelectable = true; public string[] abilityIds = new string[0]; }
     [Serializable] public sealed class ItemDef { public bool favorEligible; public string id; public string label; public string abilityId; }
-    [Serializable] public sealed class EffectDef { public string op; public int amount; public string tag; }
+    [Serializable] public sealed class EffectDef { public string op; public int amount; public string tag; public int summonHp, summonMove, summonRounds; }
     [Serializable] public sealed class TagQuery
     {
         public string[] all = new string[0];
@@ -104,6 +104,7 @@ namespace DungeonCrawlerTactics
             {
                 Require(e != null, "Null effect.");
                 Require(e.amount >= 0, "Effect amount cannot be negative.");
+                if (e.op == "DuplicatePet") { Require(e.amount == 2 && HasTag(e.tag) && HasTag("status.clockwork") && e.summonHp > 0 && e.summonHp <= 1000 && e.summonMove > 0 && e.summonMove <= 12 && e.summonRounds > 0 && e.summonRounds <= 10, "Pet duplication requires two copies and a registered trait tag."); continue; }
                 if (e.op != "Damage" && e.op != "Heal" && e.op != "Teleport" && e.op != "Push")
                     Require((e.op == "AddTag" || e.op == "RemoveTag") && HasTag(e.tag), "Invalid operation or tag.");
             }

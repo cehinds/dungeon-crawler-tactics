@@ -53,6 +53,7 @@ jobs:
           dotnet run --project Tests/HomeTests/HomeTests.csproj -c Release
           dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj -c Release
           dotnet run --project Tests/AudienceTests/AudienceTests.csproj -c Release
+          dotnet run --project Tests/SignatureTests/SignatureTests.csproj -c Release
           dotnet build Tools/Compatibility/Core.Compatibility.csproj -c Release
       - name: Verify published research catalog
         run: python Tools/prepare_research.py --check

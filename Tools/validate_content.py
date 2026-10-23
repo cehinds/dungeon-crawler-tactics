@@ -49,7 +49,7 @@ def validate(content):
 
     def effects(records, path):
         for index, effect in enumerate(records):
-            if effect["op"] in ("AddTag", "RemoveTag"):
+            if effect["op"] in ("AddTag", "RemoveTag", "DuplicatePet"):
                 references([effect["tag"]], "tags", f"{path}.{index}.tag")
             elif effect["op"] == "Teleport" and (effect["amount"] != 0 or effect["tag"] != ""):
                 errors.append(f"{path}.{index}: Teleport requires amount 0 and empty tag")

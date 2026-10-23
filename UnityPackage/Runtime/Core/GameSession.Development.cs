@@ -54,6 +54,7 @@ namespace DungeonCrawlerTactics
         }
         private ActionModifiers Modifiers(string owner, string ability)
         {
+            if (!roster.ContainsKey(owner)) return new ActionModifiers();
             ActionModifiers result = AllocationModifiers(owner, allocations);
             ActionModifiers tree = TreeModifiers(owner, unlockedSkillNodes);
             SkillPracticeSave row = practices.Find(p => p.unitId == owner && p.abilityId == ability);

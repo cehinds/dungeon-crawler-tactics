@@ -25,7 +25,7 @@ namespace DungeonCrawlerTactics
             bool reaction = forecast != null && Array.Exists(forecast.Events, e => e.type == "reaction");
             bool victory = forecast != null, survivor = false;
             if (forecast != null) foreach (EntityState e in forecast.State.Entities.Values)
-            { if (!e.IsTile && e.Team != "player" && e.Hp > 0) victory = false; if (!e.IsTile && e.Team == "player" && e.Hp > 0) survivor = true; }
+            { if (!e.IsTile && e.Team != "player" && e.Hp > 0) victory = false; if (!e.IsTile && e.Team == "player" && e.DuplicateSourceId == null && e.Hp > 0) survivor = true; }
             victory = victory && survivor;
             // Resolve deliveries against the post-consumption inventory, then accumulate
             // shared reward IDs so several offers cannot each promise the same free capacity.
@@ -51,7 +51,8 @@ namespace DungeonCrawlerTactics
                 try { ResolveAction(new GameCommand { type = "preview_favor", unitId = actor.Id, itemId = item.id, targetId = target.Id }); targets.Add(target.Id); } catch (ArgumentException) { } catch (InvalidOperationException) { }
             targets.Sort(StringComparer.Ordinal); return targets.ToArray();
         }
-        private bool IsTrapItem(string id) { foreach (EffectDef effect in catalog.Abilities[catalog.Items[id].abilityId].effects) if (effect.op == "AddTag" && TagRule(effect.tag) != null && TagRule(effect.tag).consumeOnEntry) return true; return false; }
+        private bool IsTrapItem(string id) { return IsTrapAbility(catalog.Items[id].abilityId); }
+        private bool IsTrapAbility(string id) { foreach (EffectDef effect in catalog.Abilities[id].effects) if (effect.op == "AddTag" && TagRule(effect.tag) != null && TagRule(effect.tag).consumeOnEntry) return true; return false; }
         private void ValidateFavor(GameCommand command, EntityState actor)
         {
             Require(string.IsNullOrEmpty(command.stanceId) && string.IsNullOrEmpty(command.formId) && string.IsNullOrEmpty(command.abilityId), "Favor commands may only select an environmental supply, never a stance, form or ability.");

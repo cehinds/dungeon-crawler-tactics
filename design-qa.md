@@ -1,25 +1,83 @@
-# Dungeon presentation review
+# Visual fidelity pass — 23 October 2026
 
-Final result: passed for the documented browser scope.
+## Reference and scope
 
-The approved concept guides the isometric stone dungeon, warm torchlight, cool water, distinct party silhouettes, cyan ally markers, red enemy markers and navy/gold bottom action dock. These are implemented as separate generated sprite, terrain, prop, icon and effect assets drawn over the real tactical board. The painted concept's exact room geometry is not reproduced pixel for pixel.
+The selected targets are `Web/wwwroot/assets/menu-concepts/combat-targeting.png`,
+`character-equipment.png`, and `safe-room-services.png`, together with the
+user's original dungeon image. The menu boards include isolated components on
+their right side. Comparisons crop to the illustrated game area; the component
+index is not treated as part of a playable viewport.
 
-The browser keeps the map and action forecast in one viewport. HP, Mana/MP, movement, conditions, cost and range are visible for the selected crawler. Details, inventory and save controls use dialogs; routine feedback uses toasts. End character turn advances through ready allies before the enemy phase.
+The existing shared-C# game remains the runtime. Layout, generated assets and
+rendering were changed without replacing the board with a static illustration.
+Numeric values in the references remain illustrative; the UI displays live
+health, mana, movement, equipment and unlock data.
 
-Visual and interaction evidence is recorded in [Docs/Revamp-QA.md](Docs/Revamp-QA.md); shared-rule, complete-floor and save verification is recorded in [Docs/Validation.md](Docs/Validation.md). The tested viewport sizes cover desktop, portrait phone and landscape phone in Chromium emulation.
+## Changes reviewed
 
-Known limits: reserve characters use earlier static art; the native Unity presenter remains IMGUI; there is no audio in this release. Browser viewport testing does not establish performance on physical phones. Character abilities use documented tactical adaptations rather than claiming to reproduce every book mechanic.
+- [x] Textured wall PNG runs align to the actual half-cell boundaries under all
+  four camera orientations. Blocked tile clusters use consistent stone walls.
+- [x] Closer camera, less label clutter, cached texture tint rather than costly
+  per-frame filters, and rotation about the selected character.
+- [x] Persistent character portrait and working Stats / Gear / Abilities /
+  Stances / Progress tabs. Gear controls use actual saved equipment commands.
+- [x] Eight independent house PNG components and a nine-slice golden frame,
+  rebuilt reproducibly from preserved generated sources.
+- [x] Available, locked and selected room treatments; condensed explanatory
+  text; real upgrade preview and cancellation.
+- [x] Larger party chips, readable action names and separate signature icons.
+- [x] Real summon previews, visible copy lifespan and dedicated copy stats.
 
-The room-kit update adds 25 standalone PNGs and a seeded assembly preview with native manifest anchors. Desktop and phone inspection confirmed aligned floors and clear component layering. Action and end-turn modals now expose costs, target counts and next-actor information, with labeled category colors and target outlines. Browser cancellation and download flows were exercised by the updated Playwright checks.
+## Captures and comparisons
 
-## Progression and directional-movement update
+Desktop viewport: **1672 × 941 CSS pixels**, device scale 1. Phone viewport:
+**390 × 844 CSS pixels**, device scale 1. PNGs have those same dimensions.
 
-Inspected the rendered desktop battle and exploration captures, the 360×640 safe room, and an active enemy-turn capture. All eight deployable characters now resolve to generated directional atlases; the validator checks 96 distinct idle/walk frames. The safe room presents Rest, Equipment, Skills and Enter Dungeon stations, with roster controls collapsed to keep the phone screen compact. Actual HP/Mana and equipment changes are shown in the modals. Enemy playback shows a persistent banner and disables player actions; four camera views preserve tile picking and screen-relative keyboard movement. Art and renderer retain the isometric dungeon and bottom action dock composition of the user's reference.
+`Docs/Screenshots/fidelity-sheet-{desktop,mobile}.png` shows the initial Carl
+Stats tab. `fidelity-home-{desktop,mobile}.png` shows the initial house with
+locked rooms. The neutral and target battle captures show the Sewers training
+encounter, with Carl selected, then his actual bomb forecast. They are runtime
+captures; generated concept art is not used as the battlefield screenshot.
 
-The exploration party is a compact formation representing one shared map position; combat positions are individual cells. Campaign encounters remain authored, and enemy sprites still use the earlier action atlas rather than four-direction artwork. Native Unity still needs a matching presentation implementation and Editor validation.
+`fidelity-combat-comparison.png` places the cropped concept game area beside the
+actual playable view. The source and runtime use different encounter layouts;
+this is a composition and component comparison, not a pixel-diff score.
 
-Also deployed the four reserve characters into a real encounter and visually inspected `/tmp/reserve-party-current.png`: Elle, Imani, Louis and Britney each use their own sprite, with no browser page errors.
+## Iterations and validation
 
-## Forms and mechanics-review delivery
+An initial live canvas tint caused excessive rendering work; it was replaced
+with cached textures. Browser inspection caught and corrected resource-bar
+style collisions, sheet padding, the first house bedroom ordering, and HUD
+caption overlap. Pointer picking was exercised through all four orientations
+at both viewport sizes. Tabs, room selection and purchase preview/cancel were
+checked through the rendered controls, with no JavaScript errors.
 
-Root inspected the corrected runtime map (`/tmp/revamp-current.png`): floor diamonds align, the exterior wall meets the floor continuously, and interior props contact the grid. Fire/impact effects render above the character layer. Phone narrator history now appears immediately (`/tmp/narrator-before-390.png`); its opacity animation was removed after screenshot inspection exposed a blank first frame. The 7-image concept gallery and 45-feature checklist passed desktop/phone loading, filtering and overflow checks. Every concept is explicitly illustrative; future boss encounters, manual stats, skill practice, crafting and runtime custom-map import remain unchecked. The corrected combat concept assigns Magic Missile to Donut, and the progression concept separates individual skill practice from crawler XP rather than inventing class XP.
+The rebuilt local publish passes `Tools/playtest_signatures.py`: legal story
+progression to Floor 3 (103 setup commands, 16 committed battle actions),
+specialty review/cancel/commit, Tripwire and Triplicate forecasts, two controllable
+copies, copy sheets, movement, turn completion and exact reload. These checks
+use the visible action controls and actual shared rules, not fabricated saves.
+Additional `fidelity-specialty-*`, `fidelity-triplicate-*` and
+`fidelity-clockwork-*` captures record the new flow. The existing four-lane
+desktop/phone gameplay suite also passes with no browser errors. A final phone
+review caught an offscreen selected copy chip and stale desktop camera framing
+after resizing; both were corrected before deployment.
+
+The final phone run additionally casts Rush through its button and self-target
+forecast, checks free cancellation, then confirms movement 4 → 6, Mana −3,
+action spent and movement still available. The selected Copy 2 chip and selected
+map position are within the phone viewport. The production atlas loads all nine
+PNG links, serves the downloadable kit and has no horizontal phone overflow.
+
+## Remaining reference differences
+
+The concept depicts a dense bespoke dungeon composition. Authored playable
+rooms have different geometry and still include larger open spaces. Character
+portraits use existing game sprite art rather than the concept's painted
+full-body illustration. The house uses separate room islands rather than a
+single continuous cutaway, allowing independent locked/selected states. The
+phone interface reflows controls; it cannot preserve the desktop proportions.
+
+**Result:** substantial component and layout improvements; full reference
+parity is not claimed. These remaining differences are documented rather than
+hidden behind a “pixel-perfect” pass result.

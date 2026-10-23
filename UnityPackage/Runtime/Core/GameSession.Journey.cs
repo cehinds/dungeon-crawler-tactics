@@ -92,6 +92,7 @@ namespace DungeonCrawlerTactics
         private void AdvanceJourney()
         {
             journey.floorIndex++; encounterIndex = journey.floorIndex;
+            foreach (RosterView member in roster.Values) { member.specialtyClassId = null; member.specialtyFloor = 0; }
             // Captured cards stay visible in the final checkpoint, never leak into another floor.
             if (journey.floorIndex < 8) journey.capturedIds = new string[0];
             screen = journey.floorIndex >= 8 ? "complete" : "camp"; phase = "player";

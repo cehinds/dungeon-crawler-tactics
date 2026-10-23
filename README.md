@@ -8,6 +8,14 @@ A playable Dungeon Crawler Carl fan tactics prototype with a shared C# engine: a
 
 **Completion checklist:** [Implemented, tested and still unfinished](Docs/Completion-Checklist.md) · [Expanded story levels](Docs/Story-Levels.md) · [Sponsors, Favor and traps](Docs/Audience-and-Traps.md).
 
+**Visual and signature-move pass:** textured modular walls, illustrated house rooms,
+tabbed character sheets and larger turn indicators. Carl can rig traps and throw
+Dynamite; Donut can choose a temporary floor specialty and summon two playable
+Clockwork copies; Katia can use Rush to extend her movement. See the
+[source audit and adaptation boundaries](Docs/Signature-Moves-Audit.md). The
+[menu atlas](https://cehinds.github.io/dungeon-crawler-tactics/menu-atlas.html)
+also offers the actual house PNG components and reusable frame for download.
+
 **Tabletop inspiration:** [Official RPG research and prioritized gameplay changes](Docs/Tabletop-Inspiration.md) · [Playable Over City neighborhood: Lantern Row](Docs/Over-City-Neighborhood.md).
 
 **Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md) · [Playable boss scenarios and sprite sources](Docs/Boss-Concepts.md).
@@ -45,7 +53,7 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Start the optional story campaign from the eighteen-floor guide. Floors 1–8 include seven battles and the destroyed floor-7 bypass, with route, quadrant and capture objectives.
 - Autosave, reload, and export/import a portable JSON save.
 
-There are **142 selectable class kits (122 source-attested names plus 20 original kits), six enemy-only kits, 90 ability definitions, 1,988 class-tree nodes, 10 consumables, 6 equipment pieces, 96 base directional character frames and 36 Katia form frames**. Stat formulas, early allocation timing, skill ranks, recipes and scenario rules are tactical adaptations, not canonical book formulas. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). The catalog is a sourced survey, not an exhaustive full-text audit. Numerical rank curves and class trees are game adaptations; unknown canonical ranks stay unknown. Floors 9–18, a complete T’Ghee deck battle system, full club interiors, advanced summons, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
+There are **142 selectable class kits (122 source-attested names plus 20 original kits), six enemy-only kits, 95 ability definitions, 1,988 class-tree nodes, 10 consumables, 6 equipment pieces, 96 base directional character frames and 36 Katia form frames**. Stat formulas, early allocation timing, skill ranks, recipes and scenario rules are tactical adaptations, not canonical book formulas. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). The catalog is a sourced survey, not an exhaustive full-text audit. Numerical rank curves and class trees are game adaptations; unknown canonical ranks stay unknown. Floors 9–18, a complete T’Ghee deck battle system, full club interiors, general summoning, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
 
 ## Start here
 
@@ -101,6 +109,7 @@ dotnet run --project Tests/JourneyTests/JourneyTests.csproj
 dotnet run --project Tests/HomeTests/HomeTests.csproj
 dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj
 dotnet run --project Tests/AudienceTests/AudienceTests.csproj
+dotnet run --project Tests/SignatureTests/SignatureTests.csproj
 dotnet build Tools/Compatibility/Core.Compatibility.csproj
 dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
 python3 Tools/prepare_unity_project.py

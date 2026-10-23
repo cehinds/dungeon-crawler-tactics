@@ -170,7 +170,8 @@
             "AddTag",
             "RemoveTag",
             "Push",
-            "Teleport"
+            "Teleport",
+            "DuplicatePet"
           ]
         },
         "amount": {
@@ -178,6 +179,21 @@
         },
         "tag": {
           "type": "string"
+        },
+        "summonHp": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "summonMove": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "summonRounds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
         }
       },
       "allOf": [
@@ -279,6 +295,30 @@
                 "const": ""
               }
             }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "DuplicatePet"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "amount": {
+                "const": 2
+              },
+              "tag": {
+                "$ref": "#/$defs/id"
+              }
+            },
+            "required": [
+              "summonHp",
+              "summonMove",
+              "summonRounds"
+            ]
           }
         }
       ]

@@ -50,8 +50,8 @@ namespace DungeonCrawlerTactics
         private int ForecastModeStat(string id, bool mana)
         {
             if (!units.ContainsKey(id)) return 0;
-            if (pending == null || pending.unitId != id || (string.IsNullOrEmpty(pending.formId) && string.IsNullOrEmpty(pending.stanceId))) return mana ? units[id].maxEnergy : units[id].move;
-            TacticalModeDef mode; ClassStats stats = ProposedModeStats(pending, out mode); return mana ? stats.energy : stats.move;
+            if (pending == null || pending.unitId != id || (string.IsNullOrEmpty(pending.formId) && string.IsNullOrEmpty(pending.stanceId))) return mana ? units[id].maxEnergy : EffectiveMove(forecast != null && forecast.State.Entities.ContainsKey(id) ? forecast.State.Entities[id] : battle.Entities[id], units[id].move);
+            TacticalModeDef mode; ClassStats stats = ProposedModeStats(pending, out mode); return mana ? stats.energy : EffectiveMove(forecast != null && forecast.State.Entities.ContainsKey(id) ? forecast.State.Entities[id] : battle.Entities[id], stats.move);
         }
         private void PopulateModes(GameView view)
         {

@@ -331,6 +331,12 @@ def validate_game(data, content):
             ref(record['legacyClassId'], 'classes', f'roster.{i}.legacyClassId')
         if record.get('selected') and not record.get('deployable', True):
             errors.append(f'roster.{i}: non-deployable members cannot be selected')
+        for j, tag in enumerate(record.get('combatTags', [])):
+            ref(tag, 'tags', f'roster.{i}.combatTags.{j}')
+        for j, class_id in enumerate(record.get('specialtyClassIds', [])):
+            ref(class_id, 'classes', f'roster.{i}.specialtyClassIds.{j}')
+            if class_id not in player_classes:
+                errors.append(f'roster.{i}: enemy-only specialty class cannot be assigned to a crawler')
         for j, ability_id in enumerate(record.get('innateAbilityIds', [])):
             ref(ability_id, 'abilities', f'roster.{i}.innateAbilityIds.{j}')
     replace_targets = [r['replacesId'] for r in data['roster'] if r.get('replacesId')]

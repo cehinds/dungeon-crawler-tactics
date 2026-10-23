@@ -52,7 +52,22 @@ class RevampContentValidationTests(unittest.TestCase):
             member = next(r for r in self.game['roster'] if r['id'] == character_id)
             self.assertEqual((class_id, legacy_id), (member['classId'], member['legacyClassId']))
             self.assertEqual(expected_stats, stats[class_id])
-            self.assertEqual(classes[class_id], member['innateAbilityIds'])
+            personal_extras = {'crawler.carl': ['ability.carl_tripwire']}
+            self.assertEqual(classes[class_id] + personal_extras.get(character_id, []), member['innateAbilityIds'])
+
+    def test_clockwork_requires_complete_bounded_summon_configuration(self):
+        invalid = copy.deepcopy(self.content)
+        effect = next(a for a in invalid['abilities'] if a['id'] == 'ability.donut_clockwork_triplicate')['effects'][0]
+        del effect['summonRounds']
+        self.assertTrue(any('summonRounds' in error for error in validate(invalid)))
+        effect['summonRounds'] = 100
+        self.assertTrue(any('summonRounds' in error for error in validate(invalid)))
+
+    def test_specialty_rejects_enemy_only_kits(self):
+        invalid = copy.deepcopy(self.game)
+        donut = next(r for r in invalid['roster'] if r['id'] == 'crawler.donut')
+        donut['specialtyClassIds'] = [next(c['id'] for c in self.content['classes'] if not c.get('playerSelectable', True))]
+        self.assertTrue(any('enemy-only specialty' in error for error in validate_game(invalid, self.content)))
 
     def test_magic_missile_is_arcane_and_not_a_lightning_setup(self):
         magic_missile = next(a for a in self.content['abilities'] if a['id'] == 'ability.donut_magic_missile')

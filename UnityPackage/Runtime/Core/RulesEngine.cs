@@ -5,7 +5,7 @@ namespace DungeonCrawlerTactics
 {
     public sealed class EntityState
     {
-        public string Id; public string ClassId; public string Team;
+        public string DuplicateSourceId, DuplicateCasterId; public int DuplicateRounds, DuplicateMove; public string Id; public string ClassId; public string Team;
         public bool IsTile; public bool Blocked; public int X; public int Y;
         public int Hp; public int MaxHp; public int Energy;
         public readonly HashSet<string> GrantedAbilities = new HashSet<string>(StringComparer.Ordinal);
@@ -13,7 +13,7 @@ namespace DungeonCrawlerTactics
         public readonly HashSet<string> Immunities = new HashSet<string>(StringComparer.Ordinal);
         public EntityState Clone()
         {
-            EntityState copy = new EntityState { Id = Id, ClassId = ClassId, Team = Team, IsTile = IsTile, Blocked = Blocked, X = X, Y = Y, Hp = Hp, MaxHp = MaxHp, Energy = Energy };
+            EntityState copy = new EntityState { DuplicateSourceId = DuplicateSourceId, DuplicateCasterId = DuplicateCasterId, DuplicateRounds = DuplicateRounds, DuplicateMove = DuplicateMove, Id = Id, ClassId = ClassId, Team = Team, IsTile = IsTile, Blocked = Blocked, X = X, Y = Y, Hp = Hp, MaxHp = MaxHp, Energy = Energy };
             copy.GrantedAbilities.UnionWith(GrantedAbilities); copy.Tags.UnionWith(Tags); copy.Immunities.UnionWith(Immunities); return copy;
         }
     }
@@ -75,7 +75,7 @@ namespace DungeonCrawlerTactics
             Queue<RuleEvent> queue = new Queue<RuleEvent>();
             HashSet<string> fired = new HashSet<string>(StringComparer.Ordinal);
             EffectDef[] effectiveEffects = new EffectDef[ability.effects.Length];
-            for (int i = 0; i < effectiveEffects.Length; i++) { EffectDef e = ability.effects[i]; effectiveEffects[i] = new EffectDef { op = e.op, tag = e.tag, amount = e.amount + (modifiers == null ? 0 : e.op == "Damage" ? modifiers.damageBonus : e.op == "Heal" ? modifiers.healBonus : 0) }; }
+            for (int i = 0; i < effectiveEffects.Length; i++) { EffectDef e = ability.effects[i]; effectiveEffects[i] = new EffectDef { op = e.op, tag = e.tag, summonHp = e.summonHp, summonMove = e.summonMove, summonRounds = e.summonRounds, amount = e.amount + (modifiers == null ? 0 : e.op == "Damage" ? modifiers.damageBonus : e.op == "Heal" ? modifiers.healBonus : 0) }; }
             queue.Enqueue(new RuleEvent { Tags = ability.incomingTags, Effects = effectiveEffects, Label = ability.id });
             int processed = 0;
             while (queue.Count > 0)
@@ -104,6 +104,10 @@ namespace DungeonCrawlerTactics
                 foreach (EffectDef effect in current.Effects)
                 {
                     int hp = target.Hp; bool had = effect.tag != null && target.Tags.Contains(effect.tag);
+                    if (effect.op == "DuplicatePet")
+                    {
+                        DuplicatePet(next, actor, target, effect, abilityId, events); continue;
+                    }
                     if (effect.op == "Teleport")
                     {
                         if (!target.IsTile || !Passable(next, target.X, target.Y, actorId)) throw new ArgumentException("Teleport destination is blocked or occupied.");
@@ -140,6 +144,25 @@ namespace DungeonCrawlerTactics
                 }
             }
             return new ActionResult(next, log, events);
+        }
+        private void DuplicatePet(BattleState state, EntityState actor, EntityState target, EffectDef effect, string abilityId, List<PresentationEvent> events)
+        {
+            if (target.IsTile || target.Team != actor.Team || !target.Tags.Contains(effect.tag) || target.DuplicateSourceId != null) throw new ArgumentException("Choose a living allied pet, not a clockwork copy.");
+            foreach (EntityState entity in state.Entities.Values) if (entity.DuplicateCasterId == actor.Id) throw new ArgumentException("This caster already has clockwork copies on the board.");
+            List<EntityState> spaces = new List<EntityState>();
+            foreach (EntityState tile in state.Entities.Values) if (tile.IsTile && Math.Abs(tile.X - target.X) + Math.Abs(tile.Y - target.Y) == 1 && Passable(state, tile.X, tile.Y, null)) spaces.Add(tile);
+            spaces.Sort((a, b) => a.Y == b.Y ? a.X.CompareTo(b.X) : a.Y.CompareTo(b.Y));
+            if (spaces.Count < effect.amount) throw new ArgumentException("Two open tiles adjacent to the pet are required.");
+            for (int i = 0; i < effect.amount; i++)
+            {
+                EntityState copy = new EntityState { Id = "clockwork." + actor.Id + "." + i, ClassId = target.ClassId, Team = actor.Team, X = spaces[i].X, Y = spaces[i].Y, Hp = effect.summonHp, MaxHp = effect.summonHp, Energy = 0, DuplicateSourceId = target.Id, DuplicateCasterId = actor.Id, DuplicateRounds = effect.summonRounds, DuplicateMove = effect.summonMove };
+                foreach (string grant in target.GrantedAbilities) if (catalog.Abilities[grant].cost == 0 && !Array.Exists(catalog.Abilities[grant].effects, e => e.op == "DuplicatePet")) copy.GrantedAbilities.Add(grant);
+                foreach (string grant in catalog.Classes[target.ClassId].abilityIds) if (catalog.Abilities[grant].cost == 0 && !Array.Exists(catalog.Abilities[grant].effects, e => e.op == "DuplicatePet")) copy.GrantedAbilities.Add(grant);
+                copy.Tags.Add("status.clockwork");
+                state.Entities.Add(copy.Id, copy);
+                events.Add(new PresentationEvent { type = "summon", actorId = actor.Id, targetId = copy.Id, abilityId = abilityId, tag = target.Id, toX = copy.X, toY = copy.Y });
+                if (onEntry != null) onEntry(state, copy, new List<string>(), events);
+            }
         }
         private static bool Passable(BattleState state, int x, int y, string actorId)
         {

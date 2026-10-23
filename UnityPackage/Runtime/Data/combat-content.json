@@ -64,6 +64,18 @@
     {
       "id": "surface.trap_shock",
       "label": "Shock Snare (one use; affects any entrant)"
+    },
+    {
+      "id": "trait.pet",
+      "label": "Pet companion"
+    },
+    {
+      "id": "status.clockwork",
+      "label": "Clockwork copy"
+    },
+    {
+      "id": "status.rushing",
+      "label": "Rush"
     }
   ],
   "classes": [
@@ -3106,6 +3118,86 @@
           "op": "AddTag",
           "amount": 0,
           "tag": "surface.trap_shock"
+        }
+      ]
+    },
+    {
+      "id": "ability.carl_tripwire",
+      "label": "Rig Shock Tripwire",
+      "target": "tile",
+      "range": 3,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.trap_shock"
+        }
+      ]
+    },
+    {
+      "id": "ability.carl_dynamite",
+      "label": "Dynamite",
+      "target": "enemy",
+      "range": 4,
+      "cost": 3,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 14,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.carl_freeze_trap",
+      "label": "Rig Freeze Trap",
+      "target": "tile",
+      "range": 3,
+      "cost": 3,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.trap_coolant"
+        }
+      ]
+    },
+    {
+      "id": "ability.donut_clockwork_triplicate",
+      "label": "Clockwork Triplicate",
+      "target": "ally",
+      "range": 3,
+      "cost": 4,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "DuplicatePet",
+          "amount": 2,
+          "tag": "trait.pet",
+          "summonHp": 12,
+          "summonMove": 3,
+          "summonRounds": 2
+        }
+      ]
+    },
+    {
+      "id": "ability.katia_rush",
+      "label": "Rush",
+      "target": "self",
+      "range": 0,
+      "cost": 3,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.rushing"
         }
       ]
     }

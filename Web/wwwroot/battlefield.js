@@ -12,7 +12,15 @@ const copy = value => JSON.parse(JSON.stringify(value));
 const images = {};
 const roomArt = new Map();
 const roomReady = fetch('assets/room-kit/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(manifest.assets.map(asset=>new Promise(resolve=>{
-  const image=new Image(); image.onload=()=>{roomArt.set(asset.id,{...asset,image});resolve();}; image.onerror=resolve;image.src='assets/room-kit/'+asset.file;
+  const image=new Image(); image.onload=()=>{
+    let displayImage=image;
+    if(['wall-ne','wall-nw','stone-a','stone-b'].includes(asset.id)){
+      const tinted=document.createElement('canvas');tinted.width=image.width;tinted.height=image.height;
+      const paint=tinted.getContext('2d');
+      paint.filter=asset.id.startsWith('wall-')?'sepia(.35) hue-rotate(155deg) saturate(.8) brightness(.78)':'sepia(.3) hue-rotate(155deg) saturate(.7) brightness(.88)';
+      paint.drawImage(image,0,0);displayImage=tinted;
+    }
+    roomArt.set(asset.id,{...asset,image,displayImage});resolve();}; image.onerror=resolve;image.src='assets/room-kit/'+asset.file;
 })))).catch(()=>{});
 const legacyImages = {};
 let spriteFrames = {};
@@ -98,7 +106,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function screenFacing(id){const direction=facing.get(id)??{x:0,y:1};const p=rotateVector(direction.x,direction.y);return p.x>0?'se':p.x<0?'nw':p.y>0?'sw':'ne';}
   function getRotationLabel(){return ['North view','East view','South view','West view'][rotation];}
   function rotate(delta){
-    const map=mapData(); const anchor=map?{x:(map.width-1)/2,y:(map.height-1)/2}:null;
+    const map=mapData(); const selected=view?.screen==='explore'?view.exploration:view?.units?.find(u=>u.id===view.selectedUnitId);
+    const anchor=selected??(map?{x:(map.width-1)/2,y:(map.height-1)/2}:null);
     const before=anchor?screen(anchor.x,anchor.y):null;
     rotation=((rotation+Math.round(delta))%4+4)%4;fit();
     if(anchor){const after=screen(anchor.x,anchor.y);panX+=before.x-after.x;panY+=before.y-after.y;fit();}
@@ -106,12 +115,20 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   }
   function resize() {
     const box=canvas.getBoundingClientRect();
+    const wasMobile=width<600;
+    const layoutChanged=width>1&&cameraReady&&wasMobile!==(box.width<600);
     width=Math.max(1,box.width); height=Math.max(1,box.height);
+    if(layoutChanged){
+      // Retain the user's relative zoom while switching desktop/phone framing.
+      zoomLevel=clamp(zoomLevel*(width<600?1.65/1.28:1.28/1.65),.7,3.2);
+      panX=0;panY=0;
+    }
     const dpr=Math.min(devicePixelRatio || 1,2);
     canvas.width=Math.round(width*dpr); canvas.height=Math.round(height*dpr);
     context.setTransform(dpr,0,0,dpr,0,0);
     context.imageSmoothingEnabled=false;
     fit();
+    if(layoutChanged)centerSelected();
   }
   function fit() {
     const map = view?.screen === 'explore' ? view.exploration : view;
@@ -120,7 +137,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const minX=Math.min(...corners.map(p=>p.x))-TILE_W/2,maxX=Math.max(...corners.map(p=>p.x))+TILE_W/2;
     const minY=Math.min(...corners.map(p=>p.y))-136,maxY=Math.max(...corners.map(p=>p.y))+TILE_H/2;
     const mapWidth=maxX-minX,mapHeight=maxY-minY;
-    if(!cameraReady){zoomLevel=width<600?1.55:1;cameraReady=true;}
+    if(!cameraReady){zoomLevel=width<600?1.65:1.28;cameraReady=true;}
     scale=Math.max(.05,Math.min((width-28)/mapWidth,(height-24)/mapHeight)*zoomLevel);
     originX=width/2-(minX+maxX)/2*scale+panX;
     originY=height/2-(minY+maxY)/2*scale+panY;
@@ -150,7 +167,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       cursor=selected ? {x:selected.x,y:selected.y} : {x:next.exploration?.x??1,y:next.exploration?.y??1};
     }
     fit();
-    if(width<600 && (lastSelection!==next.selectedUnitId || oldScreen!==next.screen)) centerSelected();
+    if(oldScreen!==next.screen || width<600 && lastSelection!==next.selectedUnitId) centerSelected();
     lastSelection=next.selectedUnitId;
   }
   function diamond(x,y,{stroke,fill,weight=2,inset=0}={}) {
@@ -181,7 +198,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(['floor','surface'].includes(asset.layer)){
       if(orientation===1)context.transform(0,.5,-2,0,0,0);else if(orientation===2)context.scale(-1,-1);else if(orientation===3)context.transform(0,-.5,2,0,0,0);
     }else if(orientation>=2&&!asset.tags.includes('wall')&&!asset.tags.includes('door'))context.scale(-1,1);
-    context.drawImage(asset.image,-asset.anchor.x,-asset.anchor.y,asset.width,asset.height);
+    context.drawImage(asset.displayImage??asset.image,-asset.anchor.x,-asset.anchor.y,asset.width,asset.height);
     context.restore();
   }
   function floor(x,y,index,alpha=1) {
@@ -266,7 +283,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const healthY=p.y-size*(boss?.91:enlarged)-8;
     context.fillStyle='#08131e';context.fillRect(p.x-24,healthY,48,5);
     context.fillStyle=enemy?hostile:'#80d8a4';context.fillRect(p.x-23,healthY+1,46*clamp(unit.hp/unit.maxHp,0,1),3);
-    if(!enemy&&view.screen!=='explore')text(key==='donut'?'DONUT':short(unit.label||key).toUpperCase(),p.x,healthY-12,selected?'#fff0ba':'#bceaff',11);
+    if(!enemy&&selected&&view.screen!=='explore'&&!(hover?.x===Math.round(unit.x)&&hover?.y===Math.round(unit.y)))text(key==='donut'?'DONUT':short(unit.label||key).toUpperCase(),p.x,healthY-12,selected?'#fff0ba':'#bceaff',11);
     if(unit.acted && !enemy)text('DONE',p.x,p.y+14,'#a4b1bd',10);
     if(hover?.x===Math.round(unit.x)&&hover?.y===Math.round(unit.y)) text(`${unit.label} ${unit.hp}/${unit.maxHp}`,p.x,healthY-13,enemy?'#ffb3a3':'#e3f5ff',13);
     const tags=unit.tags??[];
@@ -274,6 +291,11 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(tags.includes('status.wet')) text('WET',p.x+37,p.y-48,'#84e8ff',11);
     if(tags.includes('status.frozen')) text('FROZEN',p.x,p.y-70,'#b3faff',11);
     if(tags.includes('status.shocked')) text('SHOCK',p.x+34,p.y-35,'#d8b6ff',11);
+    if(tags.includes('status.clockwork')) {
+      const rounds=unit.statuses?.find(s=>s.tag==='status.clockwork')?.remainingRounds;
+      diamond(unit.x,unit.y,{stroke:'#abf9ff',weight:2,inset:15});
+      text(`COPY${rounds?' · '+rounds+'r':''}`,p.x,p.y+33,'#b6faff',12);
+    }
   }
   function pathTo(x,y) {
     const explore=view?.screen==='explore',map=mapData();
@@ -362,27 +384,20 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.beginPath();points.forEach((p,i)=>i?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y));context.closePath();
     context.fillStyle=fill;context.fill();if(stroke){context.strokeStyle=stroke;context.lineWidth=1;context.stroke();}
   }
-  function masonry(a,b,height=84) {
-    // Joined courses follow the exact projected boundary, so rotated walls cannot drift.
-    const lift=p=>({x:p.x,y:p.y-height});
-    polygon([a,b,lift(b),lift(a)],b.x>a.x?'#34414a':'#293641','#18272e');
-    for(let row=0;row<4;row++){
-      const y=height-row*20;
-      context.beginPath();context.moveTo(a.x,a.y-y);context.lineTo(b.x,b.y-y);context.strokeStyle=row===0?'#78818a':'#182830';context.lineWidth=row===0?3:2;context.stroke();
-      for(let j=0;j<2;j++){
-        const t=(j+(row%2?.25:.7))/2;
-        const x=a.x+(b.x-a.x)*t,base=a.y+(b.y-a.y)*t-y;
-        context.beginPath();context.moveTo(x,base);context.lineTo(x,base+19);context.strokeStyle='#182830';context.lineWidth=2;context.stroke();
-      }
-    }
-    // Stable tiny mineral flecks add texture at world scale without flicker.
-    for(let k=0;k<54;k++){
-      const t=((k*37+Math.round(a.x))%97+97)%97/97;
-      const rise=((k*23+Math.round(a.y))%79+79)%79;
-      context.fillStyle=k%3?'#8f9a9b20':'#030e1645';
-      context.fillRect(Math.round(a.x+(b.x-a.x)*t),Math.round(a.y+(b.y-a.y)*t-rise),k%4===0?3:1,1);
-    }
-    polygon([lift(a),lift(b),{x:b.x,y:b.y-height-8},{x:a.x,y:a.y-height-8}],'#55626b','#839095');
+  function masonry(a,b,alpha=1,sy=1.65) {
+    // The PNG's measured ground endpoints are (12,51)/(68,79), mirrored
+    // for NW. Align these points to the world edge, overlapping the end caps.
+    const left=a.x<b.x?a:b,right=a.x<b.x?b:a;
+    const rising=right.y<left.y,asset=roomArt.get(rising?'wall-nw':'wall-ne');
+    if(!asset)return;
+    const sx=(right.x-left.x)/56;
+    const sourceSlope=rising?-.5:.5;
+    const shear=(right.y-left.y)/56-sourceSlope*sy;
+    context.save();context.globalAlpha=alpha;
+    context.translate((left.x+right.x)/2,(left.y+right.y)/2);
+    context.transform(sx,shear,0,sy,0,0);
+    context.drawImage(asset.displayImage??asset.image,-40,-65);
+    context.restore();
   }
   function glow(x,y,radius,color,power=1) {
     const g=context.createRadialGradient(x,y,0,x,y,radius);g.addColorStop(0,color+Math.round(65*power).toString(16).padStart(2,'0'));g.addColorStop(1,color+'00');context.fillStyle=g;context.fillRect(x-radius,y-radius,radius*2,radius*2);
@@ -469,15 +484,22 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       for(let x=1;x<map.width;x+=3)drawables.push({depth:depth(x,farY)+.1,draw:()=>torch(x,farY,time)});
       for(let y=1;y<map.height;y+=3)drawables.push({depth:depth(farX,y)+.1,draw:()=>torch(farX,y,time)});
     }
+    const blocked=new Set(tiles.filter(t=>t.blocked&&(!explore||t.revealed)).map(t=>`${t.x},${t.y}`));
     for(const tile of tiles) {
-      if(explore&&!tile.revealed)continue;
-      if(tile.blocked&&!placements.some(p=>p.x===tile.x&&p.y===tile.y&&p.blocksMovement)&&!decorations.some(p=>p.x===tile.x&&p.y===tile.y&&p.layer==='prop'))drawables.push({depth:depth(tile.x,tile.y),draw:()=>{
-        const wall=project(tile.x,tile.y);
-        const nearby=visualUnits.some(u=>{const p=project(u.x,u.y);return u.hp>0&&p.y>=wall.y&&p.y-wall.y<70&&Math.abs(p.x-wall.x)<90;});
-        const crate=(tile.x+tile.y)%5===0;
-        prop(tile.x,tile.y,crate?8:(tile.x+tile.y)%6===0?6:(tile.x*7+tile.y)%5===0?5:4,crate?95:128,nearby?.66:1);
-      }});
-
+      if(!blocked.has(`${tile.x},${tile.y}`)||placements.some(p=>p.x===tile.x&&p.y===tile.y&&p.blocksMovement)||decorations.some(p=>p.x===tile.x&&p.y===tile.y&&p.layer==='prop'))continue;
+      // Render connected blocked cells as a single stone mass. Only exposed
+      // edges receive upright art; no random pillar/crate substitutions.
+      const corners=[[tile.x-.5,tile.y-.5],[tile.x+.5,tile.y-.5],[tile.x+.5,tile.y+.5],[tile.x-.5,tile.y+.5]];
+      const neighbors=[[0,-1],[1,0],[0,1],[-1,0]];
+      for(let edge=0;edge<4;edge++){
+        const [dx,dy]=neighbors[edge];if(blocked.has(`${tile.x+dx},${tile.y+dy}`))continue;
+        const a=project(...corners[edge]),b=project(...corners[(edge+1)%4]);
+        const d=(a.y+b.y)/TILE_H;
+        drawables.push({depth:d,draw:()=>{
+          const nearby=visualUnits.some(u=>{const p=project(u.x,u.y);return u.hp>0&&p.y>=(a.y+b.y)/2&&p.y-(a.y+b.y)/2<90&&Math.abs(p.x-(a.x+b.x)/2)<85;});
+          masonry(a,b,nearby?.48:1,1.05);
+        }});
+      }
     }
     for(const piece of placements)if(!['floor','surface'].includes(piece.layer)&&!['moss','fire-overlay'].includes(piece.assetId))drawables.push({depth:depth(piece.x,piece.y),draw:()=>component(piece.assetId,piece.x,piece.y,1,piece.rotation??0)});
     const intent=!explore?view.scenario?.intent:null;
@@ -540,6 +562,20 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     canvas.dispatchEvent(new CustomEvent('battleevent',{detail:{event:copy(event),actor:actor?copy(actor):null,target:target?copy(target):null}}));
     let duration=moving?(mover?.team==='enemy'?280:150):event.type==='attack'?500:event.type==='damage'?340:event.type==='reaction'?420:event.type==='phase'?450:65;
     if(reduced.matches)duration=0;
+    if(event.type==='summon') {
+      const spawned=view.units?.find(u=>u.id===event.targetId);
+      if(spawned&&!visualUnits.some(u=>u.id===spawned.id))visualUnits.push(copy(spawned));
+      const position=spawned??{x:event.toX,y:event.toY};
+      effects.push({type:'magic',x:position.x,y:position.y,started:performance.now(),duration:600});
+      float('CLOCKWORK COPY',position,'#b6faff');
+      duration=reduced.matches?0:450;
+    }
+    if(event.type==='despawn'&&target) {
+      effects.push({type:'magic',x:target.x,y:target.y,started:performance.now(),duration:450});
+      float('COPY EXPIRED',target,'#b6faff');
+      visualUnits=visualUnits.filter(u=>u.id!==event.targetId);
+      duration=reduced.matches?0:320;
+    }
     if(event.type==='damage') {if(target){target.hp=event.after;effects.push({type:'magic',x:target.x,y:target.y,started:performance.now(),duration:360});}float(`−${Math.abs(event.amount)}`,target,'#ff8880');}
     if(event.type==='heal') {if(target)target.hp=event.after;float(`+${Math.abs(event.amount)}`,target,'#9cffa5');}
     if(event.type==='guard')float(`BLOCK ${event.amount}`,target,'#a0dcff');
@@ -550,10 +586,10 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(actor?.team==='enemy'&&['attack','move'].includes(event.type))float(event.type==='move'?'MOVING':short(event.abilityId||'ATTACK').toUpperCase(),actor,'#ffb68b');
     if(event.type==='attack'&&target) {
       const id=event.abilityId??'';
-      if(/bomb|explos|fire/.test(id)) {effects.push({type:'explosion',x:target.x,y:target.y,started:performance.now()+100,duration:420});shakeUntil=performance.now()+280;}
+      if(/bomb|explos|fire|dynamite/.test(id)) {effects.push({type:'explosion',x:target.x,y:target.y,started:performance.now()+100,duration:420});shakeUntil=performance.now()+280;}
       else if(/missile|spark|teleport|puddle|heal/.test(id))effects.push({type:'magic',x:target.x,y:target.y,started:performance.now()+90,duration:420});
       if(actor&&/missile|spark/.test(id))missiles.push({fromX:actor.x,fromY:actor.y,toX:target.x,toY:target.y,started:performance.now()+70,duration:260});
-      if(/shapeshift/.test(id))effects.push({type:'magic',x:target.x,y:target.y,started:performance.now(),duration:350});
+      if(/shapeshift|rush|clockwork_triplicate/.test(id))effects.push({type:'magic',x:target.x,y:target.y,started:performance.now(),duration:350});
     }
     if(event.type==='trap_trigger'){
       const tile=visualTiles.find(t=>t.x===event.toX&&t.y===event.toY);
@@ -599,7 +635,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function centerSelected() {
     const unit=view?.screen==='explore'?view.exploration:view?.units?.find(u=>u.id===view.selectedUnitId);
     if(!unit)return;
-    const pos=screen(unit.x,unit.y);panX+=width/2-pos.x;panY+=height*(width<600?.43:.56)-pos.y;fit();
+    const pos=screen(unit.x,unit.y);panX+=width*(width<600?.5:.4)-pos.x;panY+=height*(width<600?.43:.25)-pos.y;fit();
   }
   function zoom(delta) {zoomLevel=clamp(zoomLevel+delta,.7,3.2);fit();centerSelected();}
   const down=event=>{drag={id:event.pointerId,x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY};suppressClick=false;canvas.setPointerCapture(event.pointerId);};

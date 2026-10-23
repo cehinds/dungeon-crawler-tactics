@@ -39,6 +39,9 @@ namespace DungeonCrawlerTactics
             {
                 Need(member != null && !string.IsNullOrEmpty(member.id) && !member.id.StartsWith("tile.", StringComparison.Ordinal) && roster.Add(member.id) && !string.IsNullOrEmpty(member.label) && member.classId != null && catalog.Classes.ContainsKey(member.classId) && catalog.Classes[member.classId].playerSelectable, "Invalid roster member.");
                 Need(string.IsNullOrEmpty(member.legacyClassId) || catalog.Classes.ContainsKey(member.legacyClassId), "Unknown legacy class.");
+                Need(member.combatTags != null, "Combat tags cannot be null."); foreach (string tag in member.combatTags) Need(catalog.HasTag(tag), "Unknown roster combat tag.");
+                Need(member.specialtyClassIds != null, "Specialty classes cannot be null.");
+                HashSet<string> specialties = new HashSet<string>(); foreach (string id in member.specialtyClassIds) Need(id != null && catalog.Classes.ContainsKey(id) && catalog.Classes[id].playerSelectable && specialties.Add(id), "Unknown or duplicate specialty class.");
                 Need(member.innateAbilityIds != null, "Innate abilities cannot be null.");
                 Need(member.maxSkillRank >= SkillRankProgression.NormalRankCap && member.maxSkillRank <= SkillRankProgression.AbsoluteRankCap, "Crawler skill rank eligibility must be within ranks 15–20.");
                 HashSet<string> grants = new HashSet<string>(); foreach (string id in member.innateAbilityIds) Need(id != null && catalog.Abilities.ContainsKey(id) && grants.Add(id), "Unknown or duplicate innate ability.");
@@ -51,7 +54,7 @@ namespace DungeonCrawlerTactics
             for (int i = 1; i < data.progression.xpThresholds.Length; i++) Need(data.progression.xpThresholds[i] > data.progression.xpThresholds[i - 1] && data.progression.xpThresholds[i] <= 1000000, "XP thresholds must increase from zero.");
             Need(data.progression.hpPerLevel >= 0 && data.progression.hpPerLevel <= 100 && data.progression.manaPerLevel >= 0 && data.progression.manaPerLevel <= 100 && data.progression.movePerLevel >= 0 && data.progression.movePerLevel <= 2, "Invalid progression stat growth.");
             HashSet<string> skillIds = new HashSet<string>();
-            foreach (SkillUnlockDef skill in data.progression.skillUnlocks) Need(skill != null && StableId(skill.id) && skillIds.Add(skill.id) && !string.IsNullOrEmpty(skill.label) && (string.IsNullOrEmpty(skill.rosterId) || roster.Contains(skill.rosterId)) && skill.abilityId != null && catalog.Abilities.ContainsKey(skill.abilityId) && skill.level >= 1 && skill.level <= data.progression.xpThresholds.Length, "Invalid skill unlock.");
+            foreach (SkillUnlockDef skill in data.progression.skillUnlocks) Need(skill != null && StableId(skill.id) && skillIds.Add(skill.id) && !string.IsNullOrEmpty(skill.label) && (string.IsNullOrEmpty(skill.rosterId) || roster.Contains(skill.rosterId)) && skill.abilityId != null && catalog.Abilities.ContainsKey(skill.abilityId) && skill.minimumFloor >= 1 && skill.minimumFloor <= 18 && skill.level >= 1 && skill.level <= data.progression.xpThresholds.Length, "Invalid skill unlock.");
             HashSet<string> gearIds = new HashSet<string>();
             foreach (EquipmentDef gear in data.equipment)
             {
@@ -118,7 +121,7 @@ namespace DungeonCrawlerTactics
             HashSet<string> sponsorIds = new HashSet<string>();
             foreach (SponsorChallengeDef c in data.sponsorChallenges) Need(c != null && !string.IsNullOrEmpty(c.id) && sponsorIds.Add(c.id) && !string.IsNullOrEmpty(c.label) && !string.IsNullOrEmpty(c.description) && (c.eventType == "reaction" || c.eventType == "rescue" || c.eventType == "victory") && c.rewardItemId != null && catalog.Items.ContainsKey(c.rewardItemId) && c.rewardCount > 0 && c.rewardCount <= 100, "Invalid sponsor challenge.");
             HashSet<string> rules = new HashSet<string>();
-            foreach (TagRuleDef rule in data.tagRules) Need(rule != null && catalog.HasTag(rule.tag) && rules.Add(rule.tag) && rule.durationRounds >= 0 && rule.durationRounds <= 100 && rule.entryDamage >= 0 && rule.entryDamage <= 10000 && rule.turnDamage >= 0 && rule.turnDamage <= 10000 && rule.movePenalty >= 0 && rule.movePenalty <= 100 && rule.energyPenalty >= 0 && rule.energyPenalty <= 100, "Invalid tag rule.");
+            foreach (TagRuleDef rule in data.tagRules) Need(rule != null && catalog.HasTag(rule.tag) && rules.Add(rule.tag) && rule.durationRounds >= 0 && rule.durationRounds <= 100 && rule.entryDamage >= 0 && rule.entryDamage <= 10000 && rule.turnDamage >= 0 && rule.turnDamage <= 10000 && rule.moveBonus >= 0 && rule.moveBonus <= 12 && rule.movePenalty >= 0 && rule.movePenalty <= 100 && rule.energyPenalty >= 0 && rule.energyPenalty <= 100, "Invalid tag rule.");
             foreach (TagRuleDef rule in data.tagRules) Need(string.IsNullOrEmpty(rule.occupantTag) || catalog.HasTag(rule.occupantTag), "Unknown occupant tag.");
             foreach (TagRuleDef rule in data.tagRules) Need(!rule.consumeOnEntry || rule.durationRounds == 0 && rule.turnDamage == 0 && !string.IsNullOrEmpty(rule.occupantTag), "Traps require persistent single-entry effects and no round damage.");
             ValidateSkillTreeDefinitions(data, catalog);

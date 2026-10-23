@@ -15,11 +15,14 @@ The live shared-C# source and authored JSON are the implementation reference. `D
 
 ## Browser battle readability and animation
 
+- [x] Second visual pass: align textured wall PNGs, cache stone tint, zoom closer, reduce label clutter, enlarge party chips, and use generated nine-slice frames. Review evidence: [design QA](../design-qa.md).
+- [x] Replace the long character sheet with a persistent portrait and working tabs; add eight independent illustrated house components and downloadable production assets in the menu atlas.
+
 - [x] Shared C# resolves movement, actions, exact previews, confirmation/cancellation, party turns, enemy turns and bounded tag reactions.
 - [x] Browser battle presentation displays the isometric map, party/enemy sprites, four map rotations, path preview, responsive action menu, target counts, confirmation forecasts, turn banners, and narration.
 - [x] Character sprites include four-direction idle and walking frames for all eight field characters; attacks, hits, projectiles, reactions and floating feedback are animated/presented in browser source.
 - [x] Compact HUD surfaces HP, Mana, movement, conditions, range and forecasts; action selection exposes costs, categories and legal-target counts.
-- [x] Capture and review HUD, ability chooser, target forecast/cancel, enemy phase, safe-room, equipment, skills and form menus at 1440×900 and 390×844. See [release QA](https://github.com/cehinds/dungeon-crawler-tactics/blob/main/Docs/Finish-QA.md).
+- [x] Capture and review HUD, ability chooser, target forecast/cancel, enemy phase, safe-room, equipment, skills and form menus at 1440×900 and 390×844. See [release QA](Finish-QA.md).
 - [ ] Complete the same current-build visual walkthrough for every house upgrade and every story floor.
 - [x] Compare the current HUD/menu captures with the reference; enlarge actions and sprites, replace the confusing Powerful Strike icon, and fix camp advisor overlap. This is an improved playable rendering, not pixel-for-pixel screenshot parity.
 - [x] Author and validate three alternate Katia directional idle/walk sets: 36 distinct frames, measured anchors, actual form-ID selection and committed-form browser checks.
@@ -43,6 +46,12 @@ The live shared-C# source and authored JSON are the implementation reference. `D
 
 ## Party, progression and house
 
+- [x] Carl can place mana-funded shock/freeze traps and throw direct-hit Dynamite; surfaces trigger and consume on actual entry.
+- [x] Donut's Character Actor grants a temporary specialty kit once per story floor from Floor 3, with an explicit confirmation and saved receipt. The curated kits/cadence are adaptations.
+- [x] Clockwork Triplicate creates two controllable, targetable temporary pet copies with their own activations, configured stats/lifetime, exact forecasts, save support, sprites and copy sheets.
+- [x] Katia's Rush temporarily increases actual movement; the same resolver forecasts the bonus, and movement remains available after the action.
+- [ ] Implement Hole as a proper passage/terrain mechanic. It has not been substituted with a differently named damage or slow spell.
+
 - [x] Story party progression supports shared XP through level 50; class-tree progression has authored nodes through level 50. Numerical curves and grants are game adaptations.
 - [x] Story class changes and manual stat allocation unlock on floor 3; earlier floors bank allocation points. The existing legacy campaign remains available.
 - [x] Personal trees and per-ability practice ranks are saved; configured skill eligibility can reach rank 20 after floor 3, while most skills cap at 15.
@@ -54,7 +63,7 @@ The live shared-C# source and authored JSON are the implementation reference. `D
 
 ## Story route: floors 1–8
 
-- [x] Expand six approaches (floors 1, 2, 4, 5, 6, 8) to distinct connected 17×13 maps with 24 additional discovery points, including 12 functional caches. Preserve floor 3 and existing story objectives. [Level details](https://github.com/cehinds/dungeon-crawler-tactics/blob/main/Docs/Story-Levels.md).
+- [x] Expand six approaches (floors 1, 2, 4, 5, 6, 8) to distinct connected 17×13 maps with 24 additional discovery points, including 12 functional caches. Preserve floor 3 and existing story objectives. [Level details](Story-Levels.md).
 
 - [x] Eight-floor journey registry is authored; floors 9–18 are visibly reserved/locked with no encounters.
 - [x] Current data defines seven battles plus the deliberate floor-7 bypass. Each battle has one authored encounter board, a fixed enemy roster and an XP award; floors 4 and 5 add required route/beacon discovery gates, and floor 8 adds capture objectives. Victory uses the general sponsor-reward selection flow; per-floor bespoke loot/reward scenes are not authored.
@@ -114,7 +123,7 @@ The seven XP awards sum to 118,685. Applying the authored cumulative thresholds 
 
 ## Evidence and screenshot status
 
-- [x] Capture fresh Chromium desktop/phone screenshots for this tested release source; see [release QA](https://github.com/cehinds/dungeon-crawler-tactics/blob/main/Docs/Finish-QA.md). Deployment status is recorded separately.
+- [x] Capture fresh Chromium desktop/phone screenshots for this tested release source; see [release QA](Finish-QA.md). Deployment status is recorded separately.
 - [ ] Compare screenshots against the concept gallery in `Docs/Book-Fidelity-Checklist.md`. Those images are illustrative mockups, not evidence that the product currently matches them pixel-for-pixel.
 - [ ] Record current Unity screenshots separately after actual Editor runs; browser screenshots cannot establish Unity parity.
 - [ ] Update checked statuses only after inspecting the current behavior or running the stated validation. Keep implementation claims and visual/test evidence distinct.

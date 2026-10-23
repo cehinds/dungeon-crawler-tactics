@@ -115,7 +115,11 @@ static class JourneyTests
                 Check(Save(game) == banked && locked.message.IndexOf("floor", StringComparison.OrdinalIgnoreCase) >= 0, "Earned stat points remain banked on floor two");
             }
             if (floor == 3) Check(game.GetView().journey.classesUnlocked && game.GetView().journey.allocationUnlocked, "Over City unlocks classes and allocation");
-            Command(game, "safe_room_rest"); Explore(game); Roundtrip(game, "Floor " + floor + " battle");
+            if (floor == 3) { game.Handle(new GameCommand { type = "set_specialty", unitId = "crawler.donut", classId = "class.cryomancer" }); Check(game.GetView().roster.Single(r => r.id == "crawler.donut").specialtyClassId == "class.cryomancer", "Character Actor selects a temporary specialty on floor three"); }
+            if (floor == 4) Check(game.GetView().roster.Single(r => r.id == "crawler.donut").specialtyClassId == null && game.GetView().roster.Single(r => r.id == "crawler.donut").specialtyAvailable, "Story descent clears the specialty and permits a fresh choice");
+            Command(game, "safe_room_rest"); Explore(game);
+            if (floor == 3) Check(game.GetView().units.Single(u => u.id == "crawler.donut").abilityIds.Contains("ability.ice_lance"), "Temporary specialty supplies its actual combat kit");
+            if (floor == 4) Check(!game.GetView().units.Single(u => u.id == "crawler.donut").abilityIds.Contains("ability.ice_lance"), "Expired specialty abilities do not leak into the next floor"); Roundtrip(game, "Floor " + floor + " battle");
             if (floor == 4 || floor == 5)
             {
                 GameSave missingRoute = Clone(game.ExportSave());

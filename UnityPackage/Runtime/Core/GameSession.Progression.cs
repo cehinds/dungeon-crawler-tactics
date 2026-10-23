@@ -19,11 +19,15 @@ namespace DungeonCrawlerTactics
         }
         private ClassStats PlayerStats(string id, string classId) { ClassStats stats = PlayerStats(id, classId, xp, equipped); ApplyAllocatedStats(stats, id, allocations); ApplyTreeStats(stats, id, unlockedSkillNodes); RosterView member; if (roster.TryGetValue(id, out member)) ApplyModes(stats, id, member.stanceId, member.formId); return stats; }
         private EquipmentDef Gear(string id) { EquipmentDef result = Array.Find(data.equipment, e => e.id == id); Require(result != null, "Unknown equipment."); return result; }
-        private string[] Grants(string id, int experience, List<EquipmentSlotSave> loadout, List<string> skillNodes = null, string selectedClassId = null)
+        private string[] Grants(string id, int experience, List<EquipmentSlotSave> loadout, List<string> skillNodes = null, string selectedClassId = null, string specialtyClassId = null, int progressionFloor = -1)
         {
+            if (progressionFloor < 0) progressionFloor = journey == null ? 18 : journey.floorIndex + 1;
             List<string> grants = new List<string>(); RosterDef definition = Definition(id); if (definition == null) return grants.ToArray();
+            RosterView specialist;
+            if (specialtyClassId == null && roster.TryGetValue(id, out specialist)) specialtyClassId = specialist.specialtyClassId;
+            if (!string.IsNullOrEmpty(specialtyClassId)) foreach (string ability in catalog.Classes[specialtyClassId].abilityIds) if (!grants.Contains(ability)) grants.Add(ability);
             foreach (string ability in definition.innateAbilityIds) if (!grants.Contains(ability)) grants.Add(ability);
-            foreach (SkillUnlockDef skill in data.progression.skillUnlocks) if ((string.IsNullOrEmpty(skill.rosterId) || skill.rosterId == id) && LevelAt(experience) >= skill.level && !grants.Contains(skill.abilityId)) grants.Add(skill.abilityId);
+            foreach (SkillUnlockDef skill in data.progression.skillUnlocks) if ((string.IsNullOrEmpty(skill.rosterId) || skill.rosterId == id) && LevelAt(experience) >= skill.level && progressionFloor >= skill.minimumFloor && !grants.Contains(skill.abilityId)) grants.Add(skill.abilityId);
             foreach (EquipmentSlotSave slot in loadout) if (slot.unitId == id) foreach (string ability in Gear(slot.equipmentId).abilityIds) if (!grants.Contains(ability)) grants.Add(ability);
             AddTreeGrants(id, skillNodes ?? unlockedSkillNodes, grants, selectedClassId);
             return grants.ToArray();
@@ -73,7 +77,7 @@ namespace DungeonCrawlerTactics
             {
                 foreach (string id in SortedUnitIds())
                 {
-                    EntityState unit = battle.Entities[id]; if (unit.Team != "player") continue;
+                    EntityState unit = battle.Entities[id]; if (unit.Team != "player" || unit.DuplicateSourceId != null) continue;
                     ClassStats stats = PlayerStats(id, unit.ClassId); int hpGain = stats.hp - unit.MaxHp, manaGain = stats.energy - units[id].maxEnergy;
                     unit.MaxHp = stats.hp; if (unit.Hp > 0) unit.Hp = Math.Min(stats.hp, unit.Hp + Math.Max(0, hpGain));
                     unit.Energy = Math.Min(stats.energy, unit.Energy + Math.Max(0, manaGain)); units[id].maxEnergy = stats.energy; units[id].move = stats.move;
@@ -88,7 +92,7 @@ namespace DungeonCrawlerTactics
         private void PopulateProgression(GameView view)
         {
             int level = LevelAt(xp), next = level < data.progression.xpThresholds.Length ? data.progression.xpThresholds[level] : xp;
-            List<SkillView> skills = new List<SkillView>(); foreach (SkillUnlockDef skill in data.progression.skillUnlocks) skills.Add(new SkillView { id = skill.id, label = skill.label, unitId = skill.rosterId, abilityId = skill.abilityId, level = skill.level, unlocked = level >= skill.level });
+            List<SkillView> skills = new List<SkillView>(); foreach (SkillUnlockDef skill in data.progression.skillUnlocks) skills.Add(new SkillView { id = skill.id, label = skill.label, unitId = skill.rosterId, abilityId = skill.abilityId, level = skill.level, minimumFloor = skill.minimumFloor, unlocked = level >= skill.level && (journey == null || journey.floorIndex + 1 >= skill.minimumFloor) });
             view.progression = new ProgressionView { level = level, xp = xp, nextLevelXp = next, xpIntoLevel = xp - data.progression.xpThresholds[level - 1], xpToNextLevel = Math.Max(0, next - xp), maxLevel = data.progression.xpThresholds.Length, hpBonus = (level - 1) * data.progression.hpPerLevel, manaBonus = (level - 1) * data.progression.manaPerLevel, moveBonus = (level - 1) * data.progression.movePerLevel, skills = skills.ToArray() };
             List<EquipmentView> gearViews = new List<EquipmentView>();
             foreach (EquipmentDef gear in data.equipment) { EquipmentSlotSave owner = equipped.Find(e => e.equipmentId == gear.id); gearViews.Add(new EquipmentView { id = gear.id, label = gear.label, slot = gear.slot, hpBonus = gear.hpBonus, manaBonus = gear.manaBonus, moveBonus = gear.moveBonus, abilityIds = gear.abilityIds, unlockEncounter = gear.unlockEncounter, owned = gear.unlockEncounter <= (Scenario == null ? LiveVictories() : 0), equippedUnitId = owner == null ? null : owner.unitId }); }

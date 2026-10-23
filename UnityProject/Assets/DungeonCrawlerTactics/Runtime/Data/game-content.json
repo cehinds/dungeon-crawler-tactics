@@ -13,7 +13,8 @@
       "artId": "carl",
       "innateAbilityIds": [
         "ability.carl_powerful_strike",
-        "ability.carl_bomb"
+        "ability.carl_bomb",
+        "ability.carl_tripwire"
       ],
       "legacyClassId": "class.brawler",
       "maxSkillRank": 20
@@ -31,7 +32,12 @@
         "ability.donut_heal_critter"
       ],
       "legacyClassId": "class.stormcaller",
-      "maxSkillRank": 15
+      "maxSkillRank": 15,
+      "specialtyClassIds": [
+        "class.stormcaller",
+        "class.cryomancer",
+        "class.cleric"
+      ]
     },
     {
       "id": "crawler.katia",
@@ -123,7 +129,10 @@
       ],
       "replacesId": "crawler.mordecai",
       "legacyClassId": "class.beastmaster",
-      "maxSkillRank": 15
+      "maxSkillRank": 15,
+      "combatTags": [
+        "trait.pet"
+      ]
     }
   ],
   "classStats": [
@@ -1124,6 +1133,11 @@
       "consumeOnEntry": true,
       "entryDamage": 5,
       "durationRounds": 0
+    },
+    {
+      "tag": "status.rushing",
+      "moveBonus": 2,
+      "durationRounds": 2
     }
   ],
   "encounters": [
@@ -2242,6 +2256,36 @@
         "rosterId": "crawler.brittany",
         "abilityId": "ability.britney_corner_guard",
         "level": 3
+      },
+      {
+        "id": "unlock.carl_dynamite",
+        "label": "Dynamite",
+        "rosterId": "crawler.carl",
+        "abilityId": "ability.carl_dynamite",
+        "level": 2
+      },
+      {
+        "id": "unlock.carl_freeze_trap",
+        "label": "Rig Freeze Trap",
+        "rosterId": "crawler.carl",
+        "abilityId": "ability.carl_freeze_trap",
+        "level": 3
+      },
+      {
+        "id": "unlock.donut_clockwork_triplicate",
+        "label": "Clockwork Triplicate",
+        "rosterId": "crawler.donut",
+        "abilityId": "ability.donut_clockwork_triplicate",
+        "level": 3,
+        "minimumFloor": 3
+      },
+      {
+        "id": "unlock.katia_rush",
+        "label": "Rush",
+        "rosterId": "crawler.katia",
+        "abilityId": "ability.katia_rush",
+        "level": 3,
+        "minimumFloor": 3
       }
     ]
   },

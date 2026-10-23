@@ -11,6 +11,20 @@
 <main>
 <section class="intro"><div><h1>The menu atlas.</h1><p>Six illustrated screens. Every component, up close.</p></div><a class="outline-link" href="menu-atlas.json" download>Download component inventory <span aria-hidden="true">↓</span></a></section>
 <p class="notice"><strong>Interactive design reference.</strong> These illustrations and isolated previews use illustrative values. State changes stay on this page; they do not change your game or save. Source references describe the integration boundary, not a claim that every illustrated feature is implemented.</p>
+<section class="production-assets" aria-labelledby="production-title">
+<div class="production-heading"><div><h2 id="production-title">Components used in the live game</h2><p>Eight separate transparent room illustrations and a reusable gold frame. Select a PNG to download it.</p></div><a class="outline-link" href="assets/interface-components.zip" download>Download PNG kit ↓</a></div>
+<div class="production-grid">
+<a href="assets/house/carl.png" download><img src="assets/house/carl.png" alt="Carl's green-quilt bedroom" loading="lazy"><span>Carl's room</span></a>
+<a href="assets/house/donut.png" download><img src="assets/house/donut.png" alt="Donut's royal purple bedroom" loading="lazy"><span>Donut's room</span></a>
+<a href="assets/house/katia.png" download><img src="assets/house/katia.png" alt="Katia's room with mirror and wardrobe" loading="lazy"><span>Katia's room</span></a>
+<a href="assets/house/mongo.png" download><img src="assets/house/mongo.png" alt="Mongo's straw nest and plants" loading="lazy"><span>Mongo's room</span></a>
+<a href="assets/house/training.png" download><img src="assets/house/training.png" alt="Training dummy, mat and weapon rack" loading="lazy"><span>Training room</span></a>
+<a href="assets/house/crafting.png" download><img src="assets/house/crafting.png" alt="Crafting workbench with bottles and forge" loading="lazy"><span>Crafting room</span></a>
+<a href="assets/house/social.png" download><img src="assets/house/social.png" alt="Social screen and shared lounge" loading="lazy"><span>Social lounge</span></a>
+<a href="assets/house/bedroom.png" download><img src="assets/house/bedroom.png" alt="Spare crawler's amber-quilt bedroom" loading="lazy"><span>Reserve bedroom</span></a>
+<a href="assets/interface/ornate-frame.png" download><img src="assets/interface/ornate-frame.png" alt="Reusable transparent gold border" loading="lazy"><span>Nine-slice frame</span></a>
+</div><p>Room components: 384 × 400 pixels, shared anchor (192, 392). Frame: 512 × 512 pixels, 72-pixel corner slices. These are menu illustrations; use the <a href="room-kit.html">room workshop</a> for walkable map tiles.</p>
+</section>
 <form class="filter-bar" role="search" id="filters"><label>Menu<select id="menu-filter"><option value="all">All six menus</option></select></label><label>Component type<select id="kind-filter"><option value="all">Every component</option><option value="navigation">Navigation & mission</option><option value="progression">Skills & progression</option><option value="equipment">Equipment & stats</option><option value="combat">Combat & targeting</option><option value="services">Safe room & crafting</option><option value="enemy">Enemies & inspection</option></select></label><label class="search-label">Find a component<input type="search" id="search" placeholder="Try “forecast” or “locked”…" autocomplete="off"></label><output id="result-count" aria-live="polite">30 components</output><button type="reset" class="quiet">Reset</button></form>
 <div id="atlas" aria-live="polite"></div>
 <p id="empty" hidden>No components match. Change a filter or clear the search.</p>
