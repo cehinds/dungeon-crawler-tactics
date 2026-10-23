@@ -15,7 +15,7 @@ namespace DungeonCrawlerTactics
         public ItemDef[] items = new ItemDef[0];
     }
     [Serializable] public sealed class TagDef { public string id; public string label; }
-    [Serializable] public sealed class ClassDef { public string id; public string label; public string[] abilityIds = new string[0]; }
+    [Serializable] public sealed class ClassDef { public string id; public string label; public int minimumFloor = 1; public bool playerSelectable = true; public string[] abilityIds = new string[0]; }
     [Serializable] public sealed class ItemDef { public string id; public string label; public string abilityId; }
     [Serializable] public sealed class EffectDef { public string op; public int amount; public string tag; }
     [Serializable] public sealed class TagQuery

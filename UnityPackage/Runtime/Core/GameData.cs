@@ -4,6 +4,11 @@ namespace DungeonCrawlerTactics
 {
     [Serializable] public sealed class GameData
     {
+        public HomeDef home;
+        public JourneyDef journey;
+        public SkillTreeDef[] classSkillTrees = new SkillTreeDef[0];
+        public ExpeditionDef[] expeditions = new ExpeditionDef[0];
+        public SkillTreeDef[] skillTrees = new SkillTreeDef[0];
         public DevelopmentDef development = new DevelopmentDef();
         public ScenarioDef[] scenarios = new ScenarioDef[0];
         public int schemaVersion = 1;
@@ -36,7 +41,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class EquipmentView { public string id, label, slot, equippedUnitId; public int hpBonus, manaBonus, moveBonus, unlockEncounter; public string[] abilityIds = new string[0]; public bool owned; }
     [Serializable] public sealed class SafeRoomView { public string label, description; public bool available, rested; }
     [Serializable] public sealed class QuestView { public string id, label, description; public int progress, total; public bool complete; }
-    [Serializable] public sealed class RosterDef { public string id, label, classId, artId, replacesId, legacyClassId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; }
+    [Serializable] public sealed class RosterDef { public string id, label, classId, artId, replacesId, legacyClassId; public int maxSkillRank = 15; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; }
     [Serializable] public sealed class ClassStats { public string classId; public int hp = 30, energy = 10, move = 3; }
     [Serializable] public sealed class SpawnDef { public string id, label, classId, artId; public int x, y, hp = 18, energy = 10, move = 2; public string[] tags = new string[0]; }
     [Serializable] public sealed class TileDef { public int x, y; public bool blocked; public string[] tags = new string[0]; }
@@ -63,11 +68,12 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
     [Serializable] public sealed class TagRuleDef { public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, energyPenalty; }
-    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId; public int points; public CustomMapData customMap; public int x, y; }
+    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public CustomMapData customMap; public int x, y; }
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
     {
         public string id, label, classId, team, artId, stanceId, formId; public int x, y, hp, maxHp, energy, maxEnergy, move, effectiveMove, level;
+        public string[] abilityIds = new string[0];
         public StatusView[] statuses = new StatusView[0];
         public bool selected, moved, acted, finished; public string[] tags = new string[0];
     }
@@ -77,7 +83,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class AbilityView { public string id, label, target, description, disabledReason; public string[] targetIds = new string[0]; public int range, cost; public bool enabled; }
     [Serializable] public sealed class ItemView { public string id, label, abilityId, target, description, disabledReason; public string[] targetIds = new string[0]; public int count, range; }
     [Serializable] public sealed class RosterView { public string id, label, classId, artId, stanceId, formId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; public int hp, maxHp, energy, maxEnergy, move, effectiveMove, level; public string[] equippedIds = new string[0]; }
-    [Serializable] public sealed class ClassView { public string id, label; public string[] abilityIds = new string[0]; }
+    [Serializable] public sealed class ClassView { public string id, label, disabledReason; public int minimumFloor = 1; public bool enabled = true; public string[] abilityIds = new string[0]; }
     [Serializable] public sealed class ForecastView
     {
         public string targetId, label; public int beforeHp, afterHp, beforeEnergy, afterEnergy, beforeMaxHp, afterMaxHp, beforeMaxEnergy, afterMaxEnergy, beforeMove, afterMove, beforeX, beforeY, afterX, afterY;
@@ -87,7 +93,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class GameView
     {
         public TacticalModeView[] stances = new TacticalModeView[0], forms = new TacticalModeView[0];
-        public DevelopmentView development; public CustomMapData customMap; public ScenarioOptionView[] scenarios = new ScenarioOptionView[0]; public ScenarioView scenario;
+        public HomeView home; public JourneyView journey; public ExpeditionView expedition; public ExpeditionOptionView[] expeditions = new ExpeditionOptionView[0]; public SkillTreeView skillTree; public DevelopmentView development; public CustomMapData customMap; public ScenarioOptionView[] scenarios = new ScenarioOptionView[0]; public ScenarioView scenario;
         public string[] achievementIds = new string[0];
         public ExplorationView exploration;
         public ProgressionView progression; public SafeRoomView safeRoom;
@@ -111,7 +117,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class TimedTag { public string entityId, tag, source; public int remainingRounds; }
     [Serializable] public sealed class GameSave
     {
-        public DevelopmentSave development; public CustomMapData customMap; public ScenarioSave scenario;
+        public HomeSave home; public JourneySave journey; public ExpeditionSave expedition; public SkillTreeSave skillTree; public DevelopmentSave development; public CustomMapData customMap; public ScenarioSave scenario;
         public string[] achievementIds = new string[0];
         public ExplorationSave[] exploration = new ExplorationSave[0];
         public int activationVersion; public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];

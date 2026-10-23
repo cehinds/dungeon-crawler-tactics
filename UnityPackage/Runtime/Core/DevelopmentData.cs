@@ -22,6 +22,7 @@ namespace DungeonCrawlerTactics
     {
         public int[] useThresholds = new[] { 0, 3, 8 };
         public int damagePerRank = 1, healPerRank = 1, costReductionPerRank = 1;
+        public AbilityRankProfile[] abilityProfiles = new AbilityRankProfile[0];
     }
     [Serializable]
     public sealed class ItemQuantity
@@ -72,14 +73,16 @@ namespace DungeonCrawlerTactics
     public sealed class CrawlerDevelopmentView
     {
         public string unitId;
-        public int unspentPoints;
+        public int unspentPoints, maxSkillRank;
         public StatAllocationSave[] allocated = new StatAllocationSave[0];
     }
     [Serializable]
     public sealed class SkillPracticeView
     {
         public string unitId, abilityId;
-        public int uses, rank, nextRankUses, damageBonus, healBonus, costReduction;
+        public int uses, rank, maxRank, nextRankUses, damageBonus, healBonus, costReduction;
+        public bool atCap;
+        public SkillRankView[] ranks;
     }
     [Serializable]
     public sealed class RecipeView
@@ -109,6 +112,7 @@ namespace DungeonCrawlerTactics
         public StatDefinition[] stats;
         public CrawlerDevelopmentView[] crawlers;
         public SkillPracticeView[] practice;
+        public SkillRankCatalogView[] rankCatalog;
         public RecipeView[] recipes;
         public OwnedLootBoxView[] lootBoxes;
         public DevelopmentForecast forecast;

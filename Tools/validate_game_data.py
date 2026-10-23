@@ -84,6 +84,166 @@ def validate_game(data, content):
         if scenario['kind'] == 'swine':
             if len(route) < 4 or len(set(route)) != len(route) or any(abs(a[0]-b[0])+abs(a[1]-b[1]) != 1 for a,b in zip(route, route[1:]+route[:1])):
                 errors.append('scenarios.route: must be a unique cardinal closed loop')
+    # Skill ownership, benefits and prerequisite DAGs mirror the shared-C# boundary.
+    trees = data.get('skillTrees', [])
+    class_trees = data.get('classSkillTrees', [])
+    unique(trees + class_trees, 'id', 'skillTrees')
+    unique(class_trees, 'classId', 'classSkillTrees')
+    class_by_id = {kit['id']: kit for kit in content['classes']}
+    if len(class_trees) > len(class_by_id):
+        errors.append('classSkillTrees: exceeds class catalog')
+    unique(trees, 'rosterId', 'skillTrees')
+    roster_by_id = {r['id']: r for r in data['roster']}
+    all_nodes = []
+    all_trees = [('skillTrees', i, tree) for i, tree in enumerate(trees)] + [('classSkillTrees', i, tree) for i, tree in enumerate(class_trees)]
+    for collection, ti, tree in all_trees:
+        path = f'{collection}.{ti}'
+        if collection == 'skillTrees':
+            owner = roster_by_id.get(tree['rosterId'])
+            if owner is None or not owner.get('deployable', True):
+                errors.append(path + ': skill-tree owner must be a deployable crawler')
+        else:
+            owner = class_by_id.get(tree['classId'])
+            if owner is None or not owner.get('playerSelectable', True):
+                errors.append(path + ': class skill-tree owner must be a selectable class')
+        nodes = {node['id']: node for node in tree['nodes']}
+        all_nodes.extend(tree['nodes'])
+        for ni, node in enumerate(tree['nodes']):
+            node_path = f'{path}.nodes.{ni}'
+            if node['level'] > (min(50, len(data['progression']['xpThresholds'])) if collection == 'skillTrees' else 50):
+                errors.append(node_path + ': level has no matching XP threshold')
+            if not node['abilityIds'] and not any(node[key] for key in ('hpBonus', 'manaBonus', 'moveBonus', 'damageBonus', 'healBonus')):
+                errors.append(node_path + ': node must grant a supported benefit')
+            for ability in node['abilityIds']:
+                ref(ability, 'abilities', node_path + '.abilityIds')
+            for parent in node['prerequisiteIds']:
+                if parent not in nodes:
+                    errors.append(node_path + ': prerequisite must reference a node in its own tree')
+                elif nodes[parent]['level'] > node['level']:
+                    errors.append(node_path + ': prerequisite level exceeds child level')
+        visiting, visited = set(), set()
+        def visit(node_id):
+            if node_id in visiting:
+                errors.append(path + ': skill-tree prerequisite cycle')
+                return
+            if node_id in visited:
+                return
+            visiting.add(node_id)
+            for parent in nodes[node_id]['prerequisiteIds']:
+                if parent in nodes:
+                    visit(parent)
+            visiting.remove(node_id)
+            visited.add(node_id)
+        for node_id in nodes:
+            visit(node_id)
+    unique(all_nodes, 'id', 'skillTrees.nodes')
+    if trees:
+        owners = {tree['rosterId'] for tree in trees}
+        if owners != {r['id'] for r in data['roster'] if r.get('deployable', True)}:
+            errors.append('skillTrees: every deployable crawler needs exactly one tree')
+
+    expeditions = data.get('expeditions', [])
+    unique(expeditions, 'id', 'expeditions')
+    for ei, expedition in enumerate(expeditions):
+        room = expedition['encounter']
+        path = f'expeditions.{ei}'
+        if len(room['tiles']) > room['width'] * room['height']:
+            errors.append(path + ': tile collection exceeds map area')
+        unique(expedition['decorations'], 'id', path + '.decorations')
+        for di, piece in enumerate(expedition['decorations']):
+            if piece['x'] >= room['width'] or piece['y'] >= room['height']:
+                errors.append(f'{path}.decorations.{di}: outside board')
+
+    profiles = development.get('practice', {}).get('abilityProfiles', [])
+    unique(profiles, 'abilityId', 'development.practice.abilityProfiles')
+    if len(profiles) > len(known['abilities']):
+        errors.append('development.practice.abilityProfiles: exceeds ability catalog')
+    for pi, profile in enumerate(profiles):
+        path = f'development.practice.abilityProfiles.{pi}'
+        ref(profile['abilityId'], 'abilities', path + '.abilityId')
+        milestones = profile.get('milestones', [])
+        unique(milestones, 'rank', path + '.milestones')
+        for milestone in milestones:
+            if not milestone.get('description') or not any(milestone.get(key, 0) for key in ('damageBonus', 'healBonus', 'costReduction')):
+                errors.append(path + ': rank milestones need a description and supported benefit')
+
+    journey = data.get('journey')
+    journey_rooms = []
+    if journey:
+        floors = journey['floors']
+        unique(floors, 'id', 'journey.floors')
+        expected_mechanics = ['tutorial', 'tutorial', 'classes', 'route', 'beacons', 'hunt', 'none', 'capture'] + ['none'] * 10
+        for fi, floor in enumerate(floors):
+            path = f'journey.floors.{fi}'
+            kind = 'locked' if fi >= 8 else 'bypass' if fi == 6 else 'battle'
+            if floor['number'] != fi + 1 or floor['available'] != (fi < 8) or floor['kind'] != kind:
+                errors.append(path + ': invalid ordered floor number, availability or kind')
+            if floor['mechanic'] != expected_mechanics[fi]:
+                errors.append(path + ': invalid floor mechanic')
+            required = floor.get('requiredPointIds', [])
+            room = floor.get('encounter')
+            if kind != 'battle':
+                if room is not None or required or floor.get('captureCount', 0):
+                    errors.append(path + ': bypass and locked floors cannot contain encounters or objectives')
+                continue
+            if room is None or not room.get('exploration'):
+                errors.append(path + ': playable journey floor requires an encounter and exploration')
+                continue
+            journey_rooms.append((path + '.encounter', room))
+            points = {point['id']: point for point in room['exploration']['points']}
+            if len(required) != len(set(required)) or any(point not in points or points[point]['kind'] != 'lore' for point in required):
+                errors.append(path + ': unknown or duplicate lore route objective')
+            if (fi == 3 and len(required) != 1) or (fi == 4 and len(required) != 4):
+                errors.append(path + ': route requires one lever and beacons require four objectives')
+            if fi == 7:
+                if floor.get('captureCount', 0) != 6 or len(room['enemies']) != 6:
+                    errors.append(path + ': capture floor requires exactly six authored monsters')
+            elif floor.get('captureCount', 0):
+                errors.append(path + ': only the capture floor may require cards')
+
+    home = data.get('home')
+    if home:
+        upgrades = home.get('upgrades', [])
+        unique(upgrades, 'id', 'home.upgrades')
+        by_id = {upgrade['id']: upgrade for upgrade in upgrades}
+        if sum(upgrade['kind'] == 'space' for upgrade in upgrades) != 1:
+            errors.append('home.upgrades: requires exactly one personal space')
+        if not home.get('description') or not home.get('economyNote'):
+            errors.append('home: description and economy note are required')
+        for ability in home.get('trainingAbilityIds', []):
+            ref(ability, 'abilities', 'home.trainingAbilityIds')
+        if len(home.get('trainingAbilityIds', [])) != len(set(home.get('trainingAbilityIds', []))):
+            errors.append('home.trainingAbilityIds: duplicate ability')
+        for ui, upgrade in enumerate(upgrades):
+            path = f'home.upgrades.{ui}'
+            purchasable = upgrade.get('purchasable', True)
+            if not upgrade.get('description') or not upgrade.get('costNote'):
+                errors.append(path + ': description and price context are required')
+            if any(not source for source in upgrade.get('sourceIds', [])):
+                errors.append(path + ': source references cannot be empty')
+            if not purchasable and not upgrade.get('eligibilityReason'):
+                errors.append(path + ': unavailable upgrades require an eligibility explanation')
+            if upgrade['kind'] == 'club' and (purchasable or upgrade['priceBasis'] != 'unknown' or upgrade['cost'] != 0):
+                errors.append(path + ': club admission cannot be sold as a generic home pass')
+            if upgrade['priceBasis'] == 'unknown' and purchasable:
+                errors.append(path + ': unknown price cannot be purchasable')
+            if upgrade.get('craftOutputBonus', 0) and upgrade['kind'] != 'tools':
+                errors.append(path + ': only tools may grant crafting output bonuses')
+            current, chain = upgrade, set()
+            while current.get('prerequisiteId'):
+                if current['id'] in chain:
+                    errors.append(path + ': home prerequisite cycle')
+                    break
+                chain.add(current['id'])
+                parent = by_id.get(current['prerequisiteId'])
+                if parent is None or not parent.get('purchasable', True):
+                    errors.append(path + ': unknown or ineligible home prerequisite')
+                    break
+                current = parent
+            else:
+                if upgrade['kind'] != 'space' and purchasable and current['kind'] != 'space':
+                    errors.append(path + ': upgrades must require the personal space')
+
     progression = data['progression']
     thresholds = progression['xpThresholds']
     if not thresholds or thresholds[0] != 0 or any(a >= b for a, b in zip(thresholds, thresholds[1:])):
@@ -97,12 +257,12 @@ def validate_game(data, content):
         member = roster_by_id.get(unlock['rosterId'])
         if member and not member.get('deployable', True):
             errors.append(path+': skills may only unlock for deployable roster members')
-        if unlock['level'] >= len(thresholds):
+        if unlock['level'] > len(thresholds):
             errors.append(path+'.level: has no matching XP threshold')
     unique(data['equipment'], 'id', 'equipment')
     for i, gear in enumerate(data['equipment']):
         path = f'equipment.{i}'
-        if gear['unlockEncounter'] >= len(data['encounters']):
+        if gear['unlockEncounter'] > len(data['encounters']):
             errors.append(path+'.unlockEncounter: outside encounter progression')
         if not any(gear[k] for k in ('hpBonus','manaBonus','moveBonus','abilityIds')):
             errors.append(path+': equipment must grant a stat bonus or ability')
@@ -110,7 +270,12 @@ def validate_game(data, content):
             ref(ability_id, 'abilities', f'{path}.abilityIds.{j}')
     if sum(r['selected'] for r in data['roster']) > data['partySize'] or len(data['roster']) < data['partySize']:
         errors.append('roster: invalid party selection/roster size')
+    player_classes = {c['id'] for c in content['classes'] if c.get('playerSelectable', True)}
     for i, record in enumerate(data['roster']):
+        if record['classId'] not in player_classes:
+            errors.append(f'roster.{i}: enemy-only class cannot be assigned to a crawler')
+        if record.get('legacyClassId') and record['legacyClassId'] not in player_classes:
+            errors.append(f'roster.{i}: enemy-only legacy class cannot be assigned to a crawler')
         ref(record['classId'], 'classes', f'roster.{i}.classId')
         if record.get('legacyClassId'):
             ref(record['legacyClassId'], 'classes', f'roster.{i}.legacyClassId')
@@ -145,6 +310,10 @@ def validate_game(data, content):
     unique([e['exploration'] for e in data['encounters']], 'id', 'exploration')
     rooms = [(f'encounters.{i}', e) for i, e in enumerate(data['encounters'])]
     rooms += [(f'scenarios.{i}.encounter', s['encounter']) for i, s in enumerate(data.get('scenarios', []))]
+    rooms += [(f'expeditions.{i}.encounter', e['encounter']) for i, e in enumerate(data.get('expeditions', []))]
+    rooms += journey_rooms
+    unique(data['encounters'] + [room for _, room in journey_rooms], 'id', 'encountersAndJourney')
+    unique([room['exploration'] for room in data['encounters'] + [room for _, room in journey_rooms] if room.get('exploration')], 'id', 'exploration')
     for base, encounter in rooms:
         if encounter.get('exploration'):
             m = encounter['exploration']
@@ -194,6 +363,8 @@ def validate_game(data, content):
                     occupied.add(xy)
                 for tag in record.get('tags', []):
                     ref(tag,'tags',path+'.tags')
+                if kind == 'enemies' and record['id'] in known['roster']:
+                    errors.append(path + ': enemy ID collides with roster')
                 if 'classId' in record:
                     ref(record['classId'],'classes',path+'.classId')
         unique(encounter['enemies'],'id',base+'.enemies')

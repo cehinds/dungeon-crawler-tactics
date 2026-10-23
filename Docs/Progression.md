@@ -2,15 +2,15 @@
 
 The browser starts in Mordecai's safe room. Its Rest, Equipment, Skills and dungeon-entrance stations invoke the shared C# session. Open the roster to change the four deployed crawlers or their optional classes. Mordecai remains an advisor.
 
-The party shares experience, including reserves. Cumulative XP of 0, 30, 70 and 120 grants levels 1–4. Each level adds 3 maximum HP and 1 maximum Mana. Each deployable character unlocks a personal skill at levels 2 and 3. These are compact tactical adaptations, not a complete reproduction of book mechanics. The full catalog is generated in [PlayableContent.md](PlayableContent.md).
+The party shares experience, including reserves. Cumulative XP of 0, 30, 70 and 120 retains legacy levels 1–4; the story track now extends to level 50 at 59,431 XP, before the final battle. Each level adds 3 maximum HP and 1 maximum Mana. Each deployable character unlocks a personal skill at levels 2 and 3. These are compact tactical adaptations, not a complete reproduction of book mechanics. The full catalog is generated in [PlayableContent.md](PlayableContent.md).
 
 Equipment has weapon, armor and charm slots. Each authored item is a single owned copy; it can be equipped by one crawler at a time. Three pieces are available initially, two unlock after the first victory, and one after the second. Gear changes actual HP, Mana or movement and can grant abilities. Reinforced Wraps grant Heavy Blow, while Sponsor Edge grants Backstab. Equipping and unequipping are allowed only in the safe room. Rest restores HP and Mana to the new maximum; it does not create additional consumables.
 
-The quest journal derives progress from actual cleared encounters, discovered doors, claimed discoveries and defeated enemies. It is not a separate quest scripting engine. The main campaign remains one authored three-encounter floor. Optional boss scenarios and imported workshop rooms are separate play modes; see [PlayableGame.md](PlayableGame.md).
+The quest journal derives progress from actual cleared encounters, discovered doors, claimed discoveries and defeated enemies. It is not a separate quest scripting engine. The legacy campaign remains one authored three-encounter floor. The optional story campaign implements seven tactical battles over floors 1–8, including the floor-7 bypass. Optional boss scenarios and imported workshop rooms are separate play modes; see [PlayableGame.md](PlayableGame.md).
 
 ## Stat allocation and skill practice
 
-This is an **accelerated, mixed-timeline adaptation**. Every earned party level grants each field crawler three points, spendable in the safe room without a race/class milestone. In the books, manual allocation waits until the Third Floor race/class selection. The game keeps its existing automatic HP/Mana growth for compatibility and adds an independent saved allocation pool. These formulas are invented game rules:
+This is an **accelerated, mixed-timeline adaptation**. Every earned party level grants each field crawler three points, spendable in the safe room; story mode banks them until floor 3. Legacy mode retains immediate allocation. In the books, manual allocation waits until the Third Floor race/class selection. The game keeps its existing automatic HP/Mana growth for compatibility and adds an independent saved allocation pool. These formulas are invented game rules:
 
 | Allocated stat | Actual benefit |
 |---|---|
@@ -22,7 +22,7 @@ This is an **accelerated, mixed-timeline adaptation**. Every earned party level 
 
 Preview allocation to compare the resulting caps, movement, damage and healing bonuses, then confirm or cancel. Cancellation spends nothing. Increasing a cap does not restore resources; rest to fill it. Allocations belong to each crawler, including reserves, and survive class changes and saves.
 
-Skill practice is separate from party XP and personal-skill unlocks. A committed non-item ability adds one use to that crawler's ability track. Rank 2 requires three uses; rank 3 requires eight. Each rank above 1 adds one direct damage, one direct healing and one Mana-cost reduction where relevant. Reaction damage and consumable actions do not gain these bonuses. Previews and cancellations do not train skills. This is a bounded three-rank adaptation, without guild training, race-specific caps or companion growth.
+Skill practice is separate from party XP and personal-skill unlocks. A committed non-item ability adds one use to that crawler's ability track. Rank 2 requires three uses; rank 3 requires eight. Authored profiles add direct damage or healing where the ability has that effect, with a cap of +20. Mana-cost reduction is capped at 2. Reaction damage and consumable actions do not gain these bonuses. Previews and cancellations do not train skills. Ranks now extend through 20 with increasing practice thresholds; ordinary eligibility stops at 15, while configured Primal eligibility reaches 20 after story floor 3. The purchased training room offers limited paid practice. Guild simulation and companion growth remain incomplete.
 
 ## Recipes and owned loot boxes
 
@@ -48,4 +48,10 @@ The browser locks player actions during enemy playback and labels the enemy phas
 
 Character sheets expose three stances and Katia's four shape presets. These choices preview and commit through C#, consume the action, preserve unused movement, and save their IDs. Increased caps do not heal or refill Mana; Defensive and Bulwark grant existing Guarded protection. Their tactical bonuses are invented adaptations of the character identity. New form silhouettes and a physical mass-budget simulation remain planned. Five committed achievement milestones are serialized per run; the UI narrator displays them without re-awarding on reload.
 
-The [lore review](Lore-Mechanics-Review.md) and [implementation plan](Mechanics-Plan.md) distinguish these accelerated rules from future chronological race/class milestones, mass-based shaping, companion progression and broader skill training.
+The [lore review](Lore-Mechanics-Review.md) and [implementation plan](Mechanics-Plan.md) distinguish these accelerated rules from remaining race-selection mechanics, mass-based shaping, companion progression and broader skill training.
+
+## Current class trees and personal space
+
+Each selectable kit now has a two-branch class tree with fourteen nodes across levels 1, 5, 10, 20, 30, 40 and 50. One class point is earned per authored tier, so seven points cannot purchase both full branches. Class-node ownership is per crawler; switching classes preserves learned nodes but activates only the selected class’s benefits. Personal crawler trees keep their separate one-point-per-level pool. All numerical trees are explicit tactical adaptations.
+
+See [Journey and home](Journey-and-Home.md) for gold, room purchases, crafting, paid training and earned club credentials. The runtime rank inspector uses the same C# table as action forecasting and resolution; the public codex separately labels its research extrapolations.

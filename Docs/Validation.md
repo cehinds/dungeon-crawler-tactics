@@ -1,6 +1,16 @@
 # Playable build validation
 
-## Development, scenarios and runtime map milestone
+## Eight-floor journey, classes and party house
+
+The final shared-core run passes **529 checks**: 205 game, 42 rules, 44 scenario, 20 custom-map, 43 expedition, 43 rank/class, 80 journey and 52 house/economy checks. All 73 Python validation tests pass. Both JSON catalogs validate with 148 class kits, 88 abilities, 142 class trees and 1,988 class nodes. The generated research snapshot and Unity source sync are verified.
+
+The journey harness completes floors 1–8 through legal commands, including required exploration objectives, the floor-7 bypass and six weakened-enemy captures on floor 8, with checkpoint reloads. Class checks cover branch-point spending, ownership, prerequisites, real level-50 capstone effects, class switching and rank-20 forecasting/commit. Housing checks cover atomic purchase/cancellation, gold receipts, paid practice, crafting prerequisites, personal club credentials, forgery rejection and exact preservation across nested expeditions and boss scenarios.
+
+Art checks cover 96 directional crawler frames, 16 boss/Scatterer poses, four scenery components, 24 new enemy poses, six menu illustrations and 30 component definitions. The room workshop retains 461 generator checks including 450 seeded rooms, plus 640 rotated projection/picking checks. .NET Standard compatibility builds cleanly; Unity runtime reference compilation has zero errors and its existing Inspector-field warning. Native Unity Editor execution, Play Mode and Unity Web export remain unverified. The browser is the shared C# game hosted through .NET WebAssembly.
+
+Browser validation covers the actual WASM game at desktop and phone sizes: six expedition briefings and enemy phases, class-node preview/cancel/commit, home upgrade and training costs, local records, earned credentials, the floor-7 bypass, and floor-8 capture preview/cancel/commit. The menu atlas loads all six illustrations and its thirty stateful components; the source-linked codex exposes floors, classes, skill ranks, enemies and housing. `Tools/playtest_expansion.py` and `Tools/playtest_lore.py` retain the repeatable browser drivers. These are functional checks, not a human balance study.
+
+## Earlier development, scenarios and runtime map milestone
 
 The shared-core suite passes **179 game checks, 44 scenario checks, 20 custom-map checks and 42 rules checks**. The 34 Python validation checks pass (28 under Tools and six cross-validator tests). Both authored catalogs validate. The art validator verifies 16 distinct boss/Scatterer poses plus four transparent scenery components, alongside the existing 96 directional crawler frames. .NET Standard 2.1 compatibility builds without warnings or errors; Unity runtime reference compilation has zero errors and the existing unused Inspector-field warning. Unity Editor, Play Mode and native Unity Web export remain unverified.
 

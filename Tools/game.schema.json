@@ -114,6 +114,50 @@
       "items": {
         "$ref": "#/$defs/scenario"
       }
+    },
+    "skillTrees": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/skillTree"
+      }
+    },
+    "expeditions": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 24,
+      "items": {
+        "$ref": "#/$defs/expedition"
+      }
+    },
+    "classSkillTrees": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/classSkillTree"
+      },
+      "minItems": 0,
+      "maxItems": 256
+    },
+    "journey": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/journey"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "home": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/home"
+        },
+        {
+          "type": "null"
+        }
+      ]
     }
   },
   "$defs": {
@@ -192,6 +236,11 @@
         },
         "legacyClassId": {
           "$ref": "#/$defs/id"
+        },
+        "maxSkillRank": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
         }
       }
     },
@@ -348,7 +397,7 @@
         "xp": {
           "type": "integer",
           "minimum": 0,
-          "maximum": 10000
+          "maximum": 1000000
         },
         "playerSpawns": {
           "type": "array",
@@ -593,7 +642,7 @@
         "xpThresholds": {
           "type": "array",
           "minItems": 2,
-          "maxItems": 20,
+          "maxItems": 50,
           "items": {
             "type": "integer",
             "minimum": 0
@@ -648,7 +697,7 @@
         "level": {
           "type": "integer",
           "minimum": 2,
-          "maximum": 19
+          "maximum": 50
         }
       }
     },
@@ -837,7 +886,7 @@
       "properties": {
         "useThresholds": {
           "type": "array",
-          "maxItems": 3,
+          "maxItems": 20,
           "items": {
             "type": "integer",
             "minimum": 0,
@@ -859,6 +908,14 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 1
+        },
+        "abilityProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/abilityRankProfile"
+          },
+          "minItems": 0,
+          "maxItems": 512
         }
       }
     },
@@ -1291,6 +1348,808 @@
         },
         "blocksMovement": {
           "const": false
+        }
+      }
+    },
+    "skillNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "level",
+        "pointCost",
+        "prerequisiteIds",
+        "abilityIds",
+        "hpBonus",
+        "manaBonus",
+        "moveBonus",
+        "damageBonus",
+        "healBonus"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "$ref": "#/$defs/label"
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "pointCost": {
+          "const": 1
+        },
+        "prerequisiteIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "abilityIds": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "uniqueItems": true
+        },
+        "hpBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "manaBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "moveBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "damageBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "healBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "skillTree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "rosterId",
+        "label",
+        "description",
+        "nodes"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "rosterId": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "$ref": "#/$defs/label"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/skillNode"
+          }
+        }
+      }
+    },
+    "expeditionEnemy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "classId",
+        "x",
+        "y",
+        "hp",
+        "energy",
+        "move",
+        "tags",
+        "artId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "classId": {
+          "$ref": "#/$defs/id"
+        },
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "hp": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "energy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "move": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        },
+        "artId": {
+          "enum": [
+            "sludge",
+            "cinder",
+            "frost",
+            "spore",
+            "sentry",
+            "mauler",
+            "rat",
+            "guard",
+            "boss",
+            "scatterer"
+          ]
+        }
+      }
+    },
+    "expeditionEncounter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "width",
+        "height",
+        "xp",
+        "playerSpawns",
+        "tiles",
+        "enemies"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 20
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 6,
+          "maximum": 16
+        },
+        "xp": {
+          "const": 0
+        },
+        "playerSpawns": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/cell"
+          }
+        },
+        "tiles": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 320,
+          "items": {
+            "$ref": "#/$defs/tile"
+          }
+        },
+        "enemies": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/expeditionEnemy"
+          }
+        },
+        "exploration": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/exploration"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "expeditionDecoration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "assetId",
+        "layer",
+        "x",
+        "y",
+        "rotation",
+        "blocksMovement"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "assetId": {
+          "enum": [
+            "wall-ne",
+            "wall-nw",
+            "wall-corner",
+            "pillar",
+            "door-closed-nw",
+            "door-open-nw",
+            "door-closed-ne",
+            "door-open-ne",
+            "torch",
+            "lever",
+            "grate",
+            "oil-overlay",
+            "water-overlay",
+            "moss",
+            "rubble",
+            "stairs",
+            "stone-a",
+            "stone-b",
+            "water-floor",
+            "oil-floor",
+            "crate",
+            "barrel",
+            "chest",
+            "exit",
+            "fire-overlay",
+            "scenario.garbage",
+            "scenario.bench",
+            "scenario.barrier",
+            "scenario.parts"
+          ]
+        },
+        "layer": {
+          "enum": [
+            "ground",
+            "prop",
+            "wall"
+          ]
+        },
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "rotation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "blocksMovement": {
+          "const": false
+        }
+      }
+    },
+    "expedition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "objective",
+        "encounter",
+        "decorations"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "objective": {
+          "$ref": "#/$defs/label"
+        },
+        "theme": {
+          "type": "string"
+        },
+        "difficulty": {
+          "type": "string"
+        },
+        "encounter": {
+          "$ref": "#/$defs/expeditionEncounter"
+        },
+        "decorations": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 96,
+          "items": {
+            "$ref": "#/$defs/expeditionDecoration"
+          }
+        }
+      }
+    },
+    "classSkillTree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "nodes",
+        "classId"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "$ref": "#/$defs/label"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/skillNode"
+          }
+        },
+        "classId": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "rankMilestone": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 20
+        },
+        "damageBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "healBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "costReduction": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "rank"
+      ]
+    },
+    "abilityRankProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "abilityId": {
+          "$ref": "#/$defs/id"
+        },
+        "practiceMultiplierPercent": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "damagePerRank": {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 5
+        },
+        "healPerRank": {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 5
+        },
+        "costReductionPerRank": {
+          "type": "integer",
+          "minimum": -1,
+          "maximum": 5
+        },
+        "damageBonusCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "healBonusCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "costReductionCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rankMilestone"
+          },
+          "minItems": 0,
+          "maxItems": 19
+        }
+      },
+      "required": [
+        "abilityId"
+      ]
+    },
+    "journeyFloor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "kind": {
+          "enum": [
+            "battle",
+            "bypass",
+            "locked"
+          ]
+        },
+        "mechanic": {
+          "enum": [
+            "tutorial",
+            "classes",
+            "route",
+            "beacons",
+            "hunt",
+            "capture",
+            "none"
+          ]
+        },
+        "requiredPointIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        },
+        "captureCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "encounter": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/encounter"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "number",
+        "label",
+        "description",
+        "available",
+        "kind",
+        "mechanic",
+        "requiredPointIds",
+        "captureCount",
+        "encounter"
+      ]
+    },
+    "journey": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "floors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/journeyFloor"
+          },
+          "minItems": 18,
+          "maxItems": 18
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "id",
+        "label",
+        "description",
+        "floors"
+      ]
+    },
+    "homeUpgrade": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "space",
+            "training",
+            "crafting",
+            "tools",
+            "social",
+            "club"
+          ]
+        },
+        "prerequisiteId": {
+          "type": "string"
+        },
+        "costNote": {
+          "type": "string"
+        },
+        "priceBasis": {
+          "enum": [
+            "verified",
+            "approximate",
+            "adaptation",
+            "unknown"
+          ]
+        },
+        "purchasable": {
+          "type": "boolean"
+        },
+        "eligibilityReason": {
+          "type": "string"
+        },
+        "cost": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000000
+        },
+        "craftOutputBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "sourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "description",
+        "kind",
+        "cost",
+        "costNote",
+        "priceBasis"
+      ]
+    },
+    "home": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "economyNote": {
+          "type": "string"
+        },
+        "availableFromFloor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "startingGold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000000
+        },
+        "victoryGoldBase": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "victoryGoldPerFloor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "upgrades": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/homeUpgrade"
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "trainingGoldCost": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "trainingUses": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "trainingAbilityIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          },
+          "maxItems": 512,
+          "uniqueItems": true
+        },
+        "clubs": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/homeClub"
+          }
+        }
+      },
+      "required": [
+        "label",
+        "description",
+        "economyNote",
+        "availableFromFloor",
+        "startingGold",
+        "victoryGoldBase",
+        "victoryGoldPerFloor",
+        "upgrades"
+      ]
+    },
+    "homeClub": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "minimumFloor",
+        "eligibleClassIds",
+        "excludedRosterIds",
+        "description",
+        "sourceIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "minimumFloor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18
+        },
+        "eligibleClassIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "excludedRosterIds": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceIds": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

@@ -37,6 +37,7 @@ jobs:
           python Tools/package_room_kit.py
           python Tools/validate_directional_art.py
           python Tools/validate_scenario_art.py
+          python Tools/validate_expansion_art.py
           node Tools/test_room_generator.mjs
       - name: Run shared C# regression tests
         run: |
@@ -44,7 +45,13 @@ jobs:
           dotnet run --project Tests/GameTests/GameTests.csproj -c Release
           dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj -c Release
           dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj -c Release
+          dotnet run --project Tests/ExpeditionTests/ExpeditionTests.csproj -c Release
+          dotnet run --project Tests/RankTests/RankTests.csproj -c Release
+          dotnet run --project Tests/JourneyTests/JourneyTests.csproj -c Release
+          dotnet run --project Tests/HomeTests/HomeTests.csproj -c Release
           dotnet build Tools/Compatibility/Core.Compatibility.csproj -c Release
+      - name: Verify published research catalog
+        run: python Tools/prepare_research.py --check
       - name: Publish browser game
         run: dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
       - name: Prepare static hosting artifact

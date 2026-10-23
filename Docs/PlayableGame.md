@@ -1,6 +1,6 @@
 # Playable game — current implementation
 
-This document supersedes the earlier planning and starter-kit descriptions. The current source implements a small complete floor: choose a four-person party, explore three authored corridor sectors, play three tactical encounters ending in a boss, collect sponsor supplies, and finish or restart the run.
+This document supersedes the earlier planning and starter-kit descriptions. The current source contains the original three-encounter campaign plus a separate eight-floor story route, six training expeditions and three boss scenarios. The story adds class/stat selection on floor 3, progression through level 50, ranks through 20 where eligible, and gold-funded personal housing. See [the current journey and housing guide](Journey-and-Home.md) for controls, formulas and adaptation boundaries.
 
 ## Two presentations, one game
 

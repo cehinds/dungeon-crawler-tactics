@@ -4,6 +4,10 @@
     <Compile Remove="GameTests/**" />
     <Compile Remove="ScenarioTests/**" />
     <Compile Remove="CustomMapTests/**" />
+    <Compile Remove="ExpeditionTests/**" />
+    <Compile Remove="RankTests/**" />
+    <Compile Remove="JourneyTests/**" />
+    <Compile Remove="HomeTests/**" />
     <Compile Include="../UnityPackage/Runtime/Core/*.cs" Link="Core/%(Filename)%(Extension)" />
     <None Include="../UnityPackage/Runtime/Data/combat-content.json" Link="combat-content.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../UnityPackage/Runtime/Data/starter-content.json" Link="starter-content.json" CopyToOutputDirectory="PreserveNewest" />

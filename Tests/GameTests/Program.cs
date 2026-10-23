@@ -53,8 +53,68 @@ static class GameTests
         GameDataValidator.Validate(Data, new Catalog(Content));
         Check(Content.classes.All(c => c.abilityIds.Length > 0), "all optional and identity classes have functional kits");
         Check(Content.items.Length == 8 && Content.abilities.Length >= 18, "release inventory and ability breadth");
-        AuthoredMechanicsValidation(); CrawlerDevelopment(); IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
+        BranchingSkillTrees(); AuthoredMechanicsValidation(); CrawlerDevelopment(); IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
+    }
+    static GameView TreeCommand(GameSession game, string type, string owner = null, string node = null) { return game.Handle(new GameCommand { type = type, unitId = owner, nodeId = node }); }
+    static void BranchingSkillTrees()
+    {
+        Check(Data.skillTrees.Length == 8 && Data.skillTrees.Sum(t => t.nodes.Length) == 48 && Data.skillTrees.All(t => t.nodes.Count(n => n.prerequisiteIds.Length == 0) == 2), "eight authored trees provide 48 nodes and two distinct branches each");
+        Check(RejectsGameData(d => { d.skillTrees[0].nodes[0].prerequisiteIds = new[] { d.skillTrees[0].nodes[1].id }; d.skillTrees[0].nodes[1].level = 1; }), "runtime tree validation rejects prerequisite cycles");
+        Check(RejectsGameData(d => d.skillTrees[0].nodes[0].abilityIds = new[] { "ability.unknown" }), "runtime tree validation rejects unknown granted ability");
+        Check(RejectsGameData(d => d.skillTrees[0].nodes[1].prerequisiteIds = new[] { d.skillTrees[1].nodes[0].id }), "runtime tree validation rejects cross-character prerequisites");
+        GameData config = Clone(Data); config.progression.xpThresholds = new[] { 0, 1, 2, 3 };
+        for (int i = 0; i < config.encounters.Length; i++) { config.encounters[i].xp = 1; config.encounters[i].tiles = new TileDef[0]; config.encounters[i].enemies = new[] { new SpawnDef { id = "enemy.tree_fixture", label = "Tree opponent", classId = "class.brawler", x = 2, y = 1, hp = 100, energy = 0, move = 1 } }; }
+        GameSession game = new GameSession(Clone(Content), config); GameView view = game.GetView();
+        Check(view.skillTree.trees.All(t => t.unspentPoints == 1) && view.development.crawlers.All(c => c.unspentPoints == 0), "initial skill point is separate from manually allocated stat points");
+        string original = JsonSerializer.Serialize(game.ExportSave(), Json);
+        view = TreeCommand(game, "preview_skill_node", "crawler.carl", "skill.carl_a_1");
+        Check(view.skillTree.canConfirm && view.skillTree.forecast.afterDamageBonus == view.skillTree.forecast.beforeDamageBonus + 1 && original == JsonSerializer.Serialize(game.ExportSave(), Json), "skill-node preview reports exact bonus without spending points or altering save");
+        TreeCommand(game, "cancel_skill_node"); Check(original == JsonSerializer.Serialize(game.ExportSave(), Json), "canceling skill choice spends no points and grants no ability");
+        view = TreeCommand(game, "preview_skill_node", "crawler.carl", "skill.carl_a_2"); Check(!view.skillTree.canConfirm && original == JsonSerializer.Serialize(game.ExportSave(), Json), "level gate and missing prerequisite reject without spending");
+        view = TreeCommand(game, "preview_skill_node", "crawler.donut", "skill.carl_a_1"); Check(!view.skillTree.canConfirm && original == JsonSerializer.Serialize(game.ExportSave(), Json), "one crawler cannot spend points on another crawler's tree");
+        TreeCommand(game, "preview_skill_node", "crawler.carl", "skill.carl_a_1"); view = TreeCommand(game, "confirm_skill_node");
+        Check(view.skillTree.trees.Single(t => t.rosterId == "crawler.carl").unspentPoints == 0 && view.events.Any(e => e.type == "skill_node_learned" && e.tag == "skill.carl_a_1"), "confirmed root spends exactly one skill point and emits committed learning event");
+        original = JsonSerializer.Serialize(game.ExportSave(), Json); view = TreeCommand(game, "preview_skill_node", "crawler.carl", "skill.carl_a_1");
+        Check(!view.skillTree.canConfirm && original == JsonSerializer.Serialize(game.ExportSave(), Json), "learned node cannot be purchased twice");
+        view = TreeCommand(game, "preview_skill_node", "crawler.carl", "skill.carl_b_1"); Check(!view.skillTree.canConfirm, "unspent skill-point limit prevents buying both roots initially");
+        GameSession restored = new GameSession(Clone(Content), Clone(config)); Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected") && restored.GetView().skillTree.trees.Single(t => t.rosterId == "crawler.carl").unspentPoints == 0, "reload preserves learned node without duplicating skill points");
+        GameSave oldSave = Clone(new GameSession(Clone(Content), Clone(config)).ExportSave()); oldSave.skillTree = null;
+        Check(!restored.ImportSave(oldSave).message.StartsWith("Save rejected") && restored.GetView().skillTree.trees.All(t => t.unspentPoints == 1), "existing saves migrate to empty trees with one derived initial point");
+        Command(game, "start"); view = Command(game, "preview", "crawler.carl", "enemy.tree_fixture", "ability.carl_powerful_strike"); int baseDamage = Content.abilities.Single(a => a.id == "ability.carl_powerful_strike").effects.Where(e => e.op == "Damage").Sum(e => e.amount);
+        Check(view.forecast.Single(f => f.targetId == "enemy.tree_fixture").beforeHp - view.forecast.Single(f => f.targetId == "enemy.tree_fixture").afterHp == baseDamage + 1, "learned damage root changes actual shared-resolver forecast"); Command(game, "cancel");
+        for (int room = 0; room < 2; room++)
+        {
+            GameSave wounded = Clone(game.ExportSave()); wounded.units.Single(u => u.id == "enemy.tree_fixture").hp = 1; game.ImportSave(wounded);
+            Command(game, "preview", "crawler.carl", "enemy.tree_fixture", "ability.carl_powerful_strike"); view = Command(game, "confirm");
+            game.Handle(new GameCommand { type = "choose_reward", rewardId = config.rewards[0].id }); Command(game, "continue");
+            if (room == 0)
+            {
+                int beforeMove = game.GetView().roster.Single(r => r.id == "crawler.carl").move;
+                TreeCommand(game, "preview_skill_node", "crawler.carl", "skill.carl_a_2"); view = TreeCommand(game, "confirm_skill_node");
+                Check(view.roster.Single(r => r.id == "crawler.carl").move == beforeMove + 1 && view.skillTree.trees.Single(t => t.rosterId == "crawler.carl").unspentPoints == 0, "earned level adds one separate point and learned child changes real movement");
+                Command(game, "safe_room_rest"); Command(game, "start");
+            }
+        }
+        TreeCommand(game, "preview_skill_node", "crawler.carl", "skill.carl_a_3"); view = TreeCommand(game, "confirm_skill_node");
+        Check(view.skillTree.trees.Single(t => t.rosterId == "crawler.carl").nodes.Single(n => n.id == "skill.carl_a_3").unlocked && view.skillTree.trees.Single(t => t.rosterId == "crawler.carl").unspentPoints == 0, "earned level-three capstone requires and preserves its complete branch");
+        original = JsonSerializer.Serialize(game.ExportSave(), Json); GameSave forged = Clone(game.ExportSave()); forged.skillTree.unlockedIds = new[] { "skill.carl_a_3" };
+        Check(game.ImportSave(forged).message.StartsWith("Save rejected") && original == JsonSerializer.Serialize(game.ExportSave(), Json), "forged capstone without parents rejects atomically");
+        forged = Clone(game.ExportSave()); forged.skillTree.unlockedIds = forged.skillTree.unlockedIds.Concat(new[] { "skill.carl_b_1" }).ToArray();
+        Check(game.ImportSave(forged).message.StartsWith("Save rejected") && original == JsonSerializer.Serialize(game.ExportSave(), Json), "forged overspent learned build rejects without replacing state");
+        Command(game, "safe_room_rest"); view = Command(game, "start");
+        Check(view.abilities.Any(a => a.id == "ability.carl_advanced_a" && a.targetIds.Contains("enemy.tree_fixture")) && view.units.Single(u => u.id == "crawler.carl").abilityIds.Contains("ability.carl_advanced_a"), "capstone grants a real usable targeted action while retaining personal kit");
+        restored = new GameSession(Clone(Content), Clone(config)); Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected") && restored.GetView().abilities.Any(a => a.id == "ability.carl_advanced_a"), "battle reload reconstructs learned engine ability grants");
+        view = Command(restored, "preview", "crawler.carl", "enemy.tree_fixture", "ability.carl_advanced_a"); ForecastView advanced = view.forecast.Single(f => f.targetId == "enemy.tree_fixture"); view = Command(restored, "confirm");
+        Check(view.units.Single(u => u.id == "enemy.tree_fixture").hp == advanced.afterHp && view.units.Single(u => u.id == "enemy.tree_fixture").x == advanced.afterX && view.units.Single(u => u.id == "crawler.carl").acted, "new learned capstone commits exact resolver damage, push and action spending");
+        GameSession protection = Session(); int oldMax = protection.GetView().roster.Single(r => r.id == "crawler.carl").maxHp;
+        TreeCommand(protection, "preview_skill_node", "crawler.carl", "skill.carl_b_1"); view = TreeCommand(protection, "confirm_skill_node");
+        Check(view.roster.Single(r => r.id == "crawler.carl").maxHp == oldMax + 4 && view.roster.Single(r => r.id == "crawler.carl").hp == oldMax, "HP tree node raises real cap without silently healing");
+        TreeCommand(protection, "preview_skill_node", "crawler.donut", "skill.donut_b_1"); TreeCommand(protection, "confirm_skill_node"); Command(protection, "start"); GameSave injured = Clone(protection.ExportSave()); injured.units.Single(u => u.id == "crawler.carl").hp -= 20; protection.ImportSave(injured);
+        view = Command(protection, "preview", "crawler.donut", "crawler.carl", "ability.donut_heal_critter"); ForecastView heal = view.forecast.Single(f => f.targetId == "crawler.carl"); Check(heal.afterHp - heal.beforeHp == 11, "support branch healing bonus changes actual ability result");
+        original = JsonSerializer.Serialize(protection.ExportSave(), Json); view = TreeCommand(protection, "preview_skill_node", "crawler.donut", "skill.donut_a_1"); Check(!view.skillTree.canConfirm && original == JsonSerializer.Serialize(protection.ExportSave(), Json), "learning a node outside safe room rejects without changing build");
+        string enemyClass = Content.classes.First(c => !c.playerSelectable).id; GameSession camp = Session(); original = JsonSerializer.Serialize(camp.ExportSave(), Json); view = camp.Handle(new GameCommand { type = "set_class", unitId = "crawler.carl", classId = enemyClass });
+        Check(!view.classes.Any(c => c.id == enemyClass) && original == JsonSerializer.Serialize(camp.ExportSave(), Json), "enemy-only class flag hides kits and rejects player selection atomically");
     }
     static bool RejectsGameData(Action<GameData> mutate)
     {
@@ -324,7 +384,7 @@ static class GameTests
         game.Handle(new GameCommand { type = "set_class", unitId = hero.id, classId = "class.ranger" }); Command(game, "start");
         Check(game.GetView().abilities.Any(a => a.id == "ability.fixture_jump"), "changing optional class preserves innate abilities");
 
-        GameData legacyData = Clone(Data); legacyData.contentVersion = "fixture-legacy"; legacyData.compatibleContentVersions = new string[0];
+        GameData legacyData = Clone(Data); legacyData.home = null; legacyData.skillTrees = new SkillTreeDef[0]; legacyData.contentVersion = "fixture-legacy"; legacyData.compatibleContentVersions = new string[0];
         legacyData.roster = legacyData.roster.Where(r => string.IsNullOrEmpty(r.replacesId)).ToArray();
         legacyData.progression.skillUnlocks = legacyData.progression.skillUnlocks.Where(s => legacyData.roster.Any(r => r.id == s.rosterId)).ToArray();
         foreach (RosterDef member in legacyData.roster) if (!string.IsNullOrEmpty(member.legacyClassId)) member.classId = member.legacyClassId;
@@ -391,10 +451,12 @@ static class GameTests
     static void ConfigurableParty()
     {
         GameData config = Clone(Data);
+        config.journey = null;
         config.partySize = 2;
         for (int i = 0; i < config.roster.Length; i++) config.roster[i].selected = i < 2;
         foreach (EncounterDef encounter in config.encounters) encounter.playerSpawns = encounter.playerSpawns.Take(2).ToArray();
         foreach (ScenarioDef scenario in config.scenarios) scenario.encounter.playerSpawns = scenario.encounter.playerSpawns.Take(2).ToArray();
+        foreach (ExpeditionDef expedition in config.expeditions) expedition.encounter.playerSpawns = expedition.encounter.playerSpawns.Take(2).ToArray();
         GameSession game = new GameSession(Clone(Content), config);
         GameView view = Command(game, "start");
         Check(view.partyCapacity == 2 && view.partyCount == 2 && view.screen == "battle" && view.units.Count(u => u.team == "player") == 2, "party capacity and deployment remain data driven");
@@ -550,7 +612,7 @@ static class GameTests
         }
         Check(game.GetView().screen == "complete" && victories == 3 && commands < 700, "default party clears all three authored encounters including boss");
         Check(game.GetView().xp == Data.encounters.Sum(e => e.xp), "victory XP awarded exactly once per encounter");
-        Check(highestLevel == Data.progression.xpThresholds.Length && game.GetView().progression.level == highestLevel && game.GetView().quests.Single(q => q.id == "quest.floor").complete, "three encounters reach final shared level and complete the actual floor quest");
+        Check(highestLevel == Data.progression.xpThresholds.Count(threshold => threshold <= Data.encounters.Sum(e => e.xp)) && game.GetView().progression.level == highestLevel && game.GetView().quests.Single(q => q.id == "quest.floor").complete, "three encounters reach their earned shared level and complete the actual floor quest");
         Check(moved, "full-floor traversal uses legal BFS movement");
         Check(usedPotion, "full-floor traversal uses a shared health potion");
         GameSession restored = Session(); restored.ImportSave(Clone(game.ExportSave())); Check(restored.GetView().screen == "complete", "completed floor can save and resume");

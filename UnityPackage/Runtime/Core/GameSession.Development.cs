@@ -52,22 +52,15 @@ namespace DungeonCrawlerTactics
             }
             return result;
         }
-        private int PracticeRank(int uses)
-        {
-            int rank = 1;
-            for (int i = 1; i < data.development.practice.useThresholds.Length; i++)
-                if (uses >= data.development.practice.useThresholds[i])
-                    rank = i + 1;
-            return rank;
-        }
         private ActionModifiers Modifiers(string owner, string ability)
         {
             ActionModifiers result = AllocationModifiers(owner, allocations);
+            ActionModifiers tree = TreeModifiers(owner, unlockedSkillNodes);
             SkillPracticeSave row = practices.Find(p => p.unitId == owner && p.abilityId == ability);
-            int bonus = PracticeRank(row == null ? 0 : row.uses) - 1;
-            result.damageBonus += bonus * data.development.practice.damagePerRank;
-            result.healBonus += bonus * data.development.practice.healPerRank;
-            result.costReduction = bonus * data.development.practice.costReductionPerRank;
+            SkillPracticeView practice = PracticeView(owner, ability, row == null ? 0 : row.uses);
+            result.damageBonus = Math.Min(100, result.damageBonus + tree.damageBonus + practice.damageBonus);
+            result.healBonus = Math.Min(100, result.healBonus + tree.healBonus + practice.healBonus);
+            result.costReduction = practice.costReduction;
             return result;
         }
         private void PracticeCommitted(GameCommand command)
@@ -80,13 +73,16 @@ namespace DungeonCrawlerTactics
                 row = new SkillPracticeSave { unitId = command.unitId, abilityId = command.abilityId };
                 practices.Add(row);
             }
-            int before = PracticeRank(row.uses);
-            row.uses = Math.Min(100000, row.uses + 1);
-            presentationEvents.Add(new PresentationEvent { type = "skill_practice", actorId = row.unitId, abilityId = row.abilityId, amount = row.uses, before = before, after = PracticeRank(row.uses) });
+            SkillPracticeView before = PracticeView(row.unitId, row.abilityId, row.uses);
+            if (before.atCap) return;
+            int capUses = before.ranks[before.maxRank - 1].requiredUses;
+            row.uses = Math.Min(capUses, row.uses + 1);
+            presentationEvents.Add(new PresentationEvent { type = "skill_practice", actorId = row.unitId, abilityId = row.abilityId, amount = row.uses, before = before.rank, after = PracticeView(row.unitId, row.abilityId, row.uses).rank });
         }
         private List<StatAllocationSave> ProposedAllocations(GameCommand command)
         {
             Require(screen == "camp", "Allocate stats in the safe room.");
+            Require(JourneyAllocationUnlocked, "Stat allocation unlocks on floor 3; earned points remain banked.");
             RosterView member = GetRoster(command.unitId);
             Require(Definition(member.id).deployable, "Advisors do not allocate crawler stats.");
             Require(Array.Exists(data.development.stats, s => s.id == command.statId) && command.points > 0 && command.points <= 100, "Choose a supported stat and positive point count.");
@@ -132,10 +128,12 @@ namespace DungeonCrawlerTactics
         {
             if (screen != "camp")
                 return "Craft in the safe room.";
+            string homeReason = HomeCraftingReason();
+            if (homeReason != "") return homeReason;
             foreach (ItemQuantity ingredient in recipe.ingredients)
                 if (inventory[ingredient.itemId] < ingredient.count)
                     return "Missing ingredients.";
-            foreach (ItemQuantity output in recipe.outputs)
+            foreach (ItemQuantity output in HomeRecipeOutputs(recipe))
                 if (inventory[output.itemId] + output.count > 10000)
                     return "Inventory capacity exceeded.";
             return "";
@@ -147,13 +145,15 @@ namespace DungeonCrawlerTactics
             Require(reason == "", reason);
             foreach (ItemQuantity ingredient in recipe.ingredients)
                 inventory[ingredient.itemId] -= ingredient.count;
-            foreach (ItemQuantity output in recipe.outputs)
+            foreach (ItemQuantity output in HomeRecipeOutputs(recipe))
                 inventory[output.itemId] += output.count;
             presentationEvents.Add(new PresentationEvent { type = "craft", tag = recipe.id });
             message = "Crafted " + recipe.label + ".";
         }
         private void GrantLoot(string source, bool victory)
         {
+            if (ActiveExpeditionEncounter != null)
+                return;
             foreach (LootBoxDef definition in data.development.lootBoxes)
                 if ((victory && definition.fromVictory) || (!victory && definition.achievementId == source))
                 {
@@ -186,6 +186,7 @@ namespace DungeonCrawlerTactics
             string owner = pendingDevelopment.unitId;
             ClassStats before = PlayerStats(owner, roster[owner].classId), after = PlayerStats(owner, roster[owner].classId, xp, equipped);
             ApplyAllocatedStats(after, owner, next);
+            ApplyTreeStats(after, owner, unlockedSkillNodes);
             ApplyModes(after, owner, roster[owner].stanceId, roster[owner].formId);
             ActionModifiers oldModifiers = AllocationModifiers(owner, allocations), newModifiers = AllocationModifiers(owner, next);
             return new DevelopmentForecast { unitId = owner, statId = pendingDevelopment.statId, points = pendingDevelopment.points, beforeHp = before.hp, afterHp = after.hp, beforeMana = before.energy, afterMana = after.energy, beforeMove = before.move, afterMove = after.move, beforeDamageBonus = oldModifiers.damageBonus, afterDamageBonus = newModifiers.damageBonus, beforeHealBonus = oldModifiers.healBonus, afterHealBonus = newModifiers.healBonus };
@@ -197,19 +198,18 @@ namespace DungeonCrawlerTactics
             foreach (RosterDef member in data.roster)
                 if (member.deployable)
                 {
-                    crawlers.Add(new CrawlerDevelopmentView { unitId = member.id, unspentPoints = (LevelAt(xp) - 1) * data.development.pointsPerLevel - SpentPoints(member.id, allocations), allocated = CloneAllocations(allocations.FindAll(a => a.unitId == member.id)).ToArray() });
+                    crawlers.Add(new CrawlerDevelopmentView { unitId = member.id, maxSkillRank = MaximumSkillRank(member.id), unspentPoints = (LevelAt(xp) - 1) * data.development.pointsPerLevel - SpentPoints(member.id, allocations), allocated = CloneAllocations(allocations.FindAll(a => a.unitId == member.id)).ToArray() });
                     foreach (SkillPracticeSave row in practices)
                         if (row.unitId == member.id)
                         {
-                            int rank = PracticeRank(row.uses), bonus = rank - 1;
-                            skillViews.Add(new SkillPracticeView { unitId = row.unitId, abilityId = row.abilityId, uses = row.uses, rank = rank, nextRankUses = rank < data.development.practice.useThresholds.Length ? data.development.practice.useThresholds[rank] : row.uses, damageBonus = bonus * data.development.practice.damagePerRank, healBonus = bonus * data.development.practice.healPerRank, costReduction = bonus * data.development.practice.costReductionPerRank });
+                            skillViews.Add(PracticeView(row.unitId, row.abilityId, row.uses));
                         }
                 }
             List<RecipeView> recipes = new List<RecipeView>();
             foreach (RecipeDef recipe in data.development.recipes)
             {
                 string reason = CraftReason(recipe);
-                recipes.Add(new RecipeView { id = recipe.id, label = recipe.label, description = recipe.description, ingredients = recipe.ingredients, outputs = recipe.outputs, enabled = reason == "", disabledReason = reason });
+                recipes.Add(new RecipeView { id = recipe.id, label = recipe.label, description = recipe.description, ingredients = recipe.ingredients, outputs = HomeRecipeOutputs(recipe), enabled = reason == "", disabledReason = reason });
             }
             List<OwnedLootBoxView> boxes = new List<OwnedLootBoxView>();
             foreach (OwnedLootBoxSave row in ownedBoxes)
@@ -217,7 +217,7 @@ namespace DungeonCrawlerTactics
                 LootBoxDef definition = Array.Find(data.development.lootBoxes, b => b.id == row.definitionId);
                 boxes.Add(new OwnedLootBoxView { id = row.id, label = definition.label, description = definition.description, sourceId = row.sourceId, opened = row.opened, enabled = screen == "camp" && !row.opened, rewards = definition.rewards });
             }
-            view.development = new DevelopmentView { available = screen == "camp", description = data.development.description, stats = data.development.stats, crawlers = crawlers.ToArray(), practice = skillViews.ToArray(), recipes = recipes.ToArray(), lootBoxes = boxes.ToArray(), forecast = AllocationForecast(), canConfirm = pendingDevelopment != null };
+            view.development = new DevelopmentView { available = screen == "camp", description = data.development.description, stats = data.development.stats, crawlers = crawlers.ToArray(), practice = skillViews.ToArray(), rankCatalog = screen == "camp" ? RankCatalog() : new SkillRankCatalogView[0], recipes = recipes.ToArray(), lootBoxes = boxes.ToArray(), forecast = AllocationForecast(), canConfirm = pendingDevelopment != null };
         }
         private DevelopmentSave CaptureDevelopment()
         {
@@ -253,7 +253,7 @@ namespace DungeonCrawlerTactics
                 Require(definition != null && row.id == definition.id + ":" + row.sourceId, "Unknown loot box definition.");
                 bool earned = !string.IsNullOrEmpty(definition.achievementId) && definition.achievementId == row.sourceId && Array.IndexOf(save.achievementIds, row.sourceId) >= 0;
                 if (definition.fromVictory)
-                    for (int i = 0; i < Victories(save.screen, save.encounterIndex); i++)
+                    for (int i = 0; i < SaveVictories(save); i++)
                         if (row.sourceId == "victory." + data.encounters[i].id)
                             earned = true;
                 Require(earned, "Loot box source was not earned.");

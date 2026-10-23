@@ -7,6 +7,7 @@ namespace DungeonCrawlerTactics
     {
         public static void Validate(GameData data, Catalog catalog)
         {
+            Need(data != null && catalog != null, "Game data and catalog are required.");
             ValidateDevelopmentDefinitions(data, catalog);
             Need(data.schemaVersion == 1 && !string.IsNullOrEmpty(data.contentVersion), "Expected game schemaVersion 1 and a content version.");
             Need(data.compatibleContentVersions != null, "Compatible versions cannot be null.");
@@ -28,20 +29,25 @@ namespace DungeonCrawlerTactics
             HashSet<string> stats = new HashSet<string>();
             foreach (ClassStats entry in data.classStats)
                 Need(entry != null && entry.classId != null && catalog.Classes.ContainsKey(entry.classId) && stats.Add(entry.classId) && entry.hp > 0 && entry.hp <= 10000 && entry.energy >= 0 && entry.energy <= 1000 && entry.move > 0 && entry.move <= 20, "Invalid class stats.");
-            foreach (string id in catalog.Classes.Keys) Need(stats.Contains(id), "Missing class stats: " + id);
+            foreach (ClassDef definition in catalog.Classes.Values)
+            {
+                Need(stats.Contains(definition.id), "Missing class stats: " + definition.id);
+                Need(definition.minimumFloor >= 1 && definition.minimumFloor <= 18, "Class availability must be within floors 1–18.");
+            }
             HashSet<string> roster = new HashSet<string>(); int selected = 0;
             foreach (RosterDef member in data.roster)
             {
-                Need(member != null && !string.IsNullOrEmpty(member.id) && !member.id.StartsWith("tile.", StringComparison.Ordinal) && roster.Add(member.id) && !string.IsNullOrEmpty(member.label) && member.classId != null && catalog.Classes.ContainsKey(member.classId), "Invalid roster member.");
+                Need(member != null && !string.IsNullOrEmpty(member.id) && !member.id.StartsWith("tile.", StringComparison.Ordinal) && roster.Add(member.id) && !string.IsNullOrEmpty(member.label) && member.classId != null && catalog.Classes.ContainsKey(member.classId) && catalog.Classes[member.classId].playerSelectable, "Invalid roster member.");
                 Need(string.IsNullOrEmpty(member.legacyClassId) || catalog.Classes.ContainsKey(member.legacyClassId), "Unknown legacy class.");
                 Need(member.innateAbilityIds != null, "Innate abilities cannot be null.");
+                Need(member.maxSkillRank >= SkillRankProgression.NormalRankCap && member.maxSkillRank <= SkillRankProgression.AbsoluteRankCap, "Crawler skill rank eligibility must be within ranks 15–20.");
                 HashSet<string> grants = new HashSet<string>(); foreach (string id in member.innateAbilityIds) Need(id != null && catalog.Abilities.ContainsKey(id) && grants.Add(id), "Unknown or duplicate innate ability.");
                 Need(!member.selected || member.deployable, "Advisor cannot be selected.");
                 if (member.selected) selected++;
             }
             HashSet<string> replacements = new HashSet<string>(); foreach (RosterDef member in data.roster) if (!string.IsNullOrEmpty(member.replacesId)) Need(member.replacesId != member.id && roster.Contains(member.replacesId) && replacements.Add(member.replacesId), "Invalid roster replacement.");
             Need(selected <= data.partySize, "Too many default party members.");
-            Need(data.progression != null && data.progression.xpThresholds != null && data.progression.xpThresholds.Length > 0 && data.progression.xpThresholds.Length <= 20 && data.progression.xpThresholds[0] == 0 && data.progression.skillUnlocks != null && data.equipment != null, "Invalid progression configuration.");
+            Need(data.progression != null && data.progression.xpThresholds != null && data.progression.xpThresholds.Length > 0 && data.progression.xpThresholds.Length <= 50 && data.progression.xpThresholds[0] == 0 && data.progression.skillUnlocks != null && data.equipment != null, "Invalid progression configuration.");
             for (int i = 1; i < data.progression.xpThresholds.Length; i++) Need(data.progression.xpThresholds[i] > data.progression.xpThresholds[i - 1] && data.progression.xpThresholds[i] <= 1000000, "XP thresholds must increase from zero.");
             Need(data.progression.hpPerLevel >= 0 && data.progression.hpPerLevel <= 100 && data.progression.manaPerLevel >= 0 && data.progression.manaPerLevel <= 100 && data.progression.movePerLevel >= 0 && data.progression.movePerLevel <= 2, "Invalid progression stat growth.");
             HashSet<string> skillIds = new HashSet<string>();
@@ -53,9 +59,11 @@ namespace DungeonCrawlerTactics
                 HashSet<string> grants = new HashSet<string>(); foreach (string ability in gear.abilityIds) Need(ability != null && catalog.Abilities.ContainsKey(ability) && grants.Add(ability), "Invalid equipment ability grant.");
             }
             HashSet<string> encounters = new HashSet<string>(), sectors = new HashSet<string>();
-            foreach (EncounterDef encounter in data.encounters)
+            List<EncounterDef> allEncounters = new List<EncounterDef>(data.encounters);
+            ValidateJourneyDefinitions(data, allEncounters);
+            foreach (EncounterDef encounter in allEncounters)
             {
-                Need(encounter != null && !string.IsNullOrEmpty(encounter.id) && encounters.Add(encounter.id) && !string.IsNullOrEmpty(encounter.label) && encounter.width >= 4 && encounter.height >= 4 && encounter.width <= 30 && encounter.height <= 30 && encounter.xp >= 0 && encounter.xp <= 10000, "Invalid encounter.");
+                Need(encounter != null && !string.IsNullOrEmpty(encounter.id) && encounters.Add(encounter.id) && !string.IsNullOrEmpty(encounter.label) && encounter.width >= 4 && encounter.height >= 4 && encounter.width <= 30 && encounter.height <= 30 && encounter.xp >= 0 && encounter.xp <= 1000000, "Invalid encounter.");
                 Need(encounter.tiles != null && encounter.playerSpawns != null && encounter.enemies != null && encounter.playerSpawns.Length == data.partySize && encounter.enemies.Length > 0 && encounter.enemies.Length <= 30, "Invalid encounter arrays.");
                 HashSet<string> tiles = new HashSet<string>(), walls = new HashSet<string>(), occupied = new HashSet<string>(), enemies = new HashSet<string>();
                 foreach (TileDef tile in encounter.tiles)
@@ -109,7 +117,35 @@ namespace DungeonCrawlerTactics
             HashSet<string> rules = new HashSet<string>();
             foreach (TagRuleDef rule in data.tagRules) Need(rule != null && catalog.HasTag(rule.tag) && rules.Add(rule.tag) && rule.durationRounds >= 0 && rule.durationRounds <= 100 && rule.entryDamage >= 0 && rule.entryDamage <= 10000 && rule.turnDamage >= 0 && rule.turnDamage <= 10000 && rule.movePenalty >= 0 && rule.movePenalty <= 100 && rule.energyPenalty >= 0 && rule.energyPenalty <= 100, "Invalid tag rule.");
             foreach (TagRuleDef rule in data.tagRules) Need(string.IsNullOrEmpty(rule.occupantTag) || catalog.HasTag(rule.occupantTag), "Unknown occupant tag.");
+            ValidateSkillTreeDefinitions(data, catalog);
             ScenarioDefinitionValidator.Validate(data, catalog);
+            ExpeditionDefinitionValidator.Validate(data, catalog);
+            HomeDefinitionValidator.Validate(data.home, catalog, data.roster);
+            if (data.home != null) foreach (string ability in data.home.trainingAbilityIds) Need(catalog.Abilities.ContainsKey(ability), "Unknown home training ability.");
+        }
+        private static void ValidateJourneyDefinitions(GameData data, List<EncounterDef> encounters)
+        {
+            if (data.journey == null) return;
+            JourneyDef journey = data.journey;
+            Need(journey.schemaVersion == 1 && StableId(journey.id) && !string.IsNullOrEmpty(journey.label) && !string.IsNullOrEmpty(journey.description) && journey.floors != null && journey.floors.Length == 18, "Story campaign requires an eighteen-floor registry.");
+            HashSet<string> ids = new HashSet<string>();
+            string[] mechanics = { "none", "tutorial", "classes", "route", "beacons", "hunt", "capture" };
+            for (int i = 0; i < journey.floors.Length; i++)
+            {
+                JourneyFloorDef floor = journey.floors[i];
+                Need(floor != null && StableId(floor.id) && ids.Add(floor.id) && floor.number == i + 1 && !string.IsNullOrEmpty(floor.label) && !string.IsNullOrEmpty(floor.description) && Array.IndexOf(mechanics, floor.mechanic) >= 0 && floor.requiredPointIds != null, "Invalid story floor registry entry.");
+                Need(floor.available == (i < 8) && floor.kind == (i >= 8 ? "locked" : i == 6 ? "bypass" : "battle"), "Story floor availability must preserve the destroyed seventh floor and locked later floors.");
+                Need(floor.kind == "battle" ? floor.encounter != null : floor.encounter == null && floor.requiredPointIds.Length == 0 && floor.captureCount == 0, "Only playable story floors contain encounters.");
+                if (floor.encounter == null) continue;
+                Need(floor.encounter.exploration != null && floor.encounter.exploration.points != null, "Story floors require exploration.");
+                encounters.Add(floor.encounter);
+                HashSet<string> required = new HashSet<string>();
+                foreach (string id in floor.requiredPointIds) Need(id != null && required.Add(id) && Array.Exists(floor.encounter.exploration.points, p => p != null && p.id == id && p.kind == "lore"), "Unknown or duplicate story route objective.");
+                Need(floor.mechanic != "route" || floor.requiredPointIds.Length == 1, "The railway requires one route lever.");
+                Need(floor.mechanic != "beacons" || floor.requiredPointIds.Length == 4, "The bubble requires four quadrant beacons.");
+                Need(floor.mechanic == "capture" ? floor.captureCount == 6 && floor.encounter.enemies != null && floor.encounter.enemies.Length == 6 : floor.captureCount == 0, "Ghosts of Earth requires six authored capturable monsters.");
+            }
+            Need(journey.floors[0].mechanic == "tutorial" && journey.floors[1].mechanic == "tutorial" && journey.floors[2].mechanic == "classes" && journey.floors[3].mechanic == "route" && journey.floors[4].mechanic == "beacons" && journey.floors[5].mechanic == "hunt" && journey.floors[7].mechanic == "capture", "Story floors require their explicit bounded mechanics.");
         }
         private static bool StableId(string id) { return id != null && System.Text.RegularExpressions.Regex.IsMatch(id, @"^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$"); }
         private static bool Inside(int x, int y, EncounterDef encounter) { return x >= 0 && y >= 0 && x < encounter.width && y < encounter.height; }
@@ -127,9 +163,23 @@ namespace DungeonCrawlerTactics
                 Need(stat.hpPerPoint >= 0 && stat.hpPerPoint <= 5 && stat.manaPerPoint >= 0 && stat.manaPerPoint <= 3 && stat.moveEvery >= 0 && stat.moveEvery <= 10 && stat.damageEvery >= 0 && stat.damageEvery <= 10 && stat.healEvery >= 0 && stat.healEvery <= 10, "Invalid stat formula.");
                 Need(stat.hpPerPoint + stat.manaPerPoint + stat.moveEvery + stat.damageEvery + stat.healEvery > 0, "A stat must have a real effect.");
             }
-            SkillProgressionDef practice = config.practice; Need(practice.useThresholds != null && practice.useThresholds.Length > 0 && practice.useThresholds.Length <= 3 && practice.useThresholds[0] == 0, "Invalid skill rank thresholds.");
+            SkillProgressionDef practice = config.practice; Need(practice.useThresholds != null && practice.useThresholds.Length > 0 && practice.useThresholds.Length <= SkillRankProgression.AbsoluteRankCap && practice.useThresholds[0] == 0, "Invalid skill rank thresholds.");
             for (int i = 1; i < practice.useThresholds.Length; i++) Need(practice.useThresholds[i] > practice.useThresholds[i - 1] && practice.useThresholds[i] <= 100000, "Skill thresholds must increase.");
             Need(practice.damagePerRank >= 0 && practice.damagePerRank <= 1 && practice.healPerRank >= 0 && practice.healPerRank <= 1 && practice.costReductionPerRank >= 0 && practice.costReductionPerRank <= 1, "Skill bonuses exceed bounded adaptation.");
+            Need(practice.abilityProfiles != null && practice.abilityProfiles.Length <= catalog.Abilities.Count, "Invalid ability rank profiles.");
+            HashSet<string> profileIds = new HashSet<string>();
+            foreach (AbilityRankProfile profile in practice.abilityProfiles)
+            {
+                Need(profile != null && profile.abilityId != null && catalog.Abilities.ContainsKey(profile.abilityId) && profileIds.Add(profile.abilityId), "Unknown or duplicate ability rank profile.");
+                Need(profile.practiceMultiplierPercent >= 1 && profile.practiceMultiplierPercent <= 1000 && profile.damagePerRank >= -1 && profile.damagePerRank <= 5 && profile.healPerRank >= -1 && profile.healPerRank <= 5 && profile.costReductionPerRank >= -1 && profile.costReductionPerRank <= 5, "Invalid ability rank training or per-rank effect.");
+                Need(profile.damageBonusCap >= 0 && profile.damageBonusCap <= 100 && profile.healBonusCap >= 0 && profile.healBonusCap <= 100 && profile.costReductionCap >= 0 && profile.costReductionCap <= 100 && profile.milestones != null && profile.milestones.Length < SkillRankProgression.AbsoluteRankCap, "Invalid ability rank caps or milestones.");
+                HashSet<int> milestoneRanks = new HashSet<int>();
+                foreach (RankMilestoneDef milestone in profile.milestones)
+                {
+                    Need(milestone != null && milestone.rank >= 2 && milestone.rank <= SkillRankProgression.AbsoluteRankCap && milestoneRanks.Add(milestone.rank) && !string.IsNullOrEmpty(milestone.description), "Invalid or duplicate rank milestone.");
+                    Need(milestone.damageBonus >= 0 && milestone.damageBonus <= 100 && milestone.healBonus >= 0 && milestone.healBonus <= 100 && milestone.costReduction >= 0 && milestone.costReduction <= 100 && milestone.damageBonus + milestone.healBonus + milestone.costReduction > 0, "Rank milestones require bounded supported effects.");
+                }
+            }
             Need(config.recipes.Length <= 32 && config.lootBoxes.Length <= 16, "Too many recipes or loot definitions."); ids.Clear();
             foreach (RecipeDef recipe in config.recipes)
             {
@@ -148,6 +198,45 @@ namespace DungeonCrawlerTactics
         {
             Need(quantities != null && quantities.Length > 0 && quantities.Length <= 8, "Invalid item quantities."); HashSet<string> ids = new HashSet<string>();
             foreach (ItemQuantity row in quantities) Need(row != null && row.itemId != null && catalog.Items.ContainsKey(row.itemId) && ids.Add(row.itemId) && row.count > 0 && row.count <= 100, "Unknown, duplicate or invalid item quantity.");
+        }
+        private static void ValidateSkillTreeDefinitions(GameData data, Catalog catalog)
+        {
+            Need(data.skillTrees != null && data.skillTrees.Length <= data.roster.Length && data.classSkillTrees != null && data.classSkillTrees.Length <= catalog.Classes.Count, "Invalid skill-tree collection.");
+            HashSet<string> trees = new HashSet<string>(), owners = new HashSet<string>(), classes = new HashSet<string>(), nodeIds = new HashSet<string>();
+            foreach (SkillTreeDef tree in data.skillTrees)
+            {
+                Need(tree != null && tree.rosterId != null && Array.Exists(data.roster, r => r.id == tree.rosterId && r.deployable) && owners.Add(tree.rosterId) && string.IsNullOrEmpty(tree.classId), "Invalid personal skill-tree owner.");
+                ValidateSkillTree(tree, catalog, trees, nodeIds, Math.Min(50, data.progression.xpThresholds.Length));
+            }
+            foreach (SkillTreeDef tree in data.classSkillTrees)
+            {
+                Need(tree != null && tree.classId != null && catalog.Classes.ContainsKey(tree.classId) && catalog.Classes[tree.classId].playerSelectable && classes.Add(tree.classId) && string.IsNullOrEmpty(tree.rosterId), "Invalid class skill-tree owner.");
+                ValidateSkillTree(tree, catalog, trees, nodeIds, 50);
+            }
+            if (data.skillTrees.Length > 0) foreach (RosterDef member in data.roster) Need(!member.deployable || owners.Contains(member.id), "Every deployable crawler needs an authored skill tree.");
+        }
+        private static void ValidateSkillTree(SkillTreeDef tree, Catalog catalog, HashSet<string> treeIds, HashSet<string> nodeIds, int maximumLevel)
+        {
+            Need(StableId(tree.id) && treeIds.Add(tree.id) && !string.IsNullOrEmpty(tree.label) && !string.IsNullOrEmpty(tree.description), "Invalid skill-tree identity.");
+            Need(tree.nodes != null && tree.nodes.Length > 0 && tree.nodes.Length <= 32, "Invalid skill-tree nodes.");
+            Dictionary<string, SkillNodeDef> nodes = new Dictionary<string, SkillNodeDef>();
+            foreach (SkillNodeDef node in tree.nodes)
+            {
+                Need(node != null && StableId(node.id) && nodeIds.Add(node.id) && !string.IsNullOrEmpty(node.label) && !string.IsNullOrEmpty(node.description) && node.level >= 1 && node.level <= maximumLevel && node.pointCost == 1 && node.prerequisiteIds != null && node.abilityIds != null, "Invalid skill-tree node.");
+                Need(node.hpBonus >= 0 && node.hpBonus <= 6 && node.manaBonus >= 0 && node.manaBonus <= 3 && node.moveBonus >= 0 && node.moveBonus <= 1 && node.damageBonus >= 0 && node.damageBonus <= 1 && node.healBonus >= 0 && node.healBonus <= 1, "Skill-tree bonus exceeds bounded adaptation.");
+                Need(node.abilityIds.Length <= 4 && node.prerequisiteIds.Length <= 4 && node.abilityIds.Length + node.hpBonus + node.manaBonus + node.moveBonus + node.damageBonus + node.healBonus > 0, "A skill-tree node must have a supported benefit.");
+                HashSet<string> grants = new HashSet<string>(); foreach (string ability in node.abilityIds) Need(ability != null && catalog.Abilities.ContainsKey(ability) && grants.Add(ability), "Unknown or duplicate skill-tree ability.");
+                nodes.Add(node.id, node);
+            }
+            foreach (SkillNodeDef node in tree.nodes)
+            {
+                HashSet<string> parents = new HashSet<string>(); foreach (string parent in node.prerequisiteIds) Need(parent != null && nodes.ContainsKey(parent) && parents.Add(parent) && nodes[parent].level <= node.level, "Invalid skill-tree prerequisite.");
+            }
+            HashSet<string> visiting = new HashSet<string>(), visited = new HashSet<string>(); foreach (SkillNodeDef node in tree.nodes) VisitSkillNode(node.id, nodes, visiting, visited);
+        }
+        private static void VisitSkillNode(string id, Dictionary<string, SkillNodeDef> nodes, HashSet<string> visiting, HashSet<string> visited)
+        {
+            if (visited.Contains(id)) return; Need(visiting.Add(id), "Skill-tree prerequisite cycle."); foreach (string parent in nodes[id].prerequisiteIds) VisitSkillNode(parent, nodes, visiting, visited); visiting.Remove(id); visited.Add(id);
         }
         private static void Need(bool valid, string message) { if (!valid) throw new ArgumentException(message); }
     }

@@ -22,6 +22,9 @@ const scenarioArt = {};
 const scenarioArtReady=fetch('assets/scenario-props/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(Object.entries(manifest.sprites??{}).map(([key,definition])=>new Promise(resolve=>{
   const image=new Image();image.onload=()=>{scenarioArt[key]={...definition,image};if(key==='scatterer')bossArt.scatterer={...definition,image};resolve();};image.onerror=resolve;image.src='assets/scenario-props/'+definition.file;
 })))).catch(()=>{});
+const expeditionArtReady=fetch('assets/expedition-enemies/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(Object.entries(manifest.sprites??{}).map(([key,definition])=>new Promise(resolve=>{
+  const image=new Image();image.onload=()=>{bossArt[key]={...definition,image};resolve();};image.onerror=resolve;image.src='assets/expedition-enemies/'+definition.file;
+})))).catch(()=>{});
 const bossReady=fetch('assets/bosses/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(Object.entries(manifest.sprites??{}).map(([key,definition])=>new Promise(resolve=>{
   const image=new Image();image.onload=()=>{bossArt['boss-'+key]={...definition,image};resolve();};image.onerror=resolve;image.src='assets/bosses/'+definition.file;
 })))).catch(()=>{});
@@ -37,7 +40,7 @@ const imageLoads = ['terrain','characters','enemies','ui','effects','mongo'].map
   image.onerror = resolve;
   image.src = ROOT + name + '.png';
 }));
-const ready = Promise.all([scenarioArtReady,bossReady,roomReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
+const ready = Promise.all([expeditionArtReady,scenarioArtReady,bossReady,roomReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
   fetch(ROOT+file).then(r=>r.json()).then(data=>Object.assign(spriteFrames,data)).catch(()=>{}))]);
 
 export function createBattlefield(canvas, {onCell, onHover} = {}) {
@@ -360,7 +363,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       if((tile.tags??[]).includes('surface.oil'))component('oil-overlay',tile.x,tile.y);
       if((tile.tags??[]).includes('surface.water'))component('water-overlay',tile.x,tile.y);
     }
-    const decorations=!explore?(view.scenario?.decorations??[]):[];
+    const decorations=!explore?(view.expedition?.decorations??view.scenario?.decorations??[]):[];
     const groundDecoration=piece=>['floor','surface','ground'].includes(piece.layer)||['moss','grate'].includes(piece.assetId);
     for(const piece of decorations)if(groundDecoration(piece))component(piece.assetId,piece.x,piece.y,1,piece.rotation??0);
     highlights();

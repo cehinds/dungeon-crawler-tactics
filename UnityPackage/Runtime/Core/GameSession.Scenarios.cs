@@ -39,6 +39,7 @@ namespace DungeonCrawlerTactics
                 Require(def != null, "Unknown scenario.");
                 GameSave campaign = ExportSave();
                 Reset();
+                CommitHome(ValidateHome(campaign));
                 scenarioState = NewScenario(def, campaign);
                 // The accelerated roster is explicitly an adaptation; preserve the player's selected party.
                 int count = 0;

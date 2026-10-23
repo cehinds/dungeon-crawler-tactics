@@ -1,0 +1,733 @@
+{
+  "schemaVersion": 1,
+  "researchedAt": "2026-10-23",
+  "scope": "Personal housing, training, crafting tools, social upgrades and club access; no game implementation changes.",
+  "sourcePolicy": "Primary publisher sample confirms several exact offers; remaining details are labeled secondary. No fanfiction used. Null prices mean unverified, never free.",
+  "timingCaution": "One Royal Palace wiki inconsistently calls this Floor 3; the publisher sample places acquisition on Floor 4. Availability from Floor 3 is distinct from party acquisition.",
+  "prices": [
+    {
+      "id": "housing.basic",
+      "label": "Base personal space",
+      "priceGold": 50000,
+      "priceStatus": "secondary_supported_exact_offer",
+      "sourceIds": [
+        "space",
+        "wendita"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": "Earth-season starting offer; not a level-three price."
+    },
+    {
+      "id": "housing.basic_negotiated",
+      "label": "Negotiated base-space offer",
+      "priceGold": 37500,
+      "priceStatus": "secondary_supported_exact_offer",
+      "sourceIds": [
+        "wendita"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": "Donut negotiation example, not automatic price for everyone."
+    },
+    {
+      "id": "housing.union",
+      "label": "Joining fee per union",
+      "priceGold": 5000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.training_tier1",
+      "label": "Tier-one Training Room",
+      "priceGold": 250000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.enhanced_crafting",
+      "label": "Enhanced Crafting Studio",
+      "priceGold": 255000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": "5,000 above one environmental coupon’s cap."
+    },
+    {
+      "id": "upgrade.bed_tier1",
+      "label": "Ultra-Stabilized adjustable bed",
+      "priceGold": 250000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.social",
+      "label": "Social Screen",
+      "priceGold": 50000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.quest",
+      "label": "Quest Screen",
+      "priceGold": 90000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.jobs",
+      "label": "Adventurers Inc. agency",
+      "priceGold": 100000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.special_jobs",
+      "label": "Naughty Boys agency",
+      "priceGold": 500000,
+      "priceStatus": "primary_supported_exact",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": "Invite-only; Carl’s class supplies access."
+    },
+    {
+      "id": "upgrade.cleaner",
+      "label": "Cleaner Bot",
+      "priceGold": 25000,
+      "priceStatus": "secondary_supported_exact",
+      "sourceIds": [
+        "cleaner"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      },
+      "notes": ""
+    },
+    {
+      "id": "table.engineering",
+      "label": "Engineer’s Table",
+      "priceGold": 25000,
+      "priceStatus": "secondary_supported_approximate",
+      "sourceIds": [
+        "engineering"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": "Approximate source price; not a fixed authored game price."
+    },
+    {
+      "id": "housing.level3",
+      "label": "Level-three personal space",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.shower",
+      "label": "Upgraded shower",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.bomber",
+      "label": "Tier-two Bomber’s Studio",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    },
+    {
+      "id": "table.sapper",
+      "label": "Sapper’s Table",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "sapper"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    },
+    {
+      "id": "table.alchemy",
+      "label": "Alchemy Table",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "engineering"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    },
+    {
+      "id": "upgrade.vocal",
+      "label": "Vocal Coach",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    },
+    {
+      "id": "club.desperado",
+      "label": "Desperado membership",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "desperado"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    },
+    {
+      "id": "club.vanquisher",
+      "label": "Vanquisher membership",
+      "priceGold": null,
+      "priceStatus": "not_established",
+      "sourceIds": [
+        "vanquisher"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      },
+      "notes": ""
+    }
+  ],
+  "rules": [
+    {
+      "id": "housing.access",
+      "text": "Private housing attaches to safe rooms; owners whitelist visitors.",
+      "status": "source_supported",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "housing.availability",
+      "text": "Purchases are available from Floor 3; the main party’s combined home is acquired in Book 3 / Floor 4.",
+      "status": "source_supported",
+      "sourceIds": [
+        "space",
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      }
+    },
+    {
+      "id": "housing.combine",
+      "text": "Only same-party spaces combine; shared upgrades coexist with individually owned rooms.",
+      "status": "source_supported",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "housing.ownership",
+      "text": "Space and environmental upgrades follow their owner when leaving a party.",
+      "status": "source_supported",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      }
+    },
+    {
+      "id": "housing.tables",
+      "text": "Table upgrades remain with the table; purchaser death can remove owned environmental benefits.",
+      "status": "source_supported",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "housing.layout",
+      "text": "Level 1 lacks room for training; level 3 supports a training module; level 5 permits manager quarters.",
+      "status": "source_supported",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "housing.coupons",
+      "text": "Environmental coupons cap at 250,000 gold; two cannot cover one purchase.",
+      "status": "source_supported",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      }
+    },
+    {
+      "id": "housing.merge_example",
+      "text": "Three level-three spaces produce level-five shared benefits; one departure reduces the example to level four.",
+      "status": "source_supported",
+      "sourceIds": [
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      }
+    },
+    {
+      "id": "training.limits",
+      "text": "Tier-one practice: one hour daily on an eligible nonmagical skill; explosives require a later Bomber’s Studio.",
+      "status": "source_supported",
+      "sourceIds": [
+        "training",
+        "sample.book3"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      }
+    },
+    {
+      "id": "training.tier2",
+      "text": "Tier-two upgrades begin on Floor 6.",
+      "status": "source_supported",
+      "sourceIds": [
+        "space"
+      ],
+      "timing": {
+        "book": null,
+        "floor": 6
+      }
+    },
+    {
+      "id": "training.guild",
+      "text": "Dodge Guild requires Dodge 7; first raise to 8 is free, raise to 9 costs 20,000, raise to 10 costs 250,000.",
+      "status": "source_supported",
+      "sourceIds": [
+        "dodge"
+      ],
+      "timing": {
+        "book": 3,
+        "floor": 4
+      }
+    },
+    {
+      "id": "social.filtered",
+      "text": "Social Board displays an AI-moderated feed; it is not unfiltered internet access.",
+      "status": "source_supported",
+      "sourceIds": [
+        "social"
+      ],
+      "timing": {
+        "book": 4,
+        "floor": 5
+      }
+    },
+    {
+      "id": "crafting.installation",
+      "text": "Specialized tables are installed equipment, not an automatic bench in every safe room.",
+      "status": "source_supported",
+      "sourceIds": [
+        "sapper",
+        "engineering"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "crafting.sapper",
+      "text": "Carl earns his Sapper’s Table in Book 1 / Floor 2, before installing it in the later home.",
+      "status": "source_supported",
+      "sourceIds": [
+        "sapper"
+      ],
+      "timing": {
+        "book": 1,
+        "floor": 2
+      }
+    },
+    {
+      "id": "crafting.safety",
+      "text": "At the Sapper’s Table, bomb stability does not decay and premature detonation is prevented; relevant skill gates still apply.",
+      "status": "source_supported",
+      "sourceIds": [
+        "sapper"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "crafting.equip",
+      "text": "Engineering fabrication alone does not certify armor as equippable; the described process also requires an Armorer’s Table.",
+      "status": "source_supported",
+      "sourceIds": [
+        "engineering"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.desperado_entry",
+      "text": "Public front pub needs no pass; the inner club requires earned personal membership.",
+      "status": "source_supported",
+      "sourceIds": [
+        "desperado"
+      ],
+      "timing": {
+        "book": 2,
+        "floor": 3
+      }
+    },
+    {
+      "id": "club.desperado_timing",
+      "text": "Carl and Donut receive pass tattoos in Book 1; actual urban-club access begins on Floor 3.",
+      "status": "source_supported",
+      "sourceIds": [
+        "desperado",
+        "anarchist"
+      ],
+      "timing": {
+        "book": 1,
+        "floor": 1
+      }
+    },
+    {
+      "id": "club.exclusivity",
+      "text": "Standard Desperado membership excludes a Vanquisher pass; this is not exceptionless across all gods/classes.",
+      "status": "source_supported",
+      "sourceIds": [
+        "desperado",
+        "vanquisher"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.class_restrictions",
+      "text": "Desperado membership can exclude Cleric/Paladin class choices.",
+      "status": "source_supported",
+      "sourceIds": [
+        "classes"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.emberus_exception",
+      "text": "Emberus grants limited Vanquisher access despite other affiliation: paperwork and one area per day.",
+      "status": "source_supported",
+      "sourceIds": [
+        "emberus"
+      ],
+      "timing": {
+        "book": 4,
+        "floor": 5
+      }
+    },
+    {
+      "id": "club.no_fasttravel",
+      "text": "Club exit returns to its entry doorway; a shared interior does not permit fast travel.",
+      "status": "source_supported",
+      "sourceIds": [
+        "desperado"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.not_safe",
+      "text": "The Desperado main room is not a safe room; membership does not prevent injury.",
+      "status": "source_supported",
+      "sourceIds": [
+        "desperado"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.pets",
+      "text": "Pets cannot enter the inner club; a familiar playroom does not guarantee their safety.",
+      "status": "source_supported",
+      "sourceIds": [
+        "desperado"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.depth",
+      "text": "Desperado internal levels unlock with Floor 3, Floor 6 and Floor 9 progression.",
+      "status": "source_supported",
+      "sourceIds": [
+        "desperado"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.personal_access",
+      "text": "Pass access is represented by personal credentials. Transferability of every credential is not independently established; do not model one pass as an automatic party unlock.",
+      "status": "source_supported_with_transferability_unknown",
+      "sourceIds": [
+        "desperado",
+        "vanquisher"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "club.no_anarchist_venue",
+      "text": "No separate Anarchist Club is established in reviewed sources. The Compensated Anarchist class includes Desperado access.",
+      "status": "not_established_separate_club",
+      "sourceIds": [
+        "anarchist"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    },
+    {
+      "id": "cookbook.secret",
+      "text": "The Cookbook is a concealed knowledge item; exposure can remove access. It is not a publicly purchasable club membership.",
+      "status": "source_supported",
+      "sourceIds": [
+        "cookbook"
+      ],
+      "timing": {
+        "book": null,
+        "floor": null
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "sample.book3",
+      "title": "The Dungeon Anarchist’s Cookbook publisher sample, printed pp. 36–40",
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf",
+      "quality": "primary_publisher_sample"
+    },
+    {
+      "id": "space",
+      "title": "Personal Space",
+      "url": "https://www.dccdatabase.com/wiki/personal_space/",
+      "quality": "secondary_direct"
+    },
+    {
+      "id": "wendita",
+      "title": "Wendita",
+      "url": "https://www.dccdatabase.com/wiki/wendita/",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "social",
+      "title": "Social Media Board",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Social_Media_Board",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "training",
+      "title": "Training Room",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Training_Room",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "engineering",
+      "title": "Engineer’s Table",
+      "url": "https://www.dccdatabase.com/wiki/engineer%27s_table/",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "sapper",
+      "title": "Sapper’s Table",
+      "url": "https://www.dccdatabase.com/wiki/sapper%27s_table/",
+      "quality": "secondary_direct"
+    },
+    {
+      "id": "dodge",
+      "title": "Dodge Skill",
+      "url": "https://www.dccdatabase.com/wiki/dodge_skill/",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "cleaner",
+      "title": "Cleaner Bot",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Cleaner_Bot",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "desperado",
+      "title": "Desperado Club",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Desperado_Club",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "vanquisher",
+      "title": "Club Vanquisher",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Club_Vanquisher",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "emberus",
+      "title": "Emberus High Temple of the Ending Sun",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Emberus_High_Temple_of_the_Ending_Sun",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "classes",
+      "title": "List of Classes",
+      "url": "https://www.dccdatabase.com/wiki/list_of_classes/",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "anarchist",
+      "title": "Compensated Anarchist Class",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Compensated_Anarchist_Class",
+      "quality": "secondary_indexed"
+    },
+    {
+      "id": "cookbook",
+      "title": "Dungeon Anarchist’s Cookbook item",
+      "url": "https://www.dccdatabase.com/wiki/dungeon_anarchist%27s_cookbook_%28item%29/",
+      "quality": "secondary_indexed"
+    }
+  ],
+  "adaptationRules": [
+    "Track each crawler’s room, ownership and installed equipment separately from shared room benefits.",
+    "Show exact source offers separately from balanced game costs.",
+    "Keep training costs, daily limits and skill eligibility visible before spending.",
+    "Gate clubs by a per-crawler credential and explicit exception; do not sell universal party access.",
+    "Do not infer the price of level-three housing from a base-space offer or coupon value."
+  ]
+}

@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "title": "Dungeon Crawler Tactics menu component atlas",
+  "notice": "Original generated menu illustrations and isolated HTML previews. All preview values are illustrative; no game saves are changed.",
+  "menus": [
+    {
+      "id": "mission-board",
+      "title": "Mission board",
+      "description": "Choose a route, read the stakes, and see who is coming.",
+      "kind": "navigation",
+      "image": "assets/menu-concepts/mission-board.png",
+      "imageStatus": "Generated concept illustration",
+      "anchor": "menu-atlas.html#menu-mission-board"
+    },
+    {
+      "id": "skill-tree",
+      "title": "Skill tree",
+      "description": "Understand prerequisites, compare a node, and spend a point deliberately.",
+      "kind": "progression",
+      "image": "assets/menu-concepts/skill-tree.png",
+      "imageStatus": "Generated concept illustration",
+      "anchor": "menu-atlas.html#menu-skill-tree"
+    },
+    {
+      "id": "character-equipment",
+      "title": "Character & equipment",
+      "description": "Read a crawler, compare a loadout, and understand the tradeoff.",
+      "kind": "equipment",
+      "image": "assets/menu-concepts/character-equipment.png",
+      "imageStatus": "Generated concept illustration",
+      "anchor": "menu-atlas.html#menu-character-equipment"
+    },
+    {
+      "id": "combat-targeting",
+      "title": "Combat & targeting",
+      "description": "Declare the action, expose its footprint, and inspect the result.",
+      "kind": "combat",
+      "image": "assets/menu-concepts/combat-targeting.png",
+      "imageStatus": "Generated concept illustration",
+      "anchor": "menu-atlas.html#menu-combat-targeting"
+    },
+    {
+      "id": "safe-room-services",
+      "title": "Safe room services",
+      "description": "Recover, craft, and open a reward without hiding the cost.",
+      "kind": "services",
+      "image": "assets/menu-concepts/safe-room-services.png",
+      "imageStatus": "Generated concept illustration",
+      "anchor": "menu-atlas.html#menu-safe-room-services"
+    },
+    {
+      "id": "bestiary",
+      "title": "Bestiary & inspection",
+      "description": "Recognize the threat, its conditions, and its next move.",
+      "kind": "enemy",
+      "image": "assets/menu-concepts/bestiary.png",
+      "imageStatus": "Generated concept illustration",
+      "anchor": "menu-atlas.html#menu-bestiary"
+    }
+  ],
+  "components": [
+    {
+      "id": "mission-tile",
+      "menu": "mission-board",
+      "kind": "navigation",
+      "name": "Mission tile",
+      "description": "A readable encounter choice with its threat and reward.",
+      "states": [
+        "available",
+        "selected",
+        "completed"
+      ],
+      "anchor": "menu-atlas.html#component-mission-tile",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/mission-ui.js",
+      "dataFields": [
+        "GameView.scenarios",
+        "ScenarioOptionView.objective",
+        "GameView.partyOrder"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "mission-briefing",
+      "menu": "mission-board",
+      "kind": "navigation",
+      "name": "Mission briefing",
+      "description": "The objective and risk stay visible before entry.",
+      "states": [
+        "ready",
+        "danger",
+        "completed"
+      ],
+      "anchor": "menu-atlas.html#component-mission-briefing",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/mission-ui.js",
+      "dataFields": [
+        "GameView.scenarios",
+        "ScenarioOptionView.objective",
+        "GameView.partyOrder"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "quest-row",
+      "menu": "mission-board",
+      "kind": "navigation",
+      "name": "Quest row",
+      "description": "Track a concrete objective without hiding progress.",
+      "states": [
+        "active",
+        "progress",
+        "complete"
+      ],
+      "anchor": "menu-atlas.html#component-quest-row",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/mission-ui.js",
+      "dataFields": [
+        "GameView.scenarios",
+        "ScenarioOptionView.objective",
+        "GameView.partyOrder"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "party-turn",
+      "menu": "mission-board",
+      "kind": "navigation",
+      "name": "Party order",
+      "description": "The current crawler and finished turns are distinct.",
+      "states": [
+        "ready",
+        "current",
+        "finished"
+      ],
+      "anchor": "menu-atlas.html#component-party-turn",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/mission-ui.js",
+      "dataFields": [
+        "GameView.scenarios",
+        "ScenarioOptionView.objective",
+        "GameView.partyOrder"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "entry-confirm",
+      "menu": "mission-board",
+      "kind": "navigation",
+      "name": "Entry confirmation",
+      "description": "A final decision with a clear return route.",
+      "states": [
+        "ready",
+        "confirm",
+        "entered"
+      ],
+      "anchor": "menu-atlas.html#component-entry-confirm",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/mission-ui.js",
+      "dataFields": [
+        "GameView.scenarios",
+        "ScenarioOptionView.objective",
+        "GameView.partyOrder"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "skill-node",
+      "menu": "skill-tree",
+      "kind": "progression",
+      "name": "Skill node \u00b7 four states",
+      "description": "Locked, available, learned, and maxed share one stable silhouette.",
+      "states": [
+        "locked",
+        "available",
+        "learned",
+        "maxed"
+      ],
+      "anchor": "menu-atlas.html#component-skill-node",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/skill-tree-ui.js",
+      "dataFields": [
+        "GameView.skillTree",
+        "SkillNodeView.prerequisiteIds",
+        "CrawlerSkillTreeView.unspentPoints",
+        "GameSave.skillTree"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "prerequisite-connector",
+      "menu": "skill-tree",
+      "kind": "progression",
+      "name": "Prerequisite connector",
+      "description": "A path becomes active only after its prerequisite is met.",
+      "states": [
+        "locked",
+        "available",
+        "learned"
+      ],
+      "anchor": "menu-atlas.html#component-prerequisite-connector",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/skill-tree-ui.js",
+      "dataFields": [
+        "GameView.skillTree",
+        "SkillNodeView.prerequisiteIds",
+        "CrawlerSkillTreeView.unspentPoints",
+        "GameSave.skillTree"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "points-badge",
+      "menu": "skill-tree",
+      "kind": "progression",
+      "name": "Unspent points",
+      "description": "A small persistent count keeps the purchase budget legible.",
+      "states": [
+        "empty",
+        "available",
+        "spent"
+      ],
+      "anchor": "menu-atlas.html#component-points-badge",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/skill-tree-ui.js",
+      "dataFields": [
+        "GameView.skillTree",
+        "SkillNodeView.prerequisiteIds",
+        "CrawlerSkillTreeView.unspentPoints",
+        "GameSave.skillTree"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "node-details",
+      "menu": "skill-tree",
+      "kind": "progression",
+      "name": "Node details",
+      "description": "Describe the effect, cost, and requirement in plain language.",
+      "states": [
+        "locked",
+        "available",
+        "learned"
+      ],
+      "anchor": "menu-atlas.html#component-node-details",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/skill-tree-ui.js",
+      "dataFields": [
+        "GameView.skillTree",
+        "SkillNodeView.prerequisiteIds",
+        "CrawlerSkillTreeView.unspentPoints",
+        "GameSave.skillTree"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "unlock-confirm",
+      "menu": "skill-tree",
+      "kind": "progression",
+      "name": "Unlock confirmation",
+      "description": "Review the exact change before spending a point.",
+      "states": [
+        "ready",
+        "confirm",
+        "unlocked"
+      ],
+      "anchor": "menu-atlas.html#component-unlock-confirm",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/skill-tree-ui.js",
+      "dataFields": [
+        "GameView.skillTree",
+        "SkillNodeView.prerequisiteIds",
+        "CrawlerSkillTreeView.unspentPoints",
+        "GameSave.skillTree"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "equipment-slot",
+      "menu": "character-equipment",
+      "kind": "equipment",
+      "name": "Equipment slot",
+      "description": "Empty, equipped, and incompatible states avoid ambiguity.",
+      "states": [
+        "empty",
+        "equipped",
+        "incompatible"
+      ],
+      "anchor": "menu-atlas.html#component-equipment-slot",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/character-ui.js",
+      "dataFields": [
+        "UnitView.hp",
+        "UnitView.energy",
+        "GameView.equipment",
+        "EquipmentView.equippedUnitId"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "item-stats",
+      "menu": "character-equipment",
+      "kind": "equipment",
+      "name": "Item statistics",
+      "description": "Show one item\u2019s benefits and where it belongs.",
+      "states": [
+        "normal",
+        "selected",
+        "equipped"
+      ],
+      "anchor": "menu-atlas.html#component-item-stats",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/character-ui.js",
+      "dataFields": [
+        "UnitView.hp",
+        "UnitView.energy",
+        "GameView.equipment",
+        "EquipmentView.equippedUnitId"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "resource-bars",
+      "menu": "character-equipment",
+      "kind": "equipment",
+      "name": "HP & Mana bars",
+      "description": "Pair color with exact numbers and explicit labels.",
+      "states": [
+        "healthy",
+        "wounded",
+        "empty"
+      ],
+      "anchor": "menu-atlas.html#component-resource-bars",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/character-ui.js",
+      "dataFields": [
+        "UnitView.hp",
+        "UnitView.energy",
+        "GameView.equipment",
+        "EquipmentView.equippedUnitId"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "stat-comparison",
+      "menu": "character-equipment",
+      "kind": "equipment",
+      "name": "Stat comparison",
+      "description": "Show the current value and the proposed value together.",
+      "states": [
+        "neutral",
+        "upgrade",
+        "tradeoff"
+      ],
+      "anchor": "menu-atlas.html#component-stat-comparison",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/character-ui.js",
+      "dataFields": [
+        "UnitView.hp",
+        "UnitView.energy",
+        "GameView.equipment",
+        "EquipmentView.equippedUnitId"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "party-selection",
+      "menu": "character-equipment",
+      "kind": "equipment",
+      "name": "Party selection",
+      "description": "Selection, availability, and a full party get distinct feedback.",
+      "states": [
+        "available",
+        "selected",
+        "full"
+      ],
+      "anchor": "menu-atlas.html#component-party-selection",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/character-ui.js",
+      "dataFields": [
+        "UnitView.hp",
+        "UnitView.energy",
+        "GameView.equipment",
+        "EquipmentView.equippedUnitId"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "action-card",
+      "menu": "combat-targeting",
+      "kind": "combat",
+      "name": "Action card",
+      "description": "A distinct action with its cost, range, and disabled reason.",
+      "states": [
+        "ready",
+        "selected",
+        "disabled"
+      ],
+      "anchor": "menu-atlas.html#component-action-card",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/game.js",
+      "dataFields": [
+        "AbilityView.cost",
+        "AbilityView.range",
+        "GameView.forecast",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "target-forecast",
+      "menu": "combat-targeting",
+      "kind": "combat",
+      "name": "Target forecast",
+      "description": "Before and after values are shown before a commitment.",
+      "states": [
+        "preview",
+        "confirm",
+        "canceled"
+      ],
+      "anchor": "menu-atlas.html#component-target-forecast",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/game.js",
+      "dataFields": [
+        "AbilityView.cost",
+        "AbilityView.range",
+        "GameView.forecast",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "range-legend",
+      "menu": "combat-targeting",
+      "kind": "combat",
+      "name": "Range legend",
+      "description": "Reach, threat, and target use both labels and color.",
+      "states": [
+        "movement",
+        "danger",
+        "target"
+      ],
+      "anchor": "menu-atlas.html#component-range-legend",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/game.js",
+      "dataFields": [
+        "AbilityView.cost",
+        "AbilityView.range",
+        "GameView.forecast",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "enemy-intent",
+      "menu": "combat-targeting",
+      "kind": "combat",
+      "name": "Enemy intent",
+      "description": "The declared attack and its lane remain readable.",
+      "states": [
+        "winding",
+        "interrupted",
+        "impact"
+      ],
+      "anchor": "menu-atlas.html#component-enemy-intent",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/game.js",
+      "dataFields": [
+        "AbilityView.cost",
+        "AbilityView.range",
+        "GameView.forecast",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "end-turn",
+      "menu": "combat-targeting",
+      "kind": "combat",
+      "name": "End turn confirmation",
+      "description": "Name the next crawler and any unused allowance.",
+      "states": [
+        "unused",
+        "ready",
+        "ended"
+      ],
+      "anchor": "menu-atlas.html#component-end-turn",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "Web/wwwroot/game.js",
+      "dataFields": [
+        "AbilityView.cost",
+        "AbilityView.range",
+        "GameView.forecast",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "recipe-ingredients",
+      "menu": "safe-room-services",
+      "kind": "services",
+      "name": "Recipe ingredients",
+      "description": "Owned and required quantities identify what is missing.",
+      "states": [
+        "missing",
+        "ready",
+        "consumed"
+      ],
+      "anchor": "menu-atlas.html#component-recipe-ingredients",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/GameSession.Progression.cs",
+      "dataFields": [
+        "GameView.safeRoom",
+        "GameView.items",
+        "GameCommand.type"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "craft-confirm",
+      "menu": "safe-room-services",
+      "kind": "services",
+      "name": "Craft confirmation",
+      "description": "Review the material cost and resulting item together.",
+      "states": [
+        "ready",
+        "confirm",
+        "crafted"
+      ],
+      "anchor": "menu-atlas.html#component-craft-confirm",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/GameSession.Progression.cs",
+      "dataFields": [
+        "GameView.safeRoom",
+        "GameView.items",
+        "GameCommand.type"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "loot-box",
+      "menu": "safe-room-services",
+      "kind": "services",
+      "name": "Loot box",
+      "description": "Closed, opening, and claimed states communicate ownership.",
+      "states": [
+        "closed",
+        "opening",
+        "claimed"
+      ],
+      "anchor": "menu-atlas.html#component-loot-box",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/GameSession.Progression.cs",
+      "dataFields": [
+        "GameView.safeRoom",
+        "GameView.items",
+        "GameCommand.type"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "rest-service",
+      "menu": "safe-room-services",
+      "kind": "services",
+      "name": "Rest service",
+      "description": "Explain exactly what resting will restore.",
+      "states": [
+        "needed",
+        "rested",
+        "unavailable"
+      ],
+      "anchor": "menu-atlas.html#component-rest-service",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/GameSession.Progression.cs",
+      "dataFields": [
+        "GameView.safeRoom",
+        "GameView.items",
+        "GameCommand.type"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "service-row",
+      "menu": "safe-room-services",
+      "kind": "services",
+      "name": "Service navigation",
+      "description": "A concise service row shows where it leads.",
+      "states": [
+        "available",
+        "selected",
+        "locked"
+      ],
+      "anchor": "menu-atlas.html#component-service-row",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/GameSession.Progression.cs",
+      "dataFields": [
+        "GameView.safeRoom",
+        "GameView.items",
+        "GameCommand.type"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "enemy-card",
+      "menu": "bestiary",
+      "kind": "enemy",
+      "name": "Enemy card",
+      "description": "Name, silhouette, category, and health form one compact identity.",
+      "states": [
+        "healthy",
+        "wounded",
+        "defeated"
+      ],
+      "anchor": "menu-atlas.html#component-enemy-card",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/ScenarioData.cs",
+      "dataFields": [
+        "UnitView.tags",
+        "UnitView.statuses",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "enemy-tags",
+      "menu": "bestiary",
+      "kind": "enemy",
+      "name": "Enemy tags",
+      "description": "Inspect a condition without depending on its color alone.",
+      "states": [
+        "normal",
+        "wet",
+        "burning"
+      ],
+      "anchor": "menu-atlas.html#component-enemy-tags",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/ScenarioData.cs",
+      "dataFields": [
+        "UnitView.tags",
+        "UnitView.statuses",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "intent-details",
+      "menu": "bestiary",
+      "kind": "enemy",
+      "name": "Intent details",
+      "description": "Spell out what a locked attack will do and how to avoid it.",
+      "states": [
+        "planned",
+        "blocked",
+        "resolved"
+      ],
+      "anchor": "menu-atlas.html#component-intent-details",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/ScenarioData.cs",
+      "dataFields": [
+        "UnitView.tags",
+        "UnitView.statuses",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "status-legend",
+      "menu": "bestiary",
+      "kind": "enemy",
+      "name": "Status legend",
+      "description": "State the duration and effect beside the condition.",
+      "states": [
+        "wet",
+        "frozen",
+        "guarded"
+      ],
+      "anchor": "menu-atlas.html#component-status-legend",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/ScenarioData.cs",
+      "dataFields": [
+        "UnitView.tags",
+        "UnitView.statuses",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    },
+    {
+      "id": "inspection-panel",
+      "menu": "bestiary",
+      "kind": "enemy",
+      "name": "Inspection panel",
+      "description": "An inspection keeps its identity, facts, and action in one place.",
+      "states": [
+        "overview",
+        "weakness",
+        "strategy"
+      ],
+      "anchor": "menu-atlas.html#component-inspection-panel",
+      "previewSource": "Web/wwwroot/menu-atlas.js",
+      "styleSource": "Web/wwwroot/menu-atlas.css",
+      "integrationSource": "UnityPackage/Runtime/Core/ScenarioData.cs",
+      "dataFields": [
+        "UnitView.tags",
+        "UnitView.statuses",
+        "GameView.scenario.intent"
+      ],
+      "values": "Illustrative local demo data; never dispatched to GameSession.",
+      "status": "Interactive isolated reference; check live game for implemented behavior."
+    }
+  ]
+}

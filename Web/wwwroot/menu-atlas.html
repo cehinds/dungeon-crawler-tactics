@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Menu & component atlas · Dungeon Crawler Tactics</title>
+<meta name="description" content="Six illustrated menu directions and thirty interactive interface components for Dungeon Crawler Tactics.">
+<link rel="stylesheet" href="menu-atlas.css"><script src="menu-atlas.js" type="module"></script>
+</head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">DUNGEON CRAWLER TACTICS</a><nav aria-label="Main"><a href="index.html">Play the game ↗</a><a href="mechanics-review.html">Mechanics review</a><a href="room-kit.html">Room workshop</a></nav></header>
+<main>
+<section class="intro"><div><h1>The menu atlas.</h1><p>Six illustrated screens. Every component, up close.</p></div><a class="outline-link" href="menu-atlas.json" download>Download component inventory <span aria-hidden="true">↓</span></a></section>
+<p class="notice"><strong>Interactive design reference.</strong> These illustrations and isolated previews use illustrative values. State changes stay on this page; they do not change your game or save. Source references describe the integration boundary, not a claim that every illustrated feature is implemented.</p>
+<form class="filter-bar" role="search" id="filters"><label>Menu<select id="menu-filter"><option value="all">All six menus</option></select></label><label>Component type<select id="kind-filter"><option value="all">Every component</option><option value="navigation">Navigation & mission</option><option value="progression">Skills & progression</option><option value="equipment">Equipment & stats</option><option value="combat">Combat & targeting</option><option value="services">Safe room & crafting</option><option value="enemy">Enemies & inspection</option></select></label><label class="search-label">Find a component<input type="search" id="search" placeholder="Try “forecast” or “locked”…" autocomplete="off"></label><output id="result-count" aria-live="polite">30 components</output><button type="reset" class="quiet">Reset</button></form>
+<div id="atlas" aria-live="polite"></div>
+<p id="empty" hidden>No components match. Change a filter or clear the search.</p>
+</main>
+<footer><p>Original interface studies for a fan tactics game. Pixel art illustrations are concept directions; the live game remains the source of truth for current rules.</p><a href="index.html">Return to the dungeon ↗</a></footer>
+<dialog id="sheet-dialog"><div class="dialog-top"><h2 id="sheet-title">Menu illustration</h2><button id="close-sheet" aria-label="Close illustration">Close ×</button></div><img id="sheet-image" alt=""><p>Generated concept illustration · values and layouts are illustrative.</p></dialog>
+<noscript><p>This atlas needs JavaScript for component previews. <a href="menu-atlas.json">Download the complete component inventory</a>.</p></noscript>
+</body>
+</html>
