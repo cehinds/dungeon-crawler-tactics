@@ -8,47 +8,45 @@ One move and one action are independent allowances. Either order is legal; using
 
 Three stances and four Katia forms are authored in `game-content.json`. Each shows a reversible stat package and a shared-core forecast. Changing stance/form costs the action, not the remaining movement. Increased caps do not heal or refill Mana; lowering a cap clamps the current resource. Defensive and Bulwark choices grant the existing Guarded protection for immediate usefulness. These presets are adaptations, not canonical form names or an implemented simulation of conserved mass. New form-specific sprite sets remain planned.
 
-The character sheet covers each roster member's stats, XP, skills, gear and tactical choices. The narrator consumes committed presentation events, announces actors/actions/targets and impacts, and offers a history dialog. Achievement IDs live in the save and fire only on earned commits. Five initial milestones cover moving, reacting, shapechanging, first victory and first level. These award notices; they do not yet create loot boxes or audience currency.
+The character sheet covers each roster member's stats, XP, skills, gear and tactical choices. The narrator consumes committed presentation events, announces actors/actions/targets and impacts, and offers a history dialog. Achievement IDs live in the save and fire only on earned commits. Five initial milestones cover moving, reacting, shapechanging, first victory and first level. The first-move and first-form achievements now also grant owned deterministic boxes. An audience-currency economy remains planned.
 
-The map and workshop use a shared 128×64 logical diamond footprint and measured PNG anchors. Ground surfaces stay below characters; fire/projectiles/hit effects/text render after units and walls. Piece orientation and camera orientation are distinct. The workshop supports painting, erasing, four views, recipe import/export and a game-compatible tile export. A recipe is not yet a runtime-importable campaign.
+The map and workshop use a shared 128×64 logical diamond footprint and measured PNG anchors. Ground surfaces stay below characters; fire/projectiles/hit effects/text render after units and walls. Piece orientation and camera orientation are distinct. The workshop supports painting, erasing, four views, recipe import/export and a game-compatible tile export. The workshop can now send a validated playable room to the game, preserving visual placements. It replaces the active run with a standalone room rather than inserting a new campaign chapter.
 
-## Next milestone: meaningful crawler development
+## Crawler development milestone
 
-- Add five base stats and a saved unspent-point pool. Keep the compact current levels as a migration path; do not silently reinterpret old HP/Mana as canonical base stats.
-- Choose a clear campaign milestone for race/class selection and point allocation. A chronological mode follows the later unlock; an accelerated mode must label the compression.
-- Separate skill practice from crawler XP: per-skill use count/XP, level cap, practice sources, and class/race/gear modifiers. Prevent farmable canceled previews and duplicate reload rewards.
-- Give every increase a before/after explanation tied to a supported effect. Do not invent a canonical damage formula from a fan summary.
-- Add Katia's shape silhouettes, equipped-mass budget and later engineering/momentum actions only after the rules and footprint model can forecast them.
+Five saved allocation tracks now affect direct ability damage/healing, HP/Mana caps and movement. Each party level grants every field crawler three points. Safe-room allocation previews compare actual values; confirm spends points and cancel spends none. Existing automatic level growth and checkpoint XP are retained. This is explicitly an accelerated mixed-timeline mode: chronological race/class selection and the later book unlock remain future work.
 
-Acceptance: an earned level exposes spendable points at the correct location, allocation changes real resolver behavior, canceled allocation spends nothing, skill use advances only its own track, and migration/reload preserves all choices.
+Committed non-item abilities train an individual crawler/ability track at use thresholds 0, 3 and 8. The three ranks modify direct damage/healing and Mana costs through the same resolver used by preview. Items and reactions do not receive practice bonuses. Safe-room recipes validate and consume inputs atomically. Earned achievement/victory boxes retain ownership and opened state and expose fixed contents. [Progression](Progression.md) documents exact adaptation formulas and recipes.
+
+Remaining development work includes chronological race/class prerequisites, guild or other training sources, broader skill caps/modifiers, a separate companion progression system, and a physical equipped-mass/momentum model for Katia. Form silhouettes and carried platforms must wait for supported rules and matching art; the existing stat presets do not simulate them.
 
 ## Boss scenarios, in build order
 
-All three are **planned**. The present campaign still uses its existing three encounters. Art depicts original adaptations of Book 1 settings; its costs, numbers and class labels are illustrative.
+All three now have separate playable adaptations selectable from the safe room. They preserve a campaign checkpoint and return to it afterwards; they do not replace the main three-encounter floor. Original concept art remains illustrative rather than a screenshot or exact specification. Scenario costs, damage, turn budgets and interactions are invented game rules. Multi-cell boss occupancy remains planned.
 
-### Hoarder — first vertical slice
+### Hoarder — stockpile scenario
 
-Source anchor: garbage stockpile, giant human-ish boss and Scatterers. Add an objective briefing, capped minion spawning, a visible emergence warning and destructible garbage lanes. Fire interruption and explosive counterplay are invented tactical rules. Let ordinary damage remain a viable route; do not require guessing the book solution. Separate a boss's footprint from its sprite size. Test full occupancy, blocked spawn fallback, hazard contact, phase persistence and retry.
+Source anchor: garbage stockpile, giant human-ish boss and Scatterers. The playable adaptation has three authored Scatterer slots with at most two active at once, visible emergence warnings and destructible garbage lanes. Clear a lane from beside it by spending an action. Burning, Frozen and Shocked interrupt the special emergence behavior; the boss can still swipe nearby crawlers. Ordinary attacks remain a viable victory route. Capped authored minions and one-tile occupancy are implemented; general spawn placement, large footprints and a universal phase engine remain future work.
 
-### Juicer — spatial threat reading
+### Juicer — gym scenario
 
-Source anchor: scaly gym boss hurling flaming metal weight plates. Add deterministic throw lanes and an advance warning, cover interception, topplable equipment and a close-range fallback. Attack plans must be authored/resolved by C# and displayed from the same data used for execution. Test interrupted throws, moved targets, cover destruction, friendly fire rules and all four camera views.
+Source anchor: scaly gym boss hurling flaming metal weight plates. The playable adaptation locks a cardinal throw lane before execution; moving out of the shown lane avoids it. Frozen or Shocked interrupts the throw. Spend an action beside a bench to topple it into cover: it intercepts one throw and is destroyed. Scenario throws target player crawlers rather than friendly enemies. The warning comes from the same C# scenario intent used to execute damage. This authored lane mechanic is not a universal area-effect or line-of-sight system.
 
-### Ball of Swine — cooperative construction
+### Ball of Swine — Speedbump scenario
 
-Source anchor: rolling borough threat and Meadow Lark's Speedbump engineering. Add a rolling footprint, carryable components, shared construction progress, barricade durability, helper activations and a clear collision forecast. Construction competes with combat actions. Provide a recovery route if a part breaks or a builder falls. Test loops, partial construction saves, route obstruction, lost helpers, collision order and victory/defeat boundaries.
+Source anchor: rolling borough threat and Meadow Lark's Speedbump engineering. The playable adaptation follows an eight-cell route and warns about the next three rolled cells. Crawlers use actions to collect reusable parts, carry them and build a three-part barrier. A completed barrier stops a roll and damages the boss, with limited barrier durability. Incomplete defenses can break and lose a helper; a reusable part source and rally interaction provide recovery. Helpers add progress/repair on alternating turns. Ordinary attacks also work. The boss still occupies one logical tile; a rolling multi-cell footprint, carried-unit platforms and a general construction simulation remain planned.
 
-## Exploration and reward milestone
+## Exploration and rewards
 
-Introduce typed map objects for doors, levers, caches, destructible supports, workbenches and exits. Each has stable IDs, tags, interaction range/cost and serialized state. Narration explains an object on inspection; interaction previews explain what changes. Loot boxes are owned rewards opened in a safe room. Recipes reference item IDs and explicit quantities; crafting validates and consumes materials atomically. A countdown must pause in menus or use turns, with its rule stated clearly. Pet growth is separate from a crawler's class/stat allocation.
+The main floor already has fogged corridors, encounter doors, optional supply caches and lore notes. Owned loot boxes and two atomic safe-room recipes are now playable. Broader typed environmental puzzles—levers, destructible supports, specialized workbenches and exits—remain planned beyond the scenario-specific objects below. A future floor countdown must pause in menus or use explicit turns; the current campaign has no real-time collapse clock. Pet growth remains separate future work.
 
 ## Data and code boundaries
 
 Keep the rules in the shared C# project. JSON authors classes, abilities, forms, stances, items, tag reactions, encounters and rewards. Stable IDs are never inferred from display names. UI reads views and issues commands; it does not calculate damage or bonuses.
 
-For future boss work add small typed definitions: `ScenarioDef`, `ObjectiveDef`, `BossPhaseDef`, `IntentDef`, `InteractableDef`, `RecipeDef`, `LootBoxDef` and `SkillProgressionDef`. Each requires a schema, runtime validator, save version/defaults and a meaningful scenario test. Avoid a universal scripting language. Resolution order and event budgets remain deterministic.
+`ScenarioDef`, scenario intent/object state, `RecipeDef`, `LootBoxDef` and `SkillProgressionDef` now have concrete bounded implementations. Keep future objectives/phases/interactables typed and small, with strict schemas, runtime validation, save defaults and meaningful scenario tests. Avoid a universal scripting language. Resolution order and event budgets remain deterministic.
 
-A room recipe preserves placements `{asset,x,y,rotation}` and camera-independent world coordinates. The current game tile export provides `{width,height,tiles:[{x,y,blocked,tags}]}`. Merge those fields into an encounter, preserve or deliberately relocate its spawn records, clear blocked spawns, run the validator and rebuild. Decorative recipe art is not automatically persisted by that collision/surface export. A future runtime import must validate both layers and path connectivity before replacing a live run.
+Room recipes preserve placements `{asset,x,y,rotation}` and camera-independent coordinates. The workshop exports authoring recipes, collision/surface tiles and a separate playable map. Runtime imports validate map limits, tags, components, asset/layer/rotation compatibility, actor placement and walkable connectivity before replacing the live run. A valid import deliberately starts a standalone room; export the campaign save first if it should be kept. The full custom map and its visual placements survive save/reload. Procedural campaigns and merging arbitrary workshop rooms into a live campaign remain future work.
 
 ## Verification gates
 

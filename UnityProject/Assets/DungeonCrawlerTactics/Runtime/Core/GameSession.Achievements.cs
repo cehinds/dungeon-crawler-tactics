@@ -9,7 +9,7 @@ namespace DungeonCrawlerTactics
         private void AwardAchievement(string id)
         {
             if (achievementIds.Contains(id)) return;
-            achievementIds.Add(id); presentationEvents.Add(new PresentationEvent { type = "achievement", tag = id });
+            achievementIds.Add(id); GrantLoot(id, false); presentationEvents.Add(new PresentationEvent { type = "achievement", tag = id });
         }
         private void AwardCommittedAchievements(GameCommand command)
         {

@@ -1531,5 +1531,1047 @@
       "manaBonus": 3,
       "moveBonus": 0
     }
+  ],
+  "development": {
+    "description": "Accelerated campaign adaptation: each earned level grants every field crawler 3 points to allocate in the safe room. Existing automatic HP/mana growth remains for checkpoint compatibility. Strength adds damage every 2 points; Dexterity adds movement every 3; Constitution adds 3 maximum HP per point; Intelligence adds 2 maximum mana per point; Charisma adds 1 healing per point. These are game formulas, not book formulas. New caps require rest to refill. Skill practice comes only from committed personal/class abilities; rank bonuses affect direct ability damage/healing and mana costs, never reaction damage or items.",
+    "pointsPerLevel": 3,
+    "stats": [
+      {
+        "id": "stat.strength",
+        "label": "Strength",
+        "description": "+1 direct ability damage every 2 allocated points.",
+        "hpPerPoint": 0,
+        "manaPerPoint": 0,
+        "moveEvery": 0,
+        "damageEvery": 2,
+        "healEvery": 0
+      },
+      {
+        "id": "stat.dexterity",
+        "label": "Dexterity",
+        "description": "+1 movement every 3 allocated points.",
+        "hpPerPoint": 0,
+        "manaPerPoint": 0,
+        "moveEvery": 3,
+        "damageEvery": 0,
+        "healEvery": 0
+      },
+      {
+        "id": "stat.constitution",
+        "label": "Constitution",
+        "description": "+3 maximum HP per allocated point; rest to refill.",
+        "hpPerPoint": 3,
+        "manaPerPoint": 0,
+        "moveEvery": 0,
+        "damageEvery": 0,
+        "healEvery": 0
+      },
+      {
+        "id": "stat.intelligence",
+        "label": "Intelligence",
+        "description": "+2 maximum mana per allocated point; rest to refill.",
+        "hpPerPoint": 0,
+        "manaPerPoint": 2,
+        "moveEvery": 0,
+        "damageEvery": 0,
+        "healEvery": 0
+      },
+      {
+        "id": "stat.charisma",
+        "label": "Charisma",
+        "description": "+1 direct ability healing per allocated point.",
+        "hpPerPoint": 0,
+        "manaPerPoint": 0,
+        "moveEvery": 0,
+        "damageEvery": 0,
+        "healEvery": 1
+      }
+    ],
+    "practice": {
+      "useThresholds": [
+        0,
+        3,
+        8
+      ],
+      "damagePerRank": 1,
+      "healPerRank": 1,
+      "costReductionPerRank": 1
+    },
+    "recipes": [
+      {
+        "id": "recipe.mega_tonic",
+        "label": "Distill Mega Tonic",
+        "description": "Combine two Health Tonics into one Mega Tonic. Safe-room tactical adaptation.",
+        "ingredients": [
+          {
+            "itemId": "item.health_tonic",
+            "count": 2
+          }
+        ],
+        "outputs": [
+          {
+            "itemId": "item.mega_tonic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "recipe.fire_bomb",
+        "label": "Bottle Fire Bomb",
+        "description": "Mix one Oil Flask and one Frost Vial into a Fire Bomb. Invented crafting adaptation.",
+        "ingredients": [
+          {
+            "itemId": "item.oil_flask",
+            "count": 1
+          },
+          {
+            "itemId": "item.frost_vial",
+            "count": 1
+          }
+        ],
+        "outputs": [
+          {
+            "itemId": "item.fire_bomb",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "lootBoxes": [
+      {
+        "id": "loot.first_steps",
+        "label": "Bronze Crawler Box",
+        "description": "A fixed audience reward for taking your first tactical step. Open in a safe room.",
+        "achievementId": "achievement.first_move",
+        "fromVictory": false,
+        "rewards": [
+          {
+            "itemId": "item.health_tonic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "loot.shape",
+        "label": "Bronze Improviser Box",
+        "description": "A fixed reward for your first committed shapechange.",
+        "achievementId": "achievement.first_form",
+        "fromVictory": false,
+        "rewards": [
+          {
+            "itemId": "item.cleansing_tonic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "loot.victory",
+        "label": "Silver Survivor Box",
+        "description": "One owned box per cleared encounter; deterministic supplies.",
+        "achievementId": "",
+        "fromVictory": true,
+        "rewards": [
+          {
+            "itemId": "item.health_tonic",
+            "count": 1
+          },
+          {
+            "itemId": "item.water_bomb",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "scenario.hoarder",
+      "label": "The Hoarder",
+      "kind": "hoarder",
+      "bossId": "boss.hoarder",
+      "description": "BOOK 1 SCENARIO ADAPTATION \u00b7 Mixed timeline roster and invented tactical rules. Defeat the Hoarder and Scatterers. Fire or control interrupts the visible emergence.",
+      "objective": "Defeat the Hoarder and Scatterers. Fire or control interrupts the visible emergence.",
+      "conceptArt": "assets/concepts/boss-hoarder-concept.png",
+      "damage": 7,
+      "minionCap": 2,
+      "helperCount": 2,
+      "constructionTotal": 3,
+      "barrierDurability": 2,
+      "minionIds": [
+        "scatterer.one",
+        "scatterer.two",
+        "scatterer.three"
+      ],
+      "route": [],
+      "interactables": [
+        {
+          "id": "garbage.lane",
+          "label": "Garbage lane",
+          "description": "Clear this lane with one adjacent action; the emergence remains capped.",
+          "kind": "garbage",
+          "x": 4,
+          "y": 3,
+          "hp": 1
+        }
+      ],
+      "encounter": {
+        "id": "scenario.hoarder",
+        "label": "The Hoarder",
+        "description": "BOOK 1 SCENARIO ADAPTATION \u00b7 Mixed timeline roster and invented tactical rules. Defeat the Hoarder and Scatterers. Fire or control interrupts the visible emergence.",
+        "width": 10,
+        "height": 8,
+        "xp": 0,
+        "playerSpawns": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "tiles": [
+          {
+            "x": 0,
+            "y": 1,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 8,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 9,
+            "y": 2,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 9,
+            "y": 6,
+            "blocked": true,
+            "tags": []
+          }
+        ],
+        "enemies": [
+          {
+            "id": "boss.hoarder",
+            "label": "The Hoarder",
+            "classId": "class.brawler",
+            "artId": "boss-hoarder",
+            "x": 7,
+            "y": 3,
+            "hp": 48,
+            "energy": 12,
+            "move": 0,
+            "tags": []
+          },
+          {
+            "id": "scatterer.one",
+            "label": "Scatterer",
+            "classId": "class.brawler",
+            "artId": "scatterer",
+            "x": 6,
+            "y": 2,
+            "hp": 7,
+            "energy": 8,
+            "move": 2,
+            "tags": []
+          },
+          {
+            "id": "scatterer.two",
+            "label": "Scatterer",
+            "classId": "class.brawler",
+            "artId": "scatterer",
+            "x": 6,
+            "y": 4,
+            "hp": 7,
+            "energy": 8,
+            "move": 2,
+            "tags": []
+          },
+          {
+            "id": "scatterer.three",
+            "label": "Scatterer",
+            "classId": "class.brawler",
+            "artId": "scatterer",
+            "x": 8,
+            "y": 3,
+            "hp": 7,
+            "energy": 8,
+            "move": 2,
+            "tags": []
+          }
+        ]
+      },
+      "decorations": [
+        {
+          "id": "scenario.hoarder.decor_0",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 0,
+          "y": 1,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_1",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 0,
+          "y": 3,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_2",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 0,
+          "y": 5,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_3",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 0,
+          "y": 7,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_4",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 2,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_5",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 4,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_6",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 6,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_7",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 8,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_8",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 9,
+          "y": 2,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.decor_9",
+          "assetId": "scenario.garbage",
+          "layer": "prop",
+          "x": 9,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.torch_0",
+          "assetId": "torch",
+          "layer": "wall",
+          "x": 1,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.torch_1",
+          "assetId": "torch",
+          "layer": "wall",
+          "x": 9,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.grate_0",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 2,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.grate_1",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 4,
+          "y": 1,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.hoarder.grate_2",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 6,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        }
+      ]
+    },
+    {
+      "id": "scenario.juicer",
+      "label": "The Juicer",
+      "kind": "juicer",
+      "bossId": "boss.juicer",
+      "description": "BOOK 1 SCENARIO ADAPTATION \u00b7 Mixed timeline roster and invented tactical rules. Defeat the Juicer. Avoid locked plate lanes or topple cover to intercept.",
+      "objective": "Defeat the Juicer. Avoid locked plate lanes or topple cover to intercept.",
+      "conceptArt": "assets/concepts/boss-juicer-concept.png",
+      "damage": 7,
+      "minionCap": 2,
+      "helperCount": 2,
+      "constructionTotal": 3,
+      "barrierDurability": 2,
+      "minionIds": [],
+      "route": [],
+      "interactables": [
+        {
+          "id": "gym.bench",
+          "label": "Topple bench",
+          "description": "One action: topple this bench; it intercepts one flaming plate.",
+          "kind": "cover",
+          "x": 4,
+          "y": 3,
+          "hp": 1
+        }
+      ],
+      "encounter": {
+        "id": "scenario.juicer",
+        "label": "The Juicer",
+        "description": "BOOK 1 SCENARIO ADAPTATION \u00b7 Mixed timeline roster and invented tactical rules. Defeat the Juicer. Avoid locked plate lanes or topple cover to intercept.",
+        "width": 10,
+        "height": 8,
+        "xp": 0,
+        "playerSpawns": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "tiles": [
+          {
+            "x": 0,
+            "y": 1,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 8,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 9,
+            "y": 2,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 9,
+            "y": 6,
+            "blocked": true,
+            "tags": []
+          }
+        ],
+        "enemies": [
+          {
+            "id": "boss.juicer",
+            "label": "The Juicer",
+            "classId": "class.brawler",
+            "artId": "boss-juicer",
+            "x": 7,
+            "y": 3,
+            "hp": 52,
+            "energy": 12,
+            "move": 0,
+            "tags": []
+          }
+        ]
+      },
+      "decorations": [
+        {
+          "id": "scenario.juicer.decor_0",
+          "assetId": "scenario.bench",
+          "layer": "prop",
+          "x": 0,
+          "y": 1,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_1",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 0,
+          "y": 3,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_2",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 0,
+          "y": 5,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_3",
+          "assetId": "scenario.bench",
+          "layer": "prop",
+          "x": 0,
+          "y": 7,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_4",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 2,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_5",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 4,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_6",
+          "assetId": "scenario.bench",
+          "layer": "prop",
+          "x": 6,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_7",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 8,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_8",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 9,
+          "y": 2,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.decor_9",
+          "assetId": "scenario.bench",
+          "layer": "prop",
+          "x": 9,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.torch_0",
+          "assetId": "torch",
+          "layer": "wall",
+          "x": 1,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.torch_1",
+          "assetId": "torch",
+          "layer": "wall",
+          "x": 9,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.grate_0",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 2,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.grate_1",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 4,
+          "y": 1,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.juicer.grate_2",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 6,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        }
+      ]
+    },
+    {
+      "id": "scenario.swine",
+      "label": "Ball of Swine",
+      "kind": "swine",
+      "bossId": "boss.swine",
+      "description": "BOOK 1 SCENARIO ADAPTATION \u00b7 Mixed timeline roster and invented tactical rules. Defeat the rolling boss. Build the Speedbump or use ordinary attacks; recover with helpers.",
+      "objective": "Defeat the rolling boss. Build the Speedbump or use ordinary attacks; recover with helpers.",
+      "conceptArt": "assets/concepts/boss-swine-concept.png",
+      "damage": 7,
+      "minionCap": 2,
+      "helperCount": 2,
+      "constructionTotal": 3,
+      "barrierDurability": 2,
+      "minionIds": [],
+      "route": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "interactables": [
+        {
+          "id": "speedbump.parts",
+          "label": "Collect component",
+          "description": "Reusable supply: collect a part, then brace the Speedbump next turn.",
+          "kind": "parts",
+          "x": 2,
+          "y": 3,
+          "hp": 1
+        },
+        {
+          "id": "speedbump.barrier",
+          "label": "Brace Speedbump",
+          "description": "Spend a carried part and action. Three segments stop the rolling boss.",
+          "kind": "barrier",
+          "x": 5,
+          "y": 3,
+          "hp": 1
+        },
+        {
+          "id": "speedbump.helper",
+          "label": "Rally helper",
+          "description": "Recover one lost helper; active helpers brace a part every second round.",
+          "kind": "helper",
+          "x": 3,
+          "y": 5,
+          "hp": 1
+        }
+      ],
+      "encounter": {
+        "id": "scenario.swine",
+        "label": "Ball of Swine",
+        "description": "BOOK 1 SCENARIO ADAPTATION \u00b7 Mixed timeline roster and invented tactical rules. Defeat the rolling boss. Build the Speedbump or use ordinary attacks; recover with helpers.",
+        "width": 10,
+        "height": 8,
+        "xp": 0,
+        "playerSpawns": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 4
+          },
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "tiles": [
+          {
+            "x": 0,
+            "y": 1,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 0,
+            "y": 7,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 2,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 4,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 6,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 8,
+            "y": 0,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 9,
+            "y": 2,
+            "blocked": true,
+            "tags": []
+          },
+          {
+            "x": 9,
+            "y": 6,
+            "blocked": true,
+            "tags": []
+          }
+        ],
+        "enemies": [
+          {
+            "id": "boss.swine",
+            "label": "Ball of Swine",
+            "classId": "class.brawler",
+            "artId": "boss-swine",
+            "x": 7,
+            "y": 3,
+            "hp": 60,
+            "energy": 12,
+            "move": 0,
+            "tags": []
+          }
+        ]
+      },
+      "decorations": [
+        {
+          "id": "scenario.swine.decor_0",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 0,
+          "y": 1,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_1",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 0,
+          "y": 3,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_2",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 0,
+          "y": 5,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_3",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 0,
+          "y": 7,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_4",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 2,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_5",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 4,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_6",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 6,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_7",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 8,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_8",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 9,
+          "y": 2,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.decor_9",
+          "assetId": "scenario.parts",
+          "layer": "prop",
+          "x": 9,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.torch_0",
+          "assetId": "torch",
+          "layer": "wall",
+          "x": 1,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.torch_1",
+          "assetId": "torch",
+          "layer": "wall",
+          "x": 9,
+          "y": 0,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.grate_0",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 2,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.grate_1",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 4,
+          "y": 1,
+          "rotation": 0,
+          "blocksMovement": false
+        },
+        {
+          "id": "scenario.swine.grate_2",
+          "assetId": "grate",
+          "layer": "ground",
+          "x": 6,
+          "y": 6,
+          "rotation": 0,
+          "blocksMovement": false
+        }
+      ]
+    }
   ]
 }

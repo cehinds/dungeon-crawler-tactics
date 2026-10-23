@@ -2,7 +2,7 @@
 
 The room kit is a separate visual authoring tool for assembling small isometric rooms from transparent PNGs. Open `Web/wwwroot/room-kit.html` while serving the repository over HTTP (for example, after starting the local game server). Choose a seed, dimensions, and prop density; toggle the visible layers; filter or download individual PNGs; then export the generated room JSON. The same seed, dimensions, and density produce the same placement data.
 
-The workshop is not a procedural campaign generator. Its JSON describes a visual room recipe and clear entrance-to-exit route. It does not create encounters, enemies, rewards, or playable campaign maps. Campaign rooms remain authored in `UnityPackage/Runtime/Data/game-content.json`.
+The workshop exports visual authoring recipes and playable standalone rooms. Choose **Play this room** to send the edited layout directly to the game, or export playable JSON and import it through Save & options. A valid import replaces the active run with a standalone encounter; export the current save first to preserve it. This is not a procedural campaign generator: the main floor remains authored in `UnityPackage/Runtime/Data/game-content.json`.
 
 ## Build and files
 
@@ -52,8 +52,29 @@ For Unity sprites, set Texture Type to Sprite (2D and UI), keep the PNG at its a
 
 ## Exported room recipe
 
-The download is a JSON document with `schemaVersion: 1`, `kind: "dungeon-room-authoring"`, the manifest path, seed, width, height, density, tile dimensions, start and exit cells, entrance/exit doors, `clearRoute`, `blockedCells`, and `placements`. Each placement references a manifest `assetId` and includes its own ID, layer, integer `x`/`y`, movement-blocking flag, and optional kind such as `wall`, `door`, or `exit`. Keep this recipe separate from campaign content: it is an authoring preview, not a save file or encounter definition.
+The download is a JSON document with `schemaVersion: 1`, `kind: "dungeon-room-authoring"`, the manifest path, seed, width, height, density, tile dimensions, start and exit cells, entrance/exit doors, `clearRoute`, `blockedCells`, and `placements`. Each placement references a manifest `assetId` and includes its own ID, layer, integer `x`/`y`, movement-blocking flag, rotation (0–3 quarter turns), and optional kind such as `wall`, `door`, or `exit`. This recipe preserves visual placements for further editing; it is distinct from a game checkpoint and from the playable-map export described below.
 
 ## Manual authoring and rotation
 
-Choose an asset in the palette, then click a cell to paint its layer. Erase removes the selected layer. Piece rotation and map-camera rotation are separate controls; camera changes preserve world coordinates. Import validates room recipe IDs, positions and layers. Export room JSON retains decorative placements/rotations. Export game tiles writes `{width,height,tiles:[{x,y,blocked,tags}]}` compatible with the encounter definition: merge these fields into an authored encounter, preserve or relocate its player/enemy spawns, clear blocked spawn cells, validate content, and rebuild. Decorative placements are not automatically loaded by this collision/surface export. Runtime custom-map import is still planned.
+Choose an asset in the palette, then click a cell to paint its layer. Erase removes the selected layer. Piece rotation and map-camera rotation are separate controls; the four camera views preserve world coordinates and pointer picking. Recipe import validates IDs, positions and layers. Export room JSON retains decorative placements and piece rotations.
+
+## Play an edited room
+
+1. Build or import a recipe, then paint/erase its components and rotate pieces as needed.
+2. Use dimensions between **6 and 20 columns**, and **6 and 16 rows** for runtime play. The recipe editor can represent smaller layouts, but the playable importer rejects them.
+3. Choose **Play this room**. The workshop stores the playable map and opens the game, which submits it to the shared C# importer. Alternatively, **Export game tiles** downloads `encounter-map-tiles.json`; import that file using Save & options → Import map.
+4. A valid import starts a standalone room. An invalid map leaves the current game intact. Export a campaign checkpoint before importing if it should be retained.
+
+The playable JSON includes `schemaVersion: 1`, a label, `width`, `height`, collision/surface `tiles` and the full visual `placements`, including rotations. It can also specify player spawn and enemy records. Omitted actor records receive deterministic defaults: four party starts and three enemies. This export can still supply tile fields for an authored encounter, but runtime play no longer requires rebuilding the application.
+
+Before replacing a run, C# checks dimensions, collection bounds, supported water/oil/burning tags, known asset IDs, layer/rotation/blocking compatibility, unique legal actor positions and walkable connectivity. Component art and live combat state persist in custom-room saves. New run clears the custom map override. The importer starts a single room rather than merging workshop content into the middle of a campaign.
+
+## Rendering and platform limits
+
+The runtime and workshop use measured PNG anchors and one 128×64 logical diamond grid. This aligns placement coordinates; it does not imply that every decorative silhouette fills exactly one tile. Sprite dimensions can exceed a cell, while movement still follows logical blocking. Ground surfaces remain below characters; fire, projectiles, impacts and floating combat text render above units and walls.
+
+Runtime map import and retained decorative placements are implemented in the shared C# core and browser presentation. The earlier native Unity IMGUI presenter does not have full workshop/rendering parity. Copying the kit into Unity Resources or passing reference compilation is not evidence of Unity Editor Play Mode or Web export validation.
+
+## Runtime JSON schema
+
+[`Tools/custom-map.schema.json`](../Tools/custom-map.schema.json) describes the playable import format for editor completion and structural checks. The C# importer additionally validates tile bounds, asset/layer/blocking agreement, spawn occupancy and connectivity. `game-content.json` and its scenario/development sections use [`Tools/game.schema.json`](../Tools/game.schema.json).

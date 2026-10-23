@@ -15,7 +15,7 @@ namespace DungeonCrawlerTactics
             foreach (EquipmentSlotSave slot in loadout) if (slot.unitId == id) { EquipmentDef gear = Gear(slot.equipmentId); result.hp += gear.hpBonus; result.energy += gear.manaBonus; result.move += gear.moveBonus; }
             return result;
         }
-        private ClassStats PlayerStats(string id, string classId) { ClassStats stats = PlayerStats(id, classId, xp, equipped); RosterView member; if (roster.TryGetValue(id, out member)) ApplyModes(stats, id, member.stanceId, member.formId); return stats; }
+        private ClassStats PlayerStats(string id, string classId) { ClassStats stats = PlayerStats(id, classId, xp, equipped); ApplyAllocatedStats(stats, id, allocations); RosterView member; if (roster.TryGetValue(id, out member)) ApplyModes(stats, id, member.stanceId, member.formId); return stats; }
         private EquipmentDef Gear(string id) { EquipmentDef result = Array.Find(data.equipment, e => e.id == id); Require(result != null, "Unknown equipment."); return result; }
         private string[] Grants(string id, int experience, List<EquipmentSlotSave> loadout)
         {
@@ -88,13 +88,13 @@ namespace DungeonCrawlerTactics
             List<SkillView> skills = new List<SkillView>(); foreach (SkillUnlockDef skill in data.progression.skillUnlocks) skills.Add(new SkillView { id = skill.id, label = skill.label, unitId = skill.rosterId, abilityId = skill.abilityId, level = skill.level, unlocked = level >= skill.level });
             view.progression = new ProgressionView { level = level, xp = xp, nextLevelXp = next, xpIntoLevel = xp - data.progression.xpThresholds[level - 1], xpToNextLevel = Math.Max(0, next - xp), maxLevel = data.progression.xpThresholds.Length, hpBonus = (level - 1) * data.progression.hpPerLevel, manaBonus = (level - 1) * data.progression.manaPerLevel, moveBonus = (level - 1) * data.progression.movePerLevel, skills = skills.ToArray() };
             List<EquipmentView> gearViews = new List<EquipmentView>();
-            foreach (EquipmentDef gear in data.equipment) { EquipmentSlotSave owner = equipped.Find(e => e.equipmentId == gear.id); gearViews.Add(new EquipmentView { id = gear.id, label = gear.label, slot = gear.slot, hpBonus = gear.hpBonus, manaBonus = gear.manaBonus, moveBonus = gear.moveBonus, abilityIds = gear.abilityIds, unlockEncounter = gear.unlockEncounter, owned = gear.unlockEncounter <= Victories(screen, encounterIndex), equippedUnitId = owner == null ? null : owner.unitId }); }
+            foreach (EquipmentDef gear in data.equipment) { EquipmentSlotSave owner = equipped.Find(e => e.equipmentId == gear.id); gearViews.Add(new EquipmentView { id = gear.id, label = gear.label, slot = gear.slot, hpBonus = gear.hpBonus, manaBonus = gear.manaBonus, moveBonus = gear.moveBonus, abilityIds = gear.abilityIds, unlockEncounter = gear.unlockEncounter, owned = gear.unlockEncounter <= (Scenario == null ? Victories(screen, encounterIndex) : 0), equippedUnitId = owner == null ? null : owner.unitId }); }
             view.equipment = gearViews.ToArray(); bool rested = true;
             foreach (RosterView member in view.roster) if (member.deployable && (member.hp < member.maxHp || member.energy < member.maxEnergy)) rested = false;
             view.safeRoom = new SafeRoomView { available = screen == "camp", rested = rested, label = "Safe Room", description = "Rest to restore HP and mana, change equipment, and inspect skills before exploring." };
             List<QuestView> quests = new List<QuestView>();
             int wins = Victories(screen, encounterIndex); quests.Add(Quest("quest.floor", "Reach the floor exit", "Clear all encounters to open the exit.", wins, data.encounters.Length));
-            ExplorationSave sector; if (encounterIndex < data.encounters.Length && exploration.TryGetValue(Sector.id, out sector))
+            ExplorationSave sector; if (encounterIndex < data.encounters.Length && Sector != null && exploration.TryGetValue(Sector.id, out sector))
             {
                 HashSet<string> revealed = Revealed(sector); ExplorationPointDef door = Array.Find(Sector.points, p => p.kind == "encounter");
                 quests.Add(Quest("quest.door", "Find the encounter door", "Explore the passages and discover the marked door.", revealed.Contains(ExploreKey(door.x, door.y)) ? 1 : 0, 1));

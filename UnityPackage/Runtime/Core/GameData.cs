@@ -4,6 +4,8 @@ namespace DungeonCrawlerTactics
 {
     [Serializable] public sealed class GameData
     {
+        public DevelopmentDef development = new DevelopmentDef();
+        public ScenarioDef[] scenarios = new ScenarioDef[0];
         public int schemaVersion = 1;
         public string contentVersion;
         public string[] compatibleContentVersions = new string[0];
@@ -61,7 +63,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
     [Serializable] public sealed class TagRuleDef { public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, energyPenalty; }
-    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId, equipmentId, stanceId, formId; public int x, y; }
+    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId; public int points; public CustomMapData customMap; public int x, y; }
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
     {
@@ -85,6 +87,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class GameView
     {
         public TacticalModeView[] stances = new TacticalModeView[0], forms = new TacticalModeView[0];
+        public DevelopmentView development; public CustomMapData customMap; public ScenarioOptionView[] scenarios = new ScenarioOptionView[0]; public ScenarioView scenario;
         public string[] achievementIds = new string[0];
         public ExplorationView exploration;
         public ProgressionView progression; public SafeRoomView safeRoom;
@@ -108,6 +111,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class TimedTag { public string entityId, tag, source; public int remainingRounds; }
     [Serializable] public sealed class GameSave
     {
+        public DevelopmentSave development; public CustomMapData customMap; public ScenarioSave scenario;
         public string[] achievementIds = new string[0];
         public ExplorationSave[] exploration = new ExplorationSave[0];
         public int activationVersion; public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];

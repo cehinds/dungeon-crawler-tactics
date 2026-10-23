@@ -1,6 +1,19 @@
 # Playable build validation
 
-## Forms, turn freedom and mechanics review
+## Development, scenarios and runtime map milestone
+
+The shared-core suite passes **179 game checks, 44 scenario checks, 20 custom-map checks and 42 rules checks**. The 34 Python validation checks pass (28 under Tools and six cross-validator tests). Both authored catalogs validate. The art validator verifies 16 distinct boss/Scatterer poses plus four transparent scenery components, alongside the existing 96 directional crawler frames. .NET Standard 2.1 compatibility builds without warnings or errors; Unity runtime reference compilation has zero errors and the existing unused Inspector-field warning. Unity Editor, Play Mode and native Unity Web export remain unverified.
+
+Scenario tests complete Hoarder, Juicer and Ball of Swine using ordinary legal commands, then reload the victorious checkpoints. They also verify exact campaign restoration, mid-phase intentions, capped emergence, interruption, cover interception/destruction, carried parts, partial construction, helper recovery, real Speedbump collision damage, defeat/retry, forged-state rejection and snapshot isolation. Completed level-four campaigns can enter and return from a scenario without losing state. Boss victory and defeat screens expose return/retry controls. Bosses still occupy one logical tile.
+
+Visible Chromium checks at 1366×768 and 390×844 cover stat forecast/cancel/commit, a personal practice record, recipe cost cancellation/commit, owned-box opening and persistence, all three scenario briefings and enemy phases, scenario interaction confirmation, invalid-map rejection without changing the saved run, valid map import/reload, and no duplicate level-up notice on scenario return. Crafting dialogs also fit at 360×640 and 844×390. No JavaScript errors occurred. The development browser driver uses a documented one-hit battle fixture to reach an earned level quickly; the separate complete-floor driver uses ordinary legal commands throughout.
+
+The full-floor browser driver still completes three victories and 150 XP, using 116 driver ticks, 39 moves, seven potions and 997 legal previews. Its completed save survives refresh. The actual workshop **Play this room** button imports 111 visual placements into a playable battle and preserves the exact map after reload. Generator/editor tests retain 450 seeded layouts, 640 rotated picking checks and canonical tile validation. Root and renderer reviews inspect the new grounded scenery, danger lanes and anchored boss sprites at desktop and phone sizes.
+
+`Tools/playtest_development.py`, `Tests/ScenarioTests` and `Tests/CustomMapTests` provide reproducible milestone coverage. CI now runs the scenario/custom-map harnesses and the scenario art validator before publishing.
+
+
+## Earlier forms, turn freedom and mechanics review
 
 The new shared-core harness passes **140 game checks**, including both action orders, explicit activation completion, default enemy attacks, form/stance forecasts, no-op mode rejection, achievement uniqueness and Guarded mode save roundtrips. The rules harness passes 42 checks; all 27 Python validation tests pass. Unity runtime reference compilation succeeds with zero errors and one existing Inspector-field warning. Native Unity Editor/Play Mode/Web export remain unverified.
 

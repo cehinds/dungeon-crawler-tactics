@@ -24,7 +24,7 @@ namespace DungeonCrawlerTactics
             Require(form != !string.IsNullOrEmpty(command.stanceId), "Choose one form or stance.");
             mode = Mode(form ? data.forms : data.stances, form ? command.formId : command.stanceId, member.id);
             Require(!ModeSelected(mode, form ? member.formId : member.stanceId), "That tactical adaptation is already selected.");
-            ClassStats stats = PlayerStats(member.id, member.classId, xp, equipped);
+            ClassStats stats = PlayerStats(member.id, member.classId, xp, equipped); ApplyAllocatedStats(stats, member.id, allocations);
             ApplyModes(stats, member.id, form ? member.stanceId : command.stanceId, form ? command.formId : member.formId);
             return stats;
         }

@@ -181,7 +181,7 @@ async function boot() {
       const variant=assetMap.get(variantId)??asset;
       context.save();context.translate(point.x,point.y);
       if(['floor','surface'].includes(asset.layer)||asset.tags.includes('decal')){if(q===1)context.transform(0,.5,-2,0,0,0);else if(q===2)context.scale(-1,-1);else if(q===3)context.transform(0,-.5,2,0,0,0);}
-      else if(q>=2)context.scale(-1,1);
+      else if(q>=2&&!asset.tags.includes('wall')&&!asset.tags.includes('door'))context.scale(-1,1);
       context.drawImage(images.get(variant.id),-variant.anchor.x,-variant.anchor.y,variant.width,variant.height);context.restore();
     }
     function diamond(cell, color, label) {
@@ -224,7 +224,8 @@ async function boot() {
     $('#seed').addEventListener('keydown', event => { if (event.key === 'Enter') assemble(); });
     $('#shuffle').addEventListener('click', () => { const values = new Uint32Array(1); crypto.getRandomValues(values); $('#seed').value = `room-${values[0].toString(36)}`; assemble(); });
     $('#show-route').addEventListener('change', draw);
-    $('#export-game-tiles').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(exportGameTiles(room,manifest),null,2)+'\n'],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='encounter-map-tiles.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+    $('#play-room').addEventListener('click',()=>{try{const map={schemaVersion:1,label:`Workshop / ${room.seed||'edited room'}`,...exportGameTiles(room,manifest),placements:structuredClone(room.placements)};localStorage.setItem('dct.workshop-map',JSON.stringify(map));location.href='index.html?workshop=1';}catch(error){$('#room-summary').textContent=`Could not play room: ${error.message}`;}});
+    $('#export-game-tiles').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,label:`Workshop / ${room.seed||'edited room'}`,...exportGameTiles(room,manifest),placements:room.placements},null,2)+'\n'],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download='encounter-map-tiles.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
     $('#export-json').disabled = false; $('#export-json').addEventListener('click', () => { const url = URL.createObjectURL(new Blob([JSON.stringify(room, null, 2) + '\n'], { type: 'application/json' })); const link = document.createElement('a'); link.href = url; link.download = `room-${room.seed.replace(/[^a-z0-9_-]/gi, '_') || 'untitled'}.json`; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); });
     new ResizeObserver(draw).observe(canvas.parentElement); renderGallery(); assemble();
   } catch (error) { $('#loading').textContent = `The kit could not load. ${error.message} Serve this folder over HTTP and reload.`; $('#loading').classList.add('error'); $('#room-summary').textContent = 'Asset loading failed'; $('#generate').disabled = true; }

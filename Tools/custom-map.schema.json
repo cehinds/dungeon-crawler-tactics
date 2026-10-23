@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dungeon Crawler Tactics standalone workshop map",
+  "description": "Editable runtime map format. The C# importer also validates authored asset/layer/blocking agreement, occupancy and connected spawns before changing the run. Missing spawn arrays receive deterministic defaults.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "width",
+    "height",
+    "tiles"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 6,
+      "maximum": 20
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 6,
+      "maximum": 16
+    },
+    "tiles": {
+      "type": "array",
+      "maxItems": 320,
+      "items": {
+        "$ref": "#/$defs/tile"
+      }
+    },
+    "playerSpawns": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/cell"
+      }
+    },
+    "enemies": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/customEnemy"
+      }
+    },
+    "placements": {
+      "type": "array",
+      "maxItems": 1600,
+      "items": {
+        "$ref": "#/$defs/placement"
+      }
+    }
+  },
+  "$defs": {
+    "coord": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 29
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "cost": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "tile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "blocked",
+        "tags"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "blocked": {
+          "type": "boolean"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "customEnemy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "classId",
+        "x",
+        "y"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^custom\\.enemy\\.[a-z0-9_.]+$",
+          "maxLength": 100
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "classId": {
+          "$ref": "#/$defs/id"
+        },
+        "artId": {
+          "enum": [
+            "rat",
+            "guard",
+            "boss"
+          ]
+        },
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "hp": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "energy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "move": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "assetId",
+        "layer",
+        "x",
+        "y",
+        "rotation",
+        "blocksMovement"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "assetId": {
+          "enum": [
+            "wall-ne",
+            "wall-nw",
+            "wall-corner",
+            "pillar",
+            "door-closed-nw",
+            "door-open-nw",
+            "door-closed-ne",
+            "door-open-ne",
+            "torch",
+            "lever",
+            "grate",
+            "oil-overlay",
+            "water-overlay",
+            "moss",
+            "rubble",
+            "stairs",
+            "stone-a",
+            "stone-b",
+            "water-floor",
+            "oil-floor",
+            "crate",
+            "barrel",
+            "chest",
+            "exit",
+            "fire-overlay"
+          ]
+        },
+        "layer": {
+          "enum": [
+            "floor",
+            "surface",
+            "prop",
+            "structure",
+            "overlay"
+          ]
+        },
+        "x": {
+          "$ref": "#/$defs/coord"
+        },
+        "y": {
+          "$ref": "#/$defs/coord"
+        },
+        "rotation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "blocksMovement": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

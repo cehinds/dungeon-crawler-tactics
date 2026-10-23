@@ -43,8 +43,8 @@ namespace DungeonCrawlerTactics
             this.catalog = catalog; this.maxEvents = maxEvents; this.onEntry = onEntry;
         }
         public ActionResult Preview(BattleState state, string actorId, string abilityId, string targetId) { return Execute(state, actorId, abilityId, targetId); }
-        public ActionResult Execute(BattleState state, string actorId, string abilityId, string targetId)
-        { return Resolve(state, actorId, abilityId, targetId, true); }
+        public ActionResult Execute(BattleState state, string actorId, string abilityId, string targetId, ActionModifiers modifiers = null)
+        { return Resolve(state, actorId, abilityId, targetId, true, modifiers); }
         // Inventory and activation ownership are enforced by GameSession. Item definitions grant their linked ability.
         public ActionResult ExecuteItem(BattleState state, string actorId, string itemId, string targetId)
         {
@@ -52,9 +52,10 @@ namespace DungeonCrawlerTactics
             if (itemId == null || !catalog.Items.TryGetValue(itemId, out item)) throw new ArgumentException("Unknown item.");
             return Resolve(state, actorId, item.abilityId, targetId, false);
         }
-        private ActionResult Resolve(BattleState state, string actorId, string abilityId, string targetId, bool requireGrant)
+        private ActionResult Resolve(BattleState state, string actorId, string abilityId, string targetId, bool requireGrant, ActionModifiers modifiers = null)
         {
             ValidateState(state);
+            if (modifiers != null && (modifiers.damageBonus < 0 || modifiers.damageBonus > 100 || modifiers.healBonus < 0 || modifiers.healBonus > 100 || modifiers.costReduction < 0 || modifiers.costReduction > 100)) throw new ArgumentException("Action modifiers exceed bounded limits.");
             EntityState actor; EntityState target; AbilityDef ability;
             if (actorId == null || !state.Entities.TryGetValue(actorId, out actor) || actor.IsTile || actor.Hp == 0) throw new ArgumentException("Actor must be a living unit.");
             if (targetId == null || !state.Entities.TryGetValue(targetId, out target)) throw new ArgumentException("Unknown target.");
@@ -65,14 +66,17 @@ namespace DungeonCrawlerTactics
                 (ability.target == "self" ? actorId == targetId : ability.target == "ally" ? target.Team == actor.Team : target.Team != actor.Team);
             if (!validTarget) throw new ArgumentException("Invalid target for ability.");
             long distance = Math.Abs((long)actor.X - target.X) + Math.Abs((long)actor.Y - target.Y);
-            if (distance > ability.range || actor.Energy < ability.cost) throw new ArgumentException("Target out of range or insufficient mana.");
-            BattleState next = state.Clone(); actor = next.Entities[actorId]; target = next.Entities[targetId]; actor.Energy -= ability.cost;
+            int effectiveCost = Math.Max(0, ability.cost - (modifiers == null ? 0 : modifiers.costReduction));
+            if (distance > ability.range || actor.Energy < effectiveCost) throw new ArgumentException("Target out of range or insufficient mana.");
+            BattleState next = state.Clone(); actor = next.Entities[actorId]; target = next.Entities[targetId]; actor.Energy -= effectiveCost;
             List<string> log = new List<string>();
             List<PresentationEvent> events = new List<PresentationEvent>();
             events.Add(new PresentationEvent { type = "attack", actorId = actorId, targetId = targetId, abilityId = abilityId });
             Queue<RuleEvent> queue = new Queue<RuleEvent>();
             HashSet<string> fired = new HashSet<string>(StringComparer.Ordinal);
-            queue.Enqueue(new RuleEvent { Tags = ability.incomingTags, Effects = ability.effects, Label = ability.id });
+            EffectDef[] effectiveEffects = new EffectDef[ability.effects.Length];
+            for (int i = 0; i < effectiveEffects.Length; i++) { EffectDef e = ability.effects[i]; effectiveEffects[i] = new EffectDef { op = e.op, tag = e.tag, amount = e.amount + (modifiers == null ? 0 : e.op == "Damage" ? modifiers.damageBonus : e.op == "Heal" ? modifiers.healBonus : 0) }; }
+            queue.Enqueue(new RuleEvent { Tags = ability.incomingTags, Effects = effectiveEffects, Label = ability.id });
             int processed = 0;
             while (queue.Count > 0)
             {

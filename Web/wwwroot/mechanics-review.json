@@ -1,6 +1,6 @@
 {
   "title": "Closer to the books. Clearer to play.",
-  "summary": "A source-linked mechanics review, seven GPT-generated concept sheets, and an implementation checklist. Checked means implemented in the browser build; unchecked means planned. Concept images are design targets, not screenshots or exact specifications.",
+  "summary": "A source-linked mechanics review, seven GPT-generated concept sheets, and an implementation checklist. Checked means implemented in the browser source/build workflow; unchecked means planned. Validation evidence is reported separately, and native Unity parity is not implied. Concept images are design targets, not screenshots or exact specifications.",
   "groups": [
     {
       "title": "Readable tactical combat",
@@ -41,9 +41,9 @@
           "detail": "Separate move used, action used and turn finished; enemy team follows all finished allies."
         },
         {
-          "done": false,
-          "title": "Enemy intent before the next round",
-          "detail": "Show prospective target lanes and interrupt conditions, not just declarations during playback."
+          "done": true,
+          "title": "Scenario intent before the next round",
+          "detail": "Scenario-specific warnings display the authored threat used by C# execution. A universal intent planner remains planned."
         },
         {
           "done": false,
@@ -96,14 +96,14 @@
           "detail": "Author a full directional/attack set per Katia shape, with a mass/silhouette budget. Current form stats do not imply new authored sprites."
         },
         {
-          "done": false,
-          "title": "Five core stats and allocated points",
-          "detail": "Strength, Intelligence, Constitution, Dexterity, Charisma; separate saved points, with race/class timing made explicit."
+          "done": true,
+          "title": "Five stats and allocated points",
+          "detail": "Strength, Intelligence, Constitution, Dexterity and Charisma modify real actions/stats. Three points per level per crawler; safe-room preview/confirm/cancel. Early unlock is an accelerated adaptation."
         },
         {
-          "done": false,
-          "title": "Individual skill practice levels",
-          "detail": "Track use/training separately from crawler XP; define caps and gear boosts without copying unexplained formulas."
+          "done": true,
+          "title": "Individual skill practice ranks",
+          "detail": "Committed non-item ability uses train that crawler/ability at 3 and 8 uses, granting direct effect bonuses and Mana discounts. Broader training sources and race/gear cap modifiers remain planned."
         },
         {
           "done": false,
@@ -146,14 +146,14 @@
           "detail": "Floor progress, encounter door, optional caches/notes and enemy defeats reflect game state."
         },
         {
-          "done": false,
-          "title": "Loot-box inventory and safe-room opening",
-          "detail": "Pending boxes, rarity, deterministic rewards, collection preview and a visible empty state."
+          "done": true,
+          "title": "Owned boxes and safe-room opening",
+          "detail": "Earn fixed-content achievement and victory boxes; inspect rewards and opened state. Ownership and once-only opening persist; randomized rarity and pet rewards remain planned."
         },
         {
-          "done": false,
-          "title": "Crafting and workbench recipes",
-          "detail": "Simple combinations versus specialized benches; materials, recipe previews and consumed inputs."
+          "done": true,
+          "title": "Safe-room supply recipes",
+          "detail": "Two authored recipes display ingredients/results; shared C# validates and consumes inputs atomically. Portable crafting and specialized workbenches remain planned."
         },
         {
           "done": false,
@@ -178,32 +178,32 @@
       ]
     },
     {
-      "title": "Book-grounded boss scenarios — concepts, not playable yet",
+      "title": "Book-grounded boss scenarios — playable adaptations",
       "items": [
         {
-          "done": false,
+          "done": true,
           "title": "Hoarder: stockpile and Scatterers",
-          "detail": "Book 1 boss identity; propose capped minions, garbage lanes, telegraphed emergence and explosive opportunities."
+          "detail": "Capped Scatterer slots, visible emergence warnings, interrupting statuses and action-cost garbage clearing. Ordinary damage also works; mechanics are adaptations."
         },
         {
-          "done": false,
+          "done": true,
           "title": "Juicer: gym and flaming weight plates",
-          "detail": "Book 1 scaly gym boss; propose visible throw lanes, cover interception and equipment obstacles."
+          "detail": "Locked throw lanes can be dodged or interrupted; action-cost toppled benches intercept one throw. Original tactical adaptation."
         },
         {
-          "done": false,
+          "done": true,
           "title": "Ball of Swine: cooperative Speedbump",
-          "detail": "Book 1 borough threat; propose rolling lanes, carried parts, shared barricade construction and Meadow Lark assistance."
+          "detail": "Eight-cell rolling route, three-cell warning, carried parts, a three-part barricade and recoverable helpers. Construction consumes actions; exact rules are adaptations."
         },
         {
-          "done": false,
+          "done": true,
           "title": "Scenario briefing and adaptation labels",
-          "detail": "Show source setting, current objective, special interaction and invented rules before entry."
+          "detail": "Choose a scenario at camp, inspect its objective and invented mechanics, and return to the preserved campaign afterwards."
         },
         {
           "done": false,
           "title": "Large-unit occupancy and boss phases",
-          "detail": "Shared footprint/collision rules, deterministic phase transitions, clear defeat/retry and alternate recovery paths."
+          "detail": "All current bosses occupy one logical tile. Multi-cell occupancy, a universal phase system and general large-unit collision remain planned."
         }
       ]
     },
@@ -233,12 +233,12 @@
         {
           "done": true,
           "title": "Game-compatible tile export",
-          "detail": "Export encounter width, height and tiles; merge into authored game data, validate spawns and rebuild."
+          "detail": "Export collision/surface data for authoring or a playable room with visual placements for runtime import."
         },
         {
-          "done": false,
-          "title": "Play edited maps without rebuilding",
-          "detail": "A validated runtime map-import path and full visual recipe persistence are still needed."
+          "done": true,
+          "title": "Play edited rooms without rebuilding",
+          "detail": "Play this room or import playable JSON. C# validates bounds, assets, layers, actors and connectivity before starting a standalone room; full visual components persist in saves. A valid import replaces the active run."
         },
         {
           "done": false,
@@ -262,7 +262,7 @@
     {
       "file": "assets/concepts/progression-safe-room.png",
       "title": "Grow, equip, prepare",
-      "caption": "Future five-stat allocation, separate skill practice, loot boxes and crafting. These planned systems are not yet playable."
+      "caption": "Concept treatment for now-playable stat allocation, separate skill practice, owned boxes and crafting. Consult the actual menus for supported numbers and recipes."
     },
     {
       "file": "assets/concepts/combat-feedback.png",
@@ -277,17 +277,17 @@
     {
       "file": "assets/concepts/boss-hoarder-concept.png",
       "title": "Hoarder",
-      "caption": "Book 1 scenario concept: stockpile, giant human-ish boss and Scatterer minions. Not a playable encounter."
+      "caption": "Book 1 scenario concept: stockpile, giant human-ish boss and Scatterer minions. The separate playable scenario adapts this concept; art is not a screenshot or exact specification."
     },
     {
       "file": "assets/concepts/boss-juicer-concept.png",
       "title": "Juicer",
-      "caption": "Book 1 gym scenario concept: scaly boss and flaming weight plates. Not a playable encounter."
+      "caption": "Book 1 gym scenario concept: scaly boss and flaming weight plates. The separate playable scenario adapts this concept; art is not a screenshot or exact specification."
     },
     {
       "file": "assets/concepts/boss-swine-concept.png",
       "title": "Ball of Swine",
-      "caption": "Book 1 cooperative Speedbump scenario concept with Meadow Lark helpers. Not a playable encounter."
+      "caption": "Book 1 cooperative Speedbump scenario concept with Meadow Lark helpers. The separate playable scenario adapts this concept; art is not a screenshot or exact specification."
     }
   ],
   "sources": [

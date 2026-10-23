@@ -8,6 +8,7 @@ namespace DungeonCrawlerTactics
     public sealed partial class GameSession
     {
         private readonly Catalog catalog;
+        private readonly Content scenarioValidationContent;
         private readonly GameData data;
         private readonly RulesEngine engine;
         private BattleState battle = new BattleState();
@@ -22,10 +23,11 @@ namespace DungeonCrawlerTactics
         private bool rewardChosen;
         private GameCommand pending;
         private ActionResult forecast;
-        private EncounterDef Encounter { get { return data.encounters[Math.Min(encounterIndex, data.encounters.Length - 1)]; } }
+        private EncounterDef Encounter { get { return ActiveScenarioEncounter ?? CustomEncounter(encounterIndex) ?? data.encounters[Math.Min(encounterIndex, data.encounters.Length - 1)]; } }
 
         public GameSession(Content content, GameData gameData)
         {
+            scenarioValidationContent = content;
             catalog = new Catalog(content);
             data = gameData ?? throw new ArgumentNullException(nameof(gameData));
             GameDataValidator.Validate(data, catalog);
@@ -39,8 +41,16 @@ namespace DungeonCrawlerTactics
             {
                 if (command == null) throw new ArgumentException("Missing command.");
                 message = "";
+                if (command.type != "preview_allocate" && command.type != "confirm_development" && command.type != "cancel_development") pendingDevelopment = null;
+                if (TryScenarioCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
                 switch (command.type)
                 {
+                    case "preview_allocate": PreviewAllocation(command); break;
+                    case "confirm_development": ConfirmAllocation(); break;
+                    case "cancel_development": pendingDevelopment = null; message = "Allocation canceled. No points spent."; break;
+                    case "craft": Craft(command.recipeId); break;
+                    case "open_loot_box": OpenLootBox(command.lootBoxId); break;
+                    case "import_map": ImportCustomMap(command); break;
                     case "new_run": Reset(); break;
                     case "safe_room_rest": Rest(); break;
                     case "equip": Equip(command, false); break;
@@ -107,7 +117,7 @@ namespace DungeonCrawlerTactics
                         Require(rewardChosen || data.rewards.Length == 0, "Choose a sponsor reward first.");
                         SyncRosterFromBattle();
                         encounterIndex++;
-                        screen = encounterIndex >= data.encounters.Length ? "complete" : "camp";
+                        screen = encounterIndex >= (CustomEncounter(0) != null ? 1 : data.encounters.Length) ? "complete" : "camp";
                         phase = "player";
                         if (screen == "camp") { battle = new BattleState(); units.Clear(); timed.Clear(); selected = null; }
                         message = screen == "complete" ? "Floor cleared. The audience demands another season." : "Return to the safe room: rest, equip earned gear, and inspect new skills before the next encounter.";
@@ -126,7 +136,7 @@ namespace DungeonCrawlerTactics
         }
         private void Reset()
         {
-            xp = 0; achievementIds.Clear(); equipped.Clear(); roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); exploration.Clear(); battle = new BattleState();
+            ResetDevelopment(); ResetCustomMap(); ClearScenario(); xp = 0; achievementIds.Clear(); equipped.Clear(); roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); exploration.Clear(); battle = new BattleState();
             foreach (RosterDef member in data.roster)
             {
                 ClassStats initial = PlayerStats(member.id, member.classId); int hp = initial.hp;
@@ -142,7 +152,7 @@ namespace DungeonCrawlerTactics
         }
         private void StartEncounter()
         {
-            battle = new BattleState(); units.Clear(); timed.Clear(); ClearPreview(); log.Clear();
+            battle = new BattleState(); units.Clear(); timed.Clear(); ClearPreview(); pendingDevelopment = null; log.Clear();
             EncounterDef encounter = Encounter;
             for (int y = 0; y < encounter.height; y++) for (int x = 0; x < encounter.width; x++)
             {
@@ -160,8 +170,8 @@ namespace DungeonCrawlerTactics
             }
             foreach (SpawnDef enemy in encounter.enemies) AddUnit(enemy.id, enemy.label, enemy.classId, "enemy", enemy.x, enemy.y, enemy.hp, enemy.energy, enemy.move, enemy.tags);
             screen = "battle"; phase = "player"; round = 1; rewardChosen = false;
-            selected = FirstAvailable(); message = encounter.description;
-            AddLog(encounter.label + ": defeat all enemies. Move, then act. Actions end a crawler's activation.");
+            selected = FirstAvailable(); message = encounter.description; ScenarioOnStart();
+            AddLog(encounter.label + ": defeat all enemies. Move and act in either order, then end the crawler's turn.");
         }
         private void AddUnit(string id, string label, string classId, string team, int x, int y, int hp, int energy, int move, string[] tags)
         {
@@ -205,7 +215,7 @@ namespace DungeonCrawlerTactics
                 abilityId = catalog.Items[command.itemId].abilityId;
                 resolved = engine.ExecuteItem(battle, actor.Id, command.itemId, command.targetId);
             }
-            else resolved = engine.Execute(battle, actor.Id, abilityId, command.targetId);
+            else resolved = engine.Execute(battle, actor.Id, abilityId, command.targetId, actor.Team == "player" ? Modifiers(actor.Id, abilityId) : null);
             List<string> events = new List<string>(resolved.Log);
             List<PresentationEvent> visual = new List<PresentationEvent>(resolved.Events);
             EntityState target = resolved.State.Entities[command.targetId];
@@ -232,7 +242,7 @@ namespace DungeonCrawlerTactics
             if (!string.IsNullOrEmpty(command.itemId)) inventory[command.itemId]--;
             foreach (string entry in result.Log) AddLog(Label(command.unitId) + ": " + entry);
             units[command.unitId].acted = true;
-            CommitMode(command);
+            CommitMode(command); PracticeCommitted(command);
         }
         private void EndActivation(string id) { units[id].acted = true; units[id].moved = true; units[id].finished = true; }
         private void ClearPreview() { pending = null; forecast = null; }
@@ -246,11 +256,12 @@ namespace DungeonCrawlerTactics
         {
             if (screen != "battle") return;
             phase = "enemy"; presentationEvents.Add(new PresentationEvent { type = "phase", tag = "enemy" }); ClearPreview(); AddLog("Enemy phase.");
+            RunScenarioEnemyTurn();
             List<string> enemies = UnitIds("enemy");
             foreach (string id in enemies)
             {
                 if (screen != "battle") break;
-                EntityState enemy = battle.Entities[id]; if (enemy.Hp == 0) continue;
+                EntityState enemy = battle.Entities[id]; if (IsScenarioBoss(id)) continue; if (enemy.Hp == 0) continue;
                 // Deterministic bounded legal search: evaluate every granted ability against each living target.
                 GameCommand best = BestEnemyAction(id);
                 if (best == null)
@@ -385,7 +396,7 @@ namespace DungeonCrawlerTactics
             if (!player) { screen = "defeat"; message = "Your party fell. Retry this room or begin a new run."; ClearPreview(); AddLog("Party defeated."); }
             else if (!enemy)
             {
-                int oldXp = xp; screen = "victory"; xp += Encounter.xp; AwardProgression(oldXp); rewardChosen = false; ClearPreview();
+                int oldXp = xp; screen = "victory"; xp += Encounter.xp; if (ActiveScenarioEncounter == null) AwardProgression(oldXp); else SyncRosterFromBattle(); if (ActiveScenarioEncounter == null) GrantLoot("victory." + (CustomEncounter(0) != null ? data.encounters[0].id : Encounter.id), true); rewardChosen = false; ClearPreview();
                 message = "Room cleared! Choose one sponsor reward."; AddLog("Victory: +" + Encounter.xp + " XP.");
             }
         }
@@ -427,6 +438,7 @@ namespace DungeonCrawlerTactics
         }
         private bool Passable(int x, int y, string actorId)
         {
+            if (!ScenarioPassable(x, y, actorId)) return false;
             if (x < 0 || y < 0 || x >= Encounter.width || y >= Encounter.height || Blocked(x, y)) return false;
             foreach (EntityState unit in battle.Entities.Values) if (!unit.IsTile && unit.Hp > 0 && unit.Id != actorId && unit.X == x && unit.Y == y) return false;
             return true;
@@ -505,7 +517,7 @@ namespace DungeonCrawlerTactics
             List<AbilityView> abilityViews = new List<AbilityView>();
             if (actor != null) foreach (string id in AbilityIds(actor))
             {
-                AbilityDef a = catalog.Abilities[id]; abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = a.range, cost = a.cost, enabled = view.canAct && actor.Energy >= a.cost, description = Describe(a), disabledReason = !view.canAct ? "Action unavailable" : actor.Energy < a.cost ? "Insufficient mana" : "", targetIds = includeTargets && view.canAct && actor.Energy >= a.cost ? LegalTargets(actor, a, null) : new string[0] });
+                AbilityDef a = catalog.Abilities[id]; int effectiveCost = Math.Max(0, a.cost - Modifiers(actor.Id, id).costReduction); abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = a.range, cost = effectiveCost, enabled = view.canAct && actor.Energy >= effectiveCost, description = Describe(a, Modifiers(actor.Id, id)), disabledReason = !view.canAct ? "Action unavailable" : actor.Energy < effectiveCost ? "Insufficient mana" : "", targetIds = includeTargets && view.canAct && actor.Energy >= effectiveCost ? LegalTargets(actor, a, null) : new string[0] });
             }
             view.abilities = abilityViews.ToArray();
             List<ItemView> itemViews = new List<ItemView>(); foreach (ItemDef item in catalog.Items.Values)
@@ -526,7 +538,7 @@ namespace DungeonCrawlerTactics
             if (screen == "victory" && !rewardChosen)
             { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); view.rewards = rewards.ToArray(); }
             if (screen == "explore") view.exploration = ExplorationView();
-            PopulateProgression(view); PopulateModes(view);
+            PopulateProgression(view); PopulateModes(view); PopulateDevelopment(view); PopulateCustomMap(view); view.scenarios = ScenarioOptions(); view.scenario = ScenarioView();
             return view;
         }
         private string[] LegalTargets(EntityState actor, AbilityDef ability, string itemId)
@@ -542,15 +554,15 @@ namespace DungeonCrawlerTactics
             }
             targets.Sort(StringComparer.Ordinal); return targets.ToArray();
         }
-        private string Describe(AbilityDef ability)
+        private string Describe(AbilityDef ability, ActionModifiers modifiers = null)
         {
             List<string> parts = new List<string>();
             foreach (EffectDef effect in ability.effects)
             {
-                if (effect.op == "Damage") parts.Add(effect.amount + " damage");
+                if (effect.op == "Damage") parts.Add((effect.amount + (modifiers == null ? 0 : modifiers.damageBonus)) + " damage");
                 else if (effect.op == "Teleport") parts.Add("Teleport to an unoccupied tile");
                 else if (effect.op == "Push") parts.Add("Push " + effect.amount + " tile(s)");
-                else if (effect.op == "Heal") parts.Add("Restore " + effect.amount + " HP");
+                else if (effect.op == "Heal") parts.Add("Restore " + (effect.amount + (modifiers == null ? 0 : modifiers.healBonus)) + " HP");
                 else
                 {
                     string label = DisplayTag(effect.tag);
@@ -576,7 +588,7 @@ namespace DungeonCrawlerTactics
         }
         public GameSave ExportSave()
         {
-            GameSave save = new GameSave { achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
+            GameSave save = new GameSave { development = CaptureDevelopment(), customMap = ExportCustomMap(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
             save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
@@ -601,7 +613,7 @@ namespace DungeonCrawlerTactics
                 Require(save.screen == "camp" || save.screen == "explore" || save.screen == "battle" || save.screen == "victory" || save.screen == "defeat" || save.screen == "complete", "Invalid save screen.");
                 Require(save.phase == "player" || (save.phase == "enemy" && (save.screen == "victory" || save.screen == "defeat")), "Invalid save phase.");
                 Require(save.encounterIndex >= 0 && save.encounterIndex < data.encounters.Length + (save.screen == "complete" ? 1 : 0), "Invalid encounter index.");
-                Require(save.screen != "complete" || save.encounterIndex == data.encounters.Length, "Incomplete floor marked complete.");
+                Require(save.screen != "complete" || save.encounterIndex == (save.customMap != null ? 1 : data.encounters.Length), "Incomplete floor marked complete.");
                 Require((save.screen != "battle" && save.screen != "defeat") || !save.rewardChosen, "Reward cannot precede victory.");
                 Require(save.screen != "complete" || save.rewardChosen || data.rewards.Length == 0, "Completed floor is missing its final reward choice.");
                 Require(save.round > 0 && save.round <= 100000, "Invalid round.");
@@ -611,16 +623,19 @@ namespace DungeonCrawlerTactics
                 int expectedXp = 0;
                 for (int i = 0; i < Math.Min(save.encounterIndex, data.encounters.Length); i++) expectedXp += data.encounters[i].xp;
                 if (save.screen == "victory") expectedXp += data.encounters[save.encounterIndex].xp;
-                Require(save.xp == expectedXp, "Save XP does not match its completed encounters.");
+                Require(save.scenario != null || save.xp == expectedXp, "Save XP does not match its completed encounters.");
                 ValidateAchievements(save.achievementIds);
                 string[] nextAchievements = (string[])save.achievementIds.Clone();
                 save = UpgradeProgressionSave(save);
                 List<EquipmentSlotSave> nextEquipment = ValidateEquipment(save);
+                DevelopmentSave nextDevelopment = ValidateDevelopment(save); List<StatAllocationSave> nextAllocations = new List<StatAllocationSave>(nextDevelopment.allocated);
+                EncounterDef candidateScenario = ValidateScenario(save); EncounterDef candidateCustom = ValidateCustomMap(save);
+                Require(candidateScenario == null || candidateCustom == null, "A save cannot combine a scenario and a custom map.");
                 Dictionary<string, RosterView> nextRoster = new Dictionary<string, RosterView>(); int party = 0;
                 foreach (RosterView member in save.roster)
                 {
                     Require(member != null && member.id != null && roster.ContainsKey(member.id) && !nextRoster.ContainsKey(member.id) && member.classId != null && catalog.Classes.ContainsKey(member.classId), "Invalid saved roster.");
-                    RosterDef definition = Array.Find(data.roster, r => r.id == member.id); ClassStats stats = PlayerStats(member.id, member.classId, save.xp, nextEquipment); ApplyModes(stats, member.id, member.stanceId, member.formId);
+                    RosterDef definition = Array.Find(data.roster, r => r.id == member.id); ClassStats stats = PlayerStats(member.id, member.classId, save.xp, nextEquipment); ApplyAllocatedStats(stats, member.id, nextAllocations); ApplyModes(stats, member.id, member.stanceId, member.formId);
                     Require(member.hp >= 0 && member.hp <= stats.hp && member.maxHp == stats.hp && member.energy >= 0 && member.energy <= stats.energy && member.maxEnergy == stats.energy, "Invalid roster health or mana.");
                     nextRoster.Add(member.id, new RosterView { id = member.id, label = definition.label, classId = member.classId, stanceId = member.stanceId, formId = member.formId, selected = member.selected, hp = member.hp, maxHp = member.maxHp, energy = member.energy, maxEnergy = member.maxEnergy, move = stats.move, level = LevelAt(save.xp) }); Require(!member.selected || definition.deployable, "Advisor cannot deploy."); if (member.selected) party++;
                 }
@@ -633,7 +648,7 @@ namespace DungeonCrawlerTactics
                 }
                 List<ExplorationSave> nextExploration = ValidateExploration(save);
                 bool hasBattle = save.screen != "camp" && save.screen != "explore";
-                EncounterDef encounter = data.encounters[Math.Min(save.encounterIndex, data.encounters.Length - 1)];
+                EncounterDef encounter = candidateScenario ?? candidateCustom ?? data.encounters[Math.Min(save.encounterIndex, data.encounters.Length - 1)];
                 Require(save.units.Length == (hasBattle ? data.partySize + encounter.enemies.Length : 0), "Saved unit count does not match encounter.");
                 Require(save.tiles.Length == (hasBattle ? encounter.width * encounter.height : 0), "Saved map size does not match encounter.");
                 BattleState nextBattle = new BattleState(); Dictionary<string, SavedUnit> nextUnits = new Dictionary<string, SavedUnit>(); HashSet<string> occupied = new HashSet<string>();
@@ -652,7 +667,7 @@ namespace DungeonCrawlerTactics
                     if (unit.team == "player")
                     {
                         Require(nextRoster.ContainsKey(unit.id) && nextRoster[unit.id].selected && nextRoster[unit.id].classId == unit.classId, "Saved party member not deployed.");
-                        ClassStats stats = PlayerStats(unit.id, unit.classId, save.xp, nextEquipment); ApplyModes(stats, unit.id, nextRoster[unit.id].stanceId, nextRoster[unit.id].formId); hp = stats.hp; energy = stats.energy; move = stats.move; label = nextRoster[unit.id].label; if (unit.hp > 0) playerAlive = true;
+                        ClassStats stats = PlayerStats(unit.id, unit.classId, save.xp, nextEquipment); ApplyAllocatedStats(stats, unit.id, nextAllocations); ApplyModes(stats, unit.id, nextRoster[unit.id].stanceId, nextRoster[unit.id].formId); hp = stats.hp; energy = stats.energy; move = stats.move; label = nextRoster[unit.id].label; if (unit.hp > 0) playerAlive = true;
                     }
                     else
                     {
@@ -703,6 +718,7 @@ namespace DungeonCrawlerTactics
                     }
                 foreach (string entry in save.log) Require(entry != null && entry.Length <= 1000, "Invalid saved log.");
                 // All validation is complete before replacing any live state.
+                CommitDevelopment(nextDevelopment); CommitCustomMap(save); CommitScenario(save);
                 achievementIds.Clear(); achievementIds.AddRange(nextAchievements);
                 equipped.Clear(); equipped.AddRange(nextEquipment);
                 exploration.Clear(); foreach (ExplorationSave sector in nextExploration) exploration.Add(sector.sectorId, sector);

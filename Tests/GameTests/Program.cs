@@ -53,8 +53,88 @@ static class GameTests
         GameDataValidator.Validate(Data, new Catalog(Content));
         Check(Content.classes.All(c => c.abilityIds.Length > 0), "all optional and identity classes have functional kits");
         Check(Content.items.Length == 8 && Content.abilities.Length >= 18, "release inventory and ability breadth");
-        IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
+        AuthoredMechanicsValidation(); CrawlerDevelopment(); IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
+    }
+    static bool RejectsGameData(Action<GameData> mutate)
+    {
+        GameData config = Clone(Data); mutate(config); try { new GameSession(Clone(Content), config); return false; } catch (ArgumentException) { return true; }
+    }
+    static void AuthoredMechanicsValidation()
+    {
+        Check(RejectsGameData(d => d.scenarios[0].bossId = "boss.unknown"), "runtime authored scenario rejects unknown boss reference");
+        Check(RejectsGameData(d => d.scenarios[2].route[1].x = 0), "runtime authored scenario rejects noncardinal rolling route");
+        Check(RejectsGameData(d => d.scenarios[0].encounter.playerSpawns[0].x = -1), "runtime authored scenario rejects out-of-bounds player spawn");
+        Check(RejectsGameData(d =>  { d.scenarios[0].encounter.enemies[0].x = d.scenarios[0].encounter.playerSpawns[0].x; d.scenarios[0].encounter.enemies[0].y = d.scenarios[0].encounter.playerSpawns[0].y; }), "runtime authored scenario rejects overlapping boss and player spawn");
+        Check(RejectsGameData(d => d.scenarios[0].kind = "scripted"), "runtime authored scenario rejects unknown mechanical kind");
+        Check(RejectsGameData(d => d.scenarios[0].minionIds[0] = d.scenarios[0].bossId), "runtime authored scenario rejects boss as minion");
+        Check(RejectsGameData(d => d.scenarios[0].route = null), "runtime authored scenario rejects null route collection");
+        Check(RejectsGameData(d => d.scenarios[0].encounter.tiles = Enumerable.Range(0, d.scenarios[0].encounter.height).Select(y => new TileDef { x = 5, y = y, blocked = true }).ToArray()), "runtime authored scenario rejects wall-disconnected spawn regions");
+        Check(RejectsGameData(d => { d.scenarios[0].interactables[0].x = d.scenarios[0].encounter.playerSpawns[0].x; d.scenarios[0].interactables[0].y = d.scenarios[0].encounter.playerSpawns[0].y; }), "runtime authored scenario rejects object and spawn overlap");
+        Check(RejectsGameData(d => d.development.stats[0].id = "unstable"), "runtime stat definitions require stable dotted IDs");
+        Check(RejectsGameData(d => d.development.practice.damagePerRank = 2), "runtime skill progression rejects excessive rank bonuses");
+        Check(RejectsGameData(d => d.development.recipes[0].ingredients[0].itemId = "item.unknown"), "runtime crafting rejects unknown ingredient references");
+    }
+    static void CrawlerDevelopment()
+    {
+        GameData config = Clone(Data); Content content = Clone(Content);
+        var practiceAbility = new AbilityDef { id = "ability.practice_fixture", label = "Practice Mend", target = "self", range = 0, cost = 2, effects = new[] { new EffectDef { op = "Heal", amount = 3 } } };
+        content.abilities = content.abilities.Concat(new[] { practiceAbility }).ToArray(); config.roster.Single(r => r.id == "crawler.carl").innateAbilityIds = config.roster.Single(r => r.id == "crawler.carl").innateAbilityIds.Concat(new[] { practiceAbility.id }).ToArray();
+        config.roster.Single(r => r.id == "crawler.katia").innateAbilityIds = config.roster.Single(r => r.id == "crawler.katia").innateAbilityIds.Concat(new[] { practiceAbility.id }).ToArray();
+        config.encounters[0].tiles = new TileDef[0]; config.encounters[0].enemies = new[] { new SpawnDef { id = "enemy.development", label = "Training opponent", classId = "class.brawler", x = 2, y = 1, hp = 1, energy = 0, move = 1 } };
+        config.encounters[1].tiles = new TileDef[0]; config.encounters[1].enemies = new[] { new SpawnDef { id = "enemy.practice", label = "Distant opponent", classId = "class.brawler", x = 8, y = 6, hp = 1000, energy = 0, move = 1 } };
+        GameSession game = new GameSession(content, config); Command(game, "start"); Command(game, "preview", "crawler.carl", "enemy.development", "ability.carl_powerful_strike"); GameView view = Command(game, "confirm");
+        Check(view.development.crawlers.All(c => c.unspentPoints == 3) && view.development.lootBoxes.Any(b => b.sourceId == "victory." + config.encounters[0].id), "earned level gives every crawler three manual points and one owned victory box");
+        Command(game, "choose_reward", target: null); game.Handle(new GameCommand { type = "choose_reward", rewardId = config.rewards[0].id }); view = Command(game, "continue");
+        Check(view.screen == "camp", "development station is reached through actual victory reward and continue");
+        GameSave legacy = Clone(game.ExportSave()); legacy.development = null; GameSession migrated = new GameSession(Clone(content), Clone(config));
+        Check(!migrated.ImportSave(legacy).message.StartsWith("Save rejected") && migrated.GetView().development.crawlers.All(c => c.unspentPoints == 3), "old checkpoints retain caps and receive derived unspent points without reinterpreting stats");
+        string unchanged = JsonSerializer.Serialize(game.ExportSave(), Json);
+        view = game.Handle(new GameCommand { type = "preview_allocate", unitId = "crawler.carl", statId = "stat.constitution", points = 1 });
+        Check(view.development.canConfirm && view.development.forecast.afterHp == view.development.forecast.beforeHp + 3 && unchanged == JsonSerializer.Serialize(game.ExportSave(), Json), "allocation exact forecast changes no committed stats or point pool");
+        Command(game, "cancel_development"); Check(unchanged == JsonSerializer.Serialize(game.ExportSave(), Json), "cancel allocation spends no points");
+        foreach (var choice in new[] { new { owner = "crawler.carl", stat = "stat.strength", points = 2 }, new { owner = "crawler.carl", stat = "stat.constitution", points = 1 }, new { owner = "crawler.donut", stat = "stat.dexterity", points = 3 }, new { owner = "crawler.katia", stat = "stat.intelligence", points = 2 }, new { owner = "crawler.katia", stat = "stat.charisma", points = 1 } })
+        { game.Handle(new GameCommand { type = "preview_allocate", unitId = choice.owner, statId = choice.stat, points = choice.points }); view = Command(game, "confirm_development"); }
+        Check(view.development.crawlers.Where(c => c.unitId == "crawler.carl" || c.unitId == "crawler.donut" || c.unitId == "crawler.katia").All(c => c.unspentPoints == 0), "all five stat formulas consume only their owner's earned points");
+        unchanged = JsonSerializer.Serialize(game.ExportSave(), Json); game.Handle(new GameCommand { type = "preview_allocate", unitId = "crawler.carl", statId = "stat.strength", points = 1 });
+        Check(unchanged == JsonSerializer.Serialize(game.ExportSave(), Json), "overspending allocation rejects atomically");
+        view = game.GetView();
+        Check(view.roster.Single(r => r.id == "crawler.donut").move == config.classStats.Single(c => c.classId == view.roster.Single(r => r.id == "crawler.donut").classId).move + 1 && view.roster.Single(r => r.id == "crawler.katia").maxEnergy == config.classStats.Single(c => c.classId == view.roster.Single(r => r.id == "crawler.katia").classId).energy + config.progression.manaPerLevel + 4, "Dexterity and Intelligence change real movement and mana caps");
+        GameSession restored = new GameSession(Clone(content), Clone(config)); Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected"), "all allocations and effective stats roundtrip through validated checkpoint");
+        GameSave forged = Clone(game.ExportSave()); forged.development.allocated[0].points = 99;
+        Check(restored.ImportSave(forged).message.StartsWith("Save rejected"), "forged unearned stat points reject before replacing session");
+        GameSave badBox = Clone(game.ExportSave()); badBox.development.lootBoxes[0].sourceId = "victory.unearned"; string restoredBefore = JsonSerializer.Serialize(restored.ExportSave(), Json);
+        Check(restored.ImportSave(badBox).message.StartsWith("Save rejected") && restoredBefore == JsonSerializer.Serialize(restored.ExportSave(), Json), "unearned loot source rejects without replacing inventory or allocations");
+        string boxId = view.development.lootBoxes.First().id; int tonicBefore = game.ExportSave().inventory.Single(i => i.itemId == "item.health_tonic").count;
+        view = game.Handle(new GameCommand { type = "open_loot_box", lootBoxId = boxId }); int tonicAfter = game.ExportSave().inventory.Single(i => i.itemId == "item.health_tonic").count;
+        Check(view.development.lootBoxes.Single(b => b.id == boxId).opened && tonicAfter == tonicBefore + 1, "owned deterministic box opens once into actual inventory");
+        unchanged = JsonSerializer.Serialize(game.ExportSave(), Json); game.Handle(new GameCommand { type = "open_loot_box", lootBoxId = boxId }); Check(unchanged == JsonSerializer.Serialize(game.ExportSave(), Json), "opened loot box cannot duplicate supplies");
+        int beforeTonics = tonicAfter, beforeMega = game.ExportSave().inventory.Single(i => i.itemId == "item.mega_tonic").count;
+        view = game.Handle(new GameCommand { type = "craft", recipeId = "recipe.mega_tonic" });
+        Check(game.ExportSave().inventory.Single(i => i.itemId == "item.health_tonic").count == beforeTonics - 2 && game.ExportSave().inventory.Single(i => i.itemId == "item.mega_tonic").count == beforeMega + 1, "recipe atomically consumes exact materials and grants authored output");
+        while (game.ExportSave().inventory.Single(i => i.itemId == "item.health_tonic").count >= 2) game.Handle(new GameCommand { type = "craft", recipeId = "recipe.mega_tonic" });
+        unchanged = JsonSerializer.Serialize(game.ExportSave(), Json); game.Handle(new GameCommand { type = "craft", recipeId = "recipe.mega_tonic" }); Check(unchanged == JsonSerializer.Serialize(game.ExportSave(), Json), "missing crafting ingredients reject with no partial consume or reward");
+        game.Handle(new GameCommand { type = "preview_allocate", unitId = "crawler.mongo", statId = "stat.constitution", points = 1 });
+        view = game.Handle(new GameCommand { type = "set_class", unitId = "crawler.mongo", classId = game.GetView().roster.Single(r => r.id == "crawler.mongo").classId });
+        Check(!view.development.canConfirm && view.development.forecast == null, "loadout changes invalidate pending stat forecasts");
+        Command(game, "safe_room_rest"); Command(game, "start"); GameSave wounded = Clone(game.ExportSave()); wounded.units.Single(u => u.id == "crawler.carl").hp -= 25; wounded.units.Single(u => u.id == "crawler.katia").hp -= 10; game.ImportSave(wounded);
+        view = Command(game, "preview", "crawler.katia", "crawler.katia", practiceAbility.id); ForecastView charismaHeal = view.forecast.Single(f => f.targetId == "crawler.katia");
+        Check(charismaHeal.afterHp - charismaHeal.beforeHp == 4, "allocated Charisma increases actual shared-resolver healing"); Command(game, "cancel");
+        Command(game, "select", "crawler.carl"); unchanged = JsonSerializer.Serialize(game.ExportSave(), Json); Command(game, "preview", "crawler.carl", "crawler.carl", practiceAbility.id); Command(game, "cancel"); Check(unchanged == JsonSerializer.Serialize(game.ExportSave(), Json), "canceled skill use grants no practice or loot");
+        for (int i = 0; i < 3; i++) { Command(game, "select", "crawler.carl"); Command(game, "preview", "crawler.carl", "crawler.carl", practiceAbility.id); view = Command(game, "confirm"); if (i < 2) EndRound(game); }
+        SkillPracticeView practice = view.development.practice.Single(p => p.unitId == "crawler.carl" && p.abilityId == practiceAbility.id);
+        Check(practice.uses == 3 && practice.rank == 2 && practice.damageBonus == 1 && practice.healBonus == 1 && practice.costReduction == 1, "only committed uses advance their own bounded skill rank");
+        EndRound(game); view = Command(game, "select", "crawler.carl"); Check(view.abilities.Single(a => a.id == practiceAbility.id).cost == 1, "practice changes real displayed and resolved mana cost");
+        Check(view.abilities.Single(a => a.id == practiceAbility.id).description.Contains("Restore 4 HP"), "selected ability tooltip includes earned practice bonuses");
+        view = Command(game, "preview", "crawler.carl", "crawler.carl", practiceAbility.id); ForecastView healing = view.forecast.Single(f => f.targetId == "crawler.carl");
+        Check(healing.afterHp - healing.beforeHp == 4 && healing.beforeEnergy - healing.afterEnergy == 1, "shared resolver forecasts practiced healing and mana discount exactly");
+        Command(game, "cancel"); GameSave practiceSave = Clone(game.ExportSave()); restored = new GameSession(Clone(content), Clone(config));
+        Check(!restored.ImportSave(practiceSave).message.StartsWith("Save rejected") && restored.GetView().development.practice.Single(p => p.abilityId == practiceAbility.id).uses == 3, "practice, allocation, opened boxes and crafting supplies persist on reload");
+        practiceSave.units.Single(u => u.id == "enemy.practice").x = 2; practiceSave.units.Single(u => u.id == "enemy.practice").y = 1;
+        game.ImportSave(practiceSave); view = Command(game, "preview", "crawler.carl", "enemy.practice", "ability.carl_powerful_strike");
+        int rawDamage = content.abilities.Single(a => a.id == "ability.carl_powerful_strike").effects.Where(e => e.op == "Damage").Sum(e => e.amount);
+        ForecastView damage = view.forecast.Single(f => f.targetId == "enemy.practice"); Check(damage.beforeHp - damage.afterHp == rawDamage + 1, "allocated Strength changes actual direct ability damage in shared forecast");
+        unchanged = JsonSerializer.Serialize(game.ExportSave(), Json); game.Handle(new GameCommand { type = "craft", recipeId = "recipe.fire_bomb" }); Check(unchanged == JsonSerializer.Serialize(game.ExportSave(), Json), "crafting outside safe room rejects atomically");
     }
     static void IndependentActionsAndModes()
     {
@@ -224,7 +304,7 @@ static class GameTests
         Check(view.canConfirm && view.events.All(ev => ev.preview) && before == JsonSerializer.Serialize(game.ExportSave(), Json) && view.forecast.Any(f => f.targetId == hero.id && f.afterX == 4 && f.afterY == 1), "teleport preview reports position events and leaves save untouched");
         view = RawCommand(game, "confirm"); UnitView jumped = view.units.Single(u => u.id == hero.id);
         Check(jumped.x == 4 && jumped.y == 1 && jumped.tags.Contains("status.wet") && jumped.statuses.Any(t => t.tag == "status.wet" && t.remainingRounds == 3) && view.events.All(ev => !ev.preview), "teleport commits position and terrain status with duration");
-        Check(previewEvents == string.Join("|", view.events.Select(ev => ev.type + ":" + ev.targetId + ":" + ev.tag + ":" + ev.toX + ":" + ev.toY)), "preview and committed event sequence agree");
+        Check(previewEvents == string.Join("|", view.events.Where(ev => ev.type != "skill_practice").Select(ev => ev.type + ":" + ev.targetId + ":" + ev.tag + ":" + ev.toX + ":" + ev.toY)), "preview and committed combat event sequence agree");
         game = new GameSession(Clone(fixture), Clone(config)); Command(game, "start");
         view = RawCommand(game, "preview", hero.id, "enemy.fixture", "ability.fixture_push");
         Check(view.canConfirm && view.forecast.Any(f => f.targetId == "enemy.fixture" && f.afterX == 5 && f.afterHp == 94), "push preview includes bounded path and entry hazard damage");
@@ -314,6 +394,7 @@ static class GameTests
         config.partySize = 2;
         for (int i = 0; i < config.roster.Length; i++) config.roster[i].selected = i < 2;
         foreach (EncounterDef encounter in config.encounters) encounter.playerSpawns = encounter.playerSpawns.Take(2).ToArray();
+        foreach (ScenarioDef scenario in config.scenarios) scenario.encounter.playerSpawns = scenario.encounter.playerSpawns.Take(2).ToArray();
         GameSession game = new GameSession(Clone(Content), config);
         GameView view = Command(game, "start");
         Check(view.partyCapacity == 2 && view.partyCount == 2 && view.screen == "battle" && view.units.Count(u => u.team == "player") == 2, "party capacity and deployment remain data driven");
@@ -473,6 +554,11 @@ static class GameTests
         Check(moved, "full-floor traversal uses legal BFS movement");
         Check(usedPotion, "full-floor traversal uses a shared health potion");
         GameSession restored = Session(); restored.ImportSave(Clone(game.ExportSave())); Check(restored.GetView().screen == "complete", "completed floor can save and resume");
+        string completedCampaign = JsonSerializer.Serialize(game.ExportSave(), Json);
+        game.Handle(new GameCommand { type = "scenario_start", targetId = "scenario.hoarder" });
+        Check(game.GetView().scenario != null && game.GetView().screen == "battle", "completed campaign can enter a standalone boss without restarting");
+        game.Handle(new GameCommand { type = "scenario_return" });
+        Check(JsonSerializer.Serialize(game.ExportSave(), Json) == completedCampaign, "scenario return preserves the completed level-four campaign exactly");
         Command(game, "new_run"); Check(game.GetView().screen == "camp" && game.GetView().xp == 0, "new run resets progression");
     }
     static void DefeatRetry()

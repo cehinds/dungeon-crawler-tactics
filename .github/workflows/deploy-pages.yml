@@ -36,11 +36,14 @@ jobs:
           python -m unittest Tests/test_content_validators.py
           python Tools/package_room_kit.py
           python Tools/validate_directional_art.py
+          python Tools/validate_scenario_art.py
           node Tools/test_room_generator.mjs
       - name: Run shared C# regression tests
         run: |
           dotnet run --project Tests/RulesKernel.Tests.csproj -c Release
           dotnet run --project Tests/GameTests/GameTests.csproj -c Release
+          dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj -c Release
+          dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj -c Release
           dotnet build Tools/Compatibility/Core.Compatibility.csproj -c Release
       - name: Publish browser game
         run: dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish

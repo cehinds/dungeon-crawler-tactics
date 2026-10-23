@@ -4,9 +4,9 @@ A small complete Dungeon Crawler Carl fan tactics game: an animated isometric du
 
 **Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
 
-**Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md).
+**Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md) · [Playable boss scenarios and sprite sources](Docs/Boss-Concepts.md).
 
-**Build rooms:** [Room workshop](https://cehinds.github.io/dungeon-crawler-tactics/room-kit.html) · [Download 25 layerable PNGs](https://cehinds.github.io/dungeon-crawler-tactics/assets/room-kit/room-kit.zip). Paint/erase tiles and components, rotate pieces or the camera, and import/export recipes. Export game-compatible tile data, merge into an encounter and rebuild; campaign maps remain authored. See [Room kit guide](Docs/RoomKit.md) for anchors, layers and Unity import settings.
+**Build rooms:** [Room workshop](https://cehinds.github.io/dungeon-crawler-tactics/room-kit.html) · [Download 25 layerable PNGs](https://cehinds.github.io/dungeon-crawler-tactics/assets/room-kit/room-kit.zip). Paint/erase tiles and components, rotate pieces or the camera, and import/export recipes. Choose **Play this room** to start a validated standalone battle with the full room layout, or export a playable JSON map for import through Save & options. A valid room import replaces the current run; export its save first to keep it. Campaign maps remain authored. See [Room kit guide](Docs/RoomKit.md) for anchors, layers and Unity import settings.
 
 **Play locally:** run `./play.sh` on macOS/Linux, or `Play-Windows.bat` on Windows, then open **http://localhost:8000**. Python 3 is required for the local static server. The download archive includes the published game; a source checkout needs the `dotnet publish` command below first.
 
@@ -23,14 +23,15 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Choose actions in a responsive modal with labeled category colors, Mana costs and legal-target counts. Review the exact forecast in its confirmation modal; end-turn confirmation names the next actor.
 - Move and act in either order; actions preserve unused movement. Explicitly end the current character's turn to select the next ready ally; enemies act after the whole party finishes. Watch enemies navigate around walls during a clearly labeled enemy phase.
 - Rotate the map through four views, preview movement paths, and pan/zoom on phones. All eight field characters have four-direction idle and walking sprites.
-- Earn shared party XP, reach levels 1–4, unlock personal skills, and equip weapons, armor and charms. Rest and manage loadouts in Mordecai's safe room; follow objectives in the quest journal.
+- Earn shared party XP, reach levels 1–4, allocate five stats with exact previews, train abilities through committed use, and equip weapons, armor and charms. Rest and manage loadouts in Mordecai's safe room; follow objectives in the quest journal.
 - Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage. Guardian, Bard and Necromancer support abilities now grant real single-hit protection.
 - Fight deterministic enemies, collect sponsor supplies, reach the boss, finish the floor, or retry after defeat.
 - Choose Katia's four forms and three tactical stances through character sheets, with exact stat tradeoffs. Selected abilities expose descriptions and targeting information.
-- Follow original narrator declarations and impact messages; five saved first-time achievements trigger NEW ACHIEVEMENT feedback.
+- Follow individual enemy declarations and impact messages; five saved first-time achievements trigger NEW ACHIEVEMENT feedback. Open earned fixed-content boxes and craft two supply recipes in the safe room.
+- Try separate Hoarder, Juicer and Ball of Swine scenarios with objective briefings and special interactions, then return to the preserved campaign.
 - Autosave, reload, and export/import a portable JSON save.
 
-There are **20 selectable class kits, 66 ability definitions, 8 consumables, 6 equipment pieces and 96 directional character frames**. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). Advanced summons, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
+There are **20 selectable class kits, 66 ability definitions, 8 consumables, 6 equipment pieces and 96 directional character frames**. Stat formulas, early allocation timing, skill ranks, recipes and scenario rules are tactical adaptations, not canonical book formulas. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). Advanced summons, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
 
 ## Start here
 
@@ -71,9 +72,12 @@ python3 -m pip install -r Tools/requirements.txt
 python3 Tools/validate_content.py UnityPackage/Runtime/Data/combat-content.json
 python3 Tools/validate_game_data.py
 python3 Tools/validate_directional_art.py
+python3 Tools/validate_scenario_art.py
 python3 -m unittest discover -s Tools -p 'test_*.py'
 dotnet run --project Tests/RulesKernel.Tests.csproj
 dotnet run --project Tests/GameTests/GameTests.csproj
+dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj
+dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj
 dotnet build Tools/Compatibility/Core.Compatibility.csproj
 dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
 python3 Tools/prepare_unity_project.py

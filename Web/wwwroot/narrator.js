@@ -27,6 +27,14 @@ export function createNarrator({getView,content}) {
     if(event.type==='achievement'){if(!achievements.has(event.tag)){achievements.add(event.tag);enqueue(`NEW ACHIEVEMENT · ${achievementLabels[event.tag]??event.tag.replace(/^achievement\./,'').replace(/_/g,' ')}`,'achievement');}return;}
     const actor=labelFor(event.actorId),target=labelFor(event.targetId);
     const actorUnit=(afterView??getView())?.units.find(unit=>unit.id===event.actorId);
+    const current=afterView??getView();
+    if(event.type==='scenario_intent'){const intent=beforeView?.scenario?.intent??current?.scenario?.intent;enqueue(`${actor} declares ${intent?.label??'a special attack'}. ${intent?.description??''}`);return;}
+    if(event.type==='scenario_spawn'){enqueue(`${target} emerges. Watch the marked nests.`);return;}
+    if(event.type==='scenario_interact'){const object=current?.scenario?.interactables.find(item=>item.id===event.targetId);enqueue(`${actor} uses ${object?.label??'a room interaction'}. Action spent; unused movement remains.`);return;}
+    if(event.type==='stat_allocation'){enqueue(`${actor} allocated stat points. Rest to fill any increased HP or Mana cap.`);return;}
+    if(event.type==='skill_practice'){enqueue(`${actor}: ${abilityFor(event.abilityId)} practiced (${event.amount} uses).${event.after>event.before?' Skill rank '+event.after+' reached!':''}`,event.after>event.before?'achievement':'impact');return;}
+    if(event.type==='craft'){const recipe=current?.development?.recipes.find(item=>item.id===event.tag);enqueue(`Crafted ${recipe?.label??'a recipe'}. Ingredients consumed; supplies updated.`);return;}
+    if(event.type==='loot_box_earned'||event.type==='loot_box_opened'){const box=current?.development?.lootBoxes.find(item=>item.id===event.tag);enqueue(event.type==='loot_box_earned'?`${box?.label??'Loot box'} earned. Open it in the safe room.`:`${box?.label??'Loot box'} opened. Rewards added to shared supplies.`,'achievement');return;}
     if(event.type==='phase'){enqueue(event.tag==='enemy'?'Enemy turn. Watch their movement and intentions.':'Player turn. Move and act in either order.');return;}
     if(event.type==='move'&&actorUnit?.team==='enemy'){enqueue(`${actor} advances toward the crawlers.`);return;}
     if(event.type==='attack'&&actorUnit?.team==='enemy'){enqueue(`${actor} declares ${abilityFor(event.abilityId)} against ${target}.`);return;}

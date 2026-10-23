@@ -59,6 +59,38 @@ class CampaignValidationTests(unittest.TestCase):
         self.game['encounters'][0]['exploration']['procedural'] = True
         self.assertTrue(any('procedural' in e for e in validate_game(self.game,self.content)))
 
+    def test_recipe_unknown_ingredient_is_rejected(self):
+        self.game['development']['recipes'][0]['ingredients'][0]['itemId'] = 'item.typo'
+        self.assertTrue(any('item.typo' in e for e in validate_game(self.game,self.content)))
+
+    def test_duplicate_recipe_ingredient_is_rejected(self):
+        entries = self.game['development']['recipes'][0]['ingredients']
+        entries.append(copy.deepcopy(entries[0]))
+        self.assertTrue(any('duplicate' in e for e in validate_game(self.game,self.content)))
+
+    def test_nonmonotonic_practice_thresholds_are_rejected(self):
+        self.game['development']['practice']['useThresholds'] = [0, 8, 3]
+        self.assertTrue(any('increase strictly' in e for e in validate_game(self.game,self.content)))
+
+    def test_loot_source_requires_known_achievement(self):
+        self.game['development']['lootBoxes'][0]['achievementId'] = 'achievement.typo'
+        self.assertTrue(any('achievementId' in e for e in validate_game(self.game,self.content)))
+
+    def test_scenario_requires_authored_boss(self):
+        self.game['scenarios'][0]['bossId'] = 'boss.typo'
+        self.assertTrue(any('bossId' in e for e in validate_game(self.game,self.content)))
+
+    def test_rolling_route_cannot_teleport(self):
+        scenario = next(s for s in self.game['scenarios'] if s['kind'] == 'swine')
+        scenario['route'][1] = {'x': 0, 'y': 0}
+        self.assertTrue(any('cardinal closed loop' in e for e in validate_game(self.game,self.content)))
+
+    def test_scenario_spawns_cannot_overlap(self):
+        room = self.game['scenarios'][0]['encounter']
+        room['enemies'][0]['x'] = room['playerSpawns'][0]['x']
+        room['enemies'][0]['y'] = room['playerSpawns'][0]['y']
+        self.assertTrue(any('occupied spawn' in e for e in validate_game(self.game,self.content)))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,3 +1,5 @@
+import { renderScenarioMenu, renderScenarioDetails } from './scenario-ui.js';
+import { renderDevelopment, renderDevelopmentConfirmation } from './development-ui.js';
 import { notify, syncFeedbackHost } from './feedback.js';
 import { createBattlefield } from './battlefield.js';
 import { renderAbilityDetails, renderCharacterSheet } from './character-ui.js';
@@ -32,6 +34,8 @@ let actionChooser = false;
 let endTurnActor = null;
 let animating = false;
 let campModal = null;
+let developmentTab=null,developmentUnit=null,developmentPending=null;
+let scenarioMenu=false,scenarioBriefing=null,scenarioDetails=false,scenarioInteraction=null;
 let rosterExpanded=false;
 let questModal = false;
 let levelNotice = null;
@@ -180,7 +184,7 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
       try { await playPresentation(after.events, before, after); } catch { /* Presentation cannot prevent the committed result appearing. */ }
     }
     view = after;
-    if(after.screen!=='camp')campModal=null;
+    if(after.screen!=='camp'){campModal=null;developmentTab=null;developmentPending=null;scenarioMenu=false;}
     if(after.screen!==before.screen)characterSheetId=null;
     if (!preserveAction) { actionChooser=false; endTurnActor=null; detailedForecast=false; localAction = null; previewTargetId=null; inspectedTile = null; targetTile = false; }
     if(type==='preview' && after.canConfirm) detailedForecast=true;
@@ -202,7 +206,7 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
     commandFeedback(type, args, before, view,actionLabel);
     for(const quest of after.quests??[])if(quest.complete&&!before.quests?.find(old=>old.id===quest.id)?.complete)toast(`${quest.label} complete.`,'success');
     for(const event of after.events??[])if(event.type==='equipment_unlock'){const gear=after.equipment?.find(item=>item.id===event.tag);if(gear)toast(`${gear.label} is now available in the safe room.`,'success');}
-    if((after.progression?.level??1)>(before.progression?.level??after.progression?.level??1)){levelNotice=after.progression;render();}
+    if((after.events??[]).some(event=>event.type==='level_up'&&!event.preview)){levelNotice=after.progression;render();}
   } catch (error) {
     toast(`The command could not be completed: ${error.message}`, 'error');
   } finally {
@@ -212,6 +216,10 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
   }
 }
 function commandFeedback(type, args, before, after,actionLabel) {
+  if(type==='scenario_interact'&&after.events?.some(event=>event.type==='scenario_interact')){toast('Interaction completed. Your unused movement remains available.','success');return;}
+  if(type==='confirm_development'&&JSON.stringify(before.development?.crawlers)!==JSON.stringify(after.development?.crawlers)){toast('Stat allocation applied. Updated stats are ready.','success');return;}
+  if(type==='craft'&&JSON.stringify(before.items)!==JSON.stringify(after.items)){toast('Recipe crafted. Materials spent and supplies received.','success');return;}
+  if(type==='open_loot_box'&&after.development?.lootBoxes.find(box=>box.id===args.lootBoxId)?.opened&&!before.development?.lootBoxes.find(box=>box.id===args.lootBoxId)?.opened){toast('Owned lootbox opened. Rewards added to supplies.','success');return;}
   if(type==='safe_room_rest' && (JSON.stringify(before.roster)!==JSON.stringify(after.roster)||!before.safeRoom?.rested&&after.safeRoom?.rested)){toast('Party rested. Health and mana restored.','success');return;}
   if(['equip','unequip'].includes(type)){const old=before.equipment?.find(gear=>gear.id===args.equipmentId),gear=after.equipment?.find(gear=>gear.id===args.equipmentId);if(old?.equippedUnitId!==gear?.equippedUnitId){toast(`${gear.label} ${type==='equip'?'equipped':'unequipped'}. ${gearBonuses(gear)}`,'success');return;}}
   if(type==='end_turn') {
@@ -261,6 +269,10 @@ function render() {
   if (battleCanvas?.isConnected) battleCanvas.remove();
   if (!['battle','explore'].includes(view.screen) && battlefield) { battlefield.dispose(); battlefield = null; battleCanvas = null; }
   $('#game').innerHTML = view.screen === 'camp' ? renderCamp() : view.screen === 'explore' ? renderExploration() : view.screen === 'battle' ? renderBattle() : view.screen === 'victory' ? renderVictory() : renderEnding();
+  if(scenarioMenu) $('#game').insertAdjacentHTML('beforeend',renderScenarioMenu(view,scenarioBriefing));
+  if(scenarioDetails&&view.scenario) $('#game').insertAdjacentHTML('beforeend',renderScenarioDetails(view,scenarioInteraction));
+  if(developmentTab&&view.development) $('#game').insertAdjacentHTML('beforeend',renderDevelopment(view,content,{tab:developmentTab,unitId:developmentUnit}));
+  if(developmentPending&&view.development) $('#game').insertAdjacentHTML('beforeend',renderDevelopmentConfirmation(view,content,developmentPending));
   if(questModal) $('#game').insertAdjacentHTML('beforeend',renderQuestDialog());
   if(!['battle','explore'].includes(view.screen)) $('#game').insertAdjacentHTML('beforeend','<div id="narrator-slot" class="narrator-slot narrator-page-slot"></div>');
   if(levelNotice) $('#game').insertAdjacentHTML('beforeend',renderLevelDialog());
@@ -284,7 +296,7 @@ const gearFor = unitId => (view.equipment??[]).filter(gear=>gear.equippedUnitId=
 const gearBonuses = gear => [gear.hpBonus?`${gear.hpBonus>0?'+':''}${gear.hpBonus} HP`:'',gear.manaBonus?`${gear.manaBonus>0?'+':''}${gear.manaBonus} MP`:'',gear.moveBonus?`${gear.moveBonus>0?'+':''}${gear.moveBonus} MOVE`:''].filter(Boolean).join(' · ') || 'No stat change';
 function activeQuest() {return (view.quests??[]).find(quest=>!quest.complete)??view.quests?.[0];}
 function questRows() {return (view.quests??[]).map(quest=>`<div class="quest-row${quest.complete?' complete':''}"><div><strong>${e(quest.label)}</strong><span>${quest.progress}/${quest.total}${quest.complete?' · Complete':''}</span></div><p>${e(quest.description)}</p><progress value="${quest.progress}" max="${quest.total}" aria-label="${e(quest.label)} progress"></progress></div>`).join('')||'<p class="small muted">Explore the passages and clear the next encounter.</p>';}
-function renderQuestTracker() {const quest=activeQuest();return `<button id="quest-button" class="quest-tracker"><span>QUEST</span> ${e(quest?.label||'Find the encounter door')} <b>${quest?quest.progress+'/'+quest.total:''}</b></button>`;}
+function renderQuestTracker() {const quest=activeQuest();if(view.scenario)return `<button id="scenario-objective-button" class="quest-tracker"><span>SCENARIO</span> ${e(view.scenario.objective)} <b>${view.scenario.progress??0}/${view.scenario.total??0}</b></button>`;return `<button id="quest-button" class="quest-tracker"><span>QUEST</span> ${e(quest?.label||'Find the encounter door')} <b>${quest?quest.progress+'/'+quest.total:''}</b></button>`;}
 function renderSafeRoomStations(focused,advisor) {
   return `<section class="safe-stations" aria-label="Safe-room stations"><div class="safe-station-floor" aria-hidden="true">${Array.from({length:9},(_,index)=>{const x=index%3,y=Math.floor(index/3);return `<img src="assets/room-kit/floors/stone-${index%2?'b':'a'}.png" style="left:calc(50% + ${(x-y)*58-66}px);top:${25+(x+y)*29}px" alt="">`;}).join('')}<img class="safe-torch torch-one" src="assets/room-kit/props/torch.png" alt=""><img class="safe-torch torch-two" src="assets/room-kit/props/torch.png" alt=""></div><button id="station-rest" class="safe-station rest-station">${portrait(advisor,'station-advisor')}<span>REST <small>Mordecai</small></span></button><button class="safe-station equipment-station" data-equipment="${e(focused.id)}"><img src="assets/room-kit/props/chest.png" alt=""><span>EQUIPMENT <small>Open shared gear</small></span></button><button class="safe-station skills-station" data-skills="${e(focused.id)}"><img src="assets/room-kit/props/lever.png" alt=""><span>SKILLS <small>Abilities & unlocks</small></span></button><button id="quick-enter" class="safe-station exit-station" ${view.partyCount!==view.partyCapacity?'disabled':''}><img src="assets/room-kit/doors/exit.png" alt=""><span>ENTER DUNGEON <small>${view.partyCount}/${view.partyCapacity} deployed</small></span></button></section>`;
 }
@@ -293,7 +305,7 @@ function renderCamp() {
   focusedRoster=focused?.id;
   const progression=view.progression;
   const advisor=view.roster.find(r=>r.deployable===false)??{id:'crawler.mordecai',label:'Mordecai',classId:'class.cleric'};
-  return `<section class="camp-screen safe-room" aria-labelledby="screen-title"><header class="safe-room-heading"><div><span class="section-label">MORDECAI’S SAFE ROOM</span><h1 id="screen-title">Rest. Equip. Prepare.</h1><p>A safe place between the cameras and the next fight.</p></div><div class="party-progression"><strong>PARTY LEVEL ${progression?.level??1}</strong><span>${progression?.xp??view.xp} XP${progression?.nextLevelXp?' / '+progression.nextLevelXp+' next level':''}</span><progress value="${progression?.xpIntoLevel??0}" max="${(progression?.xpIntoLevel??0)+(progression?.xpToNextLevel??1)||1}" aria-label="Party level progress"></progress></div></header>${renderSafeRoomStations(focused,advisor)}<div class="safe-room-layout"><aside class="safe-advisor panel"><div class="advisor-head">${portrait(advisor,'advisor-portrait')}<div><h2>Mordecai</h2><span>Safe-room advisor</span></div></div><p>${e(view.safeRoom?.description||'Catch your breath. Check your gear and skills before heading back into the dungeon.')}</p><button id="rest-button" class="primary" ${view.safeRoom?.available===false?'disabled':''}>${view.safeRoom?.rested?'Rest again':'Rest & restore HP / MP'}</button><small>${view.safeRoom?.rested?'Party rested. Equipment and skills are ready to change.':'Rest restores the party’s actual health and mana.'}</small><details class="safe-quests"><summary>Quest journal · ${e(activeQuest()?.label||'Explore the dungeon')} ${activeQuest()?activeQuest().progress+'/'+activeQuest().total:''}</summary>${questRows()}</details></aside><details class="safe-party" ${rosterExpanded?'open':''}><summary class="panel-head"><h2>Manage your crawlers</h2><span>${view.partyCount}/${view.partyCapacity} deployed · classes & stats</span></summary><div class="safe-roster-grid">${view.roster.filter(r=>r.deployable!==false).map(r=>`<article class="safe-crawler${r.selected?' deployed':''}${r.id===focusedRoster?' focused':''}" data-crawler-card="${e(r.id)}"><button class="safe-crawler-select" data-roster="${e(r.id)}" aria-pressed="${r.id===focusedRoster}">${portrait(r)}<span><strong>${e(r.label)}</strong><small>Level ${r.level??progression?.level??1} · ${e(classLabel(r.classId))}</small><span class="deployment-label">${r.selected?'DEPLOYED':'RESERVE'}</span></span></button><div class="safe-crawler-stats"><span>HP <b>${r.hp}/${r.maxHp}</b></span><span>MP <b>${r.energy??r.maxEnergy??'—'}/${r.maxEnergy??'—'}</b></span><span>MOVE <b>${r.move??'—'}</b></span><span>XP <b>${progression?.xp??view.xp}</b></span></div><div class="safe-crawler-gear">${gearFor(r.id).map(gear=>`<span>${e(gear.label)}</span>`).join('')||'<span>No equipment</span>'}</div><div class="safe-crawler-buttons"><button data-equipment="${e(r.id)}">Equipment</button><button data-skills="${e(r.id)}">Skills</button><button data-character-sheet="${e(r.id)}">Sheet</button></div></article>`).join('')}</div><section class="safe-loadout panel"><div><strong>${e(focused?.label)} · Class & deployment</strong><p>Character skills stay with their crawler. Classes add their own abilities.</p></div><label class="field" for="class-select">CLASS<select id="class-select">${view.classes.map(klass=>`<option value="${e(klass.id)}" ${klass.id===focused?.classId?'selected':''}>${e(klass.label)}</option>`).join('')}</select></label><button id="toggle-party">${focused?.selected?'Move to reserve':'Deploy crawler'}</button></section><details class="panel inventory-strip"><summary>Shared consumables · ${view.items.reduce((sum,item)=>sum+item.count,0)} charges</summary><div class="tags">${view.items.map(item=>`<span class="tag">${e(item.label)} ×${item.count}</span>`).join('')}</div></details></details></div>${renderCampModal()}</section>`;
+  return `<section class="camp-screen safe-room" aria-labelledby="screen-title"><header class="safe-room-heading"><div><span class="section-label">MORDECAI’S SAFE ROOM</span><h1 id="screen-title">Rest. Equip. Prepare.</h1><p>A safe place between the cameras and the next fight.</p></div><div class="party-progression"><strong>PARTY LEVEL ${progression?.level??1}</strong><span>${progression?.xp??view.xp} XP${progression?.nextLevelXp?' / '+progression.nextLevelXp+' next level':''}</span><progress value="${progression?.xpIntoLevel??0}" max="${(progression?.xpIntoLevel??0)+(progression?.xpToNextLevel??1)||1}" aria-label="Party level progress"></progress></div></header>${renderSafeRoomStations(focused,advisor)}<nav class="safe-activities" aria-label="Safe-room activities"><button id="open-development" ${view.development?'':'disabled'}>Stats · Practice · Craft · Loot</button><button id="open-scenarios" ${view.scenarios?.length?'':'disabled'}>Scenario expeditions</button></nav><div class="safe-room-layout"><aside class="safe-advisor panel"><div class="advisor-head">${portrait(advisor,'advisor-portrait')}<div><h2>Mordecai</h2><span>Safe-room advisor</span></div></div><p>${e(view.safeRoom?.description||'Catch your breath. Check your gear and skills before heading back into the dungeon.')}</p><button id="rest-button" class="primary" ${view.safeRoom?.available===false?'disabled':''}>${view.safeRoom?.rested?'Rest again':'Rest & restore HP / MP'}</button><small>${view.safeRoom?.rested?'Party rested. Equipment and skills are ready to change.':'Rest restores the party’s actual health and mana.'}</small><details class="safe-quests"><summary>Quest journal · ${e(activeQuest()?.label||'Explore the dungeon')} ${activeQuest()?activeQuest().progress+'/'+activeQuest().total:''}</summary>${questRows()}</details></aside><details class="safe-party" ${rosterExpanded?'open':''}><summary class="panel-head"><h2>Manage your crawlers</h2><span>${view.partyCount}/${view.partyCapacity} deployed · classes & stats</span></summary><div class="safe-roster-grid">${view.roster.filter(r=>r.deployable!==false).map(r=>`<article class="safe-crawler${r.selected?' deployed':''}${r.id===focusedRoster?' focused':''}" data-crawler-card="${e(r.id)}"><button class="safe-crawler-select" data-roster="${e(r.id)}" aria-pressed="${r.id===focusedRoster}">${portrait(r)}<span><strong>${e(r.label)}</strong><small>Level ${r.level??progression?.level??1} · ${e(classLabel(r.classId))}</small><span class="deployment-label">${r.selected?'DEPLOYED':'RESERVE'}</span></span></button><div class="safe-crawler-stats"><span>HP <b>${r.hp}/${r.maxHp}</b></span><span>MP <b>${r.energy??r.maxEnergy??'—'}/${r.maxEnergy??'—'}</b></span><span>MOVE <b>${r.move??'—'}</b></span><span>XP <b>${progression?.xp??view.xp}</b></span></div><div class="safe-crawler-gear">${gearFor(r.id).map(gear=>`<span>${e(gear.label)}</span>`).join('')||'<span>No equipment</span>'}</div><div class="safe-crawler-buttons"><button data-equipment="${e(r.id)}">Equipment</button><button data-skills="${e(r.id)}">Skills</button><button data-character-sheet="${e(r.id)}">Sheet</button></div></article>`).join('')}</div><section class="safe-loadout panel"><div><strong>${e(focused?.label)} · Class & deployment</strong><p>Character skills stay with their crawler. Classes add their own abilities.</p></div><label class="field" for="class-select">CLASS<select id="class-select">${view.classes.map(klass=>`<option value="${e(klass.id)}" ${klass.id===focused?.classId?'selected':''}>${e(klass.label)}</option>`).join('')}</select></label><button id="toggle-party">${focused?.selected?'Move to reserve':'Deploy crawler'}</button></section><details class="panel inventory-strip"><summary>Shared consumables · ${view.items.reduce((sum,item)=>sum+item.count,0)} charges</summary><div class="tags">${view.items.map(item=>`<span class="tag">${e(item.label)} ×${item.count}</span>`).join('')}</div></details></details></div>${renderCampModal()}</section>`;
 }
 function renderCampModal() {
   if(!campModal)return '';
@@ -405,14 +417,52 @@ function renderLog() {
 function renderSurvivors() {
   return `<div class="outcome-party">${view.roster.filter(r => r.selected).map(r => `<div class="survivor">${portrait(r)}<span><strong>${e(r.label)}</strong><small>${e(classLabel(r.classId))} · ${r.hp} / ${r.maxHp} HP</small></span></div>`).join('')}</div>`;
 }
+function renderScenarioOutcome(won) {
+  return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${won?'♜':'†'}</div><h2 id="screen-title">${e(view.scenario.label)} · ${won?'Cleared':'Defeated'}</h2><p>${e(view.scenario.objective)}</p><p>Your campaign checkpoint is preserved. Return to it or retry this standalone challenge.</p><div class="button-row"><button id="return-scenario" class="primary">Return to campaign</button><button id="retry-button">Retry scenario</button></div></div>${renderSurvivors()}${renderLog()}</section>`;
+}
 function renderVictory() {
+  if(view.scenario)return renderScenarioOutcome(true);
   return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="outcome-header"><div><h2 id="screen-title">Room cleared. Cameras rolling.</h2><p>${e(view.encounterName)} · Encounter ${view.encounterIndex + 1} complete</p></div><div class="xp-value">${view.xp} XP<small>TOTAL RUN EXPERIENCE</small></div></div><div class="reward-layout"><div><span class="section-label">${view.rewards.length ? 'PICK ONE SPONSOR REWARD' : 'SPONSOR REWARD CLAIMED'}</span><div class="reward-list">${view.rewards.map((r, i) => `<button data-reward="${e(r.id)}" class="reward-button" ${chosenReward ? 'disabled' : ''}><span class="reward-icon" aria-hidden="true">${['◇', '▱', '✦'][i % 3]}</span><span><strong>${e(r.label)}</strong><small>${e(r.description)}</small></span></button>`).join('') || '<div class="panel panel-body"><span class="tag good">DELIVERY RECEIVED</span><p class="small muted" style="margin-top:12px">Your sponsor reward is in the shared supplies. Ready for the next room.</p></div>'}</div></div><aside class="panel sponsor-copy"><h3>SPONSOR TRANSMISSION</h3><blockquote>“A surprising number of you are still alive. We’ve sent a little something.”</blockquote><p>${e(view.message || (view.rewards.length ? 'Choose a reward for your party, then head to camp before the next encounter.' : 'Delivery received. Continue when you’re ready.'))}</p><button id="continue-button" class="primary" ${view.rewards.length ? 'disabled' : ''}>${view.encounterIndex + 1 >= view.encounterCount ? 'Finish the floor' : 'Return to camp'} <span aria-hidden="true">→</span></button><p class="small">One reward per encounter. Your run saves automatically.</p></aside></div>${renderSurvivors()}${renderLog()}</section>`;
 }
 function renderEnding() {
+  if(view.scenario)return renderScenarioOutcome(false);
   const complete = view.screen === 'complete';
-  return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${complete ? '♜' : '†'}</div><h2 id="screen-title">${complete ? 'The floor is yours.' : 'The dungeon wins. For now.'}</h2><p>${complete ? `All three encounters cleared. Your crawlers earned ${view.xp} XP, exploited the elements, and made it back in one piece. The audience will want a sequel.` : 'Your deployed crawlers have fallen. Retry the encounter with the same starting party and supplies, or rebuild from the beginning.'}</p><div class="tags" style="justify-content:center"><span class="tag gold">${complete ? 'FLOOR 01 COMPLETE' : 'PARTY DEFEATED'}</span><span class="tag">${view.xp} XP EARNED</span></div><div class="button-row">${!complete ? '<button class="primary" id="retry-button">Retry encounter</button>' : ''}<button id="ending-new-run" ${complete ? 'class="primary"' : ''}>Start a new run</button></div><button class="quiet" id="ending-export">Export this run</button></div>${renderSurvivors()}${renderLog()}</section>`;
+  return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${complete ? '♜' : '†'}</div><h2 id="screen-title">${complete ? 'The floor is yours.' : 'The dungeon wins. For now.'}</h2><p>${complete ? `${view.customMap?'Your workshop room is clear.':'All three encounters cleared.'} Your crawlers earned ${view.xp} XP, exploited the elements, and made it back in one piece. The audience will want a sequel.` : 'Your deployed crawlers have fallen. Retry the encounter with the same starting party and supplies, or rebuild from the beginning.'}</p><div class="tags" style="justify-content:center"><span class="tag gold">${complete ? 'FLOOR 01 COMPLETE' : 'PARTY DEFEATED'}</span><span class="tag">${view.xp} XP EARNED</span></div><div class="button-row">${!complete ? '<button class="primary" id="retry-button">Retry encounter</button>' : '<button id="open-scenarios" class="primary">Play boss scenarios</button>'}<button id="ending-new-run" ${complete ? 'class="primary"' : ''}>Start a new run</button></div><button class="quiet" id="ending-export">Export this run</button></div>${renderSurvivors()}${renderLog()}</section>`;
+}
+function bindScenario(){
+  $('#open-scenarios')?.addEventListener('click',()=>{scenarioMenu=true;render();});
+  const close=()=>{scenarioMenu=false;render();$('#open-scenarios')?.focus();};
+  $('#close-scenarios')?.addEventListener('click',close);$('#done-scenarios')?.addEventListener('click',close);
+  if($('#scenario-dialog')){openDialog('#scenario-dialog');$('#scenario-dialog').addEventListener('cancel',event=>{event.preventDefault();close();});}
+  document.querySelectorAll('[data-scenario-briefing]').forEach(button=>button.addEventListener('click',()=>{scenarioBriefing=button.dataset.scenarioBriefing;render();$('#scenario-briefing')?.scrollIntoView({block:'nearest'});}));
+  $('#start-scenario')?.addEventListener('click',event=>{scenarioMenu=false;command('scenario_start',{targetId:event.currentTarget.dataset.scenarioId});});
+  $('#scenario-objective-button')?.addEventListener('click',()=>{scenarioDetails=true;render();});
+  const closeDetails=()=>{scenarioDetails=false;scenarioInteraction=null;render();$('#scenario-objective-button')?.focus();};
+  $('#close-scenario-objective')?.addEventListener('click',closeDetails);$('#done-scenario-objective')?.addEventListener('click',closeDetails);
+  if($('#scenario-objective-dialog')){openDialog('#scenario-objective-dialog');$('#scenario-objective-dialog').addEventListener('cancel',event=>{event.preventDefault();closeDetails();});}
+  $('#return-scenario')?.addEventListener('click',()=>{scenarioDetails=false;command('scenario_return');});
+  document.querySelectorAll('[data-scenario-interact]').forEach(button=>button.addEventListener('click',()=>{scenarioInteraction=button.dataset.scenarioInteract;render();$('#scenario-interaction-confirm')?.scrollIntoView({block:'nearest'});}));
+  $('#cancel-scenario-interaction')?.addEventListener('click',()=>{scenarioInteraction=null;render();});
+  $('#confirm-scenario-interaction')?.addEventListener('click',event=>{const targetId=event.currentTarget.dataset.target;scenarioDetails=false;scenarioInteraction=null;command('scenario_interact',{unitId:view.selectedUnitId,targetId});});
+}
+function bindDevelopment(){
+  $('#open-development')?.addEventListener('click',()=>{developmentTab='stats';render();});
+  const close=async()=>{if(view.development?.canConfirm)await command('cancel_development',{}, {save:false});developmentTab=null;developmentPending=null;render();$('#open-development')?.focus();};
+  $('#close-development')?.addEventListener('click',close);$('#done-development')?.addEventListener('click',close);
+  if($('#development-dialog')){openDialog('#development-dialog');$('#development-dialog').addEventListener('cancel',event=>{event.preventDefault();close();});}
+  $('[id="development-crawler"]')?.addEventListener('change',event=>{developmentUnit=event.target.value;render();});
+  document.querySelectorAll('[data-development-tab]').forEach(button=>button.addEventListener('click',async()=>{if(view.development?.canConfirm)await command('cancel_development',{}, {save:false});developmentTab=button.dataset.developmentTab;render();}));
+  document.querySelectorAll('[data-allocate-stat]').forEach(button=>button.addEventListener('click',()=>command('preview_allocate',{unitId:$('#development-crawler').value,statId:button.dataset.allocateStat,points:1},{save:false})));
+  $('#cancel-allocation')?.addEventListener('click',()=>command('cancel_development',{}, {save:false}));
+  $('#confirm-allocation')?.addEventListener('click',()=>command('confirm_development'));
+  document.querySelectorAll('[data-craft-recipe],[data-loot-box]').forEach(button=>button.addEventListener('click',()=>{developmentPending=button.dataset.craftRecipe?{type:'craft',id:button.dataset.craftRecipe}:{type:'loot',id:button.dataset.lootBox};render();}));
+  const closeConfirmation=()=>{developmentPending=null;render();};
+  for(const id of ['close-development-confirm','cancel-development-operation'])$('#'+id)?.addEventListener('click',closeConfirmation);
+  if($('#development-confirm-dialog')){openDialog('#development-confirm-dialog');$('#development-confirm-dialog').addEventListener('cancel',event=>{event.preventDefault();closeConfirmation();});}
+  $('#confirm-development-operation')?.addEventListener('click',()=>{const pending=developmentPending;developmentPending=null;command(pending.type==='craft'?'craft':'open_loot_box',pending.type==='craft'?{recipeId:pending.id}:{lootBoxId:pending.id});});
 }
 function bindScreen() {
+  bindDevelopment();bindScenario();
   const openSheet=(id,from)=>{characterSheetId=id;sheetReturn=from;actionChooser=false;render();};
   $('#open-character-sheet')?.addEventListener('click',()=>openSheet(view.selectedUnitId,'#open-character-sheet'));
   document.querySelectorAll('[data-character-sheet]').forEach(button=>button.addEventListener('click',()=>openSheet(button.dataset.characterSheet,`[data-character-sheet="${button.dataset.characterSheet}"]`)));
@@ -652,6 +702,7 @@ async function boot() {
       // The camp gateway is the first playable screen; help remains available on demand.
     }
     $('#game').setAttribute('aria-busy', 'false');
+    if(new URLSearchParams(location.search).get('workshop')==='1'){try{const storedMap=localStorage.getItem('dct.workshop-map');if(!storedMap)throw new Error('No workshop map is stored.');await command('import_map',{customMap:JSON.parse(storedMap)});}catch(error){toast(`Workshop map could not be loaded: ${error.message}`,'error');}}
     window.dungeon = { get scene(){return battlefield;}, cellToScreen:(x,y)=>battlefield?.cellToScreen(x,y), command, getView: () => view, getSave: () => call('GetSave'), loadSave: loadSerializedSave };
   } catch (error) {
     $('#game').innerHTML = `<section class="fatal"><h1>The dungeon couldn’t load.</h1><p>The C# runtime or game content did not finish loading. Check your connection and reload the page.</p><pre>${e(error.message)}</pre><button class="primary" onclick="location.reload()">Try again</button></section>`;
@@ -664,6 +715,13 @@ $('#save-button').addEventListener('click', () => { $('#save-error').textContent
 $('#begin-button').addEventListener('click', () => { closeDialog('#welcome-dialog'); openDialog('#help-dialog'); });
 document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeDialog(`#${b.dataset.close}`)));
 $('#export-button').addEventListener('click', exportSave);
+$('#import-map-button').addEventListener('click',()=>$('#import-map-file').click());
+$('#import-map-file').addEventListener('change',async event=>{
+ const file=event.target.files[0];if(!file)return;
+ try{if(file.size>2000000)throw new Error('Map file exceeds 2 MB.');const customMap=JSON.parse(await file.text());const previousMap=JSON.stringify(view.customMap);await command('import_map',{customMap});if(view.customMap&&JSON.stringify(view.customMap)!==previousMap)closeDialog('#save-dialog');}
+ catch(error){toast(`Map could not be loaded: ${error.message}`,'error');}
+ event.target.value='';
+});
 $('#import-button').addEventListener('click', () => $('#import-file').click());
 $('#import-file').addEventListener('change', async event => {
   const file = event.target.files[0];

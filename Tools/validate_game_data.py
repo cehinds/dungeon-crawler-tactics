@@ -37,6 +37,53 @@ def validate_game(data, content):
                 ref(mode['rosterId'], 'roster', name+'.rosterId')
             if name == 'forms' and not mode.get('rosterId'):
                 errors.append('forms: require an explicit rosterId')
+    development = data.get('development', {})
+    stats = development.get('stats', [])
+    unique(stats, 'id', 'development.stats')
+    for stat in stats:
+        if not any(stat[k] for k in ('hpPerPoint', 'manaPerPoint', 'moveEvery', 'damageEvery', 'healEvery')):
+            errors.append('development.stats: each stat needs an actual effect')
+    practice_thresholds = development.get('practice', {}).get('useThresholds', [0])
+    if practice_thresholds[0] != 0 or any(a >= b for a, b in zip(practice_thresholds, practice_thresholds[1:])):
+        errors.append('development.practice.useThresholds: must start at zero and increase strictly')
+    achievement_ids = {'achievement.first_move', 'achievement.first_reaction', 'achievement.first_form', 'achievement.first_victory', 'achievement.first_level'}
+    for collection in ('recipes', 'lootBoxes'):
+        records = development.get(collection, [])
+        unique(records, 'id', 'development.' + collection)
+        for record in records:
+            for key in ('ingredients', 'outputs', 'rewards'):
+                entries = record.get(key, [])
+                unique(entries, 'itemId', 'development.' + collection + '.' + key)
+                for entry in entries:
+                    ref(entry['itemId'], 'items', 'development.' + collection + '.' + key)
+            if collection == 'lootBoxes':
+                if record['achievementId'] and record['achievementId'] not in achievement_ids:
+                    errors.append('development.lootBoxes: unknown achievementId')
+                if bool(record['achievementId']) == record['fromVictory']:
+                    errors.append('development.lootBoxes: reward needs exactly one achievement or victory source')
+    unique(data.get('scenarios', []), 'id', 'scenarios')
+    for scenario in data.get('scenarios', []):
+        room = scenario['encounter']
+        enemy_ids = {e['id'] for e in room['enemies']}
+        if scenario['bossId'] not in enemy_ids:
+            errors.append('scenarios: unknown bossId')
+        if not set(scenario['minionIds']) <= enemy_ids or scenario['bossId'] in scenario['minionIds']:
+            errors.append('scenarios: invalid minion IDs')
+        if scenario['kind'] == 'hoarder' and scenario['minionCap'] > len(scenario['minionIds']):
+            errors.append('scenarios: minion cap exceeds authored minions')
+        unique(scenario['interactables'], 'id', 'scenarios.interactables')
+        positions = set()
+        for obj in scenario['interactables']:
+            xy = obj['x'], obj['y']
+            if not (xy[0] < room['width'] and xy[1] < room['height']) or xy in positions:
+                errors.append('scenarios.interactables: outside board or duplicate position')
+            positions.add(xy)
+        route = [(c['x'], c['y']) for c in scenario['route']]
+        if any(x >= room['width'] or y >= room['height'] for x, y in route):
+            errors.append('scenarios.route: outside board')
+        if scenario['kind'] == 'swine':
+            if len(route) < 4 or len(set(route)) != len(route) or any(abs(a[0]-b[0])+abs(a[1]-b[1]) != 1 for a,b in zip(route, route[1:]+route[:1])):
+                errors.append('scenarios.route: must be a unique cardinal closed loop')
     progression = data['progression']
     thresholds = progression['xpThresholds']
     if not thresholds or thresholds[0] != 0 or any(a >= b for a, b in zip(thresholds, thresholds[1:])):
@@ -96,32 +143,34 @@ def validate_game(data, content):
         if rule.get('occupantTag'):
             ref(rule['occupantTag'], 'tags', f'tagRules.{i}.occupantTag')
     unique([e['exploration'] for e in data['encounters']], 'id', 'exploration')
-    for i, encounter in enumerate(data['encounters']):
-        base = f'encounters.{i}'
-        m = encounter['exploration']
-        unique(m['points'], 'id', base+'.exploration.points')
-        walls = {(c['x'], c['y']) for c in m['walls']}
-        inside = lambda xy: 0 <= xy[0] < m['width'] and 0 <= xy[1] < m['height']
-        start = (m['startX'], m['startY'])
-        if len(walls) != len(m['walls']) or any(not inside(c) for c in walls) or not inside(start) or start in walls:
-            errors.append(base+': invalid exploration walls/start')
-        reached = {start}; queue = [start]
-        for x,y in queue:
-            for c in ((x,y-1),(x-1,y),(x+1,y),(x,y+1)):
-                if inside(c) and c not in walls and c not in reached:
-                    reached.add(c); queue.append(c)
-        positions = set()
-        for p in m['points']:
-            xy = p['x'],p['y']
-            if xy not in reached or xy in positions:
-                errors.append(base+': unreachable/duplicate exploration discovery')
-            positions.add(xy)
-            if p['kind'] == 'cache':
-                ref(p['itemId'], 'items', base+'.exploration.points')
-                if p['count'] <= 0: errors.append(base+': cache must grant supplies')
-            elif p['itemId'] or p['count']: errors.append(base+': only caches grant supplies')
-        if sum(p['kind']=='encounter' for p in m['points']) != 1:
-            errors.append(base+': exploration requires one encounter door')
+    rooms = [(f'encounters.{i}', e) for i, e in enumerate(data['encounters'])]
+    rooms += [(f'scenarios.{i}.encounter', s['encounter']) for i, s in enumerate(data.get('scenarios', []))]
+    for base, encounter in rooms:
+        if encounter.get('exploration'):
+            m = encounter['exploration']
+            unique(m['points'], 'id', base+'.exploration.points')
+            walls = {(c['x'], c['y']) for c in m['walls']}
+            inside = lambda xy: 0 <= xy[0] < m['width'] and 0 <= xy[1] < m['height']
+            start = (m['startX'], m['startY'])
+            if len(walls) != len(m['walls']) or any(not inside(c) for c in walls) or not inside(start) or start in walls:
+                errors.append(base+': invalid exploration walls/start')
+            reached = {start}; queue = [start]
+            for x,y in queue:
+                for c in ((x,y-1),(x-1,y),(x+1,y),(x,y+1)):
+                    if inside(c) and c not in walls and c not in reached:
+                        reached.add(c); queue.append(c)
+            positions = set()
+            for p in m['points']:
+                xy = p['x'],p['y']
+                if xy not in reached or xy in positions:
+                    errors.append(base+': unreachable/duplicate exploration discovery')
+                positions.add(xy)
+                if p['kind'] == 'cache':
+                    ref(p['itemId'], 'items', base+'.exploration.points')
+                    if p['count'] <= 0: errors.append(base+': cache must grant supplies')
+                elif p['itemId'] or p['count']: errors.append(base+': only caches grant supplies')
+            if sum(p['kind']=='encounter' for p in m['points']) != 1:
+                errors.append(base+': exploration requires one encounter door')
 
         if len(encounter['playerSpawns']) != data['partySize']:
             errors.append(f'{base}.playerSpawns: must match partySize')

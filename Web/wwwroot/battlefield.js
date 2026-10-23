@@ -17,6 +17,14 @@ const roomReady = fetch('assets/room-kit/manifest.json').then(r=>r.json()).then(
 const legacyImages = {};
 let spriteFrames = {};
 const directionalArt = {};
+const bossArt = {};
+const scenarioArt = {};
+const scenarioArtReady=fetch('assets/scenario-props/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(Object.entries(manifest.sprites??{}).map(([key,definition])=>new Promise(resolve=>{
+  const image=new Image();image.onload=()=>{scenarioArt[key]={...definition,image};if(key==='scatterer')bossArt.scatterer={...definition,image};resolve();};image.onerror=resolve;image.src='assets/scenario-props/'+definition.file;
+})))).catch(()=>{});
+const bossReady=fetch('assets/bosses/manifest.json').then(r=>r.json()).then(manifest=>Promise.all(Object.entries(manifest.sprites??{}).map(([key,definition])=>new Promise(resolve=>{
+  const image=new Image();image.onload=()=>{bossArt['boss-'+key]={...definition,image};resolve();};image.onerror=resolve;image.src='assets/bosses/'+definition.file;
+})))).catch(()=>{});
 const directionalReady = fetch('assets/directional/manifest.json').then(r=>r.json()).then(async data=>{
   await Promise.all(Object.entries(data.characters??{}).map(([key,definition])=>new Promise(resolve=>{
     const image=new Image(); image.onload=()=>{directionalArt[key]={...definition,image};resolve();}; image.onerror=resolve;
@@ -29,7 +37,7 @@ const imageLoads = ['terrain','characters','enemies','ui','effects','mongo'].map
   image.onerror = resolve;
   image.src = ROOT + name + '.png';
 }));
-const ready = Promise.all([roomReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
+const ready = Promise.all([scenarioArtReady,bossReady,roomReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
   fetch(ROOT+file).then(r=>r.json()).then(data=>Object.assign(spriteFrames,data)).catch(()=>{}))]);
 
 export function createBattlefield(canvas, {onCell, onHover} = {}) {
@@ -143,13 +151,20 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   }
   // Every component uses the manifest's grid-center anchor at its native scale.
   // Upright art remains upright; camera rotation changes world projection, never sprite pixels.
-  function component(id,x,y,alpha=1) {
-    const variantId=rotation%2?id.replace(/-ne$/, '-TEMP').replace(/-nw$/, '-ne').replace(/-TEMP$/, '-nw'):id;
+  function component(id,x,y,alpha=1,pieceRotation=0) {
+    const orientation=(rotation+pieceRotation)%4;
+    if(id?.startsWith('scenario.')){
+      const art=scenarioArt[id.slice(9)];if(!art)return;
+      const p=project(x,y),fw=art.frameWidth??art.image.width,fh=art.frameHeight??art.image.height;
+      context.save();context.globalAlpha=alpha;context.translate(p.x,p.y);if(orientation>=2)context.scale(-1,1);
+      context.drawImage(art.image,0,0,fw,fh,-(art.anchorX??fw/2),-(art.anchorY??fh*.85),fw,fh);context.restore();return;
+    }
+    const variantId=orientation%2?id.replace(/-ne$/, '-TEMP').replace(/-nw$/, '-ne').replace(/-TEMP$/, '-nw'):id;
     const asset=roomArt.get(variantId)??roomArt.get(id);if(!asset)return;
     const p=project(x,y);context.save();context.globalAlpha=alpha;context.translate(p.x,p.y);
     if(['floor','surface'].includes(asset.layer)){
-      if(rotation===1)context.transform(0,.5,-2,0,0,0);else if(rotation===2)context.scale(-1,-1);else if(rotation===3)context.transform(0,-.5,2,0,0,0);
-    }else if(rotation>=2&&!asset.tags.includes('wall')&&!asset.tags.includes('door'))context.scale(-1,1);
+      if(orientation===1)context.transform(0,.5,-2,0,0,0);else if(orientation===2)context.scale(-1,-1);else if(orientation===3)context.transform(0,-.5,2,0,0,0);
+    }else if(orientation>=2&&!asset.tags.includes('wall')&&!asset.tags.includes('door'))context.scale(-1,1);
     context.drawImage(asset.image,-asset.anchor.x,-asset.anchor.y,asset.width,asset.height);
     context.restore();
   }
@@ -193,7 +208,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const legacyFrame=spriteFrames[atlasName]?.frames?.[key]?.[pose];
     const useDirectional=directionalFrame&&(!actionPose||!legacyFrame||screenFacing(unit.id)!=='se');
     const frame=useDirectional?directionalFrame:legacyFrame;
-    const size=useDirectional ? directional.bodyHeight ?? frame.drawHeight : frame?.drawHeight ?? (key==='boss'?148:100);
+    const boss=bossArt[key];
+    const size=boss?boss.bodyHeight??168:useDirectional ? directional.bodyHeight ?? frame.drawHeight : frame?.drawHeight ?? (key==='boss'?148:100);
     diamond(unit.x,unit.y,{stroke:unit.team==='enemy'?hostile:friendly,fill:unit.team==='enemy'?'#c12c242b':'#269ed321',weight:selected?3:1.5,inset:23});
     if(selected) diamond(unit.x,unit.y,{stroke:'#fff1b2',weight:2,inset:19});
     context.globalAlpha=unit.acted && unit.team==='player'?.63:1;
@@ -207,7 +223,12 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       const reach=reduced.matches?0:Math.sin(animation.progress*Math.PI)*9;
       p.x+=(direction.x-direction.y)*reach;p.y+=(direction.x+direction.y)*reach*.5;
     }
-    if(frame&&image) {
+    if(boss){
+      const fw=boss.frameWidth??192,fh=boss.frameHeight??192;
+      const column=actor&&current?.type==='attack'?3:walking?1+Math.floor(time/110)%2:0;
+      const ratio=(boss.bodyHeight??168)/(boss.anchorY??184);
+      context.drawImage(boss.image,column*fw,0,fw,fh,p.x-(boss.anchorX??96)*ratio,p.y-(boss.anchorY??184)*ratio,fw*ratio,fh*ratio);
+    } else if(frame&&image) {
       const dw=frame.drawWidth*enlarged,dh=frame.drawHeight*enlarged;
       context.drawImage(image,frame.x,frame.y,frame.width,frame.height,p.x-dw*frame.anchorX,p.y-dh*frame.anchorY,dw,dh);
     } else if(!enemy && !(key in rowFor)) {
@@ -223,6 +244,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(unit.acted && !enemy)text('DONE',p.x,p.y+14,'#a4b1bd',10);
     if(hover?.x===Math.round(unit.x)&&hover?.y===Math.round(unit.y)) text(`${unit.label} ${unit.hp}/${unit.maxHp}`,p.x,healthY-13,enemy?'#ffb3a3':'#e3f5ff',13);
     const tags=unit.tags??[];
+    if((view.scenario?.carryingUnitIds??[]).includes(unit.id))text('CARRYING PART',p.x,p.y-100,'#ffe6a0',11);
     if(tags.includes('status.wet')) text('WET',p.x+37,p.y-48,'#84e8ff',11);
     if(tags.includes('status.frozen')) text('FROZEN',p.x,p.y-70,'#b3faff',11);
     if(tags.includes('status.shocked')) text('SHOCK',p.x+34,p.y-35,'#d8b6ff',11);
@@ -274,6 +296,34 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const previewTarget=visualUnits.find(u=>u.id===options.targetId)??visualTiles.find(t=>t.id===options.targetId);
     if(previewTarget)diamond(previewTarget.x,previewTarget.y,{stroke:'#ffc16b',fill:'#ffc16b30',weight:3,inset:8});
   }
+  function scenarioObject(item) {
+    const p=project(item.x,item.y),state=view.scenario;
+    const kind={garbage:'garbage',cover:'bench',parts:'parts',barrier:'barrier',helper:'helper'}[item.action];
+    const built=item.action!=='barrier'||item.progress>0;
+    diamond(item.x,item.y,{stroke:item.enabled?'#ffe3a0':'#8d9aab',fill:item.action==='barrier'?'#e9ac4920':'#71849a14',weight:item.enabled?2:1,inset:8});
+    const art=scenarioArt[kind];
+    if(built&&art){
+      const fw=art.frameWidth??art.image.width,fh=art.frameHeight??art.image.height;
+      const heightScale=(item.action==='cover'&&item.used) ? .68 : 1;
+      context.drawImage(art.image,0,0,fw,fh,p.x-(art.anchorX??fw/2),p.y-(art.anchorY??fh*.85)*heightScale,fw,fh*heightScale);
+    }else if(built&&item.action==='helper'){
+      for(let i=0;i<2;i++){const x=p.x-12+i*24;context.fillStyle=i<(state.helpers??0)?'#b4e0bc':'#566676';context.beginPath();context.arc(x,p.y-33,6,0,Math.PI*2);context.fill();context.fillRect(x-6,p.y-24,12,19);}
+    }else if(built){
+      component({garbage:'rubble',cover:'crate',parts:'lever',barrier:'wall-ne',helper:'torch'}[item.action]??'crate',item.x,item.y);
+      if(item.action==='garbage'){component('barrel',item.x-.18,item.y+.16);component('rubble',item.x+.22,item.y+.1);}
+    }
+    let caption=item.label,color=item.enabled?'#ffe3a0':'#c7d1db';
+    if(item.action==='barrier'){
+      const progress=item.progress??0,total=item.total??1;
+      caption=`${item.label} ${progress}/${total} · ${state.barrierHp??0} HP`;
+      color=progress>=total?'#9ff0bd':progress?'#ffcf88':'#adbdcd';
+      const y=p.y+(built?15:0);context.fillStyle='#0b1520';context.fillRect(p.x-32,y,64,5);context.fillStyle=color;context.fillRect(p.x-31,y+1,62*Math.min(1,progress/total),3);
+    }else if(item.action==='parts')caption=`${item.label} · PICK UP`;
+    else if(item.action==='helper')caption=`${item.label} · ${state.helpers??0} ACTIVE`;
+    else if(item.action==='cover'){caption=`${item.label} · ${item.used?'ACTIVE COVER':'TOPPLE FOR COVER'}`;if(item.used)color='#a3e8c0';}
+    else caption=`${item.label} · ${item.hp}/${item.maxHp}`;
+    text(caption,p.x,p.y+(built?29:-22),color,11);
+  }
   function effectSprite(type,x,y,age,duration) {
     if(age<0)return;
     const p=project(x,y),row=type==='fire'?0:type==='explosion'?2:1;
@@ -300,16 +350,25 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       if(known)floor(tile.x,tile.y,terrain);
       else if(tile.reachable)floor(tile.x,tile.y,0,.22);
     }
+    const placements=!explore?(view.customMap?.placements??[]):[];
+    for(const piece of placements)if(['floor','surface'].includes(piece.layer)||piece.assetId==='moss'){
+      const tags=tiles.find(t=>t.x===piece.x&&t.y===piece.y)?.tags??[];
+      if(piece.assetId.startsWith('oil-')&&!tags.includes('surface.oil')||piece.assetId.startsWith('water-')&&!tags.includes('surface.water'))continue;
+      component(piece.assetId,piece.x,piece.y,1,piece.rotation??0);
+    }
     for(const tile of tiles)if(!explore||tile.revealed){
       if((tile.tags??[]).includes('surface.oil'))component('oil-overlay',tile.x,tile.y);
       if((tile.tags??[]).includes('surface.water'))component('water-overlay',tile.x,tile.y);
     }
+    const decorations=!explore?(view.scenario?.decorations??[]):[];
+    const groundDecoration=piece=>['floor','surface','ground'].includes(piece.layer)||['moss','grate'].includes(piece.assetId);
+    for(const piece of decorations)if(groundDecoration(piece))component(piece.assetId,piece.x,piece.y,1,piece.rotation??0);
     highlights();
     const drawables=[];
     // Border components sit on the half-cell edge of the floor, never a full
     // unsupported cell outside it. Consecutive wall segments overlap their end
     // stones, giving a continuous run instead of detached decorative pillars.
-    if(!explore) {
+    if(!explore&&!placements.length) {
       const farY=rotation===1||rotation===2?map.height-.5:-.5;
       const farX=rotation===2||rotation===3?map.width-.5:-.5;
       for(let x=0;x<map.width;x++)drawables.push({depth:depth(x,farY),draw:()=>component('wall-ne',x,farY)});
@@ -317,13 +376,22 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     }
     for(const tile of tiles) {
       if(explore&&!tile.revealed)continue;
-      if(tile.blocked)drawables.push({depth:depth(tile.x,tile.y),draw:()=>{
+      if(tile.blocked&&!placements.some(p=>p.x===tile.x&&p.y===tile.y&&p.blocksMovement)&&!decorations.some(p=>p.x===tile.x&&p.y===tile.y&&p.layer==='prop'))drawables.push({depth:depth(tile.x,tile.y),draw:()=>{
         const wall=project(tile.x,tile.y);
         const nearby=visualUnits.some(u=>{const p=project(u.x,u.y);return u.hp>0&&p.y>=wall.y&&p.y-wall.y<70&&Math.abs(p.x-wall.x)<90;});
         const crate=(tile.x+tile.y)%5===0;
         prop(tile.x,tile.y,crate?8:(tile.x+tile.y)%6===0?6:(tile.x*7+tile.y)%5===0?5:4,crate?95:128,nearby?.66:1);
       }});
 
+    }
+    for(const piece of placements)if(!['floor','surface'].includes(piece.layer)&&!['moss','fire-overlay'].includes(piece.assetId))drawables.push({depth:depth(piece.x,piece.y),draw:()=>component(piece.assetId,piece.x,piece.y,1,piece.rotation??0)});
+    const intent=!explore?view.scenario?.intent:null;
+    if(intent)for(const cell of intent.cells??[])diamond(cell.x,cell.y,{stroke:'#ff9855',fill:'#ff4b293e',weight:3,inset:3});
+    for(const piece of decorations)if(!groundDecoration(piece))drawables.push({depth:depth(piece.x,piece.y),draw:()=>component(piece.assetId,piece.x,piece.y,1,piece.rotation??0)});
+    for(const item of !explore?view.scenario?.interactables??[]:[]){
+      // Cleared piles and destroyed gym cover must disappear from the board.
+      if(item.action==='garbage'&&item.hp<=0||item.action==='cover'&&item.destroyed)continue;
+      drawables.push({depth:depth(item.x,item.y)+.05,draw:()=>scenarioObject(item)});
     }
     if(explore) {
       for(const point of map.points??[]) {
@@ -348,6 +416,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     drawables.sort((a,b)=>a.depth-b.depth).forEach(item=>item.draw());
     // Hazard flames and transient feedback always composite above the entire scene.
     for(const tile of tiles)if((!explore||tile.revealed)&&(tile.tags??[]).includes('surface.burning'))effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800);
+    if(intent?.cells?.length){const cell=intent.cells[Math.floor(intent.cells.length/2)],p=project(cell.x,cell.y);text(`${intent.label} · ${intent.damage} DMG`,p.x,p.y-85,'#ffc898',14);}
     effects=effects.filter(e=>time-e.started<e.duration);
     for(const e of effects)effectSprite(e.type,e.x,e.y,time-e.started,e.duration);
     missiles=missiles.filter(m=>time-m.started<m.duration);
@@ -395,6 +464,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       if(entity)entity.tags=event.type==='tag_add'?[...new Set([...(entity.tags??[]),event.tag])]:(entity.tags??[]).filter(t=>t!==event.tag);
       if(event.type==='tag_add')float(short(event.tag).toUpperCase(),target,'#bce8ff');
     }
+    if(event.type==='scenario_intent')float('DANGER: '+short(event.tag||'INCOMING').toUpperCase(),actor,'#ffaf70');
+    if(event.type==='projectile'){missiles.push({fromX:event.fromX,fromY:event.fromY,toX:event.toX,toY:event.toY,started:performance.now(),duration:380});effects.push({type:'explosion',x:event.toX,y:event.toY,started:performance.now()+300,duration:420});}
     if(event.type==='phase')canvas.dispatchEvent(new CustomEvent('battlephase',{detail:{phase:event.tag}}));
     const started=performance.now();
     return new Promise(resolve=>{

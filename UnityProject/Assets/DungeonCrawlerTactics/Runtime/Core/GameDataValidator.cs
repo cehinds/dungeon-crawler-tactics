@@ -7,6 +7,7 @@ namespace DungeonCrawlerTactics
     {
         public static void Validate(GameData data, Catalog catalog)
         {
+            ValidateDevelopmentDefinitions(data, catalog);
             Need(data.schemaVersion == 1 && !string.IsNullOrEmpty(data.contentVersion), "Expected game schemaVersion 1 and a content version.");
             Need(data.compatibleContentVersions != null, "Compatible versions cannot be null.");
             Need(data.roster != null && data.classStats != null && data.encounters != null && data.startingInventory != null && data.rewards != null && data.tagRules != null, "Game arrays cannot be null.");
@@ -108,11 +109,46 @@ namespace DungeonCrawlerTactics
             HashSet<string> rules = new HashSet<string>();
             foreach (TagRuleDef rule in data.tagRules) Need(rule != null && catalog.HasTag(rule.tag) && rules.Add(rule.tag) && rule.durationRounds >= 0 && rule.durationRounds <= 100 && rule.entryDamage >= 0 && rule.entryDamage <= 10000 && rule.turnDamage >= 0 && rule.turnDamage <= 10000 && rule.movePenalty >= 0 && rule.movePenalty <= 100 && rule.energyPenalty >= 0 && rule.energyPenalty <= 100, "Invalid tag rule.");
             foreach (TagRuleDef rule in data.tagRules) Need(string.IsNullOrEmpty(rule.occupantTag) || catalog.HasTag(rule.occupantTag), "Unknown occupant tag.");
+            ScenarioDefinitionValidator.Validate(data, catalog);
         }
         private static bool StableId(string id) { return id != null && System.Text.RegularExpressions.Regex.IsMatch(id, @"^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$"); }
         private static bool Inside(int x, int y, EncounterDef encounter) { return x >= 0 && y >= 0 && x < encounter.width && y < encounter.height; }
         private static string Key(int x, int y) { return x + "," + y; }
         private static void Tags(string[] tags, Catalog catalog) { Need(tags != null, "Null authored tags."); HashSet<string> seen = new HashSet<string>(); foreach (string tag in tags) Need(catalog.HasTag(tag) && seen.Add(tag), "Unknown or duplicate authored tag."); }
+        private static void ValidateDevelopmentDefinitions(GameData data, Catalog catalog)
+        {
+            DevelopmentDef config = data.development;
+            Need(config != null && config.stats != null && config.practice != null && config.recipes != null && config.lootBoxes != null && config.pointsPerLevel >= 0 && config.pointsPerLevel <= 3, "Invalid development configuration.");
+            Need(config.stats.Length == 0 || config.stats.Length == 5, "Development defines exactly five stats.");
+            HashSet<string> ids = new HashSet<string>();
+            foreach (StatDefinition stat in config.stats)
+            {
+                Need(stat != null && StableId(stat.id) && ids.Add(stat.id) && !string.IsNullOrEmpty(stat.label) && !string.IsNullOrEmpty(stat.description), "Invalid stat definition.");
+                Need(stat.hpPerPoint >= 0 && stat.hpPerPoint <= 5 && stat.manaPerPoint >= 0 && stat.manaPerPoint <= 3 && stat.moveEvery >= 0 && stat.moveEvery <= 10 && stat.damageEvery >= 0 && stat.damageEvery <= 10 && stat.healEvery >= 0 && stat.healEvery <= 10, "Invalid stat formula.");
+                Need(stat.hpPerPoint + stat.manaPerPoint + stat.moveEvery + stat.damageEvery + stat.healEvery > 0, "A stat must have a real effect.");
+            }
+            SkillProgressionDef practice = config.practice; Need(practice.useThresholds != null && practice.useThresholds.Length > 0 && practice.useThresholds.Length <= 3 && practice.useThresholds[0] == 0, "Invalid skill rank thresholds.");
+            for (int i = 1; i < practice.useThresholds.Length; i++) Need(practice.useThresholds[i] > practice.useThresholds[i - 1] && practice.useThresholds[i] <= 100000, "Skill thresholds must increase.");
+            Need(practice.damagePerRank >= 0 && practice.damagePerRank <= 1 && practice.healPerRank >= 0 && practice.healPerRank <= 1 && practice.costReductionPerRank >= 0 && practice.costReductionPerRank <= 1, "Skill bonuses exceed bounded adaptation.");
+            Need(config.recipes.Length <= 32 && config.lootBoxes.Length <= 16, "Too many recipes or loot definitions."); ids.Clear();
+            foreach (RecipeDef recipe in config.recipes)
+            {
+                Need(recipe != null && StableId(recipe.id) && ids.Add(recipe.id) && !string.IsNullOrEmpty(recipe.label) && !string.IsNullOrEmpty(recipe.description), "Invalid recipe.");
+                ValidateQuantities(recipe.ingredients, catalog); ValidateQuantities(recipe.outputs, catalog);
+            }
+            ids.Clear(); string[] achievements = { "achievement.first_move", "achievement.first_reaction", "achievement.first_form", "achievement.first_victory", "achievement.first_level" };
+            foreach (LootBoxDef box in config.lootBoxes)
+            {
+                Need(box != null && StableId(box.id) && ids.Add(box.id) && !string.IsNullOrEmpty(box.label) && !string.IsNullOrEmpty(box.description), "Invalid loot definition.");
+                Need(box.fromVictory != !string.IsNullOrEmpty(box.achievementId) && (string.IsNullOrEmpty(box.achievementId) || Array.IndexOf(achievements, box.achievementId) >= 0), "A loot box needs one known earning source.");
+                ValidateQuantities(box.rewards, catalog);
+            }
+        }
+        private static void ValidateQuantities(ItemQuantity[] quantities, Catalog catalog)
+        {
+            Need(quantities != null && quantities.Length > 0 && quantities.Length <= 8, "Invalid item quantities."); HashSet<string> ids = new HashSet<string>();
+            foreach (ItemQuantity row in quantities) Need(row != null && row.itemId != null && catalog.Items.ContainsKey(row.itemId) && ids.Add(row.itemId) && row.count > 0 && row.count <= 100, "Unknown, duplicate or invalid item quantity.");
+        }
         private static void Need(bool valid, string message) { if (!valid) throw new ArgumentException(message); }
     }
 }
