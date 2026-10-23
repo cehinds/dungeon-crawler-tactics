@@ -27,6 +27,17 @@ namespace DungeonCrawlerTactics
             }
             HashSet<string> replacements = new HashSet<string>(); foreach (RosterDef member in data.roster) if (!string.IsNullOrEmpty(member.replacesId)) Need(member.replacesId != member.id && roster.Contains(member.replacesId) && replacements.Add(member.replacesId), "Invalid roster replacement.");
             Need(selected <= data.partySize, "Too many default party members.");
+            Need(data.progression != null && data.progression.xpThresholds != null && data.progression.xpThresholds.Length > 0 && data.progression.xpThresholds.Length <= 20 && data.progression.xpThresholds[0] == 0 && data.progression.skillUnlocks != null && data.equipment != null, "Invalid progression configuration.");
+            for (int i = 1; i < data.progression.xpThresholds.Length; i++) Need(data.progression.xpThresholds[i] > data.progression.xpThresholds[i - 1] && data.progression.xpThresholds[i] <= 1000000, "XP thresholds must increase from zero.");
+            Need(data.progression.hpPerLevel >= 0 && data.progression.hpPerLevel <= 100 && data.progression.manaPerLevel >= 0 && data.progression.manaPerLevel <= 100 && data.progression.movePerLevel >= 0 && data.progression.movePerLevel <= 2, "Invalid progression stat growth.");
+            HashSet<string> skillIds = new HashSet<string>();
+            foreach (SkillUnlockDef skill in data.progression.skillUnlocks) Need(skill != null && StableId(skill.id) && skillIds.Add(skill.id) && !string.IsNullOrEmpty(skill.label) && (string.IsNullOrEmpty(skill.rosterId) || roster.Contains(skill.rosterId)) && skill.abilityId != null && catalog.Abilities.ContainsKey(skill.abilityId) && skill.level >= 1 && skill.level <= data.progression.xpThresholds.Length, "Invalid skill unlock.");
+            HashSet<string> gearIds = new HashSet<string>();
+            foreach (EquipmentDef gear in data.equipment)
+            {
+                Need(gear != null && StableId(gear.id) && gearIds.Add(gear.id) && !string.IsNullOrEmpty(gear.label) && (gear.slot == "weapon" || gear.slot == "armor" || gear.slot == "charm") && gear.hpBonus >= 0 && gear.hpBonus <= 1000 && gear.manaBonus >= 0 && gear.manaBonus <= 1000 && gear.moveBonus >= 0 && gear.moveBonus <= 5 && gear.unlockEncounter >= 0 && gear.unlockEncounter <= data.encounters.Length && gear.abilityIds != null, "Invalid equipment.");
+                HashSet<string> grants = new HashSet<string>(); foreach (string ability in gear.abilityIds) Need(ability != null && catalog.Abilities.ContainsKey(ability) && grants.Add(ability), "Invalid equipment ability grant.");
+            }
             HashSet<string> encounters = new HashSet<string>(), sectors = new HashSet<string>();
             foreach (EncounterDef encounter in data.encounters)
             {
@@ -85,6 +96,7 @@ namespace DungeonCrawlerTactics
             foreach (TagRuleDef rule in data.tagRules) Need(rule != null && catalog.HasTag(rule.tag) && rules.Add(rule.tag) && rule.durationRounds >= 0 && rule.durationRounds <= 100 && rule.entryDamage >= 0 && rule.entryDamage <= 10000 && rule.turnDamage >= 0 && rule.turnDamage <= 10000 && rule.movePenalty >= 0 && rule.movePenalty <= 100 && rule.energyPenalty >= 0 && rule.energyPenalty <= 100, "Invalid tag rule.");
             foreach (TagRuleDef rule in data.tagRules) Need(string.IsNullOrEmpty(rule.occupantTag) || catalog.HasTag(rule.occupantTag), "Unknown occupant tag.");
         }
+        private static bool StableId(string id) { return id != null && System.Text.RegularExpressions.Regex.IsMatch(id, @"^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$"); }
         private static bool Inside(int x, int y, EncounterDef encounter) { return x >= 0 && y >= 0 && x < encounter.width && y < encounter.height; }
         private static string Key(int x, int y) { return x + "," + y; }
         private static void Tags(string[] tags, Catalog catalog) { Need(tags != null, "Null authored tags."); HashSet<string> seen = new HashSet<string>(); foreach (string tag in tags) Need(catalog.HasTag(tag) && seen.Add(tag), "Unknown or duplicate authored tag."); }

@@ -1,14 +1,22 @@
 # Playable build validation
 
-## Animated dungeon revamp
+## Progression and movement update
 
-The current shared-C# build passed 96 game checks, 42 rules checks, 21 existing Python validation tests and 6 new content-validation regression tests. Both authored JSON catalogs validate. The netstandard2.1 compatibility build passes. Unity presentation source also compiles against Unity runtime references with zero errors and one existing unused-field warning; Unity Editor Play Mode and Web export remain unverified.
+The shared-C# game harness passed 122 checks and the rules harness passed 42 checks. Both authored catalogs validate (20 classes, 66 abilities, 8 consumables, 9 roster entries and 3 encounters); all 27 Python validator tests pass. The directional-art validator checks 96 distinct frames across all eight deployable characters. Netstandard2.1 compatibility succeeds, and Unity runtime reference compilation succeeds with zero errors and one existing Inspector-field warning. Unity Editor execution remains unverified.
+
+New regression coverage includes enemy wall detours and movement events, level growth and personal skill unlocks, equipment ownership/slots/effective stats, safe-room rest, objective views, legacy-save progression migration, and a complete three-encounter run.
+
+The actual WebAssembly browser driver also completed all three encounters: 3 victories, 150 XP, level 4, 32 moves, 7 potions and 1,039 legal previews across 75 driver ticks. The completed save survived refresh with no JavaScript errors. It now explicitly rests between encounters, matching the safe-room flow.
+
+## Earlier animated dungeon revamp
+
+The earlier shared-C# build passed 96 game checks, 42 rules checks, 21 existing Python validation tests and 6 new content-validation regression tests. Both authored JSON catalogs validate. The netstandard2.1 compatibility build passes. Unity presentation source also compiles against Unity runtime references with zero errors and one existing unused-field warning; Unity Editor Play Mode and Web export remain unverified.
 
 The actual local WebAssembly build completed all three encounters through the public browser command bridge: 3 wins, 150 XP, 33 moves, 7 potions and 860 legal previews across 79 driver ticks. Its completed save reloaded successfully with no JavaScript errors. This is functional automation, not a balance or human enjoyment study.
 
 Visible-UI Playwright checks passed at 1366×768, 390×844 and 844×390: exploration, pointer targeting, forecasts, movement, Magic Missile, Shapeshift, Puddle Jumper, Wet + Lightning, individual party turn order, inspect panels and viewport fit. A separate rapid-input check verified move → ability → target ordering and refresh during animation restoring the committed position. See [Revamp-QA.md](Revamp-QA.md) for the test scope and measured latency.
 
-Current content has 16 classes, 46 abilities, 8 items, 9 roster entries (8 deployable) and 3 encounters. Presentation assets are components rendered over actual game coordinates; they are not a static concept screenshot.
+That revision had 16 classes, 46 abilities, 8 items, 9 roster entries (8 deployable) and 3 encounters. Presentation assets are components rendered over actual game coordinates; they are not a static concept screenshot.
 
 ## Earlier playable build verification
 
@@ -68,7 +76,7 @@ The published local WASM build passed `Tools/playtest_ui.py` at 1366×768, 390×
 
 No Unity Editor or Unity MCP bridge was available. Editor compilation, scene creation, Play Mode, Unity Web player export, and the native WebGL save bridge in a real exported Unity player have not been executed. The scene/build menus use Editor APIs and the runtime was compiled against real reference assemblies, but that does not replace those checks. Use the included Unity project and run the documented Editor workflow before shipping a Unity Web release.
 
-The full game and browser clients are tested; soundtrack, animated combat, complex spatial spreading, level progression, elevation and procedural content are not implemented. See `PlayableGame.md` for the supported scope.
+Soundtrack, complex spatial spreading, elevation and procedural campaign content remain unimplemented. Animated combat and level progression are now supported in the browser build. See `PlayableGame.md` for the supported scope.
 
 ## Reproduce
 

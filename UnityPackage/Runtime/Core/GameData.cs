@@ -9,6 +9,8 @@ namespace DungeonCrawlerTactics
         public string[] compatibleContentVersions = new string[0];
         public int partySize = 4;
         public int energyPerRound = 3;
+        public ProgressionDef progression = new ProgressionDef();
+        public EquipmentDef[] equipment = new EquipmentDef[0];
         public RosterDef[] roster = new RosterDef[0];
         public ClassStats[] classStats = new ClassStats[0];
         public EncounterDef[] encounters = new EncounterDef[0];
@@ -16,6 +18,19 @@ namespace DungeonCrawlerTactics
         public RewardDef[] rewards = new RewardDef[0];
         public TagRuleDef[] tagRules = new TagRuleDef[0];
     }
+    [Serializable] public sealed class ProgressionDef
+    {
+        public int[] xpThresholds = new[] { 0, 30, 70, 120 }; public int hpPerLevel = 3, manaPerLevel = 1, movePerLevel;
+        public SkillUnlockDef[] skillUnlocks = new SkillUnlockDef[0];
+    }
+    [Serializable] public sealed class SkillUnlockDef { public string id, label, rosterId, abilityId; public int level = 2; }
+    [Serializable] public sealed class EquipmentDef { public string id, label, slot; public int hpBonus, manaBonus, moveBonus, unlockEncounter; public string[] abilityIds = new string[0]; }
+    [Serializable] public sealed class EquipmentSlotSave { public string unitId, equipmentId; }
+    [Serializable] public sealed class SkillView { public string id, label, unitId, abilityId; public int level; public bool unlocked; }
+    [Serializable] public sealed class ProgressionView { public int level, xp, nextLevelXp, xpIntoLevel, xpToNextLevel, maxLevel, hpBonus, manaBonus, moveBonus; public SkillView[] skills = new SkillView[0]; }
+    [Serializable] public sealed class EquipmentView { public string id, label, slot, equippedUnitId; public int hpBonus, manaBonus, moveBonus, unlockEncounter; public string[] abilityIds = new string[0]; public bool owned; }
+    [Serializable] public sealed class SafeRoomView { public string label, description; public bool available, rested; }
+    [Serializable] public sealed class QuestView { public string id, label, description; public int progress, total; public bool complete; }
     [Serializable] public sealed class RosterDef { public string id, label, classId, artId, replacesId, legacyClassId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; }
     [Serializable] public sealed class ClassStats { public string classId; public int hp = 30, energy = 10, move = 3; }
     [Serializable] public sealed class SpawnDef { public string id, label, classId, artId; public int x, y, hp = 18, energy = 10, move = 2; public string[] tags = new string[0]; }
@@ -43,11 +58,11 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
     [Serializable] public sealed class TagRuleDef { public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, energyPenalty; }
-    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId; public int x, y; }
+    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId, equipmentId; public int x, y; }
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
     {
-        public string id, label, classId, team, artId; public int x, y, hp, maxHp, energy, maxEnergy, move, effectiveMove;
+        public string id, label, classId, team, artId; public int x, y, hp, maxHp, energy, maxEnergy, move, effectiveMove, level;
         public StatusView[] statuses = new StatusView[0];
         public bool selected, moved, acted; public string[] tags = new string[0];
     }
@@ -56,7 +71,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class TileView { public string id; public int x, y; public bool blocked; public string[] tags = new string[0]; }
     [Serializable] public sealed class AbilityView { public string id, label, target, description, disabledReason; public string[] targetIds = new string[0]; public int range, cost; public bool enabled; }
     [Serializable] public sealed class ItemView { public string id, label, abilityId, target, description, disabledReason; public string[] targetIds = new string[0]; public int count, range; }
-    [Serializable] public sealed class RosterView { public string id, label, classId, artId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; public int hp, maxHp; }
+    [Serializable] public sealed class RosterView { public string id, label, classId, artId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; public int hp, maxHp, energy, maxEnergy, move, effectiveMove, level; public string[] equippedIds = new string[0]; }
     [Serializable] public sealed class ClassView { public string id, label; public string[] abilityIds = new string[0]; }
     [Serializable] public sealed class ForecastView
     {
@@ -67,6 +82,8 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class GameView
     {
         public ExplorationView exploration;
+        public ProgressionView progression; public SafeRoomView safeRoom;
+        public EquipmentView[] equipment = new EquipmentView[0]; public QuestView[] quests = new QuestView[0];
         public PresentationEvent[] events = new PresentationEvent[0];
         public string[] partyOrder = new string[0];
         public string screen, message, encounterName, phase, selectedUnitId;
@@ -87,6 +104,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class GameSave
     {
         public ExplorationSave[] exploration = new ExplorationSave[0];
+        public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];
         public int schemaVersion = 1; public string contentVersion, screen, phase, selectedUnitId;
         public int encounterIndex, round, xp; public bool rewardChosen;
         public RosterView[] roster = new RosterView[0]; public InventoryEntry[] inventory = new InventoryEntry[0];

@@ -28,6 +28,30 @@ def validate_game(data, content):
 
     for name, field in [('roster','id'),('classStats','classId'),('encounters','id'),('startingInventory','itemId'),('rewards','id'),('tagRules','tag')]:
         unique(data[name], field, name)
+    progression = data['progression']
+    thresholds = progression['xpThresholds']
+    if not thresholds or thresholds[0] != 0 or any(a >= b for a, b in zip(thresholds, thresholds[1:])):
+        errors.append('progression.xpThresholds: must start at 0 and increase strictly')
+    unique(progression['skillUnlocks'], 'id', 'progression.skillUnlocks')
+    roster_by_id = {r['id']: r for r in data['roster']}
+    for i, unlock in enumerate(progression['skillUnlocks']):
+        path = f"progression.skillUnlocks.{i}"
+        ref(unlock['rosterId'], 'roster', path+'.rosterId')
+        ref(unlock['abilityId'], 'abilities', path+'.abilityId')
+        member = roster_by_id.get(unlock['rosterId'])
+        if member and not member.get('deployable', True):
+            errors.append(path+': skills may only unlock for deployable roster members')
+        if unlock['level'] >= len(thresholds):
+            errors.append(path+'.level: has no matching XP threshold')
+    unique(data['equipment'], 'id', 'equipment')
+    for i, gear in enumerate(data['equipment']):
+        path = f'equipment.{i}'
+        if gear['unlockEncounter'] >= len(data['encounters']):
+            errors.append(path+'.unlockEncounter: outside encounter progression')
+        if not any(gear[k] for k in ('hpBonus','manaBonus','moveBonus','abilityIds')):
+            errors.append(path+': equipment must grant a stat bonus or ability')
+        for j, ability_id in enumerate(gear['abilityIds']):
+            ref(ability_id, 'abilities', f'{path}.abilityIds.{j}')
     if sum(r['selected'] for r in data['roster']) > data['partySize'] or len(data['roster']) < data['partySize']:
         errors.append('roster: invalid party selection/roster size')
     for i, record in enumerate(data['roster']):

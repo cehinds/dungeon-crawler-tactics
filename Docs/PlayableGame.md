@@ -39,9 +39,10 @@ The Editor build hook validates the content before building. `UnityPackage` is t
 - Select an ability or consumable, then its legal unit or tile target. Legal targets come from the shared C# resolver; the UI shows effects, range, mana costs and reasons an action is unavailable. Review HP, MP and tag changes before confirming. Cancel spends nothing. Terrain abilities can target the tile beneath a unit.
 - An action ends that crawler's activation. Moving without acting remains allowed; End character turn ends the current activation. The enemy team acts after all living party members finish.
 - Enemy actions are deterministic, including movement and target choice. They use the same range, MP and effect checks as player commands. Enemy turns complete without relying on animation timing.
-- Defeat every hostile to win. Choose one sponsor reward and continue. Camp restores the party; consumables carry forward. Three victories finish the floor.
+- Defeat every hostile to win. Choose one sponsor reward and continue. Use the safe-room Rest station to restore the party; consumables carry forward. Three victories finish the floor.
 - Defeat offers a fresh attempt at the same room, with restored starting supplies, while preserving earned XP. New run resets progression.
-- XP records floor progress; level-up trees, equipment progression, summoning, elevation and procedural floors are not implemented in this version.
+- Shared party XP grants levels 1–4 at cumulative thresholds 0, 30, 70 and 120, including reserves. Each level increases maximum HP and Mana; each character gains personal skills at levels 2 and 3. Six equipment pieces alter actual stats or grant abilities. Manage loadouts, inspect skills and rest at safe-room stations. The quest journal tracks discoveries, doors and encounter objectives. See [Progression.md](Progression.md).
+- Rotate left/right through four map views. Pointer picking and screen-relative arrow/WASD movement follow the rotated projection. Movement previews show the grid path; enemies navigate by walkable distance around walls and visibly play their movement before player controls unlock.
 
 ## Room authoring kit
 
@@ -49,7 +50,7 @@ Open `room-kit.html` or use Save & options → Room kit. The workshop assembles 
 
 ## Actual content
 
-Eight deployable roster members plus Mordecai as advisor, four deployed, sixteen selectable class kits, 46 ability definitions (including consumable actions), eight consumables and three authored 10×8 maps. Six generated browser atlases provide the primary-character poses (including eight replacement winged-Mongo frames), 12 enemy poses, 12 effect frames, 12 terrain/prop components and 16 portrait/action components. Mongo also has a dedicated feathered-wing portrait. The earlier fifteen pixel assets remain as reserve-character/Unity presentation fallbacks. See `PlayableContent.md` for the generated catalog.
+Eight deployable roster members plus Mordecai as advisor, four deployed, twenty selectable class kits, 66 ability definitions (including consumable actions), eight consumables, six equipment pieces and three authored 10×8 maps. All eight field characters have four directional idle/walking views: 96 distinct frames in normalized atlases. Earlier character action, enemy, effect, terrain and icon atlases remain in use. Enemy art has walking and attack poses but not four authored directional sets. See `PlayableContent.md` for the generated catalog.
 
 Carl's Compensated Anarchist kit has Powerful Strike with knockback and a single-tile incendiary bomb. Donut's Former Child Actor kit has Magic Missile, Puddle Jumper and Heal Critter. Katia's Doppelganger kit has Shapeshift protection, Heavy Blow and New Look cleansing. Mongo is a raptor companion with Bite and Pounce. Exact costs/ranges and conversions are game adaptations; see `Revamp-Research.md` for book sources. Names such as Beastmaster and Necromancer do not imply a summon system.
 
@@ -70,7 +71,7 @@ Timed tags have a recorded origin and remaining full rounds. Current stacking po
 
 The browser client autosaves committed state in localStorage and supports downloadable/importable JSON. The Unity client uses PlayerPrefs checkpoints with a prior backup; its WebGL bridge provides browser file download/upload plus text fallback. Storage belongs to the current browser/origin and is not cloud sync.
 
-Saves contain exploration position, revealed cells and claimed discoveries as well as roster, inventory, positions, HP/MP, activation state, tile tags, timed effects, encounter progress and reward state. Preview is temporary and is not committed into a save. Import validates versions, IDs, occupancy, authored walls and status bookkeeping before replacing live state. Invalid import leaves the current run intact. Existing v1 checkpoints without exploration fields remain supported; existing battles resume normally and exploration becomes available at the next camp. Unknown content versions are rejected.
+Saves contain exploration position, revealed cells and claimed discoveries as well as XP, equipped gear, roster, inventory, positions, HP/MP, activation state, tile tags, timed effects, encounter progress and reward state. Preview is temporary and is not committed into a save. Import validates versions, IDs, occupancy, authored walls and status bookkeeping before replacing live state. Invalid import leaves the current run intact. Existing v1 checkpoints without exploration fields remain supported; existing battles resume normally and exploration becomes available at the next camp. Content versions 1 and 2 upgrade to the current progression model while preserving XP. Unknown content versions are rejected.
 
 ## Update the game
 
@@ -90,7 +91,7 @@ Strict schemas in `Tools/` catch misspelled keys and bad references. Runtime val
 
 ## Code ownership
 
-`Content.cs` owns mechanical records/catalog validation. `RulesEngine.cs` resolves a single command and its bounded reaction chain. `GameData.cs` declares configuration, view and save DTOs. `GameDataValidator.cs` checks campaign integrity. `GameSession.cs` owns the playable loop, movement, inventory, AI, timed tags and saves. `GameSession.Exploration.cs` owns fog discovery, exploration pathfinding, interactions and save validation. `PlayableGame.*.cs` presents these results in Unity. `Web/Program.cs` exposes the same core to the browser, while `Web/wwwroot/` handles UI and local storage only.
+`Content.cs` owns mechanical records/catalog validation. `RulesEngine.cs` resolves a single command and its bounded reaction chain. `GameData.cs` declares configuration, view and save DTOs. `GameDataValidator.cs` checks campaign integrity. `GameSession.cs` owns the playable loop, movement, inventory, AI, timed tags and saves. `GameSession.Progression.cs` owns levels, effective stats, equipment, safe-room commands, quest views and progression save upgrades. `GameSession.Exploration.cs` owns fog discovery, exploration pathfinding, interactions and save validation. `PlayableGame.*.cs` presents these results in Unity. `Web/Program.cs` exposes the same core to the browser, while `Web/wwwroot/` handles UI and local storage only.
 
 ## Known limits
 

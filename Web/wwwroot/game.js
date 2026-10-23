@@ -23,10 +23,19 @@ let inputQueue = Promise.resolve();
 let saveRevision = 0;
 let fastForwardRequested = false;
 let inspectPosition = null;
+let pinnedInspection = null;
+let pendingActionChoice = null;
 let detailedForecast = false;
 let actionChooser = false;
 let endTurnActor = null;
 let animating = false;
+let campModal = null;
+let rosterExpanded=false;
+let questModal = false;
+let levelNotice = null;
+let enemySequence = false;
+let enemyPlayback = false;
+let enemyPhaseName='resolving';
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 const e = escapeHtml;
 const call = (method, ...args) => DotNet.invokeMethodAsync(assembly, method, ...args);
@@ -41,7 +50,8 @@ const characterIndex = (u) => {
   return {carl:0,donut:1,katia:2,mongo:3}[id] ?? null;
 };
 const spriteName = legacySpriteName;
-const portrait = (u, className = 'unit-portrait') => characterIndex(u) === 3 ? `<img class="${className}${u.hp===0?' dead':''}" style="object-fit:contain" src="assets/revamp/mongo-portrait.png" alt="${e(u.label || 'Mongo')}">` : characterIndex(u) == null ? `<img class="${className}${u.hp===0?' dead':''}" src="assets/${e(legacySpriteName(u))}.png" alt="${e(u.label || 'Crawler')}">` : `<span class="${className} atlas-character${u.hp === 0 ? ' dead' : ''}" style="--character:${characterIndex(u)}" role="img" aria-label="${e(u.label || 'Crawler')}"></span>`;
+const reserveArtId = u => ({elle:'elle',iman:'imani',imani:'imani',louis:'louis',brittany:'brittany'}[(u.artId||u.id?.replace('crawler.',''))]) ?? null;
+const portrait = (u, className = 'unit-portrait') => characterIndex(u) === 3 ? `<img class="${className}${u.hp===0?' dead':''}" style="object-fit:contain" src="assets/revamp/mongo-portrait.png" alt="${e(u.label || 'Mongo')}">` : reserveArtId(u) ? `<img class="${className}${u.hp===0?' dead':''}" style="object-fit:contain" src="assets/directional/${reserveArtId(u)}-portrait.png" data-fallback-src="assets/${e(legacySpriteName(u))}.png" alt="${e(u.label||'Crawler')}">` : characterIndex(u) == null ? `<img class="${className}${u.hp===0?' dead':''}" src="assets/${e(legacySpriteName(u))}.png" alt="${e(u.label || 'Crawler')}">` : `<span class="${className} atlas-character${u.hp === 0 ? ' dead' : ''}" style="--character:${characterIndex(u)}" role="img" aria-label="${e(u.label || 'Crawler')}"></span>`;
 const abilityIcon = (a) => /bomb|blast/.test(a.id) ? 6 : /heal|wind|recovery|rally/.test(a.id) ? 10 : /teleport|blink|swap/.test(a.id) ? 9 : /bite|maul|pounce/.test(a.id) ? 12 : /guard|bulwark/.test(a.id) ? 14 : /strike|kick|shatter|blow|bash/.test(a.id) ? 5 : /shape|transform/.test(a.id) ? 11 : 8;
 function actionCategory(action, item=false) {
   if(item) return {key:'item',label:'Item'};
@@ -111,17 +121,32 @@ function schedulePersist() {
   void persist();
 }
 function playerInput(work) {
+  if(enemySequence){toast('Enemy turn in progress. Watch their movement, or use Skip animation.','info');return Promise.resolve();}
   if(busy || animating) fastForwardRequested=true;
   battlefield?.skipAnimations();
   const next=inputQueue.then(work);
   inputQueue=next.catch(error=>toast(`Input could not be completed: ${error.message}`,'error'));
   return next;
 }
+function setEnemyPlayback(active,phase='enemy') {
+  enemyPlayback=active;enemyPhaseName=phase;
+  const banner=$('#enemy-phase-banner');
+  if(banner){banner.hidden=!active;banner.textContent=phase==='enemy'?'ENEMY TURN · Watch their movement':phase==='player'?'YOUR TURN · Preparing the next crawler':'RESOLVING TURN…';}
+  document.body.classList.toggle('enemy-playback',active);
+  const roundLabel=$('.party-round');if(roundLabel)roundLabel.textContent=active?'ENEMY PHASE':`ROUND ${view.round}`;
+  const guidance=$('.battle-guidance');if(guidance)guidance.textContent=active?'Enemies are moving and attacking. Your actions unlock when their turn ends.':view.message||'Select a crawler. Move, then choose an ability.';
+  document.querySelectorAll('.hud-action,#open-actions,#end-turn,.party-chip,#confirm-forecast,#detail-confirm-forecast').forEach(button=>{
+    if(active){if(!button.dataset.enemyLock)button.dataset.enemyLock=button.disabled?'disabled':'ready';button.disabled=true;}
+    else if(button.dataset.enemyLock){button.disabled=button.dataset.enemyLock==='disabled';delete button.dataset.enemyLock;}
+  });
+}
 async function playPresentation(events,before,after) {
+  enemySequence=events.some(event=>event.type==='phase'&&event.tag==='enemy'||before.units.some(unit=>unit.team==='enemy'&&unit.id===event.actorId));
   animating=true; $('#skip-animation')?.removeAttribute('hidden');
+  if(enemySequence){fastForwardRequested=false;setEnemyPlayback(true,'resolving');}
   const playback=battlefield.playEvents(events,before,after);
-  if(fastForwardRequested) battlefield.skipAnimations();
-  try {await playback;} finally {fastForwardRequested=false;}
+  if(fastForwardRequested&&!enemySequence) battlefield.skipAnimations();
+  try {await playback;} finally {fastForwardRequested=false;enemySequence=false;setEnemyPlayback(false);}
 }
 async function dispatchCommand(type, args = {}, { preserveAction = false, save = true } = {}) {
   busy = true;
@@ -137,6 +162,7 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
       try { await playPresentation(after.events, before, after); } catch { /* Presentation cannot prevent the committed result appearing. */ }
     }
     view = after;
+    if(after.screen!=='camp')campModal=null;
     if (!preserveAction) { actionChooser=false; endTurnActor=null; detailedForecast=false; localAction = null; previewTargetId=null; inspectedTile = null; targetTile = false; }
     if(type==='preview' && after.canConfirm) detailedForecast=true;
     if (type === 'choose_reward' && previousScreen === 'victory') chosenReward = view.rewards.length === 0;
@@ -153,6 +179,9 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
     animating=false; $('#skip-animation')?.setAttribute('hidden','');
     if (before.canConfirm && !view.canConfirm && battleReturn) $(battleReturn)?.focus();
     commandFeedback(type, args, before, view,actionLabel);
+    for(const quest of after.quests??[])if(quest.complete&&!before.quests?.find(old=>old.id===quest.id)?.complete)toast(`${quest.label} complete.`,'success');
+    for(const event of after.events??[])if(event.type==='equipment_unlock'){const gear=after.equipment?.find(item=>item.id===event.tag);if(gear)toast(`${gear.label} is now available in the safe room.`,'success');}
+    if((after.progression?.level??1)>(before.progression?.level??after.progression?.level??1)){levelNotice=after.progression;render();}
   } catch (error) {
     toast(`The command could not be completed: ${error.message}`, 'error');
   } finally {
@@ -162,6 +191,8 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
   }
 }
 function commandFeedback(type, args, before, after,actionLabel) {
+  if(type==='safe_room_rest' && (JSON.stringify(before.roster)!==JSON.stringify(after.roster)||!before.safeRoom?.rested&&after.safeRoom?.rested)){toast('Party rested. Health and mana restored.','success');return;}
+  if(['equip','unequip'].includes(type)){const old=before.equipment?.find(gear=>gear.id===args.equipmentId),gear=after.equipment?.find(gear=>gear.id===args.equipmentId);if(old?.equippedUnitId!==gear?.equippedUnitId){toast(`${gear.label} ${type==='equip'?'equipped':'unequipped'}. ${gearBonuses(gear)}`,'success');return;}}
   if(type==='end_turn') {
     const actor=before.units.find(u=>u.id===(args.unitId||before.selectedUnitId));
     const ended=after.units.find(u=>u.id===actor?.id);
@@ -209,27 +240,53 @@ function render() {
   if (battleCanvas?.isConnected) battleCanvas.remove();
   if (!['battle','explore'].includes(view.screen) && battlefield) { battlefield.dispose(); battlefield = null; battleCanvas = null; }
   $('#game').innerHTML = view.screen === 'camp' ? renderCamp() : view.screen === 'explore' ? renderExploration() : view.screen === 'battle' ? renderBattle() : view.screen === 'victory' ? renderVictory() : renderEnding();
+  if(questModal) $('#game').insertAdjacentHTML('beforeend',renderQuestDialog());
+  if(levelNotice) $('#game').insertAdjacentHTML('beforeend',renderLevelDialog());
   if (['battle','explore'].includes(view.screen)) {
     const slot = $('#battlefield-slot');
-    if (!battleCanvas) { battleCanvas=document.createElement('canvas'); battleCanvas.id='battlefield'; battleCanvas.setAttribute('aria-label','Isometric dungeon battlefield. Use the accessible map controls to select cells.'); }
+    if (!battleCanvas) { battleCanvas=document.createElement('canvas'); battleCanvas.id='battlefield'; battleCanvas.addEventListener('battlephase',event=>{if(event.detail?.phase==='enemy')setEnemyPlayback(true);else if(event.detail?.phase==='player'&&enemySequence)setEnemyPlayback(true,'player');}); battleCanvas.setAttribute('aria-label','Isometric dungeon battlefield. Use the accessible map controls to select cells.'); }
     slot.prepend(battleCanvas);
     if (!battlefield) battlefield=createBattlefield(battleCanvas,{onCell:(x,y)=>view.screen==='explore'?command('explore_move',{x,y}):clickCell(x,y),onHover:hoverCell});
     battlefield.setView(view,{mode:view.screen==='battle'&&localAction ? 'ability' : 'move',action:selectedAction(),preview:view.canConfirm ? view.forecast : null,targetId:view.canConfirm?previewTargetId:null});
     battlefield.resize();
   }
   bindScreen();
+  if(enemySequence)setEnemyPlayback(true,enemyPhaseName);
+  if(pinnedInspection&&view.screen==='battle')hoverCell(pinnedInspection.x,pinnedInspection.y);
   window.dungeonView = view;
 }
+const gearFor = unitId => (view.equipment??[]).filter(gear=>gear.equippedUnitId===unitId);
+const gearBonuses = gear => [gear.hpBonus?`${gear.hpBonus>0?'+':''}${gear.hpBonus} HP`:'',gear.manaBonus?`${gear.manaBonus>0?'+':''}${gear.manaBonus} MP`:'',gear.moveBonus?`${gear.moveBonus>0?'+':''}${gear.moveBonus} MOVE`:''].filter(Boolean).join(' · ') || 'No stat change';
+function activeQuest() {return (view.quests??[]).find(quest=>!quest.complete)??view.quests?.[0];}
+function questRows() {return (view.quests??[]).map(quest=>`<div class="quest-row${quest.complete?' complete':''}"><div><strong>${e(quest.label)}</strong><span>${quest.progress}/${quest.total}${quest.complete?' · Complete':''}</span></div><p>${e(quest.description)}</p><progress value="${quest.progress}" max="${quest.total}" aria-label="${e(quest.label)} progress"></progress></div>`).join('')||'<p class="small muted">Explore the passages and clear the next encounter.</p>';}
+function renderQuestTracker() {const quest=activeQuest();return `<button id="quest-button" class="quest-tracker"><span>QUEST</span> ${e(quest?.label||'Find the encounter door')} <b>${quest?quest.progress+'/'+quest.total:''}</b></button>`;}
+function renderSafeRoomStations(focused,advisor) {
+  return `<section class="safe-stations" aria-label="Safe-room stations"><div class="safe-station-floor" aria-hidden="true">${Array.from({length:9},(_,index)=>{const x=index%3,y=Math.floor(index/3);return `<img src="assets/room-kit/floors/stone-${index%2?'b':'a'}.png" style="left:calc(50% + ${(x-y)*58-66}px);top:${25+(x+y)*29}px" alt="">`;}).join('')}<img class="safe-torch torch-one" src="assets/room-kit/props/torch.png" alt=""><img class="safe-torch torch-two" src="assets/room-kit/props/torch.png" alt=""></div><button id="station-rest" class="safe-station rest-station">${portrait(advisor,'station-advisor')}<span>REST <small>Mordecai</small></span></button><button class="safe-station equipment-station" data-equipment="${e(focused.id)}"><img src="assets/room-kit/props/chest.png" alt=""><span>EQUIPMENT <small>Open shared gear</small></span></button><button class="safe-station skills-station" data-skills="${e(focused.id)}"><img src="assets/room-kit/props/lever.png" alt=""><span>SKILLS <small>Abilities & unlocks</small></span></button><button id="quick-enter" class="safe-station exit-station" ${view.partyCount!==view.partyCapacity?'disabled':''}><img src="assets/room-kit/doors/exit.png" alt=""><span>ENTER DUNGEON <small>${view.partyCount}/${view.partyCapacity} deployed</small></span></button></section>`;
+}
 function renderCamp() {
-  const focused = view.roster.find(r => r.id === focusedRoster && r.deployable!==false) ?? view.roster.find(r => r.selected) ?? view.roster.find(r=>r.deployable!==false);
-  focusedRoster = focused?.id;
-  const focusClass = view.classes.find(c => c.id === focused?.classId);
-  const encounter = gameData.encounters[view.encounterIndex];
-  const focusAbilities=[...new Set([...(focused?.innateAbilityIds??[]),...(focusClass?.abilityIds??[])])];
-  return `<section class="camp-screen" aria-labelledby="screen-title"><div class="camp-arrival"><div class="camp-arrival-copy"><span class="section-label">MORDECAI’S SAFE ROOM</span><h1>The dungeon is waiting.</h1><p>Four crawlers. One way out.</p><button id="quick-enter" class="primary" ${view.partyCount !== view.partyCapacity ? 'disabled' : ''}>Enter the dungeon →</button></div><div class="camp-arrival-party">${view.roster.filter(r=>r.selected).map(r=>`<div>${portrait(r,'camp-hero')}<strong>${e(r.label)}</strong></div>`).join('')}</div></div><div class="screen-heading"><div><h2 id="screen-title">A little preparation. A little mayhem.</h2><p>Choose ${view.partyCapacity} crawlers and their classes. The next room won’t clear itself.</p></div><div class="status-group"><span class="tag gold">CAMP / FLOOR 01</span><span class="small muted mono">${view.xp} XP EARNED</span></div></div>
-  <div class="camp-layout"><section class="panel"><div class="panel-head"><h3>YOUR ROSTER</h3><span class="small mono ${view.partyCount === view.partyCapacity ? '' : 'muted'}">${view.partyCount} / ${view.partyCapacity} DEPLOYED</span></div><div class="roster-grid">${view.roster.filter(r=>r.deployable!==false).map(r => `<button class="roster-card${r.selected ? ' chosen' : ''}${r.id === focused.id ? ' focused' : ''}" data-roster="${e(r.id)}" aria-pressed="${r.id === focused.id}">${portrait(r)}<span><strong>${e(r.label)}</strong><small>${e(classLabel(r.classId))}</small><small>${r.selected ? 'DEPLOYED' : 'RESERVE'} · ${r.hp} / ${r.maxHp} HP</small></span><span class="choice-marker" aria-hidden="true">${r.selected ? '✓' : ''}</span></button>`).join('')}</div><div class="roster-bottom"><span>Select a crawler to edit their class or deployment.</span><span class="mono">${view.roster.length} CRAWLERS · ${view.classes.length} CLASSES</span></div></section>
-  <aside class="panel"><div class="panel-body"><div class="loadout-head">${portrait(focused)}<div><h2>${e(focused.label)}</h2><p>${focused.selected ? 'Deployed for the next encounter' : 'Resting in reserve'}</p><div class="tags" style="margin-top:8px"><span class="tag good">${focused.hp} / ${focused.maxHp} HP</span></div></div></div><label class="field" for="class-select">ACTIVE CLASS<select id="class-select">${view.classes.map(c => `<option value="${e(c.id)}" ${c.id === focused.classId ? 'selected' : ''}>${e(c.label)}</option>`).join('')}</select></label><div class="class-abilities">${focusAbilities.map(id => `<span><strong>${e(content.abilities.find(a => a.id === id)?.label ?? id)}</strong><small>${e(abilityDescription(content.abilities.find(a => a.id === id)))}</small></span>`).join('')}</div><button class="camp-party-toggle" id="toggle-party">${focused.selected ? 'Move to reserve' : 'Deploy this crawler'}</button><div class="encounter-brief"><span class="section-label">NEXT / ENCOUNTER ${view.encounterIndex + 1} OF ${view.encounterCount}</span><h3>${e(encounter?.label ?? view.encounterName)}</h3><p>${e(encounter?.description ?? 'Defeat every enemy to advance. Scout the surfaces and watch your mana.')}</p><button class="primary" id="enter-battle" ${view.partyCount !== view.partyCapacity ? 'disabled' : ''}>Explore the dungeon <span aria-hidden="true">→</span></button>${view.partyCount !== view.partyCapacity ? `<p class="small">Deploy exactly ${view.partyCapacity} crawlers to enter.</p>` : ''}</div><p class="camp-note">Mordecai: Choose your class carefully. I’ll keep the camp ready. Supplies carry through the run.</p></div></aside></div>
-  <details class="panel inventory-strip"><summary>SHARED SUPPLIES</summary><div class="tags">${view.items.map(i => `<span class="tag">${e(i.label)} ×${i.count}</span>`).join('') || '<span class="small muted">No consumables remaining.</span>'}</div></details>${view.message ? `<div class="board-message" role="status">${e(view.message)}</div>` : ''}</section>`;
+  const focused=view.roster.find(r=>r.id===focusedRoster&&r.deployable!==false)??view.roster.find(r=>r.selected)??view.roster.find(r=>r.deployable!==false);
+  focusedRoster=focused?.id;
+  const progression=view.progression;
+  const advisor=view.roster.find(r=>r.deployable===false)??{id:'crawler.mordecai',label:'Mordecai',classId:'class.cleric'};
+  return `<section class="camp-screen safe-room" aria-labelledby="screen-title"><header class="safe-room-heading"><div><span class="section-label">MORDECAI’S SAFE ROOM</span><h1 id="screen-title">Rest. Equip. Prepare.</h1><p>A safe place between the cameras and the next fight.</p></div><div class="party-progression"><strong>PARTY LEVEL ${progression?.level??1}</strong><span>${progression?.xp??view.xp} XP${progression?.nextLevelXp?' / '+progression.nextLevelXp+' next level':''}</span><progress value="${progression?.xpIntoLevel??0}" max="${(progression?.xpIntoLevel??0)+(progression?.xpToNextLevel??1)||1}" aria-label="Party level progress"></progress></div></header>${renderSafeRoomStations(focused,advisor)}<div class="safe-room-layout"><aside class="safe-advisor panel"><div class="advisor-head">${portrait(advisor,'advisor-portrait')}<div><h2>Mordecai</h2><span>Safe-room advisor</span></div></div><p>${e(view.safeRoom?.description||'Catch your breath. Check your gear and skills before heading back into the dungeon.')}</p><button id="rest-button" class="primary" ${view.safeRoom?.available===false?'disabled':''}>${view.safeRoom?.rested?'Rest again':'Rest & restore HP / MP'}</button><small>${view.safeRoom?.rested?'Party rested. Equipment and skills are ready to change.':'Rest restores the party’s actual health and mana.'}</small><details class="safe-quests"><summary>Quest journal · ${e(activeQuest()?.label||'Explore the dungeon')} ${activeQuest()?activeQuest().progress+'/'+activeQuest().total:''}</summary>${questRows()}</details></aside><details class="safe-party" ${rosterExpanded?'open':''}><summary class="panel-head"><h2>Manage your crawlers</h2><span>${view.partyCount}/${view.partyCapacity} deployed · classes & stats</span></summary><div class="safe-roster-grid">${view.roster.filter(r=>r.deployable!==false).map(r=>`<article class="safe-crawler${r.selected?' deployed':''}${r.id===focusedRoster?' focused':''}" data-crawler-card="${e(r.id)}"><button class="safe-crawler-select" data-roster="${e(r.id)}" aria-pressed="${r.id===focusedRoster}">${portrait(r)}<span><strong>${e(r.label)}</strong><small>Level ${r.level??progression?.level??1} · ${e(classLabel(r.classId))}</small><span class="deployment-label">${r.selected?'DEPLOYED':'RESERVE'}</span></span></button><div class="safe-crawler-stats"><span>HP <b>${r.hp}/${r.maxHp}</b></span><span>MP <b>${r.energy??r.maxEnergy??'—'}/${r.maxEnergy??'—'}</b></span><span>MOVE <b>${r.move??'—'}</b></span><span>XP <b>${progression?.xp??view.xp}</b></span></div><div class="safe-crawler-gear">${gearFor(r.id).map(gear=>`<span>${e(gear.label)}</span>`).join('')||'<span>No equipment</span>'}</div><div class="safe-crawler-buttons"><button data-equipment="${e(r.id)}">Equipment</button><button data-skills="${e(r.id)}">Skills</button></div></article>`).join('')}</div><section class="safe-loadout panel"><div><strong>${e(focused?.label)} · Class & deployment</strong><p>Character skills stay with their crawler. Classes add their own abilities.</p></div><label class="field" for="class-select">CLASS<select id="class-select">${view.classes.map(klass=>`<option value="${e(klass.id)}" ${klass.id===focused?.classId?'selected':''}>${e(klass.label)}</option>`).join('')}</select></label><button id="toggle-party">${focused?.selected?'Move to reserve':'Deploy crawler'}</button></section><details class="panel inventory-strip"><summary>Shared consumables · ${view.items.reduce((sum,item)=>sum+item.count,0)} charges</summary><div class="tags">${view.items.map(item=>`<span class="tag">${e(item.label)} ×${item.count}</span>`).join('')}</div></details></details></div>${renderCampModal()}</section>`;
+}
+function renderCampModal() {
+  if(!campModal)return '';
+  const crawler=view.roster.find(r=>r.id===focusedRoster);
+  if(!crawler)return '';
+  const equipment=campModal==='equipment';
+  const klass=view.classes.find(c=>c.id===crawler.classId);
+  const innate=crawler.innateAbilityIds??[];
+  const classIds=klass?.abilityIds??[];
+  const gearIds=gearFor(crawler.id).flatMap(gear=>gear.abilityIds??[]);
+  const unlocked=(view.progression?.skills??[]).filter(skill=>(!skill.unitId||skill.unitId===crawler.id));
+  const abilityCard=(id,source)=>{const authored=content.abilities.find(a=>a.id===id);return `<div class="skill-row"><strong>${e(authored?.label||id)}</strong><span class="skill-source">${e(source)}</span><p>${e(abilityDescription(authored))}</p><small>${authored?.cost??0} MP · range ${authored?.range??0}</small></div>`;};
+  return `<dialog id="${equipment?'equipment':'skills'}-dialog" class="loadout-dialog" aria-labelledby="loadout-title"><div class="dialog-head"><div><span class="section-label">${e(crawler.label)} · LEVEL ${crawler.level??view.progression?.level??1}</span><h2 id="loadout-title">${equipment?'Equipment':'Skills & unlocks'}</h2></div><button id="close-loadout" class="icon-button" aria-label="Close ${equipment?'equipment':'skills'}">×</button></div><div class="modal-body"><label class="loadout-crawler-label" for="loadout-crawler">CRAWLER<select id="loadout-crawler">${view.roster.filter(r=>r.deployable!==false).map(r=>`<option value="${e(r.id)}" ${r.id===crawler.id?'selected':''}>${e(r.label)}</option>`).join('')}</select></label><div class="action-modal-stats"><span>HP ${crawler.hp}/${crawler.maxHp}</span><span>MP ${crawler.energy??'—'}/${crawler.maxEnergy??'—'}</span><span>Move ${crawler.move??'—'}</span></div>${equipment?`<p class="modal-intro">Equip owned gear to change actual stats and grant skills. Each item has one owner; equipping replaces that slot’s current item.</p><div class="equipment-grid">${(view.equipment??[]).map(gear=>{const mine=gear.equippedUnitId===crawler.id;const owner=view.roster.find(r=>r.id===gear.equippedUnitId);return `<article class="equipment-card${mine?' equipped':''}${!gear.owned?' locked':''}" data-gear="${e(gear.id)}"><div><strong>${e(gear.label)}</strong><span>${e(gear.slot)}</span></div><p class="gear-bonuses">${e(gearBonuses(gear))}</p>${(gear.abilityIds??[]).map(id=>`<small>Grants ${e(content.abilities.find(a=>a.id===id)?.label||id)}</small>`).join('')}<p class="equipment-ownership">${mine?'Equipped by '+e(crawler.label):owner?'Equipped by '+e(owner.label):gear.owned?'Owned · available':'Locked · unlock encounter '+gear.unlockEncounter}</p><button ${mine?'data-unequip':'data-equip'}="${e(gear.id)}" ${!gear.owned||owner&&!mine?'disabled':''}>${mine?'Unequip':owner?'In use':'Equip'}</button></article>`;}).join('')}</div>`:`<p class="modal-intro">Available skills combine character, class, equipped gear and level unlocks. Locked skills become usable automatically at the required party level.</p><div class="skill-grid">${innate.map(id=>abilityCard(id,'Character skill')).join('')}${classIds.filter(id=>!innate.includes(id)).map(id=>abilityCard(id,'Class skill')).join('')}${gearIds.filter(id=>!innate.includes(id)&&!classIds.includes(id)).map(id=>abilityCard(id,'Equipment skill')).join('')}${unlocked.map(skill=>`<div class="skill-row${skill.unlocked?' unlocked':' locked'}" data-skill="${e(skill.id)}"><strong>${e(skill.label)}</strong><span class="skill-source">${skill.unlocked?'Unlocked':'Locked'} · Level ${skill.level}</span><p>${e(abilityDescription(content.abilities.find(a=>a.id===skill.abilityId)))}</p><small>${skill.unlocked?'Available in the action menu.':'Reach party level '+skill.level+' to unlock.'}</small></div>`).join('')}</div>`}</div><div class="modal-actions"><button id="done-loadout">Done</button><button id="switch-loadout">${equipment?'View skills':'View equipment'}</button></div></dialog>`;
+}
+function renderQuestDialog() {return `<dialog id="quest-dialog" aria-labelledby="quest-title"><div class="dialog-head"><h2 id="quest-title">Quest journal</h2><button id="close-quests" class="icon-button" aria-label="Close quests">×</button></div><div class="modal-body">${questRows()}</div><div class="modal-actions"><button id="done-quests">Back to dungeon</button></div></dialog>`;}
+function renderLevelDialog() {
+  if(!levelNotice)return '';
+  return `<dialog id="level-up-dialog" aria-labelledby="level-up-title"><div class="dialog-head"><h2 id="level-up-title">Party level ${levelNotice.level}</h2></div><div class="modal-body"><p class="level-up-line">Your crawlers grow stronger.</p><div class="action-modal-stats"><span>+${levelNotice.hpBonus} HP</span><span>+${levelNotice.manaBonus} MP</span><span>+${levelNotice.moveBonus} MOVE</span></div><p class="modal-intro">These are the party’s current level bonuses. Rest at Mordecai’s safe room, check new equipment and open Skills to see your unlocks.</p><div class="skill-grid">${(view.progression?.skills??[]).filter(skill=>skill.level===levelNotice.level).map(skill=>`<div class="skill-row unlocked"><strong>${e(skill.label)}</strong><small>${e(view.roster.find(r=>r.id===skill.unitId)?.label||'Party skill')} · unlocked</small></div>`).join('')}</div></div><div class="modal-actions"><button id="continue-level-up" class="primary">Continue</button></div></dialog>`;
 }
 function renderParty() {
   const players=view.units.filter(u=>u.team==='player');
@@ -237,12 +294,13 @@ function renderParty() {
   return `<div class="party-strip" style="--party-columns:${Math.min(4,players.length)}" aria-label="Crawler turn order">${order.map(u=>`<button class="party-chip${u.selected?' active':''}${u.acted?' turn-spent':''}" data-unit="${e(u.id)}" ${u.hp<=0?'disabled':''} aria-pressed="${u.selected}">${portrait(u)}<span><strong>${e(u.label)}</strong><small>${u.hp<=0?'Fallen':u.acted?'Turn ended':u.selected?'Selected': 'Ready'}</small></span></button>`).join('')}<span class="party-round">ROUND ${view.round}</span></div>`;
 }
 function renderBattle() {
-  return `<section class="battle-screen" aria-label="Tactical dungeon"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>FLOOR ${String(view.encounterIndex+1).padStart(2,'0')}</small><h2 id="screen-title">${e(view.objective || 'OPEN THE EXIT')}</h2></div></div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}${renderBoard()}<div id="map-inspect" class="map-inspect" hidden></div></div><div class="battle-guidance" role="status">${e(view.message || 'Select a crawler. Move, then choose an ability.')}</div><div class="battle-hud">${renderParty()}<section class="action-dock" aria-label="Selected crawler and actions">${renderInspector(unit())}</section></div>${renderDrawer()}${actionChooser?renderActionDialog():''}${endTurnActor?renderEndTurnDialog():''}${detailedForecast?renderForecastDialog():''}</section>`;
+  return `<section class="battle-screen" aria-label="Tactical dungeon"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>FLOOR ${String(view.encounterIndex+1).padStart(2,'0')}</small><h2 id="screen-title">${e(view.objective || 'OPEN THE EXIT')}</h2></div></div>${renderQuestTracker()}<div id="enemy-phase-banner" class="enemy-phase-banner" hidden role="status">ENEMY TURN · Watch their movement</div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}${renderBoard()}<div id="map-inspect" class="map-inspect" hidden></div></div><div class="battle-guidance" role="status">${e(view.message || 'Select a crawler. Move, then choose an ability.')}</div><div class="battle-hud">${renderParty()}<section class="action-dock" aria-label="Selected crawler and actions">${renderInspector(unit())}</section></div>${renderDrawer()}${actionChooser?renderActionDialog():''}${endTurnActor?renderEndTurnDialog():''}${detailedForecast?renderForecastDialog():''}</section>`;
 }
 function renderWorldControls() {
-  return `<div class="world-controls" aria-label="Battlefield camera"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="center-map">Center</button><button id="skip-animation" ${animating?'':'hidden'}>Skip animation</button></div>`;
+  return `<div class="world-controls" aria-label="Battlefield camera"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">−</button><button id="rotate-left" aria-label="Rotate left 90 degrees">↶ 90°</button><span id="compass-label">${e(battlefield?.getRotationLabel?.()||'North view')}</span><button id="rotate-right" aria-label="Rotate right 90 degrees">90° ↷</button><button id="center-map">Center</button><button id="skip-animation" ${animating?'':'hidden'}>Skip animation</button></div>`;
 }
 function hoverCell(x,y) {
+  if(x==null&&pinnedInspection&&view.screen==='battle'){x=pinnedInspection.x;y=pinnedInspection.y;}
   inspectPosition = x == null ? null : {x,y};
   const box=$('#map-inspect'); if(!box) return;
   if(view.screen==='explore') { const point=view.exploration.points.find(p=>p.x===x&&p.y===y);box.hidden=!point;if(point)box.innerHTML=`<strong>${e(point.label)}</strong><span>${e(point.description)}</span>`;return; }
@@ -264,7 +322,7 @@ function renderExploration() {
   const map=view.exploration;
   if(!map) return '<p>Preparing the passages…</p>';
   const points=map.points.filter(p=>p.canInteract&&!p.claimed);
-  return `<section class="exploration-screen iso-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(map.label)}</h2></div></div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${t.blocked?'wall':t.revealed?'passage':'unexplored'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>portrait(r)).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || 'Find the encounter door')}</strong><p>${e(points[0]?.description || 'Click a path or use arrow keys / WASD. Approach discoveries to interact.')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}<button id="return-camp">Return to Mordecai</button></div></div></section>`;
+  return `<section class="exploration-screen iso-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(map.label)}</h2></div></div>${renderQuestTracker()}<div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${t.blocked?'wall':t.revealed?'passage':'unexplored'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>portrait(r)).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || 'Find the encounter door')}</strong><p>${e(points[0]?.description || 'Click a path or use arrow keys / WASD. Approach discoveries to interact.')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}<button id="return-camp">Return to Mordecai</button></div></div></section>`;
 }
 function renderBoard() {
   const action = selectedAction();
@@ -287,9 +345,16 @@ function renderInspector(selected) {
   const target=changes.find(f=>f.targetId!==view.selectedUnitId&&f.beforeHp!==f.afterHp) ?? changes.find(f=>f.targetId!==view.selectedUnitId) ?? changes[0];
   return `<div class="hud-crawler">${selected?portrait(selected,'hud-portrait'):''}<div class="hud-stats"><strong>${e(selected?.label || 'SELECT CRAWLER')}</strong><small class="hud-class">${e(classLabel(selected?.classId))}</small><div class="hud-meter hp"><span>HP</span><b>${selected?.hp??0}/${selected?.maxHp??0}</b><i style="--fill:${selected?selected.hp/selected.maxHp*100:0}%"></i></div><div class="hud-meter en"><span>MP</span><b>${selected?.energy??0}/${selected?.maxEnergy??0}</b><i style="--fill:${selected?selected.energy/selected.maxEnergy*100:0}%"></i></div><div class="hud-move">MOVE <b>${selected?.effectiveMove??selected?.move??'—'}</b> <small>${selected?.acted?'TURN ENDED':selected?.moved?'MOVE SPENT':'READY'}</small></div><div class="hud-statuses">${(selected?.statuses??[]).map(status=>`<span class="tag" title="${e(displayLog(status.source))}">${e(shortTag(status.tag))} ${status.remainingRounds}r</span>`).join('')}</div></div></div><div class="hud-actions"><button id="open-actions" class="action-picker-button">Choose action <span>Abilities & items</span></button><div class="hud-action-list"><button id="move-mode" class="hud-action${!localAction?' active':''}" ${!view.canMove&&!localAction?'disabled':''}>${actionIcon(4)}<strong>MOVE</strong><small>${selected?.moved?'Spent':`${selected?.effectiveMove??selected?.move??'—'} tiles`}</small></button>${view.abilities.map((a,index)=>`<button class="hud-action category-${actionCategory(a).key}${localAction?.abilityId===a.id?' active':''}" data-ability="${e(a.id)}" ${!a.enabled?'disabled':''} aria-label="${e(a.label+'. '+a.description+'. '+(a.disabledReason||''))}" title="${e(a.description+(a.disabledReason?' · '+a.disabledReason:''))}">${actionIcon(abilityIcon(a))}<strong>${e(a.label)}</strong><small>${a.cost} MP · ${a.range} RNG</small>${a.disabledReason?`<small class="action-reason">${e(a.disabledReason)}</small>`:''}</button>`).join('')}<button class="hud-action category-item${localAction?.itemId?' active':''}" data-drawer="items">${actionIcon(7)}<strong>ITEMS</strong><small>${localAction?.itemId?e(selectedAction()?.label)+' ×'+(selectedAction()?.count??0):view.items.reduce((sum,i)=>sum+i.count,0)+' charges'}</small></button></div><p class="action-caption">${e(action?.description || (selected?.acted?'Choose another crawler.':'Move, then use a class ability.'))}${action?.disabledReason?' · '+e(action.disabledReason):''}</p></div><div class="hud-target" aria-live="polite">${view.canConfirm?`<div class="target-forecast"><strong>${e((target?forecastLabel(target):null)||action?.label||'TARGET')}</strong>${target&&target.beforeHp!==target.afterHp?`<span class="target-hp">HP <b>${target.beforeHp} → ${target.afterHp}</b></span>`:''}${target?tags(target.afterTags.filter(t=>!target.beforeTags.includes(t))):''}<small>${e(action?.label||'Action')} · ${action?.cost??0} MP</small></div><div class="forecast-buttons"><button id="cancel-forecast">Cancel</button><button id="confirm-forecast" class="primary">Confirm</button><button id="review-forecast" class="details-button" aria-label="Detailed forecast">Details</button></div>`:`<strong>${localAction?(action?.targetIds?.length?'CHOOSE TARGET':'NO TARGET IN RANGE'): 'READ THE ROOM'}</strong><small>${e(localAction?'Select a highlighted '+(action?.target||'target')+'.':'Select an enemy to inspect. Nothing is spent until you confirm.')}</small>${localAction?'<button id="cancel-forecast">Cancel targeting</button>':''}`}<button id="end-turn" class="end-character" ${!view.canAct?'disabled':''}>End character turn →</button><button data-drawer="log" class="hud-log">Combat log</button></div>`;
 }
+function abilitySource(id,unitId) {
+  const crawler=view.roster.find(r=>r.id===unitId);
+  if(crawler?.innateAbilityIds?.includes(id))return 'Character';
+  if(gearFor(unitId).some(gear=>gear.abilityIds?.includes(id)))return 'Equipment';
+  if(view.progression?.skills?.some(skill=>skill.abilityId===id&&skill.unlocked&&(!skill.unitId||skill.unitId===unitId)))return 'Level unlock';
+  return 'Class';
+}
 function renderActionDialog() {
   const actor=unit();
-  const abilityButton=(a,item=false)=>{ const category=actionCategory(a,item);const available=item ? a.count>0&&view.canAct : a.enabled; const reason=a.disabledReason || (!a.targetIds.length?'No legal target in range · move first':'');return `<button class="modal-action-card category-${category.key}${(item?localAction?.itemId:localAction?.abilityId)===a.id?' active':''}" ${item?'data-modal-item':'data-modal-ability'}="${e(a.id)}" ${available?'':'disabled'}>${actionIcon(item?7:abilityIcon(a))}<span><strong>${e(a.label)}${item?' ×'+a.count:''}</strong><span class="category-label">${category.label}</span><small>${item?'1 action':a.cost+' MP'} · range ${a.range} · ${e(a.target)}</small><p>${e(a.description)}</p><small class="${reason?'availability-warning':'availability-ready'}">${e(reason||a.targetIds.length+' legal target'+(a.targetIds.length===1?'':'s'))}</small></span></button>`;};
+  const abilityButton=(a,item=false)=>{ const category=actionCategory(a,item);const available=item ? a.count>0&&view.canAct : a.enabled; const reason=a.disabledReason || (!a.targetIds.length?'No legal target in range · move first':'');return `<button class="modal-action-card category-${category.key}${(item?localAction?.itemId:localAction?.abilityId)===a.id?' active':''}" ${item?'data-modal-item':'data-modal-ability'}="${e(a.id)}" ${available?'':'disabled'}>${actionIcon(item?7:abilityIcon(a))}<span><strong>${e(a.label)}${item?' ×'+a.count:''}</strong><span class="category-label">${category.label} · ${item?'Shared item':abilitySource(a.id,view.selectedUnitId)}</span><small>${item?'1 action':a.cost+' MP'} · range ${a.range} · ${e(a.target)}</small><p>${e(a.description)}</p><small class="${reason?'availability-warning':'availability-ready'}">${e(reason||a.targetIds.length+' legal target'+(a.targetIds.length===1?'':'s'))}</small></span></button>`;};
   return `<dialog id="action-dialog" aria-labelledby="action-title"><div class="dialog-head"><div><span class="section-label">${e(actor?.label||'Crawler')} · ${e(classLabel(actor?.classId))}</span><h2 id="action-title">Choose an action</h2></div><button id="close-actions" class="icon-button" aria-label="Close action choices">×</button></div><div class="modal-body"><div class="action-modal-stats"><span>HP ${actor?.hp}/${actor?.maxHp}</span><span>MP ${actor?.energy}/${actor?.maxEnergy}</span><span>Move ${actor?.effectiveMove??actor?.move??0}${actor?.moved?' · spent':''}</span></div><p class="modal-intro">Choose an ability, then select a highlighted target on the map. Review the exact result before confirming.</p><button id="modal-move" class="modal-move" ${view.canMove?'':'disabled'}>${actionIcon(4)}<span><strong>Move</strong><small>${view.canMove?'Choose a blue path. No action or mana cost.':'Movement is spent for this character.'}</small></span></button><div class="modal-action-grid">${view.abilities.map(a=>abilityButton(a)).join('')}</div><details class="modal-item-section" ${localAction?.itemId?'open':''}><summary>Shared items · ${view.items.reduce((sum,i)=>sum+i.count,0)} charges</summary><div class="modal-action-grid">${view.items.map(a=>abilityButton(a,true)).join('')}</div></details></div><div class="modal-actions"><button id="cancel-actions">Back to map</button><button id="actions-end-turn">End character turn…</button></div></dialog>`;
 }
 function closeActionDialog() { actionChooser=false;render();$('#open-actions')?.focus(); }
@@ -323,7 +388,32 @@ function renderEnding() {
   return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${complete ? '♜' : '†'}</div><h2 id="screen-title">${complete ? 'The floor is yours.' : 'The dungeon wins. For now.'}</h2><p>${complete ? `All three encounters cleared. Your crawlers earned ${view.xp} XP, exploited the elements, and made it back in one piece. The audience will want a sequel.` : 'Your deployed crawlers have fallen. Retry the encounter with the same starting party and supplies, or rebuild from the beginning.'}</p><div class="tags" style="justify-content:center"><span class="tag gold">${complete ? 'FLOOR 01 COMPLETE' : 'PARTY DEFEATED'}</span><span class="tag">${view.xp} XP EARNED</span></div><div class="button-row">${!complete ? '<button class="primary" id="retry-button">Retry encounter</button>' : ''}<button id="ending-new-run" ${complete ? 'class="primary"' : ''}>Start a new run</button></div><button class="quiet" id="ending-export">Export this run</button></div>${renderSurvivors()}${renderLog()}</section>`;
 }
 function bindScreen() {
-  $('#open-actions')?.addEventListener('click',()=>{battlefield?.skipAnimations();actionChooser=true;detailedForecast=false;endTurnActor=null;render();});
+  document.querySelectorAll('img[data-fallback-src]').forEach(img=>img.addEventListener('error',()=>{img.src=img.dataset.fallbackSrc;delete img.dataset.fallbackSrc;},{once:true}));
+  const refreshCompass=()=>{if($('#compass-label'))$('#compass-label').textContent=battlefield?.getRotationLabel?.()||'North view';};
+  $('#rotate-left')?.addEventListener('click',()=>{battlefield?.rotate?.(-1);refreshCompass();});
+  $('#rotate-right')?.addEventListener('click',()=>{battlefield?.rotate?.(1);refreshCompass();});
+  refreshCompass();
+  $('#rest-button')?.addEventListener('click',()=>command('safe_room_rest'));
+  $('#station-rest')?.addEventListener('click',()=>command('safe_room_rest'));
+  document.querySelectorAll('[data-equipment]').forEach(button=>button.addEventListener('click',()=>{focusedRoster=button.dataset.equipment;campModal='equipment';render();}));
+  document.querySelectorAll('[data-skills]').forEach(button=>button.addEventListener('click',()=>{focusedRoster=button.dataset.skills;campModal='skills';render();}));
+  const loadoutDialog=$('#equipment-dialog')||$('#skills-dialog');
+  const closeLoadout=()=>{const id=focusedRoster,kind=campModal;campModal=null;render();document.querySelector(`[data-${kind}="${id}"]`)?.focus();};
+  if(loadoutDialog){openDialog('#'+loadoutDialog.id);$('#close-loadout').focus();loadoutDialog.addEventListener('cancel',event=>{event.preventDefault();closeLoadout();});}
+  $('#close-loadout')?.addEventListener('click',closeLoadout);$('#done-loadout')?.addEventListener('click',closeLoadout);
+  $('#switch-loadout')?.addEventListener('click',()=>{campModal=campModal==='equipment'?'skills':'equipment';render();});
+  $('#loadout-crawler')?.addEventListener('change',event=>{focusedRoster=event.target.value;render();});
+  document.querySelectorAll('[data-equip]').forEach(button=>button.addEventListener('click',()=>{button.disabled=true;command('equip',{unitId:focusedRoster,equipmentId:button.dataset.equip});}));
+  document.querySelectorAll('[data-unequip]').forEach(button=>button.addEventListener('click',()=>{button.disabled=true;command('unequip',{unitId:focusedRoster,equipmentId:button.dataset.unequip});}));
+  $('#quest-button')?.addEventListener('click',()=>{questModal=true;render();});
+  const closeQuests=()=>{questModal=false;render();$('#quest-button')?.focus();};
+  if($('#quest-dialog')){openDialog('#quest-dialog');$('#quest-dialog').addEventListener('cancel',event=>{event.preventDefault();closeQuests();});}
+  $('#close-quests')?.addEventListener('click',closeQuests);$('#done-quests')?.addEventListener('click',closeQuests);
+  const closeLevel=()=>{levelNotice=null;render();};
+  if($('#level-up-dialog')){openDialog('#level-up-dialog');$('#continue-level-up').focus();$('#level-up-dialog').addEventListener('cancel',event=>{event.preventDefault();closeLevel();});}
+  $('#continue-level-up')?.addEventListener('click',closeLevel);
+
+  $('#open-actions')?.addEventListener('click',()=>{if(enemySequence)return; battlefield?.skipAnimations();actionChooser=true;detailedForecast=false;endTurnActor=null;render();});
   const actionDialog=$('#action-dialog');
   if(actionDialog){openDialog('#action-dialog');$('#close-actions').focus();actionDialog.addEventListener('cancel',event=>{event.preventDefault();closeActionDialog();});}
   $('#close-actions')?.addEventListener('click',closeActionDialog);
@@ -359,7 +449,8 @@ function bindScreen() {
       });
     });
   });
-  document.querySelectorAll('[data-roster]').forEach(b => b.addEventListener('click', () => { focusedRoster = b.dataset.roster; render(); }));
+  $('.safe-party')?.addEventListener('toggle',event=>{rosterExpanded=event.target.open;});
+  document.querySelectorAll('[data-roster]').forEach(b => b.addEventListener('click', () => { rosterExpanded=true;focusedRoster = b.dataset.roster; render(); }));
   $('#class-select')?.addEventListener('change', event => command('set_class', { unitId: focusedRoster, classId: event.target.value }));
   $('#toggle-party')?.addEventListener('click', () => command('toggle_party', { unitId: focusedRoster }));
   document.querySelectorAll('[data-drawer]').forEach(b => b.addEventListener('click', () => { drawerReturn = `[data-drawer="${b.dataset.drawer}"]`; drawer = b.dataset.drawer; render(); }));
@@ -403,8 +494,13 @@ function bindScreen() {
   $('#ending-export')?.addEventListener('click', exportSave);
 }
 function chooseAction(action) {
+  pendingActionChoice=action;
+  pinnedInspection=null;
   document.querySelectorAll('[data-ability]').forEach(button=>button.classList.toggle('active',button.dataset.ability===action.abilityId));
-  return playerInput(()=>applyActionChoice(action));
+  const result=playerInput(()=>applyActionChoice(action));
+  const clearPending=()=>{if(pendingActionChoice===action)pendingActionChoice=null;};
+  result.then(clearPending,clearPending);
+  return result;
 }
 async function applyActionChoice(action) {
   await commandQueue;
@@ -419,7 +515,15 @@ async function applyActionChoice(action) {
     await command('preview', { ...localAction, targetId: view.selectedUnitId }, { preserveAction: true, save: false });
   } else {render();toast(`Choose a highlighted ${selectedAction()?.target||'target'} for ${selectedAction()?.label||'this action'}.`);}
 }
-function clickCell(x,y) { return playerInput(()=>applyCellClick(x,y)); }
+function clickCell(x,y) {
+  const occupant=view.units.find(unit=>unit.x===x&&unit.y===y&&unit.hp>0);
+  if(view.screen==='battle'&&!localAction&&!pendingActionChoice&&occupant?.team==='enemy') {
+    // Taps have no sustained hover: keep this read-only inspection after pointerleave.
+    pinnedInspection={x,y};hoverCell(x,y);return Promise.resolve();
+  }
+  pinnedInspection=null;
+  return playerInput(()=>applyCellClick(x,y));
+}
 async function applyCellClick(x, y) {
   await commandQueue;
   if(view.screen!=='battle') return;
@@ -437,7 +541,7 @@ async function applyCellClick(x, y) {
   } else if (!occupant && view.reachable.some(c => c.x === x && c.y === y)) {
     await command('move', { x, y });
   } else {
-    hoverCell(x,y);
+    pinnedInspection={x,y};hoverCell(x,y);
   }
 }
 async function cancelTargeting() { detailedForecast=false; targetTile = false; await command('cancel', {}, { save: false }); }
@@ -527,13 +631,12 @@ $('#reload-save-button').addEventListener('click', async () => {
 $('#restart-button').addEventListener('click', () => { closeDialog('#save-dialog'); openDialog('#restart-dialog'); });
 $('#confirm-restart').addEventListener('click', async () => { closeDialog('#restart-dialog'); focusedRoster = null; await command('new_run'); });
 document.addEventListener('keydown', event => {
-  if (view?.screen === 'explore' && !busy && !document.querySelector('dialog[open]') && !['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName) && !event.ctrlKey && !event.metaKey && !event.altKey) {
-    const direction = {ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0],ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1]}[event.key];
-    if (direction) { event.preventDefault(); const map = view.exploration; const x=map.x+direction[0], y=map.y+direction[1]; if (map.tiles.some(t => t.x===x && t.y===y && t.reachable)) command('explore_move',{x,y}); }
+  if(view?.screen==='explore'&&!document.querySelector('dialog[open]')&&!['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName)&&!event.ctrlKey&&!event.metaKey&&!event.altKey&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','w','a','s','d'].includes(event.key)) {
+    event.preventDefault();battleCanvas?.focus({preventScroll:true});battleCanvas?.dispatchEvent(new KeyboardEvent('keydown',{key:event.key}));
   }
 
   if (event.key === '?' && !document.querySelector('dialog[open]') && !event.ctrlKey && !event.metaKey && !['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) { event.preventDefault(); openDialog('#help-dialog'); }
-  if (event.key === 'Escape' && !document.querySelector('dialog[open]')) { if (drawer) { closeDrawer(); } else if (view?.screen === 'battle') cancelTargeting(); }
+  if (event.key === 'Escape' && !document.querySelector('dialog[open]')) { if(enemySequence)return; if (drawer) { closeDrawer(); } else if (view?.screen === 'battle') cancelTargeting(); }
 });
 boot();
 

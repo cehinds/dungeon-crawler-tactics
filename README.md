@@ -1,6 +1,6 @@
 # Dungeon Crawler Tactics
 
-A small complete Dungeon Crawler Carl fan tactics game: an animated isometric dungeon, four deployed characters, personal ability kits, three encounters ending in a boss, environmental reactions, shared consumables and sponsor rewards.
+A small complete Dungeon Crawler Carl fan tactics game: an animated isometric dungeon, four deployed characters, personal ability kits, three encounters ending in a boss, environmental reactions, shared consumables, level growth, equipment and sponsor rewards.
 
 **Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
 
@@ -19,12 +19,14 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Move on three authored 10×8 boards, use class abilities or shared items, inspect the exact forecast, confirm or cancel.
 - Watch actual walk/attack/hit sprite frames and visual reactions on the map. Inspect HP, Mana/MP, movement, conditions, range and exact forecasts in a compact HUD.
 - Choose actions in a responsive modal with labeled category colors, Mana costs and legal-target counts. Review the exact forecast in its confirmation modal; end-turn confirmation names the next actor.
-- End the current character's turn to select the next ready ally; enemies act after the whole party finishes. Pan/zoom the map on phones.
+- End the current character's turn to select the next ready ally; enemies act after the whole party finishes. Watch enemies navigate around walls during a clearly labeled enemy phase.
+- Rotate the map through four views, preview movement paths, and pan/zoom on phones. All eight field characters have four-direction idle and walking sprites.
+- Earn shared party XP, reach levels 1–4, unlock personal skills, and equip weapons, armor and charms. Rest and manage loadouts in Mordecai's safe room; follow objectives in the quest journal.
 - Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage. Guardian, Bard and Necromancer support abilities now grant real single-hit protection.
 - Fight deterministic enemies, collect sponsor supplies, reach the boss, finish the floor, or retry after defeat.
 - Autosave, reload, and export/import a portable JSON save.
 
-There are **16 selectable class kits, 46 ability definitions, 8 consumables and six new art atlases and a dedicated winged-Mongo portrait**, plus the earlier reserve-character textures. Classes are unlocked at camp; XP is a progress score. Advanced summons, equipment progression, area chains, elevation, procedural levels and audio are outside this compact release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
+There are **20 selectable class kits, 66 ability definitions, 8 consumables, 6 equipment pieces and 96 directional character frames**. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). Advanced summons, area chains, elevation, procedural campaign levels and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
 
 ## Start here
 
@@ -64,6 +66,7 @@ Requires Python 3, `Tools/requirements.txt`, and .NET 8 SDK for development:
 python3 -m pip install -r Tools/requirements.txt
 python3 Tools/validate_content.py UnityPackage/Runtime/Data/combat-content.json
 python3 Tools/validate_game_data.py
+python3 Tools/validate_directional_art.py
 python3 -m unittest discover -s Tools -p 'test_*.py'
 dotnet run --project Tests/RulesKernel.Tests.csproj
 dotnet run --project Tests/GameTests/GameTests.csproj

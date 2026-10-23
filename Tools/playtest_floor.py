@@ -29,7 +29,13 @@ with sync_playwright() as p:
       let v=await send('new_run'), ticks=0, victories=0, potions=0, moves=0, previewChecks=0;
       const nearest=(cell,units)=>Math.min(...units.filter(u=>u.team==='enemy'&&u.hp>0).map(u=>Math.abs(u.x-cell.x)+Math.abs(u.y-cell.y)));
       while(v.screen!=='complete' && ticks++<700){
-        if(v.screen==='camp'){v=await send('start');continue;}
+        if(v.screen==='camp'){
+          v=await send('safe_room_rest');
+          if(!v.safeRoom.rested)throw Error('Safe-room rest failed');
+          v=await send('start');
+          if(v.screen!=='explore')throw Error('Could not leave safe room: '+v.message);
+          continue;
+        }
         if(v.screen==='explore'){
           const m=v.exploration;
           const nearby=m.points.find(p=>p.canInteract&&!p.claimed&&p.kind!=='encounter');
@@ -97,6 +103,7 @@ with sync_playwright() as p:
         v=await send('wait',{unitId:actor.id});
       }
       if(v.screen!=='complete'||victories!==3||v.xp!==150)throw Error('Bad final state '+JSON.stringify({screen:v.screen,victories,xp:v.xp,ticks}));
+      if(v.progression.level!==4)throw Error('Full floor did not reach level 4');
       const save=await DotNet.invokeMethodAsync('DungeonCrawlerTactics.Web','GetSave');
       await window.dungeon.loadSave(save);
       return {screen:v.screen,victories,xp:v.xp,ticks,moves,potions,previewChecks,saveBytes:save.length};

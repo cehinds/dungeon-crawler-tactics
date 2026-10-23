@@ -1,5 +1,15 @@
 # Revamp browser QA
 
+## Progression, directional movement and enemy turns
+
+The final combined visible-UI suite passed at 1366×768, 390×844 and 844×390, including all four rotations, movement and spell forecasts/commits, turn order, cancellation, touch inspection and Wet + Lightning. No JavaScript errors occurred.
+
+Integrated checks at desktop 1366×768 and phone 360×640 verified the safe-room stations and Equipment/Skills dialog footers fit. Field Vest adds 5 actual maximum HP, Rest restores HP/Mana, and future skills show their level requirement. All four phone camera rotations passed actual pointer targeting and screen-relative arrow movement. An enemy scenario emitted eight movement steps; the enemy banner and input lock remained through playback, map clicks did not skip it, and controls unlocked afterward. No JavaScript errors occurred. A final phone fix makes enemy taps pin the HP/condition inspect panel after pointer leave without changing the save; ability-target taps still open their forecast.
+
+The repeatable `Tools/playtest_revamp.py` enemy fixture uses separated walkable team positions in a validated save and ends Mongo’s activation through the visible confirmation. It observed nine enemy move events and 62 changing canvas frames, with the enemy banner visible and actions disabled throughout sampled playback. `Tools/playtest_progression.py` verified Field Vest’s +5 HP persisted through local-save reload, Rest restored damaged HP/Mana, a real attack awarded 30 XP and level 2, Rigged Burst changed from locked to unlocked, and the floor quest advanced to 1. Its weakened-enemy save fixture keeps this UI test short; the separate full-floor driver uses unmodified enemy health.
+
+The directional-art validator checks all 96 distinct frames across eight characters. Root visually inspected the current battle, exploration, safe-room phone and enemy-phase captures. These checks establish browser behavior and viewport fit, not native Unity rendering or physical-device performance.
+
 ## Room kit and modal update
 
 The updated visible-UI suite passes at 1366×768, 390×844 and 844×390. It opens the action chooser, checks Mana costs and legal-target counts, cancels a forecast with Escape without spending resources, reselects and confirms, and checks end-turn confirmation/cancellation and next-actor labels. The Wet + Lightning item scenario still commits the forecast reaction. A separate modal check at 360×640 also verified footer controls fit.

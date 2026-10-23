@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "floor-one-2.0.0",
+  "contentVersion": "floor-one-3.0.0",
   "partySize": 4,
   "energyPerRound": 3,
   "roster": [
@@ -57,38 +57,42 @@
     {
       "id": "crawler.elle",
       "label": "Elle",
-      "classId": "class.cryomancer",
+      "classId": "class.blizzardmancer",
       "selected": false,
       "deployable": true,
       "artId": "elle",
-      "innateAbilityIds": []
+      "innateAbilityIds": [],
+      "legacyClassId": "class.cryomancer"
     },
     {
       "id": "crawler.iman",
       "label": "Imani",
-      "classId": "class.guardian",
+      "classId": "class.fire_spiritualist",
       "selected": false,
       "deployable": true,
-      "artId": "iman",
-      "innateAbilityIds": []
+      "artId": "imani",
+      "innateAbilityIds": [],
+      "legacyClassId": "class.guardian"
     },
     {
       "id": "crawler.louis",
       "label": "Louis",
-      "classId": "class.ranger",
+      "classId": "class.pest_exterminator",
       "selected": false,
       "deployable": true,
       "artId": "louis",
-      "innateAbilityIds": []
+      "innateAbilityIds": [],
+      "legacyClassId": "class.ranger"
     },
     {
       "id": "crawler.brittany",
-      "label": "Brittany",
-      "classId": "class.alchemist",
+      "label": "Britney",
+      "classId": "class.pit_fighter",
       "selected": false,
       "deployable": true,
       "artId": "brittany",
-      "innateAbilityIds": []
+      "innateAbilityIds": [],
+      "legacyClassId": "class.alchemist"
     },
     {
       "id": "crawler.mongo",
@@ -201,6 +205,30 @@
       "hp": 30,
       "energy": 8,
       "move": 5
+    },
+    {
+      "classId": "class.blizzardmancer",
+      "hp": 32,
+      "energy": 18,
+      "move": 4
+    },
+    {
+      "classId": "class.fire_spiritualist",
+      "hp": 38,
+      "energy": 14,
+      "move": 4
+    },
+    {
+      "classId": "class.pest_exterminator",
+      "hp": 36,
+      "energy": 14,
+      "move": 4
+    },
+    {
+      "classId": "class.pit_fighter",
+      "hp": 42,
+      "energy": 10,
+      "move": 4
     }
   ],
   "startingInventory": [
@@ -1244,6 +1272,198 @@
     }
   ],
   "compatibleContentVersions": [
-    "floor-one-1.0.0"
+    "floor-one-1.0.0",
+    "floor-one-2.0.0"
+  ],
+  "progression": {
+    "xpThresholds": [
+      0,
+      30,
+      70,
+      120
+    ],
+    "hpPerLevel": 3,
+    "manaPerLevel": 1,
+    "movePerLevel": 0,
+    "skillUnlocks": [
+      {
+        "id": "unlock.carl.level_2",
+        "label": "Rigged Burst",
+        "rosterId": "crawler.carl",
+        "abilityId": "ability.carl_rigged_burst",
+        "level": 2
+      },
+      {
+        "id": "unlock.carl.level_3",
+        "label": "Power Combo",
+        "rosterId": "crawler.carl",
+        "abilityId": "ability.carl_power_combo",
+        "level": 3
+      },
+      {
+        "id": "unlock.donut.level_2",
+        "label": "Arcane Surge",
+        "rosterId": "crawler.donut",
+        "abilityId": "ability.donut_arcane_surge",
+        "level": 2
+      },
+      {
+        "id": "unlock.donut.level_3",
+        "label": "Mana Stream",
+        "rosterId": "crawler.donut",
+        "abilityId": "ability.donut_mana_stream",
+        "level": 3
+      },
+      {
+        "id": "unlock.katia.level_2",
+        "label": "Counterdrive",
+        "rosterId": "crawler.katia",
+        "abilityId": "ability.katia_counterdrive",
+        "level": 2
+      },
+      {
+        "id": "unlock.katia.level_3",
+        "label": "Cover Shift",
+        "rosterId": "crawler.katia",
+        "abilityId": "ability.katia_cover_shift",
+        "level": 3
+      },
+      {
+        "id": "unlock.mongo.level_2",
+        "label": "Ambush Bite",
+        "rosterId": "crawler.mongo",
+        "abilityId": "ability.mongo_ambush_bite",
+        "level": 2
+      },
+      {
+        "id": "unlock.mongo.level_3",
+        "label": "Snap",
+        "rosterId": "crawler.mongo",
+        "abilityId": "ability.mongo_snap",
+        "level": 3
+      },
+      {
+        "id": "unlock.elle.level_2",
+        "label": "Ice Shard",
+        "rosterId": "crawler.elle",
+        "abilityId": "ability.elle_ice_shard",
+        "level": 2
+      },
+      {
+        "id": "unlock.elle.level_3",
+        "label": "Glacial Lock",
+        "rosterId": "crawler.elle",
+        "abilityId": "ability.elle_glacial_lock",
+        "level": 3
+      },
+      {
+        "id": "unlock.iman.level_2",
+        "label": "Steady Hands",
+        "rosterId": "crawler.iman",
+        "abilityId": "ability.imani_steady_hands",
+        "level": 2
+      },
+      {
+        "id": "unlock.iman.level_3",
+        "label": "Triage",
+        "rosterId": "crawler.iman",
+        "abilityId": "ability.imani_triage",
+        "level": 3
+      },
+      {
+        "id": "unlock.louis.level_2",
+        "label": "Fumigate",
+        "rosterId": "crawler.louis",
+        "abilityId": "ability.louis_fumigate",
+        "level": 2
+      },
+      {
+        "id": "unlock.louis.level_3",
+        "label": "Clean Sweep",
+        "rosterId": "crawler.louis",
+        "abilityId": "ability.louis_clean_sweep",
+        "level": 3
+      },
+      {
+        "id": "unlock.brittany.level_2",
+        "label": "Heavy Swipe",
+        "rosterId": "crawler.brittany",
+        "abilityId": "ability.britney_heavy_swipe",
+        "level": 2
+      },
+      {
+        "id": "unlock.brittany.level_3",
+        "label": "Corner Guard",
+        "rosterId": "crawler.brittany",
+        "abilityId": "ability.britney_corner_guard",
+        "level": 3
+      }
+    ]
+  },
+  "equipment": [
+    {
+      "id": "equipment.weapon.brawler_wraps",
+      "label": "Reinforced Wraps",
+      "slot": "weapon",
+      "hpBonus": 2,
+      "manaBonus": 0,
+      "moveBonus": 0,
+      "abilityIds": [
+        "ability.heavy_blow"
+      ],
+      "unlockEncounter": 0
+    },
+    {
+      "id": "equipment.armor.field_vest",
+      "label": "Field Vest",
+      "slot": "armor",
+      "hpBonus": 5,
+      "manaBonus": 0,
+      "moveBonus": 0,
+      "abilityIds": [],
+      "unlockEncounter": 0
+    },
+    {
+      "id": "equipment.charm.mana_bead",
+      "label": "Mana Bead",
+      "slot": "charm",
+      "hpBonus": 0,
+      "manaBonus": 2,
+      "moveBonus": 0,
+      "abilityIds": [],
+      "unlockEncounter": 0
+    },
+    {
+      "id": "equipment.weapon.sponsor_edge",
+      "label": "Sponsor Edge",
+      "slot": "weapon",
+      "hpBonus": 2,
+      "manaBonus": 0,
+      "moveBonus": 0,
+      "abilityIds": [
+        "ability.backstab"
+      ],
+      "unlockEncounter": 1
+    },
+    {
+      "id": "equipment.armor.coolant_mesh",
+      "label": "Coolant Mesh",
+      "slot": "armor",
+      "hpBonus": 4,
+      "manaBonus": 1,
+      "moveBonus": 0,
+      "abilityIds": [],
+      "unlockEncounter": 1
+    },
+    {
+      "id": "equipment.charm.runner_token",
+      "label": "Runner Token",
+      "slot": "charm",
+      "hpBonus": 0,
+      "manaBonus": 0,
+      "moveBonus": 1,
+      "abilityIds": [],
+      "unlockEncounter": 2
+    }
   ]
 }

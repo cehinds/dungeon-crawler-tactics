@@ -42,6 +42,9 @@ namespace DungeonCrawlerTactics
                 switch (command.type)
                 {
                     case "new_run": Reset(); break;
+                    case "safe_room_rest": Rest(); break;
+                    case "equip": Equip(command, false); break;
+                    case "unequip": Equip(command, true); break;
                     case "toggle_party":
                         Require(screen == "camp", "Party can only change at camp.");
                         RosterView recruit = GetRoster(command.unitId);
@@ -52,10 +55,11 @@ namespace DungeonCrawlerTactics
                         Require(screen == "camp", "Classes can only change at camp.");
                         Require(command.classId != null && catalog.Classes.ContainsKey(command.classId), "Unknown class.");
                         RosterView trainee = GetRoster(command.unitId); trainee.classId = command.classId;
-                        trainee.hp = trainee.maxHp = Stats(command.classId).hp; break;
+                        ClassStats trained = PlayerStats(trainee.id, trainee.classId); trainee.hp = Math.Min(trainee.hp, trained.hp); trainee.maxHp = trained.hp; trainee.energy = Math.Min(trainee.energy, trained.energy); trainee.maxEnergy = trained.energy; trainee.move = trained.move; break;
                     case "start":
                         Require(screen == "camp", "Start an encounter from camp.");
                         Require(PartyCount() == data.partySize, "Choose exactly " + data.partySize + " crawlers.");
+                        foreach (RosterView member in roster.Values) Require(!member.selected || member.hp > 0, "Rest in the safe room to revive fallen party members first.");
                         StartExploration(); break;
                     case "explore_move": ExploreMove(command.x, command.y); break;
                     case "explore_interact": ExploreInteract(command.targetId); break;
@@ -101,17 +105,17 @@ namespace DungeonCrawlerTactics
                     case "continue":
                         Require(screen == "victory", "Win the encounter to continue.");
                         Require(rewardChosen || data.rewards.Length == 0, "Choose a sponsor reward first.");
+                        SyncRosterFromBattle();
                         encounterIndex++;
                         screen = encounterIndex >= data.encounters.Length ? "complete" : "camp";
                         phase = "player";
                         if (screen == "camp") { battle = new BattleState(); units.Clear(); timed.Clear(); selected = null; }
-                        message = screen == "complete" ? "Floor cleared. The audience demands another season." : "The camp medbay restored the party. Prepare for the next encounter.";
-                        foreach (RosterView member in roster.Values) member.hp = member.maxHp;
+                        message = screen == "complete" ? "Floor cleared. The audience demands another season." : "Return to the safe room: rest, equip earned gear, and inspect new skills before the next encounter.";
                         break;
                     case "retry":
                         Require(screen == "defeat", "Retry is available after defeat.");
                         // A retry is a fresh attempt: restore the starting shared supply, keeping earned XP.
-                        ResetInventory(); StartEncounter(); break;
+                        ResetInventory(); RefreshRosterStats(true); StartEncounter(); break;
                     default: throw new ArgumentException("Unknown command: " + command.type);
                 }
             }
@@ -121,14 +125,14 @@ namespace DungeonCrawlerTactics
         }
         private void Reset()
         {
-            roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); exploration.Clear(); battle = new BattleState();
+            xp = 0; equipped.Clear(); roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); exploration.Clear(); battle = new BattleState();
             foreach (RosterDef member in data.roster)
             {
-                int hp = Stats(member.classId).hp;
-                roster.Add(member.id, new RosterView { id = member.id, label = member.label, classId = member.classId, selected = member.selected && member.deployable, hp = hp, maxHp = hp });
+                ClassStats initial = PlayerStats(member.id, member.classId); int hp = initial.hp;
+                roster.Add(member.id, new RosterView { id = member.id, label = member.label, classId = member.classId, selected = member.selected && member.deployable, hp = hp, maxHp = hp, energy = initial.energy, maxEnergy = initial.energy, move = initial.move, effectiveMove = initial.move, level = 1 });
             }
             ResetInventory(); screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
-            message = "Choose " + data.partySize + " crawlers and their classes. The camp medbay restores everyone between rooms.";
+            message = "Choose " + data.partySize + " crawlers and their classes. Rest in the safe room to restore HP and mana between rooms.";
         }
         private void ResetInventory()
         {
@@ -149,8 +153,9 @@ namespace DungeonCrawlerTactics
             foreach (RosterDef definition in data.roster)
             {
                 RosterView member = roster[definition.id]; if (!member.selected) continue;
-                ClassStats stats = Stats(member.classId); CellView spawn = encounter.playerSpawns[slot++];
+                ClassStats stats = PlayerStats(member.id, member.classId); CellView spawn = encounter.playerSpawns[slot++];
                 AddUnit(member.id, member.label, member.classId, "player", spawn.x, spawn.y, stats.hp, stats.energy, stats.move, new string[0]);
+                battle.Entities[member.id].Hp = member.hp; battle.Entities[member.id].Energy = member.energy;
             }
             foreach (SpawnDef enemy in encounter.enemies) AddUnit(enemy.id, enemy.label, enemy.classId, "enemy", enemy.x, enemy.y, enemy.hp, enemy.energy, enemy.move, enemy.tags);
             screen = "battle"; phase = "player"; round = 1; rewardChosen = false;
@@ -160,7 +165,7 @@ namespace DungeonCrawlerTactics
         private void AddUnit(string id, string label, string classId, string team, int x, int y, int hp, int energy, int move, string[] tags)
         {
             EntityState unit = new EntityState { Id = id, ClassId = classId, Team = team, X = x, Y = y, Hp = hp, MaxHp = hp, Energy = energy };
-            unit.Tags.UnionWith(tags); RosterDef definition = Definition(id); if (definition != null) unit.GrantedAbilities.UnionWith(definition.innateAbilityIds); battle.Entities.Add(id, unit);
+            unit.Tags.UnionWith(tags); RosterDef definition = Definition(id); if (definition != null) unit.GrantedAbilities.UnionWith(Grants(id, xp, equipped)); battle.Entities.Add(id, unit);
             units.Add(id, new SavedUnit { id = id, label = label, classId = classId, team = team, x = x, y = y, hp = hp, maxHp = hp, energy = energy, maxEnergy = energy, move = move, permanentTags = Sorted(unit.Tags) });
         }
         private void Move(string id, int x, int y)
@@ -246,10 +251,11 @@ namespace DungeonCrawlerTactics
                 GameCommand best = BestEnemyAction(id);
                 if (best == null)
                 {
+                    Dictionary<string, int> distances = DistancesToPlayers(id);
                     List<CellView> reachable = Reachable(id); CellView destination = null; int bestDistance = int.MaxValue;
                     foreach (CellView cell in reachable)
                     {
-                        int distance = DistanceToPlayers(cell.x, cell.y);
+                        int distance; if (!distances.TryGetValue(TileId(cell.x, cell.y), out distance)) continue;
                         if (distance < bestDistance) { bestDistance = distance; destination = cell; }
                     }
                     if (destination != null && (destination.x != enemy.X || destination.y != enemy.Y))
@@ -375,7 +381,7 @@ namespace DungeonCrawlerTactics
             if (!player) { screen = "defeat"; message = "Your party fell. Retry this room or begin a new run."; ClearPreview(); AddLog("Party defeated."); }
             else if (!enemy)
             {
-                screen = "victory"; xp += Encounter.xp; rewardChosen = false; ClearPreview();
+                int oldXp = xp; screen = "victory"; xp += Encounter.xp; AwardProgression(oldXp); rewardChosen = false; ClearPreview();
                 message = "Room cleared! Choose one sponsor reward."; AddLog("Victory: +" + Encounter.xp + " XP.");
             }
         }
@@ -422,16 +428,29 @@ namespace DungeonCrawlerTactics
             return true;
         }
         private bool Blocked(int x, int y) { foreach (TileDef tile in Encounter.tiles) if (tile.x == x && tile.y == y) return tile.blocked; return false; }
-        private int DistanceToPlayers(int x, int y)
+        private Dictionary<string, int> DistancesToPlayers(string actorId)
         {
-            int nearest = int.MaxValue; foreach (EntityState unit in battle.Entities.Values) if (!unit.IsTile && unit.Hp > 0 && unit.Team == "player") nearest = Math.Min(nearest, Math.Abs(unit.X - x) + Math.Abs(unit.Y - y)); return nearest;
+            // Reverse BFS from walkable attack-adjacent cells gives route distance around walls.
+            // Manhattan distance could leave an enemy stuck when the route first leads away.
+            Dictionary<string, int> result = new Dictionary<string, int>(); Queue<CellView> queue = new Queue<CellView>();
+            foreach (string id in UnitIds("player"))
+            {
+                EntityState player = battle.Entities[id]; if (player.Hp == 0) continue;
+                foreach (CellView cell in Neighbors(player.X, player.Y)) if (Passable(cell.x, cell.y, actorId) && !result.ContainsKey(TileId(cell.x, cell.y))) { result.Add(TileId(cell.x, cell.y), 0); queue.Enqueue(cell); }
+            }
+            while (queue.Count > 0)
+            {
+                CellView cell = queue.Dequeue(); int distance = result[TileId(cell.x, cell.y)];
+                foreach (CellView next in Neighbors(cell.x, cell.y)) if (Passable(next.x, next.y, actorId) && !result.ContainsKey(TileId(next.x, next.y))) { result.Add(TileId(next.x, next.y), distance + 1); queue.Enqueue(next); }
+            }
+            return result;
         }
         private RosterDef Definition(string id) { return Array.Find(data.roster, r => r.id == id); }
         private List<string> PartyOrder() { List<string> result = new List<string>(); foreach (RosterDef member in data.roster) if (units.ContainsKey(member.id) && units[member.id].team == "player") result.Add(member.id); return result; }
         private string ArtId(string id) { RosterDef member = Definition(id); if (member != null) return member.artId; SpawnDef enemy = Array.Find(Encounter.enemies, e => e.id == id); return enemy == null ? null : enemy.artId; }
         private int EffectiveMove(string id) { int value = units[id].move; foreach (TagRuleDef rule in data.tagRules) if (battle.Entities[id].Tags.Contains(rule.tag)) value -= rule.movePenalty; return Math.Max(0, value); }
         private StatusView[] Statuses(string id) { List<StatusView> result = new List<StatusView>(); foreach (string tag in Sorted(battle.Entities[id].Tags)) { TimedTag layer = timed.Find(t => t.entityId == id && t.tag == tag); result.Add(new StatusView { tag = tag, source = layer == null ? "" : layer.source, remainingRounds = layer == null ? 0 : layer.remainingRounds }); } return result.ToArray(); }
-        private string[] AbilityIds(EntityState actor) { List<string> result = new List<string>(catalog.Classes[actor.ClassId].abilityIds); RosterDef definition = Definition(actor.Id); if (definition != null) foreach (string id in definition.innateAbilityIds) if (!result.Contains(id)) result.Add(id); return result.ToArray(); }
+        private string[] AbilityIds(EntityState actor) { List<string> result = new List<string>(catalog.Classes[actor.ClassId].abilityIds); RosterDef definition = Definition(actor.Id); if (definition != null) foreach (string id in Grants(actor.Id, xp, equipped)) if (!result.Contains(id)) result.Add(id); return result.ToArray(); }
         private string FirstAvailable() { foreach (string id in PartyOrder()) if (battle.Entities[id].Hp > 0 && !units[id].acted) return id; return null; }
         private List<string> UnitIds(string team) { List<string> ids = new List<string>(); foreach (SavedUnit unit in units.Values) if (unit.team == team) ids.Add(unit.id); ids.Sort(StringComparer.Ordinal); return ids; }
         private List<string> SortedUnitIds() { List<string> ids = new List<string>(units.Keys); ids.Sort(StringComparer.Ordinal); return ids; }
@@ -448,7 +467,7 @@ namespace DungeonCrawlerTactics
         private void AddLog(string entry) { log.Add(entry); TrimLog(); }
         private void TrimLog() { if (log.Count > 60) log.RemoveRange(0, log.Count - 60); }
         private static string[] Sorted(HashSet<string> tags) { string[] values = new string[tags.Count]; tags.CopyTo(values); Array.Sort(values, StringComparer.Ordinal); return values; }
-        private static GameCommand CopyCommand(GameCommand c) { return new GameCommand { type = c.type, unitId = c.unitId, targetId = c.targetId, abilityId = c.abilityId, itemId = c.itemId, classId = c.classId, rewardId = c.rewardId, x = c.x, y = c.y }; }
+        private static GameCommand CopyCommand(GameCommand c) { return new GameCommand { type = c.type, unitId = c.unitId, targetId = c.targetId, abilityId = c.abilityId, itemId = c.itemId, classId = c.classId, rewardId = c.rewardId, equipmentId = c.equipmentId, x = c.x, y = c.y }; }
 
         public GameView GetView(bool includeTargets = true)
         {
@@ -457,14 +476,14 @@ namespace DungeonCrawlerTactics
             List<PresentationEvent> output = new List<PresentationEvent>(presentationEvents); if (forecast != null) foreach (PresentationEvent ev in forecast.Events) { ev.preview = true; output.Add(ev); }
             for (int i = 0; i < output.Count; i++) output[i].sequence = i; view.events = output.ToArray();
             List<RosterView> rosterViews = new List<RosterView>();
-            foreach (RosterDef member in data.roster) { RosterView r = roster[member.id]; rosterViews.Add(new RosterView { id = r.id, label = r.label, classId = r.classId, artId = member.artId, deployable = member.deployable, innateAbilityIds = member.innateAbilityIds, selected = r.selected, hp = r.hp, maxHp = r.maxHp }); }
+            foreach (RosterDef member in data.roster) { RosterView r = roster[member.id]; rosterViews.Add(new RosterView { id = r.id, label = r.label, classId = r.classId, artId = member.artId, deployable = member.deployable, innateAbilityIds = member.innateAbilityIds, selected = r.selected, hp = battle.Entities.ContainsKey(r.id) ? battle.Entities[r.id].Hp : r.hp, maxHp = PlayerStats(r.id, r.classId).hp, energy = battle.Entities.ContainsKey(r.id) ? battle.Entities[r.id].Energy : r.energy, maxEnergy = PlayerStats(r.id, r.classId).energy, move = PlayerStats(r.id, r.classId).move, effectiveMove = battle.Entities.ContainsKey(r.id) ? EffectiveMove(r.id) : PlayerStats(r.id, r.classId).move, level = LevelAt(xp), equippedIds = equipped.FindAll(g => g.unitId == r.id).ConvertAll(g => g.equipmentId).ToArray() }); }
             view.roster = rosterViews.ToArray();
             List<ClassView> classes = new List<ClassView>(); foreach (ClassDef c in catalog.Classes.Values) classes.Add(new ClassView { id = c.id, label = c.label, abilityIds = (string[])c.abilityIds.Clone() }); view.classes = classes.ToArray();
             List<UnitView> unitViews = new List<UnitView>();
             foreach (string id in SortedUnitIds())
             {
                 EntityState e = battle.Entities[id]; SavedUnit u = units[id];
-                unitViews.Add(new UnitView { id = id, label = u.label, classId = e.ClassId, team = e.Team, x = e.X, y = e.Y, hp = e.Hp, maxHp = e.MaxHp, energy = e.Energy, maxEnergy = u.maxEnergy, move = u.move, effectiveMove = EffectiveMove(e.Id), artId = ArtId(e.Id), statuses = Statuses(e.Id), selected = selected == id, moved = u.moved, acted = u.acted, tags = Sorted(e.Tags) });
+                unitViews.Add(new UnitView { id = id, label = u.label, classId = e.ClassId, team = e.Team, x = e.X, y = e.Y, hp = e.Hp, maxHp = e.MaxHp, energy = e.Energy, maxEnergy = u.maxEnergy, move = u.move, effectiveMove = EffectiveMove(e.Id), level = e.Team == "player" ? LevelAt(xp) : 1, artId = ArtId(e.Id), statuses = Statuses(e.Id), selected = selected == id, moved = u.moved, acted = u.acted, tags = Sorted(e.Tags) });
             }
             view.units = unitViews.ToArray();
             List<TileView> tileViews = new List<TileView>();
@@ -502,6 +521,7 @@ namespace DungeonCrawlerTactics
             if (screen == "victory" && !rewardChosen)
             { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); view.rewards = rewards.ToArray(); }
             if (screen == "explore") view.exploration = ExplorationView();
+            PopulateProgression(view);
             return view;
         }
         private string[] LegalTargets(EntityState actor, AbilityDef ability, string itemId)
@@ -551,7 +571,7 @@ namespace DungeonCrawlerTactics
         }
         public GameSave ExportSave()
         {
-            GameSave save = new GameSave { contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
+            GameSave save = new GameSave { progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
             save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
@@ -571,6 +591,7 @@ namespace DungeonCrawlerTactics
             try
             {
                 Require(save != null && save.schemaVersion == 1 && (save.contentVersion == data.contentVersion || Array.IndexOf(data.compatibleContentVersions, save.contentVersion) >= 0), "Save version does not match this content pack.");
+                Require(save.progressionVersion == 0 || save.progressionVersion == 1, "Unknown progression save version.");
                 save = MigrateCompatibleSave(save);
                 Require(save.screen == "camp" || save.screen == "explore" || save.screen == "battle" || save.screen == "victory" || save.screen == "defeat" || save.screen == "complete", "Invalid save screen.");
                 Require(save.phase == "player" || (save.phase == "enemy" && (save.screen == "victory" || save.screen == "defeat")), "Invalid save phase.");
@@ -585,13 +606,15 @@ namespace DungeonCrawlerTactics
                 for (int i = 0; i < Math.Min(save.encounterIndex, data.encounters.Length); i++) expectedXp += data.encounters[i].xp;
                 if (save.screen == "victory") expectedXp += data.encounters[save.encounterIndex].xp;
                 Require(save.xp == expectedXp, "Save XP does not match its completed encounters.");
+                save = UpgradeProgressionSave(save);
+                List<EquipmentSlotSave> nextEquipment = ValidateEquipment(save);
                 Dictionary<string, RosterView> nextRoster = new Dictionary<string, RosterView>(); int party = 0;
                 foreach (RosterView member in save.roster)
                 {
                     Require(member != null && member.id != null && roster.ContainsKey(member.id) && !nextRoster.ContainsKey(member.id) && member.classId != null && catalog.Classes.ContainsKey(member.classId), "Invalid saved roster.");
-                    RosterDef definition = Array.Find(data.roster, r => r.id == member.id); ClassStats stats = Stats(member.classId);
-                    Require(member.hp >= 0 && member.hp <= stats.hp && member.maxHp == stats.hp, "Invalid roster health.");
-                    nextRoster.Add(member.id, new RosterView { id = member.id, label = definition.label, classId = member.classId, selected = member.selected, hp = member.hp, maxHp = member.maxHp }); Require(!member.selected || definition.deployable, "Advisor cannot deploy."); if (member.selected) party++;
+                    RosterDef definition = Array.Find(data.roster, r => r.id == member.id); ClassStats stats = PlayerStats(member.id, member.classId, save.xp, nextEquipment);
+                    Require(member.hp >= 0 && member.hp <= stats.hp && member.maxHp == stats.hp && member.energy >= 0 && member.energy <= stats.energy && member.maxEnergy == stats.energy, "Invalid roster health or mana.");
+                    nextRoster.Add(member.id, new RosterView { id = member.id, label = definition.label, classId = member.classId, selected = member.selected, hp = member.hp, maxHp = member.maxHp, energy = member.energy, maxEnergy = member.maxEnergy, move = stats.move, level = LevelAt(save.xp) }); Require(!member.selected || definition.deployable, "Advisor cannot deploy."); if (member.selected) party++;
                 }
                 Require(party <= data.partySize && (save.screen == "camp" || party == data.partySize), "Invalid party size.");
                 Dictionary<string, int> nextInventory = new Dictionary<string, int>();
@@ -621,7 +644,7 @@ namespace DungeonCrawlerTactics
                     if (unit.team == "player")
                     {
                         Require(nextRoster.ContainsKey(unit.id) && nextRoster[unit.id].selected && nextRoster[unit.id].classId == unit.classId, "Saved party member not deployed.");
-                        ClassStats stats = Stats(unit.classId); hp = stats.hp; energy = stats.energy; move = stats.move; label = nextRoster[unit.id].label; if (unit.hp > 0) playerAlive = true;
+                        ClassStats stats = PlayerStats(unit.id, unit.classId, save.xp, nextEquipment); hp = stats.hp; energy = stats.energy; move = stats.move; label = nextRoster[unit.id].label; if (unit.hp > 0) playerAlive = true;
                     }
                     else
                     {
@@ -639,7 +662,7 @@ namespace DungeonCrawlerTactics
                     foreach (string tag in unit.permanentTags) Require(seed != null && Array.IndexOf(seed.tags, tag) >= 0, "Saved permanent tag is not an authored unit seed.");
                     foreach (string tag in unit.permanentTags) Require(Array.IndexOf(unit.tags, tag) >= 0, "Permanent tag absent from saved unit.");
                     EntityState entity = new EntityState { Id = unit.id, ClassId = unit.classId, Team = unit.team, X = unit.x, Y = unit.y, Hp = unit.hp, MaxHp = hp, Energy = unit.energy };
-                    entity.Tags.UnionWith(unit.tags); RosterDef memberDefinition = Definition(unit.id); if (memberDefinition != null) entity.GrantedAbilities.UnionWith(memberDefinition.innateAbilityIds); nextBattle.Entities.Add(unit.id, entity);
+                    entity.Tags.UnionWith(unit.tags); RosterDef memberDefinition = Definition(unit.id); if (memberDefinition != null) entity.GrantedAbilities.UnionWith(Grants(unit.id, save.xp, nextEquipment)); nextBattle.Entities.Add(unit.id, entity);
                     nextUnits.Add(unit.id, new SavedUnit { id = unit.id, label = label, classId = unit.classId, team = unit.team, maxEnergy = energy, move = move, moved = unit.moved, acted = unit.acted, permanentTags = (string[])unit.permanentTags.Clone() });
                 }
                 if (save.screen == "battle") Require(playerAlive && enemyAlive, "Battle outcome is inconsistent.");
@@ -672,6 +695,7 @@ namespace DungeonCrawlerTactics
                     }
                 foreach (string entry in save.log) Require(entry != null && entry.Length <= 1000, "Invalid saved log.");
                 // All validation is complete before replacing any live state.
+                equipped.Clear(); equipped.AddRange(nextEquipment);
                 exploration.Clear(); foreach (ExplorationSave sector in nextExploration) exploration.Add(sector.sectorId, sector);
                 roster.Clear(); foreach (var pair in nextRoster) roster.Add(pair.Key, pair.Value);
                 inventory.Clear(); foreach (var pair in nextInventory) inventory.Add(pair.Key, pair.Value);

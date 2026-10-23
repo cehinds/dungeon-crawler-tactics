@@ -16,7 +16,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--url", default="http://127.0.0.1:5188")
 parser.add_argument("--browser", default="/usr/bin/chromium")
 parser.add_argument("--screenshots", default="/tmp/dct-revamp")
-parser.add_argument("--suite", choices=("all", "reaction"), default="all")
+parser.add_argument("--suite", choices=("all", "reaction", "enemy"), default="all")
 args = parser.parse_args()
 
 VIEWPORTS = [(1366, 768), (390, 844), (844, 390)]
@@ -45,6 +45,42 @@ def click_cell(page, x, y):
     page.mouse.click(point["x"], point["y"])
 
 
+def exercise_exploration_rotations(page):
+    """Check rotated pointer projection and screen-relative arrow walking."""
+    tested = []
+    keys = [("ArrowUp", 0, -1), ("ArrowDown", 0, 1),
+            ("ArrowLeft", -1, 0), ("ArrowRight", 1, 0)]
+    for rotation in range(4):
+        if rotation:
+            page.locator("#rotate-right").click()
+        assert page.evaluate("window.dungeon.scene.getRotation()") == rotation
+        label = page.locator("#compass-label").inner_text()
+        assert label == ["North view", "East view", "South view", "West view"][rotation]
+        exploration = view(page)["exploration"]
+        start = (exploration["x"], exploration["y"])
+        adjacent = [tile for tile in exploration["tiles"]
+                    if tile["reachable"] and not tile["blocked"]
+                    and abs(tile["x"]-start[0])+abs(tile["y"]-start[1]) == 1]
+        assert adjacent, f"No adjacent legal exploration tile at rotation {rotation}, position {start}."
+        target = min(adjacent, key=lambda t: (t["y"], t["x"]))
+        click_cell(page, target["x"], target["y"])
+        page.wait_for_function("([x,y])=>{const m=window.dungeon.getView().exploration;return m.x===x&&m.y===y;}",
+                               arg=[target["x"], target["y"]])
+        page.wait_for_timeout(150)
+        back = (start[0]-target["x"], start[1]-target["y"])
+        back_key = next((key for key, dx, dy in keys
+                         if page.evaluate("([dx,dy])=>window.dungeon.scene.screenDirection(dx,dy)", [dx,dy]) == {"x":back[0],"y":back[1]}), None)
+        assert back_key, f"No screen-relative key maps back to prior cell at rotation {rotation}."
+        page.locator("#battlefield").focus()
+        page.keyboard.press(back_key)
+        page.wait_for_function("([x,y])=>{const m=window.dungeon.getView().exploration;return m.x===x&&m.y===y;}",
+                               arg=[start[0], start[1]])
+        page.wait_for_timeout(150)
+        tested.append({"rotation":rotation,"compass":label,"pointerTarget":[target["x"],target["y"]],
+                       "arrowKey":back_key,"returnedTo":[start[0],start[1]]})
+    return tested
+
+
 def dismiss_intro(page):
     page.wait_for_function("window.dungeon && window.dungeon.getView()", timeout=60000)
     if page.locator("#welcome-dialog").evaluate("d => d.open"):
@@ -57,6 +93,7 @@ def dismiss_intro(page):
 def enter_encounter(page):
     page.locator("#quick-enter").click()
     page.wait_for_function("window.dungeon.getView().screen === 'explore'")
+    rotations_tested = exercise_exploration_rotations(page)
     # Choose newly reachable frontier cells through the visible grid until the
     # encounter door exposes its normal interaction button.
     for _ in range(100):
@@ -85,6 +122,10 @@ def enter_encounter(page):
                                arg=[tile["x"], tile["y"]])
         assert (tile["x"], tile["y"]) != old
     assert view(page)["screen"] == "battle", "Exploration did not enter the encounter through its door."
+    door_quest = next((q for q in view(page).get("quests", []) if q["id"] == "quest.door"), None)
+    if door_quest:
+        assert door_quest["complete"] or door_quest["progress"] == door_quest["total"], f"Entering the encounter did not advance the door quest: {door_quest}"
+    return rotations_tested
 
 
 def party_ids(game_view):
@@ -165,12 +206,12 @@ def run_viewport(browser, directory, width, height):
     assert selected == EXPECTED_PARTY, f"Default party/order mismatch: {selected}"
     mordecai = next(r for r in camp["roster"] if r["id"] == "crawler.mordecai")
     assert not mordecai["selected"] and mordecai["deployable"] is False, "Mordecai should be camp-only."
-    camp_labels = " ".join(page.locator(".camp-arrival-party strong").all_text_contents()).casefold()
+    camp_labels = " ".join(page.locator(".safe-crawler-select strong").all_text_contents()).casefold()
     assert all(name.casefold() in camp_labels
                for name in ["Carl", "Princess Donut", "Katia", "Mongo"])
     camp_shot = save_screenshot(page, directory, width, height, "camp")
 
-    enter_encounter(page)
+    rotations_tested = enter_encounter(page)
     game = view(page)
     assert party_ids(game) == EXPECTED_PARTY, f"Battle roster/order mismatch: {party_ids(game)}"
     assert game["selectedUnitId"] == "crawler.carl"
@@ -200,11 +241,28 @@ def run_viewport(browser, directory, width, height):
 
     # Hover on desktop and tap on phone to reveal target identity/health.
     game = view(page)
-    target = next(u for u in game["units"] if u["team"] == "enemy" and u["hp"] > 0)
-    point = cell_center(page, target["x"], target["y"])
+    target_candidates = [u for u in game["units"] if u["team"] == "enemy" and u["hp"] > 0]
     if width < 500:
-        page.locator("#battlefield").tap(position={"x": point["x"] - page.locator("#battlefield").bounding_box()["x"],
-                                                   "y": point["y"] - page.locator("#battlefield").bounding_box()["y"]})
+        # A zoomed-in isometric board can place a legal enemy outside the phone
+        # viewport. Pick a rendered target or zoom out using the camera control.
+        for _ in range(5):
+            box=page.locator("#battlefield").bounding_box()
+            visible=[]
+            for candidate in target_candidates:
+                pnt=cell_center(page,candidate["x"],candidate["y"])
+                if box["x"]<=pnt["x"]<=box["x"]+box["width"] and box["y"]<=pnt["y"]<=box["y"]+box["height"]:
+                    visible.append((candidate,pnt))
+            if visible: break
+            page.locator("#zoom-out").click()
+        assert visible, "No enemy tile is visible for phone target inspection after zooming out."
+        target,point=visible[0]
+    else:
+        target=target_candidates[0]
+        point=cell_center(page,target["x"],target["y"])
+    if width < 500:
+        # Use the real touchscreen API at the projected viewport coordinate.
+        # Locator.tap auto-scrolls large canvases and can retarget the document.
+        page.touchscreen.tap(point["x"], point["y"])
         page.wait_for_function("!document.querySelector('#map-inspect').hidden")
         inspect = page.locator("#map-inspect").inner_text()
         assert target["label"] in inspect and "HP" in inspect, "Tap target info omitted the enemy label/health."
@@ -324,13 +382,29 @@ def run_viewport(browser, directory, width, height):
     # Enemy turn must follow Mongo only after Carl, Donut and Katia have all ended.
     before_end = view(page)
     assert before_end["selectedUnitId"] == "crawler.mongo" and before_end["phase"] == "player"
+    page.evaluate("""() => {
+      const canvas=document.querySelector('#battlefield'); window.__enemyFrames=[];
+      window.__enemyTimer=setInterval(()=>{
+        if(document.querySelector('#enemy-phase-banner')?.hidden) return;
+        const ctx=canvas.getContext('2d'), data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+        let hash=2166136261; for(let i=0;i<data.length;i+=997) hash=Math.imul(hash^data[i],16777619);
+        window.__enemyFrames.push({hash:hash>>>0,locked:document.querySelector('#open-actions')?.disabled===true,
+          banner:!document.querySelector('#enemy-phase-banner')?.hidden});
+      },35);
+    }""")
     end_turn_with_cancel_check(page, "Enemy phase")
-    page.wait_for_function("window.dungeon.getView().round >= 2 || window.dungeon.getView().screen !== 'battle'", timeout=15000)
+    page.wait_for_function("""() => window.dungeon.getView().round >= 2 &&
+      document.querySelector('#enemy-phase-banner')?.hidden && !document.body.classList.contains('enemy-playback') &&
+      document.querySelector('#open-actions')?.disabled === false""", timeout=25000)
+    page.evaluate("clearInterval(window.__enemyTimer)")
     after_enemies = view(page)
     assert after_enemies["screen"] == "battle" and after_enemies["round"] >= 2
     phase_events = [e for e in assert_ordered_events(after_enemies) if e["type"] == "phase"]
     assert any(e["tag"] == "enemy" for e in phase_events) and any(e["tag"] == "player" for e in phase_events), f"Enemy/player phase events missing: {phase_events}"
     reaction_seen = any(e["type"] == "reaction" for e in assert_ordered_events(after_enemies))
+    enemy_moves = [e for e in assert_ordered_events(after_enemies) if e["type"] == "move" and any(u["id"] == e["actorId"] and u["team"] == "enemy" for u in before_end["units"])]
+    enemy_frames = page.evaluate("window.__enemyFrames")
+    assert enemy_frames and all(frame["banner"] and frame["locked"] for frame in enemy_frames), f"Enemy actions were not visibly locked under the phase banner: {enemy_frames}"
     assert after_enemies["phase"] == "player" and after_enemies["selectedUnitId"] == "crawler.carl"
 
     page.close()
@@ -390,6 +464,8 @@ def run_viewport(browser, directory, width, height):
         "magicMissile": {"target": wet_enemy["label"], "forecastCommitted": True},
         "shapeshift": "status.guarded forecast and commit",
         "turnOrder": "Carl -> Donut -> Katia -> Mongo -> enemy -> round 2 Carl",
+        "enemyPlayback": {"enemyMoves": len(enemy_moves), "distinctCanvasFrames": len({f["hash"] for f in enemy_frames}), "actionsLocked": True},
+        "mapRotations": rotations_tested,
         "puddleJumper": {"from": [donut["x"], donut["y"]], "to": [tx, ty], "forecastCommitted": True},
         "reactionSeen": reaction_seen,
         "atlas": images,
@@ -443,6 +519,80 @@ def run_reaction_case(browser, directory):
     return {"reaction": "reaction.wet_conducts", "target": wet["label"], "forecastCommitted": True, "screenshot": shot}
 
 
+def run_enemy_movement_case(browser, directory):
+    """Force a long legal approach with a valid save fixture, then observe the real playback."""
+    page = browser.new_page(viewport={"width": 1366, "height": 768})
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    page.goto(args.url, wait_until="domcontentloaded", timeout=60000)
+    dismiss_intro(page)
+    page.locator("#quick-enter").click()
+    page.wait_for_function("window.dungeon.getView().screen === 'explore'")
+    # Keep this movement case short: choose the nearest open frontier until the encounter opens.
+    for _ in range(100):
+        game = view(page)
+        if game["screen"] == "battle": break
+        ev = game["exploration"]
+        door = next((p for p in ev["points"] if p["kind"] == "encounter" and p["canInteract"]), None)
+        if door:
+            page.locator(f"[data-explore-interact='{door['id']}']").click()
+            page.wait_for_function("window.dungeon.getView().screen === 'battle'")
+            break
+        frontier = [t for t in ev["tiles"] if t["reachable"] and not t["revealed"]]
+        tile = min(frontier, key=lambda t: (abs(t["x"]-ev["x"])+abs(t["y"]-ev["y"]), t["y"], t["x"]))
+        click_cell(page, tile["x"], tile["y"])
+        page.wait_for_function("([x,y])=>{const m=window.dungeon.getView().exploration;return m.x===x&&m.y===y}", arg=[tile["x"],tile["y"]])
+    fixture = json.loads(state(page))
+    floors = [(t["x"],t["y"]) for t in fixture["tiles"] if not t["blocked"]]
+    clusters = []
+    for x,y in floors:
+        points = [(x,y),(x+1,y),(x,y+1),(x+1,y+1)]
+        if all(point in floors for point in points): clusters.append(points)
+    assert len(clusters)>=2, "Encounter map has no separated open 2x2 areas for enemy movement fixture."
+    player_cluster, enemy_cluster = max(((a,b) for a in clusters for b in clusters if a is not b),
+        key=lambda pair:min(abs(x-u)+abs(y-v) for x,y in pair[0] for u,v in pair[1]))
+    for index,player in enumerate([u for u in fixture["units"] if u["team"]=="player"]):
+        player["x"],player["y"]=player_cluster[index]
+        player["moved"]=index<3; player["acted"]=index<3
+    for index,enemy in enumerate([u for u in fixture["units"] if u["team"]=="enemy"]):
+        enemy["x"],enemy["y"]=enemy_cluster[index%4]
+        enemy["moved"]=False; enemy["acted"]=False
+    fixture["selectedUnitId"]="crawler.mongo";fixture["phase"]="player"
+    page.evaluate("s=>window.dungeon.loadSave(JSON.stringify(s))",fixture)
+    page.wait_for_function("window.dungeon.getView().screen==='battle'&&window.dungeon.getView().selectedUnitId==='crawler.mongo'")
+    page.evaluate("""() => {
+      const canvas=document.querySelector('#battlefield'); window.__enemyFrames=[];
+      window.__enemyTimer=setInterval(()=>{
+        if(document.querySelector('#enemy-phase-banner')?.hidden) return;
+        const data=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
+        let hash=2166136261;for(let i=0;i<data.length;i+=997)hash=Math.imul(hash^data[i],16777619);
+        window.__enemyFrames.push({hash:hash>>>0,locked:document.querySelector('#open-actions')?.disabled===true,
+          banner:!document.querySelector('#enemy-phase-banner')?.hidden});
+      },30);
+    }""")
+    page.locator("#end-turn").click()
+    page.wait_for_function("document.querySelector('#end-turn-dialog')?.open===true")
+    assert "Enemy phase" in page.locator("#end-turn-dialog").inner_text()
+    page.locator("#confirm-end-turn").click()
+    page.wait_for_function("!document.querySelector('#enemy-phase-banner')?.hidden", timeout=10000)
+    page.wait_for_function("window.__enemyFrames.length>=3", timeout=10000)
+    shot=save_screenshot(page,directory,1366,768,"enemy-movement-banner")
+    page.wait_for_function("""() => window.dungeon.getView().round>=2 && window.dungeon.getView().phase==='player' &&
+      document.querySelector('#enemy-phase-banner')?.hidden && !document.body.classList.contains('enemy-playback') &&
+      document.querySelector('#open-actions')?.disabled===false""", timeout=25000)
+    page.evaluate("clearInterval(window.__enemyTimer)")
+    game=view(page);events=assert_ordered_events(game)
+    enemy_ids={u["id"] for u in game["units"] if u["team"]=="enemy"}
+    moves=[e for e in events if e["type"]=="move" and e["actorId"] in enemy_ids]
+    frames=page.evaluate("window.__enemyFrames")
+    assert moves, f"Separated enemy team did not walk toward the party: {events}"
+    assert len({f["hash"] for f in frames})>=2, f"No changing rendered frame observed during enemy movement: {frames}"
+    assert frames and all(f["banner"] and f["locked"] for f in frames), f"Enemy movement was not covered by visible banner and locked actions: {frames}"
+    assert not errors, f"Browser page errors: {errors}"
+    page.close()
+    return {"enemyMoves":len(moves),"frames":len({f["hash"] for f in frames}),"actionsLocked":True,"screenshot":shot}
+
+
 if __name__ == "__main__":
     screenshot_dir = Path(args.screenshots)
     screenshot_dir.mkdir(parents=True, exist_ok=True)
@@ -450,8 +600,10 @@ if __name__ == "__main__":
         browser = p.chromium.launch(executable_path=args.browser, headless=True, args=["--no-sandbox"])
         results = ([run_viewport(browser, screenshot_dir, width, height) for width, height in VIEWPORTS]
                    if args.suite == "all" else [])
-        reaction = run_reaction_case(browser, screenshot_dir)
+        enemy_playback = run_enemy_movement_case(browser, screenshot_dir) if args.suite in ("all", "enemy") else None
+        reaction = run_reaction_case(browser, screenshot_dir) if args.suite in ("all", "reaction") else None
         browser.close()
     for result in results:
         print(json.dumps(result))
-    print(json.dumps({"explicitReactionCase": reaction}))
+    if enemy_playback: print(json.dumps({"enemyMovementCase": enemy_playback}))
+    if reaction: print(json.dumps({"explicitReactionCase": reaction}))

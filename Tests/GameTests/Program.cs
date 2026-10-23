@@ -53,8 +53,93 @@ static class GameTests
         GameDataValidator.Validate(Data, new Catalog(Content));
         Check(Content.classes.All(c => c.abilityIds.Length > 0), "all optional and identity classes have functional kits");
         Check(Content.items.Length == 8 && Content.abilities.Length >= 18, "release inventory and ability breadth");
-        RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
+        EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
+    }
+    static void EnemyMovementRegression()
+    {
+        GameData config = Clone(Data); config.encounters[0].tiles = new TileDef[0];
+        config.encounters[0].enemies = new[] { new SpawnDef { id = "enemy.mover", label = "Mover", classId = "class.brawler", x = 8, y = 1, hp = 200, energy = 20, move = 3 } };
+        GameSession game = new GameSession(Clone(Content), config); Command(game, "start");
+        GameView view = EndRound(game); UnitView enemy = view.units.Single(u => u.id == "enemy.mover");
+        Check(enemy.x < 8 && view.events.Any(e => e.type == "move" && e.actorId == "enemy.mover") && view.events.First(e => e.type == "phase").tag == "enemy", "enemy outside attack range advances after all four crawler activations and emits ordered movement");
+        view = EndRound(game);
+        Check(view.events.Any(e => e.type == "attack" && e.actorId == "enemy.mover") && view.events.Where(e => e.type == "move").All(e => e.actorId == "enemy.mover"), "enemy attacks after approaching and events retain enemy actor IDs");
+        config.encounters[0].enemies[0].x = 2; game = new GameSession(Clone(Content), config); Command(game, "start"); view = EndRound(game);
+        Check(view.events.Any(e => e.type == "attack" && e.actorId == "enemy.mover") && !view.events.Any(e => e.type == "move" && e.actorId == "enemy.mover"), "enemy already in range attacks in place rather than taking an unnecessary move");
+        config.encounters[0].playerSpawns = new[] { new CellView { x = 5, y = 1 }, new CellView { x = 6, y = 1 }, new CellView { x = 7, y = 1 }, new CellView { x = 8, y = 1 } };
+        config.encounters[0].tiles = Enumerable.Range(0, 6).Select(y => new TileDef { x = 3, y = y, blocked = true }).ToArray();
+        config.encounters[0].enemies[0].x = 2; config.encounters[0].enemies[0].y = 1; config.encounters[0].enemies[0].move = 2;
+        game = new GameSession(Clone(Content), config); Command(game, "start"); view = EndRound(game); enemy = view.units.Single(u => u.id == "enemy.mover");
+        Check(enemy.y > 1 && view.events.Any(e => e.type == "move" && e.actorId == "enemy.mover"), "enemy takes a wall detour that initially increases Manhattan distance");
+    }
+    static GameView GearCommand(GameSession game, string type, string unit, string gear) { return game.Handle(new GameCommand { type = type, unitId = unit, equipmentId = gear }); }
+    static void ProgressionAndEquipment()
+    {
+        GameData config = Clone(Data); config.progression = new ProgressionDef { xpThresholds = new[] { 0, 30, 60, 90 }, hpPerLevel = 3, manaPerLevel = 2, movePerLevel = 1,
+            skillUnlocks = new[] { new SkillUnlockDef { id = "skill.fixture_healing", label = "Healing", rosterId = "crawler.carl", abilityId = "ability.mend", level = 2 } } };
+        config.equipment = new[] {
+            new EquipmentDef { id = "equipment.fixture_vest", label = "Vest", slot = "armor", hpBonus = 10 },
+            new EquipmentDef { id = "equipment.fixture_focus", label = "Focus", slot = "charm", manaBonus = 4, abilityIds = new[] { "ability.spark" } },
+            new EquipmentDef { id = "equipment.fixture_boots", label = "Boots", slot = "charm", moveBonus = 1 },
+            new EquipmentDef { id = "equipment.fixture_reward", label = "Prize", slot = "weapon", unlockEncounter = 1, abilityIds = new[] { "ability.shatter" } }
+        };
+        config.encounters[0].xp = 30; config.encounters[0].tiles = new TileDef[0];
+        config.encounters[0].enemies = new[] { new SpawnDef { id = "enemy.fixture", label = "Fixture", classId = "class.brawler", x = 2, y = 1, hp = 1, energy = 0, move = 1 } };
+        GameSession game = new GameSession(Clone(Content), config); GameView view = game.GetView();
+        int basicHp = view.roster.Single(r => r.id == "crawler.carl").maxHp, basicMana = view.roster.Single(r => r.id == "crawler.carl").maxEnergy;
+        Check(view.progression.level == 1 && view.progression.xpToNextLevel == 30 && view.safeRoom.available, "shared party progression begins at exact authored threshold and safe room is available");
+        GearCommand(game, "equip", "crawler.carl", "equipment.fixture_vest"); view = GearCommand(game, "equip", "crawler.carl", "equipment.fixture_focus");
+        Check(view.roster.Single(r => r.id == "crawler.carl").maxHp == basicHp + 10 && view.roster.Single(r => r.id == "crawler.carl").maxEnergy == basicMana + 4, "equipped armor and charm change real roster HP and mana caps");
+        string equippedSave = JsonSerializer.Serialize(game.ExportSave(), Json);
+        view = GearCommand(game, "equip", "crawler.donut", "equipment.fixture_vest");
+        Check(view.message.Contains("another") && equippedSave == JsonSerializer.Serialize(game.ExportSave(), Json), "single-copy equipment cannot be duplicated across characters");
+        view = GearCommand(game, "equip", "crawler.carl", "equipment.fixture_reward");
+        Check(view.message.Contains("earned") && equippedSave == JsonSerializer.Serialize(game.ExportSave(), Json), "unearned gear rejects atomically");
+        view = Command(game, "safe_room_rest"); Check(view.safeRoom.rested && view.roster.Single(r => r.id == "crawler.carl").hp == basicHp + 10, "safe-room rest fills equipped HP and mana maxima");
+        GameSession restored = new GameSession(Clone(Content), Clone(config));
+        Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected") && restored.GetView().equipment.Single(e => e.id == "equipment.fixture_focus").equippedUnitId == "crawler.carl", "equipment and modified stats survive validated save roundtrip");
+        view = Command(game, "start");
+        Check(view.abilities.Any(a => a.id == "ability.spark") && !view.abilities.Any(a => a.id == "ability.mend"), "equipped ability works in combat while future skill remains locked");
+        string battleSave = JsonSerializer.Serialize(game.ExportSave(), Json);
+        view = GearCommand(game, "unequip", "crawler.carl", "equipment.fixture_focus");
+        Check(view.message.Contains("safe room") && battleSave == JsonSerializer.Serialize(game.ExportSave(), Json), "equipment cannot change during battle");
+        GameSave wounded = Clone(game.ExportSave()); SavedUnit actor = wounded.units.Single(u => u.id == "crawler.carl"); actor.hp -= 12; actor.energy = 3; game.ImportSave(wounded);
+        view = Command(game, "preview", "crawler.carl", "enemy.fixture", "ability.carl_powerful_strike");
+        string beforeCancel = JsonSerializer.Serialize(game.ExportSave(), Json); Command(game, "cancel");
+        Check(beforeCancel == JsonSerializer.Serialize(game.ExportSave(), Json) && game.GetView().progression.level == 1, "canceling forecast changes no XP, gear or skill unlock state");
+        Command(game, "preview", "crawler.carl", "enemy.fixture", "ability.carl_powerful_strike"); view = Command(game, "confirm");
+        Check(view.screen == "victory" && view.progression.level == 2 && view.xp == 30 && view.progression.xpIntoLevel == 0 && view.events.Any(e => e.type == "level_up"), "victory awards exact threshold level-up once with ordered event");
+        Check(view.units.Single(u => u.id == "crawler.carl").maxHp == basicHp + 13 && view.units.Single(u => u.id == "crawler.carl").maxEnergy == basicMana + 6 && view.progression.skills.Single().unlocked, "level growth changes real HP, mana and skill grant state");
+        Check(view.equipment.Single(e => e.id == "equipment.fixture_reward").owned && view.events.Any(e => e.type == "equipment_unlock") && view.quests.Single(q => q.id == "quest.floor").progress == 1 && view.quests.Single(q => q.id == "quest.encounter").complete, "gear rewards and quest objectives derive from actual victory and enemy state");
+        GameSave victory = Clone(game.ExportSave()); restored = new GameSession(Clone(Content), Clone(config));
+        Check(!restored.ImportSave(victory).message.StartsWith("Save rejected") && restored.GetView().progression.level == 2, "leveled checkpoint saves actual modified stats");
+        GameSave v2 = Clone(victory); v2.contentVersion = "floor-one-2.0.0"; v2.progressionVersion = 0; v2.equipped = new EquipmentSlotSave[0];
+        foreach (RosterView member in v2.roster)
+        {
+            RosterDef definition = config.roster.Single(r => r.id == member.id); if (!string.IsNullOrEmpty(definition.legacyClassId)) member.classId = definition.legacyClassId;
+            ClassStats oldStats = config.classStats.Single(c => c.classId == member.classId); member.hp = member.hp == 0 ? 0 : Math.Max(1, (int)((long)member.hp * oldStats.hp / member.maxHp)); member.maxHp = oldStats.hp; member.energy = member.maxEnergy = 0;
+        }
+        foreach (SavedUnit old in v2.units.Where(u => u.team == "player"))
+        {
+            old.classId = v2.roster.Single(r => r.id == old.id).classId; ClassStats oldStats = config.classStats.Single(c => c.classId == old.classId);
+            old.hp = old.hp == 0 ? 0 : Math.Max(1, (int)((long)old.hp * oldStats.hp / old.maxHp)); old.maxHp = oldStats.hp; old.energy = Math.Min(old.energy, oldStats.energy); old.maxEnergy = oldStats.energy; old.move = oldStats.move;
+        }
+        string oldFile = JsonSerializer.Serialize(v2, Json); GameSession upgraded = new GameSession(Clone(Content), Clone(config)); GameView upgradedView = upgraded.ImportSave(v2);
+        Check(!upgradedView.message.StartsWith("Save rejected") && upgradedView.progression.level == 2 && upgradedView.units.Single(u => u.id == "crawler.carl").maxHp == basicHp + 3 && upgraded.ExportSave().progressionVersion == 1, "existing floor-one-2 checkpoint upgrades base stats to earned progression without requiring new gear fields");
+        Check(oldFile == JsonSerializer.Serialize(v2, Json), "progression migration preserves original v2 save object");
+        GameSave forgedProgression = Clone(victory); forgedProgression.progressionVersion = 99;
+        Check(restored.ImportSave(forgedProgression).message.StartsWith("Save rejected"), "unknown progression versions reject");
+        game.Handle(new GameCommand { type = "choose_reward", rewardId = view.rewards[0].id }); view = Command(game, "continue");
+        Check(view.safeRoom.available && !view.safeRoom.rested && view.roster.Single(r => r.id == "crawler.carl").hp < view.roster.Single(r => r.id == "crawler.carl").maxHp, "return to safe room preserves battle wounds until actual rest");
+        view = Command(game, "safe_room_rest"); Check(view.safeRoom.rested && view.roster.Single(r => r.id == "crawler.carl").energy == basicMana + 6, "rest restores HP and mana after victory");
+        GearCommand(game, "equip", "crawler.carl", "equipment.fixture_boots"); view = game.GetView();
+        Check(view.equipment.Single(e => e.id == "equipment.fixture_focus").equippedUnitId == null && view.roster.Single(r => r.id == "crawler.carl").move == Data.classStats.Single(c => c.classId == view.roster.Single(r => r.id == "crawler.carl").classId).move + 2, "same-slot replacement returns old gear and applies real movement bonus");
+        GearCommand(game, "unequip", "crawler.carl", "equipment.fixture_boots"); view = Command(game, "start");
+        Check(view.abilities.Any(a => a.id == "ability.mend") && !view.abilities.Any(a => a.id == "ability.spark"), "earned skill persists while unequipped ability is removed");
+        GameSave invalid = Clone(game.ExportSave()); invalid.equipped = new[] { new EquipmentSlotSave { unitId = "crawler.carl", equipmentId = "equipment.fixture_vest" }, new EquipmentSlotSave { unitId = "crawler.donut", equipmentId = "equipment.fixture_vest" } };
+        string stable = JsonSerializer.Serialize(game.ExportSave(), Json);
+        Check(game.ImportSave(invalid).message.StartsWith("Save rejected") && stable == JsonSerializer.Serialize(game.ExportSave(), Json), "forged duplicate equipment save rejects without replacing session");
     }
     static void RevampContracts()
     {
@@ -122,6 +207,7 @@ static class GameTests
 
         GameData legacyData = Clone(Data); legacyData.contentVersion = "fixture-legacy"; legacyData.compatibleContentVersions = new string[0];
         legacyData.roster = legacyData.roster.Where(r => string.IsNullOrEmpty(r.replacesId)).ToArray();
+        legacyData.progression.skillUnlocks = legacyData.progression.skillUnlocks.Where(s => legacyData.roster.Any(r => r.id == s.rosterId)).ToArray();
         foreach (RosterDef member in legacyData.roster) if (!string.IsNullOrEmpty(member.legacyClassId)) member.classId = member.legacyClassId;
         RosterDef advisor = legacyData.roster.First(r => !r.deployable); advisor.deployable = true; advisor.selected = true;
         foreach (RosterDef member in legacyData.roster.Where(r => r.selected).Skip(legacyData.partySize)) member.selected = false;
@@ -295,17 +381,17 @@ static class GameTests
     }
     static void CompleteFloor()
     {
-        GameSession game = Session(); int commands = 0; bool usedPotion = false, moved = false; int victories = 0;
+        GameSession game = Session(); int commands = 0; bool usedPotion = false, moved = false; int victories = 0; int highestLevel = 1;
         while (game.GetView().screen != "complete" && commands++ < 700)
         {
             GameView view = game.GetView();
-            if (view.screen == "camp") { Command(game, "start"); continue; }
+            if (view.screen == "camp") { Command(game, "safe_room_rest"); Command(game, "start"); continue; }
             if (view.screen == "defeat") throw new Exception("Autoplay party defeated on encounter " + view.encounterIndex);
             if (view.screen == "victory")
             {
-                victories++; if (view.rewards.Length > 0) game.Handle(new GameCommand { type = "choose_reward", rewardId = view.rewards[0].id });
+                victories++; highestLevel = Math.Max(highestLevel, view.progression.level); if (view.rewards.Length > 0) game.Handle(new GameCommand { type = "choose_reward", rewardId = view.rewards[0].id });
                 GameSave checkpoint = Clone(game.ExportSave()); game.ImportSave(checkpoint); view = Command(game, "continue");
-                if (view.screen == "camp") { view = RawCommand(game, "start"); Check(view.screen == "explore" && view.exploration.x == Data.encounters[view.encounterIndex].exploration.startX && view.exploration.y == Data.encounters[view.encounterIndex].exploration.startY, "next victory opens a fresh exploration sector"); EnterDoor(game); }
+                if (view.screen == "camp") { Command(game, "safe_room_rest"); view = RawCommand(game, "start"); Check(view.screen == "explore" && view.exploration.x == Data.encounters[view.encounterIndex].exploration.startX && view.exploration.y == Data.encounters[view.encounterIndex].exploration.startY, "next victory opens a fresh exploration sector"); EnterDoor(game); }
                 continue;
             }
             UnitView actor = view.units.FirstOrDefault(u => u.team == "player" && u.hp > 0 && !u.acted);
@@ -344,6 +430,7 @@ static class GameTests
         }
         Check(game.GetView().screen == "complete" && victories == 3 && commands < 700, "default party clears all three authored encounters including boss");
         Check(game.GetView().xp == Data.encounters.Sum(e => e.xp), "victory XP awarded exactly once per encounter");
+        Check(highestLevel == Data.progression.xpThresholds.Length && game.GetView().progression.level == highestLevel && game.GetView().quests.Single(q => q.id == "quest.floor").complete, "three encounters reach final shared level and complete the actual floor quest");
         Check(moved, "full-floor traversal uses legal BFS movement");
         Check(usedPotion, "full-floor traversal uses a shared health potion");
         GameSession restored = Session(); restored.ImportSave(Clone(game.ExportSave())); Check(restored.GetView().screen == "complete", "completed floor can save and resume");

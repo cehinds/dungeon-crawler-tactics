@@ -12,13 +12,20 @@ const copy = value => JSON.parse(JSON.stringify(value));
 const images = {};
 const legacyImages = {};
 let spriteFrames = {};
+const directionalArt = {};
+const directionalReady = fetch('assets/directional/manifest.json').then(r=>r.json()).then(async data=>{
+  await Promise.all(Object.entries(data.characters??{}).map(([key,definition])=>new Promise(resolve=>{
+    const image=new Image(); image.onload=()=>{directionalArt[key]={...definition,image};resolve();}; image.onerror=resolve;
+    image.src='assets/directional/'+definition.file;
+  })));
+}).catch(()=>{});
 const imageLoads = ['terrain','characters','enemies','ui','effects','mongo'].map(name => new Promise(resolve => {
   const image = new Image();
   image.onload = () => {images[name] = image; resolve();};
   image.onerror = resolve;
   image.src = ROOT + name + '.png';
 }));
-const ready = Promise.all([...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
+const ready = Promise.all([directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
   fetch(ROOT+file).then(r=>r.json()).then(data=>Object.assign(spriteFrames,data)).catch(()=>{}))]);
 
 export function createBattlefield(canvas, {onCell, onHover} = {}) {
@@ -32,19 +39,42 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   let lastTime = 0, frameId = 0;
   let shakeUntil = 0;
   let zoomLevel = 1, panX = 0, panY = 0, cameraReady = false, lastSelection = null;
-  let drag = null, suppressClick = false;
+  let drag = null, suppressClick = false, rotation = 0;
+  const facing = new Map();
+  let explorationMotion = null;
   canvas.tabIndex = 0;
   canvas.setAttribute('role','application');
   canvas.setAttribute('aria-label','Dungeon map. Arrow keys inspect tiles; Enter selects the tile.');
 
-  function project(x, y) { return {x:(x-y)*TILE_W/2, y:(x+y)*TILE_H/2}; }
+  function rotateVector(x,y,q=rotation) {
+    const p=q===1?{x:-y,y:x}:q===2?{x:-x,y:-y}:q===3?{x:y,y:-x}:{x,y};
+    return {x:p.x||0,y:p.y||0};
+  }
+  function project(x, y) { const p=rotateVector(x,y); return {x:(p.x-p.y)*TILE_W/2, y:(p.x+p.y)*TILE_H/2}; }
   function screen(x, y) { const p=project(x,y); return {x:originX+p.x*scale,y:originY+p.y*scale}; }
+  function mapData(){return view?.screen==='explore'?view.exploration:view;}
   function cellAt(clientX,clientY) {
     const box=canvas.getBoundingClientRect();
     const px=(clientX-box.left-originX)/scale, py=(clientY-box.top-originY)/scale;
-    const x=Math.round(px/TILE_W+py/TILE_H), y=Math.round(py/TILE_H-px/TILE_W);
-    const map = view?.screen === 'explore' ? view.exploration : view;
-    return map && x>=0 && y>=0 && x<map.width && y<map.height ? {x,y} : null;
+    const p=rotateVector(Math.round(px/TILE_W+py/TILE_H),Math.round(py/TILE_H-px/TILE_W),(4-rotation)%4);
+    const map=mapData();
+    return map && p.x>=0 && p.y>=0 && p.x<map.width && p.y<map.height ? p : null;
+  }
+  function depth(x,y){return project(x,y).y/TILE_H*2;}
+  // A screen key selects the nearest cardinal grid edge in that visual direction.
+  function screenDirection(dx,dy) {
+    const projected=dx<0?{x:0,y:1}:dx>0?{x:0,y:-1}:dy<0?{x:-1,y:0}:{x:1,y:0};
+    return rotateVector(projected.x,projected.y,(4-rotation)%4);
+  }
+  function rememberFacing(id,dx,dy){if(dx||dy)facing.set(id,{x:Math.sign(dx),y:Math.sign(dy)});}
+  function screenFacing(id){const direction=facing.get(id)??{x:0,y:1};const p=rotateVector(direction.x,direction.y);return p.x>0?'se':p.x<0?'nw':p.y>0?'sw':'ne';}
+  function getRotationLabel(){return ['North view','East view','South view','West view'][rotation];}
+  function rotate(delta){
+    const map=mapData(); const anchor=map?{x:(map.width-1)/2,y:(map.height-1)/2}:null;
+    const before=anchor?screen(anchor.x,anchor.y):null;
+    rotation=((rotation+Math.round(delta))%4+4)%4;fit();
+    if(anchor){const after=screen(anchor.x,anchor.y);panX+=before.x-after.x;panY+=before.y-after.y;fit();}
+    canvas.dispatchEvent(new CustomEvent('maprotation',{detail:{rotation,label:getRotationLabel()}}));
   }
   function resize() {
     const box=canvas.getBoundingClientRect();
@@ -58,18 +88,36 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function fit() {
     const map = view?.screen === 'explore' ? view.exploration : view;
     if (!map) return;
-    const mapWidth=(map.width+map.height)*TILE_W/2;
-    const mapHeight=(map.width+map.height)*TILE_H/2 + 100;
+    const corners=[[0,0],[map.width-1,0],[0,map.height-1],[map.width-1,map.height-1]].map(([x,y])=>project(x,y));
+    const minX=Math.min(...corners.map(p=>p.x))-TILE_W/2,maxX=Math.max(...corners.map(p=>p.x))+TILE_W/2;
+    const minY=Math.min(...corners.map(p=>p.y))-112,maxY=Math.max(...corners.map(p=>p.y))+TILE_H/2;
+    const mapWidth=maxX-minX,mapHeight=maxY-minY;
     if(!cameraReady){zoomLevel=width<600?1.7:1;cameraReady=true;}
-    scale=Math.min((width-28)/mapWidth,(height-24)/mapHeight)*zoomLevel;
-    originX=width/2-(map.width-map.height)*TILE_W/4*scale+panX;
-    originY=(height-mapHeight*scale)/2+88*scale+panY;
+    scale=Math.max(.05,Math.min((width-28)/mapWidth,(height-24)/mapHeight)*zoomLevel);
+    originX=width/2-(minX+maxX)/2*scale+panX;
+    originY=height/2-(minY+maxY)/2*scale+panY;
   }
   function setView(next, settings={}) {
     const oldScreen=view?.screen;
+    if(view?.screen==='explore' && next.screen==='explore' && view.exploration.id===next.exploration.id){
+      const from=view.exploration,to=next.exploration;
+      if(from.x!==to.x||from.y!==to.y){
+        const path=pathTo(to.x,to.y); let cells=path.length?path:[[from.x,from.y],[to.x,to.y]];
+        if(explorationMotion&&explorationMotion.duration>0){
+          const priorMotion=explorationMotion,travel=clamp((performance.now()-priorMotion.started)/priorMotion.duration,0,1)*(priorMotion.cells.length-1);
+          if(travel<priorMotion.cells.length-1){
+            const index=Math.floor(travel),a=priorMotion.cells[index],b=priorMotion.cells[index+1],t=travel-index;
+            cells=[[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t],...priorMotion.cells.slice(index+1),...cells.slice(1)];
+          }
+        }
+        explorationMotion={cells,started:performance.now(),duration:reduced.matches?0:Math.max(130,(cells.length-1)*130)};
+        const last=cells.at(-1),prior=cells.at(-2); for(const u of next.roster??[])if(u.selected)rememberFacing(u.id,last[0]-prior[0],last[1]-prior[1]);
+      }
+    }
+    if(oldScreen!==next.screen)explorationMotion=null;
     view=next; options=settings;
     if (!animation) {visualUnits=copy(next.units ?? []); visualTiles=copy(next.tiles ?? []);}
-    if (!cursor) {
+    if (!cursor || oldScreen!==next.screen || lastSelection!==next.selectedUnitId) {
       const selected=next.units?.find(u=>u.id===next.selectedUnitId);
       cursor=selected ? {x:selected.x,y:selected.y} : {x:next.exploration?.x??1,y:next.exploration?.y??1};
     }
@@ -117,16 +165,30 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const row=rowFor[key] ?? (enemy?1:0);
     let col=reduced.matches?0:enemy ? Math.floor(time/600)%2 : Math.floor(time/650)%2;
     const current=animation?.event;
+    const exploringWalk=view.screen==='explore'&&explorationMotion&&time-explorationMotion.started<explorationMotion.duration;
     const actor=current?.actorId===unit.id, target=current?.targetId===unit.id;
-    if(actor && ['move','push','teleport'].includes(current.type)) col=enemy?1:2+Math.floor(time/95)%3;
+    if(exploringWalk)col=2+Math.floor((time-explorationMotion.started)/95)%2;
+    if(actor && ['move','push','teleport'].includes(current.type)) col=enemy?Math.floor(time/105)%2:2+Math.floor(time/95)%3;
     if(actor && current?.type==='attack') col=enemy?2:(animation.progress<.38?5:6);
     if(target && ['damage','guard'].includes(current?.type)) col=enemy?3:7;
     if(key==='katia' && (unit.tags??[]).includes('status.guarded') && !actor && !target) col=5;
     const p=project(unit.x,unit.y), selected=unit.id===view.selectedUnitId;
+    if(enemy){
+      const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
+      const dx=(direction.x-direction.y)*22,dy=(direction.x+direction.y)*11;
+      context.beginPath();context.moveTo(p.x+dx,p.y+dy);context.lineTo(p.x+dx*.55-dy*.25,p.y+dy*.55+dx*.125);context.lineTo(p.x+dx*.55+dy*.25,p.y+dy*.55-dx*.125);context.closePath();context.fillStyle='#ffb18c';context.fill();
+    }
     const pose=(enemy?['idle','walk','attack','hit']:['idle','idle2','walk1','walk2','walk3','windup','attack','hit'])[col];
     const atlasName=key==='mongo' && images.mongo && spriteFrames.mongo ? 'mongo' : enemy?'enemies':'characters';
-    const frame=spriteFrames[atlasName]?.frames?.[key]?.[pose];
-    const size=frame?.drawHeight ?? (key==='boss'?148:100);
+    const directional=!enemy?directionalArt[key]:null;
+    const walking=exploringWalk || (actor && ['move','push','teleport'].includes(current?.type));
+    const directionalPose=walking?`walk${1+Math.floor(time/105)%2}`:'idle';
+    const directionalFrame=directional?.frames?.[screenFacing(unit.id)]?.[directionalPose];
+    const actionPose=actor&&current?.type==='attack'||target&&['damage','guard'].includes(current?.type);
+    const legacyFrame=spriteFrames[atlasName]?.frames?.[key]?.[pose];
+    const useDirectional=directionalFrame&&(!actionPose||!legacyFrame||screenFacing(unit.id)!=='se');
+    const frame=useDirectional?directionalFrame:legacyFrame;
+    const size=useDirectional ? directional.bodyHeight ?? frame.drawHeight : frame?.drawHeight ?? (key==='boss'?148:100);
     diamond(unit.x,unit.y,{stroke:unit.team==='enemy'?hostile:friendly,fill:unit.team==='enemy'?'#c12c242b':'#269ed321',weight:selected?3:1.5,inset:23});
     if(selected) diamond(unit.x,unit.y,{stroke:'#fff1b2',weight:2,inset:19});
     context.globalAlpha=unit.acted && unit.team==='player'?.63:1;
@@ -134,7 +196,12 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       context.globalAlpha=.46;atlas('ui',14,4,4,p.x-45,p.y-95,90,90);context.globalAlpha=1;
     }
     const enlarged=(unit.tags??[]).some(t=>/shapeshift|transformed/.test(t)) || key==='katia'&&(unit.tags??[]).includes('status.guarded')?1.12:1;
-    const image=images[atlasName];
+    const image=useDirectional?directional.image:images[atlasName];
+    if(useDirectional&&actor&&current?.type==='attack'){
+      const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
+      const reach=reduced.matches?0:Math.sin(animation.progress*Math.PI)*9;
+      p.x+=(direction.x-direction.y)*reach;p.y+=(direction.x+direction.y)*reach*.5;
+    }
     if(frame&&image) {
       const dw=frame.drawWidth*enlarged,dh=frame.drawHeight*enlarged;
       context.drawImage(image,frame.x,frame.y,frame.width,frame.height,p.x-dw*frame.anchorX,p.y-dh*frame.anchorY,dw,dh);
@@ -156,13 +223,16 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(tags.includes('status.shocked')) text('SHOCK',p.x+34,p.y-35,'#d8b6ff',11);
   }
   function pathTo(x,y) {
-    const actor=visualUnits.find(u=>u.id===view.selectedUnitId);
-    if(!actor || options.mode==='ability')return [];
-    const allowed=new Set((view.reachable??[]).map(t=>`${t.x},${t.y}`));
+    const explore=view?.screen==='explore',map=mapData();
+    const actor=explore?map:visualUnits.find(u=>u.id===view.selectedUnitId);
+    if(!actor || !explore&&options.mode==='ability')return [];
+    const allowed=new Set((explore?map.tiles.filter(t=>t.reachable):view.reachable??[]).map(t=>`${t.x},${t.y}`));
+    const revealed=explore?new Set(map.tiles.filter(t=>t.revealed).map(t=>`${t.x},${t.y}`)):null;
     const goal=`${x},${y}`;if(!allowed.has(goal))return [];
     const start=`${actor.x},${actor.y}`, frontier=[[actor.x,actor.y]], parents=new Map([[start,null]]);
     for(let i=0;i<frontier.length;i++) {
       const [cx,cy]=frontier[i]; if(`${cx},${cy}`===goal)break;
+      if(revealed&&!revealed.has(`${cx},${cy}`))continue;
       for(const [dx,dy]of[[0,-1],[-1,0],[1,0],[0,1]]) {
         const nx=cx+dx,ny=cy+dy,key=`${nx},${ny}`;
         if(allowed.has(key)&&!parents.has(key)){parents.set(key,`${cx},${cy}`);frontier.push([nx,ny]);}
@@ -188,9 +258,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     }
     if(hover) {
       diamond(hover.x,hover.y,{stroke:'#fff4ba',weight:2,inset:2});
-      if(!exploring) {
+      {
         const path=pathTo(hover.x,hover.y);
-        if(path.length) {context.beginPath();path.forEach(([x,y],i)=>{const p=project(x,y);i?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y);});context.lineWidth=3;context.strokeStyle='#96efff';context.stroke();}
+        if(path.length) {context.beginPath();path.forEach(([x,y],i)=>{const p=project(x,y);i?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y);});context.lineWidth=3;context.strokeStyle='#96efff';context.stroke();const end=project(hover.x,hover.y);text(`${path.length-1} STEP${path.length===2?'':'S'}`,end.x,end.y+29,'#b8f4ff',12);}
       }
     }
     for(const item of options.preview??[]) {
@@ -230,32 +300,40 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     // Exterior wall art is outside the playable grid. It gives the rooms readable
     // architecture without introducing decorative obstacles into the simulation.
     if(!explore) {
-      for(let x=0;x<map.width;x++)drawables.push({depth:x-1,draw:()=>prop(x,-1,x%4===1?6:4,128,.95)});
-      for(let y=0;y<map.height;y++)drawables.push({depth:y-1,draw:()=>prop(-1,y,y%4===2?6:5,128,.95)});
-      drawables.push({depth:map.width-1.4,draw:()=>prop(map.width-1,-.4,11,170)});
+      const farY=rotation===1||rotation===2?map.height:-1,farX=rotation===2||rotation===3?map.width:-1;
+      for(let x=0;x<map.width;x++)drawables.push({depth:depth(x,farY),draw:()=>prop(x,farY,x%4===1?6:4,128,.95)});
+      for(let y=0;y<map.height;y++)drawables.push({depth:depth(farX,y),draw:()=>prop(farX,y,y%4===2?6:5,128,.95)});
     }
     for(const tile of tiles) {
       if(explore&&!tile.revealed)continue;
-      if(tile.blocked)drawables.push({depth:tile.x+tile.y,draw:()=>{
-        const nearby=visualUnits.some(u=>u.hp>0&&u.y>=tile.y&&Math.abs(u.x-tile.x)<2&&u.y-tile.y<2);
+      if(tile.blocked)drawables.push({depth:depth(tile.x,tile.y),draw:()=>{
+        const wall=project(tile.x,tile.y);
+        const nearby=visualUnits.some(u=>{const p=project(u.x,u.y);return u.hp>0&&p.y>=wall.y&&p.y-wall.y<70&&Math.abs(p.x-wall.x)<90;});
         const crate=(tile.x+tile.y)%5===0;
         prop(tile.x,tile.y,crate?8:(tile.x+tile.y)%6===0?6:(tile.x*7+tile.y)%5===0?5:4,crate?95:128,nearby?.66:1);
       }});
-      if((tile.tags??[]).includes('surface.oil')) drawables.push({depth:tile.x+tile.y-.1,draw:()=>prop(tile.x+.15,tile.y+.1,9,65,.95)});
-      if((tile.tags??[]).includes('surface.burning'))drawables.push({depth:tile.x+tile.y+.1,draw:()=>effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800)});
+      if((tile.tags??[]).includes('surface.oil')) drawables.push({depth:depth(tile.x,tile.y)-.1,draw:()=>prop(tile.x+.15,tile.y+.1,9,65,.95)});
+      if((tile.tags??[]).includes('surface.burning'))drawables.push({depth:depth(tile.x,tile.y)+.1,draw:()=>effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800)});
     }
     if(explore) {
       for(const point of map.points??[]) {
         if(point.claimed)continue;
-        drawables.push({depth:point.x+point.y,draw:()=>{
+        drawables.push({depth:depth(point.x,point.y),draw:()=>{
           prop(point.x,point.y,point.kind==='encounter'?11:point.kind==='cache'?10:8,point.kind==='encounter'?135:74);
           const p=project(point.x,point.y);text(point.kind==='encounter'?'ENTER':point.kind==='cache'?'SUPPLIES':'INSPECT',p.x,p.y+21,'#f4dd9c',12);
         }});
       }
       const party=(view.roster??[]).filter(u=>u.selected).slice(0,4);
-      party.forEach((u,i)=>drawables.push({depth:map.x+map.y+i*.02+.2,draw:()=>sprite({...u,x:map.x+(i%2)*.27-.12,y:map.y+Math.floor(i/2)*.25-.12,hp:u.maxHp||40,maxHp:u.maxHp||40,team:'player',tags:[]},time)}));
+      let partyX=map.x,partyY=map.y;
+      if(explorationMotion&&explorationMotion.duration>0){
+        const travel=clamp((time-explorationMotion.started)/explorationMotion.duration,0,1)*(explorationMotion.cells.length-1);
+        const index=Math.min(Math.floor(travel),explorationMotion.cells.length-2),a=explorationMotion.cells[index],b=explorationMotion.cells[index+1],t=travel-index;
+        partyX=a[0]+(b[0]-a[0])*t;partyY=a[1]+(b[1]-a[1])*t;
+        if(travel<explorationMotion.cells.length-1)for(const u of party)rememberFacing(u.id,b[0]-a[0],b[1]-a[1]);
+      }
+      party.forEach((u,i)=>drawables.push({depth:depth(partyX,partyY)+i*.02+.2,draw:()=>sprite({...u,x:partyX+(i%2)*.27-.12,y:partyY+Math.floor(i/2)*.25-.12,hp:u.hp??u.maxHp??40,maxHp:u.maxHp||40,team:'player',tags:[]},time)}));
     } else {
-      for(const u of visualUnits)drawables.push({depth:u.x+u.y+.15,draw:()=>sprite(u,time)});
+      for(const u of visualUnits)drawables.push({depth:depth(u.x,u.y)+.15,draw:()=>sprite(u,time)});
     }
     drawables.sort((a,b)=>a.depth-b.depth).forEach(item=>item.draw());
     effects=effects.filter(e=>time-e.started<e.duration);
@@ -280,7 +358,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const target=eventUnit(event);
     const moving=['move','push','teleport'].includes(event.type);
     const mover=event.type==='push'?target:actor??target;
-    let duration=moving?110:event.type==='attack'?270:event.type==='damage'?190:event.type==='reaction'?240:event.type==='phase'?260:45;
+    if(moving&&mover)rememberFacing(mover.id,event.toX-event.fromX,event.toY-event.fromY);
+    if(event.type==='attack'&&actor&&target)rememberFacing(actor.id,target.x-actor.x,target.y-actor.y);
+    let duration=moving?(mover?.team==='enemy'?175:130):event.type==='attack'?270:event.type==='damage'?190:event.type==='reaction'?240:event.type==='phase'?260:45;
     if(reduced.matches)duration=0;
     if(event.type==='damage') {if(target)target.hp=event.after;float(`−${Math.abs(event.amount)}`,target,'#ff8880');}
     if(event.type==='heal') {if(target)target.hp=event.after;float(`+${Math.abs(event.amount)}`,target,'#9cffa5');}
@@ -326,7 +406,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     })();
     return queue;
   }
-  function skipAnimations() {generation++;animation=null;if(view){visualUnits=copy(view.units??[]);visualTiles=copy(view.tiles??[]);}effects=[];floating=[];missiles=[];}
+  function skipAnimations() {explorationMotion=null;generation++;animation=null;if(view){visualUnits=copy(view.units??[]);visualTiles=copy(view.tiles??[]);}effects=[];floating=[];missiles=[];}
   function centerSelected() {
     const unit=view?.screen==='explore'?view.exploration:view?.units?.find(u=>u.id===view.selectedUnitId);
     if(!unit)return;
@@ -346,24 +426,27 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   const wheel=event=>{event.preventDefault();zoom(event.deltaY>0?-.15:.15);};
   const key=event=>{
     if(!view)return;
-    const direction={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[event.key];
+    const input={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0],w:[0,-1],s:[0,1],a:[-1,0],d:[1,0]}[event.key.length===1?event.key.toLowerCase():event.key];
+    const direction=input?screenDirection(...input):null;
     const map=view.screen==='explore'?view.exploration:view;
     if(direction && view.screen==='explore') {
       event.preventDefault();event.stopPropagation();
-      const x=map.x+direction[0],y=map.y+direction[1];
+      const x=map.x+direction.x,y=map.y+direction.y;
       if(map.tiles.some(t=>t.x===x&&t.y===y&&t.reachable))onCell?.(x,y);
       return;
     }
-    if(direction){event.preventDefault();event.stopPropagation();cursor={x:clamp((cursor?.x??0)+direction[0],0,map.width-1),y:clamp((cursor?.y??0)+direction[1],0,map.height-1)};hover=cursor;onHover?.(cursor.x,cursor.y);}
+    if(direction){event.preventDefault();event.stopPropagation();cursor={x:clamp((cursor?.x??0)+direction.x,0,map.width-1),y:clamp((cursor?.y??0)+direction.y,0,map.height-1)};hover=cursor;onHover?.(cursor.x,cursor.y);}
     if(event.key==='Enter'||event.key===' '){event.preventDefault();if(cursor)onCell?.(cursor.x,cursor.y);}
   };
   canvas.addEventListener('pointermove',move);canvas.addEventListener('pointerleave',leave);canvas.addEventListener('click',click);canvas.addEventListener('keydown',key);
   canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);canvas.addEventListener('wheel',wheel,{passive:false});
   const observer=new ResizeObserver(resize);observer.observe(canvas);
   ready.then(resize);resize();frameId=requestAnimationFrame(draw);
-  return {setView,playEvents,resize,skipAnimations,zoom,centerSelected,
+  return {setView,playEvents,resize,skipAnimations,zoom,centerSelected,rotate,getRotationLabel,getRotation:()=>rotation,screenDirection,
     // Coordinates support real pointer-based browser regression tests.
     cellToScreen:(x,y)=>screen(x,y),
+    screenToCell:(x,y)=>{const box=canvas.getBoundingClientRect();return cellAt(x+box.left,y+box.top);},
+    getPathTo:(x,y)=>pathTo(x,y),
     dispose(){disposed=true;generation++;cancelAnimationFrame(frameId);observer.disconnect();canvas.removeEventListener('pointermove',move);canvas.removeEventListener('pointerleave',leave);canvas.removeEventListener('click',click);canvas.removeEventListener('keydown',key);canvas.removeEventListener('pointerdown',down);canvas.removeEventListener('pointerup',up);canvas.removeEventListener('pointercancel',up);canvas.removeEventListener('wheel',wheel);}
   };
 }
