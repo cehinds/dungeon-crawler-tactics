@@ -24,7 +24,7 @@ namespace DungeonCrawlerTactics.Unity
                 GUI.DrawTexture(new Rect(10, row.y + 8, 74, 74), UnitArt(unit.classId, "player", unit.id), ScaleMode.ScaleToFit);
                 if (Button(new Rect(92, row.y + 8, 314, 46), unit.label, true, campUnitId == unit.id)) campUnitId = unit.id;
                 GUI.Label(new Rect(103, row.y + 58, 310, 28), ClassName(unit.classId) + "  /  " + unit.hp + "/" + unit.maxHp + " HP", smallStyle);
-                if (Button(new Rect(421, row.y + 23, 156, 46), unit.selected ? "Deployed  ✓" : "Add to party", unit.selected || view.partyCount < view.partyCapacity, unit.selected))
+                if (Button(new Rect(421, row.y + 23, 156, 46), !unit.deployable ? "Camp advisor" : unit.selected ? "Deployed  ✓" : "Add to party", unit.deployable && (unit.selected || view.partyCount < view.partyCapacity), unit.selected))
                 { campUnitId = unit.id; Submit(new GameCommand { type = "toggle_party", unitId = unit.id }); }
             }
             GUI.EndScrollView();

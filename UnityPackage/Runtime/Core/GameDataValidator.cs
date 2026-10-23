@@ -8,6 +8,7 @@ namespace DungeonCrawlerTactics
         public static void Validate(GameData data, Catalog catalog)
         {
             Need(data.schemaVersion == 1 && !string.IsNullOrEmpty(data.contentVersion), "Expected game schemaVersion 1 and a content version.");
+            Need(data.compatibleContentVersions != null, "Compatible versions cannot be null.");
             Need(data.roster != null && data.classStats != null && data.encounters != null && data.startingInventory != null && data.rewards != null && data.tagRules != null, "Game arrays cannot be null.");
             Need(data.partySize > 0 && data.partySize <= 8 && data.roster.Length >= data.partySize && data.roster.Length <= 32 && data.encounters.Length > 0 && data.encounters.Length <= 100 && data.energyPerRound >= 0 && data.energyPerRound <= 100, "Invalid game limits.");
             HashSet<string> stats = new HashSet<string>();
@@ -18,8 +19,13 @@ namespace DungeonCrawlerTactics
             foreach (RosterDef member in data.roster)
             {
                 Need(member != null && !string.IsNullOrEmpty(member.id) && !member.id.StartsWith("tile.", StringComparison.Ordinal) && roster.Add(member.id) && !string.IsNullOrEmpty(member.label) && member.classId != null && catalog.Classes.ContainsKey(member.classId), "Invalid roster member.");
+                Need(string.IsNullOrEmpty(member.legacyClassId) || catalog.Classes.ContainsKey(member.legacyClassId), "Unknown legacy class.");
+                Need(member.innateAbilityIds != null, "Innate abilities cannot be null.");
+                HashSet<string> grants = new HashSet<string>(); foreach (string id in member.innateAbilityIds) Need(id != null && catalog.Abilities.ContainsKey(id) && grants.Add(id), "Unknown or duplicate innate ability.");
+                Need(!member.selected || member.deployable, "Advisor cannot be selected.");
                 if (member.selected) selected++;
             }
+            HashSet<string> replacements = new HashSet<string>(); foreach (RosterDef member in data.roster) if (!string.IsNullOrEmpty(member.replacesId)) Need(member.replacesId != member.id && roster.Contains(member.replacesId) && replacements.Add(member.replacesId), "Invalid roster replacement.");
             Need(selected <= data.partySize, "Too many default party members.");
             HashSet<string> encounters = new HashSet<string>(), sectors = new HashSet<string>();
             foreach (EncounterDef encounter in data.encounters)

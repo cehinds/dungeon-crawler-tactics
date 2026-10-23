@@ -1,4 +1,18 @@
-# Playable build validation — 2026-10-22
+# Playable build validation
+
+## Animated dungeon revamp
+
+The current shared-C# build passed 96 game checks, 42 rules checks, 21 existing Python validation tests and 6 new content-validation regression tests. Both authored JSON catalogs validate. The netstandard2.1 compatibility build passes. Unity presentation source also compiles against Unity runtime references with zero errors and one existing unused-field warning; Unity Editor Play Mode and Web export remain unverified.
+
+The actual local WebAssembly build completed all three encounters through the public browser command bridge: 3 wins, 150 XP, 33 moves, 7 potions and 860 legal previews across 79 driver ticks. Its completed save reloaded successfully with no JavaScript errors. This is functional automation, not a balance or human enjoyment study.
+
+Visible-UI Playwright checks passed at 1366×768, 390×844 and 844×390: exploration, pointer targeting, forecasts, movement, Magic Missile, Shapeshift, Puddle Jumper, Wet + Lightning, individual party turn order, inspect panels and viewport fit. A separate rapid-input check verified move → ability → target ordering and refresh during animation restoring the committed position. See [Revamp-QA.md](Revamp-QA.md) for the test scope and measured latency.
+
+Current content has 16 classes, 46 abilities, 8 items, 9 roster entries (8 deployable) and 3 encounters. Presentation assets are components rendered over actual game coordinates; they are not a static concept screenshot.
+
+## Earlier playable build verification
+
+The following records the previous revision and is retained as historical evidence. Its content counts and check totals are superseded above.
 
 The delivered browser build is an executable .NET WebAssembly game using the same C# core as the Unity project. It is not a Unity Web export. Earlier wireframe checks are superseded by this game verification.
 

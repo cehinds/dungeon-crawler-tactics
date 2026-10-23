@@ -51,6 +51,10 @@ def validate(content):
         for index, effect in enumerate(records):
             if effect["op"] in ("AddTag", "RemoveTag"):
                 references([effect["tag"]], "tags", f"{path}.{index}.tag")
+            elif effect["op"] == "Teleport" and (effect["amount"] != 0 or effect["tag"] != ""):
+                errors.append(f"{path}.{index}: Teleport requires amount 0 and empty tag")
+            elif effect["op"] == "Push" and (effect["amount"] < 1 or effect["tag"] != ""):
+                errors.append(f"{path}.{index}: Push requires positive amount and empty tag")
 
     for index, record in enumerate(content["classes"]):
         references(record["abilityIds"], "abilities", f"classes.{index}.abilityIds")

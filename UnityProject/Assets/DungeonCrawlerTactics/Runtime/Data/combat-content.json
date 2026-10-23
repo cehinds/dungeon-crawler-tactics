@@ -52,6 +52,10 @@
     {
       "id": "status.guarded",
       "label": "Guarded"
+    },
+    {
+      "id": "element.arcane",
+      "label": "Arcane"
     }
   ],
   "classes": [
@@ -167,6 +171,40 @@
         "ability.strike",
         "ability.beast_rend",
         "ability.second_wind"
+      ]
+    },
+    {
+      "id": "class.compensated_anarchist",
+      "label": "Compensated Anarchist",
+      "abilityIds": [
+        "ability.carl_powerful_strike",
+        "ability.carl_bomb"
+      ]
+    },
+    {
+      "id": "class.former_child_actor",
+      "label": "Former Child Actor",
+      "abilityIds": [
+        "ability.donut_magic_missile",
+        "ability.donut_puddle_jumper",
+        "ability.donut_heal_critter"
+      ]
+    },
+    {
+      "id": "class.doppelganger",
+      "label": "Doppelganger",
+      "abilityIds": [
+        "ability.katia_shapeshift",
+        "ability.katia_heavy_blow",
+        "ability.katia_new_look"
+      ]
+    },
+    {
+      "id": "class.raptor_companion",
+      "label": "Raptor Companion",
+      "abilityIds": [
+        "ability.mongo_bite",
+        "ability.mongo_pounce"
       ]
     }
   ],
@@ -769,7 +807,7 @@
     },
     {
       "id": "ability.thunder_flask",
-      "label": "Thunder Flask",
+      "label": "Shock Tonic",
       "target": "enemy",
       "range": 4,
       "cost": 0,
@@ -811,6 +849,181 @@
           "op": "RemoveTag",
           "amount": 0,
           "tag": "status.wet"
+        }
+      ]
+    },
+    {
+      "id": "ability.carl_powerful_strike",
+      "label": "Powerful Strike",
+      "target": "enemy",
+      "range": 1,
+      "cost": 1,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 9,
+          "tag": ""
+        },
+        {
+          "op": "Push",
+          "amount": 1,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.carl_bomb",
+      "label": "Improvised Bomb",
+      "target": "tile",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.fire"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "surface.burning"
+        }
+      ]
+    },
+    {
+      "id": "ability.donut_magic_missile",
+      "label": "Magic Missile",
+      "target": "enemy",
+      "range": 4,
+      "cost": 2,
+      "incomingTags": [
+        "element.arcane"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 8,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.donut_puddle_jumper",
+      "label": "Puddle Jumper",
+      "target": "tile",
+      "range": 3,
+      "cost": 1,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Teleport",
+          "amount": 0,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.donut_heal_critter",
+      "label": "Heal Critter",
+      "target": "ally",
+      "range": 3,
+      "cost": 2,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Heal",
+          "amount": 10,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.katia_shapeshift",
+      "label": "Shapeshift",
+      "target": "self",
+      "range": 0,
+      "cost": 1,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.guarded"
+        }
+      ]
+    },
+    {
+      "id": "ability.katia_heavy_blow",
+      "label": "Heavy Blow",
+      "target": "enemy",
+      "range": 1,
+      "cost": 2,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 8,
+          "tag": ""
+        },
+        {
+          "op": "Push",
+          "amount": 1,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.katia_new_look",
+      "label": "New Look",
+      "target": "self",
+      "range": 0,
+      "cost": 1,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.frozen"
+        },
+        {
+          "op": "RemoveTag",
+          "amount": 0,
+          "tag": "status.shocked"
+        }
+      ]
+    },
+    {
+      "id": "ability.mongo_bite",
+      "label": "Mongo Bite",
+      "target": "enemy",
+      "range": 1,
+      "cost": 0,
+      "incomingTags": [
+        "damage.physical"
+      ],
+      "effects": [
+        {
+          "op": "Damage",
+          "amount": 7,
+          "tag": ""
+        }
+      ]
+    },
+    {
+      "id": "ability.mongo_pounce",
+      "label": "Mongo Pounce",
+      "target": "tile",
+      "range": 3,
+      "cost": 1,
+      "incomingTags": [],
+      "effects": [
+        {
+          "op": "Teleport",
+          "amount": 0,
+          "tag": ""
         }
       ]
     }
@@ -1021,7 +1234,7 @@
     },
     {
       "id": "item.thunder_flask",
-      "label": "Thunder Flask",
+      "label": "Shock Tonic",
       "abilityId": "ability.thunder_flask"
     },
     {

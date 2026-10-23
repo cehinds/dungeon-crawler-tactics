@@ -1,0 +1,46 @@
+{
+  "image": "terrain.png",
+  "width": 1448,
+  "height": 1086,
+  "columns": 4,
+  "rows": 3,
+  "cellWidth": 362,
+  "cellHeight": 362,
+  "footAnchor": {
+    "x": 181,
+    "y": 340
+  },
+  "floorDiamond": {
+    "top": [
+      181,
+      99
+    ],
+    "right": [
+      354,
+      203
+    ],
+    "bottom": [
+      181,
+      307
+    ],
+    "left": [
+      8,
+      203
+    ]
+  },
+  "sprites": [
+    "stoneA",
+    "stoneB",
+    "water",
+    "oil",
+    "wall",
+    "mossWall",
+    "torchWall",
+    "brokenWall",
+    "crate",
+    "barrel",
+    "chest",
+    "exit"
+  ],
+  "note": "Generated isolated atlas. Walls are corner segments. Floor artwork occupies y99..307, so use floor-specific anchor (181,203); prop anchors at bottom center. Original image retained."
+}

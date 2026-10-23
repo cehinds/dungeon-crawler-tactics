@@ -11,7 +11,8 @@ def validate_game(data, content):
     errors = [f"{'.'.join(map(str, e.absolute_path)) or '$'}: {e.message}" for e in Draft202012Validator(schema).iter_errors(data)]
     if errors:
         return errors
-    known = {kind: {r['id'] for r in content[kind]} for kind in ('tags', 'classes', 'items')}
+    known = {kind: {r['id'] for r in content[kind]} for kind in ('tags', 'classes', 'items', 'abilities')}
+    known['roster'] = {r['id'] for r in data['roster']}
 
     def ref(value, kind, path):
         if value not in known[kind]:
@@ -29,7 +30,23 @@ def validate_game(data, content):
         unique(data[name], field, name)
     if sum(r['selected'] for r in data['roster']) > data['partySize'] or len(data['roster']) < data['partySize']:
         errors.append('roster: invalid party selection/roster size')
-    for kind in ('roster', 'classStats'):
+    for i, record in enumerate(data['roster']):
+        ref(record['classId'], 'classes', f'roster.{i}.classId')
+        if record.get('legacyClassId'):
+            ref(record['legacyClassId'], 'classes', f'roster.{i}.legacyClassId')
+        if record.get('selected') and not record.get('deployable', True):
+            errors.append(f'roster.{i}: non-deployable members cannot be selected')
+        for j, ability_id in enumerate(record.get('innateAbilityIds', [])):
+            ref(ability_id, 'abilities', f'roster.{i}.innateAbilityIds.{j}')
+    replace_targets = [r['replacesId'] for r in data['roster'] if r.get('replacesId')]
+    if len(set(replace_targets)) != len(replace_targets):
+        errors.append('roster: duplicate replacesId')
+    for i, record in enumerate(data['roster']):
+        if record.get('replacesId'):
+            ref(record['replacesId'], 'roster', f'roster.{i}.replacesId')
+            if record['replacesId'] == record['id']:
+                errors.append(f'roster.{i}.replacesId: cannot replace itself')
+    for kind in ('classStats',):
         for i, record in enumerate(data[kind]):
             ref(record['classId'], 'classes', f'{kind}.{i}.classId')
     missing_stats = known['classes'] - {r['classId'] for r in data['classStats']}

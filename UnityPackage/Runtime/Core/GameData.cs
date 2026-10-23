@@ -6,6 +6,7 @@ namespace DungeonCrawlerTactics
     {
         public int schemaVersion = 1;
         public string contentVersion;
+        public string[] compatibleContentVersions = new string[0];
         public int partySize = 4;
         public int energyPerRound = 3;
         public RosterDef[] roster = new RosterDef[0];
@@ -15,9 +16,9 @@ namespace DungeonCrawlerTactics
         public RewardDef[] rewards = new RewardDef[0];
         public TagRuleDef[] tagRules = new TagRuleDef[0];
     }
-    [Serializable] public sealed class RosterDef { public string id, label, classId; public bool selected; }
+    [Serializable] public sealed class RosterDef { public string id, label, classId, artId, replacesId, legacyClassId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; }
     [Serializable] public sealed class ClassStats { public string classId; public int hp = 30, energy = 10, move = 3; }
-    [Serializable] public sealed class SpawnDef { public string id, label, classId; public int x, y, hp = 18, energy = 10, move = 2; public string[] tags = new string[0]; }
+    [Serializable] public sealed class SpawnDef { public string id, label, classId, artId; public int x, y, hp = 18, energy = 10, move = 2; public string[] tags = new string[0]; }
     [Serializable] public sealed class TileDef { public int x, y; public bool blocked; public string[] tags = new string[0]; }
     [Serializable] public sealed class EncounterDef
     {
@@ -46,23 +47,28 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
     {
-        public string id, label, classId, team; public int x, y, hp, maxHp, energy, maxEnergy, move;
+        public string id, label, classId, team, artId; public int x, y, hp, maxHp, energy, maxEnergy, move, effectiveMove;
+        public StatusView[] statuses = new StatusView[0];
         public bool selected, moved, acted; public string[] tags = new string[0];
     }
+    [Serializable] public sealed class StatusView { public string tag, source; public int remainingRounds; }
+    [Serializable] public sealed class PresentationEvent { public int sequence; public string type, actorId, targetId, abilityId, reactionId, tag; public int fromX, fromY, toX, toY, amount, before, after; public bool preview; }
     [Serializable] public sealed class TileView { public string id; public int x, y; public bool blocked; public string[] tags = new string[0]; }
     [Serializable] public sealed class AbilityView { public string id, label, target, description, disabledReason; public string[] targetIds = new string[0]; public int range, cost; public bool enabled; }
     [Serializable] public sealed class ItemView { public string id, label, abilityId, target, description, disabledReason; public string[] targetIds = new string[0]; public int count, range; }
-    [Serializable] public sealed class RosterView { public string id, label, classId; public bool selected; public int hp, maxHp; }
+    [Serializable] public sealed class RosterView { public string id, label, classId, artId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; public int hp, maxHp; }
     [Serializable] public sealed class ClassView { public string id, label; public string[] abilityIds = new string[0]; }
     [Serializable] public sealed class ForecastView
     {
-        public string targetId, label; public int beforeHp, afterHp, beforeEnergy, afterEnergy;
+        public string targetId, label; public int beforeHp, afterHp, beforeEnergy, afterEnergy, beforeX, beforeY, afterX, afterY;
         public string[] beforeTags = new string[0], afterTags = new string[0];
     }
     [Serializable] public sealed class RewardView { public string id, label, description; }
     [Serializable] public sealed class GameView
     {
         public ExplorationView exploration;
+        public PresentationEvent[] events = new PresentationEvent[0];
+        public string[] partyOrder = new string[0];
         public string screen, message, encounterName, phase, selectedUnitId;
         public int encounterIndex, encounterCount, round, width, height, xp, partyCount, partyCapacity;
         public bool canConfirm, canMove, canAct;

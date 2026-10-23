@@ -21,6 +21,12 @@ static class GameTests
         if (type == "start" && view.screen == "explore") return EnterDoor(game);
         return view;
     }
+    static GameView EndRound(GameSession game)
+    {
+        GameView view = game.GetView(); int round = view.round;
+        for (int i = 0; i < Data.partySize && view.screen == "battle" && view.round == round; i++) view = RawCommand(game, "end_turn");
+        return view;
+    }
     static GameView EnterDoor(GameSession game)
     {
         GameView view = game.GetView(); int attempts = 0;
@@ -45,10 +51,103 @@ static class GameTests
         Content = JsonSerializer.Deserialize<Content>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")), Json);
         Data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "game-content.json")), Json);
         GameDataValidator.Validate(Data, new Catalog(Content));
-        Check(Content.classes.All(c => c.abilityIds.Length >= 3), "all twelve classes have functional kits");
+        Check(Content.classes.All(c => c.abilityIds.Length > 0), "all optional and identity classes have functional kits");
         Check(Content.items.Length == 8 && Content.abilities.Length >= 18, "release inventory and ability breadth");
-        Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
+        RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
+    }
+    static void RevampContracts()
+    {
+        GameSession game = Session(); GameView view = Command(game, "start");
+        string[] order = Data.roster.Where(r => r.selected).Select(r => r.id).ToArray();
+        Check(view.partyOrder.SequenceEqual(order) && view.selectedUnitId == order[0], "party order and initial selection use authored roster order");
+        for (int i = 0; i < order.Length - 1; i++)
+        {
+            view = RawCommand(game, "end_turn");
+            Check(view.round == 1 && view.selectedUnitId == order[i + 1] && view.units.Single(u => u.id == order[i]).acted && !view.events.Any(ev => ev.type == "phase"), "end turn spends only current character and selects next ready");
+        }
+        view = RawCommand(game, "end_turn");
+        Check(view.round == 2 && view.events.Count(ev => ev.type == "phase") == 2 && view.events.First(ev => ev.type == "phase").tag == "enemy" && view.events.Last(ev => ev.type == "phase").tag == "player", "enemy phase starts only after last party activation");
+        Check(view.events.Select(ev => ev.sequence).SequenceEqual(Enumerable.Range(0, view.events.Length)), "presentation events have contiguous deterministic order");
+        Check(RawCommand(game, "cancel").events.Length == 0, "events are scoped to one dispatch");
+        GameSession identities = Session(); GameView identityView = Command(identities, "start");
+        Check(identityView.units.Where(u => u.team == "player").Select(u => u.classId).Distinct().Count() == 4 && identityView.units.Single(u => u.id == "crawler.carl").maxHp != identityView.units.Single(u => u.id == "crawler.donut").maxHp, "default crawlers expose distinct identity classes and stats");
+        identityView = RawCommand(identities, "select", "crawler.katia");
+        Check(!identityView.abilities.Any(a => a.id == "ability.firebolt") && identityView.abilities.Any(a => a.id == "ability.katia_shapeshift"), "default Katia has doppelganger kit without pyromancer firebolt");
+        AbilityDef missile = Content.abilities.Single(a => a.id == "ability.donut_magic_missile");
+        Check(missile.incomingTags.Contains("element.arcane") && !missile.incomingTags.Contains("element.lightning"), "Donut Magic Missile is arcane rather than lightning");
+
+        Content fixture = Clone(Content);
+        fixture.abilities = fixture.abilities.Concat(new[] {
+            new AbilityDef { id = "ability.fixture_jump", label = "Jump", target = "tile", range = 4, cost = 1, effects = new[] { new EffectDef { op = "Teleport" } } },
+            new AbilityDef { id = "ability.fixture_push", label = "Push", target = "enemy", range = 2, cost = 1, effects = new[] { new EffectDef { op = "Damage", amount = 2 }, new EffectDef { op = "Push", amount = 3 } } }
+        }).ToArray();
+        GameData config = Clone(Data); RosterDef hero = config.roster.First(r => r.selected); hero.artId = "art.fixture";
+        hero.innateAbilityIds = new[] { "ability.fixture_jump", "ability.fixture_push" };
+        EncounterDef room = config.encounters[0];
+        room.playerSpawns = new[] { new CellView { x = 1, y = 1 }, new CellView { x = 1, y = 3 }, new CellView { x = 1, y = 5 }, new CellView { x = 2, y = 3 } };
+        room.tiles = new[] { new TileDef { x = 4, y = 1, tags = new[] { "surface.water" } }, new TileDef { x = 5, y = 1, tags = new[] { "surface.burning" } }, new TileDef { x = 6, y = 1, blocked = true }, new TileDef { x = 4, y = 2, blocked = true } };
+        room.enemies = new[] { new SpawnDef { id = "enemy.fixture", label = "Fixture", artId = "art.guard", classId = "class.brawler", x = 3, y = 1, hp = 100, energy = 0, move = 1 } };
+        game = new GameSession(Clone(fixture), Clone(config)); view = Command(game, "start");
+        Check(view.abilities.Any(a => a.id == "ability.fixture_jump") && view.units.Single(u => u.id == hero.id).artId == "art.fixture", "character art and innate grants survive class presentation");
+        string before = JsonSerializer.Serialize(game.ExportSave(), Json);
+        view = RawCommand(game, "preview", hero.id, "tile.4.2", "ability.fixture_jump");
+        Check(!view.canConfirm && before == JsonSerializer.Serialize(game.ExportSave(), Json), "teleport rejects authored walls without state changes");
+        view = RawCommand(game, "preview", hero.id, "tile.1.3", "ability.fixture_jump");
+        Check(!view.canConfirm, "teleport rejects occupied destination");
+        view = RawCommand(game, "preview", hero.id, "tile.4.1", "ability.fixture_jump");
+        string previewEvents = string.Join("|", view.events.Select(ev => ev.type + ":" + ev.targetId + ":" + ev.tag + ":" + ev.toX + ":" + ev.toY));
+        Check(view.canConfirm && view.events.All(ev => ev.preview) && before == JsonSerializer.Serialize(game.ExportSave(), Json) && view.forecast.Any(f => f.targetId == hero.id && f.afterX == 4 && f.afterY == 1), "teleport preview reports position events and leaves save untouched");
+        view = RawCommand(game, "confirm"); UnitView jumped = view.units.Single(u => u.id == hero.id);
+        Check(jumped.x == 4 && jumped.y == 1 && jumped.tags.Contains("status.wet") && jumped.statuses.Any(t => t.tag == "status.wet" && t.remainingRounds == 3) && view.events.All(ev => !ev.preview), "teleport commits position and terrain status with duration");
+        Check(previewEvents == string.Join("|", view.events.Select(ev => ev.type + ":" + ev.targetId + ":" + ev.tag + ":" + ev.toX + ":" + ev.toY)), "preview and committed event sequence agree");
+        game = new GameSession(Clone(fixture), Clone(config)); Command(game, "start");
+        view = RawCommand(game, "preview", hero.id, "enemy.fixture", "ability.fixture_push");
+        Check(view.canConfirm && view.forecast.Any(f => f.targetId == "enemy.fixture" && f.afterX == 5 && f.afterHp == 94), "push preview includes bounded path and entry hazard damage");
+        view = RawCommand(game, "confirm");
+        Check(view.events.Where(ev => ev.type == "push").Select(ev => ev.toX).SequenceEqual(new[] { 4, 5 }) && view.events.Any(ev => ev.type == "damage" && ev.tag == "surface.burning" && ev.amount == 4), "push emits each traversed step and stops at wall");
+        GameSession restored = new GameSession(Clone(fixture), Clone(config));
+        Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected"), "positional ability state survives validated save roundtrip");
+        GameData occupiedPush = Clone(config); occupiedPush.encounters[0].playerSpawns[1] = new CellView { x = 4, y = 1 };
+        game = new GameSession(Clone(fixture), occupiedPush); Command(game, "start");
+        view = RawCommand(game, "preview", hero.id, "enemy.fixture", "ability.fixture_push");
+        Check(view.canConfirm && !view.events.Any(ev => ev.type == "push") && view.forecast.Single(f => f.targetId == "enemy.fixture").afterHp == 98, "push stops before living occupant while preserving attack damage");
+        GameData lethalPush = Clone(config); lethalPush.encounters[0].enemies[0].hp = 5;
+        game = new GameSession(Clone(fixture), lethalPush); Command(game, "start");
+        view = RawCommand(game, "preview", hero.id, "enemy.fixture", "ability.fixture_push");
+        Check(view.canConfirm && view.forecast.Single(f => f.targetId == "enemy.fixture").afterHp == 0 && view.events.Count(ev => ev.type == "push") == 2, "lethal pushed terrain damage stops traversal deterministically");
+        game = new GameSession(Clone(fixture), Clone(config));
+        game.Handle(new GameCommand { type = "set_class", unitId = hero.id, classId = "class.ranger" }); Command(game, "start");
+        Check(game.GetView().abilities.Any(a => a.id == "ability.fixture_jump"), "changing optional class preserves innate abilities");
+
+        GameData legacyData = Clone(Data); legacyData.contentVersion = "fixture-legacy"; legacyData.compatibleContentVersions = new string[0];
+        legacyData.roster = legacyData.roster.Where(r => string.IsNullOrEmpty(r.replacesId)).ToArray();
+        foreach (RosterDef member in legacyData.roster) if (!string.IsNullOrEmpty(member.legacyClassId)) member.classId = member.legacyClassId;
+        RosterDef advisor = legacyData.roster.First(r => !r.deployable); advisor.deployable = true; advisor.selected = true;
+        foreach (RosterDef member in legacyData.roster.Where(r => r.selected).Skip(legacyData.partySize)) member.selected = false;
+        // Select exactly the original three leads and the former field advisor.
+        foreach (RosterDef member in legacyData.roster) member.selected = member.id == advisor.id || Data.roster.Take(3).Any(r => r.id == member.id);
+        GameSession legacy = new GameSession(Clone(Content), Clone(legacyData)); Command(legacy, "start");
+        GameSave legacySave = Clone(legacy.ExportSave()); SavedUnit woundedLegacy = legacySave.units.Single(u => u.id == "crawler.carl"); woundedLegacy.hp = woundedLegacy.maxHp / 2; string original = JsonSerializer.Serialize(legacySave, Json);
+        GameData migrationTarget = Clone(Data); migrationTarget.compatibleContentVersions = new[] { "fixture-legacy" };
+        GameSession migrated = new GameSession(Clone(Content), migrationTarget); view = migrated.ImportSave(legacySave);
+        Check(!view.message.StartsWith("Save rejected") && view.units.Any(u => u.id == Data.roster.Single(r => r.replacesId == advisor.id).id) && !view.units.Any(u => u.id == advisor.id) && !view.roster.Single(r => r.id == advisor.id).selected, "allowlisted legacy advisor is replaced by new companion without losing encounter");
+        Check(view.units.Where(u => u.team == "player").All(u => u.classId == Data.roster.Single(r => r.id == u.id).classId), "legacy default classes normalize to canonical character identities");
+        UnitView normalizedCarl = view.units.Single(u => u.id == "crawler.carl"); ClassStats canonicalCarl = Data.classStats.Single(c => c.classId == normalizedCarl.classId);
+        Check(normalizedCarl.hp == (int)((long)woundedLegacy.hp * canonicalCarl.hp / woundedLegacy.maxHp) && normalizedCarl.maxHp == canonicalCarl.hp && normalizedCarl.maxEnergy == canonicalCarl.energy && normalizedCarl.move == canonicalCarl.move, "identity migration scales current HP and applies canonical mana and movement limits");
+        GameSave customClass = Clone(legacySave); RosterView oldCarl = customClass.roster.Single(r => r.id == "crawler.carl"); oldCarl.classId = "class.ranger";
+        ClassStats ranger = Data.classStats.Single(c => c.classId == "class.ranger"); oldCarl.hp = oldCarl.maxHp = ranger.hp;
+        SavedUnit oldActor = customClass.units.Single(u => u.id == "crawler.carl"); oldActor.classId = "class.ranger"; oldActor.hp = oldActor.maxHp = ranger.hp; oldActor.energy = oldActor.maxEnergy = ranger.energy; oldActor.move = ranger.move;
+        GameView customClassView = new GameSession(Clone(Content), migrationTarget).ImportSave(customClass);
+        Check(!customClassView.message.StartsWith("Save rejected") && customClassView.units.Single(u => u.id == "crawler.carl").classId == "class.ranger", "migration preserves a player-chosen nondefault legacy class");
+        Check(original == JsonSerializer.Serialize(legacySave, Json), "migration does not mutate incoming save object");
+        GameSave oldExploration = Clone(legacySave); oldExploration.screen = "explore"; oldExploration.units = new SavedUnit[0]; oldExploration.tiles = new TileView[0]; oldExploration.timedTags = new TimedTag[0]; oldExploration.selectedUnitId = null;
+        oldExploration.exploration[0].x = 4; oldExploration.exploration[0].y = 1;
+        oldExploration.exploration[0].revealed = oldExploration.exploration[0].revealed.Concat(new[] { new CellView { x = 4, y = 1 } }).GroupBy(c => c.x + "," + c.y).Select(g => g.First()).ToArray();
+        view = new GameSession(Clone(Content), migrationTarget).ImportSave(oldExploration);
+        Check(!view.message.StartsWith("Save rejected") && view.exploration.x == migrationTarget.encounters[0].exploration.startX && view.exploration.y == migrationTarget.encounters[0].exploration.startY, "legacy exploration position inside changed wall safely returns to entrance");
+        GameSave migratedSave = Clone(migrated.ExportSave());
+        Check(!Session().ImportSave(migratedSave).message.StartsWith("Save rejected"), "migrated checkpoint roundtrips in current content");
     }
     static void Exploration()
     {
@@ -66,11 +165,13 @@ static class GameTests
         view = RawCommand(game, "explore_move", x: 3, y: 1);
         Check(view.exploration.x == 3 && view.exploration.tiles.Count(t => t.revealed) > revealed, "BFS walking reveals traversed passage");
         string cache = view.exploration.points.First(p => p.kind == "cache").id;
-        int supply = view.items.First(i => i.id == "item.health_tonic").count;
+        ExplorationPointDef cacheDefinition = Data.encounters[0].exploration.points.First(p => p.id == cache);
+        view = RawCommand(game, "explore_move", x: 2, y: 2);
+        int supply = view.items.First(i => i.id == cacheDefinition.itemId).count;
         view = RawCommand(game, "explore_interact", target: cache); view = RawCommand(game, "explore_interact", target: cache);
-        Check(view.items.First(i => i.id == "item.health_tonic").count == supply + 1, "optional cache grants supply exactly once");
+        Check(view.items.First(i => i.id == cacheDefinition.itemId).count == supply + cacheDefinition.count, "optional cache grants supply exactly once");
         GameSave checkpoint = Clone(game.ExportSave()); GameSession restored = Session(); restored.ImportSave(checkpoint);
-        Check(restored.GetView().screen == "explore" && restored.GetView().exploration.x == 3 && restored.GetView().exploration.tiles.Count(t => t.revealed) == view.exploration.tiles.Count(t => t.revealed) && restored.GetView().exploration.points.First(p => p.id == cache).claimed, "exploration position fog and claims persist");
+        Check(restored.GetView().screen == "explore" && restored.GetView().exploration.x == 2 && restored.GetView().exploration.tiles.Count(t => t.revealed) == view.exploration.tiles.Count(t => t.revealed) && restored.GetView().exploration.points.First(p => p.id == cache).claimed, "exploration position fog and claims persist");
         string before = JsonSerializer.Serialize(restored.ExportSave(), Json); checkpoint.exploration[0].x = 0;
         restored.ImportSave(checkpoint); Check(JsonSerializer.Serialize(restored.ExportSave(), Json) == before, "wall exploration save rejected atomically");
         checkpoint = Clone(game.ExportSave()); checkpoint.exploration[0].claimed = new[] { cache, cache };
@@ -78,7 +179,7 @@ static class GameTests
         checkpoint = Clone(game.ExportSave()); checkpoint.exploration[0].sectorId = Data.encounters[1].exploration.id;
         restored.ImportSave(checkpoint); Check(JsonSerializer.Serialize(restored.ExportSave(), Json) == before, "future sector checkpoint rejected atomically");
         RawCommand(game, "return_camp"); game.Handle(new GameCommand { type = "set_class", unitId = "crawler.carl", classId = "class.ranger" }); RawCommand(game, "start");
-        Check(game.GetView().exploration.x == 3, "camp revisit preserves exploration progress");
+        Check(game.GetView().exploration.x == 2, "camp revisit preserves exploration progress");
         view = EnterDoor(game); Check(view.units.First(u => u.id == "crawler.carl").classId == "class.ranger", "chosen class persists through exploration into combat");
         GameSave legacy = Clone(game.ExportSave()); legacy.exploration = new ExplorationSave[0]; restored.ImportSave(legacy); Check(restored.GetView().screen == "battle", "legacy battle checkpoint resumes without exploration history");
     }
@@ -95,7 +196,7 @@ static class GameTests
     static void PartyAndMovement()
     {
         GameSession game = Session(); GameView view = game.GetView();
-        Check(view.screen == "camp" && view.roster.Length == 8 && view.partyCount == 4, "eight roster / four deployment camp");
+        Check(view.screen == "camp" && view.roster.Length == Data.roster.Length && view.partyCount == 4, "authored roster / four deployment camp");
         view = Command(game, "toggle_party", "crawler.elle"); Check(view.partyCount == 4 && view.message.Contains("full"), "fifth crawler rejected");
         Command(game, "toggle_party", "crawler.carl"); view = Command(game, "start"); Check(view.screen == "camp", "undersized party cannot deploy");
         game.Handle(new GameCommand { type = "set_class", unitId = "crawler.elle", classId = "class.ranger" });
@@ -111,11 +212,11 @@ static class GameTests
         view = Command(game, "move", hero.id, x: destination.x, y: destination.y); Check(view.units.First(u => u.id == hero.id).moved, "BFS move spends single move");
         UnitView moved = view.units.First(u => u.id == hero.id);
         view = Command(game, "move", hero.id, x: 0, y: 0); Check(view.units.First(u => u.id == hero.id).x == moved.x, "second move blocked");
-        Command(game, "wait", hero.id); view = Command(game, "end_turn"); Check(view.round == 2 && view.phase == "player", "bounded enemy phase always returns");
+        Command(game, "wait", hero.id); view = EndRound(game); Check(view.round == 2 && view.phase == "player", "bounded enemy phase always returns");
     }
     static void PreviewItemsAndTags()
     {
-        GameSession game = Session(); Command(game, "start");
+        GameSession game = Session(); game.Handle(new GameCommand { type = "set_class", unitId = "crawler.katia", classId = "class.pyromancer" }); game.Handle(new GameCommand { type = "set_class", unitId = "crawler.donut", classId = "class.stormcaller" }); Command(game, "start");
         string actor = "crawler.donut", target = "enemy.goblin_two";
         Command(game, "move", actor, x: 3, y: 3); Command(game, "select", actor);
         GameSave before = game.ExportSave(); GameView legal = game.GetView();
@@ -177,18 +278,18 @@ static class GameTests
         game = new GameSession(Clone(Content), Clone(custom)); Command(game, "start");
         Command(game, "move", "crawler.carl", x: 1, y: 0);
         Check(game.ExportSave().timedTags.Any(t => t.entityId == "crawler.carl" && t.tag == "status.wet" && t.remainingRounds == 3), "authored surface occupancy grants timed wet status");
-        Command(game, "end_turn"); Check(game.ExportSave().timedTags.Any(t => t.entityId == "crawler.carl" && t.remainingRounds == 2), "status duration ticks at full-round end");
-        Command(game, "move", "crawler.carl", x: 0, y: 0); Command(game, "end_turn"); Command(game, "end_turn");
+        EndRound(game); Check(game.ExportSave().timedTags.Any(t => t.entityId == "crawler.carl" && t.remainingRounds == 2), "status duration ticks at full-round end");
+        Command(game, "move", "crawler.carl", x: 0, y: 0); EndRound(game); EndRound(game);
         Check(!game.GetView().units.First(u => u.id == "crawler.carl").tags.Contains("status.wet"), "timed tag expires after leaving its authored surface");
         game = new GameSession(Clone(Content), Clone(custom)); Command(game, "start"); Command(game, "move", "crawler.carl", x: 1, y: 0);
-        for (int i = 0; i < 4; i++) Command(game, "end_turn");
+        for (int i = 0; i < 4; i++) EndRound(game);
         Check(game.ExportSave().timedTags.Any(t => t.entityId == "crawler.carl" && t.tag == "status.wet"), "standing on water reapplies wet with a valid duration layer");
         GameSession restored = new GameSession(Clone(Content), Clone(custom)); Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected"), "reapplied occupancy status survives validated save roundtrip");
         // An enemy also walks the complete path rather than teleporting past intermediate hazards.
         custom.encounters[0].playerSpawns = new[] { new CellView { x = 1, y = 1 }, new CellView { x = 1, y = 3 }, new CellView { x = 1, y = 5 }, new CellView { x = 2, y = 3 } };
         custom.encounters[0].enemies[0].x = 6; custom.encounters[0].enemies[0].y = 1; custom.encounters[0].enemies[0].move = 3;
         custom.encounters[0].tiles = new[] { new TileDef { x = 5, y = 1, tags = new[] { "surface.burning" } }, new TileDef { x = 4, y = 1, tags = new[] { "surface.burning" } } };
-        game = new GameSession(Clone(Content), custom); Command(game, "start"); view = Command(game, "end_turn");
+        game = new GameSession(Clone(Content), custom); Command(game, "start"); view = EndRound(game);
         UnitView walker = view.units.First(u => u.id == "enemy.walker");
         Check(walker.x == 3 && walker.y == 1 && walker.hp == 22, "enemy BFS path takes intermediate hazard entry damage");
     }
@@ -204,11 +305,11 @@ static class GameTests
             {
                 victories++; if (view.rewards.Length > 0) game.Handle(new GameCommand { type = "choose_reward", rewardId = view.rewards[0].id });
                 GameSave checkpoint = Clone(game.ExportSave()); game.ImportSave(checkpoint); view = Command(game, "continue");
-                if (view.screen == "camp") { view = RawCommand(game, "start"); Check(view.screen == "explore" && view.exploration.x == 1 && view.exploration.y == 1, "next victory opens a fresh exploration sector"); EnterDoor(game); }
+                if (view.screen == "camp") { view = RawCommand(game, "start"); Check(view.screen == "explore" && view.exploration.x == Data.encounters[view.encounterIndex].exploration.startX && view.exploration.y == Data.encounters[view.encounterIndex].exploration.startY, "next victory opens a fresh exploration sector"); EnterDoor(game); }
                 continue;
             }
             UnitView actor = view.units.FirstOrDefault(u => u.team == "player" && u.hp > 0 && !u.acted);
-            if (actor == null) { Command(game, "end_turn"); continue; }
+            if (actor == null) { EndRound(game); continue; }
             Command(game, "select", actor.id); view = game.GetView();
             // A melee crawler advances before considering a self heal; ranged crawlers seek range.
             int desiredRange = view.abilities.Where(a => a.target == "enemy").Max(a => a.range);
@@ -225,12 +326,12 @@ static class GameTests
                 if (potion.canConfirm) { Command(game, "confirm"); usedPotion = true; continue; }
             }
             GameCommand best = null; int score = -1;
-            foreach (AbilityView ability in view.abilities.Where(a => a.enabled)) foreach (UnitView target in view.units.Where(u => u.hp > 0))
+            foreach (AbilityView ability in view.abilities.Where(a => a.enabled)) foreach (string targetId in ability.targetIds)
             {
-                GameView preview = Command(game, "preview", actor.id, target.id, ability.id);
+                GameView preview = Command(game, "preview", actor.id, targetId, ability.id);
                 if (!preview.canConfirm) continue;
                 int value = preview.forecast.Sum(f => view.units.Any(u => u.id == f.targetId && u.team == "enemy") ? (f.beforeHp - f.afterHp) * 10 + (f.beforeHp > 0 && f.afterHp == 0 ? 200 : 0) : (f.afterHp - f.beforeHp) * 5);
-                if (value > score) { score = value; best = new GameCommand { type = "preview", unitId = actor.id, targetId = target.id, abilityId = ability.id }; }
+                if (value > score) { score = value; best = new GameCommand { type = "preview", unitId = actor.id, targetId = targetId, abilityId = ability.id }; }
             }
             if (best != null && score > 0) { game.Handle(best); Command(game, "confirm"); continue; }
             Command(game, "cancel"); view = game.GetView();
@@ -251,7 +352,7 @@ static class GameTests
     static void DefeatRetry()
     {
         GameSession game = Session(); Command(game, "start"); int turns = 0;
-        while (game.GetView().screen == "battle" && turns++ < 80) Command(game, "end_turn");
+        while (game.GetView().screen == "battle" && turns++ < 80) EndRound(game);
         Check(game.GetView().screen == "defeat" && turns < 80, "passive party reaches defeat without AI softlock");
         GameSession restored = Session(); restored.ImportSave(Clone(game.ExportSave())); Check(restored.GetView().screen == "defeat", "defeat checkpoint restores");
         GameView view = Command(game, "retry"); Check(view.screen == "battle" && view.round == 1 && view.units.Where(u => u.team == "player").All(u => u.hp == u.maxHp), "retry restores playable encounter");

@@ -1,56 +1,108 @@
 {
   "schemaVersion": 1,
-  "contentVersion": "floor-one-1.0.0",
+  "contentVersion": "floor-one-2.0.0",
   "partySize": 4,
   "energyPerRound": 3,
   "roster": [
     {
       "id": "crawler.carl",
       "label": "Carl",
-      "classId": "class.brawler",
-      "selected": true
+      "classId": "class.compensated_anarchist",
+      "selected": true,
+      "deployable": true,
+      "artId": "carl",
+      "innateAbilityIds": [
+        "ability.carl_powerful_strike",
+        "ability.carl_bomb"
+      ],
+      "legacyClassId": "class.brawler"
     },
     {
       "id": "crawler.donut",
       "label": "Princess Donut",
-      "classId": "class.stormcaller",
-      "selected": true
+      "classId": "class.former_child_actor",
+      "selected": true,
+      "deployable": true,
+      "artId": "donut",
+      "innateAbilityIds": [
+        "ability.donut_magic_missile",
+        "ability.donut_puddle_jumper",
+        "ability.donut_heal_critter"
+      ],
+      "legacyClassId": "class.stormcaller"
     },
     {
       "id": "crawler.katia",
       "label": "Katia",
-      "classId": "class.pyromancer",
-      "selected": true
+      "classId": "class.doppelganger",
+      "selected": true,
+      "deployable": true,
+      "artId": "katia",
+      "innateAbilityIds": [
+        "ability.katia_shapeshift",
+        "ability.katia_heavy_blow",
+        "ability.katia_new_look"
+      ],
+      "legacyClassId": "class.pyromancer"
     },
     {
       "id": "crawler.mordecai",
       "label": "Mordecai",
       "classId": "class.cleric",
-      "selected": true
+      "selected": false,
+      "deployable": false,
+      "artId": "mordecai",
+      "innateAbilityIds": []
     },
     {
       "id": "crawler.elle",
       "label": "Elle",
       "classId": "class.cryomancer",
-      "selected": false
+      "selected": false,
+      "deployable": true,
+      "artId": "elle",
+      "innateAbilityIds": []
     },
     {
       "id": "crawler.iman",
       "label": "Imani",
       "classId": "class.guardian",
-      "selected": false
+      "selected": false,
+      "deployable": true,
+      "artId": "iman",
+      "innateAbilityIds": []
     },
     {
       "id": "crawler.louis",
       "label": "Louis",
       "classId": "class.ranger",
-      "selected": false
+      "selected": false,
+      "deployable": true,
+      "artId": "louis",
+      "innateAbilityIds": []
     },
     {
       "id": "crawler.brittany",
       "label": "Brittany",
       "classId": "class.alchemist",
-      "selected": false
+      "selected": false,
+      "deployable": true,
+      "artId": "brittany",
+      "innateAbilityIds": []
+    },
+    {
+      "id": "crawler.mongo",
+      "label": "Mongo",
+      "classId": "class.raptor_companion",
+      "selected": true,
+      "deployable": true,
+      "artId": "mongo",
+      "innateAbilityIds": [
+        "ability.mongo_bite",
+        "ability.mongo_pounce"
+      ],
+      "replacesId": "crawler.mordecai",
+      "legacyClassId": "class.beastmaster"
     }
   ],
   "classStats": [
@@ -125,6 +177,30 @@
       "hp": 34,
       "energy": 12,
       "move": 4
+    },
+    {
+      "classId": "class.compensated_anarchist",
+      "hp": 42,
+      "energy": 12,
+      "move": 4
+    },
+    {
+      "classId": "class.former_child_actor",
+      "hp": 30,
+      "energy": 18,
+      "move": 5
+    },
+    {
+      "classId": "class.doppelganger",
+      "hp": 44,
+      "energy": 10,
+      "move": 4
+    },
+    {
+      "classId": "class.raptor_companion",
+      "hp": 30,
+      "energy": 8,
+      "move": 5
     }
   ],
   "startingInventory": [
@@ -305,23 +381,48 @@
             "surface.water"
           ],
           "blocked": false
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "tags": [
+            "surface.water"
+          ],
+          "blocked": false
         }
       ],
       "enemies": [
         {
           "id": "enemy.goblin_one",
-          "label": "Maintenance Goblin",
+          "label": "Maintenance Rat",
           "classId": "class.brawler",
           "x": 5,
           "y": 3,
           "hp": 18,
           "energy": 12,
           "move": 3,
-          "tags": []
+          "tags": [],
+          "artId": "rat"
         },
         {
           "id": "enemy.goblin_two",
-          "label": "Coolant Goblin",
+          "label": "Coolant Rat",
           "classId": "class.rogue",
           "x": 6,
           "y": 4,
@@ -330,7 +431,8 @@
           "move": 3,
           "tags": [
             "status.wet"
-          ]
+          ],
+          "artId": "rat"
         },
         {
           "id": "enemy.sentry",
@@ -341,18 +443,19 @@
           "hp": 20,
           "energy": 12,
           "move": 3,
-          "tags": []
+          "tags": [],
+          "artId": "rat"
         }
       ],
       "exploration": {
         "id": "sector.passages_1",
         "label": "Service Passages",
-        "description": "Scout branching passages. Caches are optional; the marked door leads into combat. Return to camp to change the party.",
+        "description": "Follow the lit service rail through a split corridor. A cache sits on the upper branch; the marked lift door is at the far end.",
         "width": 9,
         "height": 7,
         "startX": 1,
         "startY": 1,
-        "discoveryRadius": 1,
+        "discoveryRadius": 2,
         "walls": [
           {
             "x": 0,
@@ -407,15 +510,7 @@
             "y": 2
           },
           {
-            "x": 2,
-            "y": 2
-          },
-          {
             "x": 4,
-            "y": 2
-          },
-          {
-            "x": 6,
             "y": 2
           },
           {
@@ -424,14 +519,6 @@
           },
           {
             "x": 0,
-            "y": 3
-          },
-          {
-            "x": 2,
-            "y": 3
-          },
-          {
-            "x": 6,
             "y": 3
           },
           {
@@ -455,15 +542,15 @@
             "y": 4
           },
           {
-            "x": 6,
-            "y": 4
-          },
-          {
             "x": 8,
             "y": 4
           },
           {
             "x": 0,
+            "y": 5
+          },
+          {
+            "x": 4,
             "y": 5
           },
           {
@@ -511,7 +598,7 @@
           {
             "id": "discovery.door_1",
             "label": "Service Corridor 13",
-            "description": "Ignite the oil, shock a wet target, or freeze then shatter. Defeat every enemy to open the lift.",
+            "description": "Enter the tactical encounter. Inspect the floor hazards and enemy setup before committing.",
             "kind": "encounter",
             "x": 7,
             "y": 5,
@@ -520,21 +607,21 @@
           },
           {
             "id": "discovery.cache_1",
-            "label": "Sponsor supply cache",
-            "description": "A sealed delivery yields one health tonic for the shared pack.",
+            "label": "Coolant supply crate",
+            "description": "Optional cache: one coolant bomb for setting up Wet reactions.",
             "kind": "cache",
-            "x": 3,
-            "y": 1,
-            "itemId": "item.health_tonic",
+            "x": 2,
+            "y": 3,
+            "itemId": "item.water_bomb",
             "count": 1
           },
           {
             "id": "discovery.inscription_1",
-            "label": "Crawler field notes",
-            "description": "Wet targets conduct lightning. Your class actions and consumables can set up reactions before the first clash.",
+            "label": "Maintenance note",
+            "description": "Water makes a target Wet. Lightning consumes Wet for extra damage and Shock; cold can set up a later Shatter.",
             "kind": "lore",
             "x": 1,
-            "y": 3,
+            "y": 5,
             "itemId": "",
             "count": 0
           }
@@ -634,7 +721,8 @@
           "hp": 24,
           "energy": 12,
           "move": 3,
-          "tags": []
+          "tags": [],
+          "artId": "guard"
         },
         {
           "id": "enemy.arsonist",
@@ -645,7 +733,8 @@
           "hp": 20,
           "energy": 12,
           "move": 3,
-          "tags": []
+          "tags": [],
+          "artId": "rat"
         },
         {
           "id": "enemy.stalker",
@@ -656,7 +745,8 @@
           "hp": 20,
           "energy": 12,
           "move": 3,
-          "tags": []
+          "tags": [],
+          "artId": "rat"
         },
         {
           "id": "enemy.coil",
@@ -667,18 +757,19 @@
           "hp": 18,
           "energy": 12,
           "move": 3,
-          "tags": []
+          "tags": [],
+          "artId": "rat"
         }
       ],
       "exploration": {
         "id": "sector.passages_2",
         "label": "Flooded Junction",
-        "description": "Scout branching passages. Caches are optional; the marked door leads into combat. Return to camp to change the party.",
+        "description": "Two dry walkways skirt the coolant channel. Check the eastern cache, then choose a route toward the foundry door.",
         "width": 9,
         "height": 7,
         "startX": 1,
-        "startY": 1,
-        "discoveryRadius": 1,
+        "startY": 5,
+        "discoveryRadius": 2,
         "walls": [
           {
             "x": 0,
@@ -721,10 +812,6 @@
             "y": 1
           },
           {
-            "x": 4,
-            "y": 1
-          },
-          {
             "x": 8,
             "y": 1
           },
@@ -733,11 +820,11 @@
             "y": 2
           },
           {
-            "x": 2,
+            "x": 3,
             "y": 2
           },
           {
-            "x": 6,
+            "x": 5,
             "y": 2
           },
           {
@@ -746,10 +833,6 @@
           },
           {
             "x": 0,
-            "y": 3
-          },
-          {
-            "x": 2,
             "y": 3
           },
           {
@@ -757,14 +840,6 @@
             "y": 3
           },
           {
-            "x": 4,
-            "y": 3
-          },
-          {
-            "x": 6,
-            "y": 3
-          },
-          {
             "x": 8,
             "y": 3
           },
@@ -773,6 +848,14 @@
             "y": 4
           },
           {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 5,
+            "y": 4
+          },
+          {
             "x": 6,
             "y": 4
           },
@@ -782,14 +865,6 @@
           },
           {
             "x": 0,
-            "y": 5
-          },
-          {
-            "x": 1,
-            "y": 5
-          },
-          {
-            "x": 2,
             "y": 5
           },
           {
@@ -837,7 +912,7 @@
           {
             "id": "discovery.door_2",
             "label": "The Sponsor Foundry",
-            "description": "The foundry floor is burning. Reach the enemies through the northern or southern passage.",
+            "description": "Enter the tactical encounter. Inspect the floor hazards and enemy setup before committing.",
             "kind": "encounter",
             "x": 7,
             "y": 5,
@@ -846,18 +921,18 @@
           },
           {
             "id": "discovery.cache_2",
-            "label": "Sponsor supply cache",
-            "description": "A sealed delivery yields one health tonic for the shared pack.",
+            "label": "Frost supply crate",
+            "description": "Optional cache: one frost vial for freezing a target.",
             "kind": "cache",
-            "x": 3,
+            "x": 7,
             "y": 1,
-            "itemId": "item.health_tonic",
+            "itemId": "item.frost_vial",
             "count": 1
           },
           {
             "id": "discovery.inscription_2",
-            "label": "Crawler field notes",
-            "description": "Oil burns when ignited. Inspect your terrain abilities and use a water or frost supply to shape the next fight.",
+            "label": "Coolant warning",
+            "description": "Wet targets conduct lightning. The channel can set up the same reaction when a crawler crosses it.",
             "kind": "lore",
             "x": 1,
             "y": 3,
@@ -956,7 +1031,8 @@
           "hp": 64,
           "energy": 12,
           "move": 2,
-          "tags": []
+          "tags": [],
+          "artId": "boss"
         },
         {
           "id": "enemy.handler_fire",
@@ -967,7 +1043,8 @@
           "hp": 24,
           "energy": 12,
           "move": 3,
-          "tags": []
+          "tags": [],
+          "artId": "rat"
         },
         {
           "id": "enemy.handler_coil",
@@ -980,18 +1057,19 @@
           "move": 3,
           "tags": [
             "status.wet"
-          ]
+          ],
+          "artId": "rat"
         }
       ],
       "exploration": {
         "id": "sector.passages_3",
         "label": "Boss Approach",
-        "description": "Scout branching passages. Caches are optional; the marked door leads into combat. Return to camp to change the party.",
+        "description": "A broad staging hall opens around a central barricade. The lower cache is optional; the sealed arena door lies east.",
         "width": 9,
         "height": 7,
         "startX": 1,
         "startY": 1,
-        "discoveryRadius": 1,
+        "discoveryRadius": 2,
         "walls": [
           {
             "x": 0,
@@ -1034,6 +1112,10 @@
             "y": 1
           },
           {
+            "x": 3,
+            "y": 1
+          },
+          {
             "x": 8,
             "y": 1
           },
@@ -1042,22 +1124,10 @@
             "y": 2
           },
           {
-            "x": 2,
-            "y": 2
-          },
-          {
             "x": 3,
             "y": 2
           },
           {
-            "x": 4,
-            "y": 2
-          },
-          {
-            "x": 6,
-            "y": 2
-          },
-          {
             "x": 8,
             "y": 2
           },
@@ -1066,11 +1136,11 @@
             "y": 3
           },
           {
-            "x": 4,
+            "x": 3,
             "y": 3
           },
           {
-            "x": 6,
+            "x": 5,
             "y": 3
           },
           {
@@ -1082,15 +1152,7 @@
             "y": 4
           },
           {
-            "x": 1,
-            "y": 4
-          },
-          {
-            "x": 2,
-            "y": 4
-          },
-          {
-            "x": 4,
+            "x": 5,
             "y": 4
           },
           {
@@ -1099,6 +1161,10 @@
           },
           {
             "x": 0,
+            "y": 5
+          },
+          {
+            "x": 5,
             "y": 5
           },
           {
@@ -1146,7 +1212,7 @@
           {
             "id": "discovery.door_3",
             "label": "The Audience Retention Engine",
-            "description": "Boss room: bring down the Retention Engine and its handlers. No special key or consumable is required.",
+            "description": "Enter the tactical encounter. Inspect the floor hazards and enemy setup before committing.",
             "kind": "encounter",
             "x": 7,
             "y": 5,
@@ -1155,18 +1221,18 @@
           },
           {
             "id": "discovery.cache_3",
-            "label": "Sponsor supply cache",
-            "description": "A sealed delivery yields one health tonic for the shared pack.",
+            "label": "Emergency supply crate",
+            "description": "Optional cache: one mega tonic for the final approach.",
             "kind": "cache",
-            "x": 3,
-            "y": 1,
-            "itemId": "item.health_tonic",
+            "x": 2,
+            "y": 5,
+            "itemId": "item.mega_tonic",
             "count": 1
           },
           {
             "id": "discovery.inscription_3",
-            "label": "Crawler field notes",
-            "description": "Frozen targets can be shattered. Prepare a class combination at camp and check the exact forecast before committing.",
+            "label": "Arena field note",
+            "description": "Frozen targets can be shattered. A crawler can reposition with a tile-targeted teleport before committing an attack.",
             "kind": "lore",
             "x": 1,
             "y": 3,
@@ -1176,5 +1242,8 @@
         ]
       }
     }
+  ],
+  "compatibleContentVersions": [
+    "floor-one-1.0.0"
   ]
 }

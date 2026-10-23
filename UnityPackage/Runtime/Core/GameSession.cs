@@ -15,6 +15,7 @@ namespace DungeonCrawlerTactics
         private readonly Dictionary<string, RosterView> roster = new Dictionary<string, RosterView>(StringComparer.Ordinal);
         private readonly Dictionary<string, int> inventory = new Dictionary<string, int>(StringComparer.Ordinal);
         private readonly List<TimedTag> timed = new List<TimedTag>();
+        private readonly List<PresentationEvent> presentationEvents = new List<PresentationEvent>();
         private readonly List<string> log = new List<string>();
         private string screen = "camp", phase = "player", selected, message = "Choose four crawlers and their classes. Start when ready.";
         private int encounterIndex, round = 1, xp;
@@ -28,11 +29,12 @@ namespace DungeonCrawlerTactics
             catalog = new Catalog(content);
             data = gameData ?? throw new ArgumentNullException(nameof(gameData));
             GameDataValidator.Validate(data, catalog);
-            engine = new RulesEngine(catalog);
+            engine = new RulesEngine(catalog, 64, (state, moving, entries, visual) => ApplyOccupancy(state, moving, true, entries, visual));
             Reset();
         }
         public GameView Handle(GameCommand command)
         {
+            presentationEvents.Clear();
             try
             {
                 if (command == null) throw new ArgumentException("Missing command.");
@@ -43,6 +45,7 @@ namespace DungeonCrawlerTactics
                     case "toggle_party":
                         Require(screen == "camp", "Party can only change at camp.");
                         RosterView recruit = GetRoster(command.unitId);
+                        Require(Definition(recruit.id).deployable, "This character is an advisor and cannot deploy.");
                         Require(recruit.selected || PartyCount() < data.partySize, "Your party is full. Remove a crawler first.");
                         recruit.selected = !recruit.selected; break;
                     case "set_class":
@@ -80,16 +83,13 @@ namespace DungeonCrawlerTactics
                         CommitAction(commit, result); ClearPreview();
                         CheckOutcome(); FinishPlayerIfNeeded(); break;
                     case "cancel": ClearPreview(); message = "Forecast canceled. Nothing was spent."; break;
+                    case "end_turn":
                     case "wait":
                         RequirePlayer(); ClearPreview();
                         EntityState waiting = GetActor(command.unitId ?? selected);
                         Require(waiting.Team == phase, "This unit does not own the turn.");
                         EndActivation(waiting.Id); AddLog(Label(waiting.Id) + " waits.");
                         FinishPlayerIfNeeded(); break;
-                    case "end_turn":
-                        RequirePlayer(); ClearPreview();
-                        foreach (SavedUnit unit in units.Values) if (unit.team == "player") { unit.moved = true; unit.acted = true; }
-                        EnemyTurn(); break;
                     case "choose_reward":
                         Require(screen == "victory" && !rewardChosen, "No reward choice is available.");
                         RewardDef reward = null;
@@ -125,7 +125,7 @@ namespace DungeonCrawlerTactics
             foreach (RosterDef member in data.roster)
             {
                 int hp = Stats(member.classId).hp;
-                roster.Add(member.id, new RosterView { id = member.id, label = member.label, classId = member.classId, selected = member.selected, hp = hp, maxHp = hp });
+                roster.Add(member.id, new RosterView { id = member.id, label = member.label, classId = member.classId, selected = member.selected && member.deployable, hp = hp, maxHp = hp });
             }
             ResetInventory(); screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
             message = "Choose " + data.partySize + " crawlers and their classes. The camp medbay restores everyone between rooms.";
@@ -141,7 +141,7 @@ namespace DungeonCrawlerTactics
             EncounterDef encounter = Encounter;
             for (int y = 0; y < encounter.height; y++) for (int x = 0; x < encounter.width; x++)
             {
-                EntityState tile = new EntityState { Id = TileId(x, y), IsTile = true, X = x, Y = y };
+                EntityState tile = new EntityState { Id = TileId(x, y), IsTile = true, Blocked = Blocked(x, y), X = x, Y = y };
                 foreach (TileDef authored in encounter.tiles) if (authored.x == x && authored.y == y) tile.Tags.UnionWith(authored.tags);
                 battle.Entities.Add(tile.Id, tile);
             }
@@ -160,7 +160,7 @@ namespace DungeonCrawlerTactics
         private void AddUnit(string id, string label, string classId, string team, int x, int y, int hp, int energy, int move, string[] tags)
         {
             EntityState unit = new EntityState { Id = id, ClassId = classId, Team = team, X = x, Y = y, Hp = hp, MaxHp = hp, Energy = energy };
-            unit.Tags.UnionWith(tags); battle.Entities.Add(id, unit);
+            unit.Tags.UnionWith(tags); RosterDef definition = Definition(id); if (definition != null) unit.GrantedAbilities.UnionWith(definition.innateAbilityIds); battle.Entities.Add(id, unit);
             units.Add(id, new SavedUnit { id = id, label = label, classId = classId, team = team, x = x, y = y, hp = hp, maxHp = hp, energy = energy, maxEnergy = energy, move = move, permanentTags = Sorted(unit.Tags) });
         }
         private void Move(string id, int x, int y)
@@ -174,8 +174,9 @@ namespace DungeonCrawlerTactics
             List<CellView> path = FindPath(actor.X, actor.Y, x, y, actor.Id);
             foreach (CellView cell in path)
             {
+                presentationEvents.Add(new PresentationEvent { type = "move", actorId = id, targetId = id, fromX = actor.X, fromY = actor.Y, toX = cell.x, toY = cell.y });
                 actor.X = cell.x; actor.Y = cell.y;
-                ApplyOccupancy(battle, actor, true, log);
+                ApplyOccupancy(battle, actor, true, log, presentationEvents);
                 if (actor.Hp == 0) { AddLog(Label(id) + " fell to a floor hazard."); break; }
             }
             units[id].moved = true;
@@ -198,6 +199,7 @@ namespace DungeonCrawlerTactics
             }
             else resolved = engine.Execute(battle, actor.Id, abilityId, command.targetId);
             List<string> events = new List<string>(resolved.Log);
+            List<PresentationEvent> visual = new List<PresentationEvent>(resolved.Events);
             EntityState target = resolved.State.Entities[command.targetId];
             if (target.IsTile)
             {
@@ -208,14 +210,15 @@ namespace DungeonCrawlerTactics
                         // Reactions on a surface immediately affect its occupant once, as well as future entrants.
                         foreach (TagRuleDef rule in data.tagRules)
                             if (target.Tags.Contains(rule.tag) && !oldTile.Tags.Contains(rule.tag) && rule.entryDamage > 0)
-                                Damage(occupant, rule.entryDamage, rule.tag, events);
-                        TransferSurfaceTags(resolved.State, occupant);
+                                Damage(occupant, rule.entryDamage, rule.tag, events, visual);
+                        TransferSurfaceTags(resolved.State, occupant, visual);
                     }
             }
-            return new ActionResult(resolved.State, events);
+            return new ActionResult(resolved.State, events, visual);
         }
         private void CommitAction(GameCommand command, ActionResult result)
         {
+            presentationEvents.AddRange(result.Events);
             BattleState previous = battle; battle = result.State;
             ReconcileTags(previous, battle, string.IsNullOrEmpty(command.itemId) ? command.abilityId : command.itemId);
             if (!string.IsNullOrEmpty(command.itemId)) inventory[command.itemId]--;
@@ -233,7 +236,7 @@ namespace DungeonCrawlerTactics
         private void EnemyTurn()
         {
             if (screen != "battle") return;
-            phase = "enemy"; ClearPreview(); AddLog("Enemy phase.");
+            phase = "enemy"; presentationEvents.Add(new PresentationEvent { type = "phase", tag = "enemy" }); ClearPreview(); AddLog("Enemy phase.");
             List<string> enemies = UnitIds("enemy");
             foreach (string id in enemies)
             {
@@ -253,8 +256,9 @@ namespace DungeonCrawlerTactics
                     {
                         foreach (CellView step in FindPath(enemy.X, enemy.Y, destination.x, destination.y, enemy.Id))
                         {
+                            presentationEvents.Add(new PresentationEvent { type = "move", actorId = id, targetId = id, fromX = enemy.X, fromY = enemy.Y, toX = step.x, toY = step.y });
                             enemy.X = step.x; enemy.Y = step.y;
-                            ApplyOccupancy(battle, enemy, true, log);
+                            ApplyOccupancy(battle, enemy, true, log, presentationEvents);
                             if (enemy.Hp == 0) break;
                         }
                         ReconcileTags(null, battle, "terrain");
@@ -271,12 +275,12 @@ namespace DungeonCrawlerTactics
             foreach (string id in SortedUnitIds())
             {
                 EntityState unit = battle.Entities[id]; if (unit.Hp == 0) continue;
-                ApplyOccupancy(battle, unit, false, log);
-                foreach (TagRuleDef rule in data.tagRules) if (unit.Tags.Contains(rule.tag) && rule.turnDamage > 0) Damage(unit, rule.turnDamage, rule.tag, log);
+                ApplyOccupancy(battle, unit, false, log, presentationEvents);
+                foreach (TagRuleDef rule in data.tagRules) if (unit.Tags.Contains(rule.tag) && rule.turnDamage > 0) Damage(unit, rule.turnDamage, rule.tag, log, presentationEvents);
             }
             ReconcileTags(null, battle, "terrain");
             TickTags(); CheckOutcome(); if (screen != "battle") return;
-            round++; phase = "player";
+            round++; phase = "player"; presentationEvents.Add(new PresentationEvent { type = "phase", tag = "player" });
             foreach (SavedUnit unit in units.Values)
             {
                 unit.moved = false; unit.acted = false;
@@ -308,28 +312,28 @@ namespace DungeonCrawlerTactics
             }
             return best;
         }
-        private void ApplyOccupancy(BattleState state, EntityState unit, bool entry, List<string> events)
+        private void ApplyOccupancy(BattleState state, EntityState unit, bool entry, List<string> events, List<PresentationEvent> visual = null)
         {
             EntityState tile = state.Entities[TileId(unit.X, unit.Y)];
             foreach (TagRuleDef rule in data.tagRules) if (tile.Tags.Contains(rule.tag))
             {
                 int amount = entry ? rule.entryDamage : rule.turnDamage;
-                if (amount > 0) Damage(unit, amount, rule.tag, events);
+                if (amount > 0) Damage(unit, amount, rule.tag, events, visual);
             }
-            TransferSurfaceTags(state, unit);
+            TransferSurfaceTags(state, unit, visual);
         }
-        private void TransferSurfaceTags(BattleState state, EntityState unit)
+        private void TransferSurfaceTags(BattleState state, EntityState unit, List<PresentationEvent> visual = null)
         {
             EntityState tile = state.Entities[TileId(unit.X, unit.Y)];
             foreach (string tag in tile.Tags)
             {
                 // Occupancy transfer is explicit data, independent from surface lifetime.
-                TagRuleDef rule = TagRule(tag); if (rule != null && !string.IsNullOrEmpty(rule.occupantTag)) unit.Tags.Add(rule.occupantTag);
+                TagRuleDef rule = TagRule(tag); if (rule != null && !string.IsNullOrEmpty(rule.occupantTag)) { if (unit.Tags.Add(rule.occupantTag) && visual != null) visual.Add(new PresentationEvent { type = "tag_add", targetId = unit.Id, tag = rule.occupantTag }); }
             }
         }
-        private void Damage(EntityState target, int amount, string source, List<string> events)
+        private void Damage(EntityState target, int amount, string source, List<string> events, List<PresentationEvent> visual = null)
         {
-            target.Hp = Math.Max(0, target.Hp - amount); events.Add(Label(target.Id) + ": " + source + " deals " + amount + ".");
+            int before = target.Hp; target.Hp = Math.Max(0, target.Hp - amount); if (visual != null && before != target.Hp) visual.Add(new PresentationEvent { type = "damage", targetId = target.Id, tag = source, before = before, after = target.Hp, amount = before - target.Hp }); events.Add(Label(target.Id) + ": " + source + " deals " + amount + ".");
         }
         private void ReconcileTags(BattleState previous, BattleState next, string source)
         {
@@ -359,7 +363,7 @@ namespace DungeonCrawlerTactics
                 TimedTag layer = timed[i]; layer.remainingRounds--;
                 if (layer.remainingRounds > 0) continue;
                 bool permanent = units.ContainsKey(layer.entityId) && Array.IndexOf(units[layer.entityId].permanentTags, layer.tag) >= 0;
-                if (!permanent) battle.Entities[layer.entityId].Tags.Remove(layer.tag);
+                if (!permanent && battle.Entities[layer.entityId].Tags.Remove(layer.tag)) presentationEvents.Add(new PresentationEvent { type = "tag_remove", targetId = layer.entityId, tag = layer.tag });
                 timed.RemoveAt(i);
             }
         }
@@ -422,7 +426,13 @@ namespace DungeonCrawlerTactics
         {
             int nearest = int.MaxValue; foreach (EntityState unit in battle.Entities.Values) if (!unit.IsTile && unit.Hp > 0 && unit.Team == "player") nearest = Math.Min(nearest, Math.Abs(unit.X - x) + Math.Abs(unit.Y - y)); return nearest;
         }
-        private string FirstAvailable() { foreach (string id in UnitIds("player")) if (battle.Entities[id].Hp > 0 && !units[id].acted) return id; return null; }
+        private RosterDef Definition(string id) { return Array.Find(data.roster, r => r.id == id); }
+        private List<string> PartyOrder() { List<string> result = new List<string>(); foreach (RosterDef member in data.roster) if (units.ContainsKey(member.id) && units[member.id].team == "player") result.Add(member.id); return result; }
+        private string ArtId(string id) { RosterDef member = Definition(id); if (member != null) return member.artId; SpawnDef enemy = Array.Find(Encounter.enemies, e => e.id == id); return enemy == null ? null : enemy.artId; }
+        private int EffectiveMove(string id) { int value = units[id].move; foreach (TagRuleDef rule in data.tagRules) if (battle.Entities[id].Tags.Contains(rule.tag)) value -= rule.movePenalty; return Math.Max(0, value); }
+        private StatusView[] Statuses(string id) { List<StatusView> result = new List<StatusView>(); foreach (string tag in Sorted(battle.Entities[id].Tags)) { TimedTag layer = timed.Find(t => t.entityId == id && t.tag == tag); result.Add(new StatusView { tag = tag, source = layer == null ? "" : layer.source, remainingRounds = layer == null ? 0 : layer.remainingRounds }); } return result.ToArray(); }
+        private string[] AbilityIds(EntityState actor) { List<string> result = new List<string>(catalog.Classes[actor.ClassId].abilityIds); RosterDef definition = Definition(actor.Id); if (definition != null) foreach (string id in definition.innateAbilityIds) if (!result.Contains(id)) result.Add(id); return result.ToArray(); }
+        private string FirstAvailable() { foreach (string id in PartyOrder()) if (battle.Entities[id].Hp > 0 && !units[id].acted) return id; return null; }
         private List<string> UnitIds(string team) { List<string> ids = new List<string>(); foreach (SavedUnit unit in units.Values) if (unit.team == team) ids.Add(unit.id); ids.Sort(StringComparer.Ordinal); return ids; }
         private List<string> SortedUnitIds() { List<string> ids = new List<string>(units.Keys); ids.Sort(StringComparer.Ordinal); return ids; }
         private string Label(string id) { return id != null && units.ContainsKey(id) ? units[id].label : id; }
@@ -440,18 +450,21 @@ namespace DungeonCrawlerTactics
         private static string[] Sorted(HashSet<string> tags) { string[] values = new string[tags.Count]; tags.CopyTo(values); Array.Sort(values, StringComparer.Ordinal); return values; }
         private static GameCommand CopyCommand(GameCommand c) { return new GameCommand { type = c.type, unitId = c.unitId, targetId = c.targetId, abilityId = c.abilityId, itemId = c.itemId, classId = c.classId, rewardId = c.rewardId, x = c.x, y = c.y }; }
 
-        public GameView GetView()
+        public GameView GetView(bool includeTargets = true)
         {
             GameView view = new GameView { screen = screen, message = message, phase = phase, encounterIndex = encounterIndex, encounterCount = data.encounters.Length, encounterName = Encounter.label, round = round, width = Encounter.width, height = Encounter.height, xp = xp, selectedUnitId = selected, partyCount = PartyCount(), partyCapacity = data.partySize, canConfirm = pending != null };
+            view.partyOrder = PartyOrder().ToArray();
+            List<PresentationEvent> output = new List<PresentationEvent>(presentationEvents); if (forecast != null) foreach (PresentationEvent ev in forecast.Events) { ev.preview = true; output.Add(ev); }
+            for (int i = 0; i < output.Count; i++) output[i].sequence = i; view.events = output.ToArray();
             List<RosterView> rosterViews = new List<RosterView>();
-            foreach (RosterDef member in data.roster) { RosterView r = roster[member.id]; rosterViews.Add(new RosterView { id = r.id, label = r.label, classId = r.classId, selected = r.selected, hp = r.hp, maxHp = r.maxHp }); }
+            foreach (RosterDef member in data.roster) { RosterView r = roster[member.id]; rosterViews.Add(new RosterView { id = r.id, label = r.label, classId = r.classId, artId = member.artId, deployable = member.deployable, innateAbilityIds = member.innateAbilityIds, selected = r.selected, hp = r.hp, maxHp = r.maxHp }); }
             view.roster = rosterViews.ToArray();
             List<ClassView> classes = new List<ClassView>(); foreach (ClassDef c in catalog.Classes.Values) classes.Add(new ClassView { id = c.id, label = c.label, abilityIds = (string[])c.abilityIds.Clone() }); view.classes = classes.ToArray();
             List<UnitView> unitViews = new List<UnitView>();
             foreach (string id in SortedUnitIds())
             {
                 EntityState e = battle.Entities[id]; SavedUnit u = units[id];
-                unitViews.Add(new UnitView { id = id, label = u.label, classId = e.ClassId, team = e.Team, x = e.X, y = e.Y, hp = e.Hp, maxHp = e.MaxHp, energy = e.Energy, maxEnergy = u.maxEnergy, move = u.move, selected = selected == id, moved = u.moved, acted = u.acted, tags = Sorted(e.Tags) });
+                unitViews.Add(new UnitView { id = id, label = u.label, classId = e.ClassId, team = e.Team, x = e.X, y = e.Y, hp = e.Hp, maxHp = e.MaxHp, energy = e.Energy, maxEnergy = u.maxEnergy, move = u.move, effectiveMove = EffectiveMove(e.Id), artId = ArtId(e.Id), statuses = Statuses(e.Id), selected = selected == id, moved = u.moved, acted = u.acted, tags = Sorted(e.Tags) });
             }
             view.units = unitViews.ToArray();
             List<TileView> tileViews = new List<TileView>();
@@ -464,15 +477,15 @@ namespace DungeonCrawlerTactics
             EntityState actor = null; if (selected != null && units.ContainsKey(selected)) actor = battle.Entities[selected];
             bool active = actor != null && screen == "battle" && phase == "player" && actor.Hp > 0 && !units[selected].acted;
             view.canAct = active; view.canMove = active && !units[selected].moved;
-            if (view.canMove) view.reachable = Reachable(selected).ToArray();
+            if (includeTargets && view.canMove) view.reachable = Reachable(selected).ToArray();
             List<AbilityView> abilityViews = new List<AbilityView>();
-            if (actor != null) foreach (string id in catalog.Classes[actor.ClassId].abilityIds)
+            if (actor != null) foreach (string id in AbilityIds(actor))
             {
-                AbilityDef a = catalog.Abilities[id]; abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = a.range, cost = a.cost, enabled = active && actor.Energy >= a.cost, description = Describe(a), disabledReason = !active ? "Activation unavailable" : actor.Energy < a.cost ? "Insufficient energy" : "", targetIds = active && actor.Energy >= a.cost ? LegalTargets(actor, a, null) : new string[0] });
+                AbilityDef a = catalog.Abilities[id]; abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = a.range, cost = a.cost, enabled = active && actor.Energy >= a.cost, description = Describe(a), disabledReason = !active ? "Activation unavailable" : actor.Energy < a.cost ? "Insufficient mana" : "", targetIds = includeTargets && active && actor.Energy >= a.cost ? LegalTargets(actor, a, null) : new string[0] });
             }
             view.abilities = abilityViews.ToArray();
             List<ItemView> itemViews = new List<ItemView>(); foreach (ItemDef item in catalog.Items.Values)
-            { AbilityDef a = catalog.Abilities[item.abilityId]; itemViews.Add(new ItemView { id = item.id, label = item.label, abilityId = item.abilityId, count = inventory[item.id], target = a.target, range = a.range, description = Describe(a), disabledReason = !active ? "Activation unavailable" : inventory[item.id] == 0 ? "No charges" : "", targetIds = active && inventory[item.id] > 0 ? LegalTargets(actor, a, item.id) : new string[0] }); }
+            { AbilityDef a = catalog.Abilities[item.abilityId]; itemViews.Add(new ItemView { id = item.id, label = item.label, abilityId = item.abilityId, count = inventory[item.id], target = a.target, range = a.range, description = Describe(a), disabledReason = !active ? "Activation unavailable" : inventory[item.id] == 0 ? "No charges" : "", targetIds = includeTargets && active && inventory[item.id] > 0 ? LegalTargets(actor, a, item.id) : new string[0] }); }
             view.items = itemViews.ToArray();
             if (forecast != null)
             {
@@ -480,8 +493,8 @@ namespace DungeonCrawlerTactics
                 foreach (EntityState next in forecast.State.Entities.Values)
                 {
                     EntityState before = battle.Entities[next.Id];
-                    if (before.Hp != next.Hp || before.Energy != next.Energy || !before.Tags.SetEquals(next.Tags))
-                        changes.Add(new ForecastView { targetId = next.Id, label = Label(next.Id), beforeHp = before.Hp, afterHp = next.Hp, beforeEnergy = before.Energy, afterEnergy = next.Energy, beforeTags = Sorted(before.Tags), afterTags = Sorted(next.Tags) });
+                    if (before.Hp != next.Hp || before.Energy != next.Energy || before.X != next.X || before.Y != next.Y || !before.Tags.SetEquals(next.Tags))
+                        changes.Add(new ForecastView { targetId = next.Id, label = Label(next.Id), beforeHp = before.Hp, afterHp = next.Hp, beforeX = before.X, beforeY = before.Y, afterX = next.X, afterY = next.Y, beforeEnergy = before.Energy, afterEnergy = next.Energy, beforeTags = Sorted(before.Tags), afterTags = Sorted(next.Tags) });
                 }
                 changes.Sort((a, b) => StringComparer.Ordinal.Compare(a.targetId, b.targetId)); view.forecast = changes.ToArray();
             }
@@ -510,6 +523,8 @@ namespace DungeonCrawlerTactics
             foreach (EffectDef effect in ability.effects)
             {
                 if (effect.op == "Damage") parts.Add(effect.amount + " damage");
+                else if (effect.op == "Teleport") parts.Add("Teleport to an unoccupied tile");
+                else if (effect.op == "Push") parts.Add("Push " + effect.amount + " tile(s)");
                 else if (effect.op == "Heal") parts.Add("Restore " + effect.amount + " HP");
                 else
                 {
@@ -537,7 +552,7 @@ namespace DungeonCrawlerTactics
         public GameSave ExportSave()
         {
             GameSave save = new GameSave { contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
-            save.roster = GetView().roster;
+            save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
             foreach (string id in SortedUnitIds())
@@ -546,15 +561,17 @@ namespace DungeonCrawlerTactics
                 savedUnits.Add(new SavedUnit { id = id, label = unit.label, classId = entity.ClassId, team = entity.Team, x = entity.X, y = entity.Y, hp = entity.Hp, maxHp = entity.MaxHp, energy = entity.Energy, maxEnergy = unit.maxEnergy, move = unit.move, moved = unit.moved, acted = unit.acted, tags = Sorted(entity.Tags), permanentTags = (string[])unit.permanentTags.Clone() });
             }
             save.units = savedUnits.ToArray();
-            if (battle.Entities.Count > 0) save.tiles = GetView().tiles;
+            if (battle.Entities.Count > 0) save.tiles = GetView(false).tiles;
             List<TimedTag> layers = new List<TimedTag>(); foreach (TimedTag layer in timed) layers.Add(new TimedTag { entityId = layer.entityId, tag = layer.tag, source = layer.source, remainingRounds = layer.remainingRounds }); save.timedTags = layers.ToArray();
             save.exploration = ExportExploration(); save.log = log.ToArray(); return save;
         }
         public GameView ImportSave(GameSave save)
         {
+            presentationEvents.Clear();
             try
             {
-                Require(save != null && save.schemaVersion == 1 && save.contentVersion == data.contentVersion, "Save version does not match this content pack.");
+                Require(save != null && save.schemaVersion == 1 && (save.contentVersion == data.contentVersion || Array.IndexOf(data.compatibleContentVersions, save.contentVersion) >= 0), "Save version does not match this content pack.");
+                save = MigrateCompatibleSave(save);
                 Require(save.screen == "camp" || save.screen == "explore" || save.screen == "battle" || save.screen == "victory" || save.screen == "defeat" || save.screen == "complete", "Invalid save screen.");
                 Require(save.phase == "player" || (save.phase == "enemy" && (save.screen == "victory" || save.screen == "defeat")), "Invalid save phase.");
                 Require(save.encounterIndex >= 0 && save.encounterIndex < data.encounters.Length + (save.screen == "complete" ? 1 : 0), "Invalid encounter index.");
@@ -574,7 +591,7 @@ namespace DungeonCrawlerTactics
                     Require(member != null && member.id != null && roster.ContainsKey(member.id) && !nextRoster.ContainsKey(member.id) && member.classId != null && catalog.Classes.ContainsKey(member.classId), "Invalid saved roster.");
                     RosterDef definition = Array.Find(data.roster, r => r.id == member.id); ClassStats stats = Stats(member.classId);
                     Require(member.hp >= 0 && member.hp <= stats.hp && member.maxHp == stats.hp, "Invalid roster health.");
-                    nextRoster.Add(member.id, new RosterView { id = member.id, label = definition.label, classId = member.classId, selected = member.selected, hp = member.hp, maxHp = member.maxHp }); if (member.selected) party++;
+                    nextRoster.Add(member.id, new RosterView { id = member.id, label = definition.label, classId = member.classId, selected = member.selected, hp = member.hp, maxHp = member.maxHp }); Require(!member.selected || definition.deployable, "Advisor cannot deploy."); if (member.selected) party++;
                 }
                 Require(party <= data.partySize && (save.screen == "camp" || party == data.partySize), "Invalid party size.");
                 Dictionary<string, int> nextInventory = new Dictionary<string, int>();
@@ -594,7 +611,7 @@ namespace DungeonCrawlerTactics
                     Require(tile != null && tile.id == TileId(tile.x, tile.y) && tile.x >= 0 && tile.y >= 0 && tile.x < encounter.width && tile.y < encounter.height && !nextBattle.Entities.ContainsKey(tile.id), "Invalid saved tile.");
                     TileDef authored = Array.Find(encounter.tiles, t => t.x == tile.x && t.y == tile.y);
                     Require(tile.blocked == (authored != null && authored.blocked), "Save changed authored walls.");
-                    ValidateTags(tile.tags); EntityState entity = new EntityState { Id = tile.id, IsTile = true, X = tile.x, Y = tile.y }; entity.Tags.UnionWith(tile.tags); nextBattle.Entities.Add(tile.id, entity);
+                    ValidateTags(tile.tags); EntityState entity = new EntityState { Id = tile.id, IsTile = true, Blocked = tile.blocked, X = tile.x, Y = tile.y }; entity.Tags.UnionWith(tile.tags); nextBattle.Entities.Add(tile.id, entity);
                 }
                 bool playerAlive = false, enemyAlive = false;
                 foreach (SavedUnit unit in save.units)
@@ -622,7 +639,7 @@ namespace DungeonCrawlerTactics
                     foreach (string tag in unit.permanentTags) Require(seed != null && Array.IndexOf(seed.tags, tag) >= 0, "Saved permanent tag is not an authored unit seed.");
                     foreach (string tag in unit.permanentTags) Require(Array.IndexOf(unit.tags, tag) >= 0, "Permanent tag absent from saved unit.");
                     EntityState entity = new EntityState { Id = unit.id, ClassId = unit.classId, Team = unit.team, X = unit.x, Y = unit.y, Hp = unit.hp, MaxHp = hp, Energy = unit.energy };
-                    entity.Tags.UnionWith(unit.tags); nextBattle.Entities.Add(unit.id, entity);
+                    entity.Tags.UnionWith(unit.tags); RosterDef memberDefinition = Definition(unit.id); if (memberDefinition != null) entity.GrantedAbilities.UnionWith(memberDefinition.innateAbilityIds); nextBattle.Entities.Add(unit.id, entity);
                     nextUnits.Add(unit.id, new SavedUnit { id = unit.id, label = label, classId = unit.classId, team = unit.team, maxEnergy = energy, move = move, moved = unit.moved, acted = unit.acted, permanentTags = (string[])unit.permanentTags.Clone() });
                 }
                 if (save.screen == "battle") Require(playerAlive && enemyAlive, "Battle outcome is inconsistent.");

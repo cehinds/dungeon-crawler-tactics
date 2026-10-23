@@ -30,23 +30,24 @@ The Editor build hook validates the content before building. `UnityPackage` is t
 
 ## Controls and rules
 
-- At camp, select a crawler, choose a class, and deploy exactly four of the eight roster members. All classes are available immediately in this compact version.
+- At camp, deploy four of eight field characters. Mordecai is a ninth, nondeployable advisor. Carl, Donut, Katia and Mongo are the default party. Their personal abilities remain available when changing the optional class loadout.
 - Leaving camp enters exploration. Click a reachable corridor tile or use arrow keys to move the party and reveal fog. Approach a supply cache or note and interact; each cache can be claimed once. The encounter door starts combat only when you choose to enter it. Returning to camp preserves discoveries.
 - In battle, select a living crawler. Highlighted cells are reachable. Click a cell to move once, up to that class's movement allowance. Walls and living occupants block paths. Movement uses a stable shortest path; crossing hazards hurts on every affected step.
-- The browser battle view keeps the board, compact party strip and action dock in one viewport. Inventory and log open on demand. Action forecasts, help and save options use responsive dialogs; on phones these become bottom sheets with bounded content scrolling and visible decision buttons. Escape cancels a forecast without spending resources and restores keyboard focus.
+- The browser draws an isometric map with generated tile, prop, character, enemy, portrait, icon and effect atlases. The retained canvas plays walking, attack, hit, projectile and reaction events from the shared resolver. Drag to pan; use the zoom and Center controls on small screens. The compact HUD shows HP, Mana/MP, effective movement, conditions and the selected action's cost/range.
+- Forecasts appear beside the actions with inline Confirm/Cancel. Details, help, supplies and saves use responsive dialogs. Escape cancels targeting without spending resources. The party strip shows who is ready or finished; End character turn advances to the next ready party member, and enemies act only after all living party members finish. Confirming an ability also finishes that character's activation.
 - Dismissible toasts confirm class changes, discovered supplies, committed actions and save operations. Warnings and errors have distinct styling and accessible announcements. Up to three notifications appear at once, duplicates are combined, and hovering or focusing a notification pauses its expiry. Routine movement and autosaves stay quiet.
-- Select an ability or consumable, then its legal unit or tile target. Legal targets come from the shared C# resolver; the UI shows effects, range, energy and reasons an action is unavailable. Review HP, energy and tag changes before confirming. Cancel spends nothing. Terrain abilities can target the tile beneath a unit.
-- An action ends that crawler's activation. Moving without acting remains allowed; Wait ends the activation. The enemy team acts after all crawlers finish, or when End party turn is chosen.
-- Enemy actions are deterministic, including movement and target choice. They use the same range, energy and effect checks as player commands. Enemy turns complete without relying on animation timing.
+- Select an ability or consumable, then its legal unit or tile target. Legal targets come from the shared C# resolver; the UI shows effects, range, mana costs and reasons an action is unavailable. Review HP, MP and tag changes before confirming. Cancel spends nothing. Terrain abilities can target the tile beneath a unit.
+- An action ends that crawler's activation. Moving without acting remains allowed; End character turn ends the current activation. The enemy team acts after all living party members finish.
+- Enemy actions are deterministic, including movement and target choice. They use the same range, MP and effect checks as player commands. Enemy turns complete without relying on animation timing.
 - Defeat every hostile to win. Choose one sponsor reward and continue. Camp restores the party; consumables carry forward. Three victories finish the floor.
 - Defeat offers a fresh attempt at the same room, with restored starting supplies, while preserving earned XP. New run resets progression.
 - XP records floor progress; level-up trees, equipment progression, summoning, elevation and procedural floors are not implemented in this version.
 
 ## Actual content
 
-Eight roster members, four deployed, twelve selectable class kits, 36 ability definitions (including consumable actions), eight consumables, three authored 10×8 maps, and fifteen original 128×128 sprite assets. These are a compact fan adaptation, with class assignments and encounters invented for the game. See `PlayableContent.md` for the actual generated catalog.
+Eight deployable roster members plus Mordecai as advisor, four deployed, sixteen selectable class kits, 46 ability definitions (including consumable actions), eight consumables and three authored 10×8 maps. Six generated browser atlases provide the primary-character poses (including eight replacement winged-Mongo frames), 12 enemy poses, 12 effect frames, 12 terrain/prop components and 16 portrait/action components. Mongo also has a dedicated feathered-wing portrait. The earlier fifteen pixel assets remain as reserve-character/Unity presentation fallbacks. See `PlayableContent.md` for the generated catalog.
 
-Carl favors melee finishing, Donut starts as a Stormcaller, Katia supplies fire, and Mordecai begins with healing. Roster and class choices can be changed at camp. Every class has multiple usable actions, but names such as Beastmaster and Necromancer do not imply an unimplemented summon system.
+Carl's Compensated Anarchist kit has Powerful Strike with knockback and a single-tile incendiary bomb. Donut's Former Child Actor kit has Magic Missile, Puddle Jumper and Heal Critter. Katia's Doppelganger kit has Shapeshift protection, Heavy Blow and New Look cleansing. Mongo is a raptor companion with Bite and Pounce. Exact costs/ranges and conversions are game adaptations; see `Revamp-Research.md` for book sources. Names such as Beastmaster and Necromancer do not imply a summon system.
 
 ## Reactions and hazards
 
@@ -56,7 +57,7 @@ The core catalog controls incoming/target tag queries, rule priority, tag consum
 - Water tiles explicitly apply `status.wet` through `occupantTag`. Surface tags are not automatically copied onto creatures.
 - Lightning against wet consumes wet and deals reaction damage; cold against wet creates frozen. Shatter consumes frozen for bonus damage.
 - Guarded from Bulwark Recovery, Rallying Song or Siphon Ward prevents up to 6 damage from the next physical/fire/cold/lightning event, then is consumed. Unused Guarded expires after two full rounds. It prevents damage before HP loss and can prevent a lethal hit; it does not protect against untagged attacks or terrain hazards.
-- Frozen reduces movement according to `tagRules`; shocked reduces energy recovery. Effects expire at the full-round boundary. The forecast describes immediate command results; the help and tag rules describe later hazard ticks.
+- Frozen reduces movement according to `tagRules`; shocked reduces MP recovery. Effects expire at the full-round boundary. The forecast describes immediate command results; the help and tag rules describe later hazard ticks.
 - Reactions remain single-target within one action. Fire does not spread across the map and lightning does not jump between neighboring units in this version.
 
 Timed tags have a recorded origin and remaining full rounds. Current stacking policy is one active timed instance per entity/tag, without accumulating strength. Boolean tags and source metadata are distinct. Multiple independent overlapping buff sources are outside this compact model.
@@ -65,7 +66,7 @@ Timed tags have a recorded origin and remaining full rounds. Current stacking po
 
 The browser client autosaves committed state in localStorage and supports downloadable/importable JSON. The Unity client uses PlayerPrefs checkpoints with a prior backup; its WebGL bridge provides browser file download/upload plus text fallback. Storage belongs to the current browser/origin and is not cloud sync.
 
-Saves contain exploration position, revealed cells and claimed discoveries as well as roster, inventory, positions, HP/energy, activation state, tile tags, timed effects, encounter progress and reward state. Preview is temporary and is not committed into a save. Import validates versions, IDs, occupancy, authored walls and status bookkeeping before replacing live state. Invalid import leaves the current run intact. Existing v1 checkpoints without exploration fields remain supported; existing battles resume normally and exploration becomes available at the next camp. Unknown content versions are rejected.
+Saves contain exploration position, revealed cells and claimed discoveries as well as roster, inventory, positions, HP/MP, activation state, tile tags, timed effects, encounter progress and reward state. Preview is temporary and is not committed into a save. Import validates versions, IDs, occupancy, authored walls and status bookkeeping before replacing live state. Invalid import leaves the current run intact. Existing v1 checkpoints without exploration fields remain supported; existing battles resume normally and exploration becomes available at the next camp. Unknown content versions are rejected.
 
 ## Update the game
 
@@ -79,7 +80,7 @@ dotnet run --project Tests/GameTests/GameTests.csproj
 python3 Tools/prepare_unity_project.py
 ```
 
-New classes grant existing ability IDs and need one matching stats record. New abilities combine the supported `Damage`, `Heal`, `AddTag`, and `RemoveTag` operations, with explicit target/range/cost. New reactions combine registered tag queries with those operations. New items reference an existing ability and need a starting supply or reward source. Effects with fundamentally new behavior require a typed C# extension and tests.
+New classes grant existing ability IDs and need one matching stats record. New abilities combine `Damage`, `Heal`, `AddTag`, `RemoveTag`, `Push` and `Teleport` with explicit target/range/cost. Push checks walls, occupants and terrain along its path; Teleport checks the destination. New reactions combine registered tag queries with those operations. New items reference an existing ability and need a starting supply or reward source. Effects with fundamentally new behavior require a typed C# extension and tests.
 
 Strict schemas in `Tools/` catch misspelled keys and bad references. Runtime validators also guard loaded content and saves. Unity's JsonUtility does not itself reject unknown fields, so run strict authoring validation before importing content.
 
@@ -89,4 +90,4 @@ Strict schemas in `Tools/` catch misspelled keys and bad references. Runtime val
 
 ## Known limits
 
-This is a small complete game, not a full series adaptation. There are no area chains, line-of-sight/elevation rules, procedural maps, online play, animated combat sequences or audio soundtrack. Unity's presenter scales a desktop reference layout; touch menus are usable, but mobile Unity Web support has not been established. Only the shared-C# browser build has been exercised as an actual browser application here. The Unity Editor integration and Web export must be verified on a machine with Unity installed.
+This is a small complete game, not a full series adaptation. There are no area chains, line-of-sight/elevation rules, procedural maps, online play or audio soundtrack. The new isometric animated presentation is browser-specific; Unity still uses the earlier IMGUI presenter with the updated shared rules, data and Mana labels. Mobile Unity Web support has not been established. Only the shared-C# browser build has been exercised as an actual browser application here. Unity Editor integration and Web export must be verified on a machine with Unity installed.

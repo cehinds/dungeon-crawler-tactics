@@ -20,8 +20,10 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e: errors.append(str(e)))
     page.goto(args.url,wait_until='networkidle')
     page.wait_for_function('window.dungeon && window.dungeon.getView()',timeout=60000)
-    page.locator('#begin-button').click()
-    page.locator('#help-dialog [data-close]').last.click()
+    if page.locator('#welcome-dialog').evaluate('(d)=>d.open'):
+        page.locator('#begin-button').click()
+    if page.locator('#help-dialog').evaluate('(d)=>d.open'):
+        page.locator('#help-dialog [data-close]').last.click()
     result=page.evaluate('''async () => {
       const send = async (type,args={}) => JSON.parse(await DotNet.invokeMethodAsync('DungeonCrawlerTactics.Web','Dispatch',JSON.stringify({type,...args})));
       let v=await send('new_run'), ticks=0, victories=0, potions=0, moves=0, previewChecks=0;
@@ -68,10 +70,10 @@ with sync_playwright() as p:
           v=await send('preview',{unitId:actor.id,targetId:wounded.id,itemId:'item.health_tonic'});
           if(v.canConfirm){v=await send('confirm');potions++;continue;}
         }
-        const base=v,abilities=base.abilities.filter(a=>a.enabled),targets=base.units.filter(u=>u.hp>0);
+        const base=v,abilities=base.abilities.filter(a=>a.enabled);
         let best=null,bestScore=-1;
-        for(const ability of abilities)for(const target of targets.filter(t=>ability.targetIds.includes(t.id))){
-          const args={unitId:actor.id,targetId:target.id,abilityId:ability.id};
+        for(const ability of abilities)for(const targetId of ability.targetIds){
+          const args={unitId:actor.id,targetId,abilityId:ability.id};
           const preview=await send('preview',args);
           if(!preview.canConfirm)continue;
           previewChecks++;

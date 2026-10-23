@@ -38,7 +38,7 @@ namespace DungeonCrawlerTactics.Unity
                     Submit(new GameCommand { type = "select", unitId = unit.id });
                 index++;
             }
-            if (Button(new Rect(43, 749, 202, 58), "End team turn", view.phase == "player" && !view.canConfirm)) Command("end_turn");
+            if (Button(new Rect(43, 749, 202, 58), "End character turn", view.phase == "player" && !view.canConfirm)) Command("end_turn");
         }
 
         private void DrawBoard()
@@ -121,7 +121,7 @@ namespace DungeonCrawlerTactics.Unity
         {
             UnitView selected = null;
             foreach (UnitView unit in view.units) if (unit.id == view.selectedUnitId) selected = unit;
-            Card(new Rect(962, 165, 450, 346), selected == null ? "SELECT A CRAWLER" : selected.label.ToUpperInvariant() + "  /  " + selected.energy + " ENERGY");
+            Card(new Rect(962, 165, 450, 346), selected == null ? "SELECT A CRAWLER" : selected.label.ToUpperInvariant() + "  /  " + selected.energy + " MP");
             if (selected == null) { GUI.Label(new Rect(980, 222, 410, 80), "Click a living crawler on the board or in your party to begin.", bodyStyle); return; }
             GUI.Label(new Rect(980, 207, 410, 27), ClassName(selected.classId) + "  ·  " + selected.hp + "/" + selected.maxHp + " HP", smallStyle);
             if (Button(new Rect(980, 241, 202, 44), "Move [M]", view.canMove && !view.canConfirm, string.IsNullOrEmpty(actionId) && string.IsNullOrEmpty(itemId))) { actionId = ""; itemId = ""; notice = "Click a highlighted cell to move."; }
@@ -131,7 +131,7 @@ namespace DungeonCrawlerTactics.Unity
             int row = 0;
             foreach (AbilityView ability in view.abilities)
             {
-                string label = ability.label + "   /   " + ability.cost + " E   /   R" + ability.range;
+                string label = ability.label + "   /   " + ability.cost + " MP   /   R" + ability.range;
                 if (Button(new Rect(0, row++ * 54, 392, 48), label, ability.enabled && view.canAct && !view.canConfirm, actionId == ability.id))
                 {
                     actionId = ability.id; itemId = "";
@@ -162,12 +162,12 @@ namespace DungeonCrawlerTactics.Unity
                 {
                     string values = change.label;
                     if (change.beforeHp != change.afterHp) values += "  HP " + change.beforeHp + " → " + change.afterHp;
-                    if (change.beforeEnergy != change.afterEnergy) values += "  E " + change.beforeEnergy + " → " + change.afterEnergy;
+                    if (change.beforeEnergy != change.afterEnergy) values += "  MP " + change.beforeEnergy + " → " + change.afterEnergy;
                     GUI.Label(new Rect(2, y, 389, 42), values, bodyStyle);
                     GUI.Label(new Rect(2, y + 43, 389, 62), Tags(change.beforeTags) + " → " + Tags(change.afterTags), smallStyle);
                     y += 112;
                 }
-                if (view.forecast.Length == 0) GUI.Label(new Rect(2, 0, 389, 100), "No HP, energy, or condition changes. You can cancel and choose another target.", bodyStyle);
+                if (view.forecast.Length == 0) GUI.Label(new Rect(2, 0, 389, 100), "No HP, mana, or condition changes. You can cancel and choose another target.", bodyStyle);
                 GUI.EndScrollView();
                 GUI.SetNextControlName("ConfirmAction");
                 if (Button(new Rect(980, 762, 202, 48), "Confirm action", true)) Command("confirm");
@@ -177,7 +177,7 @@ namespace DungeonCrawlerTactics.Unity
             string title = "Read the room before you act.";
             string detail = "Move first: acting ends the crawler’s activation. Select an ability, then click a target to preview its exact result.";
             foreach (UnitView unit in view.units)
-                if (unit.id == inspectedId) { title = unit.label + "  /  " + unit.hp + "/" + unit.maxHp + " HP"; detail = ClassName(unit.classId) + "\n" + Tags(unit.tags) + "\nEnergy: " + unit.energy + "/" + unit.maxEnergy; }
+                if (unit.id == inspectedId) { title = unit.label + "  /  " + unit.hp + "/" + unit.maxHp + " HP"; detail = ClassName(unit.classId) + "\n" + Tags(unit.tags) + "\nMana: " + unit.energy + "/" + unit.maxEnergy; }
             foreach (TileView tile in view.tiles)
                 if (tile.id == inspectedId) { title = "Tile " + tile.x + ", " + tile.y; detail = (tile.blocked ? "Blocked terrain" : "Traversable floor") + "\n" + Tags(tile.tags); }
             GUI.Label(new Rect(980, 577, 410, 48), title, bodyStyle);

@@ -103,7 +103,7 @@ namespace DungeonCrawlerTactics
             {
                 Require(e != null, "Null effect.");
                 Require(e.amount >= 0, "Effect amount cannot be negative.");
-                if (e.op != "Damage" && e.op != "Heal")
+                if (e.op != "Damage" && e.op != "Heal" && e.op != "Teleport" && e.op != "Push")
                     Require((e.op == "AddTag" || e.op == "RemoveTag") && HasTag(e.tag), "Invalid operation or tag.");
             }
         }

@@ -6,14 +6,15 @@ namespace DungeonCrawlerTactics
     public sealed class EntityState
     {
         public string Id; public string ClassId; public string Team;
-        public bool IsTile; public int X; public int Y;
+        public bool IsTile; public bool Blocked; public int X; public int Y;
         public int Hp; public int MaxHp; public int Energy;
+        public readonly HashSet<string> GrantedAbilities = new HashSet<string>(StringComparer.Ordinal);
         public readonly HashSet<string> Tags = new HashSet<string>(StringComparer.Ordinal);
         public readonly HashSet<string> Immunities = new HashSet<string>(StringComparer.Ordinal);
         public EntityState Clone()
         {
-            EntityState copy = new EntityState { Id = Id, ClassId = ClassId, Team = Team, IsTile = IsTile, X = X, Y = Y, Hp = Hp, MaxHp = MaxHp, Energy = Energy };
-            copy.Tags.UnionWith(Tags); copy.Immunities.UnionWith(Immunities); return copy;
+            EntityState copy = new EntityState { Id = Id, ClassId = ClassId, Team = Team, IsTile = IsTile, Blocked = Blocked, X = X, Y = Y, Hp = Hp, MaxHp = MaxHp, Energy = Energy };
+            copy.GrantedAbilities.UnionWith(GrantedAbilities); copy.Tags.UnionWith(Tags); copy.Immunities.UnionWith(Immunities); return copy;
         }
     }
     public sealed class BattleState
@@ -25,19 +26,21 @@ namespace DungeonCrawlerTactics
     {
         public BattleState State { get; private set; }
         public string[] Log { get; private set; }
-        internal ActionResult(BattleState state, List<string> log) { State = state; Log = log.ToArray(); }
+        public PresentationEvent[] Events { get; private set; }
+        internal ActionResult(BattleState state, List<string> log, List<PresentationEvent> events = null) { State = state; Log = log.ToArray(); Events = events == null ? new PresentationEvent[0] : events.ToArray(); }
     }
     // This kernel is a pure state transition. Callers explicitly replace their state after Execute.
     public sealed class RulesEngine
     {
         private readonly Catalog catalog;
         private readonly int maxEvents;
+        private readonly Action<BattleState, EntityState, List<string>, List<PresentationEvent>> onEntry;
         private sealed class RuleEvent { public string[] Tags; public EffectDef[] Effects; public string Label; }
-        public RulesEngine(Catalog catalog, int maxEvents = 64)
+        public RulesEngine(Catalog catalog, int maxEvents = 64, Action<BattleState, EntityState, List<string>, List<PresentationEvent>> onEntry = null)
         {
             if (catalog == null) throw new ArgumentNullException(nameof(catalog));
             if (maxEvents < 1) throw new ArgumentOutOfRangeException(nameof(maxEvents));
-            this.catalog = catalog; this.maxEvents = maxEvents;
+            this.catalog = catalog; this.maxEvents = maxEvents; this.onEntry = onEntry;
         }
         public ActionResult Preview(BattleState state, string actorId, string abilityId, string targetId) { return Execute(state, actorId, abilityId, targetId); }
         public ActionResult Execute(BattleState state, string actorId, string abilityId, string targetId)
@@ -57,14 +60,16 @@ namespace DungeonCrawlerTactics
             if (targetId == null || !state.Entities.TryGetValue(targetId, out target)) throw new ArgumentException("Unknown target.");
             if (abilityId == null || !catalog.Abilities.TryGetValue(abilityId, out ability)) throw new ArgumentException("Unknown ability.");
             ClassDef actorClass = catalog.Classes[actor.ClassId];
-            if (requireGrant && Array.IndexOf(actorClass.abilityIds, abilityId) < 0) throw new ArgumentException("Actor class does not grant ability.");
+            if (requireGrant && Array.IndexOf(actorClass.abilityIds, abilityId) < 0 && !actor.GrantedAbilities.Contains(abilityId)) throw new ArgumentException("Actor class does not grant ability.");
             bool validTarget = ability.target == "tile" ? target.IsTile : !target.IsTile && target.Hp > 0 &&
                 (ability.target == "self" ? actorId == targetId : ability.target == "ally" ? target.Team == actor.Team : target.Team != actor.Team);
             if (!validTarget) throw new ArgumentException("Invalid target for ability.");
             long distance = Math.Abs((long)actor.X - target.X) + Math.Abs((long)actor.Y - target.Y);
-            if (distance > ability.range || actor.Energy < ability.cost) throw new ArgumentException("Target out of range or insufficient energy.");
+            if (distance > ability.range || actor.Energy < ability.cost) throw new ArgumentException("Target out of range or insufficient mana.");
             BattleState next = state.Clone(); actor = next.Entities[actorId]; target = next.Entities[targetId]; actor.Energy -= ability.cost;
             List<string> log = new List<string>();
+            List<PresentationEvent> events = new List<PresentationEvent>();
+            events.Add(new PresentationEvent { type = "attack", actorId = actorId, targetId = targetId, abilityId = abilityId });
             Queue<RuleEvent> queue = new Queue<RuleEvent>();
             HashSet<string> fired = new HashSet<string>(StringComparer.Ordinal);
             queue.Enqueue(new RuleEvent { Tags = ability.incomingTags, Effects = ability.effects, Label = ability.id });
@@ -87,21 +92,61 @@ namespace DungeonCrawlerTactics
                 {
                     if (rule.damageReduction == 0 || !damaging || !rule.target.Matches(target.Tags)) continue;
                     fired.Add(rule.id);
-                    foreach (string tag in rule.consumeTags) target.Tags.Remove(tag);
+                    foreach (string tag in rule.consumeTags) if (target.Tags.Remove(tag)) events.Add(new PresentationEvent { type = "tag_remove", actorId = actorId, targetId = targetId, tag = tag });
+                    events.Add(new PresentationEvent { type = "reaction", actorId = actorId, targetId = targetId, reactionId = rule.id, abilityId = abilityId });
                     reduction = Math.Min(int.MaxValue, reduction + rule.damageReduction);
                     queue.Enqueue(new RuleEvent { Tags = rule.emitTags, Effects = rule.effects, Label = rule.id });
                 }
-                Apply(target, current.Effects, reduction); log.Add(current.Label);
+                foreach (EffectDef effect in current.Effects)
+                {
+                    int hp = target.Hp; bool had = effect.tag != null && target.Tags.Contains(effect.tag);
+                    if (effect.op == "Teleport")
+                    {
+                        if (!target.IsTile || !Passable(next, target.X, target.Y, actorId)) throw new ArgumentException("Teleport destination is blocked or occupied.");
+                        events.Add(new PresentationEvent { type = "teleport", actorId = actorId, targetId = actorId, abilityId = abilityId, fromX = actor.X, fromY = actor.Y, toX = target.X, toY = target.Y });
+                        actor.X = target.X; actor.Y = target.Y; if (onEntry != null) onEntry(next, actor, log, events); continue;
+                    }
+                    if (effect.op == "Push")
+                    {
+                        if (target.IsTile) throw new ArgumentException("Push requires a unit target.");
+                        int dx = target.X - actor.X, dy = target.Y - actor.Y;
+                        if (Math.Abs(dx) >= Math.Abs(dy)) { dx = Math.Sign(dx); dy = 0; } else { dy = Math.Sign(dy); dx = 0; }
+                        for (int step = 0; step < effect.amount && target.Hp > 0 && (dx != 0 || dy != 0); step++)
+                        {
+                            int nx = target.X + dx, ny = target.Y + dy; if (!Passable(next, nx, ny, targetId)) break;
+                            events.Add(new PresentationEvent { type = "push", actorId = actorId, targetId = targetId, abilityId = abilityId, fromX = target.X, fromY = target.Y, toX = nx, toY = ny });
+                            target.X = nx; target.Y = ny; if (onEntry != null) onEntry(next, target, log, events);
+                        }
+                        continue;
+                    }
+                    Apply(target, new[] { effect }, reduction);
+                    if (effect.op == "Damage") { int prevented = (int)Math.Min(reduction, effect.amount); reduction -= prevented; if (prevented > 0) events.Add(new PresentationEvent { type = "guard", actorId = actorId, targetId = targetId, amount = prevented }); }
+                    if (hp != target.Hp) events.Add(new PresentationEvent { type = target.Hp < hp ? "damage" : "heal", actorId = actorId, targetId = targetId, abilityId = abilityId, before = hp, after = target.Hp, amount = Math.Abs(target.Hp - hp) });
+                    if (effect.tag != null && had != target.Tags.Contains(effect.tag)) events.Add(new PresentationEvent { type = had ? "tag_remove" : "tag_add", actorId = actorId, targetId = targetId, tag = effect.tag, abilityId = abilityId });
+                }
+                log.Add(current.Label);
                 foreach (ReactionDef rule in matched)
                 {
                     // Earlier rules can consume a prerequisite and suppress later rules.
                     if (rule.damageReduction > 0 || !rule.target.Matches(target.Tags)) continue;
                     fired.Add(rule.id);
-                    foreach (string tag in rule.consumeTags) target.Tags.Remove(tag);
+                    foreach (string tag in rule.consumeTags) if (target.Tags.Remove(tag)) events.Add(new PresentationEvent { type = "tag_remove", actorId = actorId, targetId = targetId, tag = tag });
+                    events.Add(new PresentationEvent { type = "reaction", actorId = actorId, targetId = targetId, reactionId = rule.id, abilityId = abilityId });
                     queue.Enqueue(new RuleEvent { Tags = rule.emitTags, Effects = rule.effects, Label = rule.id });
                 }
             }
-            return new ActionResult(next, log);
+            return new ActionResult(next, log, events);
+        }
+        private static bool Passable(BattleState state, int x, int y, string actorId)
+        {
+            bool tile = false;
+            foreach (EntityState entity in state.Entities.Values)
+            {
+                if (entity.X != x || entity.Y != y) continue;
+                if (entity.IsTile) { if (entity.Blocked) return false; tile = true; }
+                else if (entity.Id != actorId && entity.Hp > 0) return false;
+            }
+            return tile;
         }
         private static void Apply(EntityState target, EffectDef[] effects, long reduction)
         {
