@@ -6,6 +6,8 @@ A playable Dungeon Crawler Carl fan tactics prototype with a shared C# engine: a
 
 **Lore codex:** [Classes, rank tables, floors, enemies and housing evidence](https://cehinds.github.io/dungeon-crawler-tactics/codex.html) · [Story and housing guide](Docs/Journey-and-Home.md).
 
+**Tabletop inspiration:** [Official RPG research and prioritized gameplay changes](Docs/Tabletop-Inspiration.md).
+
 **Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md) · [Playable boss scenarios and sprite sources](Docs/Boss-Concepts.md).
 
 **Menu atlas:** [Six illustrated menus and 30 interactive components](https://cehinds.github.io/dungeon-crawler-tactics/menu-atlas.html) · [Expansion content](Docs/Expansion.md) · [Component guide](Docs/Menu-Components.md).

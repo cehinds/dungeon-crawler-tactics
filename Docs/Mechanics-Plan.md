@@ -1,5 +1,7 @@
 # Mechanics implementation plan
 
+The [tabletop inspiration update](Tabletop-Inspiration.md) adds official RPG references and prioritizes connected neighborhoods, useful noncombat skills, achievement challenges, AI Favor and house preparation. Its checklist distinguishes proposed additions from the current implementation.
+
 The aim is a readable tactics game built around the books' improvisation, character identities and cruel game-show framing. The [feature checklist](Book-Fidelity-Checklist.md) separates implemented browser behavior from future work. [Lore review](Lore-Mechanics-Review.md) identifies primary versus secondary evidence. The [concept gallery](../Web/wwwroot/mechanics-review.html) is a visual target, not an implementation specification.
 
 ## Current changes
