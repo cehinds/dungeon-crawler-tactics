@@ -451,7 +451,7 @@ static class GameTests
     static void ConfigurableParty()
     {
         GameData config = Clone(Data);
-        config.journey = null;
+        config.journey = null; config.neighborhood = null;
         config.partySize = 2;
         for (int i = 0; i < config.roster.Length; i++) config.roster[i].selected = i < 2;
         foreach (EncounterDef encounter in config.encounters) encounter.playerSpawns = encounter.playerSpawns.Take(2).ToArray();

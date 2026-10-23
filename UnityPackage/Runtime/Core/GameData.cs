@@ -4,6 +4,7 @@ namespace DungeonCrawlerTactics
 {
     [Serializable] public sealed class GameData
     {
+        public NeighborhoodDef neighborhood;
         public HomeDef home;
         public JourneyDef journey;
         public SkillTreeDef[] classSkillTrees = new SkillTreeDef[0];
@@ -63,7 +64,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class ExplorationTileView { public int x, y; public bool revealed, blocked, reachable; }
     [Serializable] public sealed class ExplorationPointView { public string id, label, description, kind; public int x, y; public bool claimed, canInteract; }
     [Serializable] public sealed class ExplorationView { public string id, label, description; public int width, height, x, y; public ExplorationTileView[] tiles; public ExplorationPointView[] points; }
-    [Serializable] public sealed class ExplorationSave { public string sectorId; public int x, y; public CellView[] revealed = new CellView[0]; public string[] claimed = new string[0]; }
+    [Serializable] public sealed class ExplorationSave { public int layoutVersion; public string sectorId; public int x, y; public CellView[] revealed = new CellView[0]; public string[] claimed = new string[0]; }
     [Serializable] public sealed class InventoryEntry { public string itemId; public int count; }
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
@@ -93,7 +94,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class GameView
     {
         public TacticalModeView[] stances = new TacticalModeView[0], forms = new TacticalModeView[0];
-        public HomeView home; public JourneyView journey; public ExpeditionView expedition; public ExpeditionOptionView[] expeditions = new ExpeditionOptionView[0]; public SkillTreeView skillTree; public DevelopmentView development; public CustomMapData customMap; public ScenarioOptionView[] scenarios = new ScenarioOptionView[0]; public ScenarioView scenario;
+        public NeighborhoodView neighborhood; public HomeView home; public JourneyView journey; public ExpeditionView expedition; public ExpeditionOptionView[] expeditions = new ExpeditionOptionView[0]; public SkillTreeView skillTree; public DevelopmentView development; public CustomMapData customMap; public ScenarioOptionView[] scenarios = new ScenarioOptionView[0]; public ScenarioView scenario;
         public string[] achievementIds = new string[0];
         public ExplorationView exploration;
         public ProgressionView progression; public SafeRoomView safeRoom;
@@ -117,7 +118,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class TimedTag { public string entityId, tag, source; public int remainingRounds; }
     [Serializable] public sealed class GameSave
     {
-        public HomeSave home; public JourneySave journey; public ExpeditionSave expedition; public SkillTreeSave skillTree; public DevelopmentSave development; public CustomMapData customMap; public ScenarioSave scenario;
+        public NeighborhoodSave neighborhood; public HomeSave home; public JourneySave journey; public ExpeditionSave expedition; public SkillTreeSave skillTree; public DevelopmentSave development; public CustomMapData customMap; public ScenarioSave scenario;
         public string[] achievementIds = new string[0];
         public ExplorationSave[] exploration = new ExplorationSave[0];
         public int activationVersion; public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];

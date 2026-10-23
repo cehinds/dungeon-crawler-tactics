@@ -69,7 +69,7 @@ def advance_story_to(page, target_floor):
         }
         if(v.screen==='explore'){
           const m=v.exploration;
-          const point=m.points.find(p=>p.canInteract&&p.kind!=='encounter');
+          const point=m.points.find(p=>p.canInteract&&p.kind!=='encounter'&&!v.neighborhood?.interactions.some(i=>i.pointId===p.id));
           if(point){v=await send('explore_interact',{targetId:point.id});continue;}
           const door=m.points.find(p=>p.canInteract&&p.kind==='encounter');
           if(door){v=await send('explore_interact',{targetId:door.id});continue;}

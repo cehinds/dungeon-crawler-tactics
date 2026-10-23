@@ -43755,12 +43755,12 @@
           ],
           "exploration": {
             "id": "sector.journey_3",
-            "label": "Third Floor — Over City Outskirts approach",
-            "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
-            "width": 11,
-            "height": 9,
+            "label": "Over City — Lantern Row",
+            "description": "Reach the pump-chamber entrance. Explore the workshop lane for supplies or take the rescue alley to help a trapped crawler. Both routes reconnect with the main street; optional choices never block the way down.",
+            "width": 15,
+            "height": 11,
             "startX": 1,
-            "startY": 4,
+            "startY": 5,
             "discoveryRadius": 2,
             "walls": [
               {
@@ -43808,11 +43808,27 @@
                 "y": 0
               },
               {
+                "x": 11,
+                "y": 0
+              },
+              {
+                "x": 12,
+                "y": 0
+              },
+              {
+                "x": 13,
+                "y": 0
+              },
+              {
+                "x": 14,
+                "y": 0
+              },
+              {
                 "x": 0,
                 "y": 1
               },
               {
-                "x": 10,
+                "x": 14,
                 "y": 1
               },
               {
@@ -43820,15 +43836,15 @@
                 "y": 2
               },
               {
-                "x": 4,
+                "x": 5,
                 "y": 2
               },
               {
-                "x": 7,
+                "x": 9,
                 "y": 2
               },
               {
-                "x": 10,
+                "x": 14,
                 "y": 2
               },
               {
@@ -43836,15 +43852,15 @@
                 "y": 3
               },
               {
-                "x": 4,
+                "x": 5,
                 "y": 3
               },
               {
-                "x": 7,
+                "x": 9,
                 "y": 3
               },
               {
-                "x": 10,
+                "x": 14,
                 "y": 3
               },
               {
@@ -43852,7 +43868,15 @@
                 "y": 4
               },
               {
-                "x": 10,
+                "x": 5,
+                "y": 4
+              },
+              {
+                "x": 9,
+                "y": 4
+              },
+              {
+                "x": 14,
                 "y": 4
               },
               {
@@ -43860,15 +43884,7 @@
                 "y": 5
               },
               {
-                "x": 4,
-                "y": 5
-              },
-              {
-                "x": 7,
-                "y": 5
-              },
-              {
-                "x": 10,
+                "x": 14,
                 "y": 5
               },
               {
@@ -43876,15 +43892,15 @@
                 "y": 6
               },
               {
-                "x": 4,
+                "x": 5,
                 "y": 6
               },
               {
-                "x": 7,
+                "x": 9,
                 "y": 6
               },
               {
-                "x": 10,
+                "x": 14,
                 "y": 6
               },
               {
@@ -43892,27 +43908,19 @@
                 "y": 7
               },
               {
-                "x": 10,
+                "x": 5,
+                "y": 7
+              },
+              {
+                "x": 9,
+                "y": 7
+              },
+              {
+                "x": 14,
                 "y": 7
               },
               {
                 "x": 0,
-                "y": 8
-              },
-              {
-                "x": 1,
-                "y": 8
-              },
-              {
-                "x": 2,
-                "y": 8
-              },
-              {
-                "x": 3,
-                "y": 8
-              },
-              {
-                "x": 4,
                 "y": 8
               },
               {
@@ -43920,56 +43928,142 @@
                 "y": 8
               },
               {
-                "x": 6,
-                "y": 8
-              },
-              {
-                "x": 7,
-                "y": 8
-              },
-              {
-                "x": 8,
-                "y": 8
-              },
-              {
                 "x": 9,
                 "y": 8
               },
               {
-                "x": 10,
+                "x": 14,
                 "y": 8
+              },
+              {
+                "x": 0,
+                "y": 9
+              },
+              {
+                "x": 14,
+                "y": 9
+              },
+              {
+                "x": 0,
+                "y": 10
+              },
+              {
+                "x": 1,
+                "y": 10
+              },
+              {
+                "x": 2,
+                "y": 10
+              },
+              {
+                "x": 3,
+                "y": 10
+              },
+              {
+                "x": 4,
+                "y": 10
+              },
+              {
+                "x": 5,
+                "y": 10
+              },
+              {
+                "x": 6,
+                "y": 10
+              },
+              {
+                "x": 7,
+                "y": 10
+              },
+              {
+                "x": 8,
+                "y": 10
+              },
+              {
+                "x": 9,
+                "y": 10
+              },
+              {
+                "x": 10,
+                "y": 10
+              },
+              {
+                "x": 11,
+                "y": 10
+              },
+              {
+                "x": 12,
+                "y": 10
+              },
+              {
+                "x": 13,
+                "y": 10
+              },
+              {
+                "x": 14,
+                "y": 10
               }
             ],
             "points": [
               {
                 "id": "discovery.journey_3_door",
-                "label": "Enter Third Floor — Over City Outskirts",
-                "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
+                "label": "Pump-chamber boss entrance",
+                "description": "Main objective: enter the existing Over City battle. Rescue is optional; a rescued crawler reveals how coolant and oil can help.",
                 "kind": "encounter",
-                "x": 9,
-                "y": 4,
+                "x": 13,
+                "y": 5,
                 "itemId": "",
                 "count": 0
               },
               {
                 "id": "discovery.journey_3_notes",
-                "label": "Floor briefing",
-                "description": "The Over City inspires guarded urban ruins. Classes and banked stat allocation unlock here; the original pump-chamber enemies and grid objectives are tactical adaptations. Source: https://dungeon-crawler-carl.fandom.com/wiki/Third_Floor",
+                "label": "Safe-room entrance / street briefing",
+                "description": "Lantern Row is an original scenario inspired by the idea of connected tabletop neighborhoods. Go east to the boss, north for the workshop and supplies, or south for an optional rescue. All routes reconnect.",
                 "kind": "lore",
-                "x": 3,
-                "y": 7,
+                "x": 2,
+                "y": 5,
                 "itemId": "",
                 "count": 0
               },
               {
                 "id": "discovery.journey_3_cache",
-                "label": "Optional shared supply",
-                "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
+                "label": "Safe-room emergency shelf",
+                "description": "One Health Tonic for the shared pack; original game adaptation.",
                 "kind": "cache",
                 "x": 3,
-                "y": 4,
+                "y": 8,
                 "itemId": "item.health_tonic",
                 "count": 1
+              },
+              {
+                "id": "discovery.journey_3_workshop",
+                "label": "Lantern workshop merchant",
+                "description": "Optional once-only workshop exchange. Take free coolant or barter a tonic for a Fire Bomb. Original adaptation.",
+                "kind": "lore",
+                "x": 3,
+                "y": 2,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_3_trap",
+                "label": "Trapped supply store",
+                "description": "Optional environmental puzzle. Use coolant to neutralize the heated latch, or open the manual bypass for a smaller supply. Original adaptation.",
+                "kind": "lore",
+                "x": 7,
+                "y": 2,
+                "itemId": "",
+                "count": 0
+              },
+              {
+                "id": "discovery.journey_3_rescue",
+                "label": "Crawler under the shutter",
+                "description": "Optional rescue: trained Heavy Blow lifts the shutter quickly; the free manual winch always works. Both reveal a coolant clue and reward supplies. Original adaptation.",
+                "kind": "lore",
+                "x": 11,
+                "y": 8,
+                "itemId": "",
+                "count": 0
               }
             ]
           }
@@ -47085,5 +47179,394 @@
         ]
       }
     ]
+  },
+  "neighborhood": {
+    "id": "neighborhood.over_city",
+    "label": "Lantern Row",
+    "description": "A sealed pump chamber blocks the way down. Explore the streets, stock up at the workshop, and help a crawler trapped in the rescue alley. Your choices decide which supplies reach the fight.",
+    "sectorId": "sector.journey_3",
+    "interactions": [
+      {
+        "id": "neighborhood.over_city.workshop",
+        "pointId": "discovery.journey_3_workshop",
+        "label": "Workshop merchant",
+        "description": "The merchant has one offer left for your party. Trade for firepower or take the coolant sample before heading to the pump chamber.",
+        "camp": false,
+        "options": [
+          {
+            "id": "workshop.barter",
+            "label": "Barter a Health Tonic",
+            "description": "Spend 1 Health Tonic; receive 1 Fire Bomb.",
+            "costItemId": "item.health_tonic",
+            "costCount": 1,
+            "rewardItemId": "item.fire_bomb",
+            "rewardCount": 1,
+            "abilityId": "",
+            "minimumRank": 1,
+            "clue": ""
+          },
+          {
+            "id": "workshop.free",
+            "label": "Take the free coolant sample",
+            "description": "Receive 1 Coolant Bomb. No skill or payment required.",
+            "costItemId": "",
+            "costCount": 0,
+            "rewardItemId": "item.water_bomb",
+            "rewardCount": 1,
+            "abilityId": "",
+            "minimumRank": 1,
+            "clue": ""
+          }
+        ]
+      },
+      {
+        "id": "neighborhood.over_city.trap",
+        "pointId": "discovery.journey_3_trap",
+        "label": "Heated supply latch",
+        "description": "The supply latch is dangerously hot. Cool it to preserve the medicine inside, or use the manual bypass to recover a smaller supply.",
+        "camp": false,
+        "options": [
+          {
+            "id": "trap.disarm",
+            "label": "Cool the latch",
+            "description": "Spend 1 Coolant Bomb; receive 1 Mega Tonic and earn the supply-puzzle challenge.",
+            "costItemId": "item.water_bomb",
+            "costCount": 1,
+            "rewardItemId": "item.mega_tonic",
+            "rewardCount": 1,
+            "abilityId": "",
+            "minimumRank": 1,
+            "clue": ""
+          },
+          {
+            "id": "trap.open",
+            "label": "Use the manual bypass",
+            "description": "Receive 1 Health Tonic. No skill or payment required.",
+            "costItemId": "",
+            "costCount": 0,
+            "rewardItemId": "item.health_tonic",
+            "rewardCount": 1,
+            "abilityId": "",
+            "minimumRank": 1,
+            "clue": ""
+          }
+        ]
+      },
+      {
+        "id": "neighborhood.over_city.rescue",
+        "pointId": "discovery.journey_3_rescue",
+        "label": "Optional crawler rescue",
+        "description": "A crawler is pinned under a shutter beside a fragile supply pack. Heavy Blow lifts it cleanly; the manual winch rescues the crawler but crushes part of the pack.",
+        "camp": false,
+        "options": [
+          {
+            "id": "rescue.trained",
+            "label": "Lift with trained Heavy Blow",
+            "description": "Requires Heavy Blow at rank 1. Lift the debris without crushing the supply pack: receive 2 Shock Tonics and the boss clue.",
+            "costItemId": "",
+            "costCount": 0,
+            "rewardItemId": "item.thunder_flask",
+            "rewardCount": 2,
+            "abilityId": "ability.katia_heavy_blow",
+            "minimumRank": 1,
+            "clue": "The pump chamber has a wet channel and oil patches. Wet targets conduct lightning; oil catches fire. The rescued crawler shares Shock Tonics to help you exploit the channel."
+          },
+          {
+            "id": "rescue.help",
+            "label": "Turn the manual winch",
+            "description": "Rescue without a skill requirement; receive 1 Shock Tonic and the boss clue.",
+            "costItemId": "",
+            "costCount": 0,
+            "rewardItemId": "item.thunder_flask",
+            "rewardCount": 1,
+            "abilityId": "",
+            "minimumRank": 1,
+            "clue": "The pump chamber has a wet channel and oil patches. Wet targets conduct lightning; oil catches fire. The rescued crawler shares Shock Tonics to help you exploit the channel."
+          }
+        ]
+      },
+      {
+        "id": "neighborhood.over_city.preparation",
+        "pointId": "",
+        "label": "Lantern Row preparation",
+        "description": "Mordecai has room for one supply package. Pack healing for a long fight, or coolant for the heated latch and lightning combinations.",
+        "camp": true,
+        "options": [
+          {
+            "id": "preparation.medical",
+            "label": "Pack medical supplies",
+            "description": "Receive 2 Health Tonics.",
+            "costItemId": "",
+            "costCount": 0,
+            "rewardItemId": "item.health_tonic",
+            "rewardCount": 2,
+            "abilityId": "",
+            "minimumRank": 1,
+            "clue": ""
+          },
+          {
+            "id": "preparation.engineering",
+            "label": "Pack coolant supplies",
+            "description": "Receive 2 Coolant Bombs.",
+            "costItemId": "",
+            "costCount": 0,
+            "rewardItemId": "item.water_bomb",
+            "rewardCount": 2,
+            "abilityId": "",
+            "minimumRank": 1,
+            "clue": ""
+          }
+        ]
+      }
+    ],
+    "challenges": [
+      {
+        "id": "achievement.lantern_rescue",
+        "label": "Leave no crawler behind",
+        "description": "Rescue the trapped crawler by either approach. Once per run: 1 Health Tonic.",
+        "interactionId": "neighborhood.over_city.rescue",
+        "optionId": "",
+        "rewardItemId": "item.health_tonic",
+        "rewardCount": 1
+      },
+      {
+        "id": "achievement.lantern_cool_latch",
+        "label": "A cooler solution",
+        "description": "Neutralize the heated supply latch with a Coolant Bomb. Once per run: 1 Fire Bomb.",
+        "interactionId": "neighborhood.over_city.trap",
+        "optionId": "trap.disarm",
+        "rewardItemId": "item.fire_bomb",
+        "rewardCount": 1
+      },
+      {
+        "id": "achievement.lantern_prepared",
+        "label": "Plan before the plunge",
+        "description": "Choose a safe-room preparation plan before exploring Lantern Row. Once per run: 1 Cleansing Tonic.",
+        "interactionId": "neighborhood.over_city.preparation",
+        "optionId": "",
+        "rewardItemId": "item.cleansing_tonic",
+        "rewardCount": 1
+      }
+    ],
+    "legacyExploration": {
+      "id": "sector.journey_3",
+      "label": "Third Floor — Over City Outskirts approach",
+      "description": "Explore the branching transfer corridors, inspect the briefing, and approach the marked door. Map geometry and interaction costs are adaptations.",
+      "width": 11,
+      "height": 9,
+      "startX": 1,
+      "startY": 4,
+      "discoveryRadius": 2,
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        },
+        {
+          "x": 1,
+          "y": 8
+        },
+        {
+          "x": 2,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        }
+      ],
+      "points": [
+        {
+          "id": "discovery.journey_3_door",
+          "label": "Enter Third Floor — Over City Outskirts",
+          "description": "Enter after completing the visible exploration objectives. Battle and progression rules are tactical adaptations.",
+          "kind": "encounter",
+          "x": 9,
+          "y": 4,
+          "itemId": "",
+          "count": 0
+        },
+        {
+          "id": "discovery.journey_3_notes",
+          "label": "Floor briefing",
+          "description": "The Over City inspires guarded urban ruins. Classes and banked stat allocation unlock here; the original pump-chamber enemies and grid objectives are tactical adaptations. Source: https://dungeon-crawler-carl.fandom.com/wiki/Third_Floor",
+          "kind": "lore",
+          "x": 3,
+          "y": 7,
+          "itemId": "",
+          "count": 0
+        },
+        {
+          "id": "discovery.journey_3_cache",
+          "label": "Optional shared supply",
+          "description": "One Health Tonic for the shared pack; this delivery is a game adaptation.",
+          "kind": "cache",
+          "x": 3,
+          "y": 4,
+          "itemId": "item.health_tonic",
+          "count": 1
+        }
+      ]
+    }
   }
 }

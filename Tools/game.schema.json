@@ -158,6 +158,9 @@
           "type": "null"
         }
       ]
+    },
+    "neighborhood": {
+      "$ref": "#/$defs/neighborhood"
     }
   },
   "$defs": {
@@ -2150,6 +2153,180 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "neighborhoodOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "costItemId",
+        "costCount",
+        "rewardItemId",
+        "rewardCount",
+        "abilityId",
+        "minimumRank",
+        "clue"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "costItemId": {
+          "type": "string"
+        },
+        "costCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rewardItemId": {
+          "type": "string"
+        },
+        "rewardCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "abilityId": {
+          "type": "string"
+        },
+        "minimumRank": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "clue": {
+          "type": "string"
+        }
+      }
+    },
+    "neighborhoodInteraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "pointId",
+        "label",
+        "description",
+        "camp",
+        "options"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "pointId": {
+          "type": "string"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "camp": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/neighborhoodOption"
+          }
+        }
+      }
+    },
+    "neighborhoodChallenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "interactionId",
+        "optionId",
+        "rewardItemId",
+        "rewardCount"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "interactionId": {
+          "$ref": "#/$defs/id"
+        },
+        "optionId": {
+          "type": "string"
+        },
+        "rewardItemId": {
+          "$ref": "#/$defs/id"
+        },
+        "rewardCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
+    "neighborhood": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "description",
+        "sectorId",
+        "interactions",
+        "challenges"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sectorId": {
+          "$ref": "#/$defs/id"
+        },
+        "interactions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/neighborhoodInteraction"
+          }
+        },
+        "challenges": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/neighborhoodChallenge"
+          }
+        },
+        "legacyExploration": {
+          "$ref": "#/$defs/exploration"
         }
       }
     }

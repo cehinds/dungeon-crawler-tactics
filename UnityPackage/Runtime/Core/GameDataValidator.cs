@@ -121,6 +121,7 @@ namespace DungeonCrawlerTactics
             ScenarioDefinitionValidator.Validate(data, catalog);
             ExpeditionDefinitionValidator.Validate(data, catalog);
             HomeDefinitionValidator.Validate(data.home, catalog, data.roster);
+            NeighborhoodDefinitionValidator.Validate(data, catalog);
             if (data.home != null) foreach (string ability in data.home.trainingAbilityIds) Need(catalog.Abilities.ContainsKey(ability), "Unknown home training ability.");
         }
         private static void ValidateJourneyDefinitions(GameData data, List<EncounterDef> encounters)

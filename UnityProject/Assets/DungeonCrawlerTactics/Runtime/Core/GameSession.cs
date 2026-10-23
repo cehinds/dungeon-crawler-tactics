@@ -44,6 +44,7 @@ namespace DungeonCrawlerTactics
                 message = "";
                 if (command.type != "preview_allocate" && command.type != "confirm_development" && command.type != "cancel_development") pendingDevelopment = null;
                 if (command.type != "preview_skill_node" && command.type != "confirm_skill_node" && command.type != "cancel_skill_node") pendingSkillNode = null;
+                if (TryNeighborhoodCommand(command)) { return GetView(); }
                 if (TryHomeCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
                 if (TryJourneyCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
                 if (TryExpeditionCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
@@ -146,7 +147,7 @@ namespace DungeonCrawlerTactics
         }
         private void Reset()
         {
-            journey = null; unlockedSkillNodes.Clear(); pendingSkillNode = null; ResetDevelopment(); ResetCustomMap(); ClearScenario(); ClearExpedition(); xp = 0; achievementIds.Clear(); equipped.Clear(); roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); exploration.Clear(); battle = new BattleState();
+            neighborhoodState = new NeighborhoodSave(); pendingNeighborhood = null; journey = null; unlockedSkillNodes.Clear(); pendingSkillNode = null; ResetDevelopment(); ResetCustomMap(); ClearScenario(); ClearExpedition(); xp = 0; achievementIds.Clear(); equipped.Clear(); roster.Clear(); units.Clear(); timed.Clear(); log.Clear(); exploration.Clear(); battle = new BattleState();
             foreach (RosterDef member in data.roster)
             {
                 ClassStats initial = PlayerStats(member.id, member.classId); int hp = initial.hp;
@@ -568,7 +569,7 @@ namespace DungeonCrawlerTactics
             { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); view.rewards = rewards.ToArray(); }
             if (screen == "explore") view.exploration = ExplorationView();
             view.home = HomeView(); view.journey = JourneyView(); if (JourneyActive) view.encounterCount = 8;
-            PopulateProgression(view); PopulateModes(view); PopulateDevelopment(view); PopulateSkillTree(view); PopulateCustomMap(view); view.scenarios = ScenarioOptions(); view.scenario = ScenarioView(); view.expeditions = ExpeditionOptions(); view.expedition = ExpeditionView();
+            view.neighborhood = BuildNeighborhoodView(); PopulateProgression(view); PopulateModes(view); PopulateDevelopment(view); PopulateSkillTree(view); PopulateCustomMap(view); view.scenarios = ScenarioOptions(); view.scenario = ScenarioView(); view.expeditions = ExpeditionOptions(); view.expedition = ExpeditionView();
             return view;
         }
         private string[] LegalTargets(EntityState actor, AbilityDef ability, string itemId)
@@ -618,7 +619,7 @@ namespace DungeonCrawlerTactics
         }
         public GameSave ExportSave()
         {
-            GameSave save = new GameSave { home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
+            GameSave save = new GameSave { neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
             save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
@@ -637,6 +638,7 @@ namespace DungeonCrawlerTactics
             presentationEvents.Clear();
             try
             {
+                ValidateNeighborhoodSaveGraph(save);
                 Require(save != null && save.schemaVersion == 1 && (save.contentVersion == data.contentVersion || Array.IndexOf(data.compatibleContentVersions, save.contentVersion) >= 0), "Save version does not match this content pack.");
                 Require(save.progressionVersion == 0 || save.progressionVersion == 1, "Unknown progression save version.");
                 save = MigrateCompatibleSave(save);
@@ -665,6 +667,7 @@ namespace DungeonCrawlerTactics
                 save = UpgradeProgressionSave(save);
                 List<EquipmentSlotSave> nextEquipment = ValidateEquipment(save);
                 List<string> nextSkillNodes = ValidateSkillTree(save);
+                NeighborhoodSave nextNeighborhood = ValidateNeighborhood(save);
                 HomeSave nextHome = ValidateHome(save);
                 DevelopmentSave nextDevelopment = ValidateDevelopment(save); List<StatAllocationSave> nextAllocations = new List<StatAllocationSave>(nextDevelopment.allocated);
                 EncounterDef candidateExpedition = ValidateExpedition(save);
@@ -760,7 +763,7 @@ namespace DungeonCrawlerTactics
                 foreach (string entry in save.log) Require(entry != null && entry.Length <= 1000, "Invalid saved log.");
                 // All validation is complete before replacing any live state.
                 journey = save.journey == null ? null : new JourneySave { id = save.journey.id, floorIndex = save.journey.floorIndex, capturedIds = (string[])save.journey.capturedIds.Clone() };
-                CommitHome(nextHome); CommitSkillTree(nextSkillNodes); CommitDevelopment(nextDevelopment); CommitCustomMap(save); CommitScenario(save); CommitExpedition(save);
+                neighborhoodState = nextNeighborhood; pendingNeighborhood = null; CommitHome(nextHome); CommitSkillTree(nextSkillNodes); CommitDevelopment(nextDevelopment); CommitCustomMap(save); CommitScenario(save); CommitExpedition(save);
                 achievementIds.Clear(); achievementIds.AddRange(nextAchievements);
                 equipped.Clear(); equipped.AddRange(nextEquipment);
                 exploration.Clear(); foreach (ExplorationSave sector in nextExploration) exploration.Add(sector.sectorId, sector);

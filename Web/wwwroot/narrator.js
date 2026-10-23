@@ -24,10 +24,10 @@ export function createNarrator({getView,content}) {
   function advance(){clearTimeout(timer);const entry=pending.shift();if(!entry){timer=null;return;}panel.classList.toggle('narrator-achievement',entry.kind==='achievement');line.textContent=entry.text;line.title=entry.text;timer=setTimeout(advance,entry.kind==='achievement'?2600:entry.kind==='impact'?1100:1800);}
   function enqueue(text,kind='declaration'){if(!text)return;history.push({text,kind});history=history.slice(-80);pending.push({text,kind});if(pending.length>8){const oldestImpact=pending.findIndex(entry=>entry.kind==='impact');pending.splice(oldestImpact>=0?oldestImpact:0,1);}if(!timer)advance();if(dialog.open)drawHistory();}
   function onEvent(event){if(!event||event.preview)return;const key=`${batch}:${event.sequence??JSON.stringify(event)}`;if(seen.has(key))return;seen.add(key);
-    if(event.type==='achievement'){if(!achievements.has(event.tag)){achievements.add(event.tag);enqueue(`NEW ACHIEVEMENT · ${achievementLabels[event.tag]??event.tag.replace(/^achievement\./,'').replace(/_/g,' ')}`,'achievement');}return;}
+    const current=afterView??getView();
+    if(event.type==='achievement'){if(!achievements.has(event.tag)){achievements.add(event.tag);enqueue(`NEW ACHIEVEMENT · ${current?.neighborhood?.challenges?.find(c=>c.id===(event.tag||event.targetId))?.label??achievementLabels[event.tag]??(event.tag||event.targetId||'Neighborhood challenge completed').replace(/^achievement\./,'').replace(/_/g,' ')}`,'achievement');}return;}
     const actor=labelFor(event.actorId),target=labelFor(event.targetId);
     const actorUnit=(afterView??getView())?.units.find(unit=>unit.id===event.actorId);
-    const current=afterView??getView();
     if(event.type==='scenario_intent'){const intent=beforeView?.scenario?.intent??current?.scenario?.intent;enqueue(`${actor} declares ${intent?.label??'a special attack'}. ${intent?.description??''}`);return;}
     if(event.type==='scenario_spawn'){enqueue(`${target} emerges. Watch the marked nests.`);return;}
     if(event.type==='scenario_interact'){const object=current?.scenario?.interactables.find(item=>item.id===event.targetId);enqueue(`${actor} uses ${object?.label??'a room interaction'}. Action spent; unused movement remains.`);return;}

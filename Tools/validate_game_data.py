@@ -201,6 +201,53 @@ def validate_game(data, content):
             elif floor.get('captureCount', 0):
                 errors.append(path + ': only the capture floor may require cards')
 
+    neighborhood = data.get('neighborhood')
+    if neighborhood:
+        sectors = [room['exploration'] for _, room in journey_rooms if room.get('exploration')]
+        sector = next((m for m in sectors if m['id'] == neighborhood['sectorId']), None)
+        if sector is None:
+            errors.append('neighborhood: unknown journey sectorId')
+        legacy = neighborhood.get('legacyExploration')
+        if legacy and legacy['id'] != neighborhood['sectorId']:
+            errors.append('neighborhood.legacyExploration: must match the current sectorId')
+        points = {p['id']: p for p in sector['points']} if sector else {}
+        interactions = neighborhood['interactions']
+        unique(interactions, 'id', 'neighborhood.interactions')
+        unique(neighborhood['challenges'], 'id', 'neighborhood.challenges')
+        used_points = set()
+        for interaction in interactions:
+            path = 'neighborhood.interactions.' + interaction['id']
+            if interaction['camp']:
+                if interaction['pointId']:
+                    errors.append(path + ': camp interaction cannot reference a point')
+            elif interaction['pointId'] not in points or points[interaction['pointId']]['kind'] != 'lore':
+                errors.append(path + ': interaction requires an authored lore point')
+            elif interaction['pointId'] in used_points:
+                errors.append(path + ': duplicate interaction point')
+            else:
+                used_points.add(interaction['pointId'])
+            unique(interaction['options'], 'id', path + '.options')
+            if not any(not o['abilityId'] and not o['costItemId'] and not o['costCount'] for o in interaction['options']):
+                errors.append(path + ': interaction requires a free untrained fallback')
+            for option in interaction['options']:
+                for prefix in ('cost', 'reward'):
+                    item, count = option[prefix + 'ItemId'], option[prefix + 'Count']
+                    if bool(item) != bool(count):
+                        errors.append(path + ': item and positive count must be supplied together')
+                    if item:
+                        ref(item, 'items', path)
+                if option['abilityId']:
+                    ref(option['abilityId'], 'abilities', path)
+        by_id = {i['id']: i for i in interactions}
+        for challenge in neighborhood['challenges']:
+            path = 'neighborhood.challenges.' + challenge['id']
+            interaction = by_id.get(challenge['interactionId'])
+            if interaction is None:
+                errors.append(path + ': unknown interactionId')
+            elif challenge['optionId'] and challenge['optionId'] not in {o['id'] for o in interaction['options']}:
+                errors.append(path + ': unknown interaction optionId')
+            ref(challenge['rewardItemId'], 'items', path)
+
     home = data.get('home')
     if home:
         upgrades = home.get('upgrades', [])
@@ -314,6 +361,11 @@ def validate_game(data, content):
     rooms += journey_rooms
     unique(data['encounters'] + [room for _, room in journey_rooms], 'id', 'encountersAndJourney')
     unique([room['exploration'] for room in data['encounters'] + [room for _, room in journey_rooms] if room.get('exploration')], 'id', 'exploration')
+    legacy = data.get('neighborhood', {}).get('legacyExploration')
+    if legacy:
+        # Reuse the complete authored exploration geometry checks without treating
+        # this migration-only snapshot as a second playable encounter.
+        rooms.append(('neighborhood.legacyExploration', {'exploration': legacy}))
     for base, encounter in rooms:
         if encounter.get('exploration'):
             m = encounter['exploration']
@@ -340,6 +392,9 @@ def validate_game(data, content):
                 elif p['itemId'] or p['count']: errors.append(base+': only caches grant supplies')
             if sum(p['kind']=='encounter' for p in m['points']) != 1:
                 errors.append(base+': exploration requires one encounter door')
+
+        if base == 'neighborhood.legacyExploration':
+            continue
 
         if len(encounter['playerSpawns']) != data['partySize']:
             errors.append(f'{base}.playerSpawns: must match partySize')

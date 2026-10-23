@@ -1,5 +1,14 @@
 # Playable build validation
 
+## Lantern Row tabletop-inspired neighborhood
+
+The final shared-core run passes **572 checks**, including 43 new neighborhood checks alongside the existing 529. All **83 Python validation tests** pass. The neighborhood suite walks the connected map through legal commands, verifies trained and fallback rescue options, resolves all three optional locations, earns all three challenges, wins the encounter through legal forecasts and commits, and restores the exact original campaign. It checks preview/cancel purity, repeated rewards, reloads, innate skills after optional class changes, malformed receipts, cyclic backups and migration of published floor-three exploration saves without changing inventory or the input checkpoint.
+
+The actual published .NET WebAssembly build passes `Tools/playtest_neighborhood.py` at **1440×900 and 390×844**. Visible UI checks cover entry cancellation, preparation, workshop barter, coolant-latch and rescue previews, complete item forecasts including achievement rewards, qualified Katia selection, cancellation, repeated-confirm rejection, three saved challenges and the clue after reload, map movement, encounter entry, explicit next-party-member turn handoff, and return to the preserved campaign. The top journal button is pointer-accessible above the canvas. Both viewports report zero JavaScript errors. These functional checks do not establish human balance or enjoyment.
+
+Both catalogs and their strict schemas validate; the lore generator preserves authored neighborhood and journey data. Canonical Unity sources are synchronized. .NET Standard compatibility and Unity runtime-reference compilation succeed (the existing `RulesDemo.contentJson` Inspector-field warning remains). Browser publication succeeds. Native Unity Editor, Play Mode and Unity Web export remain unverified; this live browser delivery uses the shared C# engine through .NET WebAssembly.
+
+
 ## Eight-floor journey, classes and party house
 
 The final shared-core run passes **529 checks**: 205 game, 42 rules, 44 scenario, 20 custom-map, 43 expedition, 43 rank/class, 80 journey and 52 house/economy checks. All 73 Python validation tests pass. Both JSON catalogs validate with 148 class kits, 88 abilities, 142 class trees and 1,988 class nodes. The generated research snapshot and Unity source sync are verified.

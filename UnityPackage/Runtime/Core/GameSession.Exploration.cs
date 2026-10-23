@@ -29,7 +29,7 @@ namespace DungeonCrawlerTactics
         {
             if (!exploration.ContainsKey(Sector.id))
             {
-                ExplorationSave state = new ExplorationSave { sectorId = Sector.id, x = Sector.startX, y = Sector.startY };
+                ExplorationSave state = new ExplorationSave { layoutVersion = data.neighborhood != null && Sector.id == data.neighborhood.sectorId ? 1 : 0, sectorId = Sector.id, x = Sector.startX, y = Sector.startY };
                 Reveal(Sector, state); exploration.Add(Sector.id, state);
             }
             screen = "explore"; ClearPreview(); message = "Explore the passages, inspect discoveries, and find the encounter door.";
@@ -68,6 +68,7 @@ namespace DungeonCrawlerTactics
             ExplorationPointDef point = Array.Find(Sector.points, p => p.id == id);
             Require(point != null && Revealed(state).Contains(ExploreKey(point.x, point.y)), "Discover that location first.");
             Require(Math.Abs(state.x - point.x) + Math.Abs(state.y - point.y) <= 1, "Move beside the discovery first.");
+            if (data.neighborhood != null && Array.Exists(data.neighborhood.interactions, i => !i.camp && i.pointId == id)) { message = "Choose an approach in the neighborhood panel and review its forecast."; return; }
             if (point.kind == "encounter") { Require(JourneyDoorUnlocked(state), "Complete the marked route objectives before entering this encounter."); StartEncounter(); return; }
             Require(Array.IndexOf(state.claimed, id) < 0, "This discovery has already been claimed.");
             if (point.kind == "cache") { Require(inventory[point.itemId] <= 10000 - point.count, "Shared supplies are full."); inventory[point.itemId] += point.count; }
@@ -90,7 +91,7 @@ namespace DungeonCrawlerTactics
         private ExplorationSave[] ExportExploration()
         {
             List<ExplorationSave> states = new List<ExplorationSave>(); foreach (EncounterDef e in CampaignEncounters())
-            { ExplorationSave s; if (!exploration.TryGetValue(e.exploration.id, out s)) continue; List<CellView> cells = new List<CellView>(); foreach (CellView c in s.revealed) cells.Add(new CellView { x = c.x, y = c.y }); states.Add(new ExplorationSave { sectorId = s.sectorId, x = s.x, y = s.y, revealed = cells.ToArray(), claimed = (string[])s.claimed.Clone() }); }
+            { ExplorationSave s; if (!exploration.TryGetValue(e.exploration.id, out s)) continue; List<CellView> cells = new List<CellView>(); foreach (CellView c in s.revealed) cells.Add(new CellView { x = c.x, y = c.y }); states.Add(new ExplorationSave { layoutVersion = s.layoutVersion, sectorId = s.sectorId, x = s.x, y = s.y, revealed = cells.ToArray(), claimed = (string[])s.claimed.Clone() }); }
             return states.ToArray();
         }
         private List<ExplorationSave> ValidateExploration(GameSave save)
@@ -99,9 +100,10 @@ namespace DungeonCrawlerTactics
             List<ExplorationSave> result = new List<ExplorationSave>(); HashSet<string> ids = new HashSet<string>();
             // Older v1 checkpoints omit exploration. Battle checkpoints resume unchanged.
             Require(save.exploration != null && save.exploration.Length <= campaign.Length, "Invalid exploration collection.");
-            foreach (ExplorationSave s in save.exploration)
+            foreach (ExplorationSave original in save.exploration)
             {
-                Require(s != null && s.sectorId != null && ids.Add(s.sectorId), "Duplicate or missing sector.");
+                ExplorationSave s = MigrateNeighborhoodExploration(original, save);
+                Require(s != null && s.layoutVersion >= 0 && s.layoutVersion <= 1 && s.sectorId != null && ids.Add(s.sectorId), "Duplicate or missing sector.");
                 int index = Array.FindIndex(campaign, e => e.exploration.id == s.sectorId); Require(index >= 0 && (save.journey == null ? index <= save.encounterIndex : Array.FindIndex(data.journey.floors, f => f.encounter == campaign[index]) <= save.encounterIndex), "Unknown or future sector."); ExplorationDef map = campaign[index].exploration;
                 Require(ExploreInside(map, s.x, s.y) && !ExploreWall(map, s.x, s.y) && s.revealed != null && s.claimed != null && s.revealed.Length <= map.width * map.height && s.claimed.Length <= map.points.Length, "Invalid exploration state.");
                 HashSet<string> cells = new HashSet<string>(); foreach (CellView c in s.revealed) Require(c != null && ExploreInside(map, c.x, c.y) && cells.Add(ExploreKey(c.x, c.y)), "Invalid revealed tile.");
@@ -111,7 +113,7 @@ namespace DungeonCrawlerTactics
                 while (queue.Count > 0) { CellView c = queue.Dequeue(); int[] dx = { 0, -1, 1, 0 }, dy = { -1, 0, 0, 1 }; for (int i = 0; i < 4; i++) { int x = c.x + dx[i], y = c.y + dy[i]; string k = ExploreKey(x, y); if (cells.Contains(k) && !ExploreWall(map, x, y) && connected.Add(k)) queue.Enqueue(new CellView { x = x, y = y }); } }
                 foreach (CellView c in s.revealed) Require(ExploreWall(map, c.x, c.y) || connected.Contains(ExploreKey(c.x, c.y)), "Disconnected exploration discovery.");
                 HashSet<string> claimed = new HashSet<string>(); foreach (string id in s.claimed) { ExplorationPointDef p = Array.Find(map.points, point => point.id == id); Require(p != null && p.kind != "encounter" && claimed.Add(id) && cells.Contains(ExploreKey(p.x, p.y)), "Invalid claimed discovery."); }
-                List<CellView> copy = new List<CellView>(); foreach (CellView c in s.revealed) copy.Add(new CellView { x = c.x, y = c.y }); result.Add(new ExplorationSave { sectorId = s.sectorId, x = s.x, y = s.y, revealed = copy.ToArray(), claimed = (string[])s.claimed.Clone() });
+                List<CellView> copy = new List<CellView>(); foreach (CellView c in s.revealed) copy.Add(new CellView { x = c.x, y = c.y }); result.Add(new ExplorationSave { layoutVersion = s.layoutVersion, sectorId = s.sectorId, x = s.x, y = s.y, revealed = copy.ToArray(), claimed = (string[])s.claimed.Clone() });
             }
             if (save.journey != null && save.expedition == null && save.journey.floorIndex < 8 && save.journey.floorIndex != 6 && save.screen != "camp" && save.screen != "explore")
             {

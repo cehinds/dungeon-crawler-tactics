@@ -1,6 +1,6 @@
 # Tabletop inspiration for Dungeon Crawler Tactics
 
-Research date: 2026-10-23. This is a design update, not a claim that the proposed systems are implemented. Use Renegade's official Dungeon Crawler Carl RPG as an additional design reference, alongside the novels and our existing tactics rules.
+Research date: 2026-10-23. This document records research and the current adaptation roadmap. The first connected Over City neighborhood is now playable; its original scenario, entry points, choices and limits are documented in [Over City neighborhood: Lantern Row](Over-City-Neighborhood.md). The other proposed systems remain design targets unless described as implemented in [Playable game](PlayableGame.md). Use Renegade's official Dungeon Crawler Carl RPG as an additional design reference, alongside the novels and our existing tactics rules.
 
 ## What the sources establish
 
@@ -19,7 +19,7 @@ Search also surfaced fan-made systems, including an AI-run GitHub campaign. Thei
 
 The strongest structural lesson is to turn a floor into connected places with choices. Our current seven story battles and small exploration maps are a foundation, not a full floor simulation.
 
-Start with one expanded Over City neighborhood: a safe-room entrance, merchant, trapped supply room, optional crawler rescue, and a boss entrance. Supply a visible main objective and optional routes. Completing the rescue can reveal a boss clue; visiting the workshop can provide a useful consumable. These are original scenarios, not reproduced RPG adventures.
+The first slice, Lantern Row, is playable: it has a safe-room entry, workshop, trapped supply store, optional crawler rescue and a boss entrance. Its rescue reveals a clue, and the safe-room offers a preparation choice. The place names, map, choices and rewards are original game content, not reproduced RPG adventures. See the [neighborhood guide](Over-City-Neighborhood.md) for the actual loop and exact choices.
 
 Proposed loop: **house preparation → explore a neighborhood → discover a problem → choose an approach → resolve combat or interaction → achievement and loot → return home or descend**.
 
@@ -69,12 +69,12 @@ The player still moves and acts in either order, explicitly ends each crawler's 
 
 - [x] Research official product descriptions and label secondary rules reports.
 - [x] Map the proposed features to the existing shared-C# architecture.
-- [ ] Playable connected Over City neighborhood with alternative routes.
-- [ ] Skill-based noncombat interactions with fallback solutions.
+- [x] Playable connected Over City neighborhood with alternative routes. See [Lantern Row](Over-City-Neighborhood.md).
+- [ ] Broader skill-based noncombat interactions with fallback solutions. Lantern Row has the authored Heavy Blow rescue check and manual winch fallback, plus a fixed bypass for its supply latch.
 - [ ] Contextual achievement challenges and sponsor offers.
 - [ ] Saved AI Favor with an exact spend forecast.
 - [ ] Modular improvised recipes and placeable traps.
 - [ ] Boss clues linked to exploration and visible mechanisms.
 - [ ] House social screen showing earned audience consequences.
 
-The existing house, gold purchases, personal/class trees, rank practice, loot boxes, tag reactions, boss scenarios and eight-floor route remain implemented as documented in [Journey and home](Journey-and-Home.md). The additions above are design targets.
+The existing house, gold purchases, personal/class trees, rank practice, loot boxes, tag reactions, boss scenarios and eight-floor route remain implemented as documented in [Journey and home](Journey-and-Home.md). Lantern Row is the completed neighborhood slice. Its clue links exploration to existing reactions; visible boss mechanisms remain future work. Broader noncombat skill interactions, contextual sponsor offers, saved AI Favor, modular improvised recipes and general placeable traps, and a house social screen showing audience consequences remain design targets.

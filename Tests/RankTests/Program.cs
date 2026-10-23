@@ -76,7 +76,7 @@ static class RankTests
     }
     static void ClassPointBudget()
     {
-        Content definitions = Clone(content); GameData config = Clone(data); config.journey = null;
+        Content definitions = Clone(content); GameData config = Clone(data); config.journey = null; config.neighborhood = null;
         GameSession game = new GameSession(definitions, config);
         var tree = game.GetView().skillTree.classTrees.First();
         Check(tree.nodes.Length == 14 && tree.unspentPoints == 1, "fourteen-node class starts with one point for its two root choices");
@@ -88,7 +88,7 @@ static class RankTests
     }
     static GameData Fixture(Content definitions)
     {
-        GameData config = Clone(data); config.journey = null; config.classSkillTrees = new SkillTreeDef[0];
+        GameData config = Clone(data); config.journey = null; config.neighborhood = null; config.classSkillTrees = new SkillTreeDef[0];
         config.progression.xpThresholds = new[] { 0, 30, 70, 120 };
         config.development.practice.abilityProfiles = new AbilityRankProfile[0];
         config.development.practice.useThresholds = new[] { 0, 3, 8 };

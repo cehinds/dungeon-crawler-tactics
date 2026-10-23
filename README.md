@@ -6,7 +6,7 @@ A playable Dungeon Crawler Carl fan tactics prototype with a shared C# engine: a
 
 **Lore codex:** [Classes, rank tables, floors, enemies and housing evidence](https://cehinds.github.io/dungeon-crawler-tactics/codex.html) · [Story and housing guide](Docs/Journey-and-Home.md).
 
-**Tabletop inspiration:** [Official RPG research and prioritized gameplay changes](Docs/Tabletop-Inspiration.md).
+**Tabletop inspiration:** [Official RPG research and prioritized gameplay changes](Docs/Tabletop-Inspiration.md) · [Playable Over City neighborhood: Lantern Row](Docs/Over-City-Neighborhood.md).
 
 **Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md) · [Playable boss scenarios and sprite sources](Docs/Boss-Concepts.md).
 
@@ -34,6 +34,7 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Combine oil/fire, water/wet/lightning, cold/frozen/shatter; use terrain while avoiding hazard damage. Guardian, Bard and Necromancer support abilities now grant real single-hit protection.
 - Fight deterministic enemies, collect sponsor supplies, reach the boss, finish the floor, or retry after defeat.
 - Choose Katia's four forms and three tactical stances through character sheets, with exact stat tradeoffs. Selected abilities expose descriptions and targeting information.
+- Explore the original Lantern Row neighborhood through the safe-room entry or its optional floor 3 discovery. Prepare supplies, follow connected streets, barter or bypass the trapped store, rescue a crawler, and earn saved challenge rewards.
 - Follow individual enemy declarations and impact messages; five saved first-time achievements trigger NEW ACHIEVEMENT feedback. Open earned fixed-content boxes and craft two supply recipes in the safe room.
 - Try separate Hoarder, Juicer and Ball of Swine scenarios with objective briefings and special interactions, then return to the preserved campaign.
 - Explore six optional training expeditions with distinct layouts and enemy kits; your selected build carries in and the campaign restores exactly on return.
@@ -93,6 +94,7 @@ dotnet run --project Tests/ExpeditionTests/ExpeditionTests.csproj
 dotnet run --project Tests/RankTests/RankTests.csproj
 dotnet run --project Tests/JourneyTests/JourneyTests.csproj
 dotnet run --project Tests/HomeTests/HomeTests.csproj
+dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj
 dotnet build Tools/Compatibility/Core.Compatibility.csproj
 dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
 python3 Tools/prepare_unity_project.py

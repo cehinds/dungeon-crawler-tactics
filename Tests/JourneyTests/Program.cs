@@ -75,13 +75,13 @@ static class JourneyTests
         for (int steps = 0; steps < 400 && game.GetView().screen == "explore"; steps++)
         {
             GameView view = game.GetView();
-            ExplorationPointView next = view.exploration.points.FirstOrDefault(p => p.canInteract && p.kind != "encounter");
+            ExplorationPointView next = view.exploration.points.FirstOrDefault(p => p.canInteract && p.kind != "encounter" && (view.neighborhood == null || !view.neighborhood.interactions.Any(i => i.pointId == p.id)));
             if (next != null) { Command(game, "explore_interact", target: next.id); continue; }
             ExplorationPointView door = view.exploration.points.FirstOrDefault(p => p.canInteract && p.kind == "encounter");
             if (door != null && view.journey.objectivesComplete == view.journey.objectivesRequired) { Command(game, "explore_interact", target: door.id); break; }
             ExplorationTileView tile = view.exploration.tiles.Where(t => t.reachable && !t.blocked && !t.revealed).OrderBy(t => Math.Abs(t.x - view.exploration.x) + Math.Abs(t.y - view.exploration.y)).ThenBy(t => t.y).ThenBy(t => t.x).FirstOrDefault();
             if (tile != null) { Command(game, "explore_move", x: tile.x, y: tile.y); continue; }
-            ExplorationPointView point = view.exploration.points.FirstOrDefault(p => !p.claimed && p.kind != "encounter") ?? view.exploration.points.FirstOrDefault(p => p.kind == "encounter");
+            ExplorationPointView point = view.exploration.points.FirstOrDefault(p => !p.claimed && p.kind != "encounter" && (view.neighborhood == null || !view.neighborhood.interactions.Any(i => i.pointId == p.id))) ?? view.exploration.points.FirstOrDefault(p => p.kind == "encounter");
             if (point != null) { Command(game, "explore_move", x: point.x, y: point.y); continue; }
         }
         Check(game.GetView().screen == "battle", "Exploration reaches a legal encounter after required objectives");

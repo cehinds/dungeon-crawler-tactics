@@ -150,6 +150,7 @@ namespace DungeonCrawlerTactics.Unity
                     else DrawOutcome();
                     DrawFooter();
                     if (!string.IsNullOrEmpty(modal)) DrawModal();
+                    DrawNeighborhood();
                 }
             }
             finally { GUI.matrix = previous; }
