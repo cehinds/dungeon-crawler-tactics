@@ -1,7 +1,7 @@
 # Ink & Lanterns — extracted concept components
 
-60 individually labeled transparent PNGs, mechanically cropped at native pixel
-resolution from 3 generated atlases. Each crop has 4px transparent padding.
+84 individually labeled transparent PNGs, mechanically cropped at native pixel
+resolution from 4 generated atlases. Each crop has 4px transparent padding.
 Available original and additional concept-scene PNGs are included in concepts/;
 manifest.conceptFiles lists the archive-relative paths.
 The original source atlases remain in the repository's source/ directory; their

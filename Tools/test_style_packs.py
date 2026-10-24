@@ -14,12 +14,14 @@ from build_style_packs import (LAYERS, PADDING, PackError, SHEETS, build_pack,
 
 
 class StylePackTests(unittest.TestCase):
-    def fixture(self, root, expansion=False):
+    def fixture(self, root, expansion=False, supplies=False):
         style = {"id": "test-pack", "title": "Test pack", "description": "Technical fixture", "assets": []}
         source = root / "test-pack/source"
         source.mkdir(parents=True)
         for sheet_name, (columns, rows) in SHEETS.items():
             if sheet_name == "expansion" and not expansion:
+                continue
+            if sheet_name == "supplies" and not supplies:
                 continue
             sheet = Image.new("RGBA", (columns * 32, rows * 32))
             for index in range(columns * rows):
@@ -28,9 +30,9 @@ class StylePackTests(unittest.TestCase):
                 patch = Image.new("RGBA", (12, 15), ((index * 31) % 256, 120, 80, 190))
                 patch.putpixel((0, 0), (10, 40, 200, 1))
                 sheet.paste(patch, (left + 8, top + 7))
-                layer = "ui" if sheet_name == "ui" else LAYERS[index % 6]
+                layer = "ui" if sheet_name in ("ui", "supplies") else LAYERS[index % 6]
                 style["assets"].append({"id": f"{sheet_name}-{index}", "label": f"Component {index}",
-                                        "category": "fixture", "layer": layer,
+                                        "category": ("equipment" if index < 12 else "loot") if sheet_name == "supplies" else "fixture", "layer": layer,
                                         "sheet": sheet_name, "cell": index})
             sheet.save(source / f"{sheet_name}.png")
         return style
@@ -187,6 +189,45 @@ class StylePackTests(unittest.TestCase):
                     self.assertEqual(archive.read(asset["file"]), (directory / asset["file"]).read_bytes())
                 self.assertIn(b"60 individually labeled", archive.read("README.md"))
             validate_pack(directory)
+
+    def test_supplies_pack_has_84_native_components_and_read_only_check(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, expansion=True, supplies=True)
+            catalog = root / "catalog.json"
+            catalog.write_text(json.dumps({"styles": [style]}))
+            manifest = build_pack(style, root)
+            directory = root / style["id"]
+            self.assertEqual(len(manifest["assets"]), 84)
+            self.assertEqual(list(manifest["sheets"]), ["world", "ui", "expansion", "supplies"])
+            supplies = [asset for asset in manifest["assets"] if asset["source"]["sheet"] == "supplies"]
+            self.assertEqual(len(supplies), 24)
+            self.assertEqual({asset["category"] for asset in supplies}, {"equipment", "loot"})
+            self.assertTrue(all(asset["layer"] == "ui" for asset in supplies))
+            with Image.open(directory / manifest["contactSheet"]) as contact:
+                self.assertEqual(contact.size, (1440, 3500))
+            with ZipFile(directory / manifest["download"]) as archive:
+                for asset in supplies:
+                    self.assertEqual(archive.read(asset["file"]), (directory / asset["file"]).read_bytes())
+                self.assertIn(b"84 individually labeled", archive.read("README.md"))
+            before = {path: (path.stat().st_mtime_ns, hashlib.sha256(path.read_bytes()).hexdigest())
+                      for path in root.rglob("*") if path.is_file()}
+            self.assertEqual(main(["--catalog", str(catalog), "--check"]), 0)
+            after = {path: (path.stat().st_mtime_ns, hashlib.sha256(path.read_bytes()).hexdigest())
+                     for path in root.rglob("*") if path.is_file()}
+            self.assertEqual(before, after)
+
+    def test_incomplete_supplies_and_missing_supplies_source_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, expansion=True, supplies=True)
+            removed = style["assets"].pop()
+            with self.assertRaisesRegex(PackError, "expected 84 components"):
+                build_pack(style, root)
+            style["assets"].append(removed)
+            (root / "test-pack/source/supplies.png").unlink()
+            with self.assertRaisesRegex(PackError, "source atlas is missing"):
+                build_pack(style, root)
 
     def test_incomplete_expansion_and_missing_expansion_source_are_rejected(self):
         with tempfile.TemporaryDirectory() as temp:

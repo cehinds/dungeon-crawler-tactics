@@ -9,7 +9,7 @@
     "extraction": "native-grid-crop",
     "padding": 4,
     "explicitSourceRegions": true,
-    "explicitAlphaIslands": false
+    "explicitAlphaIslands": true
   },
   "sheets": {
     "world": {
@@ -35,6 +35,14 @@
       "width": 1536,
       "height": 1024,
       "sha256": "7e449dfd9483300015a2398a5184d50d18ccccce2cb772bf09637cea135f9ea2"
+    },
+    "supplies": {
+      "file": "source/supplies.png",
+      "columns": 6,
+      "rows": 4,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "de140b031bdd8afa2f6ba0468dc8496417700918e66dcce7ce51402849da6701"
     }
   },
   "assets": [
@@ -2311,6 +2319,1294 @@
           1536,
           1024
         ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "iron-sword",
+      "label": "Iron sword",
+      "category": "equipment",
+      "layer": "ui",
+      "file": "components/iron-sword.png",
+      "width": 209,
+      "height": 214,
+      "anchor": {
+        "x": 104.5,
+        "y": 107.0
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 43,
+          "y": 47,
+          "width": 201,
+          "height": 206
+        },
+        "region": [
+          41,
+          45,
+          246,
+          255
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              214,
+              49
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "round-shield",
+      "label": "Round shield",
+      "category": "equipment",
+      "layer": "ui",
+      "file": "components/round-shield.png",
+      "width": 205,
+      "height": 206,
+      "anchor": {
+        "x": 102.5,
+        "y": 103.0
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 301,
+          "y": 65,
+          "width": 197,
+          "height": 198
+        },
+        "region": [
+          299,
+          63,
+          500,
+          265
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              396,
+              67
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "iron-helmet",
+      "label": "Iron helmet",
+      "category": "equipment",
+      "layer": "ui",
+      "file": "components/iron-helmet.png",
+      "width": 201,
+      "height": 211,
+      "anchor": {
+        "x": 100.5,
+        "y": 105.5
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 545,
+          "y": 56,
+          "width": 193,
+          "height": 203
+        },
+        "region": [
+          543,
+          54,
+          740,
+          261
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              655,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "leather-armor",
+      "label": "Leather chest armor",
+      "category": "equipment",
+      "layer": "ui",
+      "file": "components/leather-armor.png",
+      "width": 249,
+      "height": 202,
+      "anchor": {
+        "x": 124.5,
+        "y": 101.0
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 786,
+          "y": 65,
+          "width": 241,
+          "height": 194
+        },
+        "region": [
+          784,
+          63,
+          1029,
+          261
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              881,
+              67
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "gem-ring",
+      "label": "Gem ring",
+      "category": "equipment",
+      "layer": "ui",
+      "file": "components/gem-ring.png",
+      "width": 191,
+      "height": 177,
+      "anchor": {
+        "x": 95.5,
+        "y": 88.5
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 4,
+          "row": 0,
+          "index": 4
+        },
+        "bounds": {
+          "x": 1073,
+          "y": 81,
+          "width": 183,
+          "height": 169
+        },
+        "region": [
+          1071,
+          79,
+          1258,
+          252
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1159,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "arcane-wand",
+      "label": "Arcane wand",
+      "category": "equipment",
+      "layer": "ui",
+      "file": "components/arcane-wand.png",
+      "width": 213,
+      "height": 210,
+      "anchor": {
+        "x": 106.5,
+        "y": 105.0
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 5,
+          "row": 0,
+          "index": 5
+        },
+        "bounds": {
+          "x": 1309,
+          "y": 54,
+          "width": 205,
+          "height": 202
+        },
+        "region": [
+          1307,
+          52,
+          1516,
+          258
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1474,
+              66
+            ],
+            [
+              1455,
+              56
+            ],
+            [
+              1416,
+              59
+            ],
+            [
+              1394,
+              77
+            ],
+            [
+              1501,
+              112
+            ],
+            [
+              1488,
+              136
+            ],
+            [
+              1462,
+              161
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "health-potion",
+      "label": "Health potion",
+      "category": "loot",
+      "layer": "ui",
+      "file": "components/health-potion.png",
+      "width": 175,
+      "height": 211,
+      "anchor": {
+        "x": 87.5,
+        "y": 105.5
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 51,
+          "y": 277,
+          "width": 167,
+          "height": 203
+        },
+        "region": [
+          49,
+          275,
+          220,
+          482
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              129,
+              279
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "mana-potion",
+      "label": "Mana potion",
+      "category": "loot",
+      "layer": "ui",
+      "file": "components/mana-potion.png",
+      "width": 164,
+      "height": 212,
+      "anchor": {
+        "x": 82.0,
+        "y": 106.0
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 308,
+          "y": 280,
+          "width": 156,
+          "height": 204
+        },
+        "region": [
+          306,
+          278,
+          466,
+          486
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              377,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "antidote",
+      "label": "Antidote flask",
+      "category": "loot",
+      "layer": "ui",
+      "file": "components/antidote.png",
+      "width": 150,
+      "height": 206,
+      "anchor": {
+        "x": 75.0,
+        "y": 103.0
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 8
+        },
+        "bounds": {
+          "x": 569,
+          "y": 286,
+          "width": 142,
+          "height": 198
+        },
+        "region": [
+          567,
+          284,
+          713,
+          486
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              628,
+              288
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "gold-pouch",
+      "label": "Gold pouch",
+      "category": "loot",
+      "layer": "ui",
+      "file": "components/gold-pouch.png",
+      "width": 241,
+      "height": 209,
+      "anchor": {
+        "x": 120.5,
+        "y": 104.5
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 9
+        },
+        "bounds": {
+          "x": 778,
+          "y": 302,
+          "width": 233,
+          "height": 201
+        },
+        "region": [
+          776,
+          300,
+          1013,
+          505
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              304
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "dungeon-key",
+      "label": "Dungeon key",
+      "category": "loot",
+      "layer": "ui",
+      "file": "components/dungeon-key.png",
+      "width": 184,
+      "height": 197,
+      "anchor": {
+        "x": 92.0,
+        "y": 98.5
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 4,
+          "row": 1,
+          "index": 10
+        },
+        "bounds": {
+          "x": 1057,
+          "y": 294,
+          "width": 176,
+          "height": 189
+        },
+        "region": [
+          1055,
+          292,
+          1235,
+          485
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1167,
+              296
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "reward-box",
+      "label": "Reward box",
+      "category": "loot",
+      "layer": "ui",
+      "file": "components/reward-box.png",
+      "width": 218,
+      "height": 198,
+      "anchor": {
+        "x": 109.0,
+        "y": 99.0
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 5,
+          "row": 1,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1301,
+          "y": 294,
+          "width": 210,
+          "height": 190
+        },
+        "region": [
+          1299,
+          292,
+          1513,
+          486
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1399,
+              296
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "iron-gate-open",
+      "label": "Iron gate \u2014 open",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/iron-gate-open.png",
+      "width": 252,
+      "height": 198,
+      "anchor": {
+        "x": 126.0,
+        "y": 194
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 12
+        },
+        "bounds": {
+          "x": 20,
+          "y": 515,
+          "width": 244,
+          "height": 190
+        },
+        "region": [
+          18,
+          513,
+          266,
+          707
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              46,
+              517
+            ],
+            [
+              232,
+              517
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "iron-gate-closed",
+      "label": "Iron gate \u2014 closed",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/iron-gate-closed.png",
+      "width": 238,
+      "height": 197,
+      "anchor": {
+        "x": 119.0,
+        "y": 193
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 13
+        },
+        "bounds": {
+          "x": 284,
+          "y": 515,
+          "width": 230,
+          "height": 189
+        },
+        "region": [
+          282,
+          513,
+          516,
+          706
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              312,
+              517
+            ],
+            [
+              433,
+              597
+            ],
+            [
+              367,
+              612
+            ],
+            [
+              433,
+              613
+            ],
+            [
+              431,
+              615
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "floor-hatch-open",
+      "label": "Floor hatch \u2014 open",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/floor-hatch-open.png",
+      "width": 230,
+      "height": 213,
+      "anchor": {
+        "x": 115.0,
+        "y": 209
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 14
+        },
+        "bounds": {
+          "x": 536,
+          "y": 517,
+          "width": 222,
+          "height": 205
+        },
+        "region": [
+          534,
+          515,
+          760,
+          724
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              608,
+              519
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "floor-hatch-closed",
+      "label": "Floor hatch \u2014 closed",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/floor-hatch-closed.png",
+      "width": 238,
+      "height": 133,
+      "anchor": {
+        "x": 119.0,
+        "y": 129
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 15
+        },
+        "bounds": {
+          "x": 784,
+          "y": 598,
+          "width": 230,
+          "height": 125
+        },
+        "region": [
+          782,
+          596,
+          1016,
+          725
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              854,
+              600
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wood-ladder",
+      "label": "Wooden ladder",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/wood-ladder.png",
+      "width": 164,
+      "height": 218,
+      "anchor": {
+        "x": 82.0,
+        "y": 214
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 4,
+          "row": 2,
+          "index": 16
+        },
+        "bounds": {
+          "x": 1061,
+          "y": 517,
+          "width": 156,
+          "height": 210
+        },
+        "region": [
+          1059,
+          515,
+          1219,
+          729
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1099,
+              519
+            ],
+            [
+              1133,
+              634
+            ],
+            [
+              1131,
+              641
+            ],
+            [
+              1133,
+              642
+            ],
+            [
+              1159,
+              645
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "rope-bridge",
+      "label": "Rope bridge",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/rope-bridge.png",
+      "width": 251,
+      "height": 172,
+      "anchor": {
+        "x": 125.5,
+        "y": 168
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 5,
+          "row": 2,
+          "index": 17
+        },
+        "bounds": {
+          "x": 1275,
+          "y": 543,
+          "width": 243,
+          "height": 164
+        },
+        "region": [
+          1273,
+          541,
+          1520,
+          709
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1482,
+              545
+            ],
+            [
+              1339,
+              617
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "lever-off",
+      "label": "Floor lever \u2014 off",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/lever-off.png",
+      "width": 203,
+      "height": 212,
+      "anchor": {
+        "x": 101.5,
+        "y": 208
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 0,
+          "row": 3,
+          "index": 18
+        },
+        "bounds": {
+          "x": 44,
+          "y": 755,
+          "width": 195,
+          "height": 204
+        },
+        "region": [
+          42,
+          753,
+          241,
+          961
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              66,
+              757
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "lever-on",
+      "label": "Floor lever \u2014 on",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/lever-on.png",
+      "width": 200,
+      "height": 213,
+      "anchor": {
+        "x": 100.0,
+        "y": 209
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 1,
+          "row": 3,
+          "index": 19
+        },
+        "bounds": {
+          "x": 300,
+          "y": 755,
+          "width": 192,
+          "height": 205
+        },
+        "region": [
+          298,
+          753,
+          494,
+          962
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              457,
+              757
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wall-switch-off",
+      "label": "Wall switch \u2014 off",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/wall-switch-off.png",
+      "width": 202,
+      "height": 224,
+      "anchor": {
+        "x": 101.0,
+        "y": 220
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 2,
+          "row": 3,
+          "index": 20
+        },
+        "bounds": {
+          "x": 537,
+          "y": 750,
+          "width": 194,
+          "height": 216
+        },
+        "region": [
+          535,
+          748,
+          733,
+          968
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              581,
+              752
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wall-switch-on",
+      "label": "Wall switch \u2014 on",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/wall-switch-on.png",
+      "width": 189,
+      "height": 226,
+      "anchor": {
+        "x": 94.5,
+        "y": 222
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 3,
+          "row": 3,
+          "index": 21
+        },
+        "bounds": {
+          "x": 801,
+          "y": 750,
+          "width": 181,
+          "height": 218
+        },
+        "region": [
+          799,
+          748,
+          984,
+          970
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              825,
+              752
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "campfire",
+      "label": "Campfire",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/campfire.png",
+      "width": 236,
+      "height": 234,
+      "anchor": {
+        "x": 118.0,
+        "y": 230
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 4,
+          "row": 3,
+          "index": 22
+        },
+        "bounds": {
+          "x": 1020,
+          "y": 750,
+          "width": 228,
+          "height": 226
+        },
+        "region": [
+          1018,
+          748,
+          1250,
+          978
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1142,
+              752
+            ],
+            [
+              1102,
+              757
+            ],
+            [
+              1074,
+              775
+            ],
+            [
+              1178,
+              777
+            ],
+            [
+              1086,
+              800
+            ],
+            [
+              1201,
+              818
+            ],
+            [
+              1060,
+              827
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "blacksmith-anvil",
+      "label": "Blacksmith anvil",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/blacksmith-anvil.png",
+      "width": 247,
+      "height": 224,
+      "anchor": {
+        "x": 123.5,
+        "y": 220
+      },
+      "source": {
+        "sheet": "supplies",
+        "cell": {
+          "column": 5,
+          "row": 3,
+          "index": 23
+        },
+        "bounds": {
+          "x": 1275,
+          "y": 753,
+          "width": 239,
+          "height": 216
+        },
+        "region": [
+          1273,
+          751,
+          1516,
+          971
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1371,
+              755
+            ]
+          ],
+          "fringePixels": 2
+        }
       },
       "logicalFootprint": {
         "width": 1,

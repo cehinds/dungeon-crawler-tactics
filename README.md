@@ -4,7 +4,7 @@ A playable Dungeon Crawler Carl fan tactics prototype with a shared C# engine: a
 
 **Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
 
-**Art lab:** [Three styles, individual PNG downloads and layer previews](https://cehinds.github.io/dungeon-crawler-tactics/art-lab.html). Each style includes 60 labeled components (180 across the three styles), seven composited layers, original artwork, and new exploration/combat concepts. The 24-piece expansion adds environment tiles, house/activity props, creature concepts and effects in six-piece groups; all remain static concept art with no gameplay added. See [the art pack guide](Docs/Style-Art-Packs.md).
+**Art lab:** [Three styles, individual PNG downloads and layer previews](https://cehinds.github.io/dungeon-crawler-tactics/art-lab.html). Each style includes 84 labeled components (252 across the three styles), seven composited layers, original artwork, and new exploration/combat concepts. The 48 expansion pieces include environment tiles, house/activity props, creature concepts, effects, equipment, loot, connections and interactables in six-piece groups; these are static illustrative PNGs with no gameplay added. See [the art pack guide](Docs/Style-Art-Packs.md).
 
 **Lore codex:** [Classes, rank tables, floors, enemies and housing evidence](https://cehinds.github.io/dungeon-crawler-tactics/codex.html) · [Story and housing guide](Docs/Journey-and-Home.md).
 

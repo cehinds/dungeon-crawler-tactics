@@ -22,7 +22,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "Web/wwwroot/assets/style-packs"
-SHEETS = {"world": (6, 4), "ui": (4, 3), "expansion": (6, 4)}
+SHEETS = {"world": (6, 4), "ui": (4, 3), "expansion": (6, 4), "supplies": (6, 4)}
 REQUIRED_SHEETS = ("world", "ui")
 LAYERS = ("ground", "terrain", "structures", "props", "actors", "effects", "ui")
 PADDING = 4

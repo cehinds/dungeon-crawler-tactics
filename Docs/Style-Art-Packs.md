@@ -8,9 +8,9 @@ Three visual directions are available as separate component packs:
 | `ink-and-lanterns` | Painted gouache with warm lantern light and visible brush texture. |
 | `dungeon-after-dark` | Graphic-novel art with bold ink contours and cyan, coral and yellow accents. |
 
-Each style contains 60 individually labeled transparent PNG components. The original 36-piece inventory (24 world pieces and 12 UI pieces) is joined by 24 expansion pieces, for 180 components across all three styles. The styles share a component inventory so their pieces can be compared or used as alternatives. Open the [art lab](../Web/wwwroot/art-lab.html) to preview the pieces and download each pack ZIP; browse by style and component label. The pack files and their source material are kept with the web assets in `Web/wwwroot/assets/`.
+Each style contains 84 individually labeled transparent PNG components. The original 36-piece inventory (24 world pieces and 12 UI pieces) is joined by 48 expansion pieces, for 252 components across all three styles. The styles share a component inventory so their pieces can be compared or used as alternatives. Open the [art lab](../Web/wwwroot/art-lab.html) to preview the pieces and download each pack ZIP; browse by style and component label. The pack files and their source material are kept with the web assets in `Web/wwwroot/assets/`.
 
-The expansion adds four groups of six: environment pieces (wood-floor, wall-corner, stone-pillar, broken-barricade, spike-trap, pressure-plate); house and activity props (safe-bed, crafting-bench, alchemy-table, training-dummy, social-screen, armchair); creature concepts (rat-scout, rat-guard, slime, cave-bat, spider-drone, mimic); and effects (fire-patch, lightning-arc, ice-burst, poison-cloud, healing-ring, bomb-burst). These are static concept-art components. Creature names describe art subjects and do not establish canonical enemies or add gameplay.
+The first expansion adds four groups of six: environment pieces (wood-floor, wall-corner, stone-pillar, broken-barricade, spike-trap, pressure-plate); house and activity props (safe-bed, crafting-bench, alchemy-table, training-dummy, social-screen, armchair); creature concepts (rat-scout, rat-guard, slime, cave-bat, spider-drone, mimic); and effects (fire-patch, lightning-arc, ice-burst, poison-cloud, healing-ring, bomb-burst). The supplies expansion adds four more groups of six: equipment (iron-sword, round-shield, iron-helmet, leather-armor, gem-ring, arcane-wand); loot (health-potion, mana-potion, antidote, gold-pouch, dungeon-key, reward-box); connections (iron-gate-open, iron-gate-closed, floor-hatch-open, floor-hatch-closed, wood-ladder, rope-bridge); and interactables (lever-off, lever-on, wall-switch-off, wall-switch-on, campfire, blacksmith-anvil). These are static illustrative PNG components. Their labels describe art subjects and do not establish canonical items, characters, or gameplay.
 
 ## Concept art and component art
 
@@ -18,8 +18,8 @@ The concept images show the intended mood and how pieces might work together. Th
 
 Each component is a static art element. The pack does not provide frame-by-frame animation, a complete game scene, or a finished runtime implementation. Movement, animation, interaction, collision, and live text need to be supplied by the game.
 
-The delivery contains **180 component PNGs**, **21 full-canvas layer PNGs**, and
-**six new scene concepts**. Each style ZIP contains its 60 components, seven
+The delivery contains **252 component PNGs**, **21 full-canvas layer PNGs**, and
+**six new scene concepts**. Each style ZIP contains its 84 components, seven
 layers, composed preview, labeled contact sheet, manifest, README, original
 style study and two new scene concepts. The new scenes are Clockwork Market /
 Market Ambush, Lantern Archive / Defend the Lantern, and Backstage Access /
@@ -31,10 +31,10 @@ rebuild the component demonstration, not the original flattened illustration.
 Labels stay outside the source art: filenames, contact sheets and manifest
 records identify every piece without baking text into a usable sprite.
 
-The expansion also has a 6×4 labeled contact sheet per style for its 24 new
-components. The seven compositing layers and three concept images per style
-are unchanged. The expanded pack inventory and generated sheets still need
-their focused validation pass.
+The art lab separates the two 24-piece expansions into **Rooms & creatures**
+and **New additions** filters. The latter shows the supplies components. The
+seven compositing layers and three concept images per style are unchanged. Each
+style's full-pack contact sheet covers all 84 components.
 
 ## Rebuild and validate
 
@@ -68,13 +68,13 @@ The components are art inputs for a renderer. Unity still needs scene or prefab 
 
 ## Delivery checks
 
-- [x] All three expanded packs contain 60 labeled component PNGs, seven layers
+- [x] All three expanded packs contain 84 labeled component PNGs, seven layers
   and three concept images; archives and retained source pixels validate.
-- [x] Nineteen extraction and packaging tests pass, including legacy 36-piece
+- [x] Twenty-one extraction and packaging tests pass, including legacy 36-piece
   packs, optional expansion sheets, alpha ownership and reproducible archives.
-- [x] Chromium at 1440×900 and 390×844 verifies all three styles, 60-piece totals,
-  the **New additions** filter (24 pieces), search, PNG downloads, image decoding,
-  and no horizontal overflow or JavaScript errors.
+- [x] Chromium at 1440×900 and 390×844 verifies all three styles, 84-piece totals,
+  both 24-piece filters, Equipment/Loot filters, Mana potion search and PNG downloads,
+  image decoding, and no horizontal overflow or JavaScript errors.
 - [ ] Runtime animation, directional sprite sets, final tile-seam calibration
   and Unity Editor integration remain future production work.
 
