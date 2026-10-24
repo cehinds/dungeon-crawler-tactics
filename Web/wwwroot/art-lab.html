@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore three Dungeon Crawler Tactics art directions, toggle room layers, and download labeled transparent PNG component packs.">
+  <title>Art lab · Dungeon Crawler Tactics</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="art-lab.css">
+  <script src="art-lab.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to art packs</a>
+  <header class="site-header">
+    <a class="brand" href="index.html">DUNGEON CRAWLER TACTICS</a>
+    <nav aria-label="Main navigation"><a href="room-kit.html">Room workshop</a><a href="menu-atlas.html">Menu atlas</a><a href="index.html">Play the game <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></a></nav>
+  </header>
+  <main id="main">
+    <section class="intro" aria-labelledby="page-title">
+      <div><h1 id="page-title">Three ways into<br>the dungeon.</h1><p>Pixel, paint, and ink. Explore every art direction as a collection of separate, labeled PNGs.</p></div>
+      <p class="intro-note">An art study in pieces.<br>Compare concepts. Inspect layers.<br>Take the whole pack with you.</p>
+    </section>
+    <nav id="style-tabs" class="style-tabs" aria-label="Art direction" role="tablist"></nav>
+    <div id="load-status" class="load-status" role="status" aria-live="polite"><span class="loading-dot" aria-hidden="true"></span>Loading the art collections…</div>
+    <div id="load-error" class="error-panel" hidden><h2>We couldn’t load this collection.</h2><p id="error-detail"></p><button id="retry" type="button">Try again</button></div>
+    <section id="style-panel" class="style-panel" role="tabpanel" hidden aria-busy="true">
+      <div class="collection-heading">
+        <div><h2 id="style-title"></h2><p id="style-description"></p><p class="pack-status">Concept components · not animation-ready game assets</p></div>
+        <a id="pack-download" class="button button-primary" download><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>Download style pack <span>ZIP</span></a>
+      </div>
+      <nav class="collection-jumps" aria-label="Jump to collection content"><a href="#layers">Layers</a><a href="#concept-art">Concept art</a><a href="#components">Components</a></nav>
+      <section id="layers" class="preview-layout jump-target" aria-label="Layered room preview" tabindex="-1">
+        <figure class="room-figure">
+          <div id="room-preview" class="room-preview checkerboard" role="img" aria-label="Layered room composition"></div>
+          <figcaption><span id="preview-caption">Room composition · transparent PNG layers</span><span id="visible-layers"></span></figcaption>
+        </figure>
+        <aside class="layer-panel" aria-labelledby="layers-title">
+          <div class="layer-heading"><h3 id="layers-title">Build up the room</h3><p>Toggle a layer to see how the scene fits together.</p></div>
+          <div class="layer-tools"><span>Back to front</span><div><button id="show-layers" type="button">Show all</button><button id="hide-layers" type="button">Hide all</button></div></div>
+          <ol id="layer-list" class="layer-list"></ol>
+          <p id="preview-status" class="media-status" role="status" hidden></p>
+          <a id="preview-download" class="text-link" download>Download composed preview <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a>
+        </aside>
+      </section>
+      <section id="concept-art" class="concept-section jump-target" aria-labelledby="concept-title" tabindex="-1">
+        <div class="concepts-heading"><div><h3 id="concept-title">From concept to components</h3><p>Explore the original style, a dungeon approach, and a combat encounter.</p></div><a id="contact-sheet" class="text-link" target="_blank" rel="noopener">View component contact sheet <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
+        <div id="concepts" class="concepts"></div>
+      </section>
+      <section id="components" class="component-section jump-target" aria-labelledby="components-title" tabindex="-1">
+        <div class="component-heading"><div><h2 id="components-title">The individual pieces.</h2><p>Separate PNG files. Checkerboards show transparency.</p></div><a id="manifest-link" class="text-link" download>Download manifest <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a></div>
+        <div class="filter-bar">
+          <div id="category-filters" class="category-filters" role="group" aria-label="Filter components by category"></div>
+          <label class="search-label"><span class="sr-only">Find a component</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="component-search" type="search" placeholder="Find a piece…" autocomplete="off"></label>
+        </div>
+        <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
+        <div id="component-grid" class="component-grid"></div>
+        <p id="empty-state" class="empty-state" hidden>No pieces match. Try another category or search term.</p>
+      </section>
+      <p class="collection-note"><strong>Concept component packs.</strong> These are generated art studies split into reusable PNGs, with a composed room for exploring the layers. They are visual references, not animation-ready game assets, and have not been integrated into gameplay.</p>
+    </section>
+  </main>
+  <footer><p>Three art directions. One very dangerous dungeon.</p><a href="index.html">Return to the game <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></a></footer>
+  <noscript><p class="noscript">This gallery needs JavaScript to display the collections and toggle layers. <a href="assets/style-packs/catalog.json">Open the art pack catalog</a>.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,1463 @@
+{
+  "schemaVersion": 1,
+  "id": "ink-and-lanterns",
+  "title": "Ink & Lanterns",
+  "description": "Painted gouache and ink with parchment controls.",
+  "status": "concept-component-pack",
+  "generation": {
+    "source": "imagegen",
+    "extraction": "native-grid-crop",
+    "padding": 4,
+    "explicitSourceRegions": true,
+    "explicitAlphaIslands": false
+  },
+  "sheets": {
+    "world": {
+      "file": "source/world.png",
+      "columns": 6,
+      "rows": 4,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "a5b44638cb2b550df33ffc39ba95a21daabf56ab73b058c3560cce09edcd8929"
+    },
+    "ui": {
+      "file": "source/ui.png",
+      "columns": 4,
+      "rows": 3,
+      "width": 1448,
+      "height": 1086,
+      "sha256": "e1451b30308b3c44420946c2e281cbc37ce2790cc574eb1852210e413c2990ab"
+    }
+  },
+  "assets": [
+    {
+      "id": "stone-floor",
+      "label": "Stone floor",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/stone-floor.png",
+      "width": 249,
+      "height": 172,
+      "anchor": {
+        "x": 124.5,
+        "y": 86.0
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 8,
+          "y": 96,
+          "width": 241,
+          "height": 164
+        },
+        "region": [
+          8,
+          96,
+          249,
+          260
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "water-floor",
+      "label": "Water floor",
+      "category": "terrain",
+      "layer": "terrain",
+      "file": "components/water-floor.png",
+      "width": 260,
+      "height": 188,
+      "anchor": {
+        "x": 130.0,
+        "y": 94.0
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 260,
+          "y": 77,
+          "width": 252,
+          "height": 180
+        },
+        "region": [
+          260,
+          77,
+          512,
+          257
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wall-back",
+      "label": "Back wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/wall-back.png",
+      "width": 236,
+      "height": 246,
+      "anchor": {
+        "x": 118.0,
+        "y": 242
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 528,
+          "y": 40,
+          "width": 228,
+          "height": 238
+        },
+        "region": [
+          528,
+          40,
+          756,
+          278
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wall-side",
+      "label": "Side wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/wall-side.png",
+      "width": 226,
+      "height": 233,
+      "anchor": {
+        "x": 113.0,
+        "y": 229
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 788,
+          "y": 46,
+          "width": 218,
+          "height": 225
+        },
+        "region": [
+          788,
+          46,
+          1006,
+          271
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "door-open",
+      "label": "Open doorway",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/door-open.png",
+      "width": 219,
+      "height": 271,
+      "anchor": {
+        "x": 109.5,
+        "y": 267
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 4,
+          "row": 0,
+          "index": 4
+        },
+        "bounds": {
+          "x": 1041,
+          "y": 14,
+          "width": 211,
+          "height": 263
+        },
+        "region": [
+          1041,
+          14,
+          1252,
+          277
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "door-closed",
+      "label": "Closed door",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/door-closed.png",
+      "width": 202,
+      "height": 256,
+      "anchor": {
+        "x": 101.0,
+        "y": 252
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 5,
+          "row": 0,
+          "index": 5
+        },
+        "bounds": {
+          "x": 1309,
+          "y": 37,
+          "width": 194,
+          "height": 248
+        },
+        "region": [
+          1309,
+          37,
+          1503,
+          285
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "bridge",
+      "label": "Wooden bridge",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/bridge.png",
+      "width": 274,
+      "height": 221,
+      "anchor": {
+        "x": 137.0,
+        "y": 217
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 11,
+          "y": 298,
+          "width": 266,
+          "height": 213
+        },
+        "region": [
+          11,
+          298,
+          277,
+          511
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "crate",
+      "label": "Wooden crate",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/crate.png",
+      "width": 188,
+      "height": 214,
+      "anchor": {
+        "x": 94.0,
+        "y": 210
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 304,
+          "y": 311,
+          "width": 180,
+          "height": 206
+        },
+        "region": [
+          304,
+          311,
+          484,
+          517
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "barrel",
+      "label": "Oil barrel",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/barrel.png",
+      "width": 140,
+      "height": 228,
+      "anchor": {
+        "x": 70.0,
+        "y": 224
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 8
+        },
+        "bounds": {
+          "x": 576,
+          "y": 302,
+          "width": 132,
+          "height": 220
+        },
+        "region": [
+          576,
+          302,
+          708,
+          522
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "pipe",
+      "label": "Bent pipe",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/pipe.png",
+      "width": 208,
+      "height": 236,
+      "anchor": {
+        "x": 104.0,
+        "y": 232
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 9
+        },
+        "bounds": {
+          "x": 810,
+          "y": 301,
+          "width": 200,
+          "height": 228
+        },
+        "region": [
+          810,
+          301,
+          1010,
+          529
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "valve",
+      "label": "Valve wheel",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/valve.png",
+      "width": 205,
+      "height": 199,
+      "anchor": {
+        "x": 102.5,
+        "y": 195
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 4,
+          "row": 1,
+          "index": 10
+        },
+        "bounds": {
+          "x": 1060,
+          "y": 323,
+          "width": 197,
+          "height": 191
+        },
+        "region": [
+          1060,
+          323,
+          1257,
+          514
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "chest",
+      "label": "Supply chest",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/chest.png",
+      "width": 222,
+      "height": 197,
+      "anchor": {
+        "x": 111.0,
+        "y": 193
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 5,
+          "row": 1,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1299,
+          "y": 336,
+          "width": 214,
+          "height": 189
+        },
+        "region": [
+          1299,
+          336,
+          1513,
+          525
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "torch",
+      "label": "Wall lantern",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/torch.png",
+      "width": 184,
+      "height": 229,
+      "anchor": {
+        "x": 92.0,
+        "y": 225
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 12
+        },
+        "bounds": {
+          "x": 50,
+          "y": 537,
+          "width": 176,
+          "height": 221
+        },
+        "region": [
+          50,
+          537,
+          226,
+          758
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "gate",
+      "label": "Barred gate",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/gate.png",
+      "width": 179,
+      "height": 256,
+      "anchor": {
+        "x": 89.5,
+        "y": 252
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 13
+        },
+        "bounds": {
+          "x": 295,
+          "y": 528,
+          "width": 171,
+          "height": 248
+        },
+        "region": [
+          295,
+          528,
+          466,
+          776
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "exit-marker",
+      "label": "Exit sign",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/exit-marker.png",
+      "width": 166,
+      "height": 142,
+      "anchor": {
+        "x": 83.0,
+        "y": 138
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 14
+        },
+        "bounds": {
+          "x": 562,
+          "y": 575,
+          "width": 158,
+          "height": 134
+        },
+        "region": [
+          562,
+          575,
+          720,
+          709
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "rubble",
+      "label": "Broken masonry",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/rubble.png",
+      "width": 263,
+      "height": 223,
+      "anchor": {
+        "x": 131.5,
+        "y": 219
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 15
+        },
+        "bounds": {
+          "x": 765,
+          "y": 550,
+          "width": 255,
+          "height": 215
+        },
+        "region": [
+          765,
+          550,
+          1020,
+          765
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "grate",
+      "label": "Floor grate",
+      "category": "terrain",
+      "layer": "terrain",
+      "file": "components/grate.png",
+      "width": 258,
+      "height": 170,
+      "anchor": {
+        "x": 129.0,
+        "y": 85.0
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 4,
+          "row": 2,
+          "index": 16
+        },
+        "bounds": {
+          "x": 1028,
+          "y": 594,
+          "width": 250,
+          "height": 162
+        },
+        "region": [
+          1028,
+          594,
+          1278,
+          756
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "stairs",
+      "label": "Short stairs",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/stairs.png",
+      "width": 227,
+      "height": 223,
+      "anchor": {
+        "x": 113.5,
+        "y": 219
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 5,
+          "row": 2,
+          "index": 17
+        },
+        "bounds": {
+          "x": 1285,
+          "y": 552,
+          "width": 219,
+          "height": 215
+        },
+        "region": [
+          1285,
+          552,
+          1504,
+          767
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "carl",
+      "label": "Carl",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/carl.png",
+      "width": 168,
+      "height": 237,
+      "anchor": {
+        "x": 84.0,
+        "y": 233
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 0,
+          "row": 3,
+          "index": 18
+        },
+        "bounds": {
+          "x": 48,
+          "y": 760,
+          "width": 160,
+          "height": 229
+        },
+        "region": [
+          48,
+          760,
+          208,
+          989
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "donut",
+      "label": "Princess Donut",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/donut.png",
+      "width": 228,
+      "height": 182,
+      "anchor": {
+        "x": 114.0,
+        "y": 178
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 1,
+          "row": 3,
+          "index": 19
+        },
+        "bounds": {
+          "x": 277,
+          "y": 805,
+          "width": 220,
+          "height": 174
+        },
+        "region": [
+          277,
+          805,
+          497,
+          979
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "katia",
+      "label": "Katia",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/katia.png",
+      "width": 185,
+      "height": 245,
+      "anchor": {
+        "x": 92.5,
+        "y": 241
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 2,
+          "row": 3,
+          "index": 20
+        },
+        "bounds": {
+          "x": 542,
+          "y": 752,
+          "width": 177,
+          "height": 237
+        },
+        "region": [
+          542,
+          752,
+          719,
+          989
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "mongo",
+      "label": "Mongo",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/mongo.png",
+      "width": 305,
+      "height": 223,
+      "anchor": {
+        "x": 152.5,
+        "y": 219
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 3,
+          "row": 3,
+          "index": 21
+        },
+        "bounds": {
+          "x": 721,
+          "y": 777,
+          "width": 297,
+          "height": 215
+        },
+        "region": [
+          721,
+          777,
+          1018,
+          992
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "rat",
+      "label": "Rat guard",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/rat.png",
+      "width": 239,
+      "height": 223,
+      "anchor": {
+        "x": 119.5,
+        "y": 219
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 4,
+          "row": 3,
+          "index": 22
+        },
+        "bounds": {
+          "x": 1030,
+          "y": 777,
+          "width": 231,
+          "height": 215
+        },
+        "region": [
+          1030,
+          777,
+          1261,
+          992
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "magic-missile",
+      "label": "Magic Missile effect",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/magic-missile.png",
+      "width": 266,
+      "height": 254,
+      "anchor": {
+        "x": 133.0,
+        "y": 127.0
+      },
+      "source": {
+        "sheet": "world",
+        "cell": {
+          "column": 5,
+          "row": 3,
+          "index": 23
+        },
+        "bounds": {
+          "x": 1278,
+          "y": 778,
+          "width": 258,
+          "height": 246
+        },
+        "region": [
+          1278,
+          778,
+          1536,
+          1024
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "portrait-carl",
+      "label": "Carl portrait",
+      "category": "portrait",
+      "layer": "ui",
+      "file": "components/portrait-carl.png",
+      "width": 384,
+      "height": 412,
+      "anchor": {
+        "x": 192.0,
+        "y": 206.0
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 0,
+          "y": 20,
+          "width": 376,
+          "height": 404
+        },
+        "region": [
+          0,
+          20,
+          376,
+          440
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "portrait-donut",
+      "label": "Donut portrait",
+      "category": "portrait",
+      "layer": "ui",
+      "file": "components/portrait-donut.png",
+      "width": 355,
+      "height": 415,
+      "anchor": {
+        "x": 177.5,
+        "y": 207.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 377,
+          "y": 21,
+          "width": 347,
+          "height": 407
+        },
+        "region": [
+          376,
+          20,
+          724,
+          440
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "portrait-katia",
+      "label": "Katia portrait",
+      "category": "portrait",
+      "layer": "ui",
+      "file": "components/portrait-katia.png",
+      "width": 374,
+      "height": 424,
+      "anchor": {
+        "x": 187.0,
+        "y": 212.0
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 724,
+          "y": 24,
+          "width": 366,
+          "height": 416
+        },
+        "region": [
+          724,
+          20,
+          1090,
+          440
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "portrait-mongo",
+      "label": "Mongo portrait",
+      "category": "portrait",
+      "layer": "ui",
+      "file": "components/portrait-mongo.png",
+      "width": 351,
+      "height": 413,
+      "anchor": {
+        "x": 175.5,
+        "y": 206.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 1090,
+          "y": 21,
+          "width": 343,
+          "height": 405
+        },
+        "region": [
+          1090,
+          20,
+          1448,
+          440
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "icon-move",
+      "label": "Move icon",
+      "category": "ui",
+      "layer": "ui",
+      "file": "components/icon-move.png",
+      "width": 301,
+      "height": 270,
+      "anchor": {
+        "x": 150.5,
+        "y": 135.0
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 4
+        },
+        "bounds": {
+          "x": 47,
+          "y": 487,
+          "width": 293,
+          "height": 262
+        },
+        "region": [
+          40,
+          455,
+          340,
+          765
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "icon-kick",
+      "label": "Barefoot kick icon",
+      "category": "ui",
+      "layer": "ui",
+      "file": "components/icon-kick.png",
+      "width": 337,
+      "height": 318,
+      "anchor": {
+        "x": 168.5,
+        "y": 159.0
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 5
+        },
+        "bounds": {
+          "x": 411,
+          "y": 455,
+          "width": 329,
+          "height": 310
+        },
+        "region": [
+          400,
+          455,
+          740,
+          765
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "icon-bomb",
+      "label": "Bomb icon",
+      "category": "ui",
+      "layer": "ui",
+      "file": "components/icon-bomb.png",
+      "width": 289,
+      "height": 327,
+      "anchor": {
+        "x": 144.5,
+        "y": 163.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 779,
+          "y": 451,
+          "width": 281,
+          "height": 319
+        },
+        "region": [
+          770,
+          440,
+          1060,
+          770
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "icon-items",
+      "label": "Items icon",
+      "category": "ui",
+      "layer": "ui",
+      "file": "components/icon-items.png",
+      "width": 337,
+      "height": 287,
+      "anchor": {
+        "x": 168.5,
+        "y": 143.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 1095,
+          "y": 467,
+          "width": 329,
+          "height": 279
+        },
+        "region": [
+          1090,
+          455,
+          1448,
+          765
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "hud-panel",
+      "label": "Blank HUD panel",
+      "category": "ui",
+      "layer": "ui",
+      "file": "components/hud-panel.png",
+      "width": 390,
+      "height": 263,
+      "anchor": {
+        "x": 195.0,
+        "y": 131.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 8
+        },
+        "bounds": {
+          "x": 18,
+          "y": 800,
+          "width": 382,
+          "height": 255
+        },
+        "region": [
+          10,
+          800,
+          400,
+          1055
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "tooltip-panel",
+      "label": "Blank tooltip panel",
+      "category": "ui",
+      "layer": "ui",
+      "file": "components/tooltip-panel.png",
+      "width": 343,
+      "height": 271,
+      "anchor": {
+        "x": 171.5,
+        "y": 135.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 9
+        },
+        "bounds": {
+          "x": 405,
+          "y": 779,
+          "width": 335,
+          "height": 263
+        },
+        "region": [
+          400,
+          775,
+          740,
+          1055
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "selection-tile",
+      "label": "Selected tile marker",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/selection-tile.png",
+      "width": 368,
+      "height": 275,
+      "anchor": {
+        "x": 184.0,
+        "y": 137.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 10
+        },
+        "bounds": {
+          "x": 740,
+          "y": 793,
+          "width": 360,
+          "height": 267
+        },
+        "region": [
+          740,
+          790,
+          1100,
+          1060
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "danger-tile",
+      "label": "Danger tile marker",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/danger-tile.png",
+      "width": 340,
+      "height": 287,
+      "anchor": {
+        "x": 170.0,
+        "y": 143.5
+      },
+      "source": {
+        "sheet": "ui",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1100,
+          "y": 775,
+          "width": 332,
+          "height": 279
+        },
+        "region": [
+          1100,
+          775,
+          1448,
+          1055
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    }
+  ],
+  "preview": {
+    "file": "preview.png",
+    "kind": "component-composition",
+    "width": 1200,
+    "height": 900,
+    "layers": [
+      {
+        "id": "ground",
+        "label": "Ground",
+        "file": "layers/ground.png"
+      },
+      {
+        "id": "terrain",
+        "label": "Terrain",
+        "file": "layers/terrain.png"
+      },
+      {
+        "id": "structures",
+        "label": "Structures",
+        "file": "layers/structures.png"
+      },
+      {
+        "id": "props",
+        "label": "Props",
+        "file": "layers/props.png"
+      },
+      {
+        "id": "actors",
+        "label": "Actors",
+        "file": "layers/actors.png"
+      },
+      {
+        "id": "effects",
+        "label": "Effects",
+        "file": "layers/effects.png"
+      },
+      {
+        "id": "ui",
+        "label": "Ui",
+        "file": "layers/ui.png"
+      }
+    ]
+  },
+  "contactSheet": "contact-sheet.png",
+  "download": "ink-and-lanterns.zip",
+  "grid": {
+    "projection": "isometric",
+    "logicalTile": {
+      "width": 128,
+      "height": 64
+    }
+  },
+  "concept": "assets/style-packs/ink-and-lanterns/concepts/original.png",
+  "newConcept": "assets/style-packs/ink-and-lanterns/concepts/new.png",
+  "combatConcept": "assets/style-packs/ink-and-lanterns/concepts/combat.png",
+  "accent": "#72a399",
+  "conceptFiles": [
+    "concepts/combat.png",
+    "concepts/new.png",
+    "concepts/original.png"
+  ]
+}
