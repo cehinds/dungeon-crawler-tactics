@@ -1,0 +1,10 @@
+# Concept chamber review
+
+Compared the left gameplay panel of [`combat-targeting.png`](../Web/wwwroot/assets/menu-concepts/combat-targeting.png) with the earlier [`fidelity-battle-desktop.png`](Screenshots/fidelity-battle-desktop.png) and refreshed browser captures [`chambers-1672-legacy-opening.png`](Screenshots/chambers-1672-legacy-opening.png) and [`chambers-1672-sewers-opening.png`](Screenshots/chambers-1672-sewers-opening.png). The new captures show clear gains over the earlier battle: four floor variants add surface variation, raised masonry and lit torches frame the space, arches/hazards/props give the rooms depth, and the encounter camera now keeps the party and room in view. This is a closer composition match, not a pixel-perfect recreation of the concept.
+
+Two remaining asset priorities stand out:
+
+1. **Give the map edge a scene behind it.** Both refreshed rooms still end at a hard isometric slab edge against empty navy canvas. The concept’s dark, layered dungeon backdrop and waterfall/cliff edge make its room feel set into a place. A reusable cave/ruin edge backdrop or large boundary pieces such as a rock face, broken arch or waterfall would add that missing frame; this needs authored scenery art rather than spacing or color adjustments.
+2. **Bring the HUD portrait art closer to the map sprites.** The concept uses a chunky pixel-art Carl portrait that reads as part of the same illustrated game world. The current large Carl portrait in the lower HUD is a cleaner, more finely rendered illustration than the pixel sprites on the board, so it feels like a separate art treatment. A pixel-art portrait set aligned to the map-sprite palette would close that gap. This is an art consistency difference; current character identity and HUD information are already clear.
+
+The existing floor variants, torches, water, oil, arches and chest already cover much of the concept’s tile and small-prop language, so they are lower priority for new assets. Fresh captures show the camera framing the rooms and party; no remaining camera issue is included as an art priority.

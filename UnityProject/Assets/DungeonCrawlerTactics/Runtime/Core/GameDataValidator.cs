@@ -67,6 +67,7 @@ namespace DungeonCrawlerTactics
             foreach (EncounterDef encounter in allEncounters)
             {
                 Need(encounter != null && !string.IsNullOrEmpty(encounter.id) && encounters.Add(encounter.id) && !string.IsNullOrEmpty(encounter.label) && encounter.width >= 4 && encounter.height >= 4 && encounter.width <= 30 && encounter.height <= 30 && encounter.xp >= 0 && encounter.xp <= 1000000, "Invalid encounter.");
+                ValidateBattleLayout(encounter, catalog);
                 Need(encounter.tiles != null && encounter.playerSpawns != null && encounter.enemies != null && encounter.playerSpawns.Length == data.partySize && encounter.enemies.Length > 0 && encounter.enemies.Length <= 30, "Invalid encounter arrays.");
                 HashSet<string> tiles = new HashSet<string>(), walls = new HashSet<string>(), occupied = new HashSet<string>(), enemies = new HashSet<string>();
                 foreach (TileDef tile in encounter.tiles)
@@ -131,6 +132,21 @@ namespace DungeonCrawlerTactics
             NeighborhoodDefinitionValidator.Validate(data, catalog);
             if (data.home != null) foreach (string ability in data.home.trainingAbilityIds) Need(catalog.Abilities.ContainsKey(ability), "Unknown home training ability.");
         }
+        internal static void ValidateBattleLayout(EncounterDef encounter, Catalog catalog)
+        {
+            Need(encounter.layoutVersion == 1 && encounter.legacyTiles != null && encounter.legacyTiles.Length <= encounter.width * encounter.height, "Invalid battle layout version or legacy tiles.");
+            HashSet<string> cells = new HashSet<string>();
+            foreach (TileDef tile in encounter.legacyTiles)
+            {
+                Need(tile != null && Inside(tile.x, tile.y, encounter) && cells.Add(Key(tile.x, tile.y)), "Invalid legacy battle tile.");
+                Tags(tile.tags, catalog);
+            }
+            Need(encounter.decorations != null && encounter.decorations.Length <= 200, "Invalid battle decorations.");
+            HashSet<string> ids = new HashSet<string>();
+            foreach (MapPlacement piece in encounter.decorations)
+                Need(piece != null && StableId(piece.id) && ids.Add(piece.id) && !string.IsNullOrEmpty(piece.assetId) && piece.assetId.Length <= 80 && Inside(piece.x, piece.y, encounter) && piece.rotation >= 0 && piece.rotation < 4 && !piece.blocksMovement && (piece.layer == "ground" || piece.layer == "prop" || piece.layer == "wall"), "Invalid battle decoration.");
+        }
+
         private static void ValidateJourneyDefinitions(GameData data, List<EncounterDef> encounters)
         {
             if (data.journey == null) return;

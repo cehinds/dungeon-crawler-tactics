@@ -4,6 +4,16 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 from playtest_neighborhood import boot,view,save,wait,approach
 
+def select_ability(page, ability_id):
+    """Choose a primary shortcut or open the complete action book."""
+    shortcut = page.locator('[data-ability="' + ability_id + '"]')
+    if shortcut.count():
+        shortcut.click()
+    else:
+        page.locator('#open-actions').click()
+        page.locator('[data-modal-ability="' + ability_id + '"]').click()
+
+
 def snap(page,out,name):
     page.wait_for_timeout(150)
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Horizontal overflow: '+name
@@ -59,7 +69,7 @@ def run(browser,args,w,h):
         before=save(page);cell(page,target['x'],target['y']);wait(page,'window.dungeon.getView().canConfirm')
         snap(page,out,'action-preview');assert save(page)==before,'Action preview mutated save'
         page.locator('#detail-cancel-forecast').click();assert save(page)==before,'Cancel mutated save'
-        page.locator('[data-ability="ability.carl_bomb"]').click();cell(page,target['x'],target['y']);wait(page,'window.dungeon.getView().canConfirm')
+        select_ability(page, 'ability.carl_bomb');cell(page,target['x'],target['y']);wait(page,'window.dungeon.getView().canConfirm')
         page.locator('#detail-confirm-forecast').click();wait(page,'!window.dungeon.getView().canConfirm')
         assert view(page)['canMove'] and next(u for u in view(page)['units'] if u['id']==actor)['acted']
         tile=next(t for t in view(page)['reachable'] if t['cost']>0);cell(page,tile['x'],tile['y'])
@@ -80,7 +90,7 @@ def run(browser,args,w,h):
                 assert 'surface.trap_shock' not in next(t['tags'] for t in view(page)['tiles'] if t['x']==tile['x'] and t['y']==tile['y'])
                 snap(page,out,'shock-trap-triggered')
             if actor=='crawler.katia':
-                page.locator('[data-ability="ability.katia_shapeshift"]').click()
+                select_ability(page, 'ability.katia_shapeshift')
                 wait(page,"document.querySelector('#character-sheet-dialog')?.open")
                 forms=page.locator('[data-sheet-form]');assert forms.count()==4 and sum(f['id']!='form.baseline' for f in view(page)['forms'])==3, 'Katia must have three alternate form choices plus baseline'
                 before=save(page);page.locator('[data-sheet-form="form.strider"]').click();wait(page,'window.dungeon.getView().canConfirm')
@@ -113,7 +123,7 @@ def run_favor(browser,args,w,h):
         path=out/'legal-workshop.json';path.write_text(json.dumps(authored))
         page.locator('#save-button').click();page.locator('#import-map-file').set_input_files(str(path));wait(page,"window.dungeon.getView().screen==='battle'")
         if page.locator('#save-dialog').evaluate('d=>d.open'):page.locator('#save-dialog [data-close]').last.click()
-        page.locator('[data-ability="ability.carl_bomb"]').click();cell(page,2,2);wait(page,'window.dungeon.getView().canConfirm')
+        select_ability(page, 'ability.carl_bomb');cell(page,2,2);wait(page,'window.dungeon.getView().canConfirm')
         assert save(page)['screen']=='battle'
         page.locator('#detail-confirm-forecast').click();wait(page,'window.dungeon.getView().audience.favor===1')
         assert next(c for c in view(page)['audience']['challenges'] if c['id']=='sponsor.reaction')['earned']

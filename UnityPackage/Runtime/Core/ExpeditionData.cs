@@ -33,6 +33,7 @@ namespace DungeonCrawlerTactics
                 Need(expedition != null && Id(expedition.id) && ids.Add(expedition.id) && !string.IsNullOrEmpty(expedition.label) && expedition.label.Length <= 100 && !string.IsNullOrEmpty(expedition.description) && expedition.description.Length <= 1000 && !string.IsNullOrEmpty(expedition.objective), "Invalid expedition identity.");
                 EncounterDef encounter = expedition.encounter;
                 Need(encounter != null && Id(encounter.id) && !string.IsNullOrEmpty(encounter.label) && encounter.description != null && encounter.width >= 6 && encounter.width <= 20 && encounter.height >= 6 && encounter.height <= 16 && encounter.xp == 0, "Invalid expedition encounter dimensions or rewards.");
+                GameDataValidator.ValidateBattleLayout(encounter, catalog);
                 Need(encounter.tiles != null && encounter.tiles.Length <= encounter.width * encounter.height && encounter.playerSpawns != null && encounter.playerSpawns.Length == data.partySize && encounter.enemies != null && encounter.enemies.Length > 0 && encounter.enemies.Length <= 12, "Invalid expedition map collections.");
                 Func<int, int, bool> inside = (x, y) => x >= 0 && y >= 0 && x < encounter.width && y < encounter.height;
                 HashSet<string> walls = new HashSet<string>(), cells = new HashSet<string>(), occupied = new HashSet<string>(), enemyIds = new HashSet<string>();

@@ -13,6 +13,16 @@ from playwright.sync_api import sync_playwright
 OUT = lore.OUT
 
 
+def select_ability(page, ability_id):
+    """Choose a primary shortcut or open the complete action book."""
+    shortcut = page.locator('[data-ability="' + ability_id + '"]')
+    if shortcut.count():
+        shortcut.click()
+    else:
+        page.locator('#open-actions').click()
+        page.locator('[data-modal-ability="' + ability_id + '"]').click()
+
+
 def shot(page, name):
     # Settle real renderer playback before describing committed units as visible.
     skip = page.locator('#skip-animation')
@@ -58,7 +68,7 @@ def tripwire(page):
     lore.wait(page, "window.dungeon.getView().screen==='battle'")
     click_unit(page, 'crawler.carl')
     before = stable_save(page)
-    page.locator('[data-ability="ability.carl_tripwire"]').click()
+    select_ability(page, 'ability.carl_tripwire')
     action = next(a for a in lore.view(page)['abilities'] if a['id'] == 'ability.carl_tripwire')
     target = next(t for t in action['targetIds'] if t == 'tile.3.2') if 'tile.3.2' in action['targetIds'] else action['targetIds'][0]
     x, y = map(int, target.split('.')[1:])
@@ -68,7 +78,7 @@ def tripwire(page):
     shot(page, 'tripwire-preview-desktop')
     cancel_forecast(page)
     assert stable_save(page) == before, 'Tripwire cancel spent resources'
-    page.locator('[data-ability="ability.carl_tripwire"]').click()
+    select_ability(page, 'ability.carl_tripwire')
     click_tile(page, x, y)
     commit_forecast(page)
     carl = next(u for u in lore.view(page)['units'] if u['id'] == 'crawler.carl')
@@ -114,7 +124,7 @@ def triplicate(page):
     lore.send(page, 'expedition_start', targetId='expedition.sewers')
     lore.wait(page, "window.dungeon.getView().screen==='battle'")
     click_unit(page, 'crawler.donut')
-    page.locator('[data-ability="ability.donut_clockwork_triplicate"]').click()
+    select_ability(page, 'ability.donut_clockwork_triplicate')
     mongo = next(u for u in lore.view(page)['units'] if u['id'] == 'crawler.mongo')
     before = stable_save(page)
     click_tile(page, mongo['x'], mongo['y'])
@@ -129,7 +139,7 @@ def triplicate(page):
     page.set_viewport_size({'width':1672,'height':941})
     cancel_forecast(page)
     assert stable_save(page) == before, 'Triplicate cancel changed save'
-    page.locator('[data-ability="ability.donut_clockwork_triplicate"]').click()
+    select_ability(page, 'ability.donut_clockwork_triplicate')
     click_tile(page, mongo['x'], mongo['y'])
     commit_forecast(page)
     copies = [u for u in lore.view(page)['units'] if u.get('duplicateSourceId')]
@@ -179,7 +189,7 @@ def rush(page):
     click_unit(page, 'crawler.katia')
     before = stable_save(page)
     original = next(u for u in lore.view(page)['units'] if u['id']=='crawler.katia')
-    page.locator('[data-ability="ability.katia_rush"]').click()
+    select_ability(page, 'ability.katia_rush')
     lore.wait(page, "document.querySelector('#forecast-dialog')?.open")
     assert stable_save(page) == before, 'Rush preview mutated save'
     forecast = next(f for f in lore.view(page)['forecast'] if f['targetId']=='crawler.katia')
@@ -187,7 +197,7 @@ def rush(page):
     shot(page, 'rush-preview-phone')
     cancel_forecast(page)
     assert stable_save(page) == before, 'Rush cancel changed save'
-    page.locator('[data-ability="ability.katia_rush"]').click()
+    select_ability(page, 'ability.katia_rush')
     lore.wait(page, "document.querySelector('#forecast-dialog')?.open")
     commit_forecast(page)
     katia = next(u for u in lore.view(page)['units'] if u['id']=='crawler.katia')

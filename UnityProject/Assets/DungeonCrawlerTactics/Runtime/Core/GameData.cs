@@ -51,6 +51,9 @@ namespace DungeonCrawlerTactics
     {
         public string id, label, description;
         public int width = 10, height = 8, xp = 30;
+        public int layoutVersion = 1;
+        public TileDef[] legacyTiles = new TileDef[0];
+        public MapPlacement[] decorations = new MapPlacement[0];
         public ExplorationDef exploration;
         public CellView[] playerSpawns = new CellView[0];
         public TileDef[] tiles = new TileDef[0];
@@ -94,6 +97,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardView { public string id, label, description; }
     [Serializable] public sealed class GameView
     {
+        public MapPlacement[] decorations = new MapPlacement[0];
         public TacticalModeView[] stances = new TacticalModeView[0], forms = new TacticalModeView[0];
         public NeighborhoodView neighborhood; public HomeView home; public JourneyView journey; public ExpeditionView expedition; public ExpeditionOptionView[] expeditions = new ExpeditionOptionView[0]; public SkillTreeView skillTree; public DevelopmentView development; public CustomMapData customMap; public ScenarioOptionView[] scenarios = new ScenarioOptionView[0]; public ScenarioView scenario;
         public AudienceView audience; public string[] achievementIds = new string[0];
@@ -122,7 +126,7 @@ namespace DungeonCrawlerTactics
         public NeighborhoodSave neighborhood; public HomeSave home; public JourneySave journey; public ExpeditionSave expedition; public SkillTreeSave skillTree; public DevelopmentSave development; public CustomMapData customMap; public ScenarioSave scenario;
         public AudienceSave audience; public string[] achievementIds = new string[0];
         public ExplorationSave[] exploration = new ExplorationSave[0];
-        public int activationVersion; public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];
+        public int battleLayoutVersion; public int activationVersion; public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];
         public int schemaVersion = 1; public string contentVersion, screen, phase, selectedUnitId;
         public int encounterIndex, round, xp; public bool rewardChosen;
         public RosterView[] roster = new RosterView[0]; public InventoryEntry[] inventory = new InventoryEntry[0];

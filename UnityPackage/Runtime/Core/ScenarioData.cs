@@ -90,6 +90,7 @@ namespace DungeonCrawlerTactics
                 Need(s.damage >= 1 && s.damage <= 100 && s.minionCap >= 0 && s.minionCap <= 8 && s.helperCount >= 0 && s.helperCount <= 8 && s.constructionTotal >= 1 && s.constructionTotal <= 8 && s.barrierDurability >= 1 && s.barrierDurability <= 8, "Unbounded scenario rule.");
                 var e = s.encounter;
                 Need(e != null && Id(e.id) && !string.IsNullOrEmpty(e.label) && e.description != null && e.width >= 4 && e.height >= 4 && e.width <= 30 && e.height <= 30 && e.xp == 0, "Invalid scenario encounter.");
+                GameDataValidator.ValidateBattleLayout(e, catalog);
                 Need(e.tiles != null && e.tiles.Length <= e.width * e.height && e.playerSpawns != null && e.playerSpawns.Length == data.partySize && e.enemies != null && e.enemies.Length >= 1 && e.enemies.Length <= 16, "Invalid scenario map arrays.");
                 Func<int, int, bool> inside = (x, y) => x >= 0 && y >= 0 && x < e.width && y < e.height;
                 var blocked = new System.Collections.Generic.HashSet<string>();

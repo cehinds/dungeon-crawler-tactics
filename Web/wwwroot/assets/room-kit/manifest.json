@@ -7,14 +7,14 @@
   "assets": [
     {
       "id": "wall-ne",
-      "file": "walls/wall-ne.png",
+      "file": "concept/wall-ne.png",
       "label": "Wall Ne",
       "layer": "structure",
       "width": 80,
-      "height": 86,
+      "height": 88,
       "anchor": {
-        "x": 40.0,
-        "y": 65.0
+        "x": 33.08,
+        "y": 71.26
       },
       "footprint": {
         "width": 1,
@@ -28,18 +28,28 @@
       "blocksMovement": true,
       "connections": [
         "ne"
+      ],
+      "edgeEndpoints": [
+        [
+          0.25,
+          54.855
+        ],
+        [
+          65.91,
+          87.665
+        ]
       ]
     },
     {
       "id": "wall-nw",
-      "file": "walls/wall-nw.png",
+      "file": "concept/wall-nw.png",
       "label": "Wall Nw",
       "layer": "structure",
       "width": 80,
-      "height": 86,
+      "height": 88,
       "anchor": {
-        "x": 40.0,
-        "y": 65.0
+        "x": 46.375,
+        "y": 70.825
       },
       "footprint": {
         "width": 1,
@@ -53,6 +63,16 @@
       "blocksMovement": true,
       "connections": [
         "nw"
+      ],
+      "edgeEndpoints": [
+        [
+          12.995,
+          87.545
+        ],
+        [
+          79.75,
+          54.1
+        ]
       ]
     },
     {
@@ -369,14 +389,14 @@
     },
     {
       "id": "stone-a",
-      "file": "floors/stone-a.png",
+      "file": "concept/stone-a.png",
       "label": "Stone A",
       "layer": "floor",
       "width": 132,
       "height": 68,
       "anchor": {
-        "x": 66.0,
-        "y": 34.0
+        "x": 66,
+        "y": 34
       },
       "footprint": {
         "width": 1,
@@ -384,21 +404,26 @@
       },
       "tags": [
         "stone",
-        "normal",
         "floor"
       ],
-      "blocksMovement": false
+      "blocksMovement": false,
+      "sourceBox": [
+        36,
+        41,
+        853,
+        466
+      ]
     },
     {
       "id": "stone-b",
-      "file": "floors/stone-b.png",
+      "file": "concept/stone-b.png",
       "label": "Stone B",
       "layer": "floor",
       "width": 132,
       "height": 68,
       "anchor": {
-        "x": 66.0,
-        "y": 34.0
+        "x": 66,
+        "y": 34
       },
       "footprint": {
         "width": 1,
@@ -406,10 +431,15 @@
       },
       "tags": [
         "stone",
-        "normal",
         "floor"
       ],
-      "blocksMovement": false
+      "blocksMovement": false,
+      "sourceBox": [
+        919,
+        42,
+        1738,
+        465
+      ]
     },
     {
       "id": "water-floor",

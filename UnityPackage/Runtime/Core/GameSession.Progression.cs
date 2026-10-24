@@ -137,7 +137,7 @@ namespace DungeonCrawlerTactics
                 snapshots.Add(new SavedUnit { id = old.id, label = old.label, classId = old.classId, team = old.team, x = old.x, y = old.y, hp = ScaleHealth(old.hp, basic.hp, stats.hp), maxHp = stats.hp,
                     energy = Math.Min(stats.energy, old.energy), maxEnergy = stats.energy, move = stats.move, moved = old.moved, acted = old.acted, tags = old.tags, permanentTags = old.permanentTags });
             }
-            return new GameSave { home = source.home, journey = source.journey, schemaVersion = source.schemaVersion, contentVersion = source.contentVersion, progressionVersion = 1, equipped = new EquipmentSlotSave[0],
+            return new GameSave { battleLayoutVersion = source.battleLayoutVersion, home = source.home, journey = source.journey, schemaVersion = source.schemaVersion, contentVersion = source.contentVersion, progressionVersion = 1, equipped = new EquipmentSlotSave[0],
                 screen = source.screen, phase = source.phase, selectedUnitId = source.selectedUnitId, encounterIndex = source.encounterIndex, round = source.round, xp = source.xp, rewardChosen = source.rewardChosen,
                 roster = members.ToArray(), units = snapshots.ToArray(), tiles = source.tiles, inventory = source.inventory, timedTags = source.timedTags, exploration = source.exploration, log = source.log };
         }

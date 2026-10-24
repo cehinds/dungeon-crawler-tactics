@@ -67,7 +67,7 @@ namespace DungeonCrawlerTactics
                     tag = old.tag, source = old.source, remainingRounds = old.remainingRounds });
             }
             string selection;
-            return new GameSave { schemaVersion = source.schemaVersion, contentVersion = data.contentVersion, screen = source.screen, phase = source.phase,
+            return new GameSave { battleLayoutVersion = source.battleLayoutVersion, schemaVersion = source.schemaVersion, contentVersion = data.contentVersion, screen = source.screen, phase = source.phase,
                 selectedUnitId = source.selectedUnitId != null && replaced.TryGetValue(source.selectedUnitId, out selection) ? selection : source.selectedUnitId,
                 encounterIndex = source.encounterIndex, round = source.round, xp = source.xp, rewardChosen = source.rewardChosen, roster = migratedRoster.ToArray(),
                 units = migratedUnits.ToArray(), timedTags = migratedTags.ToArray(), tiles = source.tiles, inventory = source.inventory, exploration = MigrateExploration(source), log = source.log };

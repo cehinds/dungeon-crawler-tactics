@@ -15,6 +15,10 @@ The live shared-C# source and authored JSON are the implementation reference. `D
 
 ## Browser battle readability and animation
 
+- [x] Rebuild the first legacy/story battles and Sewers expedition as three connected chambers; verify doorway reachability and dry routes to enemies.
+- [x] Generate four stone-floor variants and two wall faces, normalize ground contacts, and share stable component IDs with the room workshop and Unity resource kit.
+- [x] Preserve old active battle geometry through versioned layouts, including saved expedition/scenario return snapshots; add 16 compatibility checks.
+- [x] Tighten the camera and four-button action bar, retain the full action book, and reset framing when switching encounters.
 - [x] Second visual pass: align textured wall PNGs, cache stone tint, zoom closer, reduce label clutter, enlarge party chips, and use generated nine-slice frames. Review evidence: [design QA](../design-qa.md).
 - [x] Replace the long character sheet with a persistent portrait and working tabs; add eight independent illustrated house components and downloadable production assets in the menu atlas.
 

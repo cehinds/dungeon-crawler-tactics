@@ -21,6 +21,25 @@ Package and validate the completed kit with:
 python3 Tools/package_room_kit.py
 ```
 
+The current concept stone pass overrides the original `stone-a`, `stone-b`,
+`wall-ne` and `wall-nw` files while preserving their stable IDs and footprints.
+Rebuild it after the original kit extraction, using the preserved generated
+source PNGs (no generation service is required):
+
+```sh
+python3 Tools/build_dungeon_floors.py
+python3 Tools/build_dungeon_walls.py
+python3 Tools/build_concept_kit.py
+python3 Tools/package_room_kit.py
+python3 Tools/prepare_unity_project.py
+```
+
+The battle renderer additionally uses `stone-c` and `stone-d` from the optional
+`concept-manifest.json` for deterministic surface variation. The 25 workshop
+IDs remain unchanged. Wall `edgeEndpoints` record the actual ground contacts;
+the renderer uses them to align wall art to the 128×64 logical grid. Anchors
+and images are shared by the workshop, downloadable kit and Unity resources.
+
 This validates the 25 RGBA sprites and manifest, writes `Web/wwwroot/assets/room-kit/room-kit.zip` for the workshop download, and copies the manifest and PNGs into `UnityPackage/Runtime/Resources/RoomKit/`. The ZIP includes the standalone PNGs, manifest, and this guide as `README.md`; source atlases stay outside the archive.
 
 The manifest is version 1 with logical tiles of 128×64 pixels and 25 PNG assets. Every asset record has `id`, `file`, `label`, `layer`, pixel `width` and `height`, a pixel `anchor`, integer-cell `footprint`, `tags`, and `blocksMovement`; `connections` is optional. The workshop uses only one-cell footprints today. `blocksMovement` affects the preview route and obstacle list; tags and connections describe asset metadata and orientation.

@@ -19,7 +19,7 @@ namespace DungeonCrawlerTactics
         private readonly List<PresentationEvent> presentationEvents = new List<PresentationEvent>();
         private readonly List<string> log = new List<string>();
         private string screen = "camp", phase = "player", selected, message = "Choose four crawlers and their classes. Start when ready.";
-        private int encounterIndex, round = 1, xp;
+        private int encounterIndex, round = 1, xp, battleLayoutVersion;
         private bool rewardChosen;
         private GameCommand pending;
         private ActionResult forecast;
@@ -155,7 +155,7 @@ namespace DungeonCrawlerTactics
                 ClassStats initial = PlayerStats(member.id, member.classId); int hp = initial.hp;
                 roster.Add(member.id, new RosterView { id = member.id, label = member.label, classId = member.classId, selected = member.selected && member.deployable, hp = hp, maxHp = hp, energy = initial.energy, maxEnergy = initial.energy, move = initial.move, effectiveMove = initial.move, level = 1 });
             }
-            ResetHome(); ResetInventory(); screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
+            ResetHome(); ResetInventory(); battleLayoutVersion = 1; screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
             message = "Choose " + data.partySize + " crawlers and their classes. Rest in the safe room to restore HP and mana between rooms.";
         }
         private void ResetInventory()
@@ -168,6 +168,7 @@ namespace DungeonCrawlerTactics
             battle = new BattleState(); units.Clear(); timed.Clear(); ClearPreview(); pendingDevelopment = null; pendingSkillNode = null; log.Clear();
             audienceState.favor = 0; audienceState.favorEarned = 0;
             EncounterDef encounter = Encounter;
+            battleLayoutVersion = encounter.layoutVersion;
             if (JourneyActive && JourneyFloor.mechanic == "capture") journey.capturedIds = new string[0];
             for (int y = 0; y < encounter.height; y++) for (int x = 0; x < encounter.width; x++)
             {
@@ -487,7 +488,12 @@ namespace DungeonCrawlerTactics
             foreach (EntityState unit in battle.Entities.Values) if (!unit.IsTile && unit.Hp > 0 && unit.Id != actorId && unit.X == x && unit.Y == y) return false;
             return true;
         }
-        private bool Blocked(int x, int y) { foreach (TileDef tile in Encounter.tiles) if (tile.x == x && tile.y == y) return tile.blocked; return false; }
+        private static TileDef[] BattleTiles(EncounterDef encounter, int version)
+        {
+            Require(version == 0 || version == encounter.layoutVersion, "Unknown encounter layout version.");
+            return version == 0 && encounter.legacyTiles.Length > 0 ? encounter.legacyTiles : encounter.tiles;
+        }
+        private bool Blocked(int x, int y) { foreach (TileDef tile in BattleTiles(Encounter, battleLayoutVersion)) if (tile.x == x && tile.y == y) return tile.blocked; return false; }
         private Dictionary<string, int> DistancesToPlayers(string actorId)
         {
             // Reverse BFS from walkable attack-adjacent cells gives route distance around walls.
@@ -533,6 +539,7 @@ namespace DungeonCrawlerTactics
         public GameView GetView(bool includeTargets = true)
         {
             GameView view = new GameView { screen = screen, message = message, phase = phase, encounterIndex = encounterIndex, encounterCount = data.encounters.Length, encounterName = Encounter.label, round = round, width = Encounter.width, height = Encounter.height, xp = xp, selectedUnitId = selected, partyCount = PartyCount(), partyCapacity = data.partySize, canConfirm = pending != null };
+            view.decorations = battleLayoutVersion == 0 && Encounter.legacyTiles.Length > 0 ? new MapPlacement[0] : Array.ConvertAll(Encounter.decorations, p => new MapPlacement { id = p.id, assetId = p.assetId, layer = p.layer, x = p.x, y = p.y, rotation = p.rotation, blocksMovement = p.blocksMovement });
             view.audience = BuildAudienceView(); view.achievementIds = achievementIds.ToArray();
             view.partyOrder = PartyOrder().ToArray();
             List<PresentationEvent> output = new List<PresentationEvent>(presentationEvents); if (forecast != null) foreach (PresentationEvent ev in forecast.Events) { ev.preview = true; output.Add(ev); }
@@ -639,7 +646,7 @@ namespace DungeonCrawlerTactics
         }
         public GameSave ExportSave()
         {
-            GameSave save = new GameSave { audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
+            GameSave save = new GameSave { battleLayoutVersion = battleLayoutVersion, audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
             save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
@@ -660,6 +667,7 @@ namespace DungeonCrawlerTactics
             {
                 ValidateNeighborhoodSaveGraph(save);
                 Require(save != null && save.schemaVersion == 1 && (save.contentVersion == data.contentVersion || Array.IndexOf(data.compatibleContentVersions, save.contentVersion) >= 0), "Save version does not match this content pack.");
+                Require(save.battleLayoutVersion >= 0 && save.battleLayoutVersion <= 1, "Unknown battle layout version.");
                 Require(save.progressionVersion == 0 || save.progressionVersion == 1, "Unknown progression save version.");
                 save = MigrateCompatibleSave(save);
                 Require(save.screen == "camp" || save.screen == "explore" || save.screen == "battle" || save.screen == "victory" || save.screen == "defeat" || save.screen == "complete", "Invalid save screen.");
@@ -716,6 +724,7 @@ namespace DungeonCrawlerTactics
                 List<ExplorationSave> nextExploration = ValidateExploration(save);
                 bool hasBattle = save.screen != "camp" && save.screen != "explore";
                 EncounterDef encounter = candidateExpedition ?? candidateScenario ?? candidateCustom ?? candidateJourney ?? data.encounters[Math.Min(save.encounterIndex, data.encounters.Length - 1)];
+                TileDef[] authoredTiles = BattleTiles(encounter, save.battleLayoutVersion);
                 ValidateDuplicatePairs(save);
                 int duplicateCount = 0; foreach (SavedUnit candidate in save.units) if (candidate != null && candidate.duplicateSourceId != null) duplicateCount++;
                 Require(duplicateCount <= data.partySize * 2 && save.units.Length == (hasBattle ? data.partySize + encounter.enemies.Length + duplicateCount : 0), "Saved unit count does not match encounter.");
@@ -724,7 +733,7 @@ namespace DungeonCrawlerTactics
                 foreach (TileView tile in save.tiles)
                 {
                     Require(tile != null && tile.id == TileId(tile.x, tile.y) && tile.x >= 0 && tile.y >= 0 && tile.x < encounter.width && tile.y < encounter.height && !nextBattle.Entities.ContainsKey(tile.id), "Invalid saved tile.");
-                    TileDef authored = Array.Find(encounter.tiles, t => t.x == tile.x && t.y == tile.y);
+                    TileDef authored = Array.Find(authoredTiles, t => t.x == tile.x && t.y == tile.y);
                     Require(tile.blocked == (authored != null && authored.blocked), "Save changed authored walls.");
                     ValidateTags(tile.tags); EntityState entity = new EntityState { Id = tile.id, IsTile = true, Blocked = tile.blocked, X = tile.x, Y = tile.y }; entity.Tags.UnionWith(tile.tags); nextBattle.Entities.Add(tile.id, entity);
                 }
@@ -749,7 +758,7 @@ namespace DungeonCrawlerTactics
                     }
                     Require(unit.hp >= 0 && unit.hp <= hp && unit.maxHp == hp && unit.energy >= 0 && unit.energy <= energy && unit.maxEnergy == energy && unit.move == move, "Saved stats do not match content.");
                     Require(unit.x >= 0 && unit.y >= 0 && unit.x < encounter.width && unit.y < encounter.height, "Unit outside board.");
-                    TileDef wall = Array.Find(encounter.tiles, t => t.x == unit.x && t.y == unit.y);
+                    TileDef wall = Array.Find(authoredTiles, t => t.x == unit.x && t.y == unit.y);
                     Require(wall == null || !wall.blocked, "Unit inside wall.");
                     if (unit.hp > 0) Require(occupied.Add(TileId(unit.x, unit.y)), "Living units overlap.");
                     Require(!unit.finished || (unit.acted && unit.moved), "Invalid activation flags."); ValidateTags(unit.tags); ValidateTags(unit.permanentTags);
@@ -785,7 +794,7 @@ namespace DungeonCrawlerTactics
                 foreach (TileView tile in save.tiles)
                     foreach (string tag in tile.tags)
                     {
-                        TagRuleDef rule = TagRule(tag); TileDef authored = Array.Find(encounter.tiles, t => t.x == tile.x && t.y == tile.y);
+                        TagRuleDef rule = TagRule(tag); TileDef authored = Array.Find(authoredTiles, t => t.x == tile.x && t.y == tile.y);
                         if (rule != null && rule.durationRounds > 0)
                             Require((authored != null && Array.IndexOf(authored.tags, tag) >= 0) || layerKeys.Contains(tile.id + ":" + tag), "Timed tile tag is missing its duration layer.");
                     }
@@ -800,7 +809,7 @@ namespace DungeonCrawlerTactics
                 inventory.Clear(); foreach (var pair in nextInventory) inventory.Add(pair.Key, pair.Value);
                 units.Clear(); foreach (var pair in nextUnits) units.Add(pair.Key, pair.Value);
                 timed.Clear(); timed.AddRange(nextTimed); battle = nextBattle;
-                screen = save.screen; phase = save.phase; selected = save.selectedUnitId; encounterIndex = save.encounterIndex; round = save.round; xp = save.xp; rewardChosen = save.rewardChosen;
+                battleLayoutVersion = save.battleLayoutVersion; screen = save.screen; phase = save.phase; selected = save.selectedUnitId; encounterIndex = save.encounterIndex; round = save.round; xp = save.xp; rewardChosen = save.rewardChosen;
                 log.Clear(); log.AddRange(save.log); ClearPreview(); message = "Save restored.";
             }
             catch (ArgumentException ex) { message = "Save rejected: " + ex.Message; }

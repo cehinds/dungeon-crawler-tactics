@@ -105,7 +105,7 @@ namespace DungeonCrawlerTactics
         private EncounterDef BuildExpeditionEncounter(ExpeditionDef definition)
         {
             EncounterDef source = definition.encounter;
-            return new EncounterDef { id = source.id, label = source.label, description = source.description, width = source.width, height = source.height, xp = 0, exploration = source.exploration ?? data.encounters[0].exploration, playerSpawns = source.playerSpawns, enemies = source.enemies, tiles = source.tiles };
+            return new EncounterDef { id = source.id, label = source.label, description = source.description, width = source.width, height = source.height, xp = 0, exploration = source.exploration ?? data.encounters[0].exploration, playerSpawns = source.playerSpawns, enemies = source.enemies, tiles = source.tiles, layoutVersion = source.layoutVersion, legacyTiles = source.legacyTiles, decorations = source.decorations };
         }
         private void CommitExpedition(GameSave save)
         {

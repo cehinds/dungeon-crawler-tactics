@@ -17,6 +17,10 @@ function remove(entry) {
   if (index >= 0) entries.splice(index, 1);
   if (hadFocus) (entries[0]?.element.querySelector('button') ?? entry.returnFocus)?.focus();
 }
+// Routine feedback is scoped to the current scene; errors remain dismissible.
+export function clearFeedback() {
+  for (const entry of [...entries]) if (entry.severity !== 'error') remove(entry);
+}
 function pause(entry) {
   if (!entry.timer) return;
   clearTimeout(entry.timer);
@@ -32,6 +36,7 @@ function resume(entry) {
 export function notify(message, severity = 'info') {
   if (!message) return;
   syncFeedbackHost();
+  if (innerWidth <= 730 && document.body.dataset.screen === 'battle' && severity !== 'error') clearFeedback();
   const duplicate = entries.find(entry => entry.message === message && entry.severity === severity);
   if (duplicate) { duplicate.remaining = severity === 'error' ? 10000 : 6500; resume(duplicate); return; }
   while (entries.length >= 3) remove(entries[0]);

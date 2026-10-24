@@ -482,6 +482,23 @@
         },
         "exploration": {
           "$ref": "#/$defs/exploration"
+        },
+        "layoutVersion": {
+          "const": 1
+        },
+        "legacyTiles": {
+          "type": "array",
+          "maxItems": 900,
+          "items": {
+            "$ref": "#/$defs/tile"
+          }
+        },
+        "decorations": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/scenarioDecoration"
+          }
         }
       }
     },
@@ -1174,6 +1191,23 @@
         },
         "exploration": {
           "$ref": "#/$defs/exploration"
+        },
+        "layoutVersion": {
+          "const": 1
+        },
+        "legacyTiles": {
+          "type": "array",
+          "maxItems": 900,
+          "items": {
+            "$ref": "#/$defs/tile"
+          }
+        },
+        "decorations": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/scenarioDecoration"
+          }
         }
       }
     },
@@ -1673,6 +1707,23 @@
               "type": "null"
             }
           ]
+        },
+        "layoutVersion": {
+          "const": 1
+        },
+        "legacyTiles": {
+          "type": "array",
+          "maxItems": 900,
+          "items": {
+            "$ref": "#/$defs/tile"
+          }
+        },
+        "decorations": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/scenarioDecoration"
+          }
         }
       }
     },

@@ -407,6 +407,18 @@ def validate_game(data, content):
 
         if len(encounter['playerSpawns']) != data['partySize']:
             errors.append(f'{base}.playerSpawns: must match partySize')
+        legacy_cells = set()
+        for j, tile in enumerate(encounter.get('legacyTiles', [])):
+            xy = tile['x'], tile['y']
+            if xy in legacy_cells or not (0 <= xy[0] < encounter['width'] and 0 <= xy[1] < encounter['height']):
+                errors.append(f'{base}.legacyTiles.{j}: duplicate or outside board')
+            legacy_cells.add(xy)
+            for tag in tile['tags']:
+                ref(tag, 'tags', f'{base}.legacyTiles.{j}.tags')
+        unique(encounter.get('decorations', []), 'id', base+'.decorations')
+        for j, piece in enumerate(encounter.get('decorations', [])):
+            if not (0 <= piece['x'] < encounter['width'] and 0 <= piece['y'] < encounter['height']):
+                errors.append(f'{base}.decorations.{j}: outside board')
         coordinates = set()
         walls = {(t['x'],t['y']) for t in encounter['tiles'] if t['blocked']}
         for j, tile in enumerate(encounter['tiles']):

@@ -1,3 +1,78 @@
+# Concept chamber follow-up — 24 October 2026
+
+**Result: passed** for this scoped chamber, camera and battle-HUD pass. This is
+not a claim of pixel-for-pixel concept parity or a redesign of every floor.
+
+## Source and final comparison
+
+Reference: `Web/wwwroot/assets/menu-concepts/combat-targeting.png`, plus the
+user's original dungeon image. The component index on the right of the source
+board is excluded from comparison. The runtime is the existing shared-C# game.
+
+[Side-by-side concept and playable Sewers](Docs/Screenshots/chambers-concept-comparison.png)
+shows the cropped source gameplay panel and the complete 1672×941 runtime,
+scaled proportionally. Different encounter geometry and gameplay state prevent
+a meaningful pixel-diff score; no numerical fidelity score is claimed.
+
+## Reviewed changes
+
+- [x] Connected rooms and real wall collision in the first legacy battle, first
+  story battle and Sewers expedition. Doorways preserve routes to every enemy.
+- [x] Four generated floor variants and two wall faces, extracted as transparent
+  components with measured anchors and ground contacts. Workshop and battle use
+  the same stone PNGs; saved room IDs remain stable.
+- [x] Closer party framing, raised masonry, warm torch pools, clearer movement
+  colors and deterministic stone variation.
+- [x] Four primary buttons, the complete action book, local pixel display font,
+  corner target confirmation and phone bottom-sheet confirmation.
+- [x] Encounter changes reset stale camera pan. All four rotations retain usable
+  party framing and correct pointer picking on desktop and phone.
+- [x] Routine notices clear on scene changes; phone guidance fits without clipping.
+- [x] Existing active saves retain their original walls and hide newly authored
+  decorations. New encounters use the new layouts.
+
+## Iterations and actual validation
+
+Early captures exposed stale camera pan when switching encounters and insufficient
+headroom after rotation. Both were fixed and recaptured. A subsequent review
+caught notices crossing encounters and clipped phone targeting guidance; fresh
+captures and explicit browser assertions confirm both fixes. A final workshop
+reaction check exposed a routine toast intercepting a map tap; informational
+battle toasts now pass clicks through while their dismiss buttons stay usable.
+
+`Tools/playtest_concept_rooms.py` exercises the published WASM build at
+1672×941 and 390×844: both changed legacy/Sewers battles, four rotations, inverse
+projection and pointer picks, the action book, legal forecast/cancel/commit,
+four party activations before enemies, and enemy progression. All pass, with no
+JavaScript errors or horizontal overflow. The `chambers-*` PNGs under
+`Docs/Screenshots/` record opening, rotation, abilities, forecast and enemy phase.
+Focused scene-transition checks find no stale routine notices and complete phone
+guidance. The tested views sampled 60 animation frames at median 16.7 ms;
+this is an observation in this Chromium environment, not a device-wide guarantee.
+
+Shared tests pass: 650 C# checks (including 16 added save-compatibility checks),
+85 Python checks, authored chamber reachability/dry-route checks, and room
+recipe/projection checks. The netstandard2.1 compatibility build also passes.
+Signature browser regression legally reaches Floor 3 in 109 commands and 17
+committed actions, then verifies Tripwire, specialty selection, Triplicate,
+two controllable copies, Rush movement 4→6, party controls and exact reload.
+The existing four-lane browser suite also passes at 1440×900 and 390×844:
+craft/place/trigger a trap, form selection, workshop import, earned Favor,
+preview/cancel/commit, preserved movement and reload. Actual map clicks pass
+through visible routine toast text, and its dismiss button remains functional.
+Unity source/resources were synchronized; Unity Editor was not run.
+
+## Remaining visual differences
+
+The concept has bespoke scenery beyond the map boundary; the game still uses a
+navy backdrop around its slab. HUD portraits have a different illustration style
+from the pixel map sprites. Later encounters retain their existing geometry.
+Phone controls reflow to fit the viewport. These are explicit follow-up art and
+content items, not hidden defects in the tested interaction flow. See
+[component review](Docs/Concept-Chambers-Review.md).
+
+---
+
 # Visual fidelity pass — 23 October 2026
 
 ## Reference and scope

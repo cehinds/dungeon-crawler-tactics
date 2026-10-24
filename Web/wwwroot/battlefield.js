@@ -22,6 +22,11 @@ const roomReady = fetch('assets/room-kit/manifest.json').then(r=>r.json()).then(
     }
     roomArt.set(asset.id,{...asset,image,displayImage});resolve();}; image.onerror=resolve;image.src='assets/room-kit/'+asset.file;
 })))).catch(()=>{});
+// Generated concept textures override the kit without changing logical grid geometry.
+// Missing optional art leaves the original kit available throughout loading.
+const conceptReady=roomReady.then(()=>fetch('assets/room-kit/concept-manifest.json').then(r=>r.ok?r.json():null).then(manifest=>Promise.all((manifest?.assets??[]).map(asset=>new Promise(resolve=>{
+  const image=new Image();image.onload=()=>{roomArt.set(asset.id,{...roomArt.get(asset.id),...asset,image,displayImage:image});resolve();};image.onerror=resolve;image.src='assets/room-kit/'+asset.file;
+})))).catch(()=>{}));
 const legacyImages = {};
 let spriteFrames = {};
 const directionalArt = {};
@@ -61,7 +66,7 @@ const imageLoads = ['terrain','characters','enemies','ui','effects','mongo'].map
   image.onerror = resolve;
   image.src = ROOT + name + '.png';
 }));
-const ready = Promise.all([trapsReady,formsReady,expeditionArtReady,scenarioArtReady,bossReady,roomReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
+const ready = Promise.all([trapsReady,formsReady,expeditionArtReady,scenarioArtReady,bossReady,roomReady,conceptReady,directionalReady,...imageLoads, ...['character-art.json','mongo-art.json'].map(file =>
   fetch(ROOT+file).then(r=>r.json()).then(data=>Object.assign(spriteFrames,data)).catch(()=>{}))]);
 
 export function createBattlefield(canvas, {onCell, onHover} = {}) {
@@ -106,11 +111,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function screenFacing(id){const direction=facing.get(id)??{x:0,y:1};const p=rotateVector(direction.x,direction.y);return p.x>0?'se':p.x<0?'nw':p.y>0?'sw':'ne';}
   function getRotationLabel(){return ['North view','East view','South view','West view'][rotation];}
   function rotate(delta){
-    const map=mapData(); const selected=view?.screen==='explore'?view.exploration:view?.units?.find(u=>u.id===view.selectedUnitId);
-    const anchor=selected??(map?{x:(map.width-1)/2,y:(map.height-1)/2}:null);
-    const before=anchor?screen(anchor.x,anchor.y):null;
-    rotation=((rotation+Math.round(delta))%4+4)%4;fit();
-    if(anchor){const after=screen(anchor.x,anchor.y);panX+=before.x-after.x;panY+=before.y-after.y;fit();}
+    rotation=((rotation+Math.round(delta))%4+4)%4;
+    fit();centerAction();
     canvas.dispatchEvent(new CustomEvent('maprotation',{detail:{rotation,label:getRotationLabel()}}));
   }
   function resize() {
@@ -120,7 +122,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     width=Math.max(1,box.width); height=Math.max(1,box.height);
     if(layoutChanged){
       // Retain the user's relative zoom while switching desktop/phone framing.
-      zoomLevel=clamp(zoomLevel*(width<600?1.65/1.28:1.28/1.65),.7,3.2);
+      zoomLevel=clamp(zoomLevel*(width<600?2.5/1.6:1.6/2.5),.7,3.2);
       panX=0;panY=0;
     }
     const dpr=Math.min(devicePixelRatio || 1,2);
@@ -137,13 +139,18 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const minX=Math.min(...corners.map(p=>p.x))-TILE_W/2,maxX=Math.max(...corners.map(p=>p.x))+TILE_W/2;
     const minY=Math.min(...corners.map(p=>p.y))-136,maxY=Math.max(...corners.map(p=>p.y))+TILE_H/2;
     const mapWidth=maxX-minX,mapHeight=maxY-minY;
-    if(!cameraReady){zoomLevel=width<600?1.65:1.28;cameraReady=true;}
+    if(!cameraReady){zoomLevel=width<600?2.5:1.6;cameraReady=true;}
     scale=Math.max(.05,Math.min((width-28)/mapWidth,(height-24)/mapHeight)*zoomLevel);
     originX=width/2-(minX+maxX)/2*scale+panX;
     originY=height/2-(minY+maxY)/2*scale+panY;
   }
+  function mapIdentity(state) {
+    return JSON.stringify([state?.screen,state?.encounterName,state?.encounterIndex,state?.width,state?.height,state?.exploration?.id,state?.expedition?.id,state?.scenario?.id,state?.journey?.floorId,state?.journey?.floorNumber,state?.customMap?.label]);
+  }
   function setView(next, settings={}) {
     const oldScreen=view?.screen;
+    const mapChanged=mapIdentity(view)!==mapIdentity(next);
+    if(mapChanged){panX=0;panY=0;rotation=0;cameraReady=false;}
     if(view?.screen==='explore' && next.screen==='explore' && view.exploration.id===next.exploration.id){
       const from=view.exploration,to=next.exploration;
       if(from.x!==to.x||from.y!==to.y){
@@ -167,7 +174,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       cursor=selected ? {x:selected.x,y:selected.y} : {x:next.exploration?.x??1,y:next.exploration?.y??1};
     }
     fit();
-    if(oldScreen!==next.screen || width<600 && lastSelection!==next.selectedUnitId) centerSelected();
+    if(mapChanged) centerAction();
+    else if(width<600 && lastSelection!==next.selectedUnitId) centerSelected();
     lastSelection=next.selectedUnitId;
   }
   function diamond(x,y,{stroke,fill,weight=2,inset=0}={}) {
@@ -203,8 +211,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   }
   function floor(x,y,index,alpha=1) {
     // A solid mortar bed joins the padded PNG edges into one continuous room.
-    context.save();context.globalAlpha=alpha;diamond(x,y,{fill:index===2?'#124955':'#48443b'});context.restore();
-    component(['stone-a','stone-b','water-floor','oil-floor'][index],x,y,alpha); }
+    context.save();context.globalAlpha=alpha;diamond(x,y,{fill:index===2?'#123e50':'#303c50'});context.restore();
+    const stone=['stone-a','stone-b','stone-c','stone-d'][(x*7+y*11)%4];
+    component(index<2&&roomArt.has(stone)?stone:['stone-a','stone-b','water-floor','oil-floor'][index],x,y,alpha); }
   function prop(x,y,index,size=128,alpha=1) {
     component(({4:'wall-ne',5:'wall-nw',6:'pillar',8:'crate',9:'oil-overlay',10:'chest',11:'stairs'})[index]??'rubble',x,y,alpha);
   }
@@ -249,12 +258,12 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const boss=bossArt[key];
     const size=boss?boss.bodyHeight??168:useDirectional ? directional.bodyHeight ?? frame.drawHeight : frame?.drawHeight ?? (key==='boss'?148:100);
     diamond(unit.x,unit.y,{stroke:unit.team==='enemy'?hostile:friendly,fill:unit.team==='enemy'?'#c12c242b':'#269ed321',weight:selected?3:1.5,inset:23});
-    if(selected) diamond(unit.x,unit.y,{stroke:'#fff1b2',weight:2,inset:19});
+    if(selected) {diamond(unit.x,unit.y,{fill:'#ffd63269',stroke:'#ffe873',weight:3,inset:13});diamond(unit.x,unit.y,{stroke:'#fff2b1',weight:1,inset:18});}
     context.globalAlpha=unit.acted && unit.team==='player'?.63:1;
     if((unit.tags??[]).includes('status.guarded')) {
       context.globalAlpha=.46;atlas('ui',14,4,4,p.x-45,p.y-95,90,90);context.globalAlpha=1;
     }
-    const enlarged=1.27;
+    const enlarged=1.32;
     const image=useDirectional?directional.image:images[atlasName];
     if(useDirectional&&actor&&current?.type==='attack'){
       const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
@@ -320,7 +329,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function highlights() {
     const exploring=view.screen==='explore';
     const reachable=exploring?view.exploration.tiles.filter(t=>t.reachable):view.reachable??[];
-    if(exploring||options.mode!=='ability') for(const tile of reachable) diamond(tile.x,tile.y,{stroke:'#67d9fd66',weight:1,fill:'#42c8ff0b',inset:3});
+    if(exploring||options.mode!=='ability') for(const tile of reachable) diamond(tile.x,tile.y,{stroke:'#4ee0ffa6',weight:1.5,fill:'#17b4e529',inset:3});
     if(!exploring && options.mode==='ability') {
       const targets=new Set(options.action?.targetIds??[]);
       for(const tile of visualTiles) {
@@ -390,13 +399,16 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const left=a.x<b.x?a:b,right=a.x<b.x?b:a;
     const rising=right.y<left.y,asset=roomArt.get(rising?'wall-nw':'wall-ne');
     if(!asset)return;
-    const sx=(right.x-left.x)/56;
-    const sourceSlope=rising?-.5:.5;
-    const shear=(right.y-left.y)/56-sourceSlope*sy;
+    const endpoints=asset.edgeEndpoints??(rising?[[12,79],[68,51]]:[[12,51],[68,79]]);
+    const [start,end]=endpoints;
+    const sourceWidth=end[0]-start[0];
+    const verticalScale=sy*86/asset.height;
+    const sx=(right.x-left.x)/sourceWidth;
+    const shear=((right.y-left.y)-(end[1]-start[1])*verticalScale)/sourceWidth;
     context.save();context.globalAlpha=alpha;
     context.translate((left.x+right.x)/2,(left.y+right.y)/2);
-    context.transform(sx,shear,0,sy,0,0);
-    context.drawImage(asset.displayImage??asset.image,-40,-65);
+    context.transform(sx,shear,0,verticalScale,0,0);
+    context.drawImage(asset.displayImage??asset.image,-(start[0]+end[0])/2,-(start[1]+end[1])/2);
     context.restore();
   }
   function glow(x,y,radius,color,power=1) {
@@ -435,7 +447,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     // Idle artwork animates at a modest rate; moving events still use the display refresh rate.
     if(!animation && time-lastTime<32)return;lastTime=time;
     context.fillStyle='#0b1116';context.fillRect(0,0,width,height);
-    const backdrop=context.createRadialGradient(width*.5,height*.5,20,width*.5,height*.5,width*.65);backdrop.addColorStop(0,'#17242a');backdrop.addColorStop(1,'#060c12');context.fillStyle=backdrop;context.fillRect(0,0,width,height);
+    const backdrop=context.createRadialGradient(width*.5,height*.5,20,width*.5,height*.5,width*.65);backdrop.addColorStop(0,'#172234');backdrop.addColorStop(1,'#020711');context.fillStyle=backdrop;context.fillRect(0,0,width,height);
     if(!view || !roomArt.size)return;
     context.save();
     const shake=!reduced.matches&&time<shakeUntil?Math.sin(time*.1)*2:0;
@@ -467,9 +479,18 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       if((tile.tags??[]).includes('surface.oil'))component('oil-overlay',tile.x,tile.y);
       if((tile.tags??[]).includes('surface.water'))component('water-overlay',tile.x,tile.y);
     }
-    const decorations=!explore?(view.expedition?.decorations??view.scenario?.decorations??[]):[];
+    // An explicit empty encounter list suppresses new props on legacy saves.
+    const decorations=!explore?(view.scenario?.decorations??view.decorations??view.expedition?.decorations??[]):[];
     const groundDecoration=piece=>['floor','surface','ground'].includes(piece.layer)||['moss','grate'].includes(piece.assetId);
     for(const piece of decorations)if(groundDecoration(piece))component(piece.assetId,piece.x,piece.y,1,piece.rotation??0);
+    if(!explore){
+      const farY=rotation===1||rotation===2?map.height-.5:-.5,farX=rotation===2||rotation===3?map.width-.5:-.5;
+      context.save();context.globalCompositeOperation='screen';
+      for(let x=1;x<map.width;x+=3){const p=project(x,farY);glow(p.x,p.y,156,'#e89a4b',.7);}
+      for(let y=1;y<map.height;y+=3){const p=project(farX,y);glow(p.x,p.y,156,'#e89a4b',.7);}
+      for(const piece of [...placements,...decorations])if(piece.assetId==='torch'){const p=project(piece.x,piece.y);glow(p.x,p.y,160,'#efa24b',.9);}
+      context.restore();
+    }
     highlights();
     if(!explore)for(const tile of tiles)trapMarker(tile,time);
     const drawables=[];
@@ -479,8 +500,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(!explore&&!placements.length) {
       const farY=rotation===1||rotation===2?map.height-.5:-.5;
       const farX=rotation===2||rotation===3?map.width-.5:-.5;
-      for(let x=0;x<map.width;x++)drawables.push({depth:depth(x,farY),draw:()=>masonry(project(x-.5,farY),project(x+.5,farY))});
-      for(let y=0;y<map.height;y++)drawables.push({depth:depth(farX,y),draw:()=>masonry(project(farX,y-.5),project(farX,y+.5))});
+      for(let x=0;x<map.width;x++)drawables.push({depth:depth(x,farY),draw:()=>masonry(project(x-.5,farY),project(x+.5,farY),1,2.15)});
+      for(let y=0;y<map.height;y++)drawables.push({depth:depth(farX,y),draw:()=>masonry(project(farX,y-.5),project(farX,y+.5),1,2.15)});
       for(let x=1;x<map.width;x+=3)drawables.push({depth:depth(x,farY)+.1,draw:()=>torch(x,farY,time)});
       for(let y=1;y<map.height;y+=3)drawables.push({depth:depth(farX,y)+.1,draw:()=>torch(farX,y,time)});
     }
@@ -490,21 +511,28 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       // Render connected blocked cells as a single stone mass. Only exposed
       // edges receive upright art; no random pillar/crate substitutions.
       const corners=[[tile.x-.5,tile.y-.5],[tile.x+.5,tile.y-.5],[tile.x+.5,tile.y+.5],[tile.x-.5,tile.y+.5]];
+      const cap=corners.map(c=>{const p=project(...c);return {x:p.x,y:p.y-59};});
+      drawables.push({depth:depth(tile.x,tile.y)-1.05,draw:()=>{
+        polygon(cap,'#46556b','#182333');
+        context.save();context.translate(0,-59);
+        floor(tile.x,tile.y,(tile.x+tile.y)%2,.9);context.restore();
+        polygon(cap,'#263c652b','#8290a15c');
+      }});
       const neighbors=[[0,-1],[1,0],[0,1],[-1,0]];
       for(let edge=0;edge<4;edge++){
         const [dx,dy]=neighbors[edge];if(blocked.has(`${tile.x+dx},${tile.y+dy}`))continue;
         const a=project(...corners[edge]),b=project(...corners[(edge+1)%4]);
         const d=(a.y+b.y)/TILE_H;
         drawables.push({depth:d,draw:()=>{
-          const nearby=visualUnits.some(u=>{const p=project(u.x,u.y);return u.hp>0&&p.y>=(a.y+b.y)/2&&p.y-(a.y+b.y)/2<90&&Math.abs(p.x-(a.x+b.x)/2)<85;});
-          masonry(a,b,nearby?.48:1,1.05);
+          const nearby=visualUnits.some(u=>{const p=project(u.x,u.y);return u.hp>0&&u.team==='player'&&p.y<(a.y+b.y)/2&&(a.y+b.y)/2-p.y<105&&Math.abs(p.x-(a.x+b.x)/2)<85;});
+          masonry(a,b,nearby?.64:1,1.35);
         }});
       }
     }
-    for(const piece of placements)if(!['floor','surface'].includes(piece.layer)&&!['moss','fire-overlay'].includes(piece.assetId))drawables.push({depth:depth(piece.x,piece.y),draw:()=>component(piece.assetId,piece.x,piece.y,1,piece.rotation??0)});
+    for(const piece of placements)if(!['floor','surface'].includes(piece.layer)&&!['moss','fire-overlay'].includes(piece.assetId))drawables.push({depth:depth(piece.x,piece.y),draw:()=>piece.assetId==='torch'?torch(piece.x,piece.y,time):component(piece.assetId,piece.x,piece.y,1,piece.rotation??0)});
     const intent=!explore?view.scenario?.intent:null;
     if(intent)for(const cell of intent.cells??[])diamond(cell.x,cell.y,{stroke:'#ff9855',fill:'#ff4b293e',weight:3,inset:3});
-    for(const piece of decorations)if(!groundDecoration(piece))drawables.push({depth:depth(piece.x,piece.y),draw:()=>component(piece.assetId,piece.x,piece.y,1,piece.rotation??0)});
+    for(const piece of decorations)if(!groundDecoration(piece))drawables.push({depth:depth(piece.x,piece.y),draw:()=>piece.assetId==='torch'?torch(piece.x,piece.y,time):component(piece.assetId,piece.x,piece.y,1,piece.rotation??0)});
     for(const item of !explore?view.scenario?.interactables??[]:[]){
       // Cleared piles and destroyed gym cover must disappear from the board.
       if(item.action==='garbage'&&item.hp<=0||item.action==='cover'&&item.destroyed)continue;
@@ -547,6 +575,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     floating=floating.filter(f=>time-f.started<1100);
     for(const f of floating) {const p=project(f.x,f.y),age=time-f.started;context.globalAlpha=Math.min(1,(1100-age)/250);text(f.text,p.x,p.y-68-age*.027,f.color,18);context.globalAlpha=1;}
     context.restore();
+    const vignette=context.createRadialGradient(width*.5,height*.48,Math.min(width,height)*.24,width*.5,height*.48,Math.max(width,height)*.68);
+    vignette.addColorStop(0,'#02071500');vignette.addColorStop(.68,'#02071524');vignette.addColorStop(1,'#020715d9');
+    context.fillStyle=vignette;context.fillRect(0,0,width,height);
     if(!explore)trapTooltip();
   }
   function eventUnit(event) {return visualUnits.find(u=>u.id===(event.targetId||event.actorId))??visualTiles.find(t=>t.id===event.targetId);}
@@ -632,10 +663,28 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     return queue;
   }
   function skipAnimations() {explorationMotion=null;generation++;animation=null;if(view){visualUnits=copy(view.units??[]);visualTiles=copy(view.tiles??[]);}effects=[];floating=[];missiles=[];}
+  function centerAction() {
+    if(view?.screen==='explore'){centerSelected();return;}
+    const party=(view?.units??[]).filter(u=>u.hp>0&&u.team==='player');if(!party.length){centerSelected();return;}
+    const center={x:party.reduce((sum,u)=>sum+u.x,0)/party.length,y:party.reduce((sum,u)=>sum+u.y,0)/party.length};
+    const enemy=(view.units??[]).filter(u=>u.hp>0&&u.team==='enemy').sort((a,b)=>Math.hypot(a.x-center.x,a.y-center.y)-Math.hypot(b.x-center.x,b.y-center.y))[0];
+    const group=[...party];if(enemy&&Math.hypot(enemy.x-center.x,enemy.y-center.y)<=(width<600?4:7))group.push(enemy);
+    const points=group.map(u=>project(u.x,u.y));
+    const bounds={left:Math.min(...points.map(p=>p.x))-48,right:Math.max(...points.map(p=>p.x))+48,top:Math.min(...points.map(p=>p.y))-148,bottom:Math.max(...points.map(p=>p.y))+32};
+    // Reserve physical screen space above the sprites for the objective and HP bars.
+    // When the party spans a rotated room, pull back enough to keep nearby threats visible.
+    const availableWidth=Math.max(160,width-80),availableHeight=Math.max(160,height-150);
+    const ratio=Math.min(1,availableWidth/((bounds.right-bounds.left)*scale),availableHeight/((bounds.bottom-bounds.top)*scale));
+    if(ratio<1){zoomLevel=Math.max(.7,zoomLevel*ratio);fit();}
+    const middle={x:(bounds.left+bounds.right)/2,y:(bounds.top+bounds.bottom)/2};
+    panX+=width*.5-(originX+middle.x*scale);
+    panY+=(90+(height-125)/2)-(originY+middle.y*scale);fit();
+  }
+
   function centerSelected() {
     const unit=view?.screen==='explore'?view.exploration:view?.units?.find(u=>u.id===view.selectedUnitId);
     if(!unit)return;
-    const pos=screen(unit.x,unit.y);panX+=width*(width<600?.5:.4)-pos.x;panY+=height*(width<600?.43:.25)-pos.y;fit();
+    const pos=screen(unit.x,unit.y);panX+=width*(width<600?.5:.4)-pos.x;panY+=Math.max(height*.46,90+148*scale)-pos.y;fit();
   }
   function zoom(delta) {zoomLevel=clamp(zoomLevel+delta,.7,3.2);fit();centerSelected();}
   const down=event=>{drag={id:event.pointerId,x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY};suppressClick=false;canvas.setPointerCapture(event.pointerId);};

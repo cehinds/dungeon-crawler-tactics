@@ -53,7 +53,7 @@ static class GameTests
         GameDataValidator.Validate(Data, new Catalog(Content));
         Check(Content.classes.All(c => c.abilityIds.Length > 0), "all optional and identity classes have functional kits");
         Check(Content.items.Length == 10 && Content.abilities.Length >= 90, "release inventory and ability breadth");
-        BranchingSkillTrees(); AuthoredMechanicsValidation(); CrawlerDevelopment(); IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
+        BranchingSkillTrees(); AuthoredMechanicsValidation(); CrawlerDevelopment(); IndependentActionsAndModes(); EnemyMovementRegression(); ProgressionAndEquipment(); RevampContracts(); Exploration(); ConfigurableParty(); PartyAndMovement(); PreviewItemsAndTags(); Saves(); BattleLayoutCompatibility(); TerrainAndDurations(); CompleteFloor(); DefeatRetry();
         Console.WriteLine(checks + " game checks passed.");
     }
     static GameView TreeCommand(GameSession game, string type, string owner = null, string node = null) { return game.Handle(new GameCommand { type = type, unitId = owner, nodeId = node }); }
@@ -531,6 +531,61 @@ static class GameTests
         bad = Clone(save); bad.tiles[0].blocked = !bad.tiles[0].blocked; Check(restored.ImportSave(bad).message.StartsWith("Save rejected"), "save cannot change authored walls");
         bad = Clone(save); bad.units[0].classId = "class.missing"; Check(restored.ImportSave(bad).message.StartsWith("Save rejected"), "unknown class rejected");
         bad = Clone(save); bad.rewardChosen = true; Check(restored.ImportSave(bad).message.StartsWith("Save rejected"), "unearned battle reward flag rejected");
+    }
+    static void BattleLayoutCompatibility()
+    {
+        // Build the old release from its preserved authored tiles, then create a real
+        // active save through the engine instead of rewriting a new map's saved tiles.
+        GameData oldContent = Clone(Data);
+        EncounterDef oldRoom = oldContent.encounters[0];
+        Check(oldRoom.legacyTiles.Length > 0, "refined first room preserves its old authored tile provenance");
+        oldRoom.tiles = Clone(oldRoom.legacyTiles); oldRoom.legacyTiles = new TileDef[0]; oldRoom.decorations = new MapPlacement[0];
+        GameSession oldGame = new GameSession(Clone(Content), oldContent); Command(oldGame, "start");
+        Command(oldGame, "move", "crawler.carl", x: 2, y: 2);
+        Command(oldGame, "preview", "crawler.carl", "enemy.goblin_one", item: "item.frost_vial"); Command(oldGame, "confirm");
+        Check(oldGame.ExportSave().timedTags.Length > 0 && oldGame.ExportSave().units.Any(u => u.moved), "old-content fixture includes committed movement and timed status");
+        GameSave oldSave = Clone(oldGame.ExportSave());
+        // Pre-version release files omitted this field, which deserializes as zero.
+        oldSave.battleLayoutVersion = 0;
+        string oldJson = JsonSerializer.Serialize(oldSave, Json).Replace("\"battleLayoutVersion\":0,", "");
+        oldSave = JsonSerializer.Deserialize<GameSave>(oldJson, Json);
+        GameSession restored = Session(); GameView view = restored.ImportSave(oldSave);
+        Check(!view.message.StartsWith("Save rejected"), "pre-version active battle restores against original authored walls");
+        Check(JsonSerializer.Serialize(oldSave, Json) == JsonSerializer.Serialize(restored.ExportSave(), Json), "old battle preserves positions health conditions flags tiles and full save state");
+        Check(view.decorations.Length == 0 && view.tiles.All(t => t.blocked == oldSave.tiles.First(o => o.id == t.id).blocked), "legacy view preserves old topology and hides new decorations");
+        string baseline = JsonSerializer.Serialize(restored.ExportSave(), Json);
+        GameSave forged = Clone(oldSave); forged.tiles[0].blocked = !forged.tiles[0].blocked;
+        Check(restored.ImportSave(forged).message.StartsWith("Save rejected") && baseline == JsonSerializer.Serialize(restored.ExportSave(), Json), "legacy authored wall forgery rejected atomically");
+        forged = Clone(oldSave); forged.battleLayoutVersion = 2;
+        Check(restored.ImportSave(forged).message.StartsWith("Save rejected") && baseline == JsonSerializer.Serialize(restored.ExportSave(), Json), "unknown battle layout version rejected atomically");
+        Command(restored, "expedition_start", target: Data.expeditions[0].id);
+        Check(restored.ExportSave().battleLayoutVersion == 1 && restored.ExportSave().expedition.campaign.battleLayoutVersion == 0, "new expedition keeps legacy campaign layout in its snapshot");
+        GameSave mission = Clone(restored.ExportSave()); GameSession missionReload = Session();
+        Check(!missionReload.ImportSave(mission).message.StartsWith("Save rejected"), "mission with legacy campaign snapshot reloads");
+        Command(missionReload, "expedition_return");
+        Check(baseline == JsonSerializer.Serialize(missionReload.ExportSave(), Json), "return from expedition restores legacy active battle exactly");
+        mission.expedition.campaign.battleLayoutVersion = 2;
+        Check(missionReload.ImportSave(mission).message.StartsWith("Save rejected") && baseline == JsonSerializer.Serialize(missionReload.ExportSave(), Json), "unknown nested campaign layout version rejected atomically");
+        Command(restored, "expedition_return");
+        Command(restored, "scenario_start", target: Data.scenarios[0].id);
+        GameSave scenario = Clone(restored.ExportSave()); GameSession scenarioReload = Session();
+        Check(scenario.scenario != null && scenario.scenario.campaign.battleLayoutVersion == 0 && !scenarioReload.ImportSave(scenario).message.StartsWith("Save rejected"), "scenario snapshot retains legacy battle layout through reload");
+        Command(scenarioReload, "scenario_return");
+        Check(baseline == JsonSerializer.Serialize(scenarioReload.ExportSave(), Json), "return from scenario restores legacy active battle exactly");
+        GameData oldStoryData = Clone(Data); EncounterDef storyRoom = oldStoryData.journey.floors[0].encounter;
+        storyRoom.tiles = Clone(storyRoom.legacyTiles); storyRoom.legacyTiles = new TileDef[0]; storyRoom.decorations = new MapPlacement[0];
+        GameSession oldStory = new GameSession(Clone(Content), oldStoryData); Command(oldStory, "start_journey"); Command(oldStory, "start");
+        GameSave storySave = Clone(oldStory.ExportSave()); storySave.battleLayoutVersion = 0;
+        GameSession storyReload = Session();
+        Check(storySave.screen == "battle" && !storyReload.ImportSave(storySave).message.StartsWith("Save rejected") && JsonSerializer.Serialize(storySave, Json) == JsonSerializer.Serialize(storyReload.ExportSave(), Json), "old story first battle restores exact original topology and saved state");
+        GameData oldExpeditionData = Clone(Data); ExpeditionDef sewers = oldExpeditionData.expeditions.First(e => e.encounter.legacyTiles.Length > 0);
+        sewers.encounter.tiles = Clone(sewers.encounter.legacyTiles); sewers.encounter.legacyTiles = new TileDef[0]; sewers.encounter.decorations = new MapPlacement[0];
+        GameSession oldExpedition = new GameSession(Clone(Content), oldExpeditionData); Command(oldExpedition, "expedition_start", target: sewers.id);
+        GameSave expeditionSave = Clone(oldExpedition.ExportSave()); expeditionSave.battleLayoutVersion = 0;
+        GameSession expeditionReload = Session();
+        Check(!expeditionReload.ImportSave(expeditionSave).message.StartsWith("Save rejected") && JsonSerializer.Serialize(expeditionSave, Json) == JsonSerializer.Serialize(expeditionReload.ExportSave(), Json), "old sewers expedition restores exact original topology and snapshot");
+        Command(restored, "new_run"); Command(restored, "start");
+        Check(restored.ExportSave().battleLayoutVersion == 1 && restored.GetView().decorations.Length == Data.encounters[0].decorations.Length, "new battle selects current layout and decorations after old save");
     }
     static void TerrainAndDurations()
     {

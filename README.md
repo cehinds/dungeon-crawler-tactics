@@ -16,6 +16,13 @@ Clockwork copies; Katia can use Rush to extend her movement. See the
 [menu atlas](https://cehinds.github.io/dungeon-crawler-tactics/menu-atlas.html)
 also offers the actual house PNG components and reusable frame for download.
 
+**Concept chamber pass:** the first legacy battle, first story battle and Sewers
+expedition now use connected chambers with real blocked walls and doorways.
+Generated stone PNGs share anchors between the battlefield and room workshop.
+The closer camera, four-button action bar and corner forecast emphasize the map;
+all abilities remain available in the action book. Existing active saves retain
+their original geometry. See [visual review](design-qa.md).
+
 **Tabletop inspiration:** [Official RPG research and prioritized gameplay changes](Docs/Tabletop-Inspiration.md) · [Playable Over City neighborhood: Lantern Row](Docs/Over-City-Neighborhood.md).
 
 **Mechanics review:** [Seven concept sheets and feature checklist](https://cehinds.github.io/dungeon-crawler-tactics/mechanics-review.html) · [Lore research](Docs/Lore-Mechanics-Review.md) · [Implementation plan](Docs/Mechanics-Plan.md) · [Playable boss scenarios and sprite sources](Docs/Boss-Concepts.md).
