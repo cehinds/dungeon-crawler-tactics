@@ -22,12 +22,12 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "Web/wwwroot/assets/style-packs"
-SHEETS = {"world": (6, 4), "ui": (4, 3), "expansion": (6, 4), "supplies": (6, 4), "biomes": (4, 3)}
+SHEETS = {"world": (6, 4), "ui": (4, 3), "expansion": (6, 4), "supplies": (6, 4), "biomes": (4, 3), "services": (6, 4)}
 REQUIRED_SHEETS = ("world", "ui")
 LAYERS = ("ground", "terrain", "structures", "props", "actors", "effects", "ui")
 PADDING = 4
 SEAM_GUTTER = 2
-MAX_ARCHIVE_BYTES = 32 * 1024 * 1024
+MAX_ARCHIVE_BYTES = 40 * 1024 * 1024
 PREVIEW_SIZE = (1200, 900)
 
 
@@ -483,7 +483,7 @@ def validate_pack(directory):
         require(image.mode == "RGBA" and image.size == PREVIEW_SIZE and image.tobytes() == composite.tobytes(),
                 "Preview differs from composited layer PNGs")
     archive_path = safe_path(directory, manifest["download"])
-    require(archive_path.stat().st_size <= MAX_ARCHIVE_BYTES, "Style ZIP exceeds 32 MiB limit")
+    require(archive_path.stat().st_size <= MAX_ARCHIVE_BYTES, f"Style ZIP exceeds {MAX_ARCHIVE_BYTES // (1024 * 1024)} MiB limit")
     with ZipFile(archive_path) as archive:
         require(archive.namelist() == archive_files(manifest), "Archive entries differ from manifest")
         require(archive.testzip() is None, "Corrupt ZIP archive")

@@ -8,11 +8,20 @@ Three visual directions are available as separate component packs:
 | `ink-and-lanterns` | Painted gouache with warm lantern light and visible brush texture. |
 | `dungeon-after-dark` | Graphic-novel art with bold ink contours and cyan, coral and yellow accents. |
 
-Each style contains 96 individually labeled transparent PNG components. The original 36-piece inventory (24 world pieces and 12 UI pieces) is joined by 60 expansion pieces, for 288 components across all three styles. The styles share a component inventory so their pieces can be compared or used as alternatives. Open the [art lab](../Web/wwwroot/art-lab.html) to preview the pieces and download each pack ZIP; browse by style and component label. The pack files and their source material are kept with the web assets in `Web/wwwroot/assets/`.
+Each style contains 120 individually labeled transparent PNG components. The original 36-piece inventory (24 world pieces and 12 UI pieces) is joined by 84 expansion pieces, for 360 components across all three styles. The styles share a component inventory so their pieces can be compared or used as alternatives. Open the [art lab](../Web/wwwroot/art-lab.html) to preview the pieces and download each pack ZIP; browse by style and component label. The pack files and their source material are kept with the web assets in `Web/wwwroot/assets/`.
 
 The first expansion adds four groups of six: environment pieces (wood-floor, wall-corner, stone-pillar, broken-barricade, spike-trap, pressure-plate); house and activity props (safe-bed, crafting-bench, alchemy-table, training-dummy, social-screen, armchair); creature concepts (rat-scout, rat-guard, slime, cave-bat, spider-drone, mimic); and effects (fire-patch, lightning-arc, ice-burst, poison-cloud, healing-ring, bomb-burst). The supplies expansion adds four more groups of six: equipment (iron-sword, round-shield, iron-helmet, leather-armor, gem-ring, arcane-wand); loot (health-potion, mana-potion, antidote, gold-pouch, dungeon-key, reward-box); connections (iron-gate-open, iron-gate-closed, floor-hatch-open, floor-hatch-closed, wood-ladder, rope-bridge); and interactables (lever-off, lever-on, wall-switch-off, wall-switch-on, campfire, blacksmith-anvil). These are static illustrative PNG components. Their labels describe art subjects and do not establish canonical items, characters, or gameplay.
 
 The biome expansion adds four groups of three: cracked-stone-floor, moss-floor and sand-floor; lava-floor, sewer-wall and stone-arch; broken-bridge, prison-cage and crystal-cluster; and mushroom-cluster, treasure-altar and waystone. These extend the art inventory for map-making and visualization. They are static references and do not change the game's runtime art or rules.
+
+The services atlas adds four groups of six: bookshelf, wardrobe, dining-table,
+kitchen-stove, armor-rack and weapon-rack; merchant-stall, notice-board,
+club-door-closed, club-door-open, vending-machine and mailbox;
+portal-inactive, portal-active, teleport-pad-inactive, teleport-pad-active,
+trap-chest-closed and trap-chest-open; and oil-puddle, water-puddle, ice-patch,
+poison-puddle, steam-cloud and shock-ring. Paired states are conceptual art
+variants that require alignment with production assets before runtime use.
+These are static illustrations and add no runtime integration or gameplay.
 
 ## Concept art and component art
 
@@ -20,23 +29,24 @@ The concept images show the intended mood and how pieces might work together. Th
 
 Each component is a static art element. The pack does not provide frame-by-frame animation, a complete game scene, or a finished runtime implementation. Movement, animation, interaction, collision, and live text need to be supplied by the game.
 
-The delivery contains **288 component PNGs**, **21 full-canvas layer PNGs**, and
-**six new scene concepts**. Each style ZIP contains its 96 components, seven
-layers, composed preview, labeled contact sheet, manifest, README, original
-style study and two new scene concepts. The new scenes are Clockwork Market /
-Market Ambush, Lantern Archive / Defend the Lantern, and Backstage Access /
-The Crusher Live. These are proposed original scenarios, not implemented levels
-or claims about named book events.
+The delivery contains **360 component PNGs**, **21 full-canvas layer PNGs**, and
+nine concept images (three per style), including six new scene concepts. Each
+style ZIP contains its 120 components, seven layers, composed preview, labeled
+contact sheet, manifest, README, original style study and two new scene concepts.
+The scenes are Clockwork Market / Market Ambush, Lantern Archive / Defend the
+Lantern, and Backstage Access / The Crusher Live. These are proposed original
+scenarios, not implemented levels or claims about named book events.
 
 The layer PNGs share a 1200×900 canvas and composite in manifest order. They
 rebuild the component demonstration, not the original flattened illustration.
 Labels stay outside the source art: filenames, contact sheets and manifest
 records identify every piece without baking text into a usable sprite.
 
-The art lab separates the existing 24-piece expansions into **Rooms & creatures**
-and **Equipment & supplies** filters. **New additions** shows the 12 biome components. The seven
-compositing layers and three concept images per style are unchanged. Each style's
-full-pack contact sheet covers all 96 components.
+The art lab retains the **Rooms & creatures** and **Equipment & supplies**
+filters, adds **Biomes & landmarks** for the 12 biome components, and uses
+**New additions** for the 24 services atlas pieces. The seven compositing layers
+and three concept images per style are unchanged. Each style's full-pack contact
+sheet covers all 120 components.
 
 ## Rebuild and validate
 
@@ -70,17 +80,16 @@ The components are art inputs for a renderer. Unity still needs scene or prefab 
 
 ## Delivery checks
 
-- [x] All three expanded packs contain 96 labeled component PNGs, seven layers
-  and three concept images; archives and retained source pixels validate.
-- [x] Twenty-three extraction and packaging tests pass, including legacy 36-piece
-  packs, optional expansion sheets, alpha ownership and reproducible archives.
-- [x] Chromium at 1440×900 and 390×844 verifies all three styles, 96-piece totals,
-  both 24-piece filters, the 12-piece New additions filter, Equipment/Loot filters,
-  Waystone search and PNG downloads,
-  image decoding, and no horizontal overflow or JavaScript errors.
-- [ ] Runtime animation, directional sprite sets, final tile-seam calibration
-  and Unity Editor integration remain future production work.
+- [x] All three packs contain 120 labeled component PNGs, seven layers and
+  three concept images; archives and retained source pixels validate.
+- [x] Twenty-five extraction and packaging tests pass, including legacy packs,
+  optional services sheets, source ownership and reproducible archives.
+- [x] Chromium at 1440×900 and 390×844 verifies all three styles, 120-piece totals,
+  the 24-piece New additions filter, previous batch/category filters, Mailbox
+  search and PNG downloads, image decoding, and no overflow or JavaScript errors.
+- [ ] Runtime animation, final state-pair alignment, tile-seam calibration and
+  Unity Editor integration remain future production work.
 
-The current checks use the local static gallery. Hosting deployment is verified
-separately through GitHub Actions. The earlier delivery screenshots show the
-original 36-piece gallery; the expanded gallery includes the new-additions filter.
+The current browser checks use the local static gallery. Hosting deployment is
+verified separately through GitHub Actions. The earlier gallery screenshots
+show the original collection rather than this expanded inventory.

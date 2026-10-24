@@ -14,7 +14,7 @@ from build_style_packs import (LAYERS, PADDING, PackError, SHEETS, build_pack,
 
 
 class StylePackTests(unittest.TestCase):
-    def fixture(self, root, expansion=False, supplies=False, biomes=False):
+    def fixture(self, root, expansion=False, supplies=False, biomes=False, services=False):
         style = {"id": "test-pack", "title": "Test pack", "description": "Technical fixture", "assets": []}
         source = root / "test-pack/source"
         source.mkdir(parents=True)
@@ -24,6 +24,8 @@ class StylePackTests(unittest.TestCase):
             if sheet_name == "supplies" and not supplies:
                 continue
             if sheet_name == "biomes" and not biomes:
+                continue
+            if sheet_name == "services" and not services:
                 continue
             sheet = Image.new("RGBA", (columns * 32, rows * 32))
             for index in range(columns * rows):
@@ -262,6 +264,57 @@ class StylePackTests(unittest.TestCase):
                 build_pack(style, root)
             style["assets"].append(removed)
             (root / "test-pack/source/biomes.png").unlink()
+            with self.assertRaisesRegex(PackError, "source atlas is missing"):
+                build_pack(style, root)
+
+    def test_services_pack_has_120_native_components_and_read_only_check(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, expansion=True, supplies=True, biomes=True, services=True)
+            catalog = root / "catalog.json"
+            catalog.write_text(json.dumps({"styles": [style]}))
+            manifest = build_pack(style, root)
+            directory = root / style["id"]
+            self.assertEqual(len(manifest["assets"]), 120)
+            self.assertEqual(list(manifest["sheets"]), ["world", "ui", "expansion", "supplies", "biomes", "services"])
+            record = manifest["sheets"]["services"]
+            self.assertEqual((record["columns"], record["rows"]), (6, 4))
+            services = [asset for asset in manifest["assets"] if asset["source"]["sheet"] == "services"]
+            self.assertEqual(len(services), 24)
+            self.assertEqual(services[-1]["source"]["cell"], {"column": 5, "row": 3, "index": 23})
+            with Image.open(directory / manifest["contactSheet"]) as contact:
+                self.assertEqual(contact.size, (1440, 5000))
+            with ZipFile(directory / manifest["download"]) as archive:
+                for asset in services:
+                    self.assertEqual(archive.read(asset["file"]), (directory / asset["file"]).read_bytes())
+                self.assertIn(b"120 individually labeled", archive.read("README.md"))
+            before = {path: (path.stat().st_mtime_ns, hashlib.sha256(path.read_bytes()).hexdigest())
+                      for path in root.rglob("*") if path.is_file()}
+            self.assertEqual(main(["--catalog", str(catalog), "--check"]), 0)
+            after = {path: (path.stat().st_mtime_ns, hashlib.sha256(path.read_bytes()).hexdigest())
+                     for path in root.rglob("*") if path.is_file()}
+            self.assertEqual(before, after)
+            # Validation reconstructs service sprites from native source pixels too.
+            path = directory / services[-1]["file"]
+            with Image.open(path) as source:
+                changed = source.copy()
+            changed.putpixel((PADDING + 1, PADDING + 1), (255, 0, 0, 255))
+            changed.save(path)
+            with self.assertRaisesRegex(PackError, "differs from native source pixels"):
+                validate_pack(directory)
+
+    def test_services_are_optional_independently_and_require_complete_source(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, services=True)
+            manifest = build_pack(style, root)
+            self.assertEqual(len(manifest["assets"]), 60)
+            validate_pack(root / style["id"])
+            removed = style["assets"].pop()
+            with self.assertRaisesRegex(PackError, "expected 60 components"):
+                build_pack(style, root)
+            style["assets"].append(removed)
+            (root / "test-pack/source/services.png").unlink()
             with self.assertRaisesRegex(PackError, "source atlas is missing"):
                 build_pack(style, root)
 
