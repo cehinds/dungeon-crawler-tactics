@@ -1,0 +1,1845 @@
+{
+  "schemaVersion": 1,
+  "id": "masquerade",
+  "style": "pocket-dungeon",
+  "title": "High Elf Castle and Masquerade ballroom",
+  "books": [
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "masquerade-white-marble-floor",
+      "label": "White Marble floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/masquerade-white-marble-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          39,
+          42,
+          241,
+          231
+        ],
+        "bounds": {
+          "x": 41,
+          "y": 44,
+          "width": 198,
+          "height": 185
+        },
+        "originalWidth": 198,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              53,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "masquerade-worn-white-marble-floor",
+      "label": "Worn white marble floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/masquerade-worn-white-marble-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          294,
+          42,
+          491,
+          231
+        ],
+        "bounds": {
+          "x": 296,
+          "y": 44,
+          "width": 193,
+          "height": 185
+        },
+        "originalWidth": 193,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              308,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "masquerade-cracked-white-marble-floor",
+      "label": "Cracked white marble floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/masquerade-cracked-white-marble-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          546,
+          42,
+          742,
+          231
+        ],
+        "bounds": {
+          "x": 548,
+          "y": 44,
+          "width": 192,
+          "height": 185
+        },
+        "originalWidth": 192,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              560,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "masquerade-wet-white-marble-floor",
+      "label": "Wet white marble floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/masquerade-wet-white-marble-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          796,
+          42,
+          993,
+          231
+        ],
+        "bounds": {
+          "x": 798,
+          "y": 44,
+          "width": 193,
+          "height": 185
+        },
+        "originalWidth": 193,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              809,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "masquerade-white-marble-edge-transition",
+      "label": "White Marble edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/masquerade-white-marble-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1044,
+          42,
+          1243,
+          231
+        ],
+        "bounds": {
+          "x": 1046,
+          "y": 44,
+          "width": 195,
+          "height": 185
+        },
+        "originalWidth": 195,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1056,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "masquerade-white-marble-corner-transition",
+      "label": "White Marble corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/masquerade-white-marble-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6881720430107527,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1302,
+          41,
+          1495,
+          231
+        ],
+        "bounds": {
+          "x": 1304,
+          "y": 43,
+          "width": 189,
+          "height": 186
+        },
+        "originalWidth": 189,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1401,
+              45
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-wall-northwest",
+      "label": "Smooth White Cubic Castle wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/masquerade-smooth-white-cubic-castle-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.4948453608247423,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          34,
+          267,
+          242,
+          465
+        ],
+        "bounds": {
+          "x": 36,
+          "y": 269,
+          "width": 204,
+          "height": 194
+        },
+        "originalWidth": 204,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              69,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-wall-northeast",
+      "label": "Smooth White Cubic Castle wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/masquerade-smooth-white-cubic-castle-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6124401913875598,
+        "scaleY": 0.49230769230769234,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          285,
+          268,
+          498,
+          467
+        ],
+        "bounds": {
+          "x": 287,
+          "y": 270,
+          "width": 209,
+          "height": 195
+        },
+        "originalWidth": 209,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              315,
+              272
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-outer-corner",
+      "label": "Smooth White Cubic Castle outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/masquerade-smooth-white-cubic-castle-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.847682119205298,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          571,
+          267,
+          726,
+          469
+        ],
+        "bounds": {
+          "x": 573,
+          "y": 269,
+          "width": 151,
+          "height": 198
+        },
+        "originalWidth": 151,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              624,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-inner-corner",
+      "label": "Smooth White Cubic Castle inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/masquerade-smooth-white-cubic-castle-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.5026178010471204,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          789,
+          262,
+          994,
+          457
+        ],
+        "bounds": {
+          "x": 791,
+          "y": 264,
+          "width": 201,
+          "height": 191
+        },
+        "originalWidth": 201,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              266
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-endcap-northwest",
+      "label": "Smooth White Cubic Castle endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/masquerade-smooth-white-cubic-castle-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.4824120603015075,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1083,
+          262,
+          1210,
+          465
+        ],
+        "bounds": {
+          "x": 1085,
+          "y": 264,
+          "width": 123,
+          "height": 199
+        },
+        "originalWidth": 123,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1128,
+              266
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-endcap-northeast",
+      "label": "Smooth White Cubic Castle endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/masquerade-smooth-white-cubic-castle-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.4897959183673469,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1339,
+          263,
+          1460,
+          463
+        ],
+        "bounds": {
+          "x": 1341,
+          "y": 265,
+          "width": 117,
+          "height": 196
+        },
+        "originalWidth": 117,
+        "originalHeight": 196,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1414,
+              267
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-open-doorway",
+      "label": "Smooth White Cubic Castle open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/masquerade-smooth-white-cubic-castle-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5981308411214953,
+        "scaleY": 0.45933014354066987,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          31,
+          479,
+          249,
+          692
+        ],
+        "bounds": {
+          "x": 33,
+          "y": 481,
+          "width": 214,
+          "height": 209
+        },
+        "originalWidth": 214,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              135,
+              483
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-smooth-white-cubic-castle-closed-doorway",
+      "label": "Smooth White Cubic Castle closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/masquerade-smooth-white-cubic-castle-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5925925925925926,
+        "scaleY": 0.4485981308411215,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          288,
+          480,
+          508,
+          698
+        ],
+        "bounds": {
+          "x": 290,
+          "y": 482,
+          "width": 216,
+          "height": 214
+        },
+        "originalWidth": 216,
+        "originalHeight": 214,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              387,
+              484
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-white-marble-stairs-up",
+      "label": "White Marble stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-white-marble-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.579185520361991,
+        "scaleY": 0.580110497237569,
+        "width": 128,
+        "height": 105,
+        "offset": {
+          "x": 64,
+          "y": 87
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          527,
+          511,
+          752,
+          696
+        ],
+        "bounds": {
+          "x": 529,
+          "y": 513,
+          "width": 221,
+          "height": 181
+        },
+        "originalWidth": 221,
+        "originalHeight": 181,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              718,
+              515
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-white-marble-stairs-down",
+      "label": "White Marble stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-white-marble-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5311203319502075,
+        "scaleY": 0.5337423312883436,
+        "width": 128,
+        "height": 87,
+        "offset": {
+          "x": 64,
+          "y": 105
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          771,
+          517,
+          1016,
+          684
+        ],
+        "bounds": {
+          "x": 773,
+          "y": 519,
+          "width": 241,
+          "height": 163
+        },
+        "originalWidth": 241,
+        "originalHeight": 163,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              962,
+              521
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-sugar-cube-castle-facade",
+      "label": "Sugar cube castle facade",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-sugar-cube-castle-facade.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.45535714285714285,
+        "width": 96,
+        "height": 102,
+        "offset": {
+          "x": 80,
+          "y": 90
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1041,
+          468,
+          1255,
+          696
+        ],
+        "bounds": {
+          "x": 1043,
+          "y": 470,
+          "width": 210,
+          "height": 224
+        },
+        "originalWidth": 210,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1145,
+              472
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-white-terrace-balustrade",
+      "label": "White terrace balustrade",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-white-terrace-balustrade.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39655172413793105,
+        "width": 96,
+        "height": 69,
+        "offset": {
+          "x": 80,
+          "y": 123
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1271,
+          520,
+          1516,
+          698
+        ],
+        "bounds": {
+          "x": 1273,
+          "y": 522,
+          "width": 241,
+          "height": 174
+        },
+        "originalWidth": 241,
+        "originalHeight": 174,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1307,
+              524
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-ballroom-chandelier",
+      "label": "Ballroom chandelier",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-ballroom-chandelier.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.4626865671641791,
+        "width": 96,
+        "height": 124,
+        "offset": {
+          "x": 80,
+          "y": 68
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          25,
+          710,
+          236,
+          982
+        ],
+        "bounds": {
+          "x": 27,
+          "y": 712,
+          "width": 207,
+          "height": 268
+        },
+        "originalWidth": 207,
+        "originalHeight": 268,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              114,
+              714
+            ],
+            [
+              115,
+              939
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-banquet-table",
+      "label": "Banquet table",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-banquet-table.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.35294117647058826,
+        "scaleY": 0.35454545454545455,
+        "width": 96,
+        "height": 78,
+        "offset": {
+          "x": 80,
+          "y": 114
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          253,
+          749,
+          529,
+          973
+        ],
+        "bounds": {
+          "x": 255,
+          "y": 751,
+          "width": 272,
+          "height": 220
+        },
+        "originalWidth": 272,
+        "originalHeight": 220,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              342,
+              753
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-formal-ballroom-dais",
+      "label": "Formal ballroom dais",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-formal-ballroom-dais.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.38866396761133604,
+        "scaleY": 0.38976377952755903,
+        "width": 96,
+        "height": 99,
+        "offset": {
+          "x": 80,
+          "y": 93
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          530,
+          713,
+          781,
+          971
+        ],
+        "bounds": {
+          "x": 532,
+          "y": 715,
+          "width": 247,
+          "height": 254
+        },
+        "originalWidth": 247,
+        "originalHeight": 254,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              647,
+              717
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-ornamental-garden-planter",
+      "label": "Ornamental garden planter",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-ornamental-garden-planter.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4752475247524752,
+        "scaleY": 0.4766355140186916,
+        "width": 96,
+        "height": 102,
+        "offset": {
+          "x": 80,
+          "y": 90
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          806,
+          748,
+          1012,
+          966
+        ],
+        "bounds": {
+          "x": 808,
+          "y": 750,
+          "width": 202,
+          "height": 214
+        },
+        "originalWidth": 202,
+        "originalHeight": 214,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              856,
+              752
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-masquerade-mask-sculpture",
+      "label": "Masquerade mask sculpture",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-masquerade-mask-sculpture.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4682926829268293,
+        "scaleY": 0.46946564885496184,
+        "width": 96,
+        "height": 123,
+        "offset": {
+          "x": 80,
+          "y": 69
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1041,
+          711,
+          1250,
+          977
+        ],
+        "bounds": {
+          "x": 1043,
+          "y": 713,
+          "width": 205,
+          "height": 262
+        },
+        "originalWidth": 205,
+        "originalHeight": 262,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1167,
+              715
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "masquerade-castle-courtyard-stairwell",
+      "label": "Castle courtyard stairwell",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "masquerade",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/masquerade-castle-courtyard-stairwell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.375,
+        "scaleY": 0.37446808510638296,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/masquerade.png",
+        "sha256": "05059744d4c9f0b0baef5678eb6b7c90bede73a97003d946f6e764debc9c485b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1250,
+          743,
+          1510,
+          982
+        ],
+        "bounds": {
+          "x": 1252,
+          "y": 745,
+          "width": 256,
+          "height": 235
+        },
+        "originalWidth": 256,
+        "originalHeight": 235,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1339,
+              747
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "masquerade.zip",
+  "contactSheet": "contact-sheet.png"
+}

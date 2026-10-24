@@ -1,0 +1,1841 @@
+{
+  "schemaVersion": 1,
+  "id": "iron-trains",
+  "style": "ink-and-lanterns",
+  "title": "Iron Tangle trains and service cars",
+  "books": [
+    3
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "iron-trains-railcar-metal-floor",
+      "label": "Railcar Metal floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5355648535564853,
+        "scaleY": 0.43537414965986393,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          14,
+          64,
+          257,
+          215
+        ],
+        "bounds": {
+          "x": 16,
+          "y": 66,
+          "width": 239,
+          "height": 147
+        },
+        "originalWidth": 239,
+        "originalHeight": 147,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              135,
+              68
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-worn-railcar-metal-floor",
+      "label": "Worn railcar metal floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-worn-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.43537414965986393,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          271,
+          64,
+          511,
+          215
+        ],
+        "bounds": {
+          "x": 273,
+          "y": 66,
+          "width": 236,
+          "height": 147
+        },
+        "originalWidth": 236,
+        "originalHeight": 147,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              390,
+              68
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-cracked-railcar-metal-floor",
+      "label": "Cracked railcar metal floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-cracked-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5470085470085471,
+        "scaleY": 0.43537414965986393,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          524,
+          64,
+          762,
+          215
+        ],
+        "bounds": {
+          "x": 526,
+          "y": 66,
+          "width": 234,
+          "height": 147
+        },
+        "originalWidth": 234,
+        "originalHeight": 147,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              641,
+              68
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-wet-railcar-metal-floor",
+      "label": "Wet railcar metal floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-wet-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.4383561643835616,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          775,
+          64,
+          1015,
+          214
+        ],
+        "bounds": {
+          "x": 777,
+          "y": 66,
+          "width": 236,
+          "height": 146
+        },
+        "originalWidth": 236,
+        "originalHeight": 146,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              68
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-edge-transition",
+      "label": "Railcar Metal edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-railcar-metal-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.4266666666666667,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1029,
+          62,
+          1270,
+          216
+        ],
+        "bounds": {
+          "x": 1031,
+          "y": 64,
+          "width": 237,
+          "height": 150
+        },
+        "originalWidth": 237,
+        "originalHeight": 150,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1148,
+              66
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-corner-transition",
+      "label": "Railcar Metal corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-railcar-metal-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5446808510638298,
+        "scaleY": 0.41830065359477125,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1286,
+          61,
+          1525,
+          218
+        ],
+        "bounds": {
+          "x": 1288,
+          "y": 63,
+          "width": 235,
+          "height": 153
+        },
+        "originalWidth": 235,
+        "originalHeight": 153,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1404,
+              65
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-wall-northwest",
+      "label": "Riveted Carriage Metal wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3076923076923077,
+        "scaleY": 0.42857142857142855,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          35,
+          256,
+          247,
+          484
+        ],
+        "bounds": {
+          "x": 37,
+          "y": 258,
+          "width": 208,
+          "height": 224
+        },
+        "originalWidth": 208,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              67,
+              260
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-wall-northeast",
+      "label": "Riveted Carriage Metal wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3047619047619048,
+        "scaleY": 0.42857142857142855,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          282,
+          256,
+          496,
+          484
+        ],
+        "bounds": {
+          "x": 284,
+          "y": 258,
+          "width": 210,
+          "height": 224
+        },
+        "originalWidth": 210,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              459,
+              260
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-outer-corner",
+      "label": "Riveted Carriage Metal outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.8050314465408805,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          565,
+          264,
+          728,
+          466
+        ],
+        "bounds": {
+          "x": 567,
+          "y": 266,
+          "width": 159,
+          "height": 198
+        },
+        "originalWidth": 159,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              700,
+              268
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-inner-corner",
+      "label": "Riveted Carriage Metal inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.4873096446700508,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          799,
+          245,
+          990,
+          446
+        ],
+        "bounds": {
+          "x": 801,
+          "y": 247,
+          "width": 187,
+          "height": 197
+        },
+        "originalWidth": 187,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              892,
+              249
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-endcap-northwest",
+      "label": "Riveted Carriage Metal endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-trains-riveted-carriage-metal-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3106796116504854,
+        "scaleY": 0.5161290322580645,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1067,
+          265,
+          1174,
+          455
+        ],
+        "bounds": {
+          "x": 1069,
+          "y": 267,
+          "width": 103,
+          "height": 186
+        },
+        "originalWidth": 103,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1095,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-endcap-northeast",
+      "label": "Riveted Carriage Metal endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-trains-riveted-carriage-metal-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.2962962962962963,
+        "scaleY": 0.5106382978723404,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1381,
+          263,
+          1493,
+          455
+        ],
+        "bounds": {
+          "x": 1383,
+          "y": 265,
+          "width": 108,
+          "height": 188
+        },
+        "originalWidth": 108,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1460,
+              267
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-open-doorway",
+      "label": "Riveted Carriage Metal open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.30917874396135264,
+        "scaleY": 0.4085106382978723,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          35,
+          492,
+          246,
+          731
+        ],
+        "bounds": {
+          "x": 37,
+          "y": 494,
+          "width": 207,
+          "height": 235
+        },
+        "originalWidth": 207,
+        "originalHeight": 235,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              66,
+              496
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-closed-doorway",
+      "label": "Riveted Carriage Metal closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3121951219512195,
+        "scaleY": 0.41025641025641024,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          282,
+          492,
+          491,
+          730
+        ],
+        "bounds": {
+          "x": 284,
+          "y": 494,
+          "width": 205,
+          "height": 234
+        },
+        "originalWidth": 205,
+        "originalHeight": 234,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              456,
+              496
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-stairs-up",
+      "label": "Railcar Metal stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-railcar-metal-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5844748858447488,
+        "scaleY": 0.583710407239819,
+        "width": 128,
+        "height": 129,
+        "offset": {
+          "x": 64,
+          "y": 63
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          517,
+          497,
+          740,
+          722
+        ],
+        "bounds": {
+          "x": 519,
+          "y": 499,
+          "width": 219,
+          "height": 221
+        },
+        "originalWidth": 219,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              630,
+              501
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-stairs-down",
+      "label": "Railcar Metal stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-railcar-metal-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5355648535564853,
+        "scaleY": 0.5333333333333333,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          769,
+          528,
+          1012,
+          712
+        ],
+        "bounds": {
+          "x": 771,
+          "y": 530,
+          "width": 239,
+          "height": 180
+        },
+        "originalWidth": 239,
+        "originalHeight": 180,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              874,
+              532
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-subway-carriage-shell",
+      "label": "Subway carriage shell",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-subway-carriage-shell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.367816091954023,
+        "scaleY": 0.3682008368200837,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1018,
+          489,
+          1283,
+          732
+        ],
+        "bounds": {
+          "x": 1020,
+          "y": 491,
+          "width": 261,
+          "height": 239
+        },
+        "originalWidth": 261,
+        "originalHeight": 239,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1077,
+              493
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-steam-locomotive-front",
+      "label": "Steam locomotive front",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-steam-locomotive-front.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4304932735426009,
+        "scaleY": 0.43014705882352944,
+        "width": 96,
+        "height": 117,
+        "offset": {
+          "x": 80,
+          "y": 75
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1297,
+          467,
+          1524,
+          743
+        ],
+        "bounds": {
+          "x": 1299,
+          "y": 469,
+          "width": 223,
+          "height": 272
+        },
+        "originalWidth": 223,
+        "originalHeight": 272,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1429,
+              471
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-passenger-bench",
+      "label": "Passenger bench",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-passenger-bench.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.44549763033175355,
+        "width": 96,
+        "height": 94,
+        "offset": {
+          "x": 80,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          21,
+          749,
+          241,
+          964
+        ],
+        "bounds": {
+          "x": 23,
+          "y": 751,
+          "width": 216,
+          "height": 211
+        },
+        "originalWidth": 216,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              86,
+              753
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-carriage-joining-gangway",
+      "label": "Carriage joining gangway",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-carriage-joining-gangway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4948453608247423,
+        "scaleY": 0.49583333333333335,
+        "width": 96,
+        "height": 119,
+        "offset": {
+          "x": 80,
+          "y": 73
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          283,
+          724,
+          481,
+          968
+        ],
+        "bounds": {
+          "x": 285,
+          "y": 726,
+          "width": 194,
+          "height": 240
+        },
+        "originalWidth": 194,
+        "originalHeight": 240,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              411,
+              728
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-janitor-supply-cart",
+      "label": "Janitor supply cart",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-janitor-supply-cart.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.5230125523012552,
+        "width": 96,
+        "height": 125,
+        "offset": {
+          "x": 80,
+          "y": 67
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          542,
+          730,
+          729,
+          973
+        ],
+        "bounds": {
+          "x": 544,
+          "y": 732,
+          "width": 183,
+          "height": 239
+        },
+        "originalWidth": 183,
+        "originalHeight": 239,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              673,
+              734
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-train-control-console",
+      "label": "Train control console",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-train-control-console.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.48,
+        "scaleY": 0.48,
+        "width": 96,
+        "height": 108,
+        "offset": {
+          "x": 80,
+          "y": 84
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          782,
+          736,
+          986,
+          965
+        ],
+        "bounds": {
+          "x": 784,
+          "y": 738,
+          "width": 200,
+          "height": 225
+        },
+        "originalWidth": 200,
+        "originalHeight": 225,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              891,
+              740
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-open-service-hatch",
+      "label": "Open service hatch",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-open-service-hatch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.3918918918918919,
+        "width": 96,
+        "height": 87,
+        "offset": {
+          "x": 80,
+          "y": 105
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1023,
+          736,
+          1273,
+          962
+        ],
+        "bounds": {
+          "x": 1025,
+          "y": 738,
+          "width": 246,
+          "height": 222
+        },
+        "originalWidth": 246,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1134,
+              740
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-cargo-wagon-shell",
+      "label": "Cargo wagon shell",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-cargo-wagon-shell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.413265306122449,
+        "width": 96,
+        "height": 81,
+        "offset": {
+          "x": 80,
+          "y": 111
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-trains.png",
+        "sha256": "5126e00bd54382769ebf2402d861821fa3e4deb28b02fcaa184fa700fce4b265",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1287,
+          753,
+          1522,
+          953
+        ],
+        "bounds": {
+          "x": 1289,
+          "y": 755,
+          "width": 231,
+          "height": 196
+        },
+        "originalWidth": 231,
+        "originalHeight": 196,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1443,
+              757
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "iron-trains.zip",
+  "contactSheet": "contact-sheet.png"
+}

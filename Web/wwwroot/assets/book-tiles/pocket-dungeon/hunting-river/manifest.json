@@ -1,0 +1,1877 @@
+{
+  "schemaVersion": 1,
+  "id": "hunting-river",
+  "style": "pocket-dungeon",
+  "title": "River crossings and Fort Freedom",
+  "books": [
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "hunting-river-riverbank-stone-floor",
+      "label": "Riverbank stone floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-riverbank-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.7111111111111111,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          58,
+          65,
+          247,
+          249
+        ],
+        "bounds": {
+          "x": 60,
+          "y": 67,
+          "width": 185,
+          "height": 180
+        },
+        "originalWidth": 185,
+        "originalHeight": 180,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              72,
+              69
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-water-floor",
+      "label": "River water floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-river-water-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          302,
+          61,
+          495,
+          249
+        ],
+        "bounds": {
+          "x": 304,
+          "y": 63,
+          "width": 189,
+          "height": 184
+        },
+        "originalWidth": 189,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              310,
+              65
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-palace-paving-floor",
+      "label": "Palace paving floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-palace-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          547,
+          61,
+          742,
+          249
+        ],
+        "bounds": {
+          "x": 549,
+          "y": 63,
+          "width": 191,
+          "height": 184
+        },
+        "originalWidth": 191,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              554,
+              65
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-wet-palace-paving-floor",
+      "label": "Wet palace paving floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-wet-palace-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          796,
+          60,
+          991,
+          249
+        ],
+        "bounds": {
+          "x": 798,
+          "y": 62,
+          "width": 191,
+          "height": 185
+        },
+        "originalWidth": 191,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              808,
+              64
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-edge",
+      "label": "Riverbank edge",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-riverbank-edge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1035,
+          60,
+          1233,
+          248
+        ],
+        "bounds": {
+          "x": 1037,
+          "y": 62,
+          "width": 194,
+          "height": 184
+        },
+        "originalWidth": 194,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1109,
+              64
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-corner",
+      "label": "Riverbank corner",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-riverbank-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.7111111111111111,
+        "scaleY": 0.6994535519125683,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1297,
+          62,
+          1481,
+          249
+        ],
+        "bounds": {
+          "x": 1299,
+          "y": 64,
+          "width": 180,
+          "height": 183
+        },
+        "originalWidth": 180,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1324,
+              66
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-wall-northwest",
+      "label": "River Palace Masonry wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          45,
+          279,
+          255,
+          481
+        ],
+        "bounds": {
+          "x": 47,
+          "y": 281,
+          "width": 206,
+          "height": 198
+        },
+        "originalWidth": 206,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              74,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-wall-northeast",
+      "label": "River Palace Masonry wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          294,
+          279,
+          500,
+          481
+        ],
+        "bounds": {
+          "x": 296,
+          "y": 281,
+          "width": 202,
+          "height": 198
+        },
+        "originalWidth": 202,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              462,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-outer-corner",
+      "label": "River Palace Masonry outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7272727272727273,
+        "scaleY": 0.48,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          561,
+          283,
+          741,
+          488
+        ],
+        "bounds": {
+          "x": 563,
+          "y": 286,
+          "width": 176,
+          "height": 200
+        },
+        "originalWidth": 176,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              595,
+              287
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-inner-corner",
+      "label": "River Palace Masonry inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6153846153846154,
+        "scaleY": 0.47761194029850745,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          788,
+          267,
+          1000,
+          472
+        ],
+        "bounds": {
+          "x": 790,
+          "y": 269,
+          "width": 208,
+          "height": 201
+        },
+        "originalWidth": 208,
+        "originalHeight": 201,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              890,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-endcap-northwest",
+      "label": "River Palace Masonry endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-river-river-palace-masonry-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.46601941747572817,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1074,
+          268,
+          1196,
+          478
+        ],
+        "bounds": {
+          "x": 1076,
+          "y": 270,
+          "width": 118,
+          "height": 206
+        },
+        "originalWidth": 118,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1106,
+              272
+            ],
+            [
+              1124,
+              457
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-endcap-northeast",
+      "label": "River Palace Masonry endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-river-river-palace-masonry-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.4,
+        "scaleY": 0.46153846153846156,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1333,
+          269,
+          1457,
+          481
+        ],
+        "bounds": {
+          "x": 1335,
+          "y": 271,
+          "width": 120,
+          "height": 208
+        },
+        "originalWidth": 120,
+        "originalHeight": 208,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1415,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-open-doorway",
+      "label": "River Palace Masonry open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.46153846153846156,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          43,
+          487,
+          246,
+          699
+        ],
+        "bounds": {
+          "x": 45,
+          "y": 489,
+          "width": 199,
+          "height": 208
+        },
+        "originalWidth": 199,
+        "originalHeight": 208,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              138,
+              491
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-closed-doorway",
+      "label": "River Palace Masonry closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.463768115942029,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          297,
+          487,
+          507,
+          698
+        ],
+        "bounds": {
+          "x": 299,
+          "y": 489,
+          "width": 206,
+          "height": 207
+        },
+        "originalWidth": 206,
+        "originalHeight": 207,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              390,
+              491
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-stone-stairs-up",
+      "label": "Riverbank Stone stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-riverbank-stone-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.6196319018404908,
+        "width": 128,
+        "height": 101,
+        "offset": {
+          "x": 64,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          545,
+          526,
+          755,
+          693
+        ],
+        "bounds": {
+          "x": 547,
+          "y": 528,
+          "width": 206,
+          "height": 163
+        },
+        "originalWidth": 206,
+        "originalHeight": 163,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              580,
+              530
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-stone-stairs-down",
+      "label": "Riverbank Stone stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-riverbank-stone-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.6204819277108434,
+        "width": 128,
+        "height": 103,
+        "offset": {
+          "x": 64,
+          "y": 89
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          792,
+          525,
+          1003,
+          695
+        ],
+        "bounds": {
+          "x": 794,
+          "y": 527,
+          "width": 207,
+          "height": 166
+        },
+        "originalWidth": 207,
+        "originalHeight": 166,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              956,
+              529
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-bridge-pier",
+      "label": "River bridge pier",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-river-bridge-pier.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5614035087719298,
+        "scaleY": 0.5625,
+        "width": 96,
+        "height": 117,
+        "offset": {
+          "x": 80,
+          "y": 75
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1042,
+          500,
+          1217,
+          712
+        ],
+        "bounds": {
+          "x": 1044,
+          "y": 502,
+          "width": 171,
+          "height": 208
+        },
+        "originalWidth": 171,
+        "originalHeight": 208,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1116,
+              504
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-wood-river-footbridge",
+      "label": "Wood river footbridge",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-wood-river-footbridge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.43478260869565216,
+        "width": 96,
+        "height": 70,
+        "offset": {
+          "x": 80,
+          "y": 122
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1278,
+          528,
+          1502,
+          693
+        ],
+        "bounds": {
+          "x": 1280,
+          "y": 530,
+          "width": 220,
+          "height": 161
+        },
+        "originalWidth": 220,
+        "originalHeight": 161,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1300,
+              532
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-naiad-palace-arch",
+      "label": "Naiad palace arch",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-naiad-palace-arch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4206008583690987,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          28,
+          720,
+          260,
+          957
+        ],
+        "bounds": {
+          "x": 30,
+          "y": 722,
+          "width": 228,
+          "height": 233
+        },
+        "originalWidth": 228,
+        "originalHeight": 233,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              143,
+              724
+            ],
+            [
+              77,
+              763
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-fortification-gate",
+      "label": "Fortification gate",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-fortification-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.4099099099099099,
+        "width": 96,
+        "height": 91,
+        "offset": {
+          "x": 80,
+          "y": 101
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          278,
+          728,
+          517,
+          954
+        ],
+        "bounds": {
+          "x": 280,
+          "y": 730,
+          "width": 235,
+          "height": 222
+        },
+        "originalWidth": 235,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              313,
+              732
+            ],
+            [
+              419,
+              793
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverside-dock",
+      "label": "Riverside dock",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-riverside-dock.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.4583333333333333,
+        "width": 96,
+        "height": 99,
+        "offset": {
+          "x": 80,
+          "y": 93
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          534,
+          758,
+          748,
+          978
+        ],
+        "bounds": {
+          "x": 536,
+          "y": 760,
+          "width": 210,
+          "height": 216
+        },
+        "originalWidth": 210,
+        "originalHeight": 216,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              672,
+              762
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-reeds",
+      "label": "River reeds",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-river-reeds.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.45662100456621,
+        "width": 96,
+        "height": 100,
+        "offset": {
+          "x": 80,
+          "y": 92
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          781,
+          748,
+          995,
+          971
+        ],
+        "bounds": {
+          "x": 783,
+          "y": 750,
+          "width": 210,
+          "height": 219
+        },
+        "originalWidth": 210,
+        "originalHeight": 219,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              928,
+              752
+            ],
+            [
+              930,
+              795
+            ],
+            [
+              925,
+              803
+            ],
+            [
+              963,
+              825
+            ],
+            [
+              831,
+              827
+            ],
+            [
+              839,
+              831
+            ],
+            [
+              841,
+              837
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-palace-fountain",
+      "label": "Palace fountain",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-palace-fountain.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.4089068825910931,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1010,
+          724,
+          1248,
+          975
+        ],
+        "bounds": {
+          "x": 1012,
+          "y": 726,
+          "width": 234,
+          "height": 247
+        },
+        "originalWidth": 234,
+        "originalHeight": 247,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1126,
+              728
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-flooded-palace-courtyard-landmark",
+      "label": "Flooded palace courtyard landmark",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-flooded-palace-courtyard-landmark.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3950617283950617,
+        "scaleY": 0.3968871595330739,
+        "width": 96,
+        "height": 102,
+        "offset": {
+          "x": 80,
+          "y": 90
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-river.png",
+        "sha256": "26a6c20234b4afe67c3b867251542febf50c1657358268297482d52bc597dcd7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1266,
+          707,
+          1513,
+          968
+        ],
+        "bounds": {
+          "x": 1268,
+          "y": 709,
+          "width": 243,
+          "height": 257
+        },
+        "originalWidth": 243,
+        "originalHeight": 257,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1348,
+              711
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "hunting-river.zip",
+  "contactSheet": "contact-sheet.png"
+}

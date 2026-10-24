@@ -1,0 +1,1853 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble-sea",
+  "style": "pocket-dungeon",
+  "title": "Sea quadrant and Akula submarine",
+  "books": [
+    4
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "bubble-sea-seabed-sand-floor",
+      "label": "Seabed sand floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-seabed-sand-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          44,
+          52,
+          247,
+          247
+        ],
+        "bounds": {
+          "x": 46,
+          "y": 54,
+          "width": 199,
+          "height": 191
+        },
+        "originalWidth": 199,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              54,
+              56
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-coral-seabed-floor",
+      "label": "Coral seabed floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-coral-seabed-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          301,
+          50,
+          502,
+          248
+        ],
+        "bounds": {
+          "x": 303,
+          "y": 52,
+          "width": 197,
+          "height": 194
+        },
+        "originalWidth": 197,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              439,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-floor",
+      "label": "Submarine metal floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-submarine-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          552,
+          48,
+          747,
+          246
+        ],
+        "bounds": {
+          "x": 554,
+          "y": 50,
+          "width": 191,
+          "height": 194
+        },
+        "originalWidth": 191,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              629,
+              52
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-grating-floor",
+      "label": "Submarine grating floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-submarine-grating-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          794,
+          49,
+          988,
+          247
+        ],
+        "bounds": {
+          "x": 796,
+          "y": 51,
+          "width": 190,
+          "height": 194
+        },
+        "originalWidth": 190,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              805,
+              53
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-shallow-water-edge",
+      "label": "Shallow water edge",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-shallow-water-edge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.6564102564102564,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1036,
+          48,
+          1241,
+          247
+        ],
+        "bounds": {
+          "x": 1038,
+          "y": 50,
+          "width": 201,
+          "height": 195
+        },
+        "originalWidth": 201,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1049,
+              52
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-shallow-water-corner",
+      "label": "Shallow water corner",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-shallow-water-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.64,
+        "scaleY": 0.6564102564102564,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1290,
+          48,
+          1494,
+          247
+        ],
+        "bounds": {
+          "x": 1292,
+          "y": 50,
+          "width": 200,
+          "height": 195
+        },
+        "originalWidth": 200,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1299,
+              52
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-wall-northwest",
+      "label": "Submarine Metal Hull wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.5245901639344263,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          40,
+          267,
+          247,
+          454
+        ],
+        "bounds": {
+          "x": 42,
+          "y": 269,
+          "width": 203,
+          "height": 183
+        },
+        "originalWidth": 203,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              73,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-wall-northeast",
+      "label": "Submarine Metal Hull wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.5245901639344263,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          299,
+          267,
+          506,
+          454
+        ],
+        "bounds": {
+          "x": 301,
+          "y": 269,
+          "width": 203,
+          "height": 183
+        },
+        "originalWidth": 203,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              462,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-outer-corner",
+      "label": "Submarine Metal Hull outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.45933014354066987,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          555,
+          271,
+          747,
+          484
+        ],
+        "bounds": {
+          "x": 557,
+          "y": 273,
+          "width": 188,
+          "height": 209
+        },
+        "originalWidth": 188,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              594,
+              275
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-inner-corner",
+      "label": "Submarine Metal Hull inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.47761194029850745,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          794,
+          261,
+          991,
+          466
+        ],
+        "bounds": {
+          "x": 796,
+          "y": 263,
+          "width": 193,
+          "height": 201
+        },
+        "originalWidth": 193,
+        "originalHeight": 201,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              892,
+              265
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-endcap-northwest",
+      "label": "Submarine Metal Hull endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-sea-submarine-metal-hull-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.3157894736842105,
+        "scaleY": 0.44651162790697674,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1059,
+          267,
+          1215,
+          486
+        ],
+        "bounds": {
+          "x": 1061,
+          "y": 269,
+          "width": 152,
+          "height": 215
+        },
+        "originalWidth": 152,
+        "originalHeight": 215,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1096,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-endcap-northeast",
+      "label": "Submarine Metal Hull endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-sea-submarine-metal-hull-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.32653061224489793,
+        "scaleY": 0.4528301886792453,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1343,
+          266,
+          1494,
+          482
+        ],
+        "bounds": {
+          "x": 1345,
+          "y": 268,
+          "width": 147,
+          "height": 212
+        },
+        "originalWidth": 147,
+        "originalHeight": 212,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1442,
+              270
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-open-doorway",
+      "label": "Submarine Metal Hull open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7032967032967034,
+        "scaleY": 0.46601941747572817,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          52,
+          495,
+          238,
+          705
+        ],
+        "bounds": {
+          "x": 54,
+          "y": 497,
+          "width": 182,
+          "height": 206
+        },
+        "originalWidth": 182,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              138,
+              499
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-closed-doorway",
+      "label": "Submarine Metal Hull closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7032967032967034,
+        "scaleY": 0.4549763033175355,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          305,
+          493,
+          491,
+          708
+        ],
+        "bounds": {
+          "x": 307,
+          "y": 495,
+          "width": 182,
+          "height": 211
+        },
+        "originalWidth": 182,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              338,
+              497
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-seabed-sand-stairs-up",
+      "label": "Seabed Sand stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-seabed-sand-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6153846153846154,
+        "scaleY": 0.6161137440758294,
+        "width": 128,
+        "height": 130,
+        "offset": {
+          "x": 64,
+          "y": 62
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          533,
+          495,
+          745,
+          710
+        ],
+        "bounds": {
+          "x": 535,
+          "y": 497,
+          "width": 208,
+          "height": 211
+        },
+        "originalWidth": 208,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              618,
+              499
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-seabed-sand-stairs-down",
+      "label": "Seabed Sand stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-seabed-sand-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6009389671361502,
+        "scaleY": 0.6,
+        "width": 128,
+        "height": 117,
+        "offset": {
+          "x": 64,
+          "y": 75
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          784,
+          507,
+          1001,
+          706
+        ],
+        "bounds": {
+          "x": 786,
+          "y": 509,
+          "width": 213,
+          "height": 195
+        },
+        "originalWidth": 213,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              863,
+              511
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-coral-cluster",
+      "label": "Coral cluster",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-coral-cluster.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.46464646464646464,
+        "width": 96,
+        "height": 92,
+        "offset": {
+          "x": 80,
+          "y": 100
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1034,
+          507,
+          1245,
+          709
+        ],
+        "bounds": {
+          "x": 1036,
+          "y": 509,
+          "width": 207,
+          "height": 198
+        },
+        "originalWidth": 207,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1159,
+              511
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-seaweed-cluster",
+      "label": "Seaweed cluster",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-seaweed-cluster.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.47761194029850745,
+        "scaleY": 0.47549019607843135,
+        "width": 96,
+        "height": 97,
+        "offset": {
+          "x": 80,
+          "y": 95
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1289,
+          503,
+          1494,
+          711
+        ],
+        "bounds": {
+          "x": 1291,
+          "y": 505,
+          "width": 201,
+          "height": 204
+        },
+        "originalWidth": 201,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1365,
+              507
+            ],
+            [
+              1316,
+              615
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-airlock",
+      "label": "Submarine airlock",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-submarine-airlock.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.4365079365079365,
+        "width": 96,
+        "height": 110,
+        "offset": {
+          "x": 80,
+          "y": 82
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          38,
+          715,
+          261,
+          971
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 717,
+          "width": 219,
+          "height": 252
+        },
+        "originalWidth": 219,
+        "originalHeight": 252,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              143,
+              719
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-command-console",
+      "label": "Submarine command console",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-submarine-command-console.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.39215686274509803,
+        "width": 96,
+        "height": 80,
+        "offset": {
+          "x": 80,
+          "y": 112
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          276,
+          751,
+          526,
+          959
+        ],
+        "bounds": {
+          "x": 278,
+          "y": 753,
+          "width": 246,
+          "height": 204
+        },
+        "originalWidth": 246,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              385,
+              755
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-periscope-station",
+      "label": "Periscope station",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-periscope-station.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5454545454545454,
+        "scaleY": 0.544,
+        "width": 96,
+        "height": 136,
+        "offset": {
+          "x": 80,
+          "y": 56
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          561,
+          717,
+          741,
+          971
+        ],
+        "bounds": {
+          "x": 563,
+          "y": 719,
+          "width": 176,
+          "height": 250
+        },
+        "originalWidth": 176,
+        "originalHeight": 250,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              640,
+              721
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-pressure-pipe-manifold",
+      "label": "Pressure pipe manifold",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-pressure-pipe-manifold.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4,
+        "scaleY": 0.4010152284263959,
+        "width": 96,
+        "height": 79,
+        "offset": {
+          "x": 80,
+          "y": 113
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          769,
+          756,
+          1013,
+          957
+        ],
+        "bounds": {
+          "x": 771,
+          "y": 758,
+          "width": 240,
+          "height": 197
+        },
+        "originalWidth": 240,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              863,
+              760
+            ],
+            [
+              955,
+              892
+            ],
+            [
+              957,
+              892
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-underwater-ruin-arch",
+      "label": "Underwater ruin arch",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-underwater-ruin-arch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4423963133640553,
+        "scaleY": 0.44398340248962653,
+        "width": 96,
+        "height": 107,
+        "offset": {
+          "x": 80,
+          "y": 85
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1031,
+          723,
+          1252,
+          968
+        ],
+        "bounds": {
+          "x": 1033,
+          "y": 725,
+          "width": 217,
+          "height": 241
+        },
+        "originalWidth": 217,
+        "originalHeight": 241,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1137,
+              727
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-sunken-stairwell",
+      "label": "Sunken stairwell",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-sunken-stairwell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.42290748898678415,
+        "scaleY": 0.42290748898678415,
+        "width": 96,
+        "height": 96,
+        "offset": {
+          "x": 80,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-sea.png",
+        "sha256": "046cd2dab058065bdd3f414d8b67b575f5b40aa11e1313f13c48c1cd65779019",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1279,
+          740,
+          1510,
+          971
+        ],
+        "bounds": {
+          "x": 1281,
+          "y": 742,
+          "width": 227,
+          "height": 227
+        },
+        "originalWidth": 227,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1438,
+              744
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "bubble-sea.zip",
+  "contactSheet": "contact-sheet.png"
+}

@@ -1,0 +1,1841 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble-glass",
+  "style": "dungeon-after-dark",
+  "title": "Sandcastle of the Mad Dune Mage",
+  "books": [
+    4
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "bubble-glass-translucent-glass-tile-floor",
+      "label": "Translucent Glass Tile floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          15,
+          86,
+          245,
+          222
+        ],
+        "bounds": {
+          "x": 17,
+          "y": 88,
+          "width": 226,
+          "height": 132
+        },
+        "originalWidth": 226,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              130,
+              90
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-worn-translucent-glass-tile-floor",
+      "label": "Worn translucent glass tile floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-worn-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          271,
+          87,
+          501,
+          222
+        ],
+        "bounds": {
+          "x": 273,
+          "y": 89,
+          "width": 226,
+          "height": 131
+        },
+        "originalWidth": 226,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              384,
+              91
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-cracked-translucent-glass-tile-floor",
+      "label": "Cracked translucent glass tile floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-cracked-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          527,
+          87,
+          757,
+          222
+        ],
+        "bounds": {
+          "x": 529,
+          "y": 89,
+          "width": 226,
+          "height": 131
+        },
+        "originalWidth": 226,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              640,
+              91
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-wet-translucent-glass-tile-floor",
+      "label": "Wet translucent glass tile floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-wet-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          783,
+          87,
+          1013,
+          222
+        ],
+        "bounds": {
+          "x": 785,
+          "y": 89,
+          "width": 226,
+          "height": 131
+        },
+        "originalWidth": 226,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              91
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-edge-transition",
+      "label": "Translucent Glass Tile edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-translucent-glass-tile-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5446808510638298,
+        "scaleY": 0.43243243243243246,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1029,
+          75,
+          1268,
+          227
+        ],
+        "bounds": {
+          "x": 1031,
+          "y": 77,
+          "width": 235,
+          "height": 148
+        },
+        "originalWidth": 235,
+        "originalHeight": 148,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1144,
+              79
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-corner-transition",
+      "label": "Translucent Glass Tile corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-translucent-glass-tile-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5541125541125541,
+        "scaleY": 0.39751552795031053,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1284,
+          63,
+          1519,
+          228
+        ],
+        "bounds": {
+          "x": 1286,
+          "y": 65,
+          "width": 231,
+          "height": 161
+        },
+        "originalWidth": 231,
+        "originalHeight": 161,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1401,
+              67
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-wall-northwest",
+      "label": "Sand Coloured Glass wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.4129032258064516,
+        "scaleY": 0.46601941747572817,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          61,
+          276,
+          220,
+          486
+        ],
+        "bounds": {
+          "x": 63,
+          "y": 278,
+          "width": 155,
+          "height": 206
+        },
+        "originalWidth": 155,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              81,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-wall-northeast",
+      "label": "Sand Coloured Glass wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.46601941747572817,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          295,
+          276,
+          453,
+          486
+        ],
+        "bounds": {
+          "x": 297,
+          "y": 278,
+          "width": 154,
+          "height": 206
+        },
+        "originalWidth": 154,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              430,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-outer-corner",
+      "label": "Sand Coloured Glass outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.7950310559006211,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          564,
+          298,
+          729,
+          484
+        ],
+        "bounds": {
+          "x": 566,
+          "y": 300,
+          "width": 161,
+          "height": 182
+        },
+        "originalWidth": 161,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              581,
+              302
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-inner-corner",
+      "label": "Sand Coloured Glass inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.5133689839572193,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          796,
+          276,
+          997,
+          467
+        ],
+        "bounds": {
+          "x": 798,
+          "y": 278,
+          "width": 197,
+          "height": 187
+        },
+        "originalWidth": 197,
+        "originalHeight": 187,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              897,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-endcap-northwest",
+      "label": "Sand Coloured Glass endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-glass-sand-coloured-glass-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34782608695652173,
+        "scaleY": 0.463768115942029,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1094,
+          273,
+          1190,
+          484
+        ],
+        "bounds": {
+          "x": 1096,
+          "y": 275,
+          "width": 92,
+          "height": 207
+        },
+        "originalWidth": 92,
+        "originalHeight": 207,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1164,
+              277
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-endcap-northeast",
+      "label": "Sand Coloured Glass endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-glass-sand-coloured-glass-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34782608695652173,
+        "scaleY": 0.463768115942029,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1367,
+          273,
+          1463,
+          484
+        ],
+        "bounds": {
+          "x": 1369,
+          "y": 275,
+          "width": 92,
+          "height": 207
+        },
+        "originalWidth": 92,
+        "originalHeight": 207,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1392,
+              277
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-open-doorway",
+      "label": "Sand Coloured Glass open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.4,
+        "scaleY": 0.4485981308411215,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          60,
+          526,
+          224,
+          744
+        ],
+        "bounds": {
+          "x": 62,
+          "y": 528,
+          "width": 160,
+          "height": 214
+        },
+        "originalWidth": 160,
+        "originalHeight": 214,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              81,
+              530
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-closed-doorway",
+      "label": "Sand Coloured Glass closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.39751552795031053,
+        "scaleY": 0.4485981308411215,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          290,
+          526,
+          455,
+          744
+        ],
+        "bounds": {
+          "x": 292,
+          "y": 528,
+          "width": 161,
+          "height": 214
+        },
+        "originalWidth": 161,
+        "originalHeight": 214,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              432,
+              530
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-stairs-up",
+      "label": "Translucent Glass Tile stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-translucent-glass-tile-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.5706806282722513,
+        "width": 128,
+        "height": 109,
+        "offset": {
+          "x": 64,
+          "y": 83
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          533,
+          544,
+          762,
+          739
+        ],
+        "bounds": {
+          "x": 535,
+          "y": 546,
+          "width": 225,
+          "height": 191
+        },
+        "originalWidth": 225,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              665,
+              548
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-stairs-down",
+      "label": "Translucent Glass Tile stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-translucent-glass-tile-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5224489795918368,
+        "scaleY": 0.52,
+        "width": 128,
+        "height": 91,
+        "offset": {
+          "x": 64,
+          "y": 101
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          772,
+          560,
+          1021,
+          739
+        ],
+        "bounds": {
+          "x": 774,
+          "y": 562,
+          "width": 245,
+          "height": 175
+        },
+        "originalWidth": 245,
+        "originalHeight": 175,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              564
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-glass-spire",
+      "label": "Glass spire",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-glass-spire.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.7111111111111111,
+        "scaleY": 0.7117117117117117,
+        "width": 96,
+        "height": 158,
+        "offset": {
+          "x": 80,
+          "y": 34
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1083,
+          518,
+          1222,
+          744
+        ],
+        "bounds": {
+          "x": 1085,
+          "y": 520,
+          "width": 135,
+          "height": 222
+        },
+        "originalWidth": 135,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1151,
+              522
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-lightning-conductor-mast",
+      "label": "Lightning conductor mast",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-lightning-conductor-mast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5925925925925926,
+        "scaleY": 0.5905172413793104,
+        "width": 96,
+        "height": 137,
+        "offset": {
+          "x": 80,
+          "y": 55
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1322,
+          515,
+          1488,
+          751
+        ],
+        "bounds": {
+          "x": 1324,
+          "y": 517,
+          "width": 162,
+          "height": 232
+        },
+        "originalWidth": 162,
+        "originalHeight": 232,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1403,
+              519
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-heavy-conductor-cable-coil",
+      "label": "Heavy conductor cable coil",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-heavy-conductor-cable-coil.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4528301886792453,
+        "scaleY": 0.45454545454545453,
+        "width": 96,
+        "height": 90,
+        "offset": {
+          "x": 80,
+          "y": 102
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          33,
+          786,
+          249,
+          988
+        ],
+        "bounds": {
+          "x": 35,
+          "y": 788,
+          "width": 212,
+          "height": 198
+        },
+        "originalWidth": 212,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              82,
+              790
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-glass-castle-gate",
+      "label": "Glass castle gate",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-glass-castle-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.46153846153846156,
+        "scaleY": 0.4595959595959596,
+        "width": 96,
+        "height": 91,
+        "offset": {
+          "x": 80,
+          "y": 101
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          279,
+          766,
+          491,
+          968
+        ],
+        "bounds": {
+          "x": 281,
+          "y": 768,
+          "width": 208,
+          "height": 198
+        },
+        "originalWidth": 208,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              458,
+              770
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-filled-chamber-mound",
+      "label": "Sand filled chamber mound",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-sand-filled-chamber-mound.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.4258373205741627,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          529,
+          776,
+          758,
+          989
+        ],
+        "bounds": {
+          "x": 531,
+          "y": 778,
+          "width": 225,
+          "height": 209
+        },
+        "originalWidth": 225,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              669,
+              780
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-glass-throne",
+      "label": "Glass throne",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-glass-throne.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5925925925925926,
+        "scaleY": 0.5929203539823009,
+        "width": 96,
+        "height": 134,
+        "offset": {
+          "x": 80,
+          "y": 58
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          816,
+          762,
+          982,
+          992
+        ],
+        "bounds": {
+          "x": 818,
+          "y": 764,
+          "width": 162,
+          "height": 226
+        },
+        "originalWidth": 162,
+        "originalHeight": 226,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              896,
+              766
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-flood-release-wheel",
+      "label": "Flood release wheel",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-flood-release-wheel.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.588957055214724,
+        "scaleY": 0.5882352941176471,
+        "width": 96,
+        "height": 120,
+        "offset": {
+          "x": 80,
+          "y": 72
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1068,
+          781,
+          1235,
+          989
+        ],
+        "bounds": {
+          "x": 1070,
+          "y": 783,
+          "width": 163,
+          "height": 204
+        },
+        "originalWidth": 163,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1141,
+              785
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-broken-glass-barricade",
+      "label": "Broken glass barricade",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-broken-glass-barricade.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.4385026737967914,
+        "width": 96,
+        "height": 82,
+        "offset": {
+          "x": 80,
+          "y": 110
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-glass.png",
+        "sha256": "7b68070bf818f324a2debcc498adddb2decae1944ca312331fbe123d730f020d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1295,
+          798,
+          1519,
+          989
+        ],
+        "bounds": {
+          "x": 1297,
+          "y": 800,
+          "width": 220,
+          "height": 187
+        },
+        "originalWidth": 220,
+        "originalHeight": 187,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1410,
+              802
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "bubble-glass.zip",
+  "contactSheet": "contact-sheet.png"
+}

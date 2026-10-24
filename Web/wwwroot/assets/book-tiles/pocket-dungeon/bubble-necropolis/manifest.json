@@ -1,0 +1,1845 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble-necropolis",
+  "style": "pocket-dungeon",
+  "title": "Necropolis of Anser and Pandinus",
+  "books": [
+    4
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "bubble-necropolis-tomb-stone-floor",
+      "label": "Tomb Stone floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-necropolis-tomb-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.64,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          44,
+          42,
+          245,
+          246
+        ],
+        "bounds": {
+          "x": 46,
+          "y": 44,
+          "width": 197,
+          "height": 200
+        },
+        "originalWidth": 197,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              73,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-worn-tomb-stone-floor",
+      "label": "Worn tomb stone floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-necropolis-worn-tomb-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6432160804020101,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          294,
+          42,
+          492,
+          245
+        ],
+        "bounds": {
+          "x": 296,
+          "y": 44,
+          "width": 194,
+          "height": 199
+        },
+        "originalWidth": 194,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              322,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-cracked-tomb-stone-floor",
+      "label": "Cracked tomb stone floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-necropolis-cracked-tomb-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6432160804020101,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          542,
+          42,
+          742,
+          245
+        ],
+        "bounds": {
+          "x": 544,
+          "y": 44,
+          "width": 196,
+          "height": 199
+        },
+        "originalWidth": 196,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              572,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-wet-tomb-stone-floor",
+      "label": "Wet tomb stone floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-necropolis-wet-tomb-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6432160804020101,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          794,
+          42,
+          995,
+          245
+        ],
+        "bounds": {
+          "x": 796,
+          "y": 44,
+          "width": 197,
+          "height": 199
+        },
+        "originalWidth": 197,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              804,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-tomb-stone-edge-transition",
+      "label": "Tomb Stone edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-necropolis-tomb-stone-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.7901234567901234,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1047,
+          60,
+          1253,
+          226
+        ],
+        "bounds": {
+          "x": 1049,
+          "y": 62,
+          "width": 202,
+          "height": 162
+        },
+        "originalWidth": 202,
+        "originalHeight": 162,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1060,
+              64
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-tomb-stone-corner-transition",
+      "label": "Tomb Stone corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-necropolis-tomb-stone-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.7231638418079096,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1305,
+          55,
+          1486,
+          243
+        ],
+        "bounds": {
+          "x": 1307,
+          "y": 57,
+          "width": 177,
+          "height": 184
+        },
+        "originalWidth": 177,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1315,
+              59
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-wall-northwest",
+      "label": "Ancient Tomb Masonry wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.6442953020134228,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          35,
+          308,
+          243,
+          461
+        ],
+        "bounds": {
+          "x": 37,
+          "y": 310,
+          "width": 204,
+          "height": 149
+        },
+        "originalWidth": 204,
+        "originalHeight": 149,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              58,
+              312
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-wall-northeast",
+      "label": "Ancient Tomb Masonry wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.6274509803921569,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          286,
+          304,
+          497,
+          461
+        ],
+        "bounds": {
+          "x": 288,
+          "y": 306,
+          "width": 207,
+          "height": 153
+        },
+        "originalWidth": 207,
+        "originalHeight": 153,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              306,
+              308
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-outer-corner",
+      "label": "Ancient Tomb Masonry outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.4948453608247423,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          545,
+          290,
+          739,
+          488
+        ],
+        "bounds": {
+          "x": 547,
+          "y": 292,
+          "width": 190,
+          "height": 194
+        },
+        "originalWidth": 190,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              703,
+              294
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-inner-corner",
+      "label": "Ancient Tomb Masonry inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6037735849056604,
+        "scaleY": 0.4752475247524752,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          791,
+          269,
+          1007,
+          475
+        ],
+        "bounds": {
+          "x": 793,
+          "y": 271,
+          "width": 212,
+          "height": 202
+        },
+        "originalWidth": 212,
+        "originalHeight": 202,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              908,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-endcap-northwest",
+      "label": "Ancient Tomb Masonry endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.41379310344827586,
+        "scaleY": 0.4948453608247423,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1098,
+          283,
+          1218,
+          481
+        ],
+        "bounds": {
+          "x": 1100,
+          "y": 285,
+          "width": 116,
+          "height": 194
+        },
+        "originalWidth": 116,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1170,
+              287
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-endcap-northeast",
+      "label": "Ancient Tomb Masonry endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.43243243243243246,
+        "scaleY": 0.49740932642487046,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1338,
+          284,
+          1453,
+          481
+        ],
+        "bounds": {
+          "x": 1340,
+          "y": 286,
+          "width": 111,
+          "height": 193
+        },
+        "originalWidth": 111,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1373,
+              288
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-open-doorway",
+      "label": "Ancient Tomb Masonry open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.4549763033175355,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          38,
+          495,
+          244,
+          710
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 497,
+          "width": 202,
+          "height": 211
+        },
+        "originalWidth": 202,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              134,
+              499
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-ancient-tomb-masonry-closed-doorway",
+      "label": "Ancient Tomb Masonry closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-necropolis-ancient-tomb-masonry-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.45714285714285713,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          288,
+          494,
+          497,
+          708
+        ],
+        "bounds": {
+          "x": 290,
+          "y": 496,
+          "width": 205,
+          "height": 210
+        },
+        "originalWidth": 205,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              379,
+              498
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-tomb-stone-stairs-up",
+      "label": "Tomb Stone stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-tomb-stone-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5981308411214953,
+        "scaleY": 0.6,
+        "width": 128,
+        "height": 102,
+        "offset": {
+          "x": 64,
+          "y": 90
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          532,
+          534,
+          750,
+          708
+        ],
+        "bounds": {
+          "x": 534,
+          "y": 536,
+          "width": 214,
+          "height": 170
+        },
+        "originalWidth": 214,
+        "originalHeight": 170,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              578,
+              538
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-tomb-stone-stairs-down",
+      "label": "Tomb Stone stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-tomb-stone-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.6094674556213018,
+        "width": 128,
+        "height": 103,
+        "offset": {
+          "x": 64,
+          "y": 89
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          787,
+          535,
+          1001,
+          708
+        ],
+        "bounds": {
+          "x": 789,
+          "y": 537,
+          "width": 210,
+          "height": 169
+        },
+        "originalWidth": 210,
+        "originalHeight": 169,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              818,
+              539
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-sarcophagus",
+      "label": "Sarcophagus",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-sarcophagus.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4528301886792453,
+        "scaleY": 0.45410628019323673,
+        "width": 96,
+        "height": 94,
+        "offset": {
+          "x": 80,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1043,
+          517,
+          1259,
+          728
+        ],
+        "bounds": {
+          "x": 1045,
+          "y": 519,
+          "width": 212,
+          "height": 207
+        },
+        "originalWidth": 212,
+        "originalHeight": 207,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1200,
+              521
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-tomb-relief-pillar",
+      "label": "Tomb relief pillar",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-tomb-relief-pillar.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.7559055118110236,
+        "scaleY": 0.7555555555555555,
+        "width": 96,
+        "height": 170,
+        "offset": {
+          "x": 80,
+          "y": 22
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1329,
+          494,
+          1460,
+          723
+        ],
+        "bounds": {
+          "x": 1331,
+          "y": 496,
+          "width": 127,
+          "height": 225
+        },
+        "originalWidth": 127,
+        "originalHeight": 225,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1369,
+              498
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-burial-niche-wall",
+      "label": "Burial niche wall",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-burial-niche-wall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.4270833333333333,
+        "width": 96,
+        "height": 82,
+        "offset": {
+          "x": 80,
+          "y": 110
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          33,
+          765,
+          262,
+          961
+        ],
+        "bounds": {
+          "x": 35,
+          "y": 767,
+          "width": 225,
+          "height": 192
+        },
+        "originalWidth": 225,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              47,
+              769
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-necropolis-tower-entrance",
+      "label": "Necropolis tower entrance",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-necropolis-tower-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4682926829268293,
+        "scaleY": 0.46863468634686345,
+        "width": 96,
+        "height": 127,
+        "offset": {
+          "x": 80,
+          "y": 65
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          286,
+          710,
+          495,
+          985
+        ],
+        "bounds": {
+          "x": 288,
+          "y": 712,
+          "width": 205,
+          "height": 271
+        },
+        "originalWidth": 205,
+        "originalHeight": 271,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              389,
+              714
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-scorpion-settlement-gate",
+      "label": "Scorpion settlement gate",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-scorpion-settlement-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39819004524886875,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          514,
+          741,
+          759,
+          966
+        ],
+        "bounds": {
+          "x": 516,
+          "y": 743,
+          "width": 241,
+          "height": 221
+        },
+        "originalWidth": 241,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              563,
+              745
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-underground-market-stall",
+      "label": "Underground market stall",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-underground-market-stall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.40869565217391307,
+        "width": 96,
+        "height": 94,
+        "offset": {
+          "x": 80,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          773,
+          746,
+          1013,
+          980
+        ],
+        "bounds": {
+          "x": 775,
+          "y": 748,
+          "width": 236,
+          "height": 230
+        },
+        "originalWidth": 236,
+        "originalHeight": 230,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              829,
+              750
+            ],
+            [
+              823,
+              870
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-collapsed-burial-chamber-rubble",
+      "label": "Collapsed burial chamber rubble",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-collapsed-burial-chamber-rubble.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39690721649484534,
+        "width": 96,
+        "height": 77,
+        "offset": {
+          "x": 80,
+          "y": 115
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1022,
+          773,
+          1267,
+          971
+        ],
+        "bounds": {
+          "x": 1024,
+          "y": 775,
+          "width": 241,
+          "height": 194
+        },
+        "originalWidth": 241,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1143,
+              777
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-necropolis-deep-tomb-shaft",
+      "label": "Deep tomb shaft",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-necropolis",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-necropolis-deep-tomb-shaft.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.44651162790697674,
+        "scaleY": 0.4467005076142132,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-necropolis.png",
+        "sha256": "e878d785a21eabc3c1cf2642ce7bb664249bb9dede48c21a05c421ebc638d6b1",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1285,
+          767,
+          1504,
+          968
+        ],
+        "bounds": {
+          "x": 1287,
+          "y": 769,
+          "width": 215,
+          "height": 197
+        },
+        "originalWidth": 215,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1446,
+              771
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "bubble-necropolis.zip",
+  "contactSheet": "contact-sheet.png"
+}

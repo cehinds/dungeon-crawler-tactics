@@ -1,0 +1,1849 @@
+{
+  "schemaVersion": 1,
+  "id": "industry-menagerie",
+  "style": "pocket-dungeon",
+  "title": "Goblin workshops, distillery and menagerie",
+  "books": [
+    1
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "industry-menagerie-industrial-brick-floor",
+      "label": "Industrial Brick floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/industry-menagerie-industrial-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          47,
+          55,
+          236,
+          249
+        ],
+        "bounds": {
+          "x": 49,
+          "y": 57,
+          "width": 185,
+          "height": 190
+        },
+        "originalWidth": 185,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              114,
+              59
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-worn-industrial-brick-floor",
+      "label": "Worn industrial brick floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/industry-menagerie-worn-industrial-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          297,
+          54,
+          484,
+          248
+        ],
+        "bounds": {
+          "x": 299,
+          "y": 56,
+          "width": 183,
+          "height": 190
+        },
+        "originalWidth": 183,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              371,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-cracked-industrial-brick-floor",
+      "label": "Cracked industrial brick floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/industry-menagerie-cracked-industrial-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          547,
+          54,
+          737,
+          248
+        ],
+        "bounds": {
+          "x": 549,
+          "y": 56,
+          "width": 186,
+          "height": 190
+        },
+        "originalWidth": 186,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              602,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-wet-industrial-brick-floor",
+      "label": "Wet industrial brick floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/industry-menagerie-wet-industrial-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          801,
+          54,
+          991,
+          249
+        ],
+        "bounds": {
+          "x": 803,
+          "y": 56,
+          "width": 186,
+          "height": 191
+        },
+        "originalWidth": 186,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              825,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-industrial-brick-edge-transition",
+      "label": "Industrial Brick edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/industry-menagerie-industrial-brick-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1054,
+          54,
+          1242,
+          248
+        ],
+        "bounds": {
+          "x": 1056,
+          "y": 56,
+          "width": 184,
+          "height": 190
+        },
+        "originalWidth": 184,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1119,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-industrial-brick-corner-transition",
+      "label": "Industrial Brick corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/industry-menagerie-industrial-brick-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1306,
+          54,
+          1493,
+          248
+        ],
+        "bounds": {
+          "x": 1308,
+          "y": 56,
+          "width": 183,
+          "height": 190
+        },
+        "originalWidth": 183,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1313,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-wall-northwest",
+      "label": "Soot Stained Brick wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/industry-menagerie-soot-stained-brick-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6857142857142857,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          40,
+          305,
+          238,
+          449
+        ],
+        "bounds": {
+          "x": 42,
+          "y": 307,
+          "width": 194,
+          "height": 140
+        },
+        "originalWidth": 194,
+        "originalHeight": 140,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              68,
+              309
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-wall-northeast",
+      "label": "Soot Stained Brick wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/industry-menagerie-soot-stained-brick-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6857142857142857,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          298,
+          305,
+          495,
+          449
+        ],
+        "bounds": {
+          "x": 300,
+          "y": 307,
+          "width": 193,
+          "height": 140
+        },
+        "originalWidth": 193,
+        "originalHeight": 140,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              321,
+              309
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-outer-corner",
+      "label": "Soot Stained Brick outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/industry-menagerie-soot-stained-brick-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.8421052631578947,
+        "scaleY": 0.5161290322580645,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          567,
+          280,
+          723,
+          470
+        ],
+        "bounds": {
+          "x": 569,
+          "y": 282,
+          "width": 152,
+          "height": 186
+        },
+        "originalWidth": 152,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              596,
+              284
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-inner-corner",
+      "label": "Soot Stained Brick inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/industry-menagerie-soot-stained-brick-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.5245901639344263,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          799,
+          276,
+          995,
+          463
+        ],
+        "bounds": {
+          "x": 801,
+          "y": 278,
+          "width": 192,
+          "height": 183
+        },
+        "originalWidth": 192,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              887,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-endcap-northwest",
+      "label": "Soot Stained Brick endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/industry-menagerie-soot-stained-brick-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.48,
+        "scaleY": 0.5026178010471204,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1101,
+          276,
+          1205,
+          471
+        ],
+        "bounds": {
+          "x": 1103,
+          "y": 278,
+          "width": 100,
+          "height": 191
+        },
+        "originalWidth": 100,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1167,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-endcap-northeast",
+      "label": "Soot Stained Brick endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/industry-menagerie-soot-stained-brick-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.5052631578947369,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1353,
+          276,
+          1459,
+          470
+        ],
+        "bounds": {
+          "x": 1355,
+          "y": 278,
+          "width": 102,
+          "height": 190
+        },
+        "originalWidth": 102,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1385,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-open-doorway",
+      "label": "Soot Stained Brick open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/industry-menagerie-soot-stained-brick-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.463768115942029,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          38,
+          491,
+          237,
+          702
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 493,
+          "width": 195,
+          "height": 207
+        },
+        "originalWidth": 195,
+        "originalHeight": 207,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              124,
+              495
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-soot-stained-brick-closed-doorway",
+      "label": "Soot Stained Brick closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/industry-menagerie-soot-stained-brick-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.4752475247524752,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          294,
+          491,
+          492,
+          697
+        ],
+        "bounds": {
+          "x": 296,
+          "y": 493,
+          "width": 194,
+          "height": 202
+        },
+        "originalWidth": 194,
+        "originalHeight": 202,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              379,
+              495
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-industrial-brick-stairs-up",
+      "label": "Industrial Brick stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-industrial-brick-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6702702702702703,
+        "width": 128,
+        "height": 124,
+        "offset": {
+          "x": 64,
+          "y": 68
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          537,
+          507,
+          732,
+          696
+        ],
+        "bounds": {
+          "x": 539,
+          "y": 509,
+          "width": 191,
+          "height": 185
+        },
+        "originalWidth": 191,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              593,
+              511
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-industrial-brick-stairs-down",
+      "label": "Industrial Brick stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-industrial-brick-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.6216216216216216,
+        "width": 128,
+        "height": 115,
+        "offset": {
+          "x": 64,
+          "y": 77
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          790,
+          508,
+          1000,
+          697
+        ],
+        "bounds": {
+          "x": 792,
+          "y": 510,
+          "width": 206,
+          "height": 185
+        },
+        "originalWidth": 206,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              828,
+              512
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-goblin-workbench",
+      "label": "Goblin workbench",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-goblin-workbench.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.38247011952191234,
+        "scaleY": 0.3826530612244898,
+        "width": 96,
+        "height": 75,
+        "offset": {
+          "x": 80,
+          "y": 117
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1024,
+          503,
+          1279,
+          703
+        ],
+        "bounds": {
+          "x": 1026,
+          "y": 505,
+          "width": 251,
+          "height": 196
+        },
+        "originalWidth": 251,
+        "originalHeight": 196,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1178,
+              507
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-improvised-cannon-emplacement",
+      "label": "Improvised cannon emplacement",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-improvised-cannon-emplacement.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4423963133640553,
+        "scaleY": 0.4427083333333333,
+        "width": 96,
+        "height": 85,
+        "offset": {
+          "x": 80,
+          "y": 107
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1299,
+          500,
+          1520,
+          696
+        ],
+        "bounds": {
+          "x": 1301,
+          "y": 502,
+          "width": 217,
+          "height": 192
+        },
+        "originalWidth": 217,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1343,
+              504
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-bottling-conveyor",
+      "label": "Bottling conveyor",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-bottling-conveyor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.384,
+        "scaleY": 0.38497652582159625,
+        "width": 96,
+        "height": 82,
+        "offset": {
+          "x": 80,
+          "y": 110
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          13,
+          749,
+          267,
+          966
+        ],
+        "bounds": {
+          "x": 15,
+          "y": 751,
+          "width": 250,
+          "height": 213
+        },
+        "originalWidth": 250,
+        "originalHeight": 213,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              199,
+              753
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-brewing-vat",
+      "label": "Brewing vat",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-brewing-vat.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.41201716738197425,
+        "scaleY": 0.411522633744856,
+        "width": 96,
+        "height": 100,
+        "offset": {
+          "x": 80,
+          "y": 92
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          281,
+          717,
+          518,
+          964
+        ],
+        "bounds": {
+          "x": 283,
+          "y": 719,
+          "width": 233,
+          "height": 243
+        },
+        "originalWidth": 233,
+        "originalHeight": 243,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              377,
+              721
+            ],
+            [
+              480,
+              819
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-pipe-valve-cluster",
+      "label": "Pipe valve cluster",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-pipe-valve-cluster.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.45933014354066987,
+        "scaleY": 0.4592274678111588,
+        "width": 96,
+        "height": 107,
+        "offset": {
+          "x": 80,
+          "y": 85
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          540,
+          719,
+          753,
+          956
+        ],
+        "bounds": {
+          "x": 542,
+          "y": 721,
+          "width": 209,
+          "height": 233
+        },
+        "originalWidth": 209,
+        "originalHeight": 233,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              672,
+              723
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-kennel-cage-section",
+      "label": "Kennel cage section",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-kennel-cage-section.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4247787610619469,
+        "scaleY": 0.4263959390862944,
+        "width": 96,
+        "height": 84,
+        "offset": {
+          "x": 80,
+          "y": 108
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          774,
+          756,
+          1004,
+          957
+        ],
+        "bounds": {
+          "x": 776,
+          "y": 758,
+          "width": 226,
+          "height": 197
+        },
+        "originalWidth": 226,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              828,
+              760
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-pet-reward-pedestal",
+      "label": "Pet reward pedestal",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-pet-reward-pedestal.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5333333333333333,
+        "scaleY": 0.535,
+        "width": 96,
+        "height": 107,
+        "offset": {
+          "x": 80,
+          "y": 85
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1049,
+          753,
+          1233,
+          957
+        ],
+        "bounds": {
+          "x": 1051,
+          "y": 755,
+          "width": 180,
+          "height": 200
+        },
+        "originalWidth": 180,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1185,
+              757
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "industry-menagerie-steel-arena-gate",
+      "label": "Steel arena gate",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "industry-menagerie",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/industry-menagerie-steel-arena-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.39344262295081966,
+        "scaleY": 0.39285714285714285,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/industry-menagerie.png",
+        "sha256": "9c1d9a0e3089ec4d92e18f12e76a57da8b8e4795ecce1415d6d9e7e28a7f6bdc",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1271,
+          726,
+          1519,
+          954
+        ],
+        "bounds": {
+          "x": 1273,
+          "y": 728,
+          "width": 244,
+          "height": 224
+        },
+        "originalWidth": 244,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1480,
+              730
+            ],
+            [
+              1457,
+              777
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "industry-menagerie.zip",
+  "contactSheet": "contact-sheet.png"
+}

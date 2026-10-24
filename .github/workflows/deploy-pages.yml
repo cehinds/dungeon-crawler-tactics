@@ -36,6 +36,7 @@ jobs:
           python -m unittest Tests/test_content_validators.py
           python Tools/package_room_kit.py
           python Tools/build_style_packs.py --style all --check
+          python Tools/build_book_tiles.py --style all --check --catalog
           python Tools/validate_directional_art.py
           python Tools/validate_form_art.py
           python Tools/expand_story_levels.py --check

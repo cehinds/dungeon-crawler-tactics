@@ -1,0 +1,1845 @@
+{
+  "schemaVersion": 1,
+  "id": "safe-services",
+  "style": "ink-and-lanterns",
+  "title": "Restaurants, waiting rooms and safe-room services",
+  "books": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "safe-services-diner-checker-tile-floor",
+      "label": "Diner Checker Tile floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.4507042253521127,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          17,
+          58,
+          246,
+          204
+        ],
+        "bounds": {
+          "x": 19,
+          "y": 60,
+          "width": 225,
+          "height": 142
+        },
+        "originalWidth": 225,
+        "originalHeight": 142,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              133,
+              62
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-worn-diner-checker-tile-floor",
+      "label": "Worn diner checker tile floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-worn-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.44755244755244755,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          271,
+          57,
+          501,
+          204
+        ],
+        "bounds": {
+          "x": 273,
+          "y": 59,
+          "width": 226,
+          "height": 143
+        },
+        "originalWidth": 226,
+        "originalHeight": 143,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              386,
+              61
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-cracked-diner-checker-tile-floor",
+      "label": "Cracked diner checker tile floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-cracked-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.44755244755244755,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          526,
+          57,
+          756,
+          204
+        ],
+        "bounds": {
+          "x": 528,
+          "y": 59,
+          "width": 226,
+          "height": 143
+        },
+        "originalWidth": 226,
+        "originalHeight": 143,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              639,
+              61
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-wet-diner-checker-tile-floor",
+      "label": "Wet diner checker tile floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-wet-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5638766519823789,
+        "scaleY": 0.44755244755244755,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          781,
+          57,
+          1012,
+          204
+        ],
+        "bounds": {
+          "x": 783,
+          "y": 59,
+          "width": 227,
+          "height": 143
+        },
+        "originalWidth": 227,
+        "originalHeight": 143,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              61
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-edge-transition",
+      "label": "Diner Checker Tile edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-diner-checker-tile-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.4444444444444444,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1037,
+          57,
+          1267,
+          205
+        ],
+        "bounds": {
+          "x": 1039,
+          "y": 59,
+          "width": 226,
+          "height": 144
+        },
+        "originalWidth": 226,
+        "originalHeight": 144,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1150,
+              61
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-corner-transition",
+      "label": "Diner Checker Tile corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-diner-checker-tile-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.4413793103448276,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1292,
+          57,
+          1522,
+          206
+        ],
+        "bounds": {
+          "x": 1294,
+          "y": 59,
+          "width": 226,
+          "height": 145
+        },
+        "originalWidth": 226,
+        "originalHeight": 145,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1403,
+              61
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-wall-northwest",
+      "label": "Cream Service Tile wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3855421686746988,
+        "scaleY": 0.4343891402714932,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          65,
+          256,
+          235,
+          481
+        ],
+        "bounds": {
+          "x": 67,
+          "y": 258,
+          "width": 166,
+          "height": 221
+        },
+        "originalWidth": 166,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              92,
+              260
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-wall-northeast",
+      "label": "Cream Service Tile wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3855421686746988,
+        "scaleY": 0.43636363636363634,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          302,
+          256,
+          472,
+          480
+        ],
+        "bounds": {
+          "x": 304,
+          "y": 258,
+          "width": 166,
+          "height": 220
+        },
+        "originalWidth": 166,
+        "originalHeight": 220,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              444,
+              260
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-outer-corner",
+      "label": "Cream Service Tile outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 1.2307692307692308,
+        "scaleY": 0.5106382978723404,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          590,
+          269,
+          698,
+          461
+        ],
+        "bounds": {
+          "x": 592,
+          "y": 271,
+          "width": 104,
+          "height": 188
+        },
+        "originalWidth": 104,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              620,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-inner-corner",
+      "label": "Cream Service Tile inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.7710843373493976,
+        "scaleY": 0.5,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          814,
+          258,
+          984,
+          454
+        ],
+        "bounds": {
+          "x": 816,
+          "y": 260,
+          "width": 166,
+          "height": 192
+        },
+        "originalWidth": 166,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              896,
+              262
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-endcap-northwest",
+      "label": "Cream Service Tile endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/safe-services-cream-service-tile-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.37209302325581395,
+        "scaleY": 0.5079365079365079,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1108,
+          269,
+          1198,
+          462
+        ],
+        "bounds": {
+          "x": 1110,
+          "y": 271,
+          "width": 86,
+          "height": 189
+        },
+        "originalWidth": 86,
+        "originalHeight": 189,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1156,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-endcap-northeast",
+      "label": "Cream Service Tile endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/safe-services-cream-service-tile-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.5026178010471204,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1367,
+          257,
+          1453,
+          452
+        ],
+        "bounds": {
+          "x": 1369,
+          "y": 259,
+          "width": 82,
+          "height": 191
+        },
+        "originalWidth": 82,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1404,
+              261
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-open-doorway",
+      "label": "Cream Service Tile open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3742690058479532,
+        "scaleY": 0.42857142857142855,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          57,
+          497,
+          232,
+          725
+        ],
+        "bounds": {
+          "x": 59,
+          "y": 499,
+          "width": 171,
+          "height": 224
+        },
+        "originalWidth": 171,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              84,
+              501
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-closed-doorway",
+      "label": "Cream Service Tile closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3699421965317919,
+        "scaleY": 0.42290748898678415,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          300,
+          498,
+          477,
+          729
+        ],
+        "bounds": {
+          "x": 302,
+          "y": 500,
+          "width": 173,
+          "height": 227
+        },
+        "originalWidth": 173,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              328,
+              502
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-stairs-up",
+      "label": "Diner Checker Tile stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-diner-checker-tile-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5565217391304348,
+        "scaleY": 0.5565217391304348,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 64
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          523,
+          499,
+          757,
+          733
+        ],
+        "bounds": {
+          "x": 525,
+          "y": 501,
+          "width": 230,
+          "height": 230
+        },
+        "originalWidth": 230,
+        "originalHeight": 230,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              633,
+              503
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-stairs-down",
+      "label": "Diner Checker Tile stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-diner-checker-tile-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5589519650655022,
+        "scaleY": 0.5583756345177665,
+        "width": 128,
+        "height": 110,
+        "offset": {
+          "x": 64,
+          "y": 82
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          777,
+          532,
+          1010,
+          733
+        ],
+        "bounds": {
+          "x": 779,
+          "y": 534,
+          "width": 229,
+          "height": 197
+        },
+        "originalWidth": 229,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              536
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-food-service-counter",
+      "label": "Food service counter",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-food-service-counter.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.3870967741935484,
+        "scaleY": 0.38571428571428573,
+        "width": 96,
+        "height": 81,
+        "offset": {
+          "x": 80,
+          "y": 111
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1024,
+          519,
+          1276,
+          733
+        ],
+        "bounds": {
+          "x": 1026,
+          "y": 521,
+          "width": 248,
+          "height": 210
+        },
+        "originalWidth": 248,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1098,
+              523
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-restaurant-dining-booth",
+      "label": "Restaurant dining booth",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-restaurant-dining-booth.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4192139737991266,
+        "scaleY": 0.41919191919191917,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1291,
+          523,
+          1524,
+          725
+        ],
+        "bounds": {
+          "x": 1293,
+          "y": 525,
+          "width": 229,
+          "height": 198
+        },
+        "originalWidth": 229,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1389,
+              527
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-waiting-room-bench",
+      "label": "Waiting room bench",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-waiting-room-bench.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.4166666666666667,
+        "width": 96,
+        "height": 80,
+        "offset": {
+          "x": 80,
+          "y": 112
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          20,
+          767,
+          255,
+          963
+        ],
+        "bounds": {
+          "x": 22,
+          "y": 769,
+          "width": 231,
+          "height": 192
+        },
+        "originalWidth": 231,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              86,
+              771
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-queue-ticket-dispenser",
+      "label": "Queue ticket dispenser",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-queue-ticket-dispenser.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.9534883720930233,
+        "scaleY": 0.9583333333333334,
+        "width": 82,
+        "height": 184,
+        "offset": {
+          "x": 87,
+          "y": 8
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          337,
+          764,
+          427,
+          960
+        ],
+        "bounds": {
+          "x": 339,
+          "y": 766,
+          "width": 86,
+          "height": 192
+        },
+        "originalWidth": 86,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              373,
+              768
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-children-play-tunnel",
+      "label": "Children play tunnel",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-children-play-tunnel.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.40336134453781514,
+        "scaleY": 0.40096618357487923,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          515,
+          757,
+          757,
+          968
+        ],
+        "bounds": {
+          "x": 517,
+          "y": 759,
+          "width": 238,
+          "height": 207
+        },
+        "originalWidth": 238,
+        "originalHeight": 207,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              689,
+              761
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-candy-vending-machine",
+      "label": "Candy vending machine",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-candy-vending-machine.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.8,
+        "scaleY": 0.8,
+        "width": 96,
+        "height": 184,
+        "offset": {
+          "x": 80,
+          "y": 8
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          832,
+          739,
+          956,
+          973
+        ],
+        "bounds": {
+          "x": 834,
+          "y": 741,
+          "width": 120,
+          "height": 230
+        },
+        "originalWidth": 120,
+        "originalHeight": 230,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              876,
+              743
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-protected-restroom-portal",
+      "label": "Protected restroom portal",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-protected-restroom-portal.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4897959183673469,
+        "scaleY": 0.48936170212765956,
+        "width": 96,
+        "height": 115,
+        "offset": {
+          "x": 80,
+          "y": 77
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1046,
+          740,
+          1246,
+          979
+        ],
+        "bounds": {
+          "x": 1048,
+          "y": 742,
+          "width": 196,
+          "height": 235
+        },
+        "originalWidth": 196,
+        "originalHeight": 235,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1073,
+              744
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-walk-in-freezer-door",
+      "label": "Walk in freezer door",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-walk-in-freezer-door.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.47761194029850745,
+        "scaleY": 0.4769874476987448,
+        "width": 96,
+        "height": 114,
+        "offset": {
+          "x": 80,
+          "y": 78
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/safe-services.png",
+        "sha256": "a0384e8e0be92f0f30f868e87824718c56607d630457a8daedd0c04bfd46e3ba",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1302,
+          741,
+          1507,
+          984
+        ],
+        "bounds": {
+          "x": 1304,
+          "y": 743,
+          "width": 201,
+          "height": 239
+        },
+        "originalWidth": 201,
+        "originalHeight": 239,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1329,
+              745
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "safe-services.zip",
+  "contactSheet": "contact-sheet.png"
+}

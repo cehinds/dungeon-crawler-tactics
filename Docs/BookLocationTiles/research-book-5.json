@@ -1,0 +1,713 @@
+{
+  "schemaVersion": 1,
+  "book": 5,
+  "title": "The Butcher's Masquerade",
+  "floor": 6,
+  "floorName": "The Hunting Grounds",
+  "researchStatus": "secondary-source location survey; not a full-text audit",
+  "scope": "Book 5 locations include the Floor 6 Hunting Grounds and finale; the half-destroyed High Elf Castle and qualifying occupants are reported transferred to Floor 9, while Carl remains on Floor 6 for the bramble-crater battle. The epilogue then enters the Floor 7 Great Race and Floor 8 selection chamber. This is not a full-text audit; the actual Floor 8 destination is unidentified, and no island landscape is claimed as visited.",
+  "chronologySources": [
+    {
+      "url": "https://www.penguinrandomhouse.com/series/43C/dungeon-crawler-carl/",
+      "kind": "official publisher series page",
+      "supports": "Book order and the title The Butcher's Masquerade as Book 5."
+    },
+    {
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241829820/9780241829820-sample.pdf",
+      "kind": "official publisher sample",
+      "supports": "Floor 6 is the Hunting Grounds; overgrown ruins/jungle; the class registration arena is stadium-sized; Zockau is a city with exits; Floor 6 is 17 days with 2,344 exits."
+    }
+  ],
+  "secondarySources": [
+    {
+      "url": "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md",
+      "kind": "fan-maintained chapter summaries",
+      "supports": "Book 5 chapter-level narrative and named places, including dryad and bugbear settlements, Point Mongo, Fort Freedom, Alucarda, and the Masquerade."
+    },
+    {
+      "url": "https://www.dccfansite.com/books/",
+      "kind": "unofficial fan chapter index",
+      "supports": "Book 5 is Floor 6 and the indexed coverage runs through chapter 75 and the epilogue."
+    },
+    {
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor",
+      "kind": "fan wiki",
+      "supports": "Named Floor 6 settlements and notable locations; broad jungle-overgrown urban-ruin characterization."
+    },
+    {
+      "url": "https://www.dccfansite.com/entry/great-race/",
+      "kind": "unofficial fan index",
+      "supports": "Book 5 epilogue arrival at Floor 7, glass pole-position chamber, portal column, branching maze concept, and floor shattering."
+    },
+    {
+      "url": "https://www.dccfansite.com/book/5/ch/99/",
+      "kind": "unofficial fan chapter index",
+      "supports": "Book 5 epilogue: Prepotente shatters the Great Race and crawlers are sent to Floor 8."
+    },
+    {
+      "url": "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+      "kind": "chapter-by-chapter secondary summary",
+      "supports": "Book 5 epilogue: Floor 7 chamber, branching Great Race design, full level shattering, Floor 8 holographic-globe chamber, and unidentified destination; Chapter 76 castle transfer and bramble-crater battle."
+    },
+    {
+      "url": "https://www.supersummary.com/the-butchers-masquerade/summary/",
+      "kind": "secondary book summary",
+      "supports": "The Great Race destruction sends crawlers to Floor 8; the High Elf Castle is transported to Floor 9 during the Book 5 finale."
+    },
+    {
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Book_5_Chapter_Summaries",
+      "kind": "fan wiki chapter summaries",
+      "supports": "Book 5 epilogue arrival on Floor 7 and immediate destruction leading to Floor 8."
+    },
+    {
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+      "kind": "fan wiki",
+      "supports": "The High Elf Castle and qualifying occupants are teleported to Floor 9 when the Masquerade seal is broken."
+    },
+    {
+      "url": "https://wiki.bookwormai.app/dungeon-crawler-carl/locations?book=5",
+      "kind": "companion location index",
+      "supports": "Book 5-filtered location list includes Pole Position Chamber and Eighth Floor Entry Chamber."
+    },
+    {
+      "url": "https://manatoastmedia.com/hunting-grounds/",
+      "kind": "secondary fan guide",
+      "supports": "Chapter 76 finale distinguishes the qualifying castle passengers transferred to Floor Nine from crawlers, hunters, most pets, and elves who remain to fight on Floor Six."
+    },
+    {
+      "url": "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+      "kind": "independent fan archive",
+      "supports": "Floor Six finale describes the castle moving to Floor Nine and combatants left behind."
+    }
+  ],
+  "locations": [
+    {
+      "id": "b5_hunting_grounds",
+      "name": "The Hunting Grounds",
+      "type": "floor / biome",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A world-scale floor resembling the earlier urban-ruin layer, now covered by centuries of jungle growth.",
+        "Abandoned urban structures and ruins beneath dense foliage, with settlements, rivers, valleys, traps, and dispersed stairwell exits.",
+        "Hunter pressure radiates from Zockau; the High Elf Castle is a major destination in the southeast."
+      ],
+      "tileFamilies": [
+        "jungle_ruin",
+        "overgrown_street",
+        "river_crossing",
+        "settlement_edge",
+        "hidden_stairwell"
+      ],
+      "confidence": "high for the overall jungle-over-ruins identity; medium for spatial arrangement, which is summarized by secondary fan sources and is not a measured map",
+      "sources": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829820/9780241829820-sample.pdf",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor",
+        "https://www.dccfansite.com/entry/hunting-grounds/"
+      ]
+    },
+    {
+      "id": "b5_registration_arena",
+      "name": "Floor 6 registration / class-specialization arena",
+      "type": "interior / staging arena",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Stadium-sized indoor staging space with a queue of crawlers and rows of small specialization booths along the wall.",
+        "Velvet crowd-control ropes and red carpets are being rolled up as the arena is closed; small booth doors lead to rooms about the size of an airplane lavatory."
+      ],
+      "tileFamilies": [
+        "stadium_interior",
+        "registration_queue",
+        "booth_row"
+      ],
+      "confidence": "high",
+      "sources": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829820/9780241829820-sample.pdf"
+      ]
+    },
+    {
+      "id": "b5_zockau",
+      "name": "Zockau",
+      "type": "city",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Northern hunter city with a tidy square, bear-headed statue, and a stairwell in a landscaped park.",
+        "Mid-century American downtown feel: low commercial buildings, yellow electric lights, and a row of seven pubs.",
+        "A three-storey, diner-like Desperado entrance anchors the hunters' city; the bombing leaves a damaged block and trapped club patrons."
+      ],
+      "tileFamilies": [
+        "midcentury_downtown",
+        "town_square",
+        "park_stairwell",
+        "bomb_damaged_street"
+      ],
+      "confidence": "high for chapter placement and city role; medium-high visual detail from an unofficial fan index",
+      "sources": [
+        "https://www.dccfansite.com/entry/zockau/",
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829820/9780241829820-sample.pdf",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_desperado_club",
+      "name": "Desperado Club",
+      "type": "building / nightclub",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Three-storey, diner-like club entrance on Zockau's pub street.",
+        "The entrance and surrounding city block are wrecked in Carl's raid; club occupants are trapped inside."
+      ],
+      "tileFamilies": [
+        "diner_frontage",
+        "nightclub_interior",
+        "ruined_city_block"
+      ],
+      "confidence": "medium-high; visual detail and events come from secondary fan sources",
+      "sources": [
+        "https://www.dccfansite.com/entry/zockau/",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ]
+    },
+    {
+      "id": "b5_scuttlebutt",
+      "name": "The Scuttlebutt",
+      "type": "pub / saferoom access",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Smallest pub in Zockau's row, identified by a broken sign.",
+        "The only ordinary bar in the row identified by the fan source as a genuine saferoom; use a modest pub interior and sign as the visual read."
+      ],
+      "tileFamilies": [
+        "pub_interior",
+        "saferoom_door",
+        "street_signage"
+      ],
+      "confidence": "medium; source is a detailed unofficial fan index",
+      "sources": [
+        "https://www.dccfansite.com/entry/scuttlebutt/"
+      ]
+    },
+    {
+      "id": "b5_dryad_settlement",
+      "name": "Dryad settlements (unnamed in this survey)",
+      "type": "settlement",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Carl arrives at a dryad settlement outside Zockau; the fan index separately tracks medium dryad settlements.",
+        "Book 5 does not support one definitive architectural template for all dryad settlements in the evidence gathered; preserve tree-integrated settlement as a broad visual cue only."
+      ],
+      "tileFamilies": [
+        "forest_settlement",
+        "tree_platforms",
+        "jungle_path"
+      ],
+      "confidence": "medium for settlement presence; low for architectural specifics",
+      "sources": [
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md",
+        "https://www.dccfansite.com/book/5/ch/1/"
+      ]
+    },
+    {
+      "id": "b5_bugbear_settlement",
+      "name": "Small bugbear settlement",
+      "type": "settlement",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A bomb-damaged bugbear settlement where Carl's party takes refuge.",
+        "The saferoom is disguised as a Whataburger; the surrounding settlement is not described with enough evidence here for a fixed architecture kit."
+      ],
+      "tileFamilies": [
+        "damaged_settlement",
+        "fast_food_frontage",
+        "saferoom_interior"
+      ],
+      "confidence": "medium-high for the story beats; low for settlement layout",
+      "sources": [
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_point_mongo",
+      "name": "Point Mongo",
+      "type": "river town / Ursine settlement",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Large, immaculate Ursine river settlement across a major river, ringed by manicured shrubs and guarded by Funeral Bell mushroom guards.",
+        "Town rules and a guarded river crossing shape its approach; it becomes Donut's fortified base after she takes control.",
+        "Book 5 action around the town includes hunter artillery and dinosaur attacks."
+      ],
+      "tileFamilies": [
+        "manicured_river_town",
+        "riverbank_gate",
+        "mushroom_guard_post",
+        "artillery_damaged_settlement"
+      ],
+      "confidence": "high for town identity and events; medium-high for visual details from fan source",
+      "sources": [
+        "https://www.dccfansite.com/book/5/ch/10/",
+        "https://www.dccfansite.com/book/5/ch/11/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Point_Mongo",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_river_and_shores",
+      "name": "Hunting Grounds river crossings and shores",
+      "type": "terrain / traversal landmark",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A large river separates settlements and is patrolled by dangerous naiads.",
+        "The Fort Freedom assault approaches across a cleared, trapped shore toward a mostly submerged palace; bridges and crossings are tactically important."
+      ],
+      "tileFamilies": [
+        "jungle_river",
+        "river_shore",
+        "broken_bridge",
+        "trapped_approach"
+      ],
+      "confidence": "medium-high; these spatial features are consolidated from secondary sources",
+      "sources": [
+        "https://www.dccfansite.com/book/5/ch/10/",
+        "https://www.dccfansite.com/entry/fort-freedom/",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_fort_freedom",
+      "name": "Fort Freedom (Old River Palace)",
+      "type": "fortress / former river palace",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Former Naiad River Palace, mostly submerged beneath a river; the damaged upper structure rises offshore like a flooded tower.",
+        "Broken ramparts, leaning flagpole, and perforated arched stained-glass window mark the exterior; the cleared shore approach is trapped and has no surviving bridge.",
+        "The main assault passes through water into the stronghold and its throne room."
+      ],
+      "tileFamilies": [
+        "submerged_palace",
+        "river_fortress",
+        "broken_rampart",
+        "underwater_throne_room"
+      ],
+      "confidence": "medium-high; descriptive detail from unofficial fan index, narrative event corroborated by separate fan chapter summaries",
+      "sources": [
+        "https://www.dccfansite.com/entry/fort-freedom/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fort_Freedom",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_alucarda",
+      "name": "Alucarda",
+      "type": "captured dryad village",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A small, sweet-smelling dryad village south of Fort Freedom, described by the fan index with crooked treehouses and bamboo-plank construction.",
+        "The village has a saferoom and a tavern; Lucia Mar has seized control when Carl's group arrives.",
+        "The nearby Temple of Diwata is desecrated during the conflict."
+      ],
+      "tileFamilies": [
+        "dryad_village",
+        "crooked_treehouse",
+        "bamboo_plank",
+        "village_tavern"
+      ],
+      "confidence": "medium; detailed design comes from an unofficial fan chapter index",
+      "sources": [
+        "https://www.dccfansite.com/book/5/ch/29/",
+        "https://www.dccfansite.com/book/5/ch/35/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Lucia_Mar",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_temple_of_diwata",
+      "name": "Temple of Diwata",
+      "type": "temple",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A temple in Alucarda associated with the dryad congregation of Diwata.",
+        "It is desecrated and damaged in Lucia Mar's encounter with Carl; no more exact temple architecture is established in sources reviewed."
+      ],
+      "tileFamilies": [
+        "jungle_temple",
+        "damaged_shrine",
+        "village_courtyard"
+      ],
+      "confidence": "medium for placement and events; low for material/style",
+      "sources": [
+        "https://www.dccfansite.com/book/5/ch/35/",
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations/temple-of-diwata?book=5"
+      ]
+    },
+    {
+      "id": "b5_all_tree_and_staging_camp",
+      "name": "All-Tree grove and Signet's staging camp",
+      "type": "forest landmark / temporary camp",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A grove around an outgrowth of the All-Tree, a huge magical tree system rooted beneath the floor.",
+        "Signet's group gathers and stages near the grove before the Fort Freedom assault; use a forest camp beside pale-barked tree growth as a restrained interpretation."
+      ],
+      "tileFamilies": [
+        "ancient_tree_grove",
+        "forest_camp",
+        "staging_area"
+      ],
+      "confidence": "medium for the All-Tree and staging camp; low-medium for precise camp layout",
+      "sources": [
+        "https://www.dccfansite.com/book/5/ch/15/",
+        "https://www.dccfansite.com/entry/all-tree/",
+        "https://www.dccfansite.com/book/5/ch/25/",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_high_elf_castle",
+      "name": "High Elf Castle (the Sugar Cube)",
+      "type": "castle / country-boss stronghold",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Huge stark-white cube against a rocky bluff in the Hunting Grounds' southeast, with four very slender corner towers and an empty moat.",
+        "The exterior is smooth white wood carved with tiny acorns, rather than stone.",
+        "Layered interior includes goodwill ballrooms, guarded control rooms, throne level, and subterranean passages; the castle is relocated at the floor's conclusion.",
+        "During the Book 5 finale the half-destroyed castle and qualifying occupants transfer to Floor 9; Carl remains behind on Floor 6."
+      ],
+      "tileFamilies": [
+        "white_wooden_castle",
+        "rocky_bluff",
+        "empty_moat",
+        "castle_interior"
+      ],
+      "confidence": "medium-high; detailed appearance from unofficial fan index, venue and narrative supported by separate sources",
+      "sources": [
+        "https://www.dccfansite.com/entry/high-elf-castle/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/High_Elf_Castle",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://www.supersummary.com/the-butchers-masquerade/summary/",
+        "https://manatoastmedia.com/hunting-grounds/",
+        "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ]
+    },
+    {
+      "id": "b5_ballroom_a",
+      "name": "High Elf Castle, Ballroom A / goodwill ballroom",
+      "type": "interior / event hall",
+      "book": 5,
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "One of the magically separated goodwill ballrooms used for the Butcher's Masquerade.",
+        "Ballroom A is described by the fan index with four pillars, a domed Scolopendra mosaic, and a white living tree hanging from the ceiling.",
+        "The venue hosts a pet contest, talent show, prize counter, and later combat after its protection is broken."
+      ],
+      "tileFamilies": [
+        "masquerade_ballroom",
+        "domed_mosaic_hall",
+        "living_tree_ceiling",
+        "gala_to_battle_arena"
+      ],
+      "confidence": "medium; the specific architectural details are from an unofficial fan index",
+      "sources": [
+        "https://www.dccfansite.com/entry/high-elf-castle/",
+        "https://www.dccfansite.com/entry/butchers-masquerade/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_crawlcon_studio",
+      "name": "CrawlCon Studio / backstage lounge",
+      "type": "recurring interior",
+      "book": 5,
+      "floor": "Dungeon production space; not on Floor 6 map",
+      "narrativeLocation": true,
+      "reusableInterior": true,
+      "visualFeatures": [
+        "Backstage lounge used around CrawlCon programming and appearances.",
+        "Fan index describes a plush couch, video playback screen, snack tables, and attached bathroom; it notes the room recurs from Book 2."
+      ],
+      "tileFamilies": [
+        "backstage_lounge",
+        "production_studio"
+      ],
+      "confidence": "low-medium; exact interior styling comes from an autogenerated companion wiki and should be checked against the prose before art lock",
+      "sources": [
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations/crawlcon-studio?book=5",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ]
+    },
+    {
+      "id": "b5_great_race_maze",
+      "name": "The Great Race (Floor Seven maze)",
+      "type": "floor / glass maze",
+      "books": [
+        5
+      ],
+      "floor": 7,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A planned maze of long branching tubes leading toward exits; passages close behind parties and saferoom pit stops sit at nodes.",
+        "Book 5 describes the maze design, but Prepotente destroys the floor before the crawlers traverse it."
+      ],
+      "tileFamilies": [
+        "great-race-transition"
+      ],
+      "confidence": "high for the announced design and destruction; no traversed route layout is shown",
+      "sources": [
+        "https://www.dccfansite.com/entry/great-race/",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Book_5_Chapter_Summaries"
+      ]
+    },
+    {
+      "id": "b5_pole_position_chamber",
+      "name": "Floor Seven Pole Position Chamber",
+      "type": "interior / glass starter pod",
+      "books": [
+        5
+      ],
+      "floor": 7,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Carl, Donut, and Prepotente arrive together inside a clear-glass chamber with vertical bars opening toward a round descending tunnel.",
+        "Many similar pods coil around a glowing column of Floor Eight exit portals."
+      ],
+      "tileFamilies": [
+        "great-race-transition"
+      ],
+      "confidence": "high for the chamber and arrangement; secondary sources supply visual interpretation",
+      "sources": [
+        "https://www.dccfansite.com/entry/great-race/",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations?book=5"
+      ]
+    },
+    {
+      "id": "b5_shattered_great_race",
+      "name": "The Shattered Great Race",
+      "type": "floor transition / broken glass maze",
+      "books": [
+        5
+      ],
+      "floor": 7,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "A treated spot cracks like a Prince Rupert's drop; the entire glass floor bursts into dust and crawlers are pulled toward Floor Eight portals.",
+        "The intended race never begins, so this is a destruction and transition scene rather than an explored maze."
+      ],
+      "tileFamilies": [
+        "great-race-transition"
+      ],
+      "confidence": "high",
+      "sources": [
+        "https://www.dccfansite.com/entry/great-race/",
+        "https://www.dccfansite.com/book/5/ch/99/",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/"
+      ]
+    },
+    {
+      "id": "b5_eighth_floor_selection_chamber",
+      "name": "Floor Eight entry / selection chamber",
+      "type": "transition chamber / holographic globe",
+      "books": [
+        5
+      ],
+      "floor": 8,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Carl and Donut land in a transition chamber with a holographic globe used to choose an eighth-floor starting location.",
+        "Donut clicks the wrong destination; Book 5 does not identify where they arrive, so no island landscape is included."
+      ],
+      "tileFamilies": [
+        "great-race-transition"
+      ],
+      "confidence": "high for the chamber and unknown destination",
+      "sources": [
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations?book=5",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Book_5_Chapter_Summaries"
+      ]
+    },
+    {
+      "id": "b5_transferred_high_elf_castle",
+      "name": "High Elf Castle relocated to Floor Nine",
+      "type": "relocated castle / finale setting",
+      "books": [
+        5
+      ],
+      "floor": 9,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "Zerzura moves the half-destroyed High Elf Castle and qualifying occupants, including the changelings and select NPCs, to Floor Nine.",
+        "Carl remains on Floor Six with crawlers, hunters, most pets, and elves; he does not visit the relocated castle in Book Five."
+      ],
+      "tileFamilies": [
+        "masquerade"
+      ],
+      "confidence": "high for which groups transfer and which remain; no Floor Nine destination layout is mapped",
+      "sources": [
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://www.supersummary.com/the-butchers-masquerade/summary/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://manatoastmedia.com/hunting-grounds/",
+        "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ],
+      "appearance": "remote_reported_not_visited"
+    },
+    {
+      "id": "b5_bramble_dome_crater",
+      "name": "Gehenna Bramble dome and castle crater",
+      "type": "battlefield / floor transition aftermath",
+      "books": [
+        5
+      ],
+      "floor": 6,
+      "narrativeLocation": true,
+      "visualFeatures": [
+        "After the castle and its qualifying occupants depart for Floor Nine, the other combatants remain on Floor Six above the empty castle footprint.",
+        "A Gehenna Bramble dome rises as the remaining teams fall into the crater and continue the final battle."
+      ],
+      "tileFamilies": [
+        "hunting-jungle"
+      ],
+      "confidence": "high for the Floor Six battle location and sequence; exact crater dimensions are not established",
+      "sources": [
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://www.supersummary.com/the-butchers-masquerade/summary/",
+        "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://manatoastmedia.com/hunting-grounds/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ]
+    }
+  ],
+  "suggestedGameKitPieces": [
+    {
+      "id": "kit_jungle_ruin_transitions",
+      "name": "Jungle ruin transitions",
+      "kind": "invented reusable kit piece",
+      "derivedFrom": [
+        "b5_hunting_grounds"
+      ],
+      "pieces": [
+        "vine-covered wall",
+        "rooted stone path",
+        "overgrown street corner",
+        "collapsed facade",
+        "small stairwell marker"
+      ],
+      "canonStatus": "generic modular props; not individual named locations in the novel"
+    },
+    {
+      "id": "kit_settlement_variants",
+      "name": "Settlement visual variants",
+      "kind": "invented reusable kit piece",
+      "derivedFrom": [
+        "b5_zockau",
+        "b5_dryad_settlement",
+        "b5_bugbear_settlement",
+        "b5_point_mongo",
+        "b5_alucarda"
+      ],
+      "pieces": [
+        "mid-century commercial block",
+        "tree-integrated village cluster",
+        "damaged bugbear frontage",
+        "manicured Ursine gate and shrubs",
+        "crooked-treehouse village segment"
+      ],
+      "canonStatus": "modular kit suggestion; avoid treating every variant as a named canonical settlement"
+    },
+    {
+      "id": "kit_river_crossing",
+      "name": "River crossing encounter kit",
+      "kind": "invented reusable kit piece",
+      "derivedFrom": [
+        "b5_river_and_shores",
+        "b5_point_mongo",
+        "b5_fort_freedom"
+      ],
+      "pieces": [
+        "riverbank",
+        "damaged bridge remnant",
+        "trapped shore approach",
+        "submerged wall segment",
+        "crossing guard post"
+      ],
+      "canonStatus": "composite encounter kit; each board arrangement is a game design choice"
+    },
+    {
+      "id": "kit_masquerade_interior",
+      "name": "Masquerade hall encounter kit",
+      "kind": "invented reusable kit piece",
+      "derivedFrom": [
+        "b5_high_elf_castle",
+        "b5_ballroom_a"
+      ],
+      "pieces": [
+        "four-pillar hall",
+        "mosaic ceiling feature",
+        "hanging living-tree centerpiece",
+        "side doors and partitioned galleries"
+      ],
+      "canonStatus": "room-scale tactics adaptation; do not imply the source text establishes tactical measurements"
+    }
+  ],
+  "coverageGaps": [
+    "This survey uses an official publisher synopsis/sample plus fan-maintained chapter summaries and indexes. It is not an exhaustive audit of the complete novel.",
+    "The chapter summaries and fan indexes list additional unnamed or numbered settlements (including further dryad villages and Prepotente-numbered towns), but their architectural details are not established consistently in sources reviewed; they are represented by generic tile families rather than separate canon records.",
+    "No precise floor maps, distances, coordinates, town footprints, or measured room dimensions were found. Fan maps are interpretive; use relative relationships as guidance only.",
+    "The CrawlCon Studio is included as a verified recurring interior, but the visual detail source is an autogenerated companion wiki and needs direct prose verification before final art specification.",
+    "Some nearby floor features such as individual stairwells, generic saferooms, forest routes, hunter camps, and additional pubs are noted in the sources but lack enough grounded visual detail here for distinct canon records.",
+    "Donut's Floor 8 selection clicks the wrong destination; the epilogue does not name the actual place. Do not depict a Bahamas, Cuba, or other island landscape as a visited Book 5 location.",
+    "Book 5 transfers the castle and qualifying occupants to Floor 9, while the crawlers and hunters remain on Floor 6 for the bramble-crater battle; only then does the epilogue enter Floors 7 and 8."
+  ],
+  "sourceDiscrepancies": [
+    {
+      "locationIds": [
+        "b5_transferred_high_elf_castle",
+        "b5_bramble_dome_crater"
+      ],
+      "issue": "An earlier coverage draft marked the relocated castle as visited by Carl and placed the post-transfer crater battle on Floor Nine.",
+      "resolution": "The Floor Six finale transfers only the castle and qualifying occupants to Floor Nine. Carl, crawlers, hunters, most pets, and elves remain on Floor Six; the bramble dome and crater battle occur there before the epilogue descends to Floor Seven.",
+      "sourceUrls": [
+        "https://manatoastmedia.com/hunting-grounds/",
+        "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/"
+      ]
+    }
+  ]
+}

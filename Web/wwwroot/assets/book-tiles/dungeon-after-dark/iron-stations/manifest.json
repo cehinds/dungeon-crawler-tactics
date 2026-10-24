@@ -1,0 +1,1841 @@
+{
+  "schemaVersion": 1,
+  "id": "iron-stations",
+  "style": "dungeon-after-dark",
+  "title": "Iron Tangle stations, transfers and yards",
+  "books": [
+    3
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "iron-stations-station-concrete-floor",
+      "label": "Station Concrete floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-stations-station-concrete-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.47058823529411764,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          13,
+          76,
+          250,
+          216
+        ],
+        "bounds": {
+          "x": 15,
+          "y": 78,
+          "width": 233,
+          "height": 136
+        },
+        "originalWidth": 233,
+        "originalHeight": 136,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              129,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-stations-worn-station-concrete-floor",
+      "label": "Worn station concrete floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-stations-worn-station-concrete-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.47058823529411764,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          268,
+          76,
+          505,
+          216
+        ],
+        "bounds": {
+          "x": 270,
+          "y": 78,
+          "width": 233,
+          "height": 136
+        },
+        "originalWidth": 233,
+        "originalHeight": 136,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              385,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-stations-cracked-station-concrete-floor",
+      "label": "Cracked station concrete floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-stations-cracked-station-concrete-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.46715328467153283,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          523,
+          76,
+          760,
+          217
+        ],
+        "bounds": {
+          "x": 525,
+          "y": 78,
+          "width": 233,
+          "height": 137
+        },
+        "originalWidth": 233,
+        "originalHeight": 137,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              640,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-stations-wet-station-concrete-floor",
+      "label": "Wet station concrete floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-stations-wet-station-concrete-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.46715328467153283,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          778,
+          76,
+          1015,
+          217
+        ],
+        "bounds": {
+          "x": 780,
+          "y": 78,
+          "width": 233,
+          "height": 137
+        },
+        "originalWidth": 233,
+        "originalHeight": 137,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-concrete-edge-transition",
+      "label": "Station Concrete edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-stations-station-concrete-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5541125541125541,
+        "scaleY": 0.46715328467153283,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1034,
+          76,
+          1269,
+          217
+        ],
+        "bounds": {
+          "x": 1036,
+          "y": 78,
+          "width": 231,
+          "height": 137
+        },
+        "originalWidth": 231,
+        "originalHeight": 137,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1149,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-concrete-corner-transition",
+      "label": "Station Concrete corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-stations-station-concrete-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5638766519823789,
+        "scaleY": 0.45390070921985815,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1291,
+          74,
+          1522,
+          219
+        ],
+        "bounds": {
+          "x": 1293,
+          "y": 76,
+          "width": 227,
+          "height": 141
+        },
+        "originalWidth": 227,
+        "originalHeight": 141,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1402,
+              78
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-wall-northwest",
+      "label": "Station Tiled Masonry wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-stations-station-tiled-masonry-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.35359116022099446,
+        "scaleY": 0.4549763033175355,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          43,
+          269,
+          228,
+          484
+        ],
+        "bounds": {
+          "x": 45,
+          "y": 271,
+          "width": 181,
+          "height": 211
+        },
+        "originalWidth": 181,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              64,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-wall-northeast",
+      "label": "Station Tiled Masonry wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-stations-station-tiled-masonry-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.35555555555555557,
+        "scaleY": 0.4549763033175355,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          285,
+          269,
+          469,
+          484
+        ],
+        "bounds": {
+          "x": 287,
+          "y": 271,
+          "width": 180,
+          "height": 211
+        },
+        "originalWidth": 180,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              443,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-outer-corner",
+      "label": "Station Tiled Masonry outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-stations-station-tiled-masonry-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.7664670658682635,
+        "scaleY": 0.5363128491620112,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          552,
+          284,
+          723,
+          467
+        ],
+        "bounds": {
+          "x": 554,
+          "y": 286,
+          "width": 167,
+          "height": 179
+        },
+        "originalWidth": 167,
+        "originalHeight": 179,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              577,
+              288
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-inner-corner",
+      "label": "Station Tiled Masonry inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-stations-station-tiled-masonry-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.7441860465116279,
+        "scaleY": 0.5423728813559322,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          808,
+          265,
+          984,
+          446
+        ],
+        "bounds": {
+          "x": 810,
+          "y": 267,
+          "width": 172,
+          "height": 177
+        },
+        "originalWidth": 172,
+        "originalHeight": 177,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-endcap-northwest",
+      "label": "Station Tiled Masonry endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-stations-station-tiled-masonry-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.5423728813559322,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1119,
+          279,
+          1196,
+          460
+        ],
+        "bounds": {
+          "x": 1121,
+          "y": 281,
+          "width": 73,
+          "height": 177
+        },
+        "originalWidth": 73,
+        "originalHeight": 177,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1144,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-endcap-northeast",
+      "label": "Station Tiled Masonry endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-stations-station-tiled-masonry-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.43243243243243246,
+        "scaleY": 0.5485714285714286,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1361,
+          278,
+          1439,
+          457
+        ],
+        "bounds": {
+          "x": 1363,
+          "y": 280,
+          "width": 74,
+          "height": 175
+        },
+        "originalWidth": 74,
+        "originalHeight": 175,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1411,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-open-doorway",
+      "label": "Station Tiled Masonry open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-stations-station-tiled-masonry-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3516483516483517,
+        "scaleY": 0.44651162790697674,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          43,
+          502,
+          229,
+          721
+        ],
+        "bounds": {
+          "x": 45,
+          "y": 504,
+          "width": 182,
+          "height": 215
+        },
+        "originalWidth": 182,
+        "originalHeight": 215,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              66,
+              506
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-tiled-masonry-closed-doorway",
+      "label": "Station Tiled Masonry closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-stations-station-tiled-masonry-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3575418994413408,
+        "scaleY": 0.45933014354066987,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          292,
+          512,
+          475,
+          725
+        ],
+        "bounds": {
+          "x": 294,
+          "y": 514,
+          "width": 179,
+          "height": 209
+        },
+        "originalWidth": 179,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              449,
+              516
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-concrete-stairs-up",
+      "label": "Station Concrete stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-station-concrete-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.5422885572139303,
+        "width": 128,
+        "height": 109,
+        "offset": {
+          "x": 64,
+          "y": 83
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          518,
+          516,
+          759,
+          721
+        ],
+        "bounds": {
+          "x": 520,
+          "y": 518,
+          "width": 237,
+          "height": 201
+        },
+        "originalWidth": 237,
+        "originalHeight": 201,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              634,
+              520
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-station-concrete-stairs-down",
+      "label": "Station Concrete stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-station-concrete-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5079365079365079,
+        "scaleY": 0.5093167701863354,
+        "width": 128,
+        "height": 82,
+        "offset": {
+          "x": 64,
+          "y": 110
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          772,
+          532,
+          1028,
+          697
+        ],
+        "bounds": {
+          "x": 774,
+          "y": 534,
+          "width": 252,
+          "height": 161
+        },
+        "originalWidth": 252,
+        "originalHeight": 161,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              898,
+              536
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-platform-edge-segment",
+      "label": "Platform edge segment",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-platform-edge-segment.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4247787610619469,
+        "scaleY": 0.42441860465116277,
+        "width": 96,
+        "height": 73,
+        "offset": {
+          "x": 80,
+          "y": 119
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1037,
+          532,
+          1267,
+          708
+        ],
+        "bounds": {
+          "x": 1039,
+          "y": 534,
+          "width": 226,
+          "height": 172
+        },
+        "originalWidth": 226,
+        "originalHeight": 172,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1189,
+              536
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-platform-end-ramp",
+      "label": "Platform end ramp",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-platform-end-ramp.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4343891402714932,
+        "scaleY": 0.43243243243243246,
+        "width": 96,
+        "height": 64,
+        "offset": {
+          "x": 80,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1292,
+          548,
+          1517,
+          700
+        ],
+        "bounds": {
+          "x": 1294,
+          "y": 550,
+          "width": 221,
+          "height": 148
+        },
+        "originalWidth": 221,
+        "originalHeight": 148,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1430,
+              552
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-blank-station-signboard",
+      "label": "Blank station signboard",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-blank-station-signboard.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.49230769230769234,
+        "scaleY": 0.4926829268292683,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          31,
+          754,
+          230,
+          963
+        ],
+        "bounds": {
+          "x": 33,
+          "y": 756,
+          "width": 195,
+          "height": 205
+        },
+        "originalWidth": 195,
+        "originalHeight": 205,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              89,
+              758
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-transfer-direction-board",
+      "label": "Transfer direction board",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-transfer-direction-board.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4824120603015075,
+        "scaleY": 0.480225988700565,
+        "width": 96,
+        "height": 85,
+        "offset": {
+          "x": 80,
+          "y": 107
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          283,
+          765,
+          486,
+          946
+        ],
+        "bounds": {
+          "x": 285,
+          "y": 767,
+          "width": 199,
+          "height": 177
+        },
+        "originalWidth": 199,
+        "originalHeight": 177,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              328,
+              769
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-ticket-gate",
+      "label": "Ticket gate",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-ticket-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41739130434782606,
+        "scaleY": 0.41875,
+        "width": 96,
+        "height": 67,
+        "offset": {
+          "x": 80,
+          "y": 125
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          525,
+          797,
+          759,
+          961
+        ],
+        "bounds": {
+          "x": 527,
+          "y": 799,
+          "width": 230,
+          "height": 160
+        },
+        "originalWidth": 230,
+        "originalHeight": 160,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              580,
+              801
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-employee-portal",
+      "label": "Employee portal",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-employee-portal.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.768,
+        "scaleY": 0.7684729064039408,
+        "width": 96,
+        "height": 156,
+        "offset": {
+          "x": 80,
+          "y": 36
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          833,
+          753,
+          962,
+          960
+        ],
+        "bounds": {
+          "x": 835,
+          "y": 755,
+          "width": 125,
+          "height": 203
+        },
+        "originalWidth": 125,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              881,
+              757
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-rail-yard-crane",
+      "label": "Rail yard crane",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-rail-yard-crane.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.4444444444444444,
+        "width": 96,
+        "height": 100,
+        "offset": {
+          "x": 80,
+          "y": 92
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1045,
+          746,
+          1265,
+          975
+        ],
+        "bounds": {
+          "x": 1047,
+          "y": 748,
+          "width": 216,
+          "height": 225
+        },
+        "originalWidth": 216,
+        "originalHeight": 225,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1091,
+              750
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-stations-abyss-warning-barrier",
+      "label": "Abyss warning barrier",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-stations",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-stations-abyss-warning-barrier.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5106382978723404,
+        "scaleY": 0.5082872928176796,
+        "width": 96,
+        "height": 92,
+        "offset": {
+          "x": 80,
+          "y": 100
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-stations.png",
+        "sha256": "da4e3620c88384b1c21854885f4c8ee4f95f0092d5466c8f9f2a5acde070aa98",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1308,
+          768,
+          1500,
+          953
+        ],
+        "bounds": {
+          "x": 1310,
+          "y": 770,
+          "width": 188,
+          "height": 181
+        },
+        "originalWidth": 188,
+        "originalHeight": 181,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1331,
+              772
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "iron-stations.zip",
+  "contactSheet": "contact-sheet.png"
+}

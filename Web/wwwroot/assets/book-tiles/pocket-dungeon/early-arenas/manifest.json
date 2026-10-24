@@ -1,0 +1,1857 @@
+{
+  "schemaVersion": 1,
+  "id": "early-arenas",
+  "style": "pocket-dungeon",
+  "title": "Hoarder, Juicer and Ball of Swine arenas",
+  "books": [
+    1
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "early-arenas-arena-stone-floor",
+      "label": "Arena Stone floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          60,
+          50,
+          258,
+          244
+        ],
+        "bounds": {
+          "x": 62,
+          "y": 52,
+          "width": 194,
+          "height": 190
+        },
+        "originalWidth": 194,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              75,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-worn-arena-stone-floor",
+      "label": "Worn arena stone floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-worn-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          301,
+          48,
+          496,
+          243
+        ],
+        "bounds": {
+          "x": 303,
+          "y": 50,
+          "width": 191,
+          "height": 191
+        },
+        "originalWidth": 191,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              313,
+              52
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-cracked-arena-stone-floor",
+      "label": "Cracked arena stone floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-cracked-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          548,
+          47,
+          740,
+          243
+        ],
+        "bounds": {
+          "x": 550,
+          "y": 49,
+          "width": 188,
+          "height": 192
+        },
+        "originalWidth": 188,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              610,
+              51
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-wet-arena-stone-floor",
+      "label": "Wet arena stone floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-wet-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          796,
+          47,
+          990,
+          243
+        ],
+        "bounds": {
+          "x": 798,
+          "y": 49,
+          "width": 190,
+          "height": 192
+        },
+        "originalWidth": 190,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              815,
+              51
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-edge-transition",
+      "label": "Arena Stone edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-arena-stone-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1040,
+          47,
+          1235,
+          242
+        ],
+        "bounds": {
+          "x": 1042,
+          "y": 49,
+          "width": 191,
+          "height": 191
+        },
+        "originalWidth": 191,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1053,
+              51
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-corner-transition",
+      "label": "Arena Stone corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-arena-stone-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1286,
+          47,
+          1479,
+          243
+        ],
+        "bounds": {
+          "x": 1288,
+          "y": 49,
+          "width": 189,
+          "height": 192
+        },
+        "originalWidth": 189,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1303,
+              51
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-wall-northwest",
+      "label": "Heavy Dungeon Stone wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.4824120603015075,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          46,
+          277,
+          260,
+          480
+        ],
+        "bounds": {
+          "x": 48,
+          "y": 279,
+          "width": 210,
+          "height": 199
+        },
+        "originalWidth": 210,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              74,
+              281
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-wall-northeast",
+      "label": "Heavy Dungeon Stone wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.49740932642487046,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          296,
+          275,
+          495,
+          472
+        ],
+        "bounds": {
+          "x": 298,
+          "y": 277,
+          "width": 195,
+          "height": 193
+        },
+        "originalWidth": 195,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              329,
+              279
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-outer-corner",
+      "label": "Heavy Dungeon Stone outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7231638418079096,
+        "scaleY": 0.4824120603015075,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          548,
+          278,
+          729,
+          481
+        ],
+        "bounds": {
+          "x": 550,
+          "y": 280,
+          "width": 177,
+          "height": 199
+        },
+        "originalWidth": 177,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              683,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-inner-corner",
+      "label": "Heavy Dungeon Stone inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.49230769230769234,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          788,
+          262,
+          996,
+          461
+        ],
+        "bounds": {
+          "x": 790,
+          "y": 264,
+          "width": 204,
+          "height": 195
+        },
+        "originalWidth": 204,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              888,
+              266
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-endcap-northwest",
+      "label": "Heavy Dungeon Stone endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/early-arenas-heavy-dungeon-stone-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.35555555555555557,
+        "scaleY": 0.49230769230769234,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1067,
+          278,
+          1206,
+          477
+        ],
+        "bounds": {
+          "x": 1069,
+          "y": 280,
+          "width": 135,
+          "height": 195
+        },
+        "originalWidth": 135,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1109,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-endcap-northeast",
+      "label": "Heavy Dungeon Stone endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/early-arenas-heavy-dungeon-stone-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.35555555555555557,
+        "scaleY": 0.5052631578947369,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1318,
+          278,
+          1457,
+          472
+        ],
+        "bounds": {
+          "x": 1320,
+          "y": 280,
+          "width": 135,
+          "height": 190
+        },
+        "originalWidth": 135,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1403,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-open-doorway",
+      "label": "Heavy Dungeon Stone open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.4444444444444444,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          37,
+          497,
+          247,
+          717
+        ],
+        "bounds": {
+          "x": 39,
+          "y": 499,
+          "width": 206,
+          "height": 216
+        },
+        "originalWidth": 206,
+        "originalHeight": 216,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              133,
+              501
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-closed-doorway",
+      "label": "Heavy Dungeon Stone closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7071823204419889,
+        "scaleY": 0.4343891402714932,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          300,
+          497,
+          485,
+          722
+        ],
+        "bounds": {
+          "x": 302,
+          "y": 499,
+          "width": 181,
+          "height": 221
+        },
+        "originalWidth": 181,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              378,
+              501
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-stairs-up",
+      "label": "Arena Stone stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-arena-stone-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.6344086021505376,
+        "width": 128,
+        "height": 118,
+        "offset": {
+          "x": 64,
+          "y": 74
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          534,
+          528,
+          739,
+          718
+        ],
+        "bounds": {
+          "x": 536,
+          "y": 530,
+          "width": 201,
+          "height": 186
+        },
+        "originalWidth": 201,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              572,
+              532
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-stairs-down",
+      "label": "Arena Stone stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-arena-stone-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.6162162162162163,
+        "width": 128,
+        "height": 114,
+        "offset": {
+          "x": 64,
+          "y": 78
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          784,
+          524,
+          995,
+          713
+        ],
+        "bounds": {
+          "x": 786,
+          "y": 526,
+          "width": 207,
+          "height": 185
+        },
+        "originalWidth": 207,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              812,
+              528
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-huge-rubbish-heap",
+      "label": "Huge rubbish heap",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-huge-rubbish-heap.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.384,
+        "scaleY": 0.38461538461538464,
+        "width": 96,
+        "height": 85,
+        "offset": {
+          "x": 80,
+          "y": 107
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1010,
+          512,
+          1264,
+          737
+        ],
+        "bounds": {
+          "x": 1012,
+          "y": 514,
+          "width": 250,
+          "height": 221
+        },
+        "originalWidth": 250,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1160,
+              516
+            ],
+            [
+              1049,
+              583
+            ],
+            [
+              1051,
+              586
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-scrap-throne",
+      "label": "Scrap throne",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-scrap-throne.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39919354838709675,
+        "width": 96,
+        "height": 99,
+        "offset": {
+          "x": 80,
+          "y": 93
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1267,
+          481,
+          1512,
+          733
+        ],
+        "bounds": {
+          "x": 1269,
+          "y": 483,
+          "width": 241,
+          "height": 248
+        },
+        "originalWidth": 241,
+        "originalHeight": 248,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1448,
+              485
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-gym-reception-turnstile",
+      "label": "Gym reception turnstile",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-gym-reception-turnstile.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5303867403314917,
+        "scaleY": 0.5320197044334976,
+        "width": 96,
+        "height": 108,
+        "offset": {
+          "x": 80,
+          "y": 84
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          50,
+          761,
+          235,
+          968
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 763,
+          "width": 181,
+          "height": 203
+        },
+        "originalWidth": 181,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              104,
+              765
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-weight-bench",
+      "label": "Weight bench",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-weight-bench.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39631336405529954,
+        "width": 96,
+        "height": 86,
+        "offset": {
+          "x": 80,
+          "y": 106
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          273,
+          756,
+          518,
+          977
+        ],
+        "bounds": {
+          "x": 275,
+          "y": 758,
+          "width": 241,
+          "height": 217
+        },
+        "originalWidth": 241,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              315,
+              760
+            ],
+            [
+              438,
+              853
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-red-warning-beacon",
+      "label": "Red warning beacon",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-red-warning-beacon.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5783132530120482,
+        "scaleY": 0.5763546798029556,
+        "width": 96,
+        "height": 117,
+        "offset": {
+          "x": 80,
+          "y": 75
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          550,
+          752,
+          720,
+          959
+        ],
+        "bounds": {
+          "x": 552,
+          "y": 754,
+          "width": 166,
+          "height": 203
+        },
+        "originalWidth": 166,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              625,
+              756
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-round-arena-stairwell",
+      "label": "Round arena stairwell",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-round-arena-stairwell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.41232227488151657,
+        "width": 96,
+        "height": 87,
+        "offset": {
+          "x": 80,
+          "y": 105
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          767,
+          752,
+          1005,
+          967
+        ],
+        "bounds": {
+          "x": 769,
+          "y": 754,
+          "width": 234,
+          "height": 211
+        },
+        "originalWidth": 234,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              874,
+              756
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-bridge-control-lever",
+      "label": "Bridge control lever",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-bridge-control-lever.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.518918918918919,
+        "scaleY": 0.5190476190476191,
+        "width": 96,
+        "height": 109,
+        "offset": {
+          "x": 80,
+          "y": 83
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1037,
+          752,
+          1226,
+          966
+        ],
+        "bounds": {
+          "x": 1039,
+          "y": 754,
+          "width": 185,
+          "height": 210
+        },
+        "originalWidth": 185,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1184,
+              756
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-gated-stone-bridge",
+      "label": "Gated stone bridge",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-gated-stone-bridge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.38967136150234744,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/early-arenas.png",
+        "sha256": "e6192fff53ea95584b5f3828e55b2810528fc5345759fad2abec50ff1944846f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1259,
+          752,
+          1509,
+          969
+        ],
+        "bounds": {
+          "x": 1261,
+          "y": 754,
+          "width": 246,
+          "height": 213
+        },
+        "originalWidth": 246,
+        "originalHeight": 213,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1294,
+              756
+            ],
+            [
+              1442,
+              795
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "early-arenas.zip",
+  "contactSheet": "contact-sheet.png"
+}

@@ -1,0 +1,1844 @@
+{
+  "schemaVersion": 1,
+  "id": "thresholds",
+  "style": "dungeon-after-dark",
+  "title": "Race selection, quadrant choices and registration",
+  "books": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "thresholds-gold-brick-floor",
+      "label": "Gold Brick floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/thresholds-gold-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5714285714285714,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          16,
+          83,
+          244,
+          219
+        ],
+        "bounds": {
+          "x": 18,
+          "y": 85,
+          "width": 224,
+          "height": 132
+        },
+        "originalWidth": 224,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              127,
+              87
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "thresholds-worn-gold-brick-floor",
+      "label": "Worn gold brick floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/thresholds-worn-gold-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          271,
+          82,
+          500,
+          218
+        ],
+        "bounds": {
+          "x": 273,
+          "y": 84,
+          "width": 225,
+          "height": 132
+        },
+        "originalWidth": 225,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              384,
+              86
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "thresholds-cracked-gold-brick-floor",
+      "label": "Cracked gold brick floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/thresholds-cracked-gold-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          527,
+          82,
+          756,
+          218
+        ],
+        "bounds": {
+          "x": 529,
+          "y": 84,
+          "width": 225,
+          "height": 132
+        },
+        "originalWidth": 225,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              640,
+              86
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "thresholds-wet-gold-brick-floor",
+      "label": "Wet gold brick floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/thresholds-wet-gold-brick-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          782,
+          82,
+          1011,
+          218
+        ],
+        "bounds": {
+          "x": 784,
+          "y": 84,
+          "width": 225,
+          "height": 132
+        },
+        "originalWidth": 225,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              86
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "thresholds-gold-brick-edge-transition",
+      "label": "Gold Brick edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/thresholds-gold-brick-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.42105263157894735,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1038,
+          69,
+          1268,
+          225
+        ],
+        "bounds": {
+          "x": 1040,
+          "y": 71,
+          "width": 226,
+          "height": 152
+        },
+        "originalWidth": 226,
+        "originalHeight": 152,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1156,
+              73
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "thresholds-gold-brick-corner-transition",
+      "label": "Gold Brick corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/thresholds-gold-brick-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.423841059602649,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1292,
+          68,
+          1521,
+          223
+        ],
+        "bounds": {
+          "x": 1294,
+          "y": 70,
+          "width": 225,
+          "height": 151
+        },
+        "originalWidth": 225,
+        "originalHeight": 151,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1402,
+              72
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-wall-northwest",
+      "label": "Golden Hall Masonry wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/thresholds-golden-hall-masonry-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3422459893048128,
+        "scaleY": 0.44036697247706424,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          37,
+          255,
+          228,
+          477
+        ],
+        "bounds": {
+          "x": 39,
+          "y": 257,
+          "width": 187,
+          "height": 218
+        },
+        "originalWidth": 187,
+        "originalHeight": 218,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              61,
+              259
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-wall-northeast",
+      "label": "Golden Hall Masonry wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/thresholds-golden-hall-masonry-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34782608695652173,
+        "scaleY": 0.46153846153846156,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          291,
+          264,
+          479,
+          476
+        ],
+        "bounds": {
+          "x": 293,
+          "y": 266,
+          "width": 184,
+          "height": 208
+        },
+        "originalWidth": 184,
+        "originalHeight": 208,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              450,
+              268
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-outer-corner",
+      "label": "Golden Hall Masonry outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/thresholds-golden-hall-masonry-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.5052631578947369,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          543,
+          272,
+          742,
+          466
+        ],
+        "bounds": {
+          "x": 545,
+          "y": 274,
+          "width": 195,
+          "height": 190
+        },
+        "originalWidth": 195,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              712,
+              276
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-inner-corner",
+      "label": "Golden Hall Masonry inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/thresholds-golden-hall-masonry-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5844748858447488,
+        "scaleY": 0.5303867403314917,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          786,
+          266,
+          1009,
+          451
+        ],
+        "bounds": {
+          "x": 788,
+          "y": 268,
+          "width": 219,
+          "height": 181
+        },
+        "originalWidth": 219,
+        "originalHeight": 181,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              270
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-endcap-northwest",
+      "label": "Golden Hall Masonry endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/thresholds-golden-hall-masonry-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.36363636363636365,
+        "scaleY": 0.48484848484848486,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1108,
+          260,
+          1200,
+          462
+        ],
+        "bounds": {
+          "x": 1110,
+          "y": 262,
+          "width": 88,
+          "height": 198
+        },
+        "originalWidth": 88,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1137,
+              264
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-endcap-northeast",
+      "label": "Golden Hall Masonry endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/thresholds-golden-hall-masonry-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3516483516483517,
+        "scaleY": 0.4897959183673469,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1349,
+          259,
+          1444,
+          459
+        ],
+        "bounds": {
+          "x": 1351,
+          "y": 261,
+          "width": 91,
+          "height": 196
+        },
+        "originalWidth": 91,
+        "originalHeight": 196,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1409,
+              263
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-open-doorway",
+      "label": "Golden Hall Masonry open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/thresholds-golden-hall-masonry-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3368421052631579,
+        "scaleY": 0.44036697247706424,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          40,
+          480,
+          234,
+          702
+        ],
+        "bounds": {
+          "x": 42,
+          "y": 482,
+          "width": 190,
+          "height": 218
+        },
+        "originalWidth": 190,
+        "originalHeight": 218,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              68,
+              484
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-golden-hall-masonry-closed-doorway",
+      "label": "Golden Hall Masonry closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/thresholds-golden-hall-masonry-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3404255319148936,
+        "scaleY": 0.43636363636363634,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          291,
+          484,
+          483,
+          708
+        ],
+        "bounds": {
+          "x": 293,
+          "y": 486,
+          "width": 188,
+          "height": 220
+        },
+        "originalWidth": 188,
+        "originalHeight": 220,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              315,
+              488
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-gold-brick-stairs-up",
+      "label": "Gold Brick stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-gold-brick-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5355648535564853,
+        "scaleY": 0.5359116022099447,
+        "width": 128,
+        "height": 97,
+        "offset": {
+          "x": 64,
+          "y": 95
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          518,
+          510,
+          761,
+          695
+        ],
+        "bounds": {
+          "x": 520,
+          "y": 512,
+          "width": 239,
+          "height": 181
+        },
+        "originalWidth": 239,
+        "originalHeight": 181,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              613,
+              514
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-gold-brick-stairs-down",
+      "label": "Gold Brick stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-gold-brick-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.5251396648044693,
+        "width": 128,
+        "height": 94,
+        "offset": {
+          "x": 64,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          771,
+          508,
+          1019,
+          691
+        ],
+        "bounds": {
+          "x": 773,
+          "y": 510,
+          "width": 244,
+          "height": 179
+        },
+        "originalWidth": 244,
+        "originalHeight": 179,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              883,
+              512
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-race-selection-podium",
+      "label": "Race selection podium",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-race-selection-podium.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.44036697247706424,
+        "scaleY": 0.44144144144144143,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1043,
+          486,
+          1265,
+          712
+        ],
+        "bounds": {
+          "x": 1045,
+          "y": 488,
+          "width": 218,
+          "height": 222
+        },
+        "originalWidth": 218,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1151,
+              490
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-guild-transformation-bed",
+      "label": "Guild transformation bed",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-guild-transformation-bed.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.44036697247706424,
+        "scaleY": 0.44144144144144143,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1294,
+          484,
+          1516,
+          710
+        ],
+        "bounds": {
+          "x": 1296,
+          "y": 486,
+          "width": 218,
+          "height": 222
+        },
+        "originalWidth": 218,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1389,
+              488
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-quadrant-selection-wheel",
+      "label": "Quadrant selection wheel",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-quadrant-selection-wheel.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.5230125523012552,
+        "width": 96,
+        "height": 125,
+        "offset": {
+          "x": 80,
+          "y": 67
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          50,
+          708,
+          237,
+          951
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 710,
+          "width": 183,
+          "height": 239
+        },
+        "originalWidth": 183,
+        "originalHeight": 239,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              141,
+              712
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-opponent-selection-wheel",
+      "label": "Opponent selection wheel",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-opponent-selection-wheel.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5549132947976878,
+        "scaleY": 0.5560165975103735,
+        "width": 96,
+        "height": 134,
+        "offset": {
+          "x": 80,
+          "y": 58
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          298,
+          707,
+          475,
+          952
+        ],
+        "bounds": {
+          "x": 300,
+          "y": 709,
+          "width": 173,
+          "height": 241
+        },
+        "originalWidth": 173,
+        "originalHeight": 241,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              386,
+              711
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-choice-portal-arch",
+      "label": "Choice portal arch",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-choice-portal-arch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.4713656387665198,
+        "width": 96,
+        "height": 107,
+        "offset": {
+          "x": 80,
+          "y": 85
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          532,
+          721,
+          740,
+          952
+        ],
+        "bounds": {
+          "x": 534,
+          "y": 723,
+          "width": 204,
+          "height": 227
+        },
+        "originalWidth": 204,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              639,
+              725
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-registration-arena-entrance",
+      "label": "Registration arena entrance",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-registration-arena-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.384,
+        "scaleY": 0.38197424892703863,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          775,
+          728,
+          1029,
+          965
+        ],
+        "bounds": {
+          "x": 777,
+          "y": 730,
+          "width": 250,
+          "height": 233
+        },
+        "originalWidth": 250,
+        "originalHeight": 233,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              909,
+              732
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-red-carpet-runner",
+      "label": "Red carpet runner",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-red-carpet-runner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.39344262295081966,
+        "scaleY": 0.3918918918918919,
+        "width": 96,
+        "height": 58,
+        "offset": {
+          "x": 80,
+          "y": 134
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1031,
+          778,
+          1279,
+          930
+        ],
+        "bounds": {
+          "x": 1033,
+          "y": 780,
+          "width": 244,
+          "height": 148
+        },
+        "originalWidth": 244,
+        "originalHeight": 148,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1191,
+              782
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "thresholds-nebula-ceiling-panel",
+      "label": "Nebula ceiling panel",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "thresholds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/thresholds-nebula-ceiling-panel.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39790575916230364,
+        "width": 96,
+        "height": 76,
+        "offset": {
+          "x": 80,
+          "y": 116
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/thresholds.png",
+        "sha256": "b170da05ead47b2ce43f5515229c35edaafa254f81ad8fb78a766d884be5ca09",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1283,
+          740,
+          1528,
+          935
+        ],
+        "bounds": {
+          "x": 1285,
+          "y": 742,
+          "width": 241,
+          "height": 191
+        },
+        "originalWidth": 241,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1403,
+              744
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "thresholds.zip",
+  "contactSheet": "contact-sheet.png"
+}

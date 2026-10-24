@@ -1,0 +1,1845 @@
+{
+  "schemaVersion": 1,
+  "id": "broadcast-portals",
+  "style": "dungeon-after-dark",
+  "title": "Broadcast sets and remote portal views",
+  "books": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "broadcast-portals-studio-stage-panel-floor",
+      "label": "Studio Stage Panel floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5311203319502075,
+        "scaleY": 0.4507042253521127,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          13,
+          77,
+          258,
+          223
+        ],
+        "bounds": {
+          "x": 15,
+          "y": 79,
+          "width": 241,
+          "height": 142
+        },
+        "originalWidth": 241,
+        "originalHeight": 142,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              131,
+              81
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-worn-studio-stage-panel-floor",
+      "label": "Worn studio stage panel floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-worn-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.44755244755244755,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          267,
+          76,
+          513,
+          223
+        ],
+        "bounds": {
+          "x": 269,
+          "y": 78,
+          "width": 242,
+          "height": 143
+        },
+        "originalWidth": 242,
+        "originalHeight": 143,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              388,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-cracked-studio-stage-panel-floor",
+      "label": "Cracked studio stage panel floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-cracked-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.44755244755244755,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          519,
+          76,
+          765,
+          223
+        ],
+        "bounds": {
+          "x": 521,
+          "y": 78,
+          "width": 242,
+          "height": 143
+        },
+        "originalWidth": 242,
+        "originalHeight": 143,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              639,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-wet-studio-stage-panel-floor",
+      "label": "Wet studio stage panel floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-wet-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5333333333333333,
+        "scaleY": 0.44755244755244755,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          772,
+          76,
+          1016,
+          223
+        ],
+        "bounds": {
+          "x": 774,
+          "y": 78,
+          "width": 240,
+          "height": 143
+        },
+        "originalWidth": 240,
+        "originalHeight": 143,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              892,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-edge-transition",
+      "label": "Studio Stage Panel edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-studio-stage-panel-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5378151260504201,
+        "scaleY": 0.45390070921985815,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1025,
+          79,
+          1267,
+          224
+        ],
+        "bounds": {
+          "x": 1027,
+          "y": 81,
+          "width": 238,
+          "height": 141
+        },
+        "originalWidth": 238,
+        "originalHeight": 141,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1143,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-corner-transition",
+      "label": "Studio Stage Panel corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-studio-stage-panel-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5355648535564853,
+        "scaleY": 0.4050632911392405,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1281,
+          62,
+          1524,
+          224
+        ],
+        "bounds": {
+          "x": 1283,
+          "y": 64,
+          "width": 239,
+          "height": 158
+        },
+        "originalWidth": 239,
+        "originalHeight": 158,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1402,
+              66
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-wall-northwest",
+      "label": "Studio Partition wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34972677595628415,
+        "scaleY": 0.43636363636363634,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          45,
+          259,
+          232,
+          483
+        ],
+        "bounds": {
+          "x": 47,
+          "y": 261,
+          "width": 183,
+          "height": 220
+        },
+        "originalWidth": 183,
+        "originalHeight": 220,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              69,
+              263
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-wall-northeast",
+      "label": "Studio Partition wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34972677595628415,
+        "scaleY": 0.44036697247706424,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          293,
+          261,
+          480,
+          483
+        ],
+        "bounds": {
+          "x": 295,
+          "y": 263,
+          "width": 183,
+          "height": 218
+        },
+        "originalWidth": 183,
+        "originalHeight": 218,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              453,
+              265
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-outer-corner",
+      "label": "Studio Partition outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.518918918918919,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          540,
+          282,
+          740,
+          471
+        ],
+        "bounds": {
+          "x": 542,
+          "y": 284,
+          "width": 196,
+          "height": 185
+        },
+        "originalWidth": 196,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              562,
+              286
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-inner-corner",
+      "label": "Studio Partition inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5898617511520737,
+        "scaleY": 0.518918918918919,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          788,
+          272,
+          1009,
+          461
+        ],
+        "bounds": {
+          "x": 790,
+          "y": 274,
+          "width": 217,
+          "height": 185
+        },
+        "originalWidth": 217,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              276
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-endcap-northwest",
+      "label": "Studio Partition endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/broadcast-portals-studio-partition-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3950617283950617,
+        "scaleY": 0.5106382978723404,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1117,
+          269,
+          1202,
+          461
+        ],
+        "bounds": {
+          "x": 1119,
+          "y": 271,
+          "width": 81,
+          "height": 188
+        },
+        "originalWidth": 81,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1136,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-endcap-northeast",
+      "label": "Studio Partition endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/broadcast-portals-studio-partition-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.4,
+        "scaleY": 0.5106382978723404,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1369,
+          269,
+          1453,
+          461
+        ],
+        "bounds": {
+          "x": 1371,
+          "y": 271,
+          "width": 80,
+          "height": 188
+        },
+        "originalWidth": 80,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1428,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-open-doorway",
+      "label": "Studio Partition open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.35555555555555557,
+        "scaleY": 0.41739130434782606,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          47,
+          489,
+          231,
+          723
+        ],
+        "bounds": {
+          "x": 49,
+          "y": 491,
+          "width": 180,
+          "height": 230
+        },
+        "originalWidth": 180,
+        "originalHeight": 230,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              69,
+              493
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-closed-doorway",
+      "label": "Studio Partition closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3657142857142857,
+        "scaleY": 0.42105263157894735,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          293,
+          491,
+          472,
+          723
+        ],
+        "bounds": {
+          "x": 295,
+          "y": 493,
+          "width": 175,
+          "height": 228
+        },
+        "originalWidth": 175,
+        "originalHeight": 228,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              449,
+              495
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-stairs-up",
+      "label": "Studio Stage Panel stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-studio-stage-panel-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5378151260504201,
+        "scaleY": 0.5402298850574713,
+        "width": 128,
+        "height": 94,
+        "offset": {
+          "x": 64,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          519,
+          543,
+          761,
+          721
+        ],
+        "bounds": {
+          "x": 521,
+          "y": 545,
+          "width": 238,
+          "height": 174
+        },
+        "originalWidth": 238,
+        "originalHeight": 174,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              624,
+              547
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-stairs-down",
+      "label": "Studio Stage Panel stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-studio-stage-panel-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5161290322580645,
+        "scaleY": 0.5167785234899329,
+        "width": 128,
+        "height": 77,
+        "offset": {
+          "x": 64,
+          "y": 115
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          767,
+          552,
+          1019,
+          705
+        ],
+        "bounds": {
+          "x": 769,
+          "y": 554,
+          "width": 248,
+          "height": 149
+        },
+        "originalWidth": 248,
+        "originalHeight": 149,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              887,
+              556
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-interview-sofa",
+      "label": "Interview sofa",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-interview-sofa.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.42290748898678415,
+        "scaleY": 0.42038216560509556,
+        "width": 96,
+        "height": 66,
+        "offset": {
+          "x": 80,
+          "y": 126
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1037,
+          545,
+          1268,
+          706
+        ],
+        "bounds": {
+          "x": 1039,
+          "y": 547,
+          "width": 227,
+          "height": 157
+        },
+        "originalWidth": 227,
+        "originalHeight": 157,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1188,
+              549
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-camera",
+      "label": "Studio camera",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-studio-camera.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5853658536585366,
+        "scaleY": 0.5854922279792746,
+        "width": 96,
+        "height": 113,
+        "offset": {
+          "x": 80,
+          "y": 79
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1322,
+          517,
+          1490,
+          714
+        ],
+        "bounds": {
+          "x": 1324,
+          "y": 519,
+          "width": 164,
+          "height": 193
+        },
+        "originalWidth": 164,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1402,
+              521
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-broadcast-spotlight",
+      "label": "Broadcast spotlight",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-broadcast-spotlight.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5363128491620112,
+        "scaleY": 0.5345622119815668,
+        "width": 96,
+        "height": 116,
+        "offset": {
+          "x": 80,
+          "y": 76
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          34,
+          739,
+          217,
+          960
+        ],
+        "bounds": {
+          "x": 36,
+          "y": 741,
+          "width": 179,
+          "height": 217
+        },
+        "originalWidth": 179,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              169,
+              743
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-underwater-trailer-window",
+      "label": "Underwater trailer window",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-underwater-trailer-window.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4824120603015075,
+        "scaleY": 0.4827586206896552,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          286,
+          755,
+          489,
+          962
+        ],
+        "bounds": {
+          "x": 288,
+          "y": 757,
+          "width": 199,
+          "height": 203
+        },
+        "originalWidth": 199,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              322,
+              759
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-infomercial-display-podium",
+      "label": "Infomercial display podium",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-infomercial-display-podium.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5925925925925926,
+        "scaleY": 0.5919282511210763,
+        "width": 96,
+        "height": 132,
+        "offset": {
+          "x": 80,
+          "y": 60
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          559,
+          740,
+          725,
+          967
+        ],
+        "bounds": {
+          "x": 561,
+          "y": 742,
+          "width": 162,
+          "height": 223
+        },
+        "originalWidth": 162,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              629,
+              744
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-convention-stage-backdrop",
+      "label": "Convention stage backdrop",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-convention-stage-backdrop.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4247787610619469,
+        "scaleY": 0.42616033755274263,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          777,
+          723,
+          1007,
+          964
+        ],
+        "bounds": {
+          "x": 779,
+          "y": 725,
+          "width": 226,
+          "height": 237
+        },
+        "originalWidth": 226,
+        "originalHeight": 237,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              982,
+              727
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-bubble-boundary-portal",
+      "label": "Bubble boundary portal",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-bubble-boundary-portal.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4549763033175355,
+        "scaleY": 0.452914798206278,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1047,
+          738,
+          1262,
+          965
+        ],
+        "bounds": {
+          "x": 1049,
+          "y": 740,
+          "width": 211,
+          "height": 223
+        },
+        "originalWidth": 211,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1147,
+              742
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-remote-flooded-city-portal-vista",
+      "label": "Remote flooded city portal vista",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-remote-flooded-city-portal-vista.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.43859649122807015,
+        "width": 96,
+        "height": 100,
+        "offset": {
+          "x": 80,
+          "y": 92
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/broadcast-portals.png",
+        "sha256": "55bb6b98c289cad74c33d0bbcb348f785839a61667ac0f0e4981fe2adc0462f9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1289,
+          735,
+          1512,
+          967
+        ],
+        "bounds": {
+          "x": 1291,
+          "y": 737,
+          "width": 219,
+          "height": 228
+        },
+        "originalWidth": 219,
+        "originalHeight": 228,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1400,
+              739
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "broadcast-portals.zip",
+  "contactSheet": "contact-sheet.png"
+}

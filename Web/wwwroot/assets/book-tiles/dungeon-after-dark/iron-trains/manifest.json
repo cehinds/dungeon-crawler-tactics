@@ -1,0 +1,1841 @@
+{
+  "schemaVersion": 1,
+  "id": "iron-trains",
+  "style": "dungeon-after-dark",
+  "title": "Iron Tangle trains and service cars",
+  "books": [
+    3
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "iron-trains-railcar-metal-floor",
+      "label": "Railcar Metal floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          19,
+          73,
+          260,
+          208
+        ],
+        "bounds": {
+          "x": 21,
+          "y": 75,
+          "width": 237,
+          "height": 131
+        },
+        "originalWidth": 237,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              138,
+              77
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-worn-railcar-metal-floor",
+      "label": "Worn railcar metal floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-worn-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          270,
+          73,
+          510,
+          209
+        ],
+        "bounds": {
+          "x": 272,
+          "y": 75,
+          "width": 236,
+          "height": 132
+        },
+        "originalWidth": 236,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              388,
+              77
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-cracked-railcar-metal-floor",
+      "label": "Cracked railcar metal floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-cracked-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          522,
+          72,
+          762,
+          208
+        ],
+        "bounds": {
+          "x": 524,
+          "y": 74,
+          "width": 236,
+          "height": 132
+        },
+        "originalWidth": 236,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              642,
+              76
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-wet-railcar-metal-floor",
+      "label": "Wet railcar metal floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-wet-railcar-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          774,
+          72,
+          1014,
+          208
+        ],
+        "bounds": {
+          "x": 776,
+          "y": 74,
+          "width": 236,
+          "height": 132
+        },
+        "originalWidth": 236,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              76
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-edge-transition",
+      "label": "Railcar Metal edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-railcar-metal-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1026,
+          72,
+          1266,
+          208
+        ],
+        "bounds": {
+          "x": 1028,
+          "y": 74,
+          "width": 236,
+          "height": 132
+        },
+        "originalWidth": 236,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1146,
+              76
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-corner-transition",
+      "label": "Railcar Metal corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-trains-railcar-metal-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.48120300751879697,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1276,
+          72,
+          1516,
+          209
+        ],
+        "bounds": {
+          "x": 1278,
+          "y": 74,
+          "width": 236,
+          "height": 133
+        },
+        "originalWidth": 236,
+        "originalHeight": 133,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1396,
+              76
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-wall-northwest",
+      "label": "Riveted Carriage Metal wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34594594594594597,
+        "scaleY": 0.43243243243243246,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          42,
+          259,
+          231,
+          485
+        ],
+        "bounds": {
+          "x": 44,
+          "y": 261,
+          "width": 185,
+          "height": 222
+        },
+        "originalWidth": 185,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              67,
+              263
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-wall-northeast",
+      "label": "Riveted Carriage Metal wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34972677595628415,
+        "scaleY": 0.43243243243243246,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          298,
+          259,
+          485,
+          485
+        ],
+        "bounds": {
+          "x": 300,
+          "y": 261,
+          "width": 183,
+          "height": 222
+        },
+        "originalWidth": 183,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              457,
+              263
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-outer-corner",
+      "label": "Riveted Carriage Metal outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.4948453608247423,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          547,
+          261,
+          738,
+          459
+        ],
+        "bounds": {
+          "x": 549,
+          "y": 263,
+          "width": 187,
+          "height": 194
+        },
+        "originalWidth": 187,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              571,
+              265
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-inner-corner",
+      "label": "Riveted Carriage Metal inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5765765765765766,
+        "scaleY": 0.5217391304347826,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          782,
+          263,
+          1008,
+          451
+        ],
+        "bounds": {
+          "x": 784,
+          "y": 265,
+          "width": 222,
+          "height": 184
+        },
+        "originalWidth": 222,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              890,
+              267
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-endcap-northwest",
+      "label": "Riveted Carriage Metal endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-trains-riveted-carriage-metal-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3047619047619048,
+        "scaleY": 0.5106382978723404,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1102,
+          266,
+          1211,
+          458
+        ],
+        "bounds": {
+          "x": 1104,
+          "y": 268,
+          "width": 105,
+          "height": 188
+        },
+        "originalWidth": 105,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1131,
+              270
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-endcap-northeast",
+      "label": "Riveted Carriage Metal endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-trains-riveted-carriage-metal-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3137254901960784,
+        "scaleY": 0.5079365079365079,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1338,
+          264,
+          1444,
+          457
+        ],
+        "bounds": {
+          "x": 1340,
+          "y": 266,
+          "width": 102,
+          "height": 189
+        },
+        "originalWidth": 102,
+        "originalHeight": 189,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1412,
+              268
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-open-doorway",
+      "label": "Riveted Carriage Metal open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34408602150537637,
+        "scaleY": 0.4067796610169492,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          40,
+          492,
+          230,
+          732
+        ],
+        "bounds": {
+          "x": 42,
+          "y": 494,
+          "width": 186,
+          "height": 236
+        },
+        "originalWidth": 186,
+        "originalHeight": 236,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              68,
+              496
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-riveted-carriage-metal-closed-doorway",
+      "label": "Riveted Carriage Metal closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-trains-riveted-carriage-metal-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4304932735426009,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          315,
+          501,
+          471,
+          728
+        ],
+        "bounds": {
+          "x": 317,
+          "y": 503,
+          "width": 152,
+          "height": 223
+        },
+        "originalWidth": 152,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              343,
+              505
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-stairs-up",
+      "label": "Railcar Metal stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-railcar-metal-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5953488372093023,
+        "scaleY": 0.5967741935483871,
+        "width": 128,
+        "height": 111,
+        "offset": {
+          "x": 64,
+          "y": 81
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          532,
+          522,
+          751,
+          712
+        ],
+        "bounds": {
+          "x": 534,
+          "y": 524,
+          "width": 215,
+          "height": 186
+        },
+        "originalWidth": 215,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              619,
+              526
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-railcar-metal-stairs-down",
+      "label": "Railcar Metal stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-railcar-metal-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5333333333333333,
+        "scaleY": 0.5304878048780488,
+        "width": 128,
+        "height": 87,
+        "offset": {
+          "x": 64,
+          "y": 105
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          768,
+          538,
+          1012,
+          706
+        ],
+        "bounds": {
+          "x": 770,
+          "y": 540,
+          "width": 240,
+          "height": 164
+        },
+        "originalWidth": 240,
+        "originalHeight": 164,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              874,
+              542
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-subway-carriage-shell",
+      "label": "Subway carriage shell",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-subway-carriage-shell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.42081447963800905,
+        "width": 96,
+        "height": 93,
+        "offset": {
+          "x": 80,
+          "y": 99
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1031,
+          502,
+          1263,
+          727
+        ],
+        "bounds": {
+          "x": 1033,
+          "y": 504,
+          "width": 228,
+          "height": 221
+        },
+        "originalWidth": 228,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1086,
+              506
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-steam-locomotive-front",
+      "label": "Steam locomotive front",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-steam-locomotive-front.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4343891402714932,
+        "scaleY": 0.43612334801762115,
+        "width": 96,
+        "height": 99,
+        "offset": {
+          "x": 80,
+          "y": 93
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1287,
+          504,
+          1512,
+          735
+        ],
+        "bounds": {
+          "x": 1289,
+          "y": 506,
+          "width": 221,
+          "height": 227
+        },
+        "originalWidth": 221,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1388,
+              508
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-passenger-bench",
+      "label": "Passenger bench",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-passenger-bench.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.44651162790697674,
+        "scaleY": 0.4444444444444444,
+        "width": 96,
+        "height": 76,
+        "offset": {
+          "x": 80,
+          "y": 116
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          27,
+          780,
+          246,
+          955
+        ],
+        "bounds": {
+          "x": 29,
+          "y": 782,
+          "width": 215,
+          "height": 171
+        },
+        "originalWidth": 215,
+        "originalHeight": 171,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              95,
+              784
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-carriage-joining-gangway",
+      "label": "Carriage joining gangway",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-carriage-joining-gangway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.44651162790697674,
+        "scaleY": 0.44541484716157204,
+        "width": 96,
+        "height": 102,
+        "offset": {
+          "x": 80,
+          "y": 90
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          284,
+          735,
+          503,
+          968
+        ],
+        "bounds": {
+          "x": 286,
+          "y": 737,
+          "width": 215,
+          "height": 229
+        },
+        "originalWidth": 215,
+        "originalHeight": 229,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              419,
+              739
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-janitor-supply-cart",
+      "label": "Janitor supply cart",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-janitor-supply-cart.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5748502994011976,
+        "scaleY": 0.5726872246696035,
+        "width": 96,
+        "height": 130,
+        "offset": {
+          "x": 80,
+          "y": 62
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          559,
+          742,
+          730,
+          973
+        ],
+        "bounds": {
+          "x": 561,
+          "y": 744,
+          "width": 167,
+          "height": 227
+        },
+        "originalWidth": 167,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              658,
+              746
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-train-control-console",
+      "label": "Train control console",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-train-control-console.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.43243243243243246,
+        "scaleY": 0.430622009569378,
+        "width": 96,
+        "height": 90,
+        "offset": {
+          "x": 80,
+          "y": 102
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          776,
+          750,
+          1002,
+          963
+        ],
+        "bounds": {
+          "x": 778,
+          "y": 752,
+          "width": 222,
+          "height": 209
+        },
+        "originalWidth": 222,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              862,
+              754
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-open-service-hatch",
+      "label": "Open service hatch",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-open-service-hatch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.41361256544502617,
+        "width": 96,
+        "height": 79,
+        "offset": {
+          "x": 80,
+          "y": 113
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1026,
+          759,
+          1261,
+          954
+        ],
+        "bounds": {
+          "x": 1028,
+          "y": 761,
+          "width": 231,
+          "height": 191
+        },
+        "originalWidth": 231,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1094,
+              763
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-trains-cargo-wagon-shell",
+      "label": "Cargo wagon shell",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-trains",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-trains-cargo-wagon-shell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41201716738197425,
+        "scaleY": 0.41089108910891087,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-trains.png",
+        "sha256": "714c7133dcd4129e54d742fcabe91e05c65e101fa9c9653357f0ec47ddd1a53c",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1280,
+          754,
+          1517,
+          960
+        ],
+        "bounds": {
+          "x": 1282,
+          "y": 756,
+          "width": 233,
+          "height": 202
+        },
+        "originalWidth": 233,
+        "originalHeight": 202,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1444,
+              758
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "iron-trains.zip",
+  "contactSheet": "contact-sheet.png"
+}

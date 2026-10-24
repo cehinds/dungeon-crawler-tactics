@@ -1,0 +1,1849 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble-airship",
+  "style": "pocket-dungeon",
+  "title": "Wasteland flying fortress",
+  "books": [
+    4
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "bubble-airship-scrap-metal-deck-floor",
+      "label": "Scrap Metal Deck floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-airship-scrap-metal-deck-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.6305418719211823,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          45,
+          38,
+          254,
+          245
+        ],
+        "bounds": {
+          "x": 47,
+          "y": 40,
+          "width": 205,
+          "height": 203
+        },
+        "originalWidth": 205,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              63,
+              42
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-worn-scrap-metal-deck-floor",
+      "label": "Worn scrap metal deck floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-airship-worn-scrap-metal-deck-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.6305418719211823,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          294,
+          38,
+          501,
+          245
+        ],
+        "bounds": {
+          "x": 296,
+          "y": 40,
+          "width": 203,
+          "height": 203
+        },
+        "originalWidth": 203,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              305,
+              42
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-cracked-scrap-metal-deck-floor",
+      "label": "Cracked scrap metal deck floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-airship-cracked-scrap-metal-deck-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.6305418719211823,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          540,
+          38,
+          748,
+          245
+        ],
+        "bounds": {
+          "x": 542,
+          "y": 40,
+          "width": 204,
+          "height": 203
+        },
+        "originalWidth": 204,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              549,
+              42
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-wet-scrap-metal-deck-floor",
+      "label": "Wet scrap metal deck floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-airship-wet-scrap-metal-deck-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.6305418719211823,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          788,
+          38,
+          995,
+          245
+        ],
+        "bounds": {
+          "x": 790,
+          "y": 40,
+          "width": 203,
+          "height": 203
+        },
+        "originalWidth": 203,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              799,
+              42
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-scrap-metal-deck-edge-transition",
+      "label": "Scrap Metal Deck edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-airship-scrap-metal-deck-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6037735849056604,
+        "scaleY": 0.7804878048780488,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1035,
+          66,
+          1251,
+          234
+        ],
+        "bounds": {
+          "x": 1037,
+          "y": 68,
+          "width": 212,
+          "height": 164
+        },
+        "originalWidth": 212,
+        "originalHeight": 164,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1045,
+              70
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-scrap-metal-deck-corner-transition",
+      "label": "Scrap Metal Deck corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-airship-scrap-metal-deck-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6464646464646465,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1297,
+          51,
+          1492,
+          253
+        ],
+        "bounds": {
+          "x": 1299,
+          "y": 53,
+          "width": 191,
+          "height": 198
+        },
+        "originalWidth": 191,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1304,
+              55
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-wall-northwest",
+      "label": "Riveted Scrap Hull wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-airship-riveted-scrap-hull-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.64,
+        "scaleY": 0.5363128491620112,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          41,
+          286,
+          245,
+          469
+        ],
+        "bounds": {
+          "x": 43,
+          "y": 288,
+          "width": 200,
+          "height": 179
+        },
+        "originalWidth": 200,
+        "originalHeight": 179,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              61,
+              290
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-wall-northeast",
+      "label": "Riveted Scrap Hull wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-airship-riveted-scrap-hull-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.5363128491620112,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          298,
+          285,
+          500,
+          468
+        ],
+        "bounds": {
+          "x": 300,
+          "y": 287,
+          "width": 198,
+          "height": 179
+        },
+        "originalWidth": 198,
+        "originalHeight": 179,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              471,
+              289
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-outer-corner",
+      "label": "Riveted Scrap Hull outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-airship-riveted-scrap-hull-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7619047619047619,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          563,
+          274,
+          735,
+          476
+        ],
+        "bounds": {
+          "x": 565,
+          "y": 276,
+          "width": 168,
+          "height": 198
+        },
+        "originalWidth": 168,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              595,
+              278
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-inner-corner",
+      "label": "Riveted Scrap Hull inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-airship-riveted-scrap-hull-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5844748858447488,
+        "scaleY": 0.49740932642487046,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          786,
+          264,
+          1009,
+          461
+        ],
+        "bounds": {
+          "x": 788,
+          "y": 266,
+          "width": 219,
+          "height": 193
+        },
+        "originalWidth": 219,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              892,
+              268
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-endcap-northwest",
+      "label": "Riveted Scrap Hull endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-airship-riveted-scrap-hull-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.32432432432432434,
+        "scaleY": 0.49740932642487046,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1064,
+          279,
+          1216,
+          476
+        ],
+        "bounds": {
+          "x": 1066,
+          "y": 281,
+          "width": 148,
+          "height": 193
+        },
+        "originalWidth": 148,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1092,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-endcap-northeast",
+      "label": "Riveted Scrap Hull endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-airship-riveted-scrap-hull-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.3157894736842105,
+        "scaleY": 0.5026178010471204,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1323,
+          281,
+          1479,
+          476
+        ],
+        "bounds": {
+          "x": 1325,
+          "y": 283,
+          "width": 152,
+          "height": 191
+        },
+        "originalWidth": 152,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1345,
+              285
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-open-doorway",
+      "label": "Riveted Scrap Hull open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-airship-riveted-scrap-hull-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.4729064039408867,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          39,
+          494,
+          234,
+          701
+        ],
+        "bounds": {
+          "x": 41,
+          "y": 496,
+          "width": 191,
+          "height": 203
+        },
+        "originalWidth": 191,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              163,
+              498
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-riveted-scrap-hull-closed-doorway",
+      "label": "Riveted Scrap Hull closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-airship-riveted-scrap-hull-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.47058823529411764,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          300,
+          496,
+          496,
+          704
+        ],
+        "bounds": {
+          "x": 302,
+          "y": 498,
+          "width": 192,
+          "height": 204
+        },
+        "originalWidth": 192,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              368,
+              500
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-scrap-metal-deck-stairs-up",
+      "label": "Scrap Metal Deck stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-scrap-metal-deck-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6124401913875598,
+        "scaleY": 0.6111111111111112,
+        "width": 128,
+        "height": 121,
+        "offset": {
+          "x": 64,
+          "y": 71
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          534,
+          501,
+          747,
+          703
+        ],
+        "bounds": {
+          "x": 536,
+          "y": 503,
+          "width": 209,
+          "height": 198
+        },
+        "originalWidth": 209,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              596,
+              505
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-scrap-metal-deck-stairs-down",
+      "label": "Scrap Metal Deck stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-scrap-metal-deck-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6153846153846154,
+        "scaleY": 0.6179775280898876,
+        "width": 128,
+        "height": 110,
+        "offset": {
+          "x": 64,
+          "y": 82
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          792,
+          515,
+          1004,
+          697
+        ],
+        "bounds": {
+          "x": 794,
+          "y": 517,
+          "width": 208,
+          "height": 178
+        },
+        "originalWidth": 208,
+        "originalHeight": 178,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              842,
+              519
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-balloon-mooring-tower",
+      "label": "Balloon mooring tower",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-balloon-mooring-tower.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.43724696356275305,
+        "width": 96,
+        "height": 108,
+        "offset": {
+          "x": 80,
+          "y": 84
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1048,
+          481,
+          1271,
+          732
+        ],
+        "bounds": {
+          "x": 1050,
+          "y": 483,
+          "width": 219,
+          "height": 247
+        },
+        "originalWidth": 219,
+        "originalHeight": 247,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1146,
+              485
+            ],
+            [
+              1077,
+              689
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-airship-balloon-section",
+      "label": "Airship balloon section",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-airship-balloon-section.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.36923076923076925,
+        "scaleY": 0.3698630136986301,
+        "width": 96,
+        "height": 81,
+        "offset": {
+          "x": 80,
+          "y": 111
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1261,
+          487,
+          1525,
+          710
+        ],
+        "bounds": {
+          "x": 1263,
+          "y": 489,
+          "width": 260,
+          "height": 219
+        },
+        "originalWidth": 260,
+        "originalHeight": 219,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1438,
+              491
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-propeller-engine",
+      "label": "Propeller engine",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-propeller-engine.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4,
+        "scaleY": 0.40086206896551724,
+        "width": 96,
+        "height": 93,
+        "offset": {
+          "x": 80,
+          "y": 99
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          17,
+          724,
+          261,
+          960
+        ],
+        "bounds": {
+          "x": 19,
+          "y": 726,
+          "width": 240,
+          "height": 232
+        },
+        "originalWidth": 240,
+        "originalHeight": 232,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              76,
+              728
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-bomb-rack",
+      "label": "Bomb rack",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-bomb-rack.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4423963133640553,
+        "scaleY": 0.44148936170212766,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          276,
+          754,
+          497,
+          946
+        ],
+        "bounds": {
+          "x": 278,
+          "y": 756,
+          "width": 217,
+          "height": 188
+        },
+        "originalWidth": 217,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              326,
+              758
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-aircraft-hangar-arch",
+      "label": "Aircraft hangar arch",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-aircraft-hangar-arch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3794466403162055,
+        "scaleY": 0.38071065989847713,
+        "width": 96,
+        "height": 75,
+        "offset": {
+          "x": 80,
+          "y": 117
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          510,
+          736,
+          767,
+          937
+        ],
+        "bounds": {
+          "x": 512,
+          "y": 738,
+          "width": 253,
+          "height": 197
+        },
+        "originalWidth": 253,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              619,
+              740
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-scrap-barricade",
+      "label": "Scrap barricade",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-scrap-barricade.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.4431818181818182,
+        "width": 96,
+        "height": 78,
+        "offset": {
+          "x": 80,
+          "y": 114
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          783,
+          770,
+          1003,
+          950
+        ],
+        "bounds": {
+          "x": 785,
+          "y": 772,
+          "width": 216,
+          "height": 176
+        },
+        "originalWidth": 216,
+        "originalHeight": 176,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              828,
+              774
+            ],
+            [
+              808,
+              820
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-biplane-parking-pad",
+      "label": "Biplane parking pad",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-biplane-parking-pad.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3855421686746988,
+        "scaleY": 0.38666666666666666,
+        "width": 96,
+        "height": 87,
+        "offset": {
+          "x": 80,
+          "y": 105
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1016,
+          744,
+          1269,
+          973
+        ],
+        "bounds": {
+          "x": 1018,
+          "y": 746,
+          "width": 249,
+          "height": 225
+        },
+        "originalWidth": 249,
+        "originalHeight": 225,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1056,
+              748
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-airship-rope-boarding-ramp",
+      "label": "Rope boarding ramp",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-airship",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-airship-rope-boarding-ramp.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.4146341463414634,
+        "width": 96,
+        "height": 102,
+        "offset": {
+          "x": 80,
+          "y": 90
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-airship.png",
+        "sha256": "29fadffdaf8c27210e42b0c1c86e9edb994124c973c5542b763bf9f3b258582b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1285,
+          728,
+          1520,
+          978
+        ],
+        "bounds": {
+          "x": 1287,
+          "y": 730,
+          "width": 231,
+          "height": 246
+        },
+        "originalWidth": 231,
+        "originalHeight": 246,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1432,
+              732
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "bubble-airship.zip",
+  "contactSheet": "contact-sheet.png"
+}

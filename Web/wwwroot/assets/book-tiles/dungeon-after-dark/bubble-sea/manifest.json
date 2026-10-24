@@ -1,0 +1,1841 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble-sea",
+  "style": "dungeon-after-dark",
+  "title": "Sea quadrant and Akula submarine",
+  "books": [
+    4
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "bubble-sea-seabed-sand-floor",
+      "label": "Seabed sand floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-seabed-sand-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.44755244755244755,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          14,
+          78,
+          260,
+          225
+        ],
+        "bounds": {
+          "x": 16,
+          "y": 80,
+          "width": 242,
+          "height": 143
+        },
+        "originalWidth": 242,
+        "originalHeight": 143,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              134,
+              82
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-coral-seabed-floor",
+      "label": "Coral seabed floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-coral-seabed-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.40764331210191085,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          268,
+          64,
+          514,
+          225
+        ],
+        "bounds": {
+          "x": 270,
+          "y": 66,
+          "width": 242,
+          "height": 157
+        },
+        "originalWidth": 242,
+        "originalHeight": 157,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              404,
+              68
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-floor",
+      "label": "Submarine metal floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-submarine-metal-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5333333333333333,
+        "scaleY": 0.4383561643835616,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          523,
+          76,
+          767,
+          226
+        ],
+        "bounds": {
+          "x": 525,
+          "y": 78,
+          "width": 240,
+          "height": 146
+        },
+        "originalWidth": 240,
+        "originalHeight": 146,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              642,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-grating-floor",
+      "label": "Submarine grating floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-submarine-grating-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.43537414965986393,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          768,
+          75,
+          1014,
+          226
+        ],
+        "bounds": {
+          "x": 770,
+          "y": 77,
+          "width": 242,
+          "height": 147
+        },
+        "originalWidth": 242,
+        "originalHeight": 147,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              888,
+              79
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-shallow-water-edge",
+      "label": "Shallow water edge",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-shallow-water-edge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5267489711934157,
+        "scaleY": 0.43537414965986393,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1020,
+          75,
+          1267,
+          226
+        ],
+        "bounds": {
+          "x": 1022,
+          "y": 77,
+          "width": 243,
+          "height": 147
+        },
+        "originalWidth": 243,
+        "originalHeight": 147,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1137,
+              79
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-shallow-water-corner",
+      "label": "Shallow water corner",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-sea-shallow-water-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.43243243243243246,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1274,
+          74,
+          1522,
+          226
+        ],
+        "bounds": {
+          "x": 1276,
+          "y": 76,
+          "width": 244,
+          "height": 148
+        },
+        "originalWidth": 244,
+        "originalHeight": 148,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1396,
+              78
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-wall-northwest",
+      "label": "Submarine Metal Hull wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.29493087557603687,
+        "scaleY": 0.43636363636363634,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          30,
+          268,
+          251,
+          492
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 270,
+          "width": 217,
+          "height": 220
+        },
+        "originalWidth": 217,
+        "originalHeight": 220,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              69,
+              272
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-wall-northeast",
+      "label": "Submarine Metal Hull wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.29493087557603687,
+        "scaleY": 0.43243243243243246,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          280,
+          266,
+          501,
+          492
+        ],
+        "bounds": {
+          "x": 282,
+          "y": 268,
+          "width": 217,
+          "height": 222
+        },
+        "originalWidth": 217,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              454,
+              270
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-outer-corner",
+      "label": "Submarine Metal Hull outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5765765765765766,
+        "scaleY": 0.5052631578947369,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          531,
+          275,
+          757,
+          469
+        ],
+        "bounds": {
+          "x": 533,
+          "y": 277,
+          "width": 222,
+          "height": 190
+        },
+        "originalWidth": 222,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              564,
+              279
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-inner-corner",
+      "label": "Submarine Metal Hull inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5470085470085471,
+        "scaleY": 0.5423728813559322,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          775,
+          267,
+          1013,
+          448
+        ],
+        "bounds": {
+          "x": 777,
+          "y": 269,
+          "width": 234,
+          "height": 177
+        },
+        "originalWidth": 234,
+        "originalHeight": 177,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-endcap-northwest",
+      "label": "Submarine Metal Hull endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-sea-submarine-metal-hull-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.26229508196721313,
+        "scaleY": 0.4948453608247423,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1091,
+          268,
+          1217,
+          466
+        ],
+        "bounds": {
+          "x": 1093,
+          "y": 270,
+          "width": 122,
+          "height": 194
+        },
+        "originalWidth": 122,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1135,
+              272
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-endcap-northeast",
+      "label": "Submarine Metal Hull endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-sea-submarine-metal-hull-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.26666666666666666,
+        "scaleY": 0.49230769230769234,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1337,
+          268,
+          1461,
+          467
+        ],
+        "bounds": {
+          "x": 1339,
+          "y": 270,
+          "width": 120,
+          "height": 195
+        },
+        "originalWidth": 120,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1407,
+              272
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-open-doorway",
+      "label": "Submarine Metal Hull open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3333333333333333,
+        "scaleY": 0.43243243243243246,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          35,
+          501,
+          231,
+          727
+        ],
+        "bounds": {
+          "x": 37,
+          "y": 503,
+          "width": 192,
+          "height": 222
+        },
+        "originalWidth": 192,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              78,
+              505
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-metal-hull-closed-doorway",
+      "label": "Submarine Metal Hull closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-sea-submarine-metal-hull-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3422459893048128,
+        "scaleY": 0.43243243243243246,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          289,
+          500,
+          480,
+          726
+        ],
+        "bounds": {
+          "x": 291,
+          "y": 502,
+          "width": 187,
+          "height": 222
+        },
+        "originalWidth": 187,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              429,
+              504
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-seabed-sand-stairs-up",
+      "label": "Seabed Sand stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-seabed-sand-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5182186234817814,
+        "scaleY": 0.5207100591715976,
+        "width": 128,
+        "height": 88,
+        "offset": {
+          "x": 64,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          518,
+          538,
+          769,
+          711
+        ],
+        "bounds": {
+          "x": 520,
+          "y": 540,
+          "width": 247,
+          "height": 169
+        },
+        "originalWidth": 247,
+        "originalHeight": 169,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              708,
+              542
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-seabed-sand-stairs-down",
+      "label": "Seabed Sand stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-seabed-sand-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5140562248995983,
+        "scaleY": 0.5128205128205128,
+        "width": 128,
+        "height": 80,
+        "offset": {
+          "x": 64,
+          "y": 112
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          768,
+          551,
+          1021,
+          711
+        ],
+        "bounds": {
+          "x": 770,
+          "y": 553,
+          "width": 249,
+          "height": 156
+        },
+        "originalWidth": 249,
+        "originalHeight": 156,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              916,
+              555
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-coral-cluster",
+      "label": "Coral cluster",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-coral-cluster.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.4635416666666667,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1042,
+          528,
+          1253,
+          724
+        ],
+        "bounds": {
+          "x": 1044,
+          "y": 530,
+          "width": 207,
+          "height": 192
+        },
+        "originalWidth": 207,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1174,
+              532
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-seaweed-cluster",
+      "label": "Seaweed cluster",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-seaweed-cluster.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5026178010471204,
+        "scaleY": 0.5049019607843137,
+        "width": 96,
+        "height": 103,
+        "offset": {
+          "x": 80,
+          "y": 89
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1302,
+          517,
+          1497,
+          725
+        ],
+        "bounds": {
+          "x": 1304,
+          "y": 519,
+          "width": 191,
+          "height": 204
+        },
+        "originalWidth": 191,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1425,
+              521
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-airlock",
+      "label": "Submarine airlock",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-submarine-airlock.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41379310344827586,
+        "scaleY": 0.4158878504672897,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          14,
+          755,
+          250,
+          973
+        ],
+        "bounds": {
+          "x": 16,
+          "y": 757,
+          "width": 232,
+          "height": 214
+        },
+        "originalWidth": 232,
+        "originalHeight": 214,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              111,
+              759
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-submarine-command-console",
+      "label": "Submarine command console",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-submarine-command-console.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.40384615384615385,
+        "width": 96,
+        "height": 84,
+        "offset": {
+          "x": 80,
+          "y": 108
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          268,
+          761,
+          511,
+          973
+        ],
+        "bounds": {
+          "x": 270,
+          "y": 763,
+          "width": 239,
+          "height": 208
+        },
+        "originalWidth": 239,
+        "originalHeight": 208,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              412,
+              765
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-periscope-station",
+      "label": "Periscope station",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-periscope-station.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4824120603015075,
+        "scaleY": 0.4830508474576271,
+        "width": 96,
+        "height": 114,
+        "offset": {
+          "x": 80,
+          "y": 78
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          541,
+          738,
+          744,
+          978
+        ],
+        "bounds": {
+          "x": 543,
+          "y": 740,
+          "width": 199,
+          "height": 236
+        },
+        "originalWidth": 199,
+        "originalHeight": 236,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              636,
+              742
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-pressure-pipe-manifold",
+      "label": "Pressure pipe manifold",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-pressure-pipe-manifold.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.4068627450980392,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          777,
+          758,
+          1016,
+          966
+        ],
+        "bounds": {
+          "x": 779,
+          "y": 760,
+          "width": 235,
+          "height": 204
+        },
+        "originalWidth": 235,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              832,
+              762
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-underwater-ruin-arch",
+      "label": "Underwater ruin arch",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-underwater-ruin-arch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4343891402714932,
+        "scaleY": 0.4330357142857143,
+        "width": 96,
+        "height": 97,
+        "offset": {
+          "x": 80,
+          "y": 95
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1031,
+          746,
+          1256,
+          974
+        ],
+        "bounds": {
+          "x": 1033,
+          "y": 748,
+          "width": 221,
+          "height": 224
+        },
+        "originalWidth": 221,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1161,
+              750
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-sea-sunken-stairwell",
+      "label": "Sunken stairwell",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-sea",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-sea-sunken-stairwell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.3950617283950617,
+        "scaleY": 0.3938053097345133,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/bubble-sea.png",
+        "sha256": "f5080dde84bbafde38ff7739b19380054e91415516f1d92cbab718b5c69d426d",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1275,
+          750,
+          1522,
+          980
+        ],
+        "bounds": {
+          "x": 1277,
+          "y": 752,
+          "width": 243,
+          "height": 226
+        },
+        "originalWidth": 243,
+        "originalHeight": 226,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1420,
+              754
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "bubble-sea.zip",
+  "contactSheet": "contact-sheet.png"
+}

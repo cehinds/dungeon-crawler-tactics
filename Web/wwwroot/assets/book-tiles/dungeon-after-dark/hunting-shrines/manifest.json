@@ -1,0 +1,1849 @@
+{
+  "schemaVersion": 1,
+  "id": "hunting-shrines",
+  "style": "dungeon-after-dark",
+  "title": "Alucarda, Point Mongo and field camps",
+  "books": [
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "hunting-shrines-village-paving-floor",
+      "label": "Village Paving floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5378151260504201,
+        "scaleY": 0.5039370078740157,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          15,
+          80,
+          257,
+          211
+        ],
+        "bounds": {
+          "x": 17,
+          "y": 82,
+          "width": 238,
+          "height": 127
+        },
+        "originalWidth": 238,
+        "originalHeight": 127,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              133,
+              84
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-worn-village-paving-floor",
+      "label": "Worn village paving floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-worn-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5378151260504201,
+        "scaleY": 0.49612403100775193,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          269,
+          79,
+          511,
+          212
+        ],
+        "bounds": {
+          "x": 271,
+          "y": 81,
+          "width": 238,
+          "height": 129
+        },
+        "originalWidth": 238,
+        "originalHeight": 129,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              390,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-cracked-village-paving-floor",
+      "label": "Cracked village paving floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-cracked-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5378151260504201,
+        "scaleY": 0.49612403100775193,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          522,
+          79,
+          764,
+          212
+        ],
+        "bounds": {
+          "x": 524,
+          "y": 81,
+          "width": 238,
+          "height": 129
+        },
+        "originalWidth": 238,
+        "originalHeight": 129,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              641,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-wet-village-paving-floor",
+      "label": "Wet village paving floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-wet-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.49612403100775193,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          775,
+          79,
+          1016,
+          212
+        ],
+        "bounds": {
+          "x": 777,
+          "y": 81,
+          "width": 237,
+          "height": 129
+        },
+        "originalWidth": 237,
+        "originalHeight": 129,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-edge-transition",
+      "label": "Village Paving edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-village-paving-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1028,
+          77,
+          1269,
+          212
+        ],
+        "bounds": {
+          "x": 1030,
+          "y": 79,
+          "width": 237,
+          "height": 131
+        },
+        "originalWidth": 237,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1143,
+              81
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-corner-transition",
+      "label": "Village Paving corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-village-paving-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5355648535564853,
+        "scaleY": 0.4266666666666667,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1282,
+          60,
+          1525,
+          214
+        ],
+        "bounds": {
+          "x": 1284,
+          "y": 62,
+          "width": 239,
+          "height": 150
+        },
+        "originalWidth": 239,
+        "originalHeight": 150,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1402,
+              64
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-wall-northwest",
+      "label": "Village Stone wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3333333333333333,
+        "scaleY": 0.5079365079365079,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          42,
+          276,
+          238,
+          469
+        ],
+        "bounds": {
+          "x": 44,
+          "y": 278,
+          "width": 192,
+          "height": 189
+        },
+        "originalWidth": 192,
+        "originalHeight": 189,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              74,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-wall-northeast",
+      "label": "Village Stone wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3316062176165803,
+        "scaleY": 0.5026178010471204,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          290,
+          276,
+          487,
+          471
+        ],
+        "bounds": {
+          "x": 292,
+          "y": 278,
+          "width": 193,
+          "height": 191
+        },
+        "originalWidth": 193,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              450,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-outer-corner",
+      "label": "Village Stone outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6066350710900474,
+        "scaleY": 0.6,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          538,
+          295,
+          753,
+          459
+        ],
+        "bounds": {
+          "x": 540,
+          "y": 297,
+          "width": 211,
+          "height": 160
+        },
+        "originalWidth": 211,
+        "originalHeight": 160,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              717,
+              299
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-inner-corner",
+      "label": "Village Stone inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.5925925925925926,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          792,
+          279,
+          1002,
+          445
+        ],
+        "bounds": {
+          "x": 794,
+          "y": 281,
+          "width": 206,
+          "height": 162
+        },
+        "originalWidth": 206,
+        "originalHeight": 162,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-endcap-northwest",
+      "label": "Village Stone endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-shrines-village-stone-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.31683168316831684,
+        "scaleY": 0.6233766233766234,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1091,
+          286,
+          1196,
+          444
+        ],
+        "bounds": {
+          "x": 1093,
+          "y": 288,
+          "width": 101,
+          "height": 154
+        },
+        "originalWidth": 101,
+        "originalHeight": 154,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1132,
+              290
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-endcap-northeast",
+      "label": "Village Stone endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-shrines-village-stone-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32323232323232326,
+        "scaleY": 0.6193548387096774,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1358,
+          285,
+          1461,
+          444
+        ],
+        "bounds": {
+          "x": 1360,
+          "y": 287,
+          "width": 99,
+          "height": 155
+        },
+        "originalWidth": 99,
+        "originalHeight": 155,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1419,
+              289
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-open-doorway",
+      "label": "Village Stone open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.31527093596059114,
+        "scaleY": 0.4383561643835616,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          37,
+          506,
+          244,
+          729
+        ],
+        "bounds": {
+          "x": 39,
+          "y": 508,
+          "width": 203,
+          "height": 219
+        },
+        "originalWidth": 203,
+        "originalHeight": 219,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              70,
+              510
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-closed-doorway",
+      "label": "Village Stone closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.31527093596059114,
+        "scaleY": 0.4343891402714932,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          284,
+          503,
+          491,
+          728
+        ],
+        "bounds": {
+          "x": 286,
+          "y": 505,
+          "width": 203,
+          "height": 221
+        },
+        "originalWidth": 203,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              451,
+              507
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-stairs-up",
+      "label": "Village Paving stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-paving-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.5688622754491018,
+        "width": 128,
+        "height": 95,
+        "offset": {
+          "x": 64,
+          "y": 97
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          518,
+          544,
+          748,
+          715
+        ],
+        "bounds": {
+          "x": 520,
+          "y": 546,
+          "width": 226,
+          "height": 167
+        },
+        "originalWidth": 226,
+        "originalHeight": 167,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              637,
+              548
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-stairs-down",
+      "label": "Village Paving stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-paving-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5182186234817814,
+        "scaleY": 0.5182481751824818,
+        "width": 128,
+        "height": 71,
+        "offset": {
+          "x": 64,
+          "y": 121
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          771,
+          570,
+          1022,
+          711
+        ],
+        "bounds": {
+          "x": 773,
+          "y": 572,
+          "width": 247,
+          "height": 137
+        },
+        "originalWidth": 247,
+        "originalHeight": 137,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              890,
+              574
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-temple-of-diwata-entrance",
+      "label": "Temple of Diwata entrance",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-temple-of-diwata-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.4,
+        "width": 96,
+        "height": 104,
+        "offset": {
+          "x": 80,
+          "y": 88
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1030,
+          480,
+          1273,
+          744
+        ],
+        "bounds": {
+          "x": 1032,
+          "y": 482,
+          "width": 239,
+          "height": 260
+        },
+        "originalWidth": 239,
+        "originalHeight": 260,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1147,
+              484
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-temple-brazier",
+      "label": "Temple brazier",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-temple-brazier.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5680473372781065,
+        "scaleY": 0.5674418604651162,
+        "width": 96,
+        "height": 122,
+        "offset": {
+          "x": 80,
+          "y": 70
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1319,
+          514,
+          1492,
+          733
+        ],
+        "bounds": {
+          "x": 1321,
+          "y": 516,
+          "width": 169,
+          "height": 215
+        },
+        "originalWidth": 169,
+        "originalHeight": 215,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1409,
+              518
+            ],
+            [
+              1418,
+              526
+            ],
+            [
+              1396,
+              555
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-market-stall",
+      "label": "Village market stall",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-market-stall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.3920704845814978,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          14,
+          747,
+          264,
+          978
+        ],
+        "bounds": {
+          "x": 16,
+          "y": 749,
+          "width": 246,
+          "height": 227
+        },
+        "originalWidth": 246,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              139,
+              751
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-house-doorway",
+      "label": "Village house doorway",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-house-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.44036697247706424,
+        "scaleY": 0.43946188340807174,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          289,
+          746,
+          511,
+          973
+        ],
+        "bounds": {
+          "x": 291,
+          "y": 748,
+          "width": 218,
+          "height": 223
+        },
+        "originalWidth": 218,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              346,
+              750
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-point-mongo-camp-marker",
+      "label": "Point Mongo camp marker",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-point-mongo-camp-marker.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5783132530120482,
+        "scaleY": 0.5778688524590164,
+        "width": 96,
+        "height": 141,
+        "offset": {
+          "x": 80,
+          "y": 51
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          558,
+          738,
+          728,
+          986
+        ],
+        "bounds": {
+          "x": 560,
+          "y": 740,
+          "width": 166,
+          "height": 244
+        },
+        "originalWidth": 166,
+        "originalHeight": 244,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              684,
+              742
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-expedition-supply-shelter",
+      "label": "Expedition supply shelter",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-expedition-supply-shelter.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.38095238095238093,
+        "scaleY": 0.3824884792626728,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          761,
+          766,
+          1017,
+          987
+        ],
+        "bounds": {
+          "x": 763,
+          "y": 768,
+          "width": 252,
+          "height": 217
+        },
+        "originalWidth": 252,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              862,
+              770
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-memorial-stone",
+      "label": "Memorial stone",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-memorial-stone.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.49230769230769234,
+        "scaleY": 0.49099099099099097,
+        "width": 96,
+        "height": 109,
+        "offset": {
+          "x": 80,
+          "y": 83
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1052,
+          764,
+          1251,
+          990
+        ],
+        "bounds": {
+          "x": 1054,
+          "y": 766,
+          "width": 195,
+          "height": 222
+        },
+        "originalWidth": 195,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1152,
+              768
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-hunter-trap-mechanism",
+      "label": "Hunter trap mechanism",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-hunter-trap-mechanism.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.40336134453781514,
+        "scaleY": 0.4034090909090909,
+        "width": 96,
+        "height": 71,
+        "offset": {
+          "x": 80,
+          "y": 121
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-shrines.png",
+        "sha256": "bddb9f8139ced87af7701ca7246b6bc4ba0f2d46fe254f0199747b1cb7191d28",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1282,
+          791,
+          1524,
+          971
+        ],
+        "bounds": {
+          "x": 1284,
+          "y": 793,
+          "width": 238,
+          "height": 176
+        },
+        "originalWidth": 238,
+        "originalHeight": 176,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1421,
+              795
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "hunting-shrines.zip",
+  "contactSheet": "contact-sheet.png"
+}

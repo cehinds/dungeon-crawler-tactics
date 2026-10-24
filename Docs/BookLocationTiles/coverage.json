@@ -1,0 +1,3924 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "books": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "floorRange": [
+      1,
+      6
+    ],
+    "book5EndingFloors": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "book5EndingSequence": [
+      "Floor 6 Masquerade finale transfers castle and qualifying occupants to Floor 9; Carl remains on Floor 6 for the bramble-crater battle.",
+      "Book 5 epilogue enters Floor 7; the Great Race shatters and crawlers enter the Floor 8 selection chamber."
+    ],
+    "description": "Source-grounded locations and routes from Books 1–5, focused on Floors 1–6. Also records the reported transfer of the Book 5 castle to Floor 9, the Floor 6 crater battle among those left behind, and the later Floor 7–8 epilogue transitions. These do not imply complete maps for Floors 7–9."
+  },
+  "tileInventory": {
+    "path": "Docs/BookLocationTiles/inventory.json",
+    "kitCount": 25,
+    "styleCount": 3,
+    "pngCount": 1800,
+    "assetsPerKitPerStyle": 24,
+    "normalizedCanvas": "256×256 pixels; 128×128 orthogonal or 128×64 isometric projection within canvas",
+    "delivery": "Source atlases are preserved outside Web; each per-kit ZIP contains 24 PNGs, a manifest, and contact sheet. No runtime integration is included."
+  },
+  "locations": [
+    {
+      "id": "b1.surface.apartment",
+      "name": "Carl and Bea’s Seattle apartment",
+      "books": [
+        1
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Two-bedroom apartment; second-story window; Donut trophy room.",
+      "kitIds": [
+        "surface-entry"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.surface.street",
+      "name": "Seattle street and apartment tree",
+      "books": [
+        1
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Tree by apartment window; sidewalk; winter night; post-collapse dirt footprints where structures stood.",
+      "kitIds": [
+        "surface-entry"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.surface.entrance",
+      "name": "Surface entrance at former thrift-store site",
+      "books": [
+        1
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Bright warm opening with upward spotlight.",
+      "kitIds": [
+        "surface-entry"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.entry.stairs",
+      "name": "Dungeon entrance staircase and landing",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Broad carved wrought-iron descent; marble landing; enormous arched wooden kua-tin double door.",
+      "kitIds": [
+        "surface-entry"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "shared.tutorial.guild",
+      "name": "Mordecai’s Tutorial Guild Hall",
+      "books": [
+        1,
+        2
+      ],
+      "floors": [
+        1,
+        2,
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Fireplace, bed, shelves, photographs, oval gray rug, desk and classroom chairs; Book 2 adds transformation beds.",
+      "kitIds": [
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf",
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816219/9780241816219-sample.pdf",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Tutorial_Guild_Hall"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: recurring_place. All guild entrances portal to assigned guide’s personal space; do not invent a separate room for every door.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.passages",
+      "name": "First Floor main arteries and neighborhood alleys",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Rock-hewn grid; broad torchlit arteries; dark red brick and glowing green growth in some side passages.",
+      "kitIds": [
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/first_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: regional_archetype.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "shared.restroom",
+      "name": "Crawler-specific restroom portal",
+      "books": [
+        1,
+        2
+      ],
+      "floors": [
+        1,
+        2,
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Mismatched commercial doors; Carl’s cramped silver-toilet stall; Donut’s litterbox stall.",
+      "kitIds": [
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/first_floor/",
+        "https://www.dccdatabase.com/wiki/second_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: recurring_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.tally",
+      "name": "Tally’s Polish restaurant safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Polish fast-food restaurant reused as Tally’s protected safe room.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/1/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Safe_Rooms",
+        "https://www.dccdatabase.com/wiki/tally/"
+      ],
+      "notes": "Tally’s Polish fast-food restaurant on Floor 1; the play area is a sub-location of this same safe room. Exact chain branding is not established.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.tacobell",
+      "name": "Sebastian’s Peruvian Taco Bell safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Full kitchen, sleeping area, bathrooms, coffee and Peruvian beer.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sebastian"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_business.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.waffle",
+      "name": "Alabama Waffle House safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Earth diner used by Meadow Lark survivors.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Safe_Rooms",
+        "https://spoilerfreecarl.com/book-1/chapter-22/"
+      ],
+      "notes": "Described by Brandon; this reference does not establish a Carl visit.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.dmv",
+      "name": "DMV waiting-room safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Dingy Earth waiting area repurposed as safe room.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Safe_Rooms",
+        "https://www.dccdatabase.com/wiki/first_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.playarea",
+      "name": "Children’s play area in Tally’s safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Children’s play area within Tally’s Polish restaurant safe room.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Safe_Rooms",
+        "https://www.dccdatabase.com/wiki/tally/"
+      ],
+      "notes": "Tally’s Polish fast-food restaurant on Floor 1; the play area is a sub-location of this same safe room. Exact chain branding is not established.",
+      "coverage": "mapped",
+      "parentId": "b1.f1.tally"
+    },
+    {
+      "id": "b1.f1.candy",
+      "name": "Candy-vending rest area",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Small safe rest stop with candy vending.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://spoilerfreecarl.com/book-1/chapter-22/"
+      ],
+      "notes": "Described by Brandon; this reference does not establish a Carl visit.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.hoarder",
+      "name": "Hoarder’s lair / Scatterer nest",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Round high-ceiling room; rubbish mountains and burst black bags; grimy signed door; skull torches.",
+      "kitIds": [
+        "early-arenas"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/hoarder/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.goblinworkshop",
+      "name": "Goblin workshop",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Goblin engineering and explosives workshop.",
+      "kitIds": [
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Goblins",
+        "https://www.dccfansite.com/book/1/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place. Industrial kit is an authored translation of workshop function; reviewed Fandom extract supports location and looting, not exact floorplan.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.goblinboss",
+      "name": "Goblin War Chieftain boss room",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Boss room adjoining goblin workshop; includes goblin noncombatants.",
+      "kitIds": [
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Goblins"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location. Do not turn noncombatant presence into an invented nursery architecture.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.juicer",
+      "name": "Juicer’s gym",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "High gym ceiling; sliding glass entry; reception turnstile; weights, benches, mats; red combat lighting.",
+      "kitIds": [
+        "early-arenas"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/juicer/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.spiral",
+      "name": "Ball of Swine spiral maze",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Rounded tunnels wind around courtyard; portcullises and three gated entrances reached by short bridges.",
+      "kitIds": [
+        "early-arenas"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/ball_of_swine/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.switch",
+      "name": "Ball of Swine switch chamber",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Square switching room within spiral route; site of Speedbump construction.",
+      "kitIds": [
+        "early-arenas"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/ball_of_swine/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_sub_location. Speedbump is a constructed object, not a canonical terrain material.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f1.swinearena",
+      "name": "Revealed Ball of Swine arena and stairwell",
+      "books": [
+        1
+      ],
+      "floors": [
+        1
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Retracted maze walls reveal domed arena; purple/neon lighting; central illuminated stair with red barrier.",
+      "kitIds": [
+        "early-arenas"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/ball_of_swine/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_sub_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "shared.media.greenroom",
+      "name": "Production trailer green room",
+      "books": [
+        1,
+        2
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Blue velvet couch; shutter-like doors; adjoining recording space and bathroom.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Production_Trailer"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: recurring_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "shared.media.odette",
+      "name": "Dungeon Crawler After Hours with Odette set",
+      "books": [
+        1,
+        2
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Talk-show studio appearance; host and audience are holographic projections.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Dungeon_Crawler_After_Hours_with_Odette"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_venue. Set layout pieces are adaptation; host/audience are not physically present.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.media.deathwatch",
+      "name": "Death Watch Extreme Dungeon Mayhem set",
+      "books": [
+        1
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Curved guest table; pig-skull host chair with red velvet; animated monster backdrop; studio audience.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Death_Watch_Extreme_Dungeon_Mayhem"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_venue.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.passages",
+      "name": "Second Floor corridors",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Narrower grid; cracked white concrete floor; magical cinderblock walls; orange-green lichen.",
+      "kitIds": [
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/second_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: regional_archetype.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.storm",
+      "name": "French storm-shelter safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Earth storm shelter reused as protected rest space.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/second_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.qwist",
+      "name": "Big Shot Chicken / Qwist’s safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Fried-chicken safe room with rental rooms, protected during the Rage Elemental siege.",
+      "kitIds": [
+        "safe-services",
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/second_floor/",
+        "https://www.dccfansite.com/book/1/",
+        "https://www.dccfansite.com/book/1/ch/38/"
+      ],
+      "notes": "Named safe room; decorative architecture and scorch variants remain art adaptations.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.distillery",
+      "name": "Rev-Up moonshine distillery / bottling room",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Bolted metal moonshine tub; filled and empty jugs; alchemy table; bicycle-powered blenders.",
+      "kitIds": [
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/krakaren_clone_(second_floor)/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.krakaren",
+      "name": "Krakaren Clone boss chamber",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Adjoins distillery; wooden decorative lettering above door; tentacles breach entrance.",
+      "kitIds": [
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/krakaren_clone_(second_floor)/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.pound",
+      "name": "Kobold dog-pound corridors",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Portuguese municipal pound; three cage-lined hallways; captive Danger Dingoes.",
+      "kitIds": [
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/ralph/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.ralph",
+      "name": "Ralph’s kobold fighting arena",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Arena opens beyond pound corridor doors; small reinforced boss cage.",
+      "kitIds": [
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/ralph/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.reward",
+      "name": "Pet reward room / menagerie",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Caged pet choices after Ralph; Donut selects Mongo.",
+      "kitIds": [
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Reward_Room",
+        "https://www.dccfansite.com/book/1/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.entry",
+      "name": "Over City arrival and race-selection approach",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Golden brick walls and floor; red carpet; illusory star and nebula ceiling.",
+      "kitIds": [
+        "thresholds",
+        "over-city"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816219/9780241816219-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.ruins",
+      "name": "Over City abandoned urban ruins",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Abandoned city surrounds scattered villages; artificial sky and wooden-plank ground.",
+      "kitIds": [
+        "over-city"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/third_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: regional_archetype.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.village",
+      "name": "Over City small guarded villages",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Small populated settlements amid dangerous ruins; shops and guilds.",
+      "kitIds": [
+        "over-city"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/third_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: regional_archetype.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.pug",
+      "name": "The Belly-Rubbed Pug",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Inn/pub safe room on third floor.",
+      "kitIds": [
+        "safe-services",
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://crawler4122.com/book-2/safe-rooms/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Safe_Rooms"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_business. Distinct signage required; exact facade and room plan are authored.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.circusgrounds",
+      "name": "Grimaldi’s Traveling Circus grounds",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Three large tents, smaller tents, wagons and cages; low rock/wood/bone battlement.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/grimaldi's_traveling_circus/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_venue.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.freaks",
+      "name": "Grimaldi’s World O’ Freaks entrance",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Faded attraction sign and sideshow imagery at tent entrance.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/grimaldi's_traveling_circus/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_sub_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.bigtop",
+      "name": "Grimaldi’s central ring",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Pale green vine fills center ring and reaches tent ceiling.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Grimaldi"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.signet",
+      "name": "Signet’s house",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "low",
+      "summary": "Tall white building near vine, according to chapter index.",
+      "kitIds": [
+        "over-city"
+      ],
+      "sourceUrls": [
+        "https://crawler4122.com/book-2/ch-07-what-was-your-name-again/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place. Location existence supported by secondary chapter index; inspect novel before asserting detailed architecture.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b2.f3.skyfowl",
+      "name": "Medium Skyfowl Settlement",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Mostly two-story buildings for flying residents; some ground floors unoccupied.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/medium_skyfowl_settlement/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_settlement.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.narwhal",
+      "name": "The One-Eyed Narwhal",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Settlement pub/inn safe room.",
+      "kitIds": [
+        "safe-services",
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/medium_skyfowl_settlement/",
+        "https://crawler4122.com/book-2/safe-rooms/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_business.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.lucky",
+      "name": "Lucky’s General Goods",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "General store in Medium Skyfowl Settlement.",
+      "kitIds": [
+        "over-city-venues",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Marketplace"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_business.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.shops",
+      "name": "Skyfowl general and potion shops",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Multiple general stores and potion stores within settlement.",
+      "kitIds": [
+        "over-city-venues",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/medium_skyfowl_settlement/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: regional_archetype.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.adminexterior",
+      "name": "Skyfowl administrative building",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Building lacks first and second floors; upper mall and offices.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/medium_skyfowl_settlement/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.adminmall",
+      "name": "Administrative building shopping mall",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Third-floor shops oriented toward Skyfowl.",
+      "kitIds": [
+        "over-city-venues",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/medium_skyfowl_settlement/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_sub_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.magistrate",
+      "name": "Featherfall and Miss Quill’s offices",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Fourth-floor administrative offices.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/medium_skyfowl_settlement/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_sub_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.ritualwreck",
+      "name": "Administrative wreckage and ritual structure",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Ruined building conceals Featherfall’s corpse tied upside down to circular ritual construction.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/magistrate_featherfall/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_sub_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.apito",
+      "name": "Apito Education Center / 201st militia temple",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Corrupt temple in poorer residential street, two blocks from administrative building.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/medium_skyfowl_settlement/",
+        "https://www.dccdatabase.com/wiki/201st_security_group_militia/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_business.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.alley",
+      "name": "GumGum alley beside Desperado Club",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Alley where party encounters GumGum’s body and Krasue.",
+      "kitIds": [
+        "over-city",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/201st_security_group_militia/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.depot",
+      "name": "Swordsmen depot / Remex warehouse",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "low",
+      "summary": "Warehouse opposite administrative building; guards below, soul apparatus above.",
+      "kitIds": [
+        "over-city-venues"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/2/ch/23/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_place. Warehouse supported by chapter index; source calls it Swordsmen Depot. Exact architectural tile placement is authored.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b2.f3.dispenser",
+      "name": "Dispenser’s ruined-building hunting site",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Boss camouflages against buildings outside Medium Skyfowl Settlement.",
+      "kitIds": [
+        "over-city"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/dispenser/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_boss_location. Do not invent a conventional enclosed boss room.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.desperadoexterior",
+      "name": "Desperado Club exterior and public pub",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Tower evoking 1920s New York; knife logo; town-specific public pub.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/desperado_club/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_venue.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.desperadomain",
+      "name": "Desperado Club main nightclub",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Shared nightclub with dance floor and bar; third dungeon floor unlocks club’s first level.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/desperado_club/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: specific_sub_location.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.silk",
+      "name": "Silk Road marketplace",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Mostly empty single row of market booths on third floor.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/silk_road/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Marketplace"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_business. Wiki infobox incorrectly says first appearance Book 3; its Book 2 story and chapter-16 citation establish earlier visit.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.hobgobs",
+      "name": "Hobgobs and Boom Sticks",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Pustule’s explosive-supplies booth in Silk Road.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/silk_road/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: named_business.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.stripdoors",
+      "name": "Bitches and Penis Parade entrances",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Adult entertainment venues on club’s first level; warned against during first visit.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/desperado_club/",
+        "https://www.dccdatabase.com/wiki/penis_parade/"
+      ],
+      "notes": "Research source appearance label: mentioned_or_seen_entry_only. Research classification: named_business. Interior visit is established in Book 3, not Book 2; keep Book 2 coverage to entrance.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b2.f3.vanquisher",
+      "name": "Club Vanquisher",
+      "books": [
+        2
+      ],
+      "floors": [
+        3
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Rival membership club available from Over City.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Club_Vanquisher"
+      ],
+      "notes": "Research source appearance label: mentioned_or_seen_entry_only. Research classification: named_venue. No Book 2 interior detail established; do not reuse later temple details here.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "shared.stairs",
+      "name": "Descending stairwells and landings",
+      "books": [
+        1,
+        2
+      ],
+      "floors": [
+        1,
+        2,
+        3
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Downward stairs connect floors; boss arenas may contain stair openings.",
+      "kitIds": [
+        "starter-dungeon"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf",
+        "https://www.dccdatabase.com/wiki/first_floor/",
+        "https://www.dccdatabase.com/wiki/third_floor/"
+      ],
+      "notes": "Research source appearance label: visited. Research classification: recurring_place.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.iron-tangle",
+      "name": "The Iron Tangle",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Subway labyrinth with both modern cars and steam trains.",
+      "kitIds": [
+        "iron-tracks",
+        "iron-stations",
+        "iron-trains"
+      ],
+      "sourceUrls": [
+        "https://www.penguinrandomhouse.com/books/772014/the-dungeon-anarchists-cookbook-by-matt-dinniman/hardcover/"
+      ],
+      "notes": "Research source appearance label: visited. Aliases: Fourth Floor. Tile proposals are art adaptation, not canon: rock tunnel straight/corner/junction, rail straight/curve/switch, platform straight/end/corner, electrical rail overlay, exposed double-sided tunnel cross-section.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.red-car20",
+      "name": "Red Line, Car 20",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Dingy Moscow metro car: inward seats, poles, vandalism.",
+      "kitIds": [
+        "iron-trains",
+        "iron-tracks",
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: passenger-car floor, seat-bank edge, ceiling pole, sliding car door, gangway, route display.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.janitors-lair",
+      "name": "Janitor’s Lair (Car 15)",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Dark windowless car containing bones and cleaning tools.",
+      "kitIds": [
+        "iron-trains",
+        "iron-tracks",
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: sealed service car, bone-pile overlay, broom/bucket prop, heavy inter-car door.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.sirin81",
+      "name": "Sirin Station (81)",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Concrete platform and hanging sign.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf"
+      ],
+      "notes": "Research source appearance label: passed_by_train. Tile proposals are art adaptation, not canon: platform pillar, Sirin 81 sign, crowd spawn marker.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.mora82",
+      "name": "Mora Station (82)",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Next stop after Sirin on the Red Line.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf"
+      ],
+      "notes": "Research source appearance label: passed_by_train. Tile proposals are art adaptation, not canon: Mora 82 sign, shared station platform.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.rusalka84",
+      "name": "Rusalka Station (84)",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "mentioned",
+      "confidence": "high",
+      "summary": "Announced after Transfer 83.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf"
+      ],
+      "notes": "Research source appearance label: announced_destination_not_visited. Tile proposals are art adaptation, not canon: Rusalka 84 sign, shared station platform.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.transfer83",
+      "name": "Transfer Station 83",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Connects Red, Yellow, and Nightmare Express routes.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: multi-platform hub, shopfront slot, safe-room doorway, route sign junction.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.personal-space",
+      "name": "Royal Palace of Princess Donut / personal space",
+      "books": [
+        3,
+        4
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Conjoined home acquires bed, shower, crafting and training rooms in Book Three.",
+      "kitIds": [
+        "personal-space"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241816240/9780241816240-sample.pdf",
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited_shared_facility. Tile proposals are art adaptation, not canon: home entry, common room, bedroom, bathroom, crafting studio, training room, cat furniture.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.limp-richard",
+      "name": "Limp Richard’s shop / Wendita’s safehouse at Transfer 83",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Transfer-station shops and saferoom.",
+      "kitIds": [
+        "iron-stations",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: general-store counter, shelving, inn counter, home doorway.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.porter-car",
+      "name": "Porter reward car",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Porter offers reward cases aboard Yellow Line.",
+      "kitIds": [
+        "iron-trains"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: porter cabin, luggage stack, prize case display.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.banshee116",
+      "name": "Banshee Station (116), Yellow Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Cornet-infested station with automatons.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: branch station tunnels, warehouse door, control-sigil overlay, dormant industrial automaton dock.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.transfer131",
+      "name": "Transfer Station 131",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Saferoom hub.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: market concourse, multiple shopfronts, safe-room entrance.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.arbys131",
+      "name": "Arby’s saferoom, Transfer 131",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Named saferoom listed at Transfer 131.",
+      "kitIds": [
+        "iron-stations",
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: restaurant frontage, dining booth, service counter, safe-room doorway.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b3.shops131",
+      "name": "Transfer 131 shops and training guilds",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Ford’s Fighting Supplies; Longbow Training Guild; Druids Only guild; elf clothing store.",
+      "kitIds": [
+        "iron-stations",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: seen. Tile proposals are art adaptation, not canon: weapon-shop sign, training target, guild doorway, clothing rack.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b3.desperado",
+      "name": "Desperado Club, upper level",
+      "books": [
+        3,
+        4
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Book Three transfer hubs provide club access; Book Four includes meetings and interrogation.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Desperado_Club",
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited_shared_facility. Tile proposals are art adaptation, not canon: club foyer, bar, casino wheel, performance floor, private booth, guard post, back meeting room.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.ochre149",
+      "name": "Ochre Line Station 149",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Derailment location.",
+      "kitIds": [
+        "iron-trains",
+        "iron-tracks",
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: derailed wheelset, broken rail, impact rubble, engine cab.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.pho149",
+      "name": "Pho restaurant saferoom, Station 149",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Restaurant saferoom listed at 149.",
+      "kitIds": [
+        "iron-stations",
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: restaurant tile, bowl counter, tables, home doorway.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.vanquisher",
+      "name": "Club Vanquisher entrances",
+      "books": [
+        3,
+        4
+      ],
+      "floors": [],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Iron Tangle transfer stations ending in 9 have this club; Carl gains access after Emberus worship in Book Four.",
+      "kitIds": [
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Desperado_Club",
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: seen_then_access_earned. Tile proposals are art adaptation, not canon: exclusive club facade, credential doorway, lounge modules.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b3.dismemberment",
+      "name": "Dismemberment Limited",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Named train boarded from Station 149.",
+      "kitIds": [
+        "iron-trains"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Dismemberment_Limited"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: steam passenger car, engineer cab, armored door, long car gangway.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b3.mauve281",
+      "name": "Mauve Line Station 281",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Saferoom stop.",
+      "kitIds": [
+        "iron-stations",
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: Mauve 281 sign, safe-room facade.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.nightmare283",
+      "name": "Station 283 / Nightmare Express boarding",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Nightmare Express interception point.",
+      "kitIds": [
+        "iron-trains",
+        "iron-tracks",
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Nightmare_Express"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: freight-height platform, approach tunnel, engine-front clearance.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.nightmare",
+      "name": "Nightmare Express",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Named train connects Transfer 83 and further routes.",
+      "kitIds": [
+        "iron-trains"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Nightmare_Express"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: steam locomotive, coal tender, engineer platform, passenger car, coupler gap.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.abyss436",
+      "name": "Abyss Station (436) / the Abyss",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "End-of-line portals dispose of cars over a pit.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/abyss_station/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: abyss edge, rail terminus, switching portal, broken walkway, glowing depth backdrop, engine-return portal.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.yards",
+      "name": "Train yards / Station 10",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Fenced rail depot with turntable, service bays, towers and substation.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Train_yard"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: fenced tracks, turntable center, rotating rail segment, service bay, watchtower, floodlight, substation facade. Review Yard A: source discrepancy says NPC-mentioned executive accommodation but fan wiki says Yard A does not exist. Yard M remains tertiary and unverified; neither should be treated as a confirmed visited map. Yard A and Yard M have unresolved source status; distinguish the visited yards from these disputed candidate names.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b3.yard-b",
+      "name": "Train yard B",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Overrun HR location.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Train_yard",
+        "https://www.dccdatabase.com/wiki/train_yard/"
+      ],
+      "notes": "Research source appearance label: reported_other_crawlers. Tile proposals are art adaptation, not canon: yard B sign, shared rail-yard modules, damage/infestation overlay.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.yard-c",
+      "name": "Train yard C",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "remote",
+      "confidence": "medium",
+      "summary": "Burned yard visible through portal.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Train_yard",
+        "https://www.dccdatabase.com/wiki/train_yard/"
+      ],
+      "notes": "Research source appearance label: portal_view. Tile proposals are art adaptation, not canon: yard C sign, shared rail-yard modules, damage/infestation overlay.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.yard-d",
+      "name": "Train yard D",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Meadow Lark shelter in substation.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Train_yard",
+        "https://www.dccdatabase.com/wiki/train_yard/"
+      ],
+      "notes": "Research source appearance label: reported_other_crawlers. Tile proposals are art adaptation, not canon: yard D sign, shared rail-yard modules, damage/infestation overlay.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.yard-e",
+      "name": "Train yard E",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Main visited yard; later mimic battle.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Train_yard",
+        "https://www.dccdatabase.com/wiki/train_yard/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: yard E sign, shared rail-yard modules, damage/infestation overlay.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.yard-q",
+      "name": "Train yard Q",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Original yard associated with Bautista rescue.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Train_yard",
+        "https://www.dccdatabase.com/wiki/train_yard/"
+      ],
+      "notes": "Research source appearance label: reported_other_crawlers. Tile proposals are art adaptation, not canon: yard Q sign, shared rail-yard modules, damage/infestation overlay.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.substation-e",
+      "name": "The Iron Tangle Substation E",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Three-story Soviet-style administrative building outside the fence.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Train_yard"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: concrete administrative facade, office corridor, HR room, stair core.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.yard-h",
+      "name": "Train yard H",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Rescue portal destination.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/End_of_the_Line_Rescue"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: yard H sign, arrival portal, safe assembly space.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.homeward",
+      "name": "Homeward Bound",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Employee rail route from yards toward early stations.",
+      "kitIds": [
+        "iron-trains",
+        "iron-tracks",
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: staff-train car, service platform, employee route sign.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-24",
+      "name": "Station 24",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Stairwell station.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: station 24 sign, shared platform, stairwell threshold, concourse module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-60",
+      "name": "Station 60",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Empty employee destination.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: station 60 sign, shared platform, stairwell threshold, concourse module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-41",
+      "name": "Station 41",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Rest stop with Desperado Club.",
+      "kitIds": [
+        "iron-stations",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: station 41 sign, shared platform, stairwell threshold, concourse module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-59",
+      "name": "Station 59",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Zomp Line saferoom.",
+      "kitIds": [
+        "iron-stations",
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: station 59 sign, shared platform, stairwell threshold, concourse module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-36",
+      "name": "Station 36",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Crawler defensive gathering at stairwell.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: station 36 sign, shared platform, stairwell threshold, generator socket.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-72",
+      "name": "Station 72",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Ghoul-generator stairwell station; later opened escape.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: station 72 sign, shared platform, stairwell threshold, generator socket.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-48",
+      "name": "Station 48",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Province-boss danger.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: reported_other_crawlers. Tile proposals are art adaptation, not canon: station 48 sign, shared platform, stairwell threshold, generator socket.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station-12",
+      "name": "Station 12",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Early stairwell station.",
+      "kitIds": [
+        "iron-stations"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: reported_other_crawlers. Tile proposals are art adaptation, not canon: station 12 sign, shared platform, stairwell threshold, concourse module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.escape-velocity",
+      "name": "Escape Velocity line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Special return route to stairwell stations.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Escape_Velocity",
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: discovered. Tile proposals are art adaptation, not canon: concealed access door, reverse-route sign, shared rail modules.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.vermillion101",
+      "name": "Vermillion Line Station 101",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Stranded-crawler rescue platform.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Vermillion_Line_Rescue"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: rescue platform, crowd assembly lane, debris barrier, plow approach.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.station75",
+      "name": "Vermillion Line Station 75",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Repair and interdiction-cart hub.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Untangling_the_Iron_Tangle"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: repair bay, portal control wall, cart dock, gnoll armory, hobgoblin workshop.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.downward-dog",
+      "name": "The Downward Dog, Station 75",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Bar and personal-space entry.",
+      "kitIds": [
+        "iron-stations",
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: bar frontage, gnoll bartender counter, home doorway.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.end-stations",
+      "name": "End-line transit stations 433–435",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Transit/mimic and Kravyad encounters precede Abyss.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks",
+        "iron-trains"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Station_Mimic"
+      ],
+      "notes": "Research source appearance label: mixed_visited_and_rescue_reports. Tile proposals are art adaptation, not canon: transit terminal, railway barrier, mimic flesh overlay, employee portal, boss waiting area, station 433/434/435 sign variants.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b3.mimic-yard",
+      "name": "Mimic-transformed Train yard E",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Station Mimic rebuilds an administrative-building shape.",
+      "kitIds": [
+        "iron-stations",
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Station_Mimic"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: living concrete facade, mouth entrance, flesh paving, broken office shell.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.planet-beautiful",
+      "name": "Planet Beautiful production trailer / studio",
+      "books": [
+        3
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Show trailer is on the ocean floor within the AI zone.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited_off_floor. Tile proposals are art adaptation, not canon: production trailer, dressing area, studio stage, ocean-window backdrop.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.selection",
+      "name": "Fifth-floor quadrant selection room",
+      "books": [
+        3
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Two wheels and four portal exits precede Bubble entry.",
+      "kitIds": [
+        "thresholds",
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/floor-five/",
+        "https://www.dccdatabase.com/wiki/book_3_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited_transition. Tile proposals are art adaptation, not canon: warehouse floor, four portal frames, quadrant wheel, opponent wheel, desert portal backdrop.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-red",
+      "name": "Red Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color-line entries are route variants and share the Iron Tangle kit; party-visit status varies or is unresolved. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-orange",
+      "name": "Orange Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-yellow",
+      "name": "Yellow Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-indigo",
+      "name": "Indigo Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-azure",
+      "name": "Azure Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-purple",
+      "name": "Purple Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-brown",
+      "name": "Brown Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-mauve",
+      "name": "Mauve Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-green",
+      "name": "Green Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-tangerine",
+      "name": "Tangerine Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-plum",
+      "name": "Plum Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-winter-sky",
+      "name": "Winter Sky Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-ochre",
+      "name": "Ochre Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-fulvous",
+      "name": "Fulvous Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-camel",
+      "name": "Camel Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-cobalt",
+      "name": "Cobalt Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-puce",
+      "name": "Puce Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-vermillion",
+      "name": "Vermillion Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-mango",
+      "name": "Mango Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-sinopia",
+      "name": "Sinopia Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-mindaro",
+      "name": "Mindaro Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-grullo",
+      "name": "Grullo Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b3.line-zomp",
+      "name": "Zomp Line",
+      "books": [
+        3
+      ],
+      "floors": [
+        4
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Named colored route.",
+      "kitIds": [
+        "iron-tracks"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fourth_Floor"
+      ],
+      "notes": "Research source appearance label: visited_or_mentioned_route_variant. Tile proposals are art adaptation, not canon: shared tunnel and track, color-coded line placard, matching route-map stripe. Color route is represented by reusable Iron Tangle track/station tiles; it is not a unique architecture set. Route appearance is mixed/uncertain, but its reusable Iron Tangle kit is mapped.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.bubble543",
+      "name": "Bubble 543",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Four enclosed environments; each contains a castle and stairwell.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829912/9780241829912-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Aliases: The Bubbles. Tile proposals are art adaptation, not canon: dome boundary, quadrant forcefield, intact/popped rim, castle stairwell lock.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.air-bowl",
+      "name": "Air Quadrant / The Bowl",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Sand-blown bowl above the Necropolis of Anser.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829912/9780241829912-sample.pdf"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: windblown sand, dune crest, bowl rim, tomb exterior wall, storm overlay.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.hump-town",
+      "name": "Hump Town",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Walled camel settlement with concentric curved streets and fabric storm awnings.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829912/9780241829912-sample.pdf",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Hump_Town"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: curved street segment, mud/plaster wall, town gate, triangular awning, roof access, residential doorway.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.hump-cityhall",
+      "name": "Hump Town City Hall and basement",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Town hall conceals collateral prisoner; basement meets underground boundary.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: hall entrance, council room, basement stair, prison cell, quadrant boundary window.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.hump-street",
+      "name": "Hump Street",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Hump Town point of interest.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829912/9780241829912-sample.pdf",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Hump_Town"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: shared settlement street, unique venue sign, doorway module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.weird-alley",
+      "name": "Weird Shit Alley",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Hump Town point of interest.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Hump_Town"
+      ],
+      "notes": "Research source appearance label: mentioned. Tile proposals are art adaptation, not canon: shared settlement street, unique venue sign, doorway module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.wiggle-room",
+      "name": "The Wiggle Room",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Hump Town point of interest.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Hump_Town"
+      ],
+      "notes": "Research source appearance label: mentioned. Tile proposals are art adaptation, not canon: shared settlement street, unique venue sign, doorway module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.spit-swallow",
+      "name": "Spit and Swallow",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Hump Town point of interest.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Hump_Town"
+      ],
+      "notes": "Research source appearance label: named_point_of_interest_visit_not_independently_verified. Tile proposals are art adaptation, not canon: shared settlement street, unique venue sign, doorway module.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b4.acrotomophilia",
+      "name": "The Acrotomophilia Oasis",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "Hump Town point of interest.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Hump_Town"
+      ],
+      "notes": "Research source appearance label: mentioned. Tile proposals are art adaptation, not canon: shared settlement street, unique venue sign, doorway module.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.toe",
+      "name": "The Toe",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Inn and tavern with lodging.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829912/9780241829912-sample.pdf",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Hump_Town"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: inn facade, tavern table, bar, rental room door, broadcast screens.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.bactrian-town",
+      "name": "Bactrian town",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "uncertain",
+      "confidence": "medium",
+      "summary": "Second Air-quadrant settlement.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: approached_then_bombarded. Tile proposals are art adaptation, not canon: second settlement wall, bomb crater, collapsed roof, burned awning.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b4.wasteland",
+      "name": "The Wasteland / Dirigible Gnome Wasteland Fortress",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Gnome airborne fortress and surviving floating castle.",
+      "kitIds": [
+        "bubble-airship"
+      ],
+      "sourceUrls": [
+        "https://www.penguinrandomhouse.com/books/788551/the-gate-of-the-feral-gods-by-matt-dinniman/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fifth_Floor",
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: floating deck edge, balloon support, bomb rack, gnome gun emplacement, castle doorway, throne room, wreckage state.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.vahana",
+      "name": "Vahana / gnome negotiator balloon",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Balloon carrying party toward the Wasteland.",
+      "kitIds": [
+        "bubble-airship"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: balloon basket floor, basket wall, suspended rigging, air gangway.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.flying-house",
+      "name": "Detached floating castle / transported house",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Captured Air castle is moved between quadrants.",
+      "kitIds": [
+        "bubble-airship"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/",
+        "https://www.supersummary.com/the-gate-of-the-feral-gods/chapters-23-28-summary/"
+      ],
+      "notes": "Research source appearance label: visited_mobile_location. Tile proposals are art adaptation, not canon: house room floor, open wall edge, balloon tether, severed stairwell section, landed house state.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.land",
+      "name": "Land Quadrant",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Sandcastle region of Bubble 543.",
+      "kitIds": [
+        "bubble-desert"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fifth_Floor"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: desert shoreline, tomb wall junction, sand floor, castle approach.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.sandcastle",
+      "name": "Sandcastle of the Mad Dune Mage",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Multi-level sand castle beside tomb; fountain, mage room, collapsing state.",
+      "kitIds": [
+        "bubble-glass"
+      ],
+      "sourceUrls": [
+        "https://www.penguinrandomhouse.com/books/788551/the-gate-of-the-feral-gods-by-matt-dinniman/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fifth_Floor",
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: sand-block floor, glass/crystal overlay, sand wall, fountain, mage chamber, collapse rubble, drain valve.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.pandinus",
+      "name": "Pandinus",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Pazuzu town and regrouping base.",
+      "kitIds": [
+        "bubble-necropolis"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Gate_of_the_Feral_Gods",
+        "https://www.supersummary.com/the-gate-of-the-feral-gods/chapters-23-28-summary/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: shore approach, scorpion-town frontage, safe-room tavern, portal arrival patch.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.water",
+      "name": "Sea / Water Quadrant",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Submerged environment containing Akula castle.",
+      "kitIds": [
+        "bubble-sea"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829912/9780241829912-sample.pdf",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fifth_Floor"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: ocean surface, shoreline, underwater floor, murky-depth overlay, diving approach, shark/jelly hazard marker.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.akula",
+      "name": "Bridge of the Akula / Akula submarine",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Derelict submarine guarded by machines.",
+      "kitIds": [
+        "bubble-sea"
+      ],
+      "sourceUrls": [
+        "https://www.penguinrandomhouse.com/books/788551/the-gate-of-the-feral-gods-by-matt-dinniman/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fifth_Floor",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sentinel_gun",
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: submarine hull, hatch, bulkhead corridor, bridge controls, pump room, flooded compartment, escape-pod hatch, broken hull.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.necropolis",
+      "name": "Necropolis of Anser / Tomb of Anser",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Trapped subterranean crypt, later flooded.",
+      "kitIds": [
+        "bubble-necropolis"
+      ],
+      "sourceUrls": [
+        "https://www.penguinrandomhouse.com/books/788551/the-gate-of-the-feral-gods-by-matt-dinniman/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fifth_Floor",
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: crypt corridor, tomb junction, trap plate, electrical panel, flooded crypt floor, water outlet, ghost arena.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.lacuna",
+      "name": "The Lacuna",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Exterior between sunken bubble worlds.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fifth_Floor"
+      ],
+      "notes": "Research source appearance label: visited. Tile proposals are art adaptation, not canon: dark void floor, bubble crater lip, popped dome rim, distant dome backdrop, wind effect.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.other-bubbles",
+      "name": "Other popped / unpopped rescue bubbles",
+      "books": [
+        4
+      ],
+      "floors": [
+        5
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Gate rescue reaches crawlers outside Bubble 543.",
+      "kitIds": [
+        "thresholds",
+        "bubble-desert",
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited_or_reported_by_allies. Tile proposals are art adaptation, not canon: reusable bubble rim, rescue portal, variable quadrant biome, castle silhouettes.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.veriluxx",
+      "name": "Veriluxx infomercial production set",
+      "books": [
+        4
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Carl and Donut attend sponsored commercial; Loita dies during absence.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited_off_floor. Tile proposals are art adaptation, not canon: commercial studio, product plinth, green room, production booth.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.bathroom-secret",
+      "name": "Personal-space bathroom, secret meetings",
+      "books": [
+        4
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Bathroom author-kit communication.",
+      "kitIds": [
+        "personal-space"
+      ],
+      "sourceUrls": [
+        "https://www.dccdatabase.com/wiki/book_4_chapter_summaries/"
+      ],
+      "notes": "Research source appearance label: visited_shared_facility. Tile proposals are art adaptation, not canon: bathroom module, writing desk prop, private conversation marker.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b4.larracos",
+      "name": "Larracos, City of Dreams (remote portal destination)",
+      "books": [
+        4
+      ],
+      "floors": [
+        9
+      ],
+      "appearance": "remote",
+      "confidence": "medium",
+      "summary": "Ninth-floor city flooded through Carl’s Fifth-floor actions.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://dungeon-crawler-carl.fandom.com/wiki/Larracos"
+      ],
+      "notes": "Research source appearance label: remotely_affected_not_visited. Tile proposals are art adaptation, not canon: portal vista only, flooded distant city silhouette, water torrent, market debris.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_hunting_grounds",
+      "name": "The Hunting Grounds",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "A world-scale floor resembling the earlier urban-ruin layer, now covered by centuries of jungle growth.",
+      "kitIds": [
+        "hunting-jungle",
+        "hunting-river"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829820/9780241829820-sample.pdf",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor",
+        "https://www.dccfansite.com/entry/hunting-grounds/"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_registration_arena",
+      "name": "Floor 6 registration / class-specialization arena",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Stadium-sized indoor staging space with a queue of crawlers and rows of small specialization booths along the wall.",
+      "kitIds": [
+        "thresholds"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829820/9780241829820-sample.pdf"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_zockau",
+      "name": "Zockau",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Northern hunter city with a tidy square, bear-headed statue, and a stairwell in a landscaped park.",
+      "kitIds": [
+        "hunting-zockau"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/zockau/",
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829820/9780241829820-sample.pdf",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_desperado_club",
+      "name": "Desperado Club",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Three-storey, diner-like club entrance on Zockau's pub street.",
+      "kitIds": [
+        "hunting-zockau",
+        "clubs-guilds"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/zockau/",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_scuttlebutt",
+      "name": "The Scuttlebutt",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Smallest pub in Zockau's row, identified by a broken sign.",
+      "kitIds": [
+        "hunting-zockau",
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/scuttlebutt/"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_dryad_settlement",
+      "name": "Dryad settlements (unnamed in this survey)",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Carl arrives at a dryad settlement outside Zockau; the fan index separately tracks medium dryad settlements.",
+      "kitIds": [
+        "hunting-jungle"
+      ],
+      "sourceUrls": [
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md",
+        "https://www.dccfansite.com/book/5/ch/1/"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_bugbear_settlement",
+      "name": "Small bugbear settlement",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "A bomb-damaged bugbear settlement where Carl's party takes refuge.",
+      "kitIds": [
+        "hunting-jungle",
+        "safe-services"
+      ],
+      "sourceUrls": [
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_point_mongo",
+      "name": "Point Mongo",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Large, immaculate Ursine river settlement across a major river, ringed by manicured shrubs and guarded by Funeral Bell mushroom guards.",
+      "kitIds": [
+        "hunting-shrines",
+        "hunting-river"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/5/ch/10/",
+        "https://www.dccfansite.com/book/5/ch/11/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Point_Mongo",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_river_and_shores",
+      "name": "Hunting Grounds river crossings and shores",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "A large river separates settlements and is patrolled by dangerous naiads.",
+      "kitIds": [
+        "hunting-river"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/5/ch/10/",
+        "https://www.dccfansite.com/entry/fort-freedom/",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_fort_freedom",
+      "name": "Fort Freedom (Old River Palace)",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Former Naiad River Palace, mostly submerged beneath a river; the damaged upper structure rises offshore like a flooded tower.",
+      "kitIds": [
+        "hunting-river"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/fort-freedom/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Fort_Freedom",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_alucarda",
+      "name": "Alucarda",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "A small, sweet-smelling dryad village south of Fort Freedom, described by the fan index with crooked treehouses and bamboo-plank construction.",
+      "kitIds": [
+        "hunting-shrines"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/5/ch/29/",
+        "https://www.dccfansite.com/book/5/ch/35/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Lucia_Mar",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_temple_of_diwata",
+      "name": "Temple of Diwata",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "A temple in Alucarda associated with the dryad congregation of Diwata.",
+      "kitIds": [
+        "hunting-shrines"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/5/ch/35/",
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations/temple-of-diwata?book=5"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_all_tree_and_staging_camp",
+      "name": "All-Tree grove and Signet's staging camp",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "A grove around an outgrowth of the All-Tree, a huge magical tree system rooted beneath the floor.",
+      "kitIds": [
+        "hunting-jungle",
+        "hunting-shrines"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/5/ch/15/",
+        "https://www.dccfansite.com/entry/all-tree/",
+        "https://www.dccfansite.com/book/5/ch/25/",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_high_elf_castle",
+      "name": "High Elf Castle (the Sugar Cube)",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Huge stark-white cube against a rocky bluff in the Hunting Grounds' southeast, with four very slender corner towers and…",
+      "kitIds": [
+        "masquerade"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/high-elf-castle/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/High_Elf_Castle",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md",
+        "https://manatoastmedia.com/hunting-grounds/",
+        "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ],
+      "notes": " Carl remains on Floor Six; only the castle and qualifying occupants transfer to Floor Nine.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_ballroom_a",
+      "name": "High Elf Castle, Ballroom A / goodwill ballroom",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "One of the magically separated goodwill ballrooms used for the Butcher's Masquerade.",
+      "kitIds": [
+        "masquerade"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/high-elf-castle/",
+        "https://www.dccfansite.com/entry/butchers-masquerade/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_crawlcon_studio",
+      "name": "CrawlCon Studio / backstage lounge",
+      "books": [
+        5
+      ],
+      "floors": [],
+      "appearance": "visited",
+      "confidence": "low",
+      "summary": "Backstage lounge used around CrawlCon programming and appearances.",
+      "kitIds": [
+        "broadcast-portals"
+      ],
+      "sourceUrls": [
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations/crawlcon-studio?book=5",
+        "https://github.com/cdkolb/dcc-compendium/blob/main/docs/chapter-summaries/book-05.md"
+      ],
+      "notes": "Recurring shared interior; source visual description needs direct-text confirmation before art lock.",
+      "coverage": "review-needed"
+    },
+    {
+      "id": "b5_great_race_maze",
+      "name": "The Great Race (Floor Seven maze)",
+      "books": [
+        5
+      ],
+      "floors": [
+        7
+      ],
+      "appearance": "mentioned",
+      "confidence": "medium",
+      "summary": "The planned Floor Seven maze branches through one-way tubes toward exits; crawlers destroy it before traversing it.",
+      "kitIds": [
+        "great-race-transition"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/great-race/",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Book_5_Chapter_Summaries"
+      ],
+      "notes": "The floor design is described but not traversed before the destruction.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_pole_position_chamber",
+      "name": "Floor Seven Pole Position Chamber",
+      "books": [
+        5
+      ],
+      "floors": [
+        7
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Clear-glass starting pod with barred opening toward a descending tube, arranged around glowing Floor Eight portals.",
+      "kitIds": [
+        "great-race-transition"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/great-race/",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations?book=5"
+      ],
+      "notes": "Book Five reaches this transition briefly; this record does not establish a complete floor map.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_shattered_great_race",
+      "name": "The Shattered Great Race",
+      "books": [
+        5
+      ],
+      "floors": [
+        7
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "The glass Great Race fractures and shatters before traversal, pulling crawlers into Floor Eight portals.",
+      "kitIds": [
+        "great-race-transition"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/entry/great-race/",
+        "https://www.dccfansite.com/book/5/ch/99/",
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/"
+      ],
+      "notes": "The race never begins; the tile represents a destruction transition.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_eighth_floor_selection_chamber",
+      "name": "Floor Eight entry / selection chamber",
+      "books": [
+        5
+      ],
+      "floors": [
+        8
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "A holographic globe in the Floor Eight transition chamber selects a starting region; the chosen destination remains unidentified.",
+      "kitIds": [
+        "great-race-transition"
+      ],
+      "sourceUrls": [
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://wiki.bookwormai.app/dungeon-crawler-carl/locations?book=5",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Book_5_Chapter_Summaries"
+      ],
+      "notes": "The actual Floor Eight destination is not identified; do not depict a specific island landscape.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_transferred_high_elf_castle",
+      "name": "High Elf Castle relocated to Floor Nine",
+      "books": [
+        5
+      ],
+      "floors": [
+        9
+      ],
+      "appearance": "remote",
+      "confidence": "high",
+      "summary": "Reported transfer sends the castle and qualifying occupants to Floor Nine; Carl remains on Floor Six.",
+      "kitIds": [
+        "masquerade"
+      ],
+      "sourceUrls": [
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://www.supersummary.com/the-butchers-masquerade/summary/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://manatoastmedia.com/hunting-grounds/",
+        "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ],
+      "notes": "The transfer is reported from the Floor Six finale; Carl, crawlers, hunters, most pets, and elves remain behind. Carl does not visit the relocated castle in Book Five.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b5_bramble_dome_crater",
+      "name": "Gehenna Bramble dome and castle crater",
+      "books": [
+        5
+      ],
+      "floors": [
+        6
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Castle departs from Floor Six; Carl and others fight in the crater beneath a rising Gehenna Bramble dome.",
+      "kitIds": [
+        "hunting-jungle"
+      ],
+      "sourceUrls": [
+        "https://chapter-summaries.com/books/the-butchers-masquerade/chapters/",
+        "https://www.supersummary.com/the-butchers-masquerade/summary/",
+        "https://dungeoncrawlercarlwiki.com/wiki/sixth-floor/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Butcher%27s_Masquerade_Ball",
+        "https://manatoastmedia.com/hunting-grounds/",
+        "https://dungeon-crawler-carl.fandom.com/wiki/Sixth_Floor"
+      ],
+      "notes": "The battle and bramble dome remain on Floor Six after the castle transfer; this happens before the epilogue descent to Floor Seven.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b1.f2.industrial-kitchen",
+      "name": "Industrial-kitchen safe room",
+      "books": [
+        1
+      ],
+      "floors": [
+        2
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Industrial kitchen and working freezer used as a safe room after the elemental escape.",
+      "kitIds": [
+        "safe-services",
+        "personal-space",
+        "industry-menagerie"
+      ],
+      "sourceUrls": [
+        "https://manatoastmedia.com/dungeon-crawler-carl-book-1-summary/",
+        "https://www.dccdatabase.com/wiki/second_floor/"
+      ],
+      "notes": "Secondary-source support; exact kitchen floor plan is not available.",
+      "coverage": "mapped"
+    }
+  ],
+  "coverageGaps": [
+    "Research is not a full-text audit or complete canonical atlas; entries reflect the three scoped research files and their cited sources.",
+    "The Iron Tangle has hundreds of stations and many named color routes. Route variants reuse Iron Tangle track/station/train kits rather than imply distinct architectural sets; individual crawler visitation remains mixed or unresolved.",
+    "Train Yard A is disputed and should not be depicted as a confirmed visited yard. Yard M is supported only by tertiary discussion and needs primary-text review; the combined yard entry is marked for review.",
+    "Amaranth and Pink route names are reader-reported candidates, not included among the researched location entries; verify against the novel before adding.",
+    "Book 4 references to Larracos describe remote effects on Floor 9. Its coverage uses broadcast/remote-view art and does not authorize playable Floor 9 maps.",
+    "Book 5 visual specifics for some settlements and the CrawlCon Studio rely on secondary or companion sources; confidence and notes preserve those limits.",
+    "Generic or unnamed settlements, safe rooms, stations, and bubble environments are consolidated into reusable kits instead of being invented as separate named locations.",
+    "Inventory tiles are normalized PNG art adaptations, not native game-engine assets; they have no runtime integration.",
+    "Some individual venue interiors and train-yard labels have weaker source support than their parent location; their records are marked review-needed even when a reusable tile kit is available.",
+    "Book 5 enters Floor 7 and the Floor 8 selection chamber in the epilogue. The actual Floor 8 destination is unidentified, so do not illustrate a Bahamas, Cuba, or other island landscape as visited.",
+    "Book 4 Larracos references remain remote. In Book 5 the castle and qualifying occupants transfer to Floor 9, while the bramble-dome crater battle remains on Floor 6 before the Floor 7–8 epilogue transitions."
+  ],
+  "sourceFiles": [
+    "Docs/BookLocationTiles/research-books-1-2.json",
+    "Docs/BookLocationTiles/research-books-3-4.json",
+    "Docs/BookLocationTiles/research-book-5.json"
+  ]
+}

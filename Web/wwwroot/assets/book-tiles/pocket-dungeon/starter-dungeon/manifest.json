@@ -1,0 +1,1858 @@
+{
+  "schemaVersion": 1,
+  "id": "starter-dungeon",
+  "style": "pocket-dungeon",
+  "title": "Early dungeon corridors and tutorial rooms",
+  "books": [
+    1,
+    2
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "starter-dungeon-grey-flagstone-floor",
+      "label": "Grey Flagstone floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/starter-dungeon-grey-flagstone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          48,
+          50,
+          240,
+          242
+        ],
+        "bounds": {
+          "x": 50,
+          "y": 52,
+          "width": 188,
+          "height": 188
+        },
+        "originalWidth": 188,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              69,
+              54
+            ],
+            [
+              235,
+              182
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-worn-grey-flagstone-floor",
+      "label": "Worn grey flagstone floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/starter-dungeon-worn-grey-flagstone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.6772486772486772,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          299,
+          48,
+          489,
+          241
+        ],
+        "bounds": {
+          "x": 301,
+          "y": 50,
+          "width": 186,
+          "height": 189
+        },
+        "originalWidth": 186,
+        "originalHeight": 189,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              313,
+              52
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-cracked-grey-flagstone-floor",
+      "label": "Cracked grey flagstone floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/starter-dungeon-cracked-grey-flagstone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          548,
+          46,
+          740,
+          240
+        ],
+        "bounds": {
+          "x": 550,
+          "y": 48,
+          "width": 188,
+          "height": 190
+        },
+        "originalWidth": 188,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              561,
+              50
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-wet-grey-flagstone-floor",
+      "label": "Wet grey flagstone floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/starter-dungeon-wet-grey-flagstone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          798,
+          45,
+          992,
+          241
+        ],
+        "bounds": {
+          "x": 800,
+          "y": 47,
+          "width": 190,
+          "height": 192
+        },
+        "originalWidth": 190,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              831,
+              49
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-grey-flagstone-edge-transition",
+      "label": "Grey Flagstone edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/starter-dungeon-grey-flagstone-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1051,
+          44,
+          1239,
+          241
+        ],
+        "bounds": {
+          "x": 1053,
+          "y": 46,
+          "width": 184,
+          "height": 193
+        },
+        "originalWidth": 184,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1066,
+              48
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-grey-flagstone-corner-transition",
+      "label": "Grey Flagstone corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/starter-dungeon-grey-flagstone-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1302,
+          44,
+          1491,
+          241
+        ],
+        "bounds": {
+          "x": 1304,
+          "y": 46,
+          "width": 185,
+          "height": 193
+        },
+        "originalWidth": 185,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1313,
+              48
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-wall-northwest",
+      "label": "Dark Stone Block wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/starter-dungeon-dark-stone-block-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.5517241379310345,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          43,
+          285,
+          248,
+          463
+        ],
+        "bounds": {
+          "x": 45,
+          "y": 287,
+          "width": 201,
+          "height": 174
+        },
+        "originalWidth": 201,
+        "originalHeight": 174,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              69,
+              289
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-wall-northeast",
+      "label": "Dark Stone Block wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/starter-dungeon-dark-stone-block-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.5549132947976878,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          293,
+          286,
+          499,
+          463
+        ],
+        "bounds": {
+          "x": 295,
+          "y": 288,
+          "width": 202,
+          "height": 173
+        },
+        "originalWidth": 202,
+        "originalHeight": 173,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              467,
+              290
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-outer-corner",
+      "label": "Dark Stone Block outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/starter-dungeon-dark-stone-block-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7314285714285714,
+        "scaleY": 0.49740932642487046,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          557,
+          274,
+          736,
+          471
+        ],
+        "bounds": {
+          "x": 559,
+          "y": 276,
+          "width": 175,
+          "height": 193
+        },
+        "originalWidth": 175,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              599,
+              278
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-inner-corner",
+      "label": "Dark Stone Block inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/starter-dungeon-dark-stone-block-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5981308411214953,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          788,
+          274,
+          1006,
+          460
+        ],
+        "bounds": {
+          "x": 790,
+          "y": 276,
+          "width": 214,
+          "height": 182
+        },
+        "originalWidth": 214,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              278
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-endcap-northwest",
+      "label": "Dark Stone Block endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/starter-dungeon-dark-stone-block-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.5133689839572193,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1090,
+          277,
+          1202,
+          468
+        ],
+        "bounds": {
+          "x": 1092,
+          "y": 279,
+          "width": 108,
+          "height": 187
+        },
+        "originalWidth": 108,
+        "originalHeight": 187,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1143,
+              281
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-endcap-northeast",
+      "label": "Dark Stone Block endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/starter-dungeon-dark-stone-block-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.5052631578947369,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1344,
+          276,
+          1458,
+          470
+        ],
+        "bounds": {
+          "x": 1346,
+          "y": 278,
+          "width": 110,
+          "height": 190
+        },
+        "originalWidth": 110,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1398,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-open-doorway",
+      "label": "Dark Stone Block open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/starter-dungeon-dark-stone-block-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.44036697247706424,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          44,
+          492,
+          241,
+          714
+        ],
+        "bounds": {
+          "x": 46,
+          "y": 494,
+          "width": 193,
+          "height": 218
+        },
+        "originalWidth": 193,
+        "originalHeight": 218,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              131,
+              496
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-dark-stone-block-closed-doorway",
+      "label": "Dark Stone Block closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/starter-dungeon-dark-stone-block-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.4423963133640553,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          289,
+          493,
+          494,
+          714
+        ],
+        "bounds": {
+          "x": 291,
+          "y": 495,
+          "width": 201,
+          "height": 217
+        },
+        "originalWidth": 201,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              396,
+              497
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-grey-flagstone-stairs-up",
+      "label": "Grey Flagstone stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-grey-flagstone-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6153846153846154,
+        "scaleY": 0.6137566137566137,
+        "width": 128,
+        "height": 116,
+        "offset": {
+          "x": 64,
+          "y": 76
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          539,
+          513,
+          751,
+          706
+        ],
+        "bounds": {
+          "x": 541,
+          "y": 515,
+          "width": 208,
+          "height": 189
+        },
+        "originalWidth": 208,
+        "originalHeight": 189,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              575,
+              517
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-grey-flagstone-stairs-down",
+      "label": "Grey Flagstone stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-grey-flagstone-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6066350710900474,
+        "scaleY": 0.6077348066298343,
+        "width": 128,
+        "height": 110,
+        "offset": {
+          "x": 64,
+          "y": 82
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          790,
+          520,
+          1005,
+          705
+        ],
+        "bounds": {
+          "x": 792,
+          "y": 522,
+          "width": 211,
+          "height": 181
+        },
+        "originalWidth": 211,
+        "originalHeight": 181,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              820,
+              524
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-wall-torch",
+      "label": "Wall torch",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-wall-torch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.9263157894736842,
+        "scaleY": 0.9246231155778895,
+        "width": 88,
+        "height": 184,
+        "offset": {
+          "x": 84,
+          "y": 8
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1101,
+          500,
+          1200,
+          703
+        ],
+        "bounds": {
+          "x": 1103,
+          "y": 502,
+          "width": 95,
+          "height": 199
+        },
+        "originalWidth": 95,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1138,
+              504
+            ],
+            [
+              1151,
+              535
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-tutorial-fireplace",
+      "label": "Tutorial fireplace",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-tutorial-fireplace.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.48484848484848486,
+        "scaleY": 0.4845814977973568,
+        "width": 96,
+        "height": 110,
+        "offset": {
+          "x": 80,
+          "y": 82
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1291,
+          490,
+          1493,
+          721
+        ],
+        "bounds": {
+          "x": 1293,
+          "y": 492,
+          "width": 198,
+          "height": 227
+        },
+        "originalWidth": 198,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1368,
+              494
+            ],
+            [
+              1447,
+              563
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-guide-desk-and-chairs",
+      "label": "Guide desk and chairs",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-guide-desk-and-chairs.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3622641509433962,
+        "scaleY": 0.3619047619047619,
+        "width": 96,
+        "height": 76,
+        "offset": {
+          "x": 80,
+          "y": 116
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          29,
+          750,
+          298,
+          964
+        ],
+        "bounds": {
+          "x": 31,
+          "y": 752,
+          "width": 265,
+          "height": 210
+        },
+        "originalWidth": 265,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              214,
+              754
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-simple-bed",
+      "label": "Simple bed",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-simple-bed.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5614035087719298,
+        "scaleY": 0.5622119815668203,
+        "width": 96,
+        "height": 122,
+        "offset": {
+          "x": 80,
+          "y": 70
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          316,
+          743,
+          491,
+          964
+        ],
+        "bounds": {
+          "x": 318,
+          "y": 745,
+          "width": 171,
+          "height": 217
+        },
+        "originalWidth": 171,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              354,
+              747
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-bookcase-with-framed-photographs",
+      "label": "Bookcase with framed photographs",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-bookcase-with-framed-photographs.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.48,
+        "scaleY": 0.48068669527896996,
+        "width": 96,
+        "height": 112,
+        "offset": {
+          "x": 80,
+          "y": 80
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          542,
+          729,
+          746,
+          966
+        ],
+        "bounds": {
+          "x": 544,
+          "y": 731,
+          "width": 200,
+          "height": 233
+        },
+        "originalWidth": 200,
+        "originalHeight": 233,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              578,
+              733
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-oval-grey-rug",
+      "label": "Oval grey rug",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-oval-grey-rug.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.3875,
+        "width": 96,
+        "height": 62,
+        "offset": {
+          "x": 80,
+          "y": 130
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          772,
+          780,
+          1022,
+          944
+        ],
+        "bounds": {
+          "x": 774,
+          "y": 782,
+          "width": 246,
+          "height": 160
+        },
+        "originalWidth": 246,
+        "originalHeight": 160,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              868,
+              784
+            ],
+            [
+              804,
+              917
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-safe-room-threshold",
+      "label": "Safe room threshold",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-safe-room-threshold.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.48,
+        "scaleY": 0.4811715481171548,
+        "width": 96,
+        "height": 115,
+        "offset": {
+          "x": 80,
+          "y": 77
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1048,
+          723,
+          1252,
+          966
+        ],
+        "bounds": {
+          "x": 1050,
+          "y": 725,
+          "width": 200,
+          "height": 239
+        },
+        "originalWidth": 200,
+        "originalHeight": 239,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1148,
+              727
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "starter-dungeon-stone-descent-stairwell",
+      "label": "Stone descent stairwell",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "starter-dungeon",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/starter-dungeon-stone-descent-stairwell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.4427083333333333,
+        "width": 96,
+        "height": 85,
+        "offset": {
+          "x": 80,
+          "y": 107
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/starter-dungeon.png",
+        "sha256": "fcad34697c3760178891df6cc6edb0f870dab9a8c35d6513c9360bd40bcc37ef",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1284,
+          760,
+          1504,
+          956
+        ],
+        "bounds": {
+          "x": 1286,
+          "y": 762,
+          "width": 216,
+          "height": 192
+        },
+        "originalWidth": 216,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1310,
+              764
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "starter-dungeon.zip",
+  "contactSheet": "contact-sheet.png"
+}

@@ -1,0 +1,1845 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble-desert",
+  "style": "pocket-dungeon",
+  "title": "The Bowl, Hump Town and desert settlements",
+  "books": [
+    4
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "bubble-desert-sandstone-and-sand-floor",
+      "label": "Sandstone And Sand floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-desert-sandstone-and-sand-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.6994535519125683,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          43,
+          43,
+          230,
+          230
+        ],
+        "bounds": {
+          "x": 45,
+          "y": 45,
+          "width": 183,
+          "height": 183
+        },
+        "originalWidth": 183,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              53,
+              47
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-worn-sandstone-and-sand-floor",
+      "label": "Worn sandstone and sand floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-desert-worn-sandstone-and-sand-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          296,
+          42,
+          484,
+          230
+        ],
+        "bounds": {
+          "x": 298,
+          "y": 44,
+          "width": 184,
+          "height": 184
+        },
+        "originalWidth": 184,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              305,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-cracked-sandstone-and-sand-floor",
+      "label": "Cracked sandstone and sand floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-desert-cracked-sandstone-and-sand-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          548,
+          41,
+          737,
+          230
+        ],
+        "bounds": {
+          "x": 550,
+          "y": 43,
+          "width": 185,
+          "height": 185
+        },
+        "originalWidth": 185,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              658,
+              45
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-wet-sandstone-and-sand-floor",
+      "label": "Wet sandstone and sand floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-desert-wet-sandstone-and-sand-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          801,
+          42,
+          990,
+          230
+        ],
+        "bounds": {
+          "x": 803,
+          "y": 44,
+          "width": 185,
+          "height": 184
+        },
+        "originalWidth": 185,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              810,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-sandstone-and-sand-edge-transition",
+      "label": "Sandstone And Sand edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-desert-sandstone-and-sand-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.6881720430107527,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1052,
+          40,
+          1242,
+          230
+        ],
+        "bounds": {
+          "x": 1054,
+          "y": 42,
+          "width": 186,
+          "height": 186
+        },
+        "originalWidth": 186,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1139,
+              44
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-sandstone-and-sand-corner-transition",
+      "label": "Sandstone And Sand corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-desert-sandstone-and-sand-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6881720430107527,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1306,
+          40,
+          1494,
+          230
+        ],
+        "bounds": {
+          "x": 1308,
+          "y": 42,
+          "width": 184,
+          "height": 186
+        },
+        "originalWidth": 184,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1375,
+              44
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-wall-northwest",
+      "label": "Adobe Desert Plaster wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-desert-adobe-desert-plaster-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5953488372093023,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          26,
+          282,
+          245,
+          468
+        ],
+        "bounds": {
+          "x": 28,
+          "y": 284,
+          "width": 215,
+          "height": 182
+        },
+        "originalWidth": 215,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              68,
+              286
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-wall-northeast",
+      "label": "Adobe Desert Plaster wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-desert-adobe-desert-plaster-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6066350710900474,
+        "scaleY": 0.5454545454545454,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          284,
+          283,
+          499,
+          463
+        ],
+        "bounds": {
+          "x": 286,
+          "y": 285,
+          "width": 211,
+          "height": 176
+        },
+        "originalWidth": 211,
+        "originalHeight": 176,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              312,
+              287
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-outer-corner",
+      "label": "Adobe Desert Plaster outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-desert-adobe-desert-plaster-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.8050314465408805,
+        "scaleY": 0.5106382978723404,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          561,
+          280,
+          724,
+          472
+        ],
+        "bounds": {
+          "x": 563,
+          "y": 282,
+          "width": 159,
+          "height": 188
+        },
+        "originalWidth": 159,
+        "originalHeight": 188,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              670,
+              284
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-inner-corner",
+      "label": "Adobe Desert Plaster inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-desert-adobe-desert-plaster-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5714285714285714,
+        "scaleY": 0.5423728813559322,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          775,
+          286,
+          1003,
+          467
+        ],
+        "bounds": {
+          "x": 777,
+          "y": 288,
+          "width": 224,
+          "height": 177
+        },
+        "originalWidth": 224,
+        "originalHeight": 177,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              868,
+              290
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-endcap-northwest",
+      "label": "Adobe Desert Plaster endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-desert-adobe-desert-plaster-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.35294117647058826,
+        "scaleY": 0.5245901639344263,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1075,
+          284,
+          1215,
+          471
+        ],
+        "bounds": {
+          "x": 1077,
+          "y": 286,
+          "width": 136,
+          "height": 183
+        },
+        "originalWidth": 136,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1118,
+              288
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-endcap-northeast",
+      "label": "Adobe Desert Plaster endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-desert-adobe-desert-plaster-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.32432432432432434,
+        "scaleY": 0.5680473372781065,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1341,
+          289,
+          1493,
+          462
+        ],
+        "bounds": {
+          "x": 1343,
+          "y": 291,
+          "width": 148,
+          "height": 169
+        },
+        "originalWidth": 148,
+        "originalHeight": 169,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1428,
+              293
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-open-doorway",
+      "label": "Adobe Desert Plaster open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-desert-adobe-desert-plaster-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6066350710900474,
+        "scaleY": 0.5,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          30,
+          516,
+          245,
+          712
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 518,
+          "width": 211,
+          "height": 192
+        },
+        "originalWidth": 211,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              68,
+              520
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-desert-plaster-closed-doorway",
+      "label": "Adobe Desert Plaster closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-desert-adobe-desert-plaster-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.4873096446700508,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          289,
+          516,
+          483,
+          717
+        ],
+        "bounds": {
+          "x": 291,
+          "y": 518,
+          "width": 190,
+          "height": 197
+        },
+        "originalWidth": 190,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              319,
+              520
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-sandstone-and-sand-stairs-up",
+      "label": "Sandstone And Sand stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-sandstone-and-sand-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.65,
+        "width": 128,
+        "height": 117,
+        "offset": {
+          "x": 64,
+          "y": 75
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          534,
+          523,
+          735,
+          707
+        ],
+        "bounds": {
+          "x": 536,
+          "y": 525,
+          "width": 197,
+          "height": 180
+        },
+        "originalWidth": 197,
+        "originalHeight": 180,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              575,
+              527
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-sandstone-and-sand-stairs-down",
+      "label": "Sandstone And Sand stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-sandstone-and-sand-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.6198830409356725,
+        "width": 128,
+        "height": 106,
+        "offset": {
+          "x": 64,
+          "y": 86
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          780,
+          533,
+          990,
+          708
+        ],
+        "bounds": {
+          "x": 782,
+          "y": 535,
+          "width": 206,
+          "height": 171
+        },
+        "originalWidth": 206,
+        "originalHeight": 171,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              813,
+              537
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-storm-sail-awning",
+      "label": "Storm sail awning",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-storm-sail-awning.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.43722943722943725,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1018,
+          497,
+          1242,
+          732
+        ],
+        "bounds": {
+          "x": 1020,
+          "y": 499,
+          "width": 220,
+          "height": 231
+        },
+        "originalWidth": 220,
+        "originalHeight": 231,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1083,
+              501
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-adobe-town-gate",
+      "label": "Adobe town gate",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-adobe-town-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3870967741935484,
+        "scaleY": 0.3879310344827586,
+        "width": 96,
+        "height": 90,
+        "offset": {
+          "x": 80,
+          "y": 102
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1265,
+          489,
+          1517,
+          725
+        ],
+        "bounds": {
+          "x": 1267,
+          "y": 491,
+          "width": 248,
+          "height": 232
+        },
+        "originalWidth": 248,
+        "originalHeight": 232,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1300,
+              493
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-city-hall-entrance",
+      "label": "City hall entrance",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-city-hall-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.3984375,
+        "width": 96,
+        "height": 102,
+        "offset": {
+          "x": 80,
+          "y": 90
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          15,
+          718,
+          260,
+          978
+        ],
+        "bounds": {
+          "x": 17,
+          "y": 720,
+          "width": 241,
+          "height": 256
+        },
+        "originalWidth": 241,
+        "originalHeight": 256,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              137,
+              722
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-desert-tavern-doorway",
+      "label": "Desert tavern doorway",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-desert-tavern-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.44651162790697674,
+        "scaleY": 0.4484304932735426,
+        "width": 96,
+        "height": 100,
+        "offset": {
+          "x": 80,
+          "y": 92
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          282,
+          747,
+          501,
+          974
+        ],
+        "bounds": {
+          "x": 284,
+          "y": 749,
+          "width": 215,
+          "height": 223
+        },
+        "originalWidth": 215,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              422,
+              751
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-narrow-market-stall",
+      "label": "Narrow market stall",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-narrow-market-stall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4752475247524752,
+        "scaleY": 0.4732142857142857,
+        "width": 96,
+        "height": 106,
+        "offset": {
+          "x": 80,
+          "y": 86
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          534,
+          747,
+          740,
+          975
+        ],
+        "bounds": {
+          "x": 536,
+          "y": 749,
+          "width": 202,
+          "height": 224
+        },
+        "originalWidth": 202,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              690,
+              751
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-sand-dune-mound",
+      "label": "Sand dune mound",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-sand-dune-mound.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.367816091954023,
+        "scaleY": 0.3696969696969697,
+        "width": 96,
+        "height": 61,
+        "offset": {
+          "x": 80,
+          "y": 131
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          758,
+          807,
+          1023,
+          976
+        ],
+        "bounds": {
+          "x": 760,
+          "y": 809,
+          "width": 261,
+          "height": 165
+        },
+        "originalWidth": 261,
+        "originalHeight": 165,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              880,
+              811
+            ],
+            [
+              999,
+              864
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-camel-folk-settlement-well",
+      "label": "Camel folk settlement well",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-camel-folk-settlement-well.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.42857142857142855,
+        "scaleY": 0.4305555555555556,
+        "width": 96,
+        "height": 93,
+        "offset": {
+          "x": 80,
+          "y": 99
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1028,
+          759,
+          1256,
+          979
+        ],
+        "bounds": {
+          "x": 1030,
+          "y": 761,
+          "width": 224,
+          "height": 216
+        },
+        "originalWidth": 224,
+        "originalHeight": 216,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1098,
+              763
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-desert-bactrian-town-ruined-wall",
+      "label": "Bactrian town ruined wall",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-desert",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-desert-bactrian-town-ruined-wall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.3894230769230769,
+        "width": 96,
+        "height": 81,
+        "offset": {
+          "x": 80,
+          "y": 111
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-desert.png",
+        "sha256": "5f32eedb07aca635fa4adc47e0eaba48372a9d0752a4e7de824c93f7ee7e39cb",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1273,
+          768,
+          1523,
+          980
+        ],
+        "bounds": {
+          "x": 1275,
+          "y": 770,
+          "width": 246,
+          "height": 208
+        },
+        "originalWidth": 246,
+        "originalHeight": 208,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1308,
+              772
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "bubble-desert.zip",
+  "contactSheet": "contact-sheet.png"
+}

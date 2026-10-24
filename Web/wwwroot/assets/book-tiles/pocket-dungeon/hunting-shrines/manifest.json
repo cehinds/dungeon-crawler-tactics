@@ -1,0 +1,1857 @@
+{
+  "schemaVersion": 1,
+  "id": "hunting-shrines",
+  "style": "pocket-dungeon",
+  "title": "Alucarda, Point Mongo and field camps",
+  "books": [
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "hunting-shrines-village-paving-floor",
+      "label": "Village Paving floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.7150837988826816,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          52,
+          58,
+          243,
+          241
+        ],
+        "bounds": {
+          "x": 54,
+          "y": 60,
+          "width": 187,
+          "height": 179
+        },
+        "originalWidth": 187,
+        "originalHeight": 179,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              60,
+              62
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-worn-village-paving-floor",
+      "label": "Worn village paving floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-worn-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.7032967032967034,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          303,
+          54,
+          495,
+          240
+        ],
+        "bounds": {
+          "x": 305,
+          "y": 56,
+          "width": 188,
+          "height": 182
+        },
+        "originalWidth": 188,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              343,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-cracked-village-paving-floor",
+      "label": "Cracked village paving floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-cracked-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          547,
+          53,
+          739,
+          241
+        ],
+        "bounds": {
+          "x": 549,
+          "y": 55,
+          "width": 188,
+          "height": 184
+        },
+        "originalWidth": 188,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              566,
+              57
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-wet-village-paving-floor",
+      "label": "Wet village paving floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-wet-village-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.6994535519125683,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          796,
+          54,
+          990,
+          241
+        ],
+        "bounds": {
+          "x": 798,
+          "y": 56,
+          "width": 190,
+          "height": 183
+        },
+        "originalWidth": 190,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              804,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-edge-transition",
+      "label": "Village Paving edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-village-paving-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1041,
+          53,
+          1234,
+          241
+        ],
+        "bounds": {
+          "x": 1043,
+          "y": 55,
+          "width": 189,
+          "height": 184
+        },
+        "originalWidth": 189,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1159,
+              57
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-corner-transition",
+      "label": "Village Paving corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-shrines-village-paving-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1294,
+          53,
+          1487,
+          241
+        ],
+        "bounds": {
+          "x": 1296,
+          "y": 55,
+          "width": 189,
+          "height": 184
+        },
+        "originalWidth": 189,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1345,
+              57
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-wall-northwest",
+      "label": "Village Stone wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.588957055214724,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          50,
+          290,
+          249,
+          457
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 292,
+          "width": 195,
+          "height": 163
+        },
+        "originalWidth": 195,
+        "originalHeight": 163,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              78,
+              294
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-wall-northeast",
+      "label": "Village Stone wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.588957055214724,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          296,
+          289,
+          496,
+          456
+        ],
+        "bounds": {
+          "x": 298,
+          "y": 291,
+          "width": 196,
+          "height": 163
+        },
+        "originalWidth": 196,
+        "originalHeight": 163,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              456,
+              293
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-outer-corner",
+      "label": "Village Stone outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.5333333333333333,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          552,
+          288,
+          745,
+          472
+        ],
+        "bounds": {
+          "x": 554,
+          "y": 290,
+          "width": 189,
+          "height": 180
+        },
+        "originalWidth": 189,
+        "originalHeight": 180,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              705,
+              292
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-inner-corner",
+      "label": "Village Stone inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.5581395348837209,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          795,
+          276,
+          992,
+          452
+        ],
+        "bounds": {
+          "x": 797,
+          "y": 278,
+          "width": 193,
+          "height": 172
+        },
+        "originalWidth": 193,
+        "originalHeight": 172,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              887,
+              280
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-endcap-northwest",
+      "label": "Village Stone endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-shrines-village-stone-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.5333333333333333,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1084,
+          277,
+          1205,
+          461
+        ],
+        "bounds": {
+          "x": 1086,
+          "y": 279,
+          "width": 117,
+          "height": 180
+        },
+        "originalWidth": 117,
+        "originalHeight": 180,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1118,
+              281
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-endcap-northeast",
+      "label": "Village Stone endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-shrines-village-stone-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.5454545454545454,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1323,
+          279,
+          1432,
+          459
+        ],
+        "bounds": {
+          "x": 1325,
+          "y": 281,
+          "width": 105,
+          "height": 176
+        },
+        "originalWidth": 105,
+        "originalHeight": 176,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1388,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-open-doorway",
+      "label": "Village Stone open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.44036697247706424,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          41,
+          494,
+          255,
+          716
+        ],
+        "bounds": {
+          "x": 43,
+          "y": 496,
+          "width": 210,
+          "height": 218
+        },
+        "originalWidth": 210,
+        "originalHeight": 218,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              134,
+              498
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-stone-closed-doorway",
+      "label": "Village Stone closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-shrines-village-stone-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.64,
+        "scaleY": 0.463768115942029,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          297,
+          499,
+          501,
+          710
+        ],
+        "bounds": {
+          "x": 299,
+          "y": 501,
+          "width": 200,
+          "height": 207
+        },
+        "originalWidth": 200,
+        "originalHeight": 207,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              369,
+              503
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-stairs-up",
+      "label": "Village Paving stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-paving-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.64,
+        "scaleY": 0.64,
+        "width": 128,
+        "height": 112,
+        "offset": {
+          "x": 64,
+          "y": 80
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          538,
+          526,
+          742,
+          705
+        ],
+        "bounds": {
+          "x": 540,
+          "y": 528,
+          "width": 200,
+          "height": 175
+        },
+        "originalWidth": 200,
+        "originalHeight": 175,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              576,
+              530
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-paving-stairs-down",
+      "label": "Village Paving stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-paving-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.625,
+        "width": 128,
+        "height": 110,
+        "offset": {
+          "x": 64,
+          "y": 82
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          779,
+          524,
+          987,
+          704
+        ],
+        "bounds": {
+          "x": 781,
+          "y": 526,
+          "width": 204,
+          "height": 176
+        },
+        "originalWidth": 204,
+        "originalHeight": 176,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              816,
+              528
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-temple-of-diwata-entrance",
+      "label": "Temple of Diwata entrance",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-temple-of-diwata-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3582089552238806,
+        "scaleY": 0.359504132231405,
+        "width": 96,
+        "height": 87,
+        "offset": {
+          "x": 80,
+          "y": 105
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1007,
+          479,
+          1279,
+          725
+        ],
+        "bounds": {
+          "x": 1009,
+          "y": 481,
+          "width": 268,
+          "height": 242
+        },
+        "originalWidth": 268,
+        "originalHeight": 242,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1137,
+              483
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-temple-brazier",
+      "label": "Temple brazier",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-temple-brazier.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.676056338028169,
+        "scaleY": 0.6740088105726872,
+        "width": 96,
+        "height": 153,
+        "offset": {
+          "x": 80,
+          "y": 39
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1315,
+          501,
+          1461,
+          732
+        ],
+        "bounds": {
+          "x": 1317,
+          "y": 503,
+          "width": 142,
+          "height": 227
+        },
+        "originalWidth": 142,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1383,
+              516
+            ],
+            [
+              1403,
+              505
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-market-stall",
+      "label": "Village market stall",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-market-stall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4343891402714932,
+        "scaleY": 0.4336283185840708,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          33,
+          740,
+          258,
+          970
+        ],
+        "bounds": {
+          "x": 35,
+          "y": 742,
+          "width": 221,
+          "height": 226
+        },
+        "originalWidth": 221,
+        "originalHeight": 226,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              82,
+              744
+            ],
+            [
+              113,
+              842
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-village-house-doorway",
+      "label": "Village house doorway",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-village-house-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.4,
+        "width": 96,
+        "height": 92,
+        "offset": {
+          "x": 80,
+          "y": 100
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          270,
+          735,
+          513,
+          969
+        ],
+        "bounds": {
+          "x": 272,
+          "y": 737,
+          "width": 239,
+          "height": 230
+        },
+        "originalWidth": 239,
+        "originalHeight": 230,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              375,
+              739
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-point-mongo-camp-marker",
+      "label": "Point Mongo camp marker",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-point-mongo-camp-marker.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4948453608247423,
+        "scaleY": 0.4959016393442623,
+        "width": 96,
+        "height": 121,
+        "offset": {
+          "x": 80,
+          "y": 71
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          534,
+          723,
+          732,
+          971
+        ],
+        "bounds": {
+          "x": 536,
+          "y": 725,
+          "width": 194,
+          "height": 244
+        },
+        "originalWidth": 194,
+        "originalHeight": 244,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              615,
+              727
+            ],
+            [
+              569,
+              881
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-expedition-supply-shelter",
+      "label": "Expedition supply shelter",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-expedition-supply-shelter.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.34408602150537637,
+        "scaleY": 0.34418604651162793,
+        "width": 96,
+        "height": 74,
+        "offset": {
+          "x": 80,
+          "y": 118
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          742,
+          750,
+          1025,
+          969
+        ],
+        "bounds": {
+          "x": 744,
+          "y": 752,
+          "width": 279,
+          "height": 215
+        },
+        "originalWidth": 279,
+        "originalHeight": 215,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              815,
+              754
+            ],
+            [
+              991,
+              881
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-memorial-stone",
+      "label": "Memorial stone",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-memorial-stone.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4304932735426009,
+        "scaleY": 0.43162393162393164,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1032,
+          736,
+          1259,
+          974
+        ],
+        "bounds": {
+          "x": 1034,
+          "y": 738,
+          "width": 223,
+          "height": 234
+        },
+        "originalWidth": 223,
+        "originalHeight": 234,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1141,
+              740
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-shrines-hunter-trap-mechanism",
+      "label": "Hunter trap mechanism",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-shrines",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-shrines-hunter-trap-mechanism.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.41968911917098445,
+        "width": 96,
+        "height": 81,
+        "offset": {
+          "x": 80,
+          "y": 111
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/hunting-shrines.png",
+        "sha256": "9425e016ce727f1dd6897e34f4fcfc9b9e5432cf99717d59b537b3c88da8e638",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1275,
+          780,
+          1507,
+          977
+        ],
+        "bounds": {
+          "x": 1277,
+          "y": 782,
+          "width": 228,
+          "height": 193
+        },
+        "originalWidth": 228,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1337,
+              784
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "hunting-shrines.zip",
+  "contactSheet": "contact-sheet.png"
+}

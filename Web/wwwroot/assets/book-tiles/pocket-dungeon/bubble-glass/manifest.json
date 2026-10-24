@@ -1,0 +1,1853 @@
+{
+  "schemaVersion": 1,
+  "id": "bubble-glass",
+  "style": "pocket-dungeon",
+  "title": "Sandcastle of the Mad Dune Mage",
+  "books": [
+    4
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "bubble-glass-translucent-glass-tile-floor",
+      "label": "Translucent Glass Tile floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6368159203980099,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          46,
+          49,
+          248,
+          254
+        ],
+        "bounds": {
+          "x": 48,
+          "y": 51,
+          "width": 198,
+          "height": 201
+        },
+        "originalWidth": 198,
+        "originalHeight": 201,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              121,
+              53
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-worn-translucent-glass-tile-floor",
+      "label": "Worn translucent glass tile floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-worn-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.64,
+        "scaleY": 0.64,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          295,
+          50,
+          499,
+          254
+        ],
+        "bounds": {
+          "x": 297,
+          "y": 52,
+          "width": 200,
+          "height": 200
+        },
+        "originalWidth": 200,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              309,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-cracked-translucent-glass-tile-floor",
+      "label": "Cracked translucent glass tile floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-cracked-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.64,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          543,
+          50,
+          749,
+          254
+        ],
+        "bounds": {
+          "x": 545,
+          "y": 52,
+          "width": 202,
+          "height": 200
+        },
+        "originalWidth": 202,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              561,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-wet-translucent-glass-tile-floor",
+      "label": "Wet translucent glass tile floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-wet-translucent-glass-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.64,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          792,
+          50,
+          995,
+          254
+        ],
+        "bounds": {
+          "x": 794,
+          "y": 52,
+          "width": 199,
+          "height": 200
+        },
+        "originalWidth": 199,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              866,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-edge-transition",
+      "label": "Translucent Glass Tile edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-translucent-glass-tile-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.64,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1040,
+          50,
+          1243,
+          254
+        ],
+        "bounds": {
+          "x": 1042,
+          "y": 52,
+          "width": 199,
+          "height": 200
+        },
+        "originalWidth": 199,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1081,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-corner-transition",
+      "label": "Translucent Glass Tile corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/bubble-glass-translucent-glass-tile-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.64,
+        "scaleY": 0.6336633663366337,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1288,
+          50,
+          1492,
+          256
+        ],
+        "bounds": {
+          "x": 1290,
+          "y": 52,
+          "width": 200,
+          "height": 202
+        },
+        "originalWidth": 200,
+        "originalHeight": 202,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1308,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-wall-northwest",
+      "label": "Sand Coloured Glass wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.5245901639344263,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          53,
+          285,
+          254,
+          472
+        ],
+        "bounds": {
+          "x": 55,
+          "y": 287,
+          "width": 197,
+          "height": 183
+        },
+        "originalWidth": 197,
+        "originalHeight": 183,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              89,
+              289
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-wall-northeast",
+      "label": "Sand Coloured Glass wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.5853658536585366,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          294,
+          293,
+          497,
+          461
+        ],
+        "bounds": {
+          "x": 296,
+          "y": 295,
+          "width": 199,
+          "height": 164
+        },
+        "originalWidth": 199,
+        "originalHeight": 164,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              457,
+              297
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-outer-corner",
+      "label": "Sand Coloured Glass outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          553,
+          291,
+          748,
+          477
+        ],
+        "bounds": {
+          "x": 555,
+          "y": 293,
+          "width": 191,
+          "height": 182
+        },
+        "originalWidth": 191,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              709,
+              295
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-inner-corner",
+      "label": "Sand Coloured Glass inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5565217391304348,
+        "scaleY": 0.5517241379310345,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          780,
+          279,
+          1014,
+          457
+        ],
+        "bounds": {
+          "x": 782,
+          "y": 281,
+          "width": 230,
+          "height": 174
+        },
+        "originalWidth": 230,
+        "originalHeight": 174,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              888,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-endcap-northwest",
+      "label": "Sand Coloured Glass endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-glass-sand-coloured-glass-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.5647058823529412,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1091,
+          287,
+          1213,
+          461
+        ],
+        "bounds": {
+          "x": 1093,
+          "y": 289,
+          "width": 118,
+          "height": 170
+        },
+        "originalWidth": 118,
+        "originalHeight": 170,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1122,
+              291
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-endcap-northeast",
+      "label": "Sand Coloured Glass endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/bubble-glass-sand-coloured-glass-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.36923076923076925,
+        "scaleY": 0.5680473372781065,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1324,
+          288,
+          1458,
+          461
+        ],
+        "bounds": {
+          "x": 1326,
+          "y": 290,
+          "width": 130,
+          "height": 169
+        },
+        "originalWidth": 130,
+        "originalHeight": 169,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1371,
+              292
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-open-doorway",
+      "label": "Sand Coloured Glass open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6124401913875598,
+        "scaleY": 0.45714285714285713,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          39,
+          501,
+          252,
+          715
+        ],
+        "bounds": {
+          "x": 41,
+          "y": 503,
+          "width": 209,
+          "height": 210
+        },
+        "originalWidth": 209,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              134,
+              505
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-coloured-glass-closed-doorway",
+      "label": "Sand Coloured Glass closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/bubble-glass-sand-coloured-glass-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6153846153846154,
+        "scaleY": 0.47058823529411764,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          297,
+          501,
+          509,
+          709
+        ],
+        "bounds": {
+          "x": 299,
+          "y": 503,
+          "width": 208,
+          "height": 204
+        },
+        "originalWidth": 208,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              391,
+              505
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-stairs-up",
+      "label": "Translucent Glass Tile stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-translucent-glass-tile-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.6285714285714286,
+        "width": 128,
+        "height": 110,
+        "offset": {
+          "x": 64,
+          "y": 82
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          547,
+          527,
+          755,
+          706
+        ],
+        "bounds": {
+          "x": 549,
+          "y": 529,
+          "width": 204,
+          "height": 175
+        },
+        "originalWidth": 204,
+        "originalHeight": 175,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              600,
+              531
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-translucent-glass-tile-stairs-down",
+      "label": "Translucent Glass Tile stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-translucent-glass-tile-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5765765765765766,
+        "scaleY": 0.5792682926829268,
+        "width": 128,
+        "height": 95,
+        "offset": {
+          "x": 64,
+          "y": 97
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          793,
+          539,
+          1019,
+          707
+        ],
+        "bounds": {
+          "x": 795,
+          "y": 541,
+          "width": 222,
+          "height": 164
+        },
+        "originalWidth": 222,
+        "originalHeight": 164,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              818,
+              543
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-glass-spire",
+      "label": "Glass spire",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-glass-spire.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.626984126984127,
+        "width": 96,
+        "height": 158,
+        "offset": {
+          "x": 80,
+          "y": 34
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1087,
+          478,
+          1244,
+          734
+        ],
+        "bounds": {
+          "x": 1089,
+          "y": 480,
+          "width": 153,
+          "height": 252
+        },
+        "originalWidth": 153,
+        "originalHeight": 252,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1161,
+              482
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-lightning-conductor-mast",
+      "label": "Lightning conductor mast",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-lightning-conductor-mast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.689922480620155,
+        "scaleY": 0.6891385767790262,
+        "width": 89,
+        "height": 184,
+        "offset": {
+          "x": 84,
+          "y": 8
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1339,
+          464,
+          1472,
+          735
+        ],
+        "bounds": {
+          "x": 1341,
+          "y": 466,
+          "width": 129,
+          "height": 267
+        },
+        "originalWidth": 129,
+        "originalHeight": 267,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1402,
+              468
+            ],
+            [
+              1366,
+              597
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-heavy-conductor-cable-coil",
+      "label": "Heavy conductor cable coil",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-heavy-conductor-cable-coil.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4304932735426009,
+        "scaleY": 0.42934782608695654,
+        "width": 96,
+        "height": 79,
+        "offset": {
+          "x": 80,
+          "y": 113
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          36,
+          780,
+          263,
+          968
+        ],
+        "bounds": {
+          "x": 38,
+          "y": 782,
+          "width": 223,
+          "height": 184
+        },
+        "originalWidth": 223,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              91,
+              784
+            ],
+            [
+              181,
+              931
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-glass-castle-gate",
+      "label": "Glass castle gate",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-glass-castle-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.44651162790697674,
+        "scaleY": 0.4485981308411215,
+        "width": 96,
+        "height": 96,
+        "offset": {
+          "x": 80,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          289,
+          739,
+          508,
+          957
+        ],
+        "bounds": {
+          "x": 291,
+          "y": 741,
+          "width": 215,
+          "height": 214
+        },
+        "originalWidth": 215,
+        "originalHeight": 214,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              471,
+              743
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-sand-filled-chamber-mound",
+      "label": "Sand filled chamber mound",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-sand-filled-chamber-mound.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3609022556390977,
+        "scaleY": 0.36,
+        "width": 96,
+        "height": 72,
+        "offset": {
+          "x": 80,
+          "y": 120
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          518,
+          774,
+          788,
+          978
+        ],
+        "bounds": {
+          "x": 520,
+          "y": 776,
+          "width": 266,
+          "height": 200
+        },
+        "originalWidth": 266,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              695,
+              778
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-glass-throne",
+      "label": "Glass throne",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-glass-throne.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.46473029045643155,
+        "width": 96,
+        "height": 112,
+        "offset": {
+          "x": 80,
+          "y": 80
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          801,
+          726,
+          1012,
+          971
+        ],
+        "bounds": {
+          "x": 803,
+          "y": 728,
+          "width": 207,
+          "height": 241
+        },
+        "originalWidth": 207,
+        "originalHeight": 241,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              906,
+              730
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-flood-release-wheel",
+      "label": "Flood release wheel",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-flood-release-wheel.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.41201716738197425,
+        "scaleY": 0.4129353233830846,
+        "width": 96,
+        "height": 83,
+        "offset": {
+          "x": 80,
+          "y": 109
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1036,
+          777,
+          1273,
+          982
+        ],
+        "bounds": {
+          "x": 1038,
+          "y": 779,
+          "width": 233,
+          "height": 201
+        },
+        "originalWidth": 233,
+        "originalHeight": 201,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1147,
+              781
+            ],
+            [
+              1101,
+              907
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "bubble-glass-broken-glass-barricade",
+      "label": "Broken glass barricade",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "bubble-glass",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/bubble-glass-broken-glass-barricade.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4304932735426009,
+        "scaleY": 0.43258426966292135,
+        "width": 96,
+        "height": 77,
+        "offset": {
+          "x": 80,
+          "y": 115
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/bubble-glass.png",
+        "sha256": "c8215f2800781955af496ea0b5a298b9a1edf710e893725d0167a0a298c4992e",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1285,
+          789,
+          1512,
+          971
+        ],
+        "bounds": {
+          "x": 1287,
+          "y": 791,
+          "width": 223,
+          "height": 178
+        },
+        "originalWidth": 223,
+        "originalHeight": 178,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1449,
+              793
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "bubble-glass.zip",
+  "contactSheet": "contact-sheet.png"
+}

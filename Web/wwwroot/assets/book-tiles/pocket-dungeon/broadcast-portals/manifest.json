@@ -1,0 +1,1853 @@
+{
+  "schemaVersion": 1,
+  "id": "broadcast-portals",
+  "style": "pocket-dungeon",
+  "title": "Broadcast sets and remote portal views",
+  "books": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "broadcast-portals-studio-stage-panel-floor",
+      "label": "Studio Stage Panel floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          44,
+          40,
+          241,
+          236
+        ],
+        "bounds": {
+          "x": 46,
+          "y": 42,
+          "width": 193,
+          "height": 192
+        },
+        "originalWidth": 193,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              65,
+              44
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-worn-studio-stage-panel-floor",
+      "label": "Worn studio stage panel floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-worn-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          287,
+          39,
+          485,
+          236
+        ],
+        "bounds": {
+          "x": 289,
+          "y": 41,
+          "width": 194,
+          "height": 193
+        },
+        "originalWidth": 194,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              302,
+              43
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-cracked-studio-stage-panel-floor",
+      "label": "Cracked studio stage panel floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-cracked-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          539,
+          39,
+          740,
+          236
+        ],
+        "bounds": {
+          "x": 541,
+          "y": 41,
+          "width": 197,
+          "height": 193
+        },
+        "originalWidth": 197,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              549,
+              43
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-wet-studio-stage-panel-floor",
+      "label": "Wet studio stage panel floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-wet-studio-stage-panel-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          794,
+          39,
+          996,
+          236
+        ],
+        "bounds": {
+          "x": 796,
+          "y": 41,
+          "width": 198,
+          "height": 193
+        },
+        "originalWidth": 198,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              804,
+              43
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-edge-transition",
+      "label": "Studio Stage Panel edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-studio-stage-panel-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1050,
+          39,
+          1246,
+          236
+        ],
+        "bounds": {
+          "x": 1052,
+          "y": 41,
+          "width": 192,
+          "height": 193
+        },
+        "originalWidth": 192,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1068,
+              43
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-corner-transition",
+      "label": "Studio Stage Panel corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/broadcast-portals-studio-stage-panel-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1297,
+          40,
+          1492,
+          234
+        ],
+        "bounds": {
+          "x": 1299,
+          "y": 42,
+          "width": 191,
+          "height": 190
+        },
+        "originalWidth": 191,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1305,
+              44
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-wall-northwest",
+      "label": "Studio Partition wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6124401913875598,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          32,
+          284,
+          245,
+          470
+        ],
+        "bounds": {
+          "x": 34,
+          "y": 286,
+          "width": 209,
+          "height": 182
+        },
+        "originalWidth": 209,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              62,
+              288
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-wall-northeast",
+      "label": "Studio Partition wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          284,
+          283,
+          498,
+          469
+        ],
+        "bounds": {
+          "x": 286,
+          "y": 285,
+          "width": 210,
+          "height": 182
+        },
+        "originalWidth": 210,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              315,
+              287
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-outer-corner",
+      "label": "Studio Partition outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.7071823204419889,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          548,
+          283,
+          733,
+          469
+        ],
+        "bounds": {
+          "x": 550,
+          "y": 285,
+          "width": 181,
+          "height": 182
+        },
+        "originalWidth": 181,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              694,
+              287
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-inner-corner",
+      "label": "Studio Partition inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5871559633027523,
+        "scaleY": 0.5217391304347826,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          783,
+          271,
+          1005,
+          459
+        ],
+        "bounds": {
+          "x": 785,
+          "y": 273,
+          "width": 218,
+          "height": 184
+        },
+        "originalWidth": 218,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              890,
+              275
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-endcap-northwest",
+      "label": "Studio Partition endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/broadcast-portals-studio-partition-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.3,
+        "scaleY": 0.5274725274725275,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1072,
+          277,
+          1236,
+          463
+        ],
+        "bounds": {
+          "x": 1074,
+          "y": 279,
+          "width": 160,
+          "height": 182
+        },
+        "originalWidth": 160,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1106,
+              281
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-endcap-northeast",
+      "label": "Studio Partition endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/broadcast-portals-studio-partition-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.3221476510067114,
+        "scaleY": 0.5393258426966292,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1324,
+          283,
+          1477,
+          465
+        ],
+        "bounds": {
+          "x": 1326,
+          "y": 285,
+          "width": 149,
+          "height": 178
+        },
+        "originalWidth": 149,
+        "originalHeight": 178,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1440,
+              287
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-open-doorway",
+      "label": "Studio Partition open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6009389671361502,
+        "scaleY": 0.49740932642487046,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          29,
+          493,
+          246,
+          690
+        ],
+        "bounds": {
+          "x": 31,
+          "y": 495,
+          "width": 213,
+          "height": 193
+        },
+        "originalWidth": 213,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              60,
+              497
+            ],
+            [
+              120,
+              631
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-partition-closed-doorway",
+      "label": "Studio Partition closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/broadcast-portals-studio-partition-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.4752475247524752,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          291,
+          494,
+          502,
+          700
+        ],
+        "bounds": {
+          "x": 293,
+          "y": 496,
+          "width": 207,
+          "height": 202
+        },
+        "originalWidth": 207,
+        "originalHeight": 202,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              321,
+              498
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-stairs-up",
+      "label": "Studio Stage Panel stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-studio-stage-panel-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5739910313901345,
+        "scaleY": 0.5763546798029556,
+        "width": 128,
+        "height": 117,
+        "offset": {
+          "x": 64,
+          "y": 75
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          526,
+          503,
+          753,
+          710
+        ],
+        "bounds": {
+          "x": 528,
+          "y": 505,
+          "width": 223,
+          "height": 203
+        },
+        "originalWidth": 223,
+        "originalHeight": 203,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              610,
+              507
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-stage-panel-stairs-down",
+      "label": "Studio Stage Panel stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-studio-stage-panel-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5517241379310345,
+        "scaleY": 0.5492227979274611,
+        "width": 128,
+        "height": 106,
+        "offset": {
+          "x": 64,
+          "y": 86
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          777,
+          505,
+          1013,
+          702
+        ],
+        "bounds": {
+          "x": 779,
+          "y": 507,
+          "width": 232,
+          "height": 193
+        },
+        "originalWidth": 232,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              865,
+              509
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-interview-sofa",
+      "label": "Interview sofa",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-interview-sofa.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4050632911392405,
+        "scaleY": 0.4069767441860465,
+        "width": 96,
+        "height": 70,
+        "offset": {
+          "x": 80,
+          "y": 122
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1030,
+          533,
+          1271,
+          709
+        ],
+        "bounds": {
+          "x": 1032,
+          "y": 535,
+          "width": 237,
+          "height": 172
+        },
+        "originalWidth": 237,
+        "originalHeight": 172,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1112,
+              537
+            ],
+            [
+              1065,
+              660
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-studio-camera",
+      "label": "Studio camera",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-studio-camera.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5106382978723404,
+        "scaleY": 0.5118483412322274,
+        "width": 96,
+        "height": 108,
+        "offset": {
+          "x": 80,
+          "y": 84
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1300,
+          498,
+          1492,
+          713
+        ],
+        "bounds": {
+          "x": 1302,
+          "y": 500,
+          "width": 188,
+          "height": 211
+        },
+        "originalWidth": 188,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1440,
+              502
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-broadcast-spotlight",
+      "label": "Broadcast spotlight",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-broadcast-spotlight.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.5454545454545454,
+        "scaleY": 0.546875,
+        "width": 96,
+        "height": 140,
+        "offset": {
+          "x": 80,
+          "y": 52
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          41,
+          715,
+          221,
+          975
+        ],
+        "bounds": {
+          "x": 43,
+          "y": 717,
+          "width": 176,
+          "height": 256
+        },
+        "originalWidth": 176,
+        "originalHeight": 256,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              157,
+              719
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-underwater-trailer-window",
+      "label": "Underwater trailer window",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-underwater-trailer-window.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4,
+        "scaleY": 0.4,
+        "width": 96,
+        "height": 80,
+        "offset": {
+          "x": 80,
+          "y": 112
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          267,
+          745,
+          511,
+          949
+        ],
+        "bounds": {
+          "x": 269,
+          "y": 747,
+          "width": 240,
+          "height": 200
+        },
+        "originalWidth": 240,
+        "originalHeight": 200,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              291,
+              749
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-infomercial-display-podium",
+      "label": "Infomercial display podium",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-infomercial-display-podium.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.4263959390862944,
+        "width": 96,
+        "height": 84,
+        "offset": {
+          "x": 80,
+          "y": 108
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          528,
+          750,
+          757,
+          951
+        ],
+        "bounds": {
+          "x": 530,
+          "y": 752,
+          "width": 225,
+          "height": 197
+        },
+        "originalWidth": 225,
+        "originalHeight": 197,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              607,
+              754
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-convention-stage-backdrop",
+      "label": "Convention stage backdrop",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-convention-stage-backdrop.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3779527559055118,
+        "scaleY": 0.38028169014084506,
+        "width": 96,
+        "height": 81,
+        "offset": {
+          "x": 80,
+          "y": 111
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          765,
+          727,
+          1023,
+          944
+        ],
+        "bounds": {
+          "x": 767,
+          "y": 729,
+          "width": 254,
+          "height": 213
+        },
+        "originalWidth": 254,
+        "originalHeight": 213,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              987,
+              731
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-bubble-boundary-portal",
+      "label": "Bubble boundary portal",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-bubble-boundary-portal.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.41702127659574467,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1030,
+          726,
+          1265,
+          965
+        ],
+        "bounds": {
+          "x": 1032,
+          "y": 728,
+          "width": 231,
+          "height": 235
+        },
+        "originalWidth": 231,
+        "originalHeight": 235,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1136,
+              730
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "broadcast-portals-remote-flooded-city-portal-vista",
+      "label": "Remote flooded city portal vista",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "broadcast-portals",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/broadcast-portals-remote-flooded-city-portal-vista.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.41739130434782606,
+        "scaleY": 0.41630901287553645,
+        "width": 96,
+        "height": 97,
+        "offset": {
+          "x": 80,
+          "y": 95
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/broadcast-portals.png",
+        "sha256": "6400ca79e7809ea7625289d008bdf9f40d0adc9384ca336b01735a117f527266",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1284,
+          728,
+          1518,
+          965
+        ],
+        "bounds": {
+          "x": 1286,
+          "y": 730,
+          "width": 230,
+          "height": 233
+        },
+        "originalWidth": 230,
+        "originalHeight": 233,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1390,
+              732
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "broadcast-portals.zip",
+  "contactSheet": "contact-sheet.png"
+}

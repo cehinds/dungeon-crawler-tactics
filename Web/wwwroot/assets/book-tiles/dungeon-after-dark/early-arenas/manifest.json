@@ -1,0 +1,1849 @@
+{
+  "schemaVersion": 1,
+  "id": "early-arenas",
+  "style": "dungeon-after-dark",
+  "title": "Hoarder, Juicer and Ball of Swine arenas",
+  "books": [
+    1
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "early-arenas-arena-stone-floor",
+      "label": "Arena Stone floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5446808510638298,
+        "scaleY": 0.4507042253521127,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          9,
+          76,
+          248,
+          222
+        ],
+        "bounds": {
+          "x": 11,
+          "y": 78,
+          "width": 235,
+          "height": 142
+        },
+        "originalWidth": 235,
+        "originalHeight": 142,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              126,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-worn-arena-stone-floor",
+      "label": "Worn arena stone floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-worn-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5446808510638298,
+        "scaleY": 0.4507042253521127,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          265,
+          76,
+          504,
+          222
+        ],
+        "bounds": {
+          "x": 267,
+          "y": 78,
+          "width": 235,
+          "height": 142
+        },
+        "originalWidth": 235,
+        "originalHeight": 142,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              382,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-cracked-arena-stone-floor",
+      "label": "Cracked arena stone floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-cracked-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5446808510638298,
+        "scaleY": 0.4507042253521127,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          521,
+          76,
+          760,
+          222
+        ],
+        "bounds": {
+          "x": 523,
+          "y": 78,
+          "width": 235,
+          "height": 142
+        },
+        "originalWidth": 235,
+        "originalHeight": 142,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              637,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-wet-arena-stone-floor",
+      "label": "Wet arena stone floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-wet-arena-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.4507042253521127,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          776,
+          76,
+          1016,
+          222
+        ],
+        "bounds": {
+          "x": 778,
+          "y": 78,
+          "width": 236,
+          "height": 142
+        },
+        "originalWidth": 236,
+        "originalHeight": 142,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-edge-transition",
+      "label": "Arena Stone edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-arena-stone-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5423728813559322,
+        "scaleY": 0.39751552795031053,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1033,
+          60,
+          1273,
+          225
+        ],
+        "bounds": {
+          "x": 1035,
+          "y": 62,
+          "width": 236,
+          "height": 161
+        },
+        "originalWidth": 236,
+        "originalHeight": 161,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1159,
+              64
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-corner-transition",
+      "label": "Arena Stone corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/early-arenas-arena-stone-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5378151260504201,
+        "scaleY": 0.38095238095238093,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1286,
+          54,
+          1528,
+          226
+        ],
+        "bounds": {
+          "x": 1288,
+          "y": 56,
+          "width": 238,
+          "height": 168
+        },
+        "originalWidth": 238,
+        "originalHeight": 168,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1405,
+              58
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-wall-northwest",
+      "label": "Heavy Dungeon Stone wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32323232323232326,
+        "scaleY": 0.4085106382978723,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          36,
+          252,
+          238,
+          491
+        ],
+        "bounds": {
+          "x": 38,
+          "y": 254,
+          "width": 198,
+          "height": 235
+        },
+        "originalWidth": 198,
+        "originalHeight": 235,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              66,
+              256
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-wall-northeast",
+      "label": "Heavy Dungeon Stone wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32160804020100503,
+        "scaleY": 0.4085106382978723,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          275,
+          252,
+          478,
+          491
+        ],
+        "bounds": {
+          "x": 277,
+          "y": 254,
+          "width": 199,
+          "height": 235
+        },
+        "originalWidth": 199,
+        "originalHeight": 235,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              443,
+              256
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-outer-corner",
+      "label": "Heavy Dungeon Stone outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.4948453608247423,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          547,
+          277,
+          735,
+          475
+        ],
+        "bounds": {
+          "x": 549,
+          "y": 279,
+          "width": 184,
+          "height": 194
+        },
+        "originalWidth": 184,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              701,
+              281
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-inner-corner",
+      "label": "Heavy Dungeon Stone inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.5161290322580645,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          791,
+          267,
+          1000,
+          457
+        ],
+        "bounds": {
+          "x": 793,
+          "y": 269,
+          "width": 205,
+          "height": 186
+        },
+        "originalWidth": 205,
+        "originalHeight": 186,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-endcap-northwest",
+      "label": "Heavy Dungeon Stone endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/early-arenas-heavy-dungeon-stone-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32,
+        "scaleY": 0.5026178010471204,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1105,
+          267,
+          1209,
+          462
+        ],
+        "bounds": {
+          "x": 1107,
+          "y": 269,
+          "width": 100,
+          "height": 191
+        },
+        "originalWidth": 100,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1146,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-endcap-northeast",
+      "label": "Heavy Dungeon Stone endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/early-arenas-heavy-dungeon-stone-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32,
+        "scaleY": 0.5026178010471204,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1353,
+          267,
+          1457,
+          462
+        ],
+        "bounds": {
+          "x": 1355,
+          "y": 269,
+          "width": 100,
+          "height": 191
+        },
+        "originalWidth": 100,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1414,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-open-doorway",
+      "label": "Heavy Dungeon Stone open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3575418994413408,
+        "scaleY": 0.4247787610619469,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          45,
+          511,
+          228,
+          741
+        ],
+        "bounds": {
+          "x": 47,
+          "y": 513,
+          "width": 179,
+          "height": 226
+        },
+        "originalWidth": 179,
+        "originalHeight": 226,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              73,
+              515
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-heavy-dungeon-stone-closed-doorway",
+      "label": "Heavy Dungeon Stone closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/early-arenas-heavy-dungeon-stone-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.35555555555555557,
+        "scaleY": 0.4266666666666667,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          293,
+          512,
+          477,
+          741
+        ],
+        "bounds": {
+          "x": 295,
+          "y": 514,
+          "width": 180,
+          "height": 225
+        },
+        "originalWidth": 180,
+        "originalHeight": 225,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              320,
+              516
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-stairs-up",
+      "label": "Arena Stone stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-arena-stone-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5638766519823789,
+        "scaleY": 0.5662650602409639,
+        "width": 128,
+        "height": 94,
+        "offset": {
+          "x": 64,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          517,
+          560,
+          748,
+          730
+        ],
+        "bounds": {
+          "x": 519,
+          "y": 562,
+          "width": 227,
+          "height": 166
+        },
+        "originalWidth": 227,
+        "originalHeight": 166,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              629,
+              564
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-arena-stone-stairs-down",
+      "label": "Arena Stone stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-arena-stone-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5203252032520326,
+        "scaleY": 0.5217391304347826,
+        "width": 128,
+        "height": 84,
+        "offset": {
+          "x": 64,
+          "y": 108
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          772,
+          553,
+          1022,
+          718
+        ],
+        "bounds": {
+          "x": 774,
+          "y": 555,
+          "width": 246,
+          "height": 161
+        },
+        "originalWidth": 246,
+        "originalHeight": 161,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              557
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-huge-rubbish-heap",
+      "label": "Huge rubbish heap",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-huge-rubbish-heap.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.3794466403162055,
+        "scaleY": 0.3769633507853403,
+        "width": 96,
+        "height": 72,
+        "offset": {
+          "x": 80,
+          "y": 120
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1026,
+          547,
+          1283,
+          742
+        ],
+        "bounds": {
+          "x": 1028,
+          "y": 549,
+          "width": 253,
+          "height": 191
+        },
+        "originalWidth": 253,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1141,
+              551
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-scrap-throne",
+      "label": "Scrap throne",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-scrap-throne.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.47761194029850745,
+        "scaleY": 0.4793388429752066,
+        "width": 96,
+        "height": 116,
+        "offset": {
+          "x": 80,
+          "y": 76
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1315,
+          497,
+          1520,
+          743
+        ],
+        "bounds": {
+          "x": 1317,
+          "y": 499,
+          "width": 201,
+          "height": 242
+        },
+        "originalWidth": 201,
+        "originalHeight": 242,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1417,
+              501
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-gym-reception-turnstile",
+      "label": "Gym reception turnstile",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-gym-reception-turnstile.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.4662576687116564,
+        "width": 96,
+        "height": 76,
+        "offset": {
+          "x": 80,
+          "y": 116
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          27,
+          812,
+          238,
+          979
+        ],
+        "bounds": {
+          "x": 29,
+          "y": 814,
+          "width": 207,
+          "height": 163
+        },
+        "originalWidth": 207,
+        "originalHeight": 163,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              123,
+              816
+            ],
+            [
+              67,
+              865
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-weight-bench",
+      "label": "Weight bench",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-weight-bench.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41201716738197425,
+        "scaleY": 0.41409691629955947,
+        "width": 96,
+        "height": 94,
+        "offset": {
+          "x": 80,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          280,
+          775,
+          517,
+          1006
+        ],
+        "bounds": {
+          "x": 282,
+          "y": 777,
+          "width": 233,
+          "height": 227
+        },
+        "originalWidth": 233,
+        "originalHeight": 227,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              385,
+              779
+            ],
+            [
+              385,
+              937
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-red-warning-beacon",
+      "label": "Red warning beacon",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-red-warning-beacon.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5454545454545454,
+        "scaleY": 0.5441176470588235,
+        "width": 96,
+        "height": 111,
+        "offset": {
+          "x": 80,
+          "y": 81
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          554,
+          786,
+          734,
+          994
+        ],
+        "bounds": {
+          "x": 556,
+          "y": 788,
+          "width": 176,
+          "height": 204
+        },
+        "originalWidth": 176,
+        "originalHeight": 204,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              649,
+              790
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-round-arena-stairwell",
+      "label": "Round arena stairwell",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-round-arena-stairwell.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.40804597701149425,
+        "width": 96,
+        "height": 71,
+        "offset": {
+          "x": 80,
+          "y": 121
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          776,
+          797,
+          1016,
+          975
+        ],
+        "bounds": {
+          "x": 778,
+          "y": 799,
+          "width": 236,
+          "height": 174
+        },
+        "originalWidth": 236,
+        "originalHeight": 174,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              896,
+              801
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-bridge-control-lever",
+      "label": "Bridge control lever",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-bridge-control-lever.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.49740932642487046,
+        "scaleY": 0.4956140350877193,
+        "width": 96,
+        "height": 113,
+        "offset": {
+          "x": 80,
+          "y": 79
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1045,
+          774,
+          1242,
+          1006
+        ],
+        "bounds": {
+          "x": 1047,
+          "y": 776,
+          "width": 193,
+          "height": 228
+        },
+        "originalWidth": 193,
+        "originalHeight": 228,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1189,
+              778
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "early-arenas-gated-stone-bridge",
+      "label": "Gated stone bridge",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "early-arenas",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/early-arenas-gated-stone-bridge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4247787610619469,
+        "scaleY": 0.42436974789915966,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/early-arenas.png",
+        "sha256": "43cfe9cf8184b5b302ee7e70090c91d4713d0f67db6fa0225d04b006b619fc62",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1291,
+          763,
+          1521,
+          1005
+        ],
+        "bounds": {
+          "x": 1293,
+          "y": 765,
+          "width": 226,
+          "height": 238
+        },
+        "originalWidth": 226,
+        "originalHeight": 238,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1464,
+              767
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "early-arenas.zip",
+  "contactSheet": "contact-sheet.png"
+}

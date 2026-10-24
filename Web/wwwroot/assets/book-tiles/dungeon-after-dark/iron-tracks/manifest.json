@@ -1,0 +1,1841 @@
+{
+  "schemaVersion": 1,
+  "id": "iron-tracks",
+  "style": "dungeon-after-dark",
+  "title": "Iron Tangle rails and tunnels",
+  "books": [
+    3
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "iron-tracks-rail-straight-northeast-southwest",
+      "label": "Rail straight northeast southwest",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-tracks-rail-straight-northeast-southwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5161290322580645,
+        "scaleY": 0.43243243243243246,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          4,
+          81,
+          256,
+          233
+        ],
+        "bounds": {
+          "x": 6,
+          "y": 83,
+          "width": 248,
+          "height": 148
+        },
+        "originalWidth": 248,
+        "originalHeight": 148,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              123,
+              85
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-straight-northwest-southeast",
+      "label": "Rail straight northwest southeast",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-tracks-rail-straight-northwest-southeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5140562248995983,
+        "scaleY": 0.42953020134228187,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          259,
+          79,
+          512,
+          232
+        ],
+        "bounds": {
+          "x": 261,
+          "y": 81,
+          "width": 249,
+          "height": 149
+        },
+        "originalWidth": 249,
+        "originalHeight": 149,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              381,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-curve",
+      "label": "Rail curve",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-tracks-rail-curve.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5140562248995983,
+        "scaleY": 0.423841059602649,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          515,
+          79,
+          768,
+          234
+        ],
+        "bounds": {
+          "x": 517,
+          "y": 81,
+          "width": 249,
+          "height": 151
+        },
+        "originalWidth": 249,
+        "originalHeight": 151,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              643,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-t-junction",
+      "label": "Rail T junction",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-tracks-rail-t-junction.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5182186234817814,
+        "scaleY": 0.423841059602649,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          769,
+          79,
+          1020,
+          234
+        ],
+        "bounds": {
+          "x": 771,
+          "y": 81,
+          "width": 247,
+          "height": 151
+        },
+        "originalWidth": 247,
+        "originalHeight": 151,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              888,
+              83
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-crossroads",
+      "label": "Rail crossroads",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-tracks-rail-crossroads.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5059288537549407,
+        "scaleY": 0.41830065359477125,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1023,
+          77,
+          1280,
+          234
+        ],
+        "bounds": {
+          "x": 1025,
+          "y": 79,
+          "width": 253,
+          "height": 153
+        },
+        "originalWidth": 253,
+        "originalHeight": 153,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1148,
+              81
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-siding-junction",
+      "label": "Rail siding junction",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/iron-tracks-rail-siding-junction.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5182186234817814,
+        "scaleY": 0.4266666666666667,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1282,
+          78,
+          1533,
+          232
+        ],
+        "bounds": {
+          "x": 1284,
+          "y": 80,
+          "width": 247,
+          "height": 150
+        },
+        "originalWidth": 247,
+        "originalHeight": 150,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1410,
+              82
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-wall-northwest",
+      "label": "Tunnel Stone wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-tracks-tunnel-stone-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3106796116504854,
+        "scaleY": 0.4304932735426009,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          37,
+          269,
+          247,
+          496
+        ],
+        "bounds": {
+          "x": 39,
+          "y": 271,
+          "width": 206,
+          "height": 223
+        },
+        "originalWidth": 206,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              64,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-wall-northeast",
+      "label": "Tunnel Stone wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-tracks-tunnel-stone-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.30917874396135264,
+        "scaleY": 0.43243243243243246,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          270,
+          269,
+          481,
+          495
+        ],
+        "bounds": {
+          "x": 272,
+          "y": 271,
+          "width": 207,
+          "height": 222
+        },
+        "originalWidth": 207,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              449,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-outer-corner",
+      "label": "Tunnel Stone outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-tracks-tunnel-stone-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5898617511520737,
+        "scaleY": 0.5217391304347826,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          535,
+          278,
+          756,
+          466
+        ],
+        "bounds": {
+          "x": 537,
+          "y": 280,
+          "width": 217,
+          "height": 184
+        },
+        "originalWidth": 217,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              727,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-inner-corner",
+      "label": "Tunnel Stone inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-tracks-tunnel-stone-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          774,
+          271,
+          1020,
+          457
+        ],
+        "bounds": {
+          "x": 776,
+          "y": 273,
+          "width": 242,
+          "height": 182
+        },
+        "originalWidth": 242,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              275
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-endcap-northwest",
+      "label": "Tunnel Stone endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-tracks-tunnel-stone-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.2601626016260163,
+        "scaleY": 0.5454545454545454,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1087,
+          294,
+          1214,
+          474
+        ],
+        "bounds": {
+          "x": 1089,
+          "y": 296,
+          "width": 123,
+          "height": 176
+        },
+        "originalWidth": 123,
+        "originalHeight": 176,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1114,
+              298
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-endcap-northeast",
+      "label": "Tunnel Stone endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/iron-tracks-tunnel-stone-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.25396825396825395,
+        "scaleY": 0.5217391304347826,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1343,
+          286,
+          1473,
+          474
+        ],
+        "bounds": {
+          "x": 1345,
+          "y": 288,
+          "width": 126,
+          "height": 184
+        },
+        "originalWidth": 126,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1440,
+              290
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-open-doorway",
+      "label": "Tunnel Stone open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-tracks-tunnel-stone-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3106796116504854,
+        "scaleY": 0.43636363636363634,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          35,
+          514,
+          245,
+          738
+        ],
+        "bounds": {
+          "x": 37,
+          "y": 516,
+          "width": 206,
+          "height": 220
+        },
+        "originalWidth": 206,
+        "originalHeight": 220,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              63,
+              518
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-stone-closed-doorway",
+      "label": "Tunnel Stone closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/iron-tracks-tunnel-stone-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32989690721649484,
+        "scaleY": 0.4383561643835616,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          274,
+          514,
+          472,
+          737
+        ],
+        "bounds": {
+          "x": 276,
+          "y": 516,
+          "width": 194,
+          "height": 219
+        },
+        "originalWidth": 194,
+        "originalHeight": 219,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              439,
+              518
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-ballast-stairs-up",
+      "label": "Rail Ballast stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-rail-ballast-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5203252032520326,
+        "scaleY": 0.5214723926380368,
+        "width": 128,
+        "height": 85,
+        "offset": {
+          "x": 64,
+          "y": 107
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          515,
+          541,
+          765,
+          708
+        ],
+        "bounds": {
+          "x": 517,
+          "y": 543,
+          "width": 246,
+          "height": 163
+        },
+        "originalWidth": 246,
+        "originalHeight": 163,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              656,
+              545
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-ballast-stairs-down",
+      "label": "Rail Ballast stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-rail-ballast-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5059288537549407,
+        "scaleY": 0.5032679738562091,
+        "width": 128,
+        "height": 77,
+        "offset": {
+          "x": 64,
+          "y": 115
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          770,
+          551,
+          1027,
+          708
+        ],
+        "bounds": {
+          "x": 772,
+          "y": 553,
+          "width": 253,
+          "height": 153
+        },
+        "originalWidth": 253,
+        "originalHeight": 153,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              555
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-signal-mast",
+      "label": "Rail signal mast",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-rail-signal-mast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.6,
+        "scaleY": 0.5990783410138248,
+        "width": 96,
+        "height": 130,
+        "offset": {
+          "x": 80,
+          "y": 62
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1072,
+          505,
+          1236,
+          726
+        ],
+        "bounds": {
+          "x": 1074,
+          "y": 507,
+          "width": 160,
+          "height": 217
+        },
+        "originalWidth": 160,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1152,
+              509
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-third-rail-insulator",
+      "label": "Third rail insulator",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-third-rail-insulator.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4192139737991266,
+        "scaleY": 0.4180790960451977,
+        "width": 96,
+        "height": 74,
+        "offset": {
+          "x": 80,
+          "y": 118
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1290,
+          538,
+          1523,
+          719
+        ],
+        "bounds": {
+          "x": 1292,
+          "y": 540,
+          "width": 229,
+          "height": 177
+        },
+        "originalWidth": 229,
+        "originalHeight": 177,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1469,
+              542
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-track-switch-lever",
+      "label": "Track switch lever",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-track-switch-lever.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.41025641025641024,
+        "width": 96,
+        "height": 80,
+        "offset": {
+          "x": 80,
+          "y": 112
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          13,
+          766,
+          252,
+          965
+        ],
+        "bounds": {
+          "x": 15,
+          "y": 768,
+          "width": 235,
+          "height": 195
+        },
+        "originalWidth": 235,
+        "originalHeight": 195,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              208,
+              770
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-maintenance-walkway",
+      "label": "Maintenance walkway",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-maintenance-walkway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.38247011952191234,
+        "scaleY": 0.3811881188118812,
+        "width": 96,
+        "height": 77,
+        "offset": {
+          "x": 80,
+          "y": 115
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          255,
+          759,
+          510,
+          965
+        ],
+        "bounds": {
+          "x": 257,
+          "y": 761,
+          "width": 251,
+          "height": 202
+        },
+        "originalWidth": 251,
+        "originalHeight": 202,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              418,
+              763
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-rail-buffer-stop",
+      "label": "Rail buffer stop",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-rail-buffer-stop.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.36923076923076925,
+        "scaleY": 0.3673469387755102,
+        "width": 96,
+        "height": 72,
+        "offset": {
+          "x": 80,
+          "y": 120
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          511,
+          760,
+          775,
+          960
+        ],
+        "bounds": {
+          "x": 513,
+          "y": 762,
+          "width": 260,
+          "height": 196
+        },
+        "originalWidth": 260,
+        "originalHeight": 196,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              587,
+              764
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-ventilation-fan",
+      "label": "Tunnel ventilation fan",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-tunnel-ventilation-fan.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.470873786407767,
+        "width": 96,
+        "height": 97,
+        "offset": {
+          "x": 80,
+          "y": 95
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          796,
+          750,
+          1004,
+          960
+        ],
+        "bounds": {
+          "x": 798,
+          "y": 752,
+          "width": 204,
+          "height": 206
+        },
+        "originalWidth": 204,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              912,
+              754
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-cable-cabinet",
+      "label": "Cable cabinet",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-cable-cabinet.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.46411483253588515,
+        "width": 96,
+        "height": 97,
+        "offset": {
+          "x": 80,
+          "y": 95
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1047,
+          755,
+          1258,
+          968
+        ],
+        "bounds": {
+          "x": 1049,
+          "y": 757,
+          "width": 207,
+          "height": 209
+        },
+        "originalWidth": 207,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1164,
+              759
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "iron-tracks-tunnel-portal-frame",
+      "label": "Tunnel portal frame",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "iron-tracks",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/iron-tracks-tunnel-portal-frame.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4192139737991266,
+        "scaleY": 0.41706161137440756,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/iron-tracks.png",
+        "sha256": "4f94b705e26ea78a6274e4e80e6f70248a19fd3b235913fd0b8e798d3910829b",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1285,
+          741,
+          1518,
+          956
+        ],
+        "bounds": {
+          "x": 1287,
+          "y": 743,
+          "width": 229,
+          "height": 211
+        },
+        "originalWidth": 229,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1453,
+              745
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "iron-tracks.zip",
+  "contactSheet": "contact-sheet.png"
+}

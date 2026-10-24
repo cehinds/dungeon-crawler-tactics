@@ -1,0 +1,1852 @@
+{
+  "schemaVersion": 1,
+  "id": "clubs-guilds",
+  "style": "dungeon-after-dark",
+  "title": "Desperado, Vanquisher, markets and guilds",
+  "books": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "clubs-guilds-club-carpet-floor",
+      "label": "Club Carpet floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.5079365079365079,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          9,
+          67,
+          246,
+          197
+        ],
+        "bounds": {
+          "x": 11,
+          "y": 69,
+          "width": 233,
+          "height": 126
+        },
+        "originalWidth": 233,
+        "originalHeight": 126,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              125,
+              71
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-worn-club-carpet-floor",
+      "label": "Worn club carpet floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-worn-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.5079365079365079,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          266,
+          67,
+          503,
+          197
+        ],
+        "bounds": {
+          "x": 268,
+          "y": 69,
+          "width": 233,
+          "height": 126
+        },
+        "originalWidth": 233,
+        "originalHeight": 126,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              383,
+              71
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-cracked-club-carpet-floor",
+      "label": "Cracked club carpet floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-cracked-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.5079365079365079,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          522,
+          67,
+          759,
+          197
+        ],
+        "bounds": {
+          "x": 524,
+          "y": 69,
+          "width": 233,
+          "height": 126
+        },
+        "originalWidth": 233,
+        "originalHeight": 126,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              638,
+              71
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-wet-club-carpet-floor",
+      "label": "Wet club carpet floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-wet-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5517241379310345,
+        "scaleY": 0.5079365079365079,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          778,
+          67,
+          1014,
+          197
+        ],
+        "bounds": {
+          "x": 780,
+          "y": 69,
+          "width": 232,
+          "height": 126
+        },
+        "originalWidth": 232,
+        "originalHeight": 126,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              71
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-edge-transition",
+      "label": "Club Carpet edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-club-carpet-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.5079365079365079,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1034,
+          67,
+          1271,
+          197
+        ],
+        "bounds": {
+          "x": 1036,
+          "y": 69,
+          "width": 233,
+          "height": 126
+        },
+        "originalWidth": 233,
+        "originalHeight": 126,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1150,
+              71
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-corner-transition",
+      "label": "Club Carpet corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-club-carpet-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5470085470085471,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1289,
+          64,
+          1527,
+          199
+        ],
+        "bounds": {
+          "x": 1291,
+          "y": 66,
+          "width": 234,
+          "height": 131
+        },
+        "originalWidth": 234,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1407,
+              68
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-wall-northwest",
+      "label": "Dark Polished Club Panel wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3615819209039548,
+        "scaleY": 0.44651162790697674,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          36,
+          265,
+          217,
+          484
+        ],
+        "bounds": {
+          "x": 38,
+          "y": 267,
+          "width": 177,
+          "height": 215
+        },
+        "originalWidth": 177,
+        "originalHeight": 215,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              59,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-wall-northeast",
+      "label": "Dark Polished Club Panel wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3615819209039548,
+        "scaleY": 0.4444444444444444,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          296,
+          265,
+          477,
+          485
+        ],
+        "bounds": {
+          "x": 298,
+          "y": 267,
+          "width": 177,
+          "height": 216
+        },
+        "originalWidth": 177,
+        "originalHeight": 216,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              449,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-outer-corner",
+      "label": "Dark Polished Club Panel outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.810126582278481,
+        "scaleY": 0.5026178010471204,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          559,
+          272,
+          721,
+          467
+        ],
+        "bounds": {
+          "x": 561,
+          "y": 274,
+          "width": 158,
+          "height": 191
+        },
+        "originalWidth": 158,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              582,
+              276
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-inner-corner",
+      "label": "Dark Polished Club Panel inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.64,
+        "scaleY": 0.5,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          794,
+          265,
+          998,
+          461
+        ],
+        "bounds": {
+          "x": 796,
+          "y": 267,
+          "width": 200,
+          "height": 192
+        },
+        "originalWidth": 200,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-endcap-northwest",
+      "label": "Dark Polished Club Panel endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/clubs-guilds-dark-polished-club-panel-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.5079365079365079,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1109,
+          269,
+          1191,
+          462
+        ],
+        "bounds": {
+          "x": 1111,
+          "y": 271,
+          "width": 78,
+          "height": 189
+        },
+        "originalWidth": 78,
+        "originalHeight": 189,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1132,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-endcap-northeast",
+      "label": "Dark Polished Club Panel endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/clubs-guilds-dark-polished-club-panel-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.5052631578947369,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1370,
+          269,
+          1452,
+          463
+        ],
+        "bounds": {
+          "x": 1372,
+          "y": 271,
+          "width": 78,
+          "height": 190
+        },
+        "originalWidth": 78,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1424,
+              273
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-open-doorway",
+      "label": "Dark Polished Club Panel open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3575418994413408,
+        "scaleY": 0.4383561643835616,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          33,
+          511,
+          216,
+          734
+        ],
+        "bounds": {
+          "x": 35,
+          "y": 513,
+          "width": 179,
+          "height": 219
+        },
+        "originalWidth": 179,
+        "originalHeight": 219,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              58,
+              515
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-closed-doorway",
+      "label": "Dark Polished Club Panel closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3595505617977528,
+        "scaleY": 0.4383561643835616,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          298,
+          511,
+          480,
+          734
+        ],
+        "bounds": {
+          "x": 300,
+          "y": 513,
+          "width": 178,
+          "height": 219
+        },
+        "originalWidth": 178,
+        "originalHeight": 219,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              453,
+              515
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-stairs-up",
+      "label": "Club Carpet stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-club-carpet-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.6066350710900474,
+        "scaleY": 0.6062176165803109,
+        "width": 128,
+        "height": 117,
+        "offset": {
+          "x": 64,
+          "y": 75
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          526,
+          523,
+          741,
+          720
+        ],
+        "bounds": {
+          "x": 528,
+          "y": 525,
+          "width": 211,
+          "height": 193
+        },
+        "originalWidth": 211,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              624,
+              527
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-stairs-down",
+      "label": "Club Carpet stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-club-carpet-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.567741935483871,
+        "width": 128,
+        "height": 88,
+        "offset": {
+          "x": 64,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          781,
+          553,
+          1011,
+          712
+        ],
+        "bounds": {
+          "x": 783,
+          "y": 555,
+          "width": 226,
+          "height": 155
+        },
+        "originalWidth": 226,
+        "originalHeight": 155,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              889,
+              557
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-neon-club-entrance",
+      "label": "Neon club entrance",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-neon-club-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4343891402714932,
+        "scaleY": 0.4349775784753363,
+        "width": 96,
+        "height": 97,
+        "offset": {
+          "x": 80,
+          "y": 95
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1040,
+          506,
+          1265,
+          733
+        ],
+        "bounds": {
+          "x": 1042,
+          "y": 508,
+          "width": 221,
+          "height": 223
+        },
+        "originalWidth": 221,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1124,
+              510
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-casino-gaming-table",
+      "label": "Casino gaming table",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-casino-gaming-table.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.44565217391304346,
+        "width": 96,
+        "height": 82,
+        "offset": {
+          "x": 80,
+          "y": 110
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1290,
+          544,
+          1510,
+          732
+        ],
+        "bounds": {
+          "x": 1292,
+          "y": 546,
+          "width": 216,
+          "height": 184
+        },
+        "originalWidth": 216,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1427,
+              548
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-restaurant-booth",
+      "label": "Restaurant booth",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-restaurant-booth.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.4166666666666667,
+        "width": 96,
+        "height": 80,
+        "offset": {
+          "x": 80,
+          "y": 112
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          11,
+          783,
+          246,
+          979
+        ],
+        "bounds": {
+          "x": 13,
+          "y": 785,
+          "width": 231,
+          "height": 192
+        },
+        "originalWidth": 231,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              114,
+              787
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-private-conversation-booth",
+      "label": "Private conversation booth",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-private-conversation-booth.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5079365079365079,
+        "scaleY": 0.5093167701863354,
+        "width": 96,
+        "height": 82,
+        "offset": {
+          "x": 80,
+          "y": 110
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          286,
+          797,
+          479,
+          962
+        ],
+        "bounds": {
+          "x": 288,
+          "y": 799,
+          "width": 189,
+          "height": 161
+        },
+        "originalWidth": 189,
+        "originalHeight": 161,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              369,
+              801
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-guild-training-doorway",
+      "label": "Guild training doorway",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-guild-training-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.49740932642487046,
+        "scaleY": 0.494949494949495,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          540,
+          764,
+          737,
+          966
+        ],
+        "bounds": {
+          "x": 542,
+          "y": 766,
+          "width": 193,
+          "height": 198
+        },
+        "originalWidth": 193,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              594,
+              768
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-silk-market-stall",
+      "label": "Silk market stall",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-silk-market-stall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.4343891402714932,
+        "width": 96,
+        "height": 96,
+        "offset": {
+          "x": 80,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          781,
+          761,
+          1005,
+          986
+        ],
+        "bounds": {
+          "x": 783,
+          "y": 763,
+          "width": 220,
+          "height": 221
+        },
+        "originalWidth": 220,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              887,
+              765
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-mercenary-reception-desk",
+      "label": "Mercenary reception desk",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-mercenary-reception-desk.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4343891402714932,
+        "scaleY": 0.43414634146341463,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1036,
+          776,
+          1261,
+          985
+        ],
+        "bounds": {
+          "x": 1038,
+          "y": 778,
+          "width": 221,
+          "height": 205
+        },
+        "originalWidth": 221,
+        "originalHeight": 205,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1147,
+              780
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-clean-white-club-entrance",
+      "label": "Clean white club entrance",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-clean-white-club-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41739130434782606,
+        "scaleY": 0.41743119266055045,
+        "width": 96,
+        "height": 91,
+        "offset": {
+          "x": 80,
+          "y": 101
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
+        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1287,
+          761,
+          1521,
+          983
+        ],
+        "bounds": {
+          "x": 1289,
+          "y": 763,
+          "width": 230,
+          "height": 218
+        },
+        "originalWidth": 230,
+        "originalHeight": 218,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1402,
+              765
+            ],
+            [
+              1332,
+              926
+            ],
+            [
+              1332,
+              929
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "clubs-guilds.zip",
+  "contactSheet": "contact-sheet.png"
+}

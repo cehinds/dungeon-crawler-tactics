@@ -1,0 +1,1861 @@
+{
+  "schemaVersion": 1,
+  "id": "over-city",
+  "style": "dungeon-after-dark",
+  "title": "Over City streets and ruins",
+  "books": [
+    2
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "over-city-city-cobblestone-floor",
+      "label": "City Cobblestone floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/over-city-city-cobblestone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5333333333333333,
+        "scaleY": 0.4740740740740741,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          12,
+          75,
+          256,
+          214
+        ],
+        "bounds": {
+          "x": 14,
+          "y": 77,
+          "width": 240,
+          "height": 135
+        },
+        "originalWidth": 240,
+        "originalHeight": 135,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              131,
+              79
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "over-city-worn-city-cobblestone-floor",
+      "label": "Worn city cobblestone floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/over-city-worn-city-cobblestone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5333333333333333,
+        "scaleY": 0.4740740740740741,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          266,
+          75,
+          510,
+          214
+        ],
+        "bounds": {
+          "x": 268,
+          "y": 77,
+          "width": 240,
+          "height": 135
+        },
+        "originalWidth": 240,
+        "originalHeight": 135,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              385,
+              79
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "over-city-cracked-city-cobblestone-floor",
+      "label": "Cracked city cobblestone floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/over-city-cracked-city-cobblestone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5333333333333333,
+        "scaleY": 0.4740740740740741,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          521,
+          75,
+          765,
+          214
+        ],
+        "bounds": {
+          "x": 523,
+          "y": 77,
+          "width": 240,
+          "height": 135
+        },
+        "originalWidth": 240,
+        "originalHeight": 135,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              640,
+              79
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "over-city-wet-city-cobblestone-floor",
+      "label": "Wet city cobblestone floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/over-city-wet-city-cobblestone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5311203319502075,
+        "scaleY": 0.4740740740740741,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          774,
+          75,
+          1019,
+          214
+        ],
+        "bounds": {
+          "x": 776,
+          "y": 77,
+          "width": 241,
+          "height": 135
+        },
+        "originalWidth": 241,
+        "originalHeight": 135,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              79
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "over-city-city-cobblestone-edge-transition",
+      "label": "City Cobblestone edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/over-city-city-cobblestone-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.4383561643835616,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1032,
+          65,
+          1278,
+          215
+        ],
+        "bounds": {
+          "x": 1034,
+          "y": 67,
+          "width": 242,
+          "height": 146
+        },
+        "originalWidth": 242,
+        "originalHeight": 146,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1169,
+              69
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "over-city-city-cobblestone-corner-transition",
+      "label": "City Cobblestone corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/over-city-city-cobblestone-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.45390070921985815,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1291,
+          68,
+          1520,
+          213
+        ],
+        "bounds": {
+          "x": 1293,
+          "y": 70,
+          "width": 225,
+          "height": 141
+        },
+        "originalWidth": 225,
+        "originalHeight": 141,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1394,
+              72
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-wall-northwest",
+      "label": "Weathered City Masonry wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/over-city-weathered-city-masonry-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34408602150537637,
+        "scaleY": 0.45714285714285713,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          48,
+          263,
+          238,
+          477
+        ],
+        "bounds": {
+          "x": 50,
+          "y": 265,
+          "width": 186,
+          "height": 210
+        },
+        "originalWidth": 186,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              79,
+              267
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-wall-northeast",
+      "label": "Weathered City Masonry wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/over-city-weathered-city-masonry-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34594594594594597,
+        "scaleY": 0.45714285714285713,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          281,
+          263,
+          470,
+          477
+        ],
+        "bounds": {
+          "x": 283,
+          "y": 265,
+          "width": 185,
+          "height": 210
+        },
+        "originalWidth": 185,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              439,
+              267
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-outer-corner",
+      "label": "Weathered City Masonry outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/over-city-weathered-city-masonry-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.7485380116959064,
+        "scaleY": 0.5363128491620112,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          554,
+          287,
+          729,
+          470
+        ],
+        "bounds": {
+          "x": 556,
+          "y": 289,
+          "width": 171,
+          "height": 179
+        },
+        "originalWidth": 171,
+        "originalHeight": 179,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              692,
+              291
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-inner-corner",
+      "label": "Weathered City Masonry inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/over-city-weathered-city-masonry-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.5517241379310345,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          792,
+          275,
+          1000,
+          453
+        ],
+        "bounds": {
+          "x": 794,
+          "y": 277,
+          "width": 204,
+          "height": 174
+        },
+        "originalWidth": 204,
+        "originalHeight": 174,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              279
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-endcap-northwest",
+      "label": "Weathered City Masonry endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/over-city-weathered-city-masonry-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32653061224489793,
+        "scaleY": 0.4948453608247423,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1103,
+          261,
+          1205,
+          459
+        ],
+        "bounds": {
+          "x": 1105,
+          "y": 263,
+          "width": 98,
+          "height": 194
+        },
+        "originalWidth": 98,
+        "originalHeight": 194,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1166,
+              265
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-endcap-northeast",
+      "label": "Weathered City Masonry endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/over-city-weathered-city-masonry-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.32323232323232326,
+        "scaleY": 0.49740932642487046,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1345,
+          264,
+          1448,
+          461
+        ],
+        "bounds": {
+          "x": 1347,
+          "y": 266,
+          "width": 99,
+          "height": 193
+        },
+        "originalWidth": 99,
+        "originalHeight": 193,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1378,
+              268
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-open-doorway",
+      "label": "Weathered City Masonry open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/over-city-weathered-city-masonry-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.35359116022099446,
+        "scaleY": 0.43243243243243246,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          51,
+          499,
+          236,
+          725
+        ],
+        "bounds": {
+          "x": 53,
+          "y": 501,
+          "width": 181,
+          "height": 222
+        },
+        "originalWidth": 181,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              78,
+              503
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-weathered-city-masonry-closed-doorway",
+      "label": "Weathered City Masonry closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/over-city-weathered-city-masonry-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3595505617977528,
+        "scaleY": 0.4343891402714932,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          300,
+          498,
+          482,
+          723
+        ],
+        "bounds": {
+          "x": 302,
+          "y": 500,
+          "width": 178,
+          "height": 221
+        },
+        "originalWidth": 178,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              331,
+              502
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-city-cobblestone-stairs-up",
+      "label": "City Cobblestone stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-city-cobblestone-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          518,
+          529,
+          764,
+          715
+        ],
+        "bounds": {
+          "x": 520,
+          "y": 531,
+          "width": 242,
+          "height": 182
+        },
+        "originalWidth": 242,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              598,
+              533
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-city-cobblestone-stairs-down",
+      "label": "City Cobblestone stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-city-cobblestone-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5289256198347108,
+        "scaleY": 0.5302013422818792,
+        "width": 128,
+        "height": 79,
+        "offset": {
+          "x": 64,
+          "y": 113
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          774,
+          554,
+          1020,
+          707
+        ],
+        "bounds": {
+          "x": 776,
+          "y": 556,
+          "width": 242,
+          "height": 149
+        },
+        "originalWidth": 242,
+        "originalHeight": 149,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              900,
+              558
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-ruined-town-house",
+      "label": "Ruined town house",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-ruined-town-house.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.42292490118577075,
+        "width": 96,
+        "height": 107,
+        "offset": {
+          "x": 80,
+          "y": 85
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1038,
+          484,
+          1270,
+          741
+        ],
+        "bounds": {
+          "x": 1040,
+          "y": 486,
+          "width": 228,
+          "height": 253
+        },
+        "originalWidth": 228,
+        "originalHeight": 253,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1207,
+              488
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-damaged-shop-front",
+      "label": "Damaged shop front",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-damaged-shop-front.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41739130434782606,
+        "scaleY": 0.41735537190082644,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1286,
+          494,
+          1520,
+          740
+        ],
+        "bounds": {
+          "x": 1288,
+          "y": 496,
+          "width": 230,
+          "height": 242
+        },
+        "originalWidth": 230,
+        "originalHeight": 242,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1348,
+              498
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-street-lamp",
+      "label": "Street lamp",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-street-lamp.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.75,
+        "scaleY": 0.757201646090535,
+        "width": 51,
+        "height": 184,
+        "offset": {
+          "x": 102,
+          "y": 8
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          97,
+          735,
+          169,
+          982
+        ],
+        "bounds": {
+          "x": 99,
+          "y": 737,
+          "width": 68,
+          "height": 243
+        },
+        "originalWidth": 68,
+        "originalHeight": 243,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              130,
+              739
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-street-barricade",
+      "label": "Street barricade",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-street-barricade.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.40131578947368424,
+        "width": 96,
+        "height": 61,
+        "offset": {
+          "x": 80,
+          "y": 131
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          262,
+          805,
+          505,
+          961
+        ],
+        "bounds": {
+          "x": 264,
+          "y": 807,
+          "width": 239,
+          "height": 152
+        },
+        "originalWidth": 239,
+        "originalHeight": 152,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              337,
+              809
+            ],
+            [
+              432,
+              861
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-public-fountain",
+      "label": "Public fountain",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-public-fountain.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.4354066985645933,
+        "width": 96,
+        "height": 91,
+        "offset": {
+          "x": 80,
+          "y": 101
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          529,
+          755,
+          753,
+          968
+        ],
+        "bounds": {
+          "x": 531,
+          "y": 757,
+          "width": 220,
+          "height": 209
+        },
+        "originalWidth": 220,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              638,
+              759
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-broken-tram-wreck",
+      "label": "Broken tram wreck",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-broken-tram-wreck.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.38095238095238093,
+        "scaleY": 0.3791469194312796,
+        "width": 96,
+        "height": 80,
+        "offset": {
+          "x": 80,
+          "y": 112
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          770,
+          764,
+          1026,
+          979
+        ],
+        "bounds": {
+          "x": 772,
+          "y": 766,
+          "width": 252,
+          "height": 211
+        },
+        "originalWidth": 252,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              936,
+              768
+            ],
+            [
+              839,
+              863
+            ],
+            [
+              986,
+              911
+            ],
+            [
+              909,
+              946
+            ],
+            [
+              911,
+              947
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-roof-access-ladder",
+      "label": "Roof access ladder",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-roof-access-ladder.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5393258426966292,
+        "scaleY": 0.5384615384615384,
+        "width": 96,
+        "height": 119,
+        "offset": {
+          "x": 80,
+          "y": 73
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1065,
+          758,
+          1247,
+          983
+        ],
+        "bounds": {
+          "x": 1067,
+          "y": 760,
+          "width": 178,
+          "height": 221
+        },
+        "originalWidth": 178,
+        "originalHeight": 221,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1153,
+              762
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "over-city-urban-stairwell-entrance",
+      "label": "Urban stairwell entrance",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "over-city",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/over-city-urban-stairwell-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39631336405529954,
+        "width": 96,
+        "height": 86,
+        "offset": {
+          "x": 80,
+          "y": 106
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/over-city.png",
+        "sha256": "242dedad1b495c73bb3786f59cac6941e98ef5cbbcec1876d7837c09b316a931",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1278,
+          748,
+          1523,
+          969
+        ],
+        "bounds": {
+          "x": 1280,
+          "y": 750,
+          "width": 241,
+          "height": 217
+        },
+        "originalWidth": 241,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1415,
+              752
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "over-city.zip",
+  "contactSheet": "contact-sheet.png"
+}

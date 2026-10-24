@@ -1,0 +1,1869 @@
+{
+  "schemaVersion": 1,
+  "id": "hunting-river",
+  "style": "dungeon-after-dark",
+  "title": "River crossings and Fort Freedom",
+  "books": [
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "hunting-river-riverbank-stone-floor",
+      "label": "Riverbank stone floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-riverbank-stone-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.45714285714285713,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          12,
+          78,
+          253,
+          222
+        ],
+        "bounds": {
+          "x": 14,
+          "y": 80,
+          "width": 237,
+          "height": 140
+        },
+        "originalWidth": 237,
+        "originalHeight": 140,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              130,
+              82
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-water-floor",
+      "label": "River water floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-river-water-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5267489711934157,
+        "scaleY": 0.43537414965986393,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          264,
+          76,
+          511,
+          227
+        ],
+        "bounds": {
+          "x": 266,
+          "y": 78,
+          "width": 243,
+          "height": 147
+        },
+        "originalWidth": 243,
+        "originalHeight": 147,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              385,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-palace-paving-floor",
+      "label": "Palace paving floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-palace-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.45390070921985815,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          521,
+          78,
+          762,
+          223
+        ],
+        "bounds": {
+          "x": 523,
+          "y": 80,
+          "width": 237,
+          "height": 141
+        },
+        "originalWidth": 237,
+        "originalHeight": 141,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              639,
+              82
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-wet-palace-paving-floor",
+      "label": "Wet palace paving floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-wet-palace-paving-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5355648535564853,
+        "scaleY": 0.4507042253521127,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          775,
+          78,
+          1018,
+          224
+        ],
+        "bounds": {
+          "x": 777,
+          "y": 80,
+          "width": 239,
+          "height": 142
+        },
+        "originalWidth": 239,
+        "originalHeight": 142,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              82
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-edge",
+      "label": "Riverbank edge",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-riverbank-edge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5355648535564853,
+        "scaleY": 0.4444444444444444,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1030,
+          76,
+          1273,
+          224
+        ],
+        "bounds": {
+          "x": 1032,
+          "y": 78,
+          "width": 239,
+          "height": 144
+        },
+        "originalWidth": 239,
+        "originalHeight": 144,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1148,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-corner",
+      "label": "Riverbank corner",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/hunting-river-riverbank-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5378151260504201,
+        "scaleY": 0.43537414965986393,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1283,
+          76,
+          1525,
+          227
+        ],
+        "bounds": {
+          "x": 1285,
+          "y": 78,
+          "width": 238,
+          "height": 147
+        },
+        "originalWidth": 238,
+        "originalHeight": 147,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1401,
+              80
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-wall-northwest",
+      "label": "River Palace Masonry wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34972677595628415,
+        "scaleY": 0.4549763033175355,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          42,
+          249,
+          229,
+          464
+        ],
+        "bounds": {
+          "x": 44,
+          "y": 251,
+          "width": 183,
+          "height": 211
+        },
+        "originalWidth": 183,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              66,
+              253
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-wall-northeast",
+      "label": "River Palace Masonry wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34782608695652173,
+        "scaleY": 0.4528301886792453,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          290,
+          246,
+          478,
+          462
+        ],
+        "bounds": {
+          "x": 292,
+          "y": 248,
+          "width": 184,
+          "height": 212
+        },
+        "originalWidth": 184,
+        "originalHeight": 212,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              448,
+              250
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-outer-corner",
+      "label": "River Palace Masonry outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          551,
+          265,
+          738,
+          451
+        ],
+        "bounds": {
+          "x": 553,
+          "y": 267,
+          "width": 183,
+          "height": 182
+        },
+        "originalWidth": 183,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              709,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-inner-corner",
+      "label": "River Palace Masonry inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.5688888888888889,
+        "scaleY": 0.518918918918919,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          784,
+          251,
+          1013,
+          440
+        ],
+        "bounds": {
+          "x": 786,
+          "y": 253,
+          "width": 225,
+          "height": 185
+        },
+        "originalWidth": 225,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              894,
+              255
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-endcap-northwest",
+      "label": "River Palace Masonry endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-river-river-palace-masonry-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.367816091954023,
+        "scaleY": 0.518918918918919,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1107,
+          255,
+          1198,
+          444
+        ],
+        "bounds": {
+          "x": 1109,
+          "y": 257,
+          "width": 87,
+          "height": 185
+        },
+        "originalWidth": 87,
+        "originalHeight": 185,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1172,
+              259
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-endcap-northeast",
+      "label": "River Palace Masonry endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/hunting-river-river-palace-masonry-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.37209302325581395,
+        "scaleY": 0.5133689839572193,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1367,
+          256,
+          1457,
+          447
+        ],
+        "bounds": {
+          "x": 1369,
+          "y": 258,
+          "width": 86,
+          "height": 187
+        },
+        "originalWidth": 86,
+        "originalHeight": 187,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1388,
+              260
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-open-doorway",
+      "label": "River Palace Masonry open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3422459893048128,
+        "scaleY": 0.42105263157894735,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          42,
+          464,
+          233,
+          696
+        ],
+        "bounds": {
+          "x": 44,
+          "y": 466,
+          "width": 187,
+          "height": 228
+        },
+        "originalWidth": 187,
+        "originalHeight": 228,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              69,
+              468
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-palace-masonry-closed-doorway",
+      "label": "River Palace Masonry closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/hunting-river-river-palace-masonry-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.34594594594594597,
+        "scaleY": 0.42105263157894735,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          289,
+          464,
+          478,
+          696
+        ],
+        "bounds": {
+          "x": 291,
+          "y": 466,
+          "width": 185,
+          "height": 228
+        },
+        "originalWidth": 185,
+        "originalHeight": 228,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              447,
+              468
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-stone-stairs-up",
+      "label": "Riverbank Stone stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-riverbank-stone-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.5401069518716578,
+        "width": 128,
+        "height": 101,
+        "offset": {
+          "x": 64,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          517,
+          489,
+          758,
+          680
+        ],
+        "bounds": {
+          "x": 519,
+          "y": 491,
+          "width": 237,
+          "height": 187
+        },
+        "originalWidth": 237,
+        "originalHeight": 187,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              640,
+              493
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverbank-stone-stairs-down",
+      "label": "Riverbank Stone stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-riverbank-stone-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5224489795918368,
+        "scaleY": 0.5197368421052632,
+        "width": 128,
+        "height": 79,
+        "offset": {
+          "x": 64,
+          "y": 113
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          778,
+          510,
+          1027,
+          666
+        ],
+        "bounds": {
+          "x": 780,
+          "y": 512,
+          "width": 245,
+          "height": 152
+        },
+        "originalWidth": 245,
+        "originalHeight": 152,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              898,
+              514
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-bridge-pier",
+      "label": "River bridge pier",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-river-bridge-pier.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.7007299270072993,
+        "scaleY": 0.7018348623853211,
+        "width": 96,
+        "height": 153,
+        "offset": {
+          "x": 80,
+          "y": 39
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1075,
+          471,
+          1216,
+          693
+        ],
+        "bounds": {
+          "x": 1077,
+          "y": 473,
+          "width": 137,
+          "height": 218
+        },
+        "originalWidth": 137,
+        "originalHeight": 218,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1142,
+              475
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-wood-river-footbridge",
+      "label": "Wood river footbridge",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-wood-river-footbridge.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.39183673469387753,
+        "scaleY": 0.39351851851851855,
+        "width": 96,
+        "height": 85,
+        "offset": {
+          "x": 80,
+          "y": 107
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1272,
+          474,
+          1521,
+          694
+        ],
+        "bounds": {
+          "x": 1274,
+          "y": 476,
+          "width": 245,
+          "height": 216
+        },
+        "originalWidth": 245,
+        "originalHeight": 216,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1419,
+              478
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-naiad-palace-arch",
+      "label": "Naiad palace arch",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-naiad-palace-arch.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4897959183673469,
+        "scaleY": 0.4897959183673469,
+        "width": 96,
+        "height": 120,
+        "offset": {
+          "x": 80,
+          "y": 72
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          41,
+          704,
+          241,
+          953
+        ],
+        "bounds": {
+          "x": 43,
+          "y": 706,
+          "width": 196,
+          "height": 245
+        },
+        "originalWidth": 196,
+        "originalHeight": 245,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              92,
+              708
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-fortification-gate",
+      "label": "Fortification gate",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-fortification-gate.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.40239043824701193,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          265,
+          706,
+          508,
+          961
+        ],
+        "bounds": {
+          "x": 267,
+          "y": 708,
+          "width": 239,
+          "height": 251
+        },
+        "originalWidth": 239,
+        "originalHeight": 251,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              328,
+              710
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-riverside-dock",
+      "label": "Riverside dock",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-riverside-dock.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.39669421487603307,
+        "scaleY": 0.3949579831932773,
+        "width": 96,
+        "height": 94,
+        "offset": {
+          "x": 80,
+          "y": 98
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          519,
+          719,
+          765,
+          961
+        ],
+        "bounds": {
+          "x": 521,
+          "y": 721,
+          "width": 242,
+          "height": 238
+        },
+        "originalWidth": 242,
+        "originalHeight": 238,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              670,
+              723
+            ],
+            [
+              711,
+              795
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-river-reeds",
+      "label": "River reeds",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-river-reeds.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41739130434782606,
+        "scaleY": 0.41706161137440756,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          780,
+          740,
+          1014,
+          955
+        ],
+        "bounds": {
+          "x": 782,
+          "y": 742,
+          "width": 230,
+          "height": 211
+        },
+        "originalWidth": 230,
+        "originalHeight": 211,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              926,
+              744
+            ],
+            [
+              898,
+              817
+            ],
+            [
+              897,
+              821
+            ],
+            [
+              969,
+              823
+            ],
+            [
+              857,
+              833
+            ],
+            [
+              895,
+              839
+            ],
+            [
+              881,
+              849
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-palace-fountain",
+      "label": "Palace fountain",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-palace-fountain.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.40336134453781514,
+        "scaleY": 0.4050632911392405,
+        "width": 96,
+        "height": 96,
+        "offset": {
+          "x": 80,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1024,
+          706,
+          1266,
+          947
+        ],
+        "bounds": {
+          "x": 1026,
+          "y": 708,
+          "width": 238,
+          "height": 237
+        },
+        "originalWidth": 238,
+        "originalHeight": 237,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1145,
+              710
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "hunting-river-flooded-palace-courtyard-landmark",
+      "label": "Flooded palace courtyard landmark",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "hunting-river",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/hunting-river-flooded-palace-courtyard-landmark.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.39344262295081966,
+        "scaleY": 0.3937007874015748,
+        "width": 96,
+        "height": 100,
+        "offset": {
+          "x": 80,
+          "y": 92
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-river.png",
+        "sha256": "4dd6832378d881b93069817916bd2a4d6320f5aa4e948493ff58e5f6c7ab403f",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1276,
+          714,
+          1524,
+          972
+        ],
+        "bounds": {
+          "x": 1278,
+          "y": 716,
+          "width": 244,
+          "height": 254
+        },
+        "originalWidth": 244,
+        "originalHeight": 254,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1369,
+              718
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "hunting-river.zip",
+  "contactSheet": "contact-sheet.png"
+}

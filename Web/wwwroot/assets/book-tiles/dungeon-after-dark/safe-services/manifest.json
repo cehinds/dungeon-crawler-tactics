@@ -1,0 +1,1845 @@
+{
+  "schemaVersion": 1,
+  "id": "safe-services",
+  "style": "dungeon-after-dark",
+  "title": "Restaurants, waiting rooms and safe-room services",
+  "books": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "isometric",
+    "tileWidth": 128,
+    "tileHeight": 64,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "safe-services-diner-checker-tile-floor",
+      "label": "Diner Checker Tile floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5589519650655022,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          20,
+          74,
+          253,
+          209
+        ],
+        "bounds": {
+          "x": 22,
+          "y": 76,
+          "width": 229,
+          "height": 131
+        },
+        "originalWidth": 229,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              133,
+              78
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-worn-diner-checker-tile-floor",
+      "label": "Worn diner checker tile floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-worn-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5565217391304348,
+        "scaleY": 0.48854961832061067,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          272,
+          73,
+          506,
+          208
+        ],
+        "bounds": {
+          "x": 274,
+          "y": 75,
+          "width": 230,
+          "height": 131
+        },
+        "originalWidth": 230,
+        "originalHeight": 131,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              387,
+              77
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-cracked-diner-checker-tile-floor",
+      "label": "Cracked diner checker tile floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-cracked-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5565217391304348,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          525,
+          71,
+          759,
+          207
+        ],
+        "bounds": {
+          "x": 527,
+          "y": 73,
+          "width": 230,
+          "height": 132
+        },
+        "originalWidth": 230,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              641,
+              75
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-wet-diner-checker-tile-floor",
+      "label": "Wet diner checker tile floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-wet-diner-checker-tile-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5565217391304348,
+        "scaleY": 0.48120300751879697,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          778,
+          71,
+          1012,
+          208
+        ],
+        "bounds": {
+          "x": 780,
+          "y": 73,
+          "width": 230,
+          "height": 133
+        },
+        "originalWidth": 230,
+        "originalHeight": 133,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              75
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-edge-transition",
+      "label": "Diner Checker Tile edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-diner-checker-tile-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5565217391304348,
+        "scaleY": 0.47058823529411764,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1030,
+          68,
+          1264,
+          208
+        ],
+        "bounds": {
+          "x": 1032,
+          "y": 70,
+          "width": 230,
+          "height": 136
+        },
+        "originalWidth": 230,
+        "originalHeight": 136,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1146,
+              72
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-corner-transition",
+      "label": "Diner Checker Tile corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/safe-services-diner-checker-tile-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "lanczos",
+        "scaleX": 0.5638766519823789,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 64,
+        "offset": {
+          "x": 64,
+          "y": 160
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1285,
+          67,
+          1516,
+          203
+        ],
+        "bounds": {
+          "x": 1287,
+          "y": 69,
+          "width": 227,
+          "height": 132
+        },
+        "originalWidth": 227,
+        "originalHeight": 132,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1398,
+              71
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-wall-northwest",
+      "label": "Cream Service Tile wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.35359116022099446,
+        "scaleY": 0.45933014354066987,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          56,
+          272,
+          241,
+          485
+        ],
+        "bounds": {
+          "x": 58,
+          "y": 274,
+          "width": 181,
+          "height": 209
+        },
+        "originalWidth": 181,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              75,
+              276
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-wall-northeast",
+      "label": "Cream Service Tile wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3615819209039548,
+        "scaleY": 0.46153846153846156,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          287,
+          273,
+          468,
+          485
+        ],
+        "bounds": {
+          "x": 289,
+          "y": 275,
+          "width": 177,
+          "height": 208
+        },
+        "originalWidth": 177,
+        "originalHeight": 208,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              444,
+              277
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-outer-corner",
+      "label": "Cream Service Tile outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.8311688311688312,
+        "scaleY": 0.5485714285714286,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          564,
+          288,
+          722,
+          467
+        ],
+        "bounds": {
+          "x": 566,
+          "y": 290,
+          "width": 154,
+          "height": 175
+        },
+        "originalWidth": 154,
+        "originalHeight": 175,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              583,
+              292
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-inner-corner",
+      "label": "Cream Service Tile inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.5393258426966292,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          798,
+          273,
+          999,
+          455
+        ],
+        "bounds": {
+          "x": 800,
+          "y": 275,
+          "width": 197,
+          "height": 178
+        },
+        "originalWidth": 197,
+        "originalHeight": 178,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              895,
+              277
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-endcap-northwest",
+      "label": "Cream Service Tile endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/safe-services-cream-service-tile-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.4507042253521127,
+        "scaleY": 0.5517241379310345,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1104,
+          279,
+          1179,
+          457
+        ],
+        "bounds": {
+          "x": 1106,
+          "y": 281,
+          "width": 71,
+          "height": 174
+        },
+        "originalWidth": 71,
+        "originalHeight": 174,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1138,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-endcap-northeast",
+      "label": "Cream Service Tile endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/safe-services-cream-service-tile-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.5485714285714286,
+        "width": 32,
+        "height": 96,
+        "offset": {
+          "x": 112,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1374,
+          279,
+          1447,
+          458
+        ],
+        "bounds": {
+          "x": 1376,
+          "y": 281,
+          "width": 69,
+          "height": 175
+        },
+        "originalWidth": 69,
+        "originalHeight": 175,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1414,
+              283
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-open-doorway",
+      "label": "Cream Service Tile open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.3657142857142857,
+        "scaleY": 0.4507042253521127,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          54,
+          527,
+          233,
+          744
+        ],
+        "bounds": {
+          "x": 56,
+          "y": 529,
+          "width": 175,
+          "height": 213
+        },
+        "originalWidth": 175,
+        "originalHeight": 213,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              72,
+              531
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-cream-service-tile-closed-doorway",
+      "label": "Cream Service Tile closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/safe-services-cream-service-tile-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "lanczos",
+        "scaleX": 0.423841059602649,
+        "scaleY": 0.46601941747572817,
+        "width": 64,
+        "height": 96,
+        "offset": {
+          "x": 96,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          316,
+          527,
+          471,
+          737
+        ],
+        "bounds": {
+          "x": 318,
+          "y": 529,
+          "width": 151,
+          "height": 206
+        },
+        "originalWidth": 151,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              336,
+              531
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-stairs-up",
+      "label": "Diner Checker Tile stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-diner-checker-tile-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5765765765765766,
+        "scaleY": 0.5778894472361809,
+        "width": 128,
+        "height": 115,
+        "offset": {
+          "x": 64,
+          "y": 77
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          524,
+          524,
+          750,
+          727
+        ],
+        "bounds": {
+          "x": 526,
+          "y": 526,
+          "width": 222,
+          "height": 199
+        },
+        "originalWidth": 222,
+        "originalHeight": 199,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              643,
+              528
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-diner-checker-tile-stairs-down",
+      "label": "Diner Checker Tile stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-diner-checker-tile-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5203252032520326,
+        "scaleY": 0.5212121212121212,
+        "width": 128,
+        "height": 86,
+        "offset": {
+          "x": 64,
+          "y": 106
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          774,
+          551,
+          1024,
+          720
+        ],
+        "bounds": {
+          "x": 776,
+          "y": 553,
+          "width": 246,
+          "height": 165
+        },
+        "originalWidth": 246,
+        "originalHeight": 165,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              886,
+              555
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-food-service-counter",
+      "label": "Food service counter",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-food-service-counter.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.41379310344827586,
+        "scaleY": 0.41262135922330095,
+        "width": 96,
+        "height": 85,
+        "offset": {
+          "x": 80,
+          "y": 107
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1031,
+          539,
+          1267,
+          749
+        ],
+        "bounds": {
+          "x": 1033,
+          "y": 541,
+          "width": 232,
+          "height": 206
+        },
+        "originalWidth": 232,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1104,
+              543
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-restaurant-dining-booth",
+      "label": "Restaurant dining booth",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-restaurant-dining-booth.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4423963133640553,
+        "scaleY": 0.4431818181818182,
+        "width": 96,
+        "height": 78,
+        "offset": {
+          "x": 80,
+          "y": 114
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1293,
+          538,
+          1514,
+          718
+        ],
+        "bounds": {
+          "x": 1295,
+          "y": 540,
+          "width": 217,
+          "height": 176
+        },
+        "originalWidth": 217,
+        "originalHeight": 176,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1417,
+              542
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-waiting-room-bench",
+      "label": "Waiting room bench",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-waiting-room-bench.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.4388888888888889,
+        "width": 96,
+        "height": 79,
+        "offset": {
+          "x": 80,
+          "y": 113
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          34,
+          785,
+          257,
+          969
+        ],
+        "bounds": {
+          "x": 36,
+          "y": 787,
+          "width": 219,
+          "height": 180
+        },
+        "originalWidth": 219,
+        "originalHeight": 180,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              91,
+              789
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-queue-ticket-dispenser",
+      "label": "Queue ticket dispenser",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-queue-ticket-dispenser.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.9642857142857143,
+        "scaleY": 0.968421052631579,
+        "width": 81,
+        "height": 184,
+        "offset": {
+          "x": 88,
+          "y": 8
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          353,
+          773,
+          441,
+          967
+        ],
+        "bounds": {
+          "x": 355,
+          "y": 775,
+          "width": 84,
+          "height": 190
+        },
+        "originalWidth": 84,
+        "originalHeight": 190,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              386,
+              777
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-children-play-tunnel",
+      "label": "Children play tunnel",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-children-play-tunnel.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.43820224719101125,
+        "width": 96,
+        "height": 78,
+        "offset": {
+          "x": 80,
+          "y": 114
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          533,
+          789,
+          756,
+          971
+        ],
+        "bounds": {
+          "x": 535,
+          "y": 791,
+          "width": 219,
+          "height": 178
+        },
+        "originalWidth": 219,
+        "originalHeight": 178,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              603,
+              793
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-candy-vending-machine",
+      "label": "Candy vending machine",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-candy-vending-machine.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.7933884297520661,
+        "scaleY": 0.7952380952380952,
+        "width": 96,
+        "height": 167,
+        "offset": {
+          "x": 80,
+          "y": 25
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          831,
+          757,
+          956,
+          971
+        ],
+        "bounds": {
+          "x": 833,
+          "y": 759,
+          "width": 121,
+          "height": 210
+        },
+        "originalWidth": 121,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              761
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-protected-restroom-portal",
+      "label": "Protected restroom portal",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-protected-restroom-portal.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.5806451612903226,
+        "width": 96,
+        "height": 126,
+        "offset": {
+          "x": 80,
+          "y": 66
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1064,
+          756,
+          1233,
+          977
+        ],
+        "bounds": {
+          "x": 1066,
+          "y": 758,
+          "width": 165,
+          "height": 217
+        },
+        "originalWidth": 165,
+        "originalHeight": 217,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1101,
+              760
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "safe-services-walk-in-freezer-door",
+      "label": "Walk in freezer door",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "safe-services",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/safe-services-walk-in-freezer-door.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "lanczos",
+        "scaleX": 0.5133689839572193,
+        "scaleY": 0.5112107623318386,
+        "width": 96,
+        "height": 114,
+        "offset": {
+          "x": 80,
+          "y": 78
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
+        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1307,
+          751,
+          1498,
+          978
+        ],
+        "bounds": {
+          "x": 1309,
+          "y": 753,
+          "width": 187,
+          "height": 223
+        },
+        "originalWidth": 187,
+        "originalHeight": 223,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1432,
+              755
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "safe-services.zip",
+  "contactSheet": "contact-sheet.png"
+}

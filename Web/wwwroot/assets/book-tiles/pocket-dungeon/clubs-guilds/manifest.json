@@ -1,0 +1,1856 @@
+{
+  "schemaVersion": 1,
+  "id": "clubs-guilds",
+  "style": "pocket-dungeon",
+  "title": "Desperado, Vanquisher, markets and guilds",
+  "books": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "exportKind": "normalized-derived-exports-not-native-pixel-copies",
+  "grid": {
+    "projection": "orthogonal",
+    "tileWidth": 128,
+    "tileHeight": 128,
+    "canvasWidth": 256,
+    "canvasHeight": 256,
+    "anchor": {
+      "x": 128,
+      "y": 192
+    }
+  },
+  "assets": [
+    {
+      "id": "clubs-guilds-club-carpet-floor",
+      "label": "Club Carpet floor",
+      "cell": 0,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.7032967032967034,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 0,
+        "sourceBox": [
+          56,
+          50,
+          244,
+          236
+        ],
+        "bounds": {
+          "x": 58,
+          "y": 52,
+          "width": 184,
+          "height": 182
+        },
+        "originalWidth": 184,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              67,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-worn-club-carpet-floor",
+      "label": "Worn club carpet floor",
+      "cell": 1,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-worn-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.7032967032967034,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 1,
+        "sourceBox": [
+          306,
+          50,
+          495,
+          236
+        ],
+        "bounds": {
+          "x": 308,
+          "y": 52,
+          "width": 185,
+          "height": 182
+        },
+        "originalWidth": 185,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              315,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-cracked-club-carpet-floor",
+      "label": "Cracked club carpet floor",
+      "cell": 2,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-cracked-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 2,
+        "sourceBox": [
+          554,
+          48,
+          741,
+          236
+        ],
+        "bounds": {
+          "x": 556,
+          "y": 50,
+          "width": 183,
+          "height": 184
+        },
+        "originalWidth": 183,
+        "originalHeight": 184,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              561,
+              54
+            ],
+            [
+              672,
+              52
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-wet-club-carpet-floor",
+      "label": "Wet club carpet floor",
+      "cell": 3,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-wet-club-carpet-floor.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.7032967032967034,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 3,
+        "sourceBox": [
+          799,
+          50,
+          988,
+          236
+        ],
+        "bounds": {
+          "x": 801,
+          "y": 52,
+          "width": 185,
+          "height": 182
+        },
+        "originalWidth": 185,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              809,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-edge-transition",
+      "label": "Club Carpet edge transition",
+      "cell": 4,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-club-carpet-edge-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.7032967032967034,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 4,
+        "sourceBox": [
+          1045,
+          50,
+          1233,
+          236
+        ],
+        "bounds": {
+          "x": 1047,
+          "y": 52,
+          "width": 184,
+          "height": 182
+        },
+        "originalWidth": 184,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1053,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-corner-transition",
+      "label": "Club Carpet corner transition",
+      "cell": 5,
+      "role": "ground",
+      "layer": "ground",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "ground",
+        "art-adaptation"
+      ],
+      "walkable": true,
+      "file": "components/clubs-guilds-club-carpet-corner-transition.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "logical-ground",
+        "resampling": "nearest",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.7032967032967034,
+        "width": 128,
+        "height": 128,
+        "offset": {
+          "x": 64,
+          "y": 128
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 5,
+        "sourceBox": [
+          1293,
+          50,
+          1481,
+          236
+        ],
+        "bounds": {
+          "x": 1295,
+          "y": 52,
+          "width": 184,
+          "height": 182
+        },
+        "originalWidth": 184,
+        "originalHeight": 182,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1301,
+              54
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-wall-northwest",
+      "label": "Dark Polished Club Panel wall northwest",
+      "cell": 6,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-wall-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.5026178010471204,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 6,
+        "sourceBox": [
+          54,
+          274,
+          262,
+          469
+        ],
+        "bounds": {
+          "x": 56,
+          "y": 276,
+          "width": 204,
+          "height": 191
+        },
+        "originalWidth": 204,
+        "originalHeight": 191,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              81,
+              278
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-wall-northeast",
+      "label": "Dark Polished Club Panel wall northeast",
+      "cell": 7,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-wall-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 7,
+        "sourceBox": [
+          301,
+          273,
+          506,
+          475
+        ],
+        "bounds": {
+          "x": 303,
+          "y": 275,
+          "width": 201,
+          "height": 198
+        },
+        "originalWidth": 201,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              330,
+              277
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-outer-corner",
+      "label": "Dark Polished Club Panel outer corner",
+      "cell": 8,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-outer-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.8205128205128205,
+        "scaleY": 0.4897959183673469,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 8,
+        "sourceBox": [
+          566,
+          277,
+          726,
+          477
+        ],
+        "bounds": {
+          "x": 568,
+          "y": 279,
+          "width": 156,
+          "height": 196
+        },
+        "originalWidth": 156,
+        "originalHeight": 196,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              597,
+              281
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-inner-corner",
+      "label": "Dark Polished Club Panel inner corner",
+      "cell": 9,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-inner-corner.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5203252032520326,
+        "scaleY": 0.48484848484848486,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 9,
+        "sourceBox": [
+          776,
+          265,
+          1026,
+          467
+        ],
+        "bounds": {
+          "x": 778,
+          "y": 267,
+          "width": 246,
+          "height": 198
+        },
+        "originalWidth": 246,
+        "originalHeight": 198,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              897,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-endcap-northwest",
+      "label": "Dark Polished Club Panel endcap northwest",
+      "cell": 10,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/clubs-guilds-dark-polished-club-panel-endcap-northwest.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5217391304347826,
+        "scaleY": 0.5,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 10,
+        "sourceBox": [
+          1110,
+          265,
+          1206,
+          461
+        ],
+        "bounds": {
+          "x": 1112,
+          "y": 267,
+          "width": 92,
+          "height": 192
+        },
+        "originalWidth": 92,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1165,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-endcap-northeast",
+      "label": "Dark Polished Club Panel endcap northeast",
+      "cell": 11,
+      "role": "wall",
+      "layer": "structures",
+      "renderWidth": 32,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "wall",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 48,
+      "file": "components/clubs-guilds-dark-polished-club-panel-endcap-northeast.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5,
+        "scaleY": 0.5,
+        "width": 48,
+        "height": 96,
+        "offset": {
+          "x": 104,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 11,
+        "sourceBox": [
+          1360,
+          265,
+          1460,
+          461
+        ],
+        "bounds": {
+          "x": 1362,
+          "y": 267,
+          "width": 96,
+          "height": 192
+        },
+        "originalWidth": 96,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1396,
+              269
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-open-doorway",
+      "label": "Dark Polished Club Panel open doorway",
+      "cell": 12,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-open-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.46601941747572817,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 12,
+        "sourceBox": [
+          43,
+          498,
+          257,
+          708
+        ],
+        "bounds": {
+          "x": 45,
+          "y": 500,
+          "width": 210,
+          "height": 206
+        },
+        "originalWidth": 210,
+        "originalHeight": 206,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              74,
+              502
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-dark-polished-club-panel-closed-doorway",
+      "label": "Dark Polished Club Panel closed doorway",
+      "cell": 13,
+      "role": "door",
+      "layer": "structures",
+      "renderWidth": 64,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "door",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "renderHeight": 96,
+      "orthogonalRenderWidth": 128,
+      "file": "components/clubs-guilds-dark-polished-club-panel-closed-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "modular-architecture",
+        "resampling": "nearest",
+        "scaleX": 0.5898617511520737,
+        "scaleY": 0.45933014354066987,
+        "width": 128,
+        "height": 96,
+        "offset": {
+          "x": 64,
+          "y": 96
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 13,
+        "sourceBox": [
+          287,
+          494,
+          508,
+          707
+        ],
+        "bounds": {
+          "x": 289,
+          "y": 496,
+          "width": 217,
+          "height": 209
+        },
+        "originalWidth": 217,
+        "originalHeight": 209,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              317,
+              498
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-stairs-up",
+      "label": "Club Carpet stairs up",
+      "cell": 14,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-club-carpet-stairs-up.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.6124401913875598,
+        "scaleY": 0.6123595505617978,
+        "width": 128,
+        "height": 109,
+        "offset": {
+          "x": 64,
+          "y": 83
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 14,
+        "sourceBox": [
+          539,
+          514,
+          752,
+          696
+        ],
+        "bounds": {
+          "x": 541,
+          "y": 516,
+          "width": 209,
+          "height": 178
+        },
+        "originalWidth": 209,
+        "originalHeight": 178,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              577,
+              518
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-club-carpet-stairs-down",
+      "label": "Club Carpet stairs down",
+      "cell": 15,
+      "role": "stairs",
+      "layer": "structures",
+      "renderWidth": 128,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "stairs",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-club-carpet-stairs-down.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.6235955056179775,
+        "width": 128,
+        "height": 111,
+        "offset": {
+          "x": 64,
+          "y": 81
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 15,
+        "sourceBox": [
+          778,
+          514,
+          987,
+          696
+        ],
+        "bounds": {
+          "x": 780,
+          "y": 516,
+          "width": 205,
+          "height": 178
+        },
+        "originalWidth": 205,
+        "originalHeight": 178,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              815,
+              518
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-neon-club-entrance",
+      "label": "Neon club entrance",
+      "cell": 16,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-neon-club-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.39183673469387753,
+        "scaleY": 0.39285714285714285,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 16,
+        "sourceBox": [
+          1005,
+          474,
+          1254,
+          702
+        ],
+        "bounds": {
+          "x": 1007,
+          "y": 476,
+          "width": 245,
+          "height": 224
+        },
+        "originalWidth": 245,
+        "originalHeight": 224,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1126,
+              478
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-casino-gaming-table",
+      "label": "Casino gaming table",
+      "cell": 17,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-casino-gaming-table.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3950617283950617,
+        "scaleY": 0.3958333333333333,
+        "width": 96,
+        "height": 76,
+        "offset": {
+          "x": 80,
+          "y": 116
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 17,
+        "sourceBox": [
+          1268,
+          511,
+          1515,
+          707
+        ],
+        "bounds": {
+          "x": 1270,
+          "y": 513,
+          "width": 243,
+          "height": 192
+        },
+        "originalWidth": 243,
+        "originalHeight": 192,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1355,
+              515
+            ],
+            [
+              1353,
+              680
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-restaurant-booth",
+      "label": "Restaurant booth",
+      "cell": 18,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-restaurant-booth.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.4009009009009009,
+        "width": 96,
+        "height": 89,
+        "offset": {
+          "x": 80,
+          "y": 103
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 18,
+        "sourceBox": [
+          29,
+          740,
+          272,
+          966
+        ],
+        "bounds": {
+          "x": 31,
+          "y": 742,
+          "width": 239,
+          "height": 222
+        },
+        "originalWidth": 239,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              113,
+              744
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-private-conversation-booth",
+      "label": "Private conversation booth",
+      "cell": 19,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-private-conversation-booth.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.41379310344827586,
+        "scaleY": 0.4142857142857143,
+        "width": 96,
+        "height": 87,
+        "offset": {
+          "x": 80,
+          "y": 105
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 19,
+        "sourceBox": [
+          287,
+          747,
+          523,
+          961
+        ],
+        "bounds": {
+          "x": 289,
+          "y": 749,
+          "width": 232,
+          "height": 210
+        },
+        "originalWidth": 232,
+        "originalHeight": 210,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              493,
+              751
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-guild-training-doorway",
+      "label": "Guild training doorway",
+      "cell": 20,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-guild-training-doorway.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.4528301886792453,
+        "scaleY": 0.45495495495495497,
+        "width": 96,
+        "height": 101,
+        "offset": {
+          "x": 80,
+          "y": 91
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 20,
+        "sourceBox": [
+          539,
+          719,
+          755,
+          945
+        ],
+        "bounds": {
+          "x": 541,
+          "y": 721,
+          "width": 212,
+          "height": 222
+        },
+        "originalWidth": 212,
+        "originalHeight": 222,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              639,
+              723
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-silk-market-stall",
+      "label": "Silk market stall",
+      "cell": 21,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-silk-market-stall.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.39823008849557523,
+        "width": 96,
+        "height": 90,
+        "offset": {
+          "x": 80,
+          "y": 102
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 21,
+        "sourceBox": [
+          769,
+          733,
+          1014,
+          963
+        ],
+        "bounds": {
+          "x": 771,
+          "y": 735,
+          "width": 241,
+          "height": 226
+        },
+        "originalWidth": 241,
+        "originalHeight": 226,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              960,
+              737
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-mercenary-reception-desk",
+      "label": "Mercenary reception desk",
+      "cell": 22,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-mercenary-reception-desk.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.4558139534883721,
+        "width": 96,
+        "height": 98,
+        "offset": {
+          "x": 80,
+          "y": 94
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 22,
+        "sourceBox": [
+          1023,
+          738,
+          1237,
+          957
+        ],
+        "bounds": {
+          "x": 1025,
+          "y": 740,
+          "width": 210,
+          "height": 215
+        },
+        "originalWidth": 210,
+        "originalHeight": 215,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1062,
+              742
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    },
+    {
+      "id": "clubs-guilds-clean-white-club-entrance",
+      "label": "Clean white club entrance",
+      "cell": 23,
+      "role": "prop",
+      "layer": "props",
+      "renderWidth": 96,
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "tags": [
+        "clubs-guilds",
+        "prop",
+        "art-adaptation"
+      ],
+      "walkable": false,
+      "file": "components/clubs-guilds-clean-white-club-entrance.png",
+      "width": 256,
+      "height": 256,
+      "anchor": {
+        "x": 128,
+        "y": 192
+      },
+      "derived": {
+        "kind": "normalized-derived-export",
+        "sizing": "preserve-aspect",
+        "resampling": "nearest",
+        "scaleX": 0.37065637065637064,
+        "scaleY": 0.37130801687763715,
+        "width": 96,
+        "height": 88,
+        "offset": {
+          "x": 80,
+          "y": 104
+        }
+      },
+      "source": {
+        "file": "Docs/BookLocationTiles/sources/pocket-dungeon/clubs-guilds.png",
+        "sha256": "04f5057e0c2900da50d7900c8c7e7553ea112b858352ab71f894086a413c42f7",
+        "atlasWidth": 1536,
+        "atlasHeight": 1024,
+        "cell": 23,
+        "sourceBox": [
+          1258,
+          716,
+          1521,
+          957
+        ],
+        "bounds": {
+          "x": 1260,
+          "y": 718,
+          "width": 259,
+          "height": 237
+        },
+        "originalWidth": 259,
+        "originalHeight": 237,
+        "alphaMask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1385,
+              720
+            ],
+            [
+              1484,
+              821
+            ]
+          ],
+          "fringePixels": 2
+        },
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        }
+      }
+    }
+  ],
+  "download": "clubs-guilds.zip",
+  "contactSheet": "contact-sheet.png"
+}
