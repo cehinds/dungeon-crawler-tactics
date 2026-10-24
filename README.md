@@ -4,7 +4,7 @@ A playable Dungeon Crawler Carl fan tactics prototype with a shared C# engine: a
 
 **Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
 
-**Art lab:** [Three styles, individual PNG downloads and layer previews](https://cehinds.github.io/dungeon-crawler-tactics/art-lab.html). Each style includes 84 labeled components (252 across the three styles), seven composited layers, original artwork, and new exploration/combat concepts. The 48 expansion pieces include environment tiles, house/activity props, creature concepts, effects, equipment, loot, connections and interactables in six-piece groups; these are static illustrative PNGs with no gameplay added. See [the art pack guide](Docs/Style-Art-Packs.md).
+**Art lab:** [Three styles, individual PNG downloads and layer previews](https://cehinds.github.io/dungeon-crawler-tactics/art-lab.html). Each style includes 96 labeled components (288 across the three styles), seven composited layers, original artwork, and new exploration/combat concepts. The 60 expansion pieces include environment tiles, house/activity props, creature concepts, effects, equipment, loot, connections, interactables and four new biome groups; these are static illustrative PNGs with no gameplay added. See [the art pack guide](Docs/Style-Art-Packs.md).
 
 **Lore codex:** [Classes, rank tables, floors, enemies and housing evidence](https://cehinds.github.io/dungeon-crawler-tactics/codex.html) · [Story and housing guide](Docs/Journey-and-Home.md).
 
@@ -32,6 +32,8 @@ their original geometry. See [visual review](design-qa.md).
 **Menu atlas:** [Six illustrated menus and 30 interactive components](https://cehinds.github.io/dungeon-crawler-tactics/menu-atlas.html) · [Expansion content](Docs/Expansion.md) · [Component guide](Docs/Menu-Components.md).
 
 **Build rooms:** [Room workshop](https://cehinds.github.io/dungeon-crawler-tactics/room-kit.html) · [Download 25 layerable PNGs](https://cehinds.github.io/dungeon-crawler-tactics/assets/room-kit/room-kit.zip). Paint/erase tiles and components, rotate pieces or the camera, and import/export recipes. Choose **Play this room** to start a validated standalone battle with the full room layout, or export a playable JSON map for import through Save & options. A valid room import replaces the current run; export its save first to keep it. Campaign maps remain authored. See [Room kit guide](Docs/RoomKit.md) for anchors, layers and Unity import settings.
+
+**Procedural maps:** [Dungeon generator](https://cehinds.github.io/dungeon-crawler-tactics/dungeon-generator.html) creates seeded chamber, cavern or hall layouts across stone, sewer and crypt biomes. Set board size, room count and prop density, inspect the route and actors in isometric or blueprint view, rotate the preview, then export a recipe, playable map JSON or PNG. Open a map in the room workshop for manual editing or play it as a standalone encounter. Campaign maps remain authored; see [Procedural Maps](Docs/Procedural-Maps.md).
 
 **Play locally:** run `./play.sh` on macOS/Linux, or `Play-Windows.bat` on Windows, then open **http://localhost:8000**. Python 3 is required for the local static server. The download archive includes the published game; a source checkout needs the `dotnet publish` command below first.
 

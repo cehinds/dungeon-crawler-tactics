@@ -43,6 +43,14 @@
       "width": 1536,
       "height": 1024,
       "sha256": "1d39837eb1901eac18a61d1a3c7901bce6c74a3783e159e1a4910e268311b89a"
+    },
+    "biomes": {
+      "file": "source/biomes.png",
+      "columns": 4,
+      "rows": 3,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "8ff833e879194eccef82d2e8ea4ca7e33ca4e07ab9779576f8a972d473cdf2db"
     }
   },
   "assets": [
@@ -4279,6 +4287,642 @@
             [
               1390,
               766
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "cracked-stone-floor",
+      "label": "Cracked stone floor",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/cracked-stone-floor.png",
+      "width": 360,
+      "height": 236,
+      "anchor": {
+        "x": 180.0,
+        "y": 118.0
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 24,
+          "y": 45,
+          "width": 352,
+          "height": 228
+        },
+        "region": [
+          22,
+          43,
+          378,
+          275
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              197,
+              47
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "moss-floor",
+      "label": "Moss floor",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/moss-floor.png",
+      "width": 361,
+      "height": 237,
+      "anchor": {
+        "x": 180.5,
+        "y": 118.5
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 401,
+          "y": 44,
+          "width": 353,
+          "height": 229
+        },
+        "region": [
+          399,
+          42,
+          756,
+          275
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              577,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "sand-floor",
+      "label": "Sand floor",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/sand-floor.png",
+      "width": 361,
+      "height": 237,
+      "anchor": {
+        "x": 180.5,
+        "y": 118.5
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 779,
+          "y": 44,
+          "width": 353,
+          "height": 229
+        },
+        "region": [
+          777,
+          42,
+          1134,
+          275
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              957,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "lava-floor",
+      "label": "Lava floor",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/lava-floor.png",
+      "width": 364,
+      "height": 237,
+      "anchor": {
+        "x": 182.0,
+        "y": 118.5
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 1157,
+          "y": 44,
+          "width": 356,
+          "height": 229
+        },
+        "region": [
+          1155,
+          42,
+          1515,
+          275
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1331,
+              46
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "sewer-wall",
+      "label": "Sewer wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/sewer-wall.png",
+      "width": 358,
+      "height": 322,
+      "anchor": {
+        "x": 179.0,
+        "y": 318
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 4
+        },
+        "bounds": {
+          "x": 24,
+          "y": 330,
+          "width": 350,
+          "height": 314
+        },
+        "region": [
+          22,
+          328,
+          376,
+          646
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              73,
+              332
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "stone-arch",
+      "label": "Stone arch",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/stone-arch.png",
+      "width": 308,
+      "height": 386,
+      "anchor": {
+        "x": 154.0,
+        "y": 382
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 5
+        },
+        "bounds": {
+          "x": 407,
+          "y": 280,
+          "width": 300,
+          "height": 378
+        },
+        "region": [
+          405,
+          278,
+          709,
+          660
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              535,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "broken-bridge",
+      "label": "Broken bridge",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/broken-bridge.png",
+      "width": 428,
+      "height": 318,
+      "anchor": {
+        "x": 214.0,
+        "y": 314
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 760,
+          "y": 338,
+          "width": 420,
+          "height": 310
+        },
+        "region": [
+          758,
+          336,
+          1182,
+          650
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              919,
+              340
+            ],
+            [
+              1079,
+              385
+            ],
+            [
+              985,
+              449
+            ],
+            [
+              977,
+              469
+            ],
+            [
+              926,
+              515
+            ],
+            [
+              924,
+              539
+            ],
+            [
+              947,
+              551
+            ],
+            [
+              948,
+              565
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "prison-cage",
+      "label": "Prison cage",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/prison-cage.png",
+      "width": 302,
+      "height": 363,
+      "anchor": {
+        "x": 151.0,
+        "y": 359
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 1218,
+          "y": 288,
+          "width": 294,
+          "height": 355
+        },
+        "region": [
+          1216,
+          286,
+          1514,
+          645
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1359,
+              290
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "crystal-cluster",
+      "label": "Crystal cluster",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/crystal-cluster.png",
+      "width": 332,
+      "height": 338,
+      "anchor": {
+        "x": 166.0,
+        "y": 334
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 8
+        },
+        "bounds": {
+          "x": 25,
+          "y": 653,
+          "width": 324,
+          "height": 330
+        },
+        "region": [
+          23,
+          651,
+          351,
+          985
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              151,
+              655
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "mushroom-cluster",
+      "label": "Mushroom cluster",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/mushroom-cluster.png",
+      "width": 339,
+      "height": 320,
+      "anchor": {
+        "x": 169.5,
+        "y": 316
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 9
+        },
+        "bounds": {
+          "x": 409,
+          "y": 673,
+          "width": 331,
+          "height": 312
+        },
+        "region": [
+          407,
+          671,
+          742,
+          987
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              573,
+              675
+            ],
+            [
+              462,
+              847
+            ],
+            [
+              463,
+              849
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "treasure-altar",
+      "label": "Treasure altar",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/treasure-altar.png",
+      "width": 393,
+      "height": 303,
+      "anchor": {
+        "x": 196.5,
+        "y": 299
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 10
+        },
+        "bounds": {
+          "x": 783,
+          "y": 688,
+          "width": 385,
+          "height": 295
+        },
+        "region": [
+          781,
+          686,
+          1170,
+          985
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1004,
+              690
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "waystone",
+      "label": "Waystone",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/waystone.png",
+      "width": 295,
+      "height": 348,
+      "anchor": {
+        "x": 147.5,
+        "y": 344
+      },
+      "source": {
+        "sheet": "biomes",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1217,
+          "y": 649,
+          "width": 287,
+          "height": 340
+        },
+        "region": [
+          1215,
+          647,
+          1506,
+          991
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1384,
+              651
             ]
           ],
           "fringePixels": 2

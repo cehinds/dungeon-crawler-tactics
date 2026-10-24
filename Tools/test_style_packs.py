@@ -14,7 +14,7 @@ from build_style_packs import (LAYERS, PADDING, PackError, SHEETS, build_pack,
 
 
 class StylePackTests(unittest.TestCase):
-    def fixture(self, root, expansion=False, supplies=False):
+    def fixture(self, root, expansion=False, supplies=False, biomes=False):
         style = {"id": "test-pack", "title": "Test pack", "description": "Technical fixture", "assets": []}
         source = root / "test-pack/source"
         source.mkdir(parents=True)
@@ -22,6 +22,8 @@ class StylePackTests(unittest.TestCase):
             if sheet_name == "expansion" and not expansion:
                 continue
             if sheet_name == "supplies" and not supplies:
+                continue
+            if sheet_name == "biomes" and not biomes:
                 continue
             sheet = Image.new("RGBA", (columns * 32, rows * 32))
             for index in range(columns * rows):
@@ -31,8 +33,10 @@ class StylePackTests(unittest.TestCase):
                 patch.putpixel((0, 0), (10, 40, 200, 1))
                 sheet.paste(patch, (left + 8, top + 7))
                 layer = "ui" if sheet_name in ("ui", "supplies") else LAYERS[index % 6]
+                category = (("equipment" if index < 12 else "loot") if sheet_name == "supplies"
+                            else ("terrain", "structure", "prop")[index % 3] if sheet_name == "biomes" else "fixture")
                 style["assets"].append({"id": f"{sheet_name}-{index}", "label": f"Component {index}",
-                                        "category": ("equipment" if index < 12 else "loot") if sheet_name == "supplies" else "fixture", "layer": layer,
+                                        "category": category, "layer": layer,
                                         "sheet": sheet_name, "cell": index})
             sheet.save(source / f"{sheet_name}.png")
         return style
@@ -216,6 +220,50 @@ class StylePackTests(unittest.TestCase):
             after = {path: (path.stat().st_mtime_ns, hashlib.sha256(path.read_bytes()).hexdigest())
                      for path in root.rglob("*") if path.is_file()}
             self.assertEqual(before, after)
+
+    def test_biomes_pack_has_96_native_components_and_read_only_check(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, expansion=True, supplies=True, biomes=True)
+            catalog = root / "catalog.json"
+            catalog.write_text(json.dumps({"styles": [style]}))
+            manifest = build_pack(style, root)
+            directory = root / style["id"]
+            self.assertEqual(len(manifest["assets"]), 96)
+            self.assertEqual(list(manifest["sheets"]), ["world", "ui", "expansion", "supplies", "biomes"])
+            record = manifest["sheets"]["biomes"]
+            self.assertEqual((record["columns"], record["rows"]), (4, 3))
+            biomes = [asset for asset in manifest["assets"] if asset["source"]["sheet"] == "biomes"]
+            self.assertEqual(len(biomes), 12)
+            self.assertEqual({asset["category"] for asset in biomes}, {"terrain", "structure", "prop"})
+            self.assertEqual(biomes[-1]["source"]["cell"], {"column": 3, "row": 2, "index": 11})
+            with Image.open(directory / manifest["contactSheet"]) as contact:
+                self.assertEqual(contact.size, (1440, 4000))
+            with ZipFile(directory / manifest["download"]) as archive:
+                for asset in biomes:
+                    self.assertEqual(archive.read(asset["file"]), (directory / asset["file"]).read_bytes())
+                self.assertIn(b"96 individually labeled", archive.read("README.md"))
+            before = {path: (path.stat().st_mtime_ns, hashlib.sha256(path.read_bytes()).hexdigest())
+                      for path in root.rglob("*") if path.is_file()}
+            self.assertEqual(main(["--catalog", str(catalog), "--check"]), 0)
+            after = {path: (path.stat().st_mtime_ns, hashlib.sha256(path.read_bytes()).hexdigest())
+                     for path in root.rglob("*") if path.is_file()}
+            self.assertEqual(before, after)
+
+    def test_biomes_are_optional_independently_and_incomplete_sources_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, biomes=True)
+            manifest = build_pack(style, root)
+            self.assertEqual(len(manifest["assets"]), 48)
+            validate_pack(root / style["id"])
+            removed = style["assets"].pop()
+            with self.assertRaisesRegex(PackError, "expected 48 components"):
+                build_pack(style, root)
+            style["assets"].append(removed)
+            (root / "test-pack/source/biomes.png").unlink()
+            with self.assertRaisesRegex(PackError, "source atlas is missing"):
+                build_pack(style, root)
 
     def test_incomplete_supplies_and_missing_supplies_source_are_rejected(self):
         with tempfile.TemporaryDirectory() as temp:

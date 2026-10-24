@@ -1,6 +1,6 @@
 const CATALOG_URL = new URL('assets/style-packs/catalog.json', document.baseURI);
 const categories = ['terrain', 'structure', 'prop', 'actor', 'effect', 'ui', 'portrait', 'equipment', 'loot'];
-const categoryNames = { supplies: 'New additions', expansion: 'Rooms & creatures', equipment: 'Equipment', loot: 'Loot', terrain: 'Terrain', structure: 'Structures', prop: 'Props', actor: 'Actors', effect: 'Effects', ui: 'UI', portrait: 'Portraits' };
+const categoryNames = { biomes: 'New additions', supplies: 'Equipment & supplies', expansion: 'Rooms & creatures', equipment: 'Equipment', loot: 'Loot', terrain: 'Terrain', structure: 'Structures', prop: 'Props', actor: 'Actors', effect: 'Effects', ui: 'UI', portrait: 'Portraits' };
 const directions = {
   'pocket-dungeon': { subtitle: 'Overhead pixel art', accent: '#615064' },
   'ink-and-lanterns': { subtitle: 'Painted gouache & ink', accent: '#547058' },
@@ -208,7 +208,7 @@ function setAllLayers(checked) {
 
 function matchesCategory(asset, category) {
   if (category === 'all') return true;
-  return category === 'supplies' || category === 'expansion'
+  return ['biomes', 'supplies', 'expansion'].includes(category)
     ? asset.source?.sheet === category
     : asset.category === category;
 }
@@ -250,7 +250,7 @@ function renderConcepts(style) {
 
 function renderFilters() {
   const assets = state.manifest.assets;
-  const available = ['all', 'supplies', 'expansion', ...categories];
+  const available = ['all', 'biomes', 'supplies', 'expansion', ...categories];
   const buttons = available.map(category => {
     const count = category === 'all' ? assets.length : assets.filter(asset => matchesCategory(asset, category)).length;
     const button = make('button', 'category-filter', category === 'all' ? 'All pieces' : categoryNames[category]);
