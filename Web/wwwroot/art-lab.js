@@ -1,13 +1,17 @@
 const CATALOG_URL = new URL('assets/style-packs/catalog.json', document.baseURI);
 const categories = ['terrain', 'structure', 'prop', 'actor', 'effect', 'ui', 'portrait', 'equipment', 'loot'];
-const categoryNames = { services: 'New additions', biomes: 'Biomes & landmarks', supplies: 'Equipment & supplies', expansion: 'Rooms & creatures', equipment: 'Equipment', loot: 'Loot', terrain: 'Terrain', structure: 'Structures', prop: 'Props', actor: 'Actors', effect: 'Effects', ui: 'UI', portrait: 'Portraits' };
+const categoryNames = { services: 'Home & services', new: 'New additions', biomes: 'Biomes & landmarks', supplies: 'Equipment & supplies', expansion: 'Rooms & creatures', equipment: 'Equipment', loot: 'Loot', terrain: 'Terrain', structure: 'Structures', prop: 'Props', actor: 'Actors', effect: 'Effects', ui: 'UI', portrait: 'Portraits' };
+const collectionNames = {arsenal: 'Weapons', armor: 'Armor', gear: 'Gear', settlements: 'Cities & towns', roads: 'Roads', forest: 'Forests', highlands: 'Mountains & volcanic', caverns: 'Caves', attacks: 'Character attacks', spells: 'Spells'};
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+let animationTimer;
+let animationObserver;
 const directions = {
   'pocket-dungeon': { subtitle: 'Overhead pixel art', accent: '#615064' },
   'ink-and-lanterns': { subtitle: 'Painted gouache & ink', accent: '#547058' },
   'dungeon-after-dark': { subtitle: 'Graphic novel & halftone', accent: '#416975' }
 };
 const $ = id => document.getElementById(id);
-const state = { styles: [], active: null, manifest: null, manifestUrl: null, category: 'all', search: '', request: 0, failedLayers: new Set(), loadedLayers: new Set(), layers: [] };
+const state = { styles: [], active: null, manifest: null, manifestUrl: null, category: 'all', collection: 'all', limit: 48, search: '', request: 0, failedLayers: new Set(), loadedLayers: new Set(), layers: [] };
 const downloadIcon = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>';
 const outwardIcon = '<svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg>';
 
@@ -91,6 +95,9 @@ async function selectStyle(id) {
   const request = ++state.request;
   state.active = id;
   state.category = 'all';
+  state.collection = 'all';
+  state.limit = 48;
+  clearInterval(animationTimer);
   state.search = '';
   $('component-search').value = '';
   renderTabs();
@@ -125,6 +132,8 @@ function renderCollection(style, manifest) {
   configureLink($('preview-download'), localUrl(manifest.preview.file, state.manifestUrl));
   renderLayers(manifest.preview);
   renderConcepts(style);
+  renderCollections();
+  renderAnimations();
   renderFilters();
   renderComponents();
 }
@@ -208,6 +217,7 @@ function setAllLayers(checked) {
 
 function matchesCategory(asset, category) {
   if (category === 'all') return true;
+  if (category === 'new') return Object.hasOwn(collectionNames, asset.collection || asset.source?.sheet);
   return ['services', 'biomes', 'supplies', 'expansion'].includes(category)
     ? asset.source?.sheet === category
     : asset.category === category;
@@ -250,7 +260,7 @@ function renderConcepts(style) {
 
 function renderFilters() {
   const assets = state.manifest.assets;
-  const available = ['all', 'services', 'biomes', 'supplies', 'expansion', ...categories];
+  const available = ['all', 'new', 'services', 'biomes', 'supplies', 'expansion', ...categories];
   const buttons = available.map(category => {
     const count = category === 'all' ? assets.length : assets.filter(asset => matchesCategory(asset, category)).length;
     const button = make('button', 'category-filter', category === 'all' ? 'All pieces' : categoryNames[category]);
@@ -260,6 +270,7 @@ function renderFilters() {
     button.disabled = count === 0;
     button.addEventListener('click', () => {
       state.category = category;
+      state.limit = 48;
       renderFilters();
       renderComponents();
       const index = available.indexOf(category);
@@ -273,10 +284,10 @@ function renderFilters() {
 function renderComponents() {
   const assets = state.manifest.assets.filter(asset => {
     const matchingCategory = matchesCategory(asset, state.category);
-    const text = `${asset.label || ''} ${asset.id || ''} ${asset.category || ''} ${asset.layer || ''}`.toLowerCase();
-    return matchingCategory && text.includes(state.search.toLowerCase().trim());
+    const text = `${asset.label || ''} ${asset.id || ''} ${asset.category || ''} ${asset.layer || ''} ${collectionNames[asset.collection || asset.source?.sheet] || ''}`.toLowerCase();
+    return matchingCategory && (state.collection === 'all' || (asset.collection || asset.source?.sheet) === state.collection) && text.includes(state.search.toLowerCase().trim());
   });
-  const cards = assets.map(asset => {
+  const cards = assets.slice(0, state.limit).map(asset => {
     const card = make('article', 'component-card');
     const label = asset.label || asset.id || 'Untitled component';
     const url = localUrl(asset.file, state.manifestUrl);
@@ -311,9 +322,100 @@ function renderComponents() {
     return card;
   });
   $('component-grid').replaceChildren(...cards);
-  $('result-count').textContent = `${assets.length} of ${state.manifest.assets.length} pieces${state.category === 'all' ? '' : ` · ${categoryNames[state.category]}`}`;
+  $('load-more').hidden = assets.length <= state.limit;
+  $('load-more').textContent = `Show ${Math.min(48, Math.max(0, assets.length - state.limit))} more pieces`;
+  $('result-count').textContent = `Showing ${Math.min(state.limit, assets.length)} of ${assets.length} matching pieces · ${state.manifest.assets.length} total${state.category === 'all' ? '' : ` · ${categoryNames[state.category]}`}`;
   $('empty-state').hidden = assets.length > 0;
 }
+
+function renderCollections() {
+  const collections = state.manifest.collections || [];
+  const select = $('collection-filter');
+  select.replaceChildren(new Option('All collections', 'all'));
+  const cards = collections.map(collection => {
+    const label = collectionNames[collection.id] || collection.label || collection.id;
+    select.add(new Option(`${label} (${collection.count || 24})`, collection.id));
+    const card = make('article', 'collection-card');
+    card.append(make('h3', '', label), make('p', 'component-meta', `${collection.count || 24} transparent PNGs`));
+    const link = make('a', 'text-link', 'Download collection ZIP');
+    link.download = '';
+    configureLink(link, localUrl(collection.download, state.manifestUrl));
+    card.append(link);
+    return card;
+  });
+  select.value = state.collection;
+  $('collection-downloads').replaceChildren(...cards);
+  $('collections').hidden = !cards.length;
+}
+
+function renderAnimations() {
+  clearInterval(animationTimer);
+  animationObserver?.disconnect();
+  const players = [];
+  const cards = (state.manifest.animations || []).map(clip => {
+    const frames = (clip.frames || []).map(path => localUrl(typeof path === 'string' ? path : path.file, state.manifestUrl)).filter(Boolean);
+    const card = make('article', 'animation-card');
+    const media = make('div', 'animation-media checkerboard');
+    const image = make('img');
+    image.alt = `${clip.label || clip.id} animation frame`;
+    image.width = clip.frameWidth || 256;
+    image.height = clip.frameHeight || 256;
+    if (frames.length) image.src = frames[0];
+    media.append(image);
+    const controls = make('div', 'animation-controls');
+    const button = make('button', 'animation-toggle');
+    button.type = 'button';
+    const slider = make('input');
+    slider.type = 'range'; slider.min = '0'; slider.max = String(Math.max(0, frames.length - 1)); slider.value = '0'; slider.step = '1';
+    slider.setAttribute('aria-label', `${clip.label || clip.id} frame`);
+    const counter = make('span', 'frame-count', `1 / ${frames.length}`);
+    const player = {card, image, frames, slider, counter, button, frame: 0, playing: !motionPreference.matches, last: 0, fps: Number(clip.fps) || 8};
+    const updateButton = () => { button.textContent = player.playing ? 'Pause' : 'Play'; button.setAttribute('aria-label', `${player.playing ? 'Pause' : 'Play'} ${clip.label || clip.id}`); };
+    player.updateButton = updateButton;
+    player.show = frame => { player.frame = frame; image.src = frames[frame]; slider.value = String(frame); counter.textContent = `${frame + 1} / ${frames.length}`; };
+    button.disabled = !frames.length; slider.disabled = !frames.length;
+    updateButton();
+    button.addEventListener('click', () => { player.playing = !player.playing; updateButton(); });
+    slider.addEventListener('input', () => { player.playing = false; updateButton(); player.show(Number(slider.value)); });
+    image.addEventListener('error', () => { player.playing = false; updateButton(); media.replaceChildren(make('p', 'image-failure', 'Animation preview unavailable')); }, {once:true});
+    controls.append(button, slider, counter);
+    card.append(media, make('h3', '', clip.label || clip.id), controls);
+    const downloads = make('div', 'animation-downloads');
+    for (const [label, path] of [['Sprite sheet PNG', clip.spriteSheet], ['Frame metadata JSON', clip.metadata]]) {
+      const link = make('a', 'text-link', label); link.download = ''; configureLink(link, localUrl(path, state.manifestUrl)); downloads.append(link);
+    }
+    card.append(downloads); players.push(player); return card;
+  });
+  $('animation-grid').replaceChildren(...cards);
+  $('animations').hidden = !cards.length;
+  state.players = players;
+  // Warm each six-frame sequence shortly before it enters the viewport.
+  animationObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const player = players.find(item => item.card === entry.target);
+      if (player) player.preloadedFrames = player.frames.map(url => { const image = new Image(); image.src = url; return image; });
+      animationObserver.unobserve(entry.target);
+    }
+  }, {rootMargin: '300px'});
+  players.forEach(player => animationObserver.observe(player.card));
+  animationTimer = setInterval(() => {
+    if (document.hidden) return;
+    const now = performance.now();
+    for (const player of players) {
+      if (!player.playing || player.frames.length < 2 || now - player.last < 1000 / player.fps) continue;
+      const bounds = player.card.getBoundingClientRect();
+      if (bounds.bottom < 0 || bounds.top > innerHeight) continue;
+      player.last = now; player.show((player.frame + 1) % player.frames.length);
+    }
+  }, 40);
+}
+
+$('collection-filter').addEventListener('change', event => { state.collection = event.target.value; state.limit = 48; renderComponents(); });
+$('load-more').addEventListener('click', () => { state.limit += 48; renderComponents(); });
+motionPreference.addEventListener('change', event => {
+  if (event.matches) for (const player of state.players || []) { player.playing = false; player.updateButton(); }
+});
 
 async function loadCatalog() {
   setLoading('Loading the art collections…');
@@ -333,6 +435,7 @@ async function loadCatalog() {
 $('retry').addEventListener('click', () => state.styles.length && state.active ? selectStyle(state.active) : loadCatalog());
 $('component-search').addEventListener('input', event => {
   state.search = event.target.value;
+  state.limit = 48;
   if (state.manifest) renderComponents();
 });
 $('show-layers').addEventListener('click', () => setAllLayers(true));

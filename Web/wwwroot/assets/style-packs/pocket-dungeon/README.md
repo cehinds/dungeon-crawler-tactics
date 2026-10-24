@@ -1,7 +1,7 @@
 # Pocket Dungeon — extracted concept components
 
-120 individually labeled transparent PNGs, mechanically cropped at native pixel
-resolution from 6 generated atlases. Each crop has 4px transparent padding.
+360 individually labeled transparent PNGs, mechanically cropped at native pixel
+resolution from 16 generated atlases. Each crop has 4px transparent padding.
 Available original and additional concept-scene PNGs are included in concepts/;
 manifest.conceptFiles lists the archive-relative paths.
 The original source atlases remain in the repository's source/ directory; their
@@ -21,13 +21,14 @@ No painting, recoloring or invented detail is performed by the extraction script
 The contact sheet labels sit outside the artwork. preview.png is an illustrative
 component arrangement, not a playable room or an integrated game screenshot.
 The seven full-canvas layers/*.png composite in manifest order to reproduce it.
-Toggle these same layers in the gallery to inspect their contribution. Components
-are scaled only in the previews; the individual PNGs preserve source pixels.
+Toggle these same layers in the gallery to inspect their contribution. Native component PNGs preserve source pixels. Animation exports are derived, resampled
+256×256 canvases using a shared scale per clip, with fixed feet or center anchors.
+Lossless WebP previews and horizontal PNG strips accompany each six-frame clip.
 
 Anchors are measured in pixels from each PNG's top-left, including padding.
 The default anchor is the original crop's bottom-center. logicalFootprint is
-placement guidance, not a collision shape. These are concept components: animation,
-directional views, tile seams and runtime collision require a production art pass.
+placement guidance, not a collision shape. These are concept components; directional views, tile seams and runtime collision
+require a production art pass. Animation clips are illustrative derived exports.
 
 Rebuild: python3 Tools/build_style_packs.py --style pocket-dungeon
 Validate without writing: python3 Tools/build_style_packs.py --style pocket-dungeon --check

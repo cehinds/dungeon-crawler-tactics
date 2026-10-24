@@ -8,9 +8,9 @@ from zipfile import ZipFile
 
 from PIL import Image
 
-from build_style_packs import (LAYERS, PADDING, PackError, SHEETS, build_pack,
+from build_style_packs import (LAYERS, PADDING, PackError, SHEETS, COLLECTION_IDS, build_pack,
                                cell_box, claim_region, extract_cell, main,
-                               isolate_alpha_islands, preview_resampling, validate_pack)
+                               isolate_alpha_islands, normalized_frames, preview_resampling, validate_pack)
 
 
 class StylePackTests(unittest.TestCase):
@@ -19,6 +19,8 @@ class StylePackTests(unittest.TestCase):
         source = root / "test-pack/source"
         source.mkdir(parents=True)
         for sheet_name, (columns, rows) in SHEETS.items():
+            if sheet_name in COLLECTION_IDS:
+                continue
             if sheet_name == "expansion" and not expansion:
                 continue
             if sheet_name == "supplies" and not supplies:
@@ -42,6 +44,98 @@ class StylePackTests(unittest.TestCase):
                                         "sheet": sheet_name, "cell": index})
             sheet.save(source / f"{sheet_name}.png")
         return style
+
+    def expansion_fixture(self, root):
+        style = self.fixture(root)
+        source = root / "test-pack/source"
+        for name in COLLECTION_IDS:
+            sheet = Image.new("RGBA", (384, 256))
+            for index in range(24):
+                left, top, _, _ = cell_box(sheet.size, 6, 4, index)
+                width, height = 12 + index % 6 * 2, 15 + index % 6
+                sheet.paste(Image.new("RGBA", (width, height), (index * 9, 110, 80, 190)), (left + 8, top + 7))
+                asset = {"id": f"{name}-{index}", "label": f"{name} {index // 6} · frame {index % 6 + 1}", "category": "fixture",
+                         "layer": "effects", "sheet": name, "cell": index, "collection": name}
+                if name in ("attacks", "spells"):
+                    asset["animation"] = {"clip": f"{name}-{index // 6}", "frame": index % 6 + 1,
+                                          "fps": 8, "anchor": "feet" if name == "attacks" else "center"}
+                style["assets"].append(asset)
+            sheet.save(source / f"{name}.png")
+        return style
+
+    def test_new_collections_and_normalized_animations_are_complete(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            manifest = build_pack(self.expansion_fixture(root), root)
+            directory = root / "test-pack"
+            self.assertEqual(len(manifest["assets"]), 276)
+            self.assertEqual(len(manifest["collections"]), 10)
+            self.assertEqual(len(manifest["animations"]), 8)
+            self.assertEqual(manifest["animations"][0]["label"], "attacks 0")
+            self.assertEqual(manifest["collections"][0]["label"], "Armor")
+            with ZipFile(directory / manifest["download"]) as archive:
+                self.assertFalse(any(path.endswith(".zip") for path in archive.namelist()))
+            for clip in manifest["animations"]:
+                self.assertEqual(clip["anchor"], {"x": 128, "y": 240 if clip["id"].startswith("attacks") else 128})
+                # Changing silhouettes must keep different sizes under a single scale.
+                bounds = []
+                for path in clip["frames"]:
+                    with Image.open(directory / path) as frame:
+                        bounds.append(frame.getchannel("A").getbbox())
+                self.assertGreater(bounds[-1][2] - bounds[-1][0], bounds[0][2] - bounds[0][0])
+                if clip["id"].startswith("attacks"):
+                    self.assertLessEqual(max(box[3] for box in bounds) - min(box[3] for box in bounds), 1)
+            metadata_path = directory / manifest["animations"][0]["metadata"]
+            metadata_bytes = metadata_path.read_bytes()
+            metadata_path.write_text("{}")
+            with self.assertRaisesRegex(PackError, "Animation metadata differs"):
+                validate_pack(directory)
+            metadata_path.write_bytes(metadata_bytes)
+            record = manifest["collections"][0]
+            collection_path = directory / record["manifest"]
+            collection_bytes = collection_path.read_bytes()
+            altered = json.loads(collection_bytes)
+            altered["assets"].pop()
+            collection_path.write_text(json.dumps(altered))
+            with self.assertRaisesRegex(PackError, "Collection manifest differs"):
+                validate_pack(directory)
+            collection_path.write_bytes(collection_bytes)
+            path = directory / manifest["animations"][0]["frames"][0]
+            Image.new("RGBA", (256, 256)).save(path)
+            with self.assertRaisesRegex(PackError, "Animation frame differs"):
+                validate_pack(directory)
+
+    def test_animation_missing_or_duplicate_frame_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.expansion_fixture(root)
+            frames = [asset for asset in style["assets"] if "animation" in asset]
+            frames[1]["animation"]["frame"] = 1
+            with self.assertRaisesRegex(PackError, "six unique frames"):
+                build_pack(style, root)
+
+    def test_animation_registers_authored_anchor_when_silhouette_extends(self):
+        members, sprites = [], {}
+        for index in range(6):
+            sprite = Image.new("RGBA", (48, 48))
+            # The body marker stays fixed while an attack extends to the right.
+            sprite.paste(Image.new("RGBA", (4, 16), "red"), (10, 10))
+            sprite.paste(Image.new("RGBA", (5 + index * 3, 3), "green"), (14, 12))
+            asset = {"id": str(index), "anchor": {"x": 12, "y": 26},
+                     "animation": {"anchor": "feet"}}
+            members.append(asset)
+            sprites[asset["id"]] = sprite
+        frames, anchor, scale = normalized_frames(members, sprites, {"id": "pocket-dungeon"})
+        self.assertEqual(anchor, {"x": 128, "y": 240})
+        red_bounds = []
+        for frame in frames:
+            mask = Image.new("L", frame.size)
+            pixels = frame.tobytes()
+            mask.putdata([255 if red > 200 and green == 0 and alpha else 0
+                          for red, green, alpha in zip(pixels[0::4], pixels[1::4], pixels[3::4])])
+            red_bounds.append(mask.getbbox())
+        self.assertTrue(all(bounds == red_bounds[0] for bounds in red_bounds))
+        self.assertGreater(scale, 0)
 
     def test_native_pixels_alpha_and_source_bounds_are_preserved(self):
         sheet = Image.new("RGBA", (64, 32))

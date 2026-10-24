@@ -25,10 +25,10 @@
     <div id="load-error" class="error-panel" hidden><h2>We couldn’t load this collection.</h2><p id="error-detail"></p><button id="retry" type="button">Try again</button></div>
     <section id="style-panel" class="style-panel" role="tabpanel" hidden aria-busy="true">
       <div class="collection-heading">
-        <div><h2 id="style-title"></h2><p id="style-description"></p><p class="pack-status">Concept components · not animation-ready game assets</p></div>
+        <div><h2 id="style-title"></h2><p id="style-description"></p><p class="pack-status">Concept components & motion studies · downloadable art references</p></div>
         <a id="pack-download" class="button button-primary" download><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>Download style pack <span>ZIP</span></a>
       </div>
-      <nav class="collection-jumps" aria-label="Jump to collection content"><a href="#layers">Layers</a><a href="#concept-art">Concept art</a><a href="#components">Components</a></nav>
+      <nav class="collection-jumps" aria-label="Jump to collection content"><a href="#layers">Layers</a><a href="#concept-art">Concept art</a><a href="#collections">Collections</a><a href="#animations">Animations</a><a href="#components">Components</a></nav>
       <section id="layers" class="preview-layout jump-target" aria-label="Layered room preview" tabindex="-1">
         <figure class="room-figure">
           <div id="room-preview" class="room-preview checkerboard" role="img" aria-label="Layered room composition"></div>
@@ -46,17 +46,20 @@
         <div class="concepts-heading"><div><h3 id="concept-title">From concept to components</h3><p>Explore the original style, a dungeon approach, and a combat encounter.</p></div><a id="contact-sheet" class="text-link" target="_blank" rel="noopener">View component contact sheet <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
         <div id="concepts" class="concepts"></div>
       </section>
+      <section id="collections" class="component-section jump-target" aria-labelledby="collections-title" tabindex="-1"><h2 id="collections-title">Explore the collections.</h2><p class="section-description">Download a focused collection as a ZIP, or browse its individual pieces below.</p><div id="collection-downloads" class="collection-downloads"></div></section>
+      <section id="animations" class="component-section jump-target" aria-labelledby="animations-title" tabindex="-1"><h2 id="animations-title">Motion studies.</h2><p class="section-description">Eight looping, six-frame clips per style. Pause or scrub a preview, then download its sprite sheet and metadata.</p><div id="animation-grid" class="animation-grid"></div></section>
       <section id="components" class="component-section jump-target" aria-labelledby="components-title" tabindex="-1">
-        <div class="component-heading"><div><h2 id="components-title">The individual pieces.</h2><p>120 PNGs per style, including 24 new service and activity pieces alongside biomes, equipment, loot, room, furniture, enemy and effect pieces. Checkerboards show transparency.</p></div><a id="manifest-link" class="text-link" download>Download manifest <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a></div>
-        <div class="filter-bar">
+        <div class="component-heading"><div><h2 id="components-title">The individual pieces.</h2><p>360 PNGs per style: 240 new weapons, armor, gear, world, attack and spell pieces alongside the original 120. Checkerboards show transparency.</p></div><a id="manifest-link" class="text-link" download>Download manifest <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v15m-6-6 6 6 6-6"/></svg></a></div>
+        <div class="filter-bar"><label class="collection-select-label">Collection<select id="collection-filter"><option value="all">All collections</option></select></label>
           <div id="category-filters" class="category-filters" role="group" aria-label="Filter components by category"></div>
           <label class="search-label"><span class="sr-only">Find a component</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="component-search" type="search" placeholder="Find a piece…" autocomplete="off"></label>
         </div>
         <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
         <div id="component-grid" class="component-grid"></div>
+        <button id="load-more" class="button load-more" type="button" hidden>Show more pieces</button>
         <p id="empty-state" class="empty-state" hidden>No pieces match. Try another category or search term.</p>
       </section>
-      <p class="collection-note"><strong>Concept component packs.</strong> These are generated art studies split into reusable PNGs, with a composed room for exploring the layers. They are visual references, not animation-ready game assets, and have not been integrated into gameplay.</p>
+      <p class="collection-note"><strong>Concept component packs.</strong> These are generated art studies split into reusable PNGs, with a composed room for exploring the layers. The motion studies include sprite sheets and frame metadata. These art references have not been integrated into gameplay.</p>
     </section>
   </main>
   <footer><p>Three art directions. One very dangerous dungeon.</p><a href="index.html">Return to the game <svg class="small-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></svg></a></footer>

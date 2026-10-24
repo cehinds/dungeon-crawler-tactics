@@ -1,0 +1,1233 @@
+{
+  "schemaVersion": 1,
+  "id": "roads",
+  "label": "Roads",
+  "pathBase": "pack-root",
+  "assets": [
+    {
+      "id": "roads-dirt-road-straight",
+      "label": "Dirt road straight",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-dirt-road-straight.png",
+      "width": 244,
+      "height": 154,
+      "anchor": {
+        "x": 122.0,
+        "y": 77.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 20,
+          "y": 92,
+          "width": 236,
+          "height": 146
+        },
+        "region": [
+          18,
+          90,
+          258,
+          240
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              146,
+              94
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-dirt-road-curve",
+      "label": "Dirt road curve",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-dirt-road-curve.png",
+      "width": 237,
+      "height": 163,
+      "anchor": {
+        "x": 118.5,
+        "y": 81.5
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 278,
+          "y": 95,
+          "width": 229,
+          "height": 155
+        },
+        "region": [
+          276,
+          93,
+          509,
+          252
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              403,
+              97
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-dirt-road-t-junction",
+      "label": "Dirt road T junction",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-dirt-road-t-junction.png",
+      "width": 251,
+      "height": 163,
+      "anchor": {
+        "x": 125.5,
+        "y": 81.5
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 519,
+          "y": 87,
+          "width": 243,
+          "height": 155
+        },
+        "region": [
+          517,
+          85,
+          764,
+          244
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              633,
+              89
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-dirt-road-crossroads",
+      "label": "Dirt road crossroads",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-dirt-road-crossroads.png",
+      "width": 258,
+      "height": 166,
+      "anchor": {
+        "x": 129.0,
+        "y": 83.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 774,
+          "y": 84,
+          "width": 250,
+          "height": 158
+        },
+        "region": [
+          772,
+          82,
+          1026,
+          244
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              890,
+              86
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-dirt-road-endcap",
+      "label": "Dirt road endcap",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-dirt-road-endcap.png",
+      "width": 227,
+      "height": 152,
+      "anchor": {
+        "x": 113.5,
+        "y": 76.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 4,
+          "row": 0,
+          "index": 4
+        },
+        "bounds": {
+          "x": 1040,
+          "y": 101,
+          "width": 219,
+          "height": 144
+        },
+        "region": [
+          1038,
+          99,
+          1261,
+          247
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1176,
+              103
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-dirt-road-slope",
+      "label": "Dirt road slope",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-dirt-road-slope.png",
+      "width": 247,
+      "height": 175,
+      "anchor": {
+        "x": 123.5,
+        "y": 87.5
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 5,
+          "row": 0,
+          "index": 5
+        },
+        "bounds": {
+          "x": 1281,
+          "y": 87,
+          "width": 239,
+          "height": 167
+        },
+        "region": [
+          1279,
+          85,
+          1522,
+          256
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1433,
+              89
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-cobblestone-road-straight",
+      "label": "Cobblestone road straight",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-cobblestone-road-straight.png",
+      "width": 250,
+      "height": 164,
+      "anchor": {
+        "x": 125.0,
+        "y": 82.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 14,
+          "y": 306,
+          "width": 242,
+          "height": 156
+        },
+        "region": [
+          12,
+          304,
+          258,
+          464
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              146,
+              308
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-cobblestone-road-curve",
+      "label": "Cobblestone road curve",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-cobblestone-road-curve.png",
+      "width": 253,
+      "height": 182,
+      "anchor": {
+        "x": 126.5,
+        "y": 91.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 268,
+          "y": 304,
+          "width": 245,
+          "height": 174
+        },
+        "region": [
+          266,
+          302,
+          515,
+          480
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              402,
+              306
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-cobblestone-road-t-junction",
+      "label": "Cobblestone road T junction",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-cobblestone-road-t-junction.png",
+      "width": 253,
+      "height": 176,
+      "anchor": {
+        "x": 126.5,
+        "y": 88.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 8
+        },
+        "bounds": {
+          "x": 521,
+          "y": 298,
+          "width": 245,
+          "height": 168
+        },
+        "region": [
+          519,
+          296,
+          768,
+          468
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              628,
+              300
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-cobblestone-road-crossroads",
+      "label": "Cobblestone road crossroads",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-cobblestone-road-crossroads.png",
+      "width": 265,
+      "height": 182,
+      "anchor": {
+        "x": 132.5,
+        "y": 91.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 9
+        },
+        "bounds": {
+          "x": 774,
+          "y": 296,
+          "width": 257,
+          "height": 174
+        },
+        "region": [
+          772,
+          294,
+          1033,
+          472
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              905,
+              298
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-cobblestone-road-endcap",
+      "label": "Cobblestone road endcap",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-cobblestone-road-endcap.png",
+      "width": 235,
+      "height": 163,
+      "anchor": {
+        "x": 117.5,
+        "y": 81.5
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 4,
+          "row": 1,
+          "index": 10
+        },
+        "bounds": {
+          "x": 1044,
+          "y": 315,
+          "width": 227,
+          "height": 155
+        },
+        "region": [
+          1042,
+          313,
+          1273,
+          472
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1174,
+              317
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-cobblestone-plaza-tile",
+      "label": "Cobblestone plaza tile",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-cobblestone-plaza-tile.png",
+      "width": 252,
+      "height": 178,
+      "anchor": {
+        "x": 126.0,
+        "y": 89.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 5,
+          "row": 1,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1281,
+          "y": 302,
+          "width": 244,
+          "height": 170
+        },
+        "region": [
+          1279,
+          300,
+          1527,
+          474
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1401,
+              304
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-forest-trail-straight",
+      "label": "Forest trail straight",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-forest-trail-straight.png",
+      "width": 246,
+      "height": 174,
+      "anchor": {
+        "x": 123.0,
+        "y": 87.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 12
+        },
+        "bounds": {
+          "x": 18,
+          "y": 528,
+          "width": 238,
+          "height": 166
+        },
+        "region": [
+          16,
+          526,
+          258,
+          696
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              141,
+              530
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-forest-trail-curve",
+      "label": "Forest trail curve",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-forest-trail-curve.png",
+      "width": 250,
+      "height": 193,
+      "anchor": {
+        "x": 125.0,
+        "y": 96.5
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 13
+        },
+        "bounds": {
+          "x": 273,
+          "y": 526,
+          "width": 242,
+          "height": 185
+        },
+        "region": [
+          271,
+          524,
+          517,
+          713
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              413,
+              528
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-forest-trail-t-junction",
+      "label": "Forest trail T junction",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-forest-trail-t-junction.png",
+      "width": 251,
+      "height": 179,
+      "anchor": {
+        "x": 125.5,
+        "y": 89.5
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 14
+        },
+        "bounds": {
+          "x": 520,
+          "y": 526,
+          "width": 243,
+          "height": 171
+        },
+        "region": [
+          518,
+          524,
+          765,
+          699
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              635,
+              528
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-forest-trail-crossroads",
+      "label": "Forest trail crossroads",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-forest-trail-crossroads.png",
+      "width": 261,
+      "height": 186,
+      "anchor": {
+        "x": 130.5,
+        "y": 93.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 15
+        },
+        "bounds": {
+          "x": 774,
+          "y": 524,
+          "width": 253,
+          "height": 178
+        },
+        "region": [
+          772,
+          522,
+          1029,
+          704
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              902,
+              526
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-trail-stepping-stones",
+      "label": "Trail stepping stones",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-trail-stepping-stones.png",
+      "width": 246,
+      "height": 172,
+      "anchor": {
+        "x": 123.0,
+        "y": 86.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 4,
+          "row": 2,
+          "index": 16
+        },
+        "bounds": {
+          "x": 1038,
+          "y": 537,
+          "width": 238,
+          "height": 164
+        },
+        "region": [
+          1036,
+          535,
+          1278,
+          703
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1173,
+              539
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-wood-plank-walkway",
+      "label": "Wood plank walkway",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/roads-wood-plank-walkway.png",
+      "width": 239,
+      "height": 196,
+      "anchor": {
+        "x": 119.5,
+        "y": 98.0
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 5,
+          "row": 2,
+          "index": 17
+        },
+        "bounds": {
+          "x": 1290,
+          "y": 518,
+          "width": 231,
+          "height": 188
+        },
+        "region": [
+          1288,
+          516,
+          1523,
+          708
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1415,
+              520
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-stone-bridge-straight",
+      "label": "Stone bridge straight",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/roads-stone-bridge-straight.png",
+      "width": 259,
+      "height": 203,
+      "anchor": {
+        "x": 129.5,
+        "y": 199
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 0,
+          "row": 3,
+          "index": 18
+        },
+        "bounds": {
+          "x": 12,
+          "y": 760,
+          "width": 251,
+          "height": 195
+        },
+        "region": [
+          10,
+          758,
+          265,
+          957
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              93,
+              762
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-stone-bridge-ramp",
+      "label": "Stone bridge ramp",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/roads-stone-bridge-ramp.png",
+      "width": 260,
+      "height": 201,
+      "anchor": {
+        "x": 130.0,
+        "y": 197
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 1,
+          "row": 3,
+          "index": 19
+        },
+        "bounds": {
+          "x": 270,
+          "y": 760,
+          "width": 252,
+          "height": 193
+        },
+        "region": [
+          268,
+          758,
+          524,
+          955
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              374,
+              762
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-wood-bridge-straight",
+      "label": "Wood bridge straight",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/roads-wood-bridge-straight.png",
+      "width": 268,
+      "height": 215,
+      "anchor": {
+        "x": 134.0,
+        "y": 211
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 2,
+          "row": 3,
+          "index": 20
+        },
+        "bounds": {
+          "x": 531,
+          "y": 744,
+          "width": 260,
+          "height": 207
+        },
+        "region": [
+          529,
+          742,
+          793,
+          953
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              630,
+              746
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-wood-bridge-ramp",
+      "label": "Wood bridge ramp",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/roads-wood-bridge-ramp.png",
+      "width": 274,
+      "height": 209,
+      "anchor": {
+        "x": 137.0,
+        "y": 205
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 3,
+          "row": 3,
+          "index": 21
+        },
+        "bounds": {
+          "x": 776,
+          "y": 754,
+          "width": 266,
+          "height": 201
+        },
+        "region": [
+          774,
+          752,
+          1044,
+          957
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              884,
+              756
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-signpost",
+      "label": "Signpost",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/roads-signpost.png",
+      "width": 171,
+      "height": 232,
+      "anchor": {
+        "x": 85.5,
+        "y": 228
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 4,
+          "row": 3,
+          "index": 22
+        },
+        "bounds": {
+          "x": 1069,
+          "y": 743,
+          "width": 163,
+          "height": 224
+        },
+        "region": [
+          1067,
+          741,
+          1234,
+          969
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1150,
+              745
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    },
+    {
+      "id": "roads-milestone-marker",
+      "label": "Milestone marker",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/roads-milestone-marker.png",
+      "width": 230,
+      "height": 211,
+      "anchor": {
+        "x": 115.0,
+        "y": 207
+      },
+      "source": {
+        "sheet": "roads",
+        "cell": {
+          "column": 5,
+          "row": 3,
+          "index": 23
+        },
+        "bounds": {
+          "x": 1299,
+          "y": 760,
+          "width": 222,
+          "height": 203
+        },
+        "region": [
+          1297,
+          758,
+          1523,
+          965
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1410,
+              762
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "roads"
+    }
+  ],
+  "animations": []
+}

@@ -1,0 +1,1237 @@
+{
+  "schemaVersion": 1,
+  "id": "highlands",
+  "label": "Mountains & volcanic",
+  "pathBase": "pack-root",
+  "assets": [
+    {
+      "id": "highlands-mountain-peak",
+      "label": "Mountain peak",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-mountain-peak.png",
+      "width": 246,
+      "height": 224,
+      "anchor": {
+        "x": 123.0,
+        "y": 220
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 20,
+          "y": 50,
+          "width": 238,
+          "height": 216
+        },
+        "region": [
+          18,
+          48,
+          260,
+          268
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              141,
+              52
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-mountain-ridge",
+      "label": "Mountain ridge",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-mountain-ridge.png",
+      "width": 256,
+      "height": 194,
+      "anchor": {
+        "x": 128.0,
+        "y": 190
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 263,
+          "y": 65,
+          "width": 248,
+          "height": 186
+        },
+        "region": [
+          261,
+          63,
+          513,
+          253
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              348,
+              67
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-mountain-cliff-wall",
+      "label": "Mountain cliff wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-mountain-cliff-wall.png",
+      "width": 238,
+      "height": 243,
+      "anchor": {
+        "x": 119.0,
+        "y": 239
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 518,
+          "y": 23,
+          "width": 230,
+          "height": 235
+        },
+        "region": [
+          516,
+          21,
+          750,
+          260
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              568,
+              25
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-mountain-cliff-corner",
+      "label": "Mountain cliff corner",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-mountain-cliff-corner.png",
+      "width": 242,
+      "height": 205,
+      "anchor": {
+        "x": 121.0,
+        "y": 201
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 777,
+          "y": 55,
+          "width": 234,
+          "height": 197
+        },
+        "region": [
+          775,
+          53,
+          1013,
+          254
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              985,
+              57
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-mountain-stone-slope",
+      "label": "Mountain stone slope",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-mountain-stone-slope.png",
+      "width": 254,
+      "height": 196,
+      "anchor": {
+        "x": 127.0,
+        "y": 192
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 4,
+          "row": 0,
+          "index": 4
+        },
+        "bounds": {
+          "x": 1023,
+          "y": 69,
+          "width": 246,
+          "height": 188
+        },
+        "region": [
+          1021,
+          67,
+          1271,
+          259
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1141,
+              71
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-mountain-scree-patch",
+      "label": "Mountain scree patch",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/highlands-mountain-scree-patch.png",
+      "width": 247,
+      "height": 165,
+      "anchor": {
+        "x": 123.5,
+        "y": 82.5
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 5,
+          "row": 0,
+          "index": 5
+        },
+        "bounds": {
+          "x": 1279,
+          "y": 96,
+          "width": 239,
+          "height": 157
+        },
+        "region": [
+          1277,
+          94,
+          1520,
+          255
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1384,
+              98
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-snowy-peak",
+      "label": "Snowy peak",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-snowy-peak.png",
+      "width": 262,
+      "height": 219,
+      "anchor": {
+        "x": 131.0,
+        "y": 215
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 17,
+          "y": 294,
+          "width": 254,
+          "height": 211
+        },
+        "region": [
+          15,
+          292,
+          273,
+          507
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              143,
+              296
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-snow-cliff-wall",
+      "label": "Snow cliff wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-snow-cliff-wall.png",
+      "width": 229,
+      "height": 224,
+      "anchor": {
+        "x": 114.5,
+        "y": 220
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 289,
+          "y": 275,
+          "width": 221,
+          "height": 216
+        },
+        "region": [
+          287,
+          273,
+          512,
+          493
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              359,
+              277
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-snow-slope",
+      "label": "Snow slope",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-snow-slope.png",
+      "width": 255,
+      "height": 209,
+      "anchor": {
+        "x": 127.5,
+        "y": 205
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 8
+        },
+        "bounds": {
+          "x": 521,
+          "y": 302,
+          "width": 247,
+          "height": 201
+        },
+        "region": [
+          519,
+          300,
+          770,
+          505
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              652,
+              304
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-snow-ground-tile",
+      "label": "Snow ground tile",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/highlands-snow-ground-tile.png",
+      "width": 245,
+      "height": 164,
+      "anchor": {
+        "x": 122.5,
+        "y": 82.0
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 9
+        },
+        "bounds": {
+          "x": 772,
+          "y": 336,
+          "width": 237,
+          "height": 156
+        },
+        "region": [
+          770,
+          334,
+          1011,
+          494
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              888,
+              338
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-frozen-waterfall",
+      "label": "Frozen waterfall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-frozen-waterfall.png",
+      "width": 247,
+      "height": 244,
+      "anchor": {
+        "x": 123.5,
+        "y": 240
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 4,
+          "row": 1,
+          "index": 10
+        },
+        "bounds": {
+          "x": 1017,
+          "y": 268,
+          "width": 239,
+          "height": 236
+        },
+        "region": [
+          1015,
+          266,
+          1258,
+          506
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1081,
+              270
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-mountain-cave-entrance",
+      "label": "Mountain cave entrance",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-mountain-cave-entrance.png",
+      "width": 258,
+      "height": 229,
+      "anchor": {
+        "x": 129.0,
+        "y": 225
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 5,
+          "row": 1,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1266,
+          "y": 284,
+          "width": 250,
+          "height": 221
+        },
+        "region": [
+          1264,
+          282,
+          1518,
+          507
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1383,
+              286
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-volcano-cone",
+      "label": "Volcano cone",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-volcano-cone.png",
+      "width": 276,
+      "height": 221,
+      "anchor": {
+        "x": 138.0,
+        "y": 217
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 12
+        },
+        "bounds": {
+          "x": 17,
+          "y": 521,
+          "width": 268,
+          "height": 213
+        },
+        "region": [
+          15,
+          519,
+          287,
+          736
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              142,
+              523
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-volcanic-cliff-wall",
+      "label": "Volcanic cliff wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-volcanic-cliff-wall.png",
+      "width": 221,
+      "height": 207,
+      "anchor": {
+        "x": 110.5,
+        "y": 203
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 13
+        },
+        "bounds": {
+          "x": 296,
+          "y": 530,
+          "width": 213,
+          "height": 199
+        },
+        "region": [
+          294,
+          528,
+          511,
+          731
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              318,
+              532
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-volcanic-cliff-corner",
+      "label": "Volcanic cliff corner",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-volcanic-cliff-corner.png",
+      "width": 233,
+      "height": 192,
+      "anchor": {
+        "x": 116.5,
+        "y": 188
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 14
+        },
+        "bounds": {
+          "x": 529,
+          "y": 535,
+          "width": 225,
+          "height": 184
+        },
+        "region": [
+          527,
+          533,
+          756,
+          721
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              555,
+              537
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-basalt-ground-tile",
+      "label": "Basalt ground tile",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/highlands-basalt-ground-tile.png",
+      "width": 247,
+      "height": 161,
+      "anchor": {
+        "x": 123.5,
+        "y": 80.5
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 15
+        },
+        "bounds": {
+          "x": 770,
+          "y": 566,
+          "width": 239,
+          "height": 153
+        },
+        "region": [
+          768,
+          564,
+          1011,
+          721
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              888,
+              568
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-lava-pool-edge",
+      "label": "Lava pool edge",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/highlands-lava-pool-edge.png",
+      "width": 247,
+      "height": 178,
+      "anchor": {
+        "x": 123.5,
+        "y": 89.0
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 4,
+          "row": 2,
+          "index": 16
+        },
+        "bounds": {
+          "x": 1021,
+          "y": 550,
+          "width": 239,
+          "height": 170
+        },
+        "region": [
+          1019,
+          548,
+          1262,
+          722
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1227,
+              552
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-lava-pool-corner",
+      "label": "Lava pool corner",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/highlands-lava-pool-corner.png",
+      "width": 257,
+      "height": 171,
+      "anchor": {
+        "x": 128.5,
+        "y": 85.5
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 5,
+          "row": 2,
+          "index": 17
+        },
+        "bounds": {
+          "x": 1270,
+          "y": 556,
+          "width": 249,
+          "height": 163
+        },
+        "region": [
+          1268,
+          554,
+          1521,
+          721
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1387,
+              558
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-lava-stream-straight",
+      "label": "Lava stream straight",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/highlands-lava-stream-straight.png",
+      "width": 261,
+      "height": 184,
+      "anchor": {
+        "x": 130.5,
+        "y": 92.0
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 0,
+          "row": 3,
+          "index": 18
+        },
+        "bounds": {
+          "x": 18,
+          "y": 785,
+          "width": 253,
+          "height": 176
+        },
+        "region": [
+          16,
+          783,
+          273,
+          963
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              112,
+              787
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-lava-stream-curve",
+      "label": "Lava stream curve",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/highlands-lava-stream-curve.png",
+      "width": 222,
+      "height": 218,
+      "anchor": {
+        "x": 111.0,
+        "y": 109.0
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 1,
+          "row": 3,
+          "index": 19
+        },
+        "bounds": {
+          "x": 295,
+          "y": 776,
+          "width": 214,
+          "height": 210
+        },
+        "region": [
+          293,
+          774,
+          511,
+          988
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              402,
+              778
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-obsidian-spire",
+      "label": "Obsidian spire",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-obsidian-spire.png",
+      "width": 234,
+      "height": 263,
+      "anchor": {
+        "x": 117.0,
+        "y": 259
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 2,
+          "row": 3,
+          "index": 20
+        },
+        "bounds": {
+          "x": 529,
+          "y": 735,
+          "width": 226,
+          "height": 255
+        },
+        "region": [
+          527,
+          733,
+          757,
+          992
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              653,
+              737
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-sulfur-vent",
+      "label": "Sulfur vent",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-sulfur-vent.png",
+      "width": 245,
+      "height": 287,
+      "anchor": {
+        "x": 122.5,
+        "y": 283
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 3,
+          "row": 3,
+          "index": 21
+        },
+        "bounds": {
+          "x": 772,
+          "y": 712,
+          "width": 237,
+          "height": 279
+        },
+        "region": [
+          770,
+          710,
+          1011,
+          993
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              937,
+              714
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-cooled-lava-boulder",
+      "label": "Cooled lava boulder",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-cooled-lava-boulder.png",
+      "width": 236,
+      "height": 186,
+      "anchor": {
+        "x": 118.0,
+        "y": 182
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 4,
+          "row": 3,
+          "index": 22
+        },
+        "bounds": {
+          "x": 1027,
+          "y": 791,
+          "width": 228,
+          "height": 178
+        },
+        "region": [
+          1025,
+          789,
+          1257,
+          971
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1146,
+              793
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    },
+    {
+      "id": "highlands-volcanic-ruined-arch",
+      "label": "Volcanic ruined arch",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/highlands-volcanic-ruined-arch.png",
+      "width": 250,
+      "height": 268,
+      "anchor": {
+        "x": 125.0,
+        "y": 264
+      },
+      "source": {
+        "sheet": "highlands",
+        "cell": {
+          "column": 5,
+          "row": 3,
+          "index": 23
+        },
+        "bounds": {
+          "x": 1280,
+          "y": 731,
+          "width": 242,
+          "height": 260
+        },
+        "region": [
+          1278,
+          729,
+          1524,
+          993
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1405,
+              733
+            ],
+            [
+              1359,
+              966
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "highlands"
+    }
+  ],
+  "animations": []
+}

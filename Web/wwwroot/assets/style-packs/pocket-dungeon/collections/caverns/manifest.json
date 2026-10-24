@@ -1,0 +1,1245 @@
+{
+  "schemaVersion": 1,
+  "id": "caverns",
+  "label": "Caves",
+  "pathBase": "pack-root",
+  "assets": [
+    {
+      "id": "caverns-cave-floor-tile",
+      "label": "Cave floor tile",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/caverns-cave-floor-tile.png",
+      "width": 188,
+      "height": 177,
+      "anchor": {
+        "x": 94.0,
+        "y": 88.5
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 46,
+          "y": 69,
+          "width": 180,
+          "height": 169
+        },
+        "region": [
+          44,
+          67,
+          228,
+          240
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              167,
+              71
+            ],
+            [
+              51,
+              198
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-cave-wall-straight",
+      "label": "Cave wall straight",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-cave-wall-straight.png",
+      "width": 203,
+      "height": 172,
+      "anchor": {
+        "x": 101.5,
+        "y": 168
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 286,
+          "y": 59,
+          "width": 195,
+          "height": 164
+        },
+        "region": [
+          284,
+          57,
+          483,
+          225
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              316,
+              61
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-cave-wall-corner",
+      "label": "Cave wall corner",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-cave-wall-corner.png",
+      "width": 214,
+      "height": 200,
+      "anchor": {
+        "x": 107.0,
+        "y": 196
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 541,
+          "y": 38,
+          "width": 206,
+          "height": 192
+        },
+        "region": [
+          539,
+          36,
+          749,
+          232
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              610,
+              40
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-cave-wall-endcap",
+      "label": "Cave wall endcap",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-cave-wall-endcap.png",
+      "width": 113,
+      "height": 215,
+      "anchor": {
+        "x": 56.5,
+        "y": 211
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 832,
+          "y": 35,
+          "width": 105,
+          "height": 207
+        },
+        "region": [
+          830,
+          33,
+          939,
+          244
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              887,
+              37
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-cave-entrance-arch",
+      "label": "Cave entrance arch",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-cave-entrance-arch.png",
+      "width": 233,
+      "height": 218,
+      "anchor": {
+        "x": 116.5,
+        "y": 214
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 4,
+          "row": 0,
+          "index": 4
+        },
+        "bounds": {
+          "x": 1038,
+          "y": 31,
+          "width": 225,
+          "height": 210
+        },
+        "region": [
+          1036,
+          29,
+          1265,
+          243
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1140,
+              33
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-cave-rock-ramp",
+      "label": "Cave rock ramp",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-cave-rock-ramp.png",
+      "width": 213,
+      "height": 202,
+      "anchor": {
+        "x": 106.5,
+        "y": 198
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 5,
+          "row": 0,
+          "index": 5
+        },
+        "bounds": {
+          "x": 1301,
+          "y": 48,
+          "width": 205,
+          "height": 194
+        },
+        "region": [
+          1299,
+          46,
+          1508,
+          244
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1433,
+              50
+            ],
+            [
+              1318,
+              168
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-stalagmite",
+      "label": "Stalagmite",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/caverns-stalagmite.png",
+      "width": 208,
+      "height": 220,
+      "anchor": {
+        "x": 104.0,
+        "y": 216
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 37,
+          "y": 284,
+          "width": 200,
+          "height": 212
+        },
+        "region": [
+          35,
+          282,
+          239,
+          498
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              130,
+              286
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-stalactite-hanging",
+      "label": "Stalactite hanging",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/caverns-stalactite-hanging.png",
+      "width": 197,
+      "height": 201,
+      "anchor": {
+        "x": 98.5,
+        "y": 197
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 290,
+          "y": 276,
+          "width": 189,
+          "height": 193
+        },
+        "region": [
+          288,
+          274,
+          481,
+          471
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              307,
+              278
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-stone-column",
+      "label": "Stone column",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-stone-column.png",
+      "width": 155,
+      "height": 239,
+      "anchor": {
+        "x": 77.5,
+        "y": 235
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 8
+        },
+        "bounds": {
+          "x": 558,
+          "y": 269,
+          "width": 147,
+          "height": 231
+        },
+        "region": [
+          556,
+          267,
+          707,
+          502
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              611,
+              271
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-crystal-wall",
+      "label": "Crystal wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-crystal-wall.png",
+      "width": 200,
+      "height": 205,
+      "anchor": {
+        "x": 100.0,
+        "y": 201
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 9
+        },
+        "bounds": {
+          "x": 793,
+          "y": 290,
+          "width": 192,
+          "height": 197
+        },
+        "region": [
+          791,
+          288,
+          987,
+          489
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              880,
+              292
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-red-crystal-cluster",
+      "label": "Red crystal cluster",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/caverns-red-crystal-cluster.png",
+      "width": 215,
+      "height": 205,
+      "anchor": {
+        "x": 107.5,
+        "y": 201
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 4,
+          "row": 1,
+          "index": 10
+        },
+        "bounds": {
+          "x": 1048,
+          "y": 294,
+          "width": 207,
+          "height": 197
+        },
+        "region": [
+          1046,
+          292,
+          1257,
+          493
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1180,
+              296
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-blue-crystal-cluster",
+      "label": "Blue crystal cluster",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/caverns-blue-crystal-cluster.png",
+      "width": 209,
+      "height": 204,
+      "anchor": {
+        "x": 104.5,
+        "y": 200
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 5,
+          "row": 1,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1304,
+          "y": 299,
+          "width": 201,
+          "height": 196
+        },
+        "region": [
+          1302,
+          297,
+          1507,
+          497
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1408,
+              301
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-green-crystal-cluster",
+      "label": "Green crystal cluster",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/caverns-green-crystal-cluster.png",
+      "width": 206,
+      "height": 186,
+      "anchor": {
+        "x": 103.0,
+        "y": 182
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 12
+        },
+        "bounds": {
+          "x": 36,
+          "y": 535,
+          "width": 198,
+          "height": 178
+        },
+        "region": [
+          34,
+          533,
+          236,
+          715
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              126,
+              537
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-underground-lake-edge",
+      "label": "Underground lake edge",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/caverns-underground-lake-edge.png",
+      "width": 197,
+      "height": 188,
+      "anchor": {
+        "x": 98.5,
+        "y": 94.0
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 13
+        },
+        "bounds": {
+          "x": 290,
+          "y": 528,
+          "width": 189,
+          "height": 180
+        },
+        "region": [
+          288,
+          526,
+          481,
+          710
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              405,
+              530
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-underground-lake-corner",
+      "label": "Underground lake corner",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/caverns-underground-lake-corner.png",
+      "width": 214,
+      "height": 189,
+      "anchor": {
+        "x": 107.0,
+        "y": 94.5
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 14
+        },
+        "bounds": {
+          "x": 541,
+          "y": 527,
+          "width": 206,
+          "height": 181
+        },
+        "region": [
+          539,
+          525,
+          749,
+          710
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              618,
+              529
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-cave-stream",
+      "label": "Cave stream",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/caverns-cave-stream.png",
+      "width": 209,
+      "height": 206,
+      "anchor": {
+        "x": 104.5,
+        "y": 103.0
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 15
+        },
+        "bounds": {
+          "x": 794,
+          "y": 518,
+          "width": 201,
+          "height": 198
+        },
+        "region": [
+          792,
+          516,
+          997,
+          718
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              811,
+              520
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-mine-rail-straight",
+      "label": "Mine rail straight",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/caverns-mine-rail-straight.png",
+      "width": 205,
+      "height": 146,
+      "anchor": {
+        "x": 102.5,
+        "y": 73.0
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 4,
+          "row": 2,
+          "index": 16
+        },
+        "bounds": {
+          "x": 1052,
+          "y": 553,
+          "width": 197,
+          "height": 138
+        },
+        "region": [
+          1050,
+          551,
+          1251,
+          693
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1172,
+              555
+            ],
+            [
+              1108,
+              632
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-mine-rail-curve",
+      "label": "Mine rail curve",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/caverns-mine-rail-curve.png",
+      "width": 198,
+      "height": 193,
+      "anchor": {
+        "x": 99.0,
+        "y": 96.5
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 5,
+          "row": 2,
+          "index": 17
+        },
+        "bounds": {
+          "x": 1313,
+          "y": 530,
+          "width": 190,
+          "height": 185
+        },
+        "region": [
+          1311,
+          528,
+          1505,
+          717
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1475,
+              532
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-mine-rail-junction",
+      "label": "Mine rail junction",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/caverns-mine-rail-junction.png",
+      "width": 242,
+      "height": 234,
+      "anchor": {
+        "x": 121.0,
+        "y": 117.0
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 0,
+          "row": 3,
+          "index": 18
+        },
+        "bounds": {
+          "x": 19,
+          "y": 754,
+          "width": 234,
+          "height": 226
+        },
+        "region": [
+          17,
+          752,
+          255,
+          982
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              80,
+              756
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-mine-cart",
+      "label": "Mine cart",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/caverns-mine-cart.png",
+      "width": 199,
+      "height": 194,
+      "anchor": {
+        "x": 99.5,
+        "y": 190
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 1,
+          "row": 3,
+          "index": 19
+        },
+        "bounds": {
+          "x": 286,
+          "y": 776,
+          "width": 191,
+          "height": 186
+        },
+        "region": [
+          284,
+          774,
+          479,
+          964
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              386,
+              778
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-timber-mine-support",
+      "label": "Timber mine support",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-timber-mine-support.png",
+      "width": 224,
+      "height": 226,
+      "anchor": {
+        "x": 112.0,
+        "y": 222
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 2,
+          "row": 3,
+          "index": 20
+        },
+        "bounds": {
+          "x": 534,
+          "y": 760,
+          "width": 216,
+          "height": 218
+        },
+        "region": [
+          532,
+          758,
+          752,
+          980
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              567,
+              762
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-cave-lift-platform",
+      "label": "Cave lift platform",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-cave-lift-platform.png",
+      "width": 200,
+      "height": 240,
+      "anchor": {
+        "x": 100.0,
+        "y": 236
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 3,
+          "row": 3,
+          "index": 21
+        },
+        "bounds": {
+          "x": 797,
+          "y": 749,
+          "width": 192,
+          "height": 232
+        },
+        "region": [
+          795,
+          747,
+          991,
+          983
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              826,
+              751
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-giant-cave-mushroom",
+      "label": "Giant cave mushroom",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/caverns-giant-cave-mushroom.png",
+      "width": 223,
+      "height": 245,
+      "anchor": {
+        "x": 111.5,
+        "y": 241
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 4,
+          "row": 3,
+          "index": 22
+        },
+        "bounds": {
+          "x": 1035,
+          "y": 750,
+          "width": 215,
+          "height": 237
+        },
+        "region": [
+          1033,
+          748,
+          1252,
+          989
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1127,
+              752
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    },
+    {
+      "id": "caverns-underground-ruin-doorway",
+      "label": "Underground ruin doorway",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/caverns-underground-ruin-doorway.png",
+      "width": 250,
+      "height": 249,
+      "anchor": {
+        "x": 125.0,
+        "y": 245
+      },
+      "source": {
+        "sheet": "caverns",
+        "cell": {
+          "column": 5,
+          "row": 3,
+          "index": 23
+        },
+        "bounds": {
+          "x": 1276,
+          "y": 739,
+          "width": 242,
+          "height": 241
+        },
+        "region": [
+          1274,
+          737,
+          1520,
+          982
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1374,
+              741
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component",
+      "collection": "caverns"
+    }
+  ],
+  "animations": []
+}

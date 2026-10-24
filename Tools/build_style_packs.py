@@ -23,11 +23,14 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "Web/wwwroot/assets/style-packs"
 SHEETS = {"world": (6, 4), "ui": (4, 3), "expansion": (6, 4), "supplies": (6, 4), "biomes": (4, 3), "services": (6, 4)}
+COLLECTION_IDS = ("arsenal", "armor", "gear", "settlements", "roads", "forest", "highlands", "caverns", "attacks", "spells")
+COLLECTION_LABELS = dict(zip(COLLECTION_IDS, ("Weapons", "Armor", "Gear", "Cities & towns", "Roads", "Forests", "Mountains & volcanic", "Caves", "Character attacks", "Spells")))
+SHEETS.update({name: (6, 4) for name in COLLECTION_IDS})
 REQUIRED_SHEETS = ("world", "ui")
 LAYERS = ("ground", "terrain", "structures", "props", "actors", "effects", "ui")
 PADDING = 4
 SEAM_GUTTER = 2
-MAX_ARCHIVE_BYTES = 40 * 1024 * 1024
+MAX_ARCHIVE_BYTES = 90 * 1024 * 1024
 PREVIEW_SIZE = (1200, 900)
 
 
@@ -105,7 +108,10 @@ def isolate_alpha_islands(sheet, region, seeds):
     """Select source-connected alpha islands and their existing faint fringe only."""
     require(isinstance(seeds, list) and seeds, "alphaIslandSeeds must contain at least one source coordinate")
     width, height = sheet.size
-    alpha = sheet.getchannel("A").tobytes()
+    alpha = sheet.info.get("pack_alpha")
+    if alpha is None:
+        alpha = sheet.getchannel("A").tobytes()
+        sheet.info["pack_alpha"] = alpha
     selected = set()
     left, top, right, bottom = region
     for seed in seeds:
@@ -323,6 +329,10 @@ def build_pack(style, packs=PACKS):
         require((sheet_name, index) not in used, f"Duplicate source cell: {sheet_name}/{index}")
         used.add((sheet_name, index))
         require(definition["layer"] in LAYERS, f"Unknown layer: {definition['layer']}")
+        if sheet_name in COLLECTION_IDS:
+            require(definition.get("collection") == sheet_name, f"{asset_id}: collection must match source sheet")
+        if sheet_name in ("attacks", "spells"):
+            require("animation" in definition, f"{asset_id}: animation metadata required")
         region = source_region(sources[sheet_name].size, SHEETS[sheet_name], index, definition.get("sourceBox"))
         sprite, bounds = extract_cell(sources[sheet_name], SHEETS[sheet_name], index,
                                       f"{style_id}/{sheet_name}", definition.get("sourceBox"),
@@ -346,6 +356,9 @@ def build_pack(style, packs=PACKS):
             asset["source"]["region"] = list(region)
         if "alphaIslandSeeds" in definition:
             asset["source"]["mask"] = island_mask_metadata(definition["alphaIslandSeeds"])
+        for key in ("collection", "animation"):
+            if key in definition:
+                asset[key] = definition[key]
         assets.append(asset)
         sprites[asset_id] = sprite
     require(used == expected_cells(sheets),
@@ -376,6 +389,8 @@ def build_pack(style, packs=PACKS):
         image.save(directory / f"layers/{layer}.png", optimize=True)
     preview.save(directory / "preview.png", optimize=True)
     contact_sheet(assets, sprites, style).save(directory / "contact-sheet.png", optimize=True)
+    manifest["animations"] = build_animations(directory, assets, sprites, style)
+    manifest["collections"] = build_collections(directory, assets, sprites, manifest["animations"], style)
     (directory / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     (directory / "README.md").write_text(readme(manifest), encoding="utf-8")
     archive_path = directory / manifest["download"]
@@ -388,11 +403,180 @@ def build_pack(style, packs=PACKS):
     return manifest
 
 
+def animation_files(clip):
+    return clip["frames"] + [clip["preview"], clip["spriteSheet"], clip["metadata"]]
+
+
+def normalized_frames(members, sprites, style):
+    """Use one scale, fitting every frame around a common registration point."""
+    kinds = {asset["animation"]["anchor"] for asset in members}
+    require(len(kinds) == 1 and kinds <= {"feet", "center"}, "Animation anchors must agree")
+    anchor = {"x": 128, "y": 240 if "feet" in kinds else 128}
+    registrations = []
+    scale = float("inf")
+    for asset in members:
+        sprite = sprites[asset["id"]]
+        bounds = sprite.getchannel("A").getbbox()
+        require(bounds is not None, "Empty animation frame")
+        registration = asset.get("anchor")
+        if registration is None:
+            x = (bounds[0] + bounds[2]) / 2
+            y = bounds[3] if "feet" in kinds else (bounds[1] + bounds[3]) / 2
+        else:
+            x, y = registration["x"], registration["y"]
+            require(isinstance(x, (int, float)) and isinstance(y, (int, float))
+                    and 0 <= x <= sprite.width and 0 <= y <= sprite.height,
+                    "Animation registration anchor outside native component")
+        registrations.append((x, y))
+        for extent, space in ((x, anchor["x"] - 2), (sprite.width - x, 254 - anchor["x"]),
+                              (y, anchor["y"] - 2), (sprite.height - y, 254 - anchor["y"])):
+            if extent > 0:
+                scale = min(scale, space / extent)
+    frames = []
+    for asset, (x, y) in zip(members, registrations):
+        sprite = sprites[asset["id"]]
+        copy = sprite.resize((max(1, round(sprite.width * scale)), max(1, round(sprite.height * scale))),
+                             preview_resampling(style))
+        frame = Image.new("RGBA", (256, 256))
+        position = (round(anchor["x"] - x * scale), round(anchor["y"] - y * scale))
+        require(position[0] >= 0 and position[1] >= 0 and position[0] + copy.width <= 256
+                and position[1] + copy.height <= 256, "Shared animation scale clips a frame")
+        frame.alpha_composite(copy, position)
+        frames.append(frame)
+    require(len({frame.tobytes() for frame in frames}) == 6, "Animation contains duplicate rendered frames")
+    return frames, anchor, scale
+
+
+def animation_groups(assets):
+    groups = {}
+    for asset in assets:
+        if "animation" in asset:
+            metadata = asset["animation"]
+            clip = metadata["clip"]
+            require(isinstance(clip, str) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", clip), "Unsafe animation ID")
+            require(type(metadata["frame"]) is int and metadata["fps"] == 8, "Animation requires integer frames and 8 fps")
+            groups.setdefault(clip, []).append(asset)
+    for clip, members in groups.items():
+        members.sort(key=lambda asset: asset["animation"]["frame"])
+        require([asset["animation"]["frame"] for asset in members] == list(range(1, 7)),
+                f"{clip}: animation requires six unique frames numbered 1–6")
+        require(len({asset.get("collection") for asset in members}) == 1, f"{clip}: collection differs across frames")
+    return groups
+
+
+def build_animations(directory, assets, sprites, style):
+    records = []
+    for clip, members in sorted(animation_groups(assets).items()):
+        frames, anchor, scale = normalized_frames(members, sprites, style)
+        base = f"animations/{clip}"
+        (directory / base).mkdir(parents=True, exist_ok=True)
+        paths = [f"{base}/frame-{index:02}.png" for index in range(1, 7)]
+        for path, frame in zip(paths, frames):
+            frame.save(directory / path, optimize=True)
+        strip = Image.new("RGBA", (1536, 256))
+        for index, frame in enumerate(frames):
+            strip.paste(frame, (index * 256, 0))
+        strip.save(directory / base / "strip.png", optimize=True)
+        frames[0].save(directory / base / "preview.webp", save_all=True, append_images=frames[1:],
+                       duration=125, loop=0, lossless=True, exact=True, minimize_size=False)
+        records.append({"id": clip, "label": re.sub(r"\s*·\s*frame\s+\d+\s*$", "", members[0]["label"], flags=re.IGNORECASE), "frames": paths,
+                        "fps": 8, "frameWidth": 256, "frameHeight": 256, "anchor": anchor,
+                        "scale": scale, "preview": f"{base}/preview.webp", "spriteSheet": f"{base}/strip.png",
+                        "componentIds": [asset["id"] for asset in members], "metadata": f"{base}/metadata.json"})
+        (directory / records[-1]["metadata"]).write_text(json.dumps(records[-1], indent=2) + "\n", encoding="utf-8")
+    return records
+
+
+def write_archive(directory, relative, files):
+    with ZipFile(directory / relative, "w", ZIP_DEFLATED, compresslevel=9) as archive:
+        for path in sorted(set(files)):
+            info = ZipInfo(path, date_time=(1980, 1, 1, 0, 0, 0))
+            info.compress_type = ZIP_DEFLATED
+            archive.writestr(info, safe_path(directory, path).read_bytes(), compresslevel=9)
+
+
+def build_collections(directory, assets, sprites, animations, style):
+    records = []
+    for collection in sorted({asset["collection"] for asset in assets if "collection" in asset}):
+        require(collection in COLLECTION_IDS, f"Unknown collection: {collection}")
+        members = [asset for asset in assets if asset.get("collection") == collection]
+        clips = [clip for clip in animations if clip["componentIds"][0] in {asset["id"] for asset in members}]
+        base = f"collections/{collection}"
+        (directory / base).mkdir(parents=True, exist_ok=True)
+        record = {"id": collection, "label": COLLECTION_LABELS[collection], "count": len(members),
+                  "download": f"{base}/{collection}.zip", "contactSheet": f"{base}/contact-sheet.png",
+                  "manifest": f"{base}/manifest.json"}
+        contact_sheet(members, sprites, style).save(directory / record["contactSheet"], optimize=True)
+        document = {"schemaVersion": 1, "id": collection, "label": record["label"],
+                    "pathBase": "pack-root", "assets": members, "animations": clips}
+        (directory / record["manifest"]).write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
+        files = [record["manifest"], record["contactSheet"]] + [asset["file"] for asset in members]
+        files += [path for clip in clips for path in animation_files(clip)]
+        write_archive(directory, record["download"], files)
+        records.append(record)
+    return records
+
+
+def validate_collections_and_animations(directory, manifest):
+    assets = manifest["assets"]
+    sprites = {}
+    for asset in assets:
+        with Image.open(safe_path(directory, asset["file"])) as image:
+            sprites[asset["id"]] = image.convert("RGBA")
+    groups = animation_groups(assets)
+    records = manifest.get("animations", [])
+    require(len(records) == len(groups) and {clip["id"] for clip in records} == set(groups), "Animation inventory differs")
+    for clip in records:
+        members = groups[clip["id"]]
+        require(json.loads(safe_path(directory, clip["metadata"]).read_text()) == clip, "Animation metadata differs")
+        frames, anchor, scale = normalized_frames(members, sprites, manifest)
+        require(clip["anchor"] == anchor and clip.get("scale") == scale and clip["fps"] == 8
+                and clip["frameWidth"] == clip["frameHeight"] == 256, "Animation registration metadata differs")
+        require(clip["componentIds"] == [asset["id"] for asset in members], "Animation component order differs")
+        require(len(clip["frames"]) == len(set(clip["frames"])) == 6, "Duplicate or missing animation frames")
+        for path, expected in zip(clip["frames"], frames):
+            with Image.open(safe_path(directory, path)) as actual:
+                require(actual.mode == "RGBA" and actual.size == (256, 256)
+                        and actual.tobytes() == expected.tobytes(), "Animation frame differs from shared-scale export")
+        with Image.open(safe_path(directory, clip["spriteSheet"])) as strip:
+            require(strip.size == (1536, 256) and strip.mode == "RGBA", "Invalid animation strip")
+            for index, frame in enumerate(frames):
+                require(strip.crop((index * 256, 0, (index + 1) * 256, 256)).tobytes() == frame.tobytes(), "Animation strip frame differs")
+        with Image.open(safe_path(directory, clip["preview"])) as preview:
+            require(preview.format == "WEBP" and preview.n_frames == 6, "Animation preview requires six decoded frames")
+            for index, frame in enumerate(frames):
+                preview.seek(index)
+                require(preview.size == (256, 256), "Animation preview size differs")
+                # WebP may discard RGB beneath zero alpha; visible pixels must remain lossless.
+                actual = preview.convert("RGBA")
+                require(actual.getchannel("A").tobytes() == frame.getchannel("A").tobytes()
+                        and Image.alpha_composite(Image.new("RGBA", frame.size, "black"), actual).tobytes()
+                        == Image.alpha_composite(Image.new("RGBA", frame.size, "black"), frame).tobytes(), "Lossless animation preview differs")
+    collections = manifest.get("collections", [])
+    expected_ids = {asset["collection"] for asset in assets if "collection" in asset}
+    require(len(collections) == len(expected_ids) and {record["id"] for record in collections} == expected_ids, "Collection inventory differs")
+    for record in collections:
+        members = [asset for asset in assets if asset.get("collection") == record["id"]]
+        clips = [clip for clip in records if clip["componentIds"][0] in {asset["id"] for asset in members}]
+        document = json.loads(safe_path(directory, record["manifest"]).read_text())
+        require(record["count"] == len(members) and document["assets"] == members and document["animations"] == clips, "Collection manifest differs")
+        with Image.open(safe_path(directory, record["contactSheet"])) as contact:
+            require(contact.size == (1440, math.ceil(len(members) / 6) * 250), "Collection contact sheet size differs")
+        files = sorted(set([record["manifest"], record["contactSheet"]] + [asset["file"] for asset in members]
+                           + [path for clip in clips for path in animation_files(clip)]))
+        with ZipFile(safe_path(directory, record["download"])) as archive:
+            require(archive.namelist() == files and archive.testzip() is None, "Collection archive inventory differs")
+            for path in files:
+                require(archive.read(path) == safe_path(directory, path).read_bytes(), "Stale collection archive entry")
+
+
 def archive_files(manifest):
     return sorted(["manifest.json", "README.md", manifest["contactSheet"], manifest["preview"]["file"]]
                   + [asset["file"] for asset in manifest["assets"]]
                   + [layer["file"] for layer in manifest["preview"]["layers"]]
-                  + manifest.get("conceptFiles", []))
+                  + manifest.get("conceptFiles", [])
+                  + [path for clip in manifest.get("animations", []) for path in animation_files(clip)]
+                  + [record[key] for record in manifest.get("collections", []) for key in ("manifest", "contactSheet")])
 
 
 def readme(manifest):
@@ -419,13 +603,14 @@ No painting, recoloring or invented detail is performed by the extraction script
 The contact sheet labels sit outside the artwork. preview.png is an illustrative
 component arrangement, not a playable room or an integrated game screenshot.
 The seven full-canvas layers/*.png composite in manifest order to reproduce it.
-Toggle these same layers in the gallery to inspect their contribution. Components
-are scaled only in the previews; the individual PNGs preserve source pixels.
+Toggle these same layers in the gallery to inspect their contribution. Native component PNGs preserve source pixels. Animation exports are derived, resampled
+256×256 canvases using a shared scale per clip, with fixed feet or center anchors.
+Lossless WebP previews and horizontal PNG strips accompany each six-frame clip.
 
 Anchors are measured in pixels from each PNG's top-left, including padding.
 The default anchor is the original crop's bottom-center. logicalFootprint is
-placement guidance, not a collision shape. These are concept components: animation,
-directional views, tile seams and runtime collision require a production art pass.
+placement guidance, not a collision shape. These are concept components; directional views, tile seams and runtime collision
+require a production art pass. Animation clips are illustrative derived exports.
 
 Rebuild: python3 Tools/build_style_packs.py --style {manifest['id']}
 Validate without writing: python3 Tools/build_style_packs.py --style {manifest['id']} --check
@@ -451,6 +636,10 @@ def validate_pack(directory):
         require(asset["status"] == "concept-component" and asset["layer"] in LAYERS,
                 f"{asset['id']}: invalid status/layer")
         source = asset["source"]
+        if source["sheet"] in COLLECTION_IDS:
+            require(asset.get("collection") == source["sheet"], f"{asset['id']}: collection must match source sheet")
+        if source["sheet"] in ("attacks", "spells"):
+            require("animation" in asset, f"{asset['id']}: animation metadata required")
         require(source["sheet"] in sheets, f"Unknown sheet: {source['sheet']}")
         key = (source["sheet"], source["cell"]["index"])
         require(key not in cells, f"Duplicate cell assignment: {key}")
@@ -482,6 +671,7 @@ def validate_pack(directory):
     with Image.open(directory / manifest["preview"]["file"]) as image:
         require(image.mode == "RGBA" and image.size == PREVIEW_SIZE and image.tobytes() == composite.tobytes(),
                 "Preview differs from composited layer PNGs")
+    validate_collections_and_animations(directory, manifest)
     archive_path = safe_path(directory, manifest["download"])
     require(archive_path.stat().st_size <= MAX_ARCHIVE_BYTES, f"Style ZIP exceeds {MAX_ARCHIVE_BYTES // (1024 * 1024)} MiB limit")
     with ZipFile(archive_path) as archive:
