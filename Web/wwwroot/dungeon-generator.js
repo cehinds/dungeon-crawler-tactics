@@ -75,7 +75,7 @@ async function load() {
     const manifestUrl=new URL('assets/room-kit/manifest.json',location.href);
     [manifest,rules]=await Promise.all([fetch(manifestUrl),fetch('assets/map-generation-rules.json')].map(async request=>{const response=await request;if(!response.ok)throw new Error(`Could not load dungeon data (${response.status}).`);return response.json();}));
     assets=new Map(manifest.assets.map(a=>[a.id,a]));
-    await Promise.all(manifest.assets.map(asset=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>{images.set(asset.id,image);resolve();};image.onerror=()=>reject(new Error(`Could not load ${asset.file}. Reload to retry.`));image.src=new URL(asset.file,manifestUrl);}))); 
+    await Promise.all(manifest.assets.map(asset=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>{images.set(asset.id,image);resolve();};image.onerror=()=>reject(new Error(`Could not load ${asset.file}. Reload to retry.`));image.src=new URL(asset.file,manifestUrl);})));
     generate();$('loading').hidden=true;$('settings').disabled=false;document.querySelectorAll('.workspace button,.workspace input').forEach(element=>element.disabled=false);
   } catch(error) {$('loading').textContent='The dungeon could not be loaded.';status(error.message,true);}
 }
