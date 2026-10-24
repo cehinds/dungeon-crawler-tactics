@@ -14,11 +14,13 @@ from build_style_packs import (LAYERS, PADDING, PackError, SHEETS, build_pack,
 
 
 class StylePackTests(unittest.TestCase):
-    def fixture(self, root):
+    def fixture(self, root, expansion=False):
         style = {"id": "test-pack", "title": "Test pack", "description": "Technical fixture", "assets": []}
         source = root / "test-pack/source"
         source.mkdir(parents=True)
         for sheet_name, (columns, rows) in SHEETS.items():
+            if sheet_name == "expansion" and not expansion:
+                continue
             sheet = Image.new("RGBA", (columns * 32, rows * 32))
             for index in range(columns * rows):
                 left, top, _, _ = cell_box(sheet.size, columns, rows, index)
@@ -165,6 +167,38 @@ class StylePackTests(unittest.TestCase):
             archive = (directory / manifest["download"]).read_bytes()
             build_pack(style, root)
             self.assertEqual((directory / manifest["download"]).read_bytes(), archive)
+
+    def test_optional_expansion_is_in_manifest_contact_sheet_and_archive(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, expansion=True)
+            manifest = build_pack(style, root)
+            directory = root / style["id"]
+            self.assertEqual(len(manifest["assets"]), 60)
+            self.assertEqual(list(manifest["sheets"]), ["world", "ui", "expansion"])
+            self.assertEqual((manifest["sheets"]["expansion"]["columns"],
+                              manifest["sheets"]["expansion"]["rows"]), (6, 4))
+            with Image.open(directory / manifest["contactSheet"]) as contact:
+                self.assertEqual(contact.size, (1440, 2500))
+            expansion = [asset for asset in manifest["assets"] if asset["source"]["sheet"] == "expansion"]
+            self.assertEqual(len(expansion), 24)
+            with ZipFile(directory / manifest["download"]) as archive:
+                for asset in expansion:
+                    self.assertEqual(archive.read(asset["file"]), (directory / asset["file"]).read_bytes())
+                self.assertIn(b"60 individually labeled", archive.read("README.md"))
+            validate_pack(directory)
+
+    def test_incomplete_expansion_and_missing_expansion_source_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            style = self.fixture(root, expansion=True)
+            removed = style["assets"].pop()
+            with self.assertRaisesRegex(PackError, "expected 60 components"):
+                build_pack(style, root)
+            style["assets"].append(removed)
+            (root / "test-pack/source/expansion.png").unlink()
+            with self.assertRaisesRegex(PackError, "source atlas is missing"):
+                build_pack(style, root)
 
     def test_duplicate_cell_assignment_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:

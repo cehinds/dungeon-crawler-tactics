@@ -1,6 +1,6 @@
 const CATALOG_URL = new URL('assets/style-packs/catalog.json', document.baseURI);
 const categories = ['terrain', 'structure', 'prop', 'actor', 'effect', 'ui', 'portrait'];
-const categoryNames = { terrain: 'Terrain', structure: 'Structures', prop: 'Props', actor: 'Actors', effect: 'Effects', ui: 'UI', portrait: 'Portraits' };
+const categoryNames = { expansion: 'New additions', terrain: 'Terrain', structure: 'Structures', prop: 'Props', actor: 'Actors', effect: 'Effects', ui: 'UI', portrait: 'Portraits' };
 const directions = {
   'pocket-dungeon': { subtitle: 'Overhead pixel art', accent: '#615064' },
   'ink-and-lanterns': { subtitle: 'Painted gouache & ink', accent: '#547058' },
@@ -243,9 +243,9 @@ function renderConcepts(style) {
 
 function renderFilters() {
   const assets = state.manifest.assets;
-  const available = ['all', ...categories];
+  const available = ['all', 'expansion', ...categories];
   const buttons = available.map(category => {
-    const count = category === 'all' ? assets.length : assets.filter(asset => asset.category === category).length;
+    const count = category === 'all' ? assets.length : assets.filter(asset => category === 'expansion' ? asset.source?.sheet === 'expansion' : asset.category === category).length;
     const button = make('button', 'category-filter', category === 'all' ? 'All pieces' : categoryNames[category]);
     button.type = 'button';
     button.setAttribute('aria-pressed', String(state.category === category));
@@ -265,7 +265,7 @@ function renderFilters() {
 
 function renderComponents() {
   const assets = state.manifest.assets.filter(asset => {
-    const matchingCategory = state.category === 'all' || asset.category === state.category;
+    const matchingCategory = state.category === 'all' || (state.category === 'expansion' ? asset.source?.sheet === 'expansion' : asset.category === state.category);
     const text = `${asset.label || ''} ${asset.id || ''} ${asset.category || ''} ${asset.layer || ''}`.toLowerCase();
     return matchingCategory && text.includes(state.search.toLowerCase().trim());
   });

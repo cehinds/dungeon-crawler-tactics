@@ -9,7 +9,7 @@
     "extraction": "native-grid-crop",
     "padding": 4,
     "explicitSourceRegions": true,
-    "explicitAlphaIslands": false
+    "explicitAlphaIslands": true
   },
   "sheets": {
     "world": {
@@ -27,6 +27,14 @@
       "width": 1448,
       "height": 1086,
       "sha256": "e1451b30308b3c44420946c2e281cbc37ce2790cc574eb1852210e413c2990ab"
+    },
+    "expansion": {
+      "file": "source/expansion.png",
+      "columns": 6,
+      "rows": 4,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "e4e0949800a2f8b9950bc310ddfad287ea79f84e23a1ac3a14b6a7e3e905092e"
     }
   },
   "assets": [
@@ -1391,6 +1399,1482 @@
           1448,
           1055
         ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wood-floor",
+      "label": "Wood plank floor",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/wood-floor.png",
+      "width": 258,
+      "height": 194,
+      "anchor": {
+        "x": 129.0,
+        "y": 97.0
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 6,
+          "y": 55,
+          "width": 250,
+          "height": 186
+        },
+        "region": [
+          4,
+          53,
+          258,
+          243
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              126,
+              57
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wall-corner",
+      "label": "Corner wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/wall-corner.png",
+      "width": 270,
+      "height": 245,
+      "anchor": {
+        "x": 135.0,
+        "y": 241
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 273,
+          "y": 29,
+          "width": 262,
+          "height": 237
+        },
+        "region": [
+          271,
+          27,
+          537,
+          268
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              339,
+              31
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "stone-pillar",
+      "label": "Stone pillar",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/stone-pillar.png",
+      "width": 120,
+      "height": 223,
+      "anchor": {
+        "x": 60.0,
+        "y": 219
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 579,
+          "y": 38,
+          "width": 112,
+          "height": 215
+        },
+        "region": [
+          577,
+          36,
+          693,
+          255
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              629,
+              40
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "broken-barricade",
+      "label": "Broken barricade",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/broken-barricade.png",
+      "width": 274,
+      "height": 164,
+      "anchor": {
+        "x": 137.0,
+        "y": 160
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 733,
+          "y": 83,
+          "width": 266,
+          "height": 156
+        },
+        "region": [
+          731,
+          81,
+          1001,
+          241
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              952,
+              85
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "spike-trap",
+      "label": "Raised spike trap",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/spike-trap.png",
+      "width": 281,
+      "height": 199,
+      "anchor": {
+        "x": 140.5,
+        "y": 195
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 0,
+          "index": 4
+        },
+        "bounds": {
+          "x": 1015,
+          "y": 53,
+          "width": 273,
+          "height": 191
+        },
+        "region": [
+          1013,
+          51,
+          1290,
+          246
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1147,
+              55
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "pressure-plate",
+      "label": "Brass pressure plate",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/pressure-plate.png",
+      "width": 219,
+      "height": 160,
+      "anchor": {
+        "x": 109.5,
+        "y": 156
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 0,
+          "index": 5
+        },
+        "bounds": {
+          "x": 1310,
+          "y": 79,
+          "width": 211,
+          "height": 152
+        },
+        "region": [
+          1308,
+          77,
+          1523,
+          233
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1411,
+              81
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "safe-bed",
+      "label": "Safe-room bed",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/safe-bed.png",
+      "width": 271,
+      "height": 263,
+      "anchor": {
+        "x": 135.5,
+        "y": 259
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 11,
+          "y": 263,
+          "width": 263,
+          "height": 255
+        },
+        "region": [
+          9,
+          261,
+          276,
+          520
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              133,
+              265
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "crafting-bench",
+      "label": "Crafting workbench",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/crafting-bench.png",
+      "width": 256,
+      "height": 252,
+      "anchor": {
+        "x": 128.0,
+        "y": 248
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 287,
+          "y": 272,
+          "width": 248,
+          "height": 244
+        },
+        "region": [
+          285,
+          270,
+          537,
+          518
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              469,
+              274
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "alchemy-table",
+      "label": "Alchemy table",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/alchemy-table.png",
+      "width": 250,
+      "height": 256,
+      "anchor": {
+        "x": 125.0,
+        "y": 252
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 8
+        },
+        "bounds": {
+          "x": 545,
+          "y": 273,
+          "width": 242,
+          "height": 248
+        },
+        "region": [
+          543,
+          271,
+          789,
+          523
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              625,
+              275
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "training-dummy",
+      "label": "Training dummy",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/training-dummy.png",
+      "width": 203,
+      "height": 260,
+      "anchor": {
+        "x": 101.5,
+        "y": 256
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 9
+        },
+        "bounds": {
+          "x": 800,
+          "y": 263,
+          "width": 195,
+          "height": 252
+        },
+        "region": [
+          798,
+          261,
+          997,
+          517
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              888,
+              265
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "social-screen",
+      "label": "Social screen",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/social-screen.png",
+      "width": 213,
+      "height": 282,
+      "anchor": {
+        "x": 106.5,
+        "y": 278
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 1,
+          "index": 10
+        },
+        "bounds": {
+          "x": 1056,
+          "y": 241,
+          "width": 205,
+          "height": 274
+        },
+        "region": [
+          1054,
+          239,
+          1263,
+          517
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1204,
+              243
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "armchair",
+      "label": "Cozy armchair",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/armchair.png",
+      "width": 198,
+      "height": 241,
+      "anchor": {
+        "x": 99.0,
+        "y": 237
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 1,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1328,
+          "y": 280,
+          "width": 190,
+          "height": 233
+        },
+        "region": [
+          1326,
+          278,
+          1520,
+          515
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1390,
+              282
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "rat-scout",
+      "label": "Rat crossbow scout",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/rat-scout.png",
+      "width": 268,
+      "height": 234,
+      "anchor": {
+        "x": 134.0,
+        "y": 230
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 12
+        },
+        "bounds": {
+          "x": 12,
+          "y": 530,
+          "width": 260,
+          "height": 226
+        },
+        "region": [
+          10,
+          528,
+          274,
+          758
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              94,
+              532
+            ],
+            [
+              76,
+              655
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "rat-guard",
+      "label": "Rat shield guard",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/rat-guard.png",
+      "width": 255,
+      "height": 236,
+      "anchor": {
+        "x": 127.5,
+        "y": 232
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 13
+        },
+        "bounds": {
+          "x": 279,
+          "y": 527,
+          "width": 247,
+          "height": 228
+        },
+        "region": [
+          277,
+          525,
+          528,
+          757
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              381,
+              529
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "slime",
+      "label": "Green slime",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/slime.png",
+      "width": 241,
+      "height": 192,
+      "anchor": {
+        "x": 120.5,
+        "y": 188
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 14
+        },
+        "bounds": {
+          "x": 515,
+          "y": 560,
+          "width": 233,
+          "height": 184
+        },
+        "region": [
+          513,
+          558,
+          750,
+          746
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              633,
+              562
+            ],
+            [
+              725,
+              707
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "cave-bat",
+      "label": "Cave bat",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/cave-bat.png",
+      "width": 343,
+      "height": 206,
+      "anchor": {
+        "x": 171.5,
+        "y": 202
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 15
+        },
+        "bounds": {
+          "x": 722,
+          "y": 523,
+          "width": 335,
+          "height": 198
+        },
+        "region": [
+          720,
+          521,
+          1059,
+          723
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              783,
+              525
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "spider-drone",
+      "label": "Mechanical spider drone",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/spider-drone.png",
+      "width": 263,
+      "height": 208,
+      "anchor": {
+        "x": 131.5,
+        "y": 204
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 2,
+          "index": 16
+        },
+        "bounds": {
+          "x": 1019,
+          "y": 549,
+          "width": 255,
+          "height": 200
+        },
+        "region": [
+          1017,
+          547,
+          1276,
+          751
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1140,
+              551
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "mimic",
+      "label": "Treasure chest mimic",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/mimic.png",
+      "width": 244,
+      "height": 256,
+      "anchor": {
+        "x": 122.0,
+        "y": 252
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 2,
+          "index": 17
+        },
+        "bounds": {
+          "x": 1291,
+          "y": 508,
+          "width": 236,
+          "height": 248
+        },
+        "region": [
+          1289,
+          506,
+          1529,
+          758
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1445,
+              510
+            ],
+            [
+              1478,
+              585
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "fire-patch",
+      "label": "Fire patch",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/fire-patch.png",
+      "width": 256,
+      "height": 240,
+      "anchor": {
+        "x": 128.0,
+        "y": 120.0
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 3,
+          "index": 18
+        },
+        "bounds": {
+          "x": 12,
+          "y": 760,
+          "width": 248,
+          "height": 232
+        },
+        "region": [
+          10,
+          758,
+          262,
+          994
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              137,
+              762
+            ],
+            [
+              215,
+              766
+            ],
+            [
+              152,
+              768
+            ],
+            [
+              99,
+              774
+            ],
+            [
+              168,
+              776
+            ],
+            [
+              201,
+              786
+            ],
+            [
+              65,
+              798
+            ],
+            [
+              119,
+              800
+            ],
+            [
+              217,
+              815
+            ],
+            [
+              79,
+              824
+            ],
+            [
+              167,
+              832
+            ],
+            [
+              27,
+              841
+            ],
+            [
+              69,
+              855
+            ],
+            [
+              225,
+              855
+            ],
+            [
+              18,
+              866
+            ],
+            [
+              238,
+              874
+            ],
+            [
+              254,
+              900
+            ],
+            [
+              16,
+              907
+            ],
+            [
+              18,
+              933
+            ],
+            [
+              215,
+              967
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "lightning-arc",
+      "label": "Lightning arc",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/lightning-arc.png",
+      "width": 261,
+      "height": 247,
+      "anchor": {
+        "x": 130.5,
+        "y": 123.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 3,
+          "index": 19
+        },
+        "bounds": {
+          "x": 265,
+          "y": 756,
+          "width": 253,
+          "height": 239
+        },
+        "region": [
+          263,
+          754,
+          520,
+          997
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              356,
+              758
+            ],
+            [
+              477,
+              774
+            ],
+            [
+              470,
+              797
+            ],
+            [
+              329,
+              921
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "ice-burst",
+      "label": "Ice crystal burst",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/ice-burst.png",
+      "width": 247,
+      "height": 245,
+      "anchor": {
+        "x": 123.5,
+        "y": 122.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 3,
+          "index": 20
+        },
+        "bounds": {
+          "x": 526,
+          "y": 753,
+          "width": 239,
+          "height": 237
+        },
+        "region": [
+          524,
+          751,
+          767,
+          992
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              615,
+              755
+            ],
+            [
+              655,
+              765
+            ],
+            [
+              566,
+              779
+            ],
+            [
+              687,
+              784
+            ],
+            [
+              658,
+              792
+            ],
+            [
+              714,
+              795
+            ],
+            [
+              707,
+              811
+            ],
+            [
+              584,
+              812
+            ],
+            [
+              756,
+              817
+            ],
+            [
+              732,
+              818
+            ],
+            [
+              707,
+              821
+            ],
+            [
+              553,
+              824
+            ],
+            [
+              580,
+              829
+            ],
+            [
+              673,
+              835
+            ],
+            [
+              545,
+              860
+            ],
+            [
+              580,
+              865
+            ],
+            [
+              550,
+              866
+            ],
+            [
+              740,
+              866
+            ],
+            [
+              716,
+              875
+            ],
+            [
+              693,
+              978
+            ],
+            [
+              661,
+              983
+            ],
+            [
+              663,
+              983
+            ],
+            [
+              666,
+              985
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "poison-cloud",
+      "label": "Poison cloud",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/poison-cloud.png",
+      "width": 262,
+      "height": 253,
+      "anchor": {
+        "x": 131.0,
+        "y": 126.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 3,
+          "index": 21
+        },
+        "bounds": {
+          "x": 775,
+          "y": 752,
+          "width": 254,
+          "height": 245
+        },
+        "region": [
+          773,
+          750,
+          1031,
+          999
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              893,
+              754
+            ],
+            [
+              864,
+              759
+            ],
+            [
+              945,
+              771
+            ],
+            [
+              957,
+              802
+            ],
+            [
+              1005,
+              861
+            ],
+            [
+              1007,
+              905
+            ],
+            [
+              794,
+              915
+            ],
+            [
+              811,
+              923
+            ],
+            [
+              1011,
+              929
+            ],
+            [
+              929,
+              961
+            ],
+            [
+              927,
+              963
+            ],
+            [
+              905,
+              967
+            ],
+            [
+              961,
+              980
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "healing-ring",
+      "label": "Healing ring",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/healing-ring.png",
+      "width": 244,
+      "height": 251,
+      "anchor": {
+        "x": 122.0,
+        "y": 125.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 3,
+          "index": 22
+        },
+        "bounds": {
+          "x": 1029,
+          "y": 755,
+          "width": 236,
+          "height": 243
+        },
+        "region": [
+          1027,
+          753,
+          1267,
+          1000
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1142,
+              757
+            ]
+          ],
+          "fringePixels": 2
+        }
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "bomb-burst",
+      "label": "Bomb explosion burst",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/bomb-burst.png",
+      "width": 262,
+      "height": 256,
+      "anchor": {
+        "x": 131.0,
+        "y": 128.0
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 3,
+          "index": 23
+        },
+        "bounds": {
+          "x": 1274,
+          "y": 751,
+          "width": 254,
+          "height": 248
+        },
+        "region": [
+          1272,
+          749,
+          1530,
+          1001
+        ],
+        "mask": {
+          "method": "connected-alpha-islands",
+          "threshold": 16,
+          "connectivity": 8,
+          "seeds": [
+            [
+              1476,
+              753
+            ],
+            [
+              1436,
+              754
+            ],
+            [
+              1416,
+              771
+            ],
+            [
+              1362,
+              775
+            ],
+            [
+              1313,
+              791
+            ],
+            [
+              1482,
+              792
+            ],
+            [
+              1311,
+              810
+            ],
+            [
+              1315,
+              818
+            ],
+            [
+              1287,
+              868
+            ],
+            [
+              1469,
+              977
+            ],
+            [
+              1471,
+              978
+            ]
+          ],
+          "fringePixels": 2
+        }
       },
       "logicalFootprint": {
         "width": 1,

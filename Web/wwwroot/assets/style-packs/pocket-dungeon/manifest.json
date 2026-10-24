@@ -27,6 +27,14 @@
       "width": 1448,
       "height": 1086,
       "sha256": "333a27d98e7f187bd2644a5c268f736ea2c1ab9000220d4f293bd9f94da6e23c"
+    },
+    "expansion": {
+      "file": "source/expansion.png",
+      "columns": 6,
+      "rows": 4,
+      "width": 1536,
+      "height": 1024,
+      "sha256": "7e449dfd9483300015a2398a5184d50d18ccccce2cb772bf09637cea135f9ea2"
     }
   },
   "assets": [
@@ -1390,6 +1398,918 @@
           755,
           1420,
           1045
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wood-floor",
+      "label": "Wood plank floor",
+      "category": "terrain",
+      "layer": "ground",
+      "file": "components/wood-floor.png",
+      "width": 264,
+      "height": 255,
+      "anchor": {
+        "x": 132.0,
+        "y": 127.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 0,
+          "index": 0
+        },
+        "bounds": {
+          "x": 0,
+          "y": 19,
+          "width": 256,
+          "height": 247
+        },
+        "region": [
+          0,
+          0,
+          256,
+          275
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "wall-corner",
+      "label": "Corner wall",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/wall-corner.png",
+      "width": 263,
+      "height": 249,
+      "anchor": {
+        "x": 131.5,
+        "y": 245
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 0,
+          "index": 1
+        },
+        "bounds": {
+          "x": 257,
+          "y": 19,
+          "width": 255,
+          "height": 241
+        },
+        "region": [
+          256,
+          0,
+          512,
+          275
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "stone-pillar",
+      "label": "Stone pillar",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/stone-pillar.png",
+      "width": 239,
+      "height": 261,
+      "anchor": {
+        "x": 119.5,
+        "y": 257
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 0,
+          "index": 2
+        },
+        "bounds": {
+          "x": 519,
+          "y": 19,
+          "width": 231,
+          "height": 253
+        },
+        "region": [
+          512,
+          0,
+          750,
+          275
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "broken-barricade",
+      "label": "Broken barricade",
+      "category": "structure",
+      "layer": "structures",
+      "file": "components/broken-barricade.png",
+      "width": 275,
+      "height": 251,
+      "anchor": {
+        "x": 137.5,
+        "y": 247
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 0,
+          "index": 3
+        },
+        "bounds": {
+          "x": 753,
+          "y": 27,
+          "width": 267,
+          "height": 243
+        },
+        "region": [
+          750,
+          0,
+          1020,
+          275
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "spike-trap",
+      "label": "Raised spike trap",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/spike-trap.png",
+      "width": 251,
+      "height": 222,
+      "anchor": {
+        "x": 125.5,
+        "y": 218
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 0,
+          "index": 4
+        },
+        "bounds": {
+          "x": 1021,
+          "y": 47,
+          "width": 243,
+          "height": 214
+        },
+        "region": [
+          1020,
+          0,
+          1268,
+          275
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "pressure-plate",
+      "label": "Brass pressure plate",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/pressure-plate.png",
+      "width": 212,
+      "height": 253,
+      "anchor": {
+        "x": 106.0,
+        "y": 249
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 0,
+          "index": 5
+        },
+        "bounds": {
+          "x": 1306,
+          "y": 23,
+          "width": 204,
+          "height": 245
+        },
+        "region": [
+          1268,
+          0,
+          1536,
+          275
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "safe-bed",
+      "label": "Safe-room bed",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/safe-bed.png",
+      "width": 254,
+      "height": 246,
+      "anchor": {
+        "x": 127.0,
+        "y": 242
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 1,
+          "index": 6
+        },
+        "bounds": {
+          "x": 0,
+          "y": 276,
+          "width": 246,
+          "height": 238
+        },
+        "region": [
+          0,
+          275,
+          256,
+          519
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "crafting-bench",
+      "label": "Crafting workbench",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/crafting-bench.png",
+      "width": 258,
+      "height": 246,
+      "anchor": {
+        "x": 129.0,
+        "y": 242
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 1,
+          "index": 7
+        },
+        "bounds": {
+          "x": 262,
+          "y": 281,
+          "width": 250,
+          "height": 238
+        },
+        "region": [
+          256,
+          275,
+          512,
+          519
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "alchemy-table",
+      "label": "Alchemy table",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/alchemy-table.png",
+      "width": 246,
+      "height": 231,
+      "anchor": {
+        "x": 123.0,
+        "y": 227
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 1,
+          "index": 8
+        },
+        "bounds": {
+          "x": 512,
+          "y": 289,
+          "width": 238,
+          "height": 223
+        },
+        "region": [
+          512,
+          275,
+          750,
+          519
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "training-dummy",
+      "label": "Training dummy",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/training-dummy.png",
+      "width": 277,
+      "height": 251,
+      "anchor": {
+        "x": 138.5,
+        "y": 247
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 1,
+          "index": 9
+        },
+        "bounds": {
+          "x": 751,
+          "y": 275,
+          "width": 269,
+          "height": 243
+        },
+        "region": [
+          750,
+          275,
+          1020,
+          519
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "social-screen",
+      "label": "Social screen",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/social-screen.png",
+      "width": 255,
+      "height": 245,
+      "anchor": {
+        "x": 127.5,
+        "y": 241
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 1,
+          "index": 10
+        },
+        "bounds": {
+          "x": 1021,
+          "y": 277,
+          "width": 247,
+          "height": 237
+        },
+        "region": [
+          1020,
+          275,
+          1268,
+          519
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "armchair",
+      "label": "Cozy armchair",
+      "category": "prop",
+      "layer": "props",
+      "file": "components/armchair.png",
+      "width": 241,
+      "height": 243,
+      "anchor": {
+        "x": 120.5,
+        "y": 239
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 1,
+          "index": 11
+        },
+        "bounds": {
+          "x": 1271,
+          "y": 279,
+          "width": 233,
+          "height": 235
+        },
+        "region": [
+          1268,
+          275,
+          1536,
+          519
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "rat-scout",
+      "label": "Rat crossbow scout",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/rat-scout.png",
+      "width": 251,
+      "height": 205,
+      "anchor": {
+        "x": 125.5,
+        "y": 201
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 2,
+          "index": 12
+        },
+        "bounds": {
+          "x": 13,
+          "y": 543,
+          "width": 243,
+          "height": 197
+        },
+        "region": [
+          0,
+          519,
+          256,
+          744
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "rat-guard",
+      "label": "Rat shield guard",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/rat-guard.png",
+      "width": 264,
+      "height": 233,
+      "anchor": {
+        "x": 132.0,
+        "y": 229
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 2,
+          "index": 13
+        },
+        "bounds": {
+          "x": 256,
+          "y": 519,
+          "width": 256,
+          "height": 225
+        },
+        "region": [
+          256,
+          519,
+          512,
+          744
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "slime",
+      "label": "Green slime",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/slime.png",
+      "width": 242,
+      "height": 223,
+      "anchor": {
+        "x": 121.0,
+        "y": 219
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 2,
+          "index": 14
+        },
+        "bounds": {
+          "x": 512,
+          "y": 529,
+          "width": 234,
+          "height": 215
+        },
+        "region": [
+          512,
+          519,
+          746,
+          744
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "cave-bat",
+      "label": "Cave bat",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/cave-bat.png",
+      "width": 282,
+      "height": 233,
+      "anchor": {
+        "x": 141.0,
+        "y": 229
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 2,
+          "index": 15
+        },
+        "bounds": {
+          "x": 746,
+          "y": 519,
+          "width": 274,
+          "height": 225
+        },
+        "region": [
+          746,
+          519,
+          1020,
+          744
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "spider-drone",
+      "label": "Mechanical spider drone",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/spider-drone.png",
+      "width": 256,
+      "height": 233,
+      "anchor": {
+        "x": 128.0,
+        "y": 229
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 2,
+          "index": 16
+        },
+        "bounds": {
+          "x": 1020,
+          "y": 519,
+          "width": 248,
+          "height": 225
+        },
+        "region": [
+          1020,
+          519,
+          1268,
+          744
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "mimic",
+      "label": "Treasure chest mimic",
+      "category": "actor",
+      "layer": "actors",
+      "file": "components/mimic.png",
+      "width": 258,
+      "height": 230,
+      "anchor": {
+        "x": 129.0,
+        "y": 226
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 2,
+          "index": 17
+        },
+        "bounds": {
+          "x": 1268,
+          "y": 522,
+          "width": 250,
+          "height": 222
+        },
+        "region": [
+          1268,
+          519,
+          1536,
+          744
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "fire-patch",
+      "label": "Fire patch",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/fire-patch.png",
+      "width": 264,
+      "height": 279,
+      "anchor": {
+        "x": 132.0,
+        "y": 139.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 0,
+          "row": 3,
+          "index": 18
+        },
+        "bounds": {
+          "x": 0,
+          "y": 753,
+          "width": 256,
+          "height": 271
+        },
+        "region": [
+          0,
+          744,
+          256,
+          1024
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "lightning-arc",
+      "label": "Lightning arc",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/lightning-arc.png",
+      "width": 264,
+      "height": 288,
+      "anchor": {
+        "x": 132.0,
+        "y": 144.0
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 1,
+          "row": 3,
+          "index": 19
+        },
+        "bounds": {
+          "x": 256,
+          "y": 744,
+          "width": 256,
+          "height": 280
+        },
+        "region": [
+          256,
+          744,
+          512,
+          1024
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "ice-burst",
+      "label": "Ice crystal burst",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/ice-burst.png",
+      "width": 246,
+      "height": 288,
+      "anchor": {
+        "x": 123.0,
+        "y": 144.0
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 2,
+          "row": 3,
+          "index": 20
+        },
+        "bounds": {
+          "x": 512,
+          "y": 744,
+          "width": 238,
+          "height": 280
+        },
+        "region": [
+          512,
+          744,
+          750,
+          1024
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "poison-cloud",
+      "label": "Poison cloud",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/poison-cloud.png",
+      "width": 278,
+      "height": 287,
+      "anchor": {
+        "x": 139.0,
+        "y": 143.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 3,
+          "row": 3,
+          "index": 21
+        },
+        "bounds": {
+          "x": 750,
+          "y": 745,
+          "width": 270,
+          "height": 279
+        },
+        "region": [
+          750,
+          744,
+          1020,
+          1024
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "healing-ring",
+      "label": "Healing ring",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/healing-ring.png",
+      "width": 256,
+      "height": 288,
+      "anchor": {
+        "x": 128.0,
+        "y": 144.0
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 4,
+          "row": 3,
+          "index": 22
+        },
+        "bounds": {
+          "x": 1020,
+          "y": 744,
+          "width": 248,
+          "height": 280
+        },
+        "region": [
+          1020,
+          744,
+          1268,
+          1024
+        ]
+      },
+      "logicalFootprint": {
+        "width": 1,
+        "height": 1
+      },
+      "status": "concept-component"
+    },
+    {
+      "id": "bomb-burst",
+      "label": "Bomb explosion burst",
+      "category": "effect",
+      "layer": "effects",
+      "file": "components/bomb-burst.png",
+      "width": 259,
+      "height": 287,
+      "anchor": {
+        "x": 129.5,
+        "y": 143.5
+      },
+      "source": {
+        "sheet": "expansion",
+        "cell": {
+          "column": 5,
+          "row": 3,
+          "index": 23
+        },
+        "bounds": {
+          "x": 1268,
+          "y": 745,
+          "width": 251,
+          "height": 279
+        },
+        "region": [
+          1268,
+          744,
+          1536,
+          1024
         ]
       },
       "logicalFootprint": {

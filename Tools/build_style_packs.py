@@ -22,11 +22,12 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "Web/wwwroot/assets/style-packs"
-SHEETS = {"world": (6, 4), "ui": (4, 3)}
+SHEETS = {"world": (6, 4), "ui": (4, 3), "expansion": (6, 4)}
+REQUIRED_SHEETS = ("world", "ui")
 LAYERS = ("ground", "terrain", "structures", "props", "actors", "effects", "ui")
 PADDING = 4
 SEAM_GUTTER = 2
-MAX_ARCHIVE_BYTES = 20 * 1024 * 1024
+MAX_ARCHIVE_BYTES = 32 * 1024 * 1024
 PREVIEW_SIZE = (1200, 900)
 
 
@@ -282,14 +283,28 @@ def read_source(path):
     return sheet
 
 
+def active_sheets(names):
+    """Require the legacy atlases and include optional atlases only when declared."""
+    names = set(names)
+    require(names <= SHEETS.keys(), f"Unknown sheets: {sorted(names - SHEETS.keys())}")
+    require(set(REQUIRED_SHEETS) <= names, "Pack requires world and ui sheets")
+    return {name: grid for name, grid in SHEETS.items() if name in names}
+
+
+def expected_cells(sheets):
+    return {(name, index) for name, grid in sheets.items() for index in range(grid[0] * grid[1])}
+
+
 def build_pack(style, packs=PACKS):
     style_id = style["id"]
     require(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", style_id), f"Unsafe style ID: {style_id}")
     directory = packs / style_id
     definitions = style["assets"]
-    require(len(definitions) == 36, f"{style_id}: expected 24 world and 12 UI components")
+    sheets = active_sheets(definition["sheet"] for definition in definitions)
+    require(len(definitions) == len(expected_cells(sheets)),
+            f"{style_id}: expected {len(expected_cells(sheets))} components for declared sheets")
     sources, sheet_records = {}, {}
-    for name, grid in SHEETS.items():
+    for name, grid in sheets.items():
         relative = f"source/{name}.png"
         path = directory / relative
         sources[name] = read_source(path)
@@ -299,6 +314,7 @@ def build_pack(style, packs=PACKS):
     assets, sprites, used, regions = [], {}, set(), []
     for definition in definitions:
         asset_id, sheet_name, index = definition["id"], definition["sheet"], definition["cell"]
+        require(sheet_name in sheets, f"Unknown sheet: {sheet_name}")
         if isinstance(index, dict):
             index = index["row"] * SHEETS[sheet_name][0] + index["column"]
         require(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", asset_id), f"Unsafe asset ID: {asset_id}")
@@ -332,7 +348,7 @@ def build_pack(style, packs=PACKS):
             asset["source"]["mask"] = island_mask_metadata(definition["alphaIslandSeeds"])
         assets.append(asset)
         sprites[asset_id] = sprite
-    require(used == {(name, index) for name, grid in SHEETS.items() for index in range(grid[0] * grid[1])},
+    require(used == expected_cells(sheets),
             f"{style_id}: all atlas cells must be assigned exactly once")
     layers, preview = preview_layers(assets, sprites, style)
     manifest = {"schemaVersion": 1, "id": style_id, "title": style.get("title", style_id),
@@ -382,8 +398,8 @@ def archive_files(manifest):
 def readme(manifest):
     return f"""# {manifest['title']} — extracted concept components
 
-36 individually labeled transparent PNGs, mechanically cropped at native pixel
-resolution from two generated atlases. Each crop has {PADDING}px transparent padding.
+{len(manifest["assets"])} individually labeled transparent PNGs, mechanically cropped at native pixel
+resolution from {len(manifest["sheets"])} generated atlases. Each crop has {PADDING}px transparent padding.
 Available original and additional concept-scene PNGs are included in concepts/;
 manifest.conceptFiles lists the archive-relative paths.
 The original source atlases remain in the repository's source/ directory; their
@@ -419,9 +435,11 @@ Validate without writing: python3 Tools/build_style_packs.py --style {manifest['
 def validate_pack(directory):
     manifest = json.loads((directory / "manifest.json").read_text(encoding="utf-8"))
     require(manifest["schemaVersion"] == 1, "Unsupported style-pack schema")
-    require(len(manifest["assets"]) == 36, "Pack must contain 36 components")
+    sheets = active_sheets(manifest["sheets"])
+    require(len(manifest["assets"]) == len(expected_cells(sheets)), "Pack component count differs from declared sheets")
     sources = {}
     for name, record in manifest["sheets"].items():
+        require((record["columns"], record["rows"]) == sheets[name], f"{name}: invalid sheet grid")
         path = safe_path(directory, record["file"])
         require(digest(path) == record["sha256"], f"{name}: source fingerprint changed")
         sources[name] = read_source(path)
@@ -433,6 +451,7 @@ def validate_pack(directory):
         require(asset["status"] == "concept-component" and asset["layer"] in LAYERS,
                 f"{asset['id']}: invalid status/layer")
         source = asset["source"]
+        require(source["sheet"] in sheets, f"Unknown sheet: {source['sheet']}")
         key = (source["sheet"], source["cell"]["index"])
         require(key not in cells, f"Duplicate cell assignment: {key}")
         cells.add(key)
@@ -452,7 +471,7 @@ def validate_pack(directory):
             require(sprite.tobytes() == expected.tobytes(), f"{asset['id']}: PNG differs from native source pixels")
         require(all(0 <= asset["anchor"][axis] <= asset["width" if axis == "x" else "height"]
                     for axis in ("x", "y")), f"{asset['id']}: anchor outside PNG")
-    require(cells == {(name, index) for name, grid in SHEETS.items() for index in range(grid[0] * grid[1])},
+    require(cells == expected_cells(sheets),
             "Every source cell must be represented exactly once")
     composite = Image.new("RGBA", PREVIEW_SIZE)
     require([layer["id"] for layer in manifest["preview"]["layers"]] == list(LAYERS), "Invalid layer order")
@@ -464,7 +483,7 @@ def validate_pack(directory):
         require(image.mode == "RGBA" and image.size == PREVIEW_SIZE and image.tobytes() == composite.tobytes(),
                 "Preview differs from composited layer PNGs")
     archive_path = safe_path(directory, manifest["download"])
-    require(archive_path.stat().st_size <= MAX_ARCHIVE_BYTES, "Style ZIP exceeds 20 MiB limit")
+    require(archive_path.stat().st_size <= MAX_ARCHIVE_BYTES, "Style ZIP exceeds 32 MiB limit")
     with ZipFile(archive_path) as archive:
         require(archive.namelist() == archive_files(manifest), "Archive entries differ from manifest")
         require(archive.testzip() is None, "Corrupt ZIP archive")
