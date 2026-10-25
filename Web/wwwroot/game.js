@@ -1041,7 +1041,7 @@ $('#begin-generated-adventure').onclick = async () => {
   } catch (error) {
     if (previousSave) { view = JSON.parse(await call('LoadSave', previousSave)); render(); }
     if (request === adventureRequest) $('#generated-adventure-status').textContent = `Could not enter the dungeon: ${error.message}`;
-  } finally { adventureCommitting = false; if (request === adventureRequest) $('#begin-generated-adventure').disabled = false; }
+  } finally { if (request === adventureRequest) { adventureCommitting = false; $('#begin-generated-adventure').disabled = false; } }
 };
 const explorationControls = attachExplorationControls({
   canMove: () => view?.screen === 'explore' && !busy && !animating && !enemySequence

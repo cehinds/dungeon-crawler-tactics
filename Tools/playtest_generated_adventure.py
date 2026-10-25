@@ -153,7 +153,8 @@ def main():
         walk(page, route(start, anchor, safe))
         hold_baseline = page.evaluate('window.dungeon.getSave()')
         dx, dy, key, pad = direction
-        page.locator('#battlefield').focus()
+        # Camera buttons must not strand movement focus outside the map.
+        page.locator('#zoom-in').click()
         page.keyboard.down(key)
         page.wait_for_function("([x,y])=>{const s=window.dungeon.getView().generatedDungeon;return Math.abs(s.x-x)+Math.abs(s.y-y)>=2}", arg=list(anchor), timeout=10000)
         page.keyboard.up(key)
@@ -186,6 +187,13 @@ def main():
         page.keyboard.up(key)
         page.locator('[data-close="help-dialog"]').last.click()
         restore(page, baseline)
+        page.set_viewport_size({'width':390,'height':844})
+        page.wait_for_timeout(200)
+        for selector in ['#battlefield', '.walk-pad', '[data-walk="north"]', '[data-walk="south"]']:
+            box = page.locator(selector).bounding_box()
+            assert box and box['x'] >= 0 and box['y'] >= 0 and box['x'] + box['width'] <= 391 and box['y'] + box['height'] <= 845, (selector, box)
+        assert page.locator('#battlefield').bounding_box()['height'] > 100
+        page.set_viewport_size({'width':1440,'height':1000})
         wall_runs = [(cell, (dx, dy)) for cell in reachable for dx, dy, *_ in DIRECTIONS
                      if (cell[0]+dx, cell[1]+dy) not in open_cells]
         assert wall_runs, 'Fixture must have a reachable wall'

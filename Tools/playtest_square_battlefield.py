@@ -41,6 +41,14 @@ def main():
           if(loads!==1||field.getNativeArtStatus().state!=='ready')throw Error('Movement or fog reveal reloaded map art');
           return initial;
         }''')
+        page.emulate_media(reduced_motion='reduce')
+        for canvas_width in [1000, 360]:
+            page.evaluate('''w=>{document.querySelector('canvas').style.width=w+'px';field.resize();field.zoom(.4);}''', canvas_width)
+            for x, y in [(23, 15), (2, 2), (23, 2)]:
+                page.evaluate('''([x,y])=>{const next=structuredClone(state);next.exploration.x=x;next.exploration.y=y;next.exploration.tiles.forEach(t=>{t.revealed=true;t.reachable=!t.blocked;});field.setView(next);state=next;}''', [x, y])
+                page.wait_for_function('''()=>{const p=field.cellToScreen(state.exploration.x,state.exploration.y),box=document.querySelector('canvas').getBoundingClientRect();return p.x>20&&p.x<box.width-20&&p.y>40&&p.y<box.height-30;}''')
+                assert page.evaluate("loads===1&&field.getNativeArtStatus().state==='ready'"), 'Camera follow reloaded art'
+        page.evaluate("document.querySelector('canvas').style.width='1000px';field.resize()")
         page.evaluate('''()=>{
           const tiles=[];for(let y=0;y<8;y++)for(let x=0;x<8;x++)tiles.push({x,y,blocked:false,reachable:true,revealed:true,tags:[]});
           const visuals={schemaVersion:1,styleId:'pocket-dungeon',kitId:'starter-dungeon',pieces:tiles.map(t=>({cell:0,x2:t.x*2,y2:t.y*2,rotation:0,layer:'ground'}))};

@@ -160,7 +160,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         scene.decorations=[];
       }
       if(disposed || request!==nativeRequest)return;
-      nativeArt=art;nativeScene=scene;nativeState='ready';fit();updateNativeStatus();
+      nativeArt=art;nativeScene=scene;nativeState='ready';fit();if(view.screen==='explore')centerSelected();updateNativeStatus();
       canvas.dispatchEvent(new CustomEvent('nativeartready',{detail:{styleId:descriptor.styleId,kitId:descriptor.kitId,pieceCount:scene.floor.length+scene.structures.length+scene.decorations.length}}));
     } catch(error) {
       if(disposed || request!==nativeRequest)return;
@@ -197,7 +197,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         [[-.5,-.5],[map.width-.5,-.5],[-.5,map.height-.5],[map.width-.5,map.height-.5]].map(([x,y])=>project(x,y));
       const minX=Math.min(...points.map(p=>p.x))-20,maxX=Math.max(...points.map(p=>p.x))+20;
       const minY=Math.min(...points.map(p=>p.y))-100,maxY=Math.max(...points.map(p=>p.y))+24;
-      if(!cameraReady){zoomLevel=1;cameraReady=true;}
+      if(!cameraReady){zoomLevel=view.screen==='explore'?(width<600?2:1.6):1;cameraReady=true;}
       scale=Math.max(.05,Math.min((width-28)/(maxX-minX),(height-24)/(maxY-minY))*zoomLevel);
       originX=width/2-(minX+maxX)/2*scale+panX;originY=height/2-(minY+maxY)/2*scale+panY;return;
     }
@@ -216,7 +216,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function setView(next, settings={}) {
     const oldScreen=view?.screen;
     const mapChanged=mapIdentity(view)!==mapIdentity(next);
-    if(mapChanged){panX=0;panY=0;rotation=0;cameraReady=false;}
+    if(mapChanged){panX=0;panY=0;rotation=0;cameraReady=false;explorationMotion=null;}
     if(view?.screen==='explore' && next.screen==='explore' && view.exploration.id===next.exploration.id){
       const from=view.exploration,to=next.exploration;
       if(from.x!==to.x||from.y!==to.y){
@@ -241,8 +241,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       cursor=selected ? {x:selected.x,y:selected.y} : {x:next.exploration?.x??1,y:next.exploration?.y??1};
     }
     fit();
-    if(mapChanged && !nativeActive()) centerAction();
-    else if(width<600 && lastSelection!==next.selectedUnitId) centerSelected();
+    if(next.screen==='explore'){if(mapChanged)centerSelected();}
+    else if(mapChanged && !nativeActive())centerAction();
+    else if(width<600 && lastSelection!==next.selectedUnitId)centerSelected();
     lastSelection=next.selectedUnitId;
   }
   function diamond(x,y,{stroke,fill,weight=2,inset=0}={}) {
@@ -526,6 +527,24 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     floating=floating.filter(f=>time-f.started<1100);
     for(const f of floating) {const p=project(f.x,f.y),age=time-f.started;context.globalAlpha=Math.min(1,(1100-age)/250);text(f.text,p.x,p.y-68-age*.027,f.color,18);context.globalAlpha=1;}
   }
+  function explorationPosition(time){
+    const map=view.exploration;
+    if(!explorationMotion||explorationMotion.duration<=0)return {x:map.x,y:map.y};
+    const cells=explorationMotion.cells,travel=clamp((time-explorationMotion.started)/explorationMotion.duration,0,1)*(cells.length-1);
+    const index=Math.min(Math.floor(travel),cells.length-2),a=cells[index],b=cells[index+1],t=travel-index;
+    return {x:a[0]+(b[0]-a[0])*t,y:a[1]+(b[1]-a[1])*t};
+  }
+  function followExploration(time){
+    if(drag||!explorationMotion)return;
+    const actor=explorationPosition(time),p=screen(actor.x,actor.y);
+    // Keep a generous dead zone: walking follows the leader while ordinary
+    // redraws preserve deliberate pan and zoom choices.
+    const left=width*.25,right=width*.75,top=Math.min(height*.4,110+100*scale),bottom=height*.72;
+    const dx=p.x<left?left-p.x:p.x>right?right-p.x:0;
+    const dy=p.y<top?top-p.y:p.y>bottom?bottom-p.y:0;
+    if(dx||dy){panX+=dx;panY+=dy;fit();}
+    if(time-explorationMotion.started>=explorationMotion.duration)explorationMotion=null;
+  }
   function drawNative(time) {
     const descriptor=artDescriptor(),map=mapData(),explore=view.screen==='explore';
     const tiles=explore?map.tiles:visualTiles;
@@ -533,6 +552,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const backdrop=context.createRadialGradient(width*.5,height*.38,0,width*.5,height*.5,Math.max(width,height)*.7);
     backdrop.addColorStop(0,mood.glow);backdrop.addColorStop(1,mood.background);context.fillStyle=backdrop;context.fillRect(0,0,width,height);
     if(nativeState!=='ready')return;
+    if(explore)followExploration(time);
     context.save();
     const shake=!reduced.matches&&time<shakeUntil?Math.sin(time*.1)*2:0;
     context.translate(originX+shake,originY);context.scale(scale,scale);

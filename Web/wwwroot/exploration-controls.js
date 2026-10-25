@@ -37,6 +37,7 @@ const directions = {
   arrowdown: [0, 1], s: [0, 1], arrowleft: [-1, 0], a: [-1, 0],
   north: [0, -1], east: [1, 0], south: [0, 1], west: [-1, 0]
 };
+const isEditable = target => Boolean(target?.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="textbox"]'));
 const isControl = target => Boolean(target?.closest?.(
   'input, textarea, select, button, a[href], [contenteditable]:not([contenteditable="false"]), [role="textbox"], [role="button"]'));
 
@@ -49,10 +50,10 @@ export function attachExplorationControls({ canMove, step, interact, focusMap, i
     listeners.push(() => target.removeEventListener(type, handler));
   };
   listen(document, 'keydown', event => {
-    if (event.ctrlKey || event.metaKey || event.altKey || isControl(event.target)) return;
+    if (event.ctrlKey || event.metaKey || event.altKey || isEditable(event.target)) return;
     const key = event.key.toLowerCase();
     const direction = directions[key];
-    if (!direction && key !== 'e' && key !== ' ') return;
+    if (!direction && (isControl(event.target) || key !== 'e' && key !== ' ')) return;
     // Native repeat must not inspect transient command-busy state mid-step.
     if (event.repeat) { event.preventDefault(); return; }
     if (!canMove()) { movement.stop(); return; }
