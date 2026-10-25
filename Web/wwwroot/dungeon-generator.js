@@ -6,7 +6,17 @@ const $ = id => document.getElementById(id), canvas = $('map'), ctx = canvas.get
 const terrainTypes = [{ tag: 'surface.water', letter: 'W', label: 'Water', color: '#82d6ff' }, { tag: 'surface.oil', letter: 'O', label: 'Oil', color: '#d4bbf2' }, { tag: 'surface.burning', letter: 'F', label: 'Fire', color: '#ffb17a' }];
 const catalogURL = new URL('assets/book-tiles/catalog.json', location.href);
 let manifest, rules, catalog, room, playable, art, scene, rotation = 0, blueprint = false, artRequest = 0, artError = false, zoom = 1, pan = { x: 0, y: 0 }, generating = false, artBusy = false, generationNumber = 0;
-function status(message, error = false) { $('status').textContent = message; $('status').classList.toggle('error', error); }
+let layoutDirty = false, feedbackTimer;
+function status(message, error = false) {
+  $('status').textContent = message; $('status').classList.toggle('error', error);
+  document.querySelectorAll('.dialog-error').forEach(node => node.remove());
+  const dialog = document.querySelector('dialog[open]');
+  if (error && dialog) {
+    const note = document.createElement('p'); note.className = 'dialog-error';
+    note.setAttribute('role', 'alert'); note.textContent = message;
+    dialog.prepend(note); dialog.scrollTop = 0;
+  }
+}
 async function safely(action) { try { await action(); } catch (error) { status(error.message, true); } }
 function settings() {
   for (const [id, max] of [['width', 20], ['height', 16]]) { const value = Number($(id).value); if (!Number.isInteger(value) || value < 6 || value > max) throw new Error(`${id === 'width' ? 'Width' : 'Height'} must be a whole number from 6 to ${max}.`); }
@@ -15,8 +25,10 @@ function settings() {
 function updateSummary() {
   const entrance = room.entrance || room.start;
   $('ambience-info').textContent = environmentMood(art?.kit.id || $('art-theme').value).label;
-  $('map-title').textContent = `${art?.kit.title || $('art-theme').selectedOptions[0]?.textContent || 'Dungeon'} / ${room.seed || 'untitled'}`;
-  $('counts').textContent = `${room.rooms.length} rooms · ${room.corridors.length} connections · ${room.clearRoute.length} route cells`;
+  $('map-title').textContent = art?.kit.title || $('art-theme').selectedOptions[0]?.textContent || 'Dungeon';
+  $('map-seed').textContent = `Seed: ${room.seed || 'untitled'}`;
+  $('map-title').title = $('map-title').textContent;
+  $('counts').textContent = `${room.width} × ${room.height} · ${room.rooms.length} rooms · 4 crawlers`;
   $('entrance-info').textContent = `Cell ${entrance.x + 1}, ${entrance.y + 1}`;
   $('exit-info').textContent = `Cell ${room.exit.x + 1}, ${room.exit.y + 1}`;
   $('terrain-summary').replaceChildren(...terrainTypes.map(type => {
@@ -45,17 +57,30 @@ function randomSeed() {
 }
 function seedMode() {
   $('seed-mode').textContent = $('fixed-seed').checked ? 'Fixed seed: Generate repeats this layout and settings.' : 'Each Generate chooses a new seed. Type a seed to lock it.';
-  if (!generating) $('generate').textContent = $('fixed-seed').checked ? 'Regenerate fixed seed' : 'Generate new dungeon';
+  if (!generating) $('generate').textContent = $('fixed-seed').checked ? 'Regenerate' : 'Generate';
 }
 function generationFeedback(message, error = false) {
+  clearTimeout(feedbackTimer);
   $('generation-feedback').textContent = message; $('generation-feedback').hidden = false;
   $('generation-feedback').classList.toggle('error', error);
+  if (!error && !message.endsWith('…')) feedbackTimer = setTimeout(() => { $('generation-feedback').hidden = true; }, 5000);
+}
+function settingsFeedback() {
+  $('settings-status').textContent = layoutDirty ? 'Settings changed. Generate to apply them.' : 'Appearance updates immediately. Generate to change the layout.';
+  $('settings-status').classList.toggle('pending', layoutDirty);
+}
+function markLayoutChanged() {
+  layoutDirty = true; settingsFeedback();
+  status('Settings changed · Generate to apply. Play opens the map currently shown.');
 }
 function syncControls() {
   const pending = generating || artBusy;
   const nativeReady = Boolean(room && playable?.visuals && art && scene && !artError && !pending);
   $('settings').disabled = !manifest || pending;
-  $('generate').disabled = pending; $('reroll').disabled = pending;
+  $('generate').disabled = !manifest || pending; $('reroll').disabled = !manifest || pending;
+  $('apply-settings').disabled = !manifest || pending;
+  $('open-export').disabled = !room || pending;
+  $('open-info').disabled = !room;
   $('generate').setAttribute('aria-busy', String(generating));
   for (const id of ['play', 'confirm-play', 'map-json', 'png']) $(id).disabled = !nativeReady;
   for (const id of ['recipe', 'edit']) $(id).disabled = !room || pending;
@@ -87,11 +112,11 @@ async function generate({ fresh = !$('fixed-seed').checked, announce = true } = 
     const candidateScene = buildArtScene(candidate, loaded, $('variety').checked);
     exactVisualMap(candidate, candidatePlayable, candidateScene);
     room = candidate; playable = candidatePlayable; art = loaded; scene = candidateScene; artError = false;
-    $('seed').value = room.seed; zoom = 1; pan = { x: 0, y: 0 }; generationNumber++;
+    $('seed').value = room.seed; zoom = 1; pan = { x: 0, y: 0 }; generationNumber++; layoutDirty = false; settingsFeedback();
     $('loading').hidden = true; updateSummary(); paletteLegend(); draw();
-    generationFeedback(`${!announce ? 'Dungeon ready' : fresh ? 'New dungeon ready' : 'Fixed seed rebuilt'} · ${room.seed} · map ${generationNumber}`);
-    status(`${room.width} × ${room.height} cells · ${art.kit.title}. Play uses this exact layout, tile art, obstacles and spawns.`);
-    if (announce && matchMedia('(max-width: 700px)').matches) $('workspace').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    if (announce) generationFeedback(`${fresh ? 'New dungeon ready' : 'Fixed seed rebuilt'} · ${room.rooms.length} rooms to explore`);
+    else $('generation-feedback').hidden = true;
+    status('Ready to play · Defeat all enemies to complete this dungeon.');
     return true;
   } catch (error) {
     // Generation is transactional: failed validation or art keeps the last map intact.
@@ -117,7 +142,7 @@ async function updateArt() {
     exactVisualMap(room, playable, nextScene);
     art = loaded; scene = nextScene; artError = false;
     $('loading').hidden = true; updateSummary(); paletteLegend(); draw();
-    status(`${room.width} × ${room.height} cells · ${art.kit.title} · ${$('art-style').selectedOptions[0].textContent}. Play preserves this exact layout and tile art.`);
+    status(layoutDirty ? 'Appearance updated · Generate to apply your layout changes.' : 'Appearance updated · Play opens this exact map.');
   } catch (error) {
     if (request !== artRequest) return;
     artError = true; $('loading-message').textContent = 'This art could not load. Your previous map is kept; retry before playing.'; $('retry').hidden = false; $('loading').hidden = blueprint;
@@ -139,7 +164,8 @@ function draw() {
   const worldCorners = !blueprint && scene ? visibleSceneCorners(scene) : [{ x: -64, y: -64 }, { x: room.width * 128 - 64, y: -64 }, { x: -64, y: room.height * 128 - 64 }, { x: room.width * 128 - 64, y: room.height * 128 - 64 }];
   const corners = worldCorners.map(p => rotate(p.x, p.y));
   const minX = Math.min(...corners.map(p => p.x)), maxX = Math.max(...corners.map(p => p.x)), minY = Math.min(...corners.map(p => p.y)), maxY = Math.max(...corners.map(p => p.y));
-  const scale = Math.max(.01, Math.min((bounds.width - 65) / (maxX - minX), (bounds.height - 70) / (maxY - minY), 1)) * zoom;
+  const padding = bounds.height < 280 ? 24 : 48;
+  const scale = Math.max(.01, Math.min((bounds.width - padding) / (maxX - minX), (bounds.height - padding) / (maxY - minY), 1)) * zoom;
   const offsetX = (bounds.width - (maxX - minX) * scale) / 2 - minX * scale + pan.x, offsetY = (bounds.height - (maxY - minY) * scale) / 2 - minY * scale + pan.y;
   const project = cell => { const p = rotate(cell.x * 128, cell.y * 128); return { x: offsetX + p.x * scale, y: offsetY + p.y * scale }; };
   ctx.save(); ctx.translate(offsetX, offsetY); ctx.scale(scale, scale); ctx.rotate(angle); ctx.imageSmoothingEnabled = $('art-style').value !== 'pocket-dungeon';
@@ -201,11 +227,28 @@ function setView(nextBlueprint) {
   blueprint = nextBlueprint; $('square').setAttribute('aria-pressed', String(!blueprint)); $('blueprint').setAttribute('aria-pressed', String(blueprint));
   $('loading').hidden = blueprint || Boolean(art); if (!blueprint && artError) $('retry').hidden = false; draw();
 }
+// One set of settings moves into the phone dialog; values and listeners survive
+// breakpoint changes, and desktop and mobile cannot disagree about the next map.
+const compactViewport = matchMedia('(max-width: 760px), (max-height: 500px)');
+function positionSettings() {
+  const dialog = $('settings-dialog');
+  if (!compactViewport.matches && dialog.open) dialog.close();
+  (compactViewport.matches ? $('mobile-controls') : $('desktop-controls')).append($('controls'));
+}
+for (const name of ['settings', 'export', 'info']) {
+  const dialog = $(`${name}-dialog`), opener = $(`open-${name}`);
+  opener.onclick = () => { dialog.querySelectorAll('.dialog-error').forEach(node => node.remove()); dialog.showModal(); };
+  $(`close-${name}`).onclick = () => dialog.close();
+  dialog.addEventListener('close', () => { if (opener.getClientRects().length) opener.focus(); });
+}
+compactViewport.addEventListener('change', positionSettings); positionSettings(); settingsFeedback();
+$('apply-settings').onclick = () => { $('settings-dialog').close(); safely(() => generate()); };
 $('generate').onclick = () => safely(() => generate());
 $('reroll').onclick = () => { $('fixed-seed').checked = false; seedMode(); safely(() => generate({ fresh: true })); };
-$('seed').addEventListener('input', () => { $('fixed-seed').checked = true; seedMode(); });
+$('seed').addEventListener('input', () => { $('fixed-seed').checked = true; seedMode(); markLayoutChanged(); });
 $('fixed-seed').addEventListener('change', seedMode);
-for (const id of ['rooms', 'density']) $(id).oninput = () => { $(`${id}-value`).textContent = $(id).value + (id === 'density' ? '%' : ''); };
+for (const id of ['width', 'height', 'layout', 'biome']) $(id).addEventListener('input', markLayoutChanged);
+for (const id of ['rooms', 'density']) $(id).oninput = () => { $(`${id}-value`).textContent = $(id).value + (id === 'density' ? '%' : ''); markLayoutChanged(); };
 for (const id of ['art-style', 'art-theme']) $(id).onchange = () => safely(updateArt);
 $('variety').onchange = () => { if (art && room) { scene = buildArtScene(room, art, $('variety').checked); exactVisualMap(room, playable, scene); paletteLegend(); draw(); syncControls(); } };
 $('square').onclick = () => setView(false); $('blueprint').onclick = () => setView(true);
@@ -213,6 +256,10 @@ $('rotate-left').onclick = () => { rotation = (rotation + 3) % 4; draw(); }; $('
 function fitMap() { zoom = 1; pan = { x: 0, y: 0 }; draw(); }
 function zoomMap(factor) { zoom = Math.max(.65, Math.min(3, zoom * factor)); if (zoom <= 1) pan = { x: 0, y: 0 }; draw(); }
 $('fit').onclick = fitMap; $('zoom-in').onclick = () => zoomMap(1.25); $('zoom-out').onclick = () => zoomMap(.8); $('route').onchange = draw; $('grid').onchange = draw;
+canvas.addEventListener('wheel', event => {
+  if (!room || event.ctrlKey) return;
+  event.preventDefault(); zoomMap(event.deltaY < 0 ? 1.12 : 1 / 1.12);
+}, { passive: false });
 let drag;
 canvas.addEventListener('pointerdown', event => { if (zoom <= 1) return; drag = { x: event.clientX, y: event.clientY, panX: pan.x, panY: pan.y }; canvas.setPointerCapture(event.pointerId); canvas.classList.add('dragging'); });
 canvas.addEventListener('pointermove', event => { if (!drag) return; pan = { x: drag.panX + event.clientX - drag.x, y: drag.panY + event.clientY - drag.y }; draw(); });

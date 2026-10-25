@@ -1,13 +1,249 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101719"><meta name="description" content="Generate connected square dungeons with clear entrances, exits, routes and native environment tiles in three art styles."><title>Dungeon Foundry · Procedural maps</title><link rel="icon" href="data:,"><link rel="stylesheet" href="dungeon-generator.css"></head>
-<body><a class="skip-link" href="#workspace">Skip to map preview</a><header><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">◇</span><span>DUNGEON FOUNDRY<small>PROCEDURAL MAP WORKSHOP</small></span></a><nav aria-label="Main navigation"><a href="book-tiles.html">Tile library</a><a href="room-kit.html">Room workshop</a><a href="index.html">Back to game</a></nav></header>
-<main><aside id="controls"><div class="heading"><h1>A way in.<br> A world to explore.</h1><p>Square rooms. Clear connections.<br> Choose the place, then build the path.</p></div><fieldset id="settings" disabled><legend class="sr-only">Dungeon and art settings</legend>
-<div class="control-group"><h2>Environment</h2><label for="art-style">Art style</label><select id="art-style"></select><label for="art-theme">Environment tiles</label><select id="art-theme"></select><label class="check-row"><input id="variety" type="checkbox" checked> Vary room materials</label><p class="field-note">Coherent wear, cracks and wet areas give each room its own surface.</p></div>
-<div class="control-group"><h2>Map layout</h2><label for="seed">Dungeon seed</label><div class="seed-row"><input id="seed" value="deep-stone-13" maxlength="120" spellcheck="false"><button id="reroll" type="button" title="Choose a new seed and generate" aria-label="Reroll seed">↻</button></div><label class="check-row seed-lock"><input id="fixed-seed" type="checkbox"> Keep this seed fixed</label><p id="seed-mode" class="field-note">Each Generate chooses a new seed. Type a seed to lock it.</p><label for="layout">Layout</label><select id="layout"><option value="chambers">Connected chambers</option><option value="cavern">Natural cavern</option><option value="hall">Grand hall</option></select><div class="dimensions"><div><label for="width">Width</label><input id="width" title="Dungeon width: 6 to 20 cells" type="number" min="6" max="20" value="16"></div><span aria-hidden="true">×</span><div><label for="height">Height</label><input id="height" title="Dungeon height: 6 to 16 cells" type="number" min="6" max="16" value="12"></div></div><label for="rooms">Target rooms <output id="rooms-value">4</output></label><input id="rooms" aria-label="Target rooms" type="range" min="2" max="6" value="4"><label for="density">Landmarks <output id="density-value">18%</output></label><input id="density" aria-label="Landmark density" type="range" min="0" max="40" value="18"><label for="biome">Playable terrain</label><select id="biome"><option value="stone">Stone stronghold</option><option value="sewer">Forgotten sewer</option><option value="crypt">Ancient crypt</option></select><p class="field-note">Terrain rules apply to the playable export.</p><button id="generate" type="button" class="primary">Generate new dungeon</button></div></fieldset><p class="aside-note">Generate creates a new dungeon by default. Keep a fixed seed to reproduce a layout.</p></aside>
-<section id="workspace" class="workspace" aria-label="Dungeon preview" tabindex="-1"><div class="workspace-top"><div><p class="eyebrow">DUNGEON PREVIEW</p><h2 id="map-title">Opening the tile library…</h2><p id="ambience-info" class="ambience-info"></p></div><span class="badge" id="view-label">SQUARE / NORTH</span></div>
-<p id="generation-feedback" class="generation-feedback" role="status" aria-live="polite" hidden></p><div class="endpoint-bar" aria-label="Entrance and exit"><div><span class="endpoint-key enter">ENTER</span><span id="entrance-info">—</span></div><span class="route-summary" id="route-summary">Connected by a clear route</span><div><span class="endpoint-key leave">EXIT</span><span id="exit-info">—</span></div></div>
-<div class="toolbar"><div class="segmented" aria-label="Preview mode"><button id="square" type="button" aria-pressed="true" disabled>Square art</button><button id="blueprint" type="button" aria-pressed="false" disabled>Blueprint</button></div><div class="view-tools"><button id="rotate-left" type="button" title="Rotate the complete map 90° counterclockwise" aria-label="Rotate view counterclockwise" disabled>↶</button><button id="rotate-right" type="button" title="Rotate the complete map 90° clockwise" aria-label="Rotate view clockwise" disabled>↷</button><button id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out" disabled>−</button><button id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in" disabled>+</button><button id="fit" type="button" disabled>Fit map</button><label class="toggle"><input id="route" type="checkbox" checked disabled> Route</label><label class="toggle"><input id="grid" type="checkbox" disabled> Grid</label></div></div>
-<div id="canvas-wrap"><canvas id="map" tabindex="0" title="Zoom in to drag the map. When focused, use plus/minus to zoom, arrow keys to pan and Home to fit." role="img" aria-label="Dungeon map preview"></canvas><div id="loading" role="status"><span id="loading-message">Loading the square tile library…</span><button id="retry" type="button" hidden>Try again</button></div><span class="map-corner">128 × 128 SQUARE GRID · ART PREVIEW</span></div>
-<div class="map-info"><div class="legend"><span><i class="party"></i>Party</span><span><i class="enemy"></i>Enemy</span><span><i class="path"></i>Clear route</span><span><i class="obstacle"></i>Blocked object</span></div><span id="counts">— rooms · — route cells</span></div><div id="terrain-summary" class="terrain-summary" aria-live="polite"></div><p class="terrain-note">W / O / F mark playable water, oil and fire. Illustrated wet floors alone are decorative.</p><div id="room-palettes" class="room-palettes" aria-label="Room floor materials"></div>
-<div class="actions"><button id="edit" type="button" disabled>Edit in workshop</button><button id="recipe" type="button" disabled>Recipe JSON</button><button id="map-json" type="button" disabled>Playable JSON</button><button id="png" type="button" disabled>Snapshot PNG</button><button id="play" type="button" class="primary" disabled>Play this dungeon</button></div><p class="adaptation-note">Play and playable JSON preserve this exact dungeon, including its selected square tile art. The room workshop uses the original editing kit; its layout and terrain rules remain compatible.</p><p id="status" role="status" aria-live="polite">Loading the map resources.</p></section></main>
-<dialog id="play-dialog"><form method="dialog"><h2>Enter this dungeon?</h2><p id="play-map-summary"></p><p>Play this exact layout and selected tile art, with the same obstacles, terrain and spawns. Defeat all enemies to complete this standalone battle. Playing this map replaces your current run; export your save in Save &amp; options first if you want to keep it.</p><div class="dialog-actions"><button value="cancel" autofocus>Keep editing</button><button id="confirm-play" value="play" class="primary">Replace run &amp; play</button></div></form></dialog><noscript><p>JavaScript is needed to generate and preview a dungeon.</p></noscript><script type="module" src="dungeon-generator.js"></script></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101823">
+<meta name="description" content="Build, explore and play your own tactical dungeon.">
+<title>Dungeon Foundry · Map workshop</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="dungeon-generator.css">
+</head>
+<body>
+<a class="skip-link" href="#workspace">Skip to map preview</a>
+<header class="app-header">
+<a class="brand" href="index.html">
+<span class="brand-icon" aria-hidden="true">◇</span>
+<span>DUNGEON FOUNDRY<small>TACTICAL MAP WORKSHOP</small>
+</span>
+</a>
+<nav aria-label="Main navigation">
+<a href="book-tiles.html">Tile library</a>
+<a href="room-kit.html">Room workshop</a>
+<a href="index.html">Back to game</a>
+</nav>
+</header>
+<main>
+<div id="desktop-controls">
+<aside id="controls" aria-label="Map settings">
+<div class="heading">
+<p class="eyebrow">YOUR NEXT EXPEDITION</p>
+<h1>Shape the dungeon</h1>
+<p>Choose a setting. Find a new path.</p>
+</div>
+<fieldset id="settings" disabled>
+<legend class="sr-only">Dungeon and art settings</legend>
+<div class="control-group">
+<h2>Look &amp; feel</h2>
+<label for="art-style">Art style</label>
+<select id="art-style">
+</select>
+<label for="art-theme">Location</label>
+<select id="art-theme">
+</select>
+<label class="check-row">
+<input id="variety" type="checkbox" checked> Vary room materials</label>
+</div>
+<div class="control-group">
+<h2>The expedition</h2>
+<label for="layout">Layout</label>
+<select id="layout">
+<option value="chambers">Connected chambers</option>
+<option value="cavern">Natural cavern</option>
+<option value="hall">Grand hall</option>
+</select>
+</div>
+<details id="advanced-settings">
+<summary>Advanced settings <span aria-hidden="true">+</span>
+</summary>
+<div class="advanced-body">
+<label for="seed">Dungeon seed</label>
+<div class="seed-row">
+<input id="seed" value="deep-stone-13" maxlength="120" spellcheck="false">
+<button id="reroll" type="button" title="Choose a new seed and generate" aria-label="Reroll seed">↻</button>
+</div>
+<label class="check-row seed-lock">
+<input id="fixed-seed" type="checkbox"> Keep this seed fixed</label>
+<p id="seed-mode" class="field-note">Each Generate chooses a new seed. Type a seed to lock it.</p>
+<div class="dimensions">
+<div>
+<label for="width">Width</label>
+<input id="width" title="Dungeon width: 6 to 20 cells" type="number" min="6" max="20" value="16">
+</div>
+<span aria-hidden="true">×</span>
+<div>
+<label for="height">Height</label>
+<input id="height" title="Dungeon height: 6 to 16 cells" type="number" min="6" max="16" value="12">
+</div>
+</div>
+<label for="rooms">Target rooms <output id="rooms-value">4</output>
+</label>
+<input id="rooms" aria-label="Target rooms" type="range" min="2" max="6" value="4">
+<label for="density">Decoration density <output id="density-value">18%</output>
+</label>
+<input id="density" aria-label="Landmark density" type="range" min="0" max="40" value="18">
+<label for="biome">Terrain &amp; hazards</label>
+<select id="biome">
+<option value="stone">Stone stronghold</option>
+<option value="sewer">Forgotten sewer</option>
+<option value="crypt">Ancient crypt</option>
+</select>
+<p class="field-note">Terrain rules apply to the playable export.</p>
+</div>
+</details>
+</fieldset>
+<p id="settings-status" class="settings-status" role="status">Ready to shape your next expedition.</p>
+</aside>
+</div>
+<section id="workspace" class="workspace" aria-label="Dungeon preview" tabindex="-1">
+<div class="workspace-top">
+<div class="map-heading">
+<p class="eyebrow">MAP PREVIEW <span class="live-dot" aria-hidden="true">
+</span>
+</p>
+<h2 id="map-title">Opening the tile library…</h2>
+<p id="ambience-info" class="ambience-info">
+</p>
+<div class="map-meta">
+<span id="counts">— rooms · — route cells</span>
+<span id="map-seed">Seed —</span>
+</div>
+</div>
+<div class="workspace-tools">
+<span class="badge" id="view-label">SQUARE / NORTH</span>
+<button id="open-info" type="button" aria-haspopup="dialog">Map details</button>
+<button id="open-export" type="button" aria-haspopup="dialog">Export</button>
+</div>
+</div>
+<div class="toolbar">
+<div class="segmented" aria-label="Preview mode">
+<button id="square" type="button" aria-pressed="true" disabled>Square art</button>
+<button id="blueprint" type="button" aria-pressed="false" disabled>Blueprint</button>
+</div>
+<div class="view-tools">
+<button id="rotate-left" type="button" title="Rotate the complete map 90° counterclockwise" aria-label="Rotate view counterclockwise" disabled>↶</button>
+<button id="rotate-right" type="button" title="Rotate the complete map 90° clockwise" aria-label="Rotate view clockwise" disabled>↷</button>
+<button id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out" disabled>−</button>
+<button id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in" disabled>+</button>
+<button id="fit" type="button" disabled>Fit map</button>
+<label class="toggle">
+<input id="route" type="checkbox" checked disabled> Route</label>
+<label class="toggle">
+<input id="grid" type="checkbox" disabled> Grid</label>
+</div>
+</div>
+<div id="canvas-wrap">
+<canvas id="map" tabindex="0" title="Zoom in to drag the map. When focused, use plus/minus to zoom, arrow keys to pan and Home to fit." role="img" aria-label="Dungeon map preview">
+</canvas>
+<div id="loading" role="status">
+<span id="loading-message">Loading the square tile library…</span>
+<button id="retry" type="button" hidden>Try again</button>
+</div>
+<span class="map-corner">ZOOM IN TO EXPLORE</span>
+</div>
+<div class="map-info">
+<div class="legend">
+<span>
+<i class="party">
+</i>Party</span>
+<span>
+<i class="enemy">
+</i>Enemy</span>
+<span>
+<i class="path">
+</i>Clear route</span>
+<span>
+<i class="obstacle">
+</i>Blocked object</span>
+</div>
+<span class="map-hint">Scroll to zoom · Drag to explore</span>
+</div>
+<p id="status" role="status" aria-live="polite">Loading the map resources.</p>
+<p id="generation-feedback" class="generation-feedback" role="status" aria-live="polite" hidden>
+</p>
+</section>
+<div class="action-dock">
+<div class="dock-caption">
+<span class="dock-sigil" aria-hidden="true">◇</span>
+<span>Choose settings → Generate → Play<small>The dungeon in the preview is the one you’ll play.</small>
+</span>
+</div>
+<button id="open-settings" type="button" aria-haspopup="dialog">Settings</button>
+<button id="generate" type="button" disabled>↻ &nbsp; Generate new dungeon</button>
+<button id="play" type="button" class="primary" disabled>Play dungeon <span aria-hidden="true">→</span>
+</button>
+</div>
+</main>
+<dialog id="settings-dialog" aria-labelledby="settings-dialog-title">
+<div class="dialog-heading">
+<h2 id="settings-dialog-title">Map settings</h2>
+<button id="close-settings" type="button" aria-label="Close map settings">✕</button>
+</div>
+<div id="mobile-controls">
+</div>
+<div class="settings-dialog-footer">
+<button id="apply-settings" class="primary" type="button" disabled>Generate dungeon</button>
+</div>
+</dialog>
+<dialog id="export-dialog" aria-labelledby="export-dialog-title">
+<div class="dialog-heading">
+<div>
+<p class="eyebrow">TAKE IT WITH YOU</p>
+<h2 id="export-dialog-title">Export your dungeon</h2>
+</div>
+<button id="close-export" type="button" aria-label="Close export options">✕</button>
+</div>
+<p>Save the map, keep its recipe, or continue building in the room workshop.</p>
+<div class="export-actions">
+<button id="edit" type="button" disabled>Edit in workshop</button>
+<button id="recipe" type="button" disabled>Recipe JSON</button>
+<button id="map-json" type="button" disabled>Playable JSON</button>
+<button id="png" type="button" disabled>Snapshot PNG</button>
+</div>
+<p class="field-note">Recipe JSON keeps your generation settings. Playable JSON includes terrain and spawns.</p>
+</dialog>
+<dialog id="info-dialog" aria-labelledby="info-dialog-title">
+<div class="dialog-heading">
+<div>
+<p class="eyebrow">EXPEDITION NOTES</p>
+<h2 id="info-dialog-title">Inside this dungeon</h2>
+</div>
+<button id="close-info" type="button" aria-label="Close map details">✕</button>
+</div>
+<div class="endpoint-bar" aria-label="Entrance and exit">
+<div>
+<span class="endpoint-key enter">ENTER</span>
+<span id="entrance-info">—</span>
+</div>
+<span class="route-summary" id="route-summary">Connected by a clear route</span>
+<div>
+<span class="endpoint-key leave">EXIT</span>
+<span id="exit-info">—</span>
+</div>
+</div>
+<div id="terrain-summary" class="terrain-summary" aria-live="polite">
+</div>
+<p class="terrain-note">W / O / F mark playable water, oil and fire. Illustrated wet floors alone are decorative.</p>
+<div id="room-palettes" class="room-palettes" aria-label="Room floor materials">
+</div>
+<p class="adaptation-note">Play and playable JSON preserve this exact dungeon and its selected art. The room workshop uses the original editing kit with compatible layout and terrain rules.</p>
+</dialog>
+<dialog id="play-dialog" aria-labelledby="play-dialog-title">
+<form method="dialog">
+<h2 id="play-dialog-title">Enter this dungeon?</h2>
+<p id="play-map-summary">
+</p>
+<p>Play this exact layout and selected tile art, with the same obstacles, terrain and spawns. Defeat all enemies to complete this standalone battle. Playing this map replaces your current run; export your save in Save &amp; options first if you want to keep it.</p>
+<div class="dialog-actions">
+<button value="cancel" autofocus>Keep editing</button>
+<button id="confirm-play" value="play" class="primary">Replace run &amp; play</button>
+</div>
+</form>
+</dialog>
+<noscript>
+<p>JavaScript is needed to generate and preview a dungeon.</p>
+</noscript>
+<script type="module" src="dungeon-generator.js">
+</script>
+</body>
+</html>

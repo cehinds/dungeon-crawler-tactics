@@ -52,9 +52,11 @@ def ready_runtime(page, native=False):
 
 
 def export_json(page, button, path):
+    page.locator('#open-export').click()
     with page.expect_download() as download:
         page.locator(button).click()
     download.value.save_as(path)
+    page.locator('#close-export').click()
     return json.loads(Path(path).read_text())
 
 
@@ -97,6 +99,7 @@ def main():
         assert page.locator("#seed").input_value() != second_seed
         assert page.locator("#map").evaluate("canvas=>canvas.toDataURL()") != second_pixels
         assert "New dungeon ready" in page.locator("#generation-feedback").inner_text()
+        page.locator('#advanced-settings summary').click()
         page.locator("#seed").fill("repeatable-native-dungeon")
         assert page.locator("#fixed-seed").is_checked(), "Typing a seed must lock it"
         page.locator("#art-style").select_option("ink-and-lanterns")

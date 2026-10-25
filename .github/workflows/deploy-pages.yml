@@ -87,6 +87,7 @@ jobs:
           python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/dct-playtest-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
+          python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Prepare static hosting artifact
