@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-city-cobblestone-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5613622789680418,
-          0.01970732764460358,
-          62.01819266639187,
-          -0.0009430573120461442,
-          0.45076953280192694,
-          159.51082744154758
-        ],
-        "width": 130,
-        "height": 73,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6772486772486772,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          20,
-          63,
-          255,
-          229
+          35,
+          42,
+          238,
+          235
         ],
         "bounds": {
-          "x": 22,
-          "y": 65,
-          "width": 231,
-          "height": 162
+          "x": 37,
+          "y": 44,
+          "width": 199,
+          "height": 189
         },
-        "originalWidth": 231,
-        "originalHeight": 162,
+        "originalWidth": 199,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              136,
-              67
+              97,
+              46
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978354978354991,
-          "y": 0.4463919753086349
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.492,
-              1.331
-            ],
-            [
-              229.0,
-              72.554
-            ],
-            [
-              112.508,
-              143.299
-            ],
-            [
-              1.0,
-              72.077
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-worn-city-cobblestone-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5589465279875575,
-          -0.0035172057890789426,
-          63.69697591684319,
-          0.0006917171385188529,
-          0.4474667364994849,
-          159.44028613494947
-        ],
-        "width": 130,
-        "height": 72,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          272,
-          63,
-          508,
-          229
+          290,
+          42,
+          483,
+          236
         ],
         "bounds": {
-          "x": 274,
-          "y": 65,
-          "width": 232,
-          "height": 162
+          "x": 292,
+          "y": 44,
+          "width": 189,
+          "height": 190
         },
-        "originalWidth": 232,
-        "originalHeight": 162,
+        "originalWidth": 189,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              387,
-              67
+              298,
+              46
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49784482758621346,
-          "y": 0.4480617283950618
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.05,
-              1.073
-            ],
-            [
-              230.0,
-              72.409
-            ],
-            [
-              115.95,
-              144.1
-            ],
-            [
-              1.0,
-              72.763
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-cracked-city-cobblestone-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5613766024186398,
-          0.011402692472310866,
-          62.609875708693814,
-          -0.0010555142033900886,
-          0.44731828693855336,
-          159.48996241950934
-        ],
-        "width": 130,
-        "height": 73,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          525,
-          63,
-          760,
-          229
+          542,
+          42,
+          738,
+          238
         ],
         "bounds": {
-          "x": 527,
-          "y": 65,
-          "width": 231,
-          "height": 162
+          "x": 544,
+          "y": 44,
+          "width": 192,
+          "height": 192
         },
-        "originalWidth": 231,
-        "originalHeight": 162,
+        "originalWidth": 192,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              639,
-              67
+              551,
+              46
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49783549783549846,
-          "y": 0.45030246913579586
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.453,
-              1.415
-            ],
-            [
-              229.0,
-              73.218
-            ],
-            [
-              113.547,
-              144.483
-            ],
-            [
-              1.0,
-              72.68
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-wet-city-cobblestone-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5565228783176647,
-          0.005822512508328314,
-          63.019930094289,
-          8.72213924350141e-05,
-          0.4457982280011663,
-          159.57121227911873
-        ],
-        "width": 129,
-        "height": 71,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          779,
-          63,
-          1016,
-          229
+          796,
+          41,
+          995,
+          236
         ],
         "bounds": {
-          "x": 781,
-          "y": 65,
-          "width": 233,
-          "height": 162
+          "x": 798,
+          "y": 43,
+          "width": 195,
+          "height": 191
         },
-        "originalWidth": 233,
-        "originalHeight": 162,
+        "originalWidth": 195,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              67
+              807,
+              45
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978540772532172,
-          "y": 0.4488919753086207
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.751,
-              0.939
-            ],
-            [
-              231.0,
-              72.698
-            ],
-            [
-              115.249,
-              144.502
-            ],
-            [
-              1.0,
-              72.743
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-city-cobblestone-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5818181818181818,
-        "scaleY": 0.4129032258064516,
+        "scaleX": 0.6124401913875598,
+        "scaleY": 0.7485380116959064,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1033,
-          69,
-          1257,
-          228
+          1049,
+          59,
+          1262,
+          234
         ],
         "bounds": {
-          "x": 1035,
-          "y": 71,
-          "width": 220,
-          "height": 155
+          "x": 1051,
+          "y": 61,
+          "width": 209,
+          "height": 171
         },
-        "originalWidth": 220,
-        "originalHeight": 155,
+        "originalWidth": 209,
+        "originalHeight": 171,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1103,
-              73
+              1062,
+              63
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-city-cobblestone-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5614035087719298,
-        "scaleY": 0.4444444444444444,
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.735632183908046,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1286,
-          76,
-          1518,
-          224
+          1297,
+          59,
+          1500,
+          237
         ],
         "bounds": {
-          "x": 1288,
-          "y": 78,
-          "width": 228,
-          "height": 144
+          "x": 1299,
+          "y": 61,
+          "width": 199,
+          "height": 174
         },
-        "originalWidth": 228,
-        "originalHeight": 144,
+        "originalWidth": 199,
+        "originalHeight": 174,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1346,
-              80
+              1448,
+              63
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "over-city-weathered-city-masonry-wall-northwest",
-      "label": "Weathered City Masonry wall northwest",
+      "label": "Weathered City Masonry north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/over-city-weathered-city-masonry-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3764705882352941,
-          -0.0,
-          91.10588235294118,
-          -0.020322443949264787,
-          0.36560402028723615,
-          130.15019108849106
-        ],
-        "width": 80,
-        "height": 79,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.45390070921985815,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 91,
-          "y": 129
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          29,
-          249,
-          247,
-          478
+          30,
+          299,
+          322,
+          444
         ],
         "bounds": {
-          "x": 31,
-          "y": 251,
-          "width": 214,
-          "height": 225
+          "x": 32,
+          "y": 301,
+          "width": 288,
+          "height": 141
         },
-        "originalWidth": 214,
-        "originalHeight": 225,
+        "originalWidth": 288,
+        "originalHeight": 141,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              59,
-              253
+              57,
+              303
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.45794392523364646,
-          "y": 0.7760844444444321
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              13.0,
-              126.131
-            ],
-            [
-              183.0,
-              223.107
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "over-city-weathered-city-masonry-wall-northeast",
-      "label": "Weathered City Masonry wall northeast",
+      "label": "Weathered City Masonry west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/over-city-weathered-city-masonry-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3657142857142857,
-          0.0,
-          85.02857142857142,
-          -0.009722543130834092,
-          0.3704160955560667,
-          132.6182608844895
-        ],
-        "width": 78,
-        "height": 78,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5161290322580645,
+        "scaleY": 0.6368159203980099,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 85,
-          "y": 131
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          291,
+          397,
           267,
-          508,
-          477
+          463,
+          472
         ],
         "bounds": {
-          "x": 293,
+          "x": 399,
           "y": 269,
-          "width": 213,
-          "height": 206
+          "width": 62,
+          "height": 201
         },
-        "originalWidth": 213,
-        "originalHeight": 206,
+        "originalWidth": 62,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              473,
+              414,
               271
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5516431924882563,
-          "y": 0.7931796116504859
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              205.0,
-              122.497
-            ],
-            [
-              30.0,
-              204.293
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/over-city-weathered-city-masonry-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.735632183908046,
-        "scaleY": 0.5303867403314917,
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.7032967032967034,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          553,
-          280,
-          731,
-          465
+          557,
+          272,
+          744,
+          458
         ],
         "bounds": {
-          "x": 555,
-          "y": 282,
-          "width": 174,
-          "height": 181
+          "x": 559,
+          "y": 274,
+          "width": 183,
+          "height": 182
         },
-        "originalWidth": 174,
-        "originalHeight": 181,
+        "originalWidth": 183,
+        "originalHeight": 182,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              584,
-              284
+              577,
+              276
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/over-city-weathered-city-masonry-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5493562231759657,
-        "scaleY": 0.5161290322580645,
+        "scaleX": 0.7529411764705882,
+        "scaleY": 0.7272727272727273,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          779,
-          268,
-          1016,
-          458
+          807,
+          279,
+          981,
+          459
         ],
         "bounds": {
-          "x": 781,
-          "y": 270,
-          "width": 233,
-          "height": 186
+          "x": 809,
+          "y": 281,
+          "width": 170,
+          "height": 176
         },
-        "originalWidth": 233,
-        "originalHeight": 186,
+        "originalWidth": 170,
+        "originalHeight": 176,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              272
+              881,
+              283
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "over-city-weathered-city-masonry-endcap-northwest",
-      "label": "Weathered City Masonry endcap northwest",
+      "label": "Weathered City Masonry north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/over-city-weathered-city-masonry-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.2909090909090909,
-        "scaleY": 0.5026178010471204,
+        "scaleX": 0.37209302325581395,
+        "scaleY": 0.35555555555555557,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1094,
-          271,
-          1208,
-          466
+          1105,
+          328,
+          1195,
+          422
         ],
         "bounds": {
-          "x": 1096,
-          "y": 273,
-          "width": 110,
-          "height": 191
+          "x": 1107,
+          "y": 330,
+          "width": 86,
+          "height": 90
         },
-        "originalWidth": 110,
-        "originalHeight": 191,
+        "originalWidth": 86,
+        "originalHeight": 90,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1129,
-              275
+              1131,
+              332
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "over-city-weathered-city-masonry-endcap-northeast",
-      "label": "Weathered City Masonry endcap northeast",
+      "label": "Weathered City Masonry west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/over-city-weathered-city-masonry-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3764705882352941,
-        "scaleY": 0.5274725274725275,
+        "scaleX": 0.37209302325581395,
+        "scaleY": 0.35555555555555557,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
           1353,
-          271,
-          1442,
-          457
+          327,
+          1443,
+          421
         ],
         "bounds": {
           "x": 1355,
-          "y": 273,
-          "width": 85,
-          "height": 182
+          "y": 329,
+          "width": 86,
+          "height": 90
         },
-        "originalWidth": 85,
-        "originalHeight": 182,
+        "originalWidth": 86,
+        "originalHeight": 90,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1385,
-              275
+              1369,
+              331
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/over-city-weathered-city-masonry-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3878787878787879,
-          -0.0,
-          91.73333333333333,
-          0.03163423542112044,
-          0.4021436038609352,
-          115.37431648404822
-        ],
-        "width": 80,
-        "height": 93,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5714285714285714,
+        "scaleY": 0.46153846153846156,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 92,
-          "y": 116
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          35,
-          490,
-          247,
-          713
+          28,
+          500,
+          256,
+          712
         ],
         "bounds": {
-          "x": 37,
-          "y": 492,
-          "width": 208,
-          "height": 219
+          "x": 30,
+          "y": 502,
+          "width": 224,
+          "height": 208
         },
-        "originalWidth": 208,
-        "originalHeight": 219,
+        "originalWidth": 224,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              67,
-              494
+              140,
+              504
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4495192307692278,
-          "y": 0.8364748858447465
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              11.0,
-              149.891
-            ],
-            [
-              176.0,
-              216.485
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/over-city-weathered-city-masonry-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.378698224852071,
-          -0.0,
-          92.97041420118343,
-          0.017049316987516754,
-          0.3867534258083367,
-          116.75143835670207
-        ],
-        "width": 79,
-        "height": 92,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.4682926829268293,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 117
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          295,
-          499,
-          507,
-          734
+          284,
+          501,
+          514,
+          710
         ],
         "bounds": {
-          "x": 297,
-          "y": 501,
-          "width": 208,
-          "height": 231
+          "x": 286,
+          "y": 503,
+          "width": 226,
+          "height": 205
         },
-        "originalWidth": 208,
-        "originalHeight": 231,
+        "originalWidth": 226,
+        "originalHeight": 205,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              329,
-              503
+              387,
+              505
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.44471153846153616,
-          "y": 0.8246190476190544
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              152.842
-            ],
-            [
-              177.0,
-              228.132
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/over-city-city-cobblestone-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5739910313901345,
-        "scaleY": 0.572139303482587,
+        "scaleX": 0.7111111111111111,
+        "scaleY": 0.6124401913875598,
         "width": 128,
-        "height": 115,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 77
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          525,
-          508,
-          752,
-          713
+          554,
+          505,
+          738,
+          718
         ],
         "bounds": {
-          "x": 527,
-          "y": 510,
-          "width": 223,
-          "height": 201
+          "x": 556,
+          "y": 507,
+          "width": 180,
+          "height": 209
         },
-        "originalWidth": 223,
-        "originalHeight": 201,
+        "originalWidth": 180,
+        "originalHeight": 209,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              659,
-              512
+              566,
+              509
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/over-city-city-cobblestone-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5541125541125541,
-        "scaleY": 0.5567567567567567,
+        "scaleX": 0.735632183908046,
+        "scaleY": 0.6009389671361502,
         "width": 128,
-        "height": 103,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 89
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          778,
-          524,
-          1013,
-          713
+          801,
+          503,
+          979,
+          720
         ],
         "bounds": {
-          "x": 780,
-          "y": 526,
-          "width": 231,
-          "height": 185
+          "x": 803,
+          "y": 505,
+          "width": 174,
+          "height": 213
         },
-        "originalWidth": 231,
-        "originalHeight": 185,
+        "originalWidth": 174,
+        "originalHeight": 213,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              528
+              823,
+              507
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-ruined-town-house.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.38247011952191234,
-        "scaleY": 0.38076923076923075,
+        "scaleX": 0.36923076923076925,
+        "scaleY": 0.37065637065637064,
         "width": 96,
-        "height": 99,
+        "height": 96,
         "offset": {
           "x": 80,
-          "y": 93
+          "y": 96
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1020,
-          478,
-          1275,
-          742
+          1006,
+          477,
+          1270,
+          740
         ],
         "bounds": {
-          "x": 1022,
-          "y": 480,
-          "width": 251,
-          "height": 260
+          "x": 1008,
+          "y": 479,
+          "width": 260,
+          "height": 259
         },
-        "originalWidth": 251,
-        "originalHeight": 260,
+        "originalWidth": 260,
+        "originalHeight": 259,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1204,
-              482
+              1209,
+              481
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-damaged-shop-front.png",
       "width": 256,
       "height": 256,
@@ -1800,45 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
         "scaleX": 0.40336134453781514,
-        "scaleY": 0.40454545454545454,
+        "scaleY": 0.4051724137931034,
         "width": 96,
-        "height": 89,
+        "height": 94,
         "offset": {
           "x": 80,
-          "y": 103
+          "y": 98
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1277,
-          502,
-          1519,
-          726
+          1279,
+          488,
+          1521,
+          724
         ],
         "bounds": {
-          "x": 1279,
-          "y": 504,
+          "x": 1281,
+          "y": 490,
           "width": 238,
-          "height": 220
+          "height": 232
         },
         "originalWidth": 238,
-        "originalHeight": 220,
+        "originalHeight": 232,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1410,
-              506
+              1346,
+              492
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-street-lamp.png",
       "width": 256,
       "height": 256,
@@ -1875,45 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.782608695652174,
-        "scaleY": 0.7829787234042553,
-        "width": 90,
-        "height": 184,
+        "scaleX": 0.7619047619047619,
+        "scaleY": 0.7625,
+        "width": 96,
+        "height": 183,
         "offset": {
-          "x": 83,
-          "y": 8
+          "x": 80,
+          "y": 9
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          80,
-          729,
-          199,
-          968
+          72,
+          725,
+          202,
+          969
         ],
         "bounds": {
-          "x": 82,
-          "y": 731,
-          "width": 115,
-          "height": 235
+          "x": 74,
+          "y": 727,
+          "width": 126,
+          "height": 240
         },
-        "originalWidth": 115,
-        "originalHeight": 235,
+        "originalWidth": 126,
+        "originalHeight": 240,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              111,
-              733
+              109,
+              729
             ]
           ],
           "fringePixels": 2
@@ -1922,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1941,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-street-barricade.png",
       "width": 256,
       "height": 256,
@@ -1950,45 +2034,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3983402489626556,
-        "scaleY": 0.3987730061349693,
+        "scaleX": 0.3650190114068441,
+        "scaleY": 0.36464088397790057,
         "width": 96,
-        "height": 65,
+        "height": 66,
         "offset": {
           "x": 80,
-          "y": 127
+          "y": 126
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          261,
-          799,
-          506,
-          966
+          236,
+          793,
+          503,
+          978
         ],
         "bounds": {
-          "x": 263,
-          "y": 801,
-          "width": 241,
-          "height": 163
+          "x": 238,
+          "y": 795,
+          "width": 263,
+          "height": 181
         },
-        "originalWidth": 241,
-        "originalHeight": 163,
+        "originalWidth": 263,
+        "originalHeight": 181,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              453,
-              803
+              457,
+              797
             ]
           ],
           "fringePixels": 2
@@ -1997,6 +2090,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2016,6 +2118,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-public-fountain.png",
       "width": 256,
       "height": 256,
@@ -2025,45 +2128,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41201716738197425,
-        "scaleY": 0.41013824884792627,
+        "scaleX": 0.39344262295081966,
+        "scaleY": 0.3922413793103448,
         "width": 96,
-        "height": 89,
+        "height": 91,
         "offset": {
           "x": 80,
-          "y": 103
+          "y": 101
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          523,
-          749,
-          760,
-          970
+          514,
+          742,
+          762,
+          978
         ],
         "bounds": {
-          "x": 525,
-          "y": 751,
-          "width": 233,
-          "height": 217
+          "x": 516,
+          "y": 744,
+          "width": 244,
+          "height": 232
         },
-        "originalWidth": 233,
-        "originalHeight": 217,
+        "originalWidth": 244,
+        "originalHeight": 232,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              638,
-              753
+              637,
+              746
+            ],
+            [
+              607,
+              827
             ]
           ],
           "fringePixels": 2
@@ -2072,6 +2188,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2091,6 +2216,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-broken-tram-wreck.png",
       "width": 256,
       "height": 256,
@@ -2100,49 +2226,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.34657039711191334,
-        "scaleY": 0.345,
+        "scaleX": 0.34285714285714286,
+        "scaleY": 0.34517766497461927,
         "width": 96,
-        "height": 69,
+        "height": 68,
         "offset": {
           "x": 80,
-          "y": 123
+          "y": 124
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          770,
-          766,
+          767,
+          780,
           1051,
-          970
+          981
         ],
         "bounds": {
-          "x": 772,
-          "y": 768,
-          "width": 277,
-          "height": 200
+          "x": 769,
+          "y": 782,
+          "width": 280,
+          "height": 197
         },
-        "originalWidth": 277,
-        "originalHeight": 200,
+        "originalWidth": 280,
+        "originalHeight": 197,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              878,
-              770
-            ],
-            [
-              1014,
-              891
+              855,
+              784
             ]
           ],
           "fringePixels": 2
@@ -2151,6 +2282,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2170,6 +2310,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-roof-access-ladder.png",
       "width": 256,
       "height": 256,
@@ -2179,45 +2320,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.5344827586206896,
+        "scaleX": 0.5549132947976878,
+        "scaleY": 0.5545454545454546,
         "width": 96,
-        "height": 124,
+        "height": 122,
         "offset": {
           "x": 80,
-          "y": 68
+          "y": 70
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1070,
-          747,
-          1254,
-          983
+          1065,
+          755,
+          1242,
+          979
         ],
         "bounds": {
-          "x": 1072,
-          "y": 749,
-          "width": 180,
-          "height": 232
+          "x": 1067,
+          "y": 757,
+          "width": 173,
+          "height": 220
         },
-        "originalWidth": 180,
-        "originalHeight": 232,
+        "originalWidth": 173,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1183,
-              751
+              1119,
+              759
             ]
           ],
           "fringePixels": 2
@@ -2226,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2245,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-urban-stairwell-entrance.png",
       "width": 256,
       "height": 256,
@@ -2254,53 +2414,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4,
-        "scaleY": 0.40096618357487923,
+        "scaleX": 0.4897959183673469,
+        "scaleY": 0.49038461538461536,
         "width": 96,
-        "height": 83,
+        "height": 102,
         "offset": {
           "x": 80,
-          "y": 109
+          "y": 90
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/over-city.png",
-        "sha256": "5b44f1ff0edecd9af415f2410677b06dd13dbf290d4d6dfb53dd33bf2ebe3837",
+        "sha256": "ff4b48142f3f42373b446a61c4bd7b2243d4cde882deeaafaa6996e84183e939",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1276,
-          757,
-          1520,
-          968
+          1297,
+          761,
+          1497,
+          973
         ],
         "bounds": {
-          "x": 1278,
-          "y": 759,
-          "width": 240,
-          "height": 207
+          "x": 1299,
+          "y": 763,
+          "width": 196,
+          "height": 208
         },
-        "originalWidth": 240,
-        "originalHeight": 207,
+        "originalWidth": 196,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1396,
-              761
-            ],
-            [
-              1448,
-              809
-            ],
-            [
-              1433,
-              810
+              1319,
+              765
             ]
           ],
           "fringePixels": 2
@@ -2309,6 +2470,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

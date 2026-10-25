@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-jungle-jungle-earth-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5378151260504201,
-          0.0,
-          62.386554621848745,
-          0.0,
-          0.41025641025641024,
-          159.5897435897436
-        ],
-        "width": 132,
-        "height": 68,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 62,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          15,
-          44,
-          263,
-          214
+          42,
+          40,
+          242,
+          238
         ],
         "bounds": {
-          "x": 17,
-          "y": 46,
-          "width": 244,
-          "height": 166
+          "x": 44,
+          "y": 42,
+          "width": 196,
+          "height": 194
         },
-        "originalWidth": 244,
-        "originalHeight": 166,
+        "originalWidth": 196,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              139,
-              48
+              64,
+              44
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000017,
-          "y": 0.4759036144578327
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              122,
-              1
-            ],
-            [
-              241,
-              79
-            ],
-            [
-              122,
-              157
-            ],
-            [
-              3,
-              79
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-jungle-worn-jungle-earth-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5378151260504201,
-          0.0,
-          62.92436974789916,
-          0.0,
-          0.4155844155844156,
-          159.58441558441558
-        ],
-        "width": 131,
-        "height": 68,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          269,
-          45,
-          516,
-          214
+          293,
+          39,
+          492,
+          236
         ],
         "bounds": {
-          "x": 271,
-          "y": 47,
-          "width": 243,
-          "height": 165
+          "x": 295,
+          "y": 41,
+          "width": 195,
+          "height": 193
         },
-        "originalWidth": 243,
-        "originalHeight": 165,
+        "originalWidth": 195,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              389,
-              49
+              320,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49794238683127745,
-          "y": 0.4727272727272686
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              121,
-              1
-            ],
-            [
-              240,
-              78
-            ],
-            [
-              121,
-              155
-            ],
-            [
-              2,
-              78
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-jungle-cracked-jungle-earth-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5334744747542457,
-          -0.010355836447261011,
-          64.21100660743936,
-          -0.006088055538999038,
-          0.44669316091708006,
-          159.89331671721013
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          520,
-          43,
-          767,
-          214
+          543,
+          38,
+          744,
+          236
         ],
         "bounds": {
-          "x": 522,
-          "y": 45,
-          "width": 243,
-          "height": 167
+          "x": 545,
+          "y": 40,
+          "width": 197,
+          "height": 194
         },
-        "originalWidth": 243,
-        "originalHeight": 167,
+        "originalWidth": 197,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              640,
-              47
+              691,
+              42
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49794238683127817,
-          "y": 0.4402724550898392
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              119.609,
-              1.869
-            ],
-            [
-              241.0,
-              75.161
-            ],
-            [
-              122.391,
-              145.183
-            ],
-            [
-              1.0,
-              71.89
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-jungle-wet-jungle-earth-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5305943923335992,
-          0.028060980208673623,
-          61.52256286176885,
-          -0.00842986483124359,
-          0.4497669746136168,
-          160.8040469331131
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6530612244897959,
+        "width": 128,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          772,
-          43,
-          1020,
-          214
+          794,
+          38,
+          996,
+          238
         ],
         "bounds": {
-          "x": 774,
-          "y": 45,
-          "width": 244,
-          "height": 167
+          "x": 796,
+          "y": 40,
+          "width": 198,
+          "height": 196
         },
-        "originalWidth": 244,
-        "originalHeight": 167,
+        "originalWidth": 198,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
-              47
+              968,
+              42
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49795081967213417,
-          "y": 0.4289670658682552
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              125.259,
-              0.56
-            ],
-            [
-              242.0,
-              73.896
-            ],
-            [
-              117.741,
-              142.715
-            ],
-            [
-              1.0,
-              69.379
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-jungle-jungle-earth-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5245901639344263,
-        "scaleY": 0.38323353293413176,
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6530612244897959,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1025,
-          43,
-          1273,
-          214
+          1045,
+          37,
+          1248,
+          237
         ],
         "bounds": {
-          "x": 1027,
-          "y": 45,
-          "width": 244,
-          "height": 167
+          "x": 1047,
+          "y": 39,
+          "width": 199,
+          "height": 196
         },
-        "originalWidth": 244,
-        "originalHeight": 167,
+        "originalWidth": 199,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1146,
-              47
+              1111,
+              41
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-jungle-jungle-earth-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5311203319502075,
-        "scaleY": 0.38323353293413176,
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6213592233009708,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1278,
-          43,
-          1523,
-          214
+          1295,
+          35,
+          1498,
+          245
         ],
         "bounds": {
-          "x": 1280,
-          "y": 45,
-          "width": 241,
-          "height": 167
+          "x": 1297,
+          "y": 37,
+          "width": 199,
+          "height": 206
         },
-        "originalWidth": 241,
-        "originalHeight": 167,
+        "originalWidth": 199,
+        "originalHeight": 206,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1399,
-              47
+              1362,
+              39
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "hunting-jungle-vine-covered-ruin-stone-wall-northwest",
-      "label": "Vine Covered Ruin Stone wall northwest",
+      "label": "Vine Covered Ruin Stone north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3657142857142857,
-          -0.0,
-          87.22285714285714,
-          0.027140359039084183,
-          0.3780687195560404,
-          122.96721028857259
-        ],
-        "width": 81,
-        "height": 85,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.48854961832061067,
+        "scaleY": 0.39263803680981596,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 87,
-          "y": 124
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          32,
-          245,
-          258,
-          462
+          21,
+          304,
+          287,
+          471
         ],
         "bounds": {
-          "x": 34,
-          "y": 247,
-          "width": 222,
-          "height": 213
+          "x": 23,
+          "y": 306,
+          "width": 262,
+          "height": 163
         },
-        "originalWidth": 222,
-        "originalHeight": 213,
+        "originalWidth": 262,
+        "originalHeight": 163,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              80,
-              249
+              205,
+              308
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5022522522522463,
-          "y": 0.8196666666666723
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              24.0,
-              138.55
-            ],
-            [
-              199.0,
-              210.628
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "hunting-jungle-vine-covered-ruin-stone-wall-northeast",
-      "label": "Vine Covered Ruin Stone wall northeast",
+      "label": "Vine Covered Ruin Stone west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.35555555555555557,
-          0.0,
-          85.33333333333333,
-          -0.015191482317487055,
-          0.36275389437815875,
-          132.99531660708567
-        ],
-        "width": 78,
-        "height": 79,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.37209302325581395,
+        "scaleY": 0.5898617511520737,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 85,
-          "y": 130
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          296,
-          246,
-          518,
-          461
+          353,
+          268,
+          443,
+          489
         ],
         "bounds": {
-          "x": 298,
-          "y": 248,
-          "width": 218,
-          "height": 211
+          "x": 355,
+          "y": 270,
+          "width": 86,
+          "height": 217
         },
-        "originalWidth": 218,
-        "originalHeight": 211,
+        "originalWidth": 86,
+        "originalHeight": 217,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              476,
-              250
+              382,
+              272
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5504587155963324,
-          "y": 0.7947061611374238
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              210.0,
-              127.345
-            ],
-            [
-              30.0,
-              208.021
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,75 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.7710843373493976,
-        "scaleY": 0.45714285714285713,
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.5844748858447488,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          565,
-          243,
-          735,
-          457
+          540,
+          267,
+          749,
+          490
         ],
         "bounds": {
-          "x": 567,
-          "y": 245,
-          "width": 166,
-          "height": 210
+          "x": 542,
+          "y": 269,
+          "width": 205,
+          "height": 219
         },
-        "originalWidth": 166,
-        "originalHeight": 210,
+        "originalWidth": 205,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              688,
-              247
+              599,
+              271
+            ],
+            [
+              561,
+              408
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1056,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1068,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5898617511520737,
-        "scaleY": 0.5454545454545454,
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.6564102564102564,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          784,
-          256,
-          1005,
-          436
+          801,
+          293,
+          1012,
+          492
         ],
         "bounds": {
-          "x": 786,
-          "y": 258,
-          "width": 217,
-          "height": 176
+          "x": 803,
+          "y": 295,
+          "width": 207,
+          "height": 195
         },
-        "originalWidth": 217,
-        "originalHeight": 176,
+        "originalWidth": 207,
+        "originalHeight": 195,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              892,
-              260
+              854,
+              297
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "hunting-jungle-vine-covered-ruin-stone-endcap-northwest",
-      "label": "Vine Covered Ruin Stone endcap northwest",
+      "label": "Vine Covered Ruin Stone north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1152,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1164,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.17486338797814208,
-        "scaleY": 0.463768115942029,
+        "scaleX": 0.2831858407079646,
+        "scaleY": 0.24806201550387597,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1056,
-          239,
-          1243,
-          450
+          1091,
+          330,
+          1208,
+          463
         ],
         "bounds": {
-          "x": 1058,
-          "y": 241,
-          "width": 183,
-          "height": 207
+          "x": 1093,
+          "y": 332,
+          "width": 113,
+          "height": 129
         },
-        "originalWidth": 183,
-        "originalHeight": 207,
+        "originalWidth": 113,
+        "originalHeight": 129,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1097,
-              243
+              1167,
+              334
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "hunting-jungle-vine-covered-ruin-stone-endcap-northeast",
-      "label": "Vine Covered Ruin Stone endcap northeast",
+      "label": "Vine Covered Ruin Stone west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1248,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1260,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.20382165605095542,
-        "scaleY": 0.4444444444444444,
+        "scaleX": 0.2689075630252101,
+        "scaleY": 0.2644628099173554,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1318,
-          239,
-          1479,
-          459
+          1334,
+          332,
+          1457,
+          457
         ],
         "bounds": {
-          "x": 1320,
-          "y": 241,
-          "width": 157,
-          "height": 216
+          "x": 1336,
+          "y": 334,
+          "width": 119,
+          "height": 121
         },
-        "originalWidth": 157,
-        "originalHeight": 216,
+        "originalWidth": 119,
+        "originalHeight": 121,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1430,
-              243
+              1419,
+              336
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1333,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1346,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1356,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.38095238095238093,
-          0.0,
-          83.80952380952381,
-          -0.11861346797857474,
-          0.4198114395854873,
-          125.51598391170505
-        ],
-        "width": 84,
-        "height": 101,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5565217391304348,
+        "scaleY": 0.4266666666666667,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 84,
-          "y": 110
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          24,
-          484,
-          249,
-          707
+          25,
+          506,
+          259,
+          735
         ],
         "bounds": {
-          "x": 26,
-          "y": 486,
-          "width": 221,
-          "height": 219
+          "x": 27,
+          "y": 508,
+          "width": 230,
+          "height": 225
         },
-        "originalWidth": 221,
-        "originalHeight": 219,
+        "originalWidth": 230,
+        "originalHeight": 225,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              153,
-              488
+              156,
+              510
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5248868778280561,
-          "y": 0.8727899543379025
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              200.0,
-              176.762
-            ],
-            [
-              32.0,
-              205.52
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1431,7 +1439,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1452,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-jungle-vine-covered-ruin-stone-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1462,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.378698224852071,
-          0.0,
-          87.28994082840237,
-          -0.06193649429630959,
-          0.403771540136205,
-          121.54083725738914
-        ],
-        "width": 76,
-        "height": 93,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.44036697247706424,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 87,
-          "y": 115
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          293,
-          489,
-          497,
-          713
+          281,
+          508,
+          511,
+          730
         ],
         "bounds": {
-          "x": 295,
-          "y": 491,
-          "width": 200,
-          "height": 220
+          "x": 283,
+          "y": 510,
+          "width": 226,
+          "height": 218
         },
-        "originalWidth": 200,
-        "originalHeight": 220,
+        "originalWidth": 226,
+        "originalHeight": 218,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              393,
-              493
+              388,
+              512
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5374999999999972,
-          "y": 0.868147727272721
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              192.0,
-              164.328
-            ],
-            [
-              23.0,
-              217.657
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1566,6 +1556,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/hunting-jungle-jungle-earth-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1567,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5688888888888889,
-        "scaleY": 0.5666666666666667,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6305418719211823,
         "width": 128,
-        "height": 119,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 73
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          525,
-          498,
-          754,
-          712
+          544,
+          518,
+          744,
+          725
         ],
         "bounds": {
-          "x": 527,
-          "y": 500,
-          "width": 225,
-          "height": 210
+          "x": 546,
+          "y": 520,
+          "width": 196,
+          "height": 203
         },
-        "originalWidth": 225,
-        "originalHeight": 210,
+        "originalWidth": 196,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              651,
-              502
+              697,
+              522
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1651,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/hunting-jungle-jungle-earth-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,36 +1662,45 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5688888888888889,
-        "scaleY": 0.5678391959798995,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6432160804020101,
         "width": 128,
-        "height": 113,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 79
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          781,
-          509,
-          1010,
-          712
+          793,
+          521,
+          993,
+          724
         ],
         "bounds": {
-          "x": 783,
-          "y": 511,
-          "width": 225,
+          "x": 795,
+          "y": 523,
+          "width": 196,
           "height": 199
         },
-        "originalWidth": 225,
+        "originalWidth": 196,
         "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -1687,16 +1708,25 @@
           "connectivity": 8,
           "seeds": [
             [
-              881,
-              513
+              851,
+              525
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1746,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-dense-jungle-tree.png",
       "width": 256,
       "height": 256,
@@ -1725,57 +1756,78 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.40336134453781514,
-        "scaleY": 0.40239043824701193,
+        "scaleX": 0.384,
+        "scaleY": 0.38524590163934425,
         "width": 96,
-        "height": 101,
+        "height": 94,
         "offset": {
           "x": 80,
-          "y": 91
+          "y": 98
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1025,
-          469,
-          1267,
-          724
+          1016,
+          492,
+          1270,
+          740
         ],
         "bounds": {
-          "x": 1027,
-          "y": 471,
-          "width": 238,
-          "height": 251
+          "x": 1018,
+          "y": 494,
+          "width": 250,
+          "height": 244
         },
-        "originalWidth": 238,
-        "originalHeight": 251,
+        "originalWidth": 250,
+        "originalHeight": 244,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1101,
-              473
+              1103,
+              496
             ],
             [
-              1066,
-              525
+              1203,
+              633
             ],
             [
-              1094,
-              607
+              1202,
+              635
             ],
             [
-              1191,
-              615
+              1202,
+              639
+            ],
+            [
+              1067,
+              647
+            ],
+            [
+              1069,
+              647
+            ],
+            [
+              1102,
+              653
             ]
           ],
           "fringePixels": 2
@@ -1784,6 +1836,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1803,6 +1864,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-overgrown-urban-wall.png",
       "width": 256,
       "height": 256,
@@ -1812,45 +1874,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.39662447257383965,
+        "scaleX": 0.39183673469387753,
+        "scaleY": 0.391304347826087,
         "width": 96,
-        "height": 94,
+        "height": 90,
         "offset": {
           "x": 80,
-          "y": 98
+          "y": 102
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1278,
-          488,
-          1524,
-          729
+          1267,
+          503,
+          1516,
+          737
         ],
         "bounds": {
-          "x": 1280,
-          "y": 490,
-          "width": 242,
-          "height": 237
+          "x": 1269,
+          "y": 505,
+          "width": 245,
+          "height": 230
         },
-        "originalWidth": 242,
-        "originalHeight": 237,
+        "originalWidth": 245,
+        "originalHeight": 230,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1374,
-              492
+              1360,
+              507
             ]
           ],
           "fringePixels": 2
@@ -1859,6 +1930,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1878,6 +1958,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-bramble-thicket.png",
       "width": 256,
       "height": 256,
@@ -1887,65 +1968,70 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.39814814814814814,
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.4075829383886256,
         "width": 96,
         "height": 86,
         "offset": {
           "x": 80,
           "y": 106
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          15,
-          763,
+          22,
+          779,
           261,
-          983
+          994
         ],
         "bounds": {
-          "x": 17,
-          "y": 765,
-          "width": 242,
-          "height": 216
+          "x": 24,
+          "y": 781,
+          "width": 235,
+          "height": 211
         },
-        "originalWidth": 242,
-        "originalHeight": 216,
+        "originalWidth": 235,
+        "originalHeight": 211,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              149,
-              767
+              153,
+              783
             ],
             [
-              188,
-              793
+              79,
+              818
             ],
             [
-              187,
-              795
+              189,
+              823
             ],
             [
-              119,
-              799
-            ],
-            [
-              185,
-              801
+              217,
+              847
             ],
             [
               219,
-              831
+              849
             ]
           ],
           "fringePixels": 2
@@ -1954,6 +2040,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1973,6 +2068,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-dryad-tree-dwelling.png",
       "width": 256,
       "height": 256,
@@ -1982,53 +2078,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41025641025641024,
-        "scaleY": 0.41064638783269963,
+        "scaleX": 0.3779527559055118,
+        "scaleY": 0.37786259541984735,
         "width": 96,
-        "height": 108,
+        "height": 99,
         "offset": {
           "x": 80,
-          "y": 84
+          "y": 93
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          272,
-          720,
-          510,
-          987
+          265,
+          730,
+          523,
+          996
         ],
         "bounds": {
-          "x": 274,
-          "y": 722,
-          "width": 234,
-          "height": 263
+          "x": 267,
+          "y": 732,
+          "width": 254,
+          "height": 262
         },
-        "originalWidth": 234,
-        "originalHeight": 263,
+        "originalWidth": 254,
+        "originalHeight": 262,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              369,
-              724
-            ],
-            [
-              365,
-              797
-            ],
-            [
-              307,
-              827
+              384,
+              734
             ]
           ],
           "fringePixels": 2
@@ -2037,6 +2134,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2056,6 +2162,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-bugbear-timber-shelter.png",
       "width": 256,
       "height": 256,
@@ -2065,36 +2172,45 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.39669421487603307,
+        "scaleX": 0.3794466403162055,
+        "scaleY": 0.38016528925619836,
         "width": 96,
-        "height": 96,
+        "height": 92,
         "offset": {
           "x": 80,
-          "y": 96
+          "y": 100
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          517,
-          739,
+          506,
+          748,
           763,
-          985
+          994
         ],
         "bounds": {
-          "x": 519,
-          "y": 741,
-          "width": 242,
+          "x": 508,
+          "y": 750,
+          "width": 253,
           "height": 242
         },
-        "originalWidth": 242,
+        "originalWidth": 253,
         "originalHeight": 242,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -2102,12 +2218,8 @@
           "connectivity": 8,
           "seeds": [
             [
-              653,
-              743
-            ],
-            [
-              575,
-              827
+              642,
+              752
             ]
           ],
           "fringePixels": 2
@@ -2116,6 +2228,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2135,6 +2256,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-hunter-camp-tent.png",
       "width": 256,
       "height": 256,
@@ -2144,49 +2266,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3983402489626556,
-        "scaleY": 0.39603960396039606,
+        "scaleX": 0.375,
+        "scaleY": 0.37681159420289856,
         "width": 96,
-        "height": 80,
+        "height": 78,
         "offset": {
           "x": 80,
-          "y": 112
+          "y": 114
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          772,
-          771,
-          1017,
-          977
+          765,
+          777,
+          1025,
+          988
         ],
         "bounds": {
-          "x": 774,
-          "y": 773,
-          "width": 241,
-          "height": 202
+          "x": 767,
+          "y": 779,
+          "width": 256,
+          "height": 207
         },
-        "originalWidth": 241,
-        "originalHeight": 202,
+        "originalWidth": 256,
+        "originalHeight": 207,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              901,
-              775
-            ],
-            [
-              969,
-              836
+              966,
+              781
             ]
           ],
           "fringePixels": 2
@@ -2195,6 +2322,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2214,6 +2350,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-all-tree-landmark.png",
       "width": 256,
       "height": 256,
@@ -2223,57 +2360,62 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39344262295081966,
-        "scaleY": 0.3953488372093023,
+        "scaleX": 0.37065637065637064,
+        "scaleY": 0.37254901960784315,
         "width": 96,
-        "height": 102,
+        "height": 95,
         "offset": {
           "x": 80,
-          "y": 90
+          "y": 97
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1026,
-          728,
-          1274,
-          990
+          1016,
+          737,
+          1279,
+          996
         ],
         "bounds": {
-          "x": 1028,
-          "y": 730,
-          "width": 244,
-          "height": 258
+          "x": 1018,
+          "y": 739,
+          "width": 259,
+          "height": 255
         },
-        "originalWidth": 244,
-        "originalHeight": 258,
+        "originalWidth": 259,
+        "originalHeight": 255,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1147,
-              732
+              1139,
+              741
             ],
             [
-              1104,
-              853
+              1213,
+              859
             ],
             [
-              1104,
-              855
-            ],
-            [
-              1066,
-              863
+              1083,
+              865
             ]
           ],
           "fringePixels": 2
@@ -2282,6 +2424,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2301,6 +2452,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-jungle-hidden-jungle-stairwell.png",
       "width": 256,
       "height": 256,
@@ -2310,45 +2462,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.401673640167364,
-        "scaleY": 0.4024896265560166,
+        "scaleX": 0.44651162790697674,
+        "scaleY": 0.44545454545454544,
         "width": 96,
-        "height": 97,
+        "height": 98,
         "offset": {
           "x": 80,
-          "y": 95
+          "y": 94
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-jungle.png",
-        "sha256": "e9376e5102bd2969c8ae9a08acf93ae83e14c41021d4fb96d9ce85bd577ef8bc",
+        "sha256": "e4f6f26c90adf1219ad5e93efb3c149dd8e42a8af68a01e1307b82002e2ec8e9",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1280,
-          739,
-          1523,
-          984
+          1289,
+          764,
+          1508,
+          988
         ],
         "bounds": {
-          "x": 1282,
-          "y": 741,
-          "width": 239,
-          "height": 241
+          "x": 1291,
+          "y": 766,
+          "width": 215,
+          "height": 220
         },
-        "originalWidth": 239,
-        "originalHeight": 241,
+        "originalWidth": 215,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1415,
-              743
+              1361,
+              768
             ]
           ],
           "fringePixels": 2
@@ -2357,6 +2518,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

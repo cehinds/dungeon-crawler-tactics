@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517255929233617,
-          -0.007338222171887105,
-          63.931621086872326,
-          -0.00010082384107131087,
-          0.5085028506206098,
-          158.50654356201338
-        ],
-        "width": 129,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 158
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          5,
-          77,
-          244,
-          220
+          38,
+          47,
+          238,
+          241
         ],
         "bounds": {
-          "x": 7,
-          "y": 79,
-          "width": 235,
-          "height": 139
+          "x": 40,
+          "y": 49,
+          "width": 196,
+          "height": 190
         },
-        "originalWidth": 235,
-        "originalHeight": 139,
+        "originalWidth": 196,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              122,
-              81
+              57,
+              51
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978723404255332,
-          "y": 0.4740287769784401
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.163,
-              2.96
-            ],
-            [
-              233.0,
-              65.913
-            ],
-            [
-              117.837,
-              128.82
-            ],
-            [
-              1.0,
-              65.867
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-frosted-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517246905921168,
-          0.00037600402081708735,
-          63.42319734523547,
-          0.0007454498319686368,
-          0.5071682141252986,
-          158.17316334086712
-        ],
-        "width": 130,
-        "height": 72,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 158
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          263,
-          78,
-          502,
-          223
+          288,
+          47,
+          489,
+          241
         ],
         "bounds": {
-          "x": 265,
-          "y": 80,
-          "width": 235,
-          "height": 141
+          "x": 290,
+          "y": 49,
+          "width": 197,
+          "height": 190
         },
-        "originalWidth": 235,
-        "originalHeight": 141,
+        "originalWidth": 197,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              382,
-              82
+              297,
+              51
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042553286,
-          "y": 0.47181205673756543
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.043,
-              3.43
-            ],
-            [
-              233.0,
-              66.355
-            ],
-            [
-              116.957,
-              129.621
-            ],
-            [
-              1.0,
-              66.696
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-cracked-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517194170799467,
-          -0.003067892023413663,
-          63.65070316651691,
-          0.0007778675087774598,
-          0.5055049356761093,
-          158.64550097164587
-        ],
-        "width": 130,
-        "height": 71,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          520,
-          80,
-          759,
-          224
+          540,
+          47,
+          740,
+          241
         ],
         "bounds": {
-          "x": 522,
-          "y": 82,
-          "width": 235,
-          "height": 140
+          "x": 542,
+          "y": 49,
+          "width": 196,
+          "height": 190
         },
-        "originalWidth": 235,
-        "originalHeight": 140,
+        "originalWidth": 196,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              636,
-              84
+              549,
+              51
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042553563,
-          "y": 0.47001785714284827
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.648,
-              2.5
-            ],
-            [
-              233.0,
-              65.624
-            ],
-            [
-              117.352,
-              129.105
-            ],
-            [
-              1.0,
-              65.981
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-shattered-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5515975123834679,
-          -0.016559823582549895,
-          64.54161580124214,
-          0.003937952685716302,
-          0.5149971945243413,
-          157.99800725359535
-        ],
-        "width": 130,
-        "height": 73,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 158
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          777,
-          80,
-          1016,
-          224
+          794,
+          47,
+          994,
+          241
         ],
         "bounds": {
-          "x": 779,
-          "y": 82,
-          "width": 235,
-          "height": 140
+          "x": 796,
+          "y": 49,
+          "width": 196,
+          "height": 190
         },
-        "originalWidth": 235,
-        "originalHeight": 140,
+        "originalWidth": 196,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
-              84
+              802,
+              51
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042553585,
-          "y": 0.4652071428571645
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.135,
-              3.007
-            ],
-            [
-              233.0,
-              64.242
-            ],
-            [
-              118.865,
-              127.25
-            ],
-            [
-              1.0,
-              66.016
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-glass-maze-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.3764705882352941,
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.6772486772486772,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1040,
-          57,
-          1284,
-          231
+          1043,
+          48,
+          1250,
+          241
         ],
         "bounds": {
-          "x": 1042,
-          "y": 59,
-          "width": 240,
-          "height": 170
+          "x": 1045,
+          "y": 50,
+          "width": 203,
+          "height": 189
         },
-        "originalWidth": 240,
-        "originalHeight": 170,
+        "originalWidth": 203,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1218,
-              61
+              1057,
+              52
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-glass-maze-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.39263803680981596,
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6701570680628273,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1293,
-          57,
-          1524,
-          224
+          1301,
+          46,
+          1502,
+          241
         ],
         "bounds": {
-          "x": 1295,
-          "y": 59,
-          "width": 227,
-          "height": 163
+          "x": 1303,
+          "y": 48,
+          "width": 197,
+          "height": 191
         },
-        "originalWidth": 227,
-        "originalHeight": 163,
+        "originalWidth": 197,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1406,
-              61
+              1315,
+              50
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-wall-northwest",
-      "label": "Glass maze wall northwest",
+      "label": "Glass maze north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/great-race-transition-glass-maze-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.37209302325581395,
-          -0.0,
-          93.3953488372093,
-          -0.018661288861496813,
-          0.36216189592965975,
-          142.54844289816094
-        ],
-        "width": 74,
-        "height": 66,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.48120300751879697,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 143
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          28,
-          282,
-          229,
-          478
+          34,
+          307,
+          275,
+          444
         ],
         "bounds": {
-          "x": 30,
-          "y": 284,
-          "width": 197,
-          "height": 192
+          "x": 36,
+          "y": 309,
+          "width": 237,
+          "height": 133
         },
-        "originalWidth": 197,
-        "originalHeight": 192,
+        "originalWidth": 237,
+        "originalHeight": 133,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              55,
-              286
+              46,
+              311
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4720812182741108,
-          "y": 0.7361328124999961
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              92.727
-            ],
-            [
-              179.0,
-              189.948
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-wall-northeast",
-      "label": "Glass maze wall northeast",
+      "label": "Glass maze west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/great-race-transition-glass-maze-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3742690058479532,
-          0.0,
-          90.01169590643275,
-          0.021499490827964124,
-          0.3627236793678321,
-          138.6198984237112
-        ],
-        "width": 73,
-        "height": 67,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6153846153846154,
+        "scaleY": 0.6808510638297872,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 90,
-          "y": 142
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          282,
-          282,
-          480,
-          478
+          367,
+          270,
+          423,
+          462
         ],
         "bounds": {
-          "x": 284,
-          "y": 284,
-          "width": 194,
-          "height": 192
+          "x": 369,
+          "y": 272,
+          "width": 52,
+          "height": 188
         },
-        "originalWidth": 194,
-        "originalHeight": 192,
+        "originalWidth": 52,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              448,
-              286
+              378,
+              274
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5231958762886648,
-          "y": 0.7351484374999799
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              187.0,
-              91.97
-            ],
-            [
-              16.0,
-              190.327
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6368159203980099,
-        "scaleY": 0.6274509803921569,
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.7441860465116279,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          537,
-          308,
-          742,
-          465
+          535,
+          286,
+          741,
+          462
         ],
         "bounds": {
-          "x": 539,
-          "y": 310,
-          "width": 201,
-          "height": 153
+          "x": 537,
+          "y": 288,
+          "width": 202,
+          "height": 172
         },
-        "originalWidth": 201,
-        "originalHeight": 153,
+        "originalWidth": 202,
+        "originalHeight": 172,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              557,
-              312
+              546,
+              290
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5289256198347108,
-        "scaleY": 0.6233766233766234,
+        "scaleX": 0.64,
+        "scaleY": 0.7441860465116279,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          774,
-          294,
-          1020,
-          452
+          790,
+          286,
+          994,
+          462
         ],
         "bounds": {
-          "x": 776,
-          "y": 296,
-          "width": 242,
-          "height": 154
+          "x": 792,
+          "y": 288,
+          "width": 200,
+          "height": 172
         },
-        "originalWidth": 242,
-        "originalHeight": 154,
+        "originalWidth": 200,
+        "originalHeight": 172,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              894,
-              298
+              800,
+              290
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-endcap-northwest",
-      "label": "Glass maze endcap northwest",
+      "label": "Glass maze north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.2644628099173554,
-        "scaleY": 0.5748502994011976,
+        "scaleX": 0.2711864406779661,
+        "scaleY": 0.27350427350427353,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1099,
-          296,
-          1224,
-          467
+          1098,
+          317,
+          1220,
+          438
         ],
         "bounds": {
-          "x": 1101,
-          "y": 298,
-          "width": 121,
-          "height": 167
+          "x": 1100,
+          "y": 319,
+          "width": 118,
+          "height": 117
         },
-        "originalWidth": 121,
-        "originalHeight": 167,
+        "originalWidth": 118,
+        "originalHeight": 117,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1120,
-              300
+              1108,
+              321
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-endcap-northeast",
-      "label": "Glass maze endcap northeast",
+      "label": "Glass maze west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.27350427350427353,
-        "scaleY": 0.5714285714285714,
+        "scaleX": 0.5925925925925926,
+        "scaleY": 0.24427480916030533,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1338,
-          294,
-          1459,
-          466
+          1365,
+          307,
+          1423,
+          442
         ],
         "bounds": {
-          "x": 1340,
-          "y": 296,
-          "width": 117,
-          "height": 168
+          "x": 1367,
+          "y": 309,
+          "width": 54,
+          "height": 131
         },
-        "originalWidth": 117,
-        "originalHeight": 168,
+        "originalWidth": 54,
+        "originalHeight": 131,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1433,
-              298
+              1383,
+              311
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/great-race-transition-open-glass-maze-gate.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.5423728813559322,
-          -0.0,
-          85.69491525423729,
-          -0.009824101076596278,
-          0.5373485865439136,
-          110.79832046968612
-        ],
-        "width": 84,
-        "height": 98,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.5133689839572193,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 86,
-          "y": 111
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          42,
-          518,
-          202,
-          707
+          33,
+          506,
+          245,
+          697
         ],
         "bounds": {
-          "x": 44,
-          "y": 520,
-          "width": 156,
-          "height": 185
+          "x": 35,
+          "y": 508,
+          "width": 207,
+          "height": 187
         },
-        "originalWidth": 156,
-        "originalHeight": 185,
+        "originalWidth": 207,
+        "originalHeight": 187,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              65,
-              522
+              47,
+              510
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000012,
-          "y": 0.8245486486486537
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              19.0,
-              121.687
-            ],
-            [
-              137.0,
-              183.396
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/great-race-transition-closed-glass-maze-gate.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.48854961832061067,
-          -0.0,
-          93.06870229007633,
-          -0.020863152573652045,
-          0.4775487129069518,
-          121.21519525926189
-        ],
-        "width": 76,
-        "height": 88,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.5133689839572193,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 94,
-          "y": 121
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          301,
-          521,
-          462,
-          715
+          285,
+          506,
+          493,
+          697
         ],
         "bounds": {
-          "x": 303,
-          "y": 523,
-          "width": 157,
-          "height": 190
+          "x": 287,
+          "y": 508,
+          "width": 204,
+          "height": 187
         },
-        "originalWidth": 157,
-        "originalHeight": 190,
+        "originalWidth": 204,
+        "originalHeight": 187,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              323,
-              525
+              298,
+              510
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.45541401273885945,
-          "y": 0.7965736842105278
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              6.0,
-              114.983
-            ],
-            [
-              137.0,
-              187.715
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/great-race-transition-glass-descent-steps.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5378151260504201,
-        "scaleY": 0.54,
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6772486772486772,
         "width": 128,
-        "height": 81,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 111
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          516,
-          562,
-          758,
-          716
+          539,
+          504,
+          740,
+          697
         ],
         "bounds": {
-          "x": 518,
-          "y": 564,
-          "width": 238,
-          "height": 150
+          "x": 541,
+          "y": 506,
+          "width": 197,
+          "height": 189
         },
-        "originalWidth": 238,
-        "originalHeight": 150,
+        "originalWidth": 197,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              633,
-              566
+              549,
+              508
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/great-race-transition-emergency-descent-hatch.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5470085470085471,
-        "scaleY": 0.5482233502538071,
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6274509803921569,
         "width": 128,
-        "height": 108,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 84
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          776,
-          515,
-          1014,
-          716
+          791,
+          490,
+          990,
+          698
         ],
         "bounds": {
-          "x": 778,
-          "y": 517,
-          "width": 234,
-          "height": 197
+          "x": 793,
+          "y": 492,
+          "width": 195,
+          "height": 204
         },
-        "originalWidth": 234,
-        "originalHeight": 197,
+        "originalWidth": 195,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              858,
-              519
+              819,
+              494
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-transparent-crawler-starting-pod.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41739130434782606,
-        "scaleY": 0.4186046511627907,
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.4097222222222222,
         "width": 96,
-        "height": 72,
+        "height": 59,
         "offset": {
           "x": 80,
-          "y": 120
+          "y": 133
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1037,
-          539,
-          1271,
-          715
+          1026,
+          546,
+          1266,
+          694
         ],
         "bounds": {
-          "x": 1039,
-          "y": 541,
-          "width": 230,
-          "height": 172
+          "x": 1028,
+          "y": 548,
+          "width": 236,
+          "height": 144
         },
-        "originalWidth": 230,
-        "originalHeight": 172,
+        "originalWidth": 236,
+        "originalHeight": 144,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1098,
-              543
+              1057,
+              550
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-broken-starting-pod.png",
       "width": 256,
       "height": 256,
@@ -1800,53 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.42105263157894735,
-        "scaleY": 0.42021276595744683,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.4114285714285714,
         "width": 96,
-        "height": 79,
+        "height": 72,
         "offset": {
           "x": 80,
-          "y": 113
+          "y": 120
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1293,
-          524,
-          1525,
-          716
+          1282,
+          532,
+          1520,
+          711
         ],
         "bounds": {
-          "x": 1295,
-          "y": 526,
-          "width": 228,
-          "height": 188
+          "x": 1284,
+          "y": 534,
+          "width": 234,
+          "height": 175
         },
-        "originalWidth": 228,
-        "originalHeight": 188,
+        "originalWidth": 234,
+        "originalHeight": 175,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1379,
-              528
-            ],
-            [
-              1315,
-              655
-            ],
-            [
-              1400,
-              701
+              1333,
+              536
             ]
           ],
           "fringePixels": 2
@@ -1855,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1874,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-maze-control-pedestal.png",
       "width": 256,
       "height": 256,
@@ -1883,45 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.6857142857142857,
-        "scaleY": 0.6862745098039216,
+        "scaleX": 0.6193548387096774,
+        "scaleY": 0.6176470588235294,
         "width": 96,
-        "height": 140,
+        "height": 147,
         "offset": {
           "x": 80,
-          "y": 52
+          "y": 45
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          56,
-          760,
-          200,
-          968
+          48,
+          730,
+          207,
+          972
         ],
         "bounds": {
-          "x": 58,
-          "y": 762,
-          "width": 140,
-          "height": 204
+          "x": 50,
+          "y": 732,
+          "width": 155,
+          "height": 238
         },
-        "originalWidth": 140,
-        "originalHeight": 204,
+        "originalWidth": 155,
+        "originalHeight": 238,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              134,
-              764
+              96,
+              734
             ]
           ],
           "fringePixels": 2
@@ -1930,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1949,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-fractured-maze-slab.png",
       "width": 256,
       "height": 256,
@@ -1958,45 +2034,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.6274509803921569,
-        "scaleY": 0.6271929824561403,
+        "scaleX": 0.46601941747572817,
+        "scaleY": 0.4657534246575342,
         "width": 96,
-        "height": 143,
+        "height": 102,
         "offset": {
           "x": 80,
-          "y": 49
+          "y": 90
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          312,
-          746,
-          469,
-          978
+          275,
+          748,
+          485,
+          971
         ],
         "bounds": {
-          "x": 314,
-          "y": 748,
-          "width": 153,
-          "height": 228
+          "x": 277,
+          "y": 750,
+          "width": 206,
+          "height": 219
         },
-        "originalWidth": 153,
-        "originalHeight": 228,
+        "originalWidth": 206,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              341,
-              750
+              311,
+              752
+            ],
+            [
+              290,
+              833
             ]
           ],
           "fringePixels": 2
@@ -2005,6 +2094,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2024,6 +2122,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-emergency-exit-portal.png",
       "width": 256,
       "height": 256,
@@ -2033,45 +2132,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5363128491620112,
-        "scaleY": 0.5384615384615384,
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.42738589211618255,
         "width": 96,
-        "height": 119,
+        "height": 103,
         "offset": {
           "x": 80,
-          "y": 73
+          "y": 89
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          550,
-          744,
-          733,
-          969
+          519,
+          725,
+          748,
+          970
         ],
         "bounds": {
-          "x": 552,
-          "y": 746,
-          "width": 179,
-          "height": 221
+          "x": 521,
+          "y": 727,
+          "width": 225,
+          "height": 241
         },
-        "originalWidth": 179,
-        "originalHeight": 221,
+        "originalWidth": 225,
+        "originalHeight": 241,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              606,
-              748
+              562,
+              729
             ]
           ],
           "fringePixels": 2
@@ -2080,6 +2188,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2099,6 +2216,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-world-selection-holographic-globe.png",
       "width": 256,
       "height": 256,
@@ -2108,45 +2226,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.44651162790697674,
-        "scaleY": 0.4469026548672566,
+        "scaleX": 0.4050632911392405,
+        "scaleY": 0.40329218106995884,
         "width": 96,
-        "height": 101,
+        "height": 98,
         "offset": {
           "x": 80,
-          "y": 91
+          "y": 94
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          786,
-          746,
-          1005,
-          976
+          768,
+          735,
+          1009,
+          982
         ],
         "bounds": {
-          "x": 788,
-          "y": 748,
-          "width": 215,
-          "height": 226
+          "x": 770,
+          "y": 737,
+          "width": 237,
+          "height": 243
         },
-        "originalWidth": 215,
-        "originalHeight": 226,
+        "originalWidth": 237,
+        "originalHeight": 243,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              881,
-              750
+              875,
+              739
             ]
           ],
           "fringePixels": 2
@@ -2155,6 +2282,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2174,6 +2310,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-selection-chamber-console.png",
       "width": 256,
       "height": 256,
@@ -2183,45 +2320,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.40336134453781514,
-        "scaleY": 0.40625,
+        "scaleX": 0.3595505617977528,
+        "scaleY": 0.358974358974359,
         "width": 96,
-        "height": 65,
+        "height": 70,
         "offset": {
           "x": 80,
-          "y": 127
+          "y": 122
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1039,
-          789,
-          1281,
-          953
+          1015,
+          769,
+          1286,
+          968
         ],
         "bounds": {
-          "x": 1041,
-          "y": 791,
-          "width": 238,
-          "height": 160
+          "x": 1017,
+          "y": 771,
+          "width": 267,
+          "height": 195
         },
-        "originalWidth": 238,
-        "originalHeight": 160,
+        "originalWidth": 267,
+        "originalHeight": 195,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1143,
-              793
+              1134,
+              773
             ]
           ],
           "fringePixels": 2
@@ -2230,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2249,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-unlabeled-destination-doorway.png",
       "width": 256,
       "height": 256,
@@ -2258,45 +2414,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.64,
-        "scaleY": 0.6422018348623854,
+        "scaleX": 0.4752475247524752,
+        "scaleY": 0.47685185185185186,
         "width": 96,
-        "height": 140,
+        "height": 103,
         "offset": {
           "x": 80,
-          "y": 52
+          "y": 89
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/great-race-transition.png",
-        "sha256": "e539e86aafe26cabd96ca502acd1fbd9ffd36455523d857bdea219137ae56ae8",
+        "sha256": "6e48b3a5fda5ca021ce8320ab2be28271e56136c98c554a403b01ab601d81cae",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1334,
-          750,
-          1488,
-          972
+          1306,
+          742,
+          1512,
+          962
         ],
         "bounds": {
-          "x": 1336,
-          "y": 752,
-          "width": 150,
-          "height": 218
+          "x": 1308,
+          "y": 744,
+          "width": 202,
+          "height": 216
         },
-        "originalWidth": 150,
-        "originalHeight": 218,
+        "originalWidth": 202,
+        "originalHeight": 216,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1449,
-              754
+              1355,
+              746
             ]
           ],
           "fringePixels": 2
@@ -2305,6 +2470,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

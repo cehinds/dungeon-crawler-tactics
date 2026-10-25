@@ -39,6 +39,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -48,120 +49,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.6918918918918919,
-          0.0,
-          64.0,
-          0.0,
-          0.6632124352331606,
-          128.0
-        ],
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6432160804020101,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          54,
-          51,
-          243,
-          248
+          42,
+          39,
+          242,
+          242
         ],
         "bounds": {
-          "x": 56,
-          "y": 53,
-          "width": 185,
-          "height": 193
+          "x": 44,
+          "y": 41,
+          "width": 196,
+          "height": 199
         },
-        "originalWidth": 185,
-        "originalHeight": 193,
+        "originalWidth": 196,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              67,
-              55
+              59,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000051,
-          "y": 0.4999999999999982
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              185.0,
-              0.0
-            ],
-            [
-              185.0,
-              193.0
-            ],
-            [
-              0.0,
-              193.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -183,6 +157,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-worn-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -192,120 +167,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.6956521739130435,
-          0.0,
-          64.0,
-          0.0,
-          0.6597938144329897,
-          128.0
-        ],
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6432160804020101,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          298,
-          48,
+          293,
+          39,
           486,
-          246
+          242
         ],
         "bounds": {
-          "x": 300,
-          "y": 50,
-          "width": 184,
-          "height": 194
+          "x": 295,
+          "y": 41,
+          "width": 189,
+          "height": 199
         },
-        "originalWidth": 184,
-        "originalHeight": 194,
+        "originalWidth": 189,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              423,
-              52
+              305,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4999999999999978,
-          "y": 0.5000000000000018
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              184.0,
-              0.0
-            ],
-            [
-              184.0,
-              194.0
-            ],
-            [
-              0.0,
-              194.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -327,6 +275,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-cracked-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -336,120 +285,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.6530612244897959,
-          0.0,
-          64.0,
-          0.0,
-          0.6666666666666666,
-          128.0
-        ],
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6432160804020101,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          540,
-          49,
-          740,
-          245
+          541,
+          39,
+          741,
+          242
         ],
         "bounds": {
-          "x": 542,
-          "y": 51,
+          "x": 543,
+          "y": 41,
           "width": 196,
-          "height": 192
+          "height": 199
         },
         "originalWidth": 196,
-        "originalHeight": 192,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              554,
-              53
+              593,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000049,
-          "y": 0.5000000000000071
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              196.0,
-              0.0
-            ],
-            [
-              196.0,
-              192.0
-            ],
-            [
-              0.0,
-              192.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -471,6 +393,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-wet-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -480,120 +403,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.6464646464646465,
-          0.0,
-          64.0,
-          0.0,
-          0.6530612244897959,
-          128.0
-        ],
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6432160804020101,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          795,
-          46,
-          997,
-          246
+          796,
+          39,
+          996,
+          242
         ],
         "bounds": {
-          "x": 797,
-          "y": 48,
-          "width": 198,
-          "height": 196
+          "x": 798,
+          "y": 41,
+          "width": 196,
+          "height": 199
         },
-        "originalWidth": 198,
-        "originalHeight": 196,
+        "originalWidth": 196,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              807,
-              50
+              863,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4999999999999968,
-          "y": 0.5000000000000048
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              198.0,
-              0.0
-            ],
-            [
-              198.0,
-              196.0
-            ],
-            [
-              0.0,
-              196.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -615,6 +511,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-gold-brick-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -624,45 +521,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "scaleX": 0.6844919786096256,
-        "scaleY": 0.6530612244897959,
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6432160804020101,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1057,
-          46,
-          1248,
-          246
+          1051,
+          39,
+          1246,
+          242
         ],
         "bounds": {
-          "x": 1059,
-          "y": 48,
-          "width": 187,
-          "height": 196
+          "x": 1053,
+          "y": 41,
+          "width": 191,
+          "height": 199
         },
-        "originalWidth": 187,
-        "originalHeight": 196,
+        "originalWidth": 191,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1087,
-              50
+              1079,
+              43
             ]
           ],
           "fringePixels": 2
@@ -671,6 +589,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -690,6 +629,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-gold-brick-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -699,45 +639,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "scaleX": 0.6432160804020101,
-        "scaleY": 0.6305418719211823,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6432160804020101,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1299,
-          46,
-          1502,
-          253
+          1296,
+          39,
+          1496,
+          242
         ],
         "bounds": {
-          "x": 1301,
-          "y": 48,
-          "width": 199,
-          "height": 203
+          "x": 1298,
+          "y": 41,
+          "width": 196,
+          "height": 199
         },
-        "originalWidth": 199,
-        "originalHeight": 203,
+        "originalWidth": 196,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1397,
-              50
+              1314,
+              43
             ]
           ],
           "fringePixels": 2
@@ -746,15 +707,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-wall-northwest",
-      "label": "Golden Hall Masonry wall northwest",
+      "label": "Golden Hall Masonry north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -765,8 +747,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/thresholds-golden-hall-masonry-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -776,109 +759,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.8533333333333334,
-          -0.0,
-          48.64,
-          -0.1838149932254504,
-          0.833300561648258,
-          49.03525578913113
-        ],
-        "width": 163,
-        "height": 157,
+        "scaleX": 0.6213592233009708,
+        "scaleY": 0.41025641025641024,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 49,
-          "y": 39
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          49,
-          276,
-          244,
-          491
+          38,
+          285,
+          248,
+          445
         ],
         "bounds": {
-          "x": 51,
-          "y": 278,
-          "width": 191,
-          "height": 211
+          "x": 40,
+          "y": 287,
+          "width": 206,
+          "height": 156
         },
-        "originalWidth": 191,
-        "originalHeight": 211,
+        "originalWidth": 206,
+        "originalHeight": 156,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              96,
-              280
+              48,
+              289
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4869109947643988,
-          "y": 0.9103270142180114
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              18.0,
-              175.535
-            ],
-            [
-              168.0,
-              208.623
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-wall-northeast",
-      "label": "Golden Hall Masonry wall northeast",
+      "label": "Golden Hall Masonry west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -889,8 +853,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/thresholds-golden-hall-masonry-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -900,100 +865,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-west-wall",
         "resampling": "nearest",
-        "affine": [
-          0.8421052631578947,
-          -0.0,
-          46.31578947368421,
-          0.18383846827065983,
-          0.8217935822468689,
-          17.56134188649804
-        ],
-        "width": 157,
-        "height": 155,
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.757396449704142,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 46,
-          "y": 42
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              64.0,
-              192.0
+              128,
+              128
             ],
             [
-              192.0,
-              192.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          301,
-          275,
-          491,
-          489
+          348,
+          276,
+          427,
+          449
         ],
         "bounds": {
-          "x": 303,
-          "y": 277,
-          "width": 186,
-          "height": 210
+          "x": 350,
+          "y": 278,
+          "width": 75,
+          "height": 169
         },
-        "originalWidth": 186,
-        "originalHeight": 210,
+        "originalWidth": 75,
+        "originalHeight": 169,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              439,
-              279
+              360,
+              280
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5215053763440843,
-          "y": 0.9074595238095233
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              21.0,
-              207.568
-            ],
-            [
-              173.0,
-              173.565
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            64.0,
-            192.0
+            128,
+            128
           ],
           [
-            192.0,
-            192.0
+            128,
+            256
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1013,8 +959,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1024,53 +971,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.6994535519125683,
-        "scaleY": 0.4485981308411215,
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.757396449704142,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          551,
-          270,
-          738,
-          488
+          543,
+          274,
+          739,
+          447
         ],
         "bounds": {
-          "x": 553,
-          "y": 272,
-          "width": 183,
-          "height": 214
+          "x": 545,
+          "y": 276,
+          "width": 192,
+          "height": 169
         },
-        "originalWidth": 183,
-        "originalHeight": 214,
+        "originalWidth": 192,
+        "originalHeight": 169,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              640,
-              274
+              553,
+              278
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1090,8 +1055,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1101,44 +1067,53 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.5739910313901345,
-        "scaleY": 0.48,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.757396449704142,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          783,
+          796,
           274,
-          1010,
-          478
+          996,
+          447
         ],
         "bounds": {
-          "x": 785,
+          "x": 798,
           "y": 276,
-          "width": 223,
-          "height": 200
+          "width": 196,
+          "height": 169
         },
-        "originalWidth": 223,
-        "originalHeight": 200,
+        "originalWidth": 196,
+        "originalHeight": 169,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
+              806,
               278
             ]
           ],
@@ -1146,13 +1121,22 @@
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-endcap-northwest",
-      "label": "Golden Hall Masonry endcap northwest",
+      "label": "Golden Hall Masonry north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1167,8 +1151,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1178,58 +1163,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.43243243243243246,
-        "scaleY": 0.4729064039408867,
-        "width": 48,
-        "height": 96,
+        "scaleX": 0.3076923076923077,
+        "scaleY": 0.2962962962962963,
+        "width": 32,
+        "height": 32,
         "offset": {
-          "x": 104,
-          "y": 96
+          "x": 112,
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1085,
-          275,
-          1200,
-          482
+          1097,
+          305,
+          1205,
+          417
         ],
         "bounds": {
-          "x": 1087,
-          "y": 277,
-          "width": 111,
-          "height": 203
+          "x": 1099,
+          "y": 307,
+          "width": 104,
+          "height": 108
         },
-        "originalWidth": 111,
-        "originalHeight": 203,
+        "originalWidth": 104,
+        "originalHeight": 108,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1148,
-              279
+              1108,
+              309
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-endcap-northeast",
-      "label": "Golden Hall Masonry endcap northeast",
+      "label": "Golden Hall Masonry west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1244,8 +1247,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1255,53 +1259,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.4528301886792453,
-        "scaleY": 0.4752475247524752,
-        "width": 48,
-        "height": 96,
+        "scaleX": 0.3047619047619048,
+        "scaleY": 0.2962962962962963,
+        "width": 32,
+        "height": 32,
         "offset": {
-          "x": 104,
-          "y": 96
+          "x": 112,
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1348,
-          276,
+          1349,
+          305,
           1458,
-          482
+          417
         ],
         "bounds": {
-          "x": 1350,
-          "y": 278,
-          "width": 106,
-          "height": 202
+          "x": 1351,
+          "y": 307,
+          "width": 105,
+          "height": 108
         },
-        "originalWidth": 106,
-        "originalHeight": 202,
+        "originalWidth": 105,
+        "originalHeight": 108,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1395,
-              280
+              1363,
+              309
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1310,7 +1332,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1323,6 +1345,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/thresholds-golden-hall-masonry-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1332,56 +1355,51 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.7071823204419889,
-          -0.0,
-          58.34254143646409,
-          -0.010458121817960747,
-          0.7071049865711245,
-          56.130003416486716
-        ],
-        "width": 147,
-        "height": 140,
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.46153846153846156,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 58,
-          "y": 55
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          35,
-          510,
-          246,
-          712
+          37,
+          474,
+          248,
+          686
         ],
         "bounds": {
-          "x": 37,
-          "y": 512,
+          "x": 39,
+          "y": 476,
           "width": 207,
-          "height": 198
+          "height": 208
         },
         "originalWidth": 207,
-        "originalHeight": 198,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1389,43 +1407,29 @@
           "seeds": [
             [
               138,
-              514
+              478
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4758454106280205,
-          "y": 0.9778106060606065
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              192.268
-            ],
-            [
-              189.0,
-              194.945
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1434,7 +1438,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1447,6 +1451,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/thresholds-golden-hall-masonry-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1456,100 +1461,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.6956521739130435,
-          -0.0,
-          58.434782608695656,
-          -0.004612374985475546,
-          0.6956368830553288,
-          58.10592990524137
-        ],
-        "width": 144,
-        "height": 136,
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.46153846153846156,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 58,
-          "y": 58
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          292,
-          510,
-          502,
-          711
+          284,
+          474,
+          493,
+          686
         ],
         "bounds": {
-          "x": 294,
-          "y": 512,
-          "width": 206,
-          "height": 197
+          "x": 286,
+          "y": 476,
+          "width": 205,
+          "height": 208
         },
-        "originalWidth": 206,
-        "originalHeight": 197,
+        "originalWidth": 205,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              397,
-              514
+              383,
+              478
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4854368932038813,
-          "y": 0.9804060913705595
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              192.53
-            ],
-            [
-              192.0,
-              193.75
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1569,6 +1555,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/thresholds-gold-brick-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1578,53 +1566,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.6183574879227053,
-        "scaleY": 0.6195652173913043,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6666666666666666,
         "width": 128,
-        "height": 114,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 78
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          529,
-          524,
-          740,
-          712
+          541,
+          493,
+          741,
+          689
         ],
         "bounds": {
-          "x": 531,
-          "y": 526,
-          "width": 207,
-          "height": 184
+          "x": 543,
+          "y": 495,
+          "width": 196,
+          "height": 192
         },
-        "originalWidth": 207,
-        "originalHeight": 184,
+        "originalWidth": 196,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              576,
-              528
+              557,
+              497
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1644,6 +1650,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/thresholds-gold-brick-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1653,53 +1661,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.5714285714285714,
-        "scaleY": 0.5732484076433121,
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6666666666666666,
         "width": 128,
-        "height": 90,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 102
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          782,
-          551,
-          1010,
-          712
+          794,
+          493,
+          996,
+          689
         ],
         "bounds": {
-          "x": 784,
-          "y": 553,
-          "width": 224,
-          "height": 157
+          "x": 796,
+          "y": 495,
+          "width": 198,
+          "height": 192
         },
-        "originalWidth": 224,
-        "originalHeight": 157,
+        "originalWidth": 198,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              819,
-              555
+              807,
+              497
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1719,6 +1745,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-race-selection-podium.png",
       "width": 256,
       "height": 256,
@@ -1728,37 +1755,46 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.43243243243243246,
-        "scaleY": 0.43414634146341463,
+        "scaleX": 0.41739130434782606,
+        "scaleY": 0.4158878504672897,
         "width": 96,
         "height": 89,
         "offset": {
           "x": 80,
           "y": 103
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1038,
-          511,
-          1264,
-          720
+          1033,
+          471,
+          1267,
+          689
         ],
         "bounds": {
-          "x": 1040,
-          "y": 513,
-          "width": 222,
-          "height": 205
+          "x": 1035,
+          "y": 473,
+          "width": 230,
+          "height": 214
         },
-        "originalWidth": 222,
-        "originalHeight": 205,
+        "originalWidth": 230,
+        "originalHeight": 214,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1766,7 +1802,15 @@
           "seeds": [
             [
               1097,
-              515
+              475
+            ],
+            [
+              1120,
+              518
+            ],
+            [
+              1120,
+              531
             ]
           ],
           "fringePixels": 2
@@ -1775,6 +1819,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1794,6 +1847,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-guild-transformation-bed.png",
       "width": 256,
       "height": 256,
@@ -1803,45 +1857,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4444444444444444,
-        "scaleY": 0.44545454545454544,
+        "scaleX": 0.4873096446700508,
+        "scaleY": 0.48878923766816146,
         "width": 96,
-        "height": 98,
+        "height": 109,
         "offset": {
           "x": 80,
-          "y": 94
+          "y": 83
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1291,
-          501,
-          1511,
-          725
+          1296,
+          469,
+          1497,
+          696
         ],
         "bounds": {
-          "x": 1293,
-          "y": 503,
-          "width": 216,
-          "height": 220
+          "x": 1298,
+          "y": 471,
+          "width": 197,
+          "height": 223
         },
-        "originalWidth": 216,
-        "originalHeight": 220,
+        "originalWidth": 197,
+        "originalHeight": 223,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1388,
-              505
+              1319,
+              473
             ]
           ],
           "fringePixels": 2
@@ -1850,6 +1913,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1869,6 +1941,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-quadrant-selection-wheel.png",
       "width": 256,
       "height": 256,
@@ -1878,36 +1951,45 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4729064039408867,
-        "scaleY": 0.47085201793721976,
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.45739910313901344,
         "width": 96,
-        "height": 105,
+        "height": 102,
         "offset": {
           "x": 80,
-          "y": 87
+          "y": 90
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          36,
-          741,
-          243,
-          968
+          34,
+          717,
+          248,
+          944
         ],
         "bounds": {
-          "x": 38,
-          "y": 743,
-          "width": 203,
+          "x": 36,
+          "y": 719,
+          "width": 210,
           "height": 223
         },
-        "originalWidth": 203,
+        "originalWidth": 210,
         "originalHeight": 223,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -1915,8 +1997,8 @@
           "connectivity": 8,
           "seeds": [
             [
-              136,
-              745
+              140,
+              721
             ]
           ],
           "fringePixels": 2
@@ -1925,6 +2007,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1944,6 +2035,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-opponent-selection-wheel.png",
       "width": 256,
       "height": 256,
@@ -1953,36 +2045,45 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.42290748898678415,
-        "scaleY": 0.4248927038626609,
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.41630901287553645,
         "width": 96,
-        "height": 99,
+        "height": 97,
         "offset": {
           "x": 80,
-          "y": 93
+          "y": 95
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          276,
-          732,
-          507,
-          969
+          269,
+          712,
+          504,
+          949
         ],
         "bounds": {
-          "x": 278,
-          "y": 734,
-          "width": 227,
+          "x": 271,
+          "y": 714,
+          "width": 231,
           "height": 233
         },
-        "originalWidth": 227,
+        "originalWidth": 231,
         "originalHeight": 233,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -1990,8 +2091,8 @@
           "connectivity": 8,
           "seeds": [
             [
-              388,
-              736
+              384,
+              716
             ]
           ],
           "fringePixels": 2
@@ -2000,6 +2101,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2019,6 +2129,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-choice-portal-arch.png",
       "width": 256,
       "height": 256,
@@ -2028,45 +2139,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4485981308411215,
-        "scaleY": 0.44933920704845814,
+        "scaleX": 0.45933014354066987,
+        "scaleY": 0.4605263157894737,
         "width": 96,
-        "height": 102,
+        "height": 105,
         "offset": {
           "x": 80,
-          "y": 90
+          "y": 87
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          522,
-          732,
-          740,
-          963
+          526,
+          712,
+          739,
+          944
         ],
         "bounds": {
-          "x": 524,
-          "y": 734,
-          "width": 214,
-          "height": 227
+          "x": 528,
+          "y": 714,
+          "width": 209,
+          "height": 228
         },
-        "originalWidth": 214,
-        "originalHeight": 227,
+        "originalWidth": 209,
+        "originalHeight": 228,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              634,
-              736
+              631,
+              716
             ]
           ],
           "fringePixels": 2
@@ -2075,6 +2195,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2094,6 +2223,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-registration-arena-entrance.png",
       "width": 256,
       "height": 256,
@@ -2103,37 +2233,46 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.39565217391304347,
+        "scaleX": 0.40336134453781514,
+        "scaleY": 0.4052863436123348,
         "width": 96,
-        "height": 91,
+        "height": 92,
         "offset": {
           "x": 80,
-          "y": 101
+          "y": 100
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
           773,
-          734,
-          1019,
-          968
+          718,
+          1015,
+          949
         ],
         "bounds": {
           "x": 775,
-          "y": 736,
-          "width": 242,
-          "height": 230
+          "y": 720,
+          "width": 238,
+          "height": 227
         },
-        "originalWidth": 242,
-        "originalHeight": 230,
+        "originalWidth": 238,
+        "originalHeight": 227,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -2141,7 +2280,7 @@
           "seeds": [
             [
               803,
-              738
+              722
             ]
           ],
           "fringePixels": 2
@@ -2150,6 +2289,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2169,6 +2317,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-red-carpet-runner.png",
       "width": 256,
       "height": 256,
@@ -2178,45 +2327,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.6193548387096774,
-        "scaleY": 0.6199095022624435,
+        "scaleX": 0.6233766233766234,
+        "scaleY": 0.6255707762557078,
         "width": 96,
         "height": 137,
         "offset": {
           "x": 80,
           "y": 55
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1074,
-          742,
-          1233,
-          967
+          1070,
+          721,
+          1228,
+          944
         ],
         "bounds": {
-          "x": 1076,
-          "y": 744,
-          "width": 155,
-          "height": 221
+          "x": 1072,
+          "y": 723,
+          "width": 154,
+          "height": 219
         },
-        "originalWidth": 155,
-        "originalHeight": 221,
+        "originalWidth": 154,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1095,
-              746
+              1097,
+              725
             ]
           ],
           "fringePixels": 2
@@ -2225,6 +2383,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2244,6 +2411,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-nebula-ceiling-panel.png",
       "width": 256,
       "height": 256,
@@ -2253,45 +2421,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4549763033175355,
-        "scaleY": 0.4558139534883721,
+        "scaleX": 0.4528301886792453,
+        "scaleY": 0.45454545454545453,
         "width": 96,
-        "height": 98,
+        "height": 100,
         "offset": {
           "x": 80,
-          "y": 94
+          "y": 92
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/thresholds.png",
-        "sha256": "737e78741b9454d950531c5f83120cd225e06cd37a213796d54412adcb7a3f99",
+        "sha256": "bd0968f5744cc8e4f3f1bd6e35fbdac7222b34afe432517bcd42bf7bd7dc94af",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1288,
-          741,
-          1503,
-          960
+          1289,
+          717,
+          1505,
+          941
         ],
         "bounds": {
-          "x": 1290,
-          "y": 743,
-          "width": 211,
-          "height": 215
+          "x": 1291,
+          "y": 719,
+          "width": 212,
+          "height": 220
         },
-        "originalWidth": 211,
-        "originalHeight": 215,
+        "originalWidth": 212,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1391,
-              745
+              1392,
+              721
             ]
           ],
           "fringePixels": 2
@@ -2300,6 +2477,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

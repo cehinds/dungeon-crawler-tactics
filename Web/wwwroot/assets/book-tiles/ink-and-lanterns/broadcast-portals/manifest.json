@@ -12,9 +12,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -40,6 +40,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/broadcast-portals-studio-stage-panel-floor.png",
       "width": 256,
       "height": 256,
@@ -49,120 +50,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5470352984156192,
-          0.005457566917948774,
-          63.070225533628644,
-          0.0023427504696433895,
-          0.4779456058383237,
-          158.47933191208872
-        ],
-        "width": 129,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          22,
-          49,
-          263,
-          209
+          40,
+          39,
+          243,
+          235
         ],
         "bounds": {
-          "x": 24,
-          "y": 51,
-          "width": 237,
-          "height": 156
+          "x": 42,
+          "y": 41,
+          "width": 199,
+          "height": 192
         },
-        "originalWidth": 237,
-        "originalHeight": 156,
+        "originalWidth": 199,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              141,
-              53
+              48,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978902953586479,
-          "y": 0.4458750000000049
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.668,
-              2.6
-            ],
-            [
-              235.0,
-              68.983
-            ],
-            [
-              117.332,
-              136.513
-            ],
-            [
-              1.0,
-              70.13
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -184,6 +158,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/broadcast-portals-worn-studio-stage-panel-floor.png",
       "width": 256,
       "height": 256,
@@ -193,120 +168,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5493267273132224,
-          -0.01941394355708302,
-          64.8239379841406,
-          0.0007200896918700112,
-          0.473957339564161,
-          158.47343353889764
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.64,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          273,
-          48,
-          513,
-          209
+          290,
+          39,
+          494,
+          235
         ],
         "bounds": {
-          "x": 275,
-          "y": 50,
-          "width": 236,
-          "height": 157
+          "x": 292,
+          "y": 41,
+          "width": 200,
+          "height": 192
         },
-        "originalWidth": 236,
-        "originalHeight": 157,
+        "originalWidth": 200,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              389,
-              52
+              299,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49788135593219784,
-          "y": 0.4494203821656179
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.114,
-              3.046
-            ],
-            [
-              234.0,
-              70.382
-            ],
-            [
-              119.886,
-              138.072
-            ],
-            [
-              1.0,
-              70.736
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -328,6 +276,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/broadcast-portals-cracked-studio-stage-panel-floor.png",
       "width": 256,
       "height": 256,
@@ -337,120 +286,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5493384946467685,
-          -0.0035095559073594546,
-          63.70028217882006,
-          0.0023794627321210397,
-          0.47104062581495254,
-          158.49438498555358
-        ],
-        "width": 129,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          524,
-          47,
-          764,
-          209
+          541,
+          39,
+          743,
+          235
         ],
         "bounds": {
-          "x": 526,
-          "y": 49,
-          "width": 236,
-          "height": 158
+          "x": 543,
+          "y": 41,
+          "width": 198,
+          "height": 192
         },
-        "originalWidth": 236,
-        "originalHeight": 158,
+        "originalWidth": 198,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              641,
-              51
+              550,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49788135593219557,
-          "y": 0.44643987341773067
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.066,
-              2.605
-            ],
-            [
-              234.0,
-              69.949
-            ],
-            [
-              117.934,
-              138.469
-            ],
-            [
-              1.0,
-              71.126
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -472,6 +394,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/broadcast-portals-wet-studio-stage-panel-floor.png",
       "width": 256,
       "height": 256,
@@ -481,120 +404,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5540660251765559,
-          -0.00558637433242188,
-          63.84528153035096,
-          0.0039055901946147154,
-          0.46891441525779426,
-          158.4752785206867
-        ],
-        "width": 129,
-        "height": 73,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          775,
-          48,
-          1013,
-          210
+          791,
+          39,
+          994,
+          235
         ],
         "bounds": {
-          "x": 777,
-          "y": 50,
-          "width": 234,
-          "height": 158
+          "x": 793,
+          "y": 41,
+          "width": 199,
+          "height": 192
         },
-        "originalWidth": 234,
-        "originalHeight": 158,
+        "originalWidth": 199,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              891,
-              52
+              799,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49786324786325153,
-          "y": 0.44635443037974754
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.812,
-              2.287
-            ],
-            [
-              232.0,
-              69.562
-            ],
-            [
-              117.188,
-              138.761
-            ],
-            [
-              1.0,
-              71.486
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -616,6 +512,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/broadcast-portals-studio-stage-panel-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -625,45 +522,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5517241379310345,
-        "scaleY": 0.3855421686746988,
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6530612244897959,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1027,
-          46,
-          1263,
-          216
+          1040,
+          39,
+          1242,
+          239
         ],
         "bounds": {
-          "x": 1029,
-          "y": 48,
-          "width": 232,
-          "height": 166
+          "x": 1042,
+          "y": 41,
+          "width": 198,
+          "height": 196
         },
-        "originalWidth": 232,
-        "originalHeight": 166,
+        "originalWidth": 198,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1141,
-              50
+              1050,
+              43
             ]
           ],
           "fringePixels": 2
@@ -672,6 +590,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -691,6 +630,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/broadcast-portals-studio-stage-panel-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -700,45 +640,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5714285714285714,
-        "scaleY": 0.367816091954023,
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.6368159203980099,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1281,
-          42,
-          1509,
-          220
+          1292,
+          35,
+          1499,
+          240
         ],
         "bounds": {
-          "x": 1283,
-          "y": 44,
-          "width": 224,
-          "height": 174
+          "x": 1294,
+          "y": 37,
+          "width": 203,
+          "height": 201
         },
-        "originalWidth": 224,
-        "originalHeight": 174,
+        "originalWidth": 203,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1393,
-              46
+              1453,
+              39
             ]
           ],
           "fringePixels": 2
@@ -747,15 +708,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "broadcast-portals-studio-partition-wall-northwest",
-      "label": "Studio Partition wall northwest",
+      "label": "Studio Partition north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -766,8 +748,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/broadcast-portals-studio-partition-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -777,109 +760,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.46715328467153283,
-          -0.0,
-          84.78832116788321,
-          -0.013434937140470256,
-          0.4601907417896598,
-          108.86675917835937
-        ],
-        "width": 86,
-        "height": 101,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5019607843137255,
+        "scaleY": 0.3422459893048128,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 85,
-          "y": 108
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          53,
-          245,
-          241,
-          471
+          34,
+          262,
+          293,
+          453
         ],
         "bounds": {
-          "x": 55,
-          "y": 247,
-          "width": 184,
-          "height": 222
+          "x": 36,
+          "y": 264,
+          "width": 255,
+          "height": 187
         },
-        "originalWidth": 184,
-        "originalHeight": 222,
+        "originalWidth": 255,
+        "originalHeight": 187,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              77,
-              249
+              47,
+              266
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5027173913043409,
-          "y": 0.8259009009009041
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              24.0,
-              146.582
-            ],
-            [
-              161.0,
-              220.118
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "broadcast-portals-studio-partition-wall-northeast",
-      "label": "Studio Partition wall northeast",
+      "label": "Studio Partition west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -890,8 +854,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/broadcast-portals-studio-partition-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -901,100 +866,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.47058823529411764,
-          0.0,
-          86.58823529411765,
-          0.01798875820537451,
-          0.4611554984996644,
-          105.1129063209576
-        ],
-        "width": 85,
-        "height": 101,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6808510638297872,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 87,
-          "y": 108
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          306,
-          242,
-          492,
-          470
+          389,
+          262,
+          440,
+          454
         ],
         "bounds": {
-          "x": 308,
-          "y": 244,
-          "width": 182,
-          "height": 224
+          "x": 391,
+          "y": 264,
+          "width": 47,
+          "height": 188
         },
-        "originalWidth": 182,
-        "originalHeight": 224,
+        "originalWidth": 47,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              464,
-              246
+              403,
+              266
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.48351648351648524,
-          "y": 0.8257991071428554
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              156.0,
-              147.631
-            ],
-            [
-              20.0,
-              222.327
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1014,8 +960,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/broadcast-portals-studio-partition-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1025,53 +972,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.7071823204419889,
-        "scaleY": 0.4824120603015075,
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.7111111111111111,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
           551,
-          252,
-          736,
-          455
+          263,
+          745,
+          447
         ],
         "bounds": {
           "x": 553,
-          "y": 254,
-          "width": 181,
-          "height": 199
+          "y": 265,
+          "width": 190,
+          "height": 180
         },
-        "originalWidth": 181,
-        "originalHeight": 199,
+        "originalWidth": 190,
+        "originalHeight": 180,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              706,
-              256
+              568,
+              267
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1091,8 +1056,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/broadcast-portals-studio-partition-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1102,58 +1068,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5688888888888889,
-        "scaleY": 0.4549763033175355,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6956521739130435,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          781,
-          238,
-          1010,
-          453
+          797,
+          263,
+          997,
+          451
         ],
         "bounds": {
-          "x": 783,
-          "y": 240,
-          "width": 225,
-          "height": 211
+          "x": 799,
+          "y": 265,
+          "width": 196,
+          "height": 184
         },
-        "originalWidth": 225,
-        "originalHeight": 211,
+        "originalWidth": 196,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              889,
-              242
+              827,
+              267
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "broadcast-portals-studio-partition-endcap-northwest",
-      "label": "Studio Partition endcap northwest",
+      "label": "Studio Partition north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1168,8 +1152,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/broadcast-portals-studio-partition-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1179,58 +1164,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3018867924528302,
-        "scaleY": 0.4897959183673469,
+        "scaleX": 0.36363636363636365,
+        "scaleY": 0.3595505617977528,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1088,
-          244,
-          1198,
-          444
+          1099,
+          337,
+          1191,
+          430
         ],
         "bounds": {
-          "x": 1090,
-          "y": 246,
-          "width": 106,
-          "height": 196
+          "x": 1101,
+          "y": 339,
+          "width": 88,
+          "height": 89
         },
-        "originalWidth": 106,
-        "originalHeight": 196,
+        "originalWidth": 88,
+        "originalHeight": 89,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1115,
-              248
+              1167,
+              341
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "broadcast-portals-studio-partition-endcap-northeast",
-      "label": "Studio Partition endcap northeast",
+      "label": "Studio Partition west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1245,8 +1248,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/broadcast-portals-studio-partition-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1256,53 +1260,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3076923076923077,
-        "scaleY": 0.5106382978723404,
+        "scaleX": 0.36363636363636365,
+        "scaleY": 0.3595505617977528,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1346,
-          259,
-          1454,
-          451
+          1353,
+          338,
+          1445,
+          431
         ],
         "bounds": {
-          "x": 1348,
-          "y": 261,
-          "width": 104,
-          "height": 188
+          "x": 1355,
+          "y": 340,
+          "width": 88,
+          "height": 89
         },
-        "originalWidth": 104,
-        "originalHeight": 188,
+        "originalWidth": 88,
+        "originalHeight": 89,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1424,
-              263
+              1393,
+              342
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1311,7 +1333,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1324,6 +1346,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/broadcast-portals-studio-partition-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1333,100 +1356,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4025157232704403,
-          -0.0,
-          93.18238993710692,
-          0.005499045750628294,
-          0.4052186081035529,
-          115.1710163106587
-        ],
-        "width": 76,
-        "height": 94,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.579185520361991,
+        "scaleY": 0.5,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 115
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          51,
-          465,
-          243,
-          698
+          29,
+          485,
+          254,
+          681
         ],
         "bounds": {
-          "x": 53,
-          "y": 467,
-          "width": 188,
-          "height": 229
+          "x": 31,
+          "y": 487,
+          "width": 221,
+          "height": 192
         },
-        "originalWidth": 188,
-        "originalHeight": 229,
+        "originalWidth": 221,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              78,
-              469
+              46,
+              489
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4601063829787236,
-          "y": 0.8228165938864659
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              150.019
-            ],
-            [
-              166.0,
-              226.831
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1435,7 +1439,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1448,6 +1452,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/broadcast-portals-studio-partition-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1457,100 +1462,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.463768115942029,
-          0.0,
-          86.72463768115942,
-          -0.01051006420517077,
-          0.46887592878039186,
-          105.50339796068734
-        ],
-        "width": 85,
-        "height": 104,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5765765765765766,
+        "scaleY": 0.5,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 87,
-          "y": 104
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          302,
-          471,
-          490,
-          696
+          284,
+          485,
+          510,
+          681
         ],
         "bounds": {
-          "x": 304,
-          "y": 473,
-          "width": 184,
-          "height": 221
+          "x": 286,
+          "y": 487,
+          "width": 222,
+          "height": 192
         },
-        "originalWidth": 184,
-        "originalHeight": 221,
+        "originalWidth": 222,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              461,
-              475
+              312,
+              489
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.48369565217391086,
-          "y": 0.8437624434389084
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              158.0,
-              153.894
-            ],
-            [
-              20.0,
-              219.049
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1570,6 +1556,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/broadcast-portals-studio-stage-panel-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1579,53 +1567,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5378151260504201,
-        "scaleY": 0.538860103626943,
+        "scaleX": 0.6183574879227053,
+        "scaleY": 0.6153846153846154,
         "width": 128,
-        "height": 104,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 88
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          525,
-          498,
-          767,
-          695
+          538,
+          484,
+          749,
+          696
         ],
         "bounds": {
-          "x": 527,
-          "y": 500,
-          "width": 238,
-          "height": 193
+          "x": 540,
+          "y": 486,
+          "width": 207,
+          "height": 208
         },
-        "originalWidth": 238,
-        "originalHeight": 193,
+        "originalWidth": 207,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              641,
-              502
+              549,
+              488
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1645,6 +1651,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/broadcast-portals-studio-stage-panel-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1654,53 +1662,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.5645161290322581,
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.6183574879227053,
         "width": 128,
-        "height": 105,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 87
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          779,
-          512,
-          1010,
-          702
+          787,
+          483,
+          996,
+          694
         ],
         "bounds": {
-          "x": 781,
-          "y": 514,
-          "width": 227,
-          "height": 186
+          "x": 789,
+          "y": 485,
+          "width": 205,
+          "height": 207
         },
-        "originalWidth": 227,
-        "originalHeight": 186,
+        "originalWidth": 205,
+        "originalHeight": 207,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
-              516
+              797,
+              487
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1720,6 +1746,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-interview-sofa.png",
       "width": 256,
       "height": 256,
@@ -1729,45 +1756,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3779527559055118,
-        "scaleY": 0.37745098039215685,
+        "scaleX": 0.3404255319148936,
+        "scaleY": 0.33962264150943394,
         "width": 96,
-        "height": 77,
+        "height": 54,
         "offset": {
           "x": 80,
-          "y": 115
+          "y": 138
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1023,
-          499,
-          1281,
-          707
+          1011,
+          531,
+          1297,
+          694
         ],
         "bounds": {
-          "x": 1025,
-          "y": 501,
-          "width": 254,
-          "height": 204
+          "x": 1013,
+          "y": 533,
+          "width": 282,
+          "height": 159
         },
-        "originalWidth": 254,
-        "originalHeight": 204,
+        "originalWidth": 282,
+        "originalHeight": 159,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1111,
-              503
+              1201,
+              535
             ]
           ],
           "fringePixels": 2
@@ -1776,6 +1812,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1795,6 +1840,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-studio-camera.png",
       "width": 256,
       "height": 256,
@@ -1804,49 +1850,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5517241379310345,
-        "scaleY": 0.5523012552301255,
+        "scaleX": 0.5454545454545454,
+        "scaleY": 0.5473251028806584,
         "width": 96,
-        "height": 132,
+        "height": 133,
         "offset": {
           "x": 80,
-          "y": 60
+          "y": 59
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1316,
-          469,
-          1494,
-          712
+          1319,
+          459,
+          1499,
+          706
         ],
         "bounds": {
-          "x": 1318,
-          "y": 471,
-          "width": 174,
-          "height": 239
+          "x": 1321,
+          "y": 461,
+          "width": 176,
+          "height": 243
         },
-        "originalWidth": 174,
-        "originalHeight": 239,
+        "originalWidth": 176,
+        "originalHeight": 243,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1435,
-              473
-            ],
-            [
-              1422,
-              615
+              1428,
+              463
             ]
           ],
           "fringePixels": 2
@@ -1855,6 +1906,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1874,6 +1934,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-broadcast-spotlight.png",
       "width": 256,
       "height": 256,
@@ -1883,37 +1944,46 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5217391304347826,
-        "scaleY": 0.5222222222222223,
+        "scaleX": 0.49740932642487046,
+        "scaleY": 0.49612403100775193,
         "width": 96,
-        "height": 141,
+        "height": 128,
         "offset": {
           "x": 80,
-          "y": 51
+          "y": 64
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          32,
-          703,
-          220,
-          977
+          19,
+          708,
+          216,
+          970
         ],
         "bounds": {
-          "x": 34,
-          "y": 705,
-          "width": 184,
-          "height": 270
+          "x": 21,
+          "y": 710,
+          "width": 193,
+          "height": 258
         },
-        "originalWidth": 184,
-        "originalHeight": 270,
+        "originalWidth": 193,
+        "originalHeight": 258,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1921,7 +1991,7 @@
           "seeds": [
             [
               119,
-              707
+              712
             ]
           ],
           "fringePixels": 2
@@ -1930,6 +2000,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1949,6 +2028,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-underwater-trailer-window.png",
       "width": 256,
       "height": 256,
@@ -1958,45 +2038,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.38095238095238093,
-        "scaleY": 0.3789954337899543,
+        "scaleX": 0.3356643356643357,
+        "scaleY": 0.3333333333333333,
         "width": 96,
-        "height": 83,
+        "height": 70,
         "offset": {
           "x": 80,
-          "y": 109
+          "y": 122
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          262,
-          747,
-          518,
-          970
+          244,
+          751,
+          534,
+          965
         ],
         "bounds": {
-          "x": 264,
-          "y": 749,
-          "width": 252,
-          "height": 219
+          "x": 246,
+          "y": 753,
+          "width": 286,
+          "height": 210
         },
-        "originalWidth": 252,
-        "originalHeight": 219,
+        "originalWidth": 286,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              320,
-              751
+              292,
+              755
             ]
           ],
           "fringePixels": 2
@@ -2005,6 +2094,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2024,6 +2122,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-infomercial-display-podium.png",
       "width": 256,
       "height": 256,
@@ -2033,45 +2132,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
         "scaleX": 0.4528301886792453,
-        "scaleY": 0.45454545454545453,
+        "scaleY": 0.4532710280373832,
         "width": 96,
-        "height": 100,
+        "height": 97,
         "offset": {
           "x": 80,
-          "y": 92
+          "y": 95
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          533,
-          747,
-          749,
-          971
+          537,
+          751,
+          753,
+          969
         ],
         "bounds": {
-          "x": 535,
-          "y": 749,
+          "x": 539,
+          "y": 753,
           "width": 212,
-          "height": 220
+          "height": 214
         },
         "originalWidth": 212,
-        "originalHeight": 220,
+        "originalHeight": 214,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              627,
-              751
+              619,
+              755
             ]
           ],
           "fringePixels": 2
@@ -2080,6 +2188,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2099,6 +2216,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-convention-stage-backdrop.png",
       "width": 256,
       "height": 256,
@@ -2108,45 +2226,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.366412213740458,
-        "scaleY": 0.36585365853658536,
+        "scaleX": 0.3595505617977528,
+        "scaleY": 0.36,
         "width": 96,
         "height": 90,
         "offset": {
           "x": 80,
           "y": 102
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          762,
-          719,
-          1028,
-          969
+          754,
+          718,
+          1025,
+          972
         ],
         "bounds": {
-          "x": 764,
-          "y": 721,
-          "width": 262,
-          "height": 246
+          "x": 756,
+          "y": 720,
+          "width": 267,
+          "height": 250
         },
-        "originalWidth": 262,
-        "originalHeight": 246,
+        "originalWidth": 267,
+        "originalHeight": 250,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              987,
-              723
+              816,
+              722
             ]
           ],
           "fringePixels": 2
@@ -2155,6 +2282,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2174,6 +2310,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-bubble-boundary-portal.png",
       "width": 256,
       "height": 256,
@@ -2183,45 +2320,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.40336134453781514,
-        "scaleY": 0.4025423728813559,
+        "scaleX": 0.384,
+        "scaleY": 0.38493723849372385,
         "width": 96,
-        "height": 95,
+        "height": 92,
         "offset": {
           "x": 80,
-          "y": 97
+          "y": 100
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1027,
-          734,
-          1269,
-          974
+          1020,
+          735,
+          1274,
+          978
         ],
         "bounds": {
-          "x": 1029,
-          "y": 736,
-          "width": 238,
-          "height": 236
+          "x": 1022,
+          "y": 737,
+          "width": 250,
+          "height": 239
         },
-        "originalWidth": 238,
-        "originalHeight": 236,
+        "originalWidth": 250,
+        "originalHeight": 239,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1193,
-              738
+              1100,
+              739
             ]
           ],
           "fringePixels": 2
@@ -2230,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2249,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/broadcast-portals-remote-flooded-city-portal-vista.png",
       "width": 256,
       "height": 256,
@@ -2258,53 +2414,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41739130434782606,
-        "scaleY": 0.4166666666666667,
+        "scaleX": 0.40336134453781514,
+        "scaleY": 0.40408163265306124,
         "width": 96,
-        "height": 100,
+        "height": 99,
         "offset": {
           "x": 80,
-          "y": 92
+          "y": 93
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/broadcast-portals.png",
-        "sha256": "41ef4c6ba44b8016de9d1c5bd67b6d057cc66b541066b86330cd77778d377c48",
+        "sha256": "7afc356066af785faa53e84965a5e54f9f884fcb290d547394b04f42d628f2c2",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
           1278,
-          732,
-          1512,
-          976
+          730,
+          1520,
+          979
         ],
         "bounds": {
           "x": 1280,
-          "y": 734,
-          "width": 230,
-          "height": 240
+          "y": 732,
+          "width": 238,
+          "height": 245
         },
-        "originalWidth": 230,
-        "originalHeight": 240,
+        "originalWidth": 238,
+        "originalHeight": 245,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1397,
-              736
-            ],
-            [
-              1478,
-              764
-            ],
-            [
-              1400,
-              957
+              1428,
+              734
             ]
           ],
           "fringePixels": 2
@@ -2313,6 +2470,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

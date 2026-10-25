@@ -12,9 +12,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -40,6 +40,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/safe-services-diner-checker-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -49,120 +50,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5663518321657791,
-          -0.005204095747022295,
-          63.75137902957292,
-          0.0020729808382316333,
-          0.5434961362417031,
-          158.81531391706085
-        ],
-        "width": 130,
-        "height": 71,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          20,
-          74,
-          253,
-          209
+          41,
+          43,
+          238,
+          238
         ],
         "bounds": {
-          "x": 22,
-          "y": 76,
-          "width": 229,
-          "height": 131
+          "x": 43,
+          "y": 45,
+          "width": 193,
+          "height": 191
         },
-        "originalWidth": 229,
-        "originalHeight": 131,
+        "originalWidth": 193,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              133,
-              78
+              86,
+              47
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978165938864644,
-          "y": 0.4627709923664191
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              113.459,
-              1.747
-            ],
-            [
-              227.0,
-              60.192
-            ],
-            [
-              114.541,
-              119.498
-            ],
-            [
-              1.0,
-              61.054
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -184,6 +158,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/safe-services-worn-diner-checker-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -193,120 +168,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5638515474770464,
-          -0.004030214080960115,
-          63.686074118325536,
-          0.0033443208394821496,
-          0.5368888476396373,
-          158.7025675704837
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          272,
-          73,
-          506,
-          208
+          292,
+          43,
+          491,
+          238
         ],
         "bounds": {
-          "x": 274,
-          "y": 75,
-          "width": 230,
-          "height": 131
+          "x": 294,
+          "y": 45,
+          "width": 195,
+          "height": 191
         },
-        "originalWidth": 230,
-        "originalHeight": 131,
+        "originalWidth": 195,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              387,
-              77
+              307,
+              47
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49782608695652614,
-          "y": 0.467984732824423
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              114.074,
-              1.706
-            ],
-            [
-              228.0,
-              60.599
-            ],
-            [
-              114.926,
-              120.905
-            ],
-            [
-              1.0,
-              62.013
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -328,6 +276,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/safe-services-cracked-diner-checker-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -337,120 +286,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.563878903106156,
-          0.0026476948052508277,
-          63.27182369114362,
-          0.0004546308695848695,
-          0.5347212818433499,
-          158.81848566690502
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          525,
-          71,
-          759,
-          207
+          543,
+          43,
+          741,
+          238
         ],
         "bounds": {
-          "x": 527,
-          "y": 73,
-          "width": 230,
-          "height": 132
+          "x": 545,
+          "y": 45,
+          "width": 194,
+          "height": 191
         },
-        "originalWidth": 230,
-        "originalHeight": 132,
+        "originalWidth": 194,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              641,
-              75
+              552,
+              47
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49782608695652186,
-          "y": 0.4693674242423937
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              114.781,
-              2.112
-            ],
-            [
-              228.0,
-              61.86
-            ],
-            [
-              114.219,
-              121.801
-            ],
-            [
-              1.0,
-              62.053
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -472,6 +394,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/safe-services-wet-diner-checker-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -481,120 +404,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5638785698496124,
-          0.0007493216213544185,
-          63.38961628236427,
-          0.0013604870687716523,
-          0.531550025148302,
-          159.00905030215216
-        ],
-        "width": 130,
-        "height": 71,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6701570680628273,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          778,
-          71,
-          1012,
-          208
+          796,
+          43,
+          993,
+          238
         ],
         "bounds": {
-          "x": 780,
-          "y": 73,
-          "width": 230,
-          "height": 133
+          "x": 798,
+          "y": 45,
+          "width": 193,
+          "height": 191
         },
-        "originalWidth": 230,
-        "originalHeight": 133,
+        "originalWidth": 193,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
-              75
+              815,
+              47
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978260869565198,
-          "y": 0.46445488721802874
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              114.58,
-              1.571
-            ],
-            [
-              228.0,
-              61.482
-            ],
-            [
-              114.42,
-              121.975
-            ],
-            [
-              1.0,
-              62.063
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -616,6 +512,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/safe-services-diner-checker-tile-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -625,45 +522,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5565217391304348,
-        "scaleY": 0.47058823529411764,
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6808510638297872,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1030,
-          68,
-          1264,
-          208
+          1045,
+          42,
+          1246,
+          234
         ],
         "bounds": {
-          "x": 1032,
-          "y": 70,
-          "width": 230,
-          "height": 136
+          "x": 1047,
+          "y": 44,
+          "width": 197,
+          "height": 188
         },
-        "originalWidth": 230,
-        "originalHeight": 136,
+        "originalWidth": 197,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1146,
-              72
+              1052,
+              46
             ]
           ],
           "fringePixels": 2
@@ -672,6 +590,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -691,6 +630,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/safe-services-diner-checker-tile-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -700,45 +640,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.48484848484848486,
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6772486772486772,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1285,
-          67,
-          1516,
-          203
+          1301,
+          42,
+          1497,
+          235
         ],
         "bounds": {
-          "x": 1287,
-          "y": 69,
-          "width": 227,
-          "height": 132
+          "x": 1303,
+          "y": 44,
+          "width": 192,
+          "height": 189
         },
-        "originalWidth": 227,
-        "originalHeight": 132,
+        "originalWidth": 192,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1398,
-              71
+              1308,
+              46
             ]
           ],
           "fringePixels": 2
@@ -747,15 +708,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "safe-services-cream-service-tile-wall-northwest",
-      "label": "Cream Service Tile wall northwest",
+      "label": "Cream Service Tile north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -766,8 +748,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/safe-services-cream-service-tile-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -777,109 +760,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4050632911392405,
-          -0.0,
-          93.16455696202532,
-          -0.007320421997881471,
-          0.4013196319934309,
-          125.68964233512952
-        ],
-        "width": 73,
-        "height": 82,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5739910313901345,
+        "scaleY": 0.4025157232704403,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 126
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          56,
-          272,
-          241,
-          485
+          36,
+          299,
+          263,
+          462
         ],
         "bounds": {
-          "x": 58,
-          "y": 274,
-          "width": 181,
-          "height": 209
+          "x": 38,
+          "y": 301,
+          "width": 223,
+          "height": 159
         },
-        "originalWidth": 181,
-        "originalHeight": 209,
+        "originalWidth": 223,
+        "originalHeight": 159,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              75,
-              276
+              44,
+              303
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.47513812154695884,
-          "y": 0.7980837320574096
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              125.49
-            ],
-            [
-              165.0,
-              208.109
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "safe-services-cream-service-tile-wall-northeast",
-      "label": "Cream Service Tile wall northeast",
+      "label": "Cream Service Tile west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -890,8 +854,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/safe-services-cream-service-tile-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -901,100 +866,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.41025641025641024,
-          0.0,
-          90.25641025641026,
-          0.010454737219295733,
-          0.40486034340793253,
-          123.92325046806158
-        ],
-        "width": 73,
-        "height": 82,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.6432160804020101,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 90,
-          "y": 126
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          287,
-          273,
-          468,
-          485
+          363,
+          264,
+          437,
+          467
         ],
         "bounds": {
-          "x": 289,
-          "y": 275,
-          "width": 177,
-          "height": 208
+          "x": 365,
+          "y": 266,
+          "width": 70,
+          "height": 199
         },
-        "originalWidth": 177,
-        "originalHeight": 208,
+        "originalWidth": 70,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              444,
-              277
+              370,
+              268
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5197740112994368,
-          "y": 0.7969855769230819
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              170.0,
-              124.239
-            ],
-            [
-              14.0,
-              207.307
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1014,8 +960,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/safe-services-cream-service-tile-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1025,36 +972,45 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.8311688311688312,
-        "scaleY": 0.5485714285714286,
+        "scaleX": 0.7191011235955056,
+        "scaleY": 0.7314285714285714,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          564,
-          288,
-          722,
-          467
+          550,
+          292,
+          732,
+          471
         ],
         "bounds": {
-          "x": 566,
-          "y": 290,
-          "width": 154,
+          "x": 552,
+          "y": 294,
+          "width": 178,
           "height": 175
         },
-        "originalWidth": 154,
+        "originalWidth": 178,
         "originalHeight": 175,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -1062,16 +1018,25 @@
           "connectivity": 8,
           "seeds": [
             [
-              583,
-              292
+              563,
+              296
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1091,8 +1056,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/safe-services-cream-service-tile-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1102,58 +1068,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.649746192893401,
-        "scaleY": 0.5393258426966292,
+        "scaleX": 0.7150837988826816,
+        "scaleY": 0.7314285714285714,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          798,
-          273,
-          999,
-          455
+          804,
+          292,
+          987,
+          471
         ],
         "bounds": {
-          "x": 800,
-          "y": 275,
-          "width": 197,
-          "height": 178
+          "x": 806,
+          "y": 294,
+          "width": 179,
+          "height": 175
         },
-        "originalWidth": 197,
-        "originalHeight": 178,
+        "originalWidth": 179,
+        "originalHeight": 175,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              277
+              816,
+              296
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "safe-services-cream-service-tile-endcap-northwest",
-      "label": "Cream Service Tile endcap northwest",
+      "label": "Cream Service Tile north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1168,8 +1152,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/safe-services-cream-service-tile-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1179,58 +1164,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.4507042253521127,
-        "scaleY": 0.5517241379310345,
+        "scaleX": 0.34408602150537637,
+        "scaleY": 0.23357664233576642,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1104,
-          279,
-          1179,
-          457
+          1099,
+          311,
+          1196,
+          452
         ],
         "bounds": {
-          "x": 1106,
-          "y": 281,
-          "width": 71,
-          "height": 174
+          "x": 1101,
+          "y": 313,
+          "width": 93,
+          "height": 137
         },
-        "originalWidth": 71,
-        "originalHeight": 174,
+        "originalWidth": 93,
+        "originalHeight": 137,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1138,
-              283
+              1111,
+              315
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "safe-services-cream-service-tile-endcap-northeast",
-      "label": "Cream Service Tile endcap northeast",
+      "label": "Cream Service Tile west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1245,8 +1248,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/safe-services-cream-service-tile-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1256,53 +1260,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.463768115942029,
-        "scaleY": 0.5485714285714286,
+        "scaleX": 0.3404255319148936,
+        "scaleY": 0.22535211267605634,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1374,
-          279,
-          1447,
-          458
+          1351,
+          306,
+          1449,
+          452
         ],
         "bounds": {
-          "x": 1376,
-          "y": 281,
-          "width": 69,
-          "height": 175
+          "x": 1353,
+          "y": 308,
+          "width": 94,
+          "height": 142
         },
-        "originalWidth": 69,
-        "originalHeight": 175,
+        "originalWidth": 94,
+        "originalHeight": 142,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1414,
-              283
+              1358,
+              310
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1311,7 +1333,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1324,6 +1346,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/safe-services-cream-service-tile-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1333,100 +1356,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.42105263157894735,
-          -0.0,
-          93.05263157894737,
-          0.007685786856417322,
-          0.4248086251732559,
-          116.79457209700541
-        ],
-        "width": 74,
-        "height": 92,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5925925925925926,
+        "scaleY": 0.5245901639344263,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 117
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          54,
-          527,
-          233,
-          744
+          34,
+          518,
+          254,
+          705
         ],
         "bounds": {
-          "x": 56,
-          "y": 529,
-          "width": 175,
-          "height": 213
+          "x": 36,
+          "y": 520,
+          "width": 216,
+          "height": 183
         },
-        "originalWidth": 175,
-        "originalHeight": 213,
+        "originalWidth": 216,
+        "originalHeight": 183,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              72,
-              531
+              179,
+              522
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.47428571428571686,
-          "y": 0.8240938967136184
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              139.243
-            ],
-            [
-              159.0,
-              211.821
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1435,7 +1439,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1448,6 +1452,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/safe-services-cream-service-tile-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1457,100 +1462,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.49612403100775193,
-          -0.0,
-          93.02325581395348,
-          -0.013003924818466489,
-          0.4894061631026432,
-          109.7370605156951
-        ],
-        "width": 75,
-        "height": 100,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.5245901639344263,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 109
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          316,
-          527,
-          471,
-          737
+          294,
+          518,
+          499,
+          705
         ],
         "bounds": {
-          "x": 318,
-          "y": 529,
-          "width": 151,
-          "height": 206
+          "x": 296,
+          "y": 520,
+          "width": 201,
+          "height": 183
         },
-        "originalWidth": 151,
-        "originalHeight": 206,
+        "originalWidth": 201,
+        "originalHeight": 183,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              336,
-              531
+              360,
+              522
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.46688741721854227,
-          "y": 0.8250509708737838
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              6.0,
-              135.554
-            ],
-            [
-              135.0,
-              204.367
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1570,6 +1556,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/safe-services-diner-checker-tile-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1579,53 +1567,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5765765765765766,
-        "scaleY": 0.5778894472361809,
+        "scaleX": 0.7150837988826816,
+        "scaleY": 0.6305418719211823,
         "width": 128,
-        "height": 115,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 77
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          524,
-          524,
-          750,
-          727
+          553,
+          506,
+          736,
+          713
         ],
         "bounds": {
-          "x": 526,
-          "y": 526,
-          "width": 222,
-          "height": 199
+          "x": 555,
+          "y": 508,
+          "width": 179,
+          "height": 203
         },
-        "originalWidth": 222,
-        "originalHeight": 199,
+        "originalWidth": 179,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              643,
-              528
+              576,
+              510
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1645,6 +1651,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/safe-services-diner-checker-tile-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1654,53 +1662,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5203252032520326,
-        "scaleY": 0.5212121212121212,
+        "scaleX": 0.7231638418079096,
+        "scaleY": 0.6336633663366337,
         "width": 128,
-        "height": 86,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 106
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          774,
-          551,
-          1024,
-          720
+          799,
+          507,
+          980,
+          713
         ],
         "bounds": {
-          "x": 776,
-          "y": 553,
-          "width": 246,
-          "height": 165
+          "x": 801,
+          "y": 509,
+          "width": 177,
+          "height": 202
         },
-        "originalWidth": 246,
-        "originalHeight": 165,
+        "originalWidth": 177,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              886,
-              555
+              823,
+              511
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1720,6 +1746,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-food-service-counter.png",
       "width": 256,
       "height": 256,
@@ -1729,45 +1756,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41379310344827586,
-        "scaleY": 0.41262135922330095,
+        "scaleX": 0.37065637065637064,
+        "scaleY": 0.36942675159235666,
         "width": 96,
-        "height": 85,
+        "height": 58,
         "offset": {
           "x": 80,
-          "y": 107
+          "y": 134
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1031,
-          539,
-          1267,
-          749
+          1001,
+          541,
+          1264,
+          702
         ],
         "bounds": {
-          "x": 1033,
-          "y": 541,
-          "width": 232,
-          "height": 206
+          "x": 1003,
+          "y": 543,
+          "width": 259,
+          "height": 157
         },
-        "originalWidth": 232,
-        "originalHeight": 206,
+        "originalWidth": 259,
+        "originalHeight": 157,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1104,
-              543
+              1055,
+              545
             ]
           ],
           "fringePixels": 2
@@ -1776,6 +1812,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1795,6 +1840,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-restaurant-dining-booth.png",
       "width": 256,
       "height": 256,
@@ -1804,45 +1850,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4423963133640553,
-        "scaleY": 0.4431818181818182,
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.4074074074074074,
         "width": 96,
-        "height": 78,
+        "height": 66,
         "offset": {
           "x": 80,
-          "y": 114
+          "y": 126
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1293,
-          538,
-          1514,
-          718
+          1281,
+          533,
+          1520,
+          699
         ],
         "bounds": {
-          "x": 1295,
-          "y": 540,
-          "width": 217,
-          "height": 176
+          "x": 1283,
+          "y": 535,
+          "width": 235,
+          "height": 162
         },
-        "originalWidth": 217,
-        "originalHeight": 176,
+        "originalWidth": 235,
+        "originalHeight": 162,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1417,
-              542
+              1311,
+              537
             ]
           ],
           "fringePixels": 2
@@ -1851,6 +1906,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1870,6 +1934,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-waiting-room-bench.png",
       "width": 256,
       "height": 256,
@@ -1879,45 +1944,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4383561643835616,
-        "scaleY": 0.4388888888888889,
+        "scaleX": 0.3582089552238806,
+        "scaleY": 0.36054421768707484,
         "width": 96,
-        "height": 79,
+        "height": 53,
         "offset": {
           "x": 80,
-          "y": 113
+          "y": 139
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          34,
-          785,
-          257,
-          969
+          21,
+          806,
+          293,
+          957
         ],
         "bounds": {
-          "x": 36,
-          "y": 787,
-          "width": 219,
-          "height": 180
+          "x": 23,
+          "y": 808,
+          "width": 268,
+          "height": 147
         },
-        "originalWidth": 219,
-        "originalHeight": 180,
+        "originalWidth": 268,
+        "originalHeight": 147,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              91,
-              789
+              56,
+              810
             ]
           ],
           "fringePixels": 2
@@ -1926,6 +2000,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1945,6 +2028,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-queue-ticket-dispenser.png",
       "width": 256,
       "height": 256,
@@ -1954,45 +2038,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.9642857142857143,
-        "scaleY": 0.968421052631579,
-        "width": 81,
+        "scaleX": 0.88,
+        "scaleY": 0.8761904761904762,
+        "width": 88,
         "height": 184,
         "offset": {
-          "x": 88,
+          "x": 84,
           "y": 8
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          353,
-          773,
-          441,
+          349,
+          753,
+          453,
           967
         ],
         "bounds": {
-          "x": 355,
-          "y": 775,
-          "width": 84,
-          "height": 190
+          "x": 351,
+          "y": 755,
+          "width": 100,
+          "height": 210
         },
-        "originalWidth": 84,
-        "originalHeight": 190,
+        "originalWidth": 100,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              386,
-              777
+              374,
+              757
             ]
           ],
           "fringePixels": 2
@@ -2001,6 +2094,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2020,6 +2122,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-children-play-tunnel.png",
       "width": 256,
       "height": 256,
@@ -2029,45 +2132,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4383561643835616,
-        "scaleY": 0.43820224719101125,
+        "scaleX": 0.36923076923076925,
+        "scaleY": 0.3706293706293706,
         "width": 96,
-        "height": 78,
+        "height": 53,
         "offset": {
           "x": 80,
-          "y": 114
+          "y": 139
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          533,
-          789,
-          756,
-          971
+          500,
+          797,
+          764,
+          944
         ],
         "bounds": {
-          "x": 535,
-          "y": 791,
-          "width": 219,
-          "height": 178
+          "x": 502,
+          "y": 799,
+          "width": 260,
+          "height": 143
         },
-        "originalWidth": 219,
-        "originalHeight": 178,
+        "originalWidth": 260,
+        "originalHeight": 143,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              603,
-              793
+              538,
+              801
             ]
           ],
           "fringePixels": 2
@@ -2076,6 +2188,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2095,6 +2216,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-candy-vending-machine.png",
       "width": 256,
       "height": 256,
@@ -2104,45 +2226,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.7933884297520661,
-        "scaleY": 0.7952380952380952,
+        "scaleX": 0.7272727272727273,
+        "scaleY": 0.7288888888888889,
         "width": 96,
-        "height": 167,
+        "height": 164,
         "offset": {
           "x": 80,
-          "y": 25
+          "y": 28
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          831,
-          757,
-          956,
-          971
+          822,
+          738,
+          958,
+          967
         ],
         "bounds": {
-          "x": 833,
-          "y": 759,
-          "width": 121,
-          "height": 210
+          "x": 824,
+          "y": 740,
+          "width": 132,
+          "height": 225
         },
-        "originalWidth": 121,
-        "originalHeight": 210,
+        "originalWidth": 132,
+        "originalHeight": 225,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
-              761
+              838,
+              742
             ]
           ],
           "fringePixels": 2
@@ -2151,6 +2282,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2170,6 +2310,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-protected-restroom-portal.png",
       "width": 256,
       "height": 256,
@@ -2179,45 +2320,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5818181818181818,
-        "scaleY": 0.5806451612903226,
+        "scaleX": 0.4873096446700508,
+        "scaleY": 0.48623853211009177,
         "width": 96,
-        "height": 126,
+        "height": 106,
         "offset": {
           "x": 80,
-          "y": 66
+          "y": 86
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1064,
-          756,
-          1233,
-          977
+          1036,
+          746,
+          1237,
+          968
         ],
         "bounds": {
-          "x": 1066,
-          "y": 758,
-          "width": 165,
-          "height": 217
+          "x": 1038,
+          "y": 748,
+          "width": 197,
+          "height": 218
         },
-        "originalWidth": 165,
-        "originalHeight": 217,
+        "originalWidth": 197,
+        "originalHeight": 218,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1101,
-              760
+              1082,
+              750
             ]
           ],
           "fringePixels": 2
@@ -2226,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2245,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/safe-services-walk-in-freezer-door.png",
       "width": 256,
       "height": 256,
@@ -2254,45 +2414,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5133689839572193,
-        "scaleY": 0.5112107623318386,
+        "scaleX": 0.4752475247524752,
+        "scaleY": 0.47474747474747475,
         "width": 96,
-        "height": 114,
+        "height": 94,
         "offset": {
           "x": 80,
-          "y": 78
+          "y": 98
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/safe-services.png",
-        "sha256": "98ca740c40f8cf93af674eb28bf5797a7840703ea3173f9b888f44a8f9697ca9",
+        "sha256": "079e7fca254281531b68165fdfb9147188b488ced2a8118de3d0f2654cb50499",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1307,
-          751,
-          1498,
-          978
+          1300,
+          758,
+          1506,
+          960
         ],
         "bounds": {
-          "x": 1309,
-          "y": 753,
-          "width": 187,
-          "height": 223
+          "x": 1302,
+          "y": 760,
+          "width": 202,
+          "height": 198
         },
-        "originalWidth": 187,
-        "originalHeight": 223,
+        "originalWidth": 202,
+        "originalHeight": 198,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1432,
-              755
+              1316,
+              762
             ]
           ],
           "fringePixels": 2
@@ -2301,6 +2470,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

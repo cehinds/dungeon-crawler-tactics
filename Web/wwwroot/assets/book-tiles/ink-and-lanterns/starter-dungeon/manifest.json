@@ -9,9 +9,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -37,6 +37,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/starter-dungeon-grey-flagstone-floor.png",
       "width": 256,
       "height": 256,
@@ -46,120 +47,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5470186541250368,
-          0.0009532709627506084,
-          63.38266236003669,
-          0.004807043208504427,
-          0.45338497008868683,
-          158.55079725322943
-        ],
-        "width": 129,
-        "height": 75,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          19,
-          60,
-          260,
-          231
+          55,
+          38,
+          253,
+          232
         ],
         "bounds": {
-          "x": 21,
-          "y": 62,
-          "width": 237,
-          "height": 167
+          "x": 57,
+          "y": 40,
+          "width": 194,
+          "height": 190
         },
-        "originalWidth": 237,
-        "originalHeight": 167,
+        "originalWidth": 194,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              138,
-              64
+              72,
+              42
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978902953586453,
-          "y": 0.4342844311377383
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.123,
-              1.944
-            ],
-            [
-              235.0,
-              71.285
-            ],
-            [
-              117.877,
-              143.107
-            ],
-            [
-              1.0,
-              73.766
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -181,6 +155,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/starter-dungeon-worn-grey-flagstone-floor.png",
       "width": 256,
       "height": 256,
@@ -190,120 +165,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5469717677061416,
-          -0.004149641640725758,
-          63.759919129475364,
-          0.00396972175408911,
-          0.44788567524438405,
-          158.87219727987224
-        ],
-        "width": 130,
-        "height": 75,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          275,
-          59,
-          516,
-          230
+          302,
+          38,
+          499,
+          232
         ],
         "bounds": {
-          "x": 277,
-          "y": 61,
-          "width": 237,
-          "height": 167
+          "x": 304,
+          "y": 40,
+          "width": 193,
+          "height": 190
         },
-        "originalWidth": 237,
-        "originalHeight": 167,
+        "originalWidth": 193,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              392,
-              63
+              312,
+              42
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49789029535864987,
-          "y": 0.4366407185628792
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.458,
-              1.477
-            ],
-            [
-              235.0,
-              71.882
-            ],
-            [
-              118.542,
-              144.36
-            ],
-            [
-              1.0,
-              73.956
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -325,6 +273,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/starter-dungeon-cracked-grey-flagstone-floor.png",
       "width": 256,
       "height": 256,
@@ -334,120 +283,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517324020905199,
-          0.0014691839085328594,
-          63.34048679719561,
-          0.0025095353411457677,
-          0.4461396162036897,
-          159.26824208033997
-        ],
-        "width": 130,
-        "height": 75,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          532,
-          59,
-          771,
-          231
+          548,
+          38,
+          742,
+          232
         ],
         "bounds": {
-          "x": 534,
-          "y": 61,
-          "width": 235,
-          "height": 168
+          "x": 550,
+          "y": 40,
+          "width": 190,
+          "height": 190
         },
-        "originalWidth": 235,
-        "originalHeight": 168,
+        "originalWidth": 190,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              649,
-              63
+              563,
+              42
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042552986,
-          "y": 0.432788690476197
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.191,
-              0.981
-            ],
-            [
-              233.0,
-              72.056
-            ],
-            [
-              116.809,
-              144.436
-            ],
-            [
-              1.0,
-              73.361
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -469,6 +391,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/starter-dungeon-wet-grey-flagstone-floor.png",
       "width": 256,
       "height": 256,
@@ -478,120 +401,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.556529041848942,
-          -0.004317802716416332,
-          63.7656524434419,
-          -0.0007392716798793757,
-          0.4371015073836973,
-          159.38553609523055
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6736842105263158,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          784,
-          59,
-          1021,
+          794,
+          38,
+          990,
           232
         ],
         "bounds": {
-          "x": 786,
-          "y": 61,
-          "width": 233,
-          "height": 169
+          "x": 796,
+          "y": 40,
+          "width": 192,
+          "height": 190
         },
-        "originalWidth": 233,
-        "originalHeight": 169,
+        "originalWidth": 192,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              900,
-              63
+              812,
+              42
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49785407725322023,
-          "y": 0.4426715976331635
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.432,
-              1.601
-            ],
-            [
-              231.0,
-              75.006
-            ],
-            [
-              116.568,
-              148.023
-            ],
-            [
-              1.0,
-              74.617
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -613,6 +509,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/starter-dungeon-grey-flagstone-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -622,45 +519,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.3902439024390244,
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6736842105263158,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1034,
-          60,
-          1265,
-          228
+          1040,
+          38,
+          1236,
+          232
         ],
         "bounds": {
-          "x": 1036,
-          "y": 62,
-          "width": 227,
-          "height": 164
+          "x": 1042,
+          "y": 40,
+          "width": 192,
+          "height": 190
         },
-        "originalWidth": 227,
-        "originalHeight": 164,
+        "originalWidth": 192,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1146,
-              64
+              1051,
+              42
             ]
           ],
           "fringePixels": 2
@@ -669,6 +587,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -688,6 +627,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/starter-dungeon-grey-flagstone-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -697,45 +637,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5589519650655022,
-        "scaleY": 0.3657142857142857,
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6701570680628273,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1277,
-          53,
-          1510,
-          232
+          1284,
+          38,
+          1486,
+          233
         ],
         "bounds": {
-          "x": 1279,
-          "y": 55,
-          "width": 229,
-          "height": 175
+          "x": 1286,
+          "y": 40,
+          "width": 198,
+          "height": 191
         },
-        "originalWidth": 229,
-        "originalHeight": 175,
+        "originalWidth": 198,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1389,
-              57
+              1299,
+              42
             ]
           ],
           "fringePixels": 2
@@ -744,15 +705,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "starter-dungeon-dark-stone-block-wall-northwest",
-      "label": "Dark Stone Block wall northwest",
+      "label": "Dark Stone Block north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -763,8 +745,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/starter-dungeon-dark-stone-block-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -774,109 +757,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.40764331210191085,
-          -0.0,
-          84.17834394904459,
-          -0.009617432354199266,
-          0.4026910638660013,
-          121.59829135803518
-        ],
-        "width": 86,
-        "height": 88,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.4866920152091255,
+        "scaleY": 0.3950617283950617,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 85,
-          "y": 121
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          38,
-          242,
-          254,
-          467
+          44,
+          283,
+          311,
+          449
         ],
         "bounds": {
-          "x": 40,
-          "y": 244,
-          "width": 212,
-          "height": 221
+          "x": 46,
+          "y": 285,
+          "width": 263,
+          "height": 162
         },
-        "originalWidth": 212,
-        "originalHeight": 221,
+        "originalWidth": 263,
+        "originalHeight": 162,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              74,
-              246
+              58,
+              287
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5070754716981132,
-          "y": 0.8026945701357528
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              29.0,
-              135.788
-            ],
-            [
-              186.0,
-              219.003
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "starter-dungeon-dark-stone-block-wall-northeast",
-      "label": "Dark Stone Block wall northeast",
+      "label": "Dark Stone Block west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -887,8 +851,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/starter-dungeon-dark-stone-block-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -898,100 +863,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4050632911392405,
-          0.0,
-          86.27848101265823,
-          0.008077251725059586,
-          0.40092297223532114,
-          119.33527552137471
-        ],
-        "width": 86,
-        "height": 88,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5161290322580645,
+        "scaleY": 0.6066350710900474,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 86,
-          "y": 121
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          292,
-          241,
-          508,
-          467
+          399,
+          254,
+          465,
+          469
         ],
         "bounds": {
-          "x": 294,
-          "y": 243,
-          "width": 212,
-          "height": 222
+          "x": 401,
+          "y": 256,
+          "width": 62,
+          "height": 211
         },
-        "originalWidth": 212,
-        "originalHeight": 222,
+        "originalWidth": 62,
+        "originalHeight": 211,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              469,
-              245
+              410,
+              258
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4858490566037709,
-          "y": 0.8070653153153204
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              182.0,
-              137.669
-            ],
-            [
-              24.0,
-              220.668
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1011,8 +957,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/starter-dungeon-dark-stone-block-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1022,53 +969,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.7398843930635838,
-        "scaleY": 0.5217391304347826,
+        "scaleX": 0.757396449704142,
+        "scaleY": 0.6881720430107527,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          565,
-          269,
-          742,
-          457
+          579,
+          270,
+          752,
+          460
         ],
         "bounds": {
-          "x": 567,
-          "y": 271,
-          "width": 173,
-          "height": 184
+          "x": 581,
+          "y": 272,
+          "width": 169,
+          "height": 186
         },
-        "originalWidth": 173,
-        "originalHeight": 184,
+        "originalWidth": 169,
+        "originalHeight": 186,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              699,
-              273
+              593,
+              274
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1088,8 +1053,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/starter-dungeon-dark-stone-block-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1099,58 +1065,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5714285714285714,
-        "scaleY": 0.5333333333333333,
+        "scaleX": 0.735632183908046,
+        "scaleY": 0.6844919786096256,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          795,
-          256,
-          1023,
-          440
+          812,
+          270,
+          990,
+          461
         ],
         "bounds": {
-          "x": 797,
-          "y": 258,
-          "width": 224,
-          "height": 180
+          "x": 814,
+          "y": 272,
+          "width": 174,
+          "height": 187
         },
-        "originalWidth": 224,
-        "originalHeight": 180,
+        "originalWidth": 174,
+        "originalHeight": 187,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              908,
-              260
+              825,
+              274
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "starter-dungeon-dark-stone-block-endcap-northwest",
-      "label": "Dark Stone Block endcap northwest",
+      "label": "Dark Stone Block north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1165,8 +1149,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/starter-dungeon-dark-stone-block-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1176,58 +1161,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.2119205298013245,
-        "scaleY": 0.46601941747572817,
+        "scaleX": 0.34408602150537637,
+        "scaleY": 0.29357798165137616,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1087,
-          245,
-          1242,
-          455
+          1088,
+          306,
+          1185,
+          419
         ],
         "bounds": {
-          "x": 1089,
-          "y": 247,
-          "width": 151,
-          "height": 206
+          "x": 1090,
+          "y": 308,
+          "width": 93,
+          "height": 109
         },
-        "originalWidth": 151,
-        "originalHeight": 206,
+        "originalWidth": 93,
+        "originalHeight": 109,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1202,
-              249
+              1102,
+              310
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "starter-dungeon-dark-stone-block-endcap-northeast",
-      "label": "Dark Stone Block endcap northeast",
+      "label": "Dark Stone Block west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1242,8 +1245,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/starter-dungeon-dark-stone-block-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1253,53 +1257,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.21333333333333335,
-        "scaleY": 0.45714285714285713,
+        "scaleX": 0.3333333333333333,
+        "scaleY": 0.2909090909090909,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1306,
-          244,
-          1460,
-          458
+          1331,
+          305,
+          1431,
+          419
         ],
         "bounds": {
-          "x": 1308,
-          "y": 246,
-          "width": 150,
-          "height": 210
+          "x": 1333,
+          "y": 307,
+          "width": 96,
+          "height": 110
         },
-        "originalWidth": 150,
-        "originalHeight": 210,
+        "originalWidth": 96,
+        "originalHeight": 110,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1343,
-              248
+              1344,
+              309
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1308,7 +1330,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1321,6 +1343,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/starter-dungeon-dark-stone-block-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1330,100 +1353,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4383561643835616,
-          0.0,
-          83.28767123287672,
-          -0.04264578704635099,
-          0.4571996361952131,
-          110.31472853896689
-        ],
-        "width": 80,
-        "height": 103,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.64,
+        "scaleY": 0.4383561643835616,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 83,
-          "y": 106
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          46,
-          466,
-          232,
-          691
+          50,
+          485,
+          254,
+          708
         ],
         "bounds": {
-          "x": 48,
-          "y": 468,
-          "width": 182,
-          "height": 221
+          "x": 52,
+          "y": 487,
+          "width": 200,
+          "height": 219
         },
-        "originalWidth": 182,
-        "originalHeight": 221,
+        "originalWidth": 200,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              139,
-              470
+              146,
+              489
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5604395604395581,
-          "y": 0.851486425339369
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              175.0,
-              159.992
-            ],
-            [
-              29.0,
-              216.365
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1432,7 +1436,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1445,6 +1449,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/starter-dungeon-dark-stone-block-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1454,100 +1459,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4444444444444444,
-          -0.0,
-          92.88888888888889,
-          0.03174638431729229,
-          0.45894720330483096,
-          100.87575594161731
-        ],
-        "width": 80,
-        "height": 106,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.4383561643835616,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 104
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          310,
-          466,
-          494,
-          698
+          298,
+          485,
+          497,
+          708
         ],
         "bounds": {
-          "x": 312,
-          "y": 468,
-          "width": 180,
-          "height": 228
+          "x": 300,
+          "y": 487,
+          "width": 195,
+          "height": 219
         },
-        "originalWidth": 180,
-        "originalHeight": 228,
+        "originalWidth": 195,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              400,
-              470
+              393,
+              489
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4388888888888905,
-          "y": 0.8468684210526353
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              163.204
-            ],
-            [
-              151.0,
-              222.968
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1567,6 +1553,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/starter-dungeon-grey-flagstone-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1576,53 +1564,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5565217391304348,
-        "scaleY": 0.5580357142857143,
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.579185520361991,
         "width": 128,
-        "height": 125,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 67
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          524,
-          475,
-          758,
-          703
+          553,
+          489,
+          746,
+          714
         ],
         "bounds": {
-          "x": 526,
-          "y": 477,
-          "width": 230,
-          "height": 224
+          "x": 555,
+          "y": 491,
+          "width": 189,
+          "height": 221
         },
-        "originalWidth": 230,
-        "originalHeight": 224,
+        "originalWidth": 189,
+        "originalHeight": 221,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              642,
-              479
+              564,
+              493
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1642,6 +1648,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/starter-dungeon-grey-flagstone-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1651,53 +1659,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5311203319502075,
-        "scaleY": 0.5316455696202531,
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.5818181818181818,
         "width": 128,
-        "height": 126,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 66
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          788,
-          469,
-          1033,
-          710
+          800,
+          491,
+          993,
+          715
         ],
         "bounds": {
-          "x": 790,
-          "y": 471,
-          "width": 241,
-          "height": 237
+          "x": 802,
+          "y": 493,
+          "width": 189,
+          "height": 220
         },
-        "originalWidth": 241,
-        "originalHeight": 237,
+        "originalWidth": 189,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              904,
-              473
+              821,
+              495
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1717,6 +1743,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-wall-torch.png",
       "width": 256,
       "height": 256,
@@ -1726,45 +1753,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.7804878048780488,
-        "scaleY": 0.7818181818181819,
+        "scaleX": 0.732824427480916,
+        "scaleY": 0.7339055793991416,
         "width": 96,
-        "height": 172,
+        "height": 171,
         "offset": {
           "x": 80,
-          "y": 20
+          "y": 21
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1083,
-          465,
-          1210,
-          689
+          1068,
+          472,
+          1203,
+          709
         ],
         "bounds": {
-          "x": 1085,
-          "y": 467,
-          "width": 123,
-          "height": 220
+          "x": 1070,
+          "y": 474,
+          "width": 131,
+          "height": 233
         },
-        "originalWidth": 123,
-        "originalHeight": 220,
+        "originalWidth": 131,
+        "originalHeight": 233,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1165,
-              469
+              1138,
+              476
             ]
           ],
           "fringePixels": 2
@@ -1773,6 +1809,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1792,6 +1837,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-tutorial-fireplace.png",
       "width": 256,
       "height": 256,
@@ -1801,45 +1847,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4729064039408867,
-        "scaleY": 0.47265625,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.40825688073394495,
         "width": 96,
-        "height": 121,
+        "height": 89,
         "offset": {
           "x": 80,
-          "y": 71
+          "y": 103
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1292,
-          464,
-          1499,
-          724
+          1269,
+          492,
+          1507,
+          714
         ],
         "bounds": {
-          "x": 1294,
-          "y": 466,
-          "width": 203,
-          "height": 256
+          "x": 1271,
+          "y": 494,
+          "width": 234,
+          "height": 218
         },
-        "originalWidth": 203,
-        "originalHeight": 256,
+        "originalWidth": 234,
+        "originalHeight": 218,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1398,
-              468
+              1434,
+              496
             ]
           ],
           "fringePixels": 2
@@ -1848,6 +1903,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1867,6 +1931,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-guide-desk-and-chairs.png",
       "width": 256,
       "height": 256,
@@ -1876,45 +1941,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
         "scaleX": 0.4067796610169492,
-        "scaleY": 0.40707964601769914,
+        "scaleY": 0.4068627450980392,
         "width": 96,
-        "height": 92,
+        "height": 83,
         "offset": {
           "x": 80,
-          "y": 100
+          "y": 109
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          23,
-          731,
-          263,
-          961
+          31,
+          758,
+          271,
+          966
         ],
         "bounds": {
-          "x": 25,
-          "y": 733,
+          "x": 33,
+          "y": 760,
           "width": 236,
-          "height": 226
+          "height": 204
         },
         "originalWidth": 236,
-        "originalHeight": 226,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              111,
-              735
+              57,
+              762
             ]
           ],
           "fringePixels": 2
@@ -1923,6 +1997,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1942,6 +2025,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-simple-bed.png",
       "width": 256,
       "height": 256,
@@ -1951,45 +2035,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39183673469387753,
-        "scaleY": 0.3920704845814978,
+        "scaleX": 0.5274725274725275,
+        "scaleY": 0.5272727272727272,
         "width": 96,
-        "height": 89,
+        "height": 116,
         "offset": {
           "x": 80,
-          "y": 103
+          "y": 76
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          279,
-          716,
-          528,
-          947
+          307,
+          739,
+          493,
+          963
         ],
         "bounds": {
-          "x": 281,
-          "y": 718,
-          "width": 245,
-          "height": 227
+          "x": 309,
+          "y": 741,
+          "width": 182,
+          "height": 220
         },
-        "originalWidth": 245,
-        "originalHeight": 227,
+        "originalWidth": 182,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              363,
-              720
+              328,
+              743
             ]
           ],
           "fringePixels": 2
@@ -1998,6 +2091,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2017,6 +2119,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-bookcase-with-framed-photographs.png",
       "width": 256,
       "height": 256,
@@ -2026,45 +2129,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5363128491620112,
-        "scaleY": 0.5366795366795367,
+        "scaleX": 0.4873096446700508,
+        "scaleY": 0.4872881355932203,
         "width": 96,
-        "height": 139,
+        "height": 115,
         "offset": {
           "x": 80,
-          "y": 53
+          "y": 77
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          563,
-          708,
-          746,
-          971
+          544,
+          723,
+          745,
+          963
         ],
         "bounds": {
-          "x": 565,
-          "y": 710,
-          "width": 179,
-          "height": 259
+          "x": 546,
+          "y": 725,
+          "width": 197,
+          "height": 236
         },
-        "originalWidth": 179,
-        "originalHeight": 259,
+        "originalWidth": 197,
+        "originalHeight": 236,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              614,
-              712
+              683,
+              727
             ]
           ],
           "fringePixels": 2
@@ -2073,6 +2185,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2092,6 +2213,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-oval-grey-rug.png",
       "width": 256,
       "height": 256,
@@ -2101,45 +2223,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3735408560311284,
-        "scaleY": 0.3741496598639456,
+        "scaleX": 0.39183673469387753,
+        "scaleY": 0.39226519337016574,
         "width": 96,
-        "height": 55,
+        "height": 71,
         "offset": {
           "x": 80,
-          "y": 137
+          "y": 121
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          767,
-          782,
-          1028,
-          933
+          760,
+          765,
+          1009,
+          950
         ],
         "bounds": {
-          "x": 769,
-          "y": 784,
-          "width": 257,
-          "height": 147
+          "x": 762,
+          "y": 767,
+          "width": 245,
+          "height": 181
         },
-        "originalWidth": 257,
-        "originalHeight": 147,
+        "originalWidth": 245,
+        "originalHeight": 181,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              943,
-              786
+              869,
+              769
             ]
           ],
           "fringePixels": 2
@@ -2148,6 +2279,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2167,6 +2307,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-safe-room-threshold.png",
       "width": 256,
       "height": 256,
@@ -2176,45 +2317,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4343891402714932,
-        "scaleY": 0.43478260869565216,
+        "scaleX": 0.4,
+        "scaleY": 0.39919354838709675,
         "width": 96,
-        "height": 110,
+        "height": 99,
         "offset": {
           "x": 80,
-          "y": 82
+          "y": 93
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1047,
-          709,
-          1272,
-          966
+          1019,
+          721,
+          1263,
+          973
         ],
         "bounds": {
-          "x": 1049,
-          "y": 711,
-          "width": 221,
-          "height": 253
+          "x": 1021,
+          "y": 723,
+          "width": 240,
+          "height": 248
         },
-        "originalWidth": 221,
-        "originalHeight": 253,
+        "originalWidth": 240,
+        "originalHeight": 248,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1149,
-              713
+              1136,
+              725
             ]
           ],
           "fringePixels": 2
@@ -2223,6 +2373,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2242,6 +2401,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/starter-dungeon-stone-descent-stairwell.png",
       "width": 256,
       "height": 256,
@@ -2251,45 +2411,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.37209302325581395,
-        "scaleY": 0.37320574162679426,
+        "scaleX": 0.4824120603015075,
+        "scaleY": 0.4835680751173709,
         "width": 96,
-        "height": 78,
+        "height": 103,
         "offset": {
           "x": 80,
-          "y": 114
+          "y": 89
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/starter-dungeon.png",
-        "sha256": "c5099364a3aa33c1d88b401b54b04427d9e6e8cfd1c434f4e808d1f6b68fab0c",
+        "sha256": "7f0da8e92acec7f48a4ba0748ad2c222013579fbedb6579a7935233cf136c05f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1263,
-          744,
-          1525,
-          957
+          1291,
+          749,
+          1494,
+          966
         ],
         "bounds": {
-          "x": 1265,
-          "y": 746,
-          "width": 258,
-          "height": 209
+          "x": 1293,
+          "y": 751,
+          "width": 199,
+          "height": 213
         },
-        "originalWidth": 258,
-        "originalHeight": 209,
+        "originalWidth": 199,
+        "originalHeight": 213,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1398,
-              748
+              1305,
+              753
             ]
           ],
           "fringePixels": 2
@@ -2298,6 +2467,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

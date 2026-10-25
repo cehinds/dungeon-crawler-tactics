@@ -83,3 +83,52 @@ def registered(tight, asset, style, registration, canvas_size, anchor):
                'registration':{'kind':kind,'points':[list(p) for p in target]}}
     source_anchor = apply(inverse, (ax, ay))
     return result, derived, {'x':source_anchor[0]/tight.width, 'y':source_anchor[1]/tight.height}
+
+
+def native_square(tight, asset, style, canvas_size, anchor):
+    """Normalize native axis-aligned art; never reproject legacy diamond art."""
+    layout = asset['squareLayout']
+    require(layout in ('floor','north-wall','west-wall','overlay','prop'),
+            f"{asset['id']}: unknown squareLayout")
+    require(style['projection'] == 'orthogonal' and style['tileWidth'] == 128
+            and style['tileHeight'] == 128, 'Native square layouts require an orthogonal 128 by 128 grid')
+    if layout == 'floor':
+        require(asset['role'] == 'ground', 'Native floor layout requires ground role')
+        if asset.get('cell', 0) < 4:
+            alpha = tight.getchannel('A')
+            solid = sum(alpha.histogram()[128:]) / (tight.width*tight.height)
+            require(solid >= .85, f"{asset['id']}: native full floor must fill a square, not an angled diamond")
+            require(.85 <= tight.width/tight.height <= 1/.85,
+                    f"{asset['id']}: native full floor must have square source proportions")
+        size = (128,128)
+        relative = (.5,.5)
+    elif layout == 'prop':
+        scale = min(asset['renderWidth']/tight.width,240/tight.width,184/tight.height)
+        size = (max(1,round(tight.width*scale)),max(1,round(tight.height*scale)))
+        relative = (.5,1)
+    else:
+        require('renderHeight' in asset, f"{asset['id']}: native layout requires renderHeight")
+        size = (round(asset['renderWidth']),round(asset['renderHeight']))
+        require(size[0] > 0 and size[1] > 0, 'Native dimensions must be positive')
+        relative = (1,.5) if layout == 'west-wall' else (.5,1) if layout == 'north-wall' else (.5,.5)
+    offset = (round(anchor['x']-relative[0]*size[0]),round(anchor['y']-relative[1]*size[1]))
+    require(offset[0]>=0 and offset[1]>=0 and offset[0]+size[0]<=canvas_size[0]
+            and offset[1]+size[1]<=canvas_size[1], f"{asset['id']}: native layout would clip normalized canvas")
+    pixel = style['id'] == 'pocket-dungeon'
+    sampling = Image.Resampling.NEAREST if pixel else Image.Resampling.LANCZOS
+    result = Image.new('RGBA',canvas_size)
+    result.paste(tight.resize(size,sampling),offset)
+    x,y=offset;w,h=size
+    if layout == 'floor':
+        placement = {'kind':'floor','points':[[x,y],[x+w,y],[x+w,y+h],[x,y+h]]}
+    elif layout == 'north-wall':
+        placement = {'kind':'wall','axis':'x','points':[[x,y+h],[x+w,y+h]]}
+    elif layout == 'west-wall':
+        placement = {'kind':'wall','axis':'y','points':[[x+w,y],[x+w,y+h]]}
+    else:
+        placement = {'kind':layout,'points':[[anchor['x'],anchor['y']]]}
+    derived = {'kind':'normalized-derived-export','sizing':'native-square-'+layout,
+               'resampling':'nearest' if pixel else 'lanczos',
+               'scaleX':w/tight.width,'scaleY':h/tight.height,'width':w,'height':h,
+               'offset':{'x':x,'y':y},'placement':placement}
+    return result,derived,{'x':relative[0],'y':relative[1]}

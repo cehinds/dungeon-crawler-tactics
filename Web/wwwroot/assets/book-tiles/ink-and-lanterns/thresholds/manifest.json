@@ -11,9 +11,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -39,6 +39,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -48,120 +49,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5589745168801097,
-          0.007273754288861136,
-          62.931258961293615,
-          0.0014522962725228867,
-          0.46841668508132955,
-          159.17050116317267
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          15,
-          53,
-          251,
-          214
+          46,
+          39,
+          239,
+          231
         ],
         "bounds": {
-          "x": 17,
-          "y": 55,
-          "width": 232,
-          "height": 157
+          "x": 48,
+          "y": 41,
+          "width": 189,
+          "height": 188
         },
-        "originalWidth": 232,
-        "originalHeight": 157,
+        "originalWidth": 189,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              130,
-              57
+              55,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978448275862046,
-          "y": 0.4441273885350098
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.389,
-              1.41
-            ],
-            [
-              230.0,
-              69.373
-            ],
-            [
-              114.611,
-              138.046
-            ],
-            [
-              1.0,
-              70.083
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -183,6 +157,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-worn-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -192,120 +167,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5589446761257353,
-          -0.003279306889228531,
-          63.67204970115152,
-          0.001048471863453103,
-          0.4717093452470735,
-          158.7717452489327
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          268,
-          52,
-          504,
-          214
+          298,
+          39,
+          490,
+          231
         ],
         "bounds": {
-          "x": 270,
-          "y": 54,
-          "width": 232,
-          "height": 158
+          "x": 300,
+          "y": 41,
+          "width": 188,
+          "height": 188
         },
-        "originalWidth": 232,
-        "originalHeight": 158,
+        "originalWidth": 188,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              385,
-              56
+              307,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49784482758620724,
-          "y": 0.44421202531648263
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.102,
-              2.348
-            ],
-            [
-              230.0,
-              69.931
-            ],
-            [
-              115.898,
-              138.023
-            ],
-            [
-              1.0,
-              70.44
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -327,6 +275,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-cracked-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -336,120 +285,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.55893847160914,
-          -0.004873819411573903,
-          63.78314029143099,
-          0.0013005056847381678,
-          0.4697410123107891,
-          159.02898706325792
-        ],
-        "width": 129,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          522,
-          52,
-          758,
-          214
+          549,
+          39,
+          741,
+          231
         ],
         "bounds": {
-          "x": 524,
-          "y": 54,
-          "width": 232,
-          "height": 158
+          "x": 551,
+          "y": 41,
+          "width": 188,
+          "height": 188
         },
-        "originalWidth": 232,
-        "originalHeight": 158,
+        "originalWidth": 188,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              637,
-              56
+              558,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978448275862005,
-          "y": 0.44221518987344943
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              114.906,
-              1.749
-            ],
-            [
-              230.0,
-              69.553
-            ],
-            [
-              116.094,
-              137.991
-            ],
-            [
-              1.0,
-              70.187
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -471,6 +393,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-wet-gold-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -480,120 +403,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517226862504142,
-          -0.001033097864771542,
-          63.52072536771241,
-          0.0006577927810849914,
-          0.4681224699746046,
-          159.17131775530981
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          776,
-          52,
-          1015,
-          214
+          797,
+          39,
+          991,
+          231
         ],
         "bounds": {
-          "x": 778,
-          "y": 54,
-          "width": 235,
-          "height": 158
+          "x": 799,
+          "y": 41,
+          "width": 190,
+          "height": 188
         },
-        "originalWidth": 235,
-        "originalHeight": 158,
+        "originalWidth": 190,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              892,
-              56
+              807,
+              43
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042553735,
-          "y": 0.44281012658226876
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.872,
-              1.606
-            ],
-            [
-              233.0,
-              69.801
-            ],
-            [
-              117.128,
-              138.322
-            ],
-            [
-              1.0,
-              70.127
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -615,6 +511,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-gold-brick-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -624,45 +521,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5614035087719298,
-        "scaleY": 0.41025641025641024,
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6844919786096256,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1035,
-          53,
-          1267,
-          213
+          1046,
+          39,
+          1244,
+          230
         ],
         "bounds": {
-          "x": 1037,
-          "y": 55,
-          "width": 228,
-          "height": 156
+          "x": 1048,
+          "y": 41,
+          "width": 194,
+          "height": 187
         },
-        "originalWidth": 228,
-        "originalHeight": 156,
+        "originalWidth": 194,
+        "originalHeight": 187,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1150,
-              57
+              1061,
+              43
             ]
           ],
           "fringePixels": 2
@@ -671,6 +589,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -690,6 +629,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/thresholds-gold-brick-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -699,45 +639,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.4025157232704403,
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6772486772486772,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1286,
-          52,
-          1517,
-          215
+          1298,
+          38,
+          1496,
+          231
         ],
         "bounds": {
-          "x": 1288,
-          "y": 54,
-          "width": 227,
-          "height": 159
+          "x": 1300,
+          "y": 40,
+          "width": 194,
+          "height": 189
         },
-        "originalWidth": 227,
-        "originalHeight": 159,
+        "originalWidth": 194,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1399,
-              56
+              1453,
+              42
             ]
           ],
           "fringePixels": 2
@@ -746,15 +707,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-wall-northwest",
-      "label": "Golden Hall Masonry wall northwest",
+      "label": "Golden Hall Masonry north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -765,8 +747,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/thresholds-golden-hall-masonry-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -776,109 +759,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3902439024390244,
-          -0.0,
-          92.8780487804878,
-          -0.003908797138058977,
-          0.3882649101409754,
-          121.03704023982658
-        ],
-        "width": 78,
-        "height": 88,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5079365079365079,
+        "scaleY": 0.35359116022099446,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 121
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          32,
-          242,
-          237,
-          474
+          26,
+          266,
+          282,
+          451
         ],
         "bounds": {
-          "x": 34,
-          "y": 244,
-          "width": 201,
-          "height": 228
+          "x": 28,
+          "y": 268,
+          "width": 252,
+          "height": 181
         },
-        "originalWidth": 201,
-        "originalHeight": 228,
+        "originalWidth": 252,
+        "originalHeight": 181,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              63,
-              246
+              33,
+              270
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4477611940298503,
-          "y": 0.8055942982456074
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              141.641
-            ],
-            [
-              172.0,
-              225.71
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-wall-northeast",
-      "label": "Golden Hall Masonry wall northeast",
+      "label": "Golden Hall Masonry west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -889,8 +853,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/thresholds-golden-hall-masonry-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -900,100 +865,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.38095238095238093,
-          0.0,
-          84.95238095238096,
-          0.0006051729461216549,
-          0.38064919314805934,
-          122.09390799021382
-        ],
-        "width": 78,
-        "height": 86,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.6808510638297872,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 85,
-          "y": 122
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          279,
-          242,
-          488,
-          474
+          374,
+          261,
+          433,
+          453
         ],
         "bounds": {
-          "x": 281,
-          "y": 244,
-          "width": 205,
-          "height": 228
+          "x": 376,
+          "y": 263,
+          "width": 55,
+          "height": 188
         },
-        "originalWidth": 205,
-        "originalHeight": 228,
+        "originalWidth": 55,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              451,
-              246
+              387,
+              265
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5512195121951238,
-          "y": 0.8046929824561382
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              197.0,
-              141.303
-            ],
-            [
-              29.0,
-              225.637
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1013,8 +959,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1024,53 +971,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.8707482993197279,
-        "scaleY": 0.4423963133640553,
+        "scaleX": 0.757396449704142,
+        "scaleY": 0.6881720430107527,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          564,
-          242,
-          715,
-          463
+          569,
+          266,
+          742,
+          456
         ],
         "bounds": {
-          "x": 566,
-          "y": 244,
-          "width": 147,
-          "height": 217
+          "x": 571,
+          "y": 268,
+          "width": 169,
+          "height": 186
         },
-        "originalWidth": 147,
-        "originalHeight": 217,
+        "originalWidth": 169,
+        "originalHeight": 186,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              638,
-              246
+              577,
+              270
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1090,8 +1055,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1101,58 +1067,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5311203319502075,
-        "scaleY": 0.45714285714285713,
+        "scaleX": 0.7231638418079096,
+        "scaleY": 0.6808510638297872,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          772,
-          236,
-          1017,
-          450
+          809,
+          266,
+          990,
+          458
         ],
         "bounds": {
-          "x": 774,
-          "y": 238,
-          "width": 241,
-          "height": 210
+          "x": 811,
+          "y": 268,
+          "width": 177,
+          "height": 188
         },
-        "originalWidth": 241,
-        "originalHeight": 210,
+        "originalWidth": 177,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              892,
-              240
+              817,
+              270
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-endcap-northwest",
-      "label": "Golden Hall Masonry endcap northwest",
+      "label": "Golden Hall Masonry north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1167,8 +1151,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1178,58 +1163,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.23357664233576642,
-        "scaleY": 0.4897959183673469,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1075,
-          273,
-          1216,
-          473
+          1105,
+          319,
+          1185,
+          403
         ],
         "bounds": {
-          "x": 1077,
-          "y": 275,
-          "width": 137,
-          "height": 196
+          "x": 1107,
+          "y": 321,
+          "width": 76,
+          "height": 80
         },
-        "originalWidth": 137,
-        "originalHeight": 196,
+        "originalWidth": 76,
+        "originalHeight": 80,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1114,
-              277
+              1117,
+              323
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "thresholds-golden-hall-masonry-endcap-northeast",
-      "label": "Golden Hall Masonry endcap northeast",
+      "label": "Golden Hall Masonry west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1244,8 +1247,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/thresholds-golden-hall-masonry-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1255,53 +1259,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.19875776397515527,
-        "scaleY": 0.4383561643835616,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1330,
-          241,
-          1495,
-          464
+          1357,
+          319,
+          1437,
+          403
         ],
         "bounds": {
-          "x": 1332,
-          "y": 243,
-          "width": 161,
-          "height": 219
+          "x": 1359,
+          "y": 321,
+          "width": 76,
+          "height": 80
         },
-        "originalWidth": 161,
-        "originalHeight": 219,
+        "originalWidth": 76,
+        "originalHeight": 80,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1457,
-              245
+              1377,
+              323
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1310,7 +1332,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1323,6 +1345,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/thresholds-golden-hall-masonry-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1332,100 +1355,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3575418994413408,
-          -0.0,
-          93.13966480446928,
-          0.06898232398280264,
-          0.3843718511789689,
-          106.12898427911763
-        ],
-        "width": 75,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.44651162790697674,
+        "width": 128,
         "height": 96,
         "offset": {
-          "x": 94,
-          "y": 112
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          22,
-          476,
-          239,
-          715
+          27,
+          467,
+          251,
+          686
         ],
         "bounds": {
-          "x": 24,
-          "y": 478,
-          "width": 213,
-          "height": 235
+          "x": 29,
+          "y": 469,
+          "width": 220,
+          "height": 215
         },
-        "originalWidth": 213,
-        "originalHeight": 235,
+        "originalWidth": 220,
+        "originalHeight": 215,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              106,
-              480
+              138,
+              471
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.45774647887323516,
-          "y": 0.8762042553191429
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              180.344
-            ],
-            [
-              187.0,
-              231.472
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1434,7 +1438,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1447,6 +1451,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/thresholds-golden-hall-masonry-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1456,100 +1461,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.36363636363636365,
-          -0.0,
-          91.63636363636364,
-          0.11465318249038318,
-          0.40097146913919346,
-          94.46876221478321
-        ],
-        "width": 76,
-        "height": 105,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5981308411214953,
+        "scaleY": 0.44651162790697674,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 92,
-          "y": 104
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          269,
-          480,
-          484,
-          719
+          285,
+          467,
+          503,
+          686
         ],
         "bounds": {
-          "x": 271,
-          "y": 482,
-          "width": 211,
-          "height": 235
+          "x": 287,
+          "y": 469,
+          "width": 214,
+          "height": 215
         },
-        "originalWidth": 211,
-        "originalHeight": 235,
+        "originalWidth": 214,
+        "originalHeight": 215,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              357,
-              484
+              393,
+              471
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.47393364928910453,
-          "y": 0.9133765957446767
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              12.0,
-              199.903
-            ],
-            [
-              188.0,
-              229.384
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1569,6 +1555,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/thresholds-gold-brick-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1578,53 +1566,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5517241379310345,
-        "scaleY": 0.5512820512820513,
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.649746192893401,
         "width": 128,
-        "height": 129,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 63
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          522,
-          481,
-          758,
-          719
+          543,
+          486,
+          749,
+          687
         ],
         "bounds": {
-          "x": 524,
-          "y": 483,
-          "width": 232,
-          "height": 234
+          "x": 545,
+          "y": 488,
+          "width": 202,
+          "height": 197
         },
-        "originalWidth": 232,
-        "originalHeight": 234,
+        "originalWidth": 202,
+        "originalHeight": 197,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              636,
-              485
+              555,
+              490
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1644,6 +1650,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/thresholds-gold-brick-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1653,53 +1661,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.540084388185654,
-        "scaleY": 0.5395348837209303,
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6432160804020101,
         "width": 128,
-        "height": 116,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 76
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          777,
-          496,
-          1018,
-          715
+          794,
+          486,
+          996,
+          689
         ],
         "bounds": {
-          "x": 779,
-          "y": 498,
-          "width": 237,
-          "height": 215
+          "x": 796,
+          "y": 488,
+          "width": 198,
+          "height": 199
         },
-        "originalWidth": 237,
-        "originalHeight": 215,
+        "originalWidth": 198,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              902,
-              500
+              805,
+              490
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1719,6 +1745,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-race-selection-podium.png",
       "width": 256,
       "height": 256,
@@ -1728,45 +1755,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4067796610169492,
-        "scaleY": 0.40625,
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.5257731958762887,
         "width": 96,
-        "height": 91,
+        "height": 102,
         "offset": {
           "x": 80,
-          "y": 101
+          "y": 90
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1036,
-          495,
-          1276,
-          723
+          1051,
+          492,
+          1238,
+          690
         ],
         "bounds": {
-          "x": 1038,
-          "y": 497,
-          "width": 236,
-          "height": 224
+          "x": 1053,
+          "y": 494,
+          "width": 183,
+          "height": 194
         },
-        "originalWidth": 236,
-        "originalHeight": 224,
+        "originalWidth": 183,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1157,
-              499
+              1074,
+              496
             ]
           ],
           "fringePixels": 2
@@ -1775,6 +1811,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1794,6 +1839,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-guild-transformation-bed.png",
       "width": 256,
       "height": 256,
@@ -1803,45 +1849,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4343891402714932,
-        "scaleY": 0.43253968253968256,
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.46261682242990654,
         "width": 96,
-        "height": 109,
+        "height": 99,
         "offset": {
           "x": 80,
-          "y": 83
+          "y": 93
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
           1291,
-          471,
-          1516,
-          727
+          472,
+          1502,
+          690
         ],
         "bounds": {
           "x": 1293,
-          "y": 473,
-          "width": 221,
-          "height": 252
+          "y": 474,
+          "width": 207,
+          "height": 214
         },
-        "originalWidth": 221,
-        "originalHeight": 252,
+        "originalWidth": 207,
+        "originalHeight": 214,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1408,
-              475
+              1313,
+              476
             ]
           ],
           "fringePixels": 2
@@ -1850,6 +1905,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1869,6 +1933,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-quadrant-selection-wheel.png",
       "width": 256,
       "height": 256,
@@ -1878,45 +1943,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.44036697247706424,
-        "scaleY": 0.4419642857142857,
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.43529411764705883,
         "width": 96,
-        "height": 99,
+        "height": 111,
         "offset": {
           "x": 80,
-          "y": 93
+          "y": 81
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          22,
-          738,
-          244,
-          966
+          26,
+          700,
+          250,
+          959
         ],
         "bounds": {
-          "x": 24,
-          "y": 740,
-          "width": 218,
-          "height": 224
+          "x": 28,
+          "y": 702,
+          "width": 220,
+          "height": 255
         },
-        "originalWidth": 218,
-        "originalHeight": 224,
+        "originalWidth": 220,
+        "originalHeight": 255,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              133,
-              742
+              137,
+              704
             ]
           ],
           "fringePixels": 2
@@ -1925,6 +1999,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1944,6 +2027,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-opponent-selection-wheel.png",
       "width": 256,
       "height": 256,
@@ -1953,45 +2037,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.42290748898678415,
-        "scaleY": 0.4232558139534884,
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.4024896265560166,
         "width": 96,
-        "height": 91,
+        "height": 97,
         "offset": {
           "x": 80,
-          "y": 101
+          "y": 95
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          262,
-          747,
-          493,
-          966
+          270,
+          714,
+          513,
+          959
         ],
         "bounds": {
-          "x": 264,
-          "y": 749,
-          "width": 227,
-          "height": 215
+          "x": 272,
+          "y": 716,
+          "width": 239,
+          "height": 241
         },
-        "originalWidth": 227,
-        "originalHeight": 215,
+        "originalWidth": 239,
+        "originalHeight": 241,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              373,
-              751
+              389,
+              718
             ]
           ],
           "fringePixels": 2
@@ -2000,6 +2093,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2019,6 +2121,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-choice-portal-arch.png",
       "width": 256,
       "height": 256,
@@ -2028,45 +2131,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4948453608247423,
-        "scaleY": 0.4942084942084942,
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.4369747899159664,
         "width": 96,
-        "height": 128,
+        "height": 104,
         "offset": {
           "x": 80,
-          "y": 64
+          "y": 88
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          541,
-          722,
-          739,
-          985
+          531,
+          706,
+          755,
+          948
         ],
         "bounds": {
-          "x": 543,
-          "y": 724,
-          "width": 194,
-          "height": 259
+          "x": 533,
+          "y": 708,
+          "width": 220,
+          "height": 238
         },
-        "originalWidth": 194,
-        "originalHeight": 259,
+        "originalWidth": 220,
+        "originalHeight": 238,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              640,
-              726
+              642,
+              710
             ]
           ],
           "fringePixels": 2
@@ -2075,6 +2187,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2094,6 +2215,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-registration-arena-entrance.png",
       "width": 256,
       "height": 256,
@@ -2103,45 +2225,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4050632911392405,
-        "scaleY": 0.4068441064638783,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4198473282442748,
         "width": 96,
-        "height": 107,
+        "height": 110,
         "offset": {
           "x": 80,
-          "y": 85
+          "y": 82
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          774,
-          716,
-          1015,
-          983
+          779,
+          703,
+          1011,
+          969
         ],
         "bounds": {
-          "x": 776,
-          "y": 718,
-          "width": 237,
-          "height": 263
+          "x": 781,
+          "y": 705,
+          "width": 228,
+          "height": 262
         },
-        "originalWidth": 237,
-        "originalHeight": 263,
+        "originalWidth": 228,
+        "originalHeight": 262,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              942,
-              720
+              846,
+              707
             ]
           ],
           "fringePixels": 2
@@ -2150,6 +2281,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2169,6 +2309,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-red-carpet-runner.png",
       "width": 256,
       "height": 256,
@@ -2178,45 +2319,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.39634146341463417,
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6820083682008368,
         "width": 96,
-        "height": 65,
+        "height": 163,
         "offset": {
           "x": 80,
-          "y": 127
+          "y": 29
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1036,
-          792,
-          1282,
-          960
+          1072,
+          707,
+          1217,
+          950
         ],
         "bounds": {
-          "x": 1038,
-          "y": 794,
-          "width": 242,
-          "height": 164
+          "x": 1074,
+          "y": 709,
+          "width": 141,
+          "height": 239
         },
-        "originalWidth": 242,
-        "originalHeight": 164,
+        "originalWidth": 141,
+        "originalHeight": 239,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1129,
-              796
+              1081,
+              711
             ]
           ],
           "fringePixels": 2
@@ -2225,6 +2375,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2244,6 +2403,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/thresholds-nebula-ceiling-panel.png",
       "width": 256,
       "height": 256,
@@ -2253,45 +2413,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4,
-        "scaleY": 0.39823008849557523,
+        "scaleX": 0.41379310344827586,
+        "scaleY": 0.41517857142857145,
         "width": 96,
-        "height": 90,
+        "height": 93,
         "offset": {
           "x": 80,
-          "y": 102
+          "y": 99
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/thresholds.png",
-        "sha256": "3b9865bfb07594f9e306f7071c8ce3213e572237cf33a4f0d5452d7c84200e9f",
+        "sha256": "4286b6a93e579ab96724fe26978a981265d5d0bc0946ed6fe9def45de7282635",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1277,
-          739,
-          1521,
-          969
+          1279,
+          716,
+          1515,
+          944
         ],
         "bounds": {
-          "x": 1279,
-          "y": 741,
-          "width": 240,
-          "height": 226
+          "x": 1281,
+          "y": 718,
+          "width": 232,
+          "height": 224
         },
-        "originalWidth": 240,
-        "originalHeight": 226,
+        "originalWidth": 232,
+        "originalHeight": 224,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1395,
-              743
+              1287,
+              720
             ]
           ],
           "fringePixels": 2
@@ -2300,6 +2469,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

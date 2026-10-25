@@ -7,7 +7,9 @@
 
 Source atlases and reviewed crops live under Docs/BookLocationTiles, outside the
 published site. Components are normalized derived exports, not native pixel
-copies: source pixels are transformed onto transparent 256×256 canvases. Reviewed
+copies: source pixels are transformed onto transparent 256×256 canvases. Native
+squareLayout art uses an orthogonal grid and explicit floor/wall/overlay sizing.
+Full native floors must have square, filled silhouettes. Reviewed
 registration maps floor planes or wall contacts to the logical grid, preserving
 overhang rather than deriving geometry from alpha bounds. Unregistered pieces
 retain legacy alpha-bounds sizing: ground fills the tile dimensions, walls/doors
@@ -29,7 +31,7 @@ import sys
 from zipfile import BadZipFile, ZipFile
 
 from PIL import Image, ImageDraw
-from book_tile_geometry import registered
+from book_tile_geometry import registered, native_square
 
 from build_style_packs import (
     PackError, claim_region, digest, extract_cell, font, island_mask_metadata,
@@ -100,6 +102,8 @@ def normalized_anchor(value, default):
 
 def normalize(tight, asset, style, reviewed_anchor=None, registration=None):
     """Return derived canvas and exact, reconstructible resize/placement metadata."""
+    if "squareLayout" in asset:
+        return native_square(tight, asset, style, CANVAS, ANCHOR)
     if registration is not None:
         require(reviewed_anchor is None, "Registration and legacy reviewed anchor cannot be combined")
         return registered(tight, asset, style, registration, CANVAS, ANCHOR)
@@ -177,7 +181,9 @@ def prepare_kit(docs, kit, style, crops):
             if review["alphaIslandSeeds"] is not None else {"method": "source-region-alpha"},
             "normalizedAnchor": relative,
         }
-        if "registration" in review:
+        if "placement" in derived:
+            asset["placement"] = derived["placement"]
+        if "registration" in review and "squareLayout" not in asset:
             asset["source"]["registration"] = review["registration"]
             asset["placement"] = dict(derived["registration"])
             if review["registration"]["kind"] == "wall":

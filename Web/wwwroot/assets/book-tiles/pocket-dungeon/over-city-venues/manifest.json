@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-venues-civic-stone-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.649746192893401,
-          0.0,
-          64.0,
-          0.0,
-          0.6464646464646465,
-          128.0
-        ],
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6368159203980099,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          36,
-          41,
+          34,
+          37,
           237,
-          243
+          242
         ],
         "bounds": {
-          "x": 38,
-          "y": 43,
-          "width": 197,
-          "height": 198
+          "x": 36,
+          "y": 39,
+          "width": 199,
+          "height": 201
         },
-        "originalWidth": 197,
-        "originalHeight": 198,
+        "originalWidth": 199,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              44,
-              45
+              93,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4999999999999985,
-          "y": 0.5000000000000078
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              197.0,
-              0.0
-            ],
-            [
-              197.0,
-              198.0
-            ],
-            [
-              0.0,
-              198.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-venues-worn-civic-stone-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.6368159203980099,
-          0.0,
-          64.0,
-          0.0,
-          0.6432160804020101,
-          128.0
-        ],
+        "scaleX": 0.64,
+        "scaleY": 0.6368159203980099,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          288,
-          40,
-          493,
-          243
+          285,
+          37,
+          489,
+          242
         ],
         "bounds": {
-          "x": 290,
-          "y": 42,
-          "width": 201,
-          "height": 199
+          "x": 287,
+          "y": 39,
+          "width": 200,
+          "height": 201
         },
-        "originalWidth": 201,
-        "originalHeight": 199,
+        "originalWidth": 200,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              417,
-              44
+              413,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000023,
-          "y": 0.500000000000009
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              201.0,
-              0.0
-            ],
-            [
-              201.0,
-              199.0
-            ],
-            [
-              0.0,
-              199.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-venues-cracked-civic-stone-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.6336633663366337,
-          0.0,
-          64.0,
-          0.0,
-          0.6432160804020101,
-          128.0
-        ],
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6368159203980099,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
           541,
-          40,
-          747,
-          243
+          37,
+          741,
+          242
         ],
         "bounds": {
           "x": 543,
-          "y": 42,
-          "width": 202,
-          "height": 199
+          "y": 39,
+          "width": 196,
+          "height": 201
         },
-        "originalWidth": 202,
-        "originalHeight": 199,
+        "originalWidth": 196,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              630,
-              44
+              557,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4999999999999995,
-          "y": 0.5000000000000089
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              202.0,
-              0.0
-            ],
-            [
-              202.0,
-              199.0
-            ],
-            [
-              0.0,
-              199.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-venues-wet-civic-stone-tile-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.6368159203980099,
-          0.0,
-          64.0,
-          0.0,
-          0.6464646464646465,
-          128.0
-        ],
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.6368159203980099,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
           795,
-          40,
-          1000,
+          37,
+          996,
           242
         ],
         "bounds": {
           "x": 797,
-          "y": 42,
-          "width": 201,
-          "height": 198
+          "y": 39,
+          "width": 197,
+          "height": 201
         },
-        "originalWidth": 201,
-        "originalHeight": 198,
+        "originalWidth": 197,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              828,
-              44
+              809,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000022,
-          "y": 0.5000000000000078
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              201.0,
-              0.0
-            ],
-            [
-              201.0,
-              198.0
-            ],
-            [
-              0.0,
-              198.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-venues-civic-stone-tile-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "scaleX": 0.6336633663366337,
-        "scaleY": 0.649746192893401,
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.6368159203980099,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1047,
-          40,
-          1253,
-          241
+          1046,
+          37,
+          1254,
+          242
         ],
         "bounds": {
-          "x": 1049,
-          "y": 42,
-          "width": 202,
-          "height": 197
+          "x": 1048,
+          "y": 39,
+          "width": 204,
+          "height": 201
         },
-        "originalWidth": 202,
-        "originalHeight": 197,
+        "originalWidth": 204,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1059,
-              44
+              1114,
+              41
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/over-city-venues-civic-stone-tile-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "scaleX": 0.64,
-        "scaleY": 0.649746192893401,
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6368159203980099,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1302,
-          40,
+          1304,
+          37,
           1506,
-          241
+          242
         ],
         "bounds": {
-          "x": 1304,
-          "y": 42,
-          "width": 200,
-          "height": 197
+          "x": 1306,
+          "y": 39,
+          "width": 198,
+          "height": 201
         },
-        "originalWidth": 200,
-        "originalHeight": 197,
+        "originalWidth": 198,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1318,
-              44
+              1369,
+              41
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "over-city-venues-painted-civic-stone-wall-northwest",
-      "label": "Painted Civic Stone wall northwest",
+      "label": "Painted Civic Stone north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/over-city-venues-painted-civic-stone-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.7804878048780488,
-          -0.0,
-          57.75609756097561,
-          -0.2492796627797845,
-          0.7396085878947929,
-          82.9715921733509
-        ],
-        "width": 158,
-        "height": 125,
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.39751552795031053,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 58,
-          "y": 72
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          36,
-          269,
-          243,
-          481
+          33,
+          286,
+          239,
+          451
         ],
         "bounds": {
-          "x": 38,
-          "y": 271,
-          "width": 203,
-          "height": 208
+          "x": 35,
+          "y": 288,
+          "width": 202,
+          "height": 161
         },
-        "originalWidth": 203,
-        "originalHeight": 208,
+        "originalWidth": 202,
+        "originalHeight": 161,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              72,
-              273
+              45,
+              290
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.44334975369458085,
-          "y": 0.8545552884615385
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              150.11
-            ],
-            [
-              172.0,
-              205.385
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "over-city-venues-painted-civic-stone-wall-northeast",
-      "label": "Painted Civic Stone wall northeast",
+      "label": "Painted Civic Stone west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/over-city-venues-painted-civic-stone-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-west-wall",
         "resampling": "nearest",
-        "affine": [
-          0.757396449704142,
-          -0.0,
-          41.27810650887574,
-          0.24464044161269097,
-          0.7167987418739017,
-          35.8060592216336
-        ],
-        "width": 157,
-        "height": 119,
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.7398843930635838,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 41,
-          "y": 77
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              64.0,
-              192.0
+              128,
+              128
             ],
             [
-              192.0,
-              192.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          285,
-          267,
-          496,
-          481
+          349,
+          275,
+          421,
+          452
         ],
         "bounds": {
-          "x": 287,
-          "y": 269,
-          "width": 207,
-          "height": 210
+          "x": 351,
+          "y": 277,
+          "width": 68,
+          "height": 173
         },
-        "originalWidth": 207,
-        "originalHeight": 210,
+        "originalWidth": 68,
+        "originalHeight": 173,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              455,
-              271
+              361,
+              279
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5531400966183598,
-          "y": 0.8515547619047632
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              30.0,
-              207.666
-            ],
-            [
-              199.0,
-              149.987
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            64.0,
-            192.0
+            128,
+            128
           ],
           [
-            192.0,
-            192.0
+            128,
+            256
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/over-city-venues-painted-civic-stone-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.7950310559006211,
-        "scaleY": 0.49230769230769234,
+        "scaleX": 0.649746192893401,
+        "scaleY": 0.7441860465116279,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          564,
-          272,
-          729,
-          471
+          541,
+          276,
+          742,
+          452
         ],
         "bounds": {
-          "x": 566,
-          "y": 274,
-          "width": 161,
-          "height": 195
+          "x": 543,
+          "y": 278,
+          "width": 197,
+          "height": 172
         },
-        "originalWidth": 161,
-        "originalHeight": 195,
+        "originalWidth": 197,
+        "originalHeight": 172,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              602,
-              276
+              555,
+              280
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/over-city-venues-painted-civic-stone-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.5311203319502075,
-        "scaleY": 0.5026178010471204,
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.7441860465116279,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          767,
-          271,
-          1012,
-          466
+          794,
+          276,
+          997,
+          452
         ],
         "bounds": {
-          "x": 769,
-          "y": 273,
-          "width": 241,
-          "height": 191
+          "x": 796,
+          "y": 278,
+          "width": 199,
+          "height": 172
         },
-        "originalWidth": 241,
-        "originalHeight": 191,
+        "originalWidth": 199,
+        "originalHeight": 172,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              885,
-              275
+              810,
+              280
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "over-city-venues-painted-civic-stone-endcap-northwest",
-      "label": "Painted Civic Stone endcap northwest",
+      "label": "Painted Civic Stone north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/over-city-venues-painted-civic-stone-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.39344262295081966,
-        "scaleY": 0.49230769230769234,
-        "width": 48,
-        "height": 96,
+        "scaleX": 0.25,
+        "scaleY": 0.2222222222222222,
+        "width": 32,
+        "height": 32,
         "offset": {
-          "x": 104,
-          "y": 96
+          "x": 112,
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1076,
-          269,
-          1202,
-          468
+          1083,
+          295,
+          1215,
+          443
         ],
         "bounds": {
-          "x": 1078,
-          "y": 271,
-          "width": 122,
-          "height": 195
+          "x": 1085,
+          "y": 297,
+          "width": 128,
+          "height": 144
         },
-        "originalWidth": 122,
-        "originalHeight": 195,
+        "originalWidth": 128,
+        "originalHeight": 144,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1111,
-              273
+              1117,
+              299
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "over-city-venues-painted-civic-stone-endcap-northeast",
-      "label": "Painted Civic Stone endcap northeast",
+      "label": "Painted Civic Stone west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/over-city-venues-painted-civic-stone-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.40336134453781514,
-        "scaleY": 0.49230769230769234,
-        "width": 48,
-        "height": 96,
+        "scaleX": 0.2601626016260163,
+        "scaleY": 0.2222222222222222,
+        "width": 32,
+        "height": 32,
         "offset": {
-          "x": 104,
-          "y": 96
+          "x": 112,
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1350,
-          269,
-          1473,
-          468
+          1349,
+          295,
+          1476,
+          443
         ],
         "bounds": {
-          "x": 1352,
-          "y": 271,
-          "width": 119,
-          "height": 195
+          "x": 1351,
+          "y": 297,
+          "width": 123,
+          "height": 144
         },
-        "originalWidth": 119,
-        "originalHeight": 195,
+        "originalWidth": 123,
+        "originalHeight": 144,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1433,
-              273
+              1362,
+              299
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/over-city-venues-painted-civic-stone-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.7150837988826816,
-          -0.0,
-          57.564245810055866,
-          -0.018905158939397183,
-          0.7148338508982022,
-          54.47599073503926
-        ],
-        "width": 143,
-        "height": 143,
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.4729064039408867,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 58,
-          "y": 52
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          35,
-          492,
-          240,
-          695
+          33,
+          481,
+          239,
+          688
         ],
         "bounds": {
-          "x": 37,
-          "y": 494,
-          "width": 201,
-          "height": 199
+          "x": 35,
+          "y": 483,
+          "width": 202,
+          "height": 203
         },
-        "originalWidth": 201,
-        "originalHeight": 199,
+        "originalWidth": 202,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              130,
-              496
+              124,
+              485
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49004975124378164,
-          "y": 0.9798542713567838
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              9.0,
-              192.624
-            ],
-            [
-              188.0,
-              197.358
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/over-city-venues-painted-civic-stone-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.6994535519125683,
-          -0.0,
-          58.404371584699454,
-          0.011946299841050704,
-          0.699351526203543,
-          54.1042048781255
-        ],
-        "width": 139,
-        "height": 140,
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.4729064039408867,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 58,
-          "y": 55
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          284,
-          490,
-          486,
-          693
+          281,
+          481,
+          489,
+          688
         ],
         "bounds": {
-          "x": 286,
-          "y": 492,
-          "width": 198,
-          "height": 199
+          "x": 283,
+          "y": 483,
+          "width": 204,
+          "height": 203
         },
-        "originalWidth": 198,
-        "originalHeight": 199,
+        "originalWidth": 204,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              376,
-              494
+              369,
+              485
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5025252525252519,
-          "y": 0.9822964824120608
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              197.04
-            ],
-            [
-              191.0,
-              193.914
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/over-city-venues-civic-stone-tile-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.6066350710900474,
-        "scaleY": 0.6062176165803109,
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6464646464646465,
         "width": 128,
-        "height": 117,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 75
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          524,
-          502,
-          739,
-          699
+          542,
+          491,
+          740,
+          693
         ],
         "bounds": {
-          "x": 526,
-          "y": 504,
-          "width": 211,
-          "height": 193
+          "x": 544,
+          "y": 493,
+          "width": 194,
+          "height": 198
         },
-        "originalWidth": 211,
-        "originalHeight": 193,
+        "originalWidth": 194,
+        "originalHeight": 198,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              582,
-              506
+              550,
+              495
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/over-city-venues-civic-stone-tile-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.579185520361991,
-        "scaleY": 0.5815217391304348,
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6464646464646465,
         "width": 128,
-        "height": 107,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 85
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          780,
-          509,
-          1005,
-          697
+          796,
+          491,
+          995,
+          693
         ],
         "bounds": {
-          "x": 782,
-          "y": 511,
-          "width": 221,
-          "height": 184
+          "x": 798,
+          "y": 493,
+          "width": 195,
+          "height": 198
         },
-        "originalWidth": 221,
-        "originalHeight": 184,
+        "originalWidth": 195,
+        "originalHeight": 198,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              941,
-              513
+              805,
+              495
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-circus-big-top-entrance.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.39737991266375544,
+        "scaleX": 0.3950617283950617,
+        "scaleY": 0.39574468085106385,
         "width": 96,
-        "height": 91,
+        "height": 93,
         "offset": {
           "x": 80,
-          "y": 101
+          "y": 99
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1030,
-          474,
-          1276,
-          707
+          1024,
+          460,
+          1271,
+          699
         ],
         "bounds": {
-          "x": 1032,
-          "y": 476,
-          "width": 242,
-          "height": 229
+          "x": 1026,
+          "y": 462,
+          "width": 243,
+          "height": 235
         },
-        "originalWidth": 242,
-        "originalHeight": 229,
+        "originalWidth": 243,
+        "originalHeight": 235,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1151,
-              478
+              1145,
+              464
+            ],
+            [
+              1171,
+              683
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1812,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1840,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-circus-striped-platform.png",
       "width": 256,
       "height": 256,
@@ -1800,45 +1850,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.42290748898678415,
-        "scaleY": 0.425531914893617,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4178082191780822,
         "width": 96,
-        "height": 60,
+        "height": 61,
         "offset": {
           "x": 80,
-          "y": 132
+          "y": 131
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1288,
-          553,
+          1287,
+          543,
           1519,
-          698
+          693
         ],
         "bounds": {
-          "x": 1290,
-          "y": 555,
-          "width": 227,
-          "height": 141
+          "x": 1289,
+          "y": 545,
+          "width": 228,
+          "height": 146
         },
-        "originalWidth": 227,
-        "originalHeight": 141,
+        "originalWidth": 228,
+        "originalHeight": 146,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1384,
-              557
+              1381,
+              547
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1906,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1934,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-general-goods-shop-counter.png",
       "width": 256,
       "height": 256,
@@ -1875,45 +1944,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4155844155844156,
-        "scaleY": 0.4155251141552511,
+        "scaleX": 0.4247787610619469,
+        "scaleY": 0.42410714285714285,
         "width": 96,
-        "height": 91,
+        "height": 95,
         "offset": {
           "x": 80,
-          "y": 101
+          "y": 97
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          22,
-          741,
+          27,
+          733,
           257,
-          964
+          961
         ],
         "bounds": {
-          "x": 24,
-          "y": 743,
-          "width": 231,
-          "height": 219
+          "x": 29,
+          "y": 735,
+          "width": 226,
+          "height": 224
         },
-        "originalWidth": 231,
-        "originalHeight": 219,
+        "originalWidth": 226,
+        "originalHeight": 224,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              61,
-              745
+              56,
+              737
             ]
           ],
           "fringePixels": 2
@@ -1922,6 +2000,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1941,6 +2028,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-tavern-bar.png",
       "width": 256,
       "height": 256,
@@ -1950,45 +2038,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.41025641025641024,
-        "scaleY": 0.40825688073394495,
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.4072398190045249,
         "width": 96,
-        "height": 89,
+        "height": 90,
         "offset": {
           "x": 80,
-          "y": 103
+          "y": 102
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
           265,
-          744,
-          503,
+          741,
+          504,
           966
         ],
         "bounds": {
           "x": 267,
-          "y": 746,
-          "width": 234,
-          "height": 218
+          "y": 743,
+          "width": 235,
+          "height": 221
         },
-        "originalWidth": 234,
-        "originalHeight": 218,
+        "originalWidth": 235,
+        "originalHeight": 221,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              449,
-              748
+              303,
+              745
+            ],
+            [
+              375,
+              951
             ]
           ],
           "fringePixels": 2
@@ -1997,6 +2098,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2016,6 +2126,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-elevated-civic-building-with-absent-lower-stories.png",
       "width": 256,
       "height": 256,
@@ -2025,45 +2136,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.3902439024390244,
-        "scaleY": 0.3902439024390244,
+        "scaleX": 0.4304932735426009,
+        "scaleY": 0.43157894736842106,
         "width": 96,
-        "height": 112,
+        "height": 123,
         "offset": {
           "x": 80,
-          "y": 80
+          "y": 69
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          521,
-          701,
-          771,
-          992
+          527,
+          695,
+          754,
+          984
         ],
         "bounds": {
-          "x": 523,
-          "y": 703,
-          "width": 246,
-          "height": 287
+          "x": 529,
+          "y": 697,
+          "width": 223,
+          "height": 285
         },
-        "originalWidth": 246,
-        "originalHeight": 287,
+        "originalWidth": 223,
+        "originalHeight": 285,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              639,
-              705
+              638,
+              699
             ]
           ],
           "fringePixels": 2
@@ -2072,6 +2192,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2091,6 +2220,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-mall-shop-stall.png",
       "width": 256,
       "height": 256,
@@ -2100,45 +2230,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4304932735426009,
-        "scaleY": 0.43119266055045874,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.41964285714285715,
         "width": 96,
         "height": 94,
         "offset": {
           "x": 80,
           "y": 98
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          786,
-          743,
-          1013,
-          965
+          780,
+          734,
+          1012,
+          962
         ],
         "bounds": {
-          "x": 788,
-          "y": 745,
-          "width": 223,
-          "height": 218
+          "x": 782,
+          "y": 736,
+          "width": 228,
+          "height": 224
         },
-        "originalWidth": 223,
-        "originalHeight": 218,
+        "originalWidth": 228,
+        "originalHeight": 224,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              819,
-              747
+              809,
+              738
             ]
           ],
           "fringePixels": 2
@@ -2147,6 +2286,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2166,6 +2314,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-administrative-office-desk.png",
       "width": 256,
       "height": 256,
@@ -2175,45 +2324,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.3983402489626556,
-        "scaleY": 0.39622641509433965,
+        "scaleX": 0.4192139737991266,
+        "scaleY": 0.417910447761194,
         "width": 96,
         "height": 84,
         "offset": {
           "x": 80,
           "y": 108
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1026,
-          761,
-          1271,
-          977
+          1027,
+          758,
+          1260,
+          963
         ],
         "bounds": {
-          "x": 1028,
-          "y": 763,
-          "width": 241,
-          "height": 212
+          "x": 1029,
+          "y": 760,
+          "width": 229,
+          "height": 201
         },
-        "originalWidth": 241,
-        "originalHeight": 212,
+        "originalWidth": 229,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1157,
-              765
+              1146,
+              762
+            ],
+            [
+              1212,
+              829
             ]
           ],
           "fringePixels": 2
@@ -2222,6 +2384,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2241,6 +2412,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/over-city-venues-education-temple-entrance.png",
       "width": 256,
       "height": 256,
@@ -2250,45 +2422,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.39344262295081966,
-        "scaleY": 0.3948339483394834,
+        "scaleX": 0.4050632911392405,
+        "scaleY": 0.4037735849056604,
         "width": 96,
         "height": 107,
         "offset": {
           "x": 80,
           "y": 85
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/over-city-venues.png",
-        "sha256": "5f6a7218d0ebf3f00fae7263e3da0a474e344bddc2014f99896b9eb9b416599e",
+        "sha256": "6885a726aa6749a4f25bbf0e906c06d44ec56dbe4f706411e5c82276cb52e20c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1277,
-          702,
-          1525,
-          977
+          1281,
+          697,
+          1522,
+          966
         ],
         "bounds": {
-          "x": 1279,
-          "y": 704,
-          "width": 244,
-          "height": 271
+          "x": 1283,
+          "y": 699,
+          "width": 237,
+          "height": 265
         },
-        "originalWidth": 244,
-        "originalHeight": 271,
+        "originalWidth": 237,
+        "originalHeight": 265,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1395,
-              706
+              1396,
+              701
             ]
           ],
           "fringePixels": 2
@@ -2297,6 +2478,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

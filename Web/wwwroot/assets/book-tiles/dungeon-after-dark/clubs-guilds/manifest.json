@@ -11,9 +11,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -39,6 +39,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/clubs-guilds-club-carpet-floor.png",
       "width": 256,
       "height": 256,
@@ -48,120 +49,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5565221775974243,
-          0.00018849982729067738,
-          63.43191901299312,
-          0.0012605925950066644,
-          0.5419370034608053,
-          158.7671623551884
-        ],
-        "width": 129,
-        "height": 68,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          9,
-          67,
-          246,
-          197
+          41,
+          59,
+          238,
+          256
         ],
         "bounds": {
-          "x": 11,
-          "y": 69,
-          "width": 233,
-          "height": 126
+          "x": 43,
+          "y": 61,
+          "width": 193,
+          "height": 193
         },
-        "originalWidth": 233,
-        "originalHeight": 126,
+        "originalWidth": 193,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              125,
-              71
+              50,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49785407725322156,
-          "y": 0.48454365079364814
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.02,
-              2.005
-            ],
-            [
-              231.0,
-              60.785
-            ],
-            [
-              115.98,
-              120.1
-            ],
-            [
-              1.0,
-              61.32
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -183,6 +157,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/clubs-guilds-worn-club-carpet-floor.png",
       "width": 256,
       "height": 256,
@@ -192,120 +167,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5565229297093388,
-          -0.0005646044286928939,
-          63.477589905267855,
-          -0.001160309948796902,
-          0.5502500788108946,
-          158.75560079827335
-        ],
-        "width": 130,
-        "height": 69,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          266,
-          67,
-          503,
-          197
+          293,
+          59,
+          489,
+          255
         ],
         "bounds": {
-          "x": 268,
-          "y": 69,
-          "width": 233,
-          "height": 126
+          "x": 295,
+          "y": 61,
+          "width": 192,
+          "height": 192
         },
-        "originalWidth": 233,
-        "originalHeight": 126,
+        "originalWidth": 192,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              383,
-              71
+              311,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49785407725322095,
-          "y": 0.48144047619047475
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.941,
-              2.506
-            ],
-            [
-              231.0,
-              60.904
-            ],
-            [
-              116.059,
-              118.817
-            ],
-            [
-              1.0,
-              60.419
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -327,6 +275,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/clubs-guilds-cracked-club-carpet-floor.png",
       "width": 256,
       "height": 256,
@@ -336,120 +285,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5565220277065015,
-          -0.00011345725699274179,
-          63.45036482779296,
-          -0.0013827603195989734,
-          0.5436493564235338,
-          159.0018668254111
-        ],
-        "width": 129,
-        "height": 68,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          522,
-          67,
-          759,
-          197
+          544,
+          59,
+          741,
+          255
         ],
         "bounds": {
-          "x": 524,
-          "y": 69,
-          "width": 233,
-          "height": 126
+          "x": 546,
+          "y": 61,
+          "width": 193,
+          "height": 192
         },
-        "originalWidth": 233,
-        "originalHeight": 126,
+        "originalWidth": 193,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              638,
-              71
+              558,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978540772532211,
-          "y": 0.48406746031743014
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.988,
-              2.131
-            ],
-            [
-              231.0,
-              61.285
-            ],
-            [
-              116.012,
-              119.854
-            ],
-            [
-              1.0,
-              60.7
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -471,6 +393,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/clubs-guilds-wet-club-carpet-floor.png",
       "width": 256,
       "height": 256,
@@ -480,120 +403,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5589527416856053,
-          0.0016467222559110853,
-          63.3410879239361,
-          0.00025700289543119993,
-          0.5449413245717262,
-          158.92071471295165
-        ],
-        "width": 129,
-        "height": 69,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6666666666666666,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          778,
-          67,
-          1014,
-          197
+          796,
+          59,
+          993,
+          255
         ],
         "bounds": {
-          "x": 780,
-          "y": 69,
-          "width": 232,
-          "height": 126
+          "x": 798,
+          "y": 61,
+          "width": 193,
+          "height": 192
         },
-        "originalWidth": 232,
-        "originalHeight": 126,
+        "originalWidth": 193,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              894,
-              71
+              804,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978448275862032,
-          "y": 0.4813333333333114
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.673,
-              1.926
-            ],
-            [
-              230.0,
-              60.594
-            ],
-            [
-              115.327,
-              119.369
-            ],
-            [
-              1.0,
-              60.702
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -615,6 +511,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/clubs-guilds-club-carpet-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -624,45 +521,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5493562231759657,
-        "scaleY": 0.5079365079365079,
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6666666666666666,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1034,
-          67,
-          1271,
-          197
+          1049,
+          59,
+          1245,
+          255
         ],
         "bounds": {
-          "x": 1036,
-          "y": 69,
-          "width": 233,
-          "height": 126
+          "x": 1051,
+          "y": 61,
+          "width": 192,
+          "height": 192
         },
-        "originalWidth": 233,
-        "originalHeight": 126,
+        "originalWidth": 192,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1150,
-              71
+              1063,
+              63
             ]
           ],
           "fringePixels": 2
@@ -671,6 +589,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -690,6 +629,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/clubs-guilds-club-carpet-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -699,45 +639,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5470085470085471,
-        "scaleY": 0.48854961832061067,
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6666666666666666,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1289,
-          64,
-          1527,
-          199
+          1299,
+          59,
+          1496,
+          255
         ],
         "bounds": {
-          "x": 1291,
-          "y": 66,
-          "width": 234,
-          "height": 131
+          "x": 1301,
+          "y": 61,
+          "width": 193,
+          "height": 192
         },
-        "originalWidth": 234,
-        "originalHeight": 131,
+        "originalWidth": 193,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1407,
-              68
+              1311,
+              63
             ]
           ],
           "fringePixels": 2
@@ -746,15 +707,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "clubs-guilds-dark-polished-club-panel-wall-northwest",
-      "label": "Dark Polished Club Panel wall northwest",
+      "label": "Dark Polished Club Panel north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -765,8 +747,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/clubs-guilds-dark-polished-club-panel-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -776,109 +759,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.42953020134228187,
-          -0.0,
-          92.99328859060402,
-          -0.005583156551950362,
-          0.4266929667456054,
-          117.77245071488424
-        ],
-        "width": 76,
-        "height": 91,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5541125541125541,
+        "scaleY": 0.4025157232704403,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 118
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          36,
-          265,
-          217,
-          484
+          29,
+          319,
+          264,
+          482
         ],
         "bounds": {
-          "x": 38,
-          "y": 267,
-          "width": 177,
-          "height": 215
+          "x": 31,
+          "y": 321,
+          "width": 231,
+          "height": 159
         },
-        "originalWidth": 177,
-        "originalHeight": 215,
+        "originalWidth": 231,
+        "originalHeight": 159,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              59,
-              269
+              41,
+              323
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.46045197740112304,
-          "y": 0.814076744186046
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              136.554
-            ],
-            [
-              156.0,
-              213.499
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "clubs-guilds-dark-polished-club-panel-wall-northeast",
-      "label": "Dark Polished Club Panel wall northeast",
+      "label": "Dark Polished Club Panel west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -889,8 +853,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/clubs-guilds-dark-polished-club-panel-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -900,100 +865,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.42953020134228187,
-          0.0,
-          87.40939597315436,
-          0.005184967753695392,
-          0.4268983599538956,
-          116.64464171298113
-        ],
-        "width": 76,
-        "height": 92,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.7111111111111111,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 87,
-          "y": 117
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          296,
-          265,
-          477,
-          485
+          355,
+          298,
+          427,
+          482
         ],
         "bounds": {
-          "x": 298,
-          "y": 267,
-          "width": 177,
-          "height": 216
+          "x": 357,
+          "y": 300,
+          "width": 68,
+          "height": 180
         },
-        "originalWidth": 177,
-        "originalHeight": 216,
+        "originalWidth": 68,
+        "originalHeight": 180,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              449,
-              269
+              367,
+              302
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5338983050847377,
-          "y": 0.8119004629629666
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              169.0,
-              136.986
-            ],
-            [
-              20.0,
-              213.755
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1013,8 +959,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/clubs-guilds-dark-polished-club-panel-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1024,53 +971,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.810126582278481,
-        "scaleY": 0.5026178010471204,
+        "scaleX": 0.7529411764705882,
+        "scaleY": 0.7529411764705882,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          559,
-          272,
-          721,
-          467
+          555,
+          298,
+          729,
+          472
         ],
         "bounds": {
-          "x": 561,
-          "y": 274,
-          "width": 158,
-          "height": 191
+          "x": 557,
+          "y": 300,
+          "width": 170,
+          "height": 170
         },
-        "originalWidth": 158,
-        "originalHeight": 191,
+        "originalWidth": 170,
+        "originalHeight": 170,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              582,
-              276
+              564,
+              302
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1090,8 +1055,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/clubs-guilds-dark-polished-club-panel-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1101,58 +1067,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.64,
-        "scaleY": 0.5,
+        "scaleX": 0.757396449704142,
+        "scaleY": 0.7529411764705882,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          794,
-          265,
-          998,
-          461
+          806,
+          298,
+          979,
+          472
         ],
         "bounds": {
-          "x": 796,
-          "y": 267,
-          "width": 200,
-          "height": 192
+          "x": 808,
+          "y": 300,
+          "width": 169,
+          "height": 170
         },
-        "originalWidth": 200,
-        "originalHeight": 192,
+        "originalWidth": 169,
+        "originalHeight": 170,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              269
+              814,
+              302
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "clubs-guilds-dark-polished-club-panel-endcap-northwest",
-      "label": "Dark Polished Club Panel endcap northwest",
+      "label": "Dark Polished Club Panel north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1167,8 +1151,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/clubs-guilds-dark-polished-club-panel-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1178,58 +1163,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.41025641025641024,
-        "scaleY": 0.5079365079365079,
+        "scaleX": 0.3368421052631579,
+        "scaleY": 0.2857142857142857,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1109,
-          269,
-          1191,
-          462
+          1099,
+          330,
+          1198,
+          446
         ],
         "bounds": {
-          "x": 1111,
-          "y": 271,
-          "width": 78,
-          "height": 189
+          "x": 1101,
+          "y": 332,
+          "width": 95,
+          "height": 112
         },
-        "originalWidth": 78,
-        "originalHeight": 189,
+        "originalWidth": 95,
+        "originalHeight": 112,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1132,
-              273
+              1107,
+              334
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "clubs-guilds-dark-polished-club-panel-endcap-northeast",
-      "label": "Dark Polished Club Panel endcap northeast",
+      "label": "Dark Polished Club Panel west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1244,8 +1247,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/clubs-guilds-dark-polished-club-panel-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1255,53 +1259,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.41025641025641024,
-        "scaleY": 0.5052631578947369,
+        "scaleX": 0.3404255319148936,
+        "scaleY": 0.2857142857142857,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1370,
-          269,
-          1452,
-          463
+          1348,
+          330,
+          1446,
+          446
         ],
         "bounds": {
-          "x": 1372,
-          "y": 271,
-          "width": 78,
-          "height": 190
+          "x": 1350,
+          "y": 332,
+          "width": 94,
+          "height": 112
         },
-        "originalWidth": 78,
-        "originalHeight": 190,
+        "originalWidth": 94,
+        "originalHeight": 112,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1424,
-              273
+              1357,
+              334
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1310,7 +1332,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1323,6 +1345,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/clubs-guilds-dark-polished-club-panel-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1332,100 +1355,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.423841059602649,
-          -0.0,
-          93.03311258278146,
-          -0.0032749700854320667,
-          0.42218769710265747,
-          117.12267479241206
-        ],
-        "width": 76,
-        "height": 92,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.579185520361991,
+        "scaleY": 0.5217391304347826,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 117
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          33,
-          511,
-          216,
-          734
+          29,
+          522,
+          254,
+          710
         ],
         "bounds": {
-          "x": 35,
-          "y": 513,
-          "width": 179,
-          "height": 219
+          "x": 31,
+          "y": 524,
+          "width": 221,
+          "height": 184
         },
-        "originalWidth": 179,
-        "originalHeight": 219,
+        "originalWidth": 221,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              58,
-              515
+              41,
+              526
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.46089385474860095,
-          "y": 0.8127648401826449
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              139.512
-            ],
-            [
-              158.0,
-              216.479
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1434,7 +1438,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1447,6 +1451,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/clubs-guilds-dark-polished-club-panel-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1456,100 +1461,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.423841059602649,
-          0.0,
-          87.94701986754967,
-          0.004473022173113667,
-          0.42157488708443225,
-          116.2958286681995
-        ],
-        "width": 75,
-        "height": 92,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5925925925925926,
+        "scaleY": 0.518918918918919,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 88,
-          "y": 117
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          298,
-          511,
-          480,
-          734
+          282,
+          521,
+          502,
+          710
         ],
         "bounds": {
-          "x": 300,
-          "y": 513,
-          "width": 178,
-          "height": 219
+          "x": 284,
+          "y": 523,
+          "width": 216,
+          "height": 185
         },
-        "originalWidth": 178,
-        "originalHeight": 219,
+        "originalWidth": 216,
+        "originalHeight": 185,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              453,
-              515
+              293,
+              525
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5308988764044916,
-          "y": 0.8153972602739707
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              170.0,
-              139.818
-            ],
-            [
-              19.0,
-              217.326
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1569,6 +1555,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/clubs-guilds-club-carpet-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1578,53 +1566,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6066350710900474,
-        "scaleY": 0.6062176165803109,
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6274509803921569,
         "width": 128,
-        "height": 117,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 75
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          526,
-          523,
+          543,
+          512,
           741,
           720
         ],
         "bounds": {
-          "x": 528,
-          "y": 525,
-          "width": 211,
-          "height": 193
+          "x": 545,
+          "y": 514,
+          "width": 194,
+          "height": 204
         },
-        "originalWidth": 211,
-        "originalHeight": 193,
+        "originalWidth": 194,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              624,
-              527
+              561,
+              516
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1644,6 +1650,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/clubs-guilds-club-carpet-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1653,53 +1661,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5663716814159292,
-        "scaleY": 0.567741935483871,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6274509803921569,
         "width": 128,
-        "height": 88,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 104
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          781,
-          553,
-          1011,
-          712
+          795,
+          512,
+          995,
+          720
         ],
         "bounds": {
-          "x": 783,
-          "y": 555,
-          "width": 226,
-          "height": 155
+          "x": 797,
+          "y": 514,
+          "width": 196,
+          "height": 204
         },
-        "originalWidth": 226,
-        "originalHeight": 155,
+        "originalWidth": 196,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              889,
-              557
+              813,
+              516
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1719,6 +1745,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-neon-club-entrance.png",
       "width": 256,
       "height": 256,
@@ -1728,45 +1755,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4343891402714932,
-        "scaleY": 0.4349775784753363,
+        "scaleX": 0.3595505617977528,
+        "scaleY": 0.36,
         "width": 96,
-        "height": 97,
+        "height": 81,
         "offset": {
           "x": 80,
-          "y": 95
+          "y": 111
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1040,
-          506,
-          1265,
-          733
+          1013,
+          501,
+          1284,
+          730
         ],
         "bounds": {
-          "x": 1042,
-          "y": 508,
-          "width": 221,
-          "height": 223
+          "x": 1015,
+          "y": 503,
+          "width": 267,
+          "height": 225
         },
-        "originalWidth": 221,
-        "originalHeight": 223,
+        "originalWidth": 267,
+        "originalHeight": 225,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1124,
-              510
+              1095,
+              505
+            ],
+            [
+              1023,
+              651
             ]
           ],
           "fringePixels": 2
@@ -1775,6 +1815,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1794,6 +1843,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-casino-gaming-table.png",
       "width": 256,
       "height": 256,
@@ -1803,45 +1853,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
         "scaleX": 0.4444444444444444,
-        "scaleY": 0.44565217391304346,
+        "scaleY": 0.4423963133640553,
         "width": 96,
-        "height": 82,
+        "height": 96,
         "offset": {
           "x": 80,
-          "y": 110
+          "y": 96
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1290,
-          544,
-          1510,
-          732
+          1293,
+          514,
+          1513,
+          735
         ],
         "bounds": {
-          "x": 1292,
-          "y": 546,
+          "x": 1295,
+          "y": 516,
           "width": 216,
-          "height": 184
+          "height": 217
         },
         "originalWidth": 216,
-        "originalHeight": 184,
+        "originalHeight": 217,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1427,
-              548
+              1403,
+              518
             ]
           ],
           "fringePixels": 2
@@ -1850,6 +1909,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1869,6 +1937,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-restaurant-booth.png",
       "width": 256,
       "height": 256,
@@ -1878,45 +1947,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4155844155844156,
-        "scaleY": 0.4166666666666667,
+        "scaleX": 0.46153846153846156,
+        "scaleY": 0.4594594594594595,
         "width": 96,
-        "height": 80,
+        "height": 85,
         "offset": {
           "x": 80,
-          "y": 112
+          "y": 107
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          11,
-          783,
-          246,
-          979
+          33,
+          777,
+          245,
+          966
         ],
         "bounds": {
-          "x": 13,
-          "y": 785,
-          "width": 231,
-          "height": 192
+          "x": 35,
+          "y": 779,
+          "width": 208,
+          "height": 185
         },
-        "originalWidth": 231,
-        "originalHeight": 192,
+        "originalWidth": 208,
+        "originalHeight": 185,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              114,
-              787
+              42,
+              781
             ]
           ],
           "fringePixels": 2
@@ -1925,6 +2003,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1944,6 +2031,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-private-conversation-booth.png",
       "width": 256,
       "height": 256,
@@ -1953,45 +2041,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5079365079365079,
-        "scaleY": 0.5093167701863354,
+        "scaleX": 0.4485981308411215,
+        "scaleY": 0.4473684210526316,
         "width": 96,
-        "height": 82,
+        "height": 85,
         "offset": {
           "x": 80,
-          "y": 110
+          "y": 107
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          286,
-          797,
-          479,
-          962
+          284,
+          770,
+          502,
+          964
         ],
         "bounds": {
-          "x": 288,
-          "y": 799,
-          "width": 189,
-          "height": 161
+          "x": 286,
+          "y": 772,
+          "width": 214,
+          "height": 190
         },
-        "originalWidth": 189,
-        "originalHeight": 161,
+        "originalWidth": 214,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              369,
-              801
+              385,
+              774
             ]
           ],
           "fringePixels": 2
@@ -2000,6 +2097,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2019,6 +2125,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-guild-training-doorway.png",
       "width": 256,
       "height": 256,
@@ -2028,45 +2135,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.49740932642487046,
-        "scaleY": 0.494949494949495,
+        "scaleX": 0.39669421487603307,
+        "scaleY": 0.39901477832512317,
         "width": 96,
-        "height": 98,
+        "height": 81,
         "offset": {
           "x": 80,
-          "y": 94
+          "y": 111
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          540,
-          764,
-          737,
-          966
+          519,
+          749,
+          765,
+          956
         ],
         "bounds": {
-          "x": 542,
-          "y": 766,
-          "width": 193,
-          "height": 198
+          "x": 521,
+          "y": 751,
+          "width": 242,
+          "height": 203
         },
-        "originalWidth": 193,
-        "originalHeight": 198,
+        "originalWidth": 242,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              594,
-              768
+              699,
+              753
             ]
           ],
           "fringePixels": 2
@@ -2075,6 +2191,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2094,6 +2219,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-silk-market-stall.png",
       "width": 256,
       "height": 256,
@@ -2103,45 +2229,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.43636363636363634,
-        "scaleY": 0.4343891402714932,
+        "scaleX": 0.42290748898678415,
+        "scaleY": 0.4230769230769231,
         "width": 96,
-        "height": 96,
+        "height": 88,
         "offset": {
           "x": 80,
-          "y": 96
+          "y": 104
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          781,
-          761,
-          1005,
-          986
+          778,
+          757,
+          1009,
+          969
         ],
         "bounds": {
-          "x": 783,
-          "y": 763,
-          "width": 220,
-          "height": 221
+          "x": 780,
+          "y": 759,
+          "width": 227,
+          "height": 208
         },
-        "originalWidth": 220,
-        "originalHeight": 221,
+        "originalWidth": 227,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              887,
-              765
+              972,
+              761
             ]
           ],
           "fringePixels": 2
@@ -2150,6 +2285,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2169,6 +2313,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-mercenary-reception-desk.png",
       "width": 256,
       "height": 256,
@@ -2178,44 +2323,53 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4343891402714932,
-        "scaleY": 0.43414634146341463,
+        "scaleX": 0.38866396761133604,
+        "scaleY": 0.387434554973822,
         "width": 96,
-        "height": 89,
+        "height": 74,
         "offset": {
           "x": 80,
-          "y": 103
+          "y": 118
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1036,
+          1017,
           776,
-          1261,
-          985
+          1268,
+          971
         ],
         "bounds": {
-          "x": 1038,
+          "x": 1019,
           "y": 778,
-          "width": 221,
-          "height": 205
+          "width": 247,
+          "height": 191
         },
-        "originalWidth": 221,
-        "originalHeight": 205,
+        "originalWidth": 247,
+        "originalHeight": 191,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1147,
+              1233,
               780
             ]
           ],
@@ -2225,6 +2379,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2244,6 +2407,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/clubs-guilds-clean-white-club-entrance.png",
       "width": 256,
       "height": 256,
@@ -2253,53 +2417,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41739130434782606,
-        "scaleY": 0.41743119266055045,
+        "scaleX": 0.43243243243243246,
+        "scaleY": 0.4336283185840708,
         "width": 96,
-        "height": 91,
+        "height": 98,
         "offset": {
           "x": 80,
-          "y": 101
+          "y": 94
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/clubs-guilds.png",
-        "sha256": "7794b4d7cb8e86358d2c54594ecdedd72b8ffd90deed94397ebb9a2f1adf8129",
+        "sha256": "10bd000a6b70d529a8d045ed1361824e85f3f502835edb38fdac591a07619f8b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1287,
-          761,
-          1521,
-          983
+          1289,
+          745,
+          1515,
+          975
         ],
         "bounds": {
-          "x": 1289,
-          "y": 763,
-          "width": 230,
-          "height": 218
+          "x": 1291,
+          "y": 747,
+          "width": 222,
+          "height": 226
         },
-        "originalWidth": 230,
-        "originalHeight": 218,
+        "originalWidth": 222,
+        "originalHeight": 226,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1402,
-              765
-            ],
-            [
-              1332,
-              926
-            ],
-            [
-              1332,
-              929
+              1399,
+              749
             ]
           ],
           "fringePixels": 2
@@ -2308,6 +2473,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

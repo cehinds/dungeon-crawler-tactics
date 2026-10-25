@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5494956907231202,
-          0.01010445848476516,
-          62.801474731883445,
-          0.0072926253337084026,
-          0.5283525195130775,
-          158.0555683413023
-        ],
-        "width": 129,
-        "height": 69,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6432160804020101,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          16,
-          76,
-          256,
-          211
+          43,
+          33,
+          245,
+          236
         ],
         "bounds": {
-          "x": 18,
-          "y": 78,
-          "width": 236,
-          "height": 131
+          "x": 45,
+          "y": 35,
+          "width": 198,
+          "height": 199
         },
-        "originalWidth": 236,
-        "originalHeight": 131,
+        "originalWidth": 198,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              136,
-              80
+              50,
+              37
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978813559322022,
-          "y": 0.47804580152669995
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.614,
-              2.043
-            ],
-            [
-              234.0,
-              61.016
-            ],
-            [
-              116.386,
-              123.205
-            ],
-            [
-              1.0,
-              64.232
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-worn-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5422585491399289,
-          -0.013717540913466981,
-          64.34556813386148,
-          0.0043491945481607674,
-          0.521814902575468,
-          158.22274668096242
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.6368159203980099,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          269,
-          73,
-          512,
-          211
+          289,
+          31,
+          497,
+          236
         ],
         "bounds": {
-          "x": 271,
-          "y": 75,
-          "width": 239,
-          "height": 134
+          "x": 291,
+          "y": 33,
+          "width": 204,
+          "height": 201
         },
-        "originalWidth": 239,
-        "originalHeight": 134,
+        "originalWidth": 204,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              389,
-              77
+              459,
+              35
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49790794979079095,
-          "y": 0.47566044776120114
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.449,
-              2.427
-            ],
-            [
-              237.0,
-              62.755
-            ],
-            [
-              120.551,
-              125.051
-            ],
-            [
-              1.0,
-              64.722
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-cracked-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5468795478941484,
-          -0.02751667526825703,
-          65.21792993711078,
-          0.0024257306950560722,
-          0.5174302485352087,
-          158.81166784925082
-        ],
-        "width": 130,
-        "height": 69,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.6368159203980099,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          521,
-          72,
-          762,
-          210
+          540,
+          31,
+          747,
+          236
         ],
         "bounds": {
-          "x": 523,
-          "y": 74,
-          "width": 237,
-          "height": 134
+          "x": 542,
+          "y": 33,
+          "width": 203,
+          "height": 201
         },
-        "originalWidth": 237,
-        "originalHeight": 134,
+        "originalWidth": 203,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              637,
-              76
+              563,
+              35
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978902953586492,
-          "y": 0.4745335820895491
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              114.889,
-              1.758
-            ],
-            [
-              235.0,
-              63.039
-            ],
-            [
-              121.111,
-              125.417
-            ],
-            [
-              1.0,
-              64.136
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.544680468784003,
-          0.0005018757501950219,
-          63.4236521751302,
-          -0.0003940164880916954,
-          0.5172842162097617,
-          159.36079454208456
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.64,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          773,
-          72,
-          1015,
-          210
+          790,
+          32,
+          997,
+          236
         ],
         "bounds": {
-          "x": 775,
-          "y": 74,
-          "width": 238,
-          "height": 134
+          "x": 792,
+          "y": 34,
+          "width": 203,
+          "height": 200
         },
-        "originalWidth": 238,
-        "originalHeight": 134,
+        "originalWidth": 203,
+        "originalHeight": 200,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              891,
-              76
+              800,
+              36
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49789915966386655,
-          "y": 0.47154850746268145
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.557,
-              1.326
-            ],
-            [
-              236.0,
-              63.277
-            ],
-            [
-              118.443,
-              125.048
-            ],
-            [
-              1.0,
-              63.098
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-city-pavement-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5517241379310345,
-        "scaleY": 0.46715328467153283,
+        "scaleX": 0.9552238805970149,
+        "scaleY": 0.6183574879227053,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1029,
-          75,
-          1265,
-          216
+          1067,
+          29,
+          1205,
+          240
         ],
         "bounds": {
-          "x": 1031,
-          "y": 77,
-          "width": 232,
-          "height": 137
+          "x": 1069,
+          "y": 31,
+          "width": 134,
+          "height": 207
         },
-        "originalWidth": 232,
-        "originalHeight": 137,
+        "originalWidth": 134,
+        "originalHeight": 207,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1081,
-              79
+              1169,
+              33
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-city-pavement-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5446808510638298,
-        "scaleY": 0.5925925925925926,
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.6274509803921569,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1285,
-          84,
-          1524,
-          196
+          1301,
+          29,
+          1488,
+          237
         ],
         "bounds": {
-          "x": 1287,
-          "y": 86,
-          "width": 235,
-          "height": 108
+          "x": 1303,
+          "y": 31,
+          "width": 183,
+          "height": 204
         },
-        "originalWidth": 235,
-        "originalHeight": 108,
+        "originalWidth": 183,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1464,
-              88
+              1312,
+              33
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-wall-northwest",
-      "label": "Urban Brick wall northwest",
+      "label": "Urban Brick north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/surface-entry-urban-brick-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.460431654676259,
-          -0.0,
-          93.23741007194245,
-          -0.0016649388335266578,
-          0.4595954156261257,
-          104.02953442388424
-        ],
-        "width": 76,
-        "height": 105,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5844748858447488,
+        "scaleY": 0.3742690058479532,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 104
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          62,
-          246,
-          231,
-          479
+          31,
+          272,
+          254,
+          447
         ],
         "bounds": {
-          "x": 64,
-          "y": 248,
-          "width": 165,
-          "height": 229
+          "x": 33,
+          "y": 274,
+          "width": 219,
+          "height": 171
         },
-        "originalWidth": 165,
-        "originalHeight": 229,
+        "originalWidth": 219,
+        "originalHeight": 171,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              87,
-              250
+              91,
+              276
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4575757575757605,
-          "y": 0.8370393013100448
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              6.0,
-              156.617
-            ],
-            [
-              145.0,
-              226.747
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-wall-northeast",
-      "label": "Urban Brick wall northeast",
+      "label": "Urban Brick west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/surface-entry-urban-brick-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.47058823529411764,
-          0.0,
-          87.05882352941177,
-          -0.0047580320319161795,
-          0.4729373343539294,
-          102.8396176601425
-        ],
-        "width": 76,
-        "height": 107,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.624390243902439,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 87,
-          "y": 102
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          306,
-          250,
-          471,
-          478
+          350,
+          259,
+          436,
+          468
         ],
         "bounds": {
-          "x": 308,
-          "y": 252,
-          "width": 161,
-          "height": 224
+          "x": 352,
+          "y": 261,
+          "width": 82,
+          "height": 205
         },
-        "originalWidth": 161,
-        "originalHeight": 224,
+        "originalWidth": 82,
+        "originalHeight": 205,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              447,
-              254
+              361,
+              263
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5403726708074553,
-          "y": 0.8455357142857137
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              155.0,
-              156.253
-            ],
-            [
-              19.0,
-              222.547
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.9078014184397163,
-        "scaleY": 0.5647058823529412,
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6564102564102564,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          567,
-          284,
-          712,
-          458
+          546,
+          264,
+          741,
+          463
         ],
         "bounds": {
-          "x": 569,
-          "y": 286,
-          "width": 141,
-          "height": 170
+          "x": 548,
+          "y": 266,
+          "width": 191,
+          "height": 195
         },
-        "originalWidth": 141,
-        "originalHeight": 170,
+        "originalWidth": 191,
+        "originalHeight": 195,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              591,
-              288
+              553,
+              268
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6956521739130435,
-        "scaleY": 0.5614035087719298,
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6597938144329897,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
           800,
-          275,
-          988,
-          450
+          264,
+          995,
+          462
         ],
         "bounds": {
           "x": 802,
-          "y": 277,
-          "width": 184,
-          "height": 171
+          "y": 266,
+          "width": 191,
+          "height": 194
         },
-        "originalWidth": 184,
-        "originalHeight": 171,
+        "originalWidth": 191,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              891,
-              279
+              808,
+              268
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-endcap-northwest",
-      "label": "Urban Brick endcap northwest",
+      "label": "Urban Brick north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.4444444444444444,
-        "scaleY": 0.5052631578947369,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.16666666666666666,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
           1110,
-          261,
-          1186,
-          455
+          264,
+          1192,
+          460
         ],
         "bounds": {
           "x": 1112,
-          "y": 263,
-          "width": 72,
-          "height": 190
+          "y": 266,
+          "width": 78,
+          "height": 192
         },
-        "originalWidth": 72,
-        "originalHeight": 190,
+        "originalWidth": 78,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1133,
-              265
+              1171,
+              268
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-endcap-northeast",
-      "label": "Urban Brick endcap northeast",
+      "label": "Urban Brick west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.4383561643835616,
-        "scaleY": 0.5052631578947369,
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.16666666666666666,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1373,
-          261,
-          1450,
-          455
+          1359,
+          264,
+          1440,
+          460
         ],
         "bounds": {
-          "x": 1375,
-          "y": 263,
-          "width": 73,
-          "height": 190
+          "x": 1361,
+          "y": 266,
+          "width": 77,
+          "height": 192
         },
-        "originalWidth": 73,
-        "originalHeight": 190,
+        "originalWidth": 77,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1423,
-              265
+              1373,
+              268
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/surface-entry-urban-brick-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,140 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.5565217391304348,
-          -0.0,
-          78.19130434782609,
-          0.019706979600553825,
-          0.5659465024541532,
-          71.44462040712612
-        ],
-        "width": 94,
-        "height": 137,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5981308411214953,
+        "scaleY": 0.4682926829268293,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 78,
-          "y": 72
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          57,
-          482,
-          229,
-          724
+          31,
+          492,
+          249,
+          701
         ],
         "bounds": {
-          "x": 59,
-          "y": 484,
-          "width": 168,
-          "height": 238
+          "x": 33,
+          "y": 494,
+          "width": 214,
+          "height": 205
         },
-        "originalWidth": 168,
-        "originalHeight": 238,
+        "originalWidth": 214,
+        "originalHeight": 205,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              89,
-              486
-            ],
-            [
-              66,
-              653
-            ],
-            [
-              68,
-              655
-            ],
-            [
-              64,
-              666
-            ],
-            [
-              66,
-              671
-            ],
-            [
-              111,
-              675
-            ],
-            [
-              108,
-              680
-            ],
-            [
-              79,
-              683
-            ],
-            [
-              85,
-              683
-            ],
-            [
-              86,
-              685
-            ],
-            [
-              89,
-              685
+              41,
+              496
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5327380952380982,
-          "y": 0.8819285714285697
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              32.0,
-              183.63
-            ],
-            [
-              147.0,
-              236.168
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1471,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1484,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/surface-entry-urban-brick-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1493,128 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517241379310345,
-          0.0,
-          83.86206896551724,
-          -0.020947484165024274,
-          0.5617098538619985,
-          76.03437634454123
-        ],
-        "width": 93,
-        "height": 136,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.4682926829268293,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 84,
-          "y": 73
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          304,
-          485,
-          476,
-          727
+          288,
+          492,
+          502,
+          701
         ],
         "bounds": {
-          "x": 306,
-          "y": 487,
-          "width": 168,
-          "height": 238
+          "x": 290,
+          "y": 494,
+          "width": 210,
+          "height": 205
         },
-        "originalWidth": 168,
-        "originalHeight": 238,
+        "originalWidth": 210,
+        "originalHeight": 205,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              448,
-              489
-            ],
-            [
-              459,
-              663
-            ],
-            [
-              461,
-              663
-            ],
-            [
-              460,
-              665
-            ],
-            [
-              459,
-              670
-            ],
-            [
-              452,
-              683
-            ],
-            [
-              438,
-              693
-            ],
-            [
-              428,
-              697
+              300,
+              496
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4761904761904784,
-          "y": 0.8799768907563006
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              138.0,
-              183.113
-            ],
-            [
-              22.0,
-              235.756
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1634,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/surface-entry-wet-city-pavement-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1643,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5663716814159292,
-        "scaleY": 0.5670731707317073,
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6336633663366337,
         "width": 128,
-        "height": 93,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 99
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          525,
-          532,
-          755,
+          547,
+          494,
+          740,
           700
         ],
         "bounds": {
-          "x": 527,
-          "y": 534,
-          "width": 226,
-          "height": 164
+          "x": 549,
+          "y": 496,
+          "width": 189,
+          "height": 202
         },
-        "originalWidth": 226,
-        "originalHeight": 164,
+        "originalWidth": 189,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              621,
-              536
+              555,
+              498
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1709,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/surface-entry-wet-city-pavement-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1718,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5161290322580645,
-        "scaleY": 0.5161290322580645,
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6274509803921569,
         "width": 128,
-        "height": 80,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 112
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          772,
-          536,
-          1024,
-          695
+          795,
+          493,
+          993,
+          701
         ],
         "bounds": {
-          "x": 774,
-          "y": 538,
-          "width": 248,
-          "height": 155
+          "x": 797,
+          "y": 495,
+          "width": 194,
+          "height": 204
         },
-        "originalWidth": 248,
-        "originalHeight": 155,
+        "originalWidth": 194,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              887,
-              540
+              804,
+              497
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1784,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-apartment-window-wall.png",
       "width": 256,
       "height": 256,
@@ -1793,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5714285714285714,
-        "scaleY": 0.5714285714285714,
+        "scaleX": 0.4507042253521127,
+        "scaleY": 0.4489795918367347,
         "width": 96,
-        "height": 140,
+        "height": 88,
         "offset": {
           "x": 80,
-          "y": 52
+          "y": 104
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1066,
-          477,
-          1238,
-          726
+          1039,
+          497,
+          1256,
+          697
         ],
         "bounds": {
-          "x": 1068,
-          "y": 479,
-          "width": 168,
-          "height": 245
+          "x": 1041,
+          "y": 499,
+          "width": 213,
+          "height": 196
         },
-        "originalWidth": 168,
-        "originalHeight": 245,
+        "originalWidth": 213,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1089,
-              481
+              1049,
+              501
             ]
           ],
           "fringePixels": 2
@@ -1840,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1859,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-trophy-shelf.png",
       "width": 256,
       "height": 256,
@@ -1868,45 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.6575342465753424,
-        "scaleY": 0.6586538461538461,
+        "scaleX": 0.48,
+        "scaleY": 0.48095238095238096,
         "width": 96,
-        "height": 137,
+        "height": 101,
         "offset": {
           "x": 80,
-          "y": 55
+          "y": 91
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1340,
-          497,
-          1490,
-          709
+          1296,
+          485,
+          1500,
+          699
         ],
         "bounds": {
-          "x": 1342,
-          "y": 499,
-          "width": 146,
-          "height": 208
+          "x": 1298,
+          "y": 487,
+          "width": 200,
+          "height": 210
         },
-        "originalWidth": 146,
-        "originalHeight": 208,
+        "originalWidth": 200,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1398,
-              501
+              1365,
+              489
             ]
           ],
           "fringePixels": 2
@@ -1915,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1934,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-snowy-sidewalk-tree.png",
       "width": 256,
       "height": 256,
@@ -1943,49 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.5317460317460317,
+        "scaleX": 0.4304932735426009,
+        "scaleY": 0.4291044776119403,
         "width": 96,
-        "height": 134,
+        "height": 115,
         "offset": {
           "x": 80,
-          "y": 58
+          "y": 77
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          38,
-          718,
-          222,
-          974
+          22,
+          709,
+          249,
+          981
         ],
         "bounds": {
-          "x": 40,
-          "y": 720,
-          "width": 180,
-          "height": 252
+          "x": 24,
+          "y": 711,
+          "width": 223,
+          "height": 268
         },
-        "originalWidth": 180,
-        "originalHeight": 252,
+        "originalWidth": 223,
+        "originalHeight": 268,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              137,
-              722
-            ],
-            [
-              203,
-              795
+              144,
+              713
             ]
           ],
           "fringePixels": 2
@@ -1994,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2013,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-collapsed-street-rubble.png",
       "width": 256,
       "height": 256,
@@ -2022,45 +2034,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3902439024390244,
-        "scaleY": 0.39204545454545453,
+        "scaleX": 0.38866396761133604,
+        "scaleY": 0.38990825688073394,
         "width": 96,
-        "height": 69,
+        "height": 85,
         "offset": {
           "x": 80,
-          "y": 123
+          "y": 107
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          261,
-          770,
-          511,
-          950
+          263,
+          755,
+          514,
+          977
         ],
         "bounds": {
-          "x": 263,
-          "y": 772,
-          "width": 246,
-          "height": 176
+          "x": 265,
+          "y": 757,
+          "width": 247,
+          "height": 218
         },
-        "originalWidth": 246,
-        "originalHeight": 176,
+        "originalWidth": 247,
+        "originalHeight": 218,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              414,
-              774
+              427,
+              759
             ]
           ],
           "fringePixels": 2
@@ -2069,6 +2090,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2088,6 +2118,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-glowing-dungeon-entrance.png",
       "width": 256,
       "height": 256,
@@ -2097,45 +2128,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4,
-        "scaleY": 0.40076335877862596,
+        "scaleX": 0.38095238095238093,
+        "scaleY": 0.38267148014440433,
         "width": 96,
-        "height": 105,
+        "height": 106,
         "offset": {
           "x": 80,
-          "y": 87
+          "y": 86
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          527,
-          712,
-          771,
-          978
+          517,
+          706,
+          773,
+          987
         ],
         "bounds": {
-          "x": 529,
-          "y": 714,
-          "width": 240,
-          "height": 262
+          "x": 519,
+          "y": 708,
+          "width": 252,
+          "height": 277
         },
-        "originalWidth": 240,
-        "originalHeight": 262,
+        "originalWidth": 252,
+        "originalHeight": 277,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              615,
-              716
+              639,
+              710
             ]
           ],
           "fringePixels": 2
@@ -2144,6 +2184,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2163,6 +2212,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-wrought-iron-stair-railing.png",
       "width": 256,
       "height": 256,
@@ -2172,45 +2222,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5026178010471204,
-        "scaleY": 0.5050505050505051,
+        "scaleX": 0.40336134453781514,
+        "scaleY": 0.40397350993377484,
         "width": 96,
-        "height": 100,
+        "height": 61,
         "offset": {
           "x": 80,
-          "y": 92
+          "y": 131
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          801,
-          749,
-          996,
-          951
+          775,
+          776,
+          1017,
+          931
         ],
         "bounds": {
-          "x": 803,
-          "y": 751,
-          "width": 191,
-          "height": 198
+          "x": 777,
+          "y": 778,
+          "width": 238,
+          "height": 151
         },
-        "originalWidth": 191,
-        "originalHeight": 198,
+        "originalWidth": 238,
+        "originalHeight": 151,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              825,
-              753
+              796,
+              780
             ]
           ],
           "fringePixels": 2
@@ -2219,6 +2278,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2238,6 +2306,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-marble-landing.png",
       "width": 256,
       "height": 256,
@@ -2247,45 +2316,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4,
-        "scaleY": 0.4,
+        "scaleX": 0.47761194029850745,
+        "scaleY": 0.47619047619047616,
         "width": 96,
-        "height": 60,
+        "height": 100,
         "offset": {
           "x": 80,
-          "y": 132
+          "y": 92
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1032,
-          795,
-          1276,
-          949
+          1045,
+          743,
+          1250,
+          957
         ],
         "bounds": {
-          "x": 1034,
-          "y": 797,
-          "width": 240,
-          "height": 150
+          "x": 1047,
+          "y": 745,
+          "width": 201,
+          "height": 210
         },
-        "originalWidth": 240,
-        "originalHeight": 150,
+        "originalWidth": 201,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1152,
-              799
+              1067,
+              747
             ]
           ],
           "fringePixels": 2
@@ -2294,6 +2372,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2313,6 +2400,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-giant-fish-relief-doorway.png",
       "width": 256,
       "height": 256,
@@ -2322,45 +2410,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.45933014354066987,
-        "scaleY": 0.4588235294117647,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.4095940959409594,
         "width": 96,
-        "height": 117,
+        "height": 111,
         "offset": {
           "x": 80,
-          "y": 75
+          "y": 81
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/surface-entry.png",
-        "sha256": "535f9dc07fd95e8ebac635317b2449d4032ab5f84f5a995436d54545cab30804",
+        "sha256": "c64c0e3b22113ab1f323a0a19431f1c2a74d31f09a75a163ff0c55bf7baae5ed",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1297,
-          717,
-          1510,
-          976
+          1276,
+          703,
+          1514,
+          978
         ],
         "bounds": {
-          "x": 1299,
-          "y": 719,
-          "width": 209,
-          "height": 255
+          "x": 1278,
+          "y": 705,
+          "width": 234,
+          "height": 271
         },
-        "originalWidth": 209,
-        "originalHeight": 255,
+        "originalWidth": 234,
+        "originalHeight": 271,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1405,
-              721
+              1395,
+              707
             ]
           ],
           "fringePixels": 2
@@ -2369,6 +2466,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/iron-stations-station-concrete-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5355506228956858,
-          0.011337093103681424,
-          62.679809163398524,
-          -0.0005954355621681657,
-          0.4743636645272874,
-          159.16988621362862
-        ],
-        "width": 130,
-        "height": 78,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          26,
-          59,
-          272,
-          227
+          55,
+          36,
+          243,
+          225
         ],
         "bounds": {
-          "x": 28,
-          "y": 61,
-          "width": 242,
-          "height": 164
+          "x": 57,
+          "y": 38,
+          "width": 184,
+          "height": 185
         },
-        "originalWidth": 242,
-        "originalHeight": 164,
+        "originalWidth": 184,
+        "originalHeight": 185,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              149,
-              63
+              72,
+              40
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.497933884297521,
-          "y": 0.42292682926828096
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              121.928,
-              1.903
-            ],
-            [
-              240.0,
-              69.51
-            ],
-            [
-              119.072,
-              136.817
-            ],
-            [
-              1.0,
-              69.21
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/iron-stations-worn-station-concrete-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5378650781574398,
-          0.023729743454421207,
-          61.79274746982403,
-          0.0009776810419954585,
-          0.46444728142699304,
-          159.32515607056905
-        ],
-        "width": 130,
-        "height": 77,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          278,
-          60,
-          523,
-          228
+          305,
+          36,
+          494,
+          225
         ],
         "bounds": {
-          "x": 280,
-          "y": 62,
-          "width": 241,
-          "height": 164
+          "x": 307,
+          "y": 38,
+          "width": 185,
+          "height": 185
         },
-        "originalWidth": 241,
-        "originalHeight": 164,
+        "originalWidth": 185,
+        "originalHeight": 185,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              400,
-              64
+              321,
+              40
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49792531120331984,
-          "y": 0.42743597560974
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              123.04,
-              1.194
-            ],
-            [
-              239.0,
-              69.849
-            ],
-            [
-              116.96,
-              139.005
-            ],
-            [
-              1.0,
-              70.35
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/iron-stations-cracked-station-concrete-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.542366647875242,
-          0.006972044752892095,
-          62.97438001416756,
-          -0.00042224496063726467,
-          0.4722739844094557,
-          159.26569556358803
-        ],
-        "width": 130,
-        "height": 77,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.7071823204419889,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          526,
-          61,
-          769,
-          228
+          555,
+          36,
+          740,
+          225
         ],
         "bounds": {
-          "x": 528,
-          "y": 63,
-          "width": 239,
-          "height": 163
+          "x": 557,
+          "y": 38,
+          "width": 181,
+          "height": 185
         },
-        "originalWidth": 239,
-        "originalHeight": 163,
+        "originalWidth": 181,
+        "originalHeight": 185,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              645,
-              65
+              564,
+              40
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49790794979079595,
-          "y": 0.4258803680981609
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              119.871,
-              1.662
-            ],
-            [
-              237.0,
-              69.524
-            ],
-            [
-              118.129,
-              137.175
-            ],
-            [
-              1.0,
-              69.313
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/iron-stations-wet-station-concrete-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5355687086800207,
-          0.0010751161318040205,
-          63.388459284982176,
-          0.0016813403740073756,
-          0.46889188960065703,
-          158.86454217288514
-        ],
-        "width": 130,
-        "height": 77,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6918918918918919,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          772,
-          60,
-          1018,
-          228
+          799,
+          36,
+          988,
+          225
         ],
         "bounds": {
-          "x": 774,
-          "y": 62,
-          "width": 242,
-          "height": 164
+          "x": 801,
+          "y": 38,
+          "width": 185,
+          "height": 185
         },
-        "originalWidth": 242,
-        "originalHeight": 164,
+        "originalWidth": 185,
+        "originalHeight": 185,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              894,
-              64
+              811,
+              40
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979338842975253,
-          "y": 0.4282652439024432
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              120.637,
-              1.989
-            ],
-            [
-              240.0,
-              69.807
-            ],
-            [
-              120.363,
-              138.482
-            ],
-            [
-              1.0,
-              70.664
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/iron-stations-station-concrete-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5378151260504201,
-        "scaleY": 0.3855421686746988,
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.6530612244897959,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1023,
-          61,
-          1265,
-          231
+          1045,
+          35,
+          1235,
+          235
         ],
         "bounds": {
-          "x": 1025,
-          "y": 63,
-          "width": 238,
-          "height": 166
+          "x": 1047,
+          "y": 37,
+          "width": 186,
+          "height": 196
         },
-        "originalWidth": 238,
-        "originalHeight": 166,
+        "originalWidth": 186,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1144,
-              65
+              1055,
+              39
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/iron-stations-station-concrete-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5517241379310345,
-        "scaleY": 0.38323353293413176,
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.649746192893401,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1274,
-          62,
-          1510,
-          233
+          1290,
+          35,
+          1481,
+          236
         ],
         "bounds": {
-          "x": 1276,
-          "y": 64,
-          "width": 232,
-          "height": 167
+          "x": 1292,
+          "y": 37,
+          "width": 187,
+          "height": 197
         },
-        "originalWidth": 232,
-        "originalHeight": 167,
+        "originalWidth": 187,
+        "originalHeight": 197,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1389,
-              66
+              1299,
+              39
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "iron-stations-station-tiled-masonry-wall-northwest",
-      "label": "Station Tiled Masonry wall northwest",
+      "label": "Station Tiled Masonry north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/iron-stations-station-tiled-masonry-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.39263803680981596,
-          -0.0,
-          93.25153374233129,
-          0.010717038870871493,
-          0.39781615116831404,
-          119.53493911594654
-        ],
-        "width": 76,
-        "height": 88,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.4413793103448276,
+        "scaleY": 0.3657142857142857,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 120
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          45,
-          255,
-          242,
-          479
+          30,
+          278,
+          324,
+          457
         ],
         "bounds": {
-          "x": 47,
-          "y": 257,
-          "width": 193,
-          "height": 220
+          "x": 32,
+          "y": 280,
+          "width": 290,
+          "height": 175
         },
-        "originalWidth": 193,
-        "originalHeight": 220,
+        "originalWidth": 290,
+        "originalHeight": 175,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              79,
-              259
+              48,
+              282
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4585492227979301,
-          "y": 0.817150000000006
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              141.749
-            ],
-            [
-              170.0,
-              217.797
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "iron-stations-station-tiled-masonry-wall-northeast",
-      "label": "Station Tiled Masonry wall northeast",
+      "label": "Station Tiled Masonry west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/iron-stations-station-tiled-masonry-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4,
-          0.0,
-          87.2,
-          -0.016193317848719115,
-          0.4076948657961452,
-          120.24238473274835
-        ],
-        "width": 75,
-        "height": 91,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.6183574879227053,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 87,
-          "y": 118
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          309,
-          255,
-          502,
-          477
+          407,
+          263,
+          466,
+          474
         ],
         "bounds": {
-          "x": 311,
-          "y": 257,
-          "width": 189,
-          "height": 218
+          "x": 409,
+          "y": 265,
+          "width": 55,
+          "height": 207
         },
-        "originalWidth": 189,
-        "originalHeight": 218,
+        "originalWidth": 55,
+        "originalHeight": 207,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              466,
-              259
+              418,
+              267
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.539682539682532,
-          "y": 0.8259610091743096
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              182.0,
-              143.992
-            ],
-            [
-              22.0,
-              216.127
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/iron-stations-station-tiled-masonry-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.8533333333333334,
-        "scaleY": 0.5106382978723404,
+        "scaleX": 0.847682119205298,
+        "scaleY": 0.6736842105263158,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          574,
-          268,
-          728,
-          460
+          571,
+          273,
+          726,
+          467
         ],
         "bounds": {
-          "x": 576,
-          "y": 270,
-          "width": 150,
-          "height": 188
+          "x": 573,
+          "y": 275,
+          "width": 151,
+          "height": 190
         },
-        "originalWidth": 150,
-        "originalHeight": 188,
+        "originalWidth": 151,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              609,
-              272
+              584,
+              277
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/iron-stations-station-tiled-masonry-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6066350710900474,
-        "scaleY": 0.49230769230769234,
+        "scaleX": 0.7032967032967034,
+        "scaleY": 0.6432160804020101,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          784,
-          258,
-          999,
-          457
+          801,
+          283,
+          987,
+          486
         ],
         "bounds": {
-          "x": 786,
-          "y": 260,
-          "width": 211,
-          "height": 195
+          "x": 803,
+          "y": 285,
+          "width": 182,
+          "height": 199
         },
-        "originalWidth": 211,
-        "originalHeight": 195,
+        "originalWidth": 182,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              892,
-              262
+              810,
+              287
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "iron-stations-station-tiled-masonry-endcap-northwest",
-      "label": "Station Tiled Masonry endcap northwest",
+      "label": "Station Tiled Masonry north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/iron-stations-station-tiled-masonry-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.25,
-        "scaleY": 0.49740932642487046,
+        "scaleX": 0.34408602150537637,
+        "scaleY": 0.23880597014925373,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1077,
-          261,
-          1209,
-          458
+          1093,
+          309,
+          1190,
+          447
         ],
         "bounds": {
-          "x": 1079,
-          "y": 263,
-          "width": 128,
-          "height": 193
+          "x": 1095,
+          "y": 311,
+          "width": 93,
+          "height": 134
         },
-        "originalWidth": 128,
-        "originalHeight": 193,
+        "originalWidth": 93,
+        "originalHeight": 134,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1113,
-              265
+              1105,
+              313
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "iron-stations-station-tiled-masonry-endcap-northeast",
-      "label": "Station Tiled Masonry endcap northeast",
+      "label": "Station Tiled Masonry west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/iron-stations-station-tiled-masonry-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.24615384615384617,
-        "scaleY": 0.4897959183673469,
+        "scaleX": 0.3018867924528302,
+        "scaleY": 0.2302158273381295,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1341,
-          267,
-          1475,
-          467
+          1326,
+          308,
+          1436,
+          451
         ],
         "bounds": {
-          "x": 1343,
-          "y": 269,
-          "width": 130,
-          "height": 196
+          "x": 1328,
+          "y": 310,
+          "width": 106,
+          "height": 139
         },
-        "originalWidth": 130,
-        "originalHeight": 196,
+        "originalWidth": 106,
+        "originalHeight": 139,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1436,
-              271
+              1338,
+              312
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/iron-stations-station-tiled-masonry-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3742690058479532,
-          -0.0,
-          93.00584795321637,
-          0.022638636907490156,
-          0.38475670362777237,
-          109.89775535878658
-        ],
-        "width": 76,
-        "height": 98,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5446808510638298,
+        "scaleY": 0.4752475247524752,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 111
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          44,
-          484,
-          250,
-          734
+          31,
+          507,
+          270,
+          713
         ],
         "bounds": {
-          "x": 46,
-          "y": 486,
-          "width": 202,
-          "height": 246
+          "x": 33,
+          "y": 509,
+          "width": 235,
+          "height": 202
         },
-        "originalWidth": 202,
-        "originalHeight": 246,
+        "originalWidth": 235,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              78,
-              488
+              44,
+              511
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4628712871287174,
-          "y": 0.8450650406504093
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              171.332
-            ],
-            [
-              179.0,
-              244.44
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/iron-stations-station-tiled-masonry-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4,
-          0.0,
-          86.39999999999999,
-          -0.019281683268823867,
-          0.40907320860432606,
-          109.38768371373563
-        ],
-        "width": 77,
-        "height": 103,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.47058823529411764,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 86,
-          "y": 106
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          302,
-          488,
-          497,
-          737
+          286,
+          505,
+          523,
+          713
         ],
         "bounds": {
-          "x": 304,
-          "y": 490,
-          "width": 191,
-          "height": 245
+          "x": 288,
+          "y": 507,
+          "width": 233,
+          "height": 204
         },
-        "originalWidth": 191,
-        "originalHeight": 245,
+        "originalWidth": 233,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              458,
-              492
+              485,
+              509
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5445026178010395,
-          "y": 0.8442938775510261
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              184.0,
-              171.51
-            ],
-            [
-              24.0,
-              242.194
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/iron-stations-station-concrete-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5714285714285714,
-        "scaleY": 0.569620253164557,
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.579185520361991,
         "width": 128,
-        "height": 135,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 57
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          530,
-          493,
-          758,
-          734
+          551,
+          504,
+          738,
+          729
         ],
         "bounds": {
-          "x": 532,
-          "y": 495,
-          "width": 224,
-          "height": 237
+          "x": 553,
+          "y": 506,
+          "width": 183,
+          "height": 221
         },
-        "originalWidth": 224,
-        "originalHeight": 237,
+        "originalWidth": 183,
+        "originalHeight": 221,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              655,
-              497
+              569,
+              508
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/iron-stations-station-concrete-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5493562231759657,
-        "scaleY": 0.546875,
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.624390243902439,
         "width": 128,
-        "height": 105,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 87
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          775,
-          538,
-          1012,
-          734
+          785,
+          520,
+          990,
+          729
         ],
         "bounds": {
-          "x": 777,
-          "y": 540,
-          "width": 233,
-          "height": 192
+          "x": 787,
+          "y": 522,
+          "width": 201,
+          "height": 205
         },
-        "originalWidth": 233,
-        "originalHeight": 192,
+        "originalWidth": 201,
+        "originalHeight": 205,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              898,
-              542
+              964,
+              524
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-platform-edge-segment.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3870967741935484,
-        "scaleY": 0.3870967741935484,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.4121212121212121,
         "width": 96,
-        "height": 72,
+        "height": 68,
         "offset": {
           "x": 80,
-          "y": 120
+          "y": 124
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1021,
-          534,
-          1273,
-          724
+          1022,
+          543,
+          1260,
+          712
         ],
         "bounds": {
-          "x": 1023,
-          "y": 536,
-          "width": 248,
-          "height": 186
+          "x": 1024,
+          "y": 545,
+          "width": 234,
+          "height": 165
         },
-        "originalWidth": 248,
-        "originalHeight": 186,
+        "originalWidth": 234,
+        "originalHeight": 165,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1195,
-              538
+              1032,
+              547
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-platform-end-ramp.png",
       "width": 256,
       "height": 256,
@@ -1800,45 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39344262295081966,
-        "scaleY": 0.3915094339622642,
+        "scaleX": 0.49230769230769234,
+        "scaleY": 0.4930232558139535,
         "width": 96,
-        "height": 83,
+        "height": 106,
         "offset": {
           "x": 80,
-          "y": 109
+          "y": 86
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1277,
-          508,
-          1525,
-          724
+          1293,
+          507,
+          1492,
+          726
         ],
         "bounds": {
-          "x": 1279,
-          "y": 510,
-          "width": 244,
-          "height": 212
+          "x": 1295,
+          "y": 509,
+          "width": 195,
+          "height": 215
         },
-        "originalWidth": 244,
-        "originalHeight": 212,
+        "originalWidth": 195,
+        "originalHeight": 215,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1424,
-              512
+              1315,
+              511
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-blank-station-signboard.png",
       "width": 256,
       "height": 256,
@@ -1875,45 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4528301886792453,
-        "scaleY": 0.45454545454545453,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.4114583333333333,
         "width": 96,
-        "height": 100,
+        "height": 79,
         "offset": {
           "x": 80,
-          "y": 92
+          "y": 113
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          39,
-          762,
-          255,
-          986
+          26,
+          766,
+          264,
+          962
         ],
         "bounds": {
-          "x": 41,
-          "y": 764,
-          "width": 212,
-          "height": 220
+          "x": 28,
+          "y": 768,
+          "width": 234,
+          "height": 192
         },
-        "originalWidth": 212,
-        "originalHeight": 220,
+        "originalWidth": 234,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              226,
-              766
+              48,
+              770
             ]
           ],
           "fringePixels": 2
@@ -1922,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1941,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-transfer-direction-board.png",
       "width": 256,
       "height": 256,
@@ -1950,45 +2034,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4507042253521127,
-        "scaleY": 0.45161290322580644,
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.40932642487046633,
         "width": 96,
-        "height": 98,
+        "height": 79,
         "offset": {
           "x": 80,
-          "y": 94
+          "y": 113
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          293,
-          753,
-          510,
-          974
+          278,
+          764,
+          517,
+          961
         ],
         "bounds": {
-          "x": 295,
-          "y": 755,
-          "width": 213,
-          "height": 217
+          "x": 280,
+          "y": 766,
+          "width": 235,
+          "height": 193
         },
-        "originalWidth": 213,
-        "originalHeight": 217,
+        "originalWidth": 235,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              309,
-              757
+              295,
+              768
             ]
           ],
           "fringePixels": 2
@@ -1997,6 +2090,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2016,6 +2118,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-ticket-gate.png",
       "width": 256,
       "height": 256,
@@ -2025,45 +2128,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.42290748898678415,
-        "scaleY": 0.4251497005988024,
+        "scaleX": 0.4507042253521127,
+        "scaleY": 0.4528301886792453,
         "width": 96,
-        "height": 71,
+        "height": 72,
         "offset": {
           "x": 80,
-          "y": 121
+          "y": 120
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          523,
-          804,
-          754,
-          975
+          532,
+          791,
+          749,
+          954
         ],
         "bounds": {
-          "x": 525,
-          "y": 806,
-          "width": 227,
-          "height": 167
+          "x": 534,
+          "y": 793,
+          "width": 213,
+          "height": 159
         },
-        "originalWidth": 227,
-        "originalHeight": 167,
+        "originalWidth": 213,
+        "originalHeight": 159,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              576,
-              808
+              555,
+              795
             ]
           ],
           "fringePixels": 2
@@ -2072,6 +2184,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2091,6 +2212,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-employee-portal.png",
       "width": 256,
       "height": 256,
@@ -2100,45 +2222,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4,
-        "scaleY": 0.40096618357487923,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.40816326530612246,
         "width": 96,
-        "height": 83,
+        "height": 80,
         "offset": {
           "x": 80,
-          "y": 109
+          "y": 112
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          771,
-          774,
-          1015,
-          985
+          770,
+          759,
+          1008,
+          959
         ],
         "bounds": {
-          "x": 773,
-          "y": 776,
-          "width": 240,
-          "height": 207
+          "x": 772,
+          "y": 761,
+          "width": 234,
+          "height": 196
         },
-        "originalWidth": 240,
-        "originalHeight": 207,
+        "originalWidth": 234,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              864,
-              778
+              852,
+              763
             ]
           ],
           "fringePixels": 2
@@ -2147,6 +2278,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2166,6 +2306,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-rail-yard-crane.png",
       "width": 256,
       "height": 256,
@@ -2175,45 +2316,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4155844155844156,
-        "scaleY": 0.41365461847389556,
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.4095238095238095,
         "width": 96,
-        "height": 103,
+        "height": 86,
         "offset": {
           "x": 80,
-          "y": 89
+          "y": 106
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1038,
-          735,
-          1273,
-          988
+          1025,
+          745,
+          1264,
+          959
         ],
         "bounds": {
-          "x": 1040,
-          "y": 737,
-          "width": 231,
-          "height": 249
+          "x": 1027,
+          "y": 747,
+          "width": 235,
+          "height": 210
         },
-        "originalWidth": 231,
-        "originalHeight": 249,
+        "originalWidth": 235,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1090,
-              739
+              1053,
+              749
+            ],
+            [
+              1059,
+              811
             ]
           ],
           "fringePixels": 2
@@ -2222,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2241,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/iron-stations-abyss-warning-barrier.png",
       "width": 256,
       "height": 256,
@@ -2250,45 +2414,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3950617283950617,
-        "scaleY": 0.39408866995073893,
+        "scaleX": 0.41739130434782606,
+        "scaleY": 0.41578947368421054,
         "width": 96,
-        "height": 80,
+        "height": 79,
         "offset": {
           "x": 80,
-          "y": 112
+          "y": 113
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/iron-stations.png",
-        "sha256": "ab00c8a00242c18ebafe20fe72d3507daeb382c5c7888dff215ab43707c4f3cb",
+        "sha256": "24812685901930a2e7aa3712e99b21c2dfc09115b5b0f6736a53f0da5d119a9c",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1273,
-          781,
-          1520,
-          988
+          1277,
+          779,
+          1511,
+          973
         ],
         "bounds": {
-          "x": 1275,
-          "y": 783,
-          "width": 243,
-          "height": 203
+          "x": 1279,
+          "y": 781,
+          "width": 230,
+          "height": 190
         },
-        "originalWidth": 243,
-        "originalHeight": 203,
+        "originalWidth": 230,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1337,
-              785
+              1323,
+              783
             ]
           ],
           "fringePixels": 2
@@ -2297,6 +2470,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

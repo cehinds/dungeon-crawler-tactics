@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/masquerade-white-marble-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5423822348854038,
-          -0.007883689126136477,
-          63.9603842717557,
-          -0.0006057719416350612,
-          0.5105792079495625,
-          159.4394379433742
-        ],
-        "width": 130,
-        "height": 78,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.6772486772486772,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          12,
-          67,
-          255,
-          223
+          39,
+          63,
+          230,
+          256
         ],
         "bounds": {
-          "x": 14,
-          "y": 69,
-          "width": 239,
-          "height": 152
+          "x": 41,
+          "y": 65,
+          "width": 187,
+          "height": 189
         },
-        "originalWidth": 239,
-        "originalHeight": 152,
+        "originalWidth": 187,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              130,
-              71
+              103,
+              67
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979079497907914,
-          "y": 0.4204802631578634
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.089,
-              1.238
-            ],
-            [
-              237.0,
-              64.053
-            ],
-            [
-              119.911,
-              126.588
-            ],
-            [
-              1.0,
-              63.773
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/masquerade-worn-white-marble-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.537832236429834,
-          -0.0134843387433618,
-          64.3320963932594,
-          -0.0006501070083804833,
-          0.5123359867369258,
-          158.94780625866235
-        ],
-        "width": 130,
-        "height": 78,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          265,
-          67,
-          510,
-          224
+          298,
+          64,
+          487,
+          256
         ],
         "bounds": {
-          "x": 267,
-          "y": 69,
-          "width": 241,
-          "height": 153
+          "x": 300,
+          "y": 66,
+          "width": 185,
+          "height": 188
         },
-        "originalWidth": 241,
-        "originalHeight": 153,
+        "originalWidth": 185,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              386,
-              71
+              327,
+              68
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49792531120332073,
-          "y": 0.4226470588235087
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.434,
-              2.204
-            ],
-            [
-              239.0,
-              64.816
-            ],
-            [
-              121.566,
-              127.126
-            ],
-            [
-              1.0,
-              64.514
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/masquerade-cracked-white-marble-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5400824409134347,
-          -0.005841816657718064,
-          63.836843253475855,
-          0.00017092722813324968,
-          0.5127816843996988,
-          158.91412923193448
-        ],
-        "width": 130,
-        "height": 78,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          519,
-          67,
-          763,
-          224
+          549,
+          64,
+          739,
+          256
         ],
         "bounds": {
-          "x": 521,
-          "y": 69,
-          "width": 240,
-          "height": 153
+          "x": 551,
+          "y": 66,
+          "width": 186,
+          "height": 188
         },
-        "originalWidth": 240,
-        "originalHeight": 153,
+        "originalWidth": 186,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              640,
-              71
+              650,
+              68
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979166666666724,
-          "y": 0.42145424836600315
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.825,
-              2.078
-            ],
-            [
-              238.0,
-              64.443
-            ],
-            [
-              120.175,
-              126.887
-            ],
-            [
-              1.0,
-              64.522
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/masquerade-wet-white-marble-floor.png",
       "width": 256,
       "height": 256,
@@ -477,64 +400,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5446782759301457,
-          -0.0028954852427614934,
-          63.6424540398243,
-          0.00045569007209124467,
-          0.512378789193497,
-          158.8850155431414
-        ],
-        "width": 130,
-        "height": 78,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          775,
-          67,
-          1017,
-          224
+          802,
+          64,
+          991,
+          256
         ],
         "bounds": {
-          "x": 777,
-          "y": 69,
-          "width": 238,
-          "height": 153
+          "x": 804,
+          "y": 66,
+          "width": 185,
+          "height": 188
         },
-        "originalWidth": 238,
-        "originalHeight": 153,
+        "originalWidth": 185,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -542,55 +459,34 @@
           "seeds": [
             [
               895,
-              71
+              68
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978991596638585,
-          "y": 0.42172875816992417
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.168,
-              2.071
-            ],
-            [
-              236.0,
-              64.42
-            ],
-            [
-              118.832,
-              126.978
-            ],
-            [
-              1.0,
-              64.629
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/masquerade-white-marble-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.41830065359477125,
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.6736842105263158,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1027,
-          68,
-          1271,
-          225
+          1053,
+          63,
+          1244,
+          257
         ],
         "bounds": {
-          "x": 1029,
-          "y": 70,
-          "width": 240,
-          "height": 153
+          "x": 1055,
+          "y": 65,
+          "width": 187,
+          "height": 190
         },
-        "originalWidth": 240,
-        "originalHeight": 153,
+        "originalWidth": 187,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1146,
-              72
+              1151,
+              67
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/masquerade-white-marble-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5355648535564853,
-        "scaleY": 0.41830065359477125,
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6736842105263158,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1281,
-          67,
-          1524,
-          224
+          1305,
+          63,
+          1498,
+          257
         ],
         "bounds": {
-          "x": 1283,
-          "y": 69,
-          "width": 239,
-          "height": 153
+          "x": 1307,
+          "y": 65,
+          "width": 189,
+          "height": 190
         },
-        "originalWidth": 239,
-        "originalHeight": 153,
+        "originalWidth": 189,
+        "originalHeight": 190,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1401,
-              71
+              1371,
+              67
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "masquerade-smooth-white-cubic-castle-wall-northwest",
-      "label": "Smooth White Cubic Castle wall northwest",
+      "label": "Smooth White Cubic Castle north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/masquerade-smooth-white-cubic-castle-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3902439024390244,
-          -0.0,
-          92.8780487804878,
-          -0.006072358590793115,
-          0.3871482002263349,
-          126.00967398947256
-        ],
-        "width": 78,
-        "height": 82,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.512,
+        "scaleY": 0.423841059602649,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 126
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          28,
-          251,
-          233,
-          472
+          31,
+          309,
+          285,
+          464
         ],
         "bounds": {
-          "x": 30,
-          "y": 253,
-          "width": 201,
-          "height": 217
+          "x": 33,
+          "y": 311,
+          "width": 250,
+          "height": 151
         },
-        "originalWidth": 201,
-        "originalHeight": 217,
+        "originalWidth": 250,
+        "originalHeight": 151,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              63,
-              255
+              44,
+              313
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4477611940298505,
-          "y": 0.7920000000000067
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              129.25
-            ],
-            [
-              172.0,
-              214.478
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "masquerade-smooth-white-cubic-castle-wall-northeast",
-      "label": "Smooth White Cubic Castle wall northeast",
+      "label": "Smooth White Cubic Castle west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/masquerade-smooth-white-cubic-castle-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3902439024390244,
-          0.0,
-          84.29268292682927,
-          0.005718957455907141,
-          0.38733165199991504,
-          125.22375918090891
-        ],
-        "width": 79,
-        "height": 83,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5517241379310345,
+        "scaleY": 0.6994535519125683,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 84,
-          "y": 126
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          286,
-          252,
-          492,
-          472
+          377,
+          289,
+          439,
+          476
         ],
         "bounds": {
-          "x": 288,
-          "y": 254,
-          "width": 202,
-          "height": 216
+          "x": 379,
+          "y": 291,
+          "width": 58,
+          "height": 183
         },
-        "originalWidth": 202,
-        "originalHeight": 216,
+        "originalWidth": 58,
+        "originalHeight": 183,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              452,
-              256
+              405,
+              293
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5544554455445538,
-          "y": 0.7904953703703641
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              194.0,
-              128.228
-            ],
-            [
-              30.0,
-              213.266
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/masquerade-smooth-white-cubic-castle-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 1.0158730158730158,
-        "scaleY": 0.5026178010471204,
+        "scaleX": 0.8152866242038217,
+        "scaleY": 0.8533333333333334,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          583,
-          257,
-          713,
-          452
+          574,
+          303,
+          735,
+          457
         ],
         "bounds": {
-          "x": 585,
-          "y": 259,
-          "width": 126,
-          "height": 191
+          "x": 576,
+          "y": 305,
+          "width": 157,
+          "height": 150
         },
-        "originalWidth": 126,
-        "originalHeight": 191,
+        "originalWidth": 157,
+        "originalHeight": 150,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              668,
-              261
+              595,
+              307
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/masquerade-smooth-white-cubic-castle-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6124401913875598,
-        "scaleY": 0.5161290322580645,
+        "scaleX": 0.7710843373493976,
+        "scaleY": 0.7901234567901234,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          787,
-          255,
-          1000,
-          445
+          806,
+          302,
+          976,
+          468
         ],
         "bounds": {
-          "x": 789,
-          "y": 257,
-          "width": 209,
-          "height": 186
+          "x": 808,
+          "y": 304,
+          "width": 166,
+          "height": 162
         },
-        "originalWidth": 209,
-        "originalHeight": 186,
+        "originalWidth": 166,
+        "originalHeight": 162,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              891,
-              259
+              816,
+              306
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "masquerade-smooth-white-cubic-castle-endcap-northwest",
-      "label": "Smooth White Cubic Castle endcap northwest",
+      "label": "Smooth White Cubic Castle north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/masquerade-smooth-white-cubic-castle-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3106796116504854,
-        "scaleY": 0.5245901639344263,
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.4,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1088,
-          255,
-          1195,
-          442
+          1115,
+          338,
+          1194,
+          422
         ],
         "bounds": {
-          "x": 1090,
-          "y": 257,
-          "width": 103,
-          "height": 183
+          "x": 1117,
+          "y": 340,
+          "width": 75,
+          "height": 80
         },
-        "originalWidth": 103,
-        "originalHeight": 183,
+        "originalWidth": 75,
+        "originalHeight": 80,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1124,
-              259
+              1126,
+              342
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "masquerade-smooth-white-cubic-castle-endcap-northeast",
-      "label": "Smooth White Cubic Castle endcap northeast",
+      "label": "Smooth White Cubic Castle west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/masquerade-smooth-white-cubic-castle-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3106796116504854,
-        "scaleY": 0.5333333333333333,
+        "scaleX": 0.4050632911392405,
+        "scaleY": 0.3902439024390244,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1354,
-          260,
-          1461,
-          444
+          1360,
+          337,
+          1443,
+          423
         ],
         "bounds": {
-          "x": 1356,
-          "y": 262,
-          "width": 103,
-          "height": 180
+          "x": 1362,
+          "y": 339,
+          "width": 79,
+          "height": 82
         },
-        "originalWidth": 103,
-        "originalHeight": 180,
+        "originalWidth": 79,
+        "originalHeight": 82,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1419,
-              264
+              1383,
+              341
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/masquerade-smooth-white-cubic-castle-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.42953020134228187,
-          -0.0,
-          83.54362416107382,
-          0.054552143379032636,
-          0.4527163026080814,
-          91.48307750202319
-        ],
-        "width": 88,
-        "height": 116,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5589519650655022,
+        "scaleY": 0.46601941747572817,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 84,
-          "y": 93
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
           33,
-          467,
-          244,
+          500,
+          266,
           710
         ],
         "bounds": {
           "x": 35,
-          "y": 469,
-          "width": 207,
-          "height": 239
+          "y": 502,
+          "width": 229,
+          "height": 206
         },
-        "originalWidth": 207,
-        "originalHeight": 239,
+        "originalWidth": 229,
+        "originalHeight": 206,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              66,
-              471
+              52,
+              504
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49999999999999245,
-          "y": 0.876815899581596
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              29.0,
-              183.194
-            ],
-            [
-              178.0,
-              235.924
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/masquerade-smooth-white-cubic-castle-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.38323353293413176,
-          0.0,
-          85.26946107784431,
-          -0.04541075597369579,
-          0.4027514474860254,
-          115.71677018218212
-        ],
-        "width": 78,
-        "height": 101,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.46601941747572817,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 85,
-          "y": 108
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          279,
-          470,
-          486,
-          709
+          289,
+          500,
+          513,
+          710
         ],
         "bounds": {
-          "x": 281,
-          "y": 472,
-          "width": 203,
-          "height": 235
+          "x": 291,
+          "y": 502,
+          "width": 220,
+          "height": 206
         },
-        "originalWidth": 203,
-        "originalHeight": 235,
+        "originalWidth": 220,
+        "originalHeight": 206,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              449,
-              474
+              306,
+              504
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5492610837438483,
-          "y": 0.8594765957446759
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              195.0,
-              171.665
-            ],
-            [
-              28.0,
-              232.289
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/masquerade-white-marble-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.5316455696202531,
+        "scaleX": 0.6305418719211823,
+        "scaleY": 0.6183574879227053,
         "width": 128,
-        "height": 126,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 66
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          518,
-          483,
-          762,
-          724
+          552,
+          501,
+          759,
+          712
         ],
         "bounds": {
-          "x": 520,
-          "y": 485,
-          "width": 240,
-          "height": 237
+          "x": 554,
+          "y": 503,
+          "width": 203,
+          "height": 207
         },
-        "originalWidth": 240,
-        "originalHeight": 237,
+        "originalWidth": 203,
+        "originalHeight": 207,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              629,
-              487
+              574,
+              505
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/masquerade-white-marble-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5355648535564853,
-        "scaleY": 0.5365853658536586,
+        "scaleX": 0.64,
+        "scaleY": 0.6095238095238096,
         "width": 128,
-        "height": 110,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 82
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          771,
-          507,
-          1014,
-          716
+          795,
+          501,
+          999,
+          715
         ],
         "bounds": {
-          "x": 773,
-          "y": 509,
-          "width": 239,
-          "height": 205
+          "x": 797,
+          "y": 503,
+          "width": 200,
+          "height": 210
         },
-        "originalWidth": 239,
-        "originalHeight": 205,
+        "originalWidth": 200,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              867,
-              511
+              815,
+              505
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-sugar-cube-castle-facade.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.46601941747572817,
-        "scaleY": 0.468,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4222222222222222,
         "width": 96,
-        "height": 117,
+        "height": 95,
         "offset": {
           "x": 80,
-          "y": 75
+          "y": 97
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1045,
-          464,
-          1255,
-          718
+          1032,
+          486,
+          1264,
+          715
         ],
         "bounds": {
-          "x": 1047,
-          "y": 466,
-          "width": 206,
-          "height": 250
+          "x": 1034,
+          "y": 488,
+          "width": 228,
+          "height": 225
         },
-        "originalWidth": 206,
-        "originalHeight": 250,
+        "originalWidth": 228,
+        "originalHeight": 225,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1218,
-              468
+              1058,
+              490
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-white-terrace-balustrade.png",
       "width": 256,
       "height": 256,
@@ -1800,45 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.45714285714285713,
-        "scaleY": 0.4563106796116505,
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.42857142857142855,
         "width": 96,
-        "height": 94,
+        "height": 69,
         "offset": {
           "x": 80,
-          "y": 98
+          "y": 123
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1296,
-          503,
-          1510,
-          713
+          1289,
+          542,
+          1518,
+          707
         ],
         "bounds": {
-          "x": 1298,
-          "y": 505,
-          "width": 210,
-          "height": 206
+          "x": 1291,
+          "y": 544,
+          "width": 225,
+          "height": 161
         },
-        "originalWidth": 210,
-        "originalHeight": 206,
+        "originalWidth": 225,
+        "originalHeight": 161,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1470,
-              507
+              1317,
+              546
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-ballroom-chandelier.png",
       "width": 256,
       "height": 256,
@@ -1875,45 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4729064039408867,
-        "scaleY": 0.47191011235955055,
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.4696969696969697,
         "width": 96,
-        "height": 126,
+        "height": 124,
         "offset": {
           "x": 80,
-          "y": 66
+          "y": 68
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          28,
-          711,
-          235,
-          982
+          33,
+          715,
+          241,
+          983
         ],
         "bounds": {
-          "x": 30,
-          "y": 713,
-          "width": 203,
-          "height": 267
+          "x": 35,
+          "y": 717,
+          "width": 204,
+          "height": 264
         },
-        "originalWidth": 203,
-        "originalHeight": 267,
+        "originalWidth": 204,
+        "originalHeight": 264,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              130,
-              715
+              134,
+              719
             ]
           ],
           "fringePixels": 2
@@ -1922,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1941,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-banquet-table.png",
       "width": 256,
       "height": 256,
@@ -1950,49 +2034,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39344262295081966,
-        "scaleY": 0.39461883408071746,
+        "scaleX": 0.3735408560311284,
+        "scaleY": 0.37320574162679426,
         "width": 96,
-        "height": 88,
+        "height": 78,
         "offset": {
           "x": 80,
-          "y": 104
+          "y": 114
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          265,
-          746,
-          513,
-          973
+          262,
+          748,
+          523,
+          961
         ],
         "bounds": {
-          "x": 267,
-          "y": 748,
-          "width": 244,
-          "height": 223
+          "x": 264,
+          "y": 750,
+          "width": 257,
+          "height": 209
         },
-        "originalWidth": 244,
-        "originalHeight": 223,
+        "originalWidth": 257,
+        "originalHeight": 209,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              430,
-              750
+              399,
+              752
             ],
             [
-              397,
-              931
+              357,
+              803
             ]
           ],
           "fringePixels": 2
@@ -2001,6 +2094,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2020,6 +2122,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-formal-ballroom-dais.png",
       "width": 256,
       "height": 256,
@@ -2029,49 +2132,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3516483516483517,
-        "scaleY": 0.35071090047393366,
+        "scaleX": 0.3287671232876712,
+        "scaleY": 0.32663316582914576,
         "width": 96,
-        "height": 74,
+        "height": 65,
         "offset": {
           "x": 80,
-          "y": 118
+          "y": 127
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          519,
-          745,
-          796,
-          960
+          528,
+          761,
+          824,
+          964
         ],
         "bounds": {
-          "x": 521,
-          "y": 747,
-          "width": 273,
-          "height": 211
+          "x": 530,
+          "y": 763,
+          "width": 292,
+          "height": 199
         },
-        "originalWidth": 273,
-        "originalHeight": 211,
+        "originalWidth": 292,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              608,
-              749
-            ],
-            [
-              695,
-              810
+              669,
+              765
             ]
           ],
           "fringePixels": 2
@@ -2080,6 +2188,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2099,6 +2216,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-ornamental-garden-planter.png",
       "width": 256,
       "height": 256,
@@ -2108,45 +2226,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5079365079365079,
-        "scaleY": 0.5087719298245614,
+        "scaleX": 0.5303867403314917,
+        "scaleY": 0.5315315315315315,
         "width": 96,
-        "height": 116,
+        "height": 118,
         "offset": {
           "x": 80,
-          "y": 76
+          "y": 74
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          803,
-          738,
-          996,
-          970
+          835,
+          740,
+          1020,
+          966
         ],
         "bounds": {
-          "x": 805,
-          "y": 740,
-          "width": 189,
-          "height": 228
+          "x": 837,
+          "y": 742,
+          "width": 181,
+          "height": 222
         },
-        "originalWidth": 189,
-        "originalHeight": 228,
+        "originalWidth": 181,
+        "originalHeight": 222,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              894,
-              742
+              936,
+              744
             ]
           ],
           "fringePixels": 2
@@ -2155,6 +2282,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2174,6 +2310,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-masquerade-mask-sculpture.png",
       "width": 256,
       "height": 256,
@@ -2183,61 +2320,62 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5614035087719298,
-        "scaleY": 0.56,
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.5241635687732342,
         "width": 96,
-        "height": 140,
+        "height": 141,
         "offset": {
           "x": 80,
-          "y": 52
+          "y": 51
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1051,
-          729,
-          1226,
-          983
+          1066,
+          713,
+          1253,
+          986
         ],
         "bounds": {
-          "x": 1053,
-          "y": 731,
-          "width": 171,
-          "height": 250
+          "x": 1068,
+          "y": 715,
+          "width": 183,
+          "height": 269
         },
-        "originalWidth": 171,
-        "originalHeight": 250,
+        "originalWidth": 183,
+        "originalHeight": 269,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1143,
-              733
+              1182,
+              717
             ],
             [
-              1165,
-              748
+              1107,
+              863
             ],
             [
-              1074,
-              821
-            ],
-            [
-              1073,
-              823
-            ],
-            [
-              1200,
-              861
+              1124,
+              875
             ]
           ],
           "fringePixels": 2
@@ -2246,6 +2384,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2265,6 +2412,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/masquerade-castle-courtyard-stairwell.png",
       "width": 256,
       "height": 256,
@@ -2274,45 +2422,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3650190114068441,
-        "scaleY": 0.3659574468085106,
+        "scaleX": 0.47761194029850745,
+        "scaleY": 0.47783251231527096,
         "width": 96,
-        "height": 86,
+        "height": 97,
         "offset": {
           "x": 80,
-          "y": 106
+          "y": 95
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/masquerade.png",
-        "sha256": "bdda36489ea273698a08c2d12b23ae20e2af4f2cfc4fff2e20726894402cf54e",
+        "sha256": "2c5e1712bf88bbe57ad97f2b8236347efc18925a4724db7e77e2aea04ffdfc07",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1262,
-          742,
-          1529,
-          981
+          1299,
+          751,
+          1504,
+          958
         ],
         "bounds": {
-          "x": 1264,
-          "y": 744,
-          "width": 263,
-          "height": 235
+          "x": 1301,
+          "y": 753,
+          "width": 201,
+          "height": 203
         },
-        "originalWidth": 263,
-        "originalHeight": 235,
+        "originalWidth": 201,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1380,
-              746
+              1322,
+              755
             ]
           ],
           "fringePixels": 2
@@ -2321,6 +2478,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

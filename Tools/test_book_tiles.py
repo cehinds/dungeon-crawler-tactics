@@ -106,6 +106,39 @@ class BookTileTests(unittest.TestCase):
         self.assertEqual(prop["derived"]["resampling"], "lanczos")
         self.assertEqual(prop["derived"]["offset"]["x"], round(128 - prop["derived"]["width"] * .25))
 
+    def test_native_square_styles_and_mating(self):
+        image = Image.new("RGBA", (100,100), "red")
+        for style in self.styles + [{"id":"dungeon-after-dark","projection":"orthogonal","tileWidth":128,"tileHeight":128}]:
+            style = dict(style, projection="orthogonal", tileWidth=128,tileHeight=128)
+            _, derived, _ = tiles.normalize(image, {"id":"floor","role":"ground","cell":0,"squareLayout":"floor"}, style,
+                                           registration={"kind":"invalid-legacy"})
+            self.assertEqual((derived["width"],derived["height"]), (128,128))
+            points = derived["placement"]["points"]
+            self.assertEqual(points, [[64,128],[192,128],[192,256],[64,256]])
+            self.assertEqual(points[1], [points[0][0]+128,points[0][1]])
+            self.assertEqual(points[2], [points[3][0]+128,points[3][1]])
+
+    def test_native_wall_and_frontal_door_contacts(self):
+        image = Image.new("RGBA", (100,100), "red")
+        for layout,width,height,axis,expected in (
+                ("north-wall",128,64,"x",[[64,192],[192,192]]),
+                ("west-wall",32,128,"y",[[128,128],[128,256]]),
+                ("north-wall",128,96,"x",[[64,192],[192,192]])):
+            _,derived,_ = tiles.normalize(image, {"id":"architecture","role":"door" if height==96 else "wall",
+                                                   "squareLayout":layout,"renderWidth":width,"renderHeight":height}, self.styles[0])
+            self.assertEqual(derived["placement"], {"kind":"wall","axis":axis,"points":expected})
+        with self.assertRaisesRegex(tiles.PackError, "clip normalized canvas"):
+            tiles.normalize(image, {"id":"oversize","role":"wall","squareLayout":"west-wall","renderWidth":32,"renderHeight":160}, self.styles[0])
+
+    def test_native_full_floor_rejects_diamond_and_projection(self):
+        image = Image.new("RGBA", (100,100))
+        ImageDraw.Draw(image).polygon([(50,0),(99,50),(50,99),(0,50)], fill="red")
+        asset = {"id":"diamond","role":"ground","cell":0,"squareLayout":"floor"}
+        with self.assertRaisesRegex(tiles.PackError,"not an angled diamond"):
+            tiles.normalize(image, asset, self.styles[0])
+        with self.assertRaisesRegex(tiles.PackError,"orthogonal"):
+            tiles.normalize(Image.new("RGBA",(100,100),"red"), asset, self.styles[1])
+
     def test_registered_review_roundtrips_provenance_and_placement(self):
         crop = self.docs / "crops/pocket-dungeon.json"
         document = tiles.read_json(crop)

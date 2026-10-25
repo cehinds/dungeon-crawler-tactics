@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.7272727272727273,
-          0.0,
-          64.0,
-          0.0,
-          0.7111111111111111,
-          128.0
-        ],
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6666666666666666,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          43,
-          41,
-          223,
-          225
+          35,
+          37,
+          231,
+          233
         ],
         "bounds": {
-          "x": 45,
-          "y": 43,
-          "width": 176,
-          "height": 180
+          "x": 37,
+          "y": 39,
+          "width": 192,
+          "height": 192
         },
-        "originalWidth": 176,
-        "originalHeight": 180,
+        "originalWidth": 192,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              51,
-              45
+              50,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49999999999999556,
-          "y": 0.5000000000000016
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              176.0,
-              0.0
-            ],
-            [
-              176.0,
-              180.0
-            ],
-            [
-              0.0,
-              180.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-worn-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.7231638418079096,
-          0.0,
-          64.0,
-          0.0,
-          0.7111111111111111,
-          128.0
-        ],
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6666666666666666,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          296,
-          41,
-          477,
-          225
+          286,
+          37,
+          483,
+          233
         ],
         "bounds": {
-          "x": 298,
-          "y": 43,
-          "width": 177,
-          "height": 180
+          "x": 288,
+          "y": 39,
+          "width": 193,
+          "height": 192
         },
-        "originalWidth": 177,
-        "originalHeight": 180,
+        "originalWidth": 193,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              305,
-              45
+              303,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000046,
-          "y": 0.5000000000000016
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              177.0,
-              0.0
-            ],
-            [
-              177.0,
-              180.0
-            ],
-            [
-              0.0,
-              180.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-cracked-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -333,64 +282,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.7231638418079096,
-          0.0,
-          64.0,
-          0.0,
-          0.7071823204419889,
-          128.0
-        ],
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6597938144329897,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          551,
-          41,
-          732,
-          226
+          541,
+          37,
+          739,
+          235
         ],
         "bounds": {
-          "x": 553,
-          "y": 43,
-          "width": 177,
-          "height": 181
+          "x": 543,
+          "y": 39,
+          "width": 194,
+          "height": 194
         },
-        "originalWidth": 177,
-        "originalHeight": 181,
+        "originalWidth": 194,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -398,55 +341,34 @@
           "seeds": [
             [
               559,
-              45
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000046,
-          "y": 0.49999999999999123
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              177.0,
-              0.0
-            ],
-            [
-              177.0,
-              181.0
-            ],
-            [
-              0.0,
-              181.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-wet-city-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "affine": [
-          0.7111111111111111,
-          0.0,
-          64.0,
-          0.0,
-          0.7071823204419889,
-          128.0
-        ],
+        "scaleX": 0.6597938144329897,
+        "scaleY": 0.6597938144329897,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              64.0,
-              128.0
+              64,
+              128
             ],
             [
-              192.0,
-              128.0
+              192,
+              128
             ],
             [
-              192.0,
-              256.0
+              192,
+              256
             ],
             [
-              64.0,
-              256.0
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          805,
-          41,
-          989,
-          226
+          797,
+          37,
+          995,
+          235
         ],
         "bounds": {
-          "x": 807,
-          "y": 43,
-          "width": 180,
-          "height": 181
+          "x": 799,
+          "y": 39,
+          "width": 194,
+          "height": 194
         },
-        "originalWidth": 180,
-        "originalHeight": 181,
+        "originalWidth": 194,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              813,
-              45
+              811,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5000000000000018,
-          "y": 0.49999999999999123
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              0.0,
-              0.0
-            ],
-            [
-              180.0,
-              0.0
-            ],
-            [
-              180.0,
-              181.0
-            ],
-            [
-              0.0,
-              181.0
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            64.0,
-            128.0
+            64,
+            128
           ],
           [
-            192.0,
-            128.0
+            192,
+            128
           ],
           [
-            192.0,
-            256.0
+            192,
+            256
           ],
           [
-            64.0,
-            256.0
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-city-pavement-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "scaleX": 0.7314285714285714,
-        "scaleY": 0.7071823204419889,
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6632124352331606,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1064,
-          41,
-          1243,
-          226
+          1055,
+          37,
+          1250,
+          234
         ],
         "bounds": {
-          "x": 1066,
-          "y": 43,
-          "width": 175,
-          "height": 181
+          "x": 1057,
+          "y": 39,
+          "width": 191,
+          "height": 193
         },
-        "originalWidth": 175,
-        "originalHeight": 181,
+        "originalWidth": 191,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1072,
-              45
+              1076,
+              41
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/surface-entry-wet-city-pavement-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "nearest",
-        "scaleX": 0.7398843930635838,
-        "scaleY": 0.7071823204419889,
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6632124352331606,
         "width": 128,
         "height": 128,
         "offset": {
           "x": 64,
           "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1318,
-          40,
-          1495,
-          225
+          1307,
+          37,
+          1502,
+          234
         ],
         "bounds": {
-          "x": 1320,
-          "y": 42,
-          "width": 173,
-          "height": 181
+          "x": 1309,
+          "y": 39,
+          "width": 191,
+          "height": 193
         },
-        "originalWidth": 173,
-        "originalHeight": 181,
+        "originalWidth": 191,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1448,
-              44
+              1321,
+              41
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-wall-northwest",
-      "label": "Urban Brick wall northwest",
+      "label": "Urban Brick north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/surface-entry-urban-brick-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.6597938144329897,
-          -0.0,
-          58.72164948453608,
-          0.02951829412672037,
-          0.6591331791647974,
-          85.94265826479467
-        ],
-        "width": 142,
-        "height": 108,
+        "scaleX": 0.5739910313901345,
+        "scaleY": 0.3878787878787879,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 59,
-          "y": 87
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          22,
-          286,
-          242,
+          28,
+          283,
+          255,
           453
         ],
         "bounds": {
-          "x": 24,
-          "y": 288,
-          "width": 216,
-          "height": 163
+          "x": 30,
+          "y": 286,
+          "width": 223,
+          "height": 165
         },
-        "originalWidth": 216,
-        "originalHeight": 163,
+        "originalWidth": 223,
+        "originalHeight": 165,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              66,
-              290
+              129,
+              287
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4861111111111129,
-          "y": 0.9582944785276105
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              160.546
-            ],
-            [
-              202.0,
-              151.858
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-wall-northeast",
-      "label": "Urban Brick wall northeast",
+      "label": "Urban Brick west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/surface-entry-urban-brick-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-west-wall",
         "resampling": "nearest",
-        "affine": [
-          0.7619047619047619,
-          -0.0,
-          57.904761904761905,
-          -0.1109057829580469,
-          0.7537896082592397,
-          88.19566894136334
-        ],
-        "width": 153,
-        "height": 129,
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.7664670658682635,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 58,
-          "y": 67
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              64.0,
-              192.0
+              128,
+              128
             ],
             [
-              192.0,
-              192.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          281,
-          290,
-          486,
-          460
+          349,
+          272,
+          421,
+          443
         ],
         "bounds": {
-          "x": 283,
-          "y": 292,
-          "width": 201,
-          "height": 166
+          "x": 351,
+          "y": 274,
+          "width": 68,
+          "height": 167
         },
-        "originalWidth": 201,
-        "originalHeight": 166,
+        "originalWidth": 68,
+        "originalHeight": 167,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              446,
-              294
+              367,
+              276
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4577114427860713,
-          "y": 0.911120481927708
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              138.887
-            ],
-            [
-              176.0,
-              163.605
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            64.0,
-            192.0
+            128,
+            128
           ],
           [
-            192.0,
-            192.0
+            128,
+            256
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.7485380116959064,
-        "scaleY": 0.4948453608247423,
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.7852760736196319,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          552,
-          281,
-          727,
-          479
+          536,
+          274,
+          742,
+          441
         ],
         "bounds": {
-          "x": 554,
-          "y": 283,
-          "width": 171,
-          "height": 194
+          "x": 538,
+          "y": 276,
+          "width": 202,
+          "height": 163
         },
-        "originalWidth": 171,
-        "originalHeight": 194,
+        "originalWidth": 202,
+        "originalHeight": 163,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              584,
-              285
+              546,
+              278
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.6009389671361502,
-        "scaleY": 0.5217391304347826,
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.7664670658682635,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          787,
-          271,
-          1004,
-          459
+          796,
+          272,
+          1001,
+          443
         ],
         "bounds": {
-          "x": 789,
-          "y": 273,
-          "width": 213,
-          "height": 184
+          "x": 798,
+          "y": 274,
+          "width": 201,
+          "height": 167
         },
-        "originalWidth": 213,
-        "originalHeight": 184,
+        "originalWidth": 201,
+        "originalHeight": 167,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              884,
-              275
+              809,
+              276
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-endcap-northwest",
-      "label": "Urban Brick endcap northwest",
+      "label": "Urban Brick north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.2981366459627329,
-        "scaleY": 0.5303867403314917,
-        "width": 48,
-        "height": 96,
+        "scaleX": 0.2962962962962963,
+        "scaleY": 0.2882882882882883,
+        "width": 32,
+        "height": 32,
         "offset": {
-          "x": 104,
-          "y": 96
+          "x": 112,
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1066,
-          281,
-          1231,
-          466
+          1100,
+          303,
+          1212,
+          418
         ],
         "bounds": {
-          "x": 1068,
-          "y": 283,
-          "width": 161,
-          "height": 181
+          "x": 1102,
+          "y": 305,
+          "width": 108,
+          "height": 111
         },
-        "originalWidth": 161,
-        "originalHeight": 181,
+        "originalWidth": 108,
+        "originalHeight": 111,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1097,
-              285
+              1112,
+              307
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "surface-entry-urban-brick-endcap-northeast",
-      "label": "Urban Brick endcap northeast",
+      "label": "Urban Brick west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/surface-entry-urban-brick-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.2874251497005988,
-        "scaleY": 0.5549132947976878,
-        "width": 48,
-        "height": 96,
+        "scaleX": 0.2962962962962963,
+        "scaleY": 0.2882882882882883,
+        "width": 32,
+        "height": 32,
         "offset": {
-          "x": 104,
-          "y": 96
+          "x": 112,
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1325,
-          284,
-          1496,
-          461
+          1349,
+          303,
+          1461,
+          418
         ],
         "bounds": {
-          "x": 1327,
-          "y": 286,
-          "width": 167,
-          "height": 173
+          "x": 1351,
+          "y": 305,
+          "width": 108,
+          "height": 111
         },
-        "originalWidth": 167,
-        "originalHeight": 173,
+        "originalWidth": 108,
+        "originalHeight": 111,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1457,
-              288
+              1360,
+              307
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/surface-entry-urban-brick-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.7150837988826816,
-          -0.0,
-          48.26815642458101,
-          0.14305350103020784,
-          0.7006286714569114,
-          38.48319688058163
-        ],
-        "width": 150,
-        "height": 143,
+        "scaleX": 0.6037735849056604,
+        "scaleY": 0.4383561643835616,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 48,
-          "y": 53
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          28,
-          501,
-          241,
-          722
+          30,
+          486,
+          246,
+          709
         ],
         "bounds": {
-          "x": 30,
-          "y": 503,
-          "width": 209,
-          "height": 217
+          "x": 32,
+          "y": 488,
+          "width": 212,
+          "height": 219
         },
-        "originalWidth": 209,
-        "originalHeight": 217,
+        "originalWidth": 212,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              135,
-              505
+              128,
+              490
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5334928229665077,
-          "y": 0.9048248847926255
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              22.0,
-              214.621
-            ],
-            [
-              201.0,
-              178.073
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/surface-entry-urban-brick-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
+        "sizing": "native-square-north-wall",
         "resampling": "nearest",
-        "affine": [
-          0.8421052631578947,
-          -0.0,
-          45.473684210526315,
-          -0.08647122911781327,
-          0.8376538669241995,
-          33.81582357110733
-        ],
-        "width": 167,
-        "height": 173,
+        "scaleX": 0.5981308411214953,
+        "scaleY": 0.4343891402714932,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 45,
-          "y": 23
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              64.0,
-              192.0
+              64,
+              192
             ],
             [
-              192.0,
-              192.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          278,
-          506,
-          480,
-          720
+          279,
+          486,
+          497,
+          711
         ],
         "bounds": {
-          "x": 280,
-          "y": 508,
-          "width": 198,
-          "height": 210
+          "x": 281,
+          "y": 488,
+          "width": 214,
+          "height": 221
         },
-        "originalWidth": 198,
-        "originalHeight": 210,
+        "originalWidth": 214,
+        "originalHeight": 221,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              374,
-              510
+              370,
+              490
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49494949494949353,
-          "y": 0.947421428571428
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              22.0,
-              191.113
-            ],
-            [
-              174.0,
-              206.804
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            64.0,
-            192.0
+            64,
+            192
           ],
           [
-            192.0,
-            192.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/surface-entry-wet-city-pavement-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,37 +1563,46 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.5844748858447488,
-        "scaleY": 0.5829145728643216,
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.5871559633027523,
         "width": 128,
-        "height": 116,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 76
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          529,
-          514,
-          752,
-          717
+          542,
+          490,
+          738,
+          712
         ],
         "bounds": {
-          "x": 531,
-          "y": 516,
-          "width": 219,
-          "height": 199
+          "x": 544,
+          "y": 492,
+          "width": 192,
+          "height": 218
         },
-        "originalWidth": 219,
-        "originalHeight": 199,
+        "originalWidth": 192,
+        "originalHeight": 218,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1613,15 +1610,24 @@
           "seeds": [
             [
               562,
-              518
+              494
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/surface-entry-wet-city-pavement-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "nearest",
-        "scaleX": 0.5981308411214953,
-        "scaleY": 0.5978835978835979,
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.5871559633027523,
         "width": 128,
-        "height": 113,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 79
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          787,
-          521,
-          1005,
-          714
+          799,
+          490,
+          994,
+          712
         ],
         "bounds": {
-          "x": 789,
-          "y": 523,
-          "width": 214,
-          "height": 189
+          "x": 801,
+          "y": 492,
+          "width": 191,
+          "height": 218
         },
-        "originalWidth": 214,
-        "originalHeight": 189,
+        "originalWidth": 191,
+        "originalHeight": 218,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              831,
-              525
+              815,
+              494
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-apartment-window-wall.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.48,
-        "scaleY": 0.4816753926701571,
+        "scaleX": 0.4343891402714932,
+        "scaleY": 0.4339622641509434,
         "width": 96,
         "height": 92,
         "offset": {
           "x": 80,
           "y": 100
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1050,
-          521,
-          1254,
-          716
+          1038,
+          496,
+          1263,
+          712
         ],
         "bounds": {
-          "x": 1052,
-          "y": 523,
-          "width": 200,
-          "height": 191
+          "x": 1040,
+          "y": 498,
+          "width": 221,
+          "height": 212
         },
-        "originalWidth": 200,
-        "originalHeight": 191,
+        "originalWidth": 221,
+        "originalHeight": 212,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1058,
-              525
+              1050,
+              500
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-trophy-shelf.png",
       "width": 256,
       "height": 256,
@@ -1800,45 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4729064039408867,
-        "scaleY": 0.4724770642201835,
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.46511627906976744,
         "width": 96,
-        "height": 103,
+        "height": 100,
         "offset": {
           "x": 80,
-          "y": 89
+          "y": 92
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1300,
-          506,
-          1507,
-          728
+          1298,
+          495,
+          1509,
+          714
         ],
         "bounds": {
-          "x": 1302,
-          "y": 508,
-          "width": 203,
-          "height": 218
+          "x": 1300,
+          "y": 497,
+          "width": 207,
+          "height": 215
         },
-        "originalWidth": 203,
-        "originalHeight": 218,
+        "originalWidth": 207,
+        "originalHeight": 215,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1394,
-              510
+              1326,
+              499
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-snowy-sidewalk-tree.png",
       "width": 256,
       "height": 256,
@@ -1875,69 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.49230769230769234,
-        "scaleY": 0.49166666666666664,
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.47244094488188976,
         "width": 96,
-        "height": 118,
+        "height": 120,
         "offset": {
           "x": 80,
-          "y": 74
+          "y": 72
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          30,
-          736,
-          229,
-          980
+          26,
+          714,
+          234,
+          972
         ],
         "bounds": {
-          "x": 32,
-          "y": 738,
-          "width": 195,
-          "height": 240
+          "x": 28,
+          "y": 716,
+          "width": 204,
+          "height": 254
         },
-        "originalWidth": 195,
-        "originalHeight": 240,
+        "originalWidth": 204,
+        "originalHeight": 254,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              102,
-              740
-            ],
-            [
-              149,
-              763
-            ],
-            [
-              95,
-              765
-            ],
-            [
-              185,
-              771
-            ],
-            [
-              81,
-              783
-            ],
-            [
-              164,
-              791
-            ],
-            [
-              107,
-              844
+              126,
+              718
             ]
           ],
           "fringePixels": 2
@@ -1946,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1965,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-collapsed-street-rubble.png",
       "width": 256,
       "height": 256,
@@ -1974,45 +2034,98 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.3950617283950617,
-        "scaleY": 0.39603960396039606,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.4195121951219512,
         "width": 96,
-        "height": 80,
+        "height": 86,
         "offset": {
           "x": 80,
-          "y": 112
+          "y": 106
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          253,
-          779,
-          500,
-          985
+          264,
+          766,
+          496,
+          975
         ],
         "bounds": {
-          "x": 255,
-          "y": 781,
-          "width": 243,
-          "height": 202
+          "x": 266,
+          "y": 768,
+          "width": 228,
+          "height": 205
         },
-        "originalWidth": 243,
-        "originalHeight": 202,
+        "originalWidth": 228,
+        "originalHeight": 205,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              347,
-              783
+              333,
+              770
+            ],
+            [
+              305,
+              811
+            ],
+            [
+              336,
+              836
+            ],
+            [
+              290,
+              855
+            ],
+            [
+              354,
+              805
+            ],
+            [
+              354,
+              807
+            ],
+            [
+              322,
+              863
+            ],
+            [
+              320,
+              865
+            ],
+            [
+              322,
+              891
+            ],
+            [
+              411,
+              893
+            ],
+            [
+              471,
+              896
+            ],
+            [
+              415,
+              945
             ]
           ],
           "fringePixels": 2
@@ -2021,6 +2134,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2040,6 +2162,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-glowing-dungeon-entrance.png",
       "width": 256,
       "height": 256,
@@ -2049,45 +2172,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.39461883408071746,
+        "scaleX": 0.4,
+        "scaleY": 0.3983050847457627,
         "width": 96,
-        "height": 88,
+        "height": 94,
         "offset": {
           "x": 80,
-          "y": 104
+          "y": 98
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
           519,
-          744,
-          765,
-          971
+          726,
+          763,
+          966
         ],
         "bounds": {
           "x": 521,
-          "y": 746,
-          "width": 242,
-          "height": 223
+          "y": 728,
+          "width": 240,
+          "height": 236
         },
-        "originalWidth": 242,
-        "originalHeight": 223,
+        "originalWidth": 240,
+        "originalHeight": 236,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              630,
-              748
+              631,
+              730
             ]
           ],
           "fringePixels": 2
@@ -2096,6 +2228,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2115,6 +2256,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-wrought-iron-stair-railing.png",
       "width": 256,
       "height": 256,
@@ -2124,45 +2266,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.47058823529411764,
-        "scaleY": 0.4703196347031963,
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.4097222222222222,
         "width": 96,
-        "height": 103,
+        "height": 59,
         "offset": {
           "x": 80,
-          "y": 89
+          "y": 133
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          797,
-          757,
-          1005,
-          980
+          776,
+          788,
+          1016,
+          936
         ],
         "bounds": {
-          "x": 799,
-          "y": 759,
-          "width": 204,
-          "height": 219
+          "x": 778,
+          "y": 790,
+          "width": 236,
+          "height": 144
         },
-        "originalWidth": 204,
-        "originalHeight": 219,
+        "originalWidth": 236,
+        "originalHeight": 144,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              819,
-              761
+              795,
+              792
+            ],
+            [
+              946,
+              844
             ]
           ],
           "fringePixels": 2
@@ -2171,6 +2326,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2190,6 +2354,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-marble-landing.png",
       "width": 256,
       "height": 256,
@@ -2199,45 +2364,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.40336134453781514,
-        "scaleY": 0.40236686390532544,
+        "scaleX": 0.4824120603015075,
+        "scaleY": 0.4801980198019802,
         "width": 96,
-        "height": 68,
+        "height": 97,
         "offset": {
           "x": 80,
-          "y": 124
+          "y": 95
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1029,
-          789,
-          1271,
-          962
+          1050,
+          757,
+          1253,
+          963
         ],
         "bounds": {
-          "x": 1031,
-          "y": 791,
-          "width": 238,
-          "height": 169
+          "x": 1052,
+          "y": 759,
+          "width": 199,
+          "height": 202
         },
-        "originalWidth": 238,
-        "originalHeight": 169,
+        "originalWidth": 199,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1068,
-              793
+              1063,
+              761
             ]
           ],
           "fringePixels": 2
@@ -2246,6 +2420,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2265,6 +2448,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/surface-entry-giant-fish-relief-doorway.png",
       "width": 256,
       "height": 256,
@@ -2274,37 +2458,46 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "nearest",
-        "scaleX": 0.4423963133640553,
-        "scaleY": 0.44206008583690987,
+        "scaleX": 0.4682926829268293,
+        "scaleY": 0.46747967479674796,
         "width": 96,
-        "height": 103,
+        "height": 115,
         "offset": {
           "x": 80,
-          "y": 89
+          "y": 77
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/pocket-dungeon/surface-entry.png",
-        "sha256": "e6a1b34499c867f7c4647331793213cb9c316a309e29e98c31ffbea745686465",
+        "sha256": "aaaab134d724101fa9595ccffda24aec6abbc52afca9023018dc841872faaa38",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1295,
-          740,
-          1516,
-          977
+          1301,
+          722,
+          1510,
+          972
         ],
         "bounds": {
-          "x": 1297,
-          "y": 742,
-          "width": 217,
-          "height": 233
+          "x": 1303,
+          "y": 724,
+          "width": 205,
+          "height": 246
         },
-        "originalWidth": 217,
-        "originalHeight": 233,
+        "originalWidth": 205,
+        "originalHeight": 246,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -2312,7 +2505,7 @@
           "seeds": [
             [
               1392,
-              744
+              726
             ]
           ],
           "fringePixels": 2
@@ -2321,6 +2514,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

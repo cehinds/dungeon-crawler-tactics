@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5818216579466358,
-          0.0009779389512200327,
-          63.36093175172684,
-          0.0020339049464205058,
-          0.5721983225223954,
-          158.50262069123758
-        ],
-        "width": 130,
-        "height": 71,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.7231638418079096,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          25,
-          92,
-          252,
-          221
+          44,
+          59,
+          234,
+          240
         ],
         "bounds": {
-          "x": 27,
-          "y": 94,
-          "width": 223,
-          "height": 125
+          "x": 46,
+          "y": 61,
+          "width": 186,
+          "height": 177
         },
-        "originalWidth": 223,
-        "originalHeight": 125,
+        "originalWidth": 186,
+        "originalHeight": 177,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              136,
-              96
+              51,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49775784753363267,
-          "y": 0.4651760000000186
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              111.094,
-              2.222
-            ],
-            [
-              221.0,
-              57.756
-            ],
-            [
-              110.906,
-              114.071
-            ],
-            [
-              1.0,
-              58.538
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-worn-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5765779372266572,
-          -0.00101363865058652,
-          63.48363118497952,
-          -0.000755160794687005,
-          0.5625694510755506,
-          158.58469233635807
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.7071823204419889,
+        "scaleY": 0.7191011235955056,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          275,
-          91,
-          504,
-          221
+          302,
+          59,
+          487,
+          241
         ],
         "bounds": {
-          "x": 277,
-          "y": 93,
-          "width": 225,
-          "height": 126
+          "x": 304,
+          "y": 61,
+          "width": 181,
+          "height": 178
         },
-        "originalWidth": 225,
-        "originalHeight": 126,
+        "originalWidth": 181,
+        "originalHeight": 178,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              389,
-              95
+              309,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4977777777777808,
-          "y": 0.4726031746031706
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              111.9,
-              2.666
-            ],
-            [
-              223.0,
-              59.697
-            ],
-            [
-              112.1,
-              116.43
-            ],
-            [
-              1.0,
-              59.399
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-cracked-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5739799159404988,
-          -0.0032529465469372538,
-          63.62085206454176,
-          0.0019067271298201286,
-          0.5580054461284625,
-          158.57691508245205
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.7111111111111111,
+        "scaleY": 0.7191011235955056,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 160
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          526,
-          90,
-          756,
-          222
+          554,
+          59,
+          738,
+          241
         ],
         "bounds": {
-          "x": 528,
-          "y": 92,
-          "width": 226,
-          "height": 128
+          "x": 556,
+          "y": 61,
+          "width": 180,
+          "height": 178
         },
-        "originalWidth": 226,
-        "originalHeight": 128,
+        "originalWidth": 180,
+        "originalHeight": 178,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              639,
-              94
+              560,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4977876106194633,
-          "y": 0.46494531250001003
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              112.175,
-              2.167
-            ],
-            [
-              224.0,
-              59.132
-            ],
-            [
-              112.825,
-              116.859
-            ],
-            [
-              1.0,
-              59.894
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-wet-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5739876104150846,
-          -0.0011235308337711378,
-          63.49255687380751,
-          0.0017181924237175134,
-          0.5642958917363835,
-          158.57616473181375
-        ],
-        "width": 130,
-        "height": 71,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.7032967032967034,
+        "scaleY": 0.7231638418079096,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          779,
-          91,
-          1009,
-          222
+          804,
+          59,
+          990,
+          240
         ],
         "bounds": {
-          "x": 781,
-          "y": 93,
-          "width": 226,
-          "height": 127
+          "x": 806,
+          "y": 61,
+          "width": 182,
+          "height": 177
         },
-        "originalWidth": 226,
-        "originalHeight": 127,
+        "originalWidth": 182,
+        "originalHeight": 177,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              892,
-              95
+              810,
+              63
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49778761061947313,
-          "y": 0.46368897637796996
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              112.389,
-              2.181
-            ],
-            [
-              224.0,
-              58.549
-            ],
-            [
-              112.611,
-              115.596
-            ],
-            [
-              1.0,
-              59.228
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-mid-century-street-pavement-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.49612403100775193,
+        "scaleX": 0.7032967032967034,
+        "scaleY": 0.7231638418079096,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1031,
-          89,
-          1262,
-          222
+          1056,
+          59,
+          1242,
+          240
         ],
         "bounds": {
-          "x": 1033,
-          "y": 91,
-          "width": 227,
-          "height": 129
+          "x": 1058,
+          "y": 61,
+          "width": 182,
+          "height": 177
         },
-        "originalWidth": 227,
-        "originalHeight": 129,
+        "originalWidth": 182,
+        "originalHeight": 177,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1146,
-              93
+              1062,
+              63
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-mid-century-street-pavement-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.5,
+        "scaleX": 0.7071823204419889,
+        "scaleY": 0.7231638418079096,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1282,
-          91,
-          1513,
-          223
+          1307,
+          59,
+          1492,
+          240
         ],
         "bounds": {
-          "x": 1284,
-          "y": 93,
-          "width": 227,
-          "height": 128
+          "x": 1309,
+          "y": 61,
+          "width": 181,
+          "height": 177
         },
-        "originalWidth": 227,
-        "originalHeight": 128,
+        "originalWidth": 181,
+        "originalHeight": 177,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1393,
-              95
+              1313,
+              63
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-wall-northwest",
-      "label": "Painted Town Brick wall northwest",
+      "label": "Painted Town Brick north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-zockau-painted-town-brick-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.36363636363636365,
-          -0.0,
-          93.0909090909091,
-          0.0005245331827185511,
-          0.36389815767984146,
-          133.5816539661643
-        ],
-        "width": 73,
-        "height": 74,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5493562231759657,
+        "scaleY": 0.4444444444444444,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 93,
-          "y": 134
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          46,
-          253,
-          251,
-          462
+          32,
+          303,
+          269,
+          451
         ],
         "bounds": {
-          "x": 48,
-          "y": 255,
-          "width": 201,
-          "height": 205
+          "x": 34,
+          "y": 305,
+          "width": 233,
+          "height": 144
         },
-        "originalWidth": 201,
-        "originalHeight": 205,
+        "originalWidth": 233,
+        "originalHeight": 144,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              70,
-              257
+              45,
+              307
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.47761194029851256,
-          "y": 0.7824219512195016
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              8.0,
-              116.555
-            ],
-            [
-              184.0,
-              204.238
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-wall-northeast",
-      "label": "Painted Town Brick wall northeast",
+      "label": "Painted Town Brick west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/hunting-zockau-painted-town-brick-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3595505617977528,
-          0.0,
-          88.80898876404494,
-          -0.004044358782571434,
-          0.36154446631570636,
-          138.28364332000535
-        ],
-        "width": 74,
-        "height": 71,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5,
+        "scaleY": 0.6772486772486772,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 89,
-          "y": 138
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          302,
-          264,
-          512,
-          463
+          367,
+          269,
+          435,
+          462
         ],
         "bounds": {
-          "x": 304,
-          "y": 266,
-          "width": 206,
-          "height": 195
+          "x": 369,
+          "y": 271,
+          "width": 64,
+          "height": 189
         },
-        "originalWidth": 206,
-        "originalHeight": 195,
+        "originalWidth": 64,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              482,
-              268
+              377,
+              273
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5291262135922421,
-          "y": 0.7681743589743708
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              198.0,
-              106.535
-            ],
-            [
-              20.0,
-              193.053
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6956521739130435,
-        "scaleY": 0.5925925925925926,
+        "scaleX": 0.7619047619047619,
+        "scaleY": 0.7111111111111111,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          565,
-          284,
-          753,
-          450
+          571,
+          278,
+          743,
+          462
         ],
         "bounds": {
-          "x": 567,
-          "y": 286,
-          "width": 184,
-          "height": 162
+          "x": 573,
+          "y": 280,
+          "width": 168,
+          "height": 180
         },
-        "originalWidth": 184,
-        "originalHeight": 162,
+        "originalWidth": 168,
+        "originalHeight": 180,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              726,
-              288
+              585,
+              282
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6213592233009708,
-        "scaleY": 0.588957055214724,
+        "scaleX": 0.7231638418079096,
+        "scaleY": 0.7111111111111111,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          801,
-          264,
-          1011,
-          431
+          798,
+          278,
+          979,
+          462
         ],
         "bounds": {
-          "x": 803,
-          "y": 266,
-          "width": 206,
-          "height": 163
+          "x": 800,
+          "y": 280,
+          "width": 177,
+          "height": 180
         },
-        "originalWidth": 206,
-        "originalHeight": 163,
+        "originalWidth": 177,
+        "originalHeight": 180,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              903,
-              268
+              935,
+              282
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-endcap-northwest",
-      "label": "Painted Town Brick endcap northwest",
+      "label": "Painted Town Brick north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.4266666666666667,
-        "scaleY": 0.5647058823529412,
+        "scaleX": 0.4507042253521127,
+        "scaleY": 0.26229508196721313,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1126,
-          273,
-          1205,
-          447
+          1117,
+          308,
+          1192,
+          434
         ],
         "bounds": {
-          "x": 1128,
-          "y": 275,
-          "width": 75,
-          "height": 170
+          "x": 1119,
+          "y": 310,
+          "width": 71,
+          "height": 122
         },
-        "originalWidth": 75,
-        "originalHeight": 170,
+        "originalWidth": 71,
+        "originalHeight": 122,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1147,
-              277
+              1128,
+              312
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-endcap-northeast",
-      "label": "Painted Town Brick endcap northeast",
+      "label": "Painted Town Brick west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.4155844155844156,
-        "scaleY": 0.5614035087719298,
+        "scaleX": 0.4050632911392405,
+        "scaleY": 0.23880597014925373,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1361,
-          273,
-          1442,
-          448
+          1358,
+          305,
+          1441,
+          443
         ],
         "bounds": {
-          "x": 1363,
-          "y": 275,
-          "width": 77,
-          "height": 171
+          "x": 1360,
+          "y": 307,
+          "width": 79,
+          "height": 134
         },
-        "originalWidth": 77,
-        "originalHeight": 171,
+        "originalWidth": 79,
+        "originalHeight": 134,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1415,
-              277
+              1371,
+              309
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-zockau-painted-town-brick-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3902439024390244,
-          -0.0,
-          93.26829268292683,
-          0.012187429563845819,
-          0.39610331988657776,
-          126.5748701580213
-        ],
-        "width": 74,
-        "height": 82,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.5274725274725275,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 127
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          54,
-          488,
-          246,
+          33,
+          508,
+          247,
           694
         ],
         "bounds": {
-          "x": 56,
-          "y": 490,
-          "width": 188,
-          "height": 202
+          "x": 35,
+          "y": 510,
+          "width": 210,
+          "height": 182
         },
-        "originalWidth": 188,
-        "originalHeight": 202,
+        "originalWidth": 210,
+        "originalHeight": 182,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              79,
-              492
+              48,
+              512
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.47340425531914865,
-          "y": 0.8041262376237552
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              124.563
-            ],
-            [
-              171.0,
-              200.304
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-zockau-painted-town-brick-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.41830065359477125,
-          -0.0,
-          93.0718954248366,
-          0.021294776114132614,
-          0.42828680586117684,
-          119.48196861378227
-        ],
-        "width": 74,
-        "height": 88,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.5,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 94,
-          "y": 120
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          313,
-          489,
-          495,
-          694
+          295,
+          505,
+          504,
+          701
         ],
         "bounds": {
-          "x": 315,
-          "y": 491,
-          "width": 178,
-          "height": 201
+          "x": 297,
+          "y": 507,
+          "width": 205,
+          "height": 192
         },
-        "originalWidth": 178,
-        "originalHeight": 201,
+        "originalWidth": 205,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              339,
-              493
+              305,
+              509
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4691011235955074,
-          "y": 0.8217388059701497
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              131.615
-            ],
-            [
-              160.0,
-              198.724
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/hunting-zockau-mid-century-street-pavement-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5289256198347108,
-        "scaleY": 0.5279187817258884,
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.6432160804020101,
         "width": 128,
-        "height": 104,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 88
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          526,
-          497,
-          772,
-          698
+          561,
+          504,
+          750,
+          707
         ],
         "bounds": {
-          "x": 528,
-          "y": 499,
-          "width": 242,
-          "height": 197
+          "x": 563,
+          "y": 506,
+          "width": 185,
+          "height": 199
         },
-        "originalWidth": 242,
-        "originalHeight": 197,
+        "originalWidth": 185,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              671,
-              501
+              569,
+              508
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/hunting-zockau-mid-century-street-pavement-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.45714285714285713,
-        "scaleY": 0.4583333333333333,
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.6597938144329897,
         "width": 128,
-        "height": 77,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 115
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          768,
-          532,
-          1052,
+          804,
+          506,
+          995,
           704
         ],
         "bounds": {
-          "x": 770,
-          "y": 534,
-          "width": 280,
-          "height": 168
+          "x": 806,
+          "y": 508,
+          "width": 187,
+          "height": 194
         },
-        "originalWidth": 280,
-        "originalHeight": 168,
+        "originalWidth": 187,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              905,
-              536
+              812,
+              510
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-bear-head-square-statue.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5853658536585366,
-        "scaleY": 0.5833333333333334,
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.696078431372549,
         "width": 96,
-        "height": 126,
+        "height": 142,
         "offset": {
           "x": 80,
-          "y": 66
+          "y": 50
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1092,
-          488,
-          1260,
+          1085,
+          500,
+          1227,
           708
         ],
         "bounds": {
-          "x": 1094,
-          "y": 490,
-          "width": 164,
-          "height": 216
+          "x": 1087,
+          "y": 502,
+          "width": 138,
+          "height": 204
         },
-        "originalWidth": 164,
-        "originalHeight": 216,
+        "originalWidth": 138,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1134,
-              492
+              1115,
+              504
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-yellow-electric-street-lamp.png",
       "width": 256,
       "height": 256,
@@ -1800,45 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.7903225806451613,
-        "scaleY": 0.7965367965367965,
-        "width": 49,
+        "scaleX": 0.796875,
+        "scaleY": 0.7931034482758621,
+        "width": 51,
         "height": 184,
         "offset": {
-          "x": 104,
+          "x": 102,
           "y": 8
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1381,
-          468,
-          1447,
-          703
+          1368,
+          484,
+          1436,
+          720
         ],
         "bounds": {
-          "x": 1383,
-          "y": 470,
-          "width": 62,
-          "height": 231
+          "x": 1370,
+          "y": 486,
+          "width": 64,
+          "height": 232
         },
-        "originalWidth": 62,
-        "originalHeight": 231,
+        "originalWidth": 64,
+        "originalHeight": 232,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1412,
-              472
+              1400,
+              488
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-three-storey-diner-club-facade.png",
       "width": 256,
       "height": 256,
@@ -1875,45 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4247787610619469,
-        "scaleY": 0.42528735632183906,
+        "scaleX": 0.44036697247706424,
+        "scaleY": 0.4385245901639344,
         "width": 96,
-        "height": 111,
+        "height": 107,
         "offset": {
           "x": 80,
-          "y": 81
+          "y": 85
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          40,
-          704,
-          270,
-          969
+          31,
+          719,
+          253,
+          967
         ],
         "bounds": {
-          "x": 42,
-          "y": 706,
-          "width": 226,
-          "height": 261
+          "x": 33,
+          "y": 721,
+          "width": 218,
+          "height": 244
         },
-        "originalWidth": 226,
-        "originalHeight": 261,
+        "originalWidth": 218,
+        "originalHeight": 244,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              115,
-              708
+              149,
+              723
             ]
           ],
           "fringePixels": 2
@@ -1922,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1941,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-small-pub-with-broken-sign.png",
       "width": 256,
       "height": 256,
@@ -1950,45 +2034,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39669421487603307,
-        "scaleY": 0.3951612903225806,
+        "scaleX": 0.366412213740458,
+        "scaleY": 0.3644067796610169,
         "width": 96,
-        "height": 98,
+        "height": 86,
         "offset": {
           "x": 80,
-          "y": 94
+          "y": 106
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          289,
-          716,
-          535,
-          968
+          279,
+          727,
+          545,
+          967
         ],
         "bounds": {
-          "x": 291,
-          "y": 718,
-          "width": 242,
-          "height": 248
+          "x": 281,
+          "y": 729,
+          "width": 262,
+          "height": 236
         },
-        "originalWidth": 242,
-        "originalHeight": 248,
+        "originalWidth": 262,
+        "originalHeight": 236,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              339,
-              720
+              317,
+              731
+            ],
+            [
+              484,
+              766
             ]
           ],
           "fringePixels": 2
@@ -1997,6 +2094,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2016,6 +2122,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-town-park-bench.png",
       "width": 256,
       "height": 256,
@@ -2025,45 +2132,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.518918918918919,
-        "scaleY": 0.5189873417721519,
+        "scaleX": 0.45714285714285713,
+        "scaleY": 0.45774647887323944,
         "width": 96,
-        "height": 82,
+        "height": 65,
         "offset": {
           "x": 80,
-          "y": 110
+          "y": 127
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          560,
-          788,
-          749,
-          950
+          547,
+          816,
+          761,
+          962
         ],
         "bounds": {
-          "x": 562,
-          "y": 790,
-          "width": 185,
-          "height": 158
+          "x": 549,
+          "y": 818,
+          "width": 210,
+          "height": 142
         },
-        "originalWidth": 185,
-        "originalHeight": 158,
+        "originalWidth": 210,
+        "originalHeight": 142,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              618,
-              792
+              731,
+              820
             ]
           ],
           "fringePixels": 2
@@ -2072,6 +2188,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2091,6 +2216,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-narrow-alley-barricade.png",
       "width": 256,
       "height": 256,
@@ -2100,49 +2226,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5133689839572193,
-        "scaleY": 0.5163398692810458,
+        "scaleX": 0.43636363636363634,
+        "scaleY": 0.43333333333333335,
         "width": 96,
-        "height": 79,
+        "height": 65,
         "offset": {
           "x": 80,
-          "y": 113
+          "y": 127
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          800,
-          778,
-          991,
-          935
+          787,
+          802,
+          1011,
+          956
         ],
         "bounds": {
-          "x": 802,
-          "y": 780,
-          "width": 187,
-          "height": 153
+          "x": 789,
+          "y": 804,
+          "width": 220,
+          "height": 150
         },
-        "originalWidth": 187,
-        "originalHeight": 153,
+        "originalWidth": 220,
+        "originalHeight": 150,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              837,
-              782
-            ],
-            [
-              847,
-              881
+              822,
+              806
             ]
           ],
           "fringePixels": 2
@@ -2151,6 +2282,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2170,6 +2310,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-public-park-stairwell.png",
       "width": 256,
       "height": 256,
@@ -2179,45 +2320,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3983402489626556,
-        "scaleY": 0.4,
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.43781094527363185,
         "width": 96,
-        "height": 92,
+        "height": 88,
         "offset": {
           "x": 80,
-          "y": 100
+          "y": 104
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1028,
-          730,
-          1273,
-          964
+          1041,
+          760,
+          1264,
+          965
         ],
         "bounds": {
-          "x": 1030,
-          "y": 732,
-          "width": 241,
-          "height": 230
+          "x": 1043,
+          "y": 762,
+          "width": 219,
+          "height": 201
         },
-        "originalWidth": 241,
-        "originalHeight": 230,
+        "originalWidth": 219,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1148,
-              734
+              1062,
+              764
             ]
           ],
           "fringePixels": 2
@@ -2226,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2245,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-shop-display-window.png",
       "width": 256,
       "height": 256,
@@ -2254,45 +2414,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5423728813559322,
-        "scaleY": 0.5439330543933054,
+        "scaleX": 0.47058823529411764,
+        "scaleY": 0.46919431279620855,
         "width": 96,
-        "height": 130,
+        "height": 99,
         "offset": {
           "x": 80,
-          "y": 62
+          "y": 93
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/hunting-zockau.png",
-        "sha256": "6ff76dd76831be2216f0d9caf6930f719892e55a589986d8d4e42b6a209026e6",
+        "sha256": "77f961d6538d6509e14cbc3733eff754f35931e7b1ccfd41d3da18c0e8329c4f",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1308,
-          718,
-          1489,
-          961
+          1297,
+          750,
+          1505,
+          965
         ],
         "bounds": {
-          "x": 1310,
-          "y": 720,
-          "width": 177,
-          "height": 239
+          "x": 1299,
+          "y": 752,
+          "width": 204,
+          "height": 211
         },
-        "originalWidth": 177,
-        "originalHeight": 239,
+        "originalWidth": 204,
+        "originalHeight": 211,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1426,
-              722
+              1353,
+              754
             ]
           ],
           "fringePixels": 2
@@ -2301,6 +2470,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

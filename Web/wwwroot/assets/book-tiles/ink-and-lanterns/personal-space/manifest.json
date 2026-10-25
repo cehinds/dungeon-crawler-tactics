@@ -10,9 +10,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -38,6 +38,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/personal-space-warm-wood-plank-floor.png",
       "width": 256,
       "height": 256,
@@ -47,120 +48,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5664406044039599,
-          0.007333613604017329,
-          62.936113051221945,
-          0.004652507555236787,
-          0.4950408227323506,
-          158.4162334456867
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          22,
-          57,
-          255,
-          211
+          44,
+          46,
+          232,
+          238
         ],
         "bounds": {
-          "x": 24,
-          "y": 59,
-          "width": 229,
-          "height": 150
+          "x": 46,
+          "y": 48,
+          "width": 184,
+          "height": 188
         },
-        "originalWidth": 229,
-        "originalHeight": 150,
+        "originalWidth": 184,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              137,
-              61
+              174,
+              50
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978165938864642,
-          "y": 0.44512666666663564
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              114.837,
-              2.12
-            ],
-            [
-              227.0,
-              65.707
-            ],
-            [
-              113.163,
-              131.419
-            ],
-            [
-              1.0,
-              67.831
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -182,6 +156,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/personal-space-worn-warm-wood-plank-floor.png",
       "width": 256,
       "height": 256,
@@ -191,120 +166,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5588505321149047,
-          -0.017360348046973638,
-          64.61613254440036,
-          0.0028690891411624086,
-          0.49104739411523735,
-          158.76206118235135
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          275,
-          57,
-          511,
-          212
+          294,
+          46,
+          482,
+          238
         ],
         "bounds": {
-          "x": 277,
-          "y": 59,
-          "width": 232,
-          "height": 151
+          "x": 296,
+          "y": 48,
+          "width": 184,
+          "height": 188
         },
-        "originalWidth": 232,
-        "originalHeight": 151,
+        "originalWidth": 184,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              389,
-              61
+              352,
+              50
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49784482758621035,
-          "y": 0.44379470198673676
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              113.476,
-              1.858
-            ],
-            [
-              230.0,
-              66.344
-            ],
-            [
-              117.524,
-              132.168
-            ],
-            [
-              1.0,
-              67.682
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -326,6 +274,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/personal-space-cracked-warm-wood-plank-floor.png",
       "width": 256,
       "height": 256,
@@ -335,120 +284,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5638641894932478,
-          -0.001441888395915693,
-          63.535350709141305,
-          0.0042097991559322725,
-          0.4870664670726933,
-          158.48123366803912
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          530,
-          56,
-          764,
-          211
+          545,
+          46,
+          736,
+          238
         ],
         "bounds": {
-          "x": 532,
-          "y": 58,
-          "width": 230,
-          "height": 151
+          "x": 547,
+          "y": 48,
+          "width": 187,
+          "height": 188
         },
-        "originalWidth": 230,
-        "originalHeight": 151,
+        "originalWidth": 187,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              646,
-              60
+              553,
+              50
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49782608695651853,
-          "y": 0.4491920529801259
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              114.332,
-              2.13
-            ],
-            [
-              228.0,
-              66.847
-            ],
-            [
-              114.668,
-              133.525
-            ],
-            [
-              1.0,
-              68.809
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -470,6 +392,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/personal-space-wet-warm-wood-plank-floor.png",
       "width": 256,
       "height": 256,
@@ -479,120 +402,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.561422722963581,
-          0.0021762720797116387,
-          63.289156612315494,
-          0.004294936957313351,
-          0.4864608178179044,
-          158.59579177248318
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6808510638297872,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          783,
-          56,
-          1018,
-          212
+          800,
+          46,
+          993,
+          238
         ],
         "bounds": {
-          "x": 785,
-          "y": 58,
-          "width": 231,
-          "height": 152
+          "x": 802,
+          "y": 48,
+          "width": 189,
+          "height": 188
         },
-        "originalWidth": 231,
-        "originalHeight": 152,
+        "originalWidth": 189,
+        "originalHeight": 188,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              900,
-              60
+              808,
+              50
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49783549783549635,
-          "y": 0.4450822368421051
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              115.255,
-              1.869
-            ],
-            [
-              229.0,
-              66.646
-            ],
-            [
-              114.745,
-              133.436
-            ],
-            [
-              1.0,
-              68.659
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -614,6 +510,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/personal-space-warm-wood-plank-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -623,45 +520,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5871559633027523,
-        "scaleY": 0.3950617283950617,
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6336633663366337,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1046,
-          62,
-          1268,
-          228
+          1051,
+          39,
+          1248,
+          245
         ],
         "bounds": {
-          "x": 1048,
-          "y": 64,
-          "width": 218,
-          "height": 162
+          "x": 1053,
+          "y": 41,
+          "width": 193,
+          "height": 202
         },
-        "originalWidth": 218,
-        "originalHeight": 162,
+        "originalWidth": 193,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1164,
-              66
+              1063,
+              43
             ]
           ],
           "fringePixels": 2
@@ -670,6 +588,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -689,6 +628,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/personal-space-warm-wood-plank-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -698,45 +638,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.6009389671361502,
-        "scaleY": 0.49612403100775193,
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6464646464646465,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1298,
-          94,
-          1515,
-          227
+          1304,
+          41,
+          1503,
+          243
         ],
         "bounds": {
-          "x": 1300,
-          "y": 96,
-          "width": 213,
-          "height": 129
+          "x": 1306,
+          "y": 43,
+          "width": 195,
+          "height": 198
         },
-        "originalWidth": 213,
-        "originalHeight": 129,
+        "originalWidth": 195,
+        "originalHeight": 198,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1402,
-              98
+              1314,
+              45
             ]
           ],
           "fringePixels": 2
@@ -745,15 +706,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "personal-space-plaster-and-timber-wall-northwest",
-      "label": "Plaster And Timber wall northwest",
+      "label": "Plaster And Timber north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -764,8 +746,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/personal-space-plaster-and-timber-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -775,109 +758,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.45390070921985815,
-          -0.0,
-          82.38297872340425,
-          -0.015035793277692965,
-          0.4460661627139757,
-          106.96021057377136
-        ],
-        "width": 90,
-        "height": 102,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.540084388185654,
+        "scaleY": 0.34782608695652173,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 82,
-          "y": 107
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          45,
-          237,
-          246,
-          475
+          36,
+          285,
+          277,
+          473
         ],
         "bounds": {
-          "x": 47,
-          "y": 239,
-          "width": 197,
-          "height": 234
+          "x": 38,
+          "y": 287,
+          "width": 237,
+          "height": 184
         },
-        "originalWidth": 197,
-        "originalHeight": 234,
+        "originalWidth": 237,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              74,
-              241
+              77,
+              289
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5101522842639666,
-          "y": 0.8291944444444417
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              30.0,
-              155.786
-            ],
-            [
-              171.0,
-              232.277
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "personal-space-plaster-and-timber-wall-northeast",
-      "label": "Plaster And Timber wall northeast",
+      "label": "Plaster And Timber west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -888,8 +852,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/personal-space-plaster-and-timber-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -899,100 +864,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4740740740740741,
-          0.0,
-          84.14814814814815,
-          0.0033671109791028027,
-          0.47237551826182766,
-          98.01482364879865
-        ],
-        "width": 91,
-        "height": 110,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.6009389671361502,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 84,
-          "y": 99
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          290,
-          237,
-          485,
-          475
+          367,
+          268,
+          432,
+          485
         ],
         "bounds": {
-          "x": 292,
-          "y": 239,
-          "width": 191,
-          "height": 234
+          "x": 369,
+          "y": 270,
+          "width": 61,
+          "height": 213
         },
-        "originalWidth": 191,
-        "originalHeight": 234,
+        "originalWidth": 61,
+        "originalHeight": 213,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              450,
-              241
+              383,
+              272
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.484293193717284,
-          "y": 0.847450854700858
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              160.0,
-              163.951
-            ],
-            [
-              25.0,
-              232.656
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1012,8 +958,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/personal-space-plaster-and-timber-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1023,53 +970,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6808510638297872,
-        "scaleY": 0.4549763033175355,
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.6956521739130435,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          550,
-          252,
-          742,
-          467
+          553,
+          278,
+          762,
+          466
         ],
         "bounds": {
-          "x": 552,
-          "y": 254,
-          "width": 188,
-          "height": 211
+          "x": 555,
+          "y": 280,
+          "width": 205,
+          "height": 184
         },
-        "originalWidth": 188,
-        "originalHeight": 211,
+        "originalWidth": 205,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              708,
-              256
+              565,
+              282
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1089,8 +1054,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/personal-space-plaster-and-timber-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1100,58 +1066,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5565217391304348,
-        "scaleY": 0.4507042253521127,
+        "scaleX": 0.6632124352331606,
+        "scaleY": 0.6432160804020101,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          781,
-          234,
-          1015,
-          451
+          865,
+          278,
+          1062,
+          481
         ],
         "bounds": {
-          "x": 783,
-          "y": 236,
-          "width": 230,
-          "height": 213
+          "x": 867,
+          "y": 280,
+          "width": 193,
+          "height": 199
         },
-        "originalWidth": 230,
-        "originalHeight": 213,
+        "originalWidth": 193,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              238
+              878,
+              282
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "personal-space-plaster-and-timber-endcap-northwest",
-      "label": "Plaster And Timber endcap northwest",
+      "label": "Plaster And Timber north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1166,8 +1150,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/personal-space-plaster-and-timber-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1177,58 +1162,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.23880597014925373,
-        "scaleY": 0.45933014354066987,
+        "scaleX": 0.37209302325581395,
+        "scaleY": 0.34782608695652173,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1070,
-          249,
-          1208,
-          462
+          1148,
+          335,
+          1238,
+          431
         ],
         "bounds": {
-          "x": 1072,
-          "y": 251,
-          "width": 134,
-          "height": 209
+          "x": 1150,
+          "y": 337,
+          "width": 86,
+          "height": 92
         },
-        "originalWidth": 134,
-        "originalHeight": 209,
+        "originalWidth": 86,
+        "originalHeight": 92,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1100,
-              253
+              1159,
+              339
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "personal-space-plaster-and-timber-endcap-northeast",
-      "label": "Plaster And Timber endcap northeast",
+      "label": "Plaster And Timber west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1243,8 +1246,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/personal-space-plaster-and-timber-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1254,53 +1258,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.24806201550387597,
-        "scaleY": 0.4528301886792453,
+        "scaleX": 0.367816091954023,
+        "scaleY": 0.34782608695652173,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1344,
-          246,
-          1477,
-          462
+          1345,
+          335,
+          1436,
+          431
         ],
         "bounds": {
-          "x": 1346,
-          "y": 248,
-          "width": 129,
-          "height": 212
+          "x": 1347,
+          "y": 337,
+          "width": 87,
+          "height": 92
         },
-        "originalWidth": 129,
-        "originalHeight": 212,
+        "originalWidth": 87,
+        "originalHeight": 92,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1441,
-              250
+              1357,
+              339
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1309,7 +1331,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1322,6 +1344,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/personal-space-plaster-and-timber-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1331,100 +1354,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.40764331210191085,
-          -0.0,
-          93.14649681528662,
-          0.029972736706921195,
-          0.42129905129215217,
-          108.89169318931943
-        ],
-        "width": 77,
-        "height": 99,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.4752475247524752,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 110
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          55,
-          475,
-          248,
-          705
+          36,
+          505,
+          260,
+          711
         ],
         "bounds": {
-          "x": 57,
-          "y": 477,
-          "width": 189,
-          "height": 226
+          "x": 38,
+          "y": 507,
+          "width": 220,
+          "height": 202
         },
-        "originalWidth": 189,
-        "originalHeight": 226,
+        "originalWidth": 220,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              87,
-              479
+              66,
+              509
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4523809523809524,
-          "y": 0.8459469026548647
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              158.791
-            ],
-            [
-              164.0,
-              223.577
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1433,7 +1437,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1446,6 +1450,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/personal-space-plaster-and-timber-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1455,100 +1460,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.423841059602649,
-          0.0,
-          85.40397350993378,
-          -0.023951548042099893,
-          0.43499335242364623,
-          109.30242114995436
-        ],
-        "width": 78,
-        "height": 103,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5981308411214953,
+        "scaleY": 0.4752475247524752,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 85,
-          "y": 106
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          293,
-          474,
-          480,
-          709
+          291,
+          505,
+          509,
+          711
         ],
         "bounds": {
-          "x": 295,
-          "y": 476,
-          "width": 183,
-          "height": 231
+          "x": 293,
+          "y": 507,
+          "width": 214,
+          "height": 202
         },
-        "originalWidth": 183,
-        "originalHeight": 231,
+        "originalWidth": 214,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              447,
-              478
+              306,
+              509
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5491803278688496,
-          "y": 0.8469523809523869
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              176.0,
-              163.021
-            ],
-            [
-              25.0,
-              228.271
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1568,6 +1554,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/personal-space-warm-wood-plank-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1577,53 +1565,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5311203319502075,
-        "scaleY": 0.5299539170506913,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6095238095238096,
         "width": 128,
-        "height": 115,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 77
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          520,
-          483,
-          765,
-          704
+          560,
+          505,
+          760,
+          719
         ],
         "bounds": {
-          "x": 522,
-          "y": 485,
-          "width": 241,
-          "height": 217
+          "x": 562,
+          "y": 507,
+          "width": 196,
+          "height": 210
         },
-        "originalWidth": 241,
-        "originalHeight": 217,
+        "originalWidth": 196,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              661,
-              487
+              572,
+              509
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1643,6 +1649,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/personal-space-warm-wood-plank-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1652,53 +1660,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5203252032520326,
-        "scaleY": 0.518918918918919,
+        "scaleX": 0.6432160804020101,
+        "scaleY": 0.6095238095238096,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          776,
-          514,
-          1026,
-          703
+          806,
+          505,
+          1009,
+          719
         ],
         "bounds": {
-          "x": 778,
-          "y": 516,
-          "width": 246,
-          "height": 185
+          "x": 808,
+          "y": 507,
+          "width": 199,
+          "height": 210
         },
-        "originalWidth": 246,
-        "originalHeight": 185,
+        "originalWidth": 199,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              891,
-              518
+              816,
+              509
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1718,6 +1744,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-bedroom-bed.png",
       "width": 256,
       "height": 256,
@@ -1727,45 +1754,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.42105263157894735,
-        "scaleY": 0.4223300970873786,
+        "scaleX": 0.45933014354066987,
+        "scaleY": 0.45794392523364486,
         "width": 96,
-        "height": 87,
+        "height": 98,
         "offset": {
           "x": 80,
-          "y": 105
+          "y": 94
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1039,
-          499,
-          1271,
-          709
+          1056,
+          505,
+          1269,
+          723
         ],
         "bounds": {
-          "x": 1041,
-          "y": 501,
-          "width": 228,
-          "height": 206
+          "x": 1058,
+          "y": 507,
+          "width": 209,
+          "height": 214
         },
-        "originalWidth": 228,
-        "originalHeight": 206,
+        "originalWidth": 209,
+        "originalHeight": 214,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1161,
-              503
+              1239,
+              509
             ]
           ],
           "fringePixels": 2
@@ -1774,6 +1810,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1793,6 +1838,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-automatic-shower-cubicle.png",
       "width": 256,
       "height": 256,
@@ -1802,45 +1848,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5783132530120482,
-        "scaleY": 0.58,
+        "scaleX": 0.49740932642487046,
+        "scaleY": 0.4957983193277311,
         "width": 96,
-        "height": 145,
+        "height": 118,
         "offset": {
           "x": 80,
-          "y": 47
+          "y": 74
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1319,
-          462,
-          1489,
-          716
+          1305,
+          479,
+          1502,
+          721
         ],
         "bounds": {
-          "x": 1321,
-          "y": 464,
-          "width": 166,
-          "height": 250
+          "x": 1307,
+          "y": 481,
+          "width": 193,
+          "height": 238
         },
-        "originalWidth": 166,
-        "originalHeight": 250,
+        "originalWidth": 193,
+        "originalHeight": 238,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1404,
-              466
+              1400,
+              483
             ]
           ],
           "fringePixels": 2
@@ -1849,6 +1904,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1868,6 +1932,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-crafting-bench.png",
       "width": 256,
       "height": 256,
@@ -1877,45 +1942,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.42105263157894735,
-        "scaleY": 0.42028985507246375,
+        "scaleX": 0.4,
+        "scaleY": 0.4019607843137255,
         "width": 96,
-        "height": 87,
+        "height": 82,
         "offset": {
           "x": 80,
-          "y": 105
+          "y": 110
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          26,
-          751,
-          258,
-          962
+          22,
+          777,
+          266,
+          985
         ],
         "bounds": {
-          "x": 28,
-          "y": 753,
-          "width": 228,
-          "height": 207
+          "x": 24,
+          "y": 779,
+          "width": 240,
+          "height": 204
         },
-        "originalWidth": 228,
-        "originalHeight": 207,
+        "originalWidth": 240,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              161,
-              755
+              162,
+              781
             ]
           ],
           "fringePixels": 2
@@ -1924,6 +1998,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1943,6 +2026,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-alchemy-station.png",
       "width": 256,
       "height": 256,
@@ -1952,49 +2036,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39183673469387753,
-        "scaleY": 0.3904382470119522,
+        "scaleX": 0.367816091954023,
+        "scaleY": 0.36693548387096775,
         "width": 96,
-        "height": 98,
+        "height": 91,
         "offset": {
           "x": 80,
-          "y": 94
+          "y": 101
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          278,
-          721,
-          527,
-          976
+          283,
+          728,
+          548,
+          980
         ],
         "bounds": {
-          "x": 280,
-          "y": 723,
-          "width": 245,
-          "height": 251
+          "x": 285,
+          "y": 730,
+          "width": 261,
+          "height": 248
         },
-        "originalWidth": 245,
-        "originalHeight": 251,
+        "originalWidth": 261,
+        "originalHeight": 248,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              435,
-              725
-            ],
-            [
-              493,
-              817
+              466,
+              732
             ]
           ],
           "fringePixels": 2
@@ -2003,6 +2092,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2022,6 +2120,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-training-dummy.png",
       "width": 256,
       "height": 256,
@@ -2031,45 +2130,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5714285714285714,
-        "scaleY": 0.5732217573221757,
+        "scaleX": 0.5274725274725275,
+        "scaleY": 0.5291666666666667,
         "width": 96,
-        "height": 137,
+        "height": 127,
         "offset": {
           "x": 80,
-          "y": 55
+          "y": 65
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          561,
-          723,
-          733,
-          966
+          554,
+          739,
+          740,
+          983
         ],
         "bounds": {
-          "x": 563,
-          "y": 725,
-          "width": 168,
-          "height": 239
+          "x": 556,
+          "y": 741,
+          "width": 182,
+          "height": 240
         },
-        "originalWidth": 168,
-        "originalHeight": 239,
+        "originalWidth": 182,
+        "originalHeight": 240,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              651,
-              727
+              639,
+              743
             ]
           ],
           "fringePixels": 2
@@ -2078,6 +2186,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2097,6 +2214,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-social-media-screen.png",
       "width": 256,
       "height": 256,
@@ -2106,45 +2224,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41201716738197425,
-        "scaleY": 0.41365461847389556,
+        "scaleX": 0.3609022556390977,
+        "scaleY": 0.35944700460829493,
         "width": 96,
-        "height": 103,
+        "height": 78,
         "offset": {
           "x": 80,
-          "y": 89
+          "y": 114
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          776,
-          721,
-          1013,
-          974
+          756,
+          764,
+          1026,
+          985
         ],
         "bounds": {
-          "x": 778,
-          "y": 723,
-          "width": 233,
-          "height": 249
+          "x": 758,
+          "y": 766,
+          "width": 266,
+          "height": 217
         },
-        "originalWidth": 233,
-        "originalHeight": 249,
+        "originalWidth": 266,
+        "originalHeight": 217,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              927,
-              725
+              811,
+              768
             ]
           ],
           "fringePixels": 2
@@ -2153,6 +2280,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2172,6 +2308,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-kitchen-counter.png",
       "width": 256,
       "height": 256,
@@ -2181,45 +2318,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3870967741935484,
-        "scaleY": 0.388,
+        "scaleX": 0.3983402489626556,
+        "scaleY": 0.4,
         "width": 96,
-        "height": 97,
+        "height": 92,
         "offset": {
           "x": 80,
-          "y": 95
+          "y": 100
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1028,
-          724,
-          1280,
-          978
+          1031,
+          746,
+          1276,
+          980
         ],
         "bounds": {
-          "x": 1030,
-          "y": 726,
-          "width": 248,
-          "height": 250
+          "x": 1033,
+          "y": 748,
+          "width": 241,
+          "height": 230
         },
-        "originalWidth": 248,
-        "originalHeight": 250,
+        "originalWidth": 241,
+        "originalHeight": 230,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1200,
-              728
+              1179,
+              750
             ]
           ],
           "fringePixels": 2
@@ -2228,6 +2374,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2247,6 +2402,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/personal-space-personal-space-portal-door.png",
       "width": 256,
       "height": 256,
@@ -2256,45 +2412,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4948453608247423,
-        "scaleY": 0.496,
+        "scaleX": 0.463768115942029,
+        "scaleY": 0.4625,
         "width": 96,
-        "height": 124,
+        "height": 111,
         "offset": {
           "x": 80,
-          "y": 68
+          "y": 81
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/personal-space.png",
-        "sha256": "4340257fcf83d95ee42e5920c7d0fd0214dd7f9a76ded59ec7db45fd0d03beb1",
+        "sha256": "1012c51aaa6af9fb85b1f76b55dddb6037adb0134640bd781b463b63f2ba7830",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1309,
-          723,
-          1507,
-          977
+          1297,
+          736,
+          1508,
+          980
         ],
         "bounds": {
-          "x": 1311,
-          "y": 725,
-          "width": 194,
-          "height": 250
+          "x": 1299,
+          "y": 738,
+          "width": 207,
+          "height": 240
         },
-        "originalWidth": 194,
-        "originalHeight": 250,
+        "originalWidth": 207,
+        "originalHeight": 240,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1400,
-              727
+              1399,
+              740
             ]
           ],
           "fringePixels": 2
@@ -2303,6 +2468,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

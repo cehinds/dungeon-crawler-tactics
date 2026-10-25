@@ -32,7 +32,8 @@ export function composeKit(manifest, seedValue, size = 5) {
   const placements = [];
   const add = (asset, position, layer) => { if (asset) placements.push({ asset, px: position.x, py: position.y, layer }); };
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) add(floors[Math.floor(random() * floors.length)], projectCell(grid, x, y), 0);
-  const axes = grid.projection === 'isometric' ? ['x', 'y'] : ['x'];
+  const hasSideWall = walls.some(a => a.placement?.kind === 'wall' && a.placement.axis === 'y');
+  const axes = grid.projection === 'isometric' || hasSideWall ? ['x', 'y'] : ['x'];
   for (const axis of axes) {
     const wall = walls.find(a => a.placement?.kind === 'wall' && a.placement.axis === axis);
     if (wall) {

@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/bubble-airship-scrap-metal-deck-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5246058804548718,
-          0.009733073575351197,
-          62.775839189390325,
-          0.0007426086345252316,
-          0.45988961122883387,
-          158.94515147390428
-        ],
-        "width": 130,
-        "height": 71,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6464646464646465,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          12,
-          66,
-          263,
-          225
+          36,
+          44,
+          238,
+          242
         ],
         "bounds": {
-          "x": 14,
-          "y": 68,
-          "width": 247,
-          "height": 155
+          "x": 38,
+          "y": 46,
+          "width": 198,
+          "height": 194
         },
-        "originalWidth": 247,
-        "originalHeight": 155,
+        "originalWidth": 198,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              136,
-              70
+              43,
+              48
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979757085020236,
-          "y": 0.46243225806447996
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              124.291,
-              2.093
-            ],
-            [
-              245.0,
-              71.48
-            ],
-            [
-              121.709,
-              141.261
-            ],
-            [
-              1.0,
-              71.874
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/bubble-airship-worn-scrap-metal-deck-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5245971171767059,
-          0.0013986736325374426,
-          63.37463404229352,
-          0.0022926906976593353,
-          0.4611842788366646,
-          158.77122475623602
-        ],
-        "width": 130,
-        "height": 72,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          264,
-          66,
-          515,
-          225
+          289,
+          44,
+          489,
+          242
         ],
         "bounds": {
-          "x": 266,
-          "y": 68,
-          "width": 247,
-          "height": 155
+          "x": 291,
+          "y": 46,
+          "width": 196,
+          "height": 194
         },
-        "originalWidth": 247,
-        "originalHeight": 155,
+        "originalWidth": 196,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              388,
-              70
+              297,
+              48
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49797570850202666,
-          "y": 0.46089999999999826
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              123.185,
-              2.052
-            ],
-            [
-              245.0,
-              70.833
-            ],
-            [
-              122.815,
-              140.827
-            ],
-            [
-              1.0,
-              72.046
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/bubble-airship-cracked-scrap-metal-deck-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5267029758473459,
-          -0.009528447651279926,
-          64.15521943721181,
-          0.0022264679472014494,
-          0.4612376054304842,
-          158.98838182420934
-        ],
-        "width": 130,
-        "height": 72,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          517,
-          66,
-          767,
-          225
+          544,
+          44,
+          740,
+          242
         ],
         "bounds": {
-          "x": 519,
-          "y": 68,
-          "width": 246,
-          "height": 155
+          "x": 546,
+          "y": 46,
+          "width": 192,
+          "height": 194
         },
-        "originalWidth": 246,
-        "originalHeight": 155,
+        "originalWidth": 192,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              640,
-              70
+              551,
+              48
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979674796747984,
-          "y": 0.45793870967742967
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              121.245,
-              1.608
-            ],
-            [
-              244.0,
-              70.394
-            ],
-            [
-              123.755,
-              140.354
-            ],
-            [
-              1.0,
-              71.567
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/bubble-airship-wet-scrap-metal-deck-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.526786124039705,
-          0.008842450194241869,
-          62.83903334802927,
-          0.001937369452429379,
-          0.4610977247211937,
-          158.92813381354358
-        ],
-        "width": 130,
-        "height": 72,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.6597938144329897,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          768,
-          66,
-          1018,
-          226
+          796,
+          44,
+          995,
+          242
         ],
         "bounds": {
-          "x": 770,
-          "y": 68,
-          "width": 246,
-          "height": 156
+          "x": 798,
+          "y": 46,
+          "width": 195,
+          "height": 194
         },
-        "originalWidth": 246,
-        "originalHeight": 156,
+        "originalWidth": 195,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              891,
-              70
+              803,
+              48
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49796747967479793,
-          "y": 0.45647115384615305
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              123.665,
-              1.805
-            ],
-            [
-              244.0,
-              70.699
-            ],
-            [
-              121.335,
-              140.614
-            ],
-            [
-              1.0,
-              71.72
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/bubble-airship-scrap-metal-deck-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.3615819209039548,
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.6368159203980099,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1020,
-          48,
-          1264,
-          229
+          1043,
+          40,
+          1257,
+          245
         ],
         "bounds": {
-          "x": 1022,
-          "y": 50,
-          "width": 240,
-          "height": 177
+          "x": 1045,
+          "y": 42,
+          "width": 210,
+          "height": 201
         },
-        "originalWidth": 240,
-        "originalHeight": 177,
+        "originalWidth": 210,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1090,
-              52
+              1060,
+              44
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/bubble-airship-scrap-metal-deck-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.3333333333333333,
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.6274509803921569,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1279,
-          31,
-          1523,
-          227
+          1298,
+          40,
+          1506,
+          248
         ],
         "bounds": {
-          "x": 1281,
-          "y": 33,
-          "width": 240,
-          "height": 192
+          "x": 1300,
+          "y": 42,
+          "width": 204,
+          "height": 204
         },
-        "originalWidth": 240,
-        "originalHeight": 192,
+        "originalWidth": 204,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1403,
-              35
+              1315,
+              44
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "bubble-airship-riveted-scrap-hull-wall-northwest",
-      "label": "Riveted Scrap Hull wall northwest",
+      "label": "Riveted Scrap Hull north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/bubble-airship-riveted-scrap-hull-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4444444444444444,
-          -0.0,
-          84.0,
-          -0.02920517389259869,
-          0.42859986552707596,
-          117.80419760139843
-        ],
-        "width": 84,
-        "height": 92,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.4444444444444444,
+        "scaleY": 0.3699421965317919,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 84,
-          "y": 117
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          46,
-          245,
-          239,
-          473
+          27,
+          291,
+          319,
+          468
         ],
         "bounds": {
-          "x": 48,
-          "y": 247,
-          "width": 189,
-          "height": 224
+          "x": 29,
+          "y": 293,
+          "width": 288,
+          "height": 173
         },
-        "originalWidth": 189,
-        "originalHeight": 224,
+        "originalWidth": 288,
+        "originalHeight": 173,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              72,
-              249
+              44,
+              295
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5238095238095256,
-          "y": 0.8029374999999936
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              27.0,
-              137.621
-            ],
-            [
-              171.0,
-              222.095
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "bubble-airship-riveted-scrap-hull-wall-northeast",
-      "label": "Riveted Scrap Hull wall northeast",
+      "label": "Riveted Scrap Hull west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/bubble-airship-riveted-scrap-hull-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.44755244755244755,
-          0.0,
-          88.39160839160839,
-          0.029451223639447143,
-          0.4315725333163414,
-          111.29274849871727
-        ],
-        "width": 85,
-        "height": 93,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.64,
+        "scaleY": 0.579185520361991,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 88,
-          "y": 116
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          288,
-          244,
-          481,
-          472
+          402,
+          262,
+          456,
+          487
         ],
         "bounds": {
-          "x": 290,
-          "y": 246,
-          "width": 189,
-          "height": 224
+          "x": 404,
+          "y": 264,
+          "width": 50,
+          "height": 221
         },
-        "originalWidth": 189,
-        "originalHeight": 224,
+        "originalWidth": 50,
+        "originalHeight": 221,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              449,
-              248
+              425,
+              266
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4682539682539619,
-          "y": 0.8078928571428629
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              160.0,
-              139.015
-            ],
-            [
-              17.0,
-              222.921
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/bubble-airship-riveted-scrap-hull-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.7314285714285714,
-        "scaleY": 0.4824120603015075,
+        "scaleX": 0.735632183908046,
+        "scaleY": 0.7398843930635838,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          553,
-          252,
-          732,
-          455
+          574,
+          277,
+          752,
+          454
         ],
         "bounds": {
-          "x": 555,
-          "y": 254,
-          "width": 175,
-          "height": 199
+          "x": 576,
+          "y": 279,
+          "width": 174,
+          "height": 173
         },
-        "originalWidth": 175,
-        "originalHeight": 199,
+        "originalWidth": 174,
+        "originalHeight": 173,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              711,
-              256
+              585,
+              281
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/bubble-airship-riveted-scrap-hull-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5981308411214953,
-        "scaleY": 0.47761194029850745,
+        "scaleX": 0.6530612244897959,
+        "scaleY": 0.7150837988826816,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          790,
-          245,
-          1008,
-          450
+          812,
+          293,
+          1012,
+          476
         ],
         "bounds": {
-          "x": 792,
-          "y": 247,
-          "width": 214,
-          "height": 201
+          "x": 814,
+          "y": 295,
+          "width": 196,
+          "height": 179
         },
-        "originalWidth": 214,
-        "originalHeight": 201,
+        "originalWidth": 196,
+        "originalHeight": 179,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
-              249
+              968,
+              297
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "bubble-airship-riveted-scrap-hull-endcap-northwest",
-      "label": "Riveted Scrap Hull endcap northwest",
+      "label": "Riveted Scrap Hull north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/bubble-airship-riveted-scrap-hull-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3106796116504854,
-        "scaleY": 0.4507042253521127,
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.36363636363636365,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1087,
-          245,
-          1194,
-          462
+          1122,
+          327,
+          1208,
+          419
         ],
         "bounds": {
-          "x": 1089,
-          "y": 247,
-          "width": 103,
-          "height": 213
+          "x": 1124,
+          "y": 329,
+          "width": 82,
+          "height": 88
         },
-        "originalWidth": 103,
-        "originalHeight": 213,
+        "originalWidth": 82,
+        "originalHeight": 88,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1165,
-              249
+              1135,
+              331
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "bubble-airship-riveted-scrap-hull-endcap-northeast",
-      "label": "Riveted Scrap Hull endcap northeast",
+      "label": "Riveted Scrap Hull west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/bubble-airship-riveted-scrap-hull-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3047619047619048,
-        "scaleY": 0.4444444444444444,
+        "scaleX": 0.3855421686746988,
+        "scaleY": 0.3595505617977528,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1364,
-          244,
-          1473,
-          464
+          1358,
+          326,
+          1445,
+          419
         ],
         "bounds": {
-          "x": 1366,
-          "y": 246,
-          "width": 105,
-          "height": 216
+          "x": 1360,
+          "y": 328,
+          "width": 83,
+          "height": 89
         },
-        "originalWidth": 105,
-        "originalHeight": 216,
+        "originalWidth": 83,
+        "originalHeight": 89,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1447,
-              248
+              1368,
+              330
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/bubble-airship-riveted-scrap-hull-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4413793103448276,
-          0.0,
-          87.61379310344827,
-          -0.004381400314597625,
-          0.44354296114465797,
-          108.09979230474855
-        ],
-        "width": 80,
-        "height": 102,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5638766519823789,
+        "scaleY": 0.4729064039408867,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 88,
-          "y": 107
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          42,
-          472,
-          228,
-          704
+          23,
+          511,
+          254,
+          718
         ],
         "bounds": {
-          "x": 44,
-          "y": 474,
-          "width": 182,
-          "height": 228
+          "x": 25,
+          "y": 513,
+          "width": 227,
+          "height": 203
         },
-        "originalWidth": 182,
-        "originalHeight": 228,
+        "originalWidth": 227,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              185,
-              476
+              36,
+              515
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5027472527472518,
-          "y": 0.8336096491228089
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              164.0,
-              154.706
-            ],
-            [
-              19.0,
-              225.42
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/bubble-airship-riveted-scrap-hull-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.45714285714285713,
-          0.0,
-          86.85714285714286,
-          -0.0055536950511469434,
-          0.4598777884736194,
-          103.99934136848024
-        ],
-        "width": 81,
-        "height": 106,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.47058823529411764,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 87,
-          "y": 103
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          298,
-          473,
-          480,
-          706
+          285,
+          510,
+          509,
+          718
         ],
         "bounds": {
-          "x": 300,
-          "y": 475,
-          "width": 178,
-          "height": 229
+          "x": 287,
+          "y": 512,
+          "width": 220,
+          "height": 204
         },
-        "originalWidth": 178,
-        "originalHeight": 229,
+        "originalWidth": 220,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              440,
-              477
+              302,
+              514
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5056179775280917,
-          "y": 0.840364628820962
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              160.0,
-              158.497
-            ],
-            [
-              20.0,
-              226.39
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/bubble-airship-scrap-metal-deck-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5565217391304348,
-        "scaleY": 0.5560344827586207,
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.6274509803921569,
         "width": 128,
-        "height": 129,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 63
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          520,
-          470,
-          754,
-          706
+          560,
+          516,
+          747,
+          724
         ],
         "bounds": {
-          "x": 522,
-          "y": 472,
-          "width": 230,
-          "height": 232
+          "x": 562,
+          "y": 518,
+          "width": 183,
+          "height": 204
         },
-        "originalWidth": 230,
-        "originalHeight": 232,
+        "originalWidth": 183,
+        "originalHeight": 204,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              658,
-              474
+              577,
+              520
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/bubble-airship-scrap-metal-deck-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,61 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5541125541125541,
-        "scaleY": 0.5561224489795918,
+        "scaleX": 0.7071823204419889,
+        "scaleY": 0.6336633663366337,
         "width": 128,
-        "height": 109,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 83
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          782,
-          511,
-          1017,
-          711
+          796,
+          516,
+          981,
+          722
         ],
         "bounds": {
-          "x": 784,
-          "y": 513,
-          "width": 231,
-          "height": 196
+          "x": 798,
+          "y": 518,
+          "width": 181,
+          "height": 202
         },
-        "originalWidth": 231,
-        "originalHeight": 196,
+        "originalWidth": 181,
+        "originalHeight": 202,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              899,
-              515
-            ],
-            [
-              895,
-              543
-            ],
-            [
-              895,
-              547
+              817,
+              520
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1724,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-balloon-mooring-tower.png",
       "width": 256,
       "height": 256,
@@ -1733,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4266666666666667,
-        "scaleY": 0.4268292682926829,
+        "scaleX": 0.4,
+        "scaleY": 0.39915966386554624,
         "width": 96,
-        "height": 105,
+        "height": 95,
         "offset": {
           "x": 80,
-          "y": 87
+          "y": 97
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1035,
-          470,
-          1264,
-          720
+          1024,
+          501,
+          1268,
+          743
         ],
         "bounds": {
-          "x": 1037,
-          "y": 472,
-          "width": 225,
-          "height": 246
+          "x": 1026,
+          "y": 503,
+          "width": 240,
+          "height": 238
         },
-        "originalWidth": 225,
-        "originalHeight": 246,
+        "originalWidth": 240,
+        "originalHeight": 238,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1164,
-              474
+              1129,
+              505
             ]
           ],
           "fringePixels": 2
@@ -1780,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1799,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-airship-balloon-section.png",
       "width": 256,
       "height": 256,
@@ -1808,45 +1846,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4050632911392405,
-        "scaleY": 0.40329218106995884,
+        "scaleX": 0.39669421487603307,
+        "scaleY": 0.39669421487603307,
         "width": 96,
-        "height": 98,
+        "height": 96,
         "offset": {
           "x": 80,
-          "y": 94
+          "y": 96
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1274,
-          470,
-          1515,
-          717
+          1278,
+          493,
+          1524,
+          739
         ],
         "bounds": {
-          "x": 1276,
-          "y": 472,
-          "width": 237,
-          "height": 243
+          "x": 1280,
+          "y": 495,
+          "width": 242,
+          "height": 242
         },
-        "originalWidth": 237,
-        "originalHeight": 243,
+        "originalWidth": 242,
+        "originalHeight": 242,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1405,
-              474
+              1398,
+              497
+            ],
+            [
+              1356,
+              663
             ]
           ],
           "fringePixels": 2
@@ -1855,6 +1906,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1874,6 +1934,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-propeller-engine.png",
       "width": 256,
       "height": 256,
@@ -1883,45 +1944,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4383561643835616,
-        "scaleY": 0.44,
+        "scaleX": 0.4266666666666667,
+        "scaleY": 0.4252336448598131,
         "width": 96,
-        "height": 99,
+        "height": 91,
         "offset": {
           "x": 80,
-          "y": 93
+          "y": 101
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          24,
-          721,
-          247,
-          950
+          17,
+          749,
+          246,
+          967
         ],
         "bounds": {
-          "x": 26,
-          "y": 723,
-          "width": 219,
-          "height": 225
+          "x": 19,
+          "y": 751,
+          "width": 225,
+          "height": 214
         },
-        "originalWidth": 219,
-        "originalHeight": 225,
+        "originalWidth": 225,
+        "originalHeight": 214,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              42,
-              725
+              32,
+              753
             ]
           ],
           "fringePixels": 2
@@ -1930,6 +2000,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1949,6 +2028,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-bomb-rack.png",
       "width": 256,
       "height": 256,
@@ -1958,45 +2038,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4343891402714932,
-        "scaleY": 0.43529411764705883,
+        "scaleX": 0.4192139737991266,
+        "scaleY": 0.41975308641975306,
         "width": 96,
-        "height": 74,
+        "height": 68,
         "offset": {
           "x": 80,
-          "y": 118
+          "y": 124
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          270,
-          761,
-          495,
-          935
+          269,
+          796,
+          502,
+          962
         ],
         "bounds": {
-          "x": 272,
-          "y": 763,
-          "width": 221,
-          "height": 170
+          "x": 271,
+          "y": 798,
+          "width": 229,
+          "height": 162
         },
-        "originalWidth": 221,
-        "originalHeight": 170,
+        "originalWidth": 229,
+        "originalHeight": 162,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              346,
-              765
+              423,
+              800
             ]
           ],
           "fringePixels": 2
@@ -2005,6 +2094,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2024,6 +2122,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-aircraft-hangar-arch.png",
       "width": 256,
       "height": 256,
@@ -2033,45 +2132,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3764705882352941,
-        "scaleY": 0.3776824034334764,
+        "scaleX": 0.3794466403162055,
+        "scaleY": 0.3789954337899543,
         "width": 96,
-        "height": 88,
+        "height": 83,
         "offset": {
           "x": 80,
-          "y": 104
+          "y": 109
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          513,
-          721,
-          772,
-          958
+          522,
+          740,
+          779,
+          963
         ],
         "bounds": {
-          "x": 515,
-          "y": 723,
-          "width": 255,
-          "height": 233
+          "x": 524,
+          "y": 742,
+          "width": 253,
+          "height": 219
         },
-        "originalWidth": 255,
-        "originalHeight": 233,
+        "originalWidth": 253,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              660,
-              725
+              648,
+              744
             ]
           ],
           "fringePixels": 2
@@ -2080,6 +2188,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2099,6 +2216,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-scrap-barricade.png",
       "width": 256,
       "height": 256,
@@ -2108,45 +2226,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41379310344827586,
-        "scaleY": 0.4117647058823529,
+        "scaleX": 0.39669421487603307,
+        "scaleY": 0.4,
         "width": 96,
-        "height": 63,
+        "height": 54,
         "offset": {
           "x": 80,
-          "y": 129
+          "y": 138
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          780,
-          786,
-          1016,
-          943
+          779,
+          820,
+          1025,
+          959
         ],
         "bounds": {
-          "x": 782,
-          "y": 788,
-          "width": 232,
-          "height": 153
+          "x": 781,
+          "y": 822,
+          "width": 242,
+          "height": 135
         },
-        "originalWidth": 232,
-        "originalHeight": 153,
+        "originalWidth": 242,
+        "originalHeight": 135,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              840,
-              790
+              810,
+              824
             ]
           ],
           "fringePixels": 2
@@ -2155,6 +2282,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2174,6 +2310,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-biplane-parking-pad.png",
       "width": 256,
       "height": 256,
@@ -2183,45 +2320,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.35424354243542433,
-        "scaleY": 0.35602094240837695,
+        "scaleX": 0.43243243243243246,
+        "scaleY": 0.43315508021390375,
         "width": 96,
-        "height": 68,
+        "height": 81,
         "offset": {
           "x": 80,
-          "y": 124
+          "y": 111
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1014,
-          746,
-          1289,
-          941
+          1034,
+          772,
+          1260,
+          963
         ],
         "bounds": {
-          "x": 1016,
-          "y": 748,
-          "width": 271,
-          "height": 191
+          "x": 1036,
+          "y": 774,
+          "width": 222,
+          "height": 187
         },
-        "originalWidth": 271,
-        "originalHeight": 191,
+        "originalWidth": 222,
+        "originalHeight": 187,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1157,
-              750
+              1046,
+              776
             ]
           ],
           "fringePixels": 2
@@ -2230,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2249,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/bubble-airship-rope-boarding-ramp.png",
       "width": 256,
       "height": 256,
@@ -2258,45 +2414,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4304932735426009,
-        "scaleY": 0.4304932735426009,
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.4025974025974026,
         "width": 96,
-        "height": 96,
+        "height": 62,
         "offset": {
           "x": 80,
-          "y": 96
+          "y": 130
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-airship.png",
-        "sha256": "7ec3d65d0fa5c94122d39c51a2a462e74385267ae115c2e2b65d2b653301393d",
+        "sha256": "ff3706a667f7e8a73ec4813f8438a940a0bec01c5a85d728fb5e9213d52b0b27",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1293,
-          732,
-          1520,
+          1279,
+          801,
+          1522,
           959
         ],
         "bounds": {
-          "x": 1295,
-          "y": 734,
-          "width": 223,
-          "height": 223
+          "x": 1281,
+          "y": 803,
+          "width": 239,
+          "height": 154
         },
-        "originalWidth": 223,
-        "originalHeight": 223,
+        "originalWidth": 239,
+        "originalHeight": 154,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1363,
-              736
+              1478,
+              805
+            ],
+            [
+              1333,
+              875
             ]
           ],
           "fringePixels": 2
@@ -2305,6 +2474,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

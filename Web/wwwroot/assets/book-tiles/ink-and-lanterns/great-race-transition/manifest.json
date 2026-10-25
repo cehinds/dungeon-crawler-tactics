@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.540083568344284,
-          -0.002989267764761912,
-          63.668923044500104,
-          0.00012919042866324138,
-          0.47104817835675805,
-          159.06465322704517
-        ],
-        "width": 130,
-        "height": 76,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.6530612244897959,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          10,
-          48,
-          254,
-          214
+          41,
+          44,
+          247,
+          244
         ],
         "bounds": {
-          "x": 12,
-          "y": 50,
-          "width": 240,
-          "height": 162
+          "x": 43,
+          "y": 46,
+          "width": 202,
+          "height": 196
         },
-        "originalWidth": 240,
-        "originalHeight": 162,
+        "originalWidth": 202,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              129,
-              52
+              54,
+              48
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979166666666639,
-          "y": 0.4313981481481577
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              119.124,
-              1.953
-            ],
-            [
-              238.0,
-              69.854
-            ],
-            [
-              119.876,
-              137.821
-            ],
-            [
-              1.0,
-              69.919
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-frosted-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5378121426419955,
-          -0.0028631096978388513,
-          63.667807806527705,
-          0.00048368610699182506,
-          0.464182634935721,
-          158.66331202071433
-        ],
-        "width": 130,
-        "height": 75,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6336633663366337,
+        "scaleY": 0.6530612244897959,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          265,
-          47,
-          510,
-          215
+          291,
+          44,
+          497,
+          244
         ],
         "bounds": {
-          "x": 267,
-          "y": 49,
-          "width": 241,
-          "height": 164
+          "x": 293,
+          "y": 46,
+          "width": 202,
+          "height": 196
         },
-        "originalWidth": 241,
-        "originalHeight": 164,
+        "originalWidth": 202,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              387,
-              51
+              302,
+              48
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49792531120331984,
-          "y": 0.4371524390243687
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              119.633,
-              2.755
-            ],
-            [
-              239.0,
-              71.569
-            ],
-            [
-              120.367,
-              140.631
-            ],
-            [
-              1.0,
-              71.817
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-cracked-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5377960189951675,
-          -0.007264343690335461,
-          63.98214938064059,
-          0.001223756498963946,
-          0.46526205551664046,
-          158.6976446198975
-        ],
-        "width": 130,
-        "height": 76,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.64,
+        "scaleY": 0.6564102564102564,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          521,
-          47,
-          766,
-          215
+          539,
+          44,
+          743,
+          243
         ],
         "bounds": {
-          "x": 523,
-          "y": 49,
-          "width": 241,
-          "height": 164
+          "x": 541,
+          "y": 46,
+          "width": 200,
+          "height": 195
         },
-        "originalWidth": 241,
-        "originalHeight": 164,
+        "originalWidth": 200,
+        "originalHeight": 195,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              640,
-              51
+              546,
+              48
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49792531120332156,
-          "y": 0.43452439024389516
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              119.071,
-              2.486
-            ],
-            [
-              239.0,
-              70.949
-            ],
-            [
-              120.929,
-              140.038
-            ],
-            [
-              1.0,
-              71.575
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-shattered-glass-maze-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5355482926392718,
-          -0.010045835568677481,
-          64.19028341886879,
-          0.0007623380612594057,
-          0.46243349401269546,
-          158.58749285253347
-        ],
-        "width": 130,
-        "height": 76,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6368159203980099,
+        "scaleY": 0.6530612244897959,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          777,
-          47,
-          1023,
-          217
+          793,
+          43,
+          998,
+          243
         ],
         "bounds": {
-          "x": 779,
-          "y": 49,
-          "width": 242,
-          "height": 166
+          "x": 795,
+          "y": 45,
+          "width": 201,
+          "height": 196
         },
-        "originalWidth": 242,
-        "originalHeight": 166,
+        "originalWidth": 201,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              897,
-              51
+              803,
+              47
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979338842975151,
-          "y": 0.4340662650602424
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              119.202,
-              2.858
-            ],
-            [
-              240.0,
-              71.858
-            ],
-            [
-              121.798,
-              141.251
-            ],
-            [
-              1.0,
-              72.252
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-glass-maze-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5355648535564853,
-        "scaleY": 0.3902439024390244,
+        "scaleX": 0.6274509803921569,
+        "scaleY": 0.6305418719211823,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1034,
-          48,
-          1277,
-          216
+          1046,
+          41,
+          1254,
+          248
         ],
         "bounds": {
-          "x": 1036,
-          "y": 50,
-          "width": 239,
-          "height": 164
+          "x": 1048,
+          "y": 43,
+          "width": 204,
+          "height": 203
         },
-        "originalWidth": 239,
-        "originalHeight": 164,
+        "originalWidth": 204,
+        "originalHeight": 203,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1153,
-              52
+              1062,
+              45
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/great-race-transition-glass-maze-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5378151260504201,
-        "scaleY": 0.39263803680981596,
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.6432160804020101,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1288,
-          47,
-          1530,
-          214
+          1295,
+          43,
+          1504,
+          246
         ],
         "bounds": {
-          "x": 1290,
-          "y": 49,
-          "width": 238,
-          "height": 163
+          "x": 1297,
+          "y": 45,
+          "width": 205,
+          "height": 199
         },
-        "originalWidth": 238,
-        "originalHeight": 163,
+        "originalWidth": 205,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1408,
-              51
+              1305,
+              47
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-wall-northwest",
-      "label": "Glass maze wall northwest",
+      "label": "Glass maze north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/great-race-transition-glass-maze-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.47058823529411764,
-          -0.0,
-          81.88235294117646,
-          -0.024557968817173603,
-          0.4574860677187189,
-          109.15735462717377
-        ],
-        "width": 90,
-        "height": 100,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.4555160142348754,
+        "scaleY": 0.35359116022099446,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 82,
-          "y": 108
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          34,
-          241,
-          229,
-          472
+          33,
+          277,
+          318,
+          462
         ],
         "bounds": {
-          "x": 36,
-          "y": 243,
-          "width": 191,
-          "height": 227
+          "x": 35,
+          "y": 279,
+          "width": 281,
+          "height": 181
         },
-        "originalWidth": 191,
-        "originalHeight": 227,
+        "originalWidth": 281,
+        "originalHeight": 181,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              64,
-              245
+              61,
+              281
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5130890052356041,
-          "y": 0.8208942731277569
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              30.0,
-              147.719
-            ],
-            [
-              166.0,
-              224.967
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-wall-northeast",
-      "label": "Glass maze wall northeast",
+      "label": "Glass maze west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/great-race-transition-glass-maze-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.460431654676259,
-          0.0,
-          85.41007194244604,
-          0.011122212086266993,
-          0.45470054597689114,
-          106.27366998235881
-        ],
-        "width": 90,
-        "height": 101,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5714285714285714,
+        "scaleY": 0.6881720430107527,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 85,
-          "y": 108
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          282,
-          240,
-          480,
-          469
+          401,
+          277,
+          461,
+          467
         ],
         "bounds": {
-          "x": 284,
-          "y": 242,
-          "width": 194,
-          "height": 225
+          "x": 403,
+          "y": 279,
+          "width": 56,
+          "height": 186
         },
-        "originalWidth": 194,
-        "originalHeight": 225,
+        "originalWidth": 56,
+        "originalHeight": 186,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              448,
-              244
+              425,
+              281
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4768041237113431,
-          "y": 0.8278711111111142
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              162.0,
-              149.383
-            ],
-            [
-              23.0,
-              223.159
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.735632183908046,
-        "scaleY": 0.49230769230769234,
+        "scaleX": 0.7111111111111111,
+        "scaleY": 0.6994535519125683,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          551,
-          258,
-          729,
-          457
+          553,
+          278,
+          737,
+          465
         ],
         "bounds": {
-          "x": 553,
-          "y": 260,
-          "width": 174,
-          "height": 195
+          "x": 555,
+          "y": 280,
+          "width": 180,
+          "height": 183
         },
-        "originalWidth": 174,
-        "originalHeight": 195,
+        "originalWidth": 180,
+        "originalHeight": 183,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              577,
-              262
+              562,
+              282
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.6368159203980099,
-        "scaleY": 0.49230769230769234,
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6994535519125683,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          793,
-          247,
-          998,
-          446
+          805,
+          280,
+          993,
+          467
         ],
         "bounds": {
-          "x": 795,
-          "y": 249,
-          "width": 201,
-          "height": 195
+          "x": 807,
+          "y": 282,
+          "width": 184,
+          "height": 183
         },
-        "originalWidth": 201,
-        "originalHeight": 195,
+        "originalWidth": 184,
+        "originalHeight": 183,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              251
+              816,
+              284
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-endcap-northwest",
-      "label": "Glass maze endcap northwest",
+      "label": "Glass maze north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.23357664233576642,
-        "scaleY": 0.48,
+        "scaleX": 0.3595505617977528,
+        "scaleY": 0.35555555555555557,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1076,
-          248,
-          1217,
-          452
+          1104,
+          329,
+          1197,
+          423
         ],
         "bounds": {
-          "x": 1078,
-          "y": 250,
-          "width": 137,
-          "height": 200
+          "x": 1106,
+          "y": 331,
+          "width": 89,
+          "height": 90
         },
-        "originalWidth": 137,
-        "originalHeight": 200,
+        "originalWidth": 89,
+        "originalHeight": 90,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1106,
-              252
+              1118,
+              333
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "great-race-transition-glass-maze-endcap-northeast",
-      "label": "Glass maze endcap northeast",
+      "label": "Glass maze west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/great-race-transition-glass-maze-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.22857142857142856,
-        "scaleY": 0.48,
+        "scaleX": 0.3404255319148936,
+        "scaleY": 0.3404255319148936,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1352,
-          251,
-          1496,
-          455
+          1355,
+          329,
+          1453,
+          427
         ],
         "bounds": {
-          "x": 1354,
-          "y": 253,
-          "width": 140,
-          "height": 200
+          "x": 1357,
+          "y": 331,
+          "width": 94,
+          "height": 94
         },
-        "originalWidth": 140,
-        "originalHeight": 200,
+        "originalWidth": 94,
+        "originalHeight": 94,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1461,
-              255
+              1374,
+              333
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/great-race-transition-open-glass-maze-gate.png",
       "width": 256,
       "height": 256,
@@ -1329,104 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.41025641025641024,
-          -0.0,
-          89.02564102564102,
-          0.07326529604806219,
-          0.43931773911887717,
-          92.17242000309464
-        ],
-        "width": 79,
-        "height": 117,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6095238095238096,
+        "scaleY": 0.43636363636363634,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 90,
-          "y": 94
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          45,
-          464,
-          245,
-          718
+          37,
+          477,
+          251,
+          701
         ],
         "bounds": {
-          "x": 47,
-          "y": 466,
-          "width": 196,
-          "height": 250
+          "x": 39,
+          "y": 479,
+          "width": 210,
+          "height": 220
         },
-        "originalWidth": 196,
-        "originalHeight": 250,
+        "originalWidth": 210,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              74,
-              468
-            ],
-            [
-              212,
-              512
+              66,
+              481
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.48469387755102217,
-          "y": 0.8455599999999985
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              17.0,
-              187.978
-            ],
-            [
-              173.0,
-              234.802
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1435,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1448,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/great-race-transition-closed-glass-maze-gate.png",
       "width": 256,
       "height": 256,
@@ -1457,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.49230769230769234,
-          0.0,
-          84.67692307692307,
-          -0.0314315850016732,
-          0.5068066006351444,
-          87.7867081850778
-        ],
-        "width": 89,
-        "height": 125,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6037735849056604,
+        "scaleY": 0.43636363636363634,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 85,
-          "y": 83
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              160.0,
-              176.0
+              64,
+              192
             ],
             [
-              96.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          290,
-          466,
-          476,
-          711
+          288,
+          477,
+          504,
+          701
         ],
         "bounds": {
-          "x": 292,
-          "y": 468,
-          "width": 182,
-          "height": 241
+          "x": 290,
+          "y": 479,
+          "width": 212,
+          "height": 220
         },
-        "originalWidth": 182,
-        "originalHeight": 241,
+        "originalWidth": 212,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              447,
-              470
+              316,
+              481
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.48351648351648524,
-          "y": 0.8758713692946034
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              153.0,
-              183.546
-            ],
-            [
-              23.0,
-              238.624
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            160.0,
-            176.0
+            64,
+            192
           ],
           [
-            96.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1570,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/great-race-transition-glass-descent-steps.png",
       "width": 256,
       "height": 256,
@@ -1579,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5493562231759657,
-        "scaleY": 0.5508474576271186,
+        "scaleX": 0.624390243902439,
+        "scaleY": 0.6009389671361502,
         "width": 128,
-        "height": 130,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 62
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          514,
-          466,
-          751,
-          706
+          540,
+          486,
+          749,
+          703
         ],
         "bounds": {
-          "x": 516,
-          "y": 468,
-          "width": 233,
-          "height": 236
+          "x": 542,
+          "y": 488,
+          "width": 205,
+          "height": 213
         },
-        "originalWidth": 233,
-        "originalHeight": 236,
+        "originalWidth": 205,
+        "originalHeight": 213,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              621,
-              470
+              570,
+              490
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1645,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/great-race-transition-emergency-descent-hatch.png",
       "width": 256,
       "height": 256,
@@ -1654,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5844748858447488,
-        "scaleY": 0.586046511627907,
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.64,
         "width": 128,
-        "height": 126,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 66
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          773,
-          487,
-          996,
-          706
+          800,
+          501,
+          991,
+          705
         ],
         "bounds": {
-          "x": 775,
-          "y": 489,
-          "width": 219,
-          "height": 215
+          "x": 802,
+          "y": 503,
+          "width": 187,
+          "height": 200
         },
-        "originalWidth": 219,
-        "originalHeight": 215,
+        "originalWidth": 187,
+        "originalHeight": 200,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              902,
-              491
+              832,
+              505
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1720,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-transparent-crawler-starting-pod.png",
       "width": 256,
       "height": 256,
@@ -1729,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.40336134453781514,
-        "scaleY": 0.40404040404040403,
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.4,
         "width": 96,
-        "height": 80,
+        "height": 64,
         "offset": {
           "x": 80,
-          "y": 112
+          "y": 128
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1029,
-          500,
-          1271,
-          702
+          1026,
+          531,
+          1269,
+          695
         ],
         "bounds": {
-          "x": 1031,
-          "y": 502,
-          "width": 238,
-          "height": 198
+          "x": 1028,
+          "y": 533,
+          "width": 239,
+          "height": 160
         },
-        "originalWidth": 238,
-        "originalHeight": 198,
+        "originalWidth": 239,
+        "originalHeight": 160,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1216,
-              504
+              1073,
+              535
             ]
           ],
           "fringePixels": 2
@@ -1776,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1795,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-broken-starting-pod.png",
       "width": 256,
       "height": 256,
@@ -1804,57 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4247787610619469,
-        "scaleY": 0.4262295081967213,
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.40804597701149425,
         "width": 96,
-        "height": 78,
+        "height": 71,
         "offset": {
           "x": 80,
-          "y": 114
+          "y": 121
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1294,
-          509,
-          1524,
-          696
+          1285,
+          527,
+          1525,
+          705
         ],
         "bounds": {
-          "x": 1296,
-          "y": 511,
-          "width": 226,
-          "height": 183
+          "x": 1287,
+          "y": 529,
+          "width": 236,
+          "height": 174
         },
-        "originalWidth": 226,
-        "originalHeight": 183,
+        "originalWidth": 236,
+        "originalHeight": 174,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1359,
-              513
-            ],
-            [
-              1354,
-              648
-            ],
-            [
-              1450,
-              678
-            ],
-            [
-              1459,
-              681
+              1347,
+              531
             ]
           ],
           "fringePixels": 2
@@ -1863,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1882,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-maze-control-pedestal.png",
       "width": 256,
       "height": 256,
@@ -1891,45 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.744,
-        "scaleY": 0.7419354838709677,
-        "width": 93,
+        "scaleX": 0.7054263565891473,
+        "scaleY": 0.7076923076923077,
+        "width": 91,
         "height": 184,
         "offset": {
           "x": 82,
           "y": 8
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          62,
-          723,
-          191,
-          975
+          73,
+          716,
+          206,
+          980
         ],
         "bounds": {
-          "x": 64,
-          "y": 725,
-          "width": 125,
-          "height": 248
+          "x": 75,
+          "y": 718,
+          "width": 129,
+          "height": 260
         },
-        "originalWidth": 125,
-        "originalHeight": 248,
+        "originalWidth": 129,
+        "originalHeight": 260,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              124,
-              727
+              138,
+              720
             ]
           ],
           "fringePixels": 2
@@ -1938,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1957,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-fractured-maze-slab.png",
       "width": 256,
       "height": 256,
@@ -1966,57 +2034,62 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3764705882352941,
-        "scaleY": 0.3763440860215054,
+        "scaleX": 0.3902439024390244,
+        "scaleY": 0.3917525773195876,
         "width": 96,
-        "height": 70,
+        "height": 76,
         "offset": {
           "x": 80,
-          "y": 122
+          "y": 116
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          246,
-          767,
-          505,
-          957
+          269,
+          766,
+          519,
+          964
         ],
         "bounds": {
-          "x": 248,
-          "y": 769,
-          "width": 255,
-          "height": 186
+          "x": 271,
+          "y": 768,
+          "width": 246,
+          "height": 194
         },
-        "originalWidth": 255,
-        "originalHeight": 186,
+        "originalWidth": 246,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              352,
-              771
+              390,
+              770
             ],
             [
-              307,
-              886
-            ],
-            [
-              464,
+              331,
               900
             ],
             [
-              337,
-              912
+              347,
+              928
             ]
           ],
           "fringePixels": 2
@@ -2025,6 +2098,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2044,6 +2126,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-emergency-exit-portal.png",
       "width": 256,
       "height": 256,
@@ -2053,44 +2136,53 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4266666666666667,
-        "scaleY": 0.42570281124497994,
+        "scaleX": 0.42105263157894735,
+        "scaleY": 0.42231075697211157,
         "width": 96,
         "height": 106,
         "offset": {
           "x": 80,
           "y": 86
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          524,
+          522,
           711,
-          753,
-          964
+          754,
+          966
         ],
         "bounds": {
-          "x": 526,
+          "x": 524,
           "y": 713,
-          "width": 225,
-          "height": 249
+          "width": 228,
+          "height": 251
         },
-        "originalWidth": 225,
-        "originalHeight": 249,
+        "originalWidth": 228,
+        "originalHeight": 251,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              640,
+              636,
               715
             ]
           ],
@@ -2100,6 +2192,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2119,6 +2220,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-world-selection-holographic-globe.png",
       "width": 256,
       "height": 256,
@@ -2128,49 +2230,62 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4304932735426009,
-        "scaleY": 0.4297520661157025,
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.4048582995951417,
         "width": 96,
-        "height": 104,
+        "height": 100,
         "offset": {
           "x": 80,
-          "y": 88
+          "y": 92
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          781,
-          717,
-          1008,
-          963
+          774,
+          724,
+          1014,
+          975
         ],
         "bounds": {
-          "x": 783,
-          "y": 719,
-          "width": 223,
-          "height": 242
+          "x": 776,
+          "y": 726,
+          "width": 236,
+          "height": 247
         },
-        "originalWidth": 223,
-        "originalHeight": 242,
+        "originalWidth": 236,
+        "originalHeight": 247,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              882,
-              721
+              886,
+              728
             ],
             [
-              850,
-              863
+              988,
+              786
+            ],
+            [
+              792,
+              800
             ]
           ],
           "fringePixels": 2
@@ -2179,6 +2294,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2198,6 +2322,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-selection-chamber-console.png",
       "width": 256,
       "height": 256,
@@ -2207,45 +2332,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.39183673469387753,
-        "scaleY": 0.3915094339622642,
+        "scaleX": 0.3794466403162055,
+        "scaleY": 0.3783783783783784,
         "width": 96,
-        "height": 83,
+        "height": 84,
         "offset": {
           "x": 80,
-          "y": 109
+          "y": 108
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1028,
-          750,
-          1277,
-          966
+          1022,
+          745,
+          1279,
+          971
         ],
         "bounds": {
-          "x": 1030,
-          "y": 752,
-          "width": 245,
-          "height": 212
+          "x": 1024,
+          "y": 747,
+          "width": 253,
+          "height": 222
         },
-        "originalWidth": 245,
-        "originalHeight": 212,
+        "originalWidth": 253,
+        "originalHeight": 222,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1150,
-              754
+              1149,
+              749
             ]
           ],
           "fringePixels": 2
@@ -2254,6 +2388,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2273,6 +2416,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/great-race-transition-unlabeled-destination-doorway.png",
       "width": 256,
       "height": 256,
@@ -2282,45 +2426,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4485981308411215,
-        "scaleY": 0.4489051094890511,
+        "scaleX": 0.4507042253521127,
+        "scaleY": 0.4522058823529412,
         "width": 96,
         "height": 123,
         "offset": {
           "x": 80,
           "y": 69
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/great-race-transition.png",
-        "sha256": "478e495ad48f99dba06f4a21b716d3d6cd14a0c51242ff51d4e3d6ab0e2012b5",
+        "sha256": "3a40332b0cf23995de8bcd12b115dc68bd4bfdaed7be680bbc272abb7cd6db4b",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1300,
-          707,
-          1518,
-          985
+          1293,
+          702,
+          1510,
+          978
         ],
         "bounds": {
-          "x": 1302,
-          "y": 709,
-          "width": 214,
-          "height": 274
+          "x": 1295,
+          "y": 704,
+          "width": 213,
+          "height": 272
         },
-        "originalWidth": 214,
-        "originalHeight": 274,
+        "originalWidth": 213,
+        "originalHeight": 272,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1406,
-              711
+              1400,
+              706
             ]
           ],
           "fringePixels": 2
@@ -2329,6 +2482,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

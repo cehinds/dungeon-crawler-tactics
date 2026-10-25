@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5446806626864117,
-          -0.0009623628965236996,
-          63.51949546943117,
-          9.62362896523878e-05,
-          0.49164191452843364,
-          159.21427105146722
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          14,
-          56,
-          256,
-          210
+          54,
+          37,
+          246,
+          234
         ],
         "bounds": {
-          "x": 16,
-          "y": 58,
-          "width": 238,
-          "height": 150
+          "x": 56,
+          "y": 39,
+          "width": 188,
+          "height": 193
         },
-        "originalWidth": 238,
-        "originalHeight": 150,
+        "originalWidth": 188,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              132,
-              60
+              65,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978991596638666,
-          "y": 0.44441999999998455
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.385,
-              1.575
-            ],
-            [
-              236.0,
-              66.64
-            ],
-            [
-              118.615,
-              131.75
-            ],
-            [
-              1.0,
-              66.686
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-worn-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.549358510760484,
-          -0.0066625899096999066,
-          63.89107865781014,
-          -0.00016953154986516376,
-          0.49376063898221234,
-          159.35962873099174
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6881720430107527,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          267,
-          56,
-          507,
-          210
+          303,
+          37,
+          493,
+          234
         ],
         "bounds": {
-          "x": 269,
-          "y": 58,
-          "width": 236,
-          "height": 150
+          "x": 305,
+          "y": 39,
+          "width": 186,
+          "height": 193
         },
-        "originalWidth": 236,
-        "originalHeight": 150,
+        "originalWidth": 186,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              383,
-              60
+              313,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978813559322039,
-          "y": 0.44097333333331185
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.714,
-              1.337
-            ],
-            [
-              234.0,
-              66.186
-            ],
-            [
-              118.286,
-              130.955
-            ],
-            [
-              1.0,
-              66.106
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-cracked-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5447018417568961,
-          -0.013049769498909625,
-          64.33665349066048,
-          -0.0007810026710873748,
-          0.4855439886389763,
-          159.2081110979719
-        ],
-        "width": 130,
-        "height": 73,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6994535519125683,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          519,
-          55,
-          761,
-          211
+          552,
+          37,
+          739,
+          234
         ],
         "bounds": {
-          "x": 521,
-          "y": 57,
-          "width": 238,
-          "height": 152
+          "x": 554,
+          "y": 39,
+          "width": 183,
+          "height": 193
         },
-        "originalWidth": 238,
-        "originalHeight": 152,
+        "originalWidth": 183,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              637,
-              59
+              562,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4978991596638695,
-          "y": 0.44557236842106596
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.921,
-              1.819
-            ],
-            [
-              236.0,
-              67.916
-            ],
-            [
-              120.079,
-              133.635
-            ],
-            [
-              1.0,
-              67.538
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-wet-mid-century-street-pavement-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5423682523823504,
-          -0.007331797082591289,
-          63.95576137320597,
-          0.0003058336409031657,
-          0.48440764599427294,
-          159.0885542898622
-        ],
-        "width": 130,
-        "height": 74,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6808510638297872,
+        "scaleY": 0.6632124352331606,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          774,
-          55,
-          1017,
-          211
+          798,
+          37,
+          990,
+          234
         ],
         "bounds": {
-          "x": 776,
-          "y": 57,
-          "width": 239,
-          "height": 152
+          "x": 800,
+          "y": 39,
+          "width": 188,
+          "height": 193
         },
-        "originalWidth": 239,
-        "originalHeight": 152,
+        "originalWidth": 188,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              893,
-              59
+              808,
+              41
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4979079497907996,
-          "y": 0.44649013157893114
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              118.107,
-              1.807
-            ],
-            [
-              237.0,
-              67.792
-            ],
-            [
-              119.893,
-              133.926
-            ],
-            [
-              1.0,
-              67.941
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-mid-century-street-pavement-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5289256198347108,
-        "scaleY": 0.423841059602649,
+        "scaleX": 0.6844919786096256,
+        "scaleY": 0.649746192893401,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1029,
-          59,
-          1275,
-          214
+          1046,
+          37,
+          1237,
+          238
         ],
         "bounds": {
-          "x": 1031,
-          "y": 61,
-          "width": 242,
-          "height": 151
+          "x": 1048,
+          "y": 39,
+          "width": 187,
+          "height": 197
         },
-        "originalWidth": 242,
-        "originalHeight": 151,
+        "originalWidth": 187,
+        "originalHeight": 197,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1137,
-              63
+              1056,
+              41
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/hunting-zockau-mid-century-street-pavement-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5541125541125541,
-        "scaleY": 0.45714285714285713,
+        "scaleX": 0.6701570680628273,
+        "scaleY": 0.6432160804020101,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1288,
-          58,
-          1523,
-          202
+          1292,
+          37,
+          1487,
+          240
         ],
         "bounds": {
-          "x": 1290,
-          "y": 60,
-          "width": 231,
-          "height": 140
+          "x": 1294,
+          "y": 39,
+          "width": 191,
+          "height": 199
         },
-        "originalWidth": 231,
-        "originalHeight": 140,
+        "originalWidth": 191,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1406,
-              62
+              1301,
+              41
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-wall-northwest",
-      "label": "Painted Town Brick wall northwest",
+      "label": "Painted Town Brick north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-zockau-painted-town-brick-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.43243243243243246,
-          -0.0,
-          83.45945945945945,
-          -0.010351599211646259,
-          0.4270998545850091,
-          116.72232926165648
-        ],
-        "width": 89,
-        "height": 93,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.46715328467153283,
+        "scaleY": 0.38323353293413176,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 83,
-          "y": 116
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          42,
-          233,
-          250,
-          457
+          41,
+          273,
+          319,
+          444
         ],
         "bounds": {
-          "x": 44,
-          "y": 235,
-          "width": 204,
-          "height": 220
+          "x": 43,
+          "y": 275,
+          "width": 274,
+          "height": 167
         },
-        "originalWidth": 204,
-        "originalHeight": 220,
+        "originalWidth": 274,
+        "originalHeight": 167,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              73,
-              237
+              53,
+              277
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5049019607843107,
-          "y": 0.8124977272727265
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              29.0,
-              139.494
-            ],
-            [
-              177.0,
-              218.005
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-wall-northeast",
-      "label": "Painted Town Brick wall northeast",
+      "label": "Painted Town Brick west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/hunting-zockau-painted-town-brick-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4266666666666667,
-          0.0,
-          84.47999999999999,
-          0.0050471088969158496,
-          0.4241055741285038,
-          116.2162099129101
-        ],
-        "width": 88,
-        "height": 92,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5818181818181818,
+        "scaleY": 0.6772486772486772,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 84,
-          "y": 117
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          292,
-          235,
-          502,
-          457
+          404,
+          259,
+          463,
+          452
         ],
         "bounds": {
-          "x": 294,
-          "y": 237,
-          "width": 206,
-          "height": 218
+          "x": 406,
+          "y": 261,
+          "width": 55,
+          "height": 189
         },
-        "originalWidth": 206,
-        "originalHeight": 218,
+        "originalWidth": 55,
+        "originalHeight": 189,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              466,
-              239
+              415,
+              263
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4951456310679664,
-          "y": 0.8141146788990808
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              177.0,
-              138.858
-            ],
-            [
-              27.0,
-              216.096
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.735632183908046,
-        "scaleY": 0.5106382978723404,
+        "scaleX": 0.8590604026845637,
+        "scaleY": 0.7852760736196319,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          564,
-          243,
-          742,
-          435
+          597,
+          271,
+          750,
+          438
         ],
         "bounds": {
-          "x": 566,
-          "y": 245,
-          "width": 174,
-          "height": 188
+          "x": 599,
+          "y": 273,
+          "width": 149,
+          "height": 163
         },
-        "originalWidth": 174,
-        "originalHeight": 188,
+        "originalWidth": 149,
+        "originalHeight": 163,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              597,
-              247
+              609,
+              275
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5844748858447488,
-        "scaleY": 0.5245901639344263,
+        "scaleX": 0.6918918918918919,
+        "scaleY": 0.7852760736196319,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
-          782,
-          244,
-          1005,
-          431
+          803,
+          271,
+          992,
+          438
         ],
         "bounds": {
-          "x": 784,
-          "y": 246,
-          "width": 219,
-          "height": 183
+          "x": 805,
+          "y": 273,
+          "width": 185,
+          "height": 163
         },
-        "originalWidth": 219,
-        "originalHeight": 183,
+        "originalWidth": 185,
+        "originalHeight": 163,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              890,
-              248
+              819,
+              275
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-endcap-northwest",
-      "label": "Painted Town Brick endcap northwest",
+      "label": "Painted Town Brick north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3106796116504854,
-        "scaleY": 0.5274725274725275,
+        "scaleX": 0.48484848484848486,
+        "scaleY": 0.4266666666666667,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1111,
-          247,
-          1218,
-          433
+          1116,
+          306,
+          1186,
+          385
         ],
         "bounds": {
-          "x": 1113,
-          "y": 249,
-          "width": 103,
-          "height": 182
+          "x": 1118,
+          "y": 308,
+          "width": 66,
+          "height": 75
         },
-        "originalWidth": 103,
-        "originalHeight": 182,
+        "originalWidth": 66,
+        "originalHeight": 75,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1145,
-              251
+              1126,
+              310
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "hunting-zockau-painted-town-brick-endcap-northeast",
-      "label": "Painted Town Brick endcap northeast",
+      "label": "Painted Town Brick west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/hunting-zockau-painted-town-brick-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.2689075630252101,
-        "scaleY": 0.4948453608247423,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.3902439024390244,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1348,
-          236,
-          1471,
-          434
+          1340,
+          301,
+          1422,
+          387
         ],
         "bounds": {
-          "x": 1350,
-          "y": 238,
-          "width": 119,
-          "height": 194
+          "x": 1342,
+          "y": 303,
+          "width": 78,
+          "height": 82
         },
-        "originalWidth": 119,
-        "originalHeight": 194,
+        "originalWidth": 78,
+        "originalHeight": 82,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1431,
-              240
+              1353,
+              305
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-zockau-painted-town-brick-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.3595505617977528,
-          -0.0,
-          90.96629213483146,
-          0.028332824970986995,
-          0.37237204601564144,
-          117.90280243209848
-        ],
-        "width": 78,
-        "height": 88,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5614035087719298,
+        "scaleY": 0.46153846153846156,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 91,
-          "y": 120
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          29,
-          460,
-          250,
-          692
+          42,
+          476,
+          274,
+          688
         ],
         "bounds": {
-          "x": 31,
-          "y": 462,
-          "width": 217,
-          "height": 228
+          "x": 44,
+          "y": 478,
+          "width": 228,
+          "height": 208
         },
-        "originalWidth": 217,
-        "originalHeight": 228,
+        "originalWidth": 228,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              90,
-              464
+              55,
+              480
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.47465437788019244,
-          "y": 0.8383771929824541
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              14.0,
-              154.954
-            ],
-            [
-              192.0,
-              227.346
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/hunting-zockau-painted-town-brick-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4129032258064516,
-          -0.0,
-          87.74193548387098,
-          0.04624620372861498,
-          0.4329498460825505,
-          103.23787271418051
-        ],
-        "width": 86,
-        "height": 104,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5739910313901345,
+        "scaleY": 0.46153846153846156,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 88,
-          "y": 106
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          296,
-          461,
-          510,
-          693
+          316,
+          476,
+          543,
+          688
         ],
         "bounds": {
-          "x": 298,
-          "y": 463,
-          "width": 210,
-          "height": 228
+          "x": 318,
+          "y": 478,
+          "width": 223,
+          "height": 208
         },
-        "originalWidth": 210,
-        "originalHeight": 228,
+        "originalWidth": 223,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              360,
-              465
+              328,
+              480
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4642857142857211,
-          "y": 0.853519736842105
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              20.0,
-              165.925
-            ],
-            [
-              175.0,
-              223.28
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/hunting-zockau-mid-century-street-pavement-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5423728813559322,
-        "scaleY": 0.5418502202643172,
+        "scaleX": 0.6956521739130435,
+        "scaleY": 0.6037735849056604,
         "width": 128,
-        "height": 123,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 69
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          531,
-          461,
-          771,
-          692
+          582,
+          475,
+          770,
+          691
         ],
         "bounds": {
-          "x": 533,
-          "y": 463,
-          "width": 236,
-          "height": 227
+          "x": 584,
+          "y": 477,
+          "width": 184,
+          "height": 212
         },
-        "originalWidth": 236,
-        "originalHeight": 227,
+        "originalWidth": 184,
+        "originalHeight": 212,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              657,
-              465
+              593,
+              479
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/hunting-zockau-mid-century-street-pavement-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5311203319502075,
-        "scaleY": 0.53125,
+        "scaleX": 0.6736842105263158,
+        "scaleY": 0.6037735849056604,
         "width": 128,
-        "height": 119,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 73
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          786,
-          462,
-          1031,
-          690
+          810,
+          475,
+          1004,
+          691
         ],
         "bounds": {
-          "x": 788,
-          "y": 464,
-          "width": 241,
-          "height": 224
+          "x": 812,
+          "y": 477,
+          "width": 190,
+          "height": 212
         },
-        "originalWidth": 241,
-        "originalHeight": 224,
+        "originalWidth": 190,
+        "originalHeight": 212,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              894,
-              466
+              821,
+              479
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-bear-head-square-statue.png",
       "width": 256,
       "height": 256,
@@ -1725,45 +1752,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.588957055214724,
-        "scaleY": 0.5896414342629482,
+        "scaleX": 0.6906474820143885,
+        "scaleY": 0.689795918367347,
         "width": 96,
-        "height": 148,
+        "height": 169,
         "offset": {
           "x": 80,
-          "y": 44
+          "y": 23
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1076,
-          456,
-          1243,
-          711
+          1090,
+          471,
+          1233,
+          720
         ],
         "bounds": {
-          "x": 1078,
-          "y": 458,
-          "width": 163,
-          "height": 251
+          "x": 1092,
+          "y": 473,
+          "width": 139,
+          "height": 245
         },
-        "originalWidth": 163,
-        "originalHeight": 251,
+        "originalWidth": 139,
+        "originalHeight": 245,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1190,
-              460
+              1152,
+              475
             ]
           ],
           "fringePixels": 2
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-yellow-electric-street-lamp.png",
       "width": 256,
       "height": 256,
@@ -1800,37 +1846,46 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.7307692307692307,
-        "scaleY": 0.7301587301587301,
-        "width": 57,
+        "scaleX": 0.6875,
+        "scaleY": 0.6814814814814815,
+        "width": 55,
         "height": 184,
         "offset": {
           "x": 100,
           "y": 8
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1357,
-          448,
-          1439,
-          704
+          1358,
+          442,
+          1442,
+          716
         ],
         "bounds": {
-          "x": 1359,
-          "y": 450,
-          "width": 78,
-          "height": 252
+          "x": 1360,
+          "y": 444,
+          "width": 80,
+          "height": 270
         },
-        "originalWidth": 78,
-        "originalHeight": 252,
+        "originalWidth": 80,
+        "originalHeight": 270,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1838,7 +1893,7 @@
           "seeds": [
             [
               1398,
-              452
+              446
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-three-storey-diner-club-facade.png",
       "width": 256,
       "height": 256,
@@ -1875,49 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.401673640167364,
-        "scaleY": 0.4033333333333333,
+        "scaleX": 0.39344262295081966,
+        "scaleY": 0.39285714285714285,
         "width": 96,
-        "height": 121,
+        "height": 110,
         "offset": {
           "x": 80,
-          "y": 71
+          "y": 82
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          18,
-          677,
-          261,
-          981
+          17,
+          700,
+          265,
+          984
         ],
         "bounds": {
-          "x": 20,
-          "y": 679,
-          "width": 239,
-          "height": 300
+          "x": 19,
+          "y": 702,
+          "width": 244,
+          "height": 280
         },
-        "originalWidth": 239,
-        "originalHeight": 300,
+        "originalWidth": 244,
+        "originalHeight": 280,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              147,
-              681
-            ],
-            [
-              119,
-              971
+              154,
+              704
             ]
           ],
           "fringePixels": 2
@@ -1926,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1945,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-small-pub-with-broken-sign.png",
       "width": 256,
       "height": 256,
@@ -1954,49 +2034,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41025641025641024,
-        "scaleY": 0.40942028985507245,
+        "scaleX": 0.3735408560311284,
+        "scaleY": 0.3741258741258741,
         "width": 96,
-        "height": 113,
+        "height": 107,
         "offset": {
           "x": 80,
-          "y": 79
+          "y": 85
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
           280,
-          693,
-          518,
-          973
+          700,
+          541,
+          990
         ],
         "bounds": {
           "x": 282,
-          "y": 695,
-          "width": 234,
-          "height": 276
+          "y": 702,
+          "width": 257,
+          "height": 286
         },
-        "originalWidth": 234,
-        "originalHeight": 276,
+        "originalWidth": 257,
+        "originalHeight": 286,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              430,
-              697
-            ],
-            [
-              485,
-              836
+              439,
+              704
             ]
           ],
           "fringePixels": 2
@@ -2005,6 +2090,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2024,6 +2118,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-town-park-bench.png",
       "width": 256,
       "height": 256,
@@ -2033,45 +2128,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4682926829268293,
-        "scaleY": 0.46987951807228917,
+        "scaleX": 0.4247787610619469,
+        "scaleY": 0.42142857142857143,
         "width": 96,
-        "height": 78,
+        "height": 59,
         "offset": {
           "x": 80,
-          "y": 114
+          "y": 133
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          542,
-          767,
-          751,
-          937
+          540,
+          818,
+          770,
+          962
         ],
         "bounds": {
-          "x": 544,
-          "y": 769,
-          "width": 205,
-          "height": 166
+          "x": 542,
+          "y": 820,
+          "width": 226,
+          "height": 140
         },
-        "originalWidth": 205,
-        "originalHeight": 166,
+        "originalWidth": 226,
+        "originalHeight": 140,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              683,
-              771
+              566,
+              822
             ]
           ],
           "fringePixels": 2
@@ -2080,6 +2184,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2099,6 +2212,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-narrow-alley-barricade.png",
       "width": 256,
       "height": 256,
@@ -2108,45 +2222,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.44036697247706424,
-        "scaleY": 0.4416243654822335,
+        "scaleX": 0.4383561643835616,
+        "scaleY": 0.4381443298969072,
         "width": 96,
-        "height": 87,
+        "height": 85,
         "offset": {
           "x": 80,
-          "y": 105
+          "y": 107
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          782,
-          728,
-          1004,
-          929
+          786,
+          781,
+          1009,
+          979
         ],
         "bounds": {
-          "x": 784,
-          "y": 730,
-          "width": 218,
-          "height": 197
+          "x": 788,
+          "y": 783,
+          "width": 219,
+          "height": 194
         },
-        "originalWidth": 218,
-        "originalHeight": 197,
+        "originalWidth": 219,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              973,
-              732
+              815,
+              785
             ]
           ],
           "fringePixels": 2
@@ -2155,6 +2278,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2174,6 +2306,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-public-park-stairwell.png",
       "width": 256,
       "height": 256,
@@ -2183,45 +2316,58 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.3779527559055118,
-        "scaleY": 0.38009049773755654,
+        "scaleX": 0.401673640167364,
+        "scaleY": 0.40106951871657753,
         "width": 96,
-        "height": 84,
+        "height": 75,
         "offset": {
           "x": 80,
-          "y": 108
+          "y": 117
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1025,
-          732,
-          1283,
-          957
+          1026,
+          789,
+          1269,
+          980
         ],
         "bounds": {
-          "x": 1027,
-          "y": 734,
-          "width": 254,
-          "height": 221
+          "x": 1028,
+          "y": 791,
+          "width": 239,
+          "height": 187
         },
-        "originalWidth": 254,
-        "originalHeight": 221,
+        "originalWidth": 239,
+        "originalHeight": 187,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1156,
-              736
+              1066,
+              793
+            ],
+            [
+              1107,
+              816
             ]
           ],
           "fringePixels": 2
@@ -2230,6 +2376,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2249,6 +2404,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/hunting-zockau-shop-display-window.png",
       "width": 256,
       "height": 256,
@@ -2258,45 +2414,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4549763033175355,
-        "scaleY": 0.45348837209302323,
+        "scaleX": 0.4155844155844156,
+        "scaleY": 0.4163265306122449,
         "width": 96,
-        "height": 117,
+        "height": 102,
         "offset": {
           "x": 80,
-          "y": 75
+          "y": 90
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/hunting-zockau.png",
-        "sha256": "4a4d8a940585b359dd41b5f38be01966ba4ec5659085f5751afa272b341b3cf7",
+        "sha256": "84c41b02517ca9f7a118075ad5789addf37ee8a11893ef49d9c0899e9c68c5bc",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
-          1301,
-          699,
-          1516,
-          961
+          1279,
+          732,
+          1514,
+          981
         ],
         "bounds": {
-          "x": 1303,
-          "y": 701,
-          "width": 211,
-          "height": 258
+          "x": 1281,
+          "y": 734,
+          "width": 231,
+          "height": 245
         },
-        "originalWidth": 211,
-        "originalHeight": 258,
+        "originalWidth": 231,
+        "originalHeight": 245,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1479,
-              703
+              1472,
+              736
             ]
           ],
           "fringePixels": 2
@@ -2305,6 +2470,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

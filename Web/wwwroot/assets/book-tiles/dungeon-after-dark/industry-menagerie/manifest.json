@@ -8,9 +8,9 @@
   ],
   "exportKind": "normalized-derived-exports-not-native-pixel-copies",
   "grid": {
-    "projection": "isometric",
+    "projection": "orthogonal",
     "tileWidth": 128,
-    "tileHeight": 64,
+    "tileHeight": 128,
     "canvasWidth": 256,
     "canvasHeight": 256,
     "anchor": {
@@ -36,6 +36,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/industry-menagerie-industrial-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -45,120 +46,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5541016996566226,
-          0.003942420314766246,
-          63.199840021237875,
-          -0.0014510296991847981,
-          0.5270249379114573,
-          159.1082435798314
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
-          15,
-          67,
-          253,
-          204
+          43,
+          45,
+          239,
+          233
         ],
         "bounds": {
-          "x": 17,
-          "y": 69,
-          "width": 234,
-          "height": 133
+          "x": 45,
+          "y": 47,
+          "width": 192,
+          "height": 184
         },
-        "originalWidth": 234,
-        "originalHeight": 133,
+        "originalWidth": 192,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              132,
-              71
+              50,
+              49
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.497863247863251,
-          "y": 0.471661654135343
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              116.932,
-              2.014
-            ],
-            [
-              232.0,
-              63.049
-            ],
-            [
-              116.068,
-              123.447
-            ],
-            [
-              1.0,
-              62.413
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -180,6 +154,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/industry-menagerie-worn-industrial-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -189,120 +164,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517332005479868,
-          0.003822776605341632,
-          63.20492795463899,
-          0.0012309877827505157,
-          0.5192530283602135,
-          158.94571749194785
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
-          267,
-          67,
-          506,
-          205
+          293,
+          45,
+          486,
+          233
         ],
         "bounds": {
-          "x": 269,
-          "y": 69,
-          "width": 235,
-          "height": 134
+          "x": 295,
+          "y": 47,
+          "width": 189,
+          "height": 184
         },
-        "originalWidth": 235,
-        "originalHeight": 134,
+        "originalWidth": 189,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              385,
-              71
+              300,
+              49
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042553385,
-          "y": 0.4729850746268601
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.427,
-              1.752
-            ],
-            [
-              233.0,
-              63.105
-            ],
-            [
-              116.573,
-              125.008
-            ],
-            [
-              1.0,
-              63.655
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -324,6 +272,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/industry-menagerie-cracked-industrial-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -333,120 +282,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517210094215076,
-          0.0031974194283443955,
-          63.24506380139064,
-          -0.0005097009903330064,
-          0.520927884393196,
-          158.89241708049636
-        ],
-        "width": 130,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          520,
-          66,
-          759,
-          205
+          545,
+          45,
+          738,
+          233
         ],
         "bounds": {
-          "x": 522,
-          "y": 68,
-          "width": 235,
-          "height": 135
+          "x": 547,
+          "y": 47,
+          "width": 189,
+          "height": 184
         },
-        "originalWidth": 235,
-        "originalHeight": 135,
+        "originalWidth": 189,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              638,
-              70
+              552,
+              49
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042553236,
-          "y": 0.47162592592593666
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.356,
-              2.241
-            ],
-            [
-              233.0,
-              63.783
-            ],
-            [
-              116.644,
-              125.098
-            ],
-            [
-              1.0,
-              63.556
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -468,6 +390,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/industry-menagerie-wet-industrial-brick-floor.png",
       "width": 256,
       "height": 256,
@@ -477,120 +400,93 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-floor",
-        "resampling": "bicubic",
-        "affine": [
-          0.5517253095865822,
-          0.0008521131255757094,
-          63.393822105349756,
-          0.0007153265448911861,
-          0.5202374871935972,
-          158.75454852932268
-        ],
-        "width": 129,
-        "height": 70,
+        "sizing": "native-square-floor",
+        "resampling": "lanczos",
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6956521739130435,
+        "width": 128,
+        "height": 128,
         "offset": {
-          "x": 63,
-          "y": 159
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "floor",
           "points": [
             [
-              128,
-              160.0
+              64,
+              128
             ],
             [
-              192.0,
-              192
+              192,
+              128
             ],
             [
-              128,
-              224.0
+              192,
+              256
             ],
             [
-              64.0,
-              192
+              64,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
-          777,
-          66,
-          1016,
-          205
+          797,
+          45,
+          990,
+          233
         ],
         "bounds": {
-          "x": 779,
-          "y": 68,
-          "width": 235,
-          "height": 135
+          "x": 799,
+          "y": 47,
+          "width": 189,
+          "height": 184
         },
-        "originalWidth": 235,
-        "originalHeight": 135,
+        "originalWidth": 189,
+        "originalHeight": 184,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              70
+              803,
+              49
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.49787234042553447,
-          "y": 0.4721740740741089
-        },
-        "registration": {
-          "kind": "floor",
-          "points": [
-            [
-              117.095,
-              2.233
-            ],
-            [
-              233.0,
-              63.584
-            ],
-            [
-              116.905,
-              125.255
-            ],
-            [
-              1.0,
-              63.903
-            ]
-          ]
+          "x": 0.5,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "floor",
         "points": [
           [
-            128,
-            160.0
+            64,
+            128
           ],
           [
-            192.0,
-            192
+            192,
+            128
           ],
           [
-            128,
-            224.0
+            192,
+            256
           ],
           [
-            64.0,
-            192
+            64,
+            256
           ]
         ]
       }
@@ -612,6 +508,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/industry-menagerie-industrial-brick-edge-transition.png",
       "width": 256,
       "height": 256,
@@ -621,45 +518,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5638766519823789,
-        "scaleY": 0.45714285714285713,
+        "scaleX": 0.6772486772486772,
+        "scaleY": 0.6918918918918919,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
-          1038,
-          64,
-          1269,
-          208
+          1049,
+          44,
+          1242,
+          233
         ],
         "bounds": {
-          "x": 1040,
-          "y": 66,
-          "width": 227,
-          "height": 140
+          "x": 1051,
+          "y": 46,
+          "width": 189,
+          "height": 185
         },
-        "originalWidth": 227,
-        "originalHeight": 140,
+        "originalWidth": 189,
+        "originalHeight": 185,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1145,
-              68
+              1057,
+              48
             ]
           ],
           "fringePixels": 2
@@ -668,6 +586,27 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
@@ -687,6 +626,7 @@
         "art-adaptation"
       ],
       "walkable": true,
+      "squareLayout": "floor",
       "file": "components/industry-menagerie-industrial-brick-corner-transition.png",
       "width": 256,
       "height": 256,
@@ -696,45 +636,66 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
+        "sizing": "native-square-floor",
         "resampling": "lanczos",
-        "scaleX": 0.5688888888888889,
-        "scaleY": 0.45714285714285713,
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6632124352331606,
         "width": 128,
-        "height": 64,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 128
+        },
+        "placement": {
+          "kind": "floor",
+          "points": [
+            [
+              64,
+              128
+            ],
+            [
+              192,
+              128
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              64,
+              256
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
-          1291,
-          65,
-          1520,
-          209
+          1299,
+          41,
+          1495,
+          238
         ],
         "bounds": {
-          "x": 1293,
-          "y": 67,
-          "width": 225,
-          "height": 140
+          "x": 1301,
+          "y": 43,
+          "width": 192,
+          "height": 193
         },
-        "originalWidth": 225,
-        "originalHeight": 140,
+        "originalWidth": 192,
+        "originalHeight": 193,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1405,
-              69
+              1458,
+              45
             ]
           ],
           "fringePixels": 2
@@ -743,15 +704,36 @@
           "x": 0.5,
           "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            64,
+            128
+          ],
+          [
+            192,
+            128
+          ],
+          [
+            192,
+            256
+          ],
+          [
+            64,
+            256
+          ]
+        ]
       }
     },
     {
       "id": "industry-menagerie-soot-stained-brick-wall-northwest",
-      "label": "Soot Stained Brick wall northwest",
+      "label": "Soot Stained Brick north wall",
       "cell": 6,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -762,8 +744,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 64,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/industry-menagerie-soot-stained-brick-wall-northwest.png",
       "width": 256,
       "height": 256,
@@ -773,109 +756,90 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.512,
-          -0.0,
-          82.688,
-          -0.007936967653117733,
-          0.507954010817997,
-          93.54548111653595
-        ],
-        "width": 88,
-        "height": 116,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.5663716814159292,
+        "scaleY": 0.37209302325581395,
+        "width": 128,
+        "height": 64,
         "offset": {
-          "x": 83,
-          "y": 93
+          "x": 64,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
-          48,
-          254,
-          224,
-          488
+          26,
+          291,
+          256,
+          467
         ],
         "bounds": {
-          "x": 50,
-          "y": 256,
-          "width": 172,
-          "height": 230
+          "x": 28,
+          "y": 293,
+          "width": 226,
+          "height": 172
         },
-        "originalWidth": 172,
-        "originalHeight": 230,
+        "originalWidth": 226,
+        "originalHeight": 172,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              71,
-              258
+              39,
+              295
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5145348837209297,
-          "y": 0.848732608695656
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              26.0,
-              162.733
-            ],
-            [
-              151.0,
-              227.684
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
       "id": "industry-menagerie-soot-stained-brick-wall-northeast",
-      "label": "Soot Stained Brick wall northeast",
+      "label": "Soot Stained Brick west wall",
       "cell": 7,
       "role": "wall",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 32,
       "footprint": {
         "width": 1,
         "height": 1
@@ -886,8 +850,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 128,
+      "renderHeight": 128,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "west-wall",
       "file": "components/industry-menagerie-soot-stained-brick-wall-northeast.png",
       "width": 256,
       "height": 256,
@@ -897,100 +862,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.45714285714285713,
-          0.0,
-          87.31428571428572,
-          0.011922563827595363,
-          0.4509846221501448,
-          105.74992612598135
-        ],
-        "width": 76,
-        "height": 101,
+        "sizing": "native-square-west-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6037735849056604,
+        "scaleY": 0.6530612244897959,
+        "width": 32,
+        "height": 128,
         "offset": {
-          "x": 87,
-          "y": 107
+          "x": 96,
+          "y": 128
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "y",
           "points": [
             [
-              160.0,
-              176.0
+              128,
+              128
             ],
             [
-              96.0,
-              208.0
+              128,
+              256
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          295,
-          253,
-          464,
-          485
+          362,
+          279,
+          419,
+          479
         ],
         "bounds": {
-          "x": 297,
-          "y": 255,
-          "width": 165,
-          "height": 228
+          "x": 364,
+          "y": 281,
+          "width": 53,
+          "height": 196
         },
-        "originalWidth": 165,
-        "originalHeight": 228,
+        "originalWidth": 53,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              433,
-              257
+              370,
+              283
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5393939393939413,
-          "y": 0.8284890350877183
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "y",
-          "points": [
-            [
-              159.0,
-              151.567
-            ],
-            [
-              19.0,
-              226.224
-            ]
-          ]
+          "x": 1,
+          "y": 0.5
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "y",
         "points": [
           [
-            160.0,
-            176.0
+            128,
+            128
           ],
           [
-            96.0,
-            208.0
+            128,
+            256
           ]
-        ],
-        "axis": "y"
+        ]
       }
     },
     {
@@ -1010,8 +956,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/industry-menagerie-soot-stained-brick-outer-corner.png",
       "width": 256,
       "height": 256,
@@ -1021,53 +968,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.7071823204419889,
-        "scaleY": 0.4824120603015075,
+        "scaleX": 0.6666666666666666,
+        "scaleY": 0.6368159203980099,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          549,
-          271,
-          734,
-          474
+          544,
+          276,
+          740,
+          481
         ],
         "bounds": {
-          "x": 551,
-          "y": 273,
-          "width": 181,
-          "height": 199
+          "x": 546,
+          "y": 278,
+          "width": 192,
+          "height": 201
         },
-        "originalWidth": 181,
-        "originalHeight": 199,
+        "originalWidth": 192,
+        "originalHeight": 201,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              709,
-              275
+              559,
+              280
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1087,8 +1052,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
+      "renderHeight": 128,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "overlay",
       "file": "components/industry-menagerie-soot-stained-brick-inner-corner.png",
       "width": 256,
       "height": 256,
@@ -1098,58 +1064,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.64,
-        "scaleY": 0.47761194029850745,
+        "scaleX": 0.6564102564102564,
+        "scaleY": 0.64,
         "width": 128,
-        "height": 96,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 96
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
           796,
-          256,
-          1000,
-          461
+          279,
+          995,
+          483
         ],
         "bounds": {
           "x": 798,
-          "y": 258,
-          "width": 200,
-          "height": 201
+          "y": 281,
+          "width": 195,
+          "height": 200
         },
-        "originalWidth": 200,
-        "originalHeight": 201,
+        "originalWidth": 195,
+        "originalHeight": 200,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              897,
-              260
+              831,
+              283
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "industry-menagerie-soot-stained-brick-endcap-northwest",
-      "label": "Soot Stained Brick endcap northwest",
+      "label": "Soot Stained Brick north endcap",
       "cell": 10,
       "role": "wall",
       "layer": "structures",
@@ -1164,8 +1148,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/industry-menagerie-soot-stained-brick-endcap-northwest.png",
       "width": 256,
       "height": 256,
@@ -1175,58 +1160,76 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.3368421052631579,
-        "scaleY": 0.4485981308411215,
+        "scaleX": 0.34782608695652173,
+        "scaleY": 0.24060150375939848,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1104,
-          255,
-          1203,
-          473
+          1099,
+          317,
+          1195,
+          454
         ],
         "bounds": {
-          "x": 1106,
-          "y": 257,
-          "width": 95,
-          "height": 214
+          "x": 1101,
+          "y": 319,
+          "width": 92,
+          "height": 133
         },
-        "originalWidth": 95,
-        "originalHeight": 214,
+        "originalWidth": 92,
+        "originalHeight": 133,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1131,
-              259
+              1111,
+              321
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
       "id": "industry-menagerie-soot-stained-brick-endcap-northeast",
-      "label": "Soot Stained Brick endcap northeast",
+      "label": "Soot Stained Brick west endcap",
       "cell": 11,
       "role": "wall",
       "layer": "structures",
@@ -1241,8 +1244,9 @@
         "art-adaptation"
       ],
       "walkable": false,
-      "renderHeight": 96,
-      "orthogonalRenderWidth": 48,
+      "renderHeight": 32,
+      "orthogonalRenderWidth": 32,
+      "squareLayout": "overlay",
       "file": "components/industry-menagerie-soot-stained-brick-endcap-northeast.png",
       "width": 256,
       "height": 256,
@@ -1252,53 +1256,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.34408602150537637,
-        "scaleY": 0.4528301886792453,
+        "scaleX": 0.3595505617977528,
+        "scaleY": 0.23357664233576642,
         "width": 32,
-        "height": 96,
+        "height": 32,
         "offset": {
           "x": 112,
-          "y": 96
+          "y": 176
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
-          1354,
-          254,
-          1451,
-          470
+          1353,
+          315,
+          1446,
+          456
         ],
         "bounds": {
-          "x": 1356,
-          "y": 256,
-          "width": 93,
-          "height": 212
+          "x": 1355,
+          "y": 317,
+          "width": 89,
+          "height": 137
         },
-        "originalWidth": 93,
-        "originalHeight": 212,
+        "originalWidth": 89,
+        "originalHeight": 137,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1420,
-              258
+              1363,
+              319
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1307,7 +1329,7 @@
       "cell": 12,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1320,6 +1342,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/industry-menagerie-soot-stained-brick-open-doorway.png",
       "width": 256,
       "height": 256,
@@ -1329,100 +1352,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.43243243243243246,
-          -0.0,
-          92.97297297297297,
-          0.0026793927893954015,
-          0.433761784641149,
-          108.3356601739024
-        ],
-        "width": 76,
-        "height": 100,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6009389671361502,
+        "scaleY": 0.4897959183673469,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 109
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
-          49,
-          487,
-          228,
-          722
+          31,
+          519,
+          248,
+          719
         ],
         "bounds": {
-          "x": 51,
-          "y": 489,
-          "width": 175,
-          "height": 231
+          "x": 33,
+          "y": 521,
+          "width": 213,
+          "height": 196
         },
-        "originalWidth": 175,
-        "originalHeight": 231,
+        "originalWidth": 213,
+        "originalHeight": 196,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              75,
-              491
+              39,
+              523
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4628571428571401,
-          "y": 0.8328160173160225
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              155.951
-            ],
-            [
-              155.0,
-              228.81
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1431,7 +1435,7 @@
       "cell": 13,
       "role": "door",
       "layer": "structures",
-      "renderWidth": 64,
+      "renderWidth": 128,
       "footprint": {
         "width": 1,
         "height": 1
@@ -1444,6 +1448,7 @@
       "walkable": false,
       "renderHeight": 96,
       "orthogonalRenderWidth": 128,
+      "squareLayout": "north-wall",
       "file": "components/industry-menagerie-soot-stained-brick-closed-doorway.png",
       "width": 256,
       "height": 256,
@@ -1453,100 +1458,81 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "registered-wall",
-        "resampling": "bicubic",
-        "affine": [
-          0.4507042253521127,
-          -0.0,
-          92.84507042253522,
-          0.010281058237447413,
-          0.45569980796625487,
-          101.09893422562305
-        ],
-        "width": 77,
-        "height": 108,
+        "sizing": "native-square-north-wall",
+        "resampling": "lanczos",
+        "scaleX": 0.6153846153846154,
+        "scaleY": 0.4873096446700508,
+        "width": 128,
+        "height": 96,
         "offset": {
-          "x": 93,
-          "y": 101
+          "x": 64,
+          "y": 96
         },
-        "registration": {
+        "placement": {
           "kind": "wall",
+          "axis": "x",
           "points": [
             [
-              96.0,
-              176.0
+              64,
+              192
             ],
             [
-              160.0,
-              208.0
+              192,
+              192
             ]
           ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          298,
-          496,
-          473,
-          734
+          286,
+          518,
+          498,
+          719
         ],
         "bounds": {
-          "x": 300,
-          "y": 498,
-          "width": 171,
-          "height": 234
+          "x": 288,
+          "y": 520,
+          "width": 208,
+          "height": 197
         },
-        "originalWidth": 171,
-        "originalHeight": 234,
+        "originalWidth": 208,
+        "originalHeight": 197,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              323,
-              500
+              296,
+              522
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.4561403508771936,
-          "y": 0.8449401709401666
-        },
-        "registration": {
-          "kind": "wall",
-          "axis": "x",
-          "points": [
-            [
-              7.0,
-              164.207
-            ],
-            [
-              149.0,
-              231.225
-            ]
-          ]
+          "x": 0.5,
+          "y": 1
         }
       },
       "placement": {
         "kind": "wall",
+        "axis": "x",
         "points": [
           [
-            96.0,
-            176.0
+            64,
+            192
           ],
           [
-            160.0,
-            208.0
+            192,
+            192
           ]
-        ],
-        "axis": "x"
+        ]
       }
     },
     {
@@ -1566,6 +1552,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/industry-menagerie-industrial-brick-stairs-up.png",
       "width": 256,
       "height": 256,
@@ -1575,53 +1563,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.5541125541125541,
-        "scaleY": 0.5542857142857143,
+        "scaleX": 0.7231638418079096,
+        "scaleY": 0.6666666666666666,
         "width": 128,
-        "height": 97,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 95
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
-          521,
-          528,
-          756,
-          707
+          552,
+          522,
+          733,
+          718
         ],
         "bounds": {
-          "x": 523,
-          "y": 530,
-          "width": 231,
-          "height": 175
+          "x": 554,
+          "y": 524,
+          "width": 177,
+          "height": 192
         },
-        "originalWidth": 231,
-        "originalHeight": 175,
+        "originalWidth": 177,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              631,
-              532
+              565,
+              526
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1641,6 +1647,8 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "overlay",
+      "renderHeight": 128,
       "file": "components/industry-menagerie-industrial-brick-stairs-down.png",
       "width": 256,
       "height": 256,
@@ -1650,53 +1658,71 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-overlay",
         "resampling": "lanczos",
-        "scaleX": 0.512,
-        "scaleY": 0.5136986301369864,
+        "scaleX": 0.7071823204419889,
+        "scaleY": 0.6666666666666666,
         "width": 128,
-        "height": 75,
+        "height": 128,
         "offset": {
           "x": 64,
-          "y": 117
+          "y": 128
+        },
+        "placement": {
+          "kind": "overlay",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          772,
-          537,
-          1026,
-          687
+          799,
+          522,
+          984,
+          718
         ],
         "bounds": {
-          "x": 774,
-          "y": 539,
-          "width": 250,
-          "height": 146
+          "x": 801,
+          "y": 524,
+          "width": 181,
+          "height": 192
         },
-        "originalWidth": 250,
-        "originalHeight": 146,
+        "originalWidth": 181,
+        "originalHeight": 192,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              900,
-              541
+              807,
+              526
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
           "x": 0.5,
-          "y": 1
+          "y": 0.5
         }
+      },
+      "placement": {
+        "kind": "overlay",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1716,6 +1742,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-goblin-workbench.png",
       "width": 256,
       "height": 256,
@@ -1725,44 +1752,53 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
         "scaleX": 0.4444444444444444,
-        "scaleY": 0.4419889502762431,
+        "scaleY": 0.44329896907216493,
         "width": 96,
-        "height": 80,
+        "height": 86,
         "offset": {
           "x": 80,
-          "y": 112
+          "y": 106
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
-          1038,
+          1035,
           527,
-          1258,
-          712
+          1255,
+          725
         ],
         "bounds": {
-          "x": 1040,
+          "x": 1037,
           "y": 529,
           "width": 216,
-          "height": 181
+          "height": 194
         },
         "originalWidth": 216,
-        "originalHeight": 181,
+        "originalHeight": 194,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1179,
+              1147,
               531
             ]
           ],
@@ -1772,6 +1808,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1791,6 +1836,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-improvised-cannon-emplacement.png",
       "width": 256,
       "height": 256,
@@ -1800,45 +1846,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.41025641025641024,
-        "scaleY": 0.41089108910891087,
+        "scaleX": 0.44651162790697674,
+        "scaleY": 0.44751381215469616,
         "width": 96,
-        "height": 83,
+        "height": 81,
         "offset": {
           "x": 80,
-          "y": 109
+          "y": 111
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1284,
-          517,
-          1522,
-          723
+          1289,
+          530,
+          1508,
+          715
         ],
         "bounds": {
-          "x": 1286,
-          "y": 519,
-          "width": 234,
-          "height": 202
+          "x": 1291,
+          "y": 532,
+          "width": 215,
+          "height": 181
         },
-        "originalWidth": 234,
-        "originalHeight": 202,
+        "originalWidth": 215,
+        "originalHeight": 181,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1483,
-              521
+              1329,
+              534
             ]
           ],
           "fringePixels": 2
@@ -1847,6 +1902,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1866,6 +1930,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-bottling-conveyor.png",
       "width": 256,
       "height": 256,
@@ -1875,45 +1940,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4343891402714932,
-        "scaleY": 0.43333333333333335,
+        "scaleX": 0.41025641025641024,
+        "scaleY": 0.41317365269461076,
         "width": 96,
-        "height": 91,
+        "height": 69,
         "offset": {
           "x": 80,
-          "y": 101
+          "y": 123
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
-          19,
-          752,
-          244,
-          966
+          24,
+          785,
+          262,
+          956
         ],
         "bounds": {
-          "x": 21,
-          "y": 754,
-          "width": 221,
-          "height": 210
+          "x": 26,
+          "y": 787,
+          "width": 234,
+          "height": 167
         },
-        "originalWidth": 221,
-        "originalHeight": 210,
+        "originalWidth": 234,
+        "originalHeight": 167,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              170,
-              756
+              190,
+              789
             ]
           ],
           "fringePixels": 2
@@ -1922,6 +1996,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -1941,6 +2024,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-brewing-vat.png",
       "width": 256,
       "height": 256,
@@ -1950,45 +2034,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4873096446700508,
-        "scaleY": 0.48878923766816146,
+        "scaleX": 0.4507042253521127,
+        "scaleY": 0.45021645021645024,
         "width": 96,
-        "height": 109,
+        "height": 104,
         "offset": {
           "x": 80,
-          "y": 83
+          "y": 88
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          289,
-          739,
-          490,
-          966
+          293,
+          743,
+          510,
+          978
         ],
         "bounds": {
-          "x": 291,
-          "y": 741,
-          "width": 197,
-          "height": 223
+          "x": 295,
+          "y": 745,
+          "width": 213,
+          "height": 231
         },
-        "originalWidth": 197,
-        "originalHeight": 223,
+        "originalWidth": 213,
+        "originalHeight": 231,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              381,
-              743
+              354,
+              747
             ]
           ],
           "fringePixels": 2
@@ -1997,6 +2090,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2016,6 +2118,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-pipe-valve-cluster.png",
       "width": 256,
       "height": 256,
@@ -2025,45 +2128,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5052631578947369,
-        "scaleY": 0.5045871559633027,
+        "scaleX": 0.5133689839572193,
+        "scaleY": 0.5136363636363637,
         "width": 96,
-        "height": 110,
+        "height": 113,
         "offset": {
           "x": 80,
-          "y": 82
+          "y": 79
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
-          544,
-          746,
-          738,
-          968
+          558,
+          756,
+          749,
+          980
         ],
         "bounds": {
-          "x": 546,
-          "y": 748,
-          "width": 190,
-          "height": 218
+          "x": 560,
+          "y": 758,
+          "width": 187,
+          "height": 220
         },
-        "originalWidth": 190,
-        "originalHeight": 218,
+        "originalWidth": 187,
+        "originalHeight": 220,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              569,
-              750
+              583,
+              760
             ]
           ],
           "fringePixels": 2
@@ -2072,6 +2184,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2091,6 +2212,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-kennel-cage-section.png",
       "width": 256,
       "height": 256,
@@ -2100,49 +2222,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.43243243243243246,
-        "scaleY": 0.43243243243243246,
+        "scaleX": 0.4752475247524752,
+        "scaleY": 0.47738693467336685,
         "width": 96,
-        "height": 96,
+        "height": 95,
         "offset": {
           "x": 80,
-          "y": 96
+          "y": 97
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          786,
-          742,
-          1012,
-          968
+          790,
+          772,
+          996,
+          975
         ],
         "bounds": {
-          "x": 788,
-          "y": 744,
-          "width": 222,
-          "height": 222
+          "x": 792,
+          "y": 774,
+          "width": 202,
+          "height": 199
         },
-        "originalWidth": 222,
-        "originalHeight": 222,
+        "originalWidth": 202,
+        "originalHeight": 199,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              874,
-              746
-            ],
-            [
-              909,
-              805
+              803,
+              776
             ]
           ],
           "fringePixels": 2
@@ -2151,6 +2278,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2170,6 +2306,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-pet-reward-pedestal.png",
       "width": 256,
       "height": 256,
@@ -2179,45 +2316,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.5783132530120482,
-        "scaleY": 0.5792349726775956,
+        "scaleX": 0.5217391304347826,
+        "scaleY": 0.5224719101123596,
         "width": 96,
-        "height": 106,
+        "height": 93,
         "offset": {
           "x": 80,
-          "y": 86
+          "y": 99
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
-          1066,
-          775,
-          1236,
-          962
+          1051,
+          788,
+          1239,
+          970
         ],
         "bounds": {
-          "x": 1068,
-          "y": 777,
-          "width": 166,
-          "height": 183
+          "x": 1053,
+          "y": 790,
+          "width": 184,
+          "height": 178
         },
-        "originalWidth": 166,
-        "originalHeight": 183,
+        "originalWidth": 184,
+        "originalHeight": 178,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1175,
-              779
+              1176,
+              792
             ]
           ],
           "fringePixels": 2
@@ -2226,6 +2372,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     },
     {
@@ -2245,6 +2400,7 @@
         "art-adaptation"
       ],
       "walkable": false,
+      "squareLayout": "prop",
       "file": "components/industry-menagerie-steel-arena-gate.png",
       "width": 256,
       "height": 256,
@@ -2254,45 +2410,54 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "preserve-aspect",
+        "sizing": "native-square-prop",
         "resampling": "lanczos",
-        "scaleX": 0.4304932735426009,
-        "scaleY": 0.4297520661157025,
+        "scaleX": 0.4485981308411215,
+        "scaleY": 0.4474885844748858,
         "width": 96,
-        "height": 104,
+        "height": 98,
         "offset": {
           "x": 80,
-          "y": 88
+          "y": 94
+        },
+        "placement": {
+          "kind": "prop",
+          "points": [
+            [
+              128,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/dungeon-after-dark/industry-menagerie.png",
-        "sha256": "5eb13ea47ca03292b6b0a2f9a0bef084cc9fef55bf03e251d41e1ddfb460cabc",
+        "sha256": "1853bb80c20b855e27ad38573d3513b30710b4a517f88636e6218052b18ee6e8",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
         "sourceBox": [
           1288,
-          733,
-          1515,
-          979
+          744,
+          1506,
+          967
         ],
         "bounds": {
           "x": 1290,
-          "y": 735,
-          "width": 223,
-          "height": 242
+          "y": 746,
+          "width": 214,
+          "height": 219
         },
-        "originalWidth": 223,
-        "originalHeight": 242,
+        "originalWidth": 214,
+        "originalHeight": 219,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1483,
-              737
+              1316,
+              748
             ]
           ],
           "fringePixels": 2
@@ -2301,6 +2466,15 @@
           "x": 0.5,
           "y": 1
         }
+      },
+      "placement": {
+        "kind": "prop",
+        "points": [
+          [
+            128,
+            192
+          ]
+        ]
       }
     }
   ],

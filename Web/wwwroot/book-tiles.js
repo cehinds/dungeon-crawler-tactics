@@ -8,6 +8,14 @@ const imageCacheLimit = 96;
 const asArray = value => Array.isArray(value) ? value : value == null ? [] : [value];
 const words = value => String(value ?? '').replaceAll('_', ' ').replaceAll('-', ' ');
 const resolve = (path, base = catalogURL) => new URL(path, base).href;
+// Stable content revisions prevent previously viewed tiles surviving a redraw in cache.
+function revisedURL(path, base, metadata) {
+  let hash = 2166136261;
+  for (const character of JSON.stringify(metadata)) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
+  const url = new URL(path, base); url.searchParams.set('v', (hash >>> 0).toString(16)); return url.href;
+}
+function componentURL(asset, manifestURL) { return revisedURL(asset.file, manifestURL, [asset.source, asset.derived]); }
+
 
 function element(tag, className, content) {
   const node = document.createElement(tag);
@@ -22,7 +30,7 @@ function link(text, href, download = false) {
   return node;
 }
 async function fetchJSON(url) {
-  const response = await fetch(url);
+  const response = await fetch(url, { cache: 'no-cache' });
   if (!response.ok) throw new Error(`The library returned HTTP ${response.status}. Please try again.`);
   return response.json();
 }
@@ -105,7 +113,7 @@ function renderTabs() {
     const tab = element('button', 'style-tab'); tab.type = 'button'; tab.role = 'tab'; tab.id = `tab-${style.id}`;
     tab.setAttribute('aria-controls', 'collection'); tab.setAttribute('aria-selected', String(style.id === state.style)); tab.tabIndex = style.id === state.style ? 0 : -1;
     tab.append(element('span', 'tab-number', String(index + 1).padStart(2, '0')));
-    const copy = element('span', 'tab-copy'); copy.append(element('span', 'tab-title', style.title), element('span', 'tab-description', `${style.projection} · ${style.tileWidth} × ${style.tileHeight}`)); tab.append(copy);
+    const copy = element('span', 'tab-copy'); copy.append(element('span', 'tab-title', style.title), element('span', 'tab-description', `${style.projection === 'orthogonal' ? 'Square grid' : 'Isometric'} · ${style.tileWidth} × ${style.tileHeight}`)); tab.append(copy);
     tab.addEventListener('click', () => changeStyle(style.id));
     tab.addEventListener('keydown', event => {
       const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End']; if (!keys.includes(event.key)) return;
@@ -150,7 +158,7 @@ function imageFor(url) {
 function renderTiles(manifest, manifestURL) {
   $('tile-grid').replaceChildren(...manifest.assets.map(asset => {
     const card = element('article', 'tile-card');
-    const url = resolve(asset.file, manifestURL);
+    const url = componentURL(asset, manifestURL);
     const preview = link('', url, true); preview.className = 'tile-image checkerboard'; preview.setAttribute('aria-label', `Download ${asset.label} PNG`);
     // Zoom to the declared visible export rectangle; downloads retain the full canvas.
     const namespace = 'http://www.w3.org/2000/svg';
@@ -188,14 +196,14 @@ async function loadKit() {
     if (!manifest) { manifest = await fetchJSON(manifestURL); if (!Array.isArray(manifest.assets) || !manifest.assets.length) throw new Error('This kit manifest contains no tile assets.'); manifestCache.set(manifestURL, manifest); }
     if (request !== state.request) return;
     state.manifestURL = manifestURL;
-    $('zip-download').href = resolve(variant.download); $('manifest-download').href = manifestURL;
-    $('contact-sheet').href = resolve(variant.contactSheet);
+    $('zip-download').href = revisedURL(variant.download, catalogURL, manifest); $('manifest-download').href = revisedURL(manifestURL, catalogURL, manifest);
+    $('contact-sheet').href = revisedURL(variant.contactSheet, catalogURL, manifest);
     $('zip-download').setAttribute('aria-label', `Download ${kit.title}, ${selectedStyle().title}, ZIP`);
     const grid = manifest.grid || selectedStyle();
-    $('tile-spec').textContent = `${manifest.assets.length} separate transparent PNGs · 256 × 256 canvas · anchor (128, 192) · ${words(grid.projection)} ${grid.tileWidth} × ${grid.tileHeight} grid`;
+    $('tile-spec').textContent = `${manifest.assets.length} separate transparent PNGs · 256 × 256 canvas · anchor (128, 192) · ${grid.tileWidth} × ${grid.tileHeight} ${grid.projection === 'orthogonal' ? 'square' : 'isometric'} grid`;
     renderTiles(manifest, manifestURL);
     document.querySelector('.kit-downloads').hidden = false;
-    const loaded = await Promise.all(manifest.assets.map(async asset => [asset.id, await imageFor(resolve(asset.file, manifestURL))]));
+    const loaded = await Promise.all(manifest.assets.map(async asset => [asset.id, await imageFor(componentURL(asset, manifestURL))]));
     if (request !== state.request) return;
     state.manifest = manifest; state.images = new Map(loaded);
     $('asset-status').textContent = `${manifest.assets.length} pieces · floors, walls, doorways, stairs and environment props`;
