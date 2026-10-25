@@ -10,7 +10,10 @@ const {nativeProject,nativePick,serializeNativeVisuals,validateNativeVisuals,nat
 const roomURL=moduleURL(await read('Web/wwwroot/room-kit.js'));
 const {generateDungeon,getPlayableMap}=await import(moduleURL((await read('Web/wwwroot/procedural-map.js')).replace(/(['"])\.\/room-kit\.js\1/g,JSON.stringify(roomURL))));
 const edgeURL=moduleURL(await read('Web/wwwroot/tile-edge-tags.js'));
-const {buildArtScene}=await import(moduleURL((await read('Web/wwwroot/generator-art.js')).replace(/(['"])\.\/tile-edge-tags\.js\1/g,JSON.stringify(edgeURL))));
+const solverURL=moduleURL((await read('Web/wwwroot/tile-edge-solver.js')).replace(/(['"])\.\/tile-edge-tags\.js\1/g,JSON.stringify(edgeURL)));
+const {buildArtScene}=await import(moduleURL((await read('Web/wwwroot/generator-art.js'))
+  .replace(/(['"])\.\/tile-edge-tags\.js\1/g,JSON.stringify(edgeURL))
+  .replace(/(['"])\.\/tile-edge-solver\.js\1/g,JSON.stringify(solverURL))));
 const kit=JSON.parse(await read('Web/wwwroot/assets/room-kit/manifest.json'));
 const rules=JSON.parse(await read('Web/wwwroot/assets/map-generation-rules.json'));
 const catalog=JSON.parse(await read('Web/wwwroot/assets/book-tiles/catalog.json'));

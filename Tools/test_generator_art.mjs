@@ -9,7 +9,8 @@ const kitURL = moduleURL(await read('Web/wwwroot/room-kit.js'));
 const { generateDungeon } = await import(moduleURL((await read('Web/wwwroot/procedural-map.js')).replace(/['"]\.\/room-kit\.js['"]/, JSON.stringify(kitURL))));
 const edgeURL = moduleURL(await read('Web/wwwroot/tile-edge-tags.js'));
 const { validateFloorConnections } = await import(edgeURL);
-const { buildArtScene, visibleSceneCorners, environmentMood } = await import(moduleURL((await read('Web/wwwroot/generator-art.js')).replace(/['\"]\.\/tile-edge-tags\.js['\"]/, JSON.stringify(edgeURL))));
+const solverURL = moduleURL((await read('Web/wwwroot/tile-edge-solver.js')).replace(/['"]\.\/tile-edge-tags\.js['"]/, JSON.stringify(edgeURL)));
+const { buildArtScene, visibleSceneCorners, environmentMood } = await import(moduleURL((await read('Web/wwwroot/generator-art.js')).replace(/['\"]\.\/tile-edge-tags\.js['\"]/, JSON.stringify(edgeURL)).replace(/['"]\.\/tile-edge-solver\.js['"]/, JSON.stringify(solverURL))));
 const manifest = JSON.parse(await read('Web/wwwroot/assets/room-kit/manifest.json'));
 const catalog = JSON.parse(await read('Web/wwwroot/assets/book-tiles/catalog.json'));
 const rules = JSON.parse(await read('Web/wwwroot/assets/map-generation-rules.json'));
@@ -34,12 +35,33 @@ for (const kit of catalog.kits) {
       const scene = buildArtScene(room, art, true);
       if (scenes === 0) {
         const broken = structuredClone(art);
-        for (const tile of broken.manifest.assets.filter(asset => asset.role === 'ground')) tile.edges.east = ['join.wall'];
-        assert.throws(() => buildArtScene(room, broken, true), /Incompatible floor edges/, 'Bad visual seams prevent map generation');
+        for (const tile of broken.manifest.assets.filter(asset => asset.role === 'ground')) tile.edges = { north: ['join.manual'], east: ['join.manual'], south: ['join.manual'], west: ['join.manual'] };
+        assert.throws(() => buildArtScene(room, broken, true), /unsatisfiable/, 'Bad visual seams prevent map generation');
+        const mixed = structuredClone(art);
+        const firstFloors = mixed.manifest.assets.filter(asset => asset.role === 'ground').slice(0, 4);
+        for (const side of ['north', 'east', 'south', 'west']) firstFloors[1].edges[side] = ['join.alternative'];
+        const repaired = buildArtScene(room, mixed, true);
+        assert.deepEqual(validateFloorConnections(repaired.floor), [], 'Satisfiable material mismatch is fitted');
+        assert(repaired.edgeFit.adjustedTiles > 0, 'Fitting reports changed floor pieces');
+        let changedLegend = false;
+        for (const style of repaired.roomStyles) {
+          const counts = new Map();
+          for (const piece of repaired.floor) {
+            const x = piece.px / 128, y = piece.py / 128;
+            const region = style.region;
+            if (x < region.x || x >= region.x + region.width || y < region.y || y >= region.y + region.height) continue;
+            counts.set(piece.asset.id, (counts.get(piece.asset.id) || 0) + 1);
+          }
+          const dominant = [...counts].sort((a,b)=>b[1]-a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))[0];
+          if (dominant) assert.equal(style.asset.id, dominant[0], 'Legend shows the dominant fitted material');
+          if (style.asset.id !== firstFloors[style.index % firstFloors.length].id) changedLegend = true;
+        }
+        assert(changedLegend, 'Custom connectors change an actual legend material');
         const missing = structuredClone(art);
         for (const tile of missing.manifest.assets.filter(asset => asset.role === 'ground')) delete tile.edges;
         assert.throws(() => buildArtScene(room, missing, true), /edge metadata/, 'Missing metadata fails clearly');
       }
+      assert.equal(scene.edgeFit.adjustedTiles, 0, 'Existing compatible art preferences stay unchanged');
       assert.deepEqual(validateFloorConnections(scene.floor), [], 'Generated floors have compatible visual seams');
       const floorCells = new Set(scene.floor.map(p => key({ x: p.px / 128, y: p.py / 128 })));
       assert.equal(floorCells.size, scene.floor.length, 'No duplicate floor cells');

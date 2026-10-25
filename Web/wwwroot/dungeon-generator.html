@@ -140,6 +140,10 @@
 <button id="retry" type="button" hidden>Try again</button>
 </div>
 <span class="map-corner">ZOOM IN TO EXPLORE</span>
+<div id="connection-controls" class="connection-controls" hidden>
+<span id="connection-summary" role="status"></span>
+<button id="hide-connections" type="button">Hide connections</button>
+</div>
 </div>
 <div class="map-info">
 <div class="legend">
@@ -228,6 +232,9 @@
 </div>
 <details class="edge-inspector" id="edge-inspector">
 <summary>Tile edge tags <span aria-hidden="true">+</span></summary>
+<button id="show-connections" type="button" disabled>Inspect connections on the map</button>
+<p class="field-note">Green marks show matching floor and wall edges. Select a floor tile for details. Keyboard: arrows select a cell, Enter inspects it, Escape hides connections.</p>
+<p id="edge-cell-summary" class="edge-cell-summary" role="status">Library component · inspection only</p>
 <label for="edge-asset">Inspect a component</label>
 <select id="edge-asset"></select>
 <label for="edge-rotation">Inspect its rotation</label>

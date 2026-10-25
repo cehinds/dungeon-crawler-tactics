@@ -28,8 +28,8 @@ export function sharedEdgeCompatibility(a, side, b, rotations = {}) {
   const compatible = !ignored && connector !== 'join.manual' && neighborConnector !== 'join.manual' && connector === neighborConnector;
   return { compatible, ignored, reason: ignored ? 'overlay' : compatible ? 'matching connectors' : connector === 'join.manual' || neighborConnector === 'join.manual' ? 'manual connection requires review' : 'different connectors', tags, neighborTags };
 }
-export function validateFloorConnections(floor) {
-  const cells = new Map(), conflicts = [];
+export function listFloorConnections(floor) {
+  const cells = new Map(), connections = [];
   for (const piece of floor) {
     if (piece.asset?.role !== 'ground') continue;
     const x = piece.px / 128, y = piece.py / 128, rotation = (piece.angle || 0) / (Math.PI / 2);
@@ -37,6 +37,7 @@ export function validateFloorConnections(floor) {
     const quarterTurns = Math.round(rotation);
     if (Math.abs(rotation - quarterTurns) > 1e-8) throw new Error('Floor seam validation requires quarter-turn rotations.');
     edgeTagsForRotation(piece.asset, quarterTurns);
+    if (cells.has(`${x},${y}`)) throw new Error('Floor seam validation found duplicate floor cells.');
     cells.set(`${x},${y}`, { piece, x, y, quarterTurns });
   }
   for (const { piece, x, y, quarterTurns } of cells.values()) {
@@ -44,8 +45,12 @@ export function validateFloorConnections(floor) {
       const neighbor = cells.get(`${x + dx},${y + dy}`);
       if (!neighbor) continue;
       const result = sharedEdgeCompatibility(piece.asset, side, neighbor.piece.asset, { a: quarterTurns, b: neighbor.quarterTurns });
-      if (!result.compatible && !result.ignored) conflicts.push({ x, y, side, neighborX: neighbor.x, neighborY: neighbor.y, tags: result.tags, neighborTags: result.neighborTags });
+      connections.push({ x, y, side, neighborX: neighbor.x, neighborY: neighbor.y, ...result });
     }
   }
-  return conflicts;
+  return connections;
+}
+export function validateFloorConnections(floor) {
+  return listFloorConnections(floor).filter(result => !result.compatible && !result.ignored)
+    .map(({ x, y, side, neighborX, neighborY, tags, neighborTags }) => ({ x, y, side, neighborX, neighborY, tags, neighborTags }));
 }

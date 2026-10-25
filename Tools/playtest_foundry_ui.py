@@ -43,6 +43,7 @@ def main():
         page.goto(args.url.rstrip('/') + '/dungeon-generator.html')
         ready(page)
         assert 'Dungeon Foundry' in page.title()
+        initial_map = export_map(page, temporary)
         page.locator('#open-info').click()
         page.locator('#edge-inspector summary').click()
         wall_id = page.evaluate("""async () => {
@@ -55,6 +56,58 @@ def main():
         assert page.locator('#edge-sides [data-side="east"] code').all_text_contents() == ['join.exterior']
         assert 'floor edges verified' in page.locator('#edge-check').inner_text()
         page.locator('#close-info').click()
+        original_pixels = page.locator('#map').evaluate('canvas=>canvas.toDataURL()')
+        page.locator('#open-info').click()
+        page.locator('#show-connections').click()
+        page.wait_for_function("document.activeElement.id === 'map'")
+        assert page.locator('#connection-controls').is_visible()
+        assert page.locator('#map').evaluate('canvas=>canvas.toDataURL()') != original_pixels
+        # The toolbar inspector must synchronize a map selection even when the
+        # previous catalog inspection was a different component and rotation.
+        page.locator('#open-info').click()
+        assert 'Placed tile' in page.locator('#edge-cell-summary').inner_text()
+        assert page.locator('#edge-asset').input_value() != wall_id
+        assert page.locator('#edge-rotation').input_value() == '0'
+        assert page.locator('#edge-sides .edge-match').count() == 4
+        page.keyboard.press('Escape')
+        page.locator('#map').focus()
+        page.keyboard.press('Enter')
+        assert 'Placed tile' in page.locator('#edge-cell-summary').inner_text()
+        assert page.locator('#edge-sides .edge-match').count() == 4
+        assert page.locator('#edge-rotation').input_value() == '0'
+        page.keyboard.press('Escape')
+        page.wait_for_function("document.activeElement.id === 'map'")
+        # Click an actual floor through every rotated camera; derive projected
+        # bounds from the exported scene, independently of the pointer handler.
+        for rotation in range(4):
+            point = page.evaluate("""async ({map, rotation}) => {
+                const {nativeSceneFromVisuals} = await import('./native-map-visuals.js');
+                const {visibleSceneCorners} = await import('./generator-art.js');
+                const manifest = await fetch(`assets/book-tiles/${map.visuals.styleId}/${map.visuals.kitId}/manifest.json`).then(r=>r.json());
+                const art = {manifest, images:new Map(manifest.assets.map(a=>[a.id,{}]))};
+                const scene = nativeSceneFromVisuals(map.visuals, art, map.width, map.height, map.tiles);
+                const c = Math.round(Math.cos(rotation*Math.PI/2)), s = Math.round(Math.sin(rotation*Math.PI/2));
+                const rotate = p => ({x:p.x*c-p.y*s, y:p.x*s+p.y*c});
+                const corners = visibleSceneCorners(scene).map(rotate);
+                const minX = Math.min(...corners.map(p=>p.x)), maxX = Math.max(...corners.map(p=>p.x));
+                const minY = Math.min(...corners.map(p=>p.y)), maxY = Math.max(...corners.map(p=>p.y));
+                const bounds = document.querySelector('#map').getBoundingClientRect();
+                const scale = Math.min((bounds.width-48)/(maxX-minX),(bounds.height-48)/(maxY-minY),1);
+                const floor = scene.floor.toSorted((a,b)=>
+                    Math.hypot(a.px-map.width*64,a.py-map.height*64)-Math.hypot(b.px-map.width*64,b.py-map.height*64))[0];
+                const p = rotate({x:floor.px,y:floor.py});
+                return {x:bounds.x+(bounds.width-(maxX-minX)*scale)/2+(p.x-minX)*scale,
+                    y:bounds.y+(bounds.height-(maxY-minY)*scale)/2+(p.y-minY)*scale,
+                    column:floor.px/128+1,row:floor.py/128+1};
+            }""", {'map': initial_map, 'rotation': rotation})
+            page.mouse.click(point['x'], point['y'])
+            assert page.locator('#edge-cell-summary').inner_text() == f"Placed tile · column {point['column']}, row {point['row']}"
+            assert page.locator('#edge-sides .edge-match').count() == 4
+            page.keyboard.press('Escape')
+            page.locator('#rotate-right').click()
+        page.locator('#hide-connections').click()
+        assert not page.locator('#connection-controls').is_visible()
+        assert page.locator('#map').evaluate('canvas=>canvas.toDataURL()') == original_pixels
         for width, height in [(1440, 900), (1280, 720), (768, 1024), (390, 844), (360, 640), (844, 390)]:
             page.set_viewport_size({'width': width, 'height': height})
             page.wait_for_function("""() => document.querySelector('#controls').parentElement.id ===
@@ -69,6 +122,16 @@ def main():
                 assert page.locator(f'#{name}-dialog').evaluate('dialog=>dialog.open')
                 page.keyboard.press('Escape')
                 assert page.evaluate('document.activeElement.id') == f'open-{name}'
+            page.locator('#open-info').click()
+            page.locator('#show-connections').click()
+            page.wait_for_function("document.activeElement.id === 'map'")
+            visible_in_viewport(page, '#hide-connections')
+            page.keyboard.press('Enter')
+            assert page.locator('#edge-sides .edge-match').count() == 4
+            page.keyboard.press('Escape')
+            page.wait_for_function("document.activeElement.id === 'map'")
+            page.keyboard.press('Escape')
+            assert not page.locator('#connection-controls').is_visible()
 
         page.set_viewport_size({'width': 390, 'height': 844})
         page.locator('#open-settings').click()
@@ -118,7 +181,7 @@ def main():
         page.wait_for_function("document.querySelector('#map').classList.contains('zoomed')")
         assert not errors, errors
         browser.close()
-    print('PASS six viewport layouts, visible primary actions, keyboard dialogs, phone settings, fixed/new generation, export, play cancellation, resize and wheel zoom.')
+    print('PASS six viewport layouts, visible primary actions, keyboard dialogs, phone settings, fixed/new generation, export, play cancellation, resize, wheel zoom, connection overlay and placed-tile picking across four rotations.')
 
 
 if __name__ == '__main__':

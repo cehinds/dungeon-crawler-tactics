@@ -1,6 +1,7 @@
 import { drawFloorLayer } from './tile-surface-renderer.js';
 import { serializeNativeVisuals } from './native-map-visuals.js';
 import { SIDES, edgeTagsForRotation } from './tile-edge-tags.js';
+import { EDGE_DIRECTIONS, sceneConnections, inspectPlacedTile, pickPreviewCell } from './tile-edge-preview.js';
 import { generateDungeon, getPlayableMap } from './procedural-map.js';
 import { fetchJSON, loadArtKit, buildArtScene, drawPiece, revisionURL, environmentMood, visibleSceneCorners } from './generator-art.js';
 const $ = id => document.getElementById(id), canvas = $('map'), ctx = canvas.getContext('2d');
@@ -8,6 +9,7 @@ const terrainTypes = [{ tag: 'surface.water', letter: 'W', label: 'Water', color
 const catalogURL = new URL('assets/book-tiles/catalog.json', location.href);
 let manifest, rules, catalog, room, playable, art, scene, rotation = 0, blueprint = false, artRequest = 0, artError = false, zoom = 1, pan = { x: 0, y: 0 }, generating = false, artBusy = false, generationNumber = 0;
 let layoutDirty = false, feedbackTimer;
+let showConnectionOverlay = false, selectedMapCell = null, camera, infoOpenedFromMap = false;
 function status(message, error = false) {
   $('status').textContent = message; $('status').classList.toggle('error', error);
   document.querySelectorAll('.dialog-error').forEach(node => node.remove());
@@ -43,6 +45,7 @@ function updateSummary() {
 function paletteLegend() {
   $('room-palettes').replaceChildren();
   if (!scene || !art) return;
+  selectedMapCell = null;
   for (const style of scene.roomStyles) {
     const row = document.createElement('div'); row.className = 'room-palette';
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'), image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
@@ -57,20 +60,52 @@ function paletteLegend() {
   renderEdgeInspector();
 }
 function renderEdgeInspector() {
+  const placed = selectedMapCell && inspectPlacedTile(scene, selectedMapCell.x, selectedMapCell.y);
+  if (placed) {
+    $('edge-asset').value = placed.piece.asset.id;
+    $('edge-rotation').value = String(((Math.round((placed.piece.angle || 0) / (Math.PI / 2)) % 4) + 4) % 4);
+  }
   const asset = art?.manifest.assets.find(item => item.id === $('edge-asset').value);
   if (!asset) return;
   const edges = edgeTagsForRotation(asset, Number($('edge-rotation').value));
+  $('edge-cell-summary').textContent = placed ? `Placed tile · column ${selectedMapCell.x + 1}, row ${selectedMapCell.y + 1}` : 'Library component · inspection only';
   $('edge-sides').replaceChildren(...SIDES.map(side => {
     const row = document.createElement('div'), heading = document.createElement('dt'), values = document.createElement('dd');
     row.dataset.side = side; heading.textContent = side[0].toUpperCase() + side.slice(1);
     for (const tag of edges[side]) { const chip = document.createElement('code'); chip.textContent = tag; values.append(chip); }
+    if (placed) {
+      const join = placed.edges.find(edge => edge.side === side), note = document.createElement('small');
+      note.className = join.compatible ? 'edge-match' : 'edge-unmatched';
+      note.textContent = join.compatible ? `✓ Matches ${join.kind === 'wall' ? 'wall' : 'neighboring floor'}` : join.reason;
+      values.append(note);
+    }
     row.append(heading, values); return row;
   }));
   const tags = Object.values(edges).flat();
   $('edge-note').textContent = tags.includes('join.manual') ? 'Manual placement: these edge directions need review before automatic joining.'
     : tags.includes('join.overlay') ? 'Overlay: this component sits on a floor and does not connect floor edges.'
     : 'Neighboring sides connect when their join tags match. Other tags describe the appearance or doorway state.';
-  $('edge-check').textContent = `Matching floor edges verified across ${scene.floor.length} floor tiles.`;
+  const fit = scene.edgeFit;
+  $('edge-check').textContent = fit
+    ? `Matching floor edges verified: ${fit.checkedJoins} floor joins and ${fit.checkedBoundaries} wall joins. ${fit.adjustedTiles} tiles adjusted, including ${fit.rotatedTiles} rotated.`
+    : `Matching floor edges verified across ${scene.floor.length} floor tiles.`;
+}
+function showConnections(enabled) {
+  showConnectionOverlay = enabled;
+  $('connection-controls').hidden = !enabled;
+  canvas.classList.toggle('inspecting', enabled);
+  if (enabled && !selectedMapCell) selectedMapCell = { ...(room.entrance || room.start) };
+  draw();
+}
+function inspectMapCell(cell) {
+  const placed = scene && inspectPlacedTile(scene, cell.x, cell.y);
+  if (!placed) { generationFeedback('Choose a floor tile to inspect its connections.'); return; }
+  selectedMapCell = cell;
+  $('edge-asset').value = placed.piece.asset.id;
+  $('edge-rotation').value = String(((Math.round((placed.piece.angle || 0) / (Math.PI / 2)) % 4) + 4) % 4);
+  renderEdgeInspector(); draw();
+  $('edge-inspector').open = true; infoOpenedFromMap = true;
+  $('info-dialog').showModal(); $('edge-cell-summary').scrollIntoView({ block: 'center' });
 }
 function randomSeed() {
   const values = new Uint32Array(2); crypto.getRandomValues(values);
@@ -102,6 +137,7 @@ function syncControls() {
   $('apply-settings').disabled = !manifest || pending;
   $('open-export').disabled = !room || pending;
   $('open-info').disabled = !room;
+  $('show-connections').disabled = !scene || pending;
   $('generate').setAttribute('aria-busy', String(generating));
   for (const id of ['play', 'confirm-play', 'map-json', 'png']) $(id).disabled = !nativeReady;
   for (const id of ['recipe', 'edit']) $(id).disabled = !room || pending;
@@ -188,6 +224,7 @@ function draw() {
   const padding = bounds.height < 280 ? 24 : 48;
   const scale = Math.max(.01, Math.min((bounds.width - padding) / (maxX - minX), (bounds.height - padding) / (maxY - minY), 1)) * zoom;
   const offsetX = (bounds.width - (maxX - minX) * scale) / 2 - minX * scale + pan.x, offsetY = (bounds.height - (maxY - minY) * scale) / 2 - minY * scale + pan.y;
+  camera = { scale, offsetX, offsetY, angle };
   const project = cell => { const p = rotate(cell.x * 128, cell.y * 128); return { x: offsetX + p.x * scale, y: offsetY + p.y * scale }; };
   ctx.save(); ctx.translate(offsetX, offsetY); ctx.scale(scale, scale); ctx.rotate(angle); ctx.imageSmoothingEnabled = $('art-style').value !== 'pocket-dungeon';
   if (blueprint) {
@@ -212,6 +249,17 @@ function draw() {
     ctx.strokeStyle = '#d2bd8ca6'; ctx.lineWidth = 1.1 / scale;
     scene.decorations.filter(piece => piece.kind === 'obstacle').forEach(piece => ctx.strokeRect(piece.px - 45, piece.py - 45, 90, 90));
     scene.decorations.forEach(piece => drawPiece(ctx, piece, art));
+  }
+  if (showConnectionOverlay && scene) {
+    const { connections } = sceneConnections(scene);
+    $('connection-summary').textContent = `${connections.filter(join => join.compatible).length} matching joins · select a tile`;
+    ctx.lineWidth = 2 / scale; ctx.lineCap = 'round';
+    for (const join of connections) {
+      const [dx, dy] = EDGE_DIRECTIONS[join.side], x = join.x * 128 + dx * 64, y = join.y * 128 + dy * 64;
+      ctx.strokeStyle = join.compatible ? '#8cf2ba' : '#ff8b7a'; ctx.beginPath();
+      ctx.moveTo(x - dy * 15, y + dx * 15); ctx.lineTo(x + dy * 15, y - dx * 15); ctx.stroke();
+    }
+    if (selectedMapCell) { ctx.strokeStyle = '#ffdb8d'; ctx.strokeRect(selectedMapCell.x * 128 - 60, selectedMapCell.y * 128 - 60, 120, 120); }
   }
   ctx.restore();
   // Screen-space labels remain readable while their cell corners rotate with the map.
@@ -258,13 +306,20 @@ function positionSettings() {
 }
 for (const name of ['settings', 'export', 'info']) {
   const dialog = $(`${name}-dialog`), opener = $(`open-${name}`);
-  opener.onclick = () => { dialog.querySelectorAll('.dialog-error').forEach(node => node.remove()); dialog.showModal(); };
+  opener.onclick = () => {
+    dialog.querySelectorAll('.dialog-error').forEach(node => node.remove());
+    if (name === 'info') renderEdgeInspector();
+    dialog.showModal();
+  };
   $(`close-${name}`).onclick = () => dialog.close();
   dialog.addEventListener('close', () => { if (opener.getClientRects().length) opener.focus(); });
 }
 compactViewport.addEventListener('change', positionSettings); positionSettings(); settingsFeedback();
-$('edge-asset').addEventListener('change', renderEdgeInspector);
-$('edge-rotation').addEventListener('change', renderEdgeInspector);
+$('edge-asset').addEventListener('change', () => { selectedMapCell = null; renderEdgeInspector(); draw(); });
+$('edge-rotation').addEventListener('change', () => { selectedMapCell = null; renderEdgeInspector(); draw(); });
+$('show-connections').onclick = () => { showConnections(true); infoOpenedFromMap = true; $('info-dialog').close(); };
+$('hide-connections').onclick = () => { showConnections(false); canvas.focus(); };
+$('info-dialog').addEventListener('close', () => { if (infoOpenedFromMap) { infoOpenedFromMap = false; canvas.focus(); } });
 $('apply-settings').onclick = () => { $('settings-dialog').close(); safely(() => generate()); };
 $('generate').onclick = () => safely(() => generate());
 $('reroll').onclick = () => { $('fixed-seed').checked = false; seedMode(); safely(() => generate({ fresh: true })); };
@@ -273,7 +328,18 @@ $('fixed-seed').addEventListener('change', seedMode);
 for (const id of ['width', 'height', 'layout', 'biome']) $(id).addEventListener('input', markLayoutChanged);
 for (const id of ['rooms', 'density']) $(id).oninput = () => { $(`${id}-value`).textContent = $(id).value + (id === 'density' ? '%' : ''); markLayoutChanged(); };
 for (const id of ['art-style', 'art-theme']) $(id).onchange = () => safely(updateArt);
-$('variety').onchange = () => { if (art && room) { scene = buildArtScene(room, art, $('variety').checked); exactVisualMap(room, playable, scene); paletteLegend(); draw(); syncControls(); } };
+$('variety').onchange = () => {
+  if (!art || !room) return;
+  const previous = room.visualAuthoring.varyRoomMaterials;
+  try {
+    const candidate = buildArtScene(room, art, $('variety').checked);
+    exactVisualMap(room, playable, candidate);
+    scene = candidate; paletteLegend(); draw(); syncControls();
+  } catch (error) {
+    $('variety').checked = previous;
+    status(error.message, true); generationFeedback(error.message, true);
+  }
+};
 $('square').onclick = () => setView(false); $('blueprint').onclick = () => setView(true);
 $('rotate-left').onclick = () => { rotation = (rotation + 3) % 4; draw(); }; $('rotate-right').onclick = () => { rotation = (rotation + 1) % 4; draw(); };
 function fitMap() { zoom = 1; pan = { x: 0, y: 0 }; draw(); }
@@ -283,13 +349,29 @@ canvas.addEventListener('wheel', event => {
   if (!room || event.ctrlKey) return;
   event.preventDefault(); zoomMap(event.deltaY < 0 ? 1.12 : 1 / 1.12);
 }, { passive: false });
-let drag;
-canvas.addEventListener('pointerdown', event => { if (zoom <= 1) return; drag = { x: event.clientX, y: event.clientY, panX: pan.x, panY: pan.y }; canvas.setPointerCapture(event.pointerId); canvas.classList.add('dragging'); });
-canvas.addEventListener('pointermove', event => { if (!drag) return; pan = { x: drag.panX + event.clientX - drag.x, y: drag.panY + event.clientY - drag.y }; draw(); });
+let drag, dragged = false;
+canvas.addEventListener('pointerdown', event => { dragged = false; if (zoom <= 1) return; drag = { x: event.clientX, y: event.clientY, panX: pan.x, panY: pan.y }; canvas.setPointerCapture(event.pointerId); canvas.classList.add('dragging'); });
+canvas.addEventListener('pointermove', event => { if (!drag) return; dragged ||= Math.hypot(event.clientX - drag.x, event.clientY - drag.y) > 5; pan = { x: drag.panX + event.clientX - drag.x, y: drag.panY + event.clientY - drag.y }; draw(); });
 function endDrag() { drag = null; canvas.classList.remove('dragging'); }
 canvas.addEventListener('pointerup', endDrag); canvas.addEventListener('pointercancel', endDrag);
+canvas.addEventListener('click', event => {
+  if (!showConnectionOverlay || dragged || !camera) return;
+  const bounds = canvas.getBoundingClientRect();
+  inspectMapCell(pickPreviewCell(event.clientX - bounds.left, event.clientY - bounds.top, camera));
+});
 canvas.addEventListener('keydown', event => {
-  if (event.key === '+' || event.key === '=') { event.preventDefault(); zoomMap(1.25); }
+  if (showConnectionOverlay && event.key === 'Escape') { event.preventDefault(); showConnections(false); }
+  else if (showConnectionOverlay && event.key === 'Enter') { event.preventDefault(); inspectMapCell(selectedMapCell || room.entrance || room.start); }
+  else if (showConnectionOverlay && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+    event.preventDefault();
+    const cell = selectedMapCell || room.entrance || room.start;
+    const dx = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0, dy = event.key === 'ArrowUp' ? -1 : event.key === 'ArrowDown' ? 1 : 0;
+    const cosine = Math.round(Math.cos(rotation * Math.PI / 2)), sine = Math.round(Math.sin(rotation * Math.PI / 2));
+    selectedMapCell = { x: Math.max(0, Math.min(room.width - 1, cell.x + dx * cosine + dy * sine)),
+      y: Math.max(0, Math.min(room.height - 1, cell.y - dx * sine + dy * cosine)) };
+    draw(); status(`Inspecting column ${selectedMapCell.x + 1}, row ${selectedMapCell.y + 1}. Press Enter for edge details.`);
+  }
+  else if (event.key === '+' || event.key === '=') { event.preventDefault(); zoomMap(1.25); }
   else if (event.key === '-') { event.preventDefault(); zoomMap(.8); }
   else if (event.key === 'Home') { event.preventDefault(); fitMap(); }
   else if (zoom > 1 && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) { event.preventDefault(); pan.x += event.key === 'ArrowLeft' ? 40 : event.key === 'ArrowRight' ? -40 : 0; pan.y += event.key === 'ArrowUp' ? 40 : event.key === 'ArrowDown' ? -40 : 0; draw(); }

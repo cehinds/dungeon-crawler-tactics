@@ -1,4 +1,5 @@
 import { validateFloorConnections } from './tile-edge-tags.js';
+import { fitFloorTiles } from './tile-edge-solver.js';
 // Native square art is a visual authoring layer. Runtime exports use the canonical room kit.
 export function revisionURL(path, base, metadata) {
   let hash = 2166136261;
@@ -45,7 +46,8 @@ export function buildArtScene(room, art, varied = true) {
   const solidProps = props.filter(asset => !/rug|carpet|threshold|stairwell|stairs|footprint|paving|floor|trail|mist|path/i.test(asset.label));
   const obstacles = solidProps.length ? solidProps : props;
   const walls = new Set(room.placements.filter(piece => piece.kind === 'wall').map(piece => key(piece.x, piece.y)));
-  const floor = [], structures = [], decorations = [], used = new Set();
+  let floor = [];
+  const boundaries = [], structures = [], decorations = [], used = new Set();
   const roomStyles = room.rooms.map((region, index) => ({ region, index, asset: floorAssets[varied ? index % floorAssets.length : 0] }));
   const owner = (x, y) => roomStyles.find(({ region }) => x >= region.x && x < region.x + region.width && y >= region.y && y < region.y + region.height);
   const add = (list, asset, x, y, angle = 0, kind = '') => { if (asset) list.push({ asset, px: x, py: y, angle, kind }); };
@@ -57,10 +59,27 @@ export function buildArtScene(room, art, varied = true) {
     const tile = patch ? floorAssets[(style.index + 1) % floorAssets.length] : base;
     add(floor, tile, x * 128, y * 128);
     const solid = (dx, dy) => x + dx < 0 || y + dy < 0 || x + dx >= room.width || y + dy >= room.height || walls.has(key(x + dx, y + dy));
+    for (const [side, dx, dy, asset, rotation] of [['north', 0, -1, north, 0], ['west', -1, 0, west, 0], ['east', 1, 0, west, 2], ['south', 0, 1, west, 3]]) {
+      if (solid(dx, dy) && asset) boundaries.push({ x, y, side, asset, rotation });
+    }
     if (solid(0, -1)) add(structures, north, x * 128, y * 128 - 64);
     if (solid(-1, 0)) add(structures, west, x * 128 - 64, y * 128);
     if (solid(1, 0)) add(structures, west, x * 128 + 64, y * 128, Math.PI);
     if (solid(0, 1)) add(structures, west, x * 128, y * 128 + 64, -Math.PI / 2);
+  }
+  const { floor: fittedFloor, ...edgeFit } = fitFloorTiles(floor, floorAssets, { seed: room.seed, boundaries });
+  floor = fittedFloor;
+  if (edgeFit.adjustedTiles) {
+    for (const style of roomStyles) {
+      const counts = new Map();
+      for (const piece of floor) {
+        if (owner(piece.px / 128, piece.py / 128) !== style) continue;
+        const entry = counts.get(piece.asset.id) || { asset: piece.asset, count: 0 };
+        entry.count++; counts.set(piece.asset.id, entry);
+      }
+      const dominant = [...counts.values()].sort((a, b) => b.count - a.count || (a.asset.id < b.asset.id ? -1 : a.asset.id > b.asset.id ? 1 : 0))[0];
+      if (dominant) style.asset = dominant.asset;
+    }
   }
   const conflicts = validateFloorConnections(floor);
   if (conflicts.length) {
@@ -97,7 +116,7 @@ export function buildArtScene(room, art, varied = true) {
   add(decorations, stairs, room.exit.x * 128, room.exit.y * 128, 0, 'exit');
   structures.sort((a, b) => a.py - b.py || a.px - b.px);
   decorations.sort((a, b) => a.py - b.py || a.px - b.px);
-  return { floor, structures, decorations, roomStyles, wallCells: walls };
+  return { floor, structures, decorations, roomStyles, wallCells: walls, edgeFit, edgeBoundaries: boundaries };
 }
 export function drawPiece(context, piece, art) {
   const image = art.images.get(piece.asset.id); if (!image) return;
