@@ -1,0 +1,62 @@
+name: Capture gameplay screenshots
+on:
+  push:
+    branches: ['screenshots/**']
+    paths:
+      - '.github/workflows/capture-screenshots.yml'
+      - 'Tools/capture_gameplay_screenshots.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read deployed art revision
+        id: art
+        run: python -c "import json,os;open(os.environ['GITHUB_OUTPUT'],'a').write('commit='+json.load(open('art-assets.lock.json'))['commit']+'\n')"
+      - uses: actions/checkout@v4
+        with:
+          repository: cehinds/AI-Art
+          ref: ${{ steps.art.outputs.commit }}
+          path: .art-source
+          sparse-checkout: |
+            dungeon-crawler-tactics/Web/wwwroot/assets/book-tiles/pocket-dungeon/starter-dungeon
+            dungeon-crawler-tactics/Web/wwwroot/assets/room-kit
+            dungeon-crawler-tactics/Web/wwwroot/assets/revamp
+            dungeon-crawler-tactics/Web/wwwroot/assets/directional
+            dungeon-crawler-tactics/Web/wwwroot/assets/forms
+            dungeon-crawler-tactics/Web/wwwroot/assets/bosses
+            dungeon-crawler-tactics/Web/wwwroot/assets/scenario-props
+            dungeon-crawler-tactics/Web/wwwroot/assets/expedition-enemies
+            dungeon-crawler-tactics/Web/wwwroot/assets/fonts
+            dungeon-crawler-tactics/Web/wwwroot/assets/house
+            dungeon-crawler-tactics/Web/wwwroot/assets/interface
+            dungeon-crawler-tactics/Web/wwwroot/assets/ui-kit
+            dungeon-crawler-tactics/Web/wwwroot/assets/signatures
+            dungeon-crawler-tactics/Web/wwwroot/assets/menu-concepts
+            dungeon-crawler-tactics/Web/wwwroot/assets/dungeon-stone
+      - name: Prepare game
+        run: |
+          cp -a .art-source/dungeon-crawler-tactics/Web/wwwroot/assets/. Web/wwwroot/assets/
+          dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
+          python -m pip install playwright==1.56.0
+      - name: Capture real gameplay
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/screenshot-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          python Tools/capture_gameplay_screenshots.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/game-screenshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gameplay-screenshots
+          path: /tmp/game-screenshots
+          retention-days: 7
