@@ -146,6 +146,8 @@ def main():
         page.locator("#confirm-play").click()
         ready_runtime(page, native=True)
         assert_exact(page.evaluate("window.dungeon.getView()"), expected)
+        assert page.locator("#screen-title").inner_text() == expected["label"]
+        assert "Defeat every enemy" in page.locator(".quest-tracker").inner_text()
         assert page.evaluate("window.dungeon.scene.getNativeVisuals()") == expected["visuals"], "Rendered pieces differ from the preview"
         saved = page.evaluate("window.dungeon.getSave().then(JSON.parse)")
         assert canonical_map(saved["customMap"]) == canonical_map(expected), "Native art must survive C# save export"
