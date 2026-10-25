@@ -25,6 +25,12 @@ The expanded art, export, and 93-variant browser review is complete: 31 kits, 93
 - Play/export wait for the selected native art to load, then carry the exact preview composition in optional presentation metadata.
 - [x] Added published-build browser regression coverage for new/fixed seeds, exact native art and terrain, one-time handoff, reload, failed-save retry and four pointer rotations. The linked workflow records execution results for each revision.
 
+## Tile edge metadata
+
+- [x] All 744 authored assets and 2,232 exported component records carry four-side tags; manifests and ZIPs match the inventory. PNG bytes are unchanged.
+- [x] Thirty exporter tests, the authored JSON Schema check, custom connector/rotation tests, and 558 generated-scene checks passed.
+- [x] Foundry rotation inspection and 24 library cards with four side lists passed browser checks.
+
 ## Publication and source audit
 
 - Publication is tracked by the [Pages deployment workflow](https://github.com/cehinds/dungeon-crawler-tactics/actions/workflows/deploy-pages.yml) after push to main.
@@ -34,7 +40,7 @@ The art lab's three whole-style ZIPs stream from the AI-Art branch; all three li
 
 ## Asset migration: passed
 
-- [x] The current game lock pins AI-Art commit `fbf58305bea542f7532ffc0e46bb63ad49a1eca0`; its main index contains 21,945 project files. Exact-pin hydration restored 17,516 missing files and verified the 4,429 already present; a subsequent `--check` verified all 21,945 files. The earlier focused seam-fix pin `8753a0061398b2a2169c2098315d26d943f214ff` passed `--check` and full 2,232-PNG reconstruction; the separate originals index tracks generation sources outside the game restore.
+- [x] The current game lock pins AI-Art commit `b2a02094de3f15a5ba8d81c01e8db4dbceb85626`; its main index contains 21,945 project files. Exact-pin hydration restored 17,516 missing files and verified the 4,429 already present; a subsequent `--check` verified all 21,945 files. The earlier focused seam-fix pin `8753a0061398b2a2169c2098315d26d943f214ff` passed `--check` and full 2,232-PNG reconstruction; the separate originals index tracks generation sources outside the game restore.
 - [x] All 20 focused asset-sync tests are included in the passing Python suite.
 
 In a new clone, run `python3 Tools/sync_art_assets.py` before testing or building. Python 3.10 or newer is required.

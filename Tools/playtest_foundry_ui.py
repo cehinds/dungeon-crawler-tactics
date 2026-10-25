@@ -43,6 +43,18 @@ def main():
         page.goto(args.url.rstrip('/') + '/dungeon-generator.html')
         ready(page)
         assert 'Dungeon Foundry' in page.title()
+        page.locator('#open-info').click()
+        page.locator('#edge-inspector summary').click()
+        wall_id = page.evaluate("""async () => {
+            const manifest = await fetch('assets/book-tiles/pocket-dungeon/starter-dungeon/manifest.json').then(r=>r.json());
+            return manifest.assets.find(asset=>asset.cell===6).id;
+        }""")
+        page.locator('#edge-asset').select_option(wall_id)
+        assert page.locator('#edge-sides [data-side="north"] code').all_text_contents() == ['join.exterior']
+        page.locator('#edge-rotation').select_option('1')
+        assert page.locator('#edge-sides [data-side="east"] code').all_text_contents() == ['join.exterior']
+        assert 'floor edges verified' in page.locator('#edge-check').inner_text()
+        page.locator('#close-info').click()
         for width, height in [(1440, 900), (1280, 720), (768, 1024), (390, 844), (360, 640), (844, 390)]:
             page.set_viewport_size({'width': width, 'height': height})
             page.wait_for_function("""() => document.querySelector('#controls').parentElement.id ===

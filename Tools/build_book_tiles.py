@@ -32,6 +32,7 @@ from zipfile import BadZipFile, ZipFile
 
 from PIL import Image, ImageDraw
 from book_tile_geometry import registered, native_square
+from tile_edge_tags import validate_edges
 
 from build_style_packs import (
     PackError, claim_region, digest, extract_cell, font, island_mask_metadata,
@@ -74,6 +75,7 @@ def read_inventory(docs=DOCS):
             require(isinstance(asset["id"], str) and SLUG.fullmatch(asset["id"]), "Unsafe asset ID")
             require(asset["id"] not in asset_ids, f"Duplicate asset ID: {asset['id']}")
             asset_ids.add(asset["id"])
+            validate_edges(asset)
             for field in ("renderWidth", "renderHeight", "orthogonalRenderWidth"):
                 if field != "renderWidth" and field not in asset:
                     continue
@@ -252,6 +254,7 @@ def validate_kit(directory, expected, sprites, style):
     require(files == archive_files(manifest) | {manifest["download"]}, f"{directory}: unexpected/missing outputs")
     fingerprints = set()
     for asset in manifest["assets"]:
+        validate_edges(asset)
         path = directory / asset["file"]
         with Image.open(path) as actual:
             require(actual.format == "PNG" and actual.mode == "RGBA" and actual.size == CANVAS,
@@ -290,6 +293,12 @@ def catalog_document(inventory, coverage, output, docs=DOCS):
             require(len(manifest["assets"]) == 24
                     and {asset["id"] for asset in manifest["assets"]} == {asset["id"] for asset in kit["assets"]},
                     f"{path}: stale authored asset inventory")
+            authored = {asset["id"]: asset for asset in kit["assets"]}
+            for asset in manifest["assets"]:
+                validate_edges(asset)
+                require(all(asset.get(field) == authored[asset["id"]].get(field)
+                            for field in ("edges", "edgeReview")),
+                        f"{path}: stale authored edge tags")
             source = docs / "sources" / style["id"] / f"{kit['id']}.png"
             require(source.is_file(), f"{path}: source atlas is missing")
             source_hash = digest(source)

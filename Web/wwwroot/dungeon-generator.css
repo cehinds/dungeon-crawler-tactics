@@ -1053,3 +1053,36 @@ dialog p {
   background:#3a2420;
   color:#ffd0bf
 }
+.edge-inspector {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 16px 0;
+  padding-bottom: 12px;
+}
+#info-dialog .dialog-heading {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #17232f;
+}
+.edge-sides {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.edge-sides > div {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+}
+.edge-sides dt {
+  color: var(--accent);
+  font-weight: 600;
+}
+.edge-sides dd { margin: 8px 0 0; }
+.edge-sides code {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+  color: var(--green);
+}

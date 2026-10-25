@@ -9,7 +9,8 @@ const moduleURL=source=>`data:text/javascript;base64,${Buffer.from(source).toStr
 const {nativeProject,nativePick,serializeNativeVisuals,validateNativeVisuals,nativeSceneFromVisuals}=await import(moduleURL(await read('Web/wwwroot/native-map-visuals.js')));
 const roomURL=moduleURL(await read('Web/wwwroot/room-kit.js'));
 const {generateDungeon,getPlayableMap}=await import(moduleURL((await read('Web/wwwroot/procedural-map.js')).replace(/(['"])\.\/room-kit\.js\1/g,JSON.stringify(roomURL))));
-const {buildArtScene}=await import(moduleURL(await read('Web/wwwroot/generator-art.js')));
+const edgeURL=moduleURL(await read('Web/wwwroot/tile-edge-tags.js'));
+const {buildArtScene}=await import(moduleURL((await read('Web/wwwroot/generator-art.js')).replace(/(['"])\.\/tile-edge-tags\.js\1/g,JSON.stringify(edgeURL))));
 const kit=JSON.parse(await read('Web/wwwroot/assets/room-kit/manifest.json'));
 const rules=JSON.parse(await read('Web/wwwroot/assets/map-generation-rules.json'));
 const catalog=JSON.parse(await read('Web/wwwroot/assets/book-tiles/catalog.json'));

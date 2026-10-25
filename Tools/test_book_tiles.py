@@ -28,6 +28,8 @@ class BookTileTests(unittest.TestCase):
                                 "role": "ground" if cell < 6 else "wall" if cell < 12 else "prop",
                                 "layer": "ground" if cell < 6 else "structures", "renderWidth": 96}
                                for cell in range(24)]}
+        for asset in self.kit["assets"]:
+            asset["edges"] = {side: ["join.floor"] for side in ("north", "east", "south", "west")}
         self.inventory = {"title": "Fixture tiles", "styles": self.styles,
                           "books": [{"id": 1, "title": "Book"}], "kits": [self.kit]}
         self.write_json(self.docs / "inventory.json", self.inventory)
@@ -74,6 +76,10 @@ class BookTileTests(unittest.TestCase):
         manifest = tiles.read_json(self.directory() / "manifest.json")
         self.assertEqual(manifest["grid"]["anchor"], {"x": 128, "y": 192})
         self.assertEqual(len(manifest["assets"]), 24)
+        self.assertEqual(manifest["assets"][0]["edges"], self.kit["assets"][0]["edges"])
+        with ZipFile(self.directory() / manifest["download"]) as archive:
+            self.assertEqual(json.loads(archive.read("manifest.json"))["assets"][0]["edges"],
+                             self.kit["assets"][0]["edges"])
         ground = manifest["assets"][0]
         wall = manifest["assets"][6]
         self.assertEqual((ground["derived"]["width"], ground["derived"]["height"]), (128, 128))
@@ -91,6 +97,66 @@ class BookTileTests(unittest.TestCase):
         self.assertEqual(self.run_export(check=True), 24)
         self.assertEqual(before, self.snapshot(self.output))
         self.assertEqual(sources_before, self.snapshot(self.docs))
+
+    def test_authored_edge_inventory_covers_all_kits(self):
+        inventory = tiles.read_inventory()
+        self.assertEqual(sum(len(kit["assets"]) for kit in inventory["kits"]), 744)
+        for kit in inventory["kits"]:
+            assets = {asset["cell"]: asset for asset in kit["assets"]}
+            for cell in range(4):
+                for tags in assets[cell]["edges"].values():
+                    self.assertEqual(tags, ["join.floor", "visual." + kit["id"]])
+            self.assertEqual(assets[6]["edges"], {
+                "north": ["join.exterior"], "east": ["join.wall"],
+                "south": ["join.floor"], "west": ["join.wall"]})
+            self.assertEqual(assets[7]["edges"], {
+                "north": ["join.wall"], "east": ["join.floor"],
+                "south": ["join.wall"], "west": ["join.exterior"]})
+            for cell, state in ((12, "open"), (13, "closed")):
+                self.assertEqual(assets[cell]["edges"]["north"], ["join.floor", "portal." + state])
+                self.assertEqual(assets[cell]["edges"]["south"], ["join.floor", "portal." + state])
+            for cell in (4, 5, 8, 9, 10, 11):
+                self.assertEqual(assets[cell]["edgeReview"], "manual")
+                self.assertTrue(all(tags == ["join.manual"] for tags in assets[cell]["edges"].values()))
+            for cell in range(14, 24):
+                self.assertTrue(all(tags == ["join.overlay"] for tags in assets[cell]["edges"].values()))
+
+    def test_custom_connector_roundtrips_without_code_changes(self):
+        asset = self.kit["assets"][0]
+        asset["edges"]["north"] = ["join.road", "visual.test-road"]
+        asset["edges"]["south"] = ["join.lava"]
+        self.write_json(self.docs / "inventory.json", self.inventory)
+        self.run_export()
+        manifest = tiles.read_json(self.directory() / "manifest.json")
+        self.assertEqual(manifest["assets"][0]["edges"], asset["edges"])
+        with ZipFile(self.directory() / manifest["download"]) as archive:
+            self.assertEqual(json.loads(archive.read("manifest.json"))["assets"][0]["edges"], asset["edges"])
+        self.run_export(check=True)
+
+    def test_invalid_authored_edges_are_rejected(self):
+        valid = self.kit["assets"][0]
+        cases = []
+        for edges in (None, {}, {"north": ["join.floor"]},
+                      dict(valid["edges"], up=["join.floor"]),
+                      dict(valid["edges"], north=[]),
+                      dict(valid["edges"], north=["join.floor", "join.floor"]),
+                      dict(valid["edges"], north=["join.floor", "join.wall"]),
+                      dict(valid["edges"], north=["join."]),
+                      dict(valid["edges"], north=["visual.test"]),
+                      dict(valid["edges"], north=["join.floor", "Visual.Test"]),
+                      dict(valid["edges"], north=["join.floor", 1]),
+                      dict(valid["edges"], north=["join.manual"])):
+            cases.append(dict(valid, edges=edges))
+        cases.append(dict(valid, edgeReview="manual"))
+        for asset in cases:
+            with self.subTest(edges=asset.get("edges"), review=asset.get("edgeReview")):
+                changed = copy.deepcopy(self.inventory)
+                changed["kits"][0]["assets"][0] = asset
+                self.write_json(self.docs / "inventory.json", changed)
+                with self.assertRaises(tiles.PackError):
+                    tiles.read_inventory(self.docs)
+        manual = dict(valid, edges={side: ["join.manual"] for side in valid["edges"]}, edgeReview="manual")
+        tiles.validate_edges(manual)
 
     def test_isometric_ground_and_reviewed_anchor(self):
         crop = self.docs / "crops/ink-and-lanterns.json"

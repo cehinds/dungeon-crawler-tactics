@@ -20,6 +20,8 @@ Starting a map launches a standalone encounter and replaces the active run, so e
 
 The generator is browser authoring JavaScript. The shared C# runtime validates and persists optional native visual metadata for custom maps; the browser renderer uses the same orthogonal projection and piece positions as the preview. Older custom maps without this metadata keep their existing isometric presentation. The art metadata is presentation-only: canonical game tiles continue to decide collision and hazards. Style, kit, and floor-variety settings remain in the editable recipe; exported playable JSON carries the specific rendered pieces and style/kit identifiers. No Unity scene or Unity Tile integration is implied by the preview.
 
+The preview also inspects authored tile-edge tags and validates neighboring full-floor seams before export or Play. See [Tile edge tags](Tile-Edges.md) for the format, manual-review and overlay markers, and library workflow.
+
 ## Reproducibility and implementation
 
 Keep the seed, layout, gameplay biome, art style, environment theme, dimensions, density, and requested room count with a recipe. Preview rotation does not change the generated layout. Changes to the generator or its asset library can affect later regeneration; keep the recipe and playable JSON when an exact authored result matters.

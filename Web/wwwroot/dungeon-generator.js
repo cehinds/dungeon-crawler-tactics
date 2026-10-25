@@ -1,5 +1,6 @@
 import { drawFloorLayer } from './tile-surface-renderer.js';
 import { serializeNativeVisuals } from './native-map-visuals.js';
+import { SIDES, edgeTagsForRotation } from './tile-edge-tags.js';
 import { generateDungeon, getPlayableMap } from './procedural-map.js';
 import { fetchJSON, loadArtKit, buildArtScene, drawPiece, revisionURL, environmentMood, visibleSceneCorners } from './generator-art.js';
 const $ = id => document.getElementById(id), canvas = $('map'), ctx = canvas.getContext('2d');
@@ -50,6 +51,26 @@ function paletteLegend() {
     const copy = document.createElement('span'), title = document.createElement('strong'), label = document.createElement('span');
     title.textContent = `Room ${style.index + 1}`; label.textContent = style.asset.label; copy.append(title, label); row.append(svg, copy); $('room-palettes').append(row);
   }
+  const selected = $('edge-asset').value;
+  $('edge-asset').replaceChildren(...art.manifest.assets.map(asset => new Option(asset.label, asset.id)));
+  if (art.manifest.assets.some(asset => asset.id === selected)) $('edge-asset').value = selected;
+  renderEdgeInspector();
+}
+function renderEdgeInspector() {
+  const asset = art?.manifest.assets.find(item => item.id === $('edge-asset').value);
+  if (!asset) return;
+  const edges = edgeTagsForRotation(asset, Number($('edge-rotation').value));
+  $('edge-sides').replaceChildren(...SIDES.map(side => {
+    const row = document.createElement('div'), heading = document.createElement('dt'), values = document.createElement('dd');
+    row.dataset.side = side; heading.textContent = side[0].toUpperCase() + side.slice(1);
+    for (const tag of edges[side]) { const chip = document.createElement('code'); chip.textContent = tag; values.append(chip); }
+    row.append(heading, values); return row;
+  }));
+  const tags = Object.values(edges).flat();
+  $('edge-note').textContent = tags.includes('join.manual') ? 'Manual placement: these edge directions need review before automatic joining.'
+    : tags.includes('join.overlay') ? 'Overlay: this component sits on a floor and does not connect floor edges.'
+    : 'Neighboring sides connect when their join tags match. Other tags describe the appearance or doorway state.';
+  $('edge-check').textContent = `Matching floor edges verified across ${scene.floor.length} floor tiles.`;
 }
 function randomSeed() {
   const values = new Uint32Array(2); crypto.getRandomValues(values);
@@ -242,6 +263,8 @@ for (const name of ['settings', 'export', 'info']) {
   dialog.addEventListener('close', () => { if (opener.getClientRects().length) opener.focus(); });
 }
 compactViewport.addEventListener('change', positionSettings); positionSettings(); settingsFeedback();
+$('edge-asset').addEventListener('change', renderEdgeInspector);
+$('edge-rotation').addEventListener('change', renderEdgeInspector);
 $('apply-settings').onclick = () => { $('settings-dialog').close(); safely(() => generate()); };
 $('generate').onclick = () => safely(() => generate());
 $('reroll').onclick = () => { $('fixed-seed').checked = false; seedMode(); safely(() => generate({ fresh: true })); };

@@ -7,7 +7,9 @@ const read = path => readFile(resolve(root, path), 'utf8');
 const moduleURL = source => `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`;
 const kitURL = moduleURL(await read('Web/wwwroot/room-kit.js'));
 const { generateDungeon } = await import(moduleURL((await read('Web/wwwroot/procedural-map.js')).replace(/['"]\.\/room-kit\.js['"]/, JSON.stringify(kitURL))));
-const { buildArtScene, visibleSceneCorners, environmentMood } = await import(moduleURL(await read('Web/wwwroot/generator-art.js')));
+const edgeURL = moduleURL(await read('Web/wwwroot/tile-edge-tags.js'));
+const { validateFloorConnections } = await import(edgeURL);
+const { buildArtScene, visibleSceneCorners, environmentMood } = await import(moduleURL((await read('Web/wwwroot/generator-art.js')).replace(/['\"]\.\/tile-edge-tags\.js['\"]/, JSON.stringify(edgeURL))));
 const manifest = JSON.parse(await read('Web/wwwroot/assets/room-kit/manifest.json'));
 const catalog = JSON.parse(await read('Web/wwwroot/assets/book-tiles/catalog.json'));
 const rules = JSON.parse(await read('Web/wwwroot/assets/map-generation-rules.json'));
@@ -30,6 +32,15 @@ for (const kit of catalog.kits) {
     for (const layout of ['chambers', 'cavern', 'hall']) for (const size of [6, 16]) {
       const room = generateDungeon(manifest, { seed: `preview-${size}`, width: size, height: size === 6 ? 6 : 12, density: .4, roomCount: 6, layout, biome: 'sewer' }, rules);
       const scene = buildArtScene(room, art, true);
+      if (scenes === 0) {
+        const broken = structuredClone(art);
+        for (const tile of broken.manifest.assets.filter(asset => asset.role === 'ground')) tile.edges.east = ['join.wall'];
+        assert.throws(() => buildArtScene(room, broken, true), /Incompatible floor edges/, 'Bad visual seams prevent map generation');
+        const missing = structuredClone(art);
+        for (const tile of missing.manifest.assets.filter(asset => asset.role === 'ground')) delete tile.edges;
+        assert.throws(() => buildArtScene(room, missing, true), /edge metadata/, 'Missing metadata fails clearly');
+      }
+      assert.deepEqual(validateFloorConnections(scene.floor), [], 'Generated floors have compatible visual seams');
       const floorCells = new Set(scene.floor.map(p => key({ x: p.px / 128, y: p.py / 128 })));
       assert.equal(floorCells.size, scene.floor.length, 'No duplicate floor cells');
       for (const p of room.clearRoute) assert(floorCells.has(key(p)), 'Entire route has a visible floor');

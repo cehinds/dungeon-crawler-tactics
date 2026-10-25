@@ -226,6 +226,23 @@
 <p class="terrain-note">W / O / F mark playable water, oil and fire. Illustrated wet floors alone are decorative.</p>
 <div id="room-palettes" class="room-palettes" aria-label="Room floor materials">
 </div>
+<details class="edge-inspector" id="edge-inspector">
+<summary>Tile edge tags <span aria-hidden="true">+</span></summary>
+<label for="edge-asset">Inspect a component</label>
+<select id="edge-asset"></select>
+<label for="edge-rotation">Inspect its rotation</label>
+<select id="edge-rotation">
+<option value="0">0° · original orientation</option>
+<option value="1">90° clockwise</option>
+<option value="2">180°</option>
+<option value="3">270° clockwise</option>
+</select>
+<p class="field-note">This inspection does not rotate or change the map.</p>
+<dl id="edge-sides" class="edge-sides" aria-live="polite"></dl>
+<p id="edge-note" class="field-note"></p>
+<p id="edge-check" class="field-note"></p>
+<p class="field-note">Edge tags describe visual joins. Movement and hazards still follow the map’s terrain rules.</p>
+</details>
 <p class="adaptation-note">Play and playable JSON preserve this exact dungeon and its selected art. The room workshop uses the original editing kit with compatible layout and terrain rules.</p>
 </dialog>
 <dialog id="play-dialog" aria-labelledby="play-dialog-title">

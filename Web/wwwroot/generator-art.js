@@ -1,3 +1,4 @@
+import { validateFloorConnections } from './tile-edge-tags.js';
 // Native square art is a visual authoring layer. Runtime exports use the canonical room kit.
 export function revisionURL(path, base, metadata) {
   let hash = 2166136261;
@@ -60,6 +61,11 @@ export function buildArtScene(room, art, varied = true) {
     if (solid(-1, 0)) add(structures, west, x * 128 - 64, y * 128);
     if (solid(1, 0)) add(structures, west, x * 128 + 64, y * 128, Math.PI);
     if (solid(0, 1)) add(structures, west, x * 128, y * 128 + 64, -Math.PI / 2);
+  }
+  const conflicts = validateFloorConnections(floor);
+  if (conflicts.length) {
+    const first = conflicts[0];
+    throw new Error(`Incompatible floor edges at (${first.x}, ${first.y}) ${first.side}: ${first.tags.join(', ')} versus ${first.neighborTags.join(', ')} (${conflicts.length} conflicting seams).`);
   }
   const protectedCells = new Set([...(room.generation?.protectedCells || []), ...(room.clearRoute || []), room.entrance || room.start, room.exit].filter(Boolean).map(p => key(p.x, p.y)));
   const candidates = room.placements.filter(piece => piece.kind === 'decoration');

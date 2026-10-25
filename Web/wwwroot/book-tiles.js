@@ -156,6 +156,26 @@ function imageFor(url) {
   while (imageCache.size > imageCacheLimit) imageCache.delete(imageCache.keys().next().value);
   return pending;
 }
+function edgeDetails(asset) {
+  const details = element('details', 'tile-edges');
+  details.append(element('summary', '', 'Edge tags'));
+  details.append(element('p', 'edge-note', 'Local orientation · north up · 0° rotation'));
+  const sides = [['north', 'N · North'], ['east', 'E · East'], ['south', 'S · South'], ['west', 'W · West']];
+  const list = element('dl', 'edge-sides');
+  const allTags = [];
+  for (const [side, label] of sides) {
+    const tags = asArray(asset.edges?.[side]);
+    allTags.push(...tags);
+    const values = element('dd', 'edge-chips');
+    for (const tag of tags) values.append(element('code', 'edge-chip', tag));
+    if (!tags.length) values.append(element('span', 'edge-note', 'Not authored'));
+    list.append(element('dt', '', label), values);
+  }
+  details.append(list);
+  if (allTags.includes('join.manual')) details.append(element('p', 'edge-note edge-review', 'Manual connection · requires review.'));
+  if (allTags.includes('join.overlay')) details.append(element('p', 'edge-note', 'Visual overlay · no automatic joining.'));
+  return details;
+}
 function renderTiles(manifest, manifestURL) {
   $('tile-grid').replaceChildren(...manifest.assets.map(asset => {
     const card = element('article', 'tile-card');
@@ -174,6 +194,7 @@ function renderTiles(manifest, manifestURL) {
     thumbnail.append(image); preview.append(thumbnail);
     card.append(preview, element('h3', '', asset.label), element('p', 'tile-meta', `${words(asset.layer)} layer · ${words(asset.role)}`), element('p', 'tile-tags', asArray(asset.tags).map(words).join(' · ')));
     if (asset.role === 'ground' && asset.cell < 4 && !asset.placement) card.append(element('p', 'tile-meta', 'Irregular support: manual alignment required.'));
+    card.append(edgeDetails(asset));
     const download = link('Download PNG ↓', url, true); download.className = 'tile-download'; card.append(download); return card;
   }));
 }
