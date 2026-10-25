@@ -95,9 +95,23 @@ export function buildArtScene(room, art, varied = true) {
 }
 export function drawPiece(context, piece, art) {
   const image = art.images.get(piece.asset.id); if (!image) return;
-  const anchor = piece.asset.anchor || { x: 128, y: 192 };
+  const display = pieceDisplayGeometry(piece.asset);
   context.save(); context.translate(piece.px, piece.py); context.rotate(piece.angle);
-  context.drawImage(image, -anchor.x, -anchor.y, 256, 256); context.restore();
+  context.scale(display.scale, display.scale);
+  context.drawImage(image, display.x, display.y, 256, 256); context.restore();
+}
+
+// Upright sprite anchors describe feet, not the center of a square map cell.
+// Center props and portals by their visible bounds so they cannot cover the
+// neighboring row. Floors and repeating walls retain their exact grid anchors.
+export function pieceDisplayGeometry(asset) {
+  const box = asset.derived, anchor = asset.anchor || { x: 128, y: 192 };
+  if (asset.role === 'prop' || asset.role === 'door') {
+    const limit = asset.role === 'prop' ? 112 : 128;
+    return { x: -box.offset.x - box.width / 2, y: -box.offset.y - box.height / 2,
+      scale: Math.min(1, limit / box.width, limit / box.height) };
+  }
+  return { x: -anchor.x, y: -anchor.y, scale: 1 };
 }
 
 // Authored ambience metadata changes the surrounding light, never the tile pixels.
@@ -140,9 +154,10 @@ export function environmentMood(kitId) {
 }
 export function visibleSceneCorners(scene) {
   return [...scene.floor, ...scene.structures, ...scene.decorations].flatMap(piece => {
-    const box = piece.asset.derived, anchor = piece.asset.anchor || { x: 128, y: 192 };
-    const left = box.offset.x - anchor.x, top = box.offset.y - anchor.y;
+    const box = piece.asset.derived, display = pieceDisplayGeometry(piece.asset);
+    const left = (box.offset.x + display.x) * display.scale, top = (box.offset.y + display.y) * display.scale;
+    const width = box.width * display.scale, height = box.height * display.scale;
     const cosine = Math.round(Math.cos(piece.angle)), sine = Math.round(Math.sin(piece.angle));
-    return [[left, top], [left + box.width, top], [left, top + box.height], [left + box.width, top + box.height]].map(([x, y]) => ({ x: piece.px + x * cosine - y * sine, y: piece.py + x * sine + y * cosine }));
+    return [[left, top], [left + width, top], [left, top + height], [left + width, top + height]].map(([x, y]) => ({ x: piece.px + x * cosine - y * sine, y: piece.py + x * sine + y * cosine }));
   });
 }

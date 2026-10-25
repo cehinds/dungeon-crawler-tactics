@@ -17,6 +17,16 @@ for (const kit of catalog.kits) {
   assert.notEqual(environmentMood(kit.id).label, undefined);
   for (const style of catalog.styles) {
     const art = { manifest: JSON.parse(await read(`Web/wwwroot/assets/book-tiles/${kit.variants[style.id].manifest}`)) };
+    for (const asset of art.manifest.assets.filter(a => ['prop', 'door'].includes(a.role))) {
+      for (let rotation = 0; rotation < 4; rotation++) {
+        const corners = visibleSceneCorners({ floor: [], structures: [], decorations: [
+          { asset, px: 0, py: 0, angle: rotation * Math.PI / 2 }
+        ] });
+        const limit = asset.role === 'prop' ? 56 : 64;
+        assert(corners.every(p => Math.abs(p.x) <= limit + 1e-6 && Math.abs(p.y) <= limit + 1e-6),
+          `${asset.id}: decoration must stay within its own cell at every rotation`);
+      }
+    }
     for (const layout of ['chambers', 'cavern', 'hall']) for (const size of [6, 16]) {
       const room = generateDungeon(manifest, { seed: `preview-${size}`, width: size, height: size === 6 ? 6 : 12, density: .4, roomCount: 6, layout, biome: 'sewer' }, rules);
       const scene = buildArtScene(room, art, true);
