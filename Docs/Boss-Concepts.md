@@ -4,9 +4,9 @@ Three separate playable scenario adaptations now accompany these generated visua
 
 | Concept | Image | Source-grounded scene | Proposed mechanics |
 |---|---|---|---|
-| Hoarder | [PNG](../Web/wwwroot/assets/concepts/boss-hoarder-concept.png) | Giant black-haired human-ish woman, gray torn shirt, blue pants, garbage stockpile, cockroach Scatterers. Not a chest mimic. | Swarm telegraph, readable nests, optional fire interruption, explosive environment, safe movement preview. |
-| Juicer | [PNG](../Web/wwwroot/assets/concepts/boss-juicer-concept.png) | Extremely muscular scaly lizard humanoid with tail and black shorts, gym, flaming thrown metal weight plates. | Straight-line attack forecast, topplable benches that create cover, clear action cost previews. |
-| Ball of Swine | [PNG](../Web/wwwroot/assets/concepts/boss-swine-concept.png) | Rolling pink sphere with pig features, tusks, tuxedo/sequin scraps; collaborative Speedbump built from furniture and gym equipment. | Carry/brace construction actions, progress segments, rolling-impact countdown, trap placement, safe-side positioning. |
+| Hoarder | [PNG](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/boss-hoarder-concept.png) | Giant black-haired human-ish woman, gray torn shirt, blue pants, garbage stockpile, cockroach Scatterers. Not a chest mimic. | Swarm telegraph, readable nests, optional fire interruption, explosive environment, safe movement preview. |
+| Juicer | [PNG](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/boss-juicer-concept.png) | Extremely muscular scaly lizard humanoid with tail and black shorts, gym, flaming thrown metal weight plates. | Straight-line attack forecast, topplable benches that create cover, clear action cost previews. |
+| Ball of Swine | [PNG](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/boss-swine-concept.png) | Rolling pink sphere with pig features, tusks, tuxedo/sequin scraps; collaborative Speedbump built from furniture and gym equipment. | Carry/brace construction actions, progress segments, rolling-impact countdown, trap placement, safe-side positioning. |
 
 ## Source checks
 
@@ -28,8 +28,8 @@ These are bounded scenario rules in shared C#, not a general scripting, construc
 
 The playable renderer uses dedicated generated art, separate from the concept sheets:
 
-- [Boss atlas manifest](../Web/wwwroot/assets/bosses/manifest.json): Hoarder, Juicer and Ball of Swine, each with idle, two walking and attack frames (12 frames total). Each frame is 192×192 with a measured foot anchor.
-- [Scenario art manifest](../Web/wwwroot/assets/scenario-props/manifest.json): four Scatterer frames plus garbage, bench, barrier and parts components. The Scatterer frames bring the animated boss/minion set to 16 frames; the four scenery components are separate art.
+- [Boss atlas manifest](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/bosses/manifest.json): Hoarder, Juicer and Ball of Swine, each with idle, two walking and attack frames (12 frames total). Each frame is 192×192 with a measured foot anchor.
+- [Scenario art manifest](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/scenario-props/manifest.json): four Scatterer frames plus garbage, bench, barrier and parts components. The Scatterer frames bring the animated boss/minion set to 16 frames; the four scenery components are separate art.
 - The retained `source-atlas.png` files in both asset directories are generation/extraction sources. Manifest dimensions and anchors describe the shipped sheets; concept-image geometry is not an import contract.
 
 Larger rendered boss art still occupies **one logical tile**. Multi-cell occupancy, general large-unit collisions, carried platforms, broad trap construction and universal area/chain reactions remain planned. Art size does not establish a larger tactical footprint or guarantee perfect alignment in every projection. Camera/occlusion and touch readability require actual rendered checks.

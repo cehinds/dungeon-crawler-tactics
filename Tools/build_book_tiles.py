@@ -1,4 +1,4 @@
-"""Export compact, normalized Books 1–5 location art, without changing sources.
+"""Export compact, normalized Books 1–8 location art, without changing sources.
 
     python3 Tools/build_book_tiles.py --style pocket-dungeon
     python3 Tools/build_book_tiles.py --style pocket-dungeon --kit starter-dungeon

@@ -81,7 +81,7 @@ function updateLocations() {
   $('location-select').replaceChildren(...locations.map(location => option(location.id, location.name)));
   $('location-select').value = state.location;
   $('location-select').disabled = !locations.length;
-  $('location-count').textContent = `${locations.length} matching ${locations.length === 1 ? 'location' : 'locations'} · source-based survey, with spoilers through book 5`;
+  $('location-count').textContent = `${locations.length} matching ${locations.length === 1 ? 'location' : 'locations'} · source-based survey, with spoilers through book 8`;
   $('empty-state').hidden = Boolean(locations.length);
   $('location-workspace').hidden = !locations.length;
   if (!locations.length) { state.request++; return; }
@@ -258,7 +258,7 @@ async function initialize() {
     const catalog = await fetchJSON(catalogURL);
     if (!catalog.styles?.length || !catalog.kits?.length || !Array.isArray(catalog.locations)) throw new Error('The book-tile library is not ready yet.');
     state.catalog = catalog; state.style = catalog.styles[0].id;
-    $('book-filter').replaceChildren(option('all', 'All five books'), ...catalog.books.map(book => option(String(book.id), `${book.id}. ${book.title}`)));
+    $('book-filter').replaceChildren(option('all', 'All eight books'), ...catalog.books.map(book => option(String(book.id), `${book.id}. ${book.title}`)));
     $('coverage-gaps').replaceChildren(...asArray(catalog.coverageGaps).map(gap => element('li', '', gapText(gap))));
     renderTabs(); updateStyleHeading();
     $('load-status').hidden = true; $('collection').hidden = false;

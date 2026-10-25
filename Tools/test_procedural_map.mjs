@@ -68,6 +68,25 @@ for (const [width, height] of [
             map.tiles,
             kit.exportGameTiles(room, manifest).tiles,
           );
+          assert.notEqual(key(room.start), key(room.exit), "entrance and exit are distinct");
+          assert.deepEqual(room.entrance, room.start);
+          assert.deepEqual(room.doors, [{...room.start,kind:"entrance"},{...room.exit,kind:"exit"}]);
+          for (const [point,kind] of [[room.start,"entrance"],[room.exit,"exit-door"],[room.exit,"exit"]]) {
+            const marker = room.placements.find((p) => p.kind===kind && key(p)===key(point));
+            assert.ok(marker, `visible canonical ${kind} placement exists`);
+            assert.equal(marker.blocksMovement,false);
+            assert.ok(room.generation.protectedCells.some((p) => key(p)===key(point)));
+            assert.ok(!room.enemies.some((p) => key(p)===key(point)));
+          }
+          assert.ok(!room.playerSpawns.some((p) => key(p)===key(room.exit)));
+          assert.ok(room.placements.every((p) => p.rotation===0), "native art never receives random rotations");
+          assert.ok(new Set(room.rooms.map((r) => r.theme.id)).size >= 2, "rooms offer distinct material themes");
+          const themeIds = new Set(room.rooms.map((r) => r.theme.id));
+          for (const p of room.placements.filter((p) => p.roomId)) {
+            assert.ok(themeIds.has(p.themeId));
+            assert.equal(p.layer,"floor");
+            assert.ok(p.material.length);
+          }
           const blocked = new Set(room.blockedCells.map(key)),
             slots = new Set(),
             spawnKeys = new Set();
@@ -178,8 +197,11 @@ for (const options of [
 ])
   assert.throws(() => generateDungeon(manifest, options));
 assert.throws(() => generateDungeon(manifest, {}, {}));
+const invalidThemes = structuredClone(rules);
+invalidThemes.biomes.stone.themes = [];
+assert.throws(() => generateDungeon(manifest, {}, invalidThemes), /theme/);
 console.log(
-  `PASS ${cases} procedural maps: deterministic seeds, all-cell connectivity, solid boundaries, canonical placements, runtime spawn records, dry paths and four rotations.`,
+  `PASS ${cases} procedural maps: deterministic seeds, all-cell connectivity, solid boundaries, canonical placements, runtime spawn records, dry paths, explicit walkable portals, varied room materials and four camera rotations.`,
 );
 
 const longSeedMap = getPlayableMap(

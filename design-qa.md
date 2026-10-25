@@ -9,7 +9,7 @@ Reference: `Web/wwwroot/assets/menu-concepts/combat-targeting.png`, plus the
 user's original dungeon image. The component index on the right of the source
 board is excluded from comparison. The runtime is the existing shared-C# game.
 
-[Side-by-side concept and playable Sewers](Docs/Screenshots/chambers-concept-comparison.png)
+[Side-by-side concept and playable Sewers](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Docs/Screenshots/chambers-concept-comparison.png)
 shows the cropped source gameplay panel and the complete 1672×941 runtime,
 scaled proportionally. Different encounter geometry and gameplay state prevent
 a meaningful pixel-diff score; no numerical fidelity score is claimed.

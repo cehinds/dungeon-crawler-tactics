@@ -17,12 +17,12 @@ The Subset description was available through its indexed official page; direct r
 
 ## Implemented inventory and its limits
 
-- [UI kit manifest](../Web/wwwroot/assets/ui-kit/manifest.json): **12 individual 128×128 PNG icons**—kick, bomb, missile, move, heart, mana, guard, bag, skills, quest, wait and potion.
-- [Room kit](RoomKit.md): **25 transparent PNG pieces**, with measured anchors and layer metadata in the [manifest](../Web/wwwroot/assets/room-kit/manifest.json).
-- [Expedition enemy manifest](../Web/wwwroot/assets/expedition-enemies/manifest.json): **six four-frame strips**—sludge, cinder, frost, spore, sentry and mauler. Each frame is 160×160, anchor `(80,148)`, with a 108-pixel body-height reference. These are authored game archetypes, not six verified novel species.
+- [UI kit manifest](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/ui-kit/manifest.json): **12 individual 128×128 PNG icons**—kick, bomb, missile, move, heart, mana, guard, bag, skills, quest, wait and potion.
+- [Room kit](RoomKit.md): **25 transparent PNG pieces**, with measured anchors and layer metadata in the [manifest](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/room-kit/manifest.json).
+- [Expedition enemy manifest](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/expedition-enemies/manifest.json): **six four-frame strips**—sludge, cinder, frost, spore, sentry and mauler. Each frame is 160×160, anchor `(80,148)`, with a 108-pixel body-height reference. These are authored game archetypes, not six verified novel species.
 - [Menu atlas](../Web/wwwroot/menu-atlas.html): **six generated menu sheets and 30 separate interactive HTML component previews**. The sheets are downloadable concept PNGs; the preview values are illustrative and do not alter saves.
 
-The new [personal-home sheet](../Web/wwwroot/assets/menu-concepts/safe-room-services.png) replaces the earlier cave-like safe-room concept: individual crawler rooms connect to communal living, training and crafting spaces. Use the housing floorplan and installed-room states to communicate ownership and access. An old cave illustration is not evidence that personal housing is merely a battle room with service buttons. See [housing research](Research-Housing.md) for the distinction between sourced facilities and game adaptation.
+The new [personal-home sheet](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/menu-concepts/safe-room-services.png) replaces the earlier cave-like safe-room concept: individual crawler rooms connect to communal living, training and crafting spaces. Use the housing floorplan and installed-room states to communicate ownership and access. An old cave illustration is not evidence that personal housing is merely a battle room with service buttons. See [housing research](Research-Housing.md) for the distinction between sourced facilities and game adaptation.
 
 ## Palette and interface tokens
 

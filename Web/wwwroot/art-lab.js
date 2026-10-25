@@ -126,7 +126,11 @@ function renderCollection(style, manifest) {
   $('style-panel').classList.toggle('pixel-art', style.id === 'pocket-dungeon');
   $('style-title').textContent = manifest.title || style.title;
   $('style-description').textContent = manifest.description || style.description || '';
-  configureLink($('pack-download'), localUrl(manifest.download, state.manifestUrl));
+  // Whole-style archives are hosted in the art repository to keep Pages below its size limit.
+  const archiveURL = Object.hasOwn(directions, style.id)
+    ? `https://raw.githubusercontent.com/cehinds/AI-Art/refs/heads/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/style-packs/${style.id}/${style.id}.zip` : null;
+  configureLink($('pack-download'), archiveURL);
+  $('pack-download').title = 'Latest full style pack from the AI-Art repository';
   configureLink($('manifest-link'), state.manifestUrl);
   configureLink($('contact-sheet'), localUrl(manifest.contactSheet, state.manifestUrl));
   configureLink($('preview-download'), localUrl(manifest.preview.file, state.manifestUrl));

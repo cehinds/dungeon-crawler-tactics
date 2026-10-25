@@ -14,27 +14,117 @@ const neighbors = (p) =>
     [0, -1],
   ].map(([dx, dy]) => ({ x: p.x + dx, y: p.y + dy }));
 const DEFAULT_RULES = {
-  schemaVersion: 1,
-  biomes: {
-    stone: {
-      floorTags: ["stone"],
-      surfaceTags: ["grate"],
-      propTags: ["crate", "pillar", "rubble"],
-      detailTags: ["moss"],
+  "schemaVersion": 1,
+  "biomes": {
+    "stone": {
+      "floorTags": [
+        "stone"
+      ],
+      "surfaceTags": [
+        "grate"
+      ],
+      "propTags": [
+        "crate",
+        "pillar",
+        "rubble"
+      ],
+      "detailTags": [
+        "moss"
+      ],
+      "themes": [
+        {
+          "id": "flagstone",
+          "material": "grey flagstone",
+          "atmosphere": "warm lanterns",
+          "kitId": "starter-dungeon"
+        },
+        {
+          "id": "sanctuary",
+          "material": "clean patterned stone",
+          "atmosphere": "quiet amber light",
+          "kitId": "safe-services"
+        },
+        {
+          "id": "city",
+          "material": "weathered pavement",
+          "atmosphere": "cool street light",
+          "kitId": "over-city"
+        }
+      ]
     },
-    sewer: {
-      floorTags: ["stone"],
-      surfaceTags: ["water", "grate"],
-      propTags: ["barrel", "crate"],
-      detailTags: ["moss"],
+    "sewer": {
+      "floorTags": [
+        "stone"
+      ],
+      "surfaceTags": [
+        "water",
+        "grate"
+      ],
+      "propTags": [
+        "barrel",
+        "crate"
+      ],
+      "detailTags": [
+        "moss"
+      ],
+      "themes": [
+        {
+          "id": "drainage",
+          "material": "wet masonry",
+          "atmosphere": "damp green light",
+          "kitId": "industry-menagerie"
+        },
+        {
+          "id": "maintenance",
+          "material": "steel plating",
+          "atmosphere": "industrial amber light",
+          "kitId": "iron-stations"
+        },
+        {
+          "id": "channels",
+          "material": "waterworn stone",
+          "atmosphere": "blue reflections",
+          "kitId": "hunting-river"
+        }
+      ]
     },
-    crypt: {
-      floorTags: ["stone"],
-      surfaceTags: ["grate"],
-      propTags: ["pillar", "chest", "rubble"],
-      detailTags: ["moss"],
-    },
-  },
+    "crypt": {
+      "floorTags": [
+        "stone"
+      ],
+      "surfaceTags": [
+        "grate"
+      ],
+      "propTags": [
+        "pillar",
+        "chest",
+        "rubble"
+      ],
+      "detailTags": [
+        "moss"
+      ],
+      "themes": [
+        {
+          "id": "burial",
+          "material": "dark mortuary stone",
+          "atmosphere": "violet candlelight",
+          "kitId": "bubble-necropolis"
+        },
+        {
+          "id": "shrine",
+          "material": "ceremonial paving",
+          "atmosphere": "golden shrine light",
+          "kitId": "hunting-shrines"
+        },
+        {
+          "id": "threshold",
+          "material": "ancient carved stone",
+          "atmosphere": "cold blue light",
+          "kitId": "thresholds"
+        }
+      ]
+    }
+  }
 };
 
 /** Seeded authoring only: combat remains in the shared C# runtime. Inputs are never modified. */
@@ -153,8 +243,14 @@ export function generateDungeon(manifest, options = {}, rules = DEFAULT_RULES) {
   }
   const open = new Set(),
     carve = (p) => open.add(key(p));
+  const themes = rule.themes ?? [{ id: biome, material: biome, atmosphere: "lantern-lit", kitId: "starter-dungeon" }];
+  if (!Array.isArray(themes) || !themes.length || !themes.every((t) =>
+    t && ["id", "material", "atmosphere", "kitId"].every((field) => typeof t[field] === "string" && t[field].length)))
+    throw new Error("Invalid room theme rules.");
+  const themeRandom = seededRandom(`${seed}:room-themes`);
+  const themeOffset = Math.floor(themeRandom() * themes.length);
   const rooms = leaves.map((r, i) => {
-    const room = { id: `room.${i}`, ...r };
+    const room = { id: `room.${i}`, ...r, theme: { ...themes[(themeOffset+i) % themes.length] } };
     if (layout === "hall" && room.width > 3) {
       room.x++;
       room.width -= 2;
@@ -209,14 +305,22 @@ export function generateDungeon(manifest, options = {}, rules = DEFAULT_RULES) {
     .sort((a, b) => a.y - b.y || a.x - b.x);
   if (cells.length < 7)
     throw new Error("Layout does not have enough spawn space.");
-  const start = { ...rooms[0].center },
-    exit = { ...rooms.at(-1).center };
+  const start = { ...rooms[0].center };
+  // Use graph distance, so the exit remains distinct even when tiny partitions
+  // have neighboring centers. Stable neighbor order resolves equal distances.
+  const queue = [start], reachable = new Set([key(start)]);
+  for (let i = 0; i < queue.length; i++)
+    for (const next of neighbors(queue[i]))
+      if (open.has(key(next)) && !reachable.has(key(next))) {
+        reachable.add(key(next)); queue.push(next);
+      }
+  const exit = { ...queue.at(-1) };
   const distance = (p) => Math.abs(p.x - start.x) + Math.abs(p.y - start.y);
   const ordered = [...cells].sort(
       (a, b) => distance(a) - distance(b) || a.y - b.y || a.x - b.x,
     ),
-    playerSpawns = ordered.slice(0, 4).map((p) => ({ ...p }));
-  const used = new Set(playerSpawns.map(key));
+    playerSpawns = ordered.filter((p) => key(p) !== key(exit)).slice(0, 4).map((p) => ({ ...p }));
+  const used = new Set([...playerSpawns, start, exit].map(key));
   const enemies = ordered
     .slice()
     .reverse()
@@ -288,7 +392,9 @@ export function generateDungeon(manifest, options = {}, rules = DEFAULT_RULES) {
     for (let x = 0; x < width; x++) {
       const p = { x, y },
         k = key(p);
+      const room = rooms.find((r) => x >= r.x && x < r.x+r.width && y >= r.y && y < r.y+r.height);
       add(pick(floors), p);
+      if (room) Object.assign(placements.at(-1), {roomId:room.id, themeId:room.theme.id, material:room.theme.material});
       if (!open.has(k)) {
         add(pick(walls), p, "wall");
         continue;
@@ -337,10 +443,16 @@ export function generateDungeon(manifest, options = {}, rules = DEFAULT_RULES) {
                   : "ne";
     placement.assetId = (wallByTag.get(direction) || walls[0]).id;
   }
+  const entryDoor = assets.find((a) => a.id === "door-open-ne" && !a.blocksMovement);
+  const exitDoor = assets.find((a) => a.id === "door-open-nw" && !a.blocksMovement);
+  if (!entryDoor || !exitDoor) throw new Error("Canonical walkable entrance and exit doors are required.");
+  add(entryDoor, start, "entrance");
+  add(exitDoor, exit, "exit-door");
   const marker = assets.find(
     (a) => a.tags.includes("stairs") && !a.blocksMovement,
   );
-  if (marker) add(marker, exit, "exit");
+  if (!marker) throw new Error("A walkable exit marker is required.");
+  add(marker, exit, "exit");
   return {
     schemaVersion: 1,
     kind: "dungeon-room-authoring",
@@ -354,7 +466,9 @@ export function generateDungeon(manifest, options = {}, rules = DEFAULT_RULES) {
     tile: { ...manifest.tile },
     start,
     exit,
-    doors: [],
+    entrance: { ...start },
+    atmosphere: rooms[0].theme.atmosphere,
+    doors: [{...start,kind:"entrance"},{...exit,kind:"exit"}],
     clearRoute,
     blockedCells: blocked(),
     placements,

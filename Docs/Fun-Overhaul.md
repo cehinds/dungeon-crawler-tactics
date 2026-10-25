@@ -108,9 +108,9 @@ systems. Each is a single game viewport at a requested 1672×941 composition.
 
 Displayed concept order in the 24 October ideation set:
 
-1. [Torchlight Expedition](ConceptArt/Overhaul/torchlight-expedition.png)
-2. [The Dungeon Show](ConceptArt/Overhaul/dungeon-show.png)
-3. [Chain-Reaction Tactics](ConceptArt/Overhaul/chain-reaction-tactics.png)
+1. [Torchlight Expedition](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Docs/ConceptArt/Overhaul/torchlight-expedition.png)
+2. [The Dungeon Show](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Docs/ConceptArt/Overhaul/dungeon-show.png)
+3. [Chain-Reaction Tactics](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Docs/ConceptArt/Overhaul/chain-reaction-tactics.png)
 
 Original generated PNGs are retained without modification. The illustrations
 are visual targets, not validated tactical layouts or final sprite sheets.

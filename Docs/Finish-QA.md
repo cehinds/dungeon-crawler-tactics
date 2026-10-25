@@ -20,12 +20,12 @@ Tested against the local Release WebAssembly build of this change using installe
 
 ## Actual captures
 
-![Desktop battle HUD](Screenshots/finish-battle-desktop.png)
+![Desktop battle HUD](https://raw.githubusercontent.com/cehinds/AI-Art/refs/heads/dungeon-crawler/dungeon-crawler-tactics/Docs/Screenshots/finish-battle-desktop.png)
 
-![Phone progression roadmap](Screenshots/finish-progress-phone.png)
+![Phone progression roadmap](https://raw.githubusercontent.com/cehinds/AI-Art/refs/heads/dungeon-crawler/dungeon-crawler-tactics/Docs/Screenshots/finish-progress-phone.png)
 
-![Phone Favor confirmation](Screenshots/finish-favor-phone.png)
+![Phone Favor confirmation](https://raw.githubusercontent.com/cehinds/AI-Art/refs/heads/dungeon-crawler/dungeon-crawler-tactics/Docs/Screenshots/finish-favor-phone.png)
 
-![Committed Bulwark form](Screenshots/finish-bulwark.png)
+![Committed Bulwark form](https://raw.githubusercontent.com/cehinds/AI-Art/refs/heads/dungeon-crawler/dungeon-crawler-tactics/Docs/Screenshots/finish-bulwark.png)
 
 These are actual runtime captures, separate from the generated concept/menu illustrations. Full temporary QA output is `/tmp/dct-finish-qa/results.json`; only representative captures are included in the repository. Source edits after captures were limited to the specifically rechecked camp/welcome correction and documentation.

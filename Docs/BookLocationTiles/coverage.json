@@ -6,11 +6,14 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8
     ],
     "floorRange": [
       1,
-      6
+      11
     ],
     "book5EndingFloors": [
       6,
@@ -22,16 +25,16 @@
       "Floor 6 Masquerade finale transfers castle and qualifying occupants to Floor 9; Carl remains on Floor 6 for the bramble-crater battle.",
       "Book 5 epilogue enters Floor 7; the Great Race shatters and crawlers enter the Floor 8 selection chamber."
     ],
-    "description": "Source-grounded locations and routes from Books 1–5, focused on Floors 1–6. Also records the reported transfer of the Book 5 castle to Floor 9, the Floor 6 crater battle among those left behind, and the later Floor 7–8 epilogue transitions. These do not imply complete maps for Floors 7–9."
+    "description": "Source-supported location and route survey through Books 1–8, including Ghosts of Earth on Floor 8, Faction Wars on Floor 9, racing on Floor 10 and the Parade of Horribles on Floor 11. Six new modular environment families extend the Book 1–5 library; these are artistic adaptations, not exact canonical floorplans or an exhaustive concordance."
   },
   "tileInventory": {
     "path": "Docs/BookLocationTiles/inventory.json",
-    "kitCount": 25,
+    "kitCount": 31,
     "styleCount": 3,
-    "pngCount": 1800,
+    "pngCount": 2232,
     "assetsPerKitPerStyle": 24,
     "normalizedCanvas": "256×256 pixels; 128×128 orthogonal logical cell in every style",
-    "delivery": "Source atlases are preserved outside Web; each per-kit ZIP contains 24 PNGs, a manifest, and contact sheet. No runtime integration is included."
+    "delivery": "Art sources and exported PNGs/ZIPs live in cehinds/AI-Art on dungeon-crawler. The game restores a pinned hash-verified revision. Native tiles support the browser generator preview; playable exports retain canonical runtime art."
   },
   "locations": [
     {
@@ -3901,6 +3904,220 @@
       ],
       "notes": "Secondary-source support; exact kitchen floor plan is not available.",
       "coverage": "mapped"
+    },
+    {
+      "id": "b6-el-capitolio",
+      "name": "El Capitolio Nacional de Cuba",
+      "books": [
+        6
+      ],
+      "floors": [
+        8
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Havana arrival rotunda with colored tile, large arched windows and warm lamps.",
+      "kitIds": [
+        "ghost-havana"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829899/9780241829899-sample.pdf"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Official author/publisher evidence.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b6-old-havana",
+      "name": "Old Havana and the Miramar coastal route",
+      "books": [
+        6
+      ],
+      "floors": [
+        8
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Warm, humid city scene with moving traffic; the route heads toward Miramar beside the northern coastal highway.",
+      "kitIds": [
+        "ghost-havana"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829899/9780241829899-sample.pdf"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Official author/publisher evidence.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b6-colon-cemetery",
+      "name": "Colón Cemetery / Pueblo de los Olvidados",
+      "books": [
+        6
+      ],
+      "floors": [
+        8
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Cemetery encounter with a sealed gate and corrupted-town quest; the church is linked to the Temple of Yemaya.",
+      "kitIds": [
+        "ghost-cemetery"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/6/ch/10/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Detailed appearance relies on a secondary fan chapter index; direct prose verification remains open.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b7-larracos",
+      "name": "Larracos, City of Dreams",
+      "books": [
+        7
+      ],
+      "floors": [
+        9
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Funnel city with recently drained lower streets, mud and damaged stone-block buildings.",
+      "kitIds": [
+        "faction-larracos"
+      ],
+      "sourceUrls": [
+        "https://cdn.penguin.co.uk/dam-assets/books/9780241829936/9780241829936-sample.pdf",
+        "https://www.dccfansite.com/book/7/ch/1/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Detailed appearance relies on a secondary fan chapter index; direct prose verification remains open.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b7-college-of-magic",
+      "name": "Larracos College of Magic",
+      "books": [
+        7
+      ],
+      "floors": [
+        9
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "The party visits the college; exact facade design is not established by this survey.",
+      "kitIds": [
+        "faction-larracos"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/7/ch/7/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Detailed appearance relies on a secondary fan chapter index; direct prose verification remains open.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b7-faction-wars",
+      "name": "Faction Wars battlefield",
+      "books": [
+        7
+      ],
+      "floors": [
+        9
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Army contest over the central castle, with alliances and large battles.",
+      "kitIds": [
+        "faction-battlefield"
+      ],
+      "sourceUrls": [
+        "https://mattdinniman.com/books/this-inevitable-ruin/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Official author/publisher evidence.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b8-races",
+      "name": "Floor Ten vehicle races",
+      "books": [
+        8
+      ],
+      "floors": [
+        10
+      ],
+      "appearance": "visited",
+      "confidence": "high",
+      "summary": "Successive races with vehicle upgrades and increasing track difficulty.",
+      "kitIds": [
+        "race-circuits"
+      ],
+      "sourceUrls": [
+        "https://mattdinniman.com/books/a-parade-of-horribles/",
+        "https://www.penguinrandomhouse.com/books/812017/a-parade-of-horribles-by-matt-dinniman/hardcover/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Official author/publisher evidence.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b8-garage",
+      "name": "Floor Ten garage",
+      "books": [
+        8
+      ],
+      "floors": [
+        10
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Garage arrival, manager selection and vehicle assignment; precise bay layout remains an adaptation.",
+      "kitIds": [
+        "race-circuits"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/8/ch/1/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Detailed appearance relies on a secondary fan chapter index; direct prose verification remains open.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b8-parade-route",
+      "name": "Floor Eleven parade staging area and route",
+      "books": [
+        8
+      ],
+      "floors": [
+        11
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Themed procession and staging area followed by a yellow-brick route with fog and masked spectators.",
+      "kitIds": [
+        "parade-horribles"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/8/ch/90/",
+        "https://www.dccfansite.com/book/8/ch/91/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Detailed appearance relies on a secondary fan chapter index; direct prose verification remains open.",
+      "coverage": "mapped"
+    },
+    {
+      "id": "b8-arena",
+      "name": "Floor Eleven finale arena",
+      "books": [
+        8
+      ],
+      "floors": [
+        11
+      ],
+      "appearance": "visited",
+      "confidence": "medium",
+      "summary": "Large white entry door, packed-dirt arena, spectator bleachers, a white tree and announcement display.",
+      "kitIds": [
+        "parade-horribles"
+      ],
+      "sourceUrls": [
+        "https://www.dccfansite.com/book/8/ch/93/",
+        "https://www.dccfansite.com/book/8/ch/96/"
+      ],
+      "notes": "Source-supported setting. Modular architecture, props and room arrangement are artistic adaptations. Detailed appearance relies on a secondary fan chapter index; direct prose verification remains open.",
+      "coverage": "mapped"
     }
   ],
   "coverageGaps": [
@@ -3914,11 +4131,108 @@
     "Inventory tiles are normalized PNG art adaptations, not native game-engine assets; they have no runtime integration.",
     "Some individual venue interiors and train-yard labels have weaker source support than their parent location; their records are marked review-needed even when a reusable tile kit is available.",
     "Book 5 enters Floor 7 and the Floor 8 selection chamber in the epilogue. The actual Floor 8 destination is unidentified, so do not illustrate a Bahamas, Cuba, or other island landscape as visited.",
-    "Book 4 Larracos references remain remote. In Book 5 the castle and qualifying occupants transfer to Floor 9, while the bramble-dome crater battle remains on Floor 6 before the Floor 7–8 epilogue transitions."
+    "Book 4 Larracos references remain remote. In Book 5 the castle and qualifying occupants transfer to Floor 9, while the bramble-dome crater battle remains on Floor 6 before the Floor 7–8 epilogue transitions.",
+    "Secondary fan chapter indexes supply the cemetery names, college visit and most Floor 11 visual detail; these need direct prose verification for a critical edition.",
+    "The official Book 8 blurb confirms a mysterious eleventh floor but alone does not prove the parade route or arena design; detailed claims are explicitly attributed to the secondary chapter index.",
+    "No measured maps, coordinates, distances, complete race-course topology or comprehensive location concordance were established.",
+    "The Bahamas, other teams' world regions, recurring clubs and private spaces are not new dedicated kits in this size-conscious proposal. A mention or report is not treated as Carl's visit.",
+    "No Book 9 or later unpublished material is included."
   ],
   "sourceFiles": [
     "Docs/BookLocationTiles/research-books-1-2.json",
     "Docs/BookLocationTiles/research-books-3-4.json",
     "Docs/BookLocationTiles/research-book-5.json"
+  ],
+  "sources": [
+    {
+      "id": "author-b6",
+      "url": "https://mattdinniman.com/books/the-eye-of-the-bedlam-bride/",
+      "kind": "official author book page",
+      "supports": "Book 6 title, Floor 8 card contest, first publication 2023-07-02 and republication 2025-05-13."
+    },
+    {
+      "id": "author-b7",
+      "url": "https://mattdinniman.com/books/this-inevitable-ruin/",
+      "kind": "official author book page",
+      "supports": "Book 7 title, first publication 2024-11-03, Floor 9 Faction Wars and the central castle objective."
+    },
+    {
+      "id": "author-b8",
+      "url": "https://mattdinniman.com/books/a-parade-of-horribles/",
+      "kind": "official author book page",
+      "supports": "Book 8 title and publication 2026-05-12; Floor 10 vehicle races and upgrades; Floor 11 is named in the synopsis."
+    },
+    {
+      "id": "author-b8-release",
+      "url": "https://mattdinniman.com/a-parade-of-horribles-release/",
+      "kind": "official author release announcement",
+      "supports": "The author announced Book 8 available on 2026-05-12, rather than merely scheduled."
+    },
+    {
+      "id": "publisher-b8",
+      "url": "https://www.penguinrandomhouse.com/books/812017/a-parade-of-horribles-by-matt-dinniman/hardcover/",
+      "kind": "official publisher product record",
+      "supports": "Published hardcover on 2026-05-12, 704 pages; corroborates title, series number and race premise."
+    },
+    {
+      "id": "sample-b6",
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241829899/9780241829899-sample.pdf",
+      "kind": "official publisher sample",
+      "supports": "Chapter 1 enters Floor 8 at El Capitolio in Havana. The room has colored tile, arched windows and lamps. Later sample pages enter Old Havana and describe city traffic and a route toward Miramar near the northern coast."
+    },
+    {
+      "id": "sample-b7",
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241829936/9780241829936-sample.pdf",
+      "kind": "official publisher sample",
+      "supports": "Chapter 1 enters Larracos on Floor 9. Recently drained low streets have mud, pitted stone buildings, water-damaged wooden doors and a broken railing. The city is funnel-shaped; Shanty Town is a separate ring."
+    },
+    {
+      "id": "fan-b6-c10",
+      "url": "https://www.dccfansite.com/book/6/ch/10/",
+      "kind": "unofficial fan chapter index",
+      "supports": "Colón Cemetery becomes the corrupted town Pueblo de los Olvidados. The chapter index names La Iglesia de los Olvidados / Temple of Yemaya and a spirit-box trap."
+    },
+    {
+      "id": "fan-b7-c1",
+      "url": "https://www.dccfansite.com/book/7/ch/1/",
+      "kind": "unofficial fan chapter index",
+      "supports": "Carl and Donut arrive in drained Larracos; the city's defenders and defense system are part of Faction Wars."
+    },
+    {
+      "id": "fan-b7-c7",
+      "url": "https://www.dccfansite.com/book/7/ch/7/",
+      "kind": "unofficial fan chapter index",
+      "supports": "The party visits the Larracos College of Magic and meets War Leader Arief."
+    },
+    {
+      "id": "fan-b8-c1",
+      "url": "https://www.dccfansite.com/book/8/ch/1/",
+      "kind": "unofficial fan chapter index",
+      "supports": "Carl arrives in a Floor 10 garage, with a garage manager and vehicle selection."
+    },
+    {
+      "id": "fan-b8-c90",
+      "url": "https://www.dccfansite.com/book/8/ch/90/",
+      "kind": "unofficial fan chapter index",
+      "supports": "The Floor 11 procession assembles themed vehicles and mounts, decorates with dahlias, and moves toward a staging area."
+    },
+    {
+      "id": "fan-b8-c91",
+      "url": "https://www.dccfansite.com/book/8/ch/91/",
+      "kind": "unofficial fan chapter index",
+      "supports": "The Floor 11 parade proceeds along a yellow-brick road with fog at the sides and masked onlookers."
+    },
+    {
+      "id": "fan-b8-c93",
+      "url": "https://www.dccfansite.com/book/8/ch/93/",
+      "kind": "unofficial fan chapter index",
+      "supports": "The parade reaches a large white arena door. Inside are packed dirt, spectator bleachers, a white tree landmark and a large display used for an announcement."
+    },
+    {
+      "id": "fan-b8-c96",
+      "url": "https://www.dccfansite.com/book/8/ch/96/",
+      "kind": "unofficial fan chapter index",
+      "supports": "The late Book 8 arena is an active narrative location where vehicles and combatants enter the finale."
+    }
   ]
 }

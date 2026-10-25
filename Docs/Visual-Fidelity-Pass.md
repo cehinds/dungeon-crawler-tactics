@@ -12,7 +12,7 @@ Use this as a screenshot review checklist for the current interface. The menu co
 
 ## Combat targeting: highest priority
 
-Reference: [`combat-targeting.png`](../Web/wwwroot/assets/menu-concepts/combat-targeting.png) (1672 × 912). Its gameplay composition occupies about 62% of the board width; the remaining 38% shows standalone UI examples. The current desktop capture is [`finish-battle-desktop.png`](Screenshots/finish-battle-desktop.png) (1440 × 900).
+Reference: [`combat-targeting.png`](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/menu-concepts/combat-targeting.png) (1672 × 912). Its gameplay composition occupies about 62% of the board width; the remaining 38% shows standalone UI examples. The current desktop capture is [`finish-battle-desktop.png`](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Docs/Screenshots/finish-battle-desktop.png) (1440 × 900).
 
 - [ ] **Make the party and target the focal point.** In the current capture, the arena spans about 1,130 × 625 px, but all four party sprites cluster in roughly 170 × 125 px at the far upper end. After cropping the concept to its left 62%, the party and active skeleton occupy a much larger share of the scene and the target forecast sits beside them. Increase the rendered party/hostile scale or adjust camera framing so the active units and target read at a glance without zooming.
 - [ ] **Show tactical targeting on the floor.** The concept distinguishes selected tile (gold), reachable tiles (cyan), hostile target (red), and above-tile magic effect (magenta). The current capture has cyan water pools and red enemy markers, but no comparable movement-range field or clearly selected tile. Add the same distinct tile states and preserve enough contrast against the gray stone floor.
@@ -22,7 +22,7 @@ Reference: [`combat-targeting.png`](../Web/wwwroot/assets/menu-concepts/combat-t
 
 ## Equipment and character sheet
 
-Reference: [`character-equipment.png`](../Web/wwwroot/assets/menu-concepts/character-equipment.png) (1672 × 912). The left 62% is the complete screen concept; the right side gives component dimensions and examples.
+Reference: [`character-equipment.png`](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/menu-concepts/character-equipment.png) (1672 × 912). The left 62% is the complete screen concept; the right side gives component dimensions and examples.
 
 - [ ] Group portrait, stats, equipped items, inventory, and comparison into framed regions. The concept gives the portrait about 30% of its screen width, stats about 28%, and the equipment/inventory area the remaining 42%; avoid reducing the character to a small header above an unstructured list.
 - [ ] Show item comparison at the point of selection: currently equipped and candidate item side by side, with green gains and red losses, plus a clear equip confirmation. Keep item icons large enough to identify without relying on labels.
@@ -30,7 +30,7 @@ Reference: [`character-equipment.png`](../Web/wwwroot/assets/menu-concepts/chara
 
 ## Safe room
 
-Reference: [`safe-room-services.png`](../Web/wwwroot/assets/menu-concepts/safe-room-services.png) (1672 × 912). The room scene and upgrade shop occupy the left 68%; isolated component references occupy the right 32%.
+Reference: [`safe-room-services.png`](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/menu-concepts/safe-room-services.png) (1672 × 912). The room scene and upgrade shop occupy the left 68%; isolated component references occupy the right 32%.
 
 - [ ] Lead with the room itself as a navigable illustrated space. Preserve the distinct bedrooms, training area, social screen, and crafting area as recognizable landmarks; place service details alongside or below that scene.
 - [ ] Present upgrades as consistent illustrated cards with a named facility, concise benefit, cost, and before/installed state. The concept uses three cards across the lower scene and separate wallet, locked-room, installed, and eligibility examples; keep those states explicit rather than relying on plain text alone.

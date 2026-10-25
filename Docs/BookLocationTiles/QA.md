@@ -1,40 +1,45 @@
-# Book 1–5 location tile QA
+# Books 1–8 location tile QA
 
-The native square-grid art, export, browser, cache, download, and visual review are complete. Working source sheets are the newly drawn 6×4 native atlases; previous source versions remain in Git history, and generated originals are retained under `/workspace/generated_images`. The exporter preserves native source PNGs and only resizes derived component PNGs.
+The expanded art, export, and browser review is complete: 31 kits, 93 atlases, and 2,232 component PNGs. Publication is tracked by the [Pages deployment workflow](https://github.com/cehinds/dungeon-crawler-tactics/actions/workflows/deploy-pages.yml) after push to main. The exhaustive canonical source audit remains open.
 
-## Engineering checks already passed
+## Art and export: passed
 
-- [x] 23 focused exporter tests passed.
-- [x] Layout tests passed for north and west wall axes on the orthogonal grid.
-- [x] All 75 native atlases and 1,800 component exports built and validated for source, extraction, pixel ownership, geometry, and ZIP contents.
-- [x] All 1,800 decoded RGBA component PNG pixel hashes are unique; all use 256×256 canvases with anchor `(128, 192)`.
-- [x] All three styles use the orthogonal 128×128 square grid. Export totals: 450 floors, 225 north-wall/door components (including 150 doors), 75 west walls, 450 overlays, and 600 props.
-- [x] All 600 components in each of the three styles passed `prepare_kit`.
-- [x] The pixel-style open submarine doorway has a clear transparent aperture (0 alpha pixels across its 7,650-pixel opening).
+- [x] All 93 native orthogonal atlases and 2,232 component exports validated for source, extraction, pixel ownership, geometry, manifests, and catalog consistency.
+- [x] All 2,232 decoded RGBA component pixel hashes are unique; components use 256×256 canvases and anchor `(128, 192)`.
+- [x] Combined export totals: 558 floors, 279 north-wall/door components (including 186 doors), 93 west walls, 558 overlays, and 744 props. All use the orthogonal 128×128 square grid.
+- [x] All 186 door states were visually checked for straight-on framing, vertical jambs, level bases, and no diamond plinths.
+- [x] All 144 new components in each art style passed `prepare_kit`; all 600 original baseline components per style also passed.
+- [x] 558 native-art scene checks passed; the pixel open-submarine aperture remains clear.
 
-## Browser and visual checks
+## Browser and runtime: passed
 
-- [x] All 75 UI variants use orthogonal 128×128 grids. Grid on/off changes pixels and restores the exact original canvas when disabled.
-- [x] All 150 doors were visually checked: frontal views, vertical jambs, level bases, and no diamond plinths.
-- [x] All 75 variants passed location, evidence, search, style tabs, keyboard navigation, and composition regeneration checks.
-- [x] Twelve composition cases across the three styles (starter, sea, jungle, painted city/desert, and rails) visibly use square geometry; all four native rail floor pieces were included.
-- [x] At 1440px desktop and 390px mobile widths, there was no overflow, browser error, or failed request.
-- [x] All 2,025 raw links and 2,025 versioned asset links returned HTTP 200. All 75 ZIPs contain 26 valid entries (24 PNGs, manifest, contact sheet); CRCs pass and PNGs match their manifests.
-- [x] Cache-on style changes and reloads reuse the same 27 asset URLs and canvas; JSON revalidation headers and query downloads return successfully.
+- [x] All 93 gallery variants and 93 generator art combinations passed browser review. Grid toggles restore exact pixels; Book 6–8 filters and evidence display correctly.
+- [x] All 2,232 PNG links and 2,511 versioned links returned HTTP 200. No browser errors; the 390px mobile view has no horizontal overflow.
+- [x] The generator passed nine style/theme combinations and checks for zoom, pan, rotation, fit, grid and route overlays, material variety, recipe metadata, strict canonical playable JSON, PNG download, play cancellation, and failure/retry behavior.
+- [x] 156 Python tests passed, including 20 asset-sync tests. Node checks passed for 720 generator cases, 721 schema-valid exports, 461 room-generation checks, 640 rotated-picking checks, and 558 native-art scenes.
+- [x] Four generated maps imported into the shared C# runtime; workshop handoff passed.
 
-Subtle art borders, 32px wall caps, and softness when pixel art is enlarged are expected asset characteristics; they did not indicate projection or alignment failures.
+## Publication and source audit
+
+- Publication is tracked by the [Pages deployment workflow](https://github.com/cehinds/dungeon-crawler-tactics/actions/workflows/deploy-pages.yml) after push to main.
+- [ ] Complete direct prose review of secondary-sourced Books 6–8 location details and the exhaustive canonical map audit.
+
+The art lab's three whole-style ZIPs stream from the AI-Art branch; all three links returned HTTP 200 with `application/zip`. Individual PNGs and smaller collection downloads remain in the Pages output. The publish workflow removes only the three duplicate aggregate ZIPs after publishing; estimated final site size is 771.5 MiB.
+
+## Asset migration: passed
+
+- [x] The earlier baseline pin `d12871d5dd8ea9bb4f334215045000fddc23fd52` restored 3,925 files into an empty directory and passed `--check`.
+- [x] The final expanded pin `4aab2055cdfbd2ff0d6955d082007ecee0e6cb5b` contains 4,429 project assets and passes sync `--check`; full 2,232-PNG reconstruction and catalog checks passed. The separate `originals/index.json` covers 312 raw originals, which are retained in AI-Art and not restored into the game.
+- [x] Restored all 4,429 final pinned assets into an empty directory and verified them with `--check`; all 20 focused asset-sync tests passed.
+
+In a new clone, run `python3 Tools/sync_art_assets.py` before testing or building. Python 3.10 or newer is required.
 
 ## Location coverage
 
-- [x] 177 unique source-linked location, sub-area, and route records; all kit references resolve.
-- [x] 166 records have reusable kit associations; 11 remain explicitly marked `review-needed`.
+- [x] 187 source-linked location, sub-area, and route records through Books 1–8; kit references resolve.
+- [x] 176 records have reusable kit associations; 11 remain `review-needed`.
 - [x] Visited, mentioned, remote, and uncertain appearances remain distinct.
-- [x] Book 5’s Great Race and Floor 8 selection transition are represented without inventing a visited island destination.
-- [x] The castle transfer is distinguished from the Floor 6 bramble-crater battle.
-- [ ] Full-text audit and complete canonical map validation remain pending.
+- [x] Books 6–8 add ten location records, including Ghosts of Earth on Floor 8, Faction Wars on Floor 9, racing and a garage on Floor 10, and the Parade of Horribles route and arena on Floor 11.
+- [x] Official author and publisher sources confirm Book 8 publication. Secondary chapter references are identified in [the Books 6–8 research file](research-books-6-8.json).
 
-The location index remains research coverage, not a complete canonical floorplan collection. Multiple named places share reusable environment kits, and art, layouts, measurements, and unsupported details are adaptations.
-
-## Scope and known limits
-
-The library is a set of art assets and composition metadata. It is not integrated into playable game maps, encounters, procedural runtime, collision, or Unity scenes. A sample composition is not a playable room. Not every prop has alternate directional views, and the metadata does not provide a complete autotiling or pathfinding system. This QA covers the native exports and browser library, not runtime integration.
+This is a researched art library, not a full-text concordance or a complete canonical floorplan collection. Room layouts, measurements, and unsupported visual details are adaptations. The tile art is not integrated into playable game maps, encounters, collision, or Unity scenes.

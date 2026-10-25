@@ -26,6 +26,20 @@ jobs:
           python-version: '3.12'
           cache: pip
           cache-dependency-path: Tools/requirements.txt
+      - name: Read pinned art revision
+        id: art-lock
+        run: |
+          art_commit="$(python Tools/sync_art_assets.py --print-commit)"
+          echo "commit=$art_commit" >> "$GITHUB_OUTPUT"
+      - name: Check out pinned art assets
+        uses: actions/checkout@v4
+        with:
+          repository: cehinds/AI-Art
+          ref: ${{ steps.art-lock.outputs.commit }}
+          path: .art-source
+          persist-credentials: false
+      - name: Restore pinned art assets
+        run: python Tools/sync_art_assets.py --source .art-source
       - name: Install content validation dependencies
         run: python -m pip install -r Tools/requirements.txt
       - name: Validate authored content
@@ -45,6 +59,7 @@ jobs:
           python Tools/validate_expansion_art.py
           node Tools/test_room_generator.mjs
           node Tools/test_procedural_map.mjs
+          node Tools/test_generator_art.mjs
           node Tools/test_book_tile_layout.mjs
       - name: Run shared C# regression tests
         run: |
@@ -68,6 +83,7 @@ jobs:
         run: |
           test -f Web/publish/wwwroot/index.html
           test -f Web/publish/wwwroot/_framework/blazor.webassembly.js
+          python Tools/prepare_pages_art.py Web/publish/wwwroot
           touch Web/publish/wwwroot/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

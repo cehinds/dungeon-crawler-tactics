@@ -69,12 +69,12 @@ The demo mixes early dungeon settings with later characters/classes. Lore exampl
 
 ## Concept gallery
 
-- [Choose a shape](../Web/wwwroot/assets/concepts/forms-and-stances.png) — Form selection, character sheets and stance tradeoffs. Illustrative names/bonuses may differ from the tested implementation.
-- [Grow, equip, prepare](../Web/wwwroot/assets/concepts/progression-safe-room.png) — Concept treatment for now-playable stat allocation, separate skill practice, owned boxes and crafting. Consult the actual menus for supported numbers and recipes.
-- [Every action has an answer](../Web/wwwroot/assets/concepts/combat-feedback.png) — Selected-ability information, separate move/action budgets, intent, impacts and compact AI feedback. Numbers are mock data.
-- [Build the room](../Web/wwwroot/assets/concepts/tile-authoring.png) — Tile anchors, layers, piece rotation and camera rotation. Use the real exporter schema, not text drawn inside the concept image.
-- [Hoarder](../Web/wwwroot/assets/concepts/boss-hoarder-concept.png) — Book 1 scenario concept: stockpile, giant human-ish boss and Scatterer minions. The separate playable scenario adapts this concept; art is not a screenshot or exact specification.
-- [Juicer](../Web/wwwroot/assets/concepts/boss-juicer-concept.png) — Book 1 gym scenario concept: scaly boss and flaming weight plates. The separate playable scenario adapts this concept; art is not a screenshot or exact specification.
-- [Ball of Swine](../Web/wwwroot/assets/concepts/boss-swine-concept.png) — Book 1 cooperative Speedbump scenario concept with Meadow Lark helpers. The separate playable scenario adapts this concept; art is not a screenshot or exact specification.
+- [Choose a shape](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/forms-and-stances.png) — Form selection, character sheets and stance tradeoffs. Illustrative names/bonuses may differ from the tested implementation.
+- [Grow, equip, prepare](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/progression-safe-room.png) — Concept treatment for now-playable stat allocation, separate skill practice, owned boxes and crafting. Consult the actual menus for supported numbers and recipes.
+- [Every action has an answer](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/combat-feedback.png) — Selected-ability information, separate move/action budgets, intent, impacts and compact AI feedback. Numbers are mock data.
+- [Build the room](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/tile-authoring.png) — Tile anchors, layers, piece rotation and camera rotation. Use the real exporter schema, not text drawn inside the concept image.
+- [Hoarder](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/boss-hoarder-concept.png) — Book 1 scenario concept: stockpile, giant human-ish boss and Scatterer minions. The separate playable scenario adapts this concept; art is not a screenshot or exact specification.
+- [Juicer](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/boss-juicer-concept.png) — Book 1 gym scenario concept: scaly boss and flaming weight plates. The separate playable scenario adapts this concept; art is not a screenshot or exact specification.
+- [Ball of Swine](https://github.com/cehinds/AI-Art/blob/dungeon-crawler/dungeon-crawler-tactics/Web/wwwroot/assets/concepts/boss-swine-concept.png) — Book 1 cooperative Speedbump scenario concept with Meadow Lark helpers. The separate playable scenario adapts this concept; art is not a screenshot or exact specification.
 
 See [lore review](Lore-Mechanics-Review.md), [boss scenarios](Boss-Concepts.md), and [implementation plan](Mechanics-Plan.md).
