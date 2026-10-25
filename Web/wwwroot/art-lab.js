@@ -30,7 +30,7 @@ function localUrl(path, base = document.baseURI) {
 }
 
 // Archive downloads live in the canonical art repository to keep Pages within its size limit.
-const ART_ARCHIVE_REF = 'refs/heads/dungeon-crawler';
+const ART_ARCHIVE_REF = '1e880cb5adb5ca9cfc59774963b00c4cbd06f1fc';
 function canonicalDownloadUrl(path) {
   if (typeof path !== 'string') return null;
   let url;
@@ -576,7 +576,7 @@ function renderReuseAsset() {
   if (views?.applicable === false) { $('reusable-views').replaceChildren(make('p', '', `Six principal views: not applicable. ${views.reason || views.notes || 'This image represents a flat graphic or effect.'}`)); return; }
   $('reusable-views').replaceChildren(...['front','top','right','left','bottom','rear'].map(direction=>{
     const item=views?.[direction];const card=make('div','reuse-view');card.append(make('strong','',direction),make('span','',item?.status||'unavailable'));
-    const target=item?.asset_id&&reuse.metadata.get(item.asset_id); if(target) {const preview=make('img');preview.src=reuseUrl(target.image.path);preview.alt=`${asset.name||asset.id}: ${direction} view`;preview.loading='lazy';card.append(preview,make('span','','Generated view: inferred surfaces, not recovered source pixels.'));const link=make('a','','Download PNG');link.download='';configureLink(link,reuseUrl(target.image.path));card.append(link);}return card;
+    const target=item?.asset_id&&reuse.metadata.get(item.asset_id); if(target) {const preview=make('img');preview.src=reuseUrl(target.image.path);preview.alt=`${asset.name||asset.id}: ${direction} view`;preview.loading='lazy';card.append(preview,make('span','','Generated view: inferred surfaces, not recovered source pixels.'));const link=make('a','','Download PNG');link.download='';configureLink(link,reuseUrl(target.image.path));card.append(link);const metadata=make('a','','Download view JSON');metadata.download='';configureLink(metadata,reuseUrl(target.metadata_path));card.append(metadata);}return card;
   }));
 }
 async function drawRemix() {
@@ -645,3 +645,44 @@ async function generateFloor() {
 }
 $('procedural-generate').addEventListener('click',generateFloor);
 $('procedural-export').addEventListener('click',()=>{if(!floorOutput)return;const url=URL.createObjectURL(new Blob([JSON.stringify(floorOutput,null,2)],{type:'application/json'}));const link=make('a');link.href=url;link.download='pocket-dungeon-floor.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+
+function importNumber(value, minimum, maximum, name) {
+  if(typeof value!=='number'||!Number.isFinite(value)||value<minimum||value>maximum)throw Error(`Invalid ${name}.`);return value;
+}
+async function readImport(input) {
+  const file=input.files?.[0];if(!file)return null;if(file.size>2000000)throw Error('JSON must be under 2 MB.');return JSON.parse(await file.text());
+}
+$('remix-import').addEventListener('change',async event=>{
+  try{
+    const document=await readImport(event.target);if(!document)return;
+    if(document.kind!=='semantic-remix'||document.schema_version!==1||document.canvas?.width!==960||document.canvas?.height!==640||!Array.isArray(document.placements)||document.placements.length>1000)throw Error('Expected a 960 × 640 semantic-remix export.');
+    const eligible=new Set(usableAssets().map(asset=>asset.id));
+    const placements=document.placements.map(item=>{
+      if(!eligible.has(item.asset_id))throw Error(`Unknown or ineligible asset: ${item.asset_id}`);
+      if(![0,90,180,270].includes(item.rotation_deg)||item.scale!==1||item.anchor!=='center')throw Error('Unsupported placement transform.');
+      return{asset_id:item.asset_id,path:reuse.metadata.get(item.asset_id).image.path,x:importNumber(item.x,0,960,'x'),y:importNumber(item.y,0,640,'y'),rotation_deg:item.rotation_deg,scale:1,anchor:'center'};
+    });
+    await Promise.all(placements.map(item=>reuseImage(item.path)));reuse.placements=placements;await drawRemix();
+  }catch(error){$('remix-status').textContent=`Import rejected; previous room retained. ${error.message}`;}finally{event.target.value='';}
+});
+$('procedural-import').addEventListener('change',async event=>{
+  try{
+    const document=await readImport(event.target);if(!document)return;
+    const grid=document.grid;if(!grid||!Number.isInteger(grid.width)||!Number.isInteger(grid.height)||grid.width<4||grid.width>64||grid.height<4||grid.height>64||grid.cell_size_px!==32||!Array.isArray(document.cells)||document.cells.length!==grid.width*grid.height)throw Error('Expected a complete grid, 4–64 cells per side, using 32 px tiles.');
+    const native=new Map(floorRecipe.cells.filter(cell=>cell.walkable&&cell.path).map(cell=>[cell.asset_id,cell.path]));const keys=new Set();const open=new Set();
+    const cells=document.cells.map(cell=>{
+      if(!Number.isInteger(cell.x)||!Number.isInteger(cell.y)||cell.x<0||cell.y<0||cell.x>=grid.width||cell.y>=grid.height||typeof cell.walkable!=='boolean')throw Error('Invalid grid cell.');
+      const key=`${cell.x},${cell.y}`;if(keys.has(key))throw Error('Duplicate grid cell.');keys.add(key);
+      if(!cell.walkable)return{x:cell.x,y:cell.y,walkable:false,connections:[]};
+      if(!native.has(cell.asset_id)||![0,90,180,270].includes(cell.rotation_deg))throw Error('Unknown floor tile or rotation.');open.add(key);
+      return{...cell,path:native.get(cell.asset_id),position_px:[cell.x*32,cell.y*32],anchor_px:[0,0]};
+    });
+    if(!open.size)throw Error('Floor has no walkable cells.');
+    const queue=[[...open][0]],visited=new Set();for(let i=0;i<queue.length;i++){const key=queue[i];if(visited.has(key))continue;visited.add(key);const[x,y]=key.split(',').map(Number);for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const next=`${x+dx},${y+dy}`;if(open.has(next)&&!visited.has(next))queue.push(next);}}
+    if(visited.size!==open.size)throw Error('Floor cells are disconnected.');
+    const imageEntries=await Promise.all([...native].map(async([id,path])=>[id,await reuseImage(path)]));const images=new Map(imageEntries);
+    const canvas=$('procedural-canvas'),ctx=canvas.getContext('2d');canvas.width=grid.width*32;canvas.height=grid.height*32;ctx.fillStyle='#181721';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingEnabled=false;
+    cells.filter(cell=>cell.walkable).forEach(cell=>{ctx.save();ctx.translate(cell.x*32+16,cell.y*32+16);ctx.rotate(cell.rotation_deg*Math.PI/180);ctx.drawImage(images.get(cell.asset_id),-16,-16,32,32);ctx.restore();});
+    floorRequest++;floorOutput={...document,cells,validation:{all_walkable_cells_connected:true,reachable_walkable_cells:visited.size}};$('procedural-export').disabled=false;$('procedural-status').textContent=`Imported floor · ${visited.size} connected walkable cells. Image references resolved from the local native tile set.`;
+  }catch(error){$('procedural-status').textContent=`Import rejected; previous floor retained. ${error.message}`;}finally{event.target.value='';}
+});
