@@ -12,7 +12,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  core:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Run shared C# regression tests
+        run: |
+          dotnet run --project Tests/RulesKernel.Tests.csproj -c Release
+          dotnet run --project Tests/GameTests/GameTests.csproj -c Release
+          dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj -c Release
+          dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj -c Release
+          dotnet run --project Tests/ExpeditionTests/ExpeditionTests.csproj -c Release
+          dotnet run --project Tests/RankTests/RankTests.csproj -c Release
+          dotnet run --project Tests/JourneyTests/JourneyTests.csproj -c Release
+          dotnet run --project Tests/HomeTests/HomeTests.csproj -c Release
+          dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj -c Release
+          dotnet run --project Tests/AudienceTests/AudienceTests.csproj -c Release
+          dotnet run --project Tests/SignatureTests/SignatureTests.csproj -c Release
+          dotnet build Tools/Compatibility/Core.Compatibility.csproj -c Release
   build:
+    needs: core
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -67,20 +91,7 @@ jobs:
           node Tools/test_tile_edge_preview.mjs
           node Tools/test_book_tile_layout.mjs
           node Tools/test_native_map_visuals.mjs
-      - name: Run shared C# regression tests
-        run: |
-          dotnet run --project Tests/RulesKernel.Tests.csproj -c Release
-          dotnet run --project Tests/GameTests/GameTests.csproj -c Release
-          dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj -c Release
-          dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj -c Release
-          dotnet run --project Tests/ExpeditionTests/ExpeditionTests.csproj -c Release
-          dotnet run --project Tests/RankTests/RankTests.csproj -c Release
-          dotnet run --project Tests/JourneyTests/JourneyTests.csproj -c Release
-          dotnet run --project Tests/HomeTests/HomeTests.csproj -c Release
-          dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj -c Release
-          dotnet run --project Tests/AudienceTests/AudienceTests.csproj -c Release
-          dotnet run --project Tests/SignatureTests/SignatureTests.csproj -c Release
-          dotnet build Tools/Compatibility/Core.Compatibility.csproj -c Release
+          node Tools/test_exploration_controls.mjs
       - name: Verify published research catalog
         run: python Tools/prepare_research.py --check
       - name: Publish browser game
@@ -91,6 +102,8 @@ jobs:
           python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/dct-playtest-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
+          python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+          python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome

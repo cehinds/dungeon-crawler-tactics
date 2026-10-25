@@ -8,6 +8,7 @@ namespace DungeonCrawlerTactics
         private EncounterDef customEncounter;
         private void ResetCustomMap()
         {
+            generatedDungeon = null;
             customMap = null;
             customEncounter = null;
         }
@@ -22,6 +23,7 @@ namespace DungeonCrawlerTactics
         private void PopulateCustomMap(GameView view)
         {
             view.customMap = ExportCustomMap();
+            view.generatedDungeon = CopyGenerated(generatedDungeon);
         }
         private EncounterDef ValidateCustomMap(GameSave save)
         {
@@ -29,12 +31,15 @@ namespace DungeonCrawlerTactics
                 return null;
             Require(save.scenario == null, "A save cannot combine a boss scenario and a workshop map.");
             Require(save.encounterIndex == 0 || save.screen == "complete", "Custom encounter index is invalid.");
-            return BuildCustomEncounter(CopyCustomMap(save.customMap));
+            EncounterDef candidate = BuildCustomEncounter(CopyCustomMap(save.customMap));
+            ValidateGenerated(save, candidate);
+            return candidate;
         }
         private void CommitCustomMap(GameSave save)
         {
             customMap = save.customMap == null ? null : CopyCustomMap(save.customMap);
             customEncounter = customMap == null ? null : BuildCustomEncounter(customMap);
+            generatedDungeon = CopyGenerated(save.generatedDungeon);
         }
         private void ImportCustomMap(GameCommand command)
         {

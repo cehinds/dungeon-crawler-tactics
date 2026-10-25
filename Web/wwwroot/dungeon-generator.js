@@ -387,8 +387,10 @@ $('play-dialog').addEventListener('close', () => {
     const token = crypto.randomUUID(), serialized = JSON.stringify(playable);
     // A per-tab immutable packet cannot be replaced by another generator tab.
     sessionStorage.setItem(`dct.workshop-map.${token}`, serialized);
+    const exploring = $('explore-first').checked;
+    if (exploring) sessionStorage.setItem(`dct.workshop-map.${token}.exploration`, JSON.stringify({entrance:room.entrance || room.start,exit:room.exit}));
     try { localStorage.setItem('dct.workshop-map', serialized); } catch { /* The per-tab packet is sufficient. */ }
-    location.href = `index.html?workshop=1&map=${encodeURIComponent(token)}`;
+    location.href = `index.html?workshop=1&map=${encodeURIComponent(token)}${exploring ? '&explore=1' : ''}`;
   });
 });
 $('retry').onclick = () => safely(() => room ? updateArt() : load());

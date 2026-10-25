@@ -49,6 +49,7 @@ namespace DungeonCrawlerTactics
                 if (TryJourneyCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
                 if (TryExpeditionCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
                 if (TryScenarioCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
+                if (TryGeneratedCommand(command)) return GetView();
                 switch (command.type)
                 {
                     case "preview_skill_node": PreviewSkillNode(command); break;
@@ -82,7 +83,8 @@ namespace DungeonCrawlerTactics
                         Require(screen == "camp", "Start an encounter from camp.");
                         Require(PartyCount() == data.partySize, "Choose exactly " + data.partySize + " crawlers.");
                         foreach (RosterView member in roster.Values) Require(!member.selected || member.hp > 0, "Rest in the safe room to revive fallen party members first.");
-                        StartExploration(); break;
+                        if (generatedDungeon != null) ResumeGenerated(); else StartExploration(); break;
+                    case "explore_step": Require(Math.Abs((long)command.x) + Math.Abs((long)command.y) == 1, "Choose one cardinal step."); Require(screen == "explore", "Move during exploration."); ExplorationSave cursor = exploration[Sector.id]; ExploreMove(cursor.x + command.x, cursor.y + command.y); break;
                     case "explore_move": ExploreMove(command.x, command.y); break;
                     case "explore_interact": ExploreInteract(command.targetId); break;
                     case "return_camp": Require(screen == "explore", "Return from exploration only."); screen = "camp"; break;
@@ -168,6 +170,7 @@ namespace DungeonCrawlerTactics
             battle = new BattleState(); units.Clear(); timed.Clear(); ClearPreview(); pendingDevelopment = null; pendingSkillNode = null; log.Clear();
             audienceState.favor = 0; audienceState.favorEarned = 0;
             EncounterDef encounter = Encounter;
+            if (generatedDungeon != null) SetGeneratedSpawns(encounter, generatedDungeon);
             battleLayoutVersion = encounter.layoutVersion;
             if (JourneyActive && JourneyFloor.mechanic == "capture") journey.capturedIds = new string[0];
             for (int y = 0; y < encounter.height; y++) for (int x = 0; x < encounter.width; x++)
@@ -442,6 +445,7 @@ namespace DungeonCrawlerTactics
                     AwardHomeVictory(); rewardChosen = false; message = "Room cleared! Choose one sponsor reward."; AddLog("Victory: +" + Encounter.xp + " XP.");
                 }
                 AudienceCommitted("victory");
+
                 ClearPreview();
             }
         }
@@ -559,7 +563,7 @@ namespace DungeonCrawlerTactics
             for (int y = 0; y < Encounter.height; y++) for (int x = 0; x < Encounter.width; x++)
             {
                 string id = TileId(x, y); EntityState tile; battle.Entities.TryGetValue(id, out tile);
-                tileViews.Add(new TileView { id = id, x = x, y = y, blocked = Blocked(x, y), tags = tile == null ? new string[0] : Sorted(tile.Tags) });
+                tileViews.Add(new TileView { id = id, x = x, y = y, blocked = Blocked(x, y), tags = tile == null ? (generatedDungeon == null ? new string[0] : Array.Find(Encounter.tiles, t => t.x == x && t.y == y)?.tags ?? new string[0]) : Sorted(tile.Tags) });
             }
             view.tiles = tileViews.ToArray();
             EntityState actor = null; if (selected != null && units.ContainsKey(selected)) actor = battle.Entities[selected];
@@ -590,7 +594,7 @@ namespace DungeonCrawlerTactics
             List<string> visibleLog = new List<string>(log); if (forecast != null) foreach (string entry in forecast.Log) visibleLog.Add("Forecast: " + entry); view.log = visibleLog.ToArray();
             if (screen == "victory" && !rewardChosen)
             { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); view.rewards = rewards.ToArray(); }
-            if (screen == "explore") view.exploration = ExplorationView();
+            if (screen == "explore") view.exploration = generatedDungeon == null ? ExplorationView() : GeneratedExplorationView();
             view.home = HomeView(); view.journey = JourneyView(); if (JourneyActive) view.encounterCount = 8;
             view.neighborhood = BuildNeighborhoodView(); PopulateProgression(view); PopulateModes(view); PopulateDevelopment(view); PopulateSkillTree(view); PopulateCustomMap(view); view.scenarios = ScenarioOptions(); view.scenario = ScenarioView(); view.expeditions = ExpeditionOptions(); view.expedition = ExpeditionView();
             return view;
@@ -646,7 +650,7 @@ namespace DungeonCrawlerTactics
         }
         public GameSave ExportSave()
         {
-            GameSave save = new GameSave { battleLayoutVersion = battleLayoutVersion, audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
+            GameSave save = new GameSave { battleLayoutVersion = battleLayoutVersion, audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), generatedDungeon = CopyGenerated(generatedDungeon), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
             save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
@@ -674,7 +678,7 @@ namespace DungeonCrawlerTactics
                 Require(save.phase == "player" || (save.phase == "enemy" && (save.screen == "victory" || save.screen == "defeat")), "Invalid save phase.");
                 int campaignLength = save.journey == null ? data.encounters.Length : 8;
                 Require(save.encounterIndex >= 0 && save.encounterIndex < campaignLength + (save.screen == "complete" || save.expedition != null ? 1 : 0), "Invalid encounter index.");
-                Require(save.screen != "complete" || save.encounterIndex == (save.customMap != null ? 1 : campaignLength), "Incomplete floor marked complete.");
+                Require(save.screen != "complete" || save.generatedDungeon != null || save.encounterIndex == (save.customMap != null ? 1 : campaignLength), "Incomplete floor marked complete.");
                 Require((save.screen != "battle" && save.screen != "defeat") || !save.rewardChosen, "Reward cannot precede victory.");
                 Require(save.screen != "complete" || save.rewardChosen || data.rewards.Length == 0, "Completed floor is missing its final reward choice.");
                 Require(save.round > 0 && save.round <= 100000, "Invalid round.");
@@ -689,6 +693,7 @@ namespace DungeonCrawlerTactics
                     for (int i = 0; i < Math.Min(save.encounterIndex, data.encounters.Length); i++) expectedXp += data.encounters[i].xp;
                     if (save.screen == "victory" && save.expedition == null && save.scenario == null) expectedXp += data.encounters[save.encounterIndex].xp;
                 }
+                if (save.generatedDungeon != null && save.generatedDungeon.cleared) expectedXp = data.encounters[0].xp;
                 Require(save.scenario != null || save.expedition != null || save.xp == expectedXp, "Save XP does not match its completed encounters.");
                 ValidateAchievements(save.achievementIds);
                 AudienceSave nextAudience = ValidateAudience(save.audience);
@@ -721,8 +726,9 @@ namespace DungeonCrawlerTactics
                     nextInventory.Add(item.itemId, item.count);
                 }
                 foreach (ItemDef item in catalog.Items.Values) if (!nextInventory.ContainsKey(item.id)) { Require(save.audience == null && IsTrapItem(item.id), "Missing saved supply."); nextInventory.Add(item.id, 0); }
-                List<ExplorationSave> nextExploration = ValidateExploration(save);
-                bool hasBattle = save.screen != "camp" && save.screen != "explore";
+                Require(save.generatedDungeon == null || save.customMap != null, "Generated dungeon requires a custom map.");
+                List<ExplorationSave> nextExploration = save.generatedDungeon == null ? ValidateExploration(save) : new List<ExplorationSave>();
+                bool hasBattle = save.screen != "camp" && save.screen != "explore" && !(save.generatedDungeon != null && save.screen == "complete");
                 EncounterDef encounter = candidateExpedition ?? candidateScenario ?? candidateCustom ?? candidateJourney ?? data.encounters[Math.Min(save.encounterIndex, data.encounters.Length - 1)];
                 TileDef[] authoredTiles = BattleTiles(encounter, save.battleLayoutVersion);
                 ValidateDuplicatePairs(save);
@@ -771,7 +777,7 @@ namespace DungeonCrawlerTactics
                 }
                 foreach (EntityState copy in nextBattle.Entities.Values) if (copy.DuplicateSourceId != null) { EntityState source = nextBattle.Entities[copy.DuplicateSourceId]; foreach (string grant in catalog.Classes[source.ClassId].abilityIds) if (catalog.Abilities[grant].cost == 0) copy.GrantedAbilities.Add(grant); foreach (string grant in Grants(source.Id, save.xp, nextEquipment, nextSkillNodes, source.ClassId, nextRoster[source.Id].specialtyClassId ?? "", save.journey == null ? 18 : save.journey.floorIndex + 1)) if (catalog.Abilities[grant].cost == 0) copy.GrantedAbilities.Add(grant); }
                 if (save.screen == "battle") Require(playerAlive && enemyAlive, "Battle outcome is inconsistent.");
-                if (save.screen == "victory" || save.screen == "complete") Require(playerAlive && !enemyAlive, "Victory outcome is inconsistent.");
+                if (save.screen == "victory" || (save.screen == "complete" && save.generatedDungeon == null)) Require(playerAlive && !enemyAlive, "Victory outcome is inconsistent.");
                 if (save.screen == "defeat") Require(!playerAlive, "Defeat outcome is inconsistent.");
                 Require(save.selectedUnitId == null || (nextUnits.ContainsKey(save.selectedUnitId) && nextUnits[save.selectedUnitId].team == "player"), "Invalid saved selection.");
                 List<TimedTag> nextTimed = new List<TimedTag>(); HashSet<string> layerKeys = new HashSet<string>();

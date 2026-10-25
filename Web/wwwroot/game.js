@@ -1,3 +1,5 @@
+import { createGeneratedAdventure } from './generated-adventure.js';
+import { attachExplorationControls } from './exploration-controls.js';
 import { renderAudience, renderAudienceSummary, renderAudienceHome, renderFavorControls } from './audience-ui.js';
 import { renderNeighborhood, renderNeighborhoodStrip } from './neighborhood-ui.js';
 import { renderHome } from './home-ui.js';
@@ -206,7 +208,7 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
     const result = await call('Dispatch', JSON.stringify({ type, ...args }));
     const after = JSON.parse(result);
     if(before.screen!==after.screen || before.encounterName!==after.encounterName || before.expedition?.id!==after.expedition?.id || before.scenario?.id!==after.scenario?.id) clearFeedback();
-    narrator?.begin(actionContext,before,after);
+    if(type!=='explore_step') narrator?.begin(actionContext,before,after);
     if(save && !['preview','cancel','select'].includes(type)) schedulePersist();
     if (before.screen === 'battle' && after.screen !== 'battle' && battlefield && after.events?.length) {
       try { await playPresentation(after.events, before, after); } catch { /* Presentation cannot prevent the committed result appearing. */ }
@@ -230,7 +232,7 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
       busy=true;
       try { await playPresentation(view.events,before,view); } catch { /* Keep the authoritative result if an animation fails. */ }
     }
-    narrator?.finish();
+    if(type!=='explore_step') narrator?.finish();
     animating=false; $('#skip-animation')?.setAttribute('hidden','');
     if (before.canConfirm && !view.canConfirm && battleReturn) $(battleReturn)?.focus();
     commandFeedback(type, args, before, view,actionLabel);
@@ -247,6 +249,7 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
   }
 }
 function commandFeedback(type, args, before, after,actionLabel) {
+  if(type==='explore_step') { if(before.screen==='explore'&&after.screen==='battle') toast('Enemies spotted · Tactical combat begins.','info'); return; }
   if(type==='preview_neighborhood'&&after.neighborhood?.canConfirm)return;
   if(type==='cancel_neighborhood'){toast('Choice canceled. Supplies unchanged.','info');return;}
   if(type==='confirm_neighborhood'&&before.neighborhood?.forecast&&!after.neighborhood?.canConfirm){
@@ -338,9 +341,9 @@ function render() {
   if(abilityDetailsOpen&&selectedAction()) $('#game').insertAdjacentHTML('beforeend',`<dialog id="ability-details-dialog" aria-labelledby="ability-details-title"><div class="dialog-head"><h2 id="ability-details-title">Action details</h2><button id="close-ability-details" class="icon-button" aria-label="Close action details">×</button></div><div class="modal-body">${renderAbilityDetails(selectedAction(),content,{full:true})}</div><div class="modal-actions"><button id="done-ability-details">Back to targeting</button></div></dialog>`);
   if (['battle','explore'].includes(view.screen)) {
     const slot = $('#battlefield-slot');
-    if (!battleCanvas) { battleCanvas=document.createElement('canvas'); battleCanvas.id='battlefield'; battleCanvas.addEventListener('battleevent',event=>narrator?.onEvent(event.detail?.event||event.detail)); battleCanvas.addEventListener('battlephase',event=>{if(event.detail?.phase==='enemy')setEnemyPlayback(true);else if(event.detail?.phase==='player'&&enemySequence)setEnemyPlayback(true,'player');}); battleCanvas.setAttribute('aria-label','Isometric dungeon battlefield. Use the accessible map controls to select cells.'); }
+    if (!battleCanvas) { battleCanvas=document.createElement('canvas'); battleCanvas.id='battlefield'; battleCanvas.addEventListener('battleevent',event=>narrator?.onEvent(event.detail?.event||event.detail)); battleCanvas.addEventListener('battlephase',event=>{if(event.detail?.phase==='enemy')setEnemyPlayback(true);else if(event.detail?.phase==='player'&&enemySequence)setEnemyPlayback(true,'player');}); battleCanvas.setAttribute('aria-label','Square dungeon battlefield. Walk with WASD or arrow keys outside combat.'); }
     slot.prepend(battleCanvas);
-    if (!battlefield) battlefield=createBattlefield(battleCanvas,{onCell:(x,y)=>view.screen==='explore'?command('explore_move',{x,y}):clickCell(x,y),onHover:hoverCell});
+    if (!battlefield) battlefield=createBattlefield(battleCanvas,{onCell:(x,y)=>view.screen==='explore'?hoverCell(x,y):clickCell(x,y),onHover:hoverCell});
     battlefield.setView(view,{mode:view.screen==='battle'&&localAction ? 'ability' : 'move',action:selectedAction(),preview:view.canConfirm ? view.forecast : null,targetId:view.canConfirm?previewTargetId:null});
     battlefield.resize();
   }
@@ -376,7 +379,7 @@ function renderCamp() {
   focusedRoster=focused?.id;
   const progression=view.progression;
   const advisor=view.roster.find(r=>r.deployable===false)??{id:'crawler.mordecai',label:'Mordecai',classId:'class.cleric'};
-  return `<section class="camp-screen safe-room" aria-labelledby="screen-title"><header class="safe-room-heading"><div><span class="section-label">MORDECAI’S SAFE ROOM</span><h1 id="screen-title">Rest. Equip. Prepare.</h1><p>A safe place between the cameras and the next fight.</p></div><div class="party-progression"><strong>PARTY LEVEL ${progression?.level??1}</strong><span>${progression?.xp??view.xp} XP${progression?.nextLevelXp?' / '+progression.nextLevelXp+' next level':''}</span><progress value="${progression?.xpIntoLevel??0}" max="${(progression?.xpIntoLevel??0)+(progression?.xpToNextLevel??1)||1}" aria-label="Party level progress"></progress></div></header>${renderSafeRoomStations(focused,advisor)}${renderAudienceHome(view)}${renderNeighborhoodStrip(view)}<nav class="safe-activities" aria-label="Safe-room activities">${view.neighborhood?.standalone?'<button data-return-neighborhood>Return to preserved campaign</button>':'<button id="open-neighborhood-start">Play Over City neighborhood…</button>'}<button id="open-home" ${view.home?'':'disabled'}>Personal space · ${view.home?.gold??0} gold</button><button id="open-journey" ${view.journey?'':'disabled'}>${view.journey?.active?'Floor journey':'Start floors 1–8…'}</button><a class="button" href="codex.html" target="_blank" rel="noopener">Lore codex ↗</a><button id="open-skill-tree" ${view.skillTree?'':'disabled'}>Skill trees</button><button id="open-missions" ${view.expeditions?.length?'':'disabled'}>Mission board</button><button id="open-development" ${view.development?'':'disabled'}>Stats · Practice · Craft · Loot</button><button id="open-scenarios" ${view.scenarios?.length?'':'disabled'}>Scenario expeditions</button></nav><div class="safe-room-layout"><aside class="safe-advisor panel"><div class="advisor-head">${portrait(advisor,'advisor-portrait')}<div><h2>Mordecai</h2><span>Safe-room advisor</span></div></div><p>${e(view.safeRoom?.description||'Catch your breath. Check your gear and skills before heading back into the dungeon.')}</p><button id="rest-button" class="primary" ${view.safeRoom?.available===false?'disabled':''}>${view.safeRoom?.rested?'Rest again':'Rest & restore HP / MP'}</button><small>${view.safeRoom?.rested?'Party rested. Equipment and skills are ready to change.':'Rest restores the party’s actual health and mana.'}</small><details class="safe-quests"><summary>Quest journal · ${e(activeQuest()?.label||'Explore the dungeon')} ${activeQuest()?activeQuest().progress+'/'+activeQuest().total:''}</summary>${questRows()}</details></aside><details class="safe-party" ${rosterExpanded?'open':''}><summary class="panel-head"><h2>Manage your crawlers</h2><span>${view.partyCount}/${view.partyCapacity} deployed · classes & stats</span></summary><div class="safe-roster-grid">${view.roster.filter(r=>r.deployable!==false).map(r=>`<article class="safe-crawler${r.selected?' deployed':''}${r.id===focusedRoster?' focused':''}" data-crawler-card="${e(r.id)}"><button class="safe-crawler-select" data-roster="${e(r.id)}" aria-pressed="${r.id===focusedRoster}">${portrait(r)}<span><strong>${e(r.label)}</strong><small>Level ${r.level??progression?.level??1} · ${e(classLabel(r.classId))}</small><span class="deployment-label">${r.selected?'DEPLOYED':'RESERVE'}</span></span></button><div class="safe-crawler-stats"><span>HP <b>${r.hp}/${r.maxHp}</b></span><span>MP <b>${r.energy??r.maxEnergy??'—'}/${r.maxEnergy??'—'}</b></span><span>MOVE <b>${r.move??'—'}</b></span><span>XP <b>${progression?.xp??view.xp}</b></span></div><div class="safe-crawler-gear">${gearFor(r.id).map(gear=>`<span>${e(gear.label)}</span>`).join('')||'<span>No equipment</span>'}</div><div class="safe-crawler-buttons"><button data-equipment="${e(r.id)}">Equipment</button><button data-skills="${e(r.id)}">Skills</button><button data-character-sheet="${e(r.id)}">Sheet</button></div></article>`).join('')}</div><section class="safe-loadout panel"><div><strong>${e(focused?.label)} · Class & deployment</strong><p>Character skills stay with their crawler. Classes add their own abilities.</p></div><label class="field" for="class-select">CLASS${view.journey?.active&&!view.journey.classesUnlocked?'<small>Unlocks on Floor 3</small>':''}<input id="class-search" type="search" placeholder="Search classes…" aria-label="Search class choices"><select id="class-select" ${view.journey?.active&&!view.journey.classesUnlocked?'disabled':''}>${[...view.classes].sort((a,b)=>a.label.localeCompare(b.label)).map(klass=>`<option value="${e(klass.id)}" ${klass.id===focused?.classId?'selected':''} ${klass.enabled===false?'disabled':''}>${e(classChoiceLabel(klass))}${klass.enabled===false?' · Locked: '+e(klass.disabledReason||'Floor '+klass.minimumFloor):''}</option>`).join('')}</select></label><button id="toggle-party">${focused?.selected?'Move to reserve':'Deploy crawler'}</button></section><details class="panel inventory-strip"><summary>Shared consumables · ${view.items.reduce((sum,item)=>sum+item.count,0)} charges</summary><div class="tags">${view.items.map(item=>`<span class="tag">${e(item.label)} ×${item.count}</span>`).join('')}</div></details></details></div>${renderCampModal()}</section>`;
+  return `<section class="camp-screen safe-room" aria-labelledby="screen-title"><header class="safe-room-heading"><div><span class="section-label">MORDECAI’S SAFE ROOM</span><h1 id="screen-title">Rest. Equip. Prepare.</h1><p>A safe place between the cameras and the next fight.</p></div><div class="party-progression"><strong>PARTY LEVEL ${progression?.level??1}</strong><span>${progression?.xp??view.xp} XP${progression?.nextLevelXp?' / '+progression.nextLevelXp+' next level':''}</span><progress value="${progression?.xpIntoLevel??0}" max="${(progression?.xpIntoLevel??0)+(progression?.xpToNextLevel??1)||1}" aria-label="Party level progress"></progress></div></header>${renderSafeRoomStations(focused,advisor)}${renderAudienceHome(view)}${renderNeighborhoodStrip(view)}<nav class="safe-activities" aria-label="Safe-room activities"><button data-generated-adventure>New generated dungeon</button><button id="legacy-dungeon">Story encounters</button>${view.neighborhood?.standalone?'<button data-return-neighborhood>Return to preserved campaign</button>':'<button id="open-neighborhood-start">Play Over City neighborhood…</button>'}<button id="open-home" ${view.home?'':'disabled'}>Personal space · ${view.home?.gold??0} gold</button><button id="open-journey" ${view.journey?'':'disabled'}>${view.journey?.active?'Floor journey':'Start floors 1–8…'}</button><a class="button" href="codex.html" target="_blank" rel="noopener">Lore codex ↗</a><button id="open-skill-tree" ${view.skillTree?'':'disabled'}>Skill trees</button><button id="open-missions" ${view.expeditions?.length?'':'disabled'}>Mission board</button><button id="open-development" ${view.development?'':'disabled'}>Stats · Practice · Craft · Loot</button><button id="open-scenarios" ${view.scenarios?.length?'':'disabled'}>Scenario expeditions</button></nav><div class="safe-room-layout"><aside class="safe-advisor panel"><div class="advisor-head">${portrait(advisor,'advisor-portrait')}<div><h2>Mordecai</h2><span>Safe-room advisor</span></div></div><p>${e(view.safeRoom?.description||'Catch your breath. Check your gear and skills before heading back into the dungeon.')}</p><button id="rest-button" class="primary" ${view.safeRoom?.available===false?'disabled':''}>${view.safeRoom?.rested?'Rest again':'Rest & restore HP / MP'}</button><small>${view.safeRoom?.rested?'Party rested. Equipment and skills are ready to change.':'Rest restores the party’s actual health and mana.'}</small><details class="safe-quests"><summary>Quest journal · ${e(activeQuest()?.label||'Explore the dungeon')} ${activeQuest()?activeQuest().progress+'/'+activeQuest().total:''}</summary>${questRows()}</details></aside><details class="safe-party" ${rosterExpanded?'open':''}><summary class="panel-head"><h2>Manage your crawlers</h2><span>${view.partyCount}/${view.partyCapacity} deployed · classes & stats</span></summary><div class="safe-roster-grid">${view.roster.filter(r=>r.deployable!==false).map(r=>`<article class="safe-crawler${r.selected?' deployed':''}${r.id===focusedRoster?' focused':''}" data-crawler-card="${e(r.id)}"><button class="safe-crawler-select" data-roster="${e(r.id)}" aria-pressed="${r.id===focusedRoster}">${portrait(r)}<span><strong>${e(r.label)}</strong><small>Level ${r.level??progression?.level??1} · ${e(classLabel(r.classId))}</small><span class="deployment-label">${r.selected?'DEPLOYED':'RESERVE'}</span></span></button><div class="safe-crawler-stats"><span>HP <b>${r.hp}/${r.maxHp}</b></span><span>MP <b>${r.energy??r.maxEnergy??'—'}/${r.maxEnergy??'—'}</b></span><span>MOVE <b>${r.move??'—'}</b></span><span>XP <b>${progression?.xp??view.xp}</b></span></div><div class="safe-crawler-gear">${gearFor(r.id).map(gear=>`<span>${e(gear.label)}</span>`).join('')||'<span>No equipment</span>'}</div><div class="safe-crawler-buttons"><button data-equipment="${e(r.id)}">Equipment</button><button data-skills="${e(r.id)}">Skills</button><button data-character-sheet="${e(r.id)}">Sheet</button></div></article>`).join('')}</div><section class="safe-loadout panel"><div><strong>${e(focused?.label)} · Class & deployment</strong><p>Character skills stay with their crawler. Classes add their own abilities.</p></div><label class="field" for="class-select">CLASS${view.journey?.active&&!view.journey.classesUnlocked?'<small>Unlocks on Floor 3</small>':''}<input id="class-search" type="search" placeholder="Search classes…" aria-label="Search class choices"><select id="class-select" ${view.journey?.active&&!view.journey.classesUnlocked?'disabled':''}>${[...view.classes].sort((a,b)=>a.label.localeCompare(b.label)).map(klass=>`<option value="${e(klass.id)}" ${klass.id===focused?.classId?'selected':''} ${klass.enabled===false?'disabled':''}>${e(classChoiceLabel(klass))}${klass.enabled===false?' · Locked: '+e(klass.disabledReason||'Floor '+klass.minimumFloor):''}</option>`).join('')}</select></label><button id="toggle-party">${focused?.selected?'Move to reserve':'Deploy crawler'}</button></section><details class="panel inventory-strip"><summary>Shared consumables · ${view.items.reduce((sum,item)=>sum+item.count,0)} charges</summary><div class="tags">${view.items.map(item=>`<span class="tag">${e(item.label)} ×${item.count}</span>`).join('')}</div></details></details></div>${renderCampModal()}</section>`;
 }
 function renderCampModal() {
   if(!campModal)return '';
@@ -433,7 +436,7 @@ function renderExploration() {
   const map=view.exploration;
   if(!map) return '<p>Preparing the passages…</p>';
   const points=map.points.filter(p=>p.canInteract&&!p.claimed&&!view.neighborhood?.interactions.some(i=>i.pointId===p.id));
-  return `<section class="exploration-screen iso-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(map.label)}</h2></div></div>${view.neighborhood?.active?renderNeighborhoodStrip(view):renderQuestTracker()}<div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${t.blocked?'wall':t.revealed?'passage':'unexplored'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>portrait(r)).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || 'Find the encounter door')}</strong><p>${e(points[0]?.description || 'Click a path or use arrow keys / WASD. Approach discoveries to interact.')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}${neighborhoodVisible()?'<button data-open-neighborhood>Room choices & journal</button>':''}<button id="return-camp">Return to Mordecai</button></div><div id="narrator-slot" class="narrator-slot"></div></div></section>`;
+  return `<section class="exploration-screen square-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(map.label)}</h2></div></div>${view.generatedDungeon?'<div class="quest-tracker">'+(view.generatedDungeon.cleared?'Enemies cleared · Walk to the exit and press E.':'Explore freely · Nearby enemies start combat.')+'</div>':view.neighborhood?.active?renderNeighborhoodStrip(view):renderQuestTracker()}<div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${!t.revealed?'unexplored':t.blocked?'wall':'passage'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="walk-pad" aria-label="Walk through the dungeon"><button data-walk="north" aria-label="Walk up">▲</button><button data-walk="west" aria-label="Walk left">◀</button><button data-walk="south" aria-label="Walk down">▼</button><button data-walk="east" aria-label="Walk right">▶</button></div><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>portrait(r)).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || 'Find the encounter door')}</strong><p>${e(points[0]?.description || 'Hold WASD / arrow keys or the direction pad to walk. E / Space interacts. Combat stays turn-based.')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}${neighborhoodVisible()?'<button data-open-neighborhood>Room choices & journal</button>':''}<button id="return-camp">Return to Mordecai</button></div><div id="narrator-slot" class="narrator-slot"></div></div></section>`;
 }
 function renderBoard() {
   const action = selectedAction();
@@ -514,7 +517,7 @@ function renderVictory() {
 function renderEnding() {
   if(view.scenario)return renderScenarioOutcome(false);
   const complete = view.screen === 'complete';
-  return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${complete ? '♜' : '†'}</div><h2 id="screen-title">${complete ? (view.journey?.complete?'Eight floors. Still standing.':'The floor is yours.') : 'The dungeon wins. For now.'}</h2><p>${complete ? `${view.journey?.complete?'All eight playable floors cleared. Floors 9–18 remain locked.':view.customMap?'Your workshop room is clear.':'All three encounters cleared.'} Your crawlers earned ${view.xp} XP, exploited the elements, and made it back in one piece. The audience will want a sequel.` : 'Your deployed crawlers have fallen. Retry the encounter with the same starting party and supplies, or rebuild from the beginning.'}</p><div class="tags" style="justify-content:center"><span class="tag gold">${complete ? (view.journey?.complete?'FLOORS 1–8 COMPLETE':'FLOOR 01 COMPLETE') : 'PARTY DEFEATED'}</span><span class="tag">${view.xp} XP EARNED</span></div><div class="button-row">${!complete ? '<button class="primary" id="retry-button">Retry encounter</button>' : '<button id="open-scenarios" class="primary">Play boss scenarios</button>'}<button id="ending-new-run" ${complete ? 'class="primary"' : ''}>Start a new run</button></div><button class="quiet" id="ending-export">Export this run</button></div>${renderSurvivors()}${renderLog()}</section>`;
+  return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${complete ? '♜' : '†'}</div><h2 id="screen-title">${complete ? (view.journey?.complete?'Eight floors. Still standing.':'The floor is yours.') : 'The dungeon wins. For now.'}</h2><p>${complete ? `${view.journey?.complete?'All eight playable floors cleared. Floors 9–18 remain locked.':view.customMap?'Your workshop room is clear.':'All three encounters cleared.'} Your crawlers earned ${view.xp} XP, exploited the elements, and made it back in one piece. The audience will want a sequel.` : 'Your deployed crawlers have fallen. Retry the encounter with the same starting party and supplies, or rebuild from the beginning.'}</p><div class="tags" style="justify-content:center"><span class="tag gold">${complete ? (view.journey?.complete?'FLOORS 1–8 COMPLETE':'FLOOR 01 COMPLETE') : 'PARTY DEFEATED'}</span><span class="tag">${view.xp} XP EARNED</span></div><div class="button-row">${!complete ? '<button class="primary" id="retry-button">Retry encounter</button>' : '<button id="open-scenarios" class="primary">Play boss scenarios</button>'}<button data-generated-adventure class="primary">Generate another dungeon</button><button id="ending-new-run" ${complete ? 'class="primary"' : ''}>Start a new run</button></div><button class="quiet" id="ending-export">Export this run</button></div>${renderSurvivors()}${renderLog()}</section>`;
 }
 function bindProgressionMenus(){
   const closeEnemy=()=>{enemySheetId=null;render();};$('#close-enemy-info')?.addEventListener('click',closeEnemy);$('#done-enemy-info')?.addEventListener('click',closeEnemy);if($('#enemy-info-dialog')){openDialog('#enemy-info-dialog');$('#enemy-info-dialog').addEventListener('cancel',event=>{event.preventDefault();closeEnemy();});}
@@ -687,6 +690,8 @@ function bindScreen() {
   $('#rotate-left')?.addEventListener('click',()=>{battlefield?.rotate?.(-1);refreshCompass();});
   $('#rotate-right')?.addEventListener('click',()=>{battlefield?.rotate?.(1);refreshCompass();});
   refreshCompass();
+  document.querySelectorAll('[data-generated-adventure]').forEach(button=>button.addEventListener('click',openGeneratedAdventure));
+  $('#legacy-dungeon')?.addEventListener('click',()=>command('start'));
   $('#rest-button')?.addEventListener('click',()=>command('safe_room_rest'));
   $('#station-rest')?.addEventListener('click',()=>command('safe_room_rest'));
   document.querySelectorAll('[data-equipment]').forEach(button=>button.addEventListener('click',()=>{focusedRoster=button.dataset.equipment;campModal='equipment';render();}));
@@ -759,11 +764,11 @@ function bindScreen() {
       if (event.shiftKey && document.activeElement === first) {event.preventDefault();last?.focus();}
       else if (!event.shiftKey && document.activeElement === last) {event.preventDefault();first?.focus();}
     }); }
-  document.querySelectorAll('[data-explore-cell]').forEach(b => b.addEventListener('click', () => { const [x,y] = b.dataset.exploreCell.split(',').map(Number); command('explore_move', {x,y}); }));
+  document.querySelectorAll('[data-explore-cell]').forEach(b => b.addEventListener('click', () => { const [x,y] = b.dataset.exploreCell.split(',').map(Number); hoverCell(x,y); }));
   document.querySelectorAll('[data-explore-interact]').forEach(b => b.addEventListener('click', () => command('explore_interact', {targetId:b.dataset.exploreInteract})));
   $('#return-camp')?.addEventListener('click', () => command('return_camp'));
   $('#enter-battle')?.addEventListener('click', () => command('start'));
-  $('#quick-enter')?.addEventListener('click', () => command('start'));
+  $('#quick-enter')?.addEventListener('click', () => view.generatedDungeon || view.journey?.active || view.neighborhood?.active || view.encounterIndex > 0 ? command('start') : openGeneratedAdventure());
   document.querySelectorAll('[data-unit], [data-ability], [data-modal-ability], [data-modal-item]').forEach(b => b.addEventListener('pointerdown', () => b.classList.add('pressed')));
   document.querySelectorAll('[data-cell]').forEach(b => b.addEventListener('focus', () => hoverCell(...b.dataset.cell.split(',').map(Number))));
   document.querySelectorAll('.party-chip[data-unit]').forEach(b => b.addEventListener('click', () => { targetTile = false; playerInput(()=>command('select', { unitId: b.dataset.unit })); }));
@@ -878,14 +883,17 @@ function workshopRequest() {
   const serialized = token ? sessionStorage.getItem(storageKey) : localStorage.getItem(storageKey);
   if (!serialized) throw new Error('This dungeon handoff has expired. Your saved run is unchanged; return to the generator and choose Play again.');
   if (serialized.length > 2_000_000) throw new Error('The generated map exceeds the 2 MB import limit.');
-  return { token, storageKey, serialized, map: JSON.parse(serialized) };
+  const exploring = query.get('explore') === '1';
+  const traversal = exploring ? JSON.parse(sessionStorage.getItem(`${storageKey}.exploration`) || 'null') : null;
+  if (exploring && !traversal) throw new Error('Exploration handoff expired. Return to Foundry and choose Play again.');
+  return { token, storageKey, serialized, map: JSON.parse(serialized), exploring, traversal };
 }
 function matchesWorkshopValue(actual, expected) {
   if (expected === null || typeof expected !== 'object') return actual === expected;
   if (Array.isArray(expected)) return Array.isArray(actual) && actual.length === expected.length && expected.every((value, index) => matchesWorkshopValue(actual[index], value));
   return actual && typeof actual === 'object' && Object.keys(expected).every(key => matchesWorkshopValue(actual[key], expected[key]));
 }
-function verifyWorkshopImport(expected) {
+function verifyWorkshopImport(expected, exploring = false) {
   if (expected.visuals && !matchesWorkshopValue(view.customMap?.visuals, expected.visuals)) throw new Error('The game did not retain this dungeon’s selected tile art. Reload the updated game and retry.');
   const portable = {
     schemaVersion: expected.schemaVersion, width: expected.width, height: expected.height, label: expected.label,
@@ -895,7 +903,11 @@ function verifyWorkshopImport(expected) {
     ...(expected.enemies?.length ? { enemies: expected.enemies } : {}),
     ...(expected.visuals ? { visuals: expected.visuals } : {}),
   };
-  if (view.screen !== 'battle' || view.width !== expected.width || view.height !== expected.height || !matchesWorkshopValue(view.customMap, portable)) throw new Error(view.message || 'The game did not accept this exact dungeon.');
+  if (view.screen !== (exploring ? 'explore' : 'battle') || view.width !== expected.width || view.height !== expected.height || !matchesWorkshopValue(view.customMap, portable)) throw new Error(view.message || 'The game did not accept this exact dungeon.');
+  if (exploring) {
+    if (!view.generatedDungeon || view.exploration?.width !== expected.width || view.exploration?.height !== expected.height) throw new Error('Generated exploration did not start on this map.');
+    return;
+  }
   const authoredTiles = new Map(expected.tiles.map(tile => [`${tile.x},${tile.y}`, tile]));
   if (view.tiles.length !== expected.width * expected.height || view.tiles.some(tile => {
     const authored = authoredTiles.get(`${tile.x},${tile.y}`);
@@ -909,8 +921,9 @@ function verifyWorkshopImport(expected) {
 }
 function consumeWorkshopRequest(request) {
   if (request.token) sessionStorage.removeItem(request.storageKey);
+  sessionStorage.removeItem(`${request.storageKey}.exploration`);
   try { if (localStorage.getItem('dct.workshop-map') === request.serialized) localStorage.removeItem('dct.workshop-map'); } catch { /* The per-tab handoff is already complete. */ }
-  const query = new URLSearchParams(location.search); query.delete('workshop'); query.delete('map');
+  const query = new URLSearchParams(location.search); query.delete('workshop'); query.delete('map'); query.delete('explore');
   history.replaceState(null, '', `${location.pathname}${query.size ? `?${query}` : ''}${location.hash}`);
 }
 async function boot() {
@@ -931,8 +944,8 @@ async function boot() {
       // An explicit map takes precedence over autosave. Commit the browser save only
       // after geometry, spawns and any native visual descriptor match exactly.
       render();
-      await command('import_map', { customMap: requestedMap.map }, { save: false });
-      verifyWorkshopImport(requestedMap.map);
+      await command(requestedMap.exploring ? 'import_generated' : 'import_map', { customMap: requestedMap.map, ...requestedMap.traversal }, { save: false });
+      verifyWorkshopImport(requestedMap.map, requestedMap.exploring);
       await persist({ strict: true });
       workshopCommitted = true;
       consumeWorkshopRequest(requestedMap);
@@ -992,10 +1005,61 @@ $('#reload-save-button').addEventListener('click', async () => {
 });
 $('#restart-button').addEventListener('click', () => { closeDialog('#save-dialog'); openDialog('#restart-dialog'); });
 $('#confirm-restart').addEventListener('click', async () => { closeDialog('#restart-dialog'); focusedRoster = null; await command('new_run'); });
-document.addEventListener('keydown', event => {
-  if(view?.screen==='explore'&&!document.querySelector('dialog[open]')&&!['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName)&&!event.ctrlKey&&!event.metaKey&&!event.altKey&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','w','a','s','d'].includes(event.key)) {
-    event.preventDefault();battleCanvas?.focus({preventScroll:true});battleCanvas?.dispatchEvent(new KeyboardEvent('keydown',{key:event.key}));
+let adventureRequest = 0, adventureCommitting = false;
+function openGeneratedAdventure() {
+  explorationControls.stop();
+  $('#generated-adventure-status').textContent = '';
+  $('#begin-generated-adventure').disabled = false;
+  openDialog('#generated-adventure-dialog');
+}
+function closeGeneratedAdventure() {
+  if (adventureCommitting) return;
+  adventureRequest++;
+  closeDialog('#generated-adventure-dialog');
+}
+$('#close-generated-adventure').onclick = closeGeneratedAdventure;
+$('#cancel-generated-adventure').onclick = closeGeneratedAdventure;
+$('#generated-adventure-dialog').addEventListener('cancel', event => { if (adventureCommitting) event.preventDefault(); else adventureRequest++; });
+$('#begin-generated-adventure').onclick = async () => {
+  const request = ++adventureRequest;
+  $('#begin-generated-adventure').disabled = true;
+  $('#generated-adventure-status').textContent = 'Building connected rooms and fitting square tiles…';
+  let previousSave;
+  try {
+    const packet = await createGeneratedAdventure({ seed: $('#adventure-seed').value, layout: $('#adventure-layout').value,
+      styleId: $('#adventure-style').value, kitId: $('#adventure-location').value });
+    if (request !== adventureRequest) return;
+    adventureCommitting = true;
+    previousSave = await call('GetSave');
+    await command('import_generated', packet, { save: false });
+    verifyWorkshopImport(packet.customMap, true);
+    await persist({ strict: true });
+    adventureCommitting = false;
+    closeGeneratedAdventure();
+    battleCanvas?.focus({preventScroll:true});
+    toast('Dungeon ready · Hold WASD, arrows, or the direction pad to walk.','success');
+  } catch (error) {
+    if (previousSave) { view = JSON.parse(await call('LoadSave', previousSave)); render(); }
+    if (request === adventureRequest) $('#generated-adventure-status').textContent = `Could not enter the dungeon: ${error.message}`;
+  } finally { adventureCommitting = false; if (request === adventureRequest) $('#begin-generated-adventure').disabled = false; }
+};
+const explorationControls = attachExplorationControls({
+  canMove: () => view?.screen === 'explore' && !busy && !animating && !enemySequence
+    && !document.querySelector('dialog[open]') && battlefield?.getNativeArtStatus?.().state === 'ready',
+  focusMap: () => battleCanvas?.focus({preventScroll:true}),
+  step: async (dx,dy) => {
+    const direction = battlefield.movementDirection(dx,dy);
+    const x = view.exploration.x + direction.x, y = view.exploration.y + direction.y;
+    if (view.exploration.tiles.some(tile => tile.x === x && tile.y === y && !tile.blocked && tile.reachable))
+      await command('explore_step', {x:direction.x,y:direction.y});
+  },
+  interact: () => {
+    const point = view.exploration.points.find(p=>p.canInteract&&!p.claimed);
+    if (point) return command('explore_interact', {targetId:point.id});
+    toast('Move beside a discovery or the cleared exit to interact.','info');
   }
+});
+document.addEventListener('keydown', event => {
 
   if (event.key === '?' && !document.querySelector('dialog[open]') && !event.ctrlKey && !event.metaKey && !['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) { event.preventDefault(); openDialog('#help-dialog'); }
   if (event.key === 'Escape' && !document.querySelector('dialog[open]')) { if(enemySequence)return; if (drawer) { closeDrawer(); } else if (view?.screen === 'battle') cancelTargeting(); }

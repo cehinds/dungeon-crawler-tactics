@@ -28,6 +28,49 @@ static class CustomMapTests
     static void Check(bool condition, string message) { if (!condition) throw new Exception(message); checks++; Console.WriteLine("PASS " + message); }
     static string Save(GameSession game) { return JsonSerializer.Serialize(game.ExportSave(), Json); }
     static void Reject(GameSession game, CustomMapData map, string message) { string before = Save(game); game.Handle(new GameCommand { type = "import_map", customMap = map }); Check(Save(game) == before, message + " preserves live run"); }
+    static void GeneratedChecks()
+    {
+        GameSession legacy = Session(); GameView legacyView = legacy.Handle(new GameCommand { type = "start" });
+        Check(legacyView.exploration.tiles.All(t => t.blocked == data.encounters[0].exploration.walls.Any(w => w.x == t.x && w.y == t.y)), "Exploration collision stays canonical while visibility changes");
+        GameSession game = Session(); CustomMapData map = NativeMap();
+        GameView view = game.Handle(new GameCommand { type = "import_generated", customMap = map, entrance = new CellView { x = 0, y = 0 }, exit = new CellView { x = 9, y = 0 } });
+        Check(view.screen == "explore" && view.exploration.width == map.width && view.customMap.visuals.kitId == map.visuals.kitId, "Generated run explores the exact native map before combat");
+        string before = Save(game);
+        game.Handle(new GameCommand { type = "explore_step", x = 1, y = 1 }); Check(Save(game) == before, "Diagonal generated movement rejected transactionally");
+        game.Handle(new GameCommand { type = "explore_step", x = -1 }); Check(Save(game) == before, "Out of bounds generated movement rejected");
+        for (int i = 0; i < 30; i++) { game.Handle(new GameCommand { type = "explore_step", x = 1 }); game.Handle(new GameCommand { type = "explore_step", x = -1 }); }
+        Check(game.GetView().screen == "explore" && game.GetView().generatedDungeon.x == 0, "Exploration permits unlimited steps without actions or movement points");
+        GameSession restored = Session(); restored.ImportSave(Clone(game.ExportSave())); Check(Save(restored) == Save(game), "Generated exploration save roundtrip");
+        game.Handle(new GameCommand { type = "return_camp" }); game.Handle(new GameCommand { type = "start" }); Check(game.GetView().exploration.id == "generated.dungeon", "Camp returns to generated map");
+        game.Handle(new GameCommand { type = "explore_move", x = 1, y = 0 }); game.Handle(new GameCommand { type = "explore_move", x = 2, y = 0 }); game.Handle(new GameCommand { type = "explore_move", x = 2, y = 1 }); game.Handle(new GameCommand { type = "explore_move", x = 2, y = 2 }); game.Handle(new GameCommand { type = "explore_move", x = 2, y = 3 });
+        before = Save(game); game.Handle(new GameCommand { type = "explore_step", x = 1 }); Check(Save(game) == before, "Canonical blocked tiles prevent exploration movement");
+        game.Handle(new GameCommand { type = "explore_move", x = 2, y = 4 }); game.Handle(new GameCommand { type = "explore_move", x = 2, y = 5 }); game.Handle(new GameCommand { type = "explore_move", x = 3, y = 5 }); game.Handle(new GameCommand { type = "explore_move", x = 4, y = 5 });
+        game.Handle(new GameCommand { type = "explore_move", x = 5, y = 5 });
+        view = game.Handle(new GameCommand { type = "explore_move", x = 6, y = 5 });
+        Check(view.screen == "battle" && view.units.First(u => u.team == "player").x == view.generatedDungeon.x && view.units.First(u => u.team == "player").y == view.generatedDungeon.y, "Nearby enemies trigger battle at exploration leader instead of entrance");
+        Check(view.units.Where(u => u.hp > 0).Select(u => u.x + "," + u.y).Distinct().Count() == view.units.Length, "Nearby party deployment does not overlap enemies or allies");
+        restored = Session(); restored.ImportSave(Clone(game.ExportSave())); Check(Save(restored) == Save(game), "Generated battle save roundtrip");
+        GameSave defeat = Clone(game.ExportSave()); defeat.screen = "defeat"; defeat.selectedUnitId = null;
+        foreach (SavedUnit unit in defeat.units.Where(u => u.team == "player")) unit.hp = 0;
+        GameSession retry = Session(); Check(retry.ImportSave(defeat).screen == "defeat", "Generated defeat checkpoint validates");
+        GameView retried = retry.Handle(new GameCommand { type = "retry" });
+        Check(retried.screen == "battle" && retried.units.First(u => u.team == "player").x == view.generatedDungeon.x && retried.units.First(u => u.team == "player").y == view.generatedDungeon.y, "Retry deploys at saved encounter approach instead of original entrance");
+        GameSave invalidReward = Clone(game.ExportSave()); invalidReward.generatedDungeon.cleared = true;
+        before = Save(game); game.ImportSave(invalidReward); Check(Save(game) == before, "Forged cleared flag cannot skip a generated battle");
+        GameSave invalid = Clone(game.ExportSave()); invalid.generatedDungeon.x = 3; invalid.generatedDungeon.y = 3; before = Save(game); game.ImportSave(invalid); Check(Save(game) == before, "Invalid generated position preserves active battle");
+        GameSession duel = Session(); CustomMapData duelMap = new CustomMapData { width = 10, height = 8, enemies = new[] { new SpawnDef { id = "custom.enemy.duel", label = "Rat", classId = data.encounters[0].enemies[0].classId, x = 2, y = 1, hp = 1, move = 1 } } };
+        duel.Handle(new GameCommand { type = "import_generated", customMap = duelMap, entrance = new CellView { x = 0, y = 1 }, exit = new CellView { x = 1, y = 1 } });
+        view = duel.Handle(new GameCommand { type = "explore_step", x = 1 });
+        AbilityView strike = view.abilities.First(a => a.enabled && a.targetIds.Contains("custom.enemy.duel"));
+        duel.Handle(new GameCommand { type = "preview", abilityId = strike.id, targetId = "custom.enemy.duel" }); duel.Handle(new GameCommand { type = "confirm" });
+        Check(duel.GetView().screen == "victory", "Generated battle retains sponsor reward flow");
+        restored = Session(); Check(restored.ImportSave(Clone(duel.ExportSave())).screen == "victory", "Generated victory roundtrip");
+        duel.Handle(new GameCommand { type = "choose_reward", rewardId = data.rewards[0].id }); view = duel.Handle(new GameCommand { type = "continue" });
+        Check(view.screen == "explore" && view.generatedDungeon.cleared && view.units.Length == 0, "Reward continuation returns to cleared generated exploration");
+        restored = Session(); Check(restored.ImportSave(Clone(duel.ExportSave())).generatedDungeon.cleared, "Cleared generated exploration save roundtrip");
+        Check(duel.Handle(new GameCommand { type = "explore_interact", targetId = "generated.exit" }).screen == "complete", "Cleared exit completes generated dungeon");
+        restored = Session(); Check(restored.ImportSave(Clone(duel.ExportSave())).screen == "complete", "Generated completion save roundtrip");
+    }
     static void Main()
     {
         content = JsonSerializer.Deserialize<Content>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")), Json);
@@ -103,6 +146,7 @@ static class CustomMapTests
         Check(view.screen == "complete" && view.width == duelMap.width && view.customMap != null, "Custom encounter completes after one victory with its map retained");
         GameSession completeReload = Session(); Check(completeReload.ImportSave(Clone(duel.ExportSave())).screen == "complete", "Completed custom run save roundtrip");
         game.Handle(new GameCommand { type = "new_run" }); Check(game.GetView().customMap == null && game.GetView().screen == "camp", "New campaign clears custom encounter override");
+        GeneratedChecks();
         Console.WriteLine("PASS " + checks + " custom map checks.");
     }
 }

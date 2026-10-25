@@ -1,5 +1,5 @@
 import { drawFloorLayer } from './tile-surface-renderer.js';
-import { fetchJSON, loadArtKit, drawPiece, visibleSceneCorners, environmentMood } from './generator-art.js';
+import { fetchJSON, loadArtKit, buildArtScene, drawPiece, visibleSceneCorners, environmentMood } from './generator-art.js';
 import { nativeProject, nativePick, nativeSceneFromVisuals, serializeNativeVisuals } from './native-map-visuals.js';
 // C# owns legality, damage, turns and saved state. Native custom art is portable.
 // This module only draws authored assets and plays the ordered events it receives.
@@ -101,14 +101,15 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const p=q===1?{x:-y,y:x}:q===2?{x:-x,y:-y}:q===3?{x:y,y:-x}:{x,y};
     return {x:p.x||0,y:p.y||0};
   }
-  function nativeActive() { return view?.screen !== 'explore' && Boolean(view?.customMap?.visuals); }
+  function nativeActive() { return Boolean(mapData()); }
+  function artDescriptor(){return view?.customMap?.visuals??{styleId:'pocket-dungeon',kitId:'starter-dungeon'};}
   function project(x, y) { if(nativeActive())return nativeProject(x,y,rotation); const p=rotateVector(x,y); return {x:(p.x-p.y)*TILE_W/2, y:(p.x+p.y)*TILE_H/2}; }
   function screen(x, y) { const p=project(x,y); return {x:originX+p.x*scale,y:originY+p.y*scale}; }
   function mapData(){return view?.screen==='explore'?view.exploration:view;}
   function cellAt(clientX,clientY) {
     const box=canvas.getBoundingClientRect();
     const px=(clientX-box.left-originX)/scale, py=(clientY-box.top-originY)/scale;
-    if(nativeActive())return nativeState==='ready'?nativePick(px,py,view.width,view.height,rotation):null;
+    if(nativeActive())return nativeState==='ready'?nativePick(px,py,mapData().width,mapData().height,rotation):null;
     const p=rotateVector(Math.round(px/TILE_W+py/TILE_H),Math.round(py/TILE_H-px/TILE_W),(4-rotation)%4);
     const map=mapData();
     return map && p.x>=0 && p.y>=0 && p.x<map.width && p.y<map.height ? p : null;
@@ -134,22 +135,33 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     canvas.setAttribute('aria-label', `${nativeActive()?'Square':'Isometric'} dungeon battlefield. Arrow keys inspect tiles; Enter selects the tile.`);
   }
   async function loadNativeArt(force=false) {
-    const descriptor = view?.customMap?.visuals;
-    const key = nativeActive() ? JSON.stringify([view.width,view.height,descriptor]) : '';
+    const descriptor = artDescriptor(), map=mapData(), suppliedVisuals=view?.customMap?.visuals;
+    const key = nativeActive() ? JSON.stringify([map.width,map.height,view.customMap?.visuals??map.tiles?.filter(t=>t.blocked).map(t=>[t.x,t.y])]) : '';
     if(!force && key===nativeKey){updateNativeStatus();return;}
     nativeKey=key; const request=++nativeRequest;
     nativeArt=null;nativeScene=null;nativeError='';
     if(!key){nativeState='none';updateNativeStatus();return;}
     nativeState='loading';updateNativeStatus();
-    const mapWidth=view.width,mapHeight=view.height,mapTiles=view.customMap.tiles;
+    const mapWidth=map.width,mapHeight=map.height,mapTiles=map.tiles??view.customMap?.tiles??[];
     try {
       const catalogURL=new URL('assets/book-tiles/catalog.json',document.baseURI);
       const catalog=await fetchJSON(catalogURL);
       const art=await loadArtKit(catalog,catalogURL,descriptor.kitId,descriptor.styleId);
-      const scene=nativeSceneFromVisuals(descriptor,art,mapWidth,mapHeight,mapTiles);
+      let scene;
+      if(suppliedVisuals)scene=nativeSceneFromVisuals(descriptor,art,mapWidth,mapHeight,mapTiles);
+      else {
+        // These maps are authored game geometry, not portable generator imports.
+        // Build directly so larger campaign dimensions remain valid.
+        const blocked=mapTiles.filter(t=>t.blocked), blockedKeys=new Set(blocked.map(t=>`${t.x},${t.y}`));
+        const open=mapTiles.filter(t=>!t.blocked), entrance=open.find(t=>[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dy])=>t.x+dx>=0&&t.y+dy>=0&&t.x+dx<mapWidth&&t.y+dy<mapHeight&&!blockedKeys.has(`${t.x+dx},${t.y+dy}`)));
+        if(!entrance)throw new Error('The authored map has no connected walkable cells.');
+        scene=buildArtScene({width:mapWidth,height:mapHeight,seed:'authored',density:0,rooms:[{x:0,y:0,width:mapWidth,height:mapHeight}],blockedCells:blocked,placements:blocked.map(t=>({kind:'wall',x:t.x,y:t.y})),entrance,exit:open.at(-1)},art,false);
+        // Authored points own their landmarks; synthetic portals are unnecessary.
+        scene.decorations=[];
+      }
       if(disposed || request!==nativeRequest)return;
       nativeArt=art;nativeScene=scene;nativeState='ready';fit();updateNativeStatus();
-      canvas.dispatchEvent(new CustomEvent('nativeartready',{detail:{styleId:descriptor.styleId,kitId:descriptor.kitId,pieceCount:descriptor.pieces.length}}));
+      canvas.dispatchEvent(new CustomEvent('nativeartready',{detail:{styleId:descriptor.styleId,kitId:descriptor.kitId,pieceCount:scene.floor.length+scene.structures.length+scene.decorations.length}}));
     } catch(error) {
       if(disposed || request!==nativeRequest)return;
       nativeState='error';nativeError=error.message||'Try loading the tiles again.';updateNativeStatus();
@@ -289,7 +301,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const row=rowFor[key] ?? (enemy?1:0);
     let col=reduced.matches?0:enemy ? Math.floor(time/600)%2 : Math.floor(time/650)%2;
     const current=animation?.event;
-    const exploringWalk=view.screen==='explore'&&explorationMotion&&time-explorationMotion.started<explorationMotion.duration;
+    const exploringWalk=!enemy&&view.screen==='explore'&&explorationMotion&&time-explorationMotion.started<explorationMotion.duration;
     const actor=current?.actorId===unit.id, target=current?.targetId===unit.id;
     if(exploringWalk)col=2+Math.floor((time-explorationMotion.started)/95)%2;
     if(actor && ['move','push','teleport'].includes(current.type)) col=enemy?Math.floor(time/105)%2:2+Math.floor(time/95)%3;
@@ -515,15 +527,20 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     for(const f of floating) {const p=project(f.x,f.y),age=time-f.started;context.globalAlpha=Math.min(1,(1100-age)/250);text(f.text,p.x,p.y-68-age*.027,f.color,18);context.globalAlpha=1;}
   }
   function drawNative(time) {
-    const mood=environmentMood(view.customMap.visuals.kitId);
+    const descriptor=artDescriptor(),map=mapData(),explore=view.screen==='explore';
+    const tiles=explore?map.tiles:visualTiles;
+    const mood=environmentMood(descriptor.kitId);
     const backdrop=context.createRadialGradient(width*.5,height*.38,0,width*.5,height*.5,Math.max(width,height)*.7);
     backdrop.addColorStop(0,mood.glow);backdrop.addColorStop(1,mood.background);context.fillStyle=backdrop;context.fillRect(0,0,width,height);
     if(nativeState!=='ready')return;
     context.save();
     const shake=!reduced.matches&&time<shakeUntil?Math.sin(time*.1)*2:0;
     context.translate(originX+shake,originY);context.scale(scale,scale);
-    context.imageSmoothingEnabled=view.customMap.visuals.styleId!=='pocket-dungeon';
+    context.imageSmoothingEnabled=descriptor.styleId!=='pocket-dungeon';
     context.save();context.rotate(rotation*Math.PI/2);drawFloorLayer(context,nativeScene.floor,nativeArt.images);context.restore();
+    // Canonical collision always occupies a square cell, including authored
+    // walls whose kit art is drawn on the surrounding walkable boundaries.
+    for(const tile of tiles)if(tile.blocked&&(!explore||tile.revealed))diamond(tile.x,tile.y,{fill:'#050b0e88',stroke:'#69808055',inset:2,weight:1});
     highlights();
     const intent=view.scenario?.intent;
     if(intent)for(const cell of intent.cells??[])diamond(cell.x,cell.y,{stroke:'#ff9855',fill:'#ff4b293e',weight:3,inset:3});
@@ -533,17 +550,45 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.restore();
     // Terrain remains canonical game state; markers keep it readable without
     // replacing any of the authored floor images selected in the preview.
-    for(const tile of visualTiles){
-      const terrain=[['surface.water','W','#82d6ff'],['surface.oil','O','#d4bbf2']].filter(([tag])=>(tile.tags??[]).includes(tag));
+    for(const tile of tiles){
+      const terrain=[['surface.water','W','#82d6ff',2],['surface.oil','O','#d4bbf2',3]].filter(([tag,,,id])=>(tile.tags??[]).includes(tag)||tile.terrain===id);
       terrain.forEach(([,letter,color],index)=>{
         const point=project(tile.x-43/128,tile.y-43/128),x=point.x+index*13;
         context.fillStyle='#101b1e';context.fillRect(x-6,point.y-6,12,12);context.strokeStyle=color;context.lineWidth=1;context.strokeRect(x-6,point.y-6,12,12);
         context.fillStyle=color;context.font='bold 8px system-ui';context.textAlign='center';context.textBaseline='middle';context.fillText(letter,x,point.y+.5);
       });
     }
-    for(const tile of visualTiles)trapMarker(tile,time);
-    [...visualUnits].sort((a,b)=>depth(a.x,a.y)-depth(b.x,b.y)).forEach(unit=>sprite(unit,time));
-    for(const tile of visualTiles)if((tile.tags??[]).includes('surface.burning'))effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800);
+    for(const tile of tiles)trapMarker(tile,time);
+    if(explore){
+      for(const tile of tiles)if(!tile.revealed)diamond(tile.x,tile.y,{fill:'#071019f5'});
+      for(const point of map.points??[]){
+        if(point.claimed||point.kind==='enemy'&&view.generatedDungeon?.cleared||!tiles.some(t=>t.x===point.x&&t.y===point.y&&t.revealed))continue;
+        const p=project(point.x,point.y);
+        diamond(point.x,point.y,{stroke:'#eac878',fill:'#d9ae4828',inset:12});
+        text(({encounter:'ENTER',cache:'SUPPLIES',enemy:'ENEMY',exit:'EXIT',entrance:'ENTRANCE'})[point.kind]??'INSPECT',p.x,p.y+21,point.kind==='enemy'?'#ffb2a0':'#f4dd9c',12);
+      }
+      if(!view.generatedDungeon?.cleared){
+        const enemies=view.customMap?.enemies??(map.points??[]).filter(p=>p.kind==='enemy').map(p=>({...p,artId:'rat',hp:1,maxHp:1}));
+        for(const enemy of [...enemies].sort((a,b)=>depth(a.x,a.y)-depth(b.x,b.y))){
+          if(!tiles.some(t=>t.x===enemy.x&&t.y===enemy.y&&t.revealed))continue;
+          sprite({...enemy,maxHp:enemy.maxHp??enemy.hp,team:'enemy',tags:enemy.tags??[]},time);
+          const p=project(enemy.x,enemy.y);text(enemy.label??'ENEMY',p.x,p.y+40,'#ffb2a0',12);
+        }
+      }
+      const party=(view.roster??[]).filter(u=>u.selected).slice(0,4);
+      let partyX=map.x,partyY=map.y;
+      if(explorationMotion&&explorationMotion.duration>0){
+        const travel=clamp((time-explorationMotion.started)/explorationMotion.duration,0,1)*(explorationMotion.cells.length-1);
+        const index=Math.min(Math.floor(travel),explorationMotion.cells.length-2),a=explorationMotion.cells[index],b=explorationMotion.cells[index+1],t=travel-index;
+        partyX=a[0]+(b[0]-a[0])*t;partyY=a[1]+(b[1]-a[1])*t;
+        if(travel<explorationMotion.cells.length-1)for(const u of party)rememberFacing(u.id,b[0]-a[0],b[1]-a[1]);
+      }
+      party.forEach((u,i)=>sprite({...u,x:partyX+(i%2)*.27-.12,y:partyY+Math.floor(i/2)*.25-.12,hp:u.hp??u.maxHp??40,maxHp:u.maxHp||40,team:'player',tags:[]},time));
+    }else{
+      for(const item of view.scenario?.interactables??[]){if(item.action==='garbage'&&item.hp<=0||item.action==='cover'&&item.destroyed)continue;scenarioObject(item);}
+      [...visualUnits].sort((a,b)=>depth(a.x,a.y)-depth(b.x,b.y)).forEach(unit=>sprite(unit,time));
+    }
+    for(const tile of tiles)if((!explore||tile.revealed)&&(tile.tags??[]).includes('surface.burning'))effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800);
     if(intent?.cells?.length){const cell=intent.cells[Math.floor(intent.cells.length/2)],p=project(cell.x,cell.y);text(`${intent.label} · ${intent.damage} DMG`,p.x,p.y-85,'#ffc898',14);}
     drawTransient(time);context.restore();trapTooltip();
   }
@@ -800,12 +845,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const input={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0],w:[0,-1],s:[0,1],a:[-1,0],d:[1,0]}[event.key.length===1?event.key.toLowerCase():event.key];
     const direction=input?screenDirection(...input):null;
     const map=view.screen==='explore'?view.exploration:view;
-    if(direction && view.screen==='explore') {
-      event.preventDefault();event.stopPropagation();
-      const x=map.x+direction.x,y=map.y+direction.y;
-      if(map.tiles.some(t=>t.x===x&&t.y===y&&t.reachable))onCell?.(x,y);
-      return;
-    }
+    if(view.screen==='explore')return; // The document controller owns direct movement.
     if(direction){event.preventDefault();event.stopPropagation();cursor={x:clamp((cursor?.x??0)+direction.x,0,map.width-1),y:clamp((cursor?.y??0)+direction.y,0,map.height-1)};hover=cursor;onHover?.(cursor.x,cursor.y);}
     if(event.key==='Enter'||event.key===' '){event.preventDefault();if(cursor)onCell?.(cursor.x,cursor.y);}
   };
@@ -813,9 +853,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);canvas.addEventListener('wheel',wheel,{passive:false});
   const observer=new ResizeObserver(resize);observer.observe(canvas);
   ready.then(resize);resize();frameId=requestAnimationFrame(draw);
-  return {setView,playEvents,resize,skipAnimations,zoom,centerSelected,rotate,getRotationLabel,getRotation:()=>rotation,screenDirection,
+  return {setView,playEvents,resize,skipAnimations,zoom,centerSelected,rotate,getRotationLabel,getRotation:()=>rotation,screenDirection,movementDirection:screenDirection,
     getNativeArtStatus:()=>({state:nativeState,projection:nativeActive()?'orthogonal':'isometric',styleId:nativeArt?.manifest.style??view?.customMap?.visuals?.styleId??null,kitId:nativeArt?.manifest.id??view?.customMap?.visuals?.kitId??null,pieceCount:nativeScene?nativeScene.floor.length+nativeScene.structures.length+nativeScene.decorations.length:0,error:nativeError}),
-    getNativeVisuals:()=>nativeScene?serializeNativeVisuals(nativeScene,{styleId:view.customMap.visuals.styleId,kitId:view.customMap.visuals.kitId,width:view.width,height:view.height}):null,
+    getNativeVisuals:()=>nativeScene&&view.customMap?.visuals?serializeNativeVisuals(nativeScene,{...artDescriptor(),width:mapData().width,height:mapData().height}):null,
     retryNativeArt:()=>loadNativeArt(true),
     // Coordinates support real pointer-based browser regression tests.
     cellToScreen:(x,y)=>screen(x,y),

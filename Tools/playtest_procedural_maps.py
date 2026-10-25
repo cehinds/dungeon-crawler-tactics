@@ -146,6 +146,7 @@ def main():
         tokens = []
         page.on("request", lambda request: tokens.append(request.url.split("map=", 1)[1].split("&", 1)[0]) if request.is_navigation_request() and "workshop=1&map=" in request.url else None)
         page.locator("#play").click()
+        page.locator("#explore-first").uncheck()
         page.locator("#confirm-play").click()
         ready_runtime(page, native=True)
         assert_exact(page.evaluate("window.dungeon.getView()"), expected)

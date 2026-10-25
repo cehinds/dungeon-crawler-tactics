@@ -82,7 +82,7 @@ namespace DungeonCrawlerTactics
             for (int y = 0; y < Sector.height; y++) for (int x = 0; x < Sector.width; x++)
             {
                 bool visible = seen.Contains(ExploreKey(x, y));
-                tiles.Add(new ExplorationTileView { x = x, y = y, revealed = visible, blocked = visible && ExploreWall(Sector, x, y), reachable = paths.ContainsKey(ExploreKey(x, y)) });
+                tiles.Add(new ExplorationTileView { x = x, y = y, revealed = visible, blocked = ExploreWall(Sector, x, y), reachable = paths.ContainsKey(ExploreKey(x, y)) });
             }
             List<ExplorationPointView> points = new List<ExplorationPointView>(); foreach (ExplorationPointDef p in Sector.points)
                 if (seen.Contains(ExploreKey(p.x, p.y))) { bool claimed = Array.IndexOf(state.claimed, p.id) >= 0; points.Add(new ExplorationPointView { id = p.id, label = p.label, description = p.description, kind = p.kind, x = p.x, y = p.y, claimed = claimed, canInteract = !claimed && Math.Abs(state.x - p.x) + Math.Abs(state.y - p.y) <= 1 }); }
