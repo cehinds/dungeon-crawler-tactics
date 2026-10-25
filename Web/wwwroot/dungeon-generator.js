@@ -87,7 +87,7 @@ function renderEdgeInspector() {
     : 'Neighboring sides connect when their join tags match. Other tags describe the appearance or doorway state.';
   const fit = scene.edgeFit;
   $('edge-check').textContent = fit
-    ? `Matching floor edges verified: ${fit.checkedJoins} floor joins and ${fit.checkedBoundaries} wall joins. ${fit.adjustedTiles} tiles adjusted, including ${fit.rotatedTiles} rotated.`
+    ? `Matching floor edges verified: ${fit.checkedJoins} floor joins and ${fit.checkedBoundaries} wall joins. ${fit.adjustedTiles} floor tiles adjusted, ${fit.rotatedTiles} rotated, ${fit.adjustedWalls || 0} wall variants fitted.`
     : `Matching floor edges verified across ${scene.floor.length} floor tiles.`;
 }
 function showConnections(enabled) {

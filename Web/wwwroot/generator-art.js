@@ -1,3 +1,4 @@
+import { planFloorMaterials, selectOpenDoor, portalRotation } from './tile-generation-plan.js';
 import { validateFloorConnections } from './tile-edge-tags.js';
 import { fitFloorTiles } from './tile-edge-solver.js';
 // Native square art is a visual authoring layer. Runtime exports use the canonical room kit.
@@ -34,13 +35,13 @@ export async function loadArtKit(catalog, catalogURL, kitId, styleId) {
   const entries = await Promise.all(manifest.assets.map(async asset => [asset.id, await imageFor(revisionURL(asset.file, url, [asset.source, asset.derived]))]));
   return { kit, manifest, images: new Map(entries), manifestURL: url };
 }
-function hashText(value) { let hash = 2166136261; for (const character of value) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619); return hash >>> 0; }
 const key = (x, y) => `${x},${y}`;
 export function buildArtScene(room, art, varied = true) {
-  const assets = art.manifest.assets, floorAssets = assets.filter(asset => asset.role === 'ground').slice(0, 4);
+  const assets = art.manifest.assets;
+  const { floorAssets, roomStyles, owner, protectedCells, floorAt } = planFloorMaterials(room, assets, varied);
   const north = assets.find(asset => asset.squareLayout === 'north-wall' && asset.role === 'wall');
   const west = assets.find(asset => asset.squareLayout === 'west-wall');
-  const door = assets.find(asset => asset.role === 'door' && asset.cell === 12);
+  const door = selectOpenDoor(assets);
   const stairs = assets.find(asset => asset.role === 'stairs' && asset.cell === 15) || assets.find(asset => asset.role === 'stairs');
   const props = assets.filter(asset => asset.role === 'prop');
   const solidProps = props.filter(asset => !/rug|carpet|threshold|stairwell|stairs|footprint|paving|floor|trail|mist|path/i.test(asset.label));
@@ -48,28 +49,29 @@ export function buildArtScene(room, art, varied = true) {
   const walls = new Set(room.placements.filter(piece => piece.kind === 'wall').map(piece => key(piece.x, piece.y)));
   let floor = [];
   const boundaries = [], structures = [], decorations = [], used = new Set();
-  const roomStyles = room.rooms.map((region, index) => ({ region, index, asset: floorAssets[varied ? index % floorAssets.length : 0] }));
-  const owner = (x, y) => roomStyles.find(({ region }) => x >= region.x && x < region.x + region.width && y >= region.y && y < region.y + region.height);
   const add = (list, asset, x, y, angle = 0, kind = '') => { if (asset) list.push({ asset, px: x, py: y, angle, kind }); };
   for (let y = 0; y < room.height; y++) for (let x = 0; x < room.width; x++) {
     if (walls.has(key(x, y))) continue;
-    const style = owner(x, y), base = style?.asset || floorAssets[0];
-    // Contiguous two-cell patches add wear without scrambling every floor tile.
-    const patch = varied && style && hashText(`${room.seed}:${style.region.theme?.id || style.index}:${Math.floor(x / 2)},${Math.floor(y / 2)}`) % 11 === 0;
-    const tile = patch ? floorAssets[(style.index + 1) % floorAssets.length] : base;
-    add(floor, tile, x * 128, y * 128);
+    add(floor, floorAt(x, y), x * 128, y * 128);
     const solid = (dx, dy) => x + dx < 0 || y + dy < 0 || x + dx >= room.width || y + dy >= room.height || walls.has(key(x + dx, y + dy));
     for (const [side, dx, dy, asset, rotation] of [['north', 0, -1, north, 0], ['west', -1, 0, west, 0], ['east', 1, 0, west, 2], ['south', 0, 1, west, 3]]) {
-      if (solid(dx, dy) && asset) boundaries.push({ x, y, side, asset, rotation });
+      if (solid(dx, dy) && asset) {
+        const candidates = assets.filter(candidate => candidate.role === 'wall' && candidate.squareLayout === asset.squareLayout)
+          .map(candidate => ({ asset: candidate, rotation }));
+        boundaries.push({ x, y, side, asset, rotation, candidates });
+        const offsets = { north: [0,-64], west: [-64,0], east: [64,0], south: [0,64] };
+        const [ox, oy] = offsets[side];
+        add(structures, asset, x * 128 + ox, y * 128 + oy, rotation === 3 ? -Math.PI / 2 : rotation * Math.PI / 2);
+      }
     }
-    if (solid(0, -1)) add(structures, north, x * 128, y * 128 - 64);
-    if (solid(-1, 0)) add(structures, west, x * 128 - 64, y * 128);
-    if (solid(1, 0)) add(structures, west, x * 128 + 64, y * 128, Math.PI);
-    if (solid(0, 1)) add(structures, west, x * 128, y * 128 + 64, -Math.PI / 2);
   }
-  const { floor: fittedFloor, ...edgeFit } = fitFloorTiles(floor, floorAssets, { seed: room.seed, boundaries });
+  const { floor: fittedFloor, boundaries: fittedBoundaries = boundaries, ...edgeFit } = fitFloorTiles(floor, floorAssets, { seed: room.seed, boundaries });
   floor = fittedFloor;
-  if (edgeFit.adjustedTiles) {
+  fittedBoundaries.forEach((boundary, index) => {
+    structures[index].asset = boundary.asset;
+    structures[index].angle = boundary.rotation === 3 ? -Math.PI / 2 : boundary.rotation * Math.PI / 2;
+  });
+  {
     for (const style of roomStyles) {
       const counts = new Map();
       for (const piece of floor) {
@@ -86,7 +88,6 @@ export function buildArtScene(room, art, varied = true) {
     const first = conflicts[0];
     throw new Error(`Incompatible floor edges at (${first.x}, ${first.y}) ${first.side}: ${first.tags.join(', ')} versus ${first.neighborTags.join(', ')} (${conflicts.length} conflicting seams).`);
   }
-  const protectedCells = new Set([...(room.generation?.protectedCells || []), ...(room.clearRoute || []), room.entrance || room.start, room.exit].filter(Boolean).map(p => key(p.x, p.y)));
   const candidates = room.placements.filter(piece => piece.kind === 'decoration');
   const blockedObjects = candidates.filter(piece => piece.blocksMovement);
   // Every canonical obstacle remains visible at its exact gameplay cell.
@@ -112,11 +113,11 @@ export function buildArtScene(room, art, varied = true) {
     }
   }
   const entrance = room.entrance || room.start;
-  add(decorations, door, entrance.x * 128, entrance.y * 128, 0, 'entrance');
+  add(decorations, door, entrance.x * 128, entrance.y * 128, portalRotation(room, door, entrance), 'entrance');
   add(decorations, stairs, room.exit.x * 128, room.exit.y * 128, 0, 'exit');
   structures.sort((a, b) => a.py - b.py || a.px - b.px);
   decorations.sort((a, b) => a.py - b.py || a.px - b.px);
-  return { floor, structures, decorations, roomStyles, wallCells: walls, edgeFit, edgeBoundaries: boundaries };
+  return { floor, structures, decorations, roomStyles, wallCells: walls, edgeFit, edgeBoundaries: fittedBoundaries };
 }
 export function drawPiece(context, piece, art) {
   const image = art.images.get(piece.asset.id); if (!image) return;

@@ -1,4 +1,4 @@
-import { edgeTagsForRotation, validateFloorConnections, sharedEdgeCompatibility, SIDES } from './tile-edge-tags.js';
+import { edgeTagsForRotation, validateFloorConnections, SIDES } from './tile-edge-tags.js';
 
 // A bounded constraint solver for visual floors. It never changes gameplay cells.
 export function fitFloorTiles(floor, candidateAssets, { seed = '', maxSearchSteps = 20000, boundaries = [] } = {}) {
@@ -29,15 +29,34 @@ export function fitFloorTiles(floor, candidateAssets, { seed = '', maxSearchStep
   const boundaryConstraints = boundaries.map(boundary => {
     const index = cells.get(`${boundary.x},${boundary.y}`), side = SIDES.indexOf(boundary.side);
     if (index === undefined || side < 0) throw new Error('Floor fitting boundary requires an existing floor cell and valid side.');
-    const edges = connectors(boundary.asset, boundary.rotation ?? 0);
-    return { ...boundary, index, sideIndex: side, connector: edges[(side + 2) % 4] };
+    if (boundary.candidates !== undefined && !Array.isArray(boundary.candidates)) throw new Error('Wall candidates must be an array.');
+    // The authored wall is preferred; alternatives share its placement geometry.
+    const choices = [{ asset: boundary.asset, rotation: boundary.rotation ?? 0 }, ...(boundary.candidates || [])]
+      .map(choice => ({ asset: choice.asset, rotation: choice.rotation ?? 0,
+        connector: connectors(choice.asset, choice.rotation ?? 0)[(side + 2) % 4] }))
+      .filter(choice => !['join.manual', 'join.overlay'].includes(choice.connector));
+    return { boundary, index, sideIndex: side, choices };
   });
-  const boundaryCompatible = boundary => sharedEdgeCompatibility(floor[boundary.index].asset, boundary.side, boundary.asset, {
-    a: Math.round((floor[boundary.index].angle || 0) / (Math.PI / 2)), b: boundary.rotation ?? 0
-  }).compatible;
+  const resolvedBoundaries = fitted => boundaryConstraints.map(({ boundary, index, sideIndex, choices }) => {
+    const piece = fitted[index], connector = connectors(piece.asset, Math.round((piece.angle || 0) / (Math.PI / 2)))[sideIndex];
+    const choice = choices.find(option => option.connector === connector);
+    if (!choice) throw new Error(`Floor fitting is unsatisfiable: no wall matches ${boundary.side} at (${boundary.x}, ${boundary.y}).`);
+    const { candidates, ...placement } = boundary;
+    return { ...placement, asset: choice.asset, rotation: choice.rotation };
+  });
+  const finish = fitted => {
+    const resolved = resolvedBoundaries(fitted);
+    const adjustedWalls = resolved.filter((wall, index) => wall.asset.id !== boundaries[index].asset.id
+      || ((wall.rotation - (boundaries[index].rotation ?? 0)) % 4 + 4) % 4 !== 0).length;
+    return { floor: fitted, boundaries: resolved, ...stats, adjustedWalls };
+  };
   const stats = { adjustedTiles: 0, rotatedTiles: 0, checkedJoins: links.length, checkedBoundaries: boundaries.length, searchSteps: 0 };
   const automaticFloor = floor.every(piece => connectors(piece.asset, 0).every(tag => tag !== 'join.manual' && tag !== 'join.overlay'));
-  if (automaticFloor && !conflicts.length && boundaryConstraints.every(boundaryCompatible)) return { floor, ...stats };
+  const preferredFit = boundaryConstraints.every(({ index, sideIndex, choices }) => {
+    const piece = floor[index], connector = connectors(piece.asset, Math.round((piece.angle || 0) / (Math.PI / 2)))[sideIndex];
+    return choices.some(choice => choice.connector === connector);
+  });
+  if (automaticFloor && !conflicts.length && preferredFit) return finish(floor);
   if (!eligible.length) throw new Error('Floor fitting is unsatisfiable: no automatic full-floor candidates.');
   const variants = eligible.flatMap(asset => Array.from({ length: 4 }, (_, rotation) => ({ asset, rotation, edges: connectors(asset, rotation) })));
   let hash = 2166136261;
@@ -48,7 +67,7 @@ export function fitFloorTiles(floor, candidateAssets, { seed = '', maxSearchStep
     return cost(variants[a]) - cost(variants[b]) || rank(a + index * variants.length) - rank(b + index * variants.length) || a - b;
   }));
   for (const boundary of boundaryConstraints) {
-    domains[boundary.index] = domains[boundary.index].filter(v => variants[v].edges[boundary.sideIndex] === boundary.connector && !['join.manual', 'join.overlay'].includes(boundary.connector));
+    domains[boundary.index] = domains[boundary.index].filter(v => boundary.choices.some(choice => choice.connector === variants[v].edges[boundary.sideIndex]));
     if (!domains[boundary.index].length) throw new Error('Floor fitting is unsatisfiable: no candidate matches a wall boundary.');
   }
   const adjacency = floor.map(() => []);
@@ -90,5 +109,6 @@ export function fitFloorTiles(floor, candidateAssets, { seed = '', maxSearchStep
     if (rotationChanged) stats.rotatedTiles++;
     return changed ? { ...piece, asset: variant.asset, angle } : piece;
   });
-  return { floor: fitted, ...stats, searchSteps: steps };
+  stats.searchSteps = steps;
+  return finish(fitted);
 }

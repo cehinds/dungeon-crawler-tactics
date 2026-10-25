@@ -10,7 +10,9 @@ const { generateDungeon } = await import(moduleURL((await read('Web/wwwroot/proc
 const edgeURL = moduleURL(await read('Web/wwwroot/tile-edge-tags.js'));
 const { validateFloorConnections } = await import(edgeURL);
 const solverURL = moduleURL((await read('Web/wwwroot/tile-edge-solver.js')).replace(/['"]\.\/tile-edge-tags\.js['"]/, JSON.stringify(edgeURL)));
-const { buildArtScene, visibleSceneCorners, environmentMood } = await import(moduleURL((await read('Web/wwwroot/generator-art.js')).replace(/['\"]\.\/tile-edge-tags\.js['\"]/, JSON.stringify(edgeURL)).replace(/['"]\.\/tile-edge-solver\.js['"]/, JSON.stringify(solverURL))));
+const planURL = moduleURL((await read('Web/wwwroot/tile-generation-plan.js')).replace(/['"]\.\/tile-edge-tags\.js['"]/, JSON.stringify(edgeURL)));
+const { eligibleFloorAssets } = await import(planURL);
+const { buildArtScene, visibleSceneCorners, environmentMood } = await import(moduleURL((await read('Web/wwwroot/generator-art.js')).replace(/['"]\.\/tile-generation-plan\.js['"]/, JSON.stringify(planURL)).replace(/['\"]\.\/tile-edge-tags\.js['\"]/, JSON.stringify(edgeURL)).replace(/['"]\.\/tile-edge-solver\.js['"]/, JSON.stringify(solverURL))));
 const manifest = JSON.parse(await read('Web/wwwroot/assets/room-kit/manifest.json'));
 const catalog = JSON.parse(await read('Web/wwwroot/assets/book-tiles/catalog.json'));
 const rules = JSON.parse(await read('Web/wwwroot/assets/map-generation-rules.json'));
@@ -42,7 +44,7 @@ for (const kit of catalog.kits) {
         for (const side of ['north', 'east', 'south', 'west']) firstFloors[1].edges[side] = ['join.alternative'];
         const repaired = buildArtScene(room, mixed, true);
         assert.deepEqual(validateFloorConnections(repaired.floor), [], 'Satisfiable material mismatch is fitted');
-        assert(repaired.edgeFit.adjustedTiles > 0, 'Fitting reports changed floor pieces');
+        assert(repaired.floor.every(p => p.asset.id !== firstFloors[1].id), 'Incompatible room materials are avoided before fitting');
         let changedLegend = false;
         for (const style of repaired.roomStyles) {
           const counts = new Map();
@@ -57,12 +59,30 @@ for (const kit of catalog.kits) {
           if (style.asset.id !== firstFloors[style.index % firstFloors.length].id) changedLegend = true;
         }
         assert(changedLegend, 'Custom connectors change an actual legend material');
+        const alternateWalls = structuredClone(art);
+        const originalWalls = alternateWalls.manifest.assets.filter(asset => asset.role === 'wall' && ['north-wall','west-wall'].includes(asset.squareLayout));
+        for (const wall of originalWalls) {
+          const matching = structuredClone(wall); matching.id += '-compatible-alternative';
+          alternateWalls.manifest.assets.push(matching);
+          for (const tags of Object.values(wall.edges)) {
+            const index = tags.indexOf('join.floor');
+            if (index >= 0) tags[index] = 'join.unmatched-wall';
+          }
+        }
+        const wallScene = buildArtScene(room, alternateWalls, true);
+        assert(wallScene.edgeFit.adjustedWalls > 0, 'Fitter adopts supplied compatible wall alternatives');
+        assert(wallScene.structures.every(piece => piece.asset.id.endsWith('-compatible-alternative')), 'Resolved wall choices reach rendered structures');
+        assert(wallScene.edgeBoundaries.every(boundary => boundary.asset.id.endsWith('-compatible-alternative')), 'Resolved boundary metadata matches rendered walls');
         const missing = structuredClone(art);
         for (const tile of missing.manifest.assets.filter(asset => asset.role === 'ground')) delete tile.edges;
         assert.throws(() => buildArtScene(room, missing, true), /edge metadata/, 'Missing metadata fails clearly');
       }
       assert.equal(scene.edgeFit.adjustedTiles, 0, 'Existing compatible art preferences stay unchanged');
       assert.deepEqual(validateFloorConnections(scene.floor), [], 'Generated floors have compatible visual seams');
+      const protectedFloors = new Set([...room.clearRoute, ...room.generation.protectedCells].map(key));
+      const baseFloor = eligibleFloorAssets(art.manifest.assets)[0];
+      for (const piece of scene.floor) if (protectedFloors.has(key({x:piece.px/128,y:piece.py/128}))) assert.equal(piece.asset.id, baseFloor.id, 'Protected routes keep the consistent corridor base without wear');
+      assert(scene.decorations.find(p=>p.kind === 'entrance').asset.edges.north.some(tag=>tag==='portal.open') || Object.values(scene.decorations.find(p=>p.kind === 'entrance').asset.edges).some(tags=>tags.includes('portal.open')));
       const floorCells = new Set(scene.floor.map(p => key({ x: p.px / 128, y: p.py / 128 })));
       assert.equal(floorCells.size, scene.floor.length, 'No duplicate floor cells');
       for (const p of room.clearRoute) assert(floorCells.has(key(p)), 'Entire route has a visible floor');

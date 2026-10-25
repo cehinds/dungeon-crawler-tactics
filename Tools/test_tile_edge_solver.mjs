@@ -45,6 +45,27 @@ assert.equal(bounded.checkedBoundaries,1);
 assert.throws(()=>fitFloorTiles([tile(a,0,0)],[a,b], { boundaries: [{x:0,y:0,side:'east',asset:wall,rotation:0}] }),/unsatisfiable/, 'Eligible floor pool cannot match wall connector d');
 const preservedBoundary = fitFloorTiles(preferred,[a,b], { boundaries: [{x:0,y:0,side:'north',asset:wall,rotation:2}] });
 assert.equal(preservedBoundary.floor,preferred, 'Compatible wall boundaries preserve fast-path references');
+const wallA = {...a, id:'wall-a', role:'wall'}, wallB = {...b, id:'wall-b', role:'wall'};
+const flexibleBoundaries = [
+  {x:0,y:0,side:'north',asset:wallA,rotation:0,candidates:[{asset:wallB,rotation:0}]},
+  {x:0,y:0,side:'east',asset:wallB,rotation:0}
+];
+const flexibleSnapshot = JSON.stringify(flexibleBoundaries);
+const jointFit = fitFloorTiles([tile(a,0,0)],[a,b],{boundaries:flexibleBoundaries});
+assert.equal(jointFit.floor[0].asset.id,'b', 'Both boundaries must be satisfied together');
+assert.equal(jointFit.boundaries[0].asset.id,'wall-b', 'Select alternate wall instead of rejecting a valid floor arrangement');
+assert.equal(jointFit.adjustedWalls,1);
+assert.equal(JSON.stringify(flexibleBoundaries),flexibleSnapshot, 'Wall input remains immutable');
+assert(!('candidates' in jointFit.boundaries[0]), 'Resolved scene boundaries contain only the placed wall');
+const retained = [tile(b,0,0)];
+assert.equal(fitFloorTiles(retained,[a,b],{boundaries:flexibleBoundaries}).floor,retained, 'Compatible alternate walls preserve floor references');
+const bridge = asset('transition',['a','b','a','a']);
+const transitioned = fitFloorTiles([tile(a,0,0),tile(a,1,0),tile(b,2,0)],[a,b,bridge],{boundaries:[
+  {x:0,y:0,side:'west',asset:wallA,rotation:0}, {x:2,y:0,side:'east',asset:wallB,rotation:0}
+]});
+assert(transitioned.floor.some(piece=>piece.asset.id==='transition'), 'Authored transition connects distinct material tags');
+assert.deepEqual(validateFloorConnections(transitioned.floor),[]);
+assert.throws(()=>fitFloorTiles([tile(a,0,0)],[a],{boundaries:[{x:0,y:0,side:'north',asset:wallA,candidates:{}}]}),/must be an array/);
 const large = Array.from({length:320},(_,i)=>tile(i%2?a:b,i%20,Math.floor(i/20)));
 const result = fitFloorTiles(large,[a,b],{seed:'large',maxSearchSteps:20000});
 assert.deepEqual(validateFloorConnections(result.floor),[]);
