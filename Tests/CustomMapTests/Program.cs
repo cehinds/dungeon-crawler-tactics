@@ -67,9 +67,11 @@ static class CustomMapTests
         restored = Session(); Check(restored.ImportSave(Clone(duel.ExportSave())).screen == "victory", "Generated victory roundtrip");
         duel.Handle(new GameCommand { type = "choose_reward", rewardId = data.rewards[0].id }); view = duel.Handle(new GameCommand { type = "continue" });
         Check(view.screen == "explore" && view.generatedDungeon.cleared && view.units.Length == 0, "Reward continuation returns to cleared generated exploration");
-        restored = Session(); Check(restored.ImportSave(Clone(duel.ExportSave())).generatedDungeon.cleared, "Cleared generated exploration save roundtrip");
+        restored = Session(); GameView restoredCleared = restored.ImportSave(Clone(duel.ExportSave())); Check(restoredCleared.generatedDungeon?.cleared == true, "Cleared generated exploration save roundtrip: " + restoredCleared.message);
+        Check(Save(restored) == Save(duel), "Cleared generated exploration retains the full checkpoint");
         Check(duel.Handle(new GameCommand { type = "explore_interact", targetId = "generated.exit" }).screen == "complete", "Cleared exit completes generated dungeon");
-        restored = Session(); Check(restored.ImportSave(Clone(duel.ExportSave())).screen == "complete", "Generated completion save roundtrip");
+        restored = Session(); GameView restoredComplete = restored.ImportSave(Clone(duel.ExportSave())); Check(restoredComplete.screen == "complete", "Generated completion save roundtrip: " + restoredComplete.message);
+        Check(Save(restored) == Save(duel), "Completed generated dungeon retains the full checkpoint");
     }
     static void Main()
     {
