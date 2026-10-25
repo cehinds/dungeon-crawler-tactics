@@ -39,7 +39,7 @@ Open [the location browser](https://cehinds.github.io/dungeon-crawler-tactics/bo
 
 Every component uses a transparent 256×256 canvas and an anchor at `(128, 192)`. Place that anchor on the destination grid coordinate. Pocket Dungeon uses a 128×128 orthogonal grid; the other styles use a 128×64 isometric grid. For isometric cell `(x, y)`, the screen anchor is `((x - y) × 64, (x + y) × 32)` before camera offset. Preserve the complete PNG canvas rather than treating its transparent margin as tile spacing.
 
-Read `role`, `layer`, `footprint`, `tags`, `walkable`, and `anchor` from each asset record. Render ground first, then depth-sort structures and props by their map position. Boundary walls need an edge offset rather than the center placement used by props; the browser's `drawMap` function provides one small example. Collision and navigation still require an authored game map. The metadata is a starting point, not a complete autotiling or pathfinding ruleset.
+Read `role`, `layer`, `footprint`, `tags`, `walkable`, and `anchor` from each asset record. Render ground first, then depth-sort structures and props by their map position. Registered boundary walls use the midpoint of a tile edge, rather than the cell center used by props. In isometric previews, those offsets are `(32, -16)` and `(-32, -16)` for the two back edges. The pure functions in `book-tile-layout.js` provide an example and matching contact metadata. The browser’s Show grid control reveals the registered floor edges and wall baselines. Collision and navigation still require an authored game map. The metadata is a starting point, not a complete autotiling or pathfinding ruleset.
 
 Use assets from one style together: Pocket Dungeon and the two isometric styles have different projections. The library includes two wall axes and corners; it does not supply every camera rotation of every prop. Rotating a runtime map needs corresponding directional art or an explicit fallback. Open and closed doorway names describe their states; do not infer facing direction from the name.
 
@@ -47,13 +47,14 @@ For Unity, import PNGs as Sprite (2D and UI), preserve transparency, and use Poi
 
 ## Rebuilding and checking
 
-Authored inputs live here; published derivatives live in `Web/wwwroot/assets/book-tiles/`. Source PNGs are original GPT-generated atlases. Reviewed crop fragments identify the alpha islands belonging to each component. The exporter only extracts, resizes, and places those pixels; it does not paint replacements.
+Authored inputs live here; published derivatives live in `Web/wwwroot/assets/book-tiles/`. Source PNGs are original GPT-generated atlases. Reviewed crop fragments identify the alpha islands belonging to each component. The exporter extracts and transforms those pixels; it does not paint replacements. Reviewed floor surfaces and wall contact points determine alignment independently of slab thickness or decorative overhang. See [Registration.md](Registration.md) for the landmark conventions and two irregular rail exceptions.
 
 ```sh
 python3 Tools/build_book_tiles.py --style all
 python3 Tools/build_book_tiles.py --catalog
 python3 Tools/build_book_tiles.py --style all --check --catalog
 python3 -m unittest discover -s Tools -p 'test_book_tiles.py'
+node Tools/test_book_tile_layout.mjs
 ```
 
 A kit can be rebuilt with `--style STYLE --kit KIT`. Regenerate the catalog after inventory, coverage, or export changes. Exact source hashes and resize metadata in each manifest make every PNG traceable. See [QA.md](QA.md) for the delivery checks and remaining limitations.

@@ -1,3 +1,4 @@
+import { composeKit, worldContacts } from './book-tile-layout.js';
 const $ = id => document.getElementById(id);
 const catalogURL = new URL('assets/book-tiles/catalog.json', document.baseURI);
 const state = { catalog: null, style: '', book: 'all', search: '', location: '', kit: '', manifest: null, manifestURL: null, images: new Map(), seed: 1, request: 0 };
@@ -163,6 +164,7 @@ function renderTiles(manifest, manifestURL) {
     image.addEventListener('error', () => preview.replaceChildren(element('span', 'image-failure', 'Image unavailable. Use Try again above to reload.')));
     thumbnail.append(image); preview.append(thumbnail);
     card.append(preview, element('h3', '', asset.label), element('p', 'tile-meta', `${words(asset.layer)} layer · ${words(asset.role)}`), element('p', 'tile-tags', asArray(asset.tags).map(words).join(' · ')));
+    if (asset.role === 'ground' && asset.cell < 4 && !asset.placement) card.append(element('p', 'tile-meta', 'Irregular support: manual alignment required.'));
     const download = link('Download PNG ↓', url, true); download.className = 'tile-download'; card.append(download); return card;
   }));
 }
@@ -208,25 +210,7 @@ async function loadKit() {
 function drawMap() {
   const manifest = state.manifest; if (!manifest) return;
   const grid = manifest.grid || selectedStyle(); const canvas = $('sample-map'); const context = canvas.getContext('2d');
-  let seed = state.seed >>> 0;
-  const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
-  const assets = manifest.assets; const floors = assets.filter(asset => asset.role === 'ground').slice(0, 4); const walls = assets.filter(asset => asset.role === 'wall'); const doors = assets.filter(asset => asset.role === 'door'); const props = assets.filter(asset => asset.role === 'prop');
-  const placements = []; const isometric = grid.projection === 'isometric';
-  const add = (asset, x, y, layer, offsetX = 0, offsetY = 0) => {
-    if (!asset) return;
-    placements.push({ asset, x, y, layer, px: (isometric ? (x - y) * grid.tileWidth / 2 : x * grid.tileWidth) + offsetX, py: (isometric ? (x + y) * grid.tileHeight / 2 : y * grid.tileHeight) + offsetY });
-  };
-  for (let y = 0; y < 5; y++) for (let x = 0; x < 5; x++) add(floors[Math.floor(random() * floors.length)], x, y, 0);
-  // Architecture anchors sit at the bottom center of each trimmed sprite.
-  // Half-width isometric walls meet the full-width corner at cell edges.
-  for (let i = 0; i < 5; i++) {
-    if (isometric && i === 0) add(walls[2] || walls[0], 0, 0, 1, 0, grid.tileHeight / 2);
-    else add(i === 2 ? doors[0] : walls[0], i, 0, 1, isometric ? grid.tileWidth / 4 : 0, isometric ? 0 : -grid.tileHeight / 2);
-    if (isometric && i > 0) add(walls[1] || walls[0], 0, i, 1, -grid.tileWidth / 4, 0);
-  }
-  const positions = [[1, 2], [3, 2], [2, 4], [4, 4]];
-  positions.forEach(([x, y]) => add(props[Math.floor(random() * props.length)], x, y, 1));
-  placements.sort((a, b) => a.layer - b.layer || a.py - b.py || a.px - b.px);
+  const placements = composeKit(manifest, state.seed);
   const bounds = placements.reduce((box, placement) => {
     const anchor = placement.asset.anchor || grid.anchor || { x: 128, y: 192 };
     const x = placement.px - anchor.x, y = placement.py - anchor.y;
@@ -241,6 +225,17 @@ function drawMap() {
     const anchor = placement.asset.anchor || grid.anchor || { x: 128, y: 192 };
     const image = state.images.get(placement.asset.id);
     if (image) context.drawImage(image, offsetX + (placement.px - anchor.x) * scale, offsetY + (placement.py - anchor.y) * scale, 256 * scale, 256 * scale);
+  }
+  if ($('show-grid').checked) {
+    context.save(); context.lineWidth = 1.5; context.strokeStyle = '#11d7ff';
+    for (const placement of placements) {
+      const points = worldContacts(placement); if (!points.length) continue;
+      context.beginPath();
+      points.forEach(([x, y], index) => context[index ? 'lineTo' : 'moveTo'](offsetX + x * scale, offsetY + y * scale));
+      if (placement.asset.placement.kind === 'floor') context.closePath();
+      context.stroke();
+    }
+    context.restore();
   }
   $('map-seed').textContent = `Seed ${state.seed}`;
   canvas.setAttribute('aria-label', `Illustrative five by five ${selectedKit().title} composition in ${selectedStyle().title}, seed ${state.seed}. Floor tiles, back-wall pieces, a doorway and four props. Not a canonical map.`);
@@ -266,6 +261,7 @@ $('book-filter').addEventListener('change', event => { state.book = event.target
 $('location-search').addEventListener('input', event => { state.search = event.target.value.trim().toLocaleLowerCase(); updateLocations(); });
 $('location-select').addEventListener('change', event => { state.location = event.target.value; renderLocation(); updateKits(); });
 $('kit-select').addEventListener('change', event => { state.kit = event.target.value; loadKit(); });
+$('show-grid').addEventListener('change', drawMap);
 $('regenerate').addEventListener('click', () => { state.seed++; drawMap(); });
 $('retry').addEventListener('click', () => state.catalog && state.kit ? loadKit() : initialize());
 initialize();

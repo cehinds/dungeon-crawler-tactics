@@ -106,6 +106,60 @@ class BookTileTests(unittest.TestCase):
         self.assertEqual(prop["derived"]["resampling"], "lanczos")
         self.assertEqual(prop["derived"]["offset"]["x"], round(128 - prop["derived"]["width"] * .25))
 
+    def test_registered_review_roundtrips_provenance_and_placement(self):
+        crop = self.docs / "crops/pocket-dungeon.json"
+        document = tiles.read_json(crop)
+        registration = {"kind":"floor", "points":[[0,0],[64,0],[64,180],[0,180]]}
+        document["sheets"]["test-kit"][0]["registration"] = registration
+        self.write_json(crop, document)
+        self.run_export()
+        manifest = tiles.read_json(self.directory() / "manifest.json")
+        asset = manifest["assets"][0]
+        self.assertEqual(asset["source"]["registration"], registration)
+        self.assertEqual(asset["placement"], {"kind":"floor", "points":[[64,128],[192,128],[192,256],[64,256]]})
+        self.assertEqual(asset["derived"]["sizing"], "registered-floor")
+        self.run_export(check=True)
+
+    def test_registered_floor_ignores_overhang_and_joins_adjacent_planes(self):
+        from book_tile_geometry import apply
+        registration = {"kind": "floor", "points": [[60,30],[100,50],[60,70],[20,50]]}
+        asset = {"id": "floor", "role": "ground"}
+        image = Image.new("RGBA", (120,90))
+        ImageDraw.Draw(image).polygon(registration["points"], fill="red")
+        _, first, _ = tiles.normalize(image, asset, self.styles[1], registration=registration)
+        ImageDraw.Draw(image).rectangle((45,5,50,20), fill="green")
+        exported, second, _ = tiles.normalize(image, asset, self.styles[1], registration=registration)
+        self.assertEqual(first["affine"], second["affine"])
+        self.assertLess(exported.getchannel("A").getbbox()[1], 160)
+        corners = [apply(second["affine"], p) for p in registration["points"]]
+        self.assertEqual(corners, [(128,160),(192,192),(128,224),(64,192)])
+        # A neighbor at grid x+1 moves by (64,32): shared endpoints coincide.
+        self.assertEqual(corners[1], tuple(v+d for v,d in zip(corners[0], (64,32))))
+        self.assertEqual(corners[2], tuple(v+d for v,d in zip(corners[3], (64,32))))
+
+    def test_registered_wall_contacts_and_vertical_scale(self):
+        from book_tile_geometry import apply
+        image = Image.new("RGBA", (100,100))
+        ImageDraw.Draw(image).polygon([(10,20),(90,60),(90,90),(10,50)], fill="blue")
+        registration = {"kind":"wall", "axis":"x", "points":[[10,50],[90,90]], "verticalScale":0.5}
+        _, derived, _ = tiles.normalize(image, {"id":"wall","role":"wall"}, self.styles[1], registration=registration)
+        self.assertEqual(apply(derived["affine"], (10,50)), (96,176))
+        self.assertEqual(apply(derived["affine"], (90,90)), (160,208))
+        base = apply(derived["affine"], (10,50))
+        raised = apply(derived["affine"], (10,20))
+        self.assertEqual(base[0], raised[0])
+        self.assertEqual(base[1]-raised[1], 15)
+
+    def test_registration_rejects_clipping_and_invalid_plane(self):
+        image = Image.new("RGBA", (100,100), "red")
+        asset = {"id":"floor","role":"ground"}
+        with self.assertRaisesRegex(tiles.PackError, "clip normalized canvas"):
+            tiles.normalize(image, asset, self.styles[1], registration={"kind":"floor", "points":[[50,45],[55,50],[50,55],[45,50]]})
+        with self.assertRaisesRegex(tiles.PackError, "fourth corner"):
+            tiles.normalize(image, asset, self.styles[1], registration={"kind":"floor", "points":[[50,0],[100,50],[70,100],[0,50]]})
+        with self.assertRaisesRegex(tiles.PackError, "collinear"):
+            tiles.normalize(image, asset, self.styles[1], registration={"kind":"floor", "points":[[0,0],[10,10],[20,20],[30,30]]})
+
     def test_zip_is_compact_and_rebuild_deterministic(self):
         self.run_export()
         with ZipFile(self.directory() / "test-kit.zip") as archive:

@@ -45,36 +45,63 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
-        "resampling": "lanczos",
-        "scaleX": 0.540084388185654,
-        "scaleY": 0.4266666666666667,
-        "width": 128,
-        "height": 64,
+        "sizing": "registered-floor",
+        "resampling": "bicubic",
+        "affine": [
+          0.5446803486232585,
+          0.00022194273358529078,
+          63.44023753291594,
+          -0.001093273465438606,
+          0.4829309480790866,
+          159.18352069675112
+        ],
+        "width": 130,
+        "height": 72,
         "offset": {
-          "x": 64,
-          "y": 160
+          "x": 63,
+          "y": 159
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              128,
+              160.0
+            ],
+            [
+              192.0,
+              192
+            ],
+            [
+              128,
+              224.0
+            ],
+            [
+              64.0,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 0,
         "sourceBox": [
           20,
           63,
-          261,
+          262,
           217
         ],
         "bounds": {
           "x": 22,
           "y": 65,
-          "width": 237,
+          "width": 238,
           "height": 150
         },
-        "originalWidth": 237,
+        "originalWidth": 238,
         "originalHeight": 150,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -82,16 +109,58 @@
           "connectivity": 8,
           "seeds": [
             [
-              139,
+              138,
               67
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 0.5
+          "x": 0.4978991596638627,
+          "y": 0.4548066666666739
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              118.527,
+              1.959
+            ],
+            [
+              236.0,
+              68.487
+            ],
+            [
+              118.473,
+              134.483
+            ],
+            [
+              1.0,
+              67.955
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            128,
+            160.0
+          ],
+          [
+            192.0,
+            192
+          ],
+          [
+            128,
+            224.0
+          ],
+          [
+            64.0,
+            192
+          ]
+        ]
       }
     },
     {
@@ -120,53 +189,122 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
-        "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.4266666666666667,
-        "width": 128,
-        "height": 64,
+        "sizing": "registered-floor",
+        "resampling": "bicubic",
+        "affine": [
+          0.5402115131223723,
+          0.01617209339894121,
+          62.33074995832395,
+          0.0037492048285499577,
+          0.47695198302004305,
+          158.69832505261016
+        ],
+        "width": 129,
+        "height": 72,
         "offset": {
           "x": 64,
-          "y": 160
+          "y": 159
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              128,
+              160.0
+            ],
+            [
+              192.0,
+              192
+            ],
+            [
+              128,
+              224.0
+            ],
+            [
+              64.0,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 1,
         "sourceBox": [
           270,
-          63,
+          62,
           514,
           217
         ],
         "bounds": {
           "x": 272,
-          "y": 65,
+          "y": 64,
           "width": 240,
-          "height": 150
+          "height": 151
         },
         "originalWidth": 240,
-        "originalHeight": 150,
+        "originalHeight": 151,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              391,
-              67
+              393,
+              66
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 0.5
+          "x": 0.4979166666666655,
+          "y": 0.45617549668875185
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              121.509,
+              1.774
+            ],
+            [
+              238.0,
+              67.951
+            ],
+            [
+              117.491,
+              135.991
+            ],
+            [
+              1.0,
+              69.814
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            128,
+            160.0
+          ],
+          [
+            192.0,
+            192
+          ],
+          [
+            128,
+            224.0
+          ],
+          [
+            64.0,
+            192
+          ]
+        ]
       }
     },
     {
@@ -195,36 +333,63 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
-        "resampling": "lanczos",
-        "scaleX": 0.5355648535564853,
-        "scaleY": 0.423841059602649,
-        "width": 128,
-        "height": 64,
+        "sizing": "registered-floor",
+        "resampling": "bicubic",
+        "affine": [
+          0.5446880965669764,
+          0.0023040503916663055,
+          63.29704437797908,
+          0.0015041459712379877,
+          0.47831434809326795,
+          159.1426049691541
+        ],
+        "width": 130,
+        "height": 73,
         "offset": {
-          "x": 64,
-          "y": 160
+          "x": 63,
+          "y": 159
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              128,
+              160.0
+            ],
+            [
+              192.0,
+              192
+            ],
+            [
+              128,
+              224.0
+            ],
+            [
+              64.0,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 2,
         "sourceBox": [
-          522,
+          523,
           62,
           765,
           217
         ],
         "bounds": {
-          "x": 524,
+          "x": 525,
           "y": 64,
-          "width": 239,
+          "width": 238,
           "height": 151
         },
-        "originalWidth": 239,
+        "originalWidth": 238,
         "originalHeight": 151,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -232,16 +397,58 @@
           "connectivity": 8,
           "seeds": [
             [
-              642,
+              641,
               66
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 0.5
+          "x": 0.4978991596638639,
+          "y": 0.45246026490065105
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              118.783,
+              1.419
+            ],
+            [
+              236.0,
+              67.952
+            ],
+            [
+              118.217,
+              135.224
+            ],
+            [
+              1.0,
+              68.691
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            128,
+            160.0
+          ],
+          [
+            192.0,
+            192
+          ],
+          [
+            128,
+            224.0
+          ],
+          [
+            64.0,
+            192
+          ]
+        ]
       }
     },
     {
@@ -270,53 +477,122 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
-        "resampling": "lanczos",
-        "scaleX": 0.5333333333333333,
-        "scaleY": 0.423841059602649,
-        "width": 128,
-        "height": 64,
+        "sizing": "registered-floor",
+        "resampling": "bicubic",
+        "affine": [
+          0.5378192865724434,
+          0.0038231823996194244,
+          63.19531875875171,
+          0.0005104145574749657,
+          0.4690295933553732,
+          159.2607549396441
+        ],
+        "width": 130,
+        "height": 72,
         "offset": {
-          "x": 64,
-          "y": 160
+          "x": 63,
+          "y": 159
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              128,
+              160.0
+            ],
+            [
+              192.0,
+              192
+            ],
+            [
+              128,
+              224.0
+            ],
+            [
+              64.0,
+              192
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 3,
         "sourceBox": [
           773,
-          62,
-          1017,
+          61,
+          1018,
           217
         ],
         "bounds": {
           "x": 775,
-          "y": 64,
-          "width": 240,
-          "height": 151
+          "y": 63,
+          "width": 241,
+          "height": 152
         },
-        "originalWidth": 240,
-        "originalHeight": 151,
+        "originalWidth": 241,
+        "originalHeight": 152,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              892,
-              66
+              894,
+              65
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 0.5
+          "x": 0.4979253112033189,
+          "y": 0.45836513157893605
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              120.485,
+              1.445
+            ],
+            [
+              239.0,
+              69.542
+            ],
+            [
+              119.515,
+              137.898
+            ],
+            [
+              1.0,
+              69.801
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            128,
+            160.0
+          ],
+          [
+            192.0,
+            192
+          ],
+          [
+            128,
+            224.0
+          ],
+          [
+            64.0,
+            192
+          ]
+        ]
       }
     },
     {
@@ -347,7 +623,7 @@
         "kind": "normalized-derived-export",
         "sizing": "logical-ground",
         "resampling": "lanczos",
-        "scaleX": 0.5355648535564853,
+        "scaleX": 0.5333333333333333,
         "scaleY": 0.423841059602649,
         "width": 128,
         "height": 64,
@@ -358,23 +634,23 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 4,
         "sourceBox": [
           1027,
           62,
-          1270,
+          1271,
           217
         ],
         "bounds": {
           "x": 1029,
           "y": 64,
-          "width": 239,
+          "width": 240,
           "height": 151
         },
-        "originalWidth": 239,
+        "originalWidth": 240,
         "originalHeight": 151,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -423,7 +699,7 @@
         "sizing": "logical-ground",
         "resampling": "lanczos",
         "scaleX": 0.5423728813559322,
-        "scaleY": 0.42105263157894735,
+        "scaleY": 0.4155844155844156,
         "width": 128,
         "height": 64,
         "offset": {
@@ -433,32 +709,32 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 5,
         "sourceBox": [
           1279,
-          62,
+          61,
           1519,
-          218
+          219
         ],
         "bounds": {
           "x": 1281,
-          "y": 64,
+          "y": 63,
           "width": 236,
-          "height": 152
+          "height": 154
         },
         "originalWidth": 236,
-        "originalHeight": 152,
+        "originalHeight": 154,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1398,
-              66
+              1400,
+              65
             ]
           ],
           "fringePixels": 2
@@ -497,53 +773,100 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.29357798165137616,
-        "scaleY": 0.46153846153846156,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.34594594594594597,
+          -0.0,
+          93.23243243243243,
+          -0.006845640746419268,
+          0.3424376046166344,
+          138.1006932182867
+        ],
+        "width": 76,
+        "height": 71,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 93,
+          "y": 138
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              96.0,
+              176.0
+            ],
+            [
+              160.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 6,
         "sourceBox": [
           27,
-          240,
-          249,
-          452
+          239,
+          250,
+          453
         ],
         "bounds": {
           "x": 29,
-          "y": 242,
-          "width": 218,
-          "height": 208
+          "y": 241,
+          "width": 219,
+          "height": 210
         },
-        "originalWidth": 218,
-        "originalHeight": 208,
+        "originalWidth": 219,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              55,
-              244
+              56,
+              243
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.45890410958904576,
+          "y": 0.7590857142856948
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "x",
+          "points": [
+            [
+              8.0,
+              110.835
+            ],
+            [
+              193.0,
+              207.981
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            96.0,
+            176.0
+          ],
+          [
+            160.0,
+            208.0
+          ]
+        ],
+        "axis": "x"
       }
     },
     {
@@ -574,53 +897,100 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.29767441860465116,
-        "scaleY": 0.4549763033175355,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.33507853403141363,
+          0.0,
+          87.95811518324606,
+          0.006418574263408277,
+          0.3317916506157417,
+          138.51576627996468
+        ],
+        "width": 75,
+        "height": 68,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 88,
+          "y": 140
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              160.0,
+              176.0
+            ],
+            [
+              96.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 7,
         "sourceBox": [
-          292,
-          240,
-          511,
-          455
+          283,
+          239,
+          510,
+          453
         ],
         "bounds": {
-          "x": 294,
-          "y": 242,
-          "width": 215,
-          "height": 211
+          "x": 285,
+          "y": 241,
+          "width": 223,
+          "height": 210
         },
-        "originalWidth": 215,
-        "originalHeight": 211,
+        "originalWidth": 223,
+        "originalHeight": 210,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              329,
-              244
+              474,
+              243
             ]
           ],
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.5358744394618885,
+          "y": 0.7566023809523593
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "y",
+          "points": [
+            [
+              215.0,
+              108.816
+            ],
+            [
+              24.0,
+              208.957
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            160.0,
+            176.0
+          ],
+          [
+            96.0,
+            208.0
+          ]
+        ],
+        "axis": "y"
       }
     },
     {
@@ -653,8 +1023,8 @@
         "kind": "normalized-derived-export",
         "sizing": "modular-architecture",
         "resampling": "lanczos",
-        "scaleX": 0.735632183908046,
-        "scaleY": 0.5714285714285714,
+        "scaleX": 0.7272727272727273,
+        "scaleY": 0.5680473372781065,
         "width": 128,
         "height": 96,
         "offset": {
@@ -664,32 +1034,32 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 8,
         "sourceBox": [
-          560,
-          266,
-          738,
+          559,
+          265,
+          739,
           438
         ],
         "bounds": {
-          "x": 562,
-          "y": 268,
-          "width": 174,
-          "height": 168
+          "x": 561,
+          "y": 267,
+          "width": 176,
+          "height": 169
         },
-        "originalWidth": 174,
-        "originalHeight": 168,
+        "originalWidth": 176,
+        "originalHeight": 169,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              587,
-              270
+              589,
+              269
             ]
           ],
           "fringePixels": 2
@@ -730,7 +1100,7 @@
         "kind": "normalized-derived-export",
         "sizing": "modular-architecture",
         "resampling": "lanczos",
-        "scaleX": 0.5311203319502075,
+        "scaleX": 0.5289256198347108,
         "scaleY": 0.5274725274725275,
         "width": 128,
         "height": 96,
@@ -741,23 +1111,23 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 9,
         "sourceBox": [
           777,
           251,
-          1022,
+          1023,
           437
         ],
         "bounds": {
           "x": 779,
           "y": 253,
-          "width": 241,
+          "width": 242,
           "height": 182
         },
-        "originalWidth": 241,
+        "originalWidth": 242,
         "originalHeight": 182,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -765,7 +1135,7 @@
           "connectivity": 8,
           "seeds": [
             [
-              895,
+              894,
               255
             ]
           ],
@@ -807,8 +1177,8 @@
         "kind": "normalized-derived-export",
         "sizing": "modular-architecture",
         "resampling": "lanczos",
-        "scaleX": 0.31683168316831684,
-        "scaleY": 0.5925925925925926,
+        "scaleX": 0.32,
+        "scaleY": 0.5853658536585366,
         "width": 32,
         "height": 96,
         "offset": {
@@ -818,32 +1188,32 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 10,
         "sourceBox": [
-          1088,
-          264,
+          1089,
+          263,
           1193,
-          430
+          431
         ],
         "bounds": {
-          "x": 1090,
-          "y": 266,
-          "width": 101,
-          "height": 162
+          "x": 1091,
+          "y": 265,
+          "width": 100,
+          "height": 164
         },
-        "originalWidth": 101,
-        "originalHeight": 162,
+        "originalWidth": 100,
+        "originalHeight": 164,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1113,
-              268
+              1116,
+              267
             ]
           ],
           "fringePixels": 2
@@ -884,8 +1254,8 @@
         "kind": "normalized-derived-export",
         "sizing": "modular-architecture",
         "resampling": "lanczos",
-        "scaleX": 0.32,
-        "scaleY": 0.588957055214724,
+        "scaleX": 0.31683168316831684,
+        "scaleY": 0.5853658536585366,
         "width": 32,
         "height": 96,
         "offset": {
@@ -895,32 +1265,32 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 11,
         "sourceBox": [
           1357,
-          263,
-          1461,
+          262,
+          1462,
           430
         ],
         "bounds": {
           "x": 1359,
-          "y": 265,
-          "width": 100,
-          "height": 163
+          "y": 264,
+          "width": 101,
+          "height": 164
         },
-        "originalWidth": 100,
-        "originalHeight": 163,
+        "originalWidth": 101,
+        "originalHeight": 164,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1428,
-              267
+              1432,
+              266
             ]
           ],
           "fringePixels": 2
@@ -959,37 +1329,56 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.29357798165137616,
-        "scaleY": 0.42105263157894735,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.35359116022099446,
+          -0.0,
+          91.75690607734806,
+          0.05207201017613519,
+          0.375136530926909,
+          113.05895590643195
+        ],
+        "width": 78,
+        "height": 94,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 92,
+          "y": 115
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              96.0,
+              176.0
+            ],
+            [
+              160.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 12,
         "sourceBox": [
           28,
           463,
-          250,
-          695
+          252,
+          696
         ],
         "bounds": {
           "x": 30,
           "y": 465,
-          "width": 218,
-          "height": 228
+          "width": 220,
+          "height": 229
         },
-        "originalWidth": 218,
-        "originalHeight": 228,
+        "originalWidth": 220,
+        "originalHeight": 229,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1003,9 +1392,37 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.46590909090908267,
+          "y": 0.8567903930131049
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "x",
+          "points": [
+            [
+              12.0,
+              166.116
+            ],
+            [
+              193.0,
+              226.294
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            96.0,
+            176.0
+          ],
+          [
+            160.0,
+            208.0
+          ]
+        ],
+        "axis": "x"
       }
     },
     {
@@ -1036,37 +1453,56 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.3047619047619048,
-        "scaleY": 0.41379310344827586,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.38323353293413176,
+          -0.0,
+          92.55089820359281,
+          0.02390749482670946,
+          0.3942822924788061,
+          113.39754540763813
+        ],
+        "width": 80,
+        "height": 95,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 93,
+          "y": 114
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              96.0,
+              176.0
+            ],
+            [
+              160.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 13,
         "sourceBox": [
-          289,
+          288,
           460,
           503,
-          696
+          697
         ],
         "bounds": {
-          "x": 291,
+          "x": 290,
           "y": 462,
-          "width": 210,
-          "height": 232
+          "width": 211,
+          "height": 233
         },
-        "originalWidth": 210,
-        "originalHeight": 232,
+        "originalWidth": 211,
+        "originalHeight": 233,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1080,9 +1516,37 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.43838862559242175,
+          "y": 0.8315321888411947
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "x",
+          "points": [
+            [
+              9.0,
+              158.23
+            ],
+            [
+              176.0,
+              229.264
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            96.0,
+            176.0
+          ],
+          [
+            160.0,
+            208.0
+          ]
+        ],
+        "axis": "x"
       }
     },
     {
@@ -1113,43 +1577,43 @@
         "kind": "normalized-derived-export",
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
-        "scaleX": 0.5289256198347108,
-        "scaleY": 0.5283018867924528,
+        "scaleX": 0.5267489711934157,
+        "scaleY": 0.5280373831775701,
         "width": 128,
-        "height": 112,
+        "height": 113,
         "offset": {
           "x": 64,
-          "y": 80
+          "y": 79
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 14,
         "sourceBox": [
           516,
-          479,
-          762,
-          695
+          478,
+          763,
+          696
         ],
         "bounds": {
           "x": 518,
-          "y": 481,
-          "width": 242,
-          "height": 212
+          "y": 480,
+          "width": 243,
+          "height": 214
         },
-        "originalWidth": 242,
-        "originalHeight": 212,
+        "originalWidth": 243,
+        "originalHeight": 214,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              647,
-              483
+              648,
+              482
             ]
           ],
           "fringePixels": 2
@@ -1188,8 +1652,8 @@
         "kind": "normalized-derived-export",
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
-        "scaleX": 0.5289256198347108,
-        "scaleY": 0.5297297297297298,
+        "scaleX": 0.5245901639344263,
+        "scaleY": 0.5268817204301075,
         "width": 128,
         "height": 98,
         "offset": {
@@ -1199,32 +1663,32 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 15,
         "sourceBox": [
-          773,
-          509,
-          1019,
+          772,
+          508,
+          1020,
           698
         ],
         "bounds": {
-          "x": 775,
-          "y": 511,
-          "width": 242,
-          "height": 185
+          "x": 774,
+          "y": 510,
+          "width": 244,
+          "height": 186
         },
-        "originalWidth": 242,
-        "originalHeight": 185,
+        "originalWidth": 244,
+        "originalHeight": 186,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              895,
-              513
+              898,
+              512
             ]
           ],
           "fringePixels": 2
@@ -1263,34 +1727,34 @@
         "kind": "normalized-derived-export",
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
-        "scaleX": 0.4085106382978723,
-        "scaleY": 0.4094488188976378,
+        "scaleX": 0.4067796610169492,
+        "scaleY": 0.40551181102362205,
         "width": 96,
-        "height": 104,
+        "height": 103,
         "offset": {
           "x": 80,
-          "y": 88
+          "y": 89
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 16,
         "sourceBox": [
           1027,
           451,
-          1266,
+          1267,
           709
         ],
         "bounds": {
           "x": 1029,
           "y": 453,
-          "width": 235,
+          "width": 236,
           "height": 254
         },
-        "originalWidth": 235,
+        "originalWidth": 236,
         "originalHeight": 254,
         "alphaMask": {
           "method": "connected-alpha-islands",
@@ -1338,8 +1802,8 @@
         "kind": "normalized-derived-export",
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
-        "scaleX": 0.4067796610169492,
-        "scaleY": 0.4083969465648855,
+        "scaleX": 0.4085106382978723,
+        "scaleY": 0.4068441064638783,
         "width": 96,
         "height": 107,
         "offset": {
@@ -1349,31 +1813,31 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 17,
         "sourceBox": [
-          1279,
+          1280,
           443,
           1519,
-          709
+          710
         ],
         "bounds": {
-          "x": 1281,
+          "x": 1282,
           "y": 445,
-          "width": 236,
-          "height": 262
+          "width": 235,
+          "height": 263
         },
-        "originalWidth": 236,
-        "originalHeight": 262,
+        "originalWidth": 235,
+        "originalHeight": 263,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1337,
+              1336,
               447
             ]
           ],
@@ -1413,8 +1877,8 @@
         "kind": "normalized-derived-export",
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
-        "scaleX": 0.37065637065637064,
-        "scaleY": 0.37174721189591076,
+        "scaleX": 0.36923076923076925,
+        "scaleY": 0.37037037037037035,
         "width": 96,
         "height": 100,
         "offset": {
@@ -1424,24 +1888,24 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 18,
         "sourceBox": [
           21,
           693,
-          284,
-          966
+          285,
+          967
         ],
         "bounds": {
           "x": 23,
           "y": 695,
-          "width": 259,
-          "height": 269
+          "width": 260,
+          "height": 270
         },
-        "originalWidth": 259,
-        "originalHeight": 269,
+        "originalWidth": 260,
+        "originalHeight": 270,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
@@ -1489,42 +1953,42 @@
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
         "scaleX": 0.43243243243243246,
-        "scaleY": 0.43103448275862066,
+        "scaleY": 0.43162393162393164,
         "width": 96,
-        "height": 100,
+        "height": 101,
         "offset": {
           "x": 80,
-          "y": 92
+          "y": 91
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 19,
         "sourceBox": [
-          291,
-          715,
-          517,
-          951
+          292,
+          714,
+          518,
+          952
         ],
         "bounds": {
-          "x": 293,
-          "y": 717,
+          "x": 294,
+          "y": 716,
           "width": 222,
-          "height": 232
+          "height": 234
         },
         "originalWidth": 222,
-        "originalHeight": 232,
+        "originalHeight": 234,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              377,
-              719
+              380,
+              718
             ]
           ],
           "fringePixels": 2
@@ -1563,8 +2027,8 @@
         "kind": "normalized-derived-export",
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
-        "scaleX": 0.4423963133640553,
-        "scaleY": 0.44396551724137934,
+        "scaleX": 0.44036697247706424,
+        "scaleY": 0.44206008583690987,
         "width": 96,
         "height": 103,
         "offset": {
@@ -1574,31 +2038,31 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 20,
         "sourceBox": [
           539,
           717,
-          760,
-          953
+          761,
+          954
         ],
         "bounds": {
           "x": 541,
           "y": 719,
-          "width": 217,
-          "height": 232
+          "width": 218,
+          "height": 233
         },
-        "originalWidth": 217,
-        "originalHeight": 232,
+        "originalWidth": 218,
+        "originalHeight": 233,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              690,
+              691,
               721
             ]
           ],
@@ -1649,18 +2113,18 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 21,
         "sourceBox": [
-          768,
+          769,
           798,
-          1023,
+          1024,
           951
         ],
         "bounds": {
-          "x": 770,
+          "x": 771,
           "y": 800,
           "width": 251,
           "height": 149
@@ -1673,7 +2137,7 @@
           "connectivity": 8,
           "seeds": [
             [
-              859,
+              860,
               802
             ]
           ],
@@ -1713,8 +2177,8 @@
         "kind": "normalized-derived-export",
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
-        "scaleX": 0.42105263157894735,
-        "scaleY": 0.42272727272727273,
+        "scaleX": 0.4192139737991266,
+        "scaleY": 0.42081447963800905,
         "width": 96,
         "height": 93,
         "offset": {
@@ -1724,40 +2188,32 @@
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 22,
         "sourceBox": [
           1033,
           729,
-          1265,
-          953
+          1266,
+          954
         ],
         "bounds": {
           "x": 1035,
           "y": 731,
-          "width": 228,
-          "height": 220
+          "width": 229,
+          "height": 221
         },
-        "originalWidth": 228,
-        "originalHeight": 220,
+        "originalWidth": 229,
+        "originalHeight": 221,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1107,
+              1106,
               733
-            ],
-            [
-              1121,
-              808
-            ],
-            [
-              1122,
-              815
             ]
           ],
           "fringePixels": 2
@@ -1797,17 +2253,17 @@
         "sizing": "preserve-aspect",
         "resampling": "lanczos",
         "scaleX": 0.40336134453781514,
-        "scaleY": 0.40096618357487923,
+        "scaleY": 0.40384615384615385,
         "width": 96,
-        "height": 83,
+        "height": 84,
         "offset": {
           "x": 80,
-          "y": 109
+          "y": 108
         }
       },
       "source": {
         "file": "Docs/BookLocationTiles/sources/ink-and-lanterns/bubble-desert.png",
-        "sha256": "cd367a2faae5cc83c53651919c248d957016e9eea6fb7b679bbe96d5c18f5c0c",
+        "sha256": "74497a5b71b3f11d28819ad46a4026a17ad4394aa1c183a395f71879e8c205c0",
         "atlasWidth": 1536,
         "atlasHeight": 1024,
         "cell": 23,
@@ -1815,23 +2271,23 @@
           1278,
           749,
           1520,
-          960
+          961
         ],
         "bounds": {
           "x": 1280,
           "y": 751,
           "width": 238,
-          "height": 207
+          "height": 208
         },
         "originalWidth": 238,
-        "originalHeight": 207,
+        "originalHeight": 208,
         "alphaMask": {
           "method": "connected-alpha-islands",
           "threshold": 16,
           "connectivity": 8,
           "seeds": [
             [
-              1377,
+              1376,
               753
             ]
           ],

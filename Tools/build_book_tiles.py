@@ -7,10 +7,11 @@
 
 Source atlases and reviewed crops live under Docs/BookLocationTiles, outside the
 published site. Components are normalized derived exports, not native pixel
-copies: tight alpha crops are resized onto transparent 256×256 canvases. Ground
-is centered on the logical tile anchor; other art uses its reviewed anchor or
-bottom center. Walls/doors with renderHeight are mechanically normalized to
-authored grid dimensions; other structures and props retain their aspect ratio.
+copies: source pixels are transformed onto transparent 256×256 canvases. Reviewed
+registration maps floor planes or wall contacts to the logical grid, preserving
+overhang rather than deriving geometry from alpha bounds. Unregistered pieces
+retain legacy alpha-bounds sizing: ground fills the tile dimensions, walls/doors
+with renderHeight fill authored dimensions, and other art retains aspect ratio.
 --kit permits incremental builds from partial reviewed crop sheets; omitting it
 requires complete style coverage. --check reconstructs exports and never writes.
 --catalog aggregates completed manifests, so independent style builds cannot
@@ -28,6 +29,7 @@ import sys
 from zipfile import BadZipFile, ZipFile
 
 from PIL import Image, ImageDraw
+from book_tile_geometry import registered
 
 from build_style_packs import (
     PackError, claim_region, digest, extract_cell, font, island_mask_metadata,
@@ -96,8 +98,11 @@ def normalized_anchor(value, default):
     return tuple(value)
 
 
-def normalize(tight, asset, style, reviewed_anchor=None):
+def normalize(tight, asset, style, reviewed_anchor=None, registration=None):
     """Return derived canvas and exact, reconstructible resize/placement metadata."""
+    if registration is not None:
+        require(reviewed_anchor is None, "Registration and legacy reviewed anchor cannot be combined")
+        return registered(tight, asset, style, registration, CANVAS, ANCHOR)
     ground = asset["role"] == "ground"
     pixel = style["id"] == "pocket-dungeon"
     resampling = Image.Resampling.NEAREST if pixel else Image.Resampling.LANCZOS
@@ -157,7 +162,7 @@ def prepare_kit(docs, kit, style, crops):
         claim_region(regions, kit["id"], region, asset["id"], ownership,
                      review["alphaIslandSeeds"] is not None)
         tight = retained.crop(retained.getchannel("A").getbbox())
-        sprite, derived, relative = normalize(tight, asset, style, review.get("anchor"))
+        sprite, derived, relative = normalize(tight, asset, style, review.get("anchor"), review.get("registration"))
         fingerprint = visible_digest(sprite)
         require(fingerprint not in visible, f"{asset['id']}: duplicate visible asset in kit")
         visible.add(fingerprint)
@@ -172,6 +177,11 @@ def prepare_kit(docs, kit, style, crops):
             if review["alphaIslandSeeds"] is not None else {"method": "source-region-alpha"},
             "normalizedAnchor": relative,
         }
+        if "registration" in review:
+            asset["source"]["registration"] = review["registration"]
+            asset["placement"] = dict(derived["registration"])
+            if review["registration"]["kind"] == "wall":
+                asset["placement"]["axis"] = review["registration"]["axis"]
         assets.append(asset)
         sprites[asset["id"]] = sprite
     manifest = {"schemaVersion": 1, "id": kit["id"], "style": style["id"],

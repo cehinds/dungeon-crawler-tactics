@@ -45,6 +45,7 @@ jobs:
           python Tools/validate_expansion_art.py
           node Tools/test_room_generator.mjs
           node Tools/test_procedural_map.mjs
+          node Tools/test_book_tile_layout.mjs
       - name: Run shared C# regression tests
         run: |
           dotnet run --project Tests/RulesKernel.Tests.csproj -c Release

@@ -45,15 +45,42 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
-        "resampling": "lanczos",
-        "scaleX": 0.5446808510638298,
-        "scaleY": 0.4,
-        "width": 128,
-        "height": 64,
+        "sizing": "registered-floor",
+        "resampling": "bicubic",
+        "affine": [
+          0.5768500948766604,
+          0.18216318785578747,
+          46.4819734345351,
+          0.06072106261859583,
+          0.44022770398481975,
+          150.99810246679317
+        ],
+        "width": 131,
+        "height": 67,
         "offset": {
-          "x": 64,
+          "x": 63,
           "y": 160
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              128,
+              160.0
+            ],
+            [
+              192.0,
+              192
+            ],
+            [
+              128,
+              224.0
+            ],
+            [
+              64.0,
+              192
+            ]
+          ]
         }
       },
       "source": {
@@ -89,9 +116,51 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 0.5
+          "x": 0.4978723404255323,
+          "y": 0.4812499999999996
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              141,
+              1
+            ],
+            [
+              233,
+              61
+            ],
+            [
+              93,
+              153
+            ],
+            [
+              1,
+              93
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            128,
+            160.0
+          ],
+          [
+            192.0,
+            192
+          ],
+          [
+            128,
+            224.0
+          ],
+          [
+            64.0,
+            192
+          ]
+        ]
       }
     },
     {
@@ -120,15 +189,42 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "logical-ground",
-        "resampling": "lanczos",
-        "scaleX": 0.5565217391304348,
-        "scaleY": 0.4129032258064516,
-        "width": 128,
-        "height": 64,
+        "sizing": "registered-floor",
+        "resampling": "bicubic",
+        "affine": [
+          0.6242038216560509,
+          -0.3184713375796178,
+          80.2547770700637,
+          -0.09129511677282377,
+          0.4819532908704883,
+          166.54777070063696
+        ],
+        "width": 136,
+        "height": 72,
         "offset": {
-          "x": 64,
-          "y": 160
+          "x": 60,
+          "y": 157
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              128,
+              160.0
+            ],
+            [
+              192.0,
+              192
+            ],
+            [
+              128,
+              224.0
+            ],
+            [
+              64.0,
+              192
+            ]
+          ]
         }
       },
       "source": {
@@ -164,9 +260,51 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 0.5
+          "x": 0.49782608695652025,
+          "y": 0.48064516129031376
+        },
+        "registration": {
+          "kind": "floor",
+          "points": [
+            [
+              77,
+              1
+            ],
+            [
+              228,
+              96
+            ],
+            [
+              152,
+              148
+            ],
+            [
+              1,
+              53
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "floor",
+        "points": [
+          [
+            128,
+            160.0
+          ],
+          [
+            192.0,
+            192
+          ],
+          [
+            128,
+            224.0
+          ],
+          [
+            64.0,
+            192
+          ]
+        ]
       }
     },
     {
@@ -497,15 +635,34 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.3004694835680751,
-        "scaleY": 0.4383561643835616,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.3615819209039548,
+          -0.0,
+          93.10734463276836,
+          0.0003630806502073891,
+          0.3617632334773475,
+          129.6447340125793
+        ],
+        "width": 77,
+        "height": 79,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 93,
+          "y": 130
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              96.0,
+              176.0
+            ],
+            [
+              160.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
@@ -541,9 +698,37 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.4530516431924835,
+          "y": 0.7866118721461235
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "x",
+          "points": [
+            [
+              8.0,
+              128.129
+            ],
+            [
+              185.0,
+              216.407
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            96.0,
+            176.0
+          ],
+          [
+            160.0,
+            208.0
+          ]
+        ],
+        "axis": "x"
       }
     },
     {
@@ -574,15 +759,34 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.3033175355450237,
-        "scaleY": 0.43636363636363634,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.367816091954023,
+          0.0,
+          85.33333333333333,
+          0.0013743800798773176,
+          0.3671256862027974,
+          128.2890964377559
+        ],
+        "width": 78,
+        "height": 80,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 85,
+          "y": 129
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              160.0,
+              176.0
+            ],
+            [
+              96.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
@@ -618,9 +822,37 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.5497630331753509,
+          "y": 0.7868431818181769
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "y",
+          "points": [
+            [
+              203.0,
+              129.198
+            ],
+            [
+              29.0,
+              217.013
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            160.0,
+            176.0
+          ],
+          [
+            96.0,
+            208.0
+          ]
+        ],
+        "axis": "y"
       }
     },
     {
@@ -959,15 +1191,34 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.29493087557603687,
-        "scaleY": 0.41379310344827586,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.3855421686746988,
+          -0.0,
+          86.74698795180723,
+          0.06622539895256202,
+          0.412055389836695,
+          100.69470529413346
+        ],
+        "width": 83,
+        "height": 101,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 87,
+          "y": 107
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              96.0,
+              176.0
+            ],
+            [
+              160.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
@@ -1003,9 +1254,37 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.4930875576036805,
+          "y": 0.8809827586206835
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "x",
+          "points": [
+            [
+              24.0,
+              178.898
+            ],
+            [
+              190.0,
+              229.878
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            96.0,
+            176.0
+          ],
+          [
+            160.0,
+            208.0
+          ]
+        ],
+        "axis": "x"
       }
     },
     {
@@ -1036,15 +1315,34 @@
       },
       "derived": {
         "kind": "normalized-derived-export",
-        "sizing": "modular-architecture",
-        "resampling": "lanczos",
-        "scaleX": 0.3018867924528302,
-        "scaleY": 0.4266666666666667,
-        "width": 64,
-        "height": 96,
+        "sizing": "registered-wall",
+        "resampling": "bicubic",
+        "affine": [
+          0.39263803680981596,
+          0.0,
+          86.1840490797546,
+          -0.07427116572666548,
+          0.4216753568729814,
+          116.04539747356382
+        ],
+        "width": 83,
+        "height": 100,
         "offset": {
-          "x": 96,
-          "y": 96
+          "x": 86,
+          "y": 108
+        },
+        "registration": {
+          "kind": "wall",
+          "points": [
+            [
+              160.0,
+              176.0
+            ],
+            [
+              96.0,
+              208.0
+            ]
+          ]
         }
       },
       "source": {
@@ -1080,9 +1378,37 @@
           "fringePixels": 2
         },
         "normalizedAnchor": {
-          "x": 0.5,
-          "y": 1
+          "x": 0.5023584905660406,
+          "y": 0.8839288888888958
+        },
+        "registration": {
+          "kind": "wall",
+          "axis": "y",
+          "points": [
+            [
+              188.0,
+              175.295
+            ],
+            [
+              25.0,
+              222.473
+            ]
+          ]
         }
+      },
+      "placement": {
+        "kind": "wall",
+        "points": [
+          [
+            160.0,
+            176.0
+          ],
+          [
+            96.0,
+            208.0
+          ]
+        ],
+        "axis": "y"
       }
     },
     {
