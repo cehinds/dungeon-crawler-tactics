@@ -1,6 +1,6 @@
 # Books 1–8 location tile QA
 
-The expanded art, export, and 93-variant browser review is complete: 31 kits, 93 atlases, and 2,232 component PNGs. The new fixed-seed and Play visual roundtrip path is implemented, with C# CI verification underway. Publication is tracked by the [Pages deployment workflow](https://github.com/cehinds/dungeon-crawler-tactics/actions/workflows/deploy-pages.yml) after push to main; the exhaustive canonical source audit remains open.
+The expanded art, export, and 93-variant browser review is complete: 31 kits, 93 atlases, and 2,232 component PNGs. The fixed-seed and Play visual roundtrip path has dedicated C# and published-browser regression checks in CI. Publication is tracked by the [Pages deployment workflow](https://github.com/cehinds/dungeon-crawler-tactics/actions/workflows/deploy-pages.yml) after push to main; the exhaustive canonical source audit remains open.
 
 ## Art and export: passed
 
@@ -23,7 +23,7 @@ The expanded art, export, and 93-variant browser review is complete: 31 kits, 93
 - [x] Four generated maps imported into the shared C# runtime; workshop handoff passed.
 - The implementation defaults Generate to a fresh seed; editing the seed enables **Keep this seed fixed**, and reroll always chooses a new one.
 - Play/export wait for the selected native art to load, then carry the exact preview composition in optional presentation metadata.
-- [ ] Verify fixed-seed generation and the native-art visual roundtrip through the updated C# build and browser Play handoff; CI verification is underway.
+- [x] Added published-build browser regression coverage for new/fixed seeds, exact native art and terrain, one-time handoff, reload, failed-save retry and four pointer rotations. The linked workflow records execution results for each revision.
 
 ## Publication and source audit
 
@@ -34,7 +34,7 @@ The art lab's three whole-style ZIPs stream from the AI-Art branch; all three li
 
 ## Asset migration: passed
 
-- [x] The current game lock pins AI-Art commit `fbf58305bea542f7532ffc0e46bb63ad49a1eca0`; its main index contains 21,945 project files. Exact-pin hydration restored 17,516 missing files and verified the 4,429 already present. The earlier focused seam-fix pin `8753a0061398b2a2169c2098315d26d943f214ff` passed `--check` and full 2,232-PNG reconstruction; the separate originals index tracks generation sources outside the game restore.
+- [x] The current game lock pins AI-Art commit `fbf58305bea542f7532ffc0e46bb63ad49a1eca0`; its main index contains 21,945 project files. Exact-pin hydration restored 17,516 missing files and verified the 4,429 already present; a subsequent `--check` verified all 21,945 files. The earlier focused seam-fix pin `8753a0061398b2a2169c2098315d26d943f214ff` passed `--check` and full 2,232-PNG reconstruction; the separate originals index tracks generation sources outside the game restore.
 - [x] All 20 focused asset-sync tests are included in the passing Python suite.
 
 In a new clone, run `python3 Tools/sync_art_assets.py` before testing or building. Python 3.10 or newer is required.
