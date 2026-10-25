@@ -1,4 +1,7 @@
-// Retained isometric presentation. C# owns legality, damage, turns and saved state.
+import { drawFloorLayer } from './tile-surface-renderer.js';
+import { fetchJSON, loadArtKit, drawPiece, visibleSceneCorners, environmentMood } from './generator-art.js';
+import { nativeProject, nativePick, nativeSceneFromVisuals, serializeNativeVisuals } from './native-map-visuals.js';
+// C# owns legality, damage, turns and saved state. Native custom art is portable.
 // This module only draws authored assets and plays the ordered events it receives.
 const ROOT = 'assets/revamp/';
 const TILE_W = 128;
@@ -83,6 +86,13 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   let drag = null, suppressClick = false, rotation = 0;
   const facing = new Map();
   let explorationMotion = null;
+  let nativeKey = '', nativeState = 'none', nativeArt = null, nativeScene = null, nativeError = '', nativeRequest = 0;
+  const nativeStatus = document.createElement('div'), nativeMessage = document.createElement('span'), nativeRetry = document.createElement('button');
+  nativeStatus.className = 'native-map-status'; nativeStatus.setAttribute('role', 'status'); nativeStatus.setAttribute('aria-live', 'polite');
+  nativeStatus.style.cssText = 'position:absolute;left:12px;right:12px;top:64px;z-index:8;padding:14px;background:#091725f2;border:1px solid #6ba6b7;border-radius:8px;color:#e2f4fa';
+  nativeRetry.textContent = 'Retry map art'; nativeRetry.type = 'button'; nativeRetry.style.marginLeft = '12px';
+  nativeStatus.append(nativeMessage, nativeRetry); nativeStatus.hidden = true;
+  nativeRetry.addEventListener('click', () => loadNativeArt(true));
   canvas.tabIndex = 0;
   canvas.setAttribute('role','application');
   canvas.setAttribute('aria-label','Dungeon map. Arrow keys inspect tiles; Enter selects the tile.');
@@ -91,12 +101,14 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const p=q===1?{x:-y,y:x}:q===2?{x:-x,y:-y}:q===3?{x:y,y:-x}:{x,y};
     return {x:p.x||0,y:p.y||0};
   }
-  function project(x, y) { const p=rotateVector(x,y); return {x:(p.x-p.y)*TILE_W/2, y:(p.x+p.y)*TILE_H/2}; }
+  function nativeActive() { return view?.screen !== 'explore' && Boolean(view?.customMap?.visuals); }
+  function project(x, y) { if(nativeActive())return nativeProject(x,y,rotation); const p=rotateVector(x,y); return {x:(p.x-p.y)*TILE_W/2, y:(p.x+p.y)*TILE_H/2}; }
   function screen(x, y) { const p=project(x,y); return {x:originX+p.x*scale,y:originY+p.y*scale}; }
   function mapData(){return view?.screen==='explore'?view.exploration:view;}
   function cellAt(clientX,clientY) {
     const box=canvas.getBoundingClientRect();
     const px=(clientX-box.left-originX)/scale, py=(clientY-box.top-originY)/scale;
+    if(nativeActive())return nativeState==='ready'?nativePick(px,py,view.width,view.height,rotation):null;
     const p=rotateVector(Math.round(px/TILE_W+py/TILE_H),Math.round(py/TILE_H-px/TILE_W),(4-rotation)%4);
     const map=mapData();
     return map && p.x>=0 && p.y>=0 && p.x<map.width && p.y<map.height ? p : null;
@@ -104,12 +116,45 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function depth(x,y){return project(x,y).y/TILE_H*2;}
   // A screen key selects the nearest cardinal grid edge in that visual direction.
   function screenDirection(dx,dy) {
+    if(nativeActive())return rotateVector(dx,dy,(4-rotation)%4);
     const projected=dx<0?{x:0,y:1}:dx>0?{x:0,y:-1}:dy<0?{x:-1,y:0}:{x:1,y:0};
     return rotateVector(projected.x,projected.y,(4-rotation)%4);
   }
   function rememberFacing(id,dx,dy){if(dx||dy)facing.set(id,{x:Math.sign(dx),y:Math.sign(dy)});}
   function screenFacing(id){const direction=facing.get(id)??{x:0,y:1};const p=rotateVector(direction.x,direction.y);return p.x>0?'se':p.x<0?'nw':p.y>0?'sw':'ne';}
   function getRotationLabel(){return ['North view','East view','South view','West view'][rotation];}
+  function updateNativeStatus() {
+    if(canvas.parentElement && nativeStatus.parentElement!==canvas.parentElement)canvas.after(nativeStatus);
+    nativeStatus.hidden = !nativeActive() || nativeState === 'ready';
+    nativeRetry.hidden = nativeState !== 'error';
+    nativeMessage.textContent = nativeState === 'error' ? `This dungeon’s art could not load. ${nativeError}` : 'Loading this dungeon’s tiles…';
+    canvas.setAttribute('aria-busy', nativeState === 'loading' ? 'true' : 'false');
+    canvas.dataset.mapProjection = nativeActive() ? 'orthogonal' : 'isometric';
+    canvas.dataset.nativeArtState = nativeState;
+    canvas.setAttribute('aria-label', `${nativeActive()?'Square':'Isometric'} dungeon battlefield. Arrow keys inspect tiles; Enter selects the tile.`);
+  }
+  async function loadNativeArt(force=false) {
+    const descriptor = view?.customMap?.visuals;
+    const key = nativeActive() ? JSON.stringify([view.width,view.height,descriptor]) : '';
+    if(!force && key===nativeKey){updateNativeStatus();return;}
+    nativeKey=key; const request=++nativeRequest;
+    nativeArt=null;nativeScene=null;nativeError='';
+    if(!key){nativeState='none';updateNativeStatus();return;}
+    nativeState='loading';updateNativeStatus();
+    const mapWidth=view.width,mapHeight=view.height,mapTiles=view.customMap.tiles;
+    try {
+      const catalogURL=new URL('assets/book-tiles/catalog.json',document.baseURI);
+      const catalog=await fetchJSON(catalogURL);
+      const art=await loadArtKit(catalog,catalogURL,descriptor.kitId,descriptor.styleId);
+      const scene=nativeSceneFromVisuals(descriptor,art,mapWidth,mapHeight,mapTiles);
+      if(disposed || request!==nativeRequest)return;
+      nativeArt=art;nativeScene=scene;nativeState='ready';fit();updateNativeStatus();
+      canvas.dispatchEvent(new CustomEvent('nativeartready',{detail:{styleId:descriptor.styleId,kitId:descriptor.kitId,pieceCount:descriptor.pieces.length}}));
+    } catch(error) {
+      if(disposed || request!==nativeRequest)return;
+      nativeState='error';nativeError=error.message||'Try loading the tiles again.';updateNativeStatus();
+    }
+  }
   function rotate(delta){
     rotation=((rotation+Math.round(delta))%4+4)%4;
     fit();centerAction();
@@ -135,6 +180,15 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function fit() {
     const map = view?.screen === 'explore' ? view.exploration : view;
     if (!map) return;
+    if(nativeActive()){
+      const points=nativeScene?visibleSceneCorners(nativeScene).map(p=>rotateVector(p.x,p.y)):
+        [[-.5,-.5],[map.width-.5,-.5],[-.5,map.height-.5],[map.width-.5,map.height-.5]].map(([x,y])=>project(x,y));
+      const minX=Math.min(...points.map(p=>p.x))-20,maxX=Math.max(...points.map(p=>p.x))+20;
+      const minY=Math.min(...points.map(p=>p.y))-100,maxY=Math.max(...points.map(p=>p.y))+24;
+      if(!cameraReady){zoomLevel=1;cameraReady=true;}
+      scale=Math.max(.05,Math.min((width-28)/(maxX-minX),(height-24)/(maxY-minY))*zoomLevel);
+      originX=width/2-(minX+maxX)/2*scale+panX;originY=height/2-(minY+maxY)/2*scale+panY;return;
+    }
     const corners=[[0,0],[map.width-1,0],[0,map.height-1],[map.width-1,map.height-1]].map(([x,y])=>project(x,y));
     const minX=Math.min(...corners.map(p=>p.x))-TILE_W/2,maxX=Math.max(...corners.map(p=>p.x))+TILE_W/2;
     const minY=Math.min(...corners.map(p=>p.y))-136,maxY=Math.max(...corners.map(p=>p.y))+TILE_H/2;
@@ -145,7 +199,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     originY=height/2-(minY+maxY)/2*scale+panY;
   }
   function mapIdentity(state) {
-    return JSON.stringify([state?.screen,state?.encounterName,state?.encounterIndex,state?.width,state?.height,state?.exploration?.id,state?.expedition?.id,state?.scenario?.id,state?.journey?.floorId,state?.journey?.floorNumber,state?.customMap?.label]);
+    return JSON.stringify([state?.screen,state?.encounterName,state?.encounterIndex,state?.width,state?.height,state?.exploration?.id,state?.expedition?.id,state?.scenario?.id,state?.journey?.floorId,state?.journey?.floorNumber,state?.customMap?.label,state?.customMap?.visuals]);
   }
   function setView(next, settings={}) {
     const oldScreen=view?.screen;
@@ -168,17 +222,22 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     }
     if(oldScreen!==next.screen)explorationMotion=null;
     view=next; options=settings;
+    loadNativeArt();
     if (!animation) {visualUnits=copy(next.units ?? []); visualTiles=copy(next.tiles ?? []);}
     if (!cursor || oldScreen!==next.screen || lastSelection!==next.selectedUnitId) {
       const selected=next.units?.find(u=>u.id===next.selectedUnitId);
       cursor=selected ? {x:selected.x,y:selected.y} : {x:next.exploration?.x??1,y:next.exploration?.y??1};
     }
     fit();
-    if(mapChanged) centerAction();
+    if(mapChanged && !nativeActive()) centerAction();
     else if(width<600 && lastSelection!==next.selectedUnitId) centerSelected();
     lastSelection=next.selectedUnitId;
   }
   function diamond(x,y,{stroke,fill,weight=2,inset=0}={}) {
+    if(nativeActive()){
+      const p=project(x,y),size=128-inset*2;context.beginPath();context.rect(p.x-size/2,p.y-size/2,size,size);
+      if(fill){context.fillStyle=fill;context.fill();}if(stroke){context.strokeStyle=stroke;context.lineWidth=weight/scale;context.stroke();}return;
+    }
     const p=project(x,y), w=TILE_W/2-inset, h=TILE_H/2-inset/2;
     context.beginPath(); context.moveTo(p.x,p.y-h); context.lineTo(p.x+w,p.y);
     context.lineTo(p.x,p.y+h); context.lineTo(p.x-w,p.y); context.closePath();
@@ -241,7 +300,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.save();context.fillStyle='#050b14a6';context.beginPath();context.ellipse(p.x,p.y+1,enemy?29:34,12,0,0,Math.PI*2);context.fill();context.restore();
     if(enemy){
       const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
-      const dx=(direction.x-direction.y)*22,dy=(direction.x+direction.y)*11;
+      const dx=nativeActive()?direction.x*24:(direction.x-direction.y)*22,dy=nativeActive()?direction.y*24:(direction.x+direction.y)*11;
       context.beginPath();context.moveTo(p.x+dx,p.y+dy);context.lineTo(p.x+dx*.55-dy*.25,p.y+dy*.55+dx*.125);context.lineTo(p.x+dx*.55+dy*.25,p.y+dy*.55-dx*.125);context.closePath();context.fillStyle='#ffb18c';context.fill();
     }
     const pose=(enemy?['idle','walk','attack','hit']:['idle','idle2','walk1','walk2','walk3','windup','attack','hit'])[col];
@@ -268,7 +327,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(useDirectional&&actor&&current?.type==='attack'){
       const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
       const reach=reduced.matches?0:Math.sin(animation.progress*Math.PI)*9;
-      p.x+=(direction.x-direction.y)*reach;p.y+=(direction.x+direction.y)*reach*.5;
+      p.x+=nativeActive()?direction.x*reach:(direction.x-direction.y)*reach;p.y+=nativeActive()?direction.y*reach:(direction.x+direction.y)*reach*.5;
     }
     if(boss){
       const fw=boss.frameWidth??192,fh=boss.frameHeight??192;
@@ -441,6 +500,53 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.font='12px monospace';context.fillStyle='#d5e6eb';context.fillText('Next entrant · either team · one use',x+11,y+31,w-22);
     context.fillText(`${trap.entryDamage} damage · ${short(trap.occupantTag).toUpperCase()}`,x+11,y+51,w-22);
   }
+  function drawTransient(time) {
+    effects=effects.filter(e=>time-e.started<e.duration);
+    for(const e of effects)effectSprite(e.type,e.x,e.y,time-e.started,e.duration);
+    missiles=missiles.filter(m=>time-m.started<m.duration);
+    for(const m of missiles) {
+      const progress=clamp((time-m.started)/m.duration,0,1);
+      if(progress<=0)continue;
+      const from=project(m.fromX,m.fromY),to=project(m.toX,m.toY);
+      const px=from.x+(to.x-from.x)*progress,py=from.y+(to.y-from.y)*progress-48;
+      atlas('effects',4+Math.floor(progress*3),4,3,px-29,py-29,58,58);
+    }
+    floating=floating.filter(f=>time-f.started<1100);
+    for(const f of floating) {const p=project(f.x,f.y),age=time-f.started;context.globalAlpha=Math.min(1,(1100-age)/250);text(f.text,p.x,p.y-68-age*.027,f.color,18);context.globalAlpha=1;}
+  }
+  function drawNative(time) {
+    const mood=environmentMood(view.customMap.visuals.kitId);
+    const backdrop=context.createRadialGradient(width*.5,height*.38,0,width*.5,height*.5,Math.max(width,height)*.7);
+    backdrop.addColorStop(0,mood.glow);backdrop.addColorStop(1,mood.background);context.fillStyle=backdrop;context.fillRect(0,0,width,height);
+    if(nativeState!=='ready')return;
+    context.save();
+    const shake=!reduced.matches&&time<shakeUntil?Math.sin(time*.1)*2:0;
+    context.translate(originX+shake,originY);context.scale(scale,scale);
+    context.imageSmoothingEnabled=view.customMap.visuals.styleId!=='pocket-dungeon';
+    context.save();context.rotate(rotation*Math.PI/2);drawFloorLayer(context,nativeScene.floor,nativeArt.images);context.restore();
+    highlights();
+    const intent=view.scenario?.intent;
+    if(intent)for(const cell of intent.cells??[])diamond(cell.x,cell.y,{stroke:'#ff9855',fill:'#ff4b293e',weight:3,inset:3});
+    context.save();context.rotate(rotation*Math.PI/2);
+    nativeScene.structures.forEach(piece=>drawPiece(context,piece,nativeArt));
+    nativeScene.decorations.forEach(piece=>drawPiece(context,piece,nativeArt));
+    context.restore();
+    // Terrain remains canonical game state; markers keep it readable without
+    // replacing any of the authored floor images selected in the preview.
+    for(const tile of visualTiles){
+      const terrain=[['surface.water','W','#82d6ff'],['surface.oil','O','#d4bbf2']].filter(([tag])=>(tile.tags??[]).includes(tag));
+      terrain.forEach(([,letter,color],index)=>{
+        const point=project(tile.x-43/128,tile.y-43/128),x=point.x+index*13;
+        context.fillStyle='#101b1e';context.fillRect(x-6,point.y-6,12,12);context.strokeStyle=color;context.lineWidth=1;context.strokeRect(x-6,point.y-6,12,12);
+        context.fillStyle=color;context.font='bold 8px system-ui';context.textAlign='center';context.textBaseline='middle';context.fillText(letter,x,point.y+.5);
+      });
+    }
+    for(const tile of visualTiles)trapMarker(tile,time);
+    [...visualUnits].sort((a,b)=>depth(a.x,a.y)-depth(b.x,b.y)).forEach(unit=>sprite(unit,time));
+    for(const tile of visualTiles)if((tile.tags??[]).includes('surface.burning'))effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800);
+    if(intent?.cells?.length){const cell=intent.cells[Math.floor(intent.cells.length/2)],p=project(cell.x,cell.y);text(`${intent.label} · ${intent.damage} DMG`,p.x,p.y-85,'#ffc898',14);}
+    drawTransient(time);context.restore();trapTooltip();
+  }
   function draw(time) {
     if(disposed)return;
     frameId=requestAnimationFrame(draw);
@@ -448,7 +554,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(!animation && time-lastTime<32)return;lastTime=time;
     context.fillStyle='#0b1116';context.fillRect(0,0,width,height);
     const backdrop=context.createRadialGradient(width*.5,height*.5,20,width*.5,height*.5,width*.65);backdrop.addColorStop(0,'#172234');backdrop.addColorStop(1,'#020711');context.fillStyle=backdrop;context.fillRect(0,0,width,height);
-    if(!view || !roomArt.size)return;
+    if(!view)return;
+    if(nativeActive()){drawNative(time);return;}
+    if(!roomArt.size)return;
     context.save();
     const shake=!reduced.matches&&time<shakeUntil?Math.sin(time*.1)*2:0;
     context.translate(originX+shake,originY);context.scale(scale,scale);
@@ -562,18 +670,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     // Hazard flames and transient feedback always composite above the entire scene.
     for(const tile of tiles)if((!explore||tile.revealed)&&(tile.tags??[]).includes('surface.burning'))effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800);
     if(intent?.cells?.length){const cell=intent.cells[Math.floor(intent.cells.length/2)],p=project(cell.x,cell.y);text(`${intent.label} · ${intent.damage} DMG`,p.x,p.y-85,'#ffc898',14);}
-    effects=effects.filter(e=>time-e.started<e.duration);
-    for(const e of effects)effectSprite(e.type,e.x,e.y,time-e.started,e.duration);
-    missiles=missiles.filter(m=>time-m.started<m.duration);
-    for(const m of missiles) {
-      const progress=clamp((time-m.started)/m.duration,0,1);
-      if(progress<=0)continue;
-      const from=project(m.fromX,m.fromY),to=project(m.toX,m.toY);
-      const px=from.x+(to.x-from.x)*progress,py=from.y+(to.y-from.y)*progress-48;
-      atlas('effects',4+Math.floor(progress*3),4,3,px-29,py-29,58,58);
-    }
-    floating=floating.filter(f=>time-f.started<1100);
-    for(const f of floating) {const p=project(f.x,f.y),age=time-f.started;context.globalAlpha=Math.min(1,(1100-age)/250);text(f.text,p.x,p.y-68-age*.027,f.color,18);context.globalAlpha=1;}
+    drawTransient(time);
     context.restore();
     const vignette=context.createRadialGradient(width*.5,height*.48,Math.min(width,height)*.24,width*.5,height*.48,Math.max(width,height)*.68);
     vignette.addColorStop(0,'#02071500');vignette.addColorStop(.68,'#02071524');vignette.addColorStop(1,'#020715d9');
@@ -699,7 +796,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   const click=event=>{if(suppressClick){suppressClick=false;return;}const cell=cellAt(event.clientX,event.clientY);if(cell){cursor=cell;trapFocus=cell;onCell?.(cell.x,cell.y);}};
   const wheel=event=>{event.preventDefault();zoom(event.deltaY>0?-.15:.15);};
   const key=event=>{
-    if(!view)return;
+    if(!view || nativeActive()&&nativeState!=='ready')return;
     const input={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0],w:[0,-1],s:[0,1],a:[-1,0],d:[1,0]}[event.key.length===1?event.key.toLowerCase():event.key];
     const direction=input?screenDirection(...input):null;
     const map=view.screen==='explore'?view.exploration:view;
@@ -717,10 +814,13 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   const observer=new ResizeObserver(resize);observer.observe(canvas);
   ready.then(resize);resize();frameId=requestAnimationFrame(draw);
   return {setView,playEvents,resize,skipAnimations,zoom,centerSelected,rotate,getRotationLabel,getRotation:()=>rotation,screenDirection,
+    getNativeArtStatus:()=>({state:nativeState,projection:nativeActive()?'orthogonal':'isometric',styleId:nativeArt?.manifest.style??view?.customMap?.visuals?.styleId??null,kitId:nativeArt?.manifest.id??view?.customMap?.visuals?.kitId??null,pieceCount:nativeScene?nativeScene.floor.length+nativeScene.structures.length+nativeScene.decorations.length:0,error:nativeError}),
+    getNativeVisuals:()=>nativeScene?serializeNativeVisuals(nativeScene,{styleId:view.customMap.visuals.styleId,kitId:view.customMap.visuals.kitId,width:view.width,height:view.height}):null,
+    retryNativeArt:()=>loadNativeArt(true),
     // Coordinates support real pointer-based browser regression tests.
     cellToScreen:(x,y)=>screen(x,y),
     screenToCell:(x,y)=>{const box=canvas.getBoundingClientRect();return cellAt(x+box.left,y+box.top);},
     getPathTo:(x,y)=>pathTo(x,y),
-    dispose(){disposed=true;generation++;cancelAnimationFrame(frameId);observer.disconnect();canvas.removeEventListener('pointermove',move);canvas.removeEventListener('pointerleave',leave);canvas.removeEventListener('click',click);canvas.removeEventListener('keydown',key);canvas.removeEventListener('pointerdown',down);canvas.removeEventListener('pointerup',up);canvas.removeEventListener('pointercancel',up);canvas.removeEventListener('wheel',wheel);}
+    dispose(){disposed=true;generation++;nativeRequest++;nativeStatus.remove();cancelAnimationFrame(frameId);observer.disconnect();canvas.removeEventListener('pointermove',move);canvas.removeEventListener('pointerleave',leave);canvas.removeEventListener('click',click);canvas.removeEventListener('keydown',key);canvas.removeEventListener('pointerdown',down);canvas.removeEventListener('pointerup',up);canvas.removeEventListener('pointercancel',up);canvas.removeEventListener('wheel',wheel);}
   };
 }

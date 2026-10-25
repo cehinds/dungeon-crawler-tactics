@@ -106,6 +106,73 @@ class BookTileTests(unittest.TestCase):
         self.assertEqual(prop["derived"]["resampling"], "lanczos")
         self.assertEqual(prop["derived"]["offset"]["x"], round(128 - prop["derived"]["width"] * .25))
 
+    def test_native_floor_mattes_transparent_grout_with_source_material(self):
+        source = Image.new("RGBA",(100,100),(120,90,60,255))
+        draw = ImageDraw.Draw(source)
+        draw.rectangle((40,40,49,49),fill=(0,0,0,0))
+        draw.rectangle((55,40,59,49),fill=(180,140,100,128))
+        original = source.tobytes()
+        asset = {"id":"floor","role":"ground","cell":0,"squareLayout":"floor"}
+        exported,derived,_ = tiles.normalize(source,asset,self.styles[0])
+        plane = exported.crop((64,128,192,256))
+        self.assertEqual(plane.getchannel("A").getextrema(),(255,255))
+        self.assertEqual(derived["matte"]["rgba"],[120,90,60,255])
+        self.assertEqual(plane.getpixel((50,50)),(120,90,60,255),"transparent grout inherits source material")
+        self.assertEqual(plane.getpixel((20,20)),(120,90,60,255),"opaque paint remains unchanged")
+        self.assertEqual(exported.getpixel((0,0))[3],0,"canvas margin remains transparent")
+        self.assertEqual(source.tobytes(),original)
+        _,wall,_ = tiles.normalize(source,{"id":"wall","role":"wall","cell":6,"squareLayout":"north-wall",
+                                          "renderWidth":128,"renderHeight":64},self.styles[0])
+        self.assertNotIn("matte",wall)
+
+    def test_native_floor_material_crop_removes_halo_and_outer_frame(self):
+        source = Image.new("RGBA", (200,200), (20,20,20,2))
+        draw = ImageDraw.Draw(source)
+        draw.rectangle((2,2,197,197), fill=(2,2,2,255))
+        draw.rectangle((8,8,191,191), fill=(130,100,70,255))
+        original = source.tobytes()
+        asset = {"id":"floor", "role":"ground", "cell":0, "squareLayout":"floor"}
+        for style_id in ("pocket-dungeon","ink-and-lanterns","dungeon-after-dark"):
+            style = dict(self.styles[0], id=style_id)
+            exported,derived,_ = tiles.normalize(source,asset,style)
+            material = exported.crop((64,128,192,256))
+            self.assertEqual(material.getchannel("A").getextrema(),(255,255))
+            self.assertEqual(material.tobytes(), bytes((130,100,70,255)) * (128*128))
+            joined = Image.new("RGBA",(256,128))
+            joined.paste(material,(0,0)); joined.paste(material,(128,0))
+            self.assertEqual(joined.crop((126,0,130,128)).tobytes(), bytes((130,100,70,255)) * (4*128))
+            self.assertEqual(derived["sourceWindow"], {"x":15,"y":15,"width":170,"height":170,
+                                                     "alphaThreshold":128,"inset":{"x":.065,"y":.065}})
+        self.assertEqual(source.tobytes(),original,"sampling never changes the authored source")
+
+    def test_native_wall_material_crop_preserves_cross_axis_silhouette(self):
+        for layout,cell,size in (("north-wall",6,(128,64)),("west-wall",7,(32,128))):
+            source = Image.new("RGBA",(200,200))
+            draw = ImageDraw.Draw(source)
+            draw.rectangle((2,2,197,197),fill=(2,2,2,255))
+            draw.rectangle((7,7,192,192),fill=(140,100,70,255))
+            _,derived,_ = tiles.normalize(source,{"id":"wall","role":"wall","cell":cell,"squareLayout":layout,
+                                                  "renderWidth":size[0],"renderHeight":size[1]},self.styles[0])
+            window = derived["sourceWindow"]
+            if layout == "north-wall":
+                self.assertEqual((window["y"],window["height"]),(0,200))
+                self.assertGreater(window["x"],7)
+                self.assertEqual(derived["placement"]["points"],[[64,192],[192,192]])
+            else:
+                self.assertEqual((window["x"],window["width"]),(0,200))
+                self.assertGreater(window["y"],7)
+                self.assertEqual(derived["placement"]["points"],[[128,128],[128,256]])
+
+    def test_native_material_crop_exempts_transitions_and_doors(self):
+        source = Image.new("RGBA",(100,100),(100,80,60,255))
+        for layout,cell,role in (("floor",4,"ground"),("floor",5,"ground"),("north-wall",12,"door")):
+            _,derived,_ = tiles.normalize(source,{"id":"piece","role":role,"cell":cell,"squareLayout":layout,
+                                                  "renderWidth":128,"renderHeight":96},self.styles[0])
+            self.assertNotIn("sourceWindow",derived)
+        with self.assertRaisesRegex(tiles.PackError,"materialInset"):
+            tiles.normalize(source,{"id":"floor","role":"ground","cell":0,"squareLayout":"floor",
+                                    "materialInset":{"x":.6,"y":0}},self.styles[0])
+
     def test_native_square_styles_and_mating(self):
         image = Image.new("RGBA", (100,100), "red")
         for style in self.styles + [{"id":"dungeon-after-dark","projection":"orthogonal","tileWidth":128,"tileHeight":128}]:

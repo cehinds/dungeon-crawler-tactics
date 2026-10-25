@@ -87,7 +87,7 @@ export function buildArtScene(room, art, varied = true) {
     }
   }
   const entrance = room.entrance || room.start;
-  add(decorations, door, entrance.x * 128, entrance.y * 128 + 15, 0, 'entrance');
+  add(decorations, door, entrance.x * 128, entrance.y * 128, 0, 'entrance');
   add(decorations, stairs, room.exit.x * 128, room.exit.y * 128, 0, 'exit');
   structures.sort((a, b) => a.py - b.py || a.px - b.px);
   decorations.sort((a, b) => a.py - b.py || a.px - b.px);

@@ -61,6 +61,7 @@ jobs:
           node Tools/test_procedural_map.mjs
           node Tools/test_generator_art.mjs
           node Tools/test_book_tile_layout.mjs
+          node Tools/test_native_map_visuals.mjs
       - name: Run shared C# regression tests
         run: |
           dotnet run --project Tests/RulesKernel.Tests.csproj -c Release
@@ -79,6 +80,14 @@ jobs:
         run: python Tools/prepare_research.py --check
       - name: Publish browser game
         run: dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
+      - name: Verify generated-map handoff in the published game
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/dct-playtest-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+          python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Prepare static hosting artifact
         run: |
           test -f Web/publish/wwwroot/index.html

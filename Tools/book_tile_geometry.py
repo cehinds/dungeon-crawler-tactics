@@ -5,6 +5,7 @@ is top/right/bottom/left (isometric), TL/TR/BR/BL (orthogonal). Wall points foll
 positive grid axis x or y and map to a baseline centered on the canvas anchor.
 """
 import math
+import statistics
 from PIL import Image
 from build_style_packs import require
 
@@ -85,6 +86,58 @@ def registered(tight, asset, style, registration, canvas_size, anchor):
     return result, derived, {'x':source_anchor[0]/tight.width, 'y':source_anchor[1]/tight.height}
 
 
+def material_window(tight, asset):
+    """Remove atlas halo/outline only on the axes that must repeat seamlessly.
+
+    Fractions are relative to opaque source bounds, not the logical grid. This
+    samples source pixels without painting, changing logical dimensions or
+    trimming a wall's nonrepeating top/bottom silhouette.
+    """
+    layout, cell = asset['squareLayout'], asset.get('cell')
+    full_floor = layout == 'floor' and (cell is None or cell < 4)
+    north = layout == 'north-wall' and cell == 6
+    west = layout == 'west-wall' and cell == 7
+    if not (full_floor or north or west):
+        return tight, None
+    defaults = {'x':.065 if full_floor or north else 0,
+                'y':.065 if full_floor or west else 0}
+    inset = asset.get('materialInset', defaults)
+    require(isinstance(inset, dict) and set(inset) == {'x','y'}
+            and all(type(v) in (int,float) and math.isfinite(v) and 0 <= v <= .2 for v in inset.values()),
+            f"{asset['id']}: materialInset requires x/y fractions from 0 to 0.2")
+    require(not north or inset['y'] == 0, 'North wall material inset must preserve its vertical silhouette')
+    require(not west or inset['x'] == 0, 'West wall material inset must preserve its horizontal silhouette')
+    opaque = tight.getchannel('A').point(lambda value: 255 if value >= 128 else 0).getbbox()
+    require(opaque is not None, f"{asset['id']}: repeating material requires opaque source pixels")
+    left,top,right,bottom = opaque
+    if north:
+        top,bottom = 0,tight.height
+    if west:
+        left,right = 0,tight.width
+    dx = round((right-left)*inset['x'])
+    dy = round((bottom-top)*inset['y'])
+    box = (left+dx,top+dy,right-dx,bottom-dy)
+    require(box[0] < box[2] and box[1] < box[3], 'Material inset leaves no source pixels')
+    return tight.crop(box), {'x':box[0],'y':box[1],'width':box[2]-box[0],
+                             'height':box[3]-box[1],'alphaThreshold':128,'inset':dict(inset)}
+
+
+def terrain_matte(sampled):
+    """Flatten terrain alpha against source-derived grout, preserving opaque paint."""
+    pixels = sampled.convert('RGBA')
+    candidates = [tuple(pixels.getpixel((x,y))) for y in range(pixels.height)
+                  for x in range(pixels.width) if pixels.getpixel((x,y))[3] >= 128]
+    require(candidates, 'Terrain material requires opaque pixels for its matte')
+    candidates.sort(key=lambda p: 299*p[0]+587*p[1]+114*p[2])
+    darkest = candidates[:max(1,math.ceil(len(candidates)*.1))]
+    color = tuple(round(statistics.median(p[channel] for p in darkest)) for channel in range(3)) + (255,)
+    flattened = Image.new('RGBA',sampled.size,color)
+    flattened.alpha_composite(sampled)
+    return flattened, {'kind':'opaque-terrain-material-plane',
+                       'method':'darkest-decile-channel-median','rgba':list(color),
+                       'sampleAlphaThreshold':128}
+
+
 def native_square(tight, asset, style, canvas_size, anchor):
     """Normalize native axis-aligned art; never reproject legacy diamond art."""
     layout = asset['squareLayout']
@@ -116,8 +169,12 @@ def native_square(tight, asset, style, canvas_size, anchor):
             and offset[1]+size[1]<=canvas_size[1], f"{asset['id']}: native layout would clip normalized canvas")
     pixel = style['id'] == 'pocket-dungeon'
     sampling = Image.Resampling.NEAREST if pixel else Image.Resampling.LANCZOS
+    sampled, source_window = material_window(tight, asset)
+    matte = None
+    if layout == 'floor' and asset.get('cell',0) < 4:
+        sampled, matte = terrain_matte(sampled)
     result = Image.new('RGBA',canvas_size)
-    result.paste(tight.resize(size,sampling),offset)
+    result.paste(sampled.resize(size,sampling),offset)
     x,y=offset;w,h=size
     if layout == 'floor':
         placement = {'kind':'floor','points':[[x,y],[x+w,y],[x+w,y+h],[x,y+h]]}
@@ -129,6 +186,10 @@ def native_square(tight, asset, style, canvas_size, anchor):
         placement = {'kind':layout,'points':[[anchor['x'],anchor['y']]]}
     derived = {'kind':'normalized-derived-export','sizing':'native-square-'+layout,
                'resampling':'nearest' if pixel else 'lanczos',
-               'scaleX':w/tight.width,'scaleY':h/tight.height,'width':w,'height':h,
+               'scaleX':w/sampled.width,'scaleY':h/sampled.height,'width':w,'height':h,
                'offset':{'x':x,'y':y},'placement':placement}
+    if source_window is not None:
+        derived['sourceWindow'] = source_window
+    if matte is not None:
+        derived['matte'] = matte
     return result,derived,{'x':relative[0],'y':relative[1]}

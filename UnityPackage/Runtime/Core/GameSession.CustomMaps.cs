@@ -55,6 +55,12 @@ namespace DungeonCrawlerTactics
             copy.playerSpawns = Array.ConvertAll(map.playerSpawns, p => p == null ? null : new CellView { x = p.x, y = p.y });
             copy.enemies = Array.ConvertAll(map.enemies, e => e == null ? null : new SpawnDef { id = e.id, label = e.label, classId = e.classId, artId = e.artId, x = e.x, y = e.y, hp = e.hp, energy = e.energy, move = e.move, tags = e.tags == null ? null : (string[])e.tags.Clone() });
             copy.placements = Array.ConvertAll(map.placements, p => p == null ? null : new MapPlacement { id = p.id, assetId = p.assetId, layer = p.layer, x = p.x, y = p.y, rotation = p.rotation, blocksMovement = p.blocksMovement });
+            if (map.visuals != null)
+            {
+                Require(map.visuals.pieces != null && map.visuals.pieces.Length <= 3840, "Native map art exceeds collection limits.");
+                copy.visuals = new NativeMapVisuals { schemaVersion = map.visuals.schemaVersion, styleId = map.visuals.styleId, kitId = map.visuals.kitId,
+                    pieces = Array.ConvertAll(map.visuals.pieces, p => p == null ? null : new NativeMapPiece { cell = p.cell, x2 = p.x2, y2 = p.y2, rotation = p.rotation, layer = p.layer }) };
+            }
             return copy;
         }
         private EncounterDef BuildCustomEncounter(CustomMapData map)
@@ -71,6 +77,7 @@ namespace DungeonCrawlerTactics
                 if (tile.blocked)
                     walls.Add(TileId(tile.x, tile.y));
             }
+            ValidateNativeVisuals(map, walls);
             string[] assetIds = { "wall-ne", "wall-nw", "wall-corner", "pillar", "door-closed-nw", "door-open-nw", "door-closed-ne", "door-open-ne", "torch", "lever", "grate", "oil-overlay", "water-overlay", "moss", "rubble", "stairs", "stone-a", "stone-b", "water-floor", "oil-floor", "crate", "barrel", "chest", "exit", "fire-overlay" };
             string[] layers = { "structure", "structure", "structure", "prop", "structure", "structure", "structure", "structure", "prop", "prop", "surface", "surface", "surface", "overlay", "prop", "prop", "floor", "floor", "floor", "floor", "prop", "prop", "prop", "structure", "overlay" };
             HashSet<string> placementIds = new HashSet<string>(), slots = new HashSet<string>();
@@ -132,6 +139,39 @@ namespace DungeonCrawlerTactics
         private static bool InCustomBounds(CustomMapData map, int x, int y)
         {
             return x >= 0 && y >= 0 && x < map.width && y < map.height;
+        }
+        private static bool IsVisualSlug(string value)
+        {
+            if (string.IsNullOrEmpty(value) || value.Length > 64 || value[0] == '-' || value[value.Length - 1] == '-') return false;
+            for (int i = 0; i < value.Length; i++)
+            {
+                char c = value[i];
+                if (!(c >= 'a' && c <= 'z') && !(c >= '0' && c <= '9') && c != '-') return false;
+                if (c == '-' && i > 0 && value[i - 1] == '-') return false;
+            }
+            return true;
+        }
+        private static void ValidateNativeVisuals(CustomMapData map, HashSet<string> blocked)
+        {
+            NativeMapVisuals art = map.visuals;
+            if (art == null) return;
+            Require(art.schemaVersion == 1 && IsVisualSlug(art.styleId) && IsVisualSlug(art.kitId), "Invalid native map art revision or kit identifier.");
+            Require(art.pieces != null && art.pieces.Length > 0 && art.pieces.Length <= map.width * map.height * 12, "Native map art exceeds collection limits.");
+            HashSet<string> floors = new HashSet<string>();
+            foreach (NativeMapPiece piece in art.pieces)
+            {
+                Require(piece != null && piece.cell >= 0 && piece.cell < 24 && piece.rotation >= 0 && piece.rotation < 4
+                    && piece.x2 >= -1 && piece.x2 < map.width * 2 && piece.y2 >= -1 && piece.y2 < map.height * 2
+                    && (piece.layer == "ground" || piece.layer == "structures" || piece.layer == "props"), "Invalid native map art placement.");
+                Require((piece.cell < 6) == (piece.layer == "ground"), "Native floor art must use the ground layer.");
+                if (piece.layer == "ground")
+                    Require(piece.x2 >= 0 && piece.y2 >= 0 && piece.x2 % 2 == 0 && piece.y2 % 2 == 0
+                        && floors.Add(TileId(piece.x2, piece.y2)), "Invalid or duplicate native floor position.");
+            }
+            Require(floors.Count > 0, "Native map art needs a floor.");
+            for (int y = 0; y < map.height; y++)
+                for (int x = 0; x < map.width; x++)
+                    Require(blocked.Contains(TileId(x, y)) || floors.Contains(TileId(x * 2, y * 2)), "Native map art must cover every walkable cell.");
         }
     }
 }

@@ -1,12 +1,15 @@
 # Books 1–8 location tile QA
 
-The expanded art, export, and browser review is complete: 31 kits, 93 atlases, and 2,232 component PNGs. Publication is tracked by the [Pages deployment workflow](https://github.com/cehinds/dungeon-crawler-tactics/actions/workflows/deploy-pages.yml) after push to main. The exhaustive canonical source audit remains open.
+The expanded art, export, and 93-variant browser review is complete: 31 kits, 93 atlases, and 2,232 component PNGs. The new fixed-seed and Play visual roundtrip path is implemented, with C# CI verification underway. Publication is tracked by the [Pages deployment workflow](https://github.com/cehinds/dungeon-crawler-tactics/actions/workflows/deploy-pages.yml) after push to main; the exhaustive canonical source audit remains open.
 
 ## Art and export: passed
 
 - [x] All 93 native orthogonal atlases and 2,232 component exports validated for source, extraction, pixel ownership, geometry, manifests, and catalog consistency.
 - [x] All 2,232 decoded RGBA component pixel hashes are unique; components use 256×256 canvases and anchor `(128, 192)`.
 - [x] Combined export totals: 558 floors, 279 north-wall/door components (including 186 doors), 93 west walls, 558 overlays, and 744 props. All use the orthogonal 128×128 square grid.
+- [x] All 372 full floor planes in cells 0–3 are fully opaque across 128×128, using a source-sampled grout matte around the inset floor material. The default inset is 6.5%; selected glass/sea/rail floors use larger 8–12% insets and correspondingly narrower source windows, recorded in derived metadata.
+- [x] North/west repeat walls use a 6.5% trim along the repeated axis only. Doors and props preserve their alpha; native atlas source pixels remain unchanged by export. `sourceWindow` and `matte` fields preserve derivation provenance.
+- [x] 27 focused tile exporter tests passed.
 - [x] All 186 door states were visually checked for straight-on framing, vertical jambs, level bases, and no diamond plinths.
 - [x] All 144 new components in each art style passed `prepare_kit`; all 600 original baseline components per style also passed.
 - [x] 558 native-art scene checks passed; the pixel open-submarine aperture remains clear.
@@ -15,9 +18,12 @@ The expanded art, export, and browser review is complete: 31 kits, 93 atlases, a
 
 - [x] All 93 gallery variants and 93 generator art combinations passed browser review. Grid toggles restore exact pixels; Book 6–8 filters and evidence display correctly.
 - [x] All 2,232 PNG links and 2,511 versioned links returned HTTP 200. No browser errors; the 390px mobile view has no horizontal overflow.
-- [x] The generator passed nine style/theme combinations and checks for zoom, pan, rotation, fit, grid and route overlays, material variety, recipe metadata, strict canonical playable JSON, PNG download, play cancellation, and failure/retry behavior.
-- [x] 156 Python tests passed, including 20 asset-sync tests. Node checks passed for 720 generator cases, 721 schema-valid exports, 461 room-generation checks, 640 rotated-picking checks, and 558 native-art scenes.
+- [x] The generator passed nine style/theme combinations and checks for zoom, pan, rotation, fit, grid and route overlays, material variety, recipe metadata, canonical playable JSON with optional art metadata, PNG download, play cancellation, and failure/retry behavior.
+- [x] 152 Python `Tools` unit tests passed, including 20 asset-sync and 27 book-tile geometry tests. Node checks passed for 720 generator cases, 721 schema-valid exports, 461 room-generation checks, 640 rotated-picking checks, and 558 native-art scenes.
 - [x] Four generated maps imported into the shared C# runtime; workshop handoff passed.
+- The implementation defaults Generate to a fresh seed; editing the seed enables **Keep this seed fixed**, and reroll always chooses a new one.
+- Play/export wait for the selected native art to load, then carry the exact preview composition in optional presentation metadata.
+- [ ] Verify fixed-seed generation and the native-art visual roundtrip through the updated C# build and browser Play handoff; CI verification is underway.
 
 ## Publication and source audit
 
@@ -28,9 +34,8 @@ The art lab's three whole-style ZIPs stream from the AI-Art branch; all three li
 
 ## Asset migration: passed
 
-- [x] The earlier baseline pin `d12871d5dd8ea9bb4f334215045000fddc23fd52` restored 3,925 files into an empty directory and passed `--check`.
-- [x] The final expanded pin `4aab2055cdfbd2ff0d6955d082007ecee0e6cb5b` contains 4,429 project assets and passes sync `--check`; full 2,232-PNG reconstruction and catalog checks passed. The separate `originals/index.json` covers 312 raw originals, which are retained in AI-Art and not restored into the game.
-- [x] Restored all 4,429 final pinned assets into an empty directory and verified them with `--check`; all 20 focused asset-sync tests passed.
+- [x] The current game lock pins AI-Art commit `fbf58305bea542f7532ffc0e46bb63ad49a1eca0`; its main index contains 21,945 project files. Exact-pin hydration restored 17,516 missing files and verified the 4,429 already present. The earlier focused seam-fix pin `8753a0061398b2a2169c2098315d26d943f214ff` passed `--check` and full 2,232-PNG reconstruction; the separate originals index tracks generation sources outside the game restore.
+- [x] All 20 focused asset-sync tests are included in the passing Python suite.
 
 In a new clone, run `python3 Tools/sync_art_assets.py` before testing or building. Python 3.10 or newer is required.
 
@@ -42,4 +47,4 @@ In a new clone, run `python3 Tools/sync_art_assets.py` before testing or buildin
 - [x] Books 6–8 add ten location records, including Ghosts of Earth on Floor 8, Faction Wars on Floor 9, racing and a garage on Floor 10, and the Parade of Horribles route and arena on Floor 11.
 - [x] Official author and publisher sources confirm Book 8 publication. Secondary chapter references are identified in [the Books 6–8 research file](research-books-6-8.json).
 
-This is a researched art library, not a full-text concordance or a complete canonical floorplan collection. Room layouts, measurements, and unsupported visual details are adaptations. The tile art is not integrated into playable game maps, encounters, collision, or Unity scenes.
+This is a researched art library, not a full-text concordance or a complete canonical floorplan collection. Room layouts, measurements, and unsupported visual details are adaptations. The browser custom-map runtime can render the native art through optional presentation metadata; it does not change canonical collision or terrain rules, campaign maps, or Unity scenes.

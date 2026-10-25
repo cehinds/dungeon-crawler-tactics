@@ -142,16 +142,18 @@ function openDialog(id) {
   syncFeedbackHost();
 }
 function closeDialog(id) { $(id).close(); }
-async function persist() {
+async function persist({ strict = false } = {}) {
   const revision=++saveRevision;
   try {
     const serialized = await call('GetSave');
-    if(revision!==saveRevision) return;
+    if(revision!==saveRevision) { if (strict) throw new Error('Another save superseded this handoff. Retry it.'); return false; }
     localStorage.setItem(saveKey, serialized);
-    $('#save-status').textContent = 'Progress saved in this browser';
+    const indicator = $('#save-status'); if (indicator) indicator.textContent = 'Progress saved in this browser';
+    return true;
   } catch (error) {
-    if(revision!==saveRevision) return;
-    $('#save-status').textContent = 'Local save unavailable · export a backup';
+    const indicator = $('#save-status'); if (indicator) indicator.textContent = 'Local save unavailable · export a backup';
+    if (strict) throw new Error(`This dungeon could not be saved in this browser. Its handoff is kept for retry. ${error.message}`);
+    return false;
   }
 }
 function command(type, args = {}, options = {}) {
@@ -869,10 +871,55 @@ async function loadSerializedSave(serialized) {
   render();
   await persist();
 }
+function workshopRequest() {
+  const query = new URLSearchParams(location.search), token = query.get('map');
+  if (token && !/^[a-zA-Z0-9-]{8,80}$/.test(token)) throw new Error('This dungeon link is invalid. Return to the generator and choose Play again.');
+  const storageKey = token ? `dct.workshop-map.${token}` : 'dct.workshop-map';
+  const serialized = token ? sessionStorage.getItem(storageKey) : localStorage.getItem(storageKey);
+  if (!serialized) throw new Error('This dungeon handoff has expired. Your saved run is unchanged; return to the generator and choose Play again.');
+  if (serialized.length > 2_000_000) throw new Error('The generated map exceeds the 2 MB import limit.');
+  return { token, storageKey, serialized, map: JSON.parse(serialized) };
+}
+function matchesWorkshopValue(actual, expected) {
+  if (expected === null || typeof expected !== 'object') return actual === expected;
+  if (Array.isArray(expected)) return Array.isArray(actual) && actual.length === expected.length && expected.every((value, index) => matchesWorkshopValue(actual[index], value));
+  return actual && typeof actual === 'object' && Object.keys(expected).every(key => matchesWorkshopValue(actual[key], expected[key]));
+}
+function verifyWorkshopImport(expected) {
+  if (expected.visuals && !matchesWorkshopValue(view.customMap?.visuals, expected.visuals)) throw new Error('The game did not retain this dungeon’s selected tile art. Reload the updated game and retry.');
+  const portable = {
+    schemaVersion: expected.schemaVersion, width: expected.width, height: expected.height, label: expected.label,
+    tiles: expected.tiles.map(({ x, y, blocked = false, tags = [] }) => ({ x, y, blocked, tags })),
+    placements: expected.placements.map(({ id, assetId, layer, x, y, rotation = 0, blocksMovement }) => ({ id, assetId, layer, x, y, rotation, blocksMovement })),
+    ...(expected.playerSpawns?.length ? { playerSpawns: expected.playerSpawns.map(({ x, y }) => ({ x, y })) } : {}),
+    ...(expected.enemies?.length ? { enemies: expected.enemies } : {}),
+    ...(expected.visuals ? { visuals: expected.visuals } : {}),
+  };
+  if (view.screen !== 'battle' || view.width !== expected.width || view.height !== expected.height || !matchesWorkshopValue(view.customMap, portable)) throw new Error(view.message || 'The game did not accept this exact dungeon.');
+  const authoredTiles = new Map(expected.tiles.map(tile => [`${tile.x},${tile.y}`, tile]));
+  if (view.tiles.length !== expected.width * expected.height || view.tiles.some(tile => {
+    const authored = authoredTiles.get(`${tile.x},${tile.y}`);
+    return tile.blocked !== Boolean(authored?.blocked) || JSON.stringify([...tile.tags].sort()) !== JSON.stringify([...(authored?.tags || [])].sort());
+  })) throw new Error('The loaded dungeon terrain does not match the generated map.');
+  if (expected.playerSpawns?.length) {
+    const positions = list => list.map(cell => `${cell.x},${cell.y}`).sort().join('|');
+    if (positions(view.units.filter(unit => unit.team === 'player')) !== positions(expected.playerSpawns)) throw new Error('The loaded party positions do not match the generated map.');
+  }
+  if (expected.enemies?.length && expected.enemies.some(enemy => !view.units.some(unit => unit.team === 'enemy' && unit.id === enemy.id && unit.x === enemy.x && unit.y === enemy.y))) throw new Error('The loaded enemies do not match the generated map.');
+}
+function consumeWorkshopRequest(request) {
+  if (request.token) sessionStorage.removeItem(request.storageKey);
+  try { if (localStorage.getItem('dct.workshop-map') === request.serialized) localStorage.removeItem('dct.workshop-map'); } catch { /* The per-tab handoff is already complete. */ }
+  const query = new URLSearchParams(location.search); query.delete('workshop'); query.delete('map');
+  history.replaceState(null, '', `${location.pathname}${query.size ? `?${query}` : ''}${location.hash}`);
+}
 async function boot() {
+  const isWorkshopRequest = new URLSearchParams(location.search).get('workshop') === '1';
+  let workshopCommitted = false;
   try {
+    const requestedMap = isWorkshopRequest ? workshopRequest() : null;
     await Blazor.start();
-    $('#boot-status').textContent = 'Loading your party and the first floor…';
+    $('#boot-status').textContent = requestedMap ? 'Loading your generated dungeon…' : 'Loading your party and the first floor…';
     const responses = await Promise.all([fetch('data/combat-content.json'), fetch('data/game-content.json')]);
     if (responses.some(r => !r.ok)) throw new Error('The game content could not be loaded. Serve this folder over HTTP; opening index.html directly is unsupported.');
     const [combatJson, gameJson] = await Promise.all(responses.map(r => r.text()));
@@ -880,21 +927,32 @@ async function boot() {
     gameData = JSON.parse(gameJson);
     view = JSON.parse(await call('Initialize', combatJson, gameJson));
     narrator=createNarrator({getView:()=>view,content});
-    let saved;
-    try { saved = localStorage.getItem(saveKey); } catch { /* Export remains available. */ }
-    if (saved) {
-      try { await loadSerializedSave(saved); toast('Your run has been restored.'); }
-      catch (error) { render(); toast('Your stored save could not be restored. A new party is ready; the stored file has been preserved.', 'warning'); $('#save-status').textContent = 'Stored save invalid · import or start fresh'; }
-    } else {
+    if (requestedMap) {
+      // An explicit map takes precedence over autosave. Commit the browser save only
+      // after geometry, spawns and any native visual descriptor match exactly.
       render();
-      await persist();
-      // The camp gateway is the first playable screen; help remains available on demand.
+      await command('import_map', { customMap: requestedMap.map }, { save: false });
+      verifyWorkshopImport(requestedMap.map);
+      await persist({ strict: true });
+      workshopCommitted = true;
+      consumeWorkshopRequest(requestedMap);
+      toast('Your exact generated dungeon is ready.', 'success');
+    } else {
+      let saved;
+      try { saved = localStorage.getItem(saveKey); } catch { /* Export remains available. */ }
+      if (saved) {
+        try { await loadSerializedSave(saved); toast('Your run has been restored.'); }
+        catch (error) { render(); toast('Your stored save could not be restored. A new party is ready; the stored file has been preserved.', 'warning'); $('#save-status').textContent = 'Stored save invalid · import or start fresh'; }
+      } else { render(); await persist(); }
     }
     $('#game').setAttribute('aria-busy', 'false');
-    if(new URLSearchParams(location.search).get('workshop')==='1'){try{const storedMap=localStorage.getItem('dct.workshop-map');if(!storedMap)throw new Error('No workshop map is stored.');await command('import_map',{customMap:JSON.parse(storedMap)});}catch(error){toast(`Workshop map could not be loaded: ${error.message}`,'error');}}
     window.dungeon = { get scene(){return battlefield;}, cellToScreen:(x,y)=>battlefield?.cellToScreen(x,y), command, getView: () => view, getSave: () => call('GetSave'), loadSave: loadSerializedSave };
   } catch (error) {
-    $('#game').innerHTML = `<section class="fatal"><h1>The dungeon couldn’t load.</h1><p>The C# runtime or game content did not finish loading. Check your connection and reload the page.</p><pre>${e(error.message)}</pre><button class="primary" onclick="location.reload()">Try again</button></section>`;
+    if (isWorkshopRequest) {
+      $('#game').innerHTML = `<section class="fatal" id="workshop-load-error" role="alert"><h1>${workshopCommitted ? 'Your dungeon was saved, but the handoff could not finish.' : 'Your generated dungeon wasn’t loaded.'}</h1><p>${workshopCommitted ? 'Your browser save now contains the generated dungeon. Open your saved run to continue.' : 'Your previous browser save has not been replaced.'}</p><pre>${e(error.message)}</pre><button class="primary" onclick="location.reload()">Retry this dungeon</button><p><a href="dungeon-generator.html">Return to the generator</a> · <a href="index.html">Open your saved run</a></p></section>`;
+    } else {
+      $('#game').innerHTML = `<section class="fatal"><h1>The dungeon couldn’t load.</h1><p>The C# runtime or game content did not finish loading. Check your connection and reload the page.</p><pre>${e(error.message)}</pre><button class="primary" onclick="location.reload()">Try again</button></section>`;
+    }
     $('#game').setAttribute('aria-busy', 'false');
     console.error(error);
   }

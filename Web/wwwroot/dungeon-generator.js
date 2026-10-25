@@ -1,9 +1,11 @@
+import { drawFloorLayer } from './tile-surface-renderer.js';
+import { serializeNativeVisuals } from './native-map-visuals.js';
 import { generateDungeon, getPlayableMap } from './procedural-map.js';
 import { fetchJSON, loadArtKit, buildArtScene, drawPiece, revisionURL, environmentMood, visibleSceneCorners } from './generator-art.js';
 const $ = id => document.getElementById(id), canvas = $('map'), ctx = canvas.getContext('2d');
 const terrainTypes = [{ tag: 'surface.water', letter: 'W', label: 'Water', color: '#82d6ff' }, { tag: 'surface.oil', letter: 'O', label: 'Oil', color: '#d4bbf2' }, { tag: 'surface.burning', letter: 'F', label: 'Fire', color: '#ffb17a' }];
 const catalogURL = new URL('assets/book-tiles/catalog.json', location.href);
-let manifest, rules, catalog, room, playable, art, scene, rotation = 0, blueprint = false, artRequest = 0, artError = false, zoom = 1, pan = { x: 0, y: 0 };
+let manifest, rules, catalog, room, playable, art, scene, rotation = 0, blueprint = false, artRequest = 0, artError = false, zoom = 1, pan = { x: 0, y: 0 }, generating = false, artBusy = false, generationNumber = 0;
 function status(message, error = false) { $('status').textContent = message; $('status').classList.toggle('error', error); }
 async function safely(action) { try { await action(); } catch (error) { status(error.message, true); } }
 function settings() {
@@ -12,7 +14,7 @@ function settings() {
 }
 function updateSummary() {
   const entrance = room.entrance || room.start;
-  $('ambience-info').textContent = environmentMood($('art-theme').value).label;
+  $('ambience-info').textContent = environmentMood(art?.kit.id || $('art-theme').value).label;
   $('map-title').textContent = `${art?.kit.title || $('art-theme').selectedOptions[0]?.textContent || 'Dungeon'} / ${room.seed || 'untitled'}`;
   $('counts').textContent = `${room.rooms.length} rooms · ${room.corridors.length} connections · ${room.clearRoute.length} route cells`;
   $('entrance-info').textContent = `Cell ${entrance.x + 1}, ${entrance.y + 1}`;
@@ -37,30 +39,91 @@ function paletteLegend() {
     title.textContent = `Room ${style.index + 1}`; label.textContent = style.asset.label; copy.append(title, label); row.append(svg, copy); $('room-palettes').append(row);
   }
 }
-async function generate() {
-  const next = generateDungeon(manifest, settings(), rules), nextPlayable = getPlayableMap(next, manifest);
-  room = next; playable = nextPlayable; zoom = 1; pan = { x: 0, y: 0 };
-  updateSummary(); await updateArt();
+function randomSeed() {
+  const values = new Uint32Array(2); crypto.getRandomValues(values);
+  return `dungeon-${values[0].toString(36)}-${values[1].toString(36)}`;
 }
-function recordVisualSettings() {
-  if (room) room.visualAuthoring = { schemaVersion: 1, styleId: $('art-style').value, kitId: $('art-theme').value, varyRoomMaterials: $('variety').checked };
+function seedMode() {
+  $('seed-mode').textContent = $('fixed-seed').checked ? 'Fixed seed: Generate repeats this layout and settings.' : 'Each Generate chooses a new seed. Type a seed to lock it.';
+  if (!generating) $('generate').textContent = $('fixed-seed').checked ? 'Regenerate fixed seed' : 'Generate new dungeon';
+}
+function generationFeedback(message, error = false) {
+  $('generation-feedback').textContent = message; $('generation-feedback').hidden = false;
+  $('generation-feedback').classList.toggle('error', error);
+}
+function syncControls() {
+  const pending = generating || artBusy;
+  const nativeReady = Boolean(room && playable?.visuals && art && scene && !artError && !pending);
+  $('settings').disabled = !manifest || pending;
+  $('generate').disabled = pending; $('reroll').disabled = pending;
+  $('generate').setAttribute('aria-busy', String(generating));
+  for (const id of ['play', 'confirm-play', 'map-json', 'png']) $(id).disabled = !nativeReady;
+  for (const id of ['recipe', 'edit']) $(id).disabled = !room || pending;
+  if (generating) $('generate').textContent = 'Generating…'; else seedMode();
+}
+function recordVisualSettings(target = room) {
+  if (target) target.visualAuthoring = { schemaVersion: 1, styleId: $('art-style').value, kitId: $('art-theme').value, varyRoomMaterials: $('variety').checked };
+}
+function exactVisualMap(targetRoom, targetPlayable, targetScene) {
+  targetPlayable.visuals = serializeNativeVisuals(targetScene, { styleId: $('art-style').value, kitId: $('art-theme').value, width: targetRoom.width, height: targetRoom.height, tiles: targetPlayable.tiles });
+  recordVisualSettings(targetRoom);
+}
+async function generate({ fresh = !$('fixed-seed').checked, announce = true } = {}) {
+  if (generating || artBusy) return false;
+  const previous = { room, playable, art, scene, artError };
+  const request = ++artRequest;
+  let candidate, candidatePlayable;
+  generating = true; syncControls();
+  generationFeedback(fresh ? 'Creating a new dungeon…' : 'Rebuilding the fixed seed…');
+  try {
+    // Paint progress before generation and image loading, even for a warm cache.
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const options = settings(); if (fresh) options.seed = randomSeed();
+    candidate = generateDungeon(manifest, options, rules); candidatePlayable = getPlayableMap(candidate, manifest);
+    $('loading-message').textContent = 'Building the dungeon and loading its exact art…'; $('retry').hidden = true; $('loading').hidden = blueprint;
+    $('canvas-wrap').setAttribute('aria-busy', 'true');
+    const loaded = await loadArtKit(catalog, catalogURL, $('art-theme').value, $('art-style').value);
+    if (request !== artRequest) return false;
+    const candidateScene = buildArtScene(candidate, loaded, $('variety').checked);
+    exactVisualMap(candidate, candidatePlayable, candidateScene);
+    room = candidate; playable = candidatePlayable; art = loaded; scene = candidateScene; artError = false;
+    $('seed').value = room.seed; zoom = 1; pan = { x: 0, y: 0 }; generationNumber++;
+    $('loading').hidden = true; updateSummary(); paletteLegend(); draw();
+    generationFeedback(`${!announce ? 'Dungeon ready' : fresh ? 'New dungeon ready' : 'Fixed seed rebuilt'} · ${room.seed} · map ${generationNumber}`);
+    status(`${room.width} × ${room.height} cells · ${art.kit.title}. Play uses this exact layout, tile art, obstacles and spawns.`);
+    if (announce && matchMedia('(max-width: 700px)').matches) $('workspace').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    return true;
+  } catch (error) {
+    // Generation is transactional: failed validation or art keeps the last map intact.
+    ({ room, playable, art, scene, artError } = previous);
+    if (!room && candidate) { room = candidate; playable = candidatePlayable; artError = true; recordVisualSettings(); updateSummary(); draw(); }
+    $('loading').hidden = Boolean(art) || blueprint;
+    if (!art) { $('loading-message').textContent = 'The dungeon art could not load. Try again, or use Blueprint.'; $('retry').hidden = false; }
+    generationFeedback(`${previous.room ? 'Current dungeon kept. ' : ''}${error.message}`, true); status(error.message, true);
+    return false;
+  } finally {
+    generating = false; $('canvas-wrap').setAttribute('aria-busy', 'false'); syncControls();
+  }
 }
 async function updateArt() {
-  if (!room || !catalog) return;
-  recordVisualSettings();
-  const request = ++artRequest; art = null; scene = null; artError = false;
-  $('loading-message').textContent = 'Loading this environment’s square tiles…'; $('retry').hidden = true; $('loading').hidden = blueprint;
-  $('canvas-wrap').setAttribute('aria-busy', 'true'); paletteLegend(); draw();
+  if (!room || !catalog || generating) return;
+  const request = ++artRequest; artBusy = true; artError = false; syncControls();
+  $('loading-message').textContent = 'Loading this dungeon’s exact tile art…'; $('retry').hidden = true; $('loading').hidden = blueprint;
+  $('canvas-wrap').setAttribute('aria-busy', 'true');
   try {
     const loaded = await loadArtKit(catalog, catalogURL, $('art-theme').value, $('art-style').value);
     if (request !== artRequest) return;
-    art = loaded; scene = buildArtScene(room, art, $('variety').checked);
-    $('loading').hidden = true; $('canvas-wrap').setAttribute('aria-busy', 'false');
-    updateSummary(); paletteLegend(); draw();
-    status(`${room.width} × ${room.height} cells · ${art.kit.title} · ${$('art-style').selectedOptions[0].textContent}. Entrance and exit are connected; preview art stays separate from playable exports.`);
+    const nextScene = buildArtScene(room, loaded, $('variety').checked);
+    exactVisualMap(room, playable, nextScene);
+    art = loaded; scene = nextScene; artError = false;
+    $('loading').hidden = true; updateSummary(); paletteLegend(); draw();
+    status(`${room.width} × ${room.height} cells · ${art.kit.title} · ${$('art-style').selectedOptions[0].textContent}. Play preserves this exact layout and tile art.`);
   } catch (error) {
     if (request !== artRequest) return;
-    artError = true; $('loading-message').textContent = 'The art could not load. Try again, or use Blueprint.'; $('retry').hidden = false; $('loading').hidden = blueprint; $('canvas-wrap').setAttribute('aria-busy', 'false'); status(error.message, true);
+    artError = true; $('loading-message').textContent = 'This art could not load. Your previous map is kept; retry before playing.'; $('retry').hidden = false; $('loading').hidden = blueprint;
+    status(error.message, true);
+  } finally {
+    if (request === artRequest) { artBusy = false; $('canvas-wrap').setAttribute('aria-busy', 'false'); syncControls(); }
   }
 }
 function draw() {
@@ -69,7 +132,7 @@ function draw() {
   if (!bounds.width || !bounds.height) return;
   canvas.width = Math.round(bounds.width * dpr); canvas.height = Math.round(bounds.height * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  const mood = environmentMood($('art-theme').value), glow = ctx.createRadialGradient(bounds.width * .5, bounds.height * .38, 0, bounds.width * .5, bounds.height * .5, Math.max(bounds.width, bounds.height) * .7);
+  const mood = environmentMood(art?.kit.id || $('art-theme').value), glow = ctx.createRadialGradient(bounds.width * .5, bounds.height * .38, 0, bounds.width * .5, bounds.height * .5, Math.max(bounds.width, bounds.height) * .7);
   glow.addColorStop(0, mood.glow); glow.addColorStop(1, mood.background); ctx.fillStyle = glow; ctx.fillRect(0, 0, bounds.width, bounds.height);
   const angle = rotation * Math.PI / 2, cosine = Math.round(Math.cos(angle)), sine = Math.round(Math.sin(angle));
   const rotate = (x, y) => ({ x: x * cosine - y * sine, y: x * sine + y * cosine });
@@ -87,7 +150,7 @@ function draw() {
       ctx.strokeStyle = '#c6d9cf22'; ctx.lineWidth = 1 / scale; ctx.strokeRect(x * 128 - 62, y * 128 - 62, 124, 124);
     }
   } else if (scene && art) {
-    scene.floor.forEach(piece => drawPiece(ctx, piece, art));
+    drawFloorLayer(ctx, scene.floor, art.images);
   }
   if ($('grid').checked && !blueprint && scene) {
     ctx.strokeStyle = '#70c6d166'; ctx.lineWidth = 1 / scale;
@@ -138,11 +201,13 @@ function setView(nextBlueprint) {
   blueprint = nextBlueprint; $('square').setAttribute('aria-pressed', String(!blueprint)); $('blueprint').setAttribute('aria-pressed', String(blueprint));
   $('loading').hidden = blueprint || Boolean(art); if (!blueprint && artError) $('retry').hidden = false; draw();
 }
-$('generate').onclick = () => safely(generate);
-$('reroll').onclick = () => { const values = new Uint32Array(1); crypto.getRandomValues(values); $('seed').value = `dungeon-${values[0].toString(36)}`; safely(generate); };
+$('generate').onclick = () => safely(() => generate());
+$('reroll').onclick = () => { $('fixed-seed').checked = false; seedMode(); safely(() => generate({ fresh: true })); };
+$('seed').addEventListener('input', () => { $('fixed-seed').checked = true; seedMode(); });
+$('fixed-seed').addEventListener('change', seedMode);
 for (const id of ['rooms', 'density']) $(id).oninput = () => { $(`${id}-value`).textContent = $(id).value + (id === 'density' ? '%' : ''); };
 for (const id of ['art-style', 'art-theme']) $(id).onchange = () => safely(updateArt);
-$('variety').onchange = () => { if (art && room) { recordVisualSettings(); scene = buildArtScene(room, art, $('variety').checked); paletteLegend(); draw(); } };
+$('variety').onchange = () => { if (art && room) { scene = buildArtScene(room, art, $('variety').checked); exactVisualMap(room, playable, scene); paletteLegend(); draw(); syncControls(); } };
 $('square').onclick = () => setView(false); $('blueprint').onclick = () => setView(true);
 $('rotate-left').onclick = () => { rotation = (rotation + 3) % 4; draw(); }; $('rotate-right').onclick = () => { rotation = (rotation + 1) % 4; draw(); };
 function fitMap() { zoom = 1; pan = { x: 0, y: 0 }; draw(); }
@@ -163,8 +228,17 @@ $('recipe').onclick = () => safely(() => download(room, 'dungeon-recipe.json'));
 $('map-json').onclick = () => safely(() => download(playable, 'dungeon-playable-map.json'));
 $('png').onclick = () => canvas.toBlob(blob => { if (blob) download(blob, 'dungeon-snapshot.png'); else status('Could not create snapshot.', true); }, 'image/png');
 $('edit').onclick = () => safely(() => { localStorage.setItem('dct.workshop-recipe', JSON.stringify(room)); location.href = 'room-kit.html?import=generator'; });
-$('play').onclick = () => $('play-dialog').showModal();
-$('play-dialog').addEventListener('close', () => { if ($('play-dialog').returnValue === 'play') safely(() => { localStorage.setItem('dct.workshop-map', JSON.stringify(playable)); location.href = 'index.html?workshop=1'; }); });
+$('play').onclick = () => { if (!$('play').disabled) { $('play-map-summary').textContent = `${room.seed} · ${room.width} × ${room.height} · ${art.kit.title} · ${$('art-style').selectedOptions[0].textContent}`; $('play-dialog').showModal(); } };
+$('play-dialog').addEventListener('close', () => {
+  if ($('play-dialog').returnValue !== 'play' || $('play').disabled) return;
+  safely(() => {
+    const token = crypto.randomUUID(), serialized = JSON.stringify(playable);
+    // A per-tab immutable packet cannot be replaced by another generator tab.
+    sessionStorage.setItem(`dct.workshop-map.${token}`, serialized);
+    try { localStorage.setItem('dct.workshop-map', serialized); } catch { /* The per-tab packet is sufficient. */ }
+    location.href = `index.html?workshop=1&map=${encodeURIComponent(token)}`;
+  });
+});
 $('retry').onclick = () => safely(() => room ? updateArt() : load());
 new ResizeObserver(draw).observe($('canvas-wrap'));
 async function load() {
@@ -172,7 +246,7 @@ async function load() {
     [manifest, rules, catalog] = await Promise.all([fetchJSON('assets/room-kit/manifest.json'), fetchJSON('assets/map-generation-rules.json'), fetchJSON(catalogURL)]);
     $('art-style').replaceChildren(...catalog.styles.map(style => new Option(style.title, style.id)));
     $('art-theme').replaceChildren(...catalog.kits.map(kit => new Option(kit.title, kit.id))); $('art-theme').value = 'starter-dungeon';
-    await generate(); $('settings').disabled = false; document.querySelectorAll('.workspace button,.workspace input').forEach(control => control.disabled = false);
+    await generate({ fresh: false, announce: false }); document.querySelectorAll('.workspace button,.workspace input').forEach(control => control.disabled = false); syncControls();
   } catch (error) { $('loading-message').textContent = 'The map resources could not load.'; $('retry').hidden = false; status(error.message, true); }
 }
 load();

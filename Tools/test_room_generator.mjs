@@ -64,8 +64,14 @@ assert.deepEqual(validateRoom(JSON.parse(JSON.stringify(edited)),manifest),edite
 const broken=structuredClone(edited);broken.placements[0].rotation=7;
 assert.throws(()=>validateRoom(broken,manifest),/Invalid placement/);
 const renderSource=await readFile(resolve(root,'Web/wwwroot/battlefield.js'),'utf8');
-assert.ok(renderSource.indexOf('drawables.sort')<renderSource.indexOf('for(const tile of tiles)if((!explore||tile.revealed)'),'burning composited after scene');
-assert.ok(renderSource.indexOf('drawables.sort')<renderSource.indexOf('for(const e of effects)'),'transient impacts composited after scene');
+const legacyRender=renderSource.slice(renderSource.indexOf('  function draw(time)'),renderSource.indexOf('  function eventUnit('));
+const nativeRender=renderSource.slice(renderSource.indexOf('  function drawNative('),renderSource.indexOf('  function draw(time)'));
+const transientRender=renderSource.slice(renderSource.indexOf('  function drawTransient('),renderSource.indexOf('  function drawNative('));
+assert.ok(legacyRender.indexOf('drawables.sort')<legacyRender.indexOf('for(const tile of tiles)if((!explore||tile.revealed)'),'legacy burning composited after scene');
+assert.ok(legacyRender.indexOf('drawTransient(time)')>legacyRender.indexOf('drawables.sort'),'legacy transient impacts called after scene');
+assert.ok(nativeRender.indexOf('drawTransient(time)')>nativeRender.indexOf('nativeScene.decorations.forEach'),'native transient impacts called after scene');
+assert.ok(nativeRender.indexOf('drawTransient(time)')>nativeRender.indexOf('forEach(unit=>sprite'),'native transient impacts called after units');
+assert.ok(transientRender.includes('for(const e of effects)')&&transientRender.includes('for(const m of missiles)'),'shared transient pass retains impacts and projectiles');
 assert.ok(!renderSource.includes('cell*.273'),'runtime uses manifest anchors instead of guessed floor crop');
 console.log('PASS editor JSON/paint/erase, 640 rotated projection/picking checks, manifest anchors and effect compositing order.');
 

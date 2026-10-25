@@ -10,6 +10,21 @@ namespace DungeonCrawlerTactics
         public CellView[] playerSpawns = new CellView[0];
         public SpawnDef[] enemies = new SpawnDef[0];
         public MapPlacement[] placements = new MapPlacement[0];
+        // Optional presentation only. Combat legality still comes from tiles and placements.
+        public NativeMapVisuals visuals;
+    }
+    [Serializable]
+    public sealed class NativeMapVisuals
+    {
+        public int schemaVersion = 1;
+        public string styleId, kitId;
+        public NativeMapPiece[] pieces = new NativeMapPiece[0];
+    }
+    [Serializable]
+    public sealed class NativeMapPiece
+    {
+        public int cell, x2, y2, rotation;
+        public string layer;
     }
     [Serializable]
     public sealed class MapPlacement

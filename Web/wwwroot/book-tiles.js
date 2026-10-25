@@ -1,3 +1,4 @@
+import { drawFloorLayer } from './tile-surface-renderer.js';
 import { composeKit, worldContacts } from './book-tile-layout.js';
 const $ = id => document.getElementById(id);
 const catalogURL = new URL('assets/book-tiles/catalog.json', document.baseURI);
@@ -218,7 +219,12 @@ async function loadKit() {
 function drawMap() {
   const manifest = state.manifest; if (!manifest) return;
   const grid = manifest.grid || selectedStyle(); const canvas = $('sample-map'); const context = canvas.getContext('2d');
-  const placements = composeKit(manifest, state.seed);
+  if (state.composedManifest !== manifest || state.composedSeed !== state.seed) {
+    state.placements = composeKit(manifest, state.seed);
+    state.floorPlacements = state.placements.filter(piece => piece.asset.role === 'ground');
+    state.composedManifest = manifest; state.composedSeed = state.seed;
+  }
+  const placements = state.placements;
   const bounds = placements.reduce((box, placement) => {
     const anchor = placement.asset.anchor || grid.anchor || { x: 128, y: 192 };
     const x = placement.px - anchor.x, y = placement.py - anchor.y;
@@ -229,7 +235,12 @@ function drawMap() {
   const offsetX = (canvas.width - (bounds.right - bounds.left) * scale) / 2 - bounds.left * scale;
   const offsetY = (canvas.height - (bounds.bottom - bounds.top) * scale) / 2 - bounds.top * scale;
   context.imageSmoothingEnabled = state.style !== 'pocket-dungeon';
+  if (grid.projection === 'orthogonal') {
+    context.save(); context.translate(offsetX, offsetY); context.scale(scale, scale);
+    drawFloorLayer(context, state.floorPlacements, state.images); context.restore();
+  }
   for (const placement of placements) {
+    if (grid.projection === 'orthogonal' && placement.asset.role === 'ground') continue;
     const anchor = placement.asset.anchor || grid.anchor || { x: 128, y: 192 };
     const image = state.images.get(placement.asset.id);
     if (image) context.drawImage(image, offsetX + (placement.px - anchor.x) * scale, offsetY + (placement.py - anchor.y) * scale, 256 * scale, 256 * scale);
