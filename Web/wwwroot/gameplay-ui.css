@@ -356,3 +356,20 @@ body[data-screen] dialog .modal-actions button { font-size: 12px; }
   body[data-screen] .exploration-hud .walk-pad button { min-width: 40px; }
   body[data-screen] .exploration-hud .explore-party { gap: 2px; }
 }
+
+/* Keep phase feedback visible above the phone's camera row. */
+@media (max-width: 730px) {
+  body[data-screen] .battle-hud .party-phase {
+    display: flex;
+    position: fixed;
+    top: auto;
+    bottom: calc(var(--hud-height) + 60px);
+    left: 8px;
+    right: auto;
+    z-index: 25;
+    font-size: 11px;
+  }
+  body[data-screen] .battle-hud .party-phase b { display: inline; }
+  body[data-screen] .battle-guidance { display: none; }
+  body[data-screen] .battle-hud .party-chip .unit-portrait { flex-shrink: 0; display: block; }
+}
