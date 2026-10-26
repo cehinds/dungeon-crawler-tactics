@@ -7,6 +7,14 @@ This document supersedes the earlier planning and starter-kit descriptions. The 
 - **Unity:** a complete source project under `UnityProject/`, generated from the canonical `UnityPackage/` source. Its runtime presenter uses Unity IMGUI and original pixel textures. An Editor command creates the actual scene and another builds a Unity Web player. The source was compiled against Unity runtime reference assemblies; no Unity Editor was available to run Play Mode or export a Unity build here.
 - **Playable browser delivery:** `Web/publish/wwwroot/` contains a real compiled .NET WebAssembly game. Its browser presentation calls the same C# `GameSession` and `RulesEngine`. It is an executable game, not a wireframe, and it is **not a Unity Web export**. No duplicate JavaScript combat rules exist.
 
+## Gameplay interface
+
+The browser HUD uses a compact ink-and-brass theme. Exploration keeps the map visible with a direction pad, party portraits that open character sheets, health indicators, and nearby interaction buttons. Combat groups the selected crawler's health and Mana, quick actions, ability book, and End turn separately. The Menu button opens save and settings options; Help explains controls. The full action book still exposes every available ability and item.
+
+`Web/wwwroot/gameplay-ui.css` is the final presentation layer, loaded after the existing menu skins. Keep responsive gameplay overrides here rather than adding more competing rules to the older stylesheets. It does not alter shared C# rules or the Unity presenter.
+
+For layout checks run `python Tools/playtest_gameplay_ui.py`. This renders production UI with explicit presentation fixtures at desktop, portrait phone, and landscape sizes; it does not validate gameplay rules. `Tools/capture_gameplay_screenshots.py` captures real generated exploration, combat, and menus from a published C# WASM game. The screenshot workflow stores those captures as a downloadable Actions artifact.
+
 ## Play locally
 
 The archive includes the published browser files. Install Python 3 if needed, then run `./play.sh` on macOS/Linux or `Play-Windows.bat` on Windows. Open `http://localhost:8000`. Alternatively run `python3 Tools/serve_game.py`. Keep the terminal open while playing. Static WebAssembly files require HTTP, so opening `index.html` directly is not supported.
