@@ -348,3 +348,11 @@ body[data-screen] dialog .modal-actions button { font-size: 12px; }
   body[data-screen] .exploration-hud .explore-copy { padding-top: 43px; }
   body[data-screen] .exploration-hud .explore-crawler .unit-portrait { width: 32px; height: 31px; }
 }
+
+/* Preserve all four character shortcuts on narrow phones. */
+@media (max-width: 360px) {
+  body[data-screen] .exploration-hud { grid-template-columns: 128px minmax(0, 1fr); column-gap: 8px; }
+  body[data-screen] .exploration-hud .walk-pad { grid-template-columns: repeat(3, 40px); }
+  body[data-screen] .exploration-hud .walk-pad button { min-width: 40px; }
+  body[data-screen] .exploration-hud .explore-party { gap: 2px; }
+}

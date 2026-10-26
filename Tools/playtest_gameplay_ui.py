@@ -96,7 +96,7 @@ def main():
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(executable_path=args.browser, args=['--no-sandbox'])
-            for width, height in [(1440, 1000), (390, 844), (844, 390)]:
+            for width, height in [(1440, 1000), (390, 844), (320, 740), (844, 390)]:
                 for screen in ['battle', 'explore']:
                     page = browser.new_page(viewport=dict(width=width, height=height))
                     errors = []
@@ -128,7 +128,7 @@ def main():
                     page.wait_for_function("window.layoutFixtureScene?.getNativeArtStatus().state === 'ready'", timeout=60000)
                     page.wait_for_timeout(500)
                     common = ['#zoom-in', '#zoom-out', '#rotate-left', '#rotate-right', '#center-map']
-                    selectors = common + (['#open-actions', '#move-mode', '[data-ability="ability.carl_powerful_strike"]', '[data-ability="ability.carl_dynamite"]', '[data-drawer="items"]', '#end-turn', '.hud-crawler', '.hud-actions', '.hud-target', '.party-strip', '.world-controls', '.battle-guidance'] if screen=='battle' else ['[data-walk="north"]', '[data-walk="west"]', '[data-walk="south"]', '[data-walk="east"]', '#return-camp', '.exploration-hud'])
+                    selectors = common + (['#open-actions', '#move-mode', '[data-ability="ability.carl_powerful_strike"]', '[data-ability="ability.carl_dynamite"]', '[data-drawer="items"]', '#end-turn', '.hud-crawler', '.hud-actions', '.hud-target', '.party-strip', '.world-controls', '.battle-guidance'] if screen=='battle' else ['[data-walk="north"]', '[data-walk="west"]', '[data-walk="south"]', '[data-walk="east"]', '#return-camp', '.exploration-hud', '.explore-party'] + [f'.explore-crawler:nth-child({i})' for i in range(1, 5)])
                     result = page.evaluate(MEASURE, dict(selectors=selectors, touch=width<900))
                     filename = f'{screen}-{width}x{height}.png'
                     page.screenshot(path=str(output/filename), full_page=True)
