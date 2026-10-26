@@ -54,6 +54,7 @@ def run(browser,args,w,h):
         # Four actual pointer picks after camera rotation, maintaining the same actor.
         rotations=[]
         for r in range(4):
+            if r and page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
             if r: page.locator('#rotate-right').click()
             selected=view(page)['selectedUnitId'];u=next(u for u in view(page)['units'] if u['id']==selected)
             projected=page.evaluate('''([x,y])=>{const p=window.dungeon.cellToScreen(x,y);return window.dungeon.scene.screenToCell(p.x,p.y)}''',[u['x'],u['y']])

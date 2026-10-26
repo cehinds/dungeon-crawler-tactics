@@ -86,9 +86,13 @@ def main():
         assert state['screen'] == 'battle', 'Walking to an enemy failed to enter real combat'
         assert state['customMap'] == expected, 'Combat replaced the generated map'
         settle(page, native=True)
+        if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
         page.locator('#center-map').click()
+        if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
         page.locator('#zoom-in').click()
+        if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
         page.locator('#zoom-in').click()
+        if page.locator('.camera-menu[open]').count(): page.locator('#camera-toggle').click()
         capture('04-combat-desktop.png', 'Real encounter reached by C# explore_step movement; centered on selected crawler.', native=True)
         page.set_viewport_size({'width': 390, 'height': 844})
         capture('06-combat-mobile.png', 'Real combat HUD at mobile size.', native=True)
@@ -97,6 +101,17 @@ def main():
             page.locator('#open-actions').click()
             page.locator('#action-dialog').wait_for(state='visible')
             capture('05-actions.png', 'Actual action book for the selected crawler.', native=True)
+            ability = next((a for a in view(page)['abilities'] if a.get('enabled') and a.get('targetIds') and a.get('target') != 'self'), None)
+            if ability:
+                page.locator('[data-modal-ability="'+ability['id']+'"]').click()
+                page.locator('#action-dialog').wait_for(state='hidden')
+                page.set_viewport_size({'width': 390, 'height': 844})
+                capture('07-targeting-mobile.png', 'Actual selected ability and contextual targeting strip.', native=True)
+                page.evaluate("a=>window.dungeon.command('preview',{abilityId:a.id,targetId:a.targetIds[0]},{preserveAction:true,save:false})", ability)
+                page.locator('#forecast-dialog').wait_for(state='visible')
+                assert view(page)['canConfirm'], 'Actual C# forecast did not become confirmable'
+                capture('08-forecast-mobile.png', 'Real C# action forecast; no action committed.', native=True)
+
         assert not errors, errors
         summary = {'seed': args.seed, 'runtime': 'actual C# WASM', 'layout': 'chambers',
                    'style': 'pocket-dungeon', 'location': 'starter-dungeon', 'captures': captures,

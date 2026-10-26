@@ -74,6 +74,7 @@ jobs:
           python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/dct-playtest-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
+          python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
           python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
@@ -105,6 +106,7 @@ jobs:
           node Tools/test_book_tile_layout.mjs
           node Tools/test_native_map_visuals.mjs
           node Tools/test_exploration_controls.mjs
+          node Tools/test_sprite_facing.mjs
       - name: Verify published research catalog
         run: python Tools/prepare_research.py --check
       - name: Prepare static hosting artifact

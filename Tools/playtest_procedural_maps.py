@@ -174,6 +174,7 @@ def main():
             box = page.locator("#battlefield").bounding_box()
             page.mouse.move(box["x"] + result["point"]["x"], box["y"] + result["point"]["y"])
             page.wait_for_function("label=>document.querySelector('#map-inspect strong')?.textContent===label", arg=result["unit"]["label"])
+            if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
             page.locator("#rotate-right").click()
         assert page.evaluate("window.dungeon.scene.getNativeVisuals()") == expected["visuals"]
         # Strict save failure must preserve the previous autosave and retain the packet.

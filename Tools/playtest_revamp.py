@@ -52,6 +52,7 @@ def exercise_exploration_rotations(page):
             ("ArrowLeft", -1, 0), ("ArrowRight", 1, 0)]
     for rotation in range(4):
         if rotation:
+            if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
             page.locator("#rotate-right").click()
         assert page.evaluate("window.dungeon.scene.getRotation()") == rotation
         label = page.locator("#compass-label").inner_text()
@@ -253,6 +254,7 @@ def run_viewport(browser, directory, width, height):
                 if box["x"]<=pnt["x"]<=box["x"]+box["width"] and box["y"]<=pnt["y"]<=box["y"]+box["height"]:
                     visible.append((candidate,pnt))
             if visible: break
+            if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
             page.locator("#zoom-out").click()
         assert visible, "No enemy tile is visible for phone target inspection after zooming out."
         target,point=visible[0]

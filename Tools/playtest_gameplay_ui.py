@@ -61,10 +61,10 @@ MEASURE = """({selectors, touch}) => {
    const r=e.getBoundingClientRect(); boxes[selector]={x:r.x,y:r.y,width:r.width,height:r.height,font:getComputedStyle(e).fontFamily,fontSize:getComputedStyle(e).fontSize};
    if(r.left < -1 || r.right > innerWidth+1) errors.push('Outside horizontal viewport: '+selector);
    if(r.top < -1 || r.bottom > innerHeight+1) errors.push('Outside vertical viewport: '+selector);
-   if(e.matches('button') && touch && (r.width<40 || r.height<40)) errors.push('Small touch control: '+selector+' '+r.width+'x'+r.height);
-   if(e.matches('button') && parseFloat(getComputedStyle(e).fontSize)<12) errors.push('Unreadable text: '+selector);
+   if(e.matches('button, summary') && touch && (r.width<40 || r.height<40)) errors.push('Small touch control: '+selector+' '+r.width+'x'+r.height);
+   if(e.matches('button, summary') && parseFloat(getComputedStyle(e).fontSize)<12) errors.push('Unreadable text: '+selector);
  }
- const controls=selectors.filter(s=>document.querySelector(s)?.matches('button'));
+ const controls=selectors.filter(s=>document.querySelector(s)?.matches('button, summary'));
  const panels=['.hud-crawler','.hud-actions','.hud-target','.world-controls','.battle-guidance','.party-strip'];
  const overlap=(a,b)=>Math.min(a.x+a.width,b.x+b.width)-Math.max(a.x,b.x)>2 && Math.min(a.y+a.height,b.y+b.height)-Math.max(a.y,b.y)>2;
  for(let i=0;i<panels.length;i++)for(let j=i+1;j<panels.length;j++){const a=boxes[panels[i]],b=boxes[panels[j]];if(a&&b&&overlap(a,b))errors.push('Overlapping HUD panels: '+panels[i]+' / '+panels[j]);}
@@ -112,7 +112,21 @@ def main():
                             source = (ROOT/'Web/wwwroot/game.js').read_text()
                             content = json.loads((ROOT/'UnityPackage/Runtime/Data/combat-content.json').read_text())
                             game = json.loads((ROOT/'UnityPackage/Runtime/Data/game-content.json').read_text())
-                            boot = 'content='+json.dumps(content)+';gameData='+json.dumps(game)+';view='+json.dumps(fixture(screen))+';render();document.querySelector("#game").setAttribute("aria-busy","false");window.layoutFixture=true;window.layoutFixtureScene=battlefield;'
+                            boot = 'content='+json.dumps(content)+';gameData='+json.dumps(game)+';view='+json.dumps(fixture(screen))+''';
+                              narrator=createNarrator({getView:()=>view,content});
+                              const initialFixture=structuredClone(view);
+                              window.layoutMode=(mode)=>{
+                                view=structuredClone(initialFixture);localAction=null;actionChooser=false;
+                                if(mode==='targeting'||mode==='forecast')localAction={abilityId:view.abilities[1].id};
+                                if(mode==='forecast'){
+                                  view.canConfirm=true;
+                                  view.forecast=[{targetId:'enemy.rat',label:'Dungeon rat',beforeHp:30,afterHp:18,beforeEnergy:12,afterEnergy:12,beforeTags:[],afterTags:['status.burning']}];
+                                }
+                                if(mode==='enemy'){view.phase='enemy';view.canMove=false;view.canAct=false;}
+                                render();
+                              };
+                              render();document.querySelector("#game").setAttribute("aria-busy","false");window.layoutFixture=true;window.layoutFixtureScene=battlefield;
+                            '''
                             request.fulfill(content_type='application/javascript', body=source.replace('\nboot();', '\n'+boot))
                         else:
                             local = ROOT/'Web/wwwroot'/path
@@ -127,9 +141,13 @@ def main():
                     page.evaluate('document.fonts.ready')
                     page.wait_for_function("window.layoutFixtureScene?.getNativeArtStatus().state === 'ready'", timeout=60000)
                     page.wait_for_timeout(500)
-                    common = ['#zoom-in', '#zoom-out', '#rotate-left', '#rotate-right', '#center-map']
-                    selectors = common + (['#open-actions', '#move-mode', '[data-ability="ability.carl_powerful_strike"]', '[data-ability="ability.carl_dynamite"]', '[data-drawer="items"]', '#end-turn', '.hud-crawler', '.hud-actions', '.hud-target', '.party-strip', '.world-controls', '.party-phase' if width <= 730 else '.battle-guidance'] if screen=='battle' else ['[data-walk="north"]', '[data-walk="west"]', '[data-walk="south"]', '[data-walk="east"]', '#return-camp', '.exploration-hud', '.explore-party'] + [f'.explore-crawler:nth-child({i})' for i in range(1, 5)])
+                    common = ['#camera-toggle', '#help-button', '#save-button']
+                    selectors = common + (['#open-character-sheet', '#open-actions', '#move-mode', '[data-ability="ability.carl_powerful_strike"]', '[data-ability="ability.carl_dynamite"]', '[data-drawer="items"]', '#end-turn', '.hud-crawler', '.hud-actions', '.hud-target', '.party-strip', '.party-phase'] if screen=='battle' else ['[data-walk="north"]', '[data-walk="west"]', '[data-walk="south"]', '[data-walk="east"]', '#return-camp', '.exploration-hud', '.explore-party'] + [f'.explore-crawler:nth-child({i})' for i in range(1, 5)])
+                    page.locator('#camera-toggle').click()
+                    camera = page.evaluate(MEASURE, dict(selectors=['#zoom-in', '#zoom-out', '#rotate-left', '#rotate-right', '#center-map'], touch=width<900))
+                    page.locator('#camera-toggle').click()
                     result = page.evaluate(MEASURE, dict(selectors=selectors, touch=width<900))
+                    result['errors'] += camera['errors']
                     filename = f'{screen}-{width}x{height}.png'
                     page.screenshot(path=str(output/filename), full_page=True)
                     result.update(screen=screen, viewport=[width,height], screenshot=filename, runtime='presentation fixture; no C# WASM', pageErrors=list(errors))
@@ -143,6 +161,18 @@ def main():
                         page.screenshot(path=str(output/filename), full_page=True)
                         modal['screenshot']=filename
                         results.append(modal)
+                        page.locator('#cancel-actions').click()
+                        for mode in ['targeting', 'forecast', 'enemy']:
+                            page.evaluate('(mode)=>window.layoutMode(mode)', mode)
+                            page.wait_for_timeout(100)
+                            state_selectors = ['#end-turn', '#open-actions', '.hud-crawler', '.hud-actions', '.hud-target', '.party-phase']
+                            if mode=='forecast': state_selectors += ['#confirm-forecast', '#cancel-forecast']
+                            state_result=page.evaluate(MEASURE, dict(selectors=state_selectors,touch=width<900))
+                            state_filename=f'{mode}-{width}x{height}.png'
+                            page.screenshot(path=str(output/state_filename),full_page=True)
+                            state_result.update(screen=mode, viewport=[width,height], runtime='presentation fixture; no C# WASM', pageErrors=list(errors), screenshot=state_filename)
+                            results.append(state_result)
+
                     page.close()
             browser.close()
     finally:

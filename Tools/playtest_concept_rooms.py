@@ -18,6 +18,7 @@ def battle(p,label):
   assert result['guidanceFits'],'Phone target guidance clips vertically'
  snap(p,label+'-opening')
  for r in range(4):
+  if r and p.locator('#camera-toggle').count() and not p.locator('#zoom-in').is_visible(): p.locator('#camera-toggle').click()
   if r:p.locator('#rotate-right').click()
   v=view(p);uid=v['selectedUnitId'];u=next(x for x in v['units'] if x['id']==uid)
   picked=p.evaluate('''u=>{const q=window.dungeon.cellToScreen(u.x,u.y);return window.dungeon.scene.screenToCell(q.x,q.y)}''',u)

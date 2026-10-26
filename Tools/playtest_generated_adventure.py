@@ -154,6 +154,7 @@ def main():
         hold_baseline = page.evaluate('window.dungeon.getSave()')
         dx, dy, key, pad = direction
         # Camera buttons must not strand movement focus outside the map.
+        if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
         page.locator('#zoom-in').click()
         page.keyboard.down(key)
         page.wait_for_function("([x,y])=>{const s=window.dungeon.getView().generatedDungeon;return Math.abs(s.x-x)+Math.abs(s.y-y)>=2}", arg=list(anchor), timeout=10000)

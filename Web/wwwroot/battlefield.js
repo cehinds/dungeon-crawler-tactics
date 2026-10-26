@@ -1,6 +1,7 @@
 import { drawFloorLayer } from './tile-surface-renderer.js';
 import { fetchJSON, loadArtKit, buildArtScene, drawPiece, visibleSceneCorners, environmentMood } from './generator-art.js';
 import { nativeProject, nativePick, nativeSceneFromVisuals, serializeNativeVisuals } from './native-map-visuals.js';
+import { rememberSpriteFacing, seedEnemyFacing, enemySpriteScaleX, drawFacingSprite } from './sprite-facing.js';
 // C# owns legality, damage, turns and saved state. Native custom art is portable.
 // This module only draws authored assets and plays the ordered events it receives.
 const ROOT = 'assets/revamp/';
@@ -121,7 +122,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const projected=dx<0?{x:0,y:1}:dx>0?{x:0,y:-1}:dy<0?{x:-1,y:0}:{x:1,y:0};
     return rotateVector(projected.x,projected.y,(4-rotation)%4);
   }
-  function rememberFacing(id,dx,dy){if(dx||dy)facing.set(id,{x:Math.sign(dx),y:Math.sign(dy)});}
+  function rememberFacing(id,dx,dy){rememberSpriteFacing(facing,id,dx,dy);}
   function screenFacing(id){const direction=facing.get(id)??{x:0,y:1};const p=rotateVector(direction.x,direction.y);return p.x>0?'se':p.x<0?'nw':p.y>0?'sw':'ne';}
   function getRotationLabel(){return ['North view','East view','South view','West view'][rotation];}
   function updateNativeStatus() {
@@ -216,7 +217,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function setView(next, settings={}) {
     const oldScreen=view?.screen;
     const mapChanged=mapIdentity(view)!==mapIdentity(next);
-    if(mapChanged){panX=0;panY=0;rotation=0;cameraReady=false;explorationMotion=null;}
+    if(mapChanged){panX=0;panY=0;rotation=0;cameraReady=false;explorationMotion=null;facing.clear();}
     if(view?.screen==='explore' && next.screen==='explore' && view.exploration.id===next.exploration.id){
       const from=view.exploration,to=next.exploration;
       if(from.x!==to.x||from.y!==to.y){
@@ -298,6 +299,9 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function sprite(unit,time) {
     if(unit.hp<=0)return;
     const enemy=unit.team==='enemy';
+    seedEnemyFacing(facing,unit,view.screen==='explore'
+      ? [{team:'player',hp:1,x:view.exploration.x,y:view.exploration.y}]
+      : visualUnits);
     const key=unit.artId || (enemy?'rat':unit.id?.split('.').pop());
     const row=rowFor[key] ?? (enemy?1:0);
     let col=reduced.matches?0:enemy ? Math.floor(time/600)%2 : Math.floor(time/650)%2;
@@ -346,16 +350,19 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       const fw=boss.frameWidth??192,fh=boss.frameHeight??192;
       const column=actor&&current?.type==='attack'?3:walking?1+Math.floor(time/110)%2:0;
       const ratio=(boss.bodyHeight??168)/(boss.anchorY??184);
-      context.drawImage(boss.image,column*fw,0,fw,fh,p.x-(boss.anchorX??96)*ratio,p.y-(boss.anchorY??184)*ratio,fw*ratio,fh*ratio);
+      drawFacingSprite(context,enemy?enemySpriteScaleX(key,column,facing.get(unit.id),rotation,nativeActive()):1,p.x,p.y,()=>
+        context.drawImage(boss.image,column*fw,0,fw,fh,-(boss.anchorX??96)*ratio,-(boss.anchorY??184)*ratio,fw*ratio,fh*ratio));
     } else if(frame&&image) {
       const dw=frame.drawWidth*enlarged,dh=frame.drawHeight*enlarged;
-      context.drawImage(image,frame.x,frame.y,frame.width,frame.height,p.x-dw*frame.anchorX,p.y-dh*frame.anchorY,dw,dh);
+      drawFacingSprite(context,enemy?enemySpriteScaleX(key,col,facing.get(unit.id),rotation,nativeActive()):1,p.x,p.y,()=>
+        context.drawImage(image,frame.x,frame.y,frame.width,frame.height,-dw*frame.anchorX,-dh*frame.anchorY,dw,dh));
     } else if(!enemy && !(key in rowFor)) {
       const classKey=(unit.classId??'class.brawler').replace('class.','');
       if(!legacyImages[classKey]){const fallback=new Image();fallback.src=`assets/${classKey}.png`;legacyImages[classKey]=fallback;}
       const fallback=legacyImages[classKey];if(fallback.complete&&fallback.naturalWidth)context.drawImage(fallback,p.x-45,p.y-85,90,90);
-    } else atlas(enemy?'enemies':'characters',row*(enemy?4:8)+col,enemy?4:8,enemy?3:4,
-      p.x-size*enlarged/2,p.y-size*enlarged*.91,size*enlarged,size*enlarged);
+    } else drawFacingSprite(context,enemy?enemySpriteScaleX(key,col,facing.get(unit.id),rotation,nativeActive()):1,p.x,p.y,()=>
+      atlas(enemy?'enemies':'characters',row*(enemy?4:8)+col,enemy?4:8,enemy?3:4,
+        -size*enlarged/2,-size*enlarged*.91,size*enlarged,size*enlarged));
     context.globalAlpha=1;
     context.beginPath();
     if(enemy){context.moveTo(p.x,p.y+22);context.lineTo(p.x-11,p.y+8);context.lineTo(p.x+11,p.y+8);}

@@ -9,11 +9,13 @@ This document supersedes the earlier planning and starter-kit descriptions. The 
 
 ## Gameplay interface
 
-The browser HUD uses a compact ink-and-brass theme. Exploration keeps the map visible with a direction pad, party portraits that open character sheets, health indicators, and nearby interaction buttons. Combat groups the selected crawler's health and Mana, quick actions, ability book, and End turn separately. The Menu button opens save and settings options; Help explains controls. The full action book still exposes every available ability and item.
+The browser HUD uses a single navy-and-brass command dock with a full-width targeting strip and a prominent End turn button. Camera zoom, rotation and centering are grouped under Camera; idle narrator feedback collapses to History. Exploration keeps the map visible with a direction pad, party portraits that open character sheets, health indicators, and nearby interaction buttons. Combat groups the selected crawler's health and Mana, quick actions, ability book, and End turn separately. The Menu button opens save and settings options; Help explains controls. The full action book still exposes every available ability and item.
+
+Enemy art faces movement or attack targets, with initial orientation toward the nearest living opponent. The renderer accounts for the camera rotation and the painted orientation of each asset. Existing enemy sheets provide side views; mirroring does not add front/back animation frames. `sprite-facing.js` isolates these presentation choices from C# rules.
 
 `Web/wwwroot/gameplay-ui.css` is the final presentation layer, loaded after the existing menu skins. Keep responsive gameplay overrides here rather than adding more competing rules to the older stylesheets. It does not alter shared C# rules or the Unity presenter.
 
-For layout checks run `python Tools/playtest_gameplay_ui.py`. This renders production UI with explicit presentation fixtures at desktop, portrait phone, and landscape sizes; it does not validate gameplay rules. `Tools/capture_gameplay_screenshots.py` captures real generated exploration, combat, and menus from a published C# WASM game. The screenshot workflow stores those captures as a downloadable Actions artifact.
+For layout checks run `python Tools/playtest_gameplay_ui.py`. This renders production UI with explicit presentation fixtures at desktop, portrait phone, and landscape sizes, including selected actions, forecasts and enemy turns; it does not validate gameplay rules. Run `node Tools/test_sprite_facing.mjs` for sprite orientation and anchor checks. `Tools/capture_gameplay_screenshots.py` captures real generated exploration, combat, and menus from a published C# WASM game. The screenshot workflow stores those captures as a downloadable Actions artifact.
 
 ## Play locally
 

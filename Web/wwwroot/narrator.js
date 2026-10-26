@@ -7,9 +7,9 @@ const achievementLabels={
   'achievement.first_level':'First level gained'
 };
 export function createNarrator({getView,content}) {
-  const panel=document.createElement('section');panel.id='narrator-panel';panel.className='narrator-panel';panel.setAttribute('aria-label','Dungeon narrator game feedback');
+  const panel=document.createElement('section');panel.id='narrator-panel';panel.className='narrator-panel';panel.dataset.empty='true';panel.setAttribute('aria-label','Dungeon narrator game feedback');
   const label=document.createElement('span');label.className='narrator-label';label.textContent='NARRATOR';
-  const line=document.createElement('p');line.id='narrator-line';line.setAttribute('role','status');line.setAttribute('aria-live','polite');line.textContent='Actions and achievements appear here.';
+  const line=document.createElement('p');line.id='narrator-line';line.setAttribute('role','status');line.setAttribute('aria-live','polite');line.textContent='';
   const historyButton=document.createElement('button');historyButton.id='narrator-history';historyButton.textContent='History';
   const dismiss=document.createElement('button');dismiss.id='narrator-dismiss';dismiss.textContent='×';dismiss.setAttribute('aria-label','Dismiss narrator message');
   panel.append(label,line,historyButton,dismiss);
@@ -21,7 +21,7 @@ export function createNarrator({getView,content}) {
   const labelFor=(id)=>{const view=afterView??getView();const tile=view?.tiles.find(tile=>tile.id===id);if(tile)return `Terrain ${String.fromCharCode(65+tile.x)}${tile.y+1}`;return view?.units.find(unit=>unit.id===id)?.label??view?.roster.find(unit=>unit.id===id)?.label??id?.replace(/^[^.]+\./,'').replace(/_/g,' ')??'Target';};
   const abilityFor=id=>content.abilities.find(ability=>ability.id===id)?.label??id?.replace(/^[^.]+\./,'').replace(/_/g,' ')??'an ability';
   function drawHistory(){const list=dialog.querySelector('.narrator-history-list');list.replaceChildren();for(const entry of [...history].reverse()){const row=document.createElement('li');row.className=entry.kind==='achievement'?'narrator-achievement':'';row.textContent=entry.text;list.append(row);}}
-  function advance(){clearTimeout(timer);const entry=pending.shift();if(!entry){timer=null;return;}panel.classList.toggle('narrator-achievement',entry.kind==='achievement');line.textContent=entry.text;line.title=entry.text;timer=setTimeout(advance,entry.kind==='achievement'?2600:entry.kind==='impact'?1100:1800);}
+  function advance(){clearTimeout(timer);const entry=pending.shift();if(!entry){timer=null;return;}panel.dataset.empty='false';panel.classList.toggle('narrator-achievement',entry.kind==='achievement');line.textContent=entry.text;line.title=entry.text;timer=setTimeout(advance,entry.kind==='achievement'?2600:entry.kind==='impact'?1100:1800);}
   function enqueue(text,kind='declaration'){if(!text)return;history.push({text,kind});history=history.slice(-80);pending.push({text,kind});if(pending.length>8){const oldestImpact=pending.findIndex(entry=>entry.kind==='impact');pending.splice(oldestImpact>=0?oldestImpact:0,1);}if(!timer)advance();if(dialog.open)drawHistory();}
   function onEvent(event){if(!event||event.preview)return;const key=`${batch}:${event.sequence??JSON.stringify(event)}`;if(seen.has(key))return;seen.add(key);
     const current=afterView??getView();
@@ -54,6 +54,6 @@ export function createNarrator({getView,content}) {
   historyButton.addEventListener('click',()=>{drawHistory();dialog.showModal();dialog.querySelector('#close-narrator-history').focus();});
   const close=()=>{dialog.close();historyButton.focus();};dialog.querySelector('#close-narrator-history').addEventListener('click',close);dialog.querySelector('#done-narrator-history').addEventListener('click',close);
   dialog.addEventListener('cancel',event=>{event.preventDefault();close();});dialog.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const first=dialog.querySelector('#close-narrator-history'),last=dialog.querySelector('#done-narrator-history');if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}});
-  dismiss.addEventListener('click',()=>{clearTimeout(timer);pending=[];timer=null;line.textContent='Narrator dismissed. Open History to review events.';panel.classList.remove('narrator-achievement');});
-  return {mount(slot){if(slot&&panel.parentElement!==slot)slot.append(panel);},begin,onEvent,finish,reset(view){achievements=new Set(view?.achievementIds??[]);pending=[];history=[];seen.clear();clearTimeout(timer);timer=null;panel.classList.remove('narrator-achievement');line.textContent='Actions and achievements appear here.';},dispose(){clearTimeout(timer);panel.remove();dialog.remove();}};
+  dismiss.addEventListener('click',()=>{clearTimeout(timer);pending=[];timer=null;line.textContent='';line.title='';panel.dataset.empty='true';panel.classList.remove('narrator-achievement');});
+  return {mount(slot){if(slot&&panel.parentElement!==slot)slot.append(panel);},begin,onEvent,finish,reset(view){achievements=new Set(view?.achievementIds??[]);pending=[];history=[];seen.clear();clearTimeout(timer);timer=null;panel.classList.remove('narrator-achievement');panel.dataset.empty='true';line.title='';line.textContent='';},dispose(){clearTimeout(timer);panel.remove();dialog.remove();}};
 }
