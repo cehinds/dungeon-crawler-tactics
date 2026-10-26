@@ -853,7 +853,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function centerSelected() {
     const unit=view?.screen==='explore'?view.exploration:view?.units?.find(u=>u.id===view.selectedUnitId);
     if(!unit)return;
-    const pos=screen(unit.x,unit.y);panX+=width*(width<600?.5:.4)-pos.x;panY+=Math.max(height*.46,90+148*scale)-pos.y;fit();
+    const pos=screen(unit.x,unit.y);panX+=width*.5-pos.x;panY+=Math.max(height*.46,90+148*scale)-pos.y;fit();
   }
   function zoom(delta) {zoomLevel=clamp(zoomLevel+delta,.7,3.2);fit();centerSelected();}
   const down=event=>{drag={id:event.pointerId,x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY};suppressClick=false;canvas.setPointerCapture(event.pointerId);};

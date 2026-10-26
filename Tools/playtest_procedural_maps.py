@@ -150,7 +150,8 @@ def main():
         page.locator("#confirm-play").click()
         ready_runtime(page, native=True)
         assert_exact(page.evaluate("window.dungeon.getView()"), expected)
-        assert page.locator("#screen-title").inner_text() == expected["label"]
+        # The objective is prominent; the imported map name remains its inspection hint.
+        assert page.locator("#screen-title").get_attribute("title") == expected["label"]
         assert "Defeat every enemy" in page.locator(".quest-tracker").inner_text()
         assert page.evaluate("window.dungeon.scene.getNativeVisuals()") == expected["visuals"], "Rendered pieces differ from the preview"
         saved = page.evaluate("window.dungeon.getSave().then(JSON.parse)")
@@ -176,6 +177,7 @@ def main():
             page.wait_for_function("label=>document.querySelector('#map-inspect strong')?.textContent===label", arg=result["unit"]["label"])
             if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
             page.locator("#rotate-right").click()
+            if page.locator(".camera-menu[open]").count(): page.locator("#camera-toggle").click()
         assert page.evaluate("window.dungeon.scene.getNativeVisuals()") == expected["visuals"]
         # Strict save failure must preserve the previous autosave and retain the packet.
         save_before_failure = page.evaluate("localStorage.getItem('dungeon-crawler-tactics.save.v1')")

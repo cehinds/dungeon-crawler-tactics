@@ -37,13 +37,15 @@ def main():
             if(Math.abs(d.x)+Math.abs(d.y)!==1)throw Error('Invalid movement direction');
             field.rotate(1);
           }
-          const next=structuredClone(state);next.exploration.x=3;next.exploration.tiles.forEach(t=>{t.revealed=t.x<8;t.reachable=t.x<8;});field.setView(next);
+          const next=structuredClone(state);next.exploration.x=3;next.exploration.tiles.forEach(t=>{t.revealed=t.x<8;t.reachable=t.x<8;});field.setView(next);state=next;
           if(loads!==1||field.getNativeArtStatus().state!=='ready')throw Error('Movement or fog reveal reloaded map art');
           return initial;
         }''')
         page.emulate_media(reduced_motion='reduce')
         for canvas_width in [1000, 360]:
             page.evaluate('''w=>{document.querySelector('canvas').style.width=w+'px';field.resize();field.zoom(.4);}''', canvas_width)
+            center = page.evaluate('''()=>field.cellToScreen(state.exploration.x,state.exploration.y)''')
+            assert abs(center['x'] - canvas_width / 2) < 1, 'Center retained the old side-panel offset'
             for x, y in [(23, 15), (2, 2), (23, 2)]:
                 page.evaluate('''([x,y])=>{const next=structuredClone(state);next.exploration.x=x;next.exploration.y=y;next.exploration.tiles.forEach(t=>{t.revealed=true;t.reachable=!t.blocked;});field.setView(next);state=next;}''', [x, y])
                 page.wait_for_function('''()=>{const p=field.cellToScreen(state.exploration.x,state.exploration.y),box=document.querySelector('canvas').getBoundingClientRect();return p.x>20&&p.x<box.width-20&&p.y>40&&p.y<box.height-30;}''')
