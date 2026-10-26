@@ -46,6 +46,7 @@ def fixture(screen):
                 classes=[dict(id='class.'+c, label=c.title()) for _, _, c in names],
                 tiles=tiles, width=12, height=10, reachable=tiles,
                 forecast=[], abilities=abilities, items=[], equipment=[], log=[],
+                audience=dict(favor=0,favorCap=1,challenges=[],favorItemIds=[]),
                 events=[], quests=[], canMove=True, canAct=True, canConfirm=False,
                 partyOrder=[u['id'] for u in units], message='Move or act in either order. End each crawler’s turn when ready.',
                 customMap=None, generatedDungeon=dict(cleared=False) if screen=='explore' else None,
@@ -153,6 +154,11 @@ def main():
                     result.update(screen=screen, viewport=[width,height], screenshot=filename, runtime='presentation fixture; no C# WASM', pageErrors=list(errors))
                     results.append(result)
                     if screen=='battle':
+                        page.locator('#save-button').click()
+                        page.locator('#menu-game-tools [data-open-audience]').click()
+                        page.locator('#audience-dialog').wait_for(state='visible')
+                        assert not page.locator('#save-dialog').is_visible(), 'Run menu stayed open under sponsors'
+                        page.locator('#done-audience').click()
                         page.locator('#open-actions').click()
                         page.locator('#action-dialog').wait_for(state='visible')
                         modal = page.evaluate(MEASURE, dict(selectors=['#action-dialog', '#close-actions', '#modal-move', '#cancel-actions', '#actions-end-turn'], touch=width<900))

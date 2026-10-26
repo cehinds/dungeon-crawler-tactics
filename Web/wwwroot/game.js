@@ -316,6 +316,8 @@ function render() {
   renderProgress();
   if (view.screen !== 'battle') drawer = null;
   document.body.dataset.screen = view.screen;
+  const menuTools=$('#menu-game-tools');
+  if(menuTools)menuTools.innerHTML=['battle','explore'].includes(view.screen)?renderAudienceSummary(view):'';
   if (battleCanvas?.isConnected) battleCanvas.remove();
   if (!['battle','explore'].includes(view.screen) && battlefield) { battlefield.dispose(); battlefield = null; battleCanvas = null; }
   $('#game').innerHTML = view.screen === 'camp' ? renderCamp() : view.screen === 'explore' ? renderExploration() : view.screen === 'battle' ? renderBattle() : view.screen === 'victory' ? renderVictory() : renderEnding();
@@ -405,7 +407,7 @@ function renderParty() {
   return `<div class="party-strip" style="--party-columns:${Math.min(4,players.length)}" aria-label="Crawler turn order">${order.map(u=>`<button class="party-chip${u.selected?' active':''}${u.finished?' turn-spent':' turn-ready'}${u.duplicateSourceId?' clockwork-chip':''}" data-unit="${e(u.id)}" ${u.hp<=0?'disabled':''} aria-pressed="${u.selected}">${portrait(u)}<span><strong>${e(copyLabel(u))}</strong><small>${u.hp<=0?'Fallen':u.finished?'Turn ended':u.acted?'Action spent':u.selected?'Selected': 'Ready'}${u.duplicateSourceId?' · '+u.duplicateRounds+'r':''}</small></span></button>`).join('')}</div>`;
 }
 function renderBattle() {
-  return `<section class="battle-screen" aria-label="Tactical dungeon"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small class="objective-phase"><span>ROUND ${view.round}</span><span class="party-phase ${view.phase==='player'?'player-phase':'hostile-phase'}">${view.phase==='player'?'PARTY TURN':'ENEMY TURN'}</span></small><h2 id="screen-title">${e(view.objective || 'Clear the room. Reach the exit.')}</h2></div></div>${view.neighborhood?.standalone?`<nav class="neighborhood-battle-controls" aria-label="Neighborhood"><button data-open-neighborhood>Neighborhood journal</button><button data-return-neighborhood>Return to campaign</button></nav>`:renderQuestTracker()}<div id="enemy-phase-banner" class="enemy-phase-banner" hidden role="status">ENEMY TURN · Watch their movement</div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}${renderBoard()}<div id="map-inspect" class="map-inspect" hidden></div></div><div class="battle-hud">${renderParty()}<section class="action-dock" aria-label="Selected crawler and actions">${renderInspector(unit())}</section><div id="narrator-slot" class="narrator-slot"></div></div>${renderAudienceSummary(view)}${renderDrawer()}${actionChooser?renderActionDialog():''}${endTurnActor?renderEndTurnDialog():''}${detailedForecast?renderForecastDialog():''}</section>`;
+  return `<section class="battle-screen" aria-label="Tactical dungeon"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small class="objective-phase"><span>ROUND ${view.round}</span><span class="party-phase ${view.phase==='player'?'player-phase':'hostile-phase'}">${view.phase==='player'?'PARTY TURN':'ENEMY TURN'}</span></small><h2 id="screen-title">${e(view.objective || 'Clear the room. Reach the exit.')}</h2></div></div>${view.neighborhood?.standalone?`<nav class="neighborhood-battle-controls" aria-label="Neighborhood"><button data-open-neighborhood>Neighborhood journal</button><button data-return-neighborhood>Return to campaign</button></nav>`:renderQuestTracker()}<div id="enemy-phase-banner" class="enemy-phase-banner" hidden role="status">ENEMY TURN · Watch their movement</div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}${renderBoard()}<div id="map-inspect" class="map-inspect" hidden></div></div><div class="battle-hud">${renderParty()}<section class="action-dock" aria-label="Selected crawler and actions">${renderInspector(unit())}</section><div id="narrator-slot" class="narrator-slot"></div></div>${renderDrawer()}${actionChooser?renderActionDialog():''}${endTurnActor?renderEndTurnDialog():''}${detailedForecast?renderForecastDialog():''}</section>`;
 }
 function renderWorldControls() {
   return `<details class="world-controls camera-menu" aria-label="Battlefield camera">
@@ -705,7 +707,7 @@ function bindNeighborhood(){
  $('#confirm-neighborhood-start')?.addEventListener('click',()=>{neighborhoodStart=false;command('start_neighborhood');});
 }
 function bindScreen() {
-  document.querySelectorAll('#open-audience,[data-open-audience]').forEach(button=>button.addEventListener('click',()=>{audienceOpen=true;render();}));
+  document.querySelectorAll('#open-audience,[data-open-audience]').forEach(button=>button.addEventListener('click',()=>{$('#save-dialog').close();audienceOpen=true;render();}));
   const closeAudience=()=>{audienceOpen=false;render();};
   for(const id of ['close-audience','done-audience'])$('#'+id)?.addEventListener('click',closeAudience);
   if($('#audience-dialog')){openDialog('#audience-dialog');$('#audience-dialog').addEventListener('cancel',event=>{event.preventDefault();closeAudience();});}

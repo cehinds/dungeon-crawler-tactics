@@ -128,13 +128,13 @@ def run_favor(browser,args,w,h):
         assert save(page)['screen']=='battle'
         page.locator('#detail-confirm-forecast').click();wait(page,'window.dungeon.getView().audience.favor===1')
         assert next(c for c in view(page)['audience']['challenges'] if c['id']=='sponsor.reaction')['earned']
-        page.locator('[data-open-audience]').first.click();snap(page,out,'audience-earned')
+        page.locator('#save-button').click();page.locator('#menu-game-tools [data-open-audience]').click();snap(page,out,'audience-earned')
         def choose():
             utility=page.locator('.audience-utility').filter(has=page.locator('[data-preview-favor][data-item-id="item.oil_flask"]'))
             utility.locator('summary').click();utility.locator('[data-preview-favor]').first.click();wait(page,'window.dungeon.getView().canConfirm')
         before=save(page);count=next(i['count'] for i in view(page)['items'] if i['id']=='item.oil_flask');choose();snap(page,out,'favor-preview');assert save(page)==before
         page.locator('#detail-cancel-forecast').click();assert save(page)==before
-        page.locator('[data-open-audience]').first.click();choose();page.locator('#detail-confirm-forecast').click();wait(page,'!window.dungeon.getView().canConfirm')
+        page.locator('#save-button').click();page.locator('#menu-game-tools [data-open-audience]').click();choose();page.locator('#detail-confirm-forecast').click();wait(page,'!window.dungeon.getView().canConfirm')
         assert view(page)['audience']['favor']==0
         assert next(i['count'] for i in view(page)['items'] if i['id']=='item.oil_flask')==count-1
         carl=next(u for u in view(page)['units'] if u['id']=='crawler.carl');assert carl['acted'] and not carl['moved'] and not carl['finished']

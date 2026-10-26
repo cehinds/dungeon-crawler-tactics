@@ -324,3 +324,14 @@ body[data-screen] #action-dialog .modal-actions button { font-size: 12px; }
   body[data-screen] .explore-interactions button { flex: 0 0 auto; width: 100%; padding: 5px; font-size: 12px; }
 }
 @media (max-width: 350px) { body[data-screen] .explore-crawler > span:not(.unit-portrait) { display: none; } }
+
+/* Optional sponsor systems belong with the run menu, away from camera controls. */
+body[data-screen] #menu-game-tools .audience-map-button {
+  position: static;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: 12px;
+  font: 13px var(--ui);
+}
