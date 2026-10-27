@@ -77,6 +77,21 @@ def main():
         assert page.locator('#edge-rotation').input_value() == '0'
         page.keyboard.press('Escape')
         page.wait_for_function("document.activeElement.id === 'map'")
+        # Native dialog.close() queues its close event. Reopening the map
+        # inspector before that event arrives must preserve the new opener.
+        page.locator('#open-info').click()
+        page.evaluate("""() => new Promise(resolve => {
+            const dialog = document.querySelector('#info-dialog');
+            dialog.addEventListener('close', resolve, {once:true});
+            dialog.close();
+            const map = document.querySelector('#map');
+            map.focus();
+            map.dispatchEvent(new KeyboardEvent('keydown', {key:'Enter', bubbles:true}));
+        })""")
+        assert page.locator('#info-dialog').evaluate('dialog=>dialog.open')
+        assert page.evaluate("document.querySelector('#info-dialog').contains(document.activeElement)")
+        page.keyboard.press('Escape')
+        page.wait_for_function("document.activeElement.id === 'map'")
         # Click an actual floor through every rotated camera; derive projected
         # bounds from the exported scene, independently of the pointer handler.
         for rotation in range(4):

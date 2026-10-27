@@ -19,7 +19,7 @@ Player facing uses the painted front-left/front-right and rear-left/rear-right f
 
 Validation commands:
 
-- `python Tools/playtest_gameplay_ui.py` checks production UI against explicit presentation fixtures, including a fixed bottom End turn across targeting, forecasts and enemy turns at five viewport sizes (55 fixture states). It checks HP/Mana geometry, quick-action selection, enemy-phase disabled commands, END/DOWN badges, status-only and Mana-only forecasts, long descriptions, visible narration without control overlap, and error toasts. It opens Help, History, Sponsors and Actions through their real UI controls.
+- `python Tools/playtest_gameplay_ui.py` checks production UI against explicit presentation fixtures, including a fixed bottom End turn across targeting, forecasts and enemy turns at five viewport sizes (60 fixture states). It checks HP/Mana geometry, quick-action selection, enemy-phase disabled commands, END/DOWN badges, status-only and Mana-only forecasts, long descriptions and command names, visible narration without control overlap, and error toasts. It opens Help, History, Sponsors and Actions through their real UI controls.
 - `node Tools/test_sprite_facing.mjs` checks player and enemy orientation across projections, camera rotations and target directions.
 - `python Tools/playtest_player_facing.py` observes actual canvas frame choices during movement, attacks and hits; it does not execute C# rules.
 - `Tools/capture_gameplay_screenshots.py` captures exploration, combat, character sheets, end-turn confirmation and forecasts from a published C# WASM game. The screenshot workflow stores downloadable captures.

@@ -135,7 +135,7 @@ def main():
                                 document.querySelectorAll('#forecast-dialog, #ability-details-dialog').forEach(dialog=>dialog.close());
                                 detailedForecast=false;abilityDetailsOpen=false;
                                 view=structuredClone(initialFixture);localAction=null;actionChooser=false;
-                                if(mode==='targeting'||mode==='forecast'||mode==='status-forecast'||mode==='mana-forecast'||mode==='narrator-targeting'||mode==='long-description')localAction={abilityId:view.abilities[1].id};
+                                if(mode==='targeting'||mode==='forecast'||mode==='status-forecast'||mode==='mana-forecast'||mode==='narrator-targeting'||mode==='long-description'||mode==='long-command-labels')localAction={abilityId:view.abilities[1].id};
                                 if(mode==='forecast'||mode==='status-forecast'||mode==='mana-forecast'){
                                   view.canConfirm=true;
                                   view.forecast=[mode==='status-forecast'
@@ -147,6 +147,17 @@ def main():
                                 if(mode==='enemy'){view.phase='enemy';view.canMove=false;view.canAct=false;}
                                 if(mode==='finished-fallen') {view.units[0].finished=true;view.units[1].hp=0;view.roster[0].finished=true;view.roster[1].hp=0;}
                                 if(mode==='narrator-targeting')narrator.onEvent({type:'damage',actorId:'crawler.carl',targetId:'enemy.rat',before:30,after:28,amount:2});
+                                if(mode==='long-command-labels') {
+                                  const donut=view.units.find(u=>u.id==='crawler.donut');donut.id='crawler.donut.fixture';donut.artId='donut';donut.label='Princess Donut';donut.selected=true;donut.classId='class.mage';donut.selectedClassId='class.mage';
+                                  view.units.forEach(u=>{if(u.team==='player'&&u!==donut)u.selected=false;});
+                                  view.roster.forEach(u=>{if(u.id==='crawler.donut'){u.id=donut.id;u.artId='donut';u.label='Princess Donut';u.selected=true;u.classId='class.mage';u.selectedClassId='class.mage';}else u.selected=false;});
+                                  view.selectedUnitId=donut.id;view.partyOrder=view.partyOrder.map(id=>id==='crawler.donut'?donut.id:id);
+                                  view.abilities=[
+                                    {id:'ability.donut_magic_missile',label:'Magic Missile',description:'A reliable arcane projectile.',target:'enemy',cost:2,range:4,targetIds:['enemy.rat'],enabled:true},
+                                    {id:'ability.donut_puddle_jumper',label:'Puddle Jumper',description:'Leap to an open puddle.',target:'tile',cost:1,range:3,targetIds:['tile.3.4'],enabled:true}
+                                  ];
+                                  localAction={abilityId:view.abilities[0].id};
+                                }
                                 if(mode==='long-description')view.abilities[1].description='A carefully aimed explosive that travels across the chamber, fractures the target’s armor, ignites the landing tile, and leaves burning debris in a wide area. Choose a safe line of attack, then review the complete forecast before committing this action.';
                                 render();
                               };
@@ -209,7 +220,7 @@ def main():
                         modal['screenshot']=filename
                         results.append(modal)
                         page.locator('#cancel-actions').click()
-                        for mode in ['targeting', 'forecast', 'status-forecast', 'mana-forecast', 'finished-fallen', 'narrator-targeting', 'long-description', 'enemy']:
+                        for mode in ['targeting', 'forecast', 'status-forecast', 'mana-forecast', 'finished-fallen', 'narrator-targeting', 'long-description', 'long-command-labels', 'enemy']:
                             page.evaluate('(mode)=>window.layoutMode(mode)', mode)
                             page.wait_for_timeout(100)
                             state_selectors = ['#end-turn', '#open-actions', '.hud-crawler', '.hud-actions', '.party-phase']
@@ -224,6 +235,7 @@ def main():
                                 assert page.locator('.party-chip:nth-child(2) .party-state').inner_text()=='DOWN'
                             if mode=='narrator-targeting': state_selectors += ['#narrator-panel', '.hud-target', '#cancel-forecast']
                             if mode=='long-description': state_selectors += ['.hud-target', '#cancel-forecast']
+                            if mode=='long-command-labels': state_selectors += ['.hud-action strong'] + (['.end-turn-name', '.end-character small'] if width>730 else [])
                             if mode=='status-forecast':
                                 page.locator('#review-forecast').click()
                                 assert page.locator('.forecast-detail').count()==1
@@ -237,6 +249,21 @@ def main():
                                 assert page.locator('#narrator-panel').get_attribute('data-empty')=='false'
                                 overlap_check="""(() => {const a=document.querySelector('#narrator-panel').getBoundingClientRect(); return ['.hud-target','.hud-actions','#end-turn','#open-actions','#cancel-forecast'].some(s=>{const e=document.querySelector(s);if(!e)return false;const b=e.getBoundingClientRect();return Math.min(a.right,b.right)-Math.max(a.left,b.left)>2 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>2;});})()"""
                                 assert not page.evaluate(overlap_check), 'Narrator overlaps targeting or action controls'
+                            if mode=='long-command-labels':
+                                assert page.locator('.hud-stats > strong').text_content()=='Princess Donut'
+                                labels=page.locator('.hud-actions [data-ability] strong')
+                                assert [label.text_content() for label in labels.all()]==['Magic Missile','Puddle Jumper']
+                                if width in (320,390):
+                                    for label in labels.all():
+                                        metrics=label.evaluate('(e)=>({text:e.textContent,scrollWidth:e.scrollWidth,clientWidth:e.clientWidth,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight})')
+                                        assert metrics['scrollWidth']<=metrics['clientWidth']+1 and metrics['scrollHeight']<=metrics['clientHeight']+1, f'Quick action label is clipped at {width}px: {metrics}'
+                                if width>730:
+                                    end_name=page.locator('.end-turn-name')
+                                    assert end_name.is_visible()
+                                    name_box=end_name.bounding_box();end_box=page.locator('#end-turn').bounding_box()
+                                    assert name_box['x']>=end_box['x']-1 and name_box['x']+name_box['width']<=end_box['x']+end_box['width']+1
+                                else:
+                                    assert page.locator('.end-turn-short').is_visible()
                             if mode=='long-description':
                                 description=page.locator('.target-description')
                                 assert description.is_visible()
@@ -250,7 +277,7 @@ def main():
                                 assert 'carefully aimed explosive' in page.locator('#ability-details-dialog').inner_text()
                             assert page.locator('.game-toast.toast-error').count()==0, 'Error toast appeared in presentation fixture'
                             state_result=page.evaluate(MEASURE, dict(selectors=state_selectors,touch=width<900))
-                            assert state_result['boxes']['#end-turn'] == result['boxes']['#end-turn'], 'End turn moved between gameplay states'
+                            assert abs((state_result['boxes']['#end-turn']['y']+state_result['boxes']['#end-turn']['height'])-(result['boxes']['#end-turn']['y']+result['boxes']['#end-turn']['height'])) <= 1, 'End turn bottom edge moved between gameplay states'
 
                             state_filename=f'{mode}-{width}x{height}.png'
                             page.screenshot(path=str(output/state_filename),full_page=True)

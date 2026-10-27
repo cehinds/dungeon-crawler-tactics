@@ -57,5 +57,7 @@ This is a HUD composition pass. It does not recreate the concept's isometric cam
 - [x] Targeting immediately shows the ability illustration and description. Status-only and Mana-only forecasts use the existing resolver data.
 - [x] Active narration remains visible in a separate strip while targeting.
 - [x] Action modal uses the same navy/gold frame treatment and Mana terminology.
-- [x] Expanded presentation checks cover 55 states. Error toasts now fail the fixture suite.
-- [ ] Real-game capture/deployment verification for this revision is tracked by GitHub Actions; local fixtures do not establish it.
+- [x] Expanded presentation checks cover 60 states. Error toasts now fail the fixture suite.
+- [x] Real-game capture for `05db6de` verified forecast cancellation preserves the save, Carl → Donut → Katia → Mongo turns, and round2 after enemies. [Capture run](https://github.com/cehinds/dungeon-crawler-tactics/actions/runs/40435988421).
+- [x] The real mobile capture exposed truncated Donut command names and a toast over the objective; the follow-up wraps names and separates feedback.
+- [ ] Final follow-up deployment is tracked by GitHub Actions; a passed capture does not imply the Pages deployment is finished.

@@ -308,18 +308,24 @@ for (const name of ['settings', 'export', 'info']) {
   const dialog = $(`${name}-dialog`), opener = $(`open-${name}`);
   opener.onclick = () => {
     dialog.querySelectorAll('.dialog-error').forEach(node => node.remove());
-    if (name === 'info') renderEdgeInspector();
+    if (name === 'info') { infoOpenedFromMap = false; renderEdgeInspector(); }
     dialog.showModal();
   };
   $(`close-${name}`).onclick = () => dialog.close();
-  dialog.addEventListener('close', () => { if (opener.getClientRects().length) opener.focus(); });
+  dialog.addEventListener('close', () => {
+    // Native close events are queued. A keyboard user can already have reopened
+    // the inspector from the map before an older close event is delivered.
+    if (dialog.open) return;
+    const destination = name === 'info' && infoOpenedFromMap ? canvas : opener;
+    if (name === 'info') infoOpenedFromMap = false;
+    if (destination.getClientRects().length) destination.focus();
+  });
 }
 compactViewport.addEventListener('change', positionSettings); positionSettings(); settingsFeedback();
 $('edge-asset').addEventListener('change', () => { selectedMapCell = null; renderEdgeInspector(); draw(); });
 $('edge-rotation').addEventListener('change', () => { selectedMapCell = null; renderEdgeInspector(); draw(); });
 $('show-connections').onclick = () => { showConnections(true); infoOpenedFromMap = true; $('info-dialog').close(); };
 $('hide-connections').onclick = () => { showConnections(false); canvas.focus(); };
-$('info-dialog').addEventListener('close', () => { if (infoOpenedFromMap) { infoOpenedFromMap = false; canvas.focus(); } });
 $('apply-settings').onclick = () => { $('settings-dialog').close(); safely(() => generate()); };
 $('generate').onclick = () => safely(() => generate());
 $('reroll').onclick = () => { $('fixed-seed').checked = false; seedMode(); safely(() => generate({ fresh: true })); };

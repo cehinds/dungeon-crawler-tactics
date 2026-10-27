@@ -4,11 +4,13 @@ Source: the same 1672×941 combat concept (`/workspace/generated_images/exec-3af
 
 Fixed shortcomings from the preceding pass: spent units only faded; End turn lacked actor/next context; movement looked like incidental text; status-only previews could show a choose-target prompt despite a valid preview; narration could occupy the same area as targeting. Visible END/DOWN badges, a desktop movement column, named End turn/next actor hint, illustrated targeting descriptions and complete preview-delta categories now address those issues. Narration remains visible and separate from action controls. Modal frames and Mana terminology match the deck.
 
-The expanded suite passes 55 fixture states without page/console errors or error toasts. An initial fixture falsely reported success after invoking engine-backed cancellation without C# loaded; visual review found the toast, and the fixture now inspects dialogs without pretending to run the engine. Real-game capture separately checks cancel save integrity and individual party turns before the enemy round. That capture requires the published runtime and is pending CI for this revision.
+The expanded suite passes 60 fixture states without page/console errors or error toasts. An initial fixture falsely reported success after invoking engine-backed cancellation without C# loaded; visual review found the toast, and the fixture now inspects dialogs without pretending to run the engine. Real-game capture for `05db6de` passed in run 40435988421: cancellation preserved the save, all four allies ended in order, enemies resolved and round 2 began. Its 12 screenshots are in `/workspace/second-pass-gameplay/`. These real screenshots exposed truncated Donut command labels and an objective/toast overlap on phones; follow-up CSS wraps labels and raises toast separation. Final follow-up presentation checks add the long-command case; final deployment remains separately tracked in Actions.
 
 Typography, spacing, navy/gold/cyan tokens, reused PNG artwork and actual-view copy were reviewed in desktop/phone captures. Portrait art, square room composition and exact ornament remain the previously documented differences. The command deck height remains 132px desktop and 218px phone. Controls, meters and visible narration fit the tested viewports.
 
 Evidence: `/workspace/scratch/ui-second-pass/battle-1672x941.png`, `finished-fallen-390x844.png`, `narrator-targeting-320x740.png`, `targeting-844x390.png`, and `status-forecast-1672x941.png`. Combined concept/deck comparison is `/workspace/scratch/ui-second-pass/concept-detail.png`.
+
+A subsequent deployment check exposed a queued native dialog-close race in Foundry: an old close event consumed the origin of a newly reopened inspector and returned focus to the toolbar. One guarded close handler now restores the correct focus destination; the full six-viewport Foundry suite and deterministic close/reopen regression pass locally.
 
 final result: passed
 

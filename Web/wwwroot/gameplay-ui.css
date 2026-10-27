@@ -92,7 +92,7 @@ body[data-screen] .narrator-panel > button { min-height: 40px; font: 12px var(--
 body[data-screen] .narrator-panel #narrator-dismiss { min-width: 40px; font-size: 20px; }
 body[data-screen] .narrator-panel[data-empty="true"] { display: none; }
 body[data-screen] .is-targeting .narrator-slot { position: fixed; top: 110px; bottom: auto; left: 12px; right: auto; width: min(400px,calc(100vw - 24px)); }
-body[data-screen="battle"] > .toast-region { top: 80px; bottom: auto; right: 12px; left: auto; max-width: min(400px,calc(100vw - 24px)); }
+body[data-screen="battle"] > .toast-region { top: 106px; bottom: auto; right: 12px; left: auto; max-width: min(400px,calc(100vw - 24px)); }
 body[data-screen="battle"]:has(.is-targeting) > .toast-region { top: 162px; }
 /* Exploration uses the same material with a small walking pad. */
 body[data-screen] .exploration-hud { padding: 10px 16px; display: grid; grid-template-columns: 138px auto minmax(160px,1fr) auto; grid-template-rows: 1fr; align-items: center; gap: 20px; }
@@ -134,8 +134,8 @@ body[data-screen] .adventure-steps span { display: block; margin-top: 3px; color
   body[data-screen] .deck-movement { margin-top: 2px; font-size: 11px; }
   body[data-screen] .deck-movement b { font-size: 12px; }
   body[data-screen] .battle-hud .hud-actions { gap: 7px; }
-  body[data-screen] .battle-hud .hud-action .hud-icon { height: 52px; width: 100%; max-width: 80px; padding: 3px; }
-  body[data-screen] .battle-hud .hud-action strong { font-size: 12px; margin-top: 4px; }
+  body[data-screen] .battle-hud .hud-action .hud-icon { height: 44px; width: 100%; max-width: 80px; padding: 3px; }
+  body[data-screen] .battle-hud .hud-action strong { font-size: 12px; line-height: 14px; min-height: 30px; margin-top: 4px; white-space: normal; overflow-wrap: anywhere; text-overflow: clip; }
   body[data-screen] .command-footer .party-strip { bottom: calc(4px + env(safe-area-inset-bottom)); left: 8px; height: 46px; max-width: 63%; gap: 4px; }
   body[data-screen] .command-footer .party-chip { min-width: 44px; flex-basis: 44px; min-height: 44px; padding: 0; }
   body[data-screen] .command-footer .party-chip .unit-portrait { width: 36px; height: 40px; }
