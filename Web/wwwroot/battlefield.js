@@ -1,7 +1,7 @@
 import { drawFloorLayer } from './tile-surface-renderer.js';
 import { fetchJSON, loadArtKit, buildArtScene, drawPiece, visibleSceneCorners, environmentMood } from './generator-art.js';
 import { nativeProject, nativePick, nativeSceneFromVisuals, serializeNativeVisuals } from './native-map-visuals.js';
-import { rememberSpriteFacing, seedEnemyFacing, enemySpriteScaleX, drawFacingSprite } from './sprite-facing.js';
+import { rememberSpriteFacing, seedSpriteFacing, playerSpriteDirection, enemySpriteScaleX, drawFacingSprite } from './sprite-facing.js';
 // C# owns legality, damage, turns and saved state. Native custom art is portable.
 // This module only draws authored assets and plays the ordered events it receives.
 const ROOT = 'assets/revamp/';
@@ -123,7 +123,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     return rotateVector(projected.x,projected.y,(4-rotation)%4);
   }
   function rememberFacing(id,dx,dy){rememberSpriteFacing(facing,id,dx,dy);}
-  function screenFacing(id){const direction=facing.get(id)??{x:0,y:1};const p=rotateVector(direction.x,direction.y);return p.x>0?'se':p.x<0?'nw':p.y>0?'sw':'ne';}
+  function screenFacing(id){return playerSpriteDirection(facing.get(id),rotation,nativeActive());}
   function getRotationLabel(){return ['North view','East view','South view','West view'][rotation];}
   function updateNativeStatus() {
     if(canvas.parentElement && nativeStatus.parentElement!==canvas.parentElement)canvas.after(nativeStatus);
@@ -161,7 +161,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         scene.decorations=[];
       }
       if(disposed || request!==nativeRequest)return;
-      nativeArt=art;nativeScene=scene;nativeState='ready';fit();if(view.screen==='explore')centerSelected();updateNativeStatus();
+      nativeArt=art;nativeScene=scene;nativeState='ready';fit();if(view.screen==='explore')centerSelected();else centerAction();updateNativeStatus();
       canvas.dispatchEvent(new CustomEvent('nativeartready',{detail:{styleId:descriptor.styleId,kitId:descriptor.kitId,pieceCount:scene.floor.length+scene.structures.length+scene.decorations.length}}));
     } catch(error) {
       if(disposed || request!==nativeRequest)return;
@@ -180,7 +180,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     width=Math.max(1,box.width); height=Math.max(1,box.height);
     if(layoutChanged){
       // Retain the user's relative zoom while switching desktop/phone framing.
-      zoomLevel=clamp(zoomLevel*(width<600?2.5/1.6:1.6/2.5),.7,3.2);
+      const desktopZoom=nativeActive()&&view?.screen!=='explore'?1.35:1.6;
+      zoomLevel=clamp(zoomLevel*(width<600?2.5/desktopZoom:desktopZoom/2.5),.7,3.2);
       panX=0;panY=0;
     }
     const dpr=Math.min(devicePixelRatio || 1,2);
@@ -198,7 +199,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         [[-.5,-.5],[map.width-.5,-.5],[-.5,map.height-.5],[map.width-.5,map.height-.5]].map(([x,y])=>project(x,y));
       const minX=Math.min(...points.map(p=>p.x))-20,maxX=Math.max(...points.map(p=>p.x))+20;
       const minY=Math.min(...points.map(p=>p.y))-100,maxY=Math.max(...points.map(p=>p.y))+24;
-      if(!cameraReady){zoomLevel=view.screen==='explore'?(width<600?2:1.6):1;cameraReady=true;}
+      if(!cameraReady){zoomLevel=view.screen==='explore'?(width<600?2:1.6):(width<600?2.5:1.35);cameraReady=true;}
       scale=Math.max(.05,Math.min((width-28)/(maxX-minX),(height-24)/(maxY-minY))*zoomLevel);
       originX=width/2-(minX+maxX)/2*scale+panX;originY=height/2-(minY+maxY)/2*scale+panY;return;
     }
@@ -243,7 +244,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     }
     fit();
     if(next.screen==='explore'){if(mapChanged)centerSelected();}
-    else if(mapChanged && !nativeActive())centerAction();
+    else if(mapChanged && (!nativeActive()||nativeState==='ready'))centerAction();
     else if(width<600 && lastSelection!==next.selectedUnitId)centerSelected();
     lastSelection=next.selectedUnitId;
   }
@@ -299,7 +300,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function sprite(unit,time) {
     if(unit.hp<=0)return;
     const enemy=unit.team==='enemy';
-    seedEnemyFacing(facing,unit,view.screen==='explore'
+    seedSpriteFacing(facing,unit,view.screen==='explore'
       ? [{team:'player',hp:1,x:view.exploration.x,y:view.exploration.y}]
       : visualUnits);
     const key=unit.artId || (enemy?'rat':unit.id?.split('.').pop());
@@ -317,6 +318,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.save();context.fillStyle='#050b14a6';context.beginPath();context.ellipse(p.x,p.y+1,enemy?29:34,12,0,0,Math.PI*2);context.fill();context.restore();
     if(enemy){
       const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
+      const length=Math.max(Math.abs(direction.x),Math.abs(direction.y),1);direction.x/=length;direction.y/=length;
       const dx=nativeActive()?direction.x*24:(direction.x-direction.y)*22,dy=nativeActive()?direction.y*24:(direction.x+direction.y)*11;
       context.beginPath();context.moveTo(p.x+dx,p.y+dy);context.lineTo(p.x+dx*.55-dy*.25,p.y+dy*.55+dx*.125);context.lineTo(p.x+dx*.55+dy*.25,p.y+dy*.55-dx*.125);context.closePath();context.fillStyle='#ffb18c';context.fill();
     }
@@ -327,9 +329,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const walking=exploringWalk || (actor && ['move','push','teleport'].includes(current?.type));
     const directionalPose=walking?`walk${1+Math.floor(time/105)%2}`:'idle';
     const directionalFrame=directional?.frames?.[screenFacing(unit.id)]?.[directionalPose];
-    const actionPose=actor&&current?.type==='attack'||target&&['damage','guard'].includes(current?.type);
     const legacyFrame=spriteFrames[atlasName]?.frames?.[key]?.[pose];
-    const useDirectional=directionalFrame&&(selectedForm||!actionPose||!legacyFrame||screenFacing(unit.id)!=='se');
+    const useDirectional=Boolean(directionalFrame);
     const frame=useDirectional?directionalFrame:legacyFrame;
     const boss=bossArt[key];
     const size=boss?boss.bodyHeight??168:useDirectional ? directional.bodyHeight ?? frame.drawHeight : frame?.drawHeight ?? (key==='boss'?148:100);
@@ -343,6 +344,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const image=useDirectional?directional.image:images[atlasName];
     if(useDirectional&&actor&&current?.type==='attack'){
       const direction=rotateVector(...Object.values(facing.get(unit.id)??{x:0,y:1}));
+      const length=Math.max(Math.abs(direction.x),Math.abs(direction.y),1);direction.x/=length;direction.y/=length;
       const reach=reduced.matches?0:Math.sin(animation.progress*Math.PI)*9;
       p.x+=nativeActive()?direction.x*reach:(direction.x-direction.y)*reach;p.y+=nativeActive()?direction.y*reach:(direction.x+direction.y)*reach*.5;
     }

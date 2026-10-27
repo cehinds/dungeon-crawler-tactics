@@ -9,13 +9,22 @@ This document supersedes the earlier planning and starter-kit descriptions. The 
 
 ## Gameplay interface
 
-The browser HUD uses a single navy-and-brass command dock with a full-width targeting strip and a prominent End turn button. Camera zoom, rotation and centering are grouped under Camera; Sponsors and AI Favor are available through Menu; idle narrator feedback collapses to History. Exploration keeps the map visible with a direction pad, party portraits that open character sheets, health indicators, and nearby interaction buttons. Combat groups the selected crawler's health and Mana, quick actions, ability book, and End turn separately. The Menu button opens save and settings options; Help explains controls. The full action book still exposes every available ability and item.
+The browser prioritizes the map. A framed bottom command deck shows a large selected portrait, labeled HP/Mana bars, movement availability, Move and two authored-order ability shortcuts. Portraits select crawlers; the large portrait opens Character and the bag opens Actions. Full abilities, items, stats, skills, forms and equipment use pop-up menus. End turn remains bottom-right on desktop and in the bottom row on phones, including while targeting. Desktop names the active crawler and next actor; finished and fallen party portraits show END and DOWN badges. Actions and movement remain separate; ending a turn still requires confirmation naming the next crawler.
 
-Enemy art faces movement or attack targets, with initial orientation toward the nearest living opponent. The renderer accounts for the camera rotation and the painted orientation of each asset. Existing enemy sheets provide side views; mirroring does not add front/back animation frames. `sprite-facing.js` isolates these presentation choices from C# rules.
+A single objective ribbon shows turn and quest progress. Camera opens zoom and rotation controls. Menu contains Help, History, Sponsors and save options. Narrator events appear briefly, then collapse; History preserves the full session log. The selected-action card appears above the party while targeting, with its action illustration, description, legal target count and a route to full effect details and exact forecasts. Preview summaries include health, Mana, stat and status changes. Active narration occupies a separate strip during targeting.
 
-`Web/wwwroot/gameplay-ui.css` is the final presentation layer, loaded after the existing menu skins. Keep responsive gameplay overrides here rather than adding more competing rules to the older stylesheets. It does not alter shared C# rules or the Unity presenter.
+Player facing uses the painted front-left/front-right and rear-left/rear-right frames after the map projection and camera rotation. Movement direction persists until an attack turns the actor toward its target. Directional lunges replace the old attack-frame fallback that could make a character face the wrong way. The art supplies idle and walk views; this does not add new directional attack frames. Enemy sheets retain their separately verified side-view mirroring.
 
-For layout checks run `python Tools/playtest_gameplay_ui.py`. This renders production UI with explicit presentation fixtures at desktop, portrait phone, and landscape sizes, including selected actions, forecasts and enemy turns; it does not validate gameplay rules. Run `node Tools/test_sprite_facing.mjs` for sprite orientation and anchor checks. `Tools/capture_gameplay_screenshots.py` captures real generated exploration, combat, and menus from a published C# WASM game. The screenshot workflow stores those captures as a downloadable Actions artifact.
+`Web/wwwroot/gameplay-ui.css` owns the final browser presentation layer. `sprite-facing.js` isolates art-facing decisions from C# rules. These changes do not alter the Unity presenter or shared combat rules.
+
+Validation commands:
+
+- `python Tools/playtest_gameplay_ui.py` checks production UI against explicit presentation fixtures, including a fixed bottom End turn across targeting, forecasts and enemy turns at five viewport sizes (55 fixture states). It checks HP/Mana geometry, quick-action selection, enemy-phase disabled commands, END/DOWN badges, status-only and Mana-only forecasts, long descriptions, visible narration without control overlap, and error toasts. It opens Help, History, Sponsors and Actions through their real UI controls.
+- `node Tools/test_sprite_facing.mjs` checks player and enemy orientation across projections, camera rotations and target directions.
+- `python Tools/playtest_player_facing.py` observes actual canvas frame choices during movement, attacks and hits; it does not execute C# rules.
+- `Tools/capture_gameplay_screenshots.py` captures exploration, combat, character sheets, end-turn confirmation and forecasts from a published C# WASM game. The screenshot workflow stores downloadable captures.
+
+See [design direction and reference access notes](Tactics-UI-References.md).
 
 ## Play locally
 

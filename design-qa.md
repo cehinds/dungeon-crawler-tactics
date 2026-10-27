@@ -1,3 +1,64 @@
+# Second HUD clarity pass
+
+Source: the same 1672×941 combat concept (`/workspace/generated_images/exec-3af4f6ce-48a8-449e-a705-f78ea6819b7a.png`). Implementation: `/workspace/scratch/ui-second-pass/`, Chromium at DPR 1, desktop 1672×941 and 1440×1000, phones 390×844 and 320×740, landscape 844×390. This remains HUD-only review with square-map presentation fixtures.
+
+Fixed shortcomings from the preceding pass: spent units only faded; End turn lacked actor/next context; movement looked like incidental text; status-only previews could show a choose-target prompt despite a valid preview; narration could occupy the same area as targeting. Visible END/DOWN badges, a desktop movement column, named End turn/next actor hint, illustrated targeting descriptions and complete preview-delta categories now address those issues. Narration remains visible and separate from action controls. Modal frames and Mana terminology match the deck.
+
+The expanded suite passes 55 fixture states without page/console errors or error toasts. An initial fixture falsely reported success after invoking engine-backed cancellation without C# loaded; visual review found the toast, and the fixture now inspects dialogs without pretending to run the engine. Real-game capture separately checks cancel save integrity and individual party turns before the enemy round. That capture requires the published runtime and is pending CI for this revision.
+
+Typography, spacing, navy/gold/cyan tokens, reused PNG artwork and actual-view copy were reviewed in desktop/phone captures. Portrait art, square room composition and exact ornament remain the previously documented differences. The command deck height remains 132px desktop and 218px phone. Controls, meters and visible narration fit the tested viewports.
+
+Evidence: `/workspace/scratch/ui-second-pass/battle-1672x941.png`, `finished-fallen-390x844.png`, `narrator-targeting-320x740.png`, `targeting-844x390.png`, and `status-forecast-1672x941.png`. Combined concept/deck comparison is `/workspace/scratch/ui-second-pass/concept-detail.png`.
+
+final result: passed
+
+---
+
+# Screenshot research and concept HUD alignment — current review
+
+**Scope:** browser HUD composition. The square map, existing shared C# combat rules and real forecast modal are retained. This is not a claim that the game reproduces the concept's entire scene.
+
+## Evidence
+
+- Source visual truth: `/workspace/generated_images/exec-3af4f6ce-48a8-449e-a705-f78ea6819b7a.png` (newer combat concept), 1672×941. Original concept: `exec-06ff3830-e51f-4e52-904f-19880ed43c1d.png`, also 1672×941.
+- External visual evidence: four actual Libretro archive screenshots of Fire Emblem GBA, FFT: The War of the Lions, FFTA and Tactics Ogre: The Knight of Lodis. Source URLs, observed states and component coordinates are in `Docs/Tactics-UI-References.md`.
+- Final browser screenshots: `/workspace/scratch/ui-concept-final/`; Chromium, DPR 1, CSS viewports 1672×941, 1440×1000, 390×844, 320×740 and 844×390.
+- Full-view combined comparison: `/workspace/scratch/ui-reference-research/concept-vs-revised.png`. Focused party/deck comparison: `/workspace/scratch/ui-reference-research/hud-detail-comparison.png`. Both inputs are displayed together in each comparison artifact. Full-view source and implementation each use 1672×941, no density correction. Focused crops use the same x=0…1672, y=710…941 region.
+- State: source depicts an attack preview; the implementation comparison uses a presentation fixture's forecast state. Action name, numbers and room geometry differ and are not used as fidelity evidence. No C# state was fabricated in a real saved run. These fixtures validate layout and UI wiring, not combat-rule correctness.
+
+## Comparison history and fixes
+
+1. Before: the 103px two-row rail had a 36×42 portrait, plain Move/Actions controls and almost no central content. [P1] It missed the concept's illustrated deck hierarchy. Replaced with a 132px framed deck, larger selected portrait, HP/Mana meters, four illustrated command tiles, party above the deck and bottom End turn.
+2. Initial capture: [P1] global `.health` styles collapsed the new HP row, overlapping Mana; [P2] inherited footer centering shifted party portraits; [P2] End turn sat too high; [P2] short-landscape target card covered objective. Reset meter layout, footer width/margins and lower anchoring; repositioned landscape target card.
+3. Focused comparison: [P2] the party row and command tiles remained undersized relative to the concept. Desktop party tabs now span roughly456px and full command frames include their labels, up to130×108px. Phones retain compact44px-or-larger controls. Short visible labels preserve full accessible names/tooltips. Removed duplicate select-target toast because the live action card already gives that instruction and the toast covered it in landscape.
+4. Final captures: no overlapping primary controls or vitals in the five tested viewports. Targeting, forecast and enemy state retain the exact End turn position. Quick abilities visibly select, carry Mana/range/description tooltips and are disabled when the actor cannot act or it is the enemy phase.
+
+## Five fidelity surfaces
+
+- **Typography:** larger serif character/action headings match the concept's hierarchy; readable sans-serif labels serve numeric and touch UI. Exact font matching is not claimed. Short labels avoid command truncation at320px.
+- **Layout:** selected identity left, commands center, End turn bottom-right, party above desktop deck, target card above party. Phone reflow deliberately places party and End turn on the lowest row. Phase remains by the objective to preserve Menu/Camera access.
+- **Colors:** navy surfaces, cream/gold hierarchy, cyan selected commands, red HP and blue Mana. Numeric labels accompany color. Objective is a plain cream UI panel, not a reproduced parchment illustration.
+- **Images:** existing generated portrait/action PNGs and ornate frame PNG are used. No external game's assets are integrated into runtime. Portrait paint style, exact ornament thickness and icons still differ from the concept; these remain P3 art-polish work within this HUD scope.
+- **Copy/content:** HP and Mana values come from view data; movement shows capability/spent state. Quick abilities use stable authored ordering. Forecast summaries consume existing preview data. Full actions/items, stats, forms and equipment remain accessible through modals; no illustrative concept damage value is hardcoded into gameplay.
+
+## Validation and limits
+
+The browser presentation suite covers30 states across five viewports, measures overlap/touch sizes/bottom anchoring, checks HP/Mana geometry, activates a quick ability, opens Actions, Help, History and Sponsors, and checks console/page errors. Player-facing canvas playback, pure facing/exploration controls and square-map projection/picking checks pass separately. Shared C# and Unity were not rebuilt locally; the browser fixture is not a substitute for deployment's WASM gameplay checks.
+
+**Accepted differences:** square projection and fixture room; simplified objective ornament; full forecast confirmation remains a modal; no new directional attack art; existing art styles reused; map and effects are outside this HUD pass. Whole-scene visual parity with the concept remains unfinished.
+
+- [x] Real screenshot research with source URLs.
+- [x] Component bounds mapped from the exact concept.
+- [x] Desktop and mobile HUD implemented and visually inspected.
+- [x] Relevant browser presentation and renderer checks.
+- [ ] Whole-scene art, room composition and effect parity (separate work).
+
+final result: passed
+
+---
+
+# Historical reviews (not validation of the current UI)
+
 # Concept chamber follow-up — 24 October 2026
 
 **Result: passed** for this scoped chamber, camera and battle-HUD pass. This is

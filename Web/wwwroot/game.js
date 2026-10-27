@@ -108,6 +108,10 @@ const selectedAction = () => {
   if(localAction?.stanceId||localAction?.formId){const mode=(localAction.stanceId?view.stances:view.forms)?.find(mode=>mode.id===(localAction.stanceId||localAction.formId));return mode?{...mode,target:'self',cost:0,range:0,targetIds:[view.selectedUnitId],disabledReason:mode.enabled?'':'Action already spent'}:null;}
   return localAction?.itemId?view.items.find(action=>action.id===localAction.itemId):view.abilities.find(action=>action.id===localAction?.abilityId);
 };
+const nextReadyCharacter = (actorId) => {
+  const order=view.partyOrder?.length?view.partyOrder:view.units.filter(u=>u.team==='player').map(u=>u.id);
+  return order.map(id=>view.units.find(u=>u.id===id)).find(u=>u&&u.id!==actorId&&u.hp>0&&!u.finished);
+};
 const canEndCharacter = () => {const selected=unit();return view?.screen==='battle'&&view.phase==='player'&&selected?.hp>0&&!selected.finished;};
 
 function abilityDescription(a) {
@@ -184,7 +188,7 @@ function setEnemyPlayback(active,phase='enemy') {
   const phaseLabel=$('.party-phase');if(phaseLabel){phaseLabel.classList.toggle('hostile-phase',active);phaseLabel.innerHTML=active?'ENEMY TURN · INPUT LOCKED':`PARTY TURN <b>${view.units.filter(u=>u.team==='player'&&u.hp>0&&!u.finished).length}/${view.units.filter(u=>u.team==='player'&&u.hp>0).length} ready</b>`;}
   const roundLabel=$('.party-round');if(roundLabel)roundLabel.textContent=active?'ENEMY PHASE':`ROUND ${view.round}`;
   const guidance=$('.battle-guidance');if(guidance)guidance.textContent=active?'Enemies are moving and attacking. Your actions unlock when their turn ends.':view.message||'Select a crawler. Move or act in either order.';
-  document.querySelectorAll('.hud-action,#open-actions,#end-turn,.party-chip,#confirm-forecast,#detail-confirm-forecast').forEach(button=>{
+  document.querySelectorAll('.hud-action,#move-mode,#open-actions,#end-turn,.party-chip,#confirm-forecast,#detail-confirm-forecast').forEach(button=>{
     if(active){if(!button.dataset.enemyLock)button.dataset.enemyLock=button.disabled?'disabled':'ready';button.disabled=true;}
     else if(button.dataset.enemyLock){button.disabled=button.dataset.enemyLock==='disabled';delete button.dataset.enemyLock;}
   });
@@ -404,10 +408,10 @@ function renderLevelDialog() {
 function renderParty() {
   const players=view.units.filter(u=>u.team==='player');
   const order=view.partyOrder?.length ? [...players].sort((a,b)=>(view.partyOrder.includes(a.id)?view.partyOrder.indexOf(a.id):999)-(view.partyOrder.includes(b.id)?view.partyOrder.indexOf(b.id):999)) : players;
-  return `<div class="party-strip" style="--party-columns:${Math.min(4,players.length)}" aria-label="Crawler turn order">${order.map(u=>`<button class="party-chip${u.selected?' active':''}${u.finished?' turn-spent':' turn-ready'}${u.duplicateSourceId?' clockwork-chip':''}" data-unit="${e(u.id)}" ${u.hp<=0?'disabled':''} aria-pressed="${u.selected}">${portrait(u)}<span><strong>${e(copyLabel(u))}</strong><small>${u.hp<=0?'Fallen':u.finished?'Turn ended':u.acted?'Action spent':u.selected?'Selected': 'Ready'}${u.duplicateSourceId?' · '+u.duplicateRounds+'r':''}</small></span></button>`).join('')}</div>`;
+  return `<div class="party-strip" style="--party-columns:${Math.min(4,players.length)}" aria-label="Crawler turn order">${order.map(u=>`<button class="party-chip${u.selected?' active':''}${u.finished?' turn-spent':' turn-ready'}${u.duplicateSourceId?' clockwork-chip':''}" data-unit="${e(u.id)}" title="${e(copyLabel(u))} · ${u.hp<=0?'Fallen':u.finished?'Turn ended':u.acted?'Action spent':'Ready'}" aria-label="${e(copyLabel(u))}, ${u.hp}/${u.maxHp} health, ${u.hp<=0?'fallen':u.finished?'turn ended':'select crawler'}" ${u.hp<=0?'disabled':''} aria-pressed="${u.selected}">${portrait(u)}${u.hp<=0||u.finished?`<b class="party-state">${u.hp<=0?'DOWN':'END'}</b>`:''}<span><strong>${e(copyLabel(u))}</strong><small>${u.hp<=0?'Fallen':u.finished?'Turn ended':u.acted?'Action spent':u.selected?'Selected': 'Ready'}${u.duplicateSourceId?' · '+u.duplicateRounds+'r':''}</small></span></button>`).join('')}</div>`;
 }
 function renderBattle() {
-  return `<section class="battle-screen" aria-label="Tactical dungeon"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small class="objective-phase"><span>ROUND ${view.round}</span><span class="party-phase ${view.phase==='player'?'player-phase':'hostile-phase'}">${view.phase==='player'?'PARTY TURN':'ENEMY TURN'}</span></small><h2 id="screen-title" title="${e(view.customMap?.label || view.encounterName || 'Dungeon')}">${e(view.objective || 'Clear the room. Reach the exit.')}</h2></div></div>${view.neighborhood?.standalone?`<nav class="neighborhood-battle-controls" aria-label="Neighborhood"><button data-open-neighborhood>Neighborhood journal</button><button data-return-neighborhood>Return to campaign</button></nav>`:renderQuestTracker()}<div id="enemy-phase-banner" class="enemy-phase-banner" hidden role="status">ENEMY TURN · Watch their movement</div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}${renderBoard()}<div id="map-inspect" class="map-inspect" hidden></div></div><div class="battle-hud">${renderParty()}<section class="action-dock" aria-label="Selected crawler and actions">${renderInspector(unit())}</section><div id="narrator-slot" class="narrator-slot"></div></div>${renderDrawer()}${actionChooser?renderActionDialog():''}${endTurnActor?renderEndTurnDialog():''}${detailedForecast?renderForecastDialog():''}</section>`;
+  return `<section class="battle-screen${localAction?' is-targeting':''}" aria-label="Tactical dungeon"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small class="objective-phase"><span>ROUND ${view.round}</span><span class="party-phase ${view.phase==='player'?'player-phase':'hostile-phase'}">${view.phase==='player'?'PARTY TURN':'ENEMY TURN'}</span></small><h2 id="screen-title" title="${e(view.customMap?.label || view.encounterName || 'Dungeon')}">${e(view.objective || 'Clear the room. Reach the exit.')}</h2>${renderQuestTracker()}</div></div>${view.neighborhood?.standalone?`<nav class="neighborhood-battle-controls" aria-label="Neighborhood"><button data-open-neighborhood>Neighborhood journal</button><button data-return-neighborhood>Return to campaign</button></nav>`:''}<div id="enemy-phase-banner" class="enemy-phase-banner" hidden role="status">ENEMY TURN · Watch their movement</div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}${renderBoard()}<div id="map-inspect" class="map-inspect" hidden></div></div><div class="battle-hud"><section class="action-dock" aria-label="Selected crawler and actions">${renderInspector(unit())}</section><footer class="command-footer">${renderParty()}<button id="end-turn" class="end-character" title="${canEndCharacter()?'End this crawler’s turn':view.phase!=='player'?'Wait for the enemy turn to finish':'Select a ready crawler'}" ${!canEndCharacter()?'disabled':''}><span class="end-turn-short">End turn</span><span class="end-turn-name">End ${e(unit()?.label||'crawler')}’s turn</span><small>${view.phase!=='player'?'Enemy phase':'Next: '+e(nextReadyCharacter(view.selectedUnitId)?.label||'Enemy phase')}</small></button></footer><div id="narrator-slot" class="narrator-slot"></div></div>${renderDrawer()}${actionChooser?renderActionDialog():''}${endTurnActor?renderEndTurnDialog():''}${detailedForecast?renderForecastDialog():''}</section>`;
 }
 function renderWorldControls() {
   return `<details class="world-controls camera-menu" aria-label="Battlefield camera">
@@ -449,7 +453,7 @@ function renderExploration() {
   const map=view.exploration;
   if(!map) return '<p>Preparing the passages…</p>';
   const points=map.points.filter(p=>p.canInteract&&!p.claimed&&!view.neighborhood?.interactions.some(i=>i.pointId===p.id));
-  return `<section class="exploration-screen square-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(view.generatedDungeon ? 'Find the exit' : map.label)}</h2></div></div>${view.generatedDungeon?'<div class="quest-tracker">'+(view.generatedDungeon.cleared?'Enemies cleared · Reach the exit':'Find the enemies · Clear a path to the exit')+'</div>':view.neighborhood?.active?renderNeighborhoodStrip(view):renderQuestTracker()}<div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${!t.revealed?'unexplored':t.blocked?'wall':'passage'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="walk-pad" aria-label="Walk through the dungeon"><button data-walk="north" aria-label="Walk up">↑</button><button data-walk="west" aria-label="Walk left">←</button><button data-walk="south" aria-label="Walk down">↓</button><button data-walk="east" aria-label="Walk right">→</button></div><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>`<button class="explore-crawler" data-character-sheet="${e(r.id)}" aria-label="Open ${e(r.label)} character sheet: ${r.hp}/${r.maxHp} health, ${r.energy}/${r.maxEnergy} mana" title="${e(r.label)} · ${r.hp}/${r.maxHp} HP · ${r.energy}/${r.maxEnergy} Mana">${portrait(r)}<span>${e(copyLabel(r))}</span><i class="explore-health" style="--fill:${r.maxHp?r.hp/r.maxHp*100:0}%" aria-hidden="true"></i></button>`).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || (view.generatedDungeon ? view.generatedDungeon.cleared ? 'Reach the exit' : 'Explore the dungeon' : 'Find the encounter door'))}</strong><p>${e(points[0] ? 'E / Space to interact' : 'WASD / arrows to walk')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}${neighborhoodVisible()?'<button data-open-neighborhood>Room choices & journal</button>':''}<button id="return-camp" class="quiet" title="Leave this dungeon and return to Mordecai">Return to camp</button></div><div id="narrator-slot" class="narrator-slot"></div></div></section>`;
+  return `<section class="exploration-screen square-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(view.generatedDungeon ? 'Find the exit' : map.label)}</h2>${view.generatedDungeon?'<small>'+(view.generatedDungeon.cleared?'Enemies cleared · Reach the exit':'Clear the enemies · Reach the exit')+'</small>':renderQuestTracker()}</div></div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${!t.revealed?'unexplored':t.blocked?'wall':'passage'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="walk-pad" aria-label="Walk through the dungeon"><button data-walk="north" aria-label="Walk up">↑</button><button data-walk="west" aria-label="Walk left">←</button><button data-walk="south" aria-label="Walk down">↓</button><button data-walk="east" aria-label="Walk right">→</button></div><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>`<button class="explore-crawler" data-character-sheet="${e(r.id)}" aria-label="Open ${e(r.label)} character sheet: ${r.hp}/${r.maxHp} health, ${r.energy}/${r.maxEnergy} mana" title="${e(r.label)} · ${r.hp}/${r.maxHp} HP · ${r.energy}/${r.maxEnergy} Mana">${portrait(r)}<span>${e(copyLabel(r))}</span><i class="explore-health" style="--fill:${r.maxHp?r.hp/r.maxHp*100:0}%" aria-hidden="true"></i></button>`).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || (view.generatedDungeon ? view.generatedDungeon.cleared ? 'Reach the exit' : 'Explore the dungeon' : 'Find the encounter door'))}</strong><p>${e(points[0] ? 'E / Space to interact' : 'WASD / arrows to walk')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}${neighborhoodVisible()?'<button data-open-neighborhood>Room choices & journal</button>':''}<button id="return-camp" class="quiet" title="Leave this dungeon and return to Mordecai">Return to camp</button></div><div id="narrator-slot" class="narrator-slot"></div></div></section>`;
 }
 function renderBoard() {
   const action = selectedAction();
@@ -475,73 +479,24 @@ function renderMovementGuidance(selected) {
 }
 function renderInspector(selected) {
   const action=selectedAction();
-  const availableActions=view.abilities.map(abilityPresentation);
-  const primaryActions=availableActions.slice(0,2);
-  const chosenAbility=availableActions.find(a=>a.id===localAction?.abilityId);
-  if(chosenAbility&&!primaryActions.includes(chosenAbility))primaryActions.splice(1,1,chosenAbility);
-  const changes=view.forecast.filter(f=>f.beforeHp!==f.afterHp||f.beforeEnergy!==f.afterEnergy||JSON.stringify(f.beforeTags)!==JSON.stringify(f.afterTags));
-  const target=changes.find(f=>f.targetId!==view.selectedUnitId&&f.beforeHp!==f.afterHp) ?? changes.find(f=>f.targetId!==view.selectedUnitId) ?? changes[0];
-  return `<div class="hud-crawler">${selected?`<button id="open-character-sheet" class="hud-character-button" aria-label="Open ${e(selected.label)} character sheet">${portrait(selected,'hud-portrait')}<span>Character sheet</span>
-    </button>`:''}<div class="hud-stats">
-    <strong>${e(selected?copyLabel(selected):'SELECT CRAWLER')}</strong>
-    <small class="hud-class">${e(selected?.duplicateSourceId?'Clockwork · '+selected.duplicateRounds+' rounds':classLabel(selected?.classId))}</small>
-    <div class="hud-meter hp">
-    <span>HP</span>
-    <b>${selected?.hp??0}/${selected?.maxHp??0}</b>
-    <i style="--fill:${selected?selected.hp/selected.maxHp*100:0}%">
-    </i>
-    </div>
-    <div class="hud-meter en">
-    <span>Mana</span>
-    <b>${selected?.energy??0}/${selected?.maxEnergy??0}</b>
-    <i style="--fill:${selected?selected.energy/selected.maxEnergy*100:0}%">
-    </i>
-    </div>
-    <div class="hud-move">MOVE <b>${selected?.moved||selected?.finished?0:selected?.effectiveMove??selected?.move??'—'}</b> <small>${selected?.finished?'TURN ENDED':selected?.moved?'SPENT':'TILES LEFT'}</small>
-    <span class="hud-action-budget">ACTION <b>${selected?.acted||selected?.finished?0:1}</b>
-    </span>
-    </div>
-    <div class="hud-statuses">${(selected?.statuses??[]).map(status=>`<span class="tag" title="${e(displayLog(status.source))}">${e(shortTag(status.tag))} ${status.remainingRounds}r</span>`).join('')}</div>
-    </div>
-    </div>
-    <div class="hud-actions">
-    <div class="chosen-action-heading">
-    <span>${localAction?'SELECTED ACTION':'MOVEMENT'}</span>
-    <strong>${e(action?.label||'Move')}</strong>
-    <small>${localAction?`${action?.cost??0} Mana · Range ${action?.range??0} · ${action?.targetIds?.length??0} targets`:'Choose a blue tile · No Mana cost'}</small>
-    </div>
-    <button id="open-actions" class="action-picker-button">
-    <img src="assets/ui-kit/skills.png" class="ui-inline-icon" alt="">Action book <span>${view.abilities.length} abilities</span>
-    </button>
-    <div class="hud-action-list">
-    <button id="move-mode" aria-pressed="${!localAction}" class="hud-action${!localAction?' active':''}" ${!view.canMove&&!localAction?'disabled':''}>${actionIcon(4)}<strong>Move</strong>
-    <small>${selected?.moved?'Spent':`${selected?.effectiveMove??selected?.move??'—'} tiles`}</small>
-    </button>${primaryActions.map((a,index)=>`<button class="hud-action category-${actionCategory(a).key}${localAction?.abilityId===a.id?' active':''}" data-ability="${e(a.id)}" aria-pressed="${localAction?.abilityId===a.id}" ${!a.enabled?'disabled':''} aria-label="${e(a.label+'. '+a.description+'. '+(a.disabledReason||''))}" title="${e(a.label+' · '+a.description+' · '+a.cost+' MP · Range '+a.range+' · '+(a.disabledReason||a.targetIds.length+' legal targets'))}">${actionIcon(abilityIcon(a))}<strong>${e(hudActionLabel(a))}</strong>
-    <small>${a.formChooser?'Choose form · 1 action':a.cost+' MP · '+a.range+' RNG'}</small>${a.disabledReason?`<small class="action-reason">${e(a.disabledReason)}</small>`:''}</button>`).join('')}<button class="hud-action category-item${localAction?.itemId?' active':''}" data-drawer="items" aria-pressed="${!!localAction?.itemId}">${actionIcon(7)}<strong>Items</strong>
-    <small>${localAction?.itemId?e(selectedAction()?.label)+' ×'+(selectedAction()?.count??0):view.items.reduce((sum,i)=>sum+i.count,0)+' charges'}</small>
-    </button>
-    </div>
-    <p class="action-caption">${e(action?.description || (selected?.finished?'Choose another crawler.':selected?.acted?'Action spent. Move or end this character’s turn.':'Move or act in either order.'))}${action?.disabledReason?' · '+e(action.disabledReason):''}</p>
-    </div>
-    <div class="hud-target" aria-live="polite">${view.canConfirm?`<div class="target-forecast">
-    <strong>${e((target?forecastLabel(target):null)||action?.label||'TARGET')}</strong>${target&&target.beforeHp!==target.afterHp?`<span class="target-hp">HP <b>${isSummonForecast(target)?target.afterHp:target.beforeHp+' → '+target.afterHp}</b>
-    </span>`:''}${target?tags(target.afterTags.filter(t=>!target.beforeTags.includes(t))):''}<small>${e(action?.label||'Action')} · ${action?.cost??0} MP</small>
-    </div>
-    <div class="forecast-buttons">
-    <button id="cancel-forecast">Cancel</button>
-    <button id="confirm-forecast" class="primary">Confirm</button>
-    <button id="review-forecast" class="details-button" aria-label="Detailed forecast">Details</button>
-    </div>`:`${localAction?`<div class="target-action-summary">
-    <strong>${e(action?.label || 'Choose a target')}</strong>
-    <small>${action?.cost??0} Mana · Range ${action?.range??0} · ${action?.targetIds?.length??0} targets</small>
-    <button id="open-ability-details">Action details</button>
-    </div>`:renderMovementGuidance(selected)}${localAction?'<button id="cancel-forecast">Cancel targeting</button>':''}`}</div>
-    <div class="hud-turn">
-    <button id="end-turn" class="end-character" ${!canEndCharacter()?'disabled':''}>
-    <img src="assets/ui-kit/wait.png" class="ui-inline-icon" alt="">End turn →</button>
-    <button data-drawer="log" class="hud-log">Combat log</button>
-    </div>`;
+  // Authored ability order is stable and already scoped by the selected actor.
+  const quick=view.abilities.slice(0,2).map(abilityPresentation);
+  const meter=(label,value,max,kind)=>`<span class="deck-meter ${kind}"><span>${label}</span><b>${value}/${max}</b><i style="--fill:${Math.max(0,Math.min(100,max?value/max*100:0))}%" aria-hidden="true"></i></span>`;
+  const changes=view.canConfirm?view.forecast.map(f=>{
+    const deltas=[];
+    for(const [key,label] of [['Hp','HP'],['Energy','Mana'],['MaxHp','max HP'],['MaxEnergy','max Mana'],['Move','move']]) {
+      if(f['before'+key]!==undefined&&f['before'+key]!==f['after'+key])deltas.push(`${f['before'+key]} → ${f['after'+key]} ${label}`);
+    }
+    for(const tag of f.afterTags??[])if(!(f.beforeTags??[]).includes(tag))deltas.push(`+${shortTag(tag)}`);
+    for(const tag of f.beforeTags??[])if(!(f.afterTags??[]).includes(tag))deltas.push(`−${shortTag(tag)}`);
+    return deltas.length?`${forecastLabel(f)}: ${deltas.join(', ')}`:'';
+  }).filter(Boolean):[];
+  const summary=changes.slice(0,2).join(' · ')+(changes.length>2?` · +${changes.length-2} more in Review`:'');
+  return `<div class="hud-crawler"><button id="open-character-sheet" class="hud-character-button" title="Character · Stats, skills and equipment" aria-label="Open ${e(selected?.label||'crawler')} character sheet">${selected?portrait(selected,'hud-portrait'):''}</button><div class="hud-stats"><strong>${e(selected?copyLabel(selected):'Select crawler')}</strong>${meter('HP',selected?.hp??0,selected?.maxHp??0,'health')}${meter('Mana',selected?.energy??0,selected?.maxEnergy??0,'mana')}<span class="deck-movement"><img src="assets/ui-kit/move.png" alt="" aria-hidden="true"><span>Move <b>${selected?.effectiveMove??selected?.move??0}</b><small>${view.canMove?'Available':'Spent'}</small></span></span></div></div>
+  <nav class="hud-actions" aria-label="Crawler commands"><button id="move-mode" class="hud-action${!localAction?' active':''}" aria-label="Move: choose a highlighted tile" title="Move · Choose a highlighted tile" aria-pressed="${!localAction}" ${!view.canMove&&!localAction?'disabled':''}>${actionIcon(4)}<strong>Move</strong></button>${quick.map(a=>`<button class="hud-action${localAction?.abilityId===a.id?' active':''}" data-ability="${e(a.id)}" aria-label="${e(a.label)}, ${a.cost} Mana, range ${a.range}" aria-pressed="${localAction?.abilityId===a.id}" title="${e(a.label+' · '+a.cost+' Mana · Range '+a.range+' · '+(a.description||'')+(a.disabledReason?' · '+a.disabledReason:''))}" ${a.enabled&&view.canAct&&view.phase==='player'?'':'disabled'}>${actionIcon(abilityIcon(a))}<strong>${e(hudActionLabel(a))}</strong></button>`).join('')}<button id="open-actions" class="hud-action" aria-label="Open all actions and shared items" title="All abilities and shared items"><img class="hud-icon ui-action-icon" src="assets/ui-kit/bag.png" alt="" aria-hidden="true"><strong>Actions</strong></button></nav>
+  ${localAction?`<div class="hud-target" aria-live="polite"><div class="target-action-summary">${actionIcon(localAction?.itemId?7:abilityIcon(action||{id:''}))}<div class="target-action-copy"><strong>${e(action?.label||'Choose a target')}</strong><small>${action?.cost??0} Mana · Range ${action?.range??0} · ${action?.targetIds?.length??0} ${(action?.targetIds?.length??0)===1?'target':'targets'}</small><p class="target-description">${e(action?.description||abilityDescription(action))}</p></div></div><p class="target-result">${e(view.canConfirm?(summary||'Ready to confirm. Review the full result.'):'Choose a highlighted target.')}</p><div class="target-controls"><button id="open-ability-details" aria-label="Action details">Details</button>${view.canConfirm?'<button id="review-forecast" class="primary">Review result</button>':''}<button id="cancel-forecast">Cancel</button></div></div>`:''}`;
 }
+
 function abilitySource(id,unitId) {
   if(view.units.find(u=>u.id===unitId)?.duplicateSourceId)return 'Clockwork copy';
   const crawler=view.roster.find(r=>r.id===unitId);
@@ -554,9 +509,9 @@ function abilitySource(id,unitId) {
 function renderActionDialog() {
   const actor=unit();
   const lockedPersonal=(view.progression?.skills??[]).filter(skill=>!skill.unlocked&&(!skill.unitId||skill.unitId===actor?.id));
-  const lockedPersonalCards=lockedPersonal.length?`<section class="locked-personal-skills"><h3>Upcoming personal abilities</h3><div class="modal-action-grid">${lockedPersonal.map(skill=>{const a=content.abilities.find(a=>a.id===skill.abilityId);return `<article class="locked-personal-card">${actionIcon(abilityIcon(a??{id:skill.abilityId}))}<div><strong>${e(skill.label??a?.label)}</strong><span class="skill-source">Locked · Level ${skill.level}${skill.minimumFloor>1?' · Floor '+skill.minimumFloor:''}</span><p>${e(abilityDescription(a))}</p><small>${a?.cost??0} MP · range ${a?.range??0} · ${e(a?.target??'self')}</small></div></article>`;}).join('')}</div></section>`:'';
-  const abilityButton=(a,item=false)=>{ const category=actionCategory(a,item);const available=item ? a.count>0&&view.canAct : a.enabled; const reason=a.disabledReason || (!a.targetIds.length?'No legal target in range · move first':'');return `<button class="modal-action-card category-${category.key}${(item?localAction?.itemId:localAction?.abilityId)===a.id?' active':''}" ${item?'data-modal-item':'data-modal-ability'}="${e(a.id)}" ${available?'':'disabled'}>${actionIcon(item?7:abilityIcon(a))}<span><strong>${e(a.label)}${item?' ×'+a.count:''}</strong><span class="category-label">${category.label} · ${item?'Shared item':abilitySource(a.id,view.selectedUnitId)}</span><small>${a.formChooser?'Choose form · 1 action':(item?'1 action':a.cost+' MP')+' · range '+a.range+' · '+e(a.target)}</small><p>${e(a.description)}</p><small class="${reason?'availability-warning':'availability-ready'}">${e(reason||a.targetIds.length+' legal target'+(a.targetIds.length===1?'':'s'))}</small></span></button>`;};
-  return `<dialog id="action-dialog" aria-labelledby="action-title"><div class="dialog-head"><div><span class="section-label">${e(actor?.label||'Crawler')} · ${e(classLabel(actor?.classId))}</span><h2 id="action-title">Choose an action</h2></div><button id="close-actions" class="icon-button" aria-label="Close action choices">×</button></div><div class="modal-body"><div class="action-modal-stats"><span>HP ${actor?.hp}/${actor?.maxHp}</span><span>MP ${actor?.energy}/${actor?.maxEnergy}</span><span>Move ${actor?.effectiveMove??actor?.move??0}${actor?.moved?' · spent':''}</span></div><p class="modal-intro">Choose an ability, then select a highlighted target on the map. Review the exact result before confirming.</p><button id="modal-move" class="modal-move" ${view.canMove?'':'disabled'}>${actionIcon(4)}<span><strong>Move</strong><small>${view.canMove?'Choose a blue path. No action or mana cost.':'Movement is spent for this character.'}</small></span></button><div class="modal-action-grid">${view.abilities.map(abilityPresentation).map(a=>abilityButton(a)).join('')}</div>${lockedPersonalCards}<details class="modal-item-section" ${localAction?.itemId?'open':''}><summary>Shared items · ${view.items.reduce((sum,i)=>sum+i.count,0)} charges</summary><div class="modal-action-grid">${view.items.map(a=>abilityButton(a,true)).join('')}</div></details></div><div class="modal-actions"><button id="cancel-actions">Back to map</button><button id="actions-end-turn">End character turn…</button></div></dialog>`;
+  const lockedPersonalCards=lockedPersonal.length?`<section class="locked-personal-skills"><h3>Upcoming personal abilities</h3><div class="modal-action-grid">${lockedPersonal.map(skill=>{const a=content.abilities.find(a=>a.id===skill.abilityId);return `<article class="locked-personal-card">${actionIcon(abilityIcon(a??{id:skill.abilityId}))}<div><strong>${e(skill.label??a?.label)}</strong><span class="skill-source">Locked · Level ${skill.level}${skill.minimumFloor>1?' · Floor '+skill.minimumFloor:''}</span><p>${e(abilityDescription(a))}</p><small>${a?.cost??0} Mana · range ${a?.range??0} · ${e(a?.target??'self')}</small></div></article>`;}).join('')}</div></section>`:'';
+  const abilityButton=(a,item=false)=>{ const category=actionCategory(a,item);const available=item ? a.count>0&&view.canAct : a.enabled; const reason=a.disabledReason || (!a.targetIds.length?'No legal target in range · move first':'');return `<button class="modal-action-card category-${category.key}${(item?localAction?.itemId:localAction?.abilityId)===a.id?' active':''}" ${item?'data-modal-item':'data-modal-ability'}="${e(a.id)}" ${available?'':'disabled'}>${actionIcon(item?7:abilityIcon(a))}<span><strong>${e(a.label)}${item?' ×'+a.count:''}</strong><span class="category-label">${category.label} · ${item?'Shared item':abilitySource(a.id,view.selectedUnitId)}</span><small>${a.formChooser?'Choose form · 1 action':(item?'1 action':a.cost+' Mana')+' · range '+a.range+' · '+e(a.target)}</small><p>${e(a.description)}</p><small class="${reason?'availability-warning':'availability-ready'}">${e(reason||a.targetIds.length+' legal target'+(a.targetIds.length===1?'':'s'))}</small></span></button>`;};
+  return `<dialog id="action-dialog" aria-labelledby="action-title"><div class="dialog-head"><div><span class="section-label">${e(actor?.label||'Crawler')} · ${e(classLabel(actor?.classId))}</span><h2 id="action-title">Choose an action</h2></div><button id="close-actions" class="icon-button" aria-label="Close action choices">×</button></div><div class="modal-body"><div class="action-modal-stats"><span>HP ${actor?.hp}/${actor?.maxHp}</span><span>Mana ${actor?.energy}/${actor?.maxEnergy}</span><span>Move ${actor?.effectiveMove??actor?.move??0}${actor?.moved?' · spent':''}</span></div><p class="modal-intro">Choose an ability, then select a highlighted target on the map. Review the exact result before confirming.</p><button id="modal-move" class="modal-move" ${view.canMove?'':'disabled'}>${actionIcon(4)}<span><strong>Move</strong><small>${view.canMove?'Choose a blue path. No action or mana cost.':'Movement is spent for this character.'}</small></span></button><div class="modal-action-grid">${view.abilities.map(abilityPresentation).map(a=>abilityButton(a)).join('')}</div>${lockedPersonalCards}<details class="modal-item-section" ${localAction?.itemId?'open':''}><summary>Shared items · ${view.items.reduce((sum,i)=>sum+i.count,0)} charges</summary><div class="modal-action-grid">${view.items.map(a=>abilityButton(a,true)).join('')}</div></details></div><div class="modal-actions"><button id="cancel-actions">Back to map</button><button id="actions-end-turn">End character turn…</button></div></dialog>`;
 }
 function closeActionDialog() { actionChooser=false;render();$('#open-actions')?.focus(); }
 function requestEndTurn() {
@@ -565,8 +520,7 @@ function requestEndTurn() {
 }
 function renderEndTurnDialog() {
   const actor=view.units.find(u=>u.id===endTurnActor);
-  const order=view.partyOrder?.length?view.partyOrder:view.units.filter(u=>u.team==='player').map(u=>u.id);
-  const next=order.map(id=>view.units.find(u=>u.id===id)).find(u=>u&&u.id!==actor?.id&&u.hp>0&&!u.finished);
+  const next=nextReadyCharacter(actor?.id);
   return `<dialog id="end-turn-dialog" aria-labelledby="end-turn-title"><div class="dialog-head"><h2 id="end-turn-title">End ${e(actor?.label||'this character')}’s turn?</h2><button class="icon-button" id="close-end-turn" aria-label="Keep playing">×</button></div><div class="modal-body"><div class="turn-actor-summary">${actor?portrait(actor):''}<div><strong>${e(actor?.label||'Crawler')}</strong><p>${actor?.moved?'Movement spent.':'Movement is still ready.'} ${view.canAct?'An ability is still available.':''}</p></div></div><p class="turn-next"><span>NEXT</span><strong>${e(next?.label||'Enemy phase')}</strong><small>${next?'Only this character ends their turn. The next ready crawler can act.':'All living crawlers will have finished. Enemies move and attack, then the next round begins.'}</small></p><p class="small muted">Cancel returns to the map without spending movement, mana or an action.</p></div><div class="modal-actions"><button id="cancel-end-turn">Keep playing</button><button id="confirm-end-turn" class="primary">End ${e(actor?.label||'character')}’s turn</button></div></dialog>`;
 }
 function closeEndTurnDialog() {endTurnActor=null;render();$('#end-turn')?.focus();}
@@ -893,7 +847,10 @@ async function applyActionChoice(action) {
   if (selectedAction()?.target === 'self') {
     previewTargetId=view.selectedUnitId;
     await command('preview', { ...localAction, targetId: view.selectedUnitId }, { preserveAction: true, save: false });
-  } else {render();toast(`Choose a highlighted ${selectedAction()?.target||'target'} for ${selectedAction()?.label||'this action'}.`);}
+  } else {
+    // The live targeting card is the instruction; a second toast would cover it.
+    render();
+  }
 }
 function clickCell(x,y) {
   const occupant=view.units.find(unit=>unit.x===x&&unit.y===y&&unit.hp>0);
@@ -1049,7 +1006,8 @@ async function boot() {
     console.error(error);
   }
 }
-$('#help-button').addEventListener('click', () => openDialog('#help-dialog'));
+$('#help-button').addEventListener('click', () => { closeDialog('#save-dialog'); openDialog('#help-dialog'); });
+$('#menu-narrator-history').addEventListener('click', () => { closeDialog('#save-dialog'); narrator?.openHistory(); });
 $('#save-button').addEventListener('click', () => { $('#save-error').textContent = ''; openDialog('#save-dialog'); });
 $('#begin-button').addEventListener('click', () => { closeDialog('#welcome-dialog'); openDialog('#help-dialog'); });
 document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeDialog(`#${b.dataset.close}`)));

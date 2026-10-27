@@ -179,6 +179,7 @@ def main():
         restore(page, hold_baseline)
         page.locator('#battlefield').focus()
         page.keyboard.down(key)
+        page.locator('#save-button').click()
         page.locator('#help-button').click()
         page.locator('#help-dialog').wait_for(state='visible')
         page.wait_for_timeout(350)

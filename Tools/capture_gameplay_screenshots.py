@@ -43,6 +43,7 @@ def main():
         def capture(filename, note, native=False):
             settle(page, native=native)
             assert not errors, errors
+            assert page.locator('.game-toast.toast-error').count() == 0, 'Game error toast during capture'
             state = view(page)
             page.screenshot(path=str(output / filename), full_page=False, animations='disabled')
             captures.append({'file': filename, 'screen': state['screen'], 'viewport': page.viewport_size,
@@ -86,16 +87,20 @@ def main():
         assert state['screen'] == 'battle', 'Walking to an enemy failed to enter real combat'
         assert state['customMap'] == expected, 'Combat replaced the generated map'
         settle(page, native=True)
-        if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
-        page.locator('#center-map').click()
-        if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
-        page.locator('#zoom-in').click()
-        if page.locator('#camera-toggle').count() and not page.locator('#zoom-in').is_visible(): page.locator('#camera-toggle').click()
-        page.locator('#zoom-in').click()
-        if page.locator('.camera-menu[open]').count(): page.locator('#camera-toggle').click()
-        capture('04-combat-desktop.png', 'Real encounter reached by C# explore_step movement; centered on selected crawler.', native=True)
+        capture('04-combat-desktop.png', 'Real encounter reached by C# explore_step movement; default encounter camera.', native=True)
         page.set_viewport_size({'width': 390, 'height': 844})
         capture('06-combat-mobile.png', 'Real combat HUD at mobile size.', native=True)
+        turn_box=page.locator('#end-turn').bounding_box()
+        assert page.viewport_size['height']-(turn_box['y']+turn_box['height']) <= 10, 'End turn is not anchored at bottom'
+        page.locator('#open-character-sheet').click()
+        page.locator('#character-sheet-dialog').wait_for(state='visible')
+        capture('09-character-mobile.png', 'Character stats opened from the portrait.', native=True)
+        page.locator('#done-character-sheet').click()
+        page.locator('#end-turn').click()
+        page.locator('#end-turn-dialog').wait_for(state='visible')
+        capture('10-end-turn-mobile.png', 'Bottom End turn opens a real next-crawler confirmation.', native=True)
+        page.locator('#cancel-end-turn').click()
+
         page.set_viewport_size({'width': 1440, 'height': 1000})
         if page.locator('#open-actions').is_visible() and page.locator('#open-actions').is_enabled():
             page.locator('#open-actions').click()
@@ -107,14 +112,41 @@ def main():
                 page.locator('#action-dialog').wait_for(state='hidden')
                 page.set_viewport_size({'width': 390, 'height': 844})
                 capture('07-targeting-mobile.png', 'Actual selected ability and contextual targeting strip.', native=True)
+                before_preview = page.evaluate('window.dungeon.getSave()')
                 page.evaluate("a=>window.dungeon.command('preview',{abilityId:a.id,targetId:a.targetIds[0]},{preserveAction:true,save:false})", ability)
                 page.locator('#forecast-dialog').wait_for(state='visible')
                 assert view(page)['canConfirm'], 'Actual C# forecast did not become confirmable'
                 capture('08-forecast-mobile.png', 'Real C# action forecast; no action committed.', native=True)
+                page.locator('#detail-cancel-forecast').click()
+                page.wait_for_function('!window.dungeon.getView().canConfirm')
+                assert page.evaluate('window.dungeon.getSave()') == before_preview, 'Cancelling changed the committed save'
+            else:
+                page.locator('#cancel-actions').click()
+
+        # Verify the bottom control advances each ready ally before the enemy round.
+        page.set_viewport_size({'width': 390, 'height': 844})
+        starting_round = view(page)['round']
+        ready_count = len([u for u in view(page)['units'] if u['team']=='player' and u['hp']>0 and not u['finished']])
+        ended_actors = []
+        for turn_index in range(ready_count):
+            current = view(page)
+            assert current['round'] == starting_round, 'Enemies acted before all ready allies ended their turns'
+            actor = current['selectedUnitId']
+            assert actor not in ended_actors, 'End turn selected an already finished ally'
+            ended_actors.append(actor)
+            page.locator('#end-turn').click()
+            page.locator('#confirm-end-turn').click()
+            page.wait_for_function('actor => window.dungeon.getView().selectedUnitId !== actor || window.dungeon.getView().round > '+str(starting_round), arg=actor)
+            if turn_index == 0:
+                capture('11-party-turn-progress-mobile.png', 'First crawler ended; next ally selected and END badge visible.', native=True)
+        page.wait_for_function('window.dungeon.getView().round > '+str(starting_round), timeout=60000)
+        page.wait_for_function("!document.body.classList.contains('enemy-playback')", timeout=60000)
+        capture('12-next-round-mobile.png', 'All ready crawlers ended their turns, enemies resolved, next player round ready.', native=True)
 
         assert not errors, errors
         summary = {'seed': args.seed, 'runtime': 'actual C# WASM', 'layout': 'chambers',
                    'style': 'pocket-dungeon', 'location': 'starter-dungeon', 'captures': captures,
+                   'endedActors': ended_actors, 'roundAfterEnemyTurn': view(page)['round'],
                    'nativeArt': page.evaluate('window.dungeon.scene.getNativeArtStatus()'), 'errors': errors}
         (output / 'capture-summary.json').write_text(json.dumps(summary, indent=2) + '\n')
         browser.close()

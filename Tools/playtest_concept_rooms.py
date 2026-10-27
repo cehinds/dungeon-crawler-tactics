@@ -14,8 +14,8 @@ def battle(p,label):
  if label.endswith('-sewers'):assert not result['openingNotifications'],'Stale feedback crossed expedition transition'
  if p.viewport_size['width']<600:
   assert p.locator('.game-toast:not(.toast-error)').count()<=1
-  result['guidanceFits']=p.locator('.hud-target>small').evaluate('(e)=>e.scrollHeight<=e.clientHeight+1')
-  assert result['guidanceFits'],'Phone target guidance clips vertically'
+  result['guidanceFits']=p.locator('.hud-stats').evaluate('(e)=>e.scrollHeight<=e.clientHeight+1')
+  assert result['guidanceFits'],'Phone character vitals clip vertically'
  snap(p,label+'-opening')
  for r in range(4):
   if r and p.locator('#camera-toggle').count() and not p.locator('#zoom-in').is_visible(): p.locator('#camera-toggle').click()

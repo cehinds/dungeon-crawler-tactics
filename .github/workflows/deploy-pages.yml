@@ -75,6 +75,7 @@ jobs:
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
+          python Tools/playtest_player_facing.py --browser /usr/bin/google-chrome
           python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
           python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome

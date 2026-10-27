@@ -73,9 +73,9 @@ def run_campaign(browser,screenshots,width,height):
     bomb=page.locator("[data-modal-ability='ability.carl_bomb']")
     assert bomb.count()==1 and bomb.is_enabled(),f'Carl bomb unavailable: {bomb.inner_text() if bomb.count() else "missing"}'
     bomb.click();page.wait_for_function("document.querySelector('#action-dialog')?.open!==true")
-    details=page.locator('#ability-details')
-    assert details.count()==1 and 'MP' in details.inner_text() and 'Range' in details.inner_text() and details.locator('p').inner_text(),f'Persistent ability details incomplete: {details.inner_text()}'
     page.locator('#open-ability-details').click();page.wait_for_function("document.querySelector('#ability-details-dialog')?.open===true")
+    details=page.locator('#full-ability-details')
+    assert details.count()==1 and 'MP' in details.inner_text() and 'Range' in details.inner_text() and details.locator('p').inner_text(),f'Persistent ability details incomplete: {details.inner_text()}'
     assert 'Bomb' in page.locator('#full-ability-details').inner_text() or 'bomb' in page.locator('#full-ability-details').inner_text().lower()
     page.locator('#done-ability-details').click()
     v=game_view(page);legal=next((t for t in v.get('reachable',[]) if t['cost']>0),None)
@@ -125,7 +125,7 @@ def run_campaign(browser,screenshots,width,height):
     assert 'achievement.first_form' in game_view(page).get('achievementIds',[]),'Committed form change did not award its achievement.'
     if page.locator('#done-character-sheet').count(): page.locator('#done-character-sheet').click()
     page.wait_for_function("document.querySelector('#narrator-line')?.textContent.includes('ACHIEVEMENT')",timeout=7000)
-    page.locator('#narrator-history').click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
+    page.locator('#save-button').click();page.locator('#menu-narrator-history').click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
     history=page.locator('.narrator-history-list').inner_text()
     assert ('First form change' in history or 'First form or stance change' in history) and 'declares' in history, f'Narrator history missed committed events: {history}'
     page.screenshot(path=str(screenshots/f'campaign-feedback-{width}x{height}.png'),full_page=True)

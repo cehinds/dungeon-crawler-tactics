@@ -153,7 +153,7 @@ def click_ability(page, ability_id):
     if ability(view(page), ability_id)["target"] == "self":
         page.wait_for_function("document.querySelector('#forecast-dialog')?.open === true")
     else:
-        page.wait_for_function("document.querySelector('#ability-details')?.textContent.includes('MP')")
+        page.wait_for_function("document.querySelector('.target-action-summary')?.textContent.includes('Mana')")
 
 
 def end_turn_with_cancel_check(page, expected_next):
@@ -217,7 +217,9 @@ def run_viewport(browser, directory, width, height):
     assert party_ids(game) == EXPECTED_PARTY, f"Battle roster/order mismatch: {party_ids(game)}"
     assert game["selectedUnitId"] == "crawler.carl"
     assert "MP" in page.locator(".hud-meter.en").inner_text(), "Mana meter is not labeled MP."
-    assert page.locator(".hud-action-list").inner_text().count("MP") >= 1, "Actions do not show costs in MP."
+    page.locator("#open-actions").click()
+    assert page.locator("#action-dialog").inner_text().count("MP") >= 1, "Action menu does not show mana costs."
+    page.locator("#cancel-actions").click()
     assert page.locator("#battlefield").count() == 1
     assert page.evaluate("document.documentElement.scrollHeight <= innerHeight"), "Battle page scrolls."
 
@@ -533,7 +535,7 @@ def run_reaction_case(browser, directory):
     assert item.is_enabled() and "1 action" in item_text and "legal target" in item_text, f"Shock Tonic action state: enabled={item.is_enabled()}, text={item_text!r}"
     item.click()
     page.wait_for_function("document.querySelector('#action-dialog')?.open !== true")
-    page.wait_for_function("document.querySelector('#ability-details')?.textContent.includes('MP')")
+    page.wait_for_function("document.querySelector('.target-action-summary')?.textContent.includes('Mana')")
     click_cell(page, wet["x"], wet["y"])
     page.wait_for_function("window.dungeon.getView().canConfirm")
     forecast = view(page)
@@ -629,7 +631,7 @@ def run_enemy_movement_case(browser, directory):
     assert moves, f"Separated enemy team did not walk toward the party: {events}"
     assert len({f["hash"] for f in frames})>=2, f"No changing rendered frame observed during enemy movement: {frames}"
     assert frames and all(f["banner"] and f["locked"] for f in frames), f"Enemy movement was not covered by visible banner and locked actions: {frames}"
-    page.locator('#narrator-history').click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
+    page.locator('#save-button').click();page.locator('#menu-narrator-history').click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
     history=page.locator('.narrator-history-list').inner_text()
     assert 'Enemy turn' in history and 'advances toward' in history, f'Enemy phase history omitted actual movement declarations: {history}'
     if attacks: assert 'declares' in history, f'Enemy attack event was not narrated: {history}'
@@ -672,7 +674,7 @@ def run_enemy_attack_narration_case(browser,directory):
     page.wait_for_function("window.dungeon.getView().round>=2&&window.dungeon.getView().phase==='player'&&document.querySelector('#enemy-phase-banner')?.hidden&&!document.body.classList.contains('enemy-playback')",timeout=25000)
     game=view(page);events=assert_ordered_events(game);attacks=[e for e in events if e["type"]=="attack" and e["actorId"]==attacker["id"]]
     assert attacks,f"Adjacent enemy produced no attack event: {events}; enemy state={next(u for u in game['units'] if u['id']==attacker['id'])}"
-    page.locator("#narrator-history").click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
+    page.locator("#save-button").click();page.locator("#menu-narrator-history").click();page.wait_for_function("document.querySelector('#narrator-history-dialog')?.open===true")
     history=page.locator('.narrator-history-list').inner_text()
     assert 'declares' in history and 'Enemy turn' in history,f'Actual enemy attack was not narrated: {history}'
     shot=save_screenshot(page,directory,1366,768,'enemy-attack-narrator')
