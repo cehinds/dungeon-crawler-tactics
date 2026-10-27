@@ -146,19 +146,39 @@ jobs:
           python Tools/ci_disk_preflight.py --publish-assets Web/wwwroot/assets
       - name: Publish browser game
         run: dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
-      - name: Verify generated-map handoff in the published game
+      - name: Start published browser check server
         run: |
           python -m pip install playwright==1.56.0
-          python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/dct-playtest-server.log 2>&1 &
-          server_pid=$!
-          trap 'kill "$server_pid"' EXIT
-          python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
-          python Tools/playtest_player_facing.py --browser /usr/bin/google-chrome
-          python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+          python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > "$RUNNER_TEMP/dct-playtest-server.log" 2>&1 < /dev/null &
+          echo "$!" > "$RUNNER_TEMP/dct-playtest-server.pid"
+          for attempt in {1..30}; do
+            curl --fail --silent http://127.0.0.1:8765/index.html -o /dev/null && break
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8765/index.html -o /dev/null
+      - name: Check published Gameplay HUD
+        run: python Tools/run_ci_browser_check.py --name "Gameplay HUD" -- python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
+      - name: Check published Player facing
+        run: python Tools/run_ci_browser_check.py --name "Player facing" -- python Tools/playtest_player_facing.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check published Square battlefield
+        run: python Tools/run_ci_browser_check.py --name "Square battlefield" -- python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check published Generated adventure
+        run: python Tools/run_ci_browser_check.py --name "Generated adventure" -- python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check published Foundry UI
+        run: python Tools/run_ci_browser_check.py --name "Foundry UI" -- python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check published Procedural maps
+        run: python Tools/run_ci_browser_check.py --name "Procedural maps" -- python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check published Tile surfaces
+        run: python Tools/run_ci_browser_check.py --name "Tile surfaces" -- python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Stop published browser check server
+        if: always()
+        run: |
+          if test -f "$RUNNER_TEMP/dct-playtest-server.pid"; then
+            check_server_pid="$(cat "$RUNNER_TEMP/dct-playtest-server.pid")"
+            if ps -p "$check_server_pid" -o args= | grep -q 'http.server 8765'; then
+              kill "$check_server_pid" || true
+            fi
+          fi
       - name: Prepare static hosting artifact
         run: |
           test -f Web/publish/wwwroot/index.html
