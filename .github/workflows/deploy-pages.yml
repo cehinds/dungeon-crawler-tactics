@@ -42,6 +42,13 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - name: Reclaim unused SDKs on the disposable Linux runner
+        run: |
+          # These SDKs are unused by the .NET/Python/Node browser build.
+          sudo rm -rf /usr/local/lib/android /usr/share/swift /usr/local/.ghcup /opt/ghc /usr/local/share/boost /opt/hostedtoolcache/CodeQL /opt/hostedtoolcache/go /opt/az /usr/local/share/powershell
+          docker image prune --all --force
+          df -h .
+          python3 Tools/ci_disk_preflight.py --required-free-gib 45
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
@@ -65,27 +72,17 @@ jobs:
       - name: Restore pinned art assets
         run: python Tools/sync_art_assets.py --source .art-source
       - name: Install content validation dependencies
-        run: python -m pip install -r Tools/requirements.txt
-      - name: Publish browser game
-        run: dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
-      - name: Verify generated-map handoff in the published game
-        run: |
-          python -m pip install playwright==1.56.0
-          python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/dct-playtest-server.log 2>&1 &
-          server_pid=$!
-          trap 'kill "$server_pid"' EXIT
-          python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
-          python Tools/playtest_player_facing.py --browser /usr/bin/google-chrome
-          python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-          python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+        run: python -m pip install -r Tools/requirements.txt -r .art-source/tools/pocket-requirements.txt
       - name: Validate authored content
         run: |
           python Tools/validate_content.py UnityPackage/Runtime/Data/combat-content.json
           python Tools/validate_game_data.py
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/style-packs/pocket-dungeon --self-test --require-six-views
+          for pack in Web/wwwroot/assets/style-packs/{pocket-dungeon,dungeon-after-dark,ink-and-lanterns} Web/wwwroot/assets/book-tiles/{pocket-dungeon,dungeon-after-dark,ink-and-lanterns} Web/wwwroot/assets/reusable-gameplay; do
+            python .art-source/tools/validate_pocket_reusable.py --pack "$pack" --self-test --require-six-views --allow-recorded-generation-blocks
+          done
+          python -m unittest discover -s .art-source/tools -p test_asset_attachment_tags.py
+          python -m unittest discover -s .art-source/tools -p test_generation_block_contract.py
+          python .art-source/tools/asset_attachment_tags.py --assets Web/wwwroot/assets --check --refresh-archives
           python -m unittest discover -s Tools -p 'test_*.py'
           python -m unittest Tests/test_content_validators.py
           python Tools/package_room_kit.py
@@ -108,8 +105,32 @@ jobs:
           node Tools/test_native_map_visuals.mjs
           node Tools/test_exploration_controls.mjs
           node Tools/test_sprite_facing.mjs
+          node --test Tools/test_art_lab_blocks.cjs
+          node --test Tools/test_art_lab_downloads.cjs
       - name: Verify published research catalog
         run: python Tools/prepare_research.py --check
+      - name: Release verified art checkout before publishing
+        run: |
+          # All pinned-source verification and strict Art tests finish first.
+          python Tools/sync_art_assets.py --source .art-source --check
+          test -d .art-source/.git
+          rm -rf .art-source
+          python Tools/ci_disk_preflight.py --publish-assets Web/wwwroot/assets
+      - name: Publish browser game
+        run: dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
+      - name: Verify generated-map handoff in the published game
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > /tmp/dct-playtest-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
+          python Tools/playtest_player_facing.py --browser /usr/bin/google-chrome
+          python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+          python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+          python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+          python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+          python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Prepare static hosting artifact
         run: |
           test -f Web/publish/wwwroot/index.html

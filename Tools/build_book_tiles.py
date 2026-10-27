@@ -33,6 +33,7 @@ from zipfile import BadZipFile, ZipFile
 from PIL import Image, ImageDraw
 from book_tile_geometry import registered, native_square
 from tile_edge_tags import validate_edges
+from art_metadata import enrich_expected, catalog as metadata_catalog
 
 from build_style_packs import (
     PackError, claim_region, digest, extract_cell, font, island_mask_metadata,
@@ -235,9 +236,29 @@ def archive_files(manifest):
     return {"manifest.json", manifest["contactSheet"], *(asset["file"] for asset in manifest["assets"])}
 
 
+def existing_sidecars(directory, manifest):
+    """Canonical reusable metadata accompanies the unchanged legacy PNG set."""
+    index = directory.parent / 'reusable/index.json'
+    if not index.is_file():
+        return set()
+    records = metadata_catalog(str(index))
+    sidecars = set()
+    for asset in manifest['assets']:
+        relative = Path(asset['file']).with_suffix('.json').as_posix()
+        path = directory / relative
+        if not path.is_file():
+            continue
+        record = records.get(asset['id'])
+        require(record is not None and read_json(path) == record, f'{path}: sidecar differs from canonical reusable catalog')
+        require(safe_path(directory.parent, record['metadata_path']) == path.resolve(), f'{path}: invalid metadata path')
+        require(safe_path(directory.parent, record['image']['path']) == (directory / asset['file']).resolve(), f'{path}: invalid image reference')
+        sidecars.add(relative)
+    return sidecars
+
+
 def build_kit(directory, manifest, sprites, style):
     (directory / "components").mkdir(parents=True, exist_ok=True)
-    expected = archive_files(manifest) | {manifest["download"]}
+    expected = archive_files(manifest) | {manifest["download"]} | existing_sidecars(directory, manifest)
     require(not {p.relative_to(directory).as_posix() for p in directory.rglob("*") if p.is_file()} - expected,
             f"{directory}: unexpected files; refusing to retain obsolete exports")
     for asset in manifest["assets"]:
@@ -251,7 +272,7 @@ def validate_kit(directory, expected, sprites, style):
     manifest = read_json(directory / "manifest.json")
     require(manifest == expected, f"{directory}: stale manifest, source hash, or provenance")
     files = {p.relative_to(directory).as_posix() for p in directory.rglob("*") if p.is_file()}
-    require(files == archive_files(manifest) | {manifest["download"]}, f"{directory}: unexpected/missing outputs")
+    require(files == archive_files(manifest) | {manifest["download"]} | existing_sidecars(directory, manifest), f"{directory}: unexpected/missing outputs")
     fingerprints = set()
     for asset in manifest["assets"]:
         validate_edges(asset)
@@ -333,6 +354,7 @@ def run(style_id=None, check=False, catalog=False, docs=DOCS, output=OUTPUT, kit
         seen = set()
         for kit in kits:
             manifest, sprites = prepare_kit(docs, kit, style, crops)
+            manifest = enrich_expected(manifest, output / style['id'])
             fingerprints = {visible_digest(sprite) for sprite in sprites.values()}
             require(not seen.intersection(fingerprints), f"{style['id']}/{kit['id']}: repeated visible asset across kits")
             seen.update(fingerprints)
@@ -343,6 +365,7 @@ def run(style_id=None, check=False, catalog=False, docs=DOCS, output=OUTPUT, kit
             total += len(sprites)
     if catalog:
         expected = catalog_document(inventory, read_json(docs / "coverage.json"), output, docs)
+        expected = enrich_expected(expected, output)
         path = output / "catalog.json"
         if check:
             require(read_json(path) == expected, "Stale catalog or broken catalog links")
