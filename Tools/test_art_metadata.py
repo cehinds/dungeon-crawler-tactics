@@ -8,7 +8,8 @@ from unittest.mock import patch
 
 import art_metadata
 from build_book_tiles import existing_sidecars
-from build_style_packs import PackError
+from build_style_packs import PackError, validate_animation_metadata
+from types import SimpleNamespace
 
 
 class ArtMetadataIntegrationTests(unittest.TestCase):
@@ -23,6 +24,24 @@ class ArtMetadataIntegrationTests(unittest.TestCase):
             with patch.object(art_metadata,'ROOT',root):
                 with self.assertRaisesRegex(ValueError,'requires the pinned AI-Art checkout'):art_metadata.enrich_expected({'assets':[]},pack)
             art_metadata.helper.cache_clear()
+
+    def test_animation_accepts_only_canonical_annotations_and_rejects_changed_content(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            pack=Path(tmp);(pack/'reusable').mkdir();(pack/'reusable/index.json').write_text('{"assets":[]}')
+            clip={'id':'clip','fps':8,'metadata':'clip.json','frames':['one.png']}
+            def annotate(doc, style, assets):
+                doc['tags']=['attachment-tagged','metadata-document']
+                return doc
+            module=SimpleNamespace(style_of=lambda path:'pocket-dungeon',enrich_document=annotate)
+            annotated={**clip,'tags':['attachment-tagged','metadata-document']};(pack/'clip.json').write_text(json.dumps(annotated))
+            art_metadata.catalog.cache_clear()
+            with patch.object(art_metadata,'helper',return_value=module):
+                validate_animation_metadata(pack,clip)
+                self.assertNotIn('tags', clip)
+                (pack/'clip.json').write_text(json.dumps({**annotated,'fps':9}))
+                with self.assertRaisesRegex(PackError,'Animation metadata differs'):validate_animation_metadata(pack,clip)
+                (pack/'clip.json').write_text(json.dumps({**annotated,'unexpected':'not allowed'}))
+                with self.assertRaisesRegex(PackError,'Animation metadata differs'):validate_animation_metadata(pack,clip)
 
     def test_sidecars_must_match_catalog_and_resolve_to_exact_png(self):
         with tempfile.TemporaryDirectory() as tmp:

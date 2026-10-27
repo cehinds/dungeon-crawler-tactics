@@ -73,27 +73,55 @@ jobs:
         run: python Tools/sync_art_assets.py --source .art-source
       - name: Install content validation dependencies
         run: python -m pip install -r Tools/requirements.txt -r .art-source/tools/pocket-requirements.txt
-      - name: Validate authored content
+      - name: Validate authored gameplay data
         run: |
           python Tools/validate_content.py UnityPackage/Runtime/Data/combat-content.json
           python Tools/validate_game_data.py
-          for pack in Web/wwwroot/assets/style-packs/{pocket-dungeon,dungeon-after-dark,ink-and-lanterns} Web/wwwroot/assets/book-tiles/{pocket-dungeon,dungeon-after-dark,ink-and-lanterns} Web/wwwroot/assets/reusable-gameplay; do
-            python .art-source/tools/validate_pocket_reusable.py --pack "$pack" --self-test --require-six-views --allow-recorded-generation-blocks
-          done
+      - name: Validate reviewed Pocket STYLE library
+        run: |
+          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/style-packs/pocket-dungeon --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate reviewed Dark STYLE library
+        run: |
+          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/style-packs/dungeon-after-dark --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate reviewed Ink STYLE library
+        run: |
+          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/style-packs/ink-and-lanterns --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate reviewed Pocket BOOK library
+        run: |
+          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/book-tiles/pocket-dungeon --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate reviewed Dark BOOK library
+        run: |
+          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/book-tiles/dungeon-after-dark --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate reviewed Ink BOOK library
+        run: |
+          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/book-tiles/ink-and-lanterns --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate reviewed Gameplay library
+        run: |
+          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/reusable-gameplay --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate recorded-block and attachment contracts
+        run: |
           python -m unittest discover -s .art-source/tools -p test_asset_attachment_tags.py
           python -m unittest discover -s .art-source/tools -p test_generation_block_contract.py
           python .art-source/tools/asset_attachment_tags.py --assets Web/wwwroot/assets --check --refresh-archives
+      - name: Run Python content regressions
+        run: |
           python -m unittest discover -s Tools -p 'test_*.py'
           python -m unittest Tests/test_content_validators.py
-          python Tools/package_room_kit.py
+      - name: Validate pinned native packages
+        run: |
+          python Tools/package_room_kit.py --check
           python Tools/build_style_packs.py --style all --check
           python Tools/build_book_tiles.py --style all --check --catalog
+      - name: Validate additional authored art
+        run: |
           python Tools/validate_directional_art.py
           python Tools/validate_form_art.py
           python Tools/expand_story_levels.py --check
           python Tools/author_concept_rooms.py --check
           python Tools/validate_scenario_art.py
           python Tools/validate_expansion_art.py
+      - name: Run Node art and map regressions
+        run: |
           node Tools/test_room_generator.mjs
           node Tools/test_procedural_map.mjs
           node Tools/test_generator_art.mjs

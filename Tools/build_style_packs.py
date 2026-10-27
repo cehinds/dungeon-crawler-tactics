@@ -8,6 +8,7 @@ Native retained pixels are never resized, recolored, painted, or inferred; scale
 copies are used solely in the previews.
 """
 import argparse
+import copy
 from collections import deque
 import hashlib
 import json
@@ -18,6 +19,7 @@ import sys
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from art_metadata import enrich_expected
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -528,7 +530,7 @@ def validate_collections_and_animations(directory, manifest):
     require(len(records) == len(groups) and {clip["id"] for clip in records} == set(groups), "Animation inventory differs")
     for clip in records:
         members = groups[clip["id"]]
-        require(json.loads(safe_path(directory, clip["metadata"]).read_text()) == clip, "Animation metadata differs")
+        validate_animation_metadata(directory, clip)
         frames, anchor, scale = normalized_frames(members, sprites, manifest)
         require(clip["anchor"] == anchor and clip.get("scale") == scale and clip["fps"] == 8
                 and clip["frameWidth"] == clip["frameHeight"] == 256, "Animation registration metadata differs")
@@ -615,6 +617,11 @@ require a production art pass. Animation clips are illustrative derived exports.
 Rebuild: python3 Tools/build_style_packs.py --style {manifest['id']}
 Validate without writing: python3 Tools/build_style_packs.py --style {manifest['id']} --check
 """
+
+
+def validate_animation_metadata(directory, clip):
+    require(json.loads(safe_path(directory, clip["metadata"]).read_text()) == enrich_expected(copy.deepcopy(clip), directory),
+            "Animation metadata differs")
 
 
 def validate_pack(directory):
