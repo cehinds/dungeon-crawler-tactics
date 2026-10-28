@@ -223,6 +223,7 @@ namespace DungeonCrawlerTactics
         private ActionResult ResolveAction(GameCommand command)
         {
             EntityState actor = GetActor(command.unitId);
+            Require(string.IsNullOrEmpty(command.castModeId) || (actor.Team == "player" && string.IsNullOrEmpty(command.itemId) && string.IsNullOrEmpty(command.formId) && string.IsNullOrEmpty(command.stanceId) && command.type != "journey_capture"), "Cast modes require a learned ability cast.");
             bool favor = command.type == "preview_favor";
             if (favor) ValidateFavor(command, actor);
             Require(favor || !units[actor.Id].acted, "This crawler already used its action.");
@@ -233,6 +234,7 @@ namespace DungeonCrawlerTactics
             ActionResult resolved;
             if (!string.IsNullOrEmpty(command.itemId))
             {
+                Require(string.IsNullOrEmpty(command.castModeId), "Consumables cannot select a cast mode.");
                 Require(actor.Team == "player", "Only crawlers use shared supplies.");
                 Require(inventory.ContainsKey(command.itemId) && inventory[command.itemId] > 0, "No charges remain for that item.");
                 abilityId = catalog.Items[command.itemId].abilityId;
@@ -241,7 +243,7 @@ namespace DungeonCrawlerTactics
             else
             {
                 Require(actor.Team != "player" || Array.IndexOf(AbilityIds(actor), abilityId) >= 0, "This ability is not unlocked for this crawler.");
-                resolved = engine.Execute(battle, actor.Id, abilityId, command.targetId, actor.Team == "player" ? Modifiers(actor.Id, abilityId) : null);
+                resolved = engine.Execute(battle, actor.Id, abilityId, command.targetId, actor.Team == "player" ? CastModifiers(actor.Id, abilityId, command.castModeId) : null);
             }
             if (IsTrapAbility(abilityId))
             {
@@ -539,7 +541,7 @@ namespace DungeonCrawlerTactics
         private void AddLog(string entry) { log.Add(entry); TrimLog(); }
         private void TrimLog() { if (log.Count > 60) log.RemoveRange(0, log.Count - 60); }
         private static string[] Sorted(HashSet<string> tags) { string[] values = new string[tags.Count]; tags.CopyTo(values); Array.Sort(values, StringComparer.Ordinal); return values; }
-        private static GameCommand CopyCommand(GameCommand c) { return new GameCommand { type = c.type, unitId = c.unitId, targetId = c.targetId, abilityId = c.abilityId, itemId = c.itemId, classId = c.classId, rewardId = c.rewardId, equipmentId = c.equipmentId, stanceId = c.stanceId, formId = c.formId, x = c.x, y = c.y }; }
+        private static GameCommand CopyCommand(GameCommand c) { return new GameCommand { type = c.type, unitId = c.unitId, targetId = c.targetId, abilityId = c.abilityId, castModeId = c.castModeId, itemId = c.itemId, classId = c.classId, rewardId = c.rewardId, equipmentId = c.equipmentId, stanceId = c.stanceId, formId = c.formId, x = c.x, y = c.y }; }
 
         public GameView GetView(bool includeTargets = true)
         {
@@ -576,6 +578,11 @@ namespace DungeonCrawlerTactics
             {
                 AbilityDef a = catalog.Abilities[id]; SkillPracticeSave savedPractice = practices.Find(p => p.unitId == actor.Id && p.abilityId == id); SkillPracticeView practice = PracticeView(actor.Id, id, savedPractice == null ? 0 : savedPractice.uses); int effectiveCost = Math.Max(0, a.cost - Modifiers(actor.Id, id).costReduction); abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = AbilityScaling.Apply(a, Modifiers(actor.Id, id)).range, rank = practice.rank, maxRank = practice.maxRank, uses = practice.uses, nextRankUses = practice.nextRankUses, cost = effectiveCost, enabled = view.canAct && actor.Energy >= effectiveCost, description = Describe(a, Modifiers(actor.Id, id)), disabledReason = !view.canAct ? "Action unavailable" : actor.Energy < effectiveCost ? "Insufficient mana" : "", targetIds = includeTargets && view.canAct && actor.Energy >= effectiveCost ? LegalTargets(actor, a, null) : new string[0] });
             }
+            foreach (AbilityView abilityView in abilityViews)
+            {
+                abilityView.castModes = CastModeViews(actor.Id, abilityView.id, abilityView.rank, Modifiers(actor.Id, abilityView.id), actor, view.canAct, includeTargets);
+                foreach (AbilityCastModeView mode in abilityView.castModes) if (mode.enabled) { abilityView.enabled = true; abilityView.disabledReason = ""; }
+            }
             view.abilities = abilityViews.ToArray();
             List<ItemView> itemViews = new List<ItemView>(); foreach (ItemDef item in catalog.Items.Values)
             { AbilityDef a = catalog.Abilities[item.abilityId]; itemViews.Add(new ItemView { favorTargetIds = includeTargets ? LegalFavorTargets(actor, item) : new string[0], id = item.id, label = item.label, abilityId = item.abilityId, count = inventory[item.id], target = a.target, range = a.range, description = Describe(a), disabledReason = !view.canAct ? "Action unavailable" : inventory[item.id] == 0 ? "No charges" : "", targetIds = includeTargets && view.canAct && inventory[item.id] > 0 ? LegalTargets(actor, a, item.id) : new string[0] }); }
@@ -600,7 +607,7 @@ namespace DungeonCrawlerTactics
             view.neighborhood = BuildNeighborhoodView(); PopulateProgression(view); PopulateModes(view); PopulateDevelopment(view); PopulateSkillTree(view); PopulateCustomMap(view); view.scenarios = ScenarioOptions(); view.scenario = ScenarioView(); view.expeditions = ExpeditionOptions(); view.expedition = ExpeditionView();
             return view;
         }
-        private string[] LegalTargets(EntityState actor, AbilityDef ability, string itemId)
+        private string[] LegalTargets(EntityState actor, AbilityDef ability, string itemId, string castModeId = null)
         {
             int effectiveRange = string.IsNullOrEmpty(itemId) ? AbilityScaling.Apply(ability, Modifiers(actor.Id, ability.id)).range : ability.range;
             List<string> targets = new List<string>();
@@ -608,7 +615,7 @@ namespace DungeonCrawlerTactics
             {
                 if (Math.Abs(actor.X - target.X) + Math.Abs(actor.Y - target.Y) > effectiveRange) continue;
                 if ((ability.target == "tile") != target.IsTile) continue;
-                try { ResolveAction(new GameCommand { unitId = actor.Id, abilityId = ability.id, itemId = itemId, targetId = target.Id }); targets.Add(target.Id); }
+                try { ResolveAction(new GameCommand { unitId = actor.Id, abilityId = ability.id, itemId = itemId, castModeId = castModeId, targetId = target.Id }); targets.Add(target.Id); }
                 catch (ArgumentException) { }
                 catch (InvalidOperationException) { }
             }

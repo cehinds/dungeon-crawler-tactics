@@ -160,6 +160,8 @@ jobs:
         run: python Tools/run_ci_browser_check.py --name "Gameplay HUD" -- python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
       - name: Check ability rank UI
         run: python Tools/run_ci_browser_check.py --name "Ability ranks UI" -- python Tools/playtest_ability_ranks.py
+      - name: Check cast power UI
+        run: python Tools/run_ci_browser_check.py --name "Cast power UI" -- python Tools/playtest_cast_power.py
       - name: Check published ability rank progression
         run: python Tools/run_ci_browser_check.py --name "Ability ranks gameplay" -- python Tools/playtest_ability_rank_gameplay.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published Player facing

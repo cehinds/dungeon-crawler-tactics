@@ -86,6 +86,7 @@ namespace DungeonCrawlerTactics
         public int uses, rank, maxRank, nextRankUses, damageBonus, healBonus, costReduction;
         public bool atCap;
         public SkillRankView[] ranks;
+        public AbilityCastModeView[] castModes = new AbilityCastModeView[0];
     }
     [Serializable]
     public sealed class RecipeView
@@ -124,6 +125,7 @@ namespace DungeonCrawlerTactics
     public sealed class ActionModifiers
     {
         public int damageBonus, healBonus, costReduction;
+        public bool hasCastMode; public int castModeCost, castModeDamageBonus;
         public int rangeBonus, pushBonus, summonHpBonus, summonMoveBonus, summonRoundsBonus;
         public string[] addTags = new string[0], removeTags = new string[0];
         public TagReplacementDef[] tagReplacements = new TagReplacementDef[0];

@@ -73,7 +73,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
     [Serializable] public sealed class TagRuleDef { public bool consumeOnEntry; public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, moveBonus, energyPenalty; }
-    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public CustomMapData customMap; public CellView entrance, exit; public int x, y; }
+    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, castModeId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public CustomMapData customMap; public CellView entrance, exit; public int x, y; }
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
     {
@@ -85,7 +85,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class StatusView { public string tag, source; public int remainingRounds; }
     [Serializable] public sealed class PresentationEvent { public int sequence; public string type, actorId, targetId, abilityId, reactionId, tag; public int fromX, fromY, toX, toY, amount, before, after; public bool preview; }
     [Serializable] public sealed class TileView { public string id; public int x, y; public bool blocked; public string[] tags = new string[0]; }
-    [Serializable] public sealed class AbilityView { public string id, label, target, description, disabledReason; public string[] targetIds = new string[0]; public int range, cost, rank, maxRank, uses, nextRankUses; public bool enabled; }
+    [Serializable] public sealed class AbilityView { public AbilityCastModeView[] castModes = new AbilityCastModeView[0]; public string id, label, target, description, disabledReason; public string[] targetIds = new string[0]; public int range, cost, rank, maxRank, uses, nextRankUses; public bool enabled; }
     [Serializable] public sealed class ItemView { public string[] favorTargetIds = new string[0]; public string id, label, abilityId, target, description, disabledReason; public string[] targetIds = new string[0]; public int count, range; }
     [Serializable] public sealed class RosterView { public string specialtyClassId; public int specialtyFloor; public bool specialtyAvailable; public string[] specialtyClassIds = new string[0]; public string id, label, classId, artId, stanceId, formId; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; public int hp, maxHp, energy, maxEnergy, move, effectiveMove, level; public string[] equippedIds = new string[0]; }
     [Serializable] public sealed class ClassView { public string id, label, disabledReason; public int minimumFloor = 1; public bool enabled = true; public string[] abilityIds = new string[0]; }

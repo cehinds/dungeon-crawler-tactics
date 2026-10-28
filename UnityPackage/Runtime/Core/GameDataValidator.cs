@@ -208,6 +208,10 @@ namespace DungeonCrawlerTactics
                 AbilityDef rankedAbility = catalog.Abilities[profile.abilityId];
                 Need(profile.pushPerRank == 0 || Array.Exists(rankedAbility.effects, e => e.op == "Push"), "Push growth requires a push effect.");
                 Need(profile.summonHpPerRank + profile.summonMovePerRank + profile.summonRoundsPerRank == 0 || Array.Exists(rankedAbility.effects, e => e.op == "DuplicatePet"), "Summon growth requires a summon effect.");
+                Need(profile.castModes != null && profile.castModes.Length <= 8, "Invalid cast modes.");
+                HashSet<string> modeIds = new HashSet<string>(StringComparer.Ordinal);
+                foreach (AbilityCastModeDef mode in profile.castModes)
+                    Need(mode != null && !string.IsNullOrEmpty(mode.id) && modeIds.Add(mode.id) && !string.IsNullOrEmpty(mode.label) && mode.minimumRank >= 1 && mode.minimumRank <= SkillRankProgression.AbsoluteRankCap && mode.manaCost >= 0 && mode.manaCost <= 100 && mode.damageBonus >= -100 && mode.damageBonus <= 100 && Array.Exists(rankedAbility.effects, e => e.op == "Damage"), "Invalid or duplicate cast mode.");
                 HashSet<int> milestoneRanks = new HashSet<int>();
                 foreach (RankMilestoneDef milestone in profile.milestones)
                 {

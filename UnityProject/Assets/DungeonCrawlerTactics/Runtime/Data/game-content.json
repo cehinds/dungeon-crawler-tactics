@@ -5152,10 +5152,10 @@
           "practiceMultiplierPercent": 100,
           "damagePerRank": 1,
           "healPerRank": 0,
-          "costReductionPerRank": 1,
+          "costReductionPerRank": 0,
           "damageBonusCap": 80,
           "healBonusCap": 60,
-          "costReductionCap": 2,
+          "costReductionCap": 0,
           "rangePerRank": 0,
           "rangeBonusCap": 6,
           "pushPerRank": 0,
@@ -5167,14 +5167,14 @@
           "summonRoundsPerRank": 0,
           "summonRoundsBonusCap": 5,
           "description": "Tactical adaptation: committed uses train this ability. Milestones refine its existing effects; consumable casts do not train or receive rank bonuses.",
-          "canonNotes": "Secondary chapter-cited anchors: rank 5 permits variable Mana expenditure; rank 10 can ignite targets. The game uses fixed casting cost and guaranteed short Burning at rank 10, not the book chance or selectable cast power. Other ranks are extrapolated.",
+          "canonNotes": "Secondary chapter-cited anchors: early casts cost 5 Mana; rank 5 permits choosing 3–6 Mana; rank 10 can ignite targets. This game implements those expenditure choices, with tuned damage offsets of -4/-2/0/+4 and guaranteed short Burning at rank 10. Damage numbers, ignition certainty and other rank growth are tactical adaptations, not a verified novel rank table.",
           "sourceUrls": [
             "https://www.dccdatabase.com/wiki/magic_missile/"
           ],
           "milestones": [
             {
               "rank": 5,
-              "description": "Tier 5: tactical refinement.",
+              "description": "Choose 3–6 Mana before targeting. Damage offsets are tactical tuning; the rank and expenditure choices follow the chapter-cited reference.",
               "damageBonus": 1,
               "rangeBonus": 1
             },
@@ -5204,6 +5204,36 @@
               "description": "Tier 20: tactical refinement.",
               "damageBonus": 6,
               "rangeBonus": 1
+            }
+          ],
+          "castModes": [
+            {
+              "id": "power.mana3",
+              "label": "Conserve",
+              "minimumRank": 5,
+              "manaCost": 3,
+              "damageBonus": -4
+            },
+            {
+              "id": "power.mana4",
+              "label": "Measured",
+              "minimumRank": 5,
+              "manaCost": 4,
+              "damageBonus": -2
+            },
+            {
+              "id": "power.mana5",
+              "label": "Standard",
+              "minimumRank": 5,
+              "manaCost": 5,
+              "damageBonus": 0
+            },
+            {
+              "id": "power.mana6",
+              "label": "Overcharge",
+              "minimumRank": 5,
+              "manaCost": 6,
+              "damageBonus": 4
             }
           ]
         },

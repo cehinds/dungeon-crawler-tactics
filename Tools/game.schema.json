@@ -2089,6 +2089,13 @@
             "type": "string",
             "pattern": "^https?://"
           }
+        },
+        "castModes": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/abilityCastMode"
+          }
         }
       },
       "required": [
@@ -2578,6 +2585,41 @@
         },
         "legacyExploration": {
           "$ref": "#/$defs/exploration"
+        }
+      }
+    },
+    "abilityCastMode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "minimumRank",
+        "manaCost",
+        "damageBonus"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minimumRank": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "manaCost": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "damageBonus": {
+          "type": "integer",
+          "minimum": -100,
+          "maximum": 100
         }
       }
     }

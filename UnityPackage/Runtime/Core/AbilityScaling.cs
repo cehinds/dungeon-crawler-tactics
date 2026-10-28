@@ -13,13 +13,15 @@ namespace DungeonCrawlerTactics
         {
             if (m == null) return ability;
             if (m.damageBonus < 0 || m.damageBonus > 100 || m.healBonus < 0 || m.healBonus > 100 || m.costReduction < 0 || m.costReduction > 100 || m.rangeBonus < 0 || m.rangeBonus > 12 || m.pushBonus < 0 || m.pushBonus > 12 || m.summonHpBonus < 0 || m.summonHpBonus > 100 || m.summonMoveBonus < 0 || m.summonMoveBonus > 6 || m.summonRoundsBonus < 0 || m.summonRoundsBonus > 10) throw new ArgumentException("Action modifiers exceed bounded limits.");
-            AbilityDef result = new AbilityDef { id = ability.id, label = ability.label, target = ability.target, requiredTargetTag = ability.requiredTargetTag, cost = Math.Max(0, ability.cost - m.costReduction), range = ability.range + m.rangeBonus, incomingTags = ability.incomingTags, effects = new EffectDef[ability.effects.Length] };
+            if (m.hasCastMode && (m.castModeCost < 0 || m.castModeCost > 100 || m.castModeDamageBonus < -100 || m.castModeDamageBonus > 100)) throw new ArgumentException("Invalid cast mode modifiers.");
+            AbilityDef result = new AbilityDef { id = ability.id, label = ability.label, target = ability.target, requiredTargetTag = ability.requiredTargetTag, cost = m.hasCastMode ? m.castModeCost : Math.Max(0, ability.cost - m.costReduction), range = ability.range + m.rangeBonus, incomingTags = ability.incomingTags, effects = new EffectDef[ability.effects.Length] };
             for (int i = 0; i < result.effects.Length; i++)
             {
                 EffectDef e = ability.effects[i]; string tag = e.tag;
                 if (e.op == "AddTag" && m.tagReplacements != null) foreach (TagReplacementDef replacement in m.tagReplacements) if (replacement.fromTag == e.tag) tag = replacement.toTag;
-                result.effects[i] = new EffectDef { op = e.op, tag = tag, amount = e.amount + (e.op == "Damage" ? m.damageBonus : e.op == "Heal" ? m.healBonus : e.op == "Push" ? m.pushBonus : 0), summonHp = e.summonHp + (e.op == "DuplicatePet" ? m.summonHpBonus : 0), summonMove = e.summonMove + (e.op == "DuplicatePet" ? m.summonMoveBonus : 0), summonRounds = e.summonRounds + (e.op == "DuplicatePet" ? m.summonRoundsBonus : 0) };
+                result.effects[i] = new EffectDef { op = e.op, tag = tag, amount = e.amount + (e.op == "Damage" ? m.damageBonus + (m.hasCastMode ? m.castModeDamageBonus : 0) : e.op == "Heal" ? m.healBonus : e.op == "Push" ? m.pushBonus : 0), summonHp = e.summonHp + (e.op == "DuplicatePet" ? m.summonHpBonus : 0), summonMove = e.summonMove + (e.op == "DuplicatePet" ? m.summonMoveBonus : 0), summonRounds = e.summonRounds + (e.op == "DuplicatePet" ? m.summonRoundsBonus : 0) };
             }
+            foreach (EffectDef effect in result.effects) if (effect.op == "Damage") effect.amount = Math.Max(0, effect.amount);
             var effects = new System.Collections.Generic.List<EffectDef>(result.effects);
             foreach (string tag in m.removeTags) effects.Add(new EffectDef { op = "RemoveTag", tag = tag });
             foreach (string tag in m.addTags) effects.Add(new EffectDef { op = "AddTag", tag = tag });

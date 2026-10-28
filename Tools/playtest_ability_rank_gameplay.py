@@ -2,7 +2,8 @@
 
 A generated map is legally imported with one authored 80HP test enemy. Serialized
 save fixtures explicitly seed practice and legal positions; seeded ranks are NOT
-earned-play evidence. Only the rank 1→2 transition is earned by an actual cast.
+earned-play evidence. The rank 1→2 and 4→5 boundary transitions each use an actual
+committed cast; the earlier uses remain explicitly seeded fixtures.
 """
 import argparse
 import json
@@ -59,8 +60,10 @@ def main():
         enemy=next(u for u in base['units'] if u['team']=='enemy');enemy.update(x=near['x'],y=near['y'])
         base['selectedUnitId']='crawler.donut'
         mongo=next(u for u in base['units'] if u['id']=='crawler.mongo');mongo['hp']-=3
-        def load_seed(entries):
+        def load_seed(entries, mana=None):
             seed=json.loads(json.dumps(base));seed['development']['practice']=[dict(unitId='crawler.donut',abilityId='ability.donut_'+ability,uses=uses) for ability,uses in entries.items()]
+            if mana is not None:
+                next(u for u in seed['units'] if u['id']=='crawler.donut')['energy']=mana
             page.evaluate('save=>window.dungeon.loadSave(JSON.stringify(save))',seed)
             state=current(page)
             assert state['screen']=='battle' and state['selectedUnitId']=='crawler.donut'
@@ -96,6 +99,58 @@ def main():
         page.reload();ready_runtime(page)
         assert practice(current(page),'magic_missile')['rank']==2 and practice(current(page),'magic_missile')['uses']==threshold
         results.append('Real page reload restores the earned rank 2 and exact committed use count.')
+        missile_id='ability.donut_magic_missile'
+        rank5=practice(state,'magic_missile')['ranks'][4]['requiredUses']
+        state=load_seed({'magic_missile':rank5-1})
+        ability=next(a for a in state['abilities'] if a['id']==missile_id)
+        assert ability['rank']==4 and ability['cost']==5 and all(not m['enabled'] for m in ability['castModes'])
+        command(page,'preview',abilityId=missile_id,targetId=enemy['id'])
+        earned5=command(page,'confirm')
+        assert practice(earned5,'magic_missile')['rank']==5
+        assert all('Requires rank' not in m['disabledReason'] for m in practice(earned5,'magic_missile')['castModes'])
+        results.append('One real cast from a seeded rank-4 boundary earns rank 5 and unlocks selectable Mana power.')
+        damage=[]
+        for mana in range(3,7):
+            state=load_seed({'magic_missile':rank5})
+            before=page.evaluate('window.dungeon.getSave()')
+            page.click('#open-actions')
+            page.click(f'[data-modal-ability="{missile_id}"]')
+            assert page.locator('[data-cast-mode]').count()==4
+            if mana==3:
+                for width,height in [(1440,1000),(390,844)]:
+                    page.set_viewport_size(dict(width=width,height=height))
+                    assert page.locator('#cancel-cast-power').is_visible()
+                    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+                    page.screenshot(path=str(output/f'cast-power-{width}.png'))
+                page.set_viewport_size(dict(width=1440,height=1000))
+            page.click(f'[data-cast-mode="power.mana{mana}"]')
+            assert f'{mana} Mana' in page.locator('.hud-target').inner_text()
+            point=page.evaluate('''u=>{const p=window.dungeon.cellToScreen(u.x,u.y),b=document.querySelector('#battlefield').getBoundingClientRect();return {x:b.left+p.x,y:b.top+p.y};}''',enemy)
+            page.mouse.click(point['x'],point['y'])
+            page.wait_for_function('window.dungeon.getView().canConfirm')
+            preview=current(page)
+            actor=next(f for f in preview['forecast'] if f['targetId']=='crawler.donut')
+            target=next(f for f in preview['forecast'] if f['targetId']==enemy['id'])
+            assert actor['beforeEnergy']-actor['afterEnergy']==mana
+            damage.append(target['beforeHp']-target['afterHp'])
+            page.click('#detail-cancel-forecast')
+            assert page.evaluate('window.dungeon.getSave()')==before
+            command(page,'preview',abilityId=missile_id,castModeId=f'power.mana{mana}',targetId=enemy['id'])
+            committed=command(page,'confirm')
+            assert next(u for u in committed['units'] if u['id']==enemy['id'])['hp']==target['afterHp']
+            actor=next(u for u in committed['units'] if u['id']=='crawler.donut')
+            assert actor['energy']==donut['energy']-mana and actor['acted'] and not actor['moved']
+            assert practice(committed,'magic_missile')['uses']==rank5+1
+        assert [d-damage[0] for d in damage]==[0,2,4,8],damage
+        results.append('All four real UI power choices target through C#, preview exact Mana/damage, cancel atomically and commit matching effects with one practice use and movement intact.')
+        state=load_seed({'magic_missile':rank5},mana=3)
+        page.click('#open-actions');page.click(f'[data-modal-ability="{missile_id}"]')
+        assert page.locator('[data-cast-mode]:enabled').count()==1
+        assert page.locator('[data-cast-mode="power.mana3"]').is_enabled()
+        page.click('#cancel-cast-power')
+        assert command(page,'preview',abilityId=missile_id,castModeId='power.mana3',targetId=enemy['id'])['canConfirm']
+        command(page,'cancel')
+        results.append('With only 3 Mana, the real action menu still opens and only the affordable power is enabled.')
         # Later-rank tests use explicit imported seeds, never claim those ranks were earned.
         rank10=practice(state,'magic_missile')['ranks'][9]['requiredUses']
         state=load_seed({'magic_missile':rank10})

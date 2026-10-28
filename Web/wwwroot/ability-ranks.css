@@ -21,3 +21,12 @@
 .ability-rank-row.locked{border-style:dashed}
 .skill-row .ability-rank-progress,.modal-action-card .ability-rank-progress{max-width:100%}
 .ability-rank-progress.compact progress{flex-basis:100%;max-width:200px;margin-top:2px}
+
+.cast-power-dialog{width:min(620px,calc(100vw - 24px))}
+.cast-power-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cast-power-grid button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:5px;min-height:44px;padding:12px;white-space:normal}
+.cast-power-grid button strong{color:#f5db91;font-size:18px}
+.cast-power-grid button p{margin:3px 0;font-size:13px;line-height:1.5}
+.cast-power-grid button small{font-size:12px}
+.rank-cast-powers{margin:8px 0;padding:10px;background:#111a20;border-radius:5px}
+@media(max-width:380px){.cast-power-grid{gap:6px}.cast-power-grid button{padding:9px}}

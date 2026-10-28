@@ -32,7 +32,7 @@ static class RankTests
     {
         content = JsonSerializer.Deserialize<Content>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")), Json);
         data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "game-content.json")), Json);
-        Tables(); SavedSummonFloorGate(); AuthoredProfiles(); RankEffects(); DefinitionValidation(); ClassPointBudget(); TrainingAndResolver(); ClassOwnershipAndCheckpoints();
+        Tables(); CastModes(); SavedSummonFloorGate(); AuthoredProfiles(); RankEffects(); DefinitionValidation(); ClassPointBudget(); TrainingAndResolver(); ClassOwnershipAndCheckpoints();
         Console.WriteLine(checks + " rank/class progression checks passed.");
     }
     static void SavedSummonFloorGate()
@@ -80,11 +80,51 @@ static class RankTests
         var missileGame=AuthoredPracticeBattle("crawler.donut",missile,10);var missileSave=missileGame.ExportSave();missileSave.units.Single(u=>u.team=="enemy").x=4;missileSave.units.Single(u=>u.team=="enemy").y=3;missileGame.ImportSave(missileSave);string stable=Snapshot(missileGame);var missileView=Command(missileGame,"preview","crawler.donut",missile,"custom.enemy.rank");int predicted=missileView.forecast.Single(f=>f.targetId=="custom.enemy.rank").afterHp;Check(missileView.canConfirm&&Snapshot(missileGame)==stable&&missileView.forecast.Single(f=>f.targetId=="custom.enemy.rank").afterTags.Contains("status.burning"),"authored rank-ten missile forecasts actual ignition without changing save");missileView=Command(missileGame,"confirm");Check(missileView.units.Single(u=>u.id=="custom.enemy.rank").hp==predicted&&missileGame.ExportSave().timedTags.Any(t=>t.entityId=="custom.enemy.rank"&&t.tag=="status.burning"&&t.remainingRounds==2),"authored missile commit matches forecast and stores real two-round Burning lifetime");
         AuthoredMovementAndTrap();
     }
-    static GameSession AuthoredPracticeBattle(string owner,string ability,int rank)
+    static GameSession AuthoredPracticeBattle(string owner,string ability,int rank, GameData source = null)
     {
-        GameData config=Clone(data);foreach(var unlock in config.progression.skillUnlocks)if(unlock.abilityId==ability)unlock.level=1;
+        GameData config=Clone(source ?? data);foreach(var unlock in config.progression.skillUnlocks)if(unlock.abilityId==ability)unlock.level=1;
         GameSession game=new GameSession(Clone(content),config);game.Handle(new GameCommand{type="import_map",customMap=new CustomMapData{width=10,height=8,playerSpawns=new[]{new CellView{x=1,y=1},new CellView{x=1,y=3},new CellView{x=1,y=5},new CellView{x=3,y=3}},enemies=new[]{new SpawnDef{id="custom.enemy.rank",label="Rank opponent",classId=data.encounters[0].enemies[0].classId,x=8,y=6,hp=500,energy=0,move=1}}}});
         GameSave save=game.ExportSave();save.development.practice=rank==1?new SkillPracticeSave[0]:new[]{new SkillPracticeSave{unitId=owner,abilityId=ability,uses=SkillRankProgression.Thresholds(data.development.practice,ability)[rank-1]}};Check(!game.ImportSave(save).message.StartsWith("Save rejected"),"authored practice battlefield imports rank "+rank+" "+ability);game.Handle(new GameCommand{type="select",unitId=owner});return game;
+    }
+    static void CastModes()
+    {
+        const string spell = "ability.donut_magic_missile", owner = "crawler.donut", enemy = "custom.enemy.rank";
+        GameData config = Clone(data);
+        var profile = config.development.practice.abilityProfiles.Single(p => p.abilityId == spell);
+        profile.castModes = new[] { new AbilityCastModeDef { id = "mode.economy", label = "Economy", minimumRank = 5, manaCost = 1, damageBonus = -2 }, new AbilityCastModeDef { id = "mode.power", label = "Power", minimumRank = 5, manaCost = 6, damageBonus = 4 } };
+        GameSession game = AuthoredPracticeBattle(owner, spell, 5, config);
+        GameSave save = game.ExportSave(); save.units.Single(u => u.id == enemy).x = 4; save.units.Single(u => u.id == enemy).y = 3; save.units.Single(u => u.id == owner).energy = 1;
+        Check(!game.ImportSave(save).message.StartsWith("Save rejected"), "cast mode fixture imports low Mana");
+        string stable = Snapshot(game);
+        var ability = game.GetView().abilities.Single(a => a.id == spell);
+        var cheap = ability.castModes.Single(m => m.id == "mode.economy");
+        Check(ability.enabled && cheap.enabled && cheap.cost == 1 && cheap.targetIds.Contains(enemy) && !ability.castModes.Single(m => m.id == "mode.power").enabled, "affordable low-cost mode keeps ability selectable with mode-specific legal targets");
+        var bad = game.Handle(new GameCommand { type = "preview", unitId = owner, abilityId = spell, targetId = enemy, castModeId = "mode.unknown" });
+        Check(!bad.canConfirm && Snapshot(game) == stable, "unknown mode rejects without resources or practice");
+        bad = game.Handle(new GameCommand { type = "preview", unitId = owner, abilityId = spell, targetId = enemy, castModeId = "mode.power" });
+        Check(!bad.canConfirm && Snapshot(game) == stable, "unaffordable mode rejects atomically");
+        var preview = game.Handle(new GameCommand { type = "preview", unitId = owner, abilityId = spell, targetId = enemy, castModeId = cheap.id });
+        int hp = preview.forecast.Single(f => f.targetId == enemy).afterHp;
+        Check(preview.canConfirm && preview.forecast.Single(f => f.targetId == owner).afterEnergy == 0 && Snapshot(game) == stable, "selected mode forecasts exact absolute Mana without spending");
+        Command(game, "cancel"); Check(Snapshot(game) == stable, "mode preview cancellation preserves checkpoint");
+        game.Handle(new GameCommand { type = "preview", unitId = owner, abilityId = spell, targetId = enemy, castModeId = cheap.id });
+        var committed = Command(game, "confirm");
+        Check(committed.units.Single(u => u.id == enemy).hp == hp && committed.units.Single(u => u.id == owner).energy == 0 && committed.units.Single(u => u.id == owner).acted && !committed.units.Single(u => u.id == owner).moved, "mode commit matches forecast, spends action and preserves movement");
+        Check(game.ExportSave().development.practice.Single(p => p.unitId == owner && p.abilityId == spell).uses == save.development.practice.Single(p => p.unitId == owner && p.abilityId == spell).uses + 1, "mode commit trains learned ability exactly once");
+        game = AuthoredPracticeBattle(owner, spell, 4, config); save = game.ExportSave(); save.units.Single(u => u.id == enemy).x = 4; save.units.Single(u => u.id == enemy).y = 3; game.ImportSave(save); stable = Snapshot(game);
+        bad = game.Handle(new GameCommand { type = "preview", unitId = owner, abilityId = spell, targetId = enemy, castModeId = cheap.id });
+        Check(!bad.canConfirm && Snapshot(game) == stable && !bad.abilities.Single(a => a.id == spell).castModes.Single(m => m.id == cheap.id).enabled, "rank-four learned spell rejects rank-five mode in resolver and view");
+        game = AuthoredPracticeBattle(owner, spell, 4, config); save = game.ExportSave();
+        save.units.Single(u => u.id == enemy).x = 4; save.units.Single(u => u.id == enemy).y = 3;
+        save.development.practice.Single(p => p.unitId == owner && p.abilityId == spell).uses = SkillRankProgression.Thresholds(config.development.practice, spell)[4] - 1;
+        game.ImportSave(save); stable = Snapshot(game);
+        bad = game.Handle(new GameCommand { type = "preview", unitId = owner, itemId = "item.health_tonic", targetId = owner, castModeId = cheap.id });
+        Check(!bad.canConfirm && Snapshot(game) == stable, "consumable casts cannot bypass mode restrictions");
+        var normal = Command(game, "preview", owner, spell, enemy); Check(normal.canConfirm, "last rank-four normal earned use can preview");
+        var ranked = Command(game, "confirm");
+        Check(ranked.development.practice.Single(p => p.unitId == owner && p.abilityId == spell).rank == 5 && ranked.development.practice.Single(p => p.unitId == owner && p.abilityId == spell).castModes.All(c => c.enabled), "ordinary committed practice unlocks rank-five modes immediately");
+        var m = AuthoredRank(spell, 5); m.hasCastMode = true; m.castModeCost = 6; m.castModeDamageBonus = -100;
+        Check(AbilityScaling.Apply(content.abilities.Single(a => a.id == spell), m).effects.Where(e => e.op == "Damage").All(e => e.amount == 0), "negative mode damage is bounded at zero");
     }
     static void AuthoredMovementAndTrap()
     {
@@ -161,6 +201,7 @@ static class RankTests
         GameDataValidator.Validate(Clone(data), new Catalog(Clone(content)));
         Check(RejectsData(d => d.roster[0].maxSkillRank = 14) && RejectsData(d => d.roster[0].maxSkillRank = 21), "rank eligibility rejects values outside the supported fifteen-to-twenty interval");
         Check(RejectsProfile(p => p.abilityId = "ability.unknown") && RejectsData(d => d.development.practice.abilityProfiles = new[] { new AbilityRankProfile { abilityId = content.abilities[0].id }, new AbilityRankProfile { abilityId = content.abilities[0].id } }), "rank definitions reject unknown and duplicate ability profiles");
+        Check(RejectsProfile(p => p.castModes = new[] { new AbilityCastModeDef { id = "mode.bad", label = "Bad", minimumRank = 21 } }) && RejectsProfile(p => p.castModes = new[] { new AbilityCastModeDef { id = "mode.bad", label = "Bad", damageBonus = -101 } }) && RejectsProfile(p => p.castModes = new[] { new AbilityCastModeDef { id = "mode.bad", label = "Bad", manaCost = 101 } }), "cast mode definitions reject invalid unlock ranks, damage and Mana bounds");
         Check(RejectsProfile(p => p.practiceMultiplierPercent = 0) && RejectsProfile(p => p.damagePerRank = -2) && RejectsProfile(p => p.healBonusCap = 101), "rank definitions reject malformed training rates and effects beyond resolver limits");
         Check(RejectsProfile(p => p.milestones = new[] { new RankMilestoneDef { rank = 21, damageBonus = 1, description = "Invalid" } }) && RejectsProfile(p => p.milestones = new[] { new RankMilestoneDef { rank = 10, damageBonus = 1, description = "First" }, new RankMilestoneDef { rank = 10, healBonus = 1, description = "Duplicate" } }) && RejectsProfile(p => p.milestones = new[] { new RankMilestoneDef { rank = 10, damageBonus = -1, description = "Negative" } }), "rank milestones reject unsupported ranks, duplicate tiers, and negative effects");
         Check(RejectsData(d => d.classSkillTrees[0].classId = content.classes.First(c => !c.playerSelectable).id) && RejectsData(d => d.classSkillTrees[0].rosterId = d.roster[0].id), "class trees require a selectable class and cannot claim a personal-tree owner");

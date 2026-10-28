@@ -6,6 +6,7 @@ namespace DungeonCrawlerTactics
     public sealed class AbilityRankProfile
     {
         public string abilityId;
+        public AbilityCastModeDef[] castModes = new AbilityCastModeDef[0];
         public string description, canonNotes;
         public string[] sourceUrls = new string[0];
         public int practiceMultiplierPercent = 100;
@@ -18,6 +19,8 @@ namespace DungeonCrawlerTactics
         public int summonRoundsPerRank, summonRoundsBonusCap = 10;
         public RankMilestoneDef[] milestones = new RankMilestoneDef[0];
     }
+    [Serializable] public sealed class AbilityCastModeDef { public string id, label; public int minimumRank = 1, manaCost, damageBonus; }
+    [Serializable] public sealed class AbilityCastModeView { public string id, label, description, disabledReason; public int minimumRank, cost, range; public bool enabled; public string[] targetIds = new string[0]; }
     [Serializable]
     public sealed class RankMilestoneDef
     {

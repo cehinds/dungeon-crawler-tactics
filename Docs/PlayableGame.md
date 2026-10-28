@@ -28,7 +28,7 @@ Validation commands:
 - `python Tools/playtest_player_facing.py` observes actual canvas frame choices during movement, attacks and hits; it does not execute C# rules.
 - `Tools/capture_gameplay_screenshots.py` captures exploration, combat, character sheets, end-turn confirmation and forecasts from a published C# WASM game. The screenshot workflow stores downloadable captures.
 
-Ability cards now show trained rank/cap and uses to the next rank. Character → Abilities includes a collapsed 1–20 effect inspector using the shared C# tables, including unpracticed abilities. See [rank mechanics and fidelity limits](Progression.md) and the [source audit](Ability-Rank-Audit.md).
+Ability cards now show trained rank/cap and uses to the next rank. Character → Abilities includes a collapsed 1–20 effect inspector using the shared C# tables, including unpracticed abilities and rank-locked cast modes. The browser Actions flow offers Magic Missile's rank-5 Mana choices through a compact chooser with authoritative C# summaries. It displays affordable lower-cost modes even when the default 5 Mana cost cannot be paid. Preview/cancel spend nothing and do not train; confirming the selected mode spends its Mana, trains the ability once, and preserves remaining movement. This chooser is documented for the browser presentation; Unity UI support is not established. See [rank mechanics and fidelity limits](Progression.md) and the [source audit](Ability-Rank-Audit.md).
 
 See [design direction and reference access notes](Tactics-UI-References.md).
 

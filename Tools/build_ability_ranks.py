@@ -112,9 +112,17 @@ def build():
     evidence(strike['abilityId'], 'Secondary book reference: Powerful Strike amplifies unarmed damage. This action converts that identity to bounded damage and push; neither these numbers nor its full rank table are canon.',
              'https://dungeon-crawler-carl.fandom.com/wiki/Powerful_Strike_Skill')
     missile = 'ability.donut_magic_missile'
+    abilities[missile]['cost'] = 5
+    by_id[missile]['costReductionPerRank'] = 0
+    by_id[missile]['costReductionCap'] = 0
+    by_id[missile]['castModes'] = [
+        dict(id=f'power.mana{cost}', label=label, minimumRank=5, manaCost=cost, damageBonus=bonus)
+        for cost, label, bonus in [(3, 'Conserve', -4), (4, 'Measured', -2),
+                                   (5, 'Standard', 0), (6, 'Overcharge', 4)]]
+    milestone(missile, 5)['description'] = 'Choose 3–6 Mana before targeting. Damage offsets are tactical tuning; the rank and expenditure choices follow the chapter-cited reference.'
     milestone(missile, 10)['addTags'] = ['status.burning']
     milestone(missile, 10)['description'] = 'Igniting missile: applies Burning for two rounds. Deterministic tactical adaptation of the reported rank-10 ignition effect.'
-    evidence(missile, 'Secondary chapter-cited anchors: rank 5 permits variable Mana expenditure; rank 10 can ignite targets. The game uses fixed casting cost and guaranteed short Burning at rank 10, not the book chance or selectable cast power. Other ranks are extrapolated.',
+    evidence(missile, 'Secondary chapter-cited anchors: early casts cost 5 Mana; rank 5 permits choosing 3–6 Mana; rank 10 can ignite targets. This game implements those expenditure choices, with tuned damage offsets of -4/-2/0/+4 and guaranteed short Burning at rank 10. Damage numbers, ignition certainty and other rank growth are tactical adaptations, not a verified novel rank table.',
              'https://www.dccdatabase.com/wiki/magic_missile/')
     evidence('ability.donut_puddle_jumper', 'Book summaries describe group transport, cast delay and cooldown, with rank-5 and rank-15 changes. This board adaptation teleports one actor immediately; its growing tile range is extrapolated, not a canon distance or timer.',
              'https://dungeon-crawler-carl.fandom.com/wiki/Puddle_Jumper_Spell')

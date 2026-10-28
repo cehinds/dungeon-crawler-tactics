@@ -42,6 +42,7 @@ namespace DungeonCrawlerTactics
             AbilityDef effectiveCurrent = AbilityScaling.Apply(definition, currentModifiers);
             AbilityRankProfile profile = SkillRankProgression.Profile(data.development.practice, ability);
             return new SkillPracticeView { unitId = owner, abilityId = ability, uses = uses, rank = rank, maxRank = cap, atCap = rank >= cap,
+                castModes = CastModeViews(owner, ability, rank, currentModifiers),
                 canonNotes = profile == null ? "" : profile.canonNotes, sourceUrls = profile == null ? new string[0] : profile.sourceUrls, description = Describe(effectiveCurrent), cost = effectiveCurrent.cost, range = effectiveCurrent.range, nextRankUses = rank < cap ? table[rank].requiredUses : 0, damageBonus = current.damageBonus, healBonus = current.healBonus, costReduction = current.costReduction, ranks = table };
         }
         private SkillRankCatalogView[] RankCatalog()

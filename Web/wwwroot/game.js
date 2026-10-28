@@ -40,6 +40,8 @@ let pinnedInspection = null;
 let pendingActionChoice = null;
 let detailedForecast = false;
 let actionChooser = false;
+let castPowerAbilityId = null;
+let castPowerReturn = null;
 let actionTab = 'abilities';
 let endTurnActor = null;
 let animating = false;
@@ -87,7 +89,7 @@ const portrait = (u, className = 'unit-portrait') => characterIndex(u) === 3 ? `
 const hudActionLabel = (a) => a.id==='ability.katia_rush'?'Rush':({triplicate:'Triplicate',tripwire:'Tripwire',dynamite:'Dynamite',5:'Kick',15:'Strike',6:'Bomb',10:'Restore',14:'Guard',11:'Forms'})[abilityIcon(a)] || a.label;
 const abilityIcon = (a) => a.id==='ability.katia_rush'?4:({'ability.carl_tripwire':'tripwire','ability.carl_dynamite':'dynamite','ability.donut_clockwork_triplicate':'triplicate'})[a.id] || (a.id==='ability.carl_powerful_strike'?15 : /bomb|blast/.test(a.id) ? 6 : /heal|wind|recovery|rally/.test(a.id) ? 10 : /teleport|blink|swap/.test(a.id) ? 9 : /bite|maul|pounce/.test(a.id) ? 12 : /guard|bulwark/.test(a.id) ? 14 : /strike|kick|shatter|blow|bash/.test(a.id) ? 5 : /shape|transform/.test(a.id) ? 11 : 8);
 function abilityPresentation(ability) {
-  if(ability.id!=='ability.katia_shapeshift')return ability;
+  if(ability.id!=='ability.katia_shapeshift')return {...ability,enabled:ability.enabled||(ability.castModes??[]).some(mode=>mode.enabled)};
   return {...ability,formChooser:true,cost:0,range:0,target:'self',targetIds:view.canAct?[view.selectedUnitId]:[],description:abilityDescription(ability),enabled:view.canAct,disabledReason:view.canAct?'':'Action already spent'};
 }
 function actionCategory(action, item=false) {
@@ -107,7 +109,9 @@ const forecastLabel = (forecast) => { if(isSummonForecast(forecast))return `Summ
 const selectedAction = () => {
   if(captureTargetId&&view?.canConfirm){const capture=view.journey?.captures?.find(c=>c.targetId===captureTargetId);if(capture)return {label:'Capture '+capture.label,description:'Seal this weakened monster into a card and remove it from the board. This is capture, not a damaging attack. The selected crawler spends one action; movement remains independent.',cost:0,range:capture.range,target:'enemy'};}
   if(localAction?.stanceId||localAction?.formId){const mode=(localAction.stanceId?view.stances:view.forms)?.find(mode=>mode.id===(localAction.stanceId||localAction.formId));return mode?{...mode,target:'self',cost:0,range:0,targetIds:[view.selectedUnitId],disabledReason:mode.enabled?'':'Action already spent'}:null;}
-  return localAction?.itemId?view.items.find(action=>action.id===localAction.itemId):view.abilities.find(action=>action.id===localAction?.abilityId);
+  const action=localAction?.itemId?view.items.find(action=>action.id===localAction.itemId):view.abilities.find(action=>action.id===localAction?.abilityId);
+  const mode=action?.castModes?.find(mode=>mode.id===localAction?.castModeId);
+  return mode?{...action,...mode,id:action.id,label:action.label+' · '+mode.label}:action;
 };
 const nextReadyCharacter = (actorId) => {
   const order=view.partyOrder?.length?view.partyOrder:view.units.filter(u=>u.team==='player').map(u=>u.id);
@@ -346,6 +350,7 @@ function render() {
   if(levelNotice) $('#game').insertAdjacentHTML('beforeend',renderLevelDialog());
   if(characterSheetId) $('#game').insertAdjacentHTML('beforeend',renderCharacterSheet(view,content,gameData,{id:characterSheetId,portrait,describe:abilityDescription}));
   if(specialtyPending) $('#game').insertAdjacentHTML('beforeend',renderSpecialtyReview(view,content,specialtyPending,abilityDescription));
+  if(castPowerAbilityId) $('#game').insertAdjacentHTML('beforeend',renderCastPowerDialog());
   if(abilityDetailsOpen&&selectedAction()) $('#game').insertAdjacentHTML('beforeend',`<dialog id="ability-details-dialog" aria-labelledby="ability-details-title"><div class="dialog-head"><h2 id="ability-details-title">Action details</h2><button id="close-ability-details" class="icon-button" aria-label="Close action details">×</button></div><div class="modal-body">${renderAbilityDetails(selectedAction(),content,{full:true,practice:view.development?.practice?.find(skill=>skill.unitId===view.selectedUnitId&&skill.abilityId===selectedAction()?.id),profile:view.development?.rankCatalog?.find(profile=>profile.abilityId===selectedAction()?.id)})}</div><div class="modal-actions"><button id="done-ability-details">Back to targeting</button></div></dialog>`);
   if (['battle','explore'].includes(view.screen)) {
     const slot = $('#battlefield-slot');
@@ -748,6 +753,11 @@ function bindScreen() {
   $('#continue-level-up')?.addEventListener('click',closeLevel);
 
   $('#open-actions')?.addEventListener('click',()=>{if(enemySequence)return; battlefield?.skipAnimations();clearFeedback();actionChooser=true;actionTab=localAction?.itemId?'items':'abilities';detailedForecast=false;endTurnActor=null;render();});
+  const castPowerDialog=$('#cast-power-dialog');
+  if(castPowerDialog){openDialog('#cast-power-dialog');castPowerDialog.querySelector('[data-cast-mode]:not(:disabled)')?.focus();castPowerDialog.addEventListener('cancel',event=>{event.preventDefault();closeCastPower();});}
+  $('#close-cast-power')?.addEventListener('click',closeCastPower);
+  $('#cancel-cast-power')?.addEventListener('click',closeCastPower);
+  document.querySelectorAll('[data-cast-mode]').forEach(button=>button.addEventListener('click',()=>{const abilityId=castPowerAbilityId;castPowerAbilityId=null;chooseAction({abilityId,castModeId:button.dataset.castMode});}));
   const actionDialog=$('#action-dialog');
   if(actionDialog){openDialog('#action-dialog');$('#close-actions').focus();actionDialog.addEventListener('cancel',event=>{event.preventDefault();closeActionDialog();});}
   document.querySelectorAll('[data-action-tab]').forEach(button=>{
@@ -833,7 +843,26 @@ function bindScreen() {
   $('#ending-new-run')?.addEventListener('click', () => openDialog('#restart-dialog'));
   $('#ending-export')?.addEventListener('click', exportSave);
 }
+function renderCastPowerDialog() {
+  const ability=view.abilities.find(a=>a.id===castPowerAbilityId);
+  if(!ability)return '';
+  const modes=(ability.castModes??[]).filter(mode=>mode.minimumRank<=(ability.rank??1));
+  return `<dialog id="cast-power-dialog" class="cast-power-dialog" aria-labelledby="cast-power-title"><div class="dialog-head"><div><span class="section-label">${e(ability.label)} · Rank ${ability.rank}</span><h2 id="cast-power-title">Choose cast power</h2></div><button id="close-cast-power" class="icon-button" aria-label="Cancel cast power">×</button></div><div class="modal-body"><p class="small muted">Choose Mana to spend, then choose a target. Cancel spends nothing.</p><div class="cast-power-grid">${modes.map(mode=>`<button data-cast-mode="${e(mode.id)}" ${mode.enabled?'':'disabled'}><strong>${mode.cost} Mana</strong><span>${e(mode.label)}</span><p>${e(mode.description)}</p><small>Range ${mode.range} · ${mode.targetIds?.length??0} target${mode.targetIds?.length===1?'':'s'}</small>${mode.disabledReason?`<small class="availability-warning">${e(mode.disabledReason)}</small>`:''}</button>`).join('')}</div></div><div class="modal-actions"><button id="cancel-cast-power">Cancel</button></div></dialog>`;
+}
+function closeCastPower() {
+  castPowerAbilityId=null;
+  const target=castPowerReturn;castPowerReturn=null;
+  render();($(target??'#open-actions')??$('#open-actions'))?.focus();
+}
 function chooseAction(action) {
+  const ability=view.abilities.find(a=>a.id===action.abilityId);
+  if(!Object.hasOwn(action,'castModeId')&&(ability?.castModes??[]).some(mode=>mode.minimumRank<=(ability.rank??1)))return playerInput(async()=>{
+    await commandQueue;
+    if(view.canConfirm)await command('cancel',{}, {save:false});
+    localAction=null;previewTargetId=null;detailedForecast=false;actionChooser=false;
+    castPowerAbilityId=action.abilityId;castPowerReturn=`[data-ability="${action.abilityId}"]`;
+    render();
+  });
   if(action.abilityId==='ability.katia_shapeshift')return playerInput(async()=>{await commandQueue;if(view.canConfirm)await command('cancel',{}, {save:false});localAction=null;actionChooser=false;characterSheetId=view.selectedUnitId;sheetReturn='#open-actions';sheetOpenSection='sheet-forms';render();});
   pendingActionChoice=action;
   pinnedInspection=null;

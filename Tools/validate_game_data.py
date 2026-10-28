@@ -170,6 +170,11 @@ def validate_game(data, content):
     for pi, profile in enumerate(profiles):
         path = f'development.practice.abilityProfiles.{pi}'
         ref(profile['abilityId'], 'abilities', path + '.abilityId')
+        modes = profile.get('castModes', [])
+        unique(modes, 'id', path + '.castModes')
+        ability = next((a for a in content['abilities'] if a['id'] == profile['abilityId']), None)
+        if modes and ability and not any(e['op'] == 'Damage' for e in ability['effects']):
+            errors.append(path + ': cast modes require a damage effect')
         milestones = profile.get('milestones', [])
         unique(milestones, 'rank', path + '.milestones')
         for milestone in milestones:

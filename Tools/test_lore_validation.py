@@ -46,6 +46,26 @@ class LoreValidationTests(unittest.TestCase):
         self.home()
         self.assertEqual([], self.errors())
 
+    def test_cast_modes_validate_bounds_and_unique_ids(self):
+        profile = self.profile()
+        mode = {'id': 'mode.economy', 'label': 'Economy', 'minimumRank': 5, 'manaCost': 3, 'damageBonus': -2}
+        profile['castModes'] = [mode]
+        self.assertEqual([], self.errors())
+        for key, invalid in [('minimumRank', 21), ('manaCost', -1), ('damageBonus', -101)]:
+            with self.subTest(key=key):
+                previous = mode[key]
+                mode[key] = invalid
+                self.assertTrue(self.errors())
+                mode[key] = previous
+        profile['castModes'].append(copy.deepcopy(mode))
+        self.rejected('duplicate')
+
+    def test_cast_modes_require_damage_effect(self):
+        profile = self.profile()
+        profile['abilityId'] = 'ability.donut_heal_critter'
+        profile['castModes'] = [{'id': 'mode.power', 'label': 'Power', 'minimumRank': 5, 'manaCost': 6, 'damageBonus': 4}]
+        self.rejected('cast modes require a damage effect')
+
     def test_class_owner_must_exist_and_be_selectable(self):
         self.game['classSkillTrees'][0]['classId'] = 'class.missing'
         self.rejected('selectable class')
