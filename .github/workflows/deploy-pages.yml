@@ -162,6 +162,10 @@ jobs:
         run: python Tools/run_ci_browser_check.py --name "Ability ranks UI" -- python Tools/playtest_ability_ranks.py
       - name: Check cast power UI
         run: python Tools/run_ci_browser_check.py --name "Cast power UI" -- python Tools/playtest_cast_power.py
+      - name: Check compact tactics command UI
+        run: python Tools/run_ci_browser_check.py --name "Tactics command UI" -- python Tools/playtest_gba_command_ui.py
+      - name: Check published target selection and turn flow
+        run: python Tools/run_ci_browser_check.py --name "Tactics gameplay" -- python Tools/playtest_gba_gameplay.py --url http://127.0.0.1:8765
       - name: Check published ability rank progression
         run: python Tools/run_ci_browser_check.py --name "Ability ranks gameplay" -- python Tools/playtest_ability_rank_gameplay.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published Player facing

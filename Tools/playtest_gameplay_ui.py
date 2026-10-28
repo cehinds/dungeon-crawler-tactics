@@ -235,11 +235,16 @@ def main():
                         assert page.locator('.locked-personal-skills summary').inner_text().startswith('Upcoming personal abilities')
                         assert page.locator('.locked-personal-skills').locator('summary').inner_text().endswith('1')
                         page.locator('.locked-personal-skills summary').click()
-                        assert page.locator('.locked-personal-card').is_visible()
-                        assert 'Locked · Level 3' in page.locator('.locked-personal-card').inner_text()
+                        locked=page.locator('[data-action-kind="locked"]')
+                        assert locked.is_visible()
+                        locked.focus()
+                        assert 'Level 3' in page.locator('#action-menu-detail').inner_text()
                         unavailable=page.locator('[data-modal-ability="ability.carl_tripwire"]')
-                        assert unavailable.is_disabled()
-                        assert 'Requires an open tile within 3 spaces.' in unavailable.inner_text()
+                        assert unavailable.get_attribute('aria-disabled')=='true'
+                        unavailable.focus()
+                        assert 'Requires an open tile within 3 spaces.' in page.locator('#action-menu-detail').inner_text()
+                        unavailable.click(force=True)
+                        assert page.locator('#action-dialog').is_visible(), 'Unavailable inspection cast an action'
                         if width<=390:
                             for card in page.locator('#action-panel-abilities .modal-action-card').all():
                                 card_box=card.bounding_box()
@@ -291,7 +296,7 @@ def main():
                                 items_screenshot=f'actions-items-{width}x{height}.png'
                                 page.screenshot(path=str(output/items_screenshot),full_page=True)
                                 results.append(dict(screen='action-items',viewport=[width,height],runtime='presentation fixture; no C# WASM',pageErrors=list(errors),screenshot=items_screenshot,errors=[]))
-                            body=page.locator('#action-dialog .modal-body')
+                            body=page.locator('#action-dialog .action-list-pane')
                             assert body.evaluate('(e)=>e.scrollHeight>e.clientHeight'), 'Many-item phone fixture did not create a scrollable action list'
                             anchors=['#action-dialog > .dialog-head', '#action-dialog .action-tabs', '#action-dialog > .modal-actions']
                             before={selector:page.locator(selector).bounding_box() for selector in anchors}

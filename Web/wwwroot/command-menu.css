@@ -1,0 +1,103 @@
+/* Compact tactics commands: a navigable list and one contextual description.
+   This file owns only Actions and target navigation, not the battlefield HUD. */
+body[data-screen] #action-dialog {
+  --command-paper: #f4dda6;
+  --command-line: #657589;
+  --command-focus: #284b69;
+  width: min(800px, calc(100vw - 24px));
+  height: min(620px, 90dvh);
+  max-height: min(720px, 90dvh);
+  box-shadow: 0 12px 64px #000a;
+}
+body[data-screen] #action-dialog .dialog-head { padding: 12px 16px; }
+body[data-screen] #action-dialog .action-readiness { color: #b9e0d3; font-size: 11px; }
+body[data-screen] #action-dialog .action-browser {
+  display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: 0; padding: 0; overflow: hidden; min-height: 0; flex: 1 1 auto;
+}
+body[data-screen] #action-dialog .action-list-pane {
+  min-width: 0; min-height: 0; overflow-y: auto;
+  overscroll-behavior: contain; scrollbar-width: thin; padding: 10px;
+}
+body[data-screen] #action-dialog .action-command-list { display: grid; grid-template-columns: 1fr; gap: 3px; }
+body[data-screen] #action-dialog .action-command-row {
+  position: relative; display: grid; width: 100%; min-height: 64px;
+  grid-template-columns: 36px minmax(0, 1fr) auto; grid-template-rows: auto auto;
+  column-gap: 9px; row-gap: 2px; align-items: center; text-align: left;
+  border: 1px solid transparent; border-radius: 0; border-left: 3px solid #4b697c;
+  padding: 7px 9px; background: #102238; box-shadow: none;
+  transition: background-color 100ms ease, border-color 100ms ease;
+}
+body[data-screen] #action-dialog .action-command-row .hud-icon {
+  grid-column: 1; grid-row: 1 / 3; width: 36px; height: 36px;
+  min-width: 0; padding: 1px; background: #0b182b; border: 1px solid #8f7950;
+  border-radius: 0; box-shadow: none;
+}
+body[data-screen] #action-dialog .action-row-name { grid-column: 2; grid-row: 1; color: #f2e8cb; font: 700 14px/1.25 var(--ui); overflow-wrap: anywhere; }
+body[data-screen] #action-dialog .action-row-cost { grid-column: 3; grid-row: 1; color: #a6e5f8; font: 600 12px/1.3 var(--ui); white-space: nowrap; }
+body[data-screen] #action-dialog .action-row-rank { grid-column: 3; grid-row: 2; color: #d6c18e; font: 11px/1.3 var(--ui); text-align: right; }
+body[data-screen] #action-dialog .action-row-state { grid-column: 2; grid-row: 2; margin: 0; color: #b5c7d2; font: 11px/1.3 var(--ui); }
+body[data-screen] #action-dialog .action-command-row.highlighted,
+body[data-screen] #action-dialog .action-command-row:hover {
+  background: var(--command-focus); border-color: #b9a273; border-left-color: #ffe5a0;
+  box-shadow: inset 3px 0 #f6d990;
+}
+body[data-screen] #action-dialog .action-command-row.highlighted::after {
+  content: '▸'; position: absolute; left: -1px; top: 50%; transform: translateY(-50%);
+  font-size: 13px; color: #ffe5a0;
+}
+body[data-screen] #action-dialog .action-command-row:focus-visible { outline: 2px solid #ffe6a0; outline-offset: -2px; }
+body[data-screen] #action-dialog .action-command-row[aria-disabled="true"] .action-row-state { color: #dfb49a; }
+body[data-screen] #action-dialog .action-command-row[aria-disabled="true"] .hud-icon { filter: saturate(.35); }
+body[data-screen] #action-dialog .action-menu-detail {
+  min-width: 0; min-height: 0; overflow-y: auto;
+  padding: 18px; border-left: 1px solid var(--command-line);
+  background: linear-gradient(140deg, #1d334a, #0d2035);
+  overscroll-behavior: contain; scrollbar-width: thin;
+}
+body[data-screen] #action-dialog .action-menu-detail h3 { margin: 6px 0 12px; color: var(--command-paper); font: 700 24px/1.15 Georgia, serif; }
+body[data-screen] #action-dialog .action-menu-detail .section-label { font-size: 10px; color: #d8c28e; }
+body[data-screen] #action-dialog .ability-detail-budget { display: flex; flex-wrap: wrap; gap: 5px 12px; padding-bottom: 12px; border-bottom: 1px solid #65758980; color: #aee6f5; font: 12px/1.4 var(--ui); }
+body[data-screen] #action-dialog .action-detail-description { margin: 13px 0; color: #f0eadc; font: 14px/1.55 var(--ui); }
+body[data-screen] #action-dialog .action-menu-detail > p:last-of-type { margin: 10px 0 0; font: 12px/1.45 var(--ui); }
+body[data-screen] #action-dialog .action-menu-detail .availability-ready { color: #b8e3cb; }
+body[data-screen] #action-dialog .action-menu-detail .availability-warning { color: #f2c3a1; }
+body[data-screen] #action-dialog .locked-personal-skills { margin-top: 8px; padding-top: 4px; }
+body[data-screen] #action-dialog .locked-personal-skills summary { padding: 10px 5px; font-size: 12px; }
+body[data-screen] #action-dialog .modal-actions { border-top: 1px solid #ab874e; }
+body[data-screen] #action-dialog #actions-end-turn { background: #59452d; border-color: #d7b36a; color: #fff0c6; }
+body[data-screen] #forecast-dialog .forecast-target-nav {
+  display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center;
+  gap: 8px; margin: 0 0 12px; padding: 0 0 12px; border-bottom: 1px solid #657589;
+}
+body[data-screen] #forecast-dialog .forecast-target-nav button { min-height: 44px; padding: 8px 10px; font: 600 12px var(--ui); }
+body[data-screen] #forecast-dialog .forecast-target-nav span { min-width: 0; text-align: center; }
+body[data-screen] #forecast-dialog .forecast-target-nav strong { display: block; color: #f4dda6; font: 600 14px/1.3 var(--ui); overflow-wrap: anywhere; }
+body[data-screen] #forecast-dialog .forecast-target-nav small { display: block; margin-top: 3px; font: 12px var(--ui); color: #bfcedc; }
+@media (max-width: 600px) {
+  body[data-screen] #action-dialog { width: calc(100vw - 12px); height: min(690px, 94dvh); max-height: 94dvh; }
+  body[data-screen] #action-dialog .dialog-head { padding: 9px 10px; }
+  body[data-screen] #action-dialog .action-browser { display: flex; flex-direction: column; }
+  body[data-screen] #action-dialog .action-menu-detail { order: -1; flex: 0 0 195px; height: 195px; padding: 10px 12px; border-left: 0; border-bottom: 1px solid var(--command-line); }
+  body[data-screen] #action-dialog .action-menu-detail h3 { font-size: 20px; margin: 3px 0 6px; }
+  body[data-screen] #action-dialog .ability-detail-budget { padding-bottom: 5px; gap: 3px 10px; font-size: 11px; }
+  body[data-screen] #action-dialog .action-detail-description { font-size: 12px; line-height: 1.4; margin: 7px 0; }
+  body[data-screen] #action-dialog .action-menu-detail .ability-rank-progress { margin: 5px 0; font-size: 11px; }
+  body[data-screen] #action-dialog .action-menu-detail .ability-rank-progress b { font-size: 12px; }
+  body[data-screen] #action-dialog .action-menu-detail > p:last-of-type { font-size: 11px; margin-top: 5px; }
+  body[data-screen] #action-dialog .action-list-pane { flex: 1 1 auto; padding: 6px; }
+  body[data-screen] #action-dialog .action-command-row { min-height: 57px; padding: 5px 8px; }
+  body[data-screen] #action-dialog .action-readiness { font-size: 10px; }
+}
+@media (max-height: 520px) and (min-width: 601px) {
+  body[data-screen] #action-dialog { height: 96dvh; max-height: 96dvh; }
+  body[data-screen] #action-dialog .dialog-head { padding: 6px 12px; }
+  body[data-screen] #action-dialog .dialog-head h2 { font-size: 19px; }
+  body[data-screen] #action-dialog .action-tabs { padding-block: 4px; }
+  body[data-screen] #action-dialog .action-menu-detail { padding: 10px 12px; }
+  body[data-screen] #action-dialog .action-menu-detail h3 { font-size: 20px; margin: 4px 0 6px; }
+  body[data-screen] #action-dialog .modal-actions { padding-block: 5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-screen] #action-dialog .action-command-row { transition: none; }
+}

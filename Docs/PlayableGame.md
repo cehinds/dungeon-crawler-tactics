@@ -137,6 +137,14 @@ Six floor approaches now use distinct 17×13 layouts with connected optional sup
 
 The browser has larger anchored sprites, stone/torch/water presentation, a larger navy/gold HUD and a replaced Powerful Strike icon. Katia’s three alternate forms each have twelve generated, normalized idle/walking frames chosen by actual form ID. A character-sheet Progress section shows next XP, personal unlock, class milestones, unspent points and nearest practiced ranks. These are rendered components backed by game state; concept sheets remain visual targets.
 
+## Command menu clarity pass
+
+The browser now uses a compact command list with one hover/focus detail panel, replacing cards that repeated a full description and rank information for every action. The target forecast can step through legal targets and display each exact shared-C# preview without spending the ability or item. Selection uses ArrowUp/ArrowDown, Home/End, Enter and Escape; locked or unavailable skills remain inspectable but cannot activate. On phones the detail panel sits above the list, with Back, Move and End turn fixed in the footer. This retains the current navy/gold styling and does not change combat rules. Special forms, stances, Favor and capture are outside scope.
+
+- [x] Compact command list, contextual detail panel, keyboard controls and phone placement.
+- [x] Legal-target previous/next forecast controls preserve the selected ability, cast mode or item.
+- [x] Four-viewport UI fixtures and published C# WASM checks verify fixed controls, resource-free previews, selected-target confirmation, movement after casting and party advancement.
+
 ## Known limits
 
 This is a playable, ongoing series adaptation; the [completion checklist](Completion-Checklist.md) records unfinished work. There are no universal area chains, line-of-sight/elevation rules, procedural campaigns, race milestone choices, physical mass-based forms, separate companion progression, online play or audio soundtrack. Lantern Row's latch remains a one-time puzzle. Two reusable authored trap supplies now create persistent, single-entry surfaces; four fixed recipes are supported, while arbitrary improvised crafting remains planned. Three once-per-run sponsor challenges and one Favor grant per encounter are implemented; see [Audience and traps](Audience-and-Traps.md). Scenario lanes are specific authored mechanics; they do not imply a general area-effect engine. The animated square-tile browser presentation is browser-specific; Unity still uses the earlier IMGUI presenter with the updated shared rules, data and Mana labels. Mobile Unity Web support has not been established. Only the shared-C# browser build has been exercised as an actual browser application here. Unity Editor integration and Web export must be verified on a machine with Unity installed.

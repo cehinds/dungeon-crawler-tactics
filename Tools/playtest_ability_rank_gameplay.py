@@ -89,8 +89,11 @@ def main():
         assert page.locator('.game-toast').filter(has_text='SKILL RANK UP').count()>0
         page.click('#open-actions')
         card=page.locator('[data-modal-ability="ability.donut_magic_missile"]')
-        assert 'Rank 2/15' in card.inner_text() and 'uses to rank 3' in card.inner_text()
-        assert card.locator('progress').count()==1
+        assert 'R2' in card.inner_text()
+        card.focus()
+        detail=page.locator('#action-menu-detail')
+        assert 'Rank 2/15' in detail.inner_text() and 'uses to rank 3' in detail.inner_text()
+        assert detail.locator('progress').count()==1
         page.screenshot(path=str(output/'earned-rank2-desktop.png'))
         page.click('#close-actions')
         results.append('One legal confirmed cast earns rank 2 and updates action badge, progress and attained-only toast.')

@@ -71,3 +71,17 @@ This is a HUD composition pass. It does not recreate the concept's isometric cam
 - [x] Phone targeting is smaller; full action details stay accessible.
 
 The concept's illustrated hierarchy remains the reference. This pass reduces repeated chrome and nested scrolling rather than scaling down the entire interface. Long inventories and progression lists still scroll, while their navigation remains visible. Current validation and screenshots are recorded at the top of `design-qa.md`.
+
+## Fourth pass: compact command list and exact target comparison
+
+The preceding action menu repeated a description, source, rank progress and availability message on every large card. A compact command list with one focused detail panel gives each command one place and uses the available space to explain the current choice. The FFT PSP capture supports the short command-list pattern (Move/Act/Wait/Status/AI); the FFTA capture supports showing both combatants' results together. Nintendo's [FFT battle-options guide](https://www.guiasnintendo.com/1_GAMEBOY_ADVANCE/finalfantasytactics/fftactics/opcionesbatalla.html) names Move, Action (special skills/items), Wait and Status. The visible stills guide layout only; they do not establish interaction behavior or additional rules.
+
+- [x] Replace repetitive command cards with a compact keyboard-navigable list and one detail panel on hover/focus. Support ArrowUp/ArrowDown, Home/End, Enter to select and Escape to go back. Unavailable or locked skills remain inspectable but cannot activate.
+- [x] On phones, place the detail panel above the command list. Keep Back, Move and End turn in a fixed footer.
+- [x] In the action forecast, previous/next legal-target controls compare exact C# previews without spending resources. Keep the same ability, cast mode and item while changing the target.
+- [x] Preserve the existing navy/gold command-menu style. This pass needs no new graphics or rule changes. Special forms, stances, Favor and capture remain outside scope.
+- [x] Compared the user’s combat concept and reference screenshots with desktop, phone and landscape browser captures.
+
+The old cards gave every description equal visual weight. The list keeps command selection together, while the single panel explains only the currently pointed-to choice and the forecast controls let players inspect other legal targets using resolver output. The browser implementation uses `command-menu.css` for the command list and forecast navigation. Dialog geometry stays fixed while descriptions change, preventing pointer targets from shifting. Long descriptions can scroll within their bounded detail panel; the command list scrolls independently, with no nested page scrolling.
+
+Validation: the four-viewport command fixture covers pointer/keyboard input, disabled commands, long names, stable row positions, item scrolling and fixed controls. The existing 70-state HUD fixture and rank fixtures pass. A published C# WASM test verifies legal-target wraparound, byte-identical cancel, exactly one chosen target damaged, one Mana charge and practice use, movement after casting, and advancement to the next ready ally. The generated-map test uses explicitly seeded enemy positions/HP; it does not claim the fixture was earned through campaign play.
