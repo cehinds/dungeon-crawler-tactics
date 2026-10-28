@@ -15,11 +15,15 @@ A single objective ribbon shows turn and quest progress. Camera opens zoom and r
 
 Player facing uses the painted front-left/front-right and rear-left/rear-right frames after the map projection and camera rotation. Movement direction persists until an attack turns the actor toward its target. Directional lunges replace the old attack-frame fallback that could make a character face the wrong way. The art supplies idle and walk views; this does not add new directional attack frames. Enemy sheets retain their separately verified side-view mirroring.
 
-`Web/wwwroot/gameplay-ui.css` owns the final browser presentation layer. `sprite-facing.js` isolates art-facing decisions from C# rules. These changes do not alter the Unity presenter or shared combat rules.
+Actions has separate Abilities and Items tabs. Its compact header, category tabs and Back/Move/End turn footer stay visible while only the list scrolls. Upcoming skills are collapsed by default. Forecasts emphasize signed HP changes alongside exact before/after numbers; the reaction log expands on demand. Phone targeting uses a smaller card with full details available.
+
+Character sheets keep their compact portrait/resources, section tabs and Back to game control visible; only the selected section scrolls. Opening either menu clears stale routine toasts, while errors remain visible. Scaling changes preserve readable labels and 44px touch controls instead of applying a global zoom or shrinking the whole interface.
+
+`Web/wwwroot/gameplay-ui.css` owns the final battle/action presentation layer; `character-layout.css` owns the character sheet's single-scroll-panel layout. `sprite-facing.js` isolates art-facing decisions from C# rules. These changes do not alter the Unity presenter or shared combat rules.
 
 Validation commands:
 
-- `python Tools/playtest_gameplay_ui.py` checks production UI against explicit presentation fixtures, including a fixed bottom End turn across targeting, forecasts and enemy turns at five viewport sizes (60 fixture states). It checks HP/Mana geometry, quick-action selection, enemy-phase disabled commands, END/DOWN badges, status-only and Mana-only forecasts, long descriptions and command names, visible narration without control overlap, and error toasts. It opens Help, History, Sponsors and Actions through their real UI controls.
+- `python Tools/playtest_gameplay_ui.py` checks production UI against explicit presentation fixtures, including a fixed bottom End turn across targeting, forecasts and enemy turns at five viewport sizes. It checks HP/Mana geometry, quick-action selection, enemy-phase disabled commands, END/DOWN badges, status-only and Mana-only forecasts, long descriptions and command names, visible narration without control overlap, and error toasts. It opens Help, History, Sponsors and Actions through their real UI controls. Large item/equipment lists exercise the fixed navigation and single scrolling panel; action-tab keyboard navigation and HP loss/heal readouts have separate checks.
 - `node Tools/test_sprite_facing.mjs` checks player and enemy orientation across projections, camera rotations and target directions.
 - `python Tools/playtest_player_facing.py` observes actual canvas frame choices during movement, attacks and hits; it does not execute C# rules.
 - `Tools/capture_gameplay_screenshots.py` captures exploration, combat, character sheets, end-turn confirmation and forecasts from a published C# WASM game. The screenshot workflow stores downloadable captures.

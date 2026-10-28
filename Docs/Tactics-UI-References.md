@@ -60,4 +60,14 @@ This is a HUD composition pass. It does not recreate the concept's isometric cam
 - [x] Expanded presentation checks cover 60 states. Error toasts now fail the fixture suite.
 - [x] Real-game capture for `05db6de` verified forecast cancellation preserves the save, Carl → Donut → Katia → Mongo turns, and round2 after enemies. [Capture run](https://github.com/cehinds/dungeon-crawler-tactics/actions/runs/40435988421).
 - [x] The real mobile capture exposed truncated Donut command names and a toast over the objective; the follow-up wraps names and separates feedback.
-- [ ] Final follow-up deployment is tracked by GitHub Actions; a passed capture does not imply the Pages deployment is finished.
+- [x] Second-pass Pages deployment succeeded: [run 40437214998](https://github.com/cehinds/dungeon-crawler-tactics/actions/runs/40437214998).
+
+## Third pass: menu scaling and scrolling
+
+- [x] Abilities/Items tabs expose supplies without scrolling past locked skills.
+- [x] Action header, category tabs and three-button footer sit outside the list scroller. Dialog height follows its content up to a viewport limit.
+- [x] Forecasts show signed HP changes and before/after numbers together; reaction details expand separately.
+- [x] Character sheets use compact resources and fixed navigation; the active panel owns scrolling.
+- [x] Phone targeting is smaller; full action details stay accessible.
+
+The concept's illustrated hierarchy remains the reference. This pass reduces repeated chrome and nested scrolling rather than scaling down the entire interface. Long inventories and progression lists still scroll, while their navigation remains visible. Current validation and screenshots are recorded at the top of `design-qa.md`.

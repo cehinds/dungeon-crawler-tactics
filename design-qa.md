@@ -1,3 +1,19 @@
+# Third HUD pass: scrolling and menu architecture
+
+Source remains the newer 1672×941 combat concept at `/workspace/generated_images/exec-3af4f6ce-48a8-449e-a705-f78ea6819b7a.png`. The previous pass deployed successfully in Pages run 40437214998. This pass focuses on the action book, target/forecast cards, and character sheets; whole-scene art parity remains unfinished.
+
+- [x] Direct Abilities/Items tabs; locked future abilities collapsed.
+- [x] Compact fixed action header/tabs/footer, with the list as its only scroll owner.
+- [x] Natural action-dialog height and responsive viewport bounds; 44px controls retained.
+- [x] Opaque navy/gold forecast; prominent signed HP changes accompany exact before/after values, with reaction logs disclosed on demand.
+- [x] Smaller phone targeting card with full effect details accessible.
+- [x] Compact character identity/resources and fixed section navigation; only the active tab panel scrolls.
+- [x] Remaining character/action-detail MP labels changed to Mana; stale routine toasts cleared on menu entry while errors remain.
+
+The presentation suite passes 70 checks at five viewports, including long item/equipment lists, keyboard tabs, unavailable-action reasons and loss/heal/status forecasts. Visual review covers the action menu, exact forecast, phone item list and character sheets at 320×740, 390×844 and 844×390. A short-landscape test initially found a 58px content panel that could not display a full equipment card; a height-specific compact summary now leaves approximately 160px and the strict last-item visibility check passes. Screenshots: `/workspace/scratch/ui-third-pass/`. JavaScript syntax, Python compilation and whitespace checks pass. Shared C# validation and deployment are tracked separately in Actions. The real-game capture script also checks that browsing Items/Abilities preserves the save before continuing through preview cancellation and the four-character turn cycle. Presentation fixtures do not establish C# runtime validation.
+
+---
+
 # Second HUD clarity pass
 
 Source: the same 1672×941 combat concept (`/workspace/generated_images/exec-3af4f6ce-48a8-449e-a705-f78ea6819b7a.png`). Implementation: `/workspace/scratch/ui-second-pass/`, Chromium at DPR 1, desktop 1672×941 and 1440×1000, phones 390×844 and 320×740, landscape 844×390. This remains HUD-only review with square-map presentation fixtures.

@@ -106,6 +106,18 @@ def main():
             page.locator('#open-actions').click()
             page.locator('#action-dialog').wait_for(state='visible')
             capture('05-actions.png', 'Actual action book for the selected crawler.', native=True)
+            before_menu = page.evaluate('window.dungeon.getSave()')
+            page.locator('#action-tab-items').click()
+            assert page.locator('#action-tab-items').get_attribute('aria-selected') == 'true'
+            assert page.locator('#action-panel-items [data-modal-item]').count() == len(view(page)['items'])
+            capture('13-items-desktop.png', 'Shared supplies directly accessible through the Items tab.', native=True)
+            page.set_viewport_size({'width': 390, 'height': 844})
+            capture('14-items-mobile.png', 'Illustrated supplies and pinned dialog controls on a phone.', native=True)
+            page.locator('#action-tab-abilities').click()
+            assert page.locator('#action-tab-abilities').get_attribute('aria-selected') == 'true'
+            capture('15-abilities-mobile.png', 'Abilities tab with upcoming skills collapsed.', native=True)
+            assert page.evaluate('window.dungeon.getSave()') == before_menu, 'Browsing action tabs changed the save'
+            page.set_viewport_size({'width': 1440, 'height': 1000})
             ability = next((a for a in view(page)['abilities'] if a.get('enabled') and a.get('targetIds') and a.get('target') != 'self'), None)
             if ability:
                 page.locator('[data-modal-ability="'+ability['id']+'"]').click()

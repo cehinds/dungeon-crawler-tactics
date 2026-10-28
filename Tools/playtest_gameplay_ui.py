@@ -37,7 +37,8 @@ def fixture(screen):
                       target='enemy', cost=5, range=4, targetIds=['enemy.rat'], enabled=True),
                  dict(id='ability.carl_tripwire', label='Rig Tripwire',
                       description='Set a trap on an empty tile.', target='tile', cost=2,
-                      range=3, targetIds=['tile.3.4'], enabled=True)]
+                      range=3, targetIds=[], enabled=False,
+                      disabledReason='Requires an open tile within 3 spaces.')]
     enemy = dict(units[0], id='enemy.rat', label='Dungeon rat', team='enemy',
                  selected=False, x=6, y=4, classId='class.enemy')
     return dict(screen=screen, encounterIndex=0, encounterName='Lantern Vault',
@@ -45,7 +46,13 @@ def fixture(screen):
                 selectedUnitId=units[0]['id'], units=units+[enemy], roster=[dict(u, selected=True) for u in units],
                 classes=[dict(id='class.'+c, label=c.title()) for _, _, c in names],
                 tiles=tiles, width=12, height=10, reachable=[t for t in tiles if not t['blocked'] and abs(t['x']-2)+abs(t['y']-3)<=5],
-                forecast=[], abilities=abilities, items=[], equipment=[], log=[],
+                forecast=[], abilities=abilities,
+                items=[dict(id='item.healing_tonic', label='Healing tonic', count=2,
+                            cost=0, range=0, target='ally', targetIds=['crawler.carl'],
+                            description='Restore 7 health to one ally.')], equipment=[], log=[],
+                progression=dict(skills=[dict(id='skill.carl_shock_trap',
+                    abilityId='ability.carl_tripwire', label='Shock Trap', level=3,
+                    minimumFloor=2, unlocked=False, unitId='crawler.carl')]),
                 audience=dict(favor=0,favorCap=1,challenges=[],favorItemIds=[]),
                 events=[], quests=[], canMove=True, canAct=True, canConfirm=False,
                 partyOrder=[u['id'] for u in units], message='Move or act in either order. End each crawler’s turn when ready.',
@@ -135,16 +142,20 @@ def main():
                                 document.querySelectorAll('#forecast-dialog, #ability-details-dialog').forEach(dialog=>dialog.close());
                                 detailedForecast=false;abilityDetailsOpen=false;
                                 view=structuredClone(initialFixture);localAction=null;actionChooser=false;
-                                if(mode==='targeting'||mode==='forecast'||mode==='status-forecast'||mode==='mana-forecast'||mode==='narrator-targeting'||mode==='long-description'||mode==='long-command-labels')localAction={abilityId:view.abilities[1].id};
-                                if(mode==='forecast'||mode==='status-forecast'||mode==='mana-forecast'){
+                                if(mode==='targeting'||mode==='forecast'||mode==='status-forecast'||mode==='mana-forecast'||mode==='heal-forecast'||mode==='narrator-targeting'||mode==='long-description'||mode==='long-command-labels')localAction={abilityId:view.abilities[1].id};
+                                if(mode==='forecast'||mode==='status-forecast'||mode==='mana-forecast'||mode==='heal-forecast'){
                                   view.canConfirm=true;
                                   view.forecast=[mode==='status-forecast'
                                     ?{targetId:'enemy.rat',label:'Dungeon rat',beforeHp:30,afterHp:30,beforeEnergy:12,afterEnergy:12,beforeTags:[],afterTags:['status.burning']}
                                     :mode==='mana-forecast'
                                       ?{targetId:'enemy.rat',label:'Dungeon rat',beforeHp:30,afterHp:30,beforeEnergy:12,afterEnergy:7,beforeTags:[],afterTags:[]}
+                                      :mode==='heal-forecast'
+                                        ?{targetId:'crawler.carl',label:'Carl',beforeHp:30,afterHp:37,beforeEnergy:12,afterEnergy:12,beforeTags:[],afterTags:[]}
                                       :{targetId:'enemy.rat',label:'Dungeon rat',beforeHp:30,afterHp:18,beforeEnergy:12,afterEnergy:12,beforeTags:[],afterTags:['status.burning']}];
                                 }
                                 if(mode==='enemy'){view.phase='enemy';view.canMove=false;view.canAct=false;}
+                                if(mode==='many-items')view.items=Array.from({length:18},(_,i)=>({id:'item.fixture_'+i,label:'Supply '+String(i+1).padStart(2,'0'),count:2,cost:0,range:0,target:'ally',targetIds:['crawler.carl'],description:'A counted fixture supply for scrolling checks.'}));
+                                if(mode==='long-sheet')view.equipment=Array.from({length:14},(_,i)=>({id:'gear.fixture_'+i,label:'Field kit '+String(i+1).padStart(2,'0'),slot:'Trinket',owned:i<7,equippedUnitId:null,hpBonus:i,manaBonus:1,moveBonus:0,abilityIds:[]}));
                                 if(mode==='finished-fallen') {view.units[0].finished=true;view.units[1].hp=0;view.roster[0].finished=true;view.roster[1].hp=0;}
                                 if(mode==='narrator-targeting')narrator.onEvent({type:'damage',actorId:'crawler.carl',targetId:'enemy.rat',before:30,after:28,amount:2});
                                 if(mode==='long-command-labels') {
@@ -219,8 +230,84 @@ def main():
                         page.screenshot(path=str(output/filename), full_page=True)
                         modal['screenshot']=filename
                         results.append(modal)
+                        # Exercise both action-book tabs and the upcoming-skills disclosure.
+                        assert page.locator('[data-action-tab="abilities"]').get_attribute('aria-selected')=='true'
+                        assert page.locator('.locked-personal-skills summary').inner_text().startswith('Upcoming personal abilities')
+                        assert page.locator('.locked-personal-skills').locator('summary').inner_text().endswith('1')
+                        page.locator('.locked-personal-skills summary').click()
+                        assert page.locator('.locked-personal-card').is_visible()
+                        assert 'Locked · Level 3' in page.locator('.locked-personal-card').inner_text()
+                        unavailable=page.locator('[data-modal-ability="ability.carl_tripwire"]')
+                        assert unavailable.is_disabled()
+                        assert 'Requires an open tile within 3 spaces.' in unavailable.inner_text()
+                        if width<=390:
+                            for card in page.locator('#action-panel-abilities .modal-action-card').all():
+                                card_box=card.bounding_box()
+                                assert card_box['height']<=160, f'Action card exceeds compact phone budget: {card_box}'
+                        page.locator('[data-action-tab="items"]').click()
+                        assert page.locator('[data-action-tab="items"]').get_attribute('aria-selected')=='true'
+                        assert page.locator('#action-panel-items [data-modal-item="item.healing_tonic"]').inner_text().count('Healing tonic')==1
+                        page.locator('[data-action-tab="abilities"]').click()
+                        assert page.locator('[data-action-tab="abilities"]').get_attribute('aria-selected')=='true'
+                        if width<=390:
+                            dialog=page.locator('#action-dialog').bounding_box()
+                            footer=page.locator('#action-dialog .modal-actions').bounding_box()
+                            assert footer['x']>=dialog['x']-1 and footer['x']+footer['width']<=dialog['x']+dialog['width']+1, f'Action dialog footer escapes dialog at {width}px'
+                            assert footer['y']+footer['height']<=height+1, f'Action dialog footer escapes viewport at {width}px'
                         page.locator('#cancel-actions').click()
-                        for mode in ['targeting', 'forecast', 'status-forecast', 'mana-forecast', 'finished-fallen', 'narrator-targeting', 'long-description', 'long-command-labels', 'enemy']:
+                        if width<=390 or (width==844 and height==390):
+                            page.evaluate("window.layoutMode('long-sheet')")
+                            page.locator('#open-character-sheet').click()
+                            page.locator('#character-sheet-dialog').wait_for(state='visible')
+                            sheet_screenshot=f'character-sheet-{width}x{height}.png'
+                            page.screenshot(path=str(output/sheet_screenshot),full_page=True)
+                            results.append(dict(screen='character-sheet',viewport=[width,height],runtime='presentation fixture; no C# WASM',pageErrors=list(errors),screenshot=sheet_screenshot,errors=[]))
+                            assert page.locator('[data-sheet-section="sheet-stats"]').get_attribute('aria-selected')=='true'
+                            page.locator('[data-sheet-section="sheet-gear"]').click()
+                            assert page.locator('[data-sheet-section="sheet-gear"]').get_attribute('aria-selected')=='true'
+                            panel=page.locator('#sheet-gear')
+                            assert panel.is_visible()
+                            assert panel.evaluate('(e)=>e.scrollHeight>e.clientHeight'), 'Character gear fixture did not create a scrollable section'
+                            anchors=['#character-sheet-dialog > .dialog-head', '.sheet-portrait-panel', '.sheet-navigation', '#character-sheet-dialog > .modal-actions']
+                            before={selector:page.locator(selector).bounding_box() for selector in anchors}
+                            panel.evaluate('(e)=>e.scrollTop=e.scrollHeight')
+                            page.wait_for_timeout(80)
+                            after={selector:page.locator(selector).bounding_box() for selector in anchors}
+                            for selector in anchors:
+                                assert abs(before[selector]['y']-after[selector]['y'])<=1, f'{selector} moved while scrolling character content'
+                                assert after[selector]['y']>=-1 and after[selector]['y']+after[selector]['height']<=height+1, f'{selector} escaped character-sheet viewport'
+                            last_inventory=page.locator('#sheet-gear .sheet-inventory-item').last
+                            last_box=last_inventory.bounding_box();panel_box=panel.bounding_box()
+                            assert last_inventory.is_visible() and last_box['y']>=panel_box['y']-1 and last_box['y']+last_box['height']<=panel_box['y']+panel_box['height']+1, f'Last inventory entry is not in view at the bottom of the character sheet: item={last_box}, panel={panel_box}, scroll={panel.evaluate("e=>({top:e.scrollTop,scroll:e.scrollHeight,client:e.clientHeight})")}'
+                            page.locator('[data-sheet-section="sheet-stats"]').click()
+                            assert page.locator('#sheet-stats').is_visible(), 'Character sheet tab navigation failed'
+                            page.locator('#done-character-sheet').click()
+                            assert not page.locator('#character-sheet-dialog').is_visible()
+                        if width<=390:
+                            page.evaluate("window.layoutMode('many-items')")
+                            page.locator('#open-actions').click()
+                            page.locator('[data-action-tab="items"]').click()
+                            if width<=390:
+                                items_screenshot=f'actions-items-{width}x{height}.png'
+                                page.screenshot(path=str(output/items_screenshot),full_page=True)
+                                results.append(dict(screen='action-items',viewport=[width,height],runtime='presentation fixture; no C# WASM',pageErrors=list(errors),screenshot=items_screenshot,errors=[]))
+                            body=page.locator('#action-dialog .modal-body')
+                            assert body.evaluate('(e)=>e.scrollHeight>e.clientHeight'), 'Many-item phone fixture did not create a scrollable action list'
+                            anchors=['#action-dialog > .dialog-head', '#action-dialog .action-tabs', '#action-dialog > .modal-actions']
+                            before={selector:page.locator(selector).bounding_box() for selector in anchors}
+                            body.evaluate('(e)=>e.scrollTop=e.scrollHeight')
+                            page.wait_for_timeout(80)
+                            after={selector:page.locator(selector).bounding_box() for selector in anchors}
+                            for selector in anchors:
+                                assert abs(before[selector]['y']-after[selector]['y'])<=1, f'{selector} moved while scrolling the item list'
+                                assert after[selector]['y']>=-1 and after[selector]['y']+after[selector]['height']<=height+1, f'{selector} escaped phone viewport'
+                            last=page.locator('#action-panel-items [data-modal-item="item.fixture_17"]')
+                            last_box=last.bounding_box();body_box=body.bounding_box()
+                            assert last.is_visible() and last_box['y']>=body_box['y']-1 and last_box['y']+last_box['height']<=body_box['y']+body_box['height']+1, f'Last counted item is not in view at bottom of phone list: {last_box}, {body_box}'
+                            last.click()
+                            assert page.locator('.hud-target').is_visible(), 'Scrolled item action could not be selected'
+                            page.evaluate("window.layoutMode('battle')")
+                        for mode in ['targeting', 'forecast', 'status-forecast', 'mana-forecast', 'heal-forecast', 'finished-fallen', 'narrator-targeting', 'long-description', 'long-command-labels', 'enemy']:
                             page.evaluate('(mode)=>window.layoutMode(mode)', mode)
                             page.wait_for_timeout(100)
                             state_selectors = ['#end-turn', '#open-actions', '.hud-crawler', '.hud-actions', '.party-phase']
@@ -228,7 +315,7 @@ def main():
                                 assert page.locator('.hud-actions [data-ability]:enabled').count()==0
                                 assert page.locator('#end-turn').is_disabled()
                             if mode not in ('enemy','finished-fallen'): state_selectors += ['.hud-target', '#cancel-forecast']
-                            if mode in ('forecast','status-forecast','mana-forecast'): state_selectors += ['#review-forecast']
+                            if mode in ('forecast','status-forecast','mana-forecast','heal-forecast'): state_selectors += ['#review-forecast']
                             if mode=='finished-fallen': state_selectors += ['.party-chip:nth-child(1) .party-state', '.party-chip:nth-child(2) .party-state']
                             if mode=='finished-fallen':
                                 assert page.locator('.party-chip:nth-child(1) .party-state').inner_text()=='END'
@@ -245,6 +332,10 @@ def main():
                                 page.locator('#review-forecast').click()
                                 detail=page.locator('.forecast-detail').inner_text()
                                 assert 'Mana' in detail and '12 → 7' in detail
+                            if mode in ('forecast','heal-forecast'):
+                                page.locator('#review-forecast').click()
+                                hp=page.locator('.forecast-detail').inner_text()
+                                assert ('30 → 18' in hp and '12' in hp and 'HP lost' in hp) if mode=='forecast' else ('30 → 37' in hp and '7' in hp and 'HP restored' in hp), f'HP forecast delta missing in {mode}: {hp}'
                             if mode=='narrator-targeting':
                                 assert page.locator('#narrator-panel').get_attribute('data-empty')=='false'
                                 overlap_check="""(() => {const a=document.querySelector('#narrator-panel').getBoundingClientRect(); return ['.hud-target','.hud-actions','#end-turn','#open-actions','#cancel-forecast'].some(s=>{const e=document.querySelector(s);if(!e)return false;const b=e.getBoundingClientRect();return Math.min(a.right,b.right)-Math.max(a.left,b.left)>2 && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>2;});})()"""
