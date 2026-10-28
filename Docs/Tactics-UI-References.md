@@ -85,3 +85,15 @@ The preceding action menu repeated a description, source, rank progress and avai
 The old cards gave every description equal visual weight. The list keeps command selection together, while the single panel explains only the currently pointed-to choice and the forecast controls let players inspect other legal targets using resolver output. The browser implementation uses `command-menu.css` for the command list and forecast navigation. Dialog geometry stays fixed while descriptions change, preventing pointer targets from shifting. Long descriptions can scroll within their bounded detail panel; the command list scrolls independently, with no nested page scrolling.
 
 Validation: the four-viewport command fixture covers pointer/keyboard input, disabled commands, long names, stable row positions, item scrolling and fixed controls. The existing 70-state HUD fixture and rank fixtures pass. A published C# WASM test verifies legal-target wraparound, byte-identical cancel, exactly one chosen target damaged, one Mana charge and practice use, movement after casting, and advancement to the next ready ally. The generated-map test uses explicitly seeded enemy positions/HP; it does not claim the fixture was earned through campaign play.
+
+## Fifth UX pass: activation and targeting clarity
+
+This pass applies the compact status-feedback approach of the references above to the game’s independent movement and action budgets. These are presentation changes, not new combat rules.
+
+- [x] Give Move and Act independent ready/spent checks on party portraits; strike through the spent part. Keep END and DOWN visibly distinct.
+- [x] During targeting, keep the acting unit, legal targets and selected preview in view without covering the HUD. Preserve manual pan on unchanged targeting and the selected target when reframing. For large terrain-target sets, prioritize occupied legal tiles plus a local sample rather than every legal tile.
+- [x] Match invalid-click guidance to the command's target type and team legality, rather than always suggesting a terrain target.
+
+Validation: the 70-state HUD suite, four-size command menu and readiness fixtures, and 16 target-camera scenarios pass. Camera checks also cover four rotations, resize continuity and unchanged-render pan preservation. The actual published C# WASM flow verifies invalid-target/save preservation, exact target confirmation, independent action/movement readiness and party advancement. A fresh-run screenshot walkthrough covers exploration, targeting, party turns and the enemy phase. Numeric rank rules and Unity presentation are unchanged.
+
+The preceding Pages run failed its 320px command-row height check with the CI system font. Command names now wrap to at most two visible lines; the selected detail panel retains the complete name. A monospace-font stress case verifies the compact row budget without relaxing it.

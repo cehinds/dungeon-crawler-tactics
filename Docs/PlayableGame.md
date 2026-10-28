@@ -145,6 +145,14 @@ The browser now uses a compact command list with one hover/focus detail panel, r
 - [x] Legal-target previous/next forecast controls preserve the selected ability, cast mode or item.
 - [x] Four-viewport UI fixtures and published C# WASM checks verify fixed controls, resource-free previews, selected-target confirmation, movement after casting and party advancement.
 
+## Fifth UX pass: activation and targeting clarity
+
+Implemented in the browser presentation; combat rules are unchanged.
+
+- [x] Show Move and Act as separate ready/spent checks on each party portrait. Mark a spent part with strikethrough; keep END (activation finished) distinct from DOWN (defeated).
+- [x] When targeting, frame the acting unit, legal targets and selected target preview together while keeping the HUD clear. Preserve manual pan on unchanged targeting, and do not change the selected target when the camera reframes. For large terrain-target sets, prioritize occupied legal tiles and a local sample rather than fitting every legal tile.
+- [x] Explain rejected clicks from the action's actual target type and team legality; do not default every invalid click to a terrain-target suggestion.
+
 ## Known limits
 
 This is a playable, ongoing series adaptation; the [completion checklist](Completion-Checklist.md) records unfinished work. There are no universal area chains, line-of-sight/elevation rules, procedural campaigns, race milestone choices, physical mass-based forms, separate companion progression, online play or audio soundtrack. Lantern Row's latch remains a one-time puzzle. Two reusable authored trap supplies now create persistent, single-entry surfaces; four fixed recipes are supported, while arbitrary improvised crafting remains planned. Three once-per-run sponsor challenges and one Favor grant per encounter are implemented; see [Audience and traps](Audience-and-Traps.md). Scenario lanes are specific authored mechanics; they do not imply a general area-effect engine. The animated square-tile browser presentation is browser-specific; Unity still uses the earlier IMGUI presenter with the updated shared rules, data and Mana labels. Mobile Unity Web support has not been established. Only the shared-C# browser build has been exercised as an actual browser application here. Unity Editor integration and Web export must be verified on a machine with Unity installed.

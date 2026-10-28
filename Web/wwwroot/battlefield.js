@@ -85,6 +85,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   let shakeUntil = 0;
   let zoomLevel = 1, panX = 0, panY = 0, cameraReady = false, lastSelection = null;
   let drag = null, suppressClick = false, rotation = 0;
+  let targetingFrameKey = '';
   const facing = new Map();
   let explorationMotion = null;
   let nativeKey = '', nativeState = 'none', nativeArt = null, nativeScene = null, nativeError = '', nativeRequest = 0;
@@ -175,6 +176,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   }
   function resize() {
     const box=canvas.getBoundingClientRect();
+    const sizeChanged=Math.abs(width-box.width)>.5||Math.abs(height-box.height)>.5;
     const wasMobile=width<600;
     const layoutChanged=width>1&&cameraReady&&wasMobile!==(box.width<600);
     width=Math.max(1,box.width); height=Math.max(1,box.height);
@@ -189,7 +191,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.setTransform(dpr,0,0,dpr,0,0);
     context.imageSmoothingEnabled=false;
     fit();
-    if(layoutChanged)centerSelected();
+    if(sizeChanged&&options.mode==='ability'&&options.action)centerTargets();
+    else if(layoutChanged)centerSelected();
   }
   function fit() {
     const map = view?.screen === 'explore' ? view.exploration : view;
@@ -235,6 +238,10 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       }
     }
     if(oldScreen!==next.screen)explorationMotion=null;
+    const targetKey=settings.mode==='ability' && settings.action
+      ? JSON.stringify([next.selectedUnitId,settings.action.id,settings.action.cost,settings.action.range,settings.action.targetIds,settings.targetId]) : '';
+    const targetChanged=targetKey!==targetingFrameKey;
+    targetingFrameKey=targetKey;
     view=next; options=settings;
     loadNativeArt();
     if (!animation) {visualUnits=copy(next.units ?? []); visualTiles=copy(next.tiles ?? []);}
@@ -246,6 +253,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     if(next.screen==='explore'){if(mapChanged)centerSelected();}
     else if(mapChanged && (!nativeActive()||nativeState==='ready'))centerAction();
     else if(width<600 && lastSelection!==next.selectedUnitId)centerSelected();
+    if(targetKey && (targetChanged||mapChanged))centerTargets();
     lastSelection=next.selectedUnitId;
   }
   function diamond(x,y,{stroke,fill,weight=2,inset=0}={}) {
@@ -836,6 +844,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function skipAnimations() {explorationMotion=null;generation++;animation=null;if(view){visualUnits=copy(view.units??[]);visualTiles=copy(view.tiles??[]);}effects=[];floating=[];missiles=[];}
   function centerAction() {
     if(view?.screen==='explore'){centerSelected();return;}
+    if(options.mode==='ability' && options.action){centerTargets();return;}
     const party=(view?.units??[]).filter(u=>u.hp>0&&u.team==='player');if(!party.length){centerSelected();return;}
     const center={x:party.reduce((sum,u)=>sum+u.x,0)/party.length,y:party.reduce((sum,u)=>sum+u.y,0)/party.length};
     const enemy=(view.units??[]).filter(u=>u.hp>0&&u.team==='enemy').sort((a,b)=>Math.hypot(a.x-center.x,a.y-center.y)-Math.hypot(b.x-center.x,b.y-center.y))[0];
@@ -850,6 +859,47 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const middle={x:(bounds.left+bounds.right)/2,y:(bounds.top+bounds.bottom)/2};
     panX+=width*.5-(originX+middle.x*scale);
     panY+=(90+(height-125)/2)-(originY+middle.y*scale);fit();
+  }
+
+  // Measure overlays in canvas coordinates so targeting follows the actual HUD layout.
+  function targetingViewport() {
+    const box=canvas.getBoundingClientRect();
+    let area={left:20,right:width-20,top:20,bottom:height-20};
+    for(const node of document.querySelectorAll('.objective-banner,.battle-hud,.hud-target')) {
+      const rect=node.getBoundingClientRect();
+      const obstacle={left:Math.max(0,rect.left-box.left-12),right:Math.min(width,rect.right-box.left+12),top:Math.max(0,rect.top-box.top-12),bottom:Math.min(height,rect.bottom-box.top+12)};
+      if(!rect.width||!rect.height||obstacle.right<=area.left||obstacle.left>=area.right||obstacle.bottom<=area.top||obstacle.top>=area.bottom)continue;
+      const candidates=[{...area,left:obstacle.right},{...area,right:obstacle.left},{...area,top:obstacle.bottom},{...area,bottom:obstacle.top}];
+      const usable=candidates.filter(a=>a.right-a.left>=120&&a.bottom-a.top>=120);
+      if(usable.length)area=usable.sort((a,b)=>(b.right-b.left)*(b.bottom-b.top)-(a.right-a.left)*(a.bottom-a.top))[0];
+    }
+    return area;
+  }
+  function centerTargets() {
+    const actor=view?.units?.find(u=>u.id===view.selectedUnitId);
+    if(!actor)return;
+    const ids=new Set(options.action?.targetIds??[]);
+    const entities=[...(view.units??[]),...(view.tiles??[])];
+    const preview=entities.find(entity=>entity.id===options.targetId&&ids.has(entity.id));
+    let targets=entities.filter(entity=>ids.has(entity.id)&&entity.id!==actor.id);
+    const nearest=(a,b)=>Math.hypot(a.x-actor.x,a.y-actor.y)-Math.hypot(b.x-actor.x,b.y-actor.y);
+    // Terrain actions can expose hundreds of cells. Prioritize occupied legal
+    // cells so a bomb's distant threats remain visible, then add local terrain.
+    if(options.action?.target==='tile') {
+      const occupied=new Set((view.units??[]).filter(u=>u.hp>0).map(u=>`${u.x},${u.y}`));
+      const occupiedTargets=targets.filter(t=>occupied.has(`${t.x},${t.y}`)).sort(nearest).slice(0,8);
+      const emptyTargets=targets.filter(t=>!occupied.has(`${t.x},${t.y}`)).sort(nearest).slice(0,4);
+      targets=[...occupiedTargets,...emptyTargets];
+    } else if(targets.length>8)targets=targets.sort(nearest).slice(0,8);
+    const group=preview?[actor,preview]:[actor,...targets];
+    const points=group.map(entity=>project(entity.x,entity.y));
+    const bounds={left:Math.min(...points.map(p=>p.x))-48,right:Math.max(...points.map(p=>p.x))+48,top:Math.min(...points.map(p=>p.y))-148,bottom:Math.max(...points.map(p=>p.y))+32};
+    const area=targetingViewport();
+    const ratio=Math.min(1,(area.right-area.left)/((bounds.right-bounds.left)*scale),(area.bottom-area.top)/((bounds.bottom-bounds.top)*scale));
+    if(ratio<1){zoomLevel=Math.max(.05,zoomLevel*ratio);fit();}
+    panX+=(area.left+area.right)/2-(originX+(bounds.left+bounds.right)/2*scale);
+    panY+=(area.top+area.bottom)/2-(originY+(bounds.top+bounds.bottom)/2*scale);
+    fit();
   }
 
   function centerSelected() {

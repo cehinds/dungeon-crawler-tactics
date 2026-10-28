@@ -78,6 +78,13 @@ def main():
                 page.screenshot(path=str(output/f'pre-hover-{width}x{height}.png'))
                 rows.nth(1).hover();assert state['abilities'][1]['description'] in detail.inner_text()
                 errors.extend(page.evaluate(LAYOUT));page.screenshot(path=str(output/f'commands-{width}x{height}.png'))
+                if width==320:
+                    # CI has different system fonts: stress wrapping while retaining
+                    # the complete command name in its shared detail panel.
+                    font_style=page.add_style_tag(content='body[data-screen] { --ui: monospace; }')
+                    rows.nth(1).focus();assert state['abilities'][1]['label'] in detail.inner_text()
+                    errors.extend(page.evaluate(LAYOUT))
+                    font_style.evaluate('e=>e.remove()')
                 rows.nth(0).click();assert not page.locator('#action-dialog').is_visible();assert 'Powerful Strike' in page.locator('.hud-target').inner_text()
                 page.evaluate('window.gbaResetTargetFixture()');page.click('#open-actions');page.click('[data-action-tab="items"]')
                 pane=page.locator('.action-list-pane');footer=page.locator('#action-dialog > .modal-actions');before=footer.bounding_box()

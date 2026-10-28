@@ -15,7 +15,23 @@ from playtest_procedural_maps import ready_runtime
 def view(page):return page.evaluate('window.dungeon.getView()')
 def save(page):return page.evaluate('window.dungeon.getSave()')
 def cell_click(page,unit):
-    point=page.evaluate('''u=>{const p=window.dungeon.cellToScreen(u.x,u.y),b=document.querySelector('#battlefield').getBoundingClientRect();return {x:b.left+p.x,y:b.top+p.y};}''',unit)
+    # Native art completion changes projection/fit; wait for the real renderer,
+    # then require stable coordinates and verify its inverse pick before input.
+    page.wait_for_function("['none','ready'].includes(window.dungeon.scene.getNativeArtStatus().state)")
+    point=page.evaluate('''async u=>{
+      await document.fonts.ready;
+      let previous=null,stable=0,p;
+      for(let i=0;i<120&&stable<4;i++){
+        await new Promise(requestAnimationFrame);
+        p=window.dungeon.cellToScreen(u.x,u.y);
+        stable=previous&&Math.abs(p.x-previous.x)<.01&&Math.abs(p.y-previous.y)<.01?stable+1:0;
+        previous=p;
+      }
+      if(stable<4)throw Error('Battlefield coordinates did not stabilize');
+      const b=document.querySelector('#battlefield').getBoundingClientRect();
+      return {x:b.left+p.x,y:b.top+p.y,picked:window.dungeon.scene.screenToCell(p.x,p.y),art:window.dungeon.scene.getNativeArtStatus()};
+    }''',unit)
+    assert point['picked'] and (point['picked']['x'],point['picked']['y'])==(unit['x'],unit['y']),dict(target=unit,point=point)
     page.mouse.click(point['x'],point['y'])
 
 
@@ -43,7 +59,20 @@ def main():
         seed['selectedUnitId']=actor['id'];seed['development']['practice']=[]
         page.evaluate('s=>window.dungeon.loadSave(JSON.stringify(s))',seed)
         initial=view(page);ability=next(a for a in initial['abilities'] if a['id']=='ability.donut_magic_missile');ids=ability['targetIds'];assert len(ids)>=2 and ability['enabled']
+        def readiness(move, act):
+            chip=page.locator('[data-unit="crawler.donut"]')
+            assert chip.locator('.move-'+move).inner_text()=='Move'
+            assert chip.locator('.act-'+act).inner_text()=='Act'
+        readiness('ready','ready')
         checkpoint=save(page)
+        page.click('#open-actions');page.click('[data-modal-ability="ability.donut_magic_missile"]')
+        cell_click(page,actor)
+        page.locator('.game-toast.toast-warning').wait_for(state='visible')
+        assert 'cannot target' in page.locator('.game-toast.toast-warning').inner_text()
+        assert 'Choose a highlighted enemy' in page.locator('.game-toast.toast-warning').inner_text()
+        assert save(page)==checkpoint and not view(page)['canConfirm']
+        checks.append('Invalid allied target reports the target restriction and preserves byte-identical saved state.')
+        page.click('#move-mode')
         def open_forecast():
             page.click('#open-actions');page.click('[data-modal-ability="ability.donut_magic_missile"]');cell_click(page,next(u for u in view(page)['units'] if u['id']==ids[0]));page.wait_for_function('window.dungeon.getView().canConfirm');page.locator('#forecast-next-target').wait_for(state='visible')
         open_forecast()
@@ -62,10 +91,14 @@ def main():
             if u['team']=='enemy':assert u['hp']==(expected if u['id']==chosen else before_units[u['id']]['hp'])
         after_actor=next(u for u in committed['units'] if u['id']==actor['id']);assert after_actor['energy']==actor['energy']-ability['cost'] and not after_actor['moved'] and committed['canMove']
         practice=next(s for s in committed['development']['practice'] if s['unitId']==actor['id'] and s['abilityId']==ability['id']);assert practice['uses']==1
+        readiness('ready','spent')
         checks.append('Confirm damages exactly chosen enemy, charges Mana once and trains one practice use; movement remains ready.')
         page.click('#move-mode');page.wait_for_function('window.dungeon.getView().reachable.some(t=>t.cost>0)');destination=next(t for t in view(page)['reachable'] if (t['x'],t['y'])!=(actor['x'],actor['y']));cell_click(page,destination);page.wait_for_function('window.dungeon.getView().units.find(u=>u.id==="crawler.donut").moved')
         moved=view(page);unit=next(u for u in moved['units'] if u['id']==actor['id']);assert (unit['x'],unit['y'])==(destination['x'],destination['y']) and unit['energy']==after_actor['energy']
+        readiness('spent','spent')
         page.click('#end-turn');page.click('#confirm-end-turn');page.wait_for_function('window.dungeon.getView().selectedUnitId!=="crawler.donut"');assert next(u for u in view(page)['units'] if u['id']==actor['id'])['finished']
+        assert page.locator('[data-unit="crawler.donut"] .party-state').inner_text()=='END'
+        assert page.locator('[data-unit="crawler.donut"] .party-budget').count()==0
         checks.append('After casting, UI movement succeeds without extra Mana; End turn advances to another ready crawler.')
         page.screenshot(path=str(output/'after-action-move-endturn.png'));assert not errors,errors;browser.close()
     report=dict(runtime='actual published C# WASM',setup=__doc__,checks=checks,errors=errors);(output/'report.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
