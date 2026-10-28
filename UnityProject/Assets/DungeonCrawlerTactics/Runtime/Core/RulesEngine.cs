@@ -60,13 +60,16 @@ namespace DungeonCrawlerTactics
             if (actorId == null || !state.Entities.TryGetValue(actorId, out actor) || actor.IsTile || actor.Hp == 0) throw new ArgumentException("Actor must be a living unit.");
             if (targetId == null || !state.Entities.TryGetValue(targetId, out target)) throw new ArgumentException("Unknown target.");
             if (abilityId == null || !catalog.Abilities.TryGetValue(abilityId, out ability)) throw new ArgumentException("Unknown ability.");
+            ability = AbilityScaling.Apply(ability, modifiers);
+            foreach (EffectDef effect in ability.effects) if ((effect.op == "AddTag" || effect.op == "RemoveTag") && !catalog.HasTag(effect.tag)) throw new ArgumentException("Unknown ranked effect tag.");
             ClassDef actorClass = catalog.Classes[actor.ClassId];
             if (requireGrant && Array.IndexOf(actorClass.abilityIds, abilityId) < 0 && !actor.GrantedAbilities.Contains(abilityId)) throw new ArgumentException("Actor class does not grant ability.");
             bool validTarget = ability.target == "tile" ? target.IsTile : !target.IsTile && target.Hp > 0 &&
                 (ability.target == "self" ? actorId == targetId : ability.target == "ally" ? target.Team == actor.Team : target.Team != actor.Team);
+            validTarget = validTarget && (string.IsNullOrEmpty(ability.requiredTargetTag) || target.Tags.Contains(ability.requiredTargetTag));
             if (!validTarget) throw new ArgumentException("Invalid target for ability.");
             long distance = Math.Abs((long)actor.X - target.X) + Math.Abs((long)actor.Y - target.Y);
-            int effectiveCost = Math.Max(0, ability.cost - (modifiers == null ? 0 : modifiers.costReduction));
+            int effectiveCost = Math.Max(0, ability.cost);
             if (distance > ability.range || actor.Energy < effectiveCost) throw new ArgumentException("Target out of range or insufficient mana.");
             BattleState next = state.Clone(); actor = next.Entities[actorId]; target = next.Entities[targetId]; actor.Energy -= effectiveCost;
             List<string> log = new List<string>();
@@ -74,8 +77,7 @@ namespace DungeonCrawlerTactics
             events.Add(new PresentationEvent { type = "attack", actorId = actorId, targetId = targetId, abilityId = abilityId });
             Queue<RuleEvent> queue = new Queue<RuleEvent>();
             HashSet<string> fired = new HashSet<string>(StringComparer.Ordinal);
-            EffectDef[] effectiveEffects = new EffectDef[ability.effects.Length];
-            for (int i = 0; i < effectiveEffects.Length; i++) { EffectDef e = ability.effects[i]; effectiveEffects[i] = new EffectDef { op = e.op, tag = e.tag, summonHp = e.summonHp, summonMove = e.summonMove, summonRounds = e.summonRounds, amount = e.amount + (modifiers == null ? 0 : e.op == "Damage" ? modifiers.damageBonus : e.op == "Heal" ? modifiers.healBonus : 0) }; }
+            EffectDef[] effectiveEffects = ability.effects;
             queue.Enqueue(new RuleEvent { Tags = ability.incomingTags, Effects = effectiveEffects, Label = ability.id });
             int processed = 0;
             while (queue.Count > 0)
@@ -127,6 +129,7 @@ namespace DungeonCrawlerTactics
                         }
                         continue;
                     }
+                    if (effect.op == "AddTag" || effect.op == "RemoveTag") catalog.RemoveTagFamily(target.Tags, effect.tag);
                     Apply(target, new[] { effect }, reduction);
                     if (effect.op == "Damage") { int prevented = (int)Math.Min(reduction, effect.amount); reduction -= prevented; if (prevented > 0) events.Add(new PresentationEvent { type = "guard", actorId = actorId, targetId = targetId, amount = prevented }); }
                     if (hp != target.Hp) events.Add(new PresentationEvent { type = target.Hp < hp ? "damage" : "heal", actorId = actorId, targetId = targetId, abilityId = abilityId, before = hp, after = target.Hp, amount = Math.Abs(target.Hp - hp) });

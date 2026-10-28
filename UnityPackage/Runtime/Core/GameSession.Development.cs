@@ -58,20 +58,23 @@ namespace DungeonCrawlerTactics
             ActionModifiers result = AllocationModifiers(owner, allocations);
             ActionModifiers tree = TreeModifiers(owner, unlockedSkillNodes);
             SkillPracticeSave row = practices.Find(p => p.unitId == owner && p.abilityId == ability);
-            SkillPracticeView practice = PracticeView(owner, ability, row == null ? 0 : row.uses);
-            result.damageBonus = Math.Min(100, result.damageBonus + tree.damageBonus + practice.damageBonus);
-            result.healBonus = Math.Min(100, result.healBonus + tree.healBonus + practice.healBonus);
-            result.costReduction = practice.costReduction;
+            SkillRankView rank = CurrentPracticeRank(owner, ability, row == null ? 0 : row.uses);
+            result.damageBonus = Math.Min(100, result.damageBonus + tree.damageBonus + rank.damageBonus);
+            result.healBonus = Math.Min(100, result.healBonus + tree.healBonus + rank.healBonus);
+            result.rangeBonus = rank.rangeBonus; result.pushBonus = rank.pushBonus; result.summonHpBonus = rank.summonHpBonus; result.summonMoveBonus = rank.summonMoveBonus; result.summonRoundsBonus = rank.summonRoundsBonus;
+            result.tagReplacements = rank.tagReplacements; result.addTags = rank.addTags; result.removeTags = rank.removeTags;
+            result.costReduction = rank.costReduction;
             return result;
         }
         private void PracticeCommitted(GameCommand command)
         {
-            if (!string.IsNullOrEmpty(command.itemId) || string.IsNullOrEmpty(command.abilityId) || !roster.ContainsKey(command.unitId))
+            string abilityId = ModePracticeAbility(command);
+            if (!string.IsNullOrEmpty(command.itemId) || string.IsNullOrEmpty(abilityId) || !roster.ContainsKey(command.unitId))
                 return;
-            SkillPracticeSave row = practices.Find(p => p.unitId == command.unitId && p.abilityId == command.abilityId);
+            SkillPracticeSave row = practices.Find(p => p.unitId == command.unitId && p.abilityId == abilityId);
             if (row == null)
             {
-                row = new SkillPracticeSave { unitId = command.unitId, abilityId = command.abilityId };
+                row = new SkillPracticeSave { unitId = command.unitId, abilityId = abilityId };
                 practices.Add(row);
             }
             SkillPracticeView before = PracticeView(row.unitId, row.abilityId, row.uses);
@@ -192,6 +195,12 @@ namespace DungeonCrawlerTactics
             ActionModifiers oldModifiers = AllocationModifiers(owner, allocations), newModifiers = AllocationModifiers(owner, next);
             return new DevelopmentForecast { unitId = owner, statId = pendingDevelopment.statId, points = pendingDevelopment.points, beforeHp = before.hp, afterHp = after.hp, beforeMana = before.energy, afterMana = after.energy, beforeMove = before.move, afterMove = after.move, beforeDamageBonus = oldModifiers.damageBonus, afterDamageBonus = newModifiers.damageBonus, beforeHealBonus = oldModifiers.healBonus, afterHealBonus = newModifiers.healBonus };
         }
+        private string[] KnownPracticeAbilities(string owner)
+        {
+            List<string> ids = new List<string>(Grants(owner, xp, equipped));
+            if (JourneyAllocationUnlocked) foreach (string id in catalog.Classes[roster[owner].classId].abilityIds) if (!ids.Contains(id)) ids.Add(id);
+            ids.Sort(StringComparer.Ordinal); return ids.ToArray();
+        }
         private void PopulateDevelopment(GameView view)
         {
             List<CrawlerDevelopmentView> crawlers = new List<CrawlerDevelopmentView>();
@@ -200,11 +209,11 @@ namespace DungeonCrawlerTactics
                 if (member.deployable)
                 {
                     crawlers.Add(new CrawlerDevelopmentView { unitId = member.id, maxSkillRank = MaximumSkillRank(member.id), unspentPoints = (LevelAt(xp) - 1) * data.development.pointsPerLevel - SpentPoints(member.id, allocations), allocated = CloneAllocations(allocations.FindAll(a => a.unitId == member.id)).ToArray() });
-                    foreach (SkillPracticeSave row in practices)
-                        if (row.unitId == member.id)
-                        {
-                            skillViews.Add(PracticeView(row.unitId, row.abilityId, row.uses));
-                        }
+                    foreach (string abilityId in KnownPracticeAbilities(member.id))
+                    {
+                        SkillPracticeSave row = practices.Find(p => p.unitId == member.id && p.abilityId == abilityId);
+                        skillViews.Add(PracticeView(member.id, abilityId, row == null ? 0 : row.uses));
+                    }
                 }
             List<RecipeView> recipes = new List<RecipeView>();
             foreach (RecipeDef recipe in data.development.recipes)

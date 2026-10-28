@@ -32,8 +32,105 @@ static class RankTests
     {
         content = JsonSerializer.Deserialize<Content>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")), Json);
         data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "game-content.json")), Json);
-        Tables(); DefinitionValidation(); ClassPointBudget(); TrainingAndResolver(); ClassOwnershipAndCheckpoints();
+        Tables(); SavedSummonFloorGate(); AuthoredProfiles(); RankEffects(); DefinitionValidation(); ClassPointBudget(); TrainingAndResolver(); ClassOwnershipAndCheckpoints();
         Console.WriteLine(checks + " rank/class progression checks passed.");
+    }
+    static void SavedSummonFloorGate()
+    {
+        const string spell="ability.donut_clockwork_triplicate";GameData config=Clone(data);RosterDef carl=config.roster.Single(r=>r.id=="crawler.carl");carl.innateAbilityIds=carl.innateAbilityIds.Concat(new[]{spell}).Distinct().ToArray();carl.maxSkillRank=20;
+        GameSession game=new GameSession(Clone(content),config);Command(game,"start_journey");Command(game,"start");GameSave save=game.ExportSave();
+        Check(save.screen=="battle"&&save.journey.floorIndex==0,"summon floor-gate fixture starts a real floor-one battle");
+        save.development.practice=new[]{new SkillPracticeSave{unitId="crawler.carl",abilityId=spell,uses=SkillRankProgression.Thresholds(config.development.practice,spell)[19]}};Check(!game.ImportSave(save).message.StartsWith("Save rejected"),"legacy overtrained Primal uses remain importable before floor three");
+        Command(game,"select","crawler.carl");var preview=Command(game,"preview","crawler.carl",spell,"crawler.mongo");Check(preview.canConfirm,"innate summon is legal before floor-three class unlock");Command(game,"confirm");save=game.ExportSave();
+        Check(!game.ImportSave(Clone(save)).message.StartsWith("Save rejected"),"legitimate rank-fifteen copies reload before floor three despite saved rank-twenty practice");
+        var expected=AbilityScaling.Apply(content.abilities.Single(a=>a.id==spell),AuthoredRank(spell,20)).effects.Single(e=>e.op=="DuplicatePet");var forged=Clone(save);foreach(var unit in forged.units.Where(u=>u.duplicateSourceId!=null)){unit.maxHp=expected.summonHp;unit.hp=expected.summonHp;unit.move=expected.summonMove;unit.duplicateRounds=expected.summonRounds;}
+        string stable=Snapshot(game);var rejected=game.ImportSave(forged);Check(rejected.message.StartsWith("Save rejected")&&Snapshot(game)==stable,"floor-one import rejects forged rank-twenty summon stats atomically");
+    }
+    static ActionModifiers AuthoredRank(string ability, int rank) { return AbilityScaling.Modifiers(SkillRankProgression.Table(data.development.practice, ability)[rank - 1]); }
+    static BattleState AuthoredBoard()
+    {
+        BattleState state = new BattleState();
+        for (int y=0;y<8;y++) for(int x=0;x<10;x++) state.Entities.Add("tile."+x+"."+y,new EntityState{Id="tile."+x+"."+y,IsTile=true,X=x,Y=y});
+        EntityState caster=new EntityState{Id="caster",ClassId=content.classes[0].id,Team="player",Hp=100,MaxHp=100,Energy=100,X=1,Y=1};
+        caster.GrantedAbilities.UnionWith(content.abilities.Select(a=>a.id));state.Entities.Add(caster.Id,caster);
+        EntityState enemy=new EntityState{Id="foe",ClassId=content.classes[0].id,Team="enemy",Hp=500,MaxHp=500,Energy=100,X=2,Y=1};enemy.GrantedAbilities.UnionWith(content.abilities.Select(a=>a.id));state.Entities.Add(enemy.Id,enemy);
+        EntityState pet=new EntityState{Id="pet",ClassId=content.classes[0].id,Team="player",Hp=1,MaxHp=100,Energy=0,X=1,Y=2};pet.Tags.Add("trait.pet");state.Entities.Add(pet.Id,pet);return state;
+    }
+    static void AuthoredProfiles()
+    {
+        Check(data.development.practice.abilityProfiles.Length==95&&data.development.practice.abilityProfiles.Select(p=>p.abilityId).Distinct().Count()==95,"all 95 authored abilities have distinct explicit rank profiles");
+        Check(content.abilities.All(a=>{var rows=SkillRankProgression.Table(data.development.practice,a.id);return rows.Length==20&&rows.Zip(rows.Skip(1),(l,r)=>r.requiredUses>l.requiredUses).All(v=>v);}),"every authored profile expands to twenty increasing practice thresholds");
+        Catalog catalog=new Catalog(content);catalog.ConfigureRankTags(data.development.practice);RulesEngine engine=new RulesEngine(catalog);BattleState state=AuthoredBoard();
+        const string missile="ability.donut_magic_missile";
+        var nine=engine.Execute(state,"caster",missile,"foe",AuthoredRank(missile,9));var ten=engine.Execute(state,"caster",missile,"foe",AuthoredRank(missile,10));
+        Check(!nine.State.Entities["foe"].Tags.Contains("status.burning")&&ten.State.Entities["foe"].Tags.Contains("status.burning")&&state.Entities["foe"].Hp==500,"authored rank-ten missile executes ignition while rank nine and preview input remain unburned");
+        Check(data.tagRules.Single(r=>r.tag=="status.burning").turnDamage>0&&data.tagRules.Single(r=>r.tag=="status.burning").durationRounds==2,"missile ignition uses a real two-round damaging status rule");
+        const string teleport="ability.donut_puddle_jumper";bool rejected=false;try{engine.Execute(state,"caster",teleport,"tile.5.1",AuthoredRank(teleport,1));}catch(ArgumentException){rejected=true;}
+        var jumped=engine.Execute(state,"caster",teleport,"tile.5.1",AuthoredRank(teleport,5));Check(rejected&&jumped.State.Entities["caster"].X==5&&state.Entities["caster"].X==1,"authored rank-five teleport reaches a tile rejected at rank one");
+        const string summon="ability.donut_clockwork_triplicate";var fifteen=engine.Execute(state,"caster",summon,"pet",AuthoredRank(summon,15));var twenty=engine.Execute(state,"caster",summon,"pet",AuthoredRank(summon,20));var oldCopy=fifteen.State.Entities.Values.First(e=>e.DuplicateSourceId!=null);var newCopy=twenty.State.Entities.Values.First(e=>e.DuplicateSourceId!=null);
+        Check(newCopy.MaxHp>oldCopy.MaxHp&&newCopy.DuplicateRounds>oldCopy.DuplicateRounds&&AuthoredRank(summon,20).summonRoundsBonus<=SkillRankProgression.Profile(data.development.practice,summon).summonRoundsBonusCap,"authored rank-twenty summons execute stronger capped copies than rank fifteen");
+        const string guard="ability.imani_wing_guard";var weak=engine.Execute(state,"caster",guard,"caster",AuthoredRank(guard,1));var strong=engine.Execute(state,"caster",guard,"caster",AuthoredRank(guard,20));
+        var weakHit=engine.Execute(weak.State,"foe","ability.strike","caster");var strongHit=engine.Execute(strong.State,"foe","ability.strike","caster");Check(strongHit.State.Entities["caster"].Hp>weakHit.State.Entities["caster"].Hp,"authored guard rank variants prevent more actual incoming damage");
+        const string heal="ability.donut_heal_critter";rejected=false;try{engine.Execute(state,"caster",heal,"caster");}catch(ArgumentException){rejected=true;}
+        var healed=engine.Execute(state,"caster",heal,"pet");Check(rejected&&healed.State.Entities["pet"].Hp>1,"canonical Heal Critter rejects a crawler and actually restores a pet");
+        // Link an isolated inventory record to the unchanged authored spell, exercising the real item resolver path.
+        Content withItem=Clone(content);withItem.items=withItem.items.Concat(new[]{new ItemDef{id="item.authored_rank_test",label="Spell fixture",abilityId=missile}}).ToArray();var itemEngine=new RulesEngine(new Catalog(withItem));var itemCast=itemEngine.ExecuteItem(state,"caster","item.authored_rank_test","foe");
+        Check(!itemCast.State.Entities["foe"].Tags.Contains("status.burning")&&itemCast.State.Entities["foe"].Hp>ten.State.Entities["foe"].Hp,"item casting the same authored spell receives neither learned damage nor rank-ten ignition");
+        Check(data.forms.All(f=>f.practiceAbilityId=="ability.katia_shapeshift")&&data.stances.All(s=>string.IsNullOrEmpty(s.practiceAbilityId)),"actual authored forms train Shapeshift while ordinary stances have no training alias");
+        var missileGame=AuthoredPracticeBattle("crawler.donut",missile,10);var missileSave=missileGame.ExportSave();missileSave.units.Single(u=>u.team=="enemy").x=4;missileSave.units.Single(u=>u.team=="enemy").y=3;missileGame.ImportSave(missileSave);string stable=Snapshot(missileGame);var missileView=Command(missileGame,"preview","crawler.donut",missile,"custom.enemy.rank");int predicted=missileView.forecast.Single(f=>f.targetId=="custom.enemy.rank").afterHp;Check(missileView.canConfirm&&Snapshot(missileGame)==stable&&missileView.forecast.Single(f=>f.targetId=="custom.enemy.rank").afterTags.Contains("status.burning"),"authored rank-ten missile forecasts actual ignition without changing save");missileView=Command(missileGame,"confirm");Check(missileView.units.Single(u=>u.id=="custom.enemy.rank").hp==predicted&&missileGame.ExportSave().timedTags.Any(t=>t.entityId=="custom.enemy.rank"&&t.tag=="status.burning"&&t.remainingRounds==2),"authored missile commit matches forecast and stores real two-round Burning lifetime");
+        AuthoredMovementAndTrap();
+    }
+    static GameSession AuthoredPracticeBattle(string owner,string ability,int rank)
+    {
+        GameData config=Clone(data);foreach(var unlock in config.progression.skillUnlocks)if(unlock.abilityId==ability)unlock.level=1;
+        GameSession game=new GameSession(Clone(content),config);game.Handle(new GameCommand{type="import_map",customMap=new CustomMapData{width=10,height=8,playerSpawns=new[]{new CellView{x=1,y=1},new CellView{x=1,y=3},new CellView{x=1,y=5},new CellView{x=3,y=3}},enemies=new[]{new SpawnDef{id="custom.enemy.rank",label="Rank opponent",classId=data.encounters[0].enemies[0].classId,x=8,y=6,hp=500,energy=0,move=1}}}});
+        GameSave save=game.ExportSave();save.development.practice=rank==1?new SkillPracticeSave[0]:new[]{new SkillPracticeSave{unitId=owner,abilityId=ability,uses=SkillRankProgression.Thresholds(data.development.practice,ability)[rank-1]}};Check(!game.ImportSave(save).message.StartsWith("Save rejected"),"authored practice battlefield imports rank "+rank+" "+ability);game.Handle(new GameCommand{type="select",unitId=owner});return game;
+    }
+    static void AuthoredMovementAndTrap()
+    {
+        const string rush="ability.katia_rush";GameSession low=AuthoredPracticeBattle("crawler.katia",rush,1),high=AuthoredPracticeBattle("crawler.katia",rush,15);
+        int lowBefore=low.GetView().units.Single(u=>u.id=="crawler.katia").effectiveMove,highBefore=high.GetView().units.Single(u=>u.id=="crawler.katia").effectiveMove;
+        string stable=Snapshot(high);var forecast=Command(high,"preview","crawler.katia",rush,"crawler.katia");Check(forecast.canConfirm&&Snapshot(high)==stable,"authored ranked Rush forecasts without granting practice");Command(high,"cancel");Check(Snapshot(high)==stable,"authored ranked Rush cancellation preserves save");Command(high,"preview","crawler.katia",rush,"crawler.katia");var highView=Command(high,"confirm");Command(low,"preview","crawler.katia",rush,"crawler.katia");var lowView=Command(low,"confirm");
+        Check(highView.units.Single(u=>u.id=="crawler.katia").effectiveMove-highBefore>lowView.units.Single(u=>u.id=="crawler.katia").effectiveMove-lowBefore,"authored Rush variant grants more real movement after exact preview and commit");
+        var shaped=AuthoredPracticeBattle("crawler.katia","ability.katia_shapeshift",5);int previousUses=shaped.GetView().development.practice.Single(p=>p.unitId=="crawler.katia"&&p.abilityId=="ability.katia_shapeshift").uses;stable=Snapshot(shaped);
+        var shapePreview=shaped.Handle(new GameCommand{type="preview",unitId="crawler.katia",formId="form.bulwark"});Check(shapePreview.canConfirm&&Snapshot(shaped)==stable&&shapePreview.forecast.Any(f=>f.targetId=="crawler.katia"&&f.afterTags.Contains("status.guarded_rank5")),"authored Bulwark mapping previews the trained Shapeshift guard variant");Command(shaped,"cancel");Check(Snapshot(shaped)==stable,"authored form cancellation leaves practice unchanged");shaped.Handle(new GameCommand{type="preview",unitId="crawler.katia",formId="form.bulwark"});var shapedView=Command(shaped,"confirm");Check(shapedView.units.Single(u=>u.id=="crawler.katia").tags.Contains("status.guarded_rank5")&&shapedView.development.practice.Single(p=>p.unitId=="crawler.katia"&&p.abilityId=="ability.katia_shapeshift").uses==previousUses+1,"authored form commits ranked guard and trains its mapped ability once");
+        const string trap="ability.carl_tripwire";low=AuthoredPracticeBattle("crawler.carl",trap,1);high=AuthoredPracticeBattle("crawler.carl",trap,15);
+        foreach(var game in new[]{low,high}){Command(game,"preview","crawler.carl",trap,"tile.2.1");Command(game,"confirm");}
+        int lowHp=low.GetView().units.Single(u=>u.id=="crawler.carl").hp,highHp=high.GetView().units.Single(u=>u.id=="crawler.carl").hp;
+        lowView=low.Handle(new GameCommand{type="move",unitId="crawler.carl",x=2,y=1});highView=high.Handle(new GameCommand{type="move",unitId="crawler.carl",x=2,y=1});
+        Check(highHp-highView.units.Single(u=>u.id=="crawler.carl").hp>lowHp-lowView.units.Single(u=>u.id=="crawler.carl").hp&&!highView.tiles.Single(t=>t.id=="tile.2.1").tags.Any(t=>t.StartsWith("surface.trap_shock")),"authored shock-trap rank variant deals greater real entry damage and is consumed");
+    }
+    static void RankEffects()
+    {
+        Content definitions = Clone(content); GameData config = Clone(data);
+        var ability = definitions.abilities.First(a => a.effects.Any(e => e.op == "Teleport"));
+        config.development.practice.abilityProfiles = new[] { new AbilityRankProfile { abilityId = ability.id, damagePerRank = 0, healPerRank = 0, costReductionPerRank = 0, rangePerRank = 1, rangeBonusCap = 12, milestones = new[] { new RankMilestoneDef { rank = 2, description = "Cleanse adaptation", removeTags = new[] { "status.wet" } } } } };
+        SkillRankView row = SkillRankProgression.Table(config.development.practice, ability.id)[1];
+        AbilityDef effective = AbilityScaling.Apply(ability, AbilityScaling.Modifiers(row));
+        Check(effective.range == ability.range + 1 && effective.effects.Any(e => e.op == "RemoveTag" && e.tag == "status.wet"), "rank range and milestone status operations use one effective ability");
+        Check(ability.range + 1 == effective.range && ability.effects.All(e => e.op != "RemoveTag"), "rank transformation preserves authored base definitions");
+        ability.requiredTargetTag = "trait.pet";
+        Catalog targetCatalog = new Catalog(definitions);
+        EntityState actor = new EntityState { Id = "actor", ClassId = definitions.classes[0].id, Team = "player", Hp = 10, MaxHp = 10, Energy = 100 };
+        actor.GrantedAbilities.Add(ability.id);
+        EntityState target = new EntityState { Id = "tile", IsTile = true, X = 0, Y = 0 };
+        BattleState state = new BattleState(); state.Entities.Add(actor.Id, actor); state.Entities.Add(target.Id, target);
+        bool rejected = false;
+        try { new RulesEngine(targetCatalog).Execute(state, actor.Id, ability.id, target.Id); } catch (ArgumentException) { rejected = true; }
+        Check(rejected, "required target trait is enforced by the pure resolver before commitment");
+        AbilityDef petHeal = new AbilityDef { id = "ability.pet_heal_fixture", label = "Pet healing", target = "ally", range = 1, requiredTargetTag = "trait.pet", effects = new[] { new EffectDef { op = "Heal", amount = 3 } } };
+        definitions.abilities = definitions.abilities.Concat(new[] { petHeal }).ToArray(); actor.GrantedAbilities.Add(petHeal.id);
+        EntityState pet = new EntityState { Id = "pet", ClassId = actor.ClassId, Team = "player", Hp = 1, MaxHp = 10, X = 1 }; pet.Tags.Add("trait.pet"); state.Entities.Add(pet.Id, pet);
+        var petResult = new RulesEngine(new Catalog(definitions)).Execute(state, actor.Id, petHeal.id, pet.Id);
+        Check(petResult.State.Entities[pet.Id].Hp == 4 && state.Entities[pet.Id].Hp == 1, "required pet trait allows actual pet healing without modifying preview input");
+        ability.requiredTargetTag = "";
+        var summon = definitions.abilities.First(a => a.effects.Any(e => e.op == "DuplicatePet"));
+        EffectDef original = summon.effects.First(e => e.op == "DuplicatePet");
+        EffectDef scaled = AbilityScaling.Apply(summon, new ActionModifiers { summonHpBonus = 5, summonMoveBonus = 1, summonRoundsBonus = 2 }).effects.First(e => e.op == "DuplicatePet");
+        Check(scaled.summonHp == original.summonHp + 5 && scaled.summonMove == original.summonMove + 1 && scaled.summonRounds == original.summonRounds + 2, "summon rank growth changes actual effect parameters");
+        Catalog catalog = new Catalog(definitions); catalog.ConfigureRankTags(new SkillProgressionDef { abilityProfiles = new[] { new AbilityRankProfile { milestones = new[] { new RankMilestoneDef { tagReplacements = new[] { new TagReplacementDef { fromTag = "status.wet", toTag = "status.frozen" } } } } } } });
+        var tags = new System.Collections.Generic.HashSet<string> { "status.wet", "status.frozen" }; Check(catalog.HasStackedRankTags(tags), "saved tag validation detects stacked rank variants"); catalog.RemoveTagFamily(tags, "status.wet");
+        Check(tags.Count == 0, "cleansing a base tag removes all authored ranked family variants");
     }
     static void Tables()
     {
@@ -119,18 +216,18 @@ static class RankTests
         int round = view.round;
         for (int i = 0; i < config.partySize && game.GetView().round == round; i++) Command(game, "end_turn");
         Command(game, "preview", "crawler.carl", "ability.rank_fixture", "crawler.carl"); view = Command(game, "confirm");
-        Check(view.development.practice.Single().uses == threshold && view.events.All(e => e.type != "skill_practice"), "further committed uses at the rank cap grant no extra training");
+        Check(view.development.practice.Single(p => p.unitId == "crawler.carl" && p.abilityId == "ability.rank_fixture").uses == threshold && view.events.All(e => e.type != "skill_practice"), "further committed uses at the rank cap grant no extra training");
         round = view.round;
         for (int i = 0; i < config.partySize && game.GetView().round == round; i++) Command(game, "end_turn");
         view = game.Handle(new GameCommand { type = "preview", unitId = "crawler.carl", itemId = "item.health_tonic", targetId = "crawler.carl" });
         Check(view.canConfirm, "item fixture has a legal committed use");
         view = Command(game, "confirm");
-        Check(view.development.practice.Length == 1 && view.development.practice.Single().uses == threshold && view.events.All(e => e.type != "skill_practice"), "committed item use creates no ability training");
+        Check(game.ExportSave().development.practice.Length == 1 && view.development.practice.Single(p => p.unitId == "crawler.carl" && p.abilityId == "ability.rank_fixture").uses == threshold && view.events.All(e => e.type != "skill_practice"), "committed item use creates no ability training");
         GameSession restored = new GameSession(Clone(definitions), Clone(config));
-        Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected") && restored.GetView().development.practice.Single().rank == 20, "rank twenty persists through checkpoint reload");
+        Check(!restored.ImportSave(Clone(game.ExportSave())).message.StartsWith("Save rejected") && restored.GetView().development.practice.Single(p => p.unitId == "crawler.carl" && p.abilityId == "ability.rank_fixture").rank == 20, "rank twenty persists through checkpoint reload");
         config.roster.Single(r => r.id == "crawler.carl").maxSkillRank = 15;
         restored = new GameSession(Clone(definitions), config); view = restored.ImportSave(Clone(game.ExportSave()));
-        Check(!view.message.StartsWith("Save rejected") && view.development.practice.Single().rank == 15, "eligibility changes safely cap a legacy over-trained checkpoint");
+        Check(!view.message.StartsWith("Save rejected") && view.development.practice.Single(p => p.unitId == "crawler.carl" && p.abilityId == "ability.rank_fixture").rank == 15, "eligibility changes safely cap a legacy over-trained checkpoint");
     }
     static void ClassOwnershipAndCheckpoints()
     {

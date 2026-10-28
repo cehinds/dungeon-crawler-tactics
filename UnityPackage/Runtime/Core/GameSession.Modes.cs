@@ -35,9 +35,24 @@ namespace DungeonCrawlerTactics
             TacticalModeDef mode; ClassStats stats = ProposedModeStats(command, out mode);
             BattleState next = battle.Clone(); EntityState changed = next.Entities[actor.Id];
             // Preserve damage and spent mana; changing shape never restores resources.
-            if (!string.IsNullOrEmpty(mode.grantTag)) changed.Tags.Add(mode.grantTag);
+            if (!string.IsNullOrEmpty(mode.grantTag))
+            {
+                string tag = ModeGrantTag(mode, actor.Id); catalog.RemoveTagFamily(changed.Tags, tag); changed.Tags.Add(tag);
+            }
             changed.MaxHp = stats.hp; changed.Hp = Math.Min(changed.Hp, stats.hp); changed.Energy = Math.Min(changed.Energy, stats.energy);
             return new ActionResult(next, new List<string> { mode.label + ": " + mode.description + " (tactical adaptation)." }, new List<PresentationEvent> { new PresentationEvent { type = "adaptation", actorId = actor.Id, targetId = actor.Id, tag = mode.id } });
+        }
+        private string ModePracticeAbility(GameCommand command)
+        {
+            if (!string.IsNullOrEmpty(command.formId)) return Mode(data.forms, command.formId, command.unitId).practiceAbilityId;
+            if (!string.IsNullOrEmpty(command.stanceId)) return Mode(data.stances, command.stanceId, command.unitId).practiceAbilityId;
+            return command.abilityId;
+        }
+        private string ModeGrantTag(TacticalModeDef mode, string owner)
+        {
+            string tag = mode.grantTag;
+            if (!string.IsNullOrEmpty(mode.practiceAbilityId)) foreach (TagReplacementDef replacement in Modifiers(owner, mode.practiceAbilityId).tagReplacements) if (replacement.fromTag == mode.grantTag) tag = replacement.toTag;
+            return tag;
         }
         private void CommitMode(GameCommand command)
         {
@@ -60,12 +75,18 @@ namespace DungeonCrawlerTactics
             view.stances = ModeViews(data.stances, owner, member.stanceId, view.canAct);
             view.forms = ModeViews(data.forms, owner, member.formId, view.canAct);
         }
+        private string ModeDescription(TacticalModeDef mode, string owner)
+        {
+            if (string.IsNullOrEmpty(mode.practiceAbilityId)) return mode.description;
+            string suffix = string.IsNullOrEmpty(mode.grantTag) ? " Rank training affects granted protection; preset stats remain fixed." : " Current protection: " + Describe(new AbilityDef { incomingTags = new string[0], effects = new[] { new EffectDef { op = "AddTag", tag = ModeGrantTag(mode, owner) } } });
+            return mode.description + suffix;
+        }
         private static bool ModeSelected(TacticalModeDef mode, string current) { return current == mode.id || (string.IsNullOrEmpty(current) && mode.hpBonus == 0 && mode.manaBonus == 0 && mode.moveBonus == 0 && string.IsNullOrEmpty(mode.grantTag)); }
         private TacticalModeView[] ModeViews(TacticalModeDef[] definitions, string owner, string current, bool enabled)
         {
             List<TacticalModeView> result = new List<TacticalModeView>();
             foreach (TacticalModeDef mode in definitions) if (string.IsNullOrEmpty(mode.rosterId) || mode.rosterId == owner)
-                result.Add(new TacticalModeView { id = mode.id, label = mode.label, description = mode.description, unitId = owner, grantTag = mode.grantTag, hpBonus = mode.hpBonus, manaBonus = mode.manaBonus, moveBonus = mode.moveBonus, selected = ModeSelected(mode, current), enabled = enabled && !ModeSelected(mode, current) });
+                result.Add(new TacticalModeView { id = mode.id, label = mode.label, description = ModeDescription(mode, owner), unitId = owner, grantTag = ModeGrantTag(mode, owner), hpBonus = mode.hpBonus, manaBonus = mode.manaBonus, moveBonus = mode.moveBonus, selected = ModeSelected(mode, current), enabled = enabled && !ModeSelected(mode, current) });
             return result.ToArray();
         }
     }

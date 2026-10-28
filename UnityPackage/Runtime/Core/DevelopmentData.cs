@@ -80,6 +80,9 @@ namespace DungeonCrawlerTactics
     public sealed class SkillPracticeView
     {
         public string unitId, abilityId;
+        public string description, canonNotes;
+        public string[] sourceUrls = new string[0];
+        public int cost, range;
         public int uses, rank, maxRank, nextRankUses, damageBonus, healBonus, costReduction;
         public bool atCap;
         public SkillRankView[] ranks;
@@ -121,5 +124,8 @@ namespace DungeonCrawlerTactics
     public sealed class ActionModifiers
     {
         public int damageBonus, healBonus, costReduction;
+        public int rangeBonus, pushBonus, summonHpBonus, summonMoveBonus, summonRoundsBonus;
+        public string[] addTags = new string[0], removeTags = new string[0];
+        public TagReplacementDef[] tagReplacements = new TagReplacementDef[0];
     }
 }

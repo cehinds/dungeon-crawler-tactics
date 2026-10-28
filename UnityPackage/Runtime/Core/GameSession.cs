@@ -31,6 +31,7 @@ namespace DungeonCrawlerTactics
             catalog = new Catalog(content);
             data = gameData ?? throw new ArgumentNullException(nameof(gameData));
             GameDataValidator.Validate(data, catalog);
+            catalog.ConfigureRankTags(data.development.practice);
             engine = new RulesEngine(catalog, 64, (state, moving, entries, visual) => ApplyOccupancy(state, moving, true, entries, visual));
             Reset();
         }
@@ -573,7 +574,7 @@ namespace DungeonCrawlerTactics
             List<AbilityView> abilityViews = new List<AbilityView>();
             if (actor != null) foreach (string id in AbilityIds(actor))
             {
-                AbilityDef a = catalog.Abilities[id]; int effectiveCost = Math.Max(0, a.cost - Modifiers(actor.Id, id).costReduction); abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = a.range, cost = effectiveCost, enabled = view.canAct && actor.Energy >= effectiveCost, description = Describe(a, Modifiers(actor.Id, id)), disabledReason = !view.canAct ? "Action unavailable" : actor.Energy < effectiveCost ? "Insufficient mana" : "", targetIds = includeTargets && view.canAct && actor.Energy >= effectiveCost ? LegalTargets(actor, a, null) : new string[0] });
+                AbilityDef a = catalog.Abilities[id]; SkillPracticeSave savedPractice = practices.Find(p => p.unitId == actor.Id && p.abilityId == id); SkillPracticeView practice = PracticeView(actor.Id, id, savedPractice == null ? 0 : savedPractice.uses); int effectiveCost = Math.Max(0, a.cost - Modifiers(actor.Id, id).costReduction); abilityViews.Add(new AbilityView { id = id, label = a.label, target = a.target, range = AbilityScaling.Apply(a, Modifiers(actor.Id, id)).range, rank = practice.rank, maxRank = practice.maxRank, uses = practice.uses, nextRankUses = practice.nextRankUses, cost = effectiveCost, enabled = view.canAct && actor.Energy >= effectiveCost, description = Describe(a, Modifiers(actor.Id, id)), disabledReason = !view.canAct ? "Action unavailable" : actor.Energy < effectiveCost ? "Insufficient mana" : "", targetIds = includeTargets && view.canAct && actor.Energy >= effectiveCost ? LegalTargets(actor, a, null) : new string[0] });
             }
             view.abilities = abilityViews.ToArray();
             List<ItemView> itemViews = new List<ItemView>(); foreach (ItemDef item in catalog.Items.Values)
@@ -601,10 +602,11 @@ namespace DungeonCrawlerTactics
         }
         private string[] LegalTargets(EntityState actor, AbilityDef ability, string itemId)
         {
+            int effectiveRange = string.IsNullOrEmpty(itemId) ? AbilityScaling.Apply(ability, Modifiers(actor.Id, ability.id)).range : ability.range;
             List<string> targets = new List<string>();
             foreach (EntityState target in battle.Entities.Values)
             {
-                if (Math.Abs(actor.X - target.X) + Math.Abs(actor.Y - target.Y) > ability.range) continue;
+                if (Math.Abs(actor.X - target.X) + Math.Abs(actor.Y - target.Y) > effectiveRange) continue;
                 if ((ability.target == "tile") != target.IsTile) continue;
                 try { ResolveAction(new GameCommand { unitId = actor.Id, abilityId = ability.id, itemId = itemId, targetId = target.Id }); targets.Add(target.Id); }
                 catch (ArgumentException) { }
@@ -614,6 +616,7 @@ namespace DungeonCrawlerTactics
         }
         private string Describe(AbilityDef ability, ActionModifiers modifiers = null)
         {
+            ability = AbilityScaling.Apply(ability, modifiers); modifiers = null;
             List<string> parts = new List<string>();
             foreach (EffectDef effect in ability.effects)
             {
@@ -632,6 +635,13 @@ namespace DungeonCrawlerTactics
                         if (rule.damageReduction > 0 && Array.IndexOf(rule.target.all, effect.tag) >= 0)
                         { protection = " (" + rule.damageReduction + " damage protection on a matching hit)"; break; }
                     if (effect.op == "AddTag" && placement != null && placement.moveBonus > 0) protection += " (+" + placement.moveBonus + " movement for " + placement.durationRounds + " rounds; tactical Mana/turn cadence, not the novel’s daily cooldown)";
+                    if (effect.op == "AddTag" && placement != null)
+                    {
+                        if (placement.durationRounds > 0 && placement.moveBonus == 0) protection += " (" + placement.durationRounds + " rounds)";
+                        if (placement.turnDamage > 0) protection += " (" + placement.turnDamage + " damage each round)";
+                        if (placement.movePenalty > 0) protection += " (-" + placement.movePenalty + " movement)";
+                        if (placement.energyPenalty > 0) protection += " (-" + placement.energyPenalty + " Mana each round)";
+                    }
                     parts.Add((effect.op == "AddTag" ? "Apply " : "Remove ") + label + protection);
                 }
             }
@@ -640,6 +650,7 @@ namespace DungeonCrawlerTactics
                 List<string> labels = new List<string>(); foreach (string tag in ability.incomingTags) labels.Add(DisplayTag(tag));
                 parts.Add("Triggers " + string.Join(" / ", labels) + " reactions");
             }
+            if (!string.IsNullOrEmpty(ability.requiredTargetTag)) parts.Add("Requires target: " + DisplayTag(ability.requiredTargetTag));
             return string.Join(". ", parts) + ".";
         }
         private static string DisplayTag(string tag)
@@ -824,6 +835,7 @@ namespace DungeonCrawlerTactics
         private void ValidateTags(string[] tags)
         {
             Require(tags != null && tags.Length <= 100, "Invalid saved tags."); HashSet<string> seen = new HashSet<string>();
+            Require(!catalog.HasStackedRankTags(tags), "Saved tags stack mutually exclusive ranked variants.");
             foreach (string tag in tags) Require(catalog.HasTag(tag) && seen.Add(tag), "Unknown or duplicate saved tag.");
         }
     }

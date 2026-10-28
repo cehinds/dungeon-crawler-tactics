@@ -157,18 +157,40 @@ def validate_game(data, content):
             if piece['x'] >= room['width'] or piece['y'] >= room['height']:
                 errors.append(f'{path}.decorations.{di}: outside board')
 
+    for mode in data.get('forms', []) + data.get('stances', []):
+        if mode.get('practiceAbilityId'):
+            ref(mode['practiceAbilityId'], 'abilities', 'tacticalMode.practiceAbilityId')
+
     profiles = development.get('practice', {}).get('abilityProfiles', [])
     unique(profiles, 'abilityId', 'development.practice.abilityProfiles')
     if len(profiles) > len(known['abilities']):
         errors.append('development.practice.abilityProfiles: exceeds ability catalog')
+    rank_tag_owners = {}
+    rank_tag_roots = set()
     for pi, profile in enumerate(profiles):
         path = f'development.practice.abilityProfiles.{pi}'
         ref(profile['abilityId'], 'abilities', path + '.abilityId')
         milestones = profile.get('milestones', [])
         unique(milestones, 'rank', path + '.milestones')
         for milestone in milestones:
-            if not milestone.get('description') or not any(milestone.get(key, 0) for key in ('damageBonus', 'healBonus', 'costReduction')):
+            for tag in milestone.get('addTags', []) + milestone.get('removeTags', []):
+                ref(tag, 'tags', path + '.status')
+            for replacement in milestone.get('tagReplacements', []):
+                ref(replacement['fromTag'], 'tags', path + '.fromTag')
+                ref(replacement['toTag'], 'tags', path + '.toTag')
+                base, variant = replacement['fromTag'], replacement['toTag']
+                rank_tag_roots.add(base)
+                if base == variant or (variant in rank_tag_owners and rank_tag_owners[variant] != base):
+                    errors.append(path + ': invalid or shared rank tag family')
+                rank_tag_owners[variant] = base
+                ability = next((a for a in content['abilities'] if a['id'] == profile['abilityId']), None)
+                if ability and not any(e['op'] == 'AddTag' and e.get('tag') == base for e in ability['effects']):
+                    errors.append(path + ': replacement source must be an authored AddTag effect')
+            if not milestone.get('description') or not any(milestone.get(key, 0) for key in ('damageBonus', 'healBonus', 'costReduction', 'rangeBonus', 'pushBonus', 'summonHpBonus', 'summonMoveBonus', 'summonRoundsBonus', 'tagReplacements', 'addTags', 'removeTags')):
                 errors.append(path + ': rank milestones need a description and supported benefit')
+
+    if rank_tag_roots.intersection(rank_tag_owners):
+        errors.append('rank tag families cannot chain or cycle')
 
     journey = data.get('journey')
     journey_rooms = []

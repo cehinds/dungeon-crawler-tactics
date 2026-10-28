@@ -76,6 +76,70 @@
     {
       "id": "status.rushing",
       "label": "Rush"
+    },
+    {
+      "id": "status.burning",
+      "label": "Burning"
+    },
+    {
+      "id": "status.guarded_rank5",
+      "label": "Guarded · tier 5"
+    },
+    {
+      "id": "status.guarded_rank10",
+      "label": "Guarded · tier 10"
+    },
+    {
+      "id": "status.guarded_rank15",
+      "label": "Guarded · tier 15"
+    },
+    {
+      "id": "status.guarded_rank16",
+      "label": "Guarded · tier 16"
+    },
+    {
+      "id": "status.guarded_rank20",
+      "label": "Guarded · tier 20"
+    },
+    {
+      "id": "status.rushing_rank5",
+      "label": "Rushing · tier 5"
+    },
+    {
+      "id": "status.rushing_rank10",
+      "label": "Rushing · tier 10"
+    },
+    {
+      "id": "status.rushing_rank15",
+      "label": "Rushing · tier 15"
+    },
+    {
+      "id": "status.rushing_rank16",
+      "label": "Rushing · tier 16"
+    },
+    {
+      "id": "status.rushing_rank20",
+      "label": "Rushing · tier 20"
+    },
+    {
+      "id": "surface.trap_shock_rank5",
+      "label": "Shock trap · tier 5"
+    },
+    {
+      "id": "surface.trap_shock_rank10",
+      "label": "Shock trap · tier 10"
+    },
+    {
+      "id": "surface.trap_shock_rank15",
+      "label": "Shock trap · tier 15"
+    },
+    {
+      "id": "surface.trap_shock_rank16",
+      "label": "Shock trap · tier 16"
+    },
+    {
+      "id": "surface.trap_shock_rank20",
+      "label": "Shock trap · tier 20"
     }
   ],
   "classes": [
@@ -2142,7 +2206,8 @@
           "amount": 10,
           "tag": ""
         }
-      ]
+      ],
+      "requiredTargetTag": "trait.pet"
     },
     {
       "id": "ability.katia_shapeshift",
@@ -3370,6 +3435,141 @@
       },
       "consumeTags": [
         "status.guarded"
+      ],
+      "effects": [],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.guarded_rank5_blocks",
+      "priority": 200,
+      "damageReduction": 8,
+      "incoming": {
+        "all": [],
+        "any": [
+          "damage.physical",
+          "element.fire",
+          "element.cold",
+          "element.lightning"
+        ],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.guarded_rank5"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.guarded_rank5"
+      ],
+      "effects": [],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.guarded_rank10_blocks",
+      "priority": 200,
+      "damageReduction": 10,
+      "incoming": {
+        "all": [],
+        "any": [
+          "damage.physical",
+          "element.fire",
+          "element.cold",
+          "element.lightning"
+        ],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.guarded_rank10"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.guarded_rank10"
+      ],
+      "effects": [],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.guarded_rank15_blocks",
+      "priority": 200,
+      "damageReduction": 12,
+      "incoming": {
+        "all": [],
+        "any": [
+          "damage.physical",
+          "element.fire",
+          "element.cold",
+          "element.lightning"
+        ],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.guarded_rank15"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.guarded_rank15"
+      ],
+      "effects": [],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.guarded_rank16_blocks",
+      "priority": 200,
+      "damageReduction": 15,
+      "incoming": {
+        "all": [],
+        "any": [
+          "damage.physical",
+          "element.fire",
+          "element.cold",
+          "element.lightning"
+        ],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.guarded_rank16"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.guarded_rank16"
+      ],
+      "effects": [],
+      "emitTags": []
+    },
+    {
+      "id": "reaction.guarded_rank20_blocks",
+      "priority": 200,
+      "damageReduction": 18,
+      "incoming": {
+        "all": [],
+        "any": [
+          "damage.physical",
+          "element.fire",
+          "element.cold",
+          "element.lightning"
+        ],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.guarded_rank20"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.guarded_rank20"
       ],
       "effects": [],
       "emitTags": []

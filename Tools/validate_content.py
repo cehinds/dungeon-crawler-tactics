@@ -65,6 +65,8 @@ def validate(content):
             if ability and (ability["target"] != "tile" or ability["incomingTags"] or any(e["op"] != "AddTag" for e in ability["effects"])):
                 errors.append(f"items.{index}: Favor supplies must only add environmental tags without incoming reactions")
     for index, record in enumerate(content["abilities"]):
+        if record.get("requiredTargetTag"):
+            references([record["requiredTargetTag"]], "tags", f"abilities.{index}.requiredTargetTag")
         references(record["incomingTags"], "tags", f"abilities.{index}.incomingTags")
         effects(record["effects"], f"abilities.{index}.effects")
     for index, record in enumerate(content["reactions"]):

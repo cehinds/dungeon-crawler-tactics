@@ -28,6 +28,8 @@ Validation commands:
 - `python Tools/playtest_player_facing.py` observes actual canvas frame choices during movement, attacks and hits; it does not execute C# rules.
 - `Tools/capture_gameplay_screenshots.py` captures exploration, combat, character sheets, end-turn confirmation and forecasts from a published C# WASM game. The screenshot workflow stores downloadable captures.
 
+Ability cards now show trained rank/cap and uses to the next rank. Character → Abilities includes a collapsed 1–20 effect inspector using the shared C# tables, including unpracticed abilities. See [rank mechanics and fidelity limits](Progression.md) and the [source audit](Ability-Rank-Audit.md).
+
 See [design direction and reference access notes](Tactics-UI-References.md).
 
 ## Play locally

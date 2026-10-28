@@ -34,7 +34,7 @@ namespace DungeonCrawlerTactics
     }
     [Serializable] public sealed class AbilityDef
     {
-        public string id; public string label; public string target;
+        public string id; public string label; public string target; public string requiredTargetTag = "";
         public int range; public int cost;
         public string[] incomingTags = new string[0];
         public EffectDef[] effects = new EffectDef[0];
@@ -68,6 +68,7 @@ namespace DungeonCrawlerTactics
                 Require(a != null && ValidId(a.id) && !Abilities.ContainsKey(a.id), "Invalid or duplicate ability.");
                 Require(a.target == "self" || a.target == "ally" || a.target == "enemy" || a.target == "tile", "Invalid ability target: " + a.id);
                 Require(a.range >= 0 && a.cost >= 0, "Negative range/cost: " + a.id);
+                Require(string.IsNullOrEmpty(a.requiredTargetTag) || HasTag(a.requiredTargetTag), "Unknown required target tag.");
                 CheckTags(a.incomingTags); CheckEffects(a.effects); Abilities.Add(a.id, a);
             }
             foreach (ClassDef c in content.classes)
@@ -91,6 +92,29 @@ namespace DungeonCrawlerTactics
                 if (item.favorEligible) { AbilityDef utility = Abilities[item.abilityId]; Require(utility.target == "tile" && utility.incomingTags.Length == 0, "Favor supply must be an explicit tile utility without reaction triggers."); foreach (EffectDef effect in utility.effects) Require(effect.op == "AddTag", "Favor supplies may only place environmental tags."); }
                 Items.Add(item.id, item);
             }
+        }
+        private readonly Dictionary<string, HashSet<string>> tagFamilies = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+        public void ConfigureRankTags(SkillProgressionDef practice)
+        {
+            foreach (AbilityRankProfile profile in practice.abilityProfiles)
+                foreach (RankMilestoneDef milestone in profile.milestones)
+                    foreach (TagReplacementDef replacement in milestone.tagReplacements)
+                    {
+                        HashSet<string> family;
+                        if (!tagFamilies.TryGetValue(replacement.fromTag, out family)) { family = new HashSet<string>(StringComparer.Ordinal); family.Add(replacement.fromTag); tagFamilies.Add(replacement.fromTag, family); }
+                        family.Add(replacement.toTag);
+                    }
+            foreach (HashSet<string> family in new List<HashSet<string>>(tagFamilies.Values)) foreach (string tag in family) tagFamilies[tag] = family;
+        }
+        public bool HasStackedRankTags(System.Collections.Generic.IEnumerable<string> tags)
+        {
+            HashSet<HashSet<string>> seen = new HashSet<HashSet<string>>();
+            foreach (string tag in tags) { HashSet<string> family; if (tagFamilies.TryGetValue(tag, out family) && !seen.Add(family)) return true; }
+            return false;
+        }
+        public void RemoveTagFamily(HashSet<string> target, string tag)
+        {
+            HashSet<string> family; if (tag != null && tagFamilies.TryGetValue(tag, out family)) target.ExceptWith(family); else target.Remove(tag);
         }
         public bool HasTag(string id) { return id != null && tags.Contains(id); }
         private static bool ValidId(string id) { return id != null && Regex.IsMatch(id, @"^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$"); }

@@ -367,6 +367,10 @@
         },
         "effects": {
           "$ref": "#/$defs/effects"
+        },
+        "requiredTargetTag": {
+          "type": "string",
+          "pattern": "^$|^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
         }
       }
     },

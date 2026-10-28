@@ -894,6 +894,10 @@
         "grantTag": {
           "type": "string",
           "minLength": 1
+        },
+        "practiceAbilityId": {
+          "type": "string",
+          "pattern": "^$|^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
         }
       }
     },
@@ -1905,6 +1909,67 @@
         },
         "description": {
           "type": "string"
+        },
+        "rangeBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "pushBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "summonHpBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "summonMoveBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "summonRoundsBonus": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "tagReplacements": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fromTag",
+              "toTag"
+            ],
+            "properties": {
+              "fromTag": {
+                "$ref": "#/$defs/id"
+              },
+              "toTag": {
+                "$ref": "#/$defs/id"
+              }
+            }
+          }
+        },
+        "addTags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "removeTags": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
         }
       },
       "required": [
@@ -1960,6 +2025,70 @@
           },
           "minItems": 0,
           "maxItems": 19
+        },
+        "rangePerRank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "rangeBonusCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "pushPerRank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "pushBonusCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "summonHpPerRank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "summonHpBonusCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "summonMovePerRank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "summonMoveBonusCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "summonRoundsPerRank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "summonRoundsBonusCap": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "description": {
+          "type": "string"
+        },
+        "canonNotes": {
+          "type": "string"
+        },
+        "sourceUrls": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "pattern": "^https?://"
+          }
         }
       },
       "required": [

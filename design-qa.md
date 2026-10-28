@@ -1,3 +1,19 @@
+# Ability rank progression pass
+
+The rank interface preserves the preceding fixed character/action menu controls. Actions show current rank/cap and progress; Character → Abilities shows effective current effects and a collapsed twenty-rank inspector. Book anchors and source links are separate from numeric game tuning.
+
+- [x] All 95 authored abilities have explicit profiles and twenty runtime rows.
+- [x] Utility range, push, summons and ranked tags affect the actual shared resolver.
+- [x] Mode-based Shapeshift earns practice; consumables and previews do not.
+- [x] Heal Critter requires a pet; Magic Missile has an explicitly adapted rank-10 Burning rider.
+- [x] Rank-up feedback occurs only on an attained rank, not on preview or ordinary practice.
+- [x] 743 shared C# checks across eleven suites, 169 Python checks, content validation, four-viewport rank UI fixtures, and the 70-state HUD suite passed. Summon save validation also enforces the saved floor’s rank gate and rejects forged high-tier copies atomically.
+- [x] A fresh local .NET WASM publish passed eight rank integration checks. High-rank test states were explicitly seeded through validated saves; the rank-1-to-2 transition was earned by an actual cast. Preview/cancel preserved the save, commit trained once, reload retained progress, pet targeting and extended teleport range resolved through C#, and Burning appeared in the committed timed statuses.
+
+Evidence: `/workspace/scratch/ability-rank-runtime-final/report.json`, `earned-rank2-desktop.png`, `seeded-inspector-1440.png`, `seeded-inspector-390.png`. This is browser and shared-core verification. Unity source/data were synchronized and the compatibility build passed; Unity Editor execution remains unverified. A complete novel rank table, generic race/class cap selection, variable-power Missile and group teleport are not claimed. See `Docs/Ability-Rank-Audit.md` and `Docs/Progression.md`.
+
+---
+
 # Third HUD pass: scrolling and menu architecture
 
 Source remains the newer 1672×941 combat concept at `/workspace/generated_images/exec-3af4f6ce-48a8-449e-a705-f78ea6819b7a.png`. The previous pass deployed successfully in Pages run 40437214998. This pass focuses on the action book, target/forecast cards, and character sheets; whole-scene art parity remains unfinished.

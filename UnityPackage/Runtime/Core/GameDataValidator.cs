@@ -20,6 +20,7 @@ namespace DungeonCrawlerTactics
                 foreach (TacticalModeDef mode in modes)
                 {
                     Need(mode != null && !string.IsNullOrEmpty(mode.id) && ids.Add(mode.id) && !string.IsNullOrEmpty(mode.label) && !string.IsNullOrEmpty(mode.description), "Invalid tactical adaptation.");
+                    Need(string.IsNullOrEmpty(mode.practiceAbilityId) || catalog.Abilities.ContainsKey(mode.practiceAbilityId), "Unknown tactical adaptation practice ability.");
                     Need(string.IsNullOrEmpty(mode.grantTag) || catalog.HasTag(mode.grantTag), "Unknown tactical adaptation tag.");
                     Need(Math.Abs(mode.hpBonus) <= 10 && Math.Abs(mode.manaBonus) <= 3 && Math.Abs(mode.moveBonus) <= 1, "Tactical adaptation exceeds bounded stats.");
                     Need(string.IsNullOrEmpty(mode.rosterId) || Array.Exists(data.roster, r => r.id == mode.rosterId && r.deployable), "Unknown tactical adaptation owner.");
@@ -197,13 +198,46 @@ namespace DungeonCrawlerTactics
                 Need(profile != null && profile.abilityId != null && catalog.Abilities.ContainsKey(profile.abilityId) && profileIds.Add(profile.abilityId), "Unknown or duplicate ability rank profile.");
                 Need(profile.practiceMultiplierPercent >= 1 && profile.practiceMultiplierPercent <= 1000 && profile.damagePerRank >= -1 && profile.damagePerRank <= 5 && profile.healPerRank >= -1 && profile.healPerRank <= 5 && profile.costReductionPerRank >= -1 && profile.costReductionPerRank <= 5, "Invalid ability rank training or per-rank effect.");
                 Need(profile.damageBonusCap >= 0 && profile.damageBonusCap <= 100 && profile.healBonusCap >= 0 && profile.healBonusCap <= 100 && profile.costReductionCap >= 0 && profile.costReductionCap <= 100 && profile.milestones != null && profile.milestones.Length < SkillRankProgression.AbsoluteRankCap, "Invalid ability rank caps or milestones.");
+                Need(profile.rangePerRank >= 0 && profile.rangePerRank <= 12 && profile.rangeBonusCap >= 0 && profile.rangeBonusCap <= 12, "Invalid range rank progression.");
+                Need(profile.pushPerRank >= 0 && profile.pushPerRank <= 12 && profile.pushBonusCap >= 0 && profile.pushBonusCap <= 12, "Invalid push rank progression.");
+                Need(profile.summonHpPerRank >= 0 && profile.summonHpPerRank <= 100 && profile.summonHpBonusCap >= 0 && profile.summonHpBonusCap <= 100, "Invalid summonHp rank progression.");
+                Need(profile.summonMovePerRank >= 0 && profile.summonMovePerRank <= 6 && profile.summonMoveBonusCap >= 0 && profile.summonMoveBonusCap <= 6, "Invalid summonMove rank progression.");
+                Need(profile.summonRoundsPerRank >= 0 && profile.summonRoundsPerRank <= 10 && profile.summonRoundsBonusCap >= 0 && profile.summonRoundsBonusCap <= 10, "Invalid summonRounds rank progression.");
+                Need(profile.sourceUrls != null && profile.sourceUrls.Length <= 16, "Invalid rank source URLs.");
+                foreach (string url in profile.sourceUrls) Need(url != null && (url.StartsWith("https://", StringComparison.Ordinal) || url.StartsWith("http://", StringComparison.Ordinal)), "Rank evidence requires HTTP URLs.");
+                AbilityDef rankedAbility = catalog.Abilities[profile.abilityId];
+                Need(profile.pushPerRank == 0 || Array.Exists(rankedAbility.effects, e => e.op == "Push"), "Push growth requires a push effect.");
+                Need(profile.summonHpPerRank + profile.summonMovePerRank + profile.summonRoundsPerRank == 0 || Array.Exists(rankedAbility.effects, e => e.op == "DuplicatePet"), "Summon growth requires a summon effect.");
                 HashSet<int> milestoneRanks = new HashSet<int>();
                 foreach (RankMilestoneDef milestone in profile.milestones)
                 {
                     Need(milestone != null && milestone.rank >= 2 && milestone.rank <= SkillRankProgression.AbsoluteRankCap && milestoneRanks.Add(milestone.rank) && !string.IsNullOrEmpty(milestone.description), "Invalid or duplicate rank milestone.");
-                    Need(milestone.damageBonus >= 0 && milestone.damageBonus <= 100 && milestone.healBonus >= 0 && milestone.healBonus <= 100 && milestone.costReduction >= 0 && milestone.costReduction <= 100 && milestone.damageBonus + milestone.healBonus + milestone.costReduction > 0, "Rank milestones require bounded supported effects.");
+                    Need(milestone.rangeBonus >= 0 && milestone.rangeBonus <= 12, "Invalid range milestone.");
+                    Need(milestone.pushBonus >= 0 && milestone.pushBonus <= 12, "Invalid push milestone.");
+                    Need(milestone.summonHpBonus >= 0 && milestone.summonHpBonus <= 100, "Invalid summonHp milestone.");
+                    Need(milestone.summonMoveBonus >= 0 && milestone.summonMoveBonus <= 6, "Invalid summonMove milestone.");
+                    Need(milestone.summonRoundsBonus >= 0 && milestone.summonRoundsBonus <= 10, "Invalid summonRounds milestone.");
+                    Need(milestone.pushBonus == 0 || Array.Exists(rankedAbility.effects, e => e.op == "Push"), "Push milestone requires a push effect.");
+                    Need(milestone.summonHpBonus + milestone.summonMoveBonus + milestone.summonRoundsBonus == 0 || Array.Exists(rankedAbility.effects, e => e.op == "DuplicatePet"), "Summon milestone requires a summon effect.");
+                    Need(milestone.tagReplacements != null, "Missing rank tag replacements.");
+                    Need(milestone.addTags != null && milestone.removeTags != null && milestone.addTags.Length <= 16 && milestone.removeTags.Length <= 16, "Invalid rank status additions.");
+                    foreach (string tag in milestone.addTags) Need(catalog.HasTag(tag), "Unknown ranked status addition.");
+                    foreach (string tag in milestone.removeTags) Need(catalog.HasTag(tag), "Unknown ranked status removal.");
+                    HashSet<string> replacementTags = new HashSet<string>();
+                    foreach (TagReplacementDef replacement in milestone.tagReplacements)
+                        Need(replacement != null && catalog.HasTag(replacement.fromTag) && catalog.HasTag(replacement.toTag) && replacement.fromTag != replacement.toTag && replacementTags.Add(replacement.fromTag) && Array.Exists(catalog.Abilities[profile.abilityId].effects, e => e.op == "AddTag" && e.tag == replacement.fromTag), "Invalid rank tag replacement.");
+                    Need(milestone.damageBonus >= 0 && milestone.damageBonus <= 100 && milestone.healBonus >= 0 && milestone.healBonus <= 100 && milestone.costReduction >= 0 && milestone.costReduction <= 100 && milestone.damageBonus + milestone.healBonus + milestone.costReduction + milestone.rangeBonus + milestone.pushBonus + milestone.summonHpBonus + milestone.summonMoveBonus + milestone.summonRoundsBonus + milestone.tagReplacements.Length + milestone.addTags.Length + milestone.removeTags.Length > 0, "Rank milestones require bounded supported effects.");
                 }
             }
+            Dictionary<string, string> rankTagOwners = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (AbilityRankProfile profile in practice.abilityProfiles) foreach (RankMilestoneDef milestone in profile.milestones) foreach (TagReplacementDef replacement in milestone.tagReplacements)
+            {
+                string owner;
+                Need(!rankTagOwners.TryGetValue(replacement.toTag, out owner) || owner == replacement.fromTag, "Rank tag variant belongs to multiple families.");
+                rankTagOwners[replacement.toTag] = replacement.fromTag;
+            }
+            foreach (AbilityRankProfile profile in practice.abilityProfiles) foreach (RankMilestoneDef milestone in profile.milestones) foreach (TagReplacementDef replacement in milestone.tagReplacements)
+                Need(!rankTagOwners.ContainsKey(replacement.fromTag), "Rank tag families cannot chain or cycle.");
             Need(config.recipes.Length <= 32 && config.lootBoxes.Length <= 16, "Too many recipes or loot definitions."); ids.Clear();
             foreach (RecipeDef recipe in config.recipes)
             {

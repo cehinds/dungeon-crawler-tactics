@@ -22,7 +22,23 @@ This is an **accelerated, mixed-timeline adaptation**. Every earned party level 
 
 Preview allocation to compare the resulting caps, movement, damage and healing bonuses, then confirm or cancel. Cancellation spends nothing. Increasing a cap does not restore resources; rest to fill it. Allocations belong to each crawler, including reserves, and survive class changes and saves.
 
-Skill practice is separate from party XP and personal-skill unlocks. A committed non-item ability adds one use to that crawler's ability track. Rank 2 requires three uses; rank 3 requires eight. Authored profiles add direct damage or healing where the ability has that effect, with a cap of +20. Mana-cost reduction is capped at 2. Reaction damage and consumable actions do not gain these bonuses. Previews and cancellations do not train skills. Ranks now extend through 20 with increasing practice thresholds; ordinary eligibility stops at 15, while configured Primal eligibility reaches 20 after story floor 3. The purchased training room offers limited paid practice. Guild simulation and companion growth remain incomplete.
+Skill practice is separate from party XP and skill unlocks. A committed learned ability adds one use to that crawler’s track; previews, cancellations, consumable casts and temporary-copy actions do not train the owner. Authored Katia form changes now train Shapeshift too. The original early thresholds (rank 2 at three uses, rank 3 at eight) and saved use counts are preserved. The deterministic curve slows after rank 10. Normal eligibility stops at 15; Carl’s configured Primal permission reaches 20 after story floor 3. All 20 rows remain inspectable even when permission locks the upper ranks. Full race/class-specific cap selection is not implemented.
+
+All 95 authored abilities have explicit profiles in `development.practice.abilityProfiles`. The pure C# effective-ability transformation is used by targeting, descriptions, forecasts and commits. Damage/healing, Mana reduction, range, push distance and temporary summon HP/movement/lifetime can scale. Milestone tags provide stronger Rush, protection and shock traps. Ranked tags form exclusive families: recasting replaces sibling tiers rather than stacking them, and removing a base tag removes its variants. Existing duration/reapplication rules remain: an already present identical timed tag does not refresh merely from another cast.
+
+| Signature ability | Implemented rank behavior | Book fidelity boundary |
+|---|---|---|
+| Powerful Strike | Damage progression with later push refinements | Bounded tactics conversion of unarmed amplification, not the novel’s literal multiplier. |
+| Magic Missile | Damage/range growth; rank 10 adds a two-round Burning status | Chapter-cited secondary source reports ignition at 10. Guaranteed Burning and numbers are adaptations; rank-5 selectable Mana expenditure remains unimplemented. |
+| Puddle Jumper | Range increases at authored milestones | Instant single-unit board teleport; group transport, casting delay and cooldown remain unimplemented. |
+| Heal Critter | Healing/range growth; requires the Pet tag | Pet target restriction matches the cited identity. Numeric rank table is extrapolated. |
+| Clockwork Triplicate | Two copies gain HP, movement and lifetime by rank | Duplicate count remains two. All numeric scaling is extrapolated. |
+| Katia’s Shapeshift / Rush | Committed form changes train Shapeshift; guarded forms use its protection tier. Rush gains movement/duration tiers. | Preset form stats stay fixed. Mass-based shaping and copying powers are not claimed. |
+| Mongo’s actions | Bite potency and leap range scale | Independent companion practice is a game adaptation. |
+
+Rank descriptions and source notes appear in Actions and Character → Abilities. A collapsed inspector exposes ranks 1–20 without adding a permanent long list. It shows the base ability with rank benefits; the current description also includes the crawler’s allocated-stat and skill-tree modifiers. Consumable casts keep their authored effects and do not receive learned-ability rank bonuses. Some utility ranks share the same effect between milestones. No complete 20-rank novel table is claimed: see [Ability rank audit](Ability-Rank-Audit.md).
+
+The purchased training room retains its limited paid-practice service. Equipment skill-level bonuses, arbitrary race/class cap permissions, skill potions, guild simulation, Character Actor’s separate floor-based leveling and companion growth remain incomplete.
 
 ## Recipes and owned loot boxes
 
@@ -34,7 +50,7 @@ Earned loot boxes are owned records with visible fixed contents and an opened fl
 
 `UnityPackage/Runtime/Data/game-content.json` contains `progression.xpThresholds`, per-level growth, `skillUnlocks`, `equipment` and the `development` definitions for stats, practice thresholds, recipes and box sources. Stable IDs reference abilities in `combat-content.json`. Equipment `unlockEncounter` counts completed victories. `abilityIds` grants existing resolver abilities; new combinations of existing effects need no new runtime primitive.
 
-`GameSession.Progression.cs` owns effective stats, ownership, equipment validation, resting, quest views and save upgrades. `GameSession.Development.cs` owns allocation previews, per-ability practice, atomic crafting and owned-box state. Saves retain these records alongside equipped IDs; older checkpoints initialize missing development records while preserving earned XP and existing party state. Browser presentation reads these views and sends commands rather than calculating combat bonuses itself.
+`GameSession.Progression.cs` owns effective stats, ownership, equipment validation, resting, quest views and save upgrades. `GameSession.Development.cs` owns allocation previews, per-ability practice, atomic crafting and owned-box state. `RankProgressionData.cs` constructs the twenty-row tables, and `AbilityScaling.cs` applies their effects without mutating authored definitions. `Tools/build_ability_ranks.py` is an optional reproducible authoring helper for the JSON profiles and registered tag variants. Saves retain these records alongside equipped IDs; older checkpoints initialize missing development records while preserving earned XP and existing party state. Browser presentation reads these views and sends commands rather than calculating combat bonuses itself.
 
 ## Movement and art
 
