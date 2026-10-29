@@ -19,3 +19,10 @@ svg.small-icon{width:13px;height:13px;vertical-align:-2px}.site-header nav a:las
 .reuse-attachment{border:1px solid var(--line);padding:20px;margin:0 0 35px;font-size:13px;overflow-wrap:anywhere}.reuse-attachment p{margin:10px 0;color:var(--muted)}.reuse-attachment ul,.reuse-coverage ul{max-height:280px;overflow:auto}.reuse-coverage{margin:12px 0 20px;font-size:13px;overflow-wrap:anywhere}.reuse-coverage summary{cursor:pointer}
 .remix-selection{display:flex;align-items:center;gap:16px;margin:12px 0 20px;font-size:13px;color:var(--muted);overflow-wrap:anywhere}.remix-selection img{width:88px;height:88px;object-fit:contain;flex:none;background-color:var(--soft);image-rendering:pixelated}.remix-selection p{min-width:0}
 .archive-parts{margin:10px 0;padding-left:24px}.archive-parts li{margin:6px 0}.archive-command{display:block;white-space:normal;overflow-wrap:anywhere;font-size:11px;line-height:1.5}.reuse-download strong{display:block;margin-bottom:6px}.reuse-download>a{display:inline-block;margin-top:8px}
+
+.drainage-expansion-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin:1.5rem 0; }
+.drainage-expansion-grid article { min-width:0; border:1px solid #cfc9bd; padding:1rem; }
+.drainage-expansion-grid img { display:block; width:100%; aspect-ratio:1; object-fit:contain; margin:1rem 0; image-rendering:pixelated; }
+@media(max-width:700px) { .drainage-expansion-grid { grid-template-columns:1fr; } }
+
+.drainage-expansion-grid select { min-height:40px; padding:.35rem .6rem; }

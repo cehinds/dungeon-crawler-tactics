@@ -98,6 +98,10 @@ jobs:
       - name: Validate reviewed Gameplay library
         run: |
           python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/reusable-gameplay --self-test --require-six-views --allow-recorded-generation-blocks
+      - name: Validate reviewed drainage expansion
+        run: |
+          python .art-source/tools/drainage_expansion.py --root Web/wwwroot/assets/expansions/drainage-channels-v1 --check
+          python -m unittest discover -s .art-source/tools -p test_drainage_expansion.py
       - name: Validate recorded-block and attachment contracts
         run: |
           python -m unittest discover -s .art-source/tools -p test_asset_attachment_tags.py

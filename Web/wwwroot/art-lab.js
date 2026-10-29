@@ -30,7 +30,7 @@ function localUrl(path, base = document.baseURI) {
 }
 
 // Archive downloads live in the canonical art repository to keep Pages within its size limit.
-const ART_ARCHIVE_REF = '4bfbe30977d95f9070fa01e0793db1a4543df9ae';
+const ART_ARCHIVE_REF = '00cd965c66e4fe38906d66cd5a18d4849683bf9b';
 function canonicalDownloadUrl(path) {
   if (typeof path !== 'string') return null;
   let url;
