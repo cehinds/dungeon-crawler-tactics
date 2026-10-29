@@ -28,6 +28,7 @@ jobs:
           dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj -c Release
           dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj -c Release
           dotnet run --project Tests/ExplorationRouteTests/ExplorationRouteTests.csproj -c Release
+          dotnet run --project Tests/GeneratedCampaignTests/GeneratedCampaignTests.csproj -c Release
           dotnet run --project Tests/ExpeditionTests/ExpeditionTests.csproj -c Release
           dotnet run --project Tests/RankTests/RankTests.csproj -c Release
           dotnet run --project Tests/JourneyTests/JourneyTests.csproj -c Release
@@ -138,6 +139,7 @@ jobs:
           node Tools/test_native_map_visuals.mjs
           node Tools/test_exploration_controls.mjs
           node Tools/test_exploration_floor.mjs
+          node Tools/test_generated_campaign.mjs
           node Tools/test_sprite_facing.mjs
           node --test Tools/test_art_lab_blocks.cjs
           node --test Tools/test_art_lab_downloads.cjs
@@ -184,6 +186,8 @@ jobs:
         run: python Tools/run_ci_browser_check.py --name "Square battlefield" -- python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check continuous exploration floor
         run: python Tools/run_ci_browser_check.py --name "Continuous floor" -- python Tools/playtest_continuous_floor.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check persistent generated campaign
+        run: python Tools/run_ci_browser_check.py --name "Generated campaign" -- python Tools/playtest_generated_campaign.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check exploration sprite motion
         run: python Tools/run_ci_browser_check.py --name "Exploration motion" -- python Tools/playtest_exploration_motion.py
       - name: Check published Generated adventure

@@ -9,6 +9,8 @@ namespace DungeonCrawlerTactics
         private void ResetCustomMap()
         {
             generatedDungeon = null;
+            generatedCampaign = null;
+            pendingDescent = false;
             customMap = null;
             customEncounter = null;
         }
@@ -22,6 +24,7 @@ namespace DungeonCrawlerTactics
         }
         private void PopulateCustomMap(GameView view)
         {
+            view.generatedCampaign = CampaignView();
             view.customMap = ExportCustomMap();
             view.generatedDungeon = CopyGenerated(generatedDungeon);
         }

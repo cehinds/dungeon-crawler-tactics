@@ -4,6 +4,16 @@ Use this as the working status list for the current playable scope. It is intent
 
 The live shared-C# source and authored JSON are the implementation reference. `Docs/PlayableGame.md` describes current behavior and delivery limits; `Docs/Book-Fidelity-Checklist.md` tracks fidelity-oriented mechanics. This checklist captures the full active finish scope, including the defined floors 1–8 story route. Floors 9–18 are outside the current playable scope.
 
+## Connected expedition — first adventure-loop package
+
+- [x] Three generated depths with distinct layout families, environment kits and objective recipes.
+- [x] Preserve party, equipment, current HP/Mana, supplies, XP and practice across one-way descent.
+- [x] Explicit descent review, cancel and confirm; stale/duplicate confirmations cannot advance twice.
+- [x] Save all realized maps and compact completed-floor archives; preserve standalone-floor compatibility.
+- [x] Shared-core campaign regressions and generator validation. See [generated campaign evidence](Generated-Campaign.md).
+- [ ] Integrate full canonical floor-specific systems and longer progression/equipment balance.
+- [ ] Complete the remaining [pseudocode work packages](Pseudocode/README.md); these are design targets, not implemented features.
+
 ## Reference fidelity and adaptation boundaries
 
 - [x] Source-linked survey of classes, floors, enemies, skills and housing is published in the lore codex and research documents.

@@ -118,3 +118,46 @@ export function validateExplorationFloor(plan,rules) {
   if(seen.size!==map.width*map.height-blocked.size)throw new Error('Disconnected walkable floor.');
   return {walkableCells:seen.size,exitDistance:distance.get(key(exit))};
 }
+
+// Campaign recipes compose the independently usable continuous-floor rules.
+export function campaignDepthRules(baseRules, campaignRules, depth) {
+  const family = campaignRules.families.find(f => f.id === depth.familyId);
+  if (!family) throw new Error(`Invalid generated campaign rules: unknown family ${depth.familyId}.`);
+  return {...structuredClone(baseRules), zones:structuredClone(family.zones), connections:structuredClone(family.connections),
+    groups:structuredClone(depth.groups), enemyRecipe:structuredClone(depth.enemyRecipe), discoveries:structuredClone(depth.discoveries), propLabelPattern:depth.propLabelPattern};
+}
+export function validateGeneratedCampaignRules(config, baseRules, catalog) {
+  const check = (value, message) => { if (!value) throw new Error(`Invalid generated campaign rules: ${message}`); };
+  const text = value => typeof value === 'string' && value.trim().length > 0 && value.length <= 120;
+  const keys = (value, allowed) => value && Object.keys(value).every(k=>allowed.includes(k));
+  check(keys(config,['schemaVersion','id','label','families','depths']) && config.schemaVersion===1 && text(config.id) && text(config.label), 'version, identity or fields.');
+  check(Array.isArray(config.families) && config.families.length>=1 && config.families.length<=8, '1–8 families required.');
+  check(Array.isArray(config.depths) && config.depths.length>=2 && config.depths.length<=8, '2–8 depths required.');
+  for (const [values, fields] of [[config.families,['id','zones','connections']],[config.depths,['id','label','familyId','kitId','groups','enemyRecipe','discoveries','propLabelPattern']]]) {
+    const ids = new Set();
+    for (const value of values) { check(keys(value,fields) && text(value.id) && !ids.has(value.id), 'unique identities and supported fields required.'); ids.add(value.id); }
+  }
+  for(const family of config.families) {
+    // Validate even unused graph definitions with the shared relationship validator.
+    validateExplorationFloorRules({...structuredClone(baseRules),zones:family.zones,connections:family.connections});
+  }
+  for(const depth of config.depths) {
+    check(text(depth.label) && text(depth.familyId) && text(depth.kitId), 'depth label, graph and kit required.');
+    const rules=campaignDepthRules(baseRules,config,depth);
+    validateExplorationFloorRules(rules);
+    check(rules.groups.some(g=>g.kind==='visible') && rules.groups.some(g=>g.kind==='ambush'), 'each depth requires visible threats and an ambush.');
+    check(rules.discoveries.some(d=>d.kind==='cache') && rules.discoveries.some(d=>d.kind==='objective'), 'each depth requires supplies and objectives.');
+    const sites=new Set();
+    for(const discovery of rules.discoveries) { check(!sites.has(discovery.zone), 'discoveries must use distinct zones.'); sites.add(discovery.zone); }
+    if(catalog) check(catalog.kits.some(k=>k.id===depth.kitId), `unknown kit ${depth.kitId}.`);
+  }
+  return config;
+}
+export function generateCampaignFloor(manifest, baseRules, campaignRules, depthIndex, seed) {
+  const depth=campaignRules.depths[depthIndex];
+  if(!depth) throw new Error('Invalid campaign depth.');
+  const result=generateExplorationFloor(manifest,campaignDepthRules(baseRules,campaignRules,depth),`${seed}/${depth.id}`);
+  result.floorPlan.map.label=depth.label;
+  result.room.generation.familyId=depth.familyId;
+  return result;
+}

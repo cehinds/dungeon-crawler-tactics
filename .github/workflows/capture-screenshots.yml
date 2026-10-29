@@ -15,6 +15,8 @@ on:
       - 'Web/wwwroot/field-ui.css'
       - 'Web/wwwroot/camp-hub.js'
       - 'Web/wwwroot/camp-hub.css'
+      - 'Web/wwwroot/campaign-ui.js'
+      - 'Web/wwwroot/assets/generated-campaign-rules.json'
       - 'Web/wwwroot/sprite-facing.js'
       - 'Web/wwwroot/narrator.js'
       - 'Web/wwwroot/index.html'
@@ -42,6 +44,9 @@ jobs:
           path: .art-source
           sparse-checkout: |
             dungeon-crawler-tactics/Web/wwwroot/assets/book-tiles/pocket-dungeon/starter-dungeon
+            dungeon-crawler-tactics/Web/wwwroot/assets/book-tiles/pocket-dungeon/safe-services
+            dungeon-crawler-tactics/Web/wwwroot/assets/book-tiles/pocket-dungeon/industry-menagerie
+            dungeon-crawler-tactics/Web/wwwroot/assets/book-tiles/pocket-dungeon/iron-stations
             dungeon-crawler-tactics/Web/wwwroot/assets/room-kit
             dungeon-crawler-tactics/Web/wwwroot/assets/revamp
             dungeon-crawler-tactics/Web/wwwroot/assets/directional

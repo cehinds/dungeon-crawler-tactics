@@ -30,7 +30,7 @@ namespace DungeonCrawlerTactics
         {
             if (!compact || screen != "explore" || generatedDungeon == null || generatedDungeon.floorPlan == null) return GetView();
             GeneratedDungeonState s = generatedDungeon;
-            return new GameView { screen = screen, phase = phase, message = message, exploration = FloorExplorationView(),
+            return new GameView { screen = screen, phase = phase, message = message, exploration = FloorExplorationView(), generatedCampaign = CampaignView(),
                 generatedDungeon = new GeneratedDungeonState { x = s.x, y = s.y, entrance = CopyCell(s.entrance), exit = CopyCell(s.exit), cleared = s.cleared, steps = s.steps, activeGroupId = s.activeGroupId, defeatedGroupIds = (string[])s.defeatedGroupIds.Clone(), claimedIds = (string[])s.claimedIds.Clone(), revealed = Array.ConvertAll(s.revealed, CopyCell) } };
         }
         private static CellView CopyCell(CellView c) { return c == null ? null : new CellView { x = c.x, y = c.y }; }
@@ -59,6 +59,7 @@ namespace DungeonCrawlerTactics
             List<CellView> cells = GeneratedCells(original, f.entrance.x, f.entrance.y);
             Func<int,int,bool> connected = (x,y) => cells.Exists(c => c.x == x && c.y == y);
             Require(connected(s.x,s.y) && connected(f.exit.x,f.exit.y) && !Array.Exists(original.enemies,e => e.x == f.entrance.x && e.y == f.entrance.y), "Floor endpoints must connect.");
+            foreach (SpawnDef enemy in original.enemies) Require(connected(enemy.x, enemy.y), "Every floor enemy must connect to the entrance.");
             HashSet<string> ids = new HashSet<string>(), enemies = new HashSet<string>();
             foreach (GeneratedEncounterGroup g in f.groups)
             {
@@ -98,6 +99,7 @@ namespace DungeonCrawlerTactics
         }
         private bool TryFloorCommand(GameCommand command)
         {
+            if (TryCampaignCommand(command)) return true;
             if(command.type=="import_floor")
             {
                 GeneratedFloorPlan f=CopyFloor(command.floorPlan); Require(f!=null,"Choose a floor plan."); CustomMapData map=CopyCustomMap(f.map); EncounterDef encounter=BuildCustomEncounter(map,true); f.map=CopyCustomMap(map);
@@ -122,7 +124,7 @@ namespace DungeonCrawlerTactics
             if(command.type=="explore_interact")
             {
                 Require(screen=="explore","Interact during exploration.");
-                if(command.targetId=="generated.exit"){Require(FloorExitReady(generatedDungeon)&&Near(generatedDungeon,generatedDungeon.exit.x,generatedDungeon.exit.y),"Clear the encounters, find the objective, and reach the exit.");screen="complete";rewardChosen=true;message="Floor completed.";return true;}
+                if(command.targetId=="generated.exit"){Require(FloorExitReady(generatedDungeon)&&Near(generatedDungeon,generatedDungeon.exit.x,generatedDungeon.exit.y),"Clear the encounters, find the objective, and reach the exit.");if (generatedCampaign != null) { message = "Exit ready. Preview descent to continue the expedition."; return true; } screen="complete";rewardChosen=true;message="Floor completed.";return true;}
                 ExplorationPointDef p=Array.Find(generatedDungeon.floorPlan.discoveries,d=>d.id==command.targetId);Require(p!=null&&Near(generatedDungeon,p.x,p.y)&&Array.Exists(generatedDungeon.revealed,c=>c.x==p.x&&c.y==p.y)&&!Has(generatedDungeon.claimedIds,p.id),"Reach an unclaimed discovery first.");
                 if(p.kind=="cache"){Require(inventory[p.itemId]<=10000-p.count,"Supplies are full.");inventory[p.itemId]+=p.count;}generatedDungeon.claimedIds=Append(generatedDungeon.claimedIds,p.id);message=p.description;return true;
             }

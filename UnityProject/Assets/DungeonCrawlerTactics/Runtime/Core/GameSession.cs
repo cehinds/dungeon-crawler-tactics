@@ -42,6 +42,7 @@ namespace DungeonCrawlerTactics
             try
             {
                 if (command == null) throw new ArgumentException("Missing command.");
+                PrepareCampaignCommand(command);
                 ClearHomePreview(command);
                 message = "";
                 if (command.type != "preview_allocate" && command.type != "confirm_development" && command.type != "cancel_development") pendingDevelopment = null;
@@ -669,7 +670,7 @@ namespace DungeonCrawlerTactics
         }
         public GameSave ExportSave()
         {
-            GameSave save = new GameSave { battleLayoutVersion = battleLayoutVersion, audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), generatedDungeon = CopyGenerated(generatedDungeon), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
+            GameSave save = new GameSave { battleLayoutVersion = battleLayoutVersion, audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), generatedDungeon = CopyGenerated(generatedDungeon), generatedCampaign = CaptureCampaign(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
             save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
@@ -693,6 +694,7 @@ namespace DungeonCrawlerTactics
                 Require(save.battleLayoutVersion >= 0 && save.battleLayoutVersion <= 1, "Unknown battle layout version.");
                 Require(save.progressionVersion == 0 || save.progressionVersion == 1, "Unknown progression save version.");
                 save = MigrateCompatibleSave(save);
+                ValidateCampaignSave(save);
                 Require(save.screen == "camp" || save.screen == "explore" || save.screen == "battle" || save.screen == "victory" || save.screen == "defeat" || save.screen == "complete", "Invalid save screen.");
                 Require(save.phase == "player" || (save.phase == "enemy" && (save.screen == "victory" || save.screen == "defeat")), "Invalid save phase.");
                 int campaignLength = save.journey == null ? data.encounters.Length : 8;
@@ -712,7 +714,7 @@ namespace DungeonCrawlerTactics
                     for (int i = 0; i < Math.Min(save.encounterIndex, data.encounters.Length); i++) expectedXp += data.encounters[i].xp;
                     if (save.screen == "victory" && save.expedition == null && save.scenario == null) expectedXp += data.encounters[save.encounterIndex].xp;
                 }
-                if (save.generatedDungeon != null && save.generatedDungeon.floorPlan != null) expectedXp = FloorWins(save.generatedDungeon, save.screen) * data.encounters[0].xp;
+                if (save.generatedDungeon != null && save.generatedDungeon.floorPlan != null) expectedXp = CampaignWins(save.generatedCampaign, save.generatedDungeon, save.screen) * data.encounters[0].xp;
                 else if (save.generatedDungeon != null && save.generatedDungeon.cleared) expectedXp = data.encounters[0].xp;
                 Require(save.scenario != null || save.expedition != null || save.xp == expectedXp, "Save XP does not match its completed encounters.");
                 ValidateAchievements(save.achievementIds);
@@ -827,7 +829,7 @@ namespace DungeonCrawlerTactics
                 foreach (string entry in save.log) Require(entry != null && entry.Length <= 1000, "Invalid saved log.");
                 // All validation is complete before replacing any live state.
                 journey = save.journey == null ? null : new JourneySave { id = save.journey.id, floorIndex = save.journey.floorIndex, capturedIds = (string[])save.journey.capturedIds.Clone() };
-                neighborhoodState = nextNeighborhood; pendingNeighborhood = null; CommitHome(nextHome); CommitSkillTree(nextSkillNodes); CommitDevelopment(nextDevelopment); CommitCustomMap(save); CommitScenario(save); CommitExpedition(save);
+                neighborhoodState = nextNeighborhood; pendingNeighborhood = null; CommitHome(nextHome); CommitSkillTree(nextSkillNodes); CommitDevelopment(nextDevelopment); CommitCustomMap(save); generatedCampaign = CopyCampaign(save.generatedCampaign); pendingDescent = false; CommitScenario(save); CommitExpedition(save);
                 audienceState = nextAudience; achievementIds.Clear(); achievementIds.AddRange(nextAchievements);
                 equipped.Clear(); equipped.AddRange(nextEquipment);
                 exploration.Clear(); foreach (ExplorationSave sector in nextExploration) exploration.Add(sector.sectorId, sector);

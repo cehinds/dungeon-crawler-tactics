@@ -34,7 +34,7 @@ Keep authored content in JSON and runtime rules in the shared C# core. A floor p
 
 The current room kit already separates canonical gameplay tiles from optional placed-art metadata, and the tile-edge fitter only changes visual choices. Reuse that separation for generated floors rather than making art tags determine navigation.
 
-## Implemented in this pass
+## Original continuous-floor foundation
 
 Validated locally on 2026-10-29 against the published shared-C# WebAssembly build.
 
@@ -72,8 +72,8 @@ Validated locally on 2026-10-29 against the published shared-C# WebAssembly buil
 
 ### Remaining exploration work
 
-- [ ] Connect generated floors into persistent floor-to-floor campaign progression. The current continuous floor is a standalone mode; story floors 1–8 retain their authored route.
-- [ ] More zone graph families and biome-specific encounter/discovery recipes. Seeds vary room dimensions and route ordering; the base five-zone graph is authored.
+- [x] Connect generated floors into a persistent adapted expedition. The [generated campaign](Generated-Campaign.md) adds three depths with party/resource carryover and saved archives. Story floors 1–8 retain their authored route; the full procedural book campaign remains future work.
+- [x] Add three authored graph families and per-depth environment/encounter/objective recipes for connected expeditions. Seeds still operate within bounded authored layouts; broader biome systems remain future work.
 - [ ] Reusable keys/locked doors, field abilities and multi-step environmental puzzles. These are design targets above, not current generalized systems.
 - [ ] More equipment drops, rarity/progression tiers, and visible equipment attachments. This pass exposes the existing six gear pieces during exploration; it does not create a new item catalog or armor overlays.
 - [ ] Distinct overworld travel, settlements and book-specific floor simulations.

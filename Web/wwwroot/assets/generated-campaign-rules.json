@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 1,
+  "id": "expedition.works-relay",
+  "label": "Works to Relay Expedition",
+  "families": [
+    {
+      "id": "ring-crosslink",
+      "zones": [
+        {
+          "id": "arrival",
+          "label": "Arrival clearing",
+          "x": 2,
+          "y": 2,
+          "width": 10,
+          "height": 8
+        },
+        {
+          "id": "workyard",
+          "label": "Abandoned workyard",
+          "x": 17,
+          "y": 2,
+          "width": 10,
+          "height": 8
+        },
+        {
+          "id": "cistern",
+          "label": "Dry cistern",
+          "x": 29,
+          "y": 13,
+          "width": 8,
+          "height": 8
+        },
+        {
+          "id": "gallery",
+          "label": "Broken gallery",
+          "x": 15,
+          "y": 23,
+          "width": 11,
+          "height": 7
+        },
+        {
+          "id": "vault",
+          "label": "Sealed archive",
+          "x": 2,
+          "y": 17,
+          "width": 9,
+          "height": 10
+        }
+      ],
+      "connections": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          1,
+          3
+        ]
+      ]
+    },
+    {
+      "id": "branching-waterways",
+      "zones": [
+        {
+          "id": "arrival",
+          "label": "Arrival clearing",
+          "x": 2,
+          "y": 2,
+          "width": 10,
+          "height": 8
+        },
+        {
+          "id": "workyard",
+          "label": "Abandoned workyard",
+          "x": 17,
+          "y": 2,
+          "width": 10,
+          "height": 8
+        },
+        {
+          "id": "cistern",
+          "label": "Dry cistern",
+          "x": 29,
+          "y": 13,
+          "width": 8,
+          "height": 8
+        },
+        {
+          "id": "gallery",
+          "label": "Broken gallery",
+          "x": 15,
+          "y": 23,
+          "width": 11,
+          "height": 7
+        },
+        {
+          "id": "vault",
+          "label": "Sealed archive",
+          "x": 2,
+          "y": 17,
+          "width": 9,
+          "height": 10
+        }
+      ],
+      "connections": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "id": "relay-circuit",
+      "zones": [
+        {
+          "id": "arrival",
+          "label": "Arrival clearing",
+          "x": 2,
+          "y": 2,
+          "width": 10,
+          "height": 8
+        },
+        {
+          "id": "workyard",
+          "label": "Abandoned workyard",
+          "x": 17,
+          "y": 2,
+          "width": 10,
+          "height": 8
+        },
+        {
+          "id": "cistern",
+          "label": "Dry cistern",
+          "x": 29,
+          "y": 13,
+          "width": 8,
+          "height": 8
+        },
+        {
+          "id": "gallery",
+          "label": "Broken gallery",
+          "x": 15,
+          "y": 23,
+          "width": 11,
+          "height": 7
+        },
+        {
+          "id": "vault",
+          "label": "Sealed archive",
+          "x": 2,
+          "y": 17,
+          "width": 9,
+          "height": 10
+        }
+      ],
+      "connections": [
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    }
+  ],
+  "depths": [
+    {
+      "id": "works",
+      "label": "Depth 1 \u00b7 Abandoned Works",
+      "familyId": "ring-crosslink",
+      "kitId": "industry-menagerie",
+      "propLabelPattern": "crate|barrel|rubble|rock|pillar|moss|debris|pipe",
+      "groups": [
+        {
+          "id": "depth1.group1",
+          "label": "Abandoned Works scavengers",
+          "kind": "visible",
+          "zone": 1
+        },
+        {
+          "id": "depth1.group2",
+          "label": "Abandoned Works sentries",
+          "kind": "visible",
+          "zone": 2
+        },
+        {
+          "id": "depth1.group3",
+          "label": "Abandoned Works patrol",
+          "kind": "visible",
+          "zone": 3
+        },
+        {
+          "id": "depth1.group4",
+          "label": "Abandoned Works ambush",
+          "kind": "ambush",
+          "zone": 4
+        }
+      ],
+      "enemyRecipe": [
+        {
+          "classId": "class.brawler",
+          "artId": "rat",
+          "hp": 18,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "classId": "class.ranger",
+          "artId": "guard",
+          "hp": 18,
+          "energy": 12,
+          "move": 3,
+          "tags": []
+        }
+      ],
+      "discoveries": [
+        {
+          "id": "depth1.supplies",
+          "label": "Abandoned Works supplies",
+          "description": "A supply cache beside the abandoned works route.",
+          "kind": "cache",
+          "zone": 1,
+          "itemId": "item.health_tonic",
+          "count": 2
+        },
+        {
+          "id": "depth1.objective1",
+          "label": "Release the works seal",
+          "description": "Release the works seal. Clear every threat and activate each marked objective before descending.",
+          "kind": "objective",
+          "zone": 4,
+          "itemId": null,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "id": "cistern",
+      "label": "Depth 2 \u00b7 Dry Cistern",
+      "familyId": "branching-waterways",
+      "kitId": "starter-dungeon",
+      "propLabelPattern": "crate|barrel|rubble|rock|pillar|moss|debris|pipe",
+      "groups": [
+        {
+          "id": "depth2.group1",
+          "label": "Dry Cistern scavengers",
+          "kind": "visible",
+          "zone": 1
+        },
+        {
+          "id": "depth2.group2",
+          "label": "Dry Cistern sentries",
+          "kind": "visible",
+          "zone": 2
+        },
+        {
+          "id": "depth2.group3",
+          "label": "Dry Cistern patrol",
+          "kind": "visible",
+          "zone": 3
+        },
+        {
+          "id": "depth2.group4",
+          "label": "Dry Cistern ambush",
+          "kind": "ambush",
+          "zone": 4
+        }
+      ],
+      "enemyRecipe": [
+        {
+          "classId": "class.brawler",
+          "artId": "rat",
+          "hp": 21,
+          "energy": 13,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "classId": "class.ranger",
+          "artId": "guard",
+          "hp": 21,
+          "energy": 13,
+          "move": 3,
+          "tags": []
+        }
+      ],
+      "discoveries": [
+        {
+          "id": "depth2.supplies",
+          "label": "Dry Cistern supplies",
+          "description": "A supply cache beside the dry cistern route.",
+          "kind": "cache",
+          "zone": 1,
+          "itemId": "item.health_tonic",
+          "count": 2
+        },
+        {
+          "id": "depth2.objective1",
+          "label": "Open the west valve",
+          "description": "Open the west valve. Clear every threat and activate each marked objective before descending.",
+          "kind": "objective",
+          "zone": 4,
+          "itemId": null,
+          "count": 0
+        },
+        {
+          "id": "depth2.objective2",
+          "label": "Open the east valve",
+          "description": "Open the east valve. Clear every threat and activate each marked objective before descending.",
+          "kind": "objective",
+          "zone": 3,
+          "itemId": null,
+          "count": 0
+        }
+      ]
+    },
+    {
+      "id": "vault",
+      "label": "Depth 3 \u00b7 Relay Vault",
+      "familyId": "relay-circuit",
+      "kitId": "iron-stations",
+      "propLabelPattern": "crate|barrel|rubble|rock|pillar|moss|debris|pipe",
+      "groups": [
+        {
+          "id": "depth3.group1",
+          "label": "Relay Vault scavengers",
+          "kind": "visible",
+          "zone": 1
+        },
+        {
+          "id": "depth3.group2",
+          "label": "Relay Vault sentries",
+          "kind": "visible",
+          "zone": 2
+        },
+        {
+          "id": "depth3.group3",
+          "label": "Relay Vault patrol",
+          "kind": "visible",
+          "zone": 3
+        },
+        {
+          "id": "depth3.group4",
+          "label": "Relay Vault ambush",
+          "kind": "ambush",
+          "zone": 4
+        }
+      ],
+      "enemyRecipe": [
+        {
+          "classId": "class.brawler",
+          "artId": "rat",
+          "hp": 24,
+          "energy": 14,
+          "move": 3,
+          "tags": []
+        },
+        {
+          "classId": "class.ranger",
+          "artId": "guard",
+          "hp": 24,
+          "energy": 14,
+          "move": 3,
+          "tags": []
+        }
+      ],
+      "discoveries": [
+        {
+          "id": "depth3.supplies",
+          "label": "Relay Vault supplies",
+          "description": "A supply cache beside the relay vault route.",
+          "kind": "cache",
+          "zone": 1,
+          "itemId": "item.health_tonic",
+          "count": 2
+        },
+        {
+          "id": "depth3.objective1",
+          "label": "Charge the archive relay",
+          "description": "Charge the archive relay. Clear every threat and activate each marked objective before descending.",
+          "kind": "objective",
+          "zone": 4,
+          "itemId": null,
+          "count": 0
+        },
+        {
+          "id": "depth3.objective2",
+          "label": "Align the signal relay",
+          "description": "Align the signal relay. Clear every threat and activate each marked objective before descending.",
+          "kind": "objective",
+          "zone": 3,
+          "itemId": null,
+          "count": 0
+        },
+        {
+          "id": "depth3.objective3",
+          "label": "Release the descent relay",
+          "description": "Release the descent relay. Clear every threat and activate each marked objective before descending.",
+          "kind": "objective",
+          "zone": 2,
+          "itemId": null,
+          "count": 0
+        }
+      ]
+    }
+  ]
+}

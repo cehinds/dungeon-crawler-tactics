@@ -1,6 +1,7 @@
 import { renderCampHub, bindCampHub } from './camp-hub.js';
 import { renderFieldShell, renderFieldMenu, renderFieldMap, refreshFieldStep } from './field-ui.js';
-import { createGeneratedAdventure, createExplorationFloor } from './generated-adventure.js';
+import { renderDescentReview, renderCampaignEnding } from './campaign-ui.js';
+import { createGeneratedAdventure, createExplorationFloor, createGeneratedCampaign } from './generated-adventure.js';
 import { attachExplorationControls } from './exploration-controls.js';
 import { renderAudience, renderAudienceSummary, renderAudienceHome, renderFavorControls } from './audience-ui.js';
 import { renderNeighborhood, renderNeighborhoodStrip } from './neighborhood-ui.js';
@@ -214,6 +215,11 @@ async function playPresentation(events,before,after) {
   try {await playback;} finally {fastForwardRequested=false;enemySequence=false;setEnemyPlayback(false);}
 }
 async function dispatchCommand(type, args = {}, { preserveAction = false, save = true } = {}) {
+  // Both the touch interaction and E/Space route through the same descent review.
+  if (type === 'explore_interact' && args.targetId === 'generated.exit' && view.generatedCampaign) {
+    type = 'preview_descent';
+    args = {};
+  }
   busy = true;
   $('#game').setAttribute('aria-busy', 'true');
   try {
@@ -224,10 +230,10 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
     const compactStep=type==='explore_step'&&before.screen==='explore'&&before.generatedDungeon?.floorPlan;
     const result = await call(compactStep?'DispatchMovement':'Dispatch', JSON.stringify({ type, ...args }));
     const response = JSON.parse(result);
-    const after = compactStep ? (response.partial ? {...before,screen:response.view.screen,phase:response.view.phase,message:response.view.message,exploration:response.view.exploration,events:[],forecast:[],canConfirm:false,generatedDungeon:{...before.generatedDungeon,...response.view.generatedDungeon,floorPlan:before.generatedDungeon.floorPlan}} : response.view) : response;
+    const after = compactStep ? (response.partial ? {...before,screen:response.view.screen,phase:response.view.phase,message:response.view.message,exploration:response.view.exploration,generatedCampaign:response.view.generatedCampaign??before.generatedCampaign,events:[],forecast:[],canConfirm:false,generatedDungeon:{...before.generatedDungeon,...response.view.generatedDungeon,floorPlan:before.generatedDungeon.floorPlan}} : response.view) : response;
     if(before.screen!==after.screen || before.encounterName!==after.encounterName || before.expedition?.id!==after.expedition?.id || before.scenario?.id!==after.scenario?.id) clearFeedback();
     if(type!=='explore_step') narrator?.begin(actionContext,before,after);
-    if(save && !['preview','cancel','select'].includes(type)) schedulePersist({movement:compactStep&&response.partial});
+    if(save && !['preview','cancel','select','preview_descent','cancel_descent'].includes(type)) schedulePersist({movement:compactStep&&response.partial});
     if (before.screen === 'battle' && after.screen !== 'battle' && battlefield && after.events?.length) {
       try { await playPresentation(after.events, before, after); } catch { /* Presentation cannot prevent the committed result appearing. */ }
     }
@@ -272,6 +278,13 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
   }
 }
 function commandFeedback(type, args, before, after,actionLabel) {
+  if(type==='preview_descent'&&after.generatedCampaign?.canConfirmDescent)return;
+  if(type==='cancel_descent'){toast('Descent canceled. Keep exploring or return home to rest.','info');return;}
+  if(type==='confirm_descent'&&(after.generatedCampaign?.floorIndex!==before.generatedCampaign?.floorIndex||after.generatedCampaign?.complete&&!before.generatedCampaign?.complete)){
+    toast(after.generatedCampaign.complete?'Expedition complete. Your party and progress are saved.':`Depth ${after.generatedCampaign.floorNumber} reached. Your party and supplies carried forward.`,'success');
+    battleCanvas?.focus({preventScroll:true});
+    return;
+  }
   if(type==='explore_step') { if(before.screen==='explore'&&after.screen==='battle') toast('Enemies spotted · Tactical combat begins.','info'); return; }
   if(type==='preview_neighborhood'&&after.neighborhood?.canConfirm)return;
   if(type==='cancel_neighborhood'){toast('Choice canceled. Supplies unchanged.','info');return;}
@@ -324,6 +337,11 @@ function commandFeedback(type, args, before, after,actionLabel) {
 }
 function renderProgress() {
   const progress = $('#run-progress');
+  if(view.generatedCampaign){
+    const campaign=view.generatedCampaign;
+    progress.innerHTML=`<span class="current">${String(campaign.floorNumber).padStart(2,'0')}</span><small>OF ${campaign.totalFloors} · EXPEDITION DEPTHS</small>`;
+    return;
+  }
   if(view.journey?.active){progress.innerHTML=`<span class="current">${String(view.journey.floorNumber).padStart(2,'0')}</span><small>OF 18 · ${e(view.journey.floorLabel)}</small>`;return;}
   if(progress.querySelectorAll('span').length!==3)progress.innerHTML='<span>01</span><i></i><span>02</span><i></i><span>03</span><small>THE FIRST FLOOR</small>';
   progress.querySelectorAll('span').forEach((span, index) => {
@@ -378,6 +396,7 @@ function render() {
   if(campModal)$('#game').insertAdjacentHTML('beforeend',renderCampModal());
   if(fieldMenu&&view.screen==='explore')$('#game').insertAdjacentHTML('beforeend',renderFieldMenu(view));
   if(fieldMap&&view.screen==='explore')$('#game').insertAdjacentHTML('beforeend',renderFieldMap(view));
+  if(view.generatedCampaign?.canConfirmDescent)$('#game').insertAdjacentHTML('beforeend',renderDescentReview(view,{portrait}));
   narrator?.mount($('#narrator-slot'));
   bindScreen();
   if(view.screen==='camp')hubCleanup=bindCampHub({onActivate:activateHub});
@@ -506,6 +525,15 @@ function renderExploration() {
   return `<section class="exploration-screen square-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(view.generatedDungeon ? 'Find the exit' : map.label)}</h2>${view.generatedDungeon?'<small>'+(view.generatedDungeon.cleared?'Enemies cleared · Reach the exit':'Clear the enemies · Reach the exit')+'</small>':renderQuestTracker()}</div></div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${!t.revealed?'unexplored':t.blocked?'wall':'passage'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="walk-pad" aria-label="Walk through the dungeon"><button data-walk="north" aria-label="Walk up">↑</button><button data-walk="west" aria-label="Walk left">←</button><button data-walk="south" aria-label="Walk down">↓</button><button data-walk="east" aria-label="Walk right">→</button></div><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>`<button class="explore-crawler" data-character-sheet="${e(r.id)}" aria-label="Open ${e(r.label)} character sheet: ${r.hp}/${r.maxHp} health, ${r.energy}/${r.maxEnergy} mana" title="${e(r.label)} · ${r.hp}/${r.maxHp} HP · ${r.energy}/${r.maxEnergy} Mana">${portrait(r)}<span>${e(copyLabel(r))}</span><i class="explore-health" style="--fill:${r.maxHp?r.hp/r.maxHp*100:0}%" aria-hidden="true"></i></button>`).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || (view.generatedDungeon ? view.generatedDungeon.cleared ? 'Reach the exit' : 'Explore the dungeon' : 'Find the encounter door'))}</strong><p>${e(points[0] ? 'E / Space to interact' : 'WASD / arrows to walk')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}${neighborhoodVisible()?'<button data-open-neighborhood>Room choices & journal</button>':''}<button id="return-camp" class="quiet" title="Leave this dungeon and return to Mordecai">Return to camp</button></div><div id="narrator-slot" class="narrator-slot"></div></div></section>`;
 }
 function bindFieldMenus() {
+  const descent=$('#descent-dialog');
+  if(descent){
+    openDialog('#descent-dialog');
+    const cancel=()=>command('cancel_descent',{}, {save:false});
+    $('#cancel-descent').onclick=cancel;
+    $('#close-descent').onclick=cancel;
+    descent.addEventListener('cancel',event=>{event.preventDefault();cancel();});
+    $('#confirm-descent').onclick=event=>{event.currentTarget.disabled=true;void command('confirm_descent');};
+  }
   if($('#party-setup-dialog')){openDialog('#party-setup-dialog');const close=()=>{partySetup=false;render();};$('#close-party-setup').onclick=close;$('#party-setup-dialog').addEventListener('cancel',event=>{event.preventDefault();close();});}
   $('#field-menu-button')?.addEventListener('click',()=>{schedulePersist();fieldMenu=true;render();});
   $('#field-map-button')?.addEventListener('click',()=>{schedulePersist();fieldMap=true;render();});
@@ -665,6 +693,7 @@ function renderVictory() {
   return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="outcome-header"><div><h2 id="screen-title">Room cleared. Cameras rolling.</h2><p>${e(view.encounterName)} · Encounter ${view.encounterIndex + 1} complete</p></div><div class="xp-value">${view.xp} XP<small>TOTAL RUN EXPERIENCE</small></div></div><div class="reward-layout"><div><span class="section-label">${view.rewards.length ? 'PICK ONE SPONSOR REWARD' : 'SPONSOR REWARD CLAIMED'}</span><div class="reward-list">${view.rewards.map((r, i) => `<button data-reward="${e(r.id)}" class="reward-button" ${chosenReward ? 'disabled' : ''}><span class="reward-icon" aria-hidden="true">${['◇', '▱', '✦'][i % 3]}</span><span><strong>${e(r.label)}</strong><small>${e(r.description)}</small></span></button>`).join('') || '<div class="panel panel-body"><span class="tag good">DELIVERY RECEIVED</span><p class="small muted" style="margin-top:12px">Your sponsor reward is in the shared supplies. Ready for the next room.</p></div>'}</div></div><aside class="panel sponsor-copy"><h3>SPONSOR TRANSMISSION</h3><blockquote>“A surprising number of you are still alive. We’ve sent a little something.”</blockquote><p>${e(view.message || (view.rewards.length ? 'Choose a reward for your party, then head to camp before the next encounter.' : 'Delivery received. Continue when you’re ready.'))}</p><button id="continue-button" class="primary" ${view.rewards.length ? 'disabled' : ''}>${view.journey?.active ? (view.journey.floorNumber===8?'Finish playable journey':'Descend to next floor') : view.encounterIndex + 1 >= view.encounterCount ? 'Finish the floor' : 'Return to camp'} <span aria-hidden="true">→</span></button><p class="small">One reward per encounter. Your run saves automatically.</p></aside></div>${renderSurvivors()}${renderLog()}</section>`;
 }
 function renderEnding() {
+  if(view.generatedCampaign?.complete)return renderCampaignEnding(view,{survivors:renderSurvivors,log:renderLog});
   if(view.scenario)return renderScenarioOutcome(false);
   const complete = view.screen === 'complete';
   return `<section class="outcome-layout" aria-labelledby="screen-title"><div class="center-outcome"><div class="trophy" aria-hidden="true">${complete ? '♜' : '†'}</div><h2 id="screen-title">${complete ? (view.journey?.complete?'Eight floors. Still standing.':'The floor is yours.') : 'The dungeon wins. For now.'}</h2><p>${complete ? `${view.journey?.complete?'All eight playable floors cleared. Floors 9–18 remain locked.':view.customMap?'Your workshop room is clear.':'All three encounters cleared.'} Your crawlers earned ${view.xp} XP, exploited the elements, and made it back in one piece. The audience will want a sequel.` : 'Your deployed crawlers have fallen. Retry the encounter with the same starting party and supplies, or rebuild from the beginning.'}</p><div class="tags" style="justify-content:center"><span class="tag gold">${complete ? (view.journey?.complete?'FLOORS 1–8 COMPLETE':'FLOOR 01 COMPLETE') : 'PARTY DEFEATED'}</span><span class="tag">${view.xp} XP EARNED</span></div><div class="button-row">${!complete ? '<button class="primary" id="retry-button">Retry encounter</button>' : '<button id="open-scenarios" class="primary">Play boss scenarios</button>'}<button data-generated-adventure class="primary">Generate another dungeon</button><button id="ending-new-run" ${complete ? 'class="primary"' : ''}>Start a new run</button></div><button class="quiet" id="ending-export">Export this run</button></div>${renderSurvivors()}${renderLog()}</section>`;
@@ -1179,7 +1208,7 @@ $('#import-file').addEventListener('change', async event => {
   const file = event.target.files[0];
   if (!file) return;
   try {
-    if (file.size > 2_000_000) throw new Error('Save files must be smaller than 2 MB.');
+    if (file.size > 16_000_000) throw new Error('Save files must be smaller than 16 MB.');
     await loadSerializedSave(await file.text());
     closeDialog('#save-dialog');
     toast('Save imported. Your run is ready.', 'success');
@@ -1212,24 +1241,37 @@ function closeGeneratedAdventure() {
 $('#close-generated-adventure').onclick = closeGeneratedAdventure;
 $('#cancel-generated-adventure').onclick = closeGeneratedAdventure;
 $('#generated-adventure-dialog').addEventListener('cancel', event => { if (adventureCommitting) event.preventDefault(); else adventureRequest++; });
+$('#adventure-mode').onchange=()=>{
+  $('#adventure-summary').textContent=$('#adventure-mode').value==='campaign'
+    ? 'Three connected depths with different layouts and objectives. Your party, equipment, supplies and skills carry forward. This expedition is separate from the book story route.'
+    : 'One large floor with visible patrols, danger areas, supplies and an exit objective. Complete it as a standalone run.';
+};
 $('#begin-generated-adventure').onclick = async () => {
   const request = ++adventureRequest;
   $('#begin-generated-adventure').disabled = true;
   $('#generated-adventure-status').textContent = 'Building paths, discoveries and encounters…';
   let previousSave;
   try {
-    const packet = await createExplorationFloor({ seed: $('#adventure-seed').value, layout: $('#adventure-layout').value,
-      styleId: $('#adventure-style').value, kitId: $('#adventure-location').value });
+    const campaignMode=$('#adventure-mode').value==='campaign';
+    const options={seed:$('#adventure-seed').value,styleId:$('#adventure-style').value,kitId:$('#adventure-location').value||undefined};
+    const packet = campaignMode
+      ? await createGeneratedCampaign({...options,onProgress:progress=>{
+          if(request===adventureRequest)$('#generated-adventure-status').textContent=progress.phase==='ready'
+            ? 'Route ready. Preparing your party…'
+            : `Building depth ${progress.depth}/${progress.total}: ${progress.label}…`;
+        }})
+      : await createExplorationFloor(options);
     if (request !== adventureRequest) return;
     adventureCommitting = true;
     previousSave = await call('GetSave');
-    await command('import_floor', {floorPlan:packet.floorPlan}, { save: false });
+    await command(campaignMode?'import_campaign':'import_floor', campaignMode?{campaignPlan:packet.campaignPlan}:{floorPlan:packet.floorPlan}, { save: false });
+    if(campaignMode&&view.generatedCampaign?.id!==packet.campaignPlan.id)throw new Error(view.message||'The campaign was not accepted.');
     verifyWorkshopImport(packet.customMap, true);
     await persist({ strict: true });
     adventureCommitting = false;
     closeGeneratedAdventure();
     battleCanvas?.focus({preventScroll:true});
-    toast('Floor ready · Walk freely. Explore side paths and watch for patrols.','success');
+    toast(campaignMode?'Expedition ready · Explore, battle, and carry your party into the next depth.':'Floor ready · Walk freely. Explore side paths and watch for patrols.','success');
   } catch (error) {
     if (previousSave) { view = JSON.parse(await call('LoadSave', previousSave)); render(); }
     if (request === adventureRequest) $('#generated-adventure-status').textContent = `Could not enter the dungeon: ${error.message}`;

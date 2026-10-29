@@ -5,12 +5,13 @@ const stats=view=>{const s=view.generatedDungeon,p=s.floorPlan;return {s,p,won:s
 export function renderFieldShell(view,{portrait,worldControls}) {
  const map=view.exploration,{s,p,won,total,found}=stats(view);
  const nearby=map.points.filter(point=>point.canInteract&&!point.claimed);
- const goal=p.discoveries.find(d=>d.kind==='objective');
- const instruction=goal&&!found.includes(goal.id)?'Find the exit seal':won<total?'Clear the remaining encounters':'Reach the stairway';
+ const goals=p.discoveries.filter(d=>d.kind==='objective');
+ const goal=goals.find(d=>!found.includes(d.id));
+ const instruction=goal?`Find: ${goal.label}`:won<total?'Clear the remaining encounters':view.generatedCampaign?'Reach the exit to review descent':'Reach the stairway';
  const danger=map.points.find(point=>point.kind==='danger'&&Math.abs(point.x-map.x)+Math.abs(point.y-map.y)<=4);
  const party=view.roster.filter(r=>r.selected);
  return `<section class="exploration-screen square-exploration field-screen" aria-label="Explore the floor">
- <header class="field-location"><small>THE CRAWL · FLOOR EXPEDITION</small><h2>${esc(map.label.split(' / ')[0])}</h2><p>${esc(instruction)} <span> · ${won}/${total} encounters</span></p></header>
+ <header class="field-location"><small>${view.generatedCampaign?`EXPEDITION · DEPTH ${view.generatedCampaign.floorNumber} / ${view.generatedCampaign.totalFloors}`:'THE CRAWL · FLOOR EXPEDITION'}</small><h2>${esc(map.label.split(' / ')[0].replace(/^Depth \d+ · /,''))}</h2><p>${esc(instruction)} <span> · ${won}/${total} encounters</span></p></header>
  <div id="battlefield-slot" class="battlefield-slot">${worldControls()}<div class="board accessible-board" aria-label="Adjacent walkable tiles">${map.tiles.filter(t=>t.reachable).map(t=>`<button data-explore-cell="${t.x},${t.y}" aria-label="Walk to ${t.x},${t.y}"></button>`).join('')}</div><div id="map-inspect" hidden></div></div>
  <aside class="field-compass"><button id="field-map-button" aria-label="Open explored floor map">Map</button><button id="field-menu-button">Party & gear</button></aside>
  <div class="field-danger ${danger?'is-danger':''}" role="status">${danger?'! Danger area · Keep moving or prepare for an encounter':'Walk freely · WASD / arrows'}</div>
@@ -19,8 +20,10 @@ export function renderFieldShell(view,{portrait,worldControls}) {
  <div class="explore-interactions">${nearby.length?nearby.slice(0,2).map(point=>`<button class="primary" data-explore-interact="${esc(point.id)}">${esc(point.label)} <kbd>E</kbd></button>`).join(''):'<span class="field-hint">Follow the paths.<br>Explore the side passages.</span>'}</div><div id="narrator-slot" class="narrator-slot"></div></footer></section>`;
 }
 export function renderFieldMenu(view) {
- const {won,total}=stats(view);
- return `<dialog id="field-menu" class="field-dialog"><div class="dialog-head"><h2>Expedition menu</h2><button data-close-field aria-label="Close menu">×</button></div><div class="modal-body"><p>${won}/${total} encounters cleared · Party level ${view.progression?.level??1}</p><nav class="field-menu-grid">${[['party','Party status','Stats, skills and conditions'],['equipment','Equipment','Weapons, armor and charms'],['map','Floor map','Your explored paths and landmarks'],['home','Return to safe room','Rest and prepare; floor progress is kept'],['save','Save & options','Export, load and settings']].map(([id,name,detail])=>`<button data-field-action="${id}"><strong>${name}</strong><small>${detail}</small></button>`).join('')}</nav></div></dialog>`;
+ const {won,total,p,found}=stats(view),campaign=view.generatedCampaign;
+ const progress=campaign?`<div class="field-campaign-progress"><strong>${esc(campaign.label)}</strong><small>Depth ${campaign.floorNumber} of ${campaign.totalFloors} · ${campaign.completedFloors} completed</small><small>Descent is one-way. Your party and supplies carry forward.</small></div>`:'';
+ const objectives=p.discoveries.filter(d=>d.kind==='objective').map(d=>`<li class="${found.includes(d.id)?'complete':''}"><span aria-hidden="true">${found.includes(d.id)?'✓':'◇'}</span>${esc(d.label)} · ${found.includes(d.id)?'Complete':'Find and activate'}</li>`).join('');
+ return `<dialog id="field-menu" class="field-dialog"><div class="dialog-head"><h2>Expedition menu</h2><button data-close-field aria-label="Close menu">×</button></div><div class="modal-body">${progress}<p>${won}/${total} encounters cleared · Party level ${view.progression?.level??1}</p><ul class="field-objectives" aria-label="Floor objectives">${objectives}</ul><nav class="field-menu-grid">${[['party','Party status','Stats, skills and conditions'],['equipment','Equipment','Weapons, armor and charms'],['map','Floor map','Your explored paths and landmarks'],['home','Return to safe room','Rest and prepare; floor progress is kept'],['save','Save & options','Export, load and settings']].map(([id,name,detail])=>`<button data-field-action="${id}"><strong>${name}</strong><small>${detail}</small></button>`).join('')}</nav></div></dialog>`;
 }
 export function renderFieldMap(view) {
  const map=view.exploration,{s,p}=stats(view),revealed=new Set(map.tiles.filter(t=>t.revealed).map(t=>`${t.x},${t.y}`));
