@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="character-layout.css" />
   <link rel="stylesheet" href="ability-ranks.css" />
   <link rel="stylesheet" href="command-menu.css" />
+  <link rel="stylesheet" href="camp-hub.css" />
+  <link rel="stylesheet" href="field-ui.css" />
 </head>
 <body>
   <header class="header">
@@ -26,12 +28,12 @@
   </main>
   <footer><span>Shared C# browser build · Unity project included</span><span id="save-status" aria-live="polite">Local saves · no account required</span></footer>
   <dialog id="generated-adventure-dialog" aria-labelledby="generated-adventure-title">
-    <div class="dialog-head"><h2 id="generated-adventure-title">Explore a generated dungeon</h2><button id="close-generated-adventure" aria-label="Close">×</button></div>
+    <div class="dialog-head"><h2 id="generated-adventure-title">Explore a continuous floor</h2><button id="close-generated-adventure" aria-label="Close">×</button></div>
     <div class="modal-body generated-settings">
       <p class="adventure-intro">A new dungeon. Your party. One way out.</p><ol class="adventure-steps"><li><b>Explore</b><span>Walk with WASD, arrows or the pad.</span></li><li><b>Battle</b><span>Nearby enemies begin party turns.</span></li><li><b>Escape</b><span>Clear the enemies and reach the exit.</span></li></ol>
       <p class="small muted">Starts a new standalone run and replaces this browser’s current run. Export your save first to keep it.</p>
       <label>Seed <input id="adventure-seed" maxlength="120" placeholder="Leave blank for a new dungeon"></label>
-      <label>Layout <select id="adventure-layout"><option value="chambers">Connected chambers</option><option value="cavern">Natural cavern</option><option value="hall">Grand hall</option></select></label>
+      <input id="adventure-layout" type="hidden" value="chambers"><p>One large floor. Visible patrols, danger areas, side-path supplies, and an exit seal. Battles use your existing tactical commands.</p>
       <label>Art style <select id="adventure-style"><option value="pocket-dungeon">Pocket Dungeon</option><option value="ink-and-lanterns">Ink &amp; Lanterns</option><option value="dungeon-after-dark">Dungeon After Dark</option></select></label>
       <label>Location <select id="adventure-location"><option value="starter-dungeon">Starter dungeon</option><option value="over-city">Over City</option><option value="hunting-jungle">Hunting jungle</option><option value="bubble-desert">Bubble desert</option></select></label>
       <p id="generated-adventure-status" role="status"></p>

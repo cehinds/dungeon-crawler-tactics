@@ -1,6 +1,6 @@
 /** Cardinal hold movement with one command in flight and no queued repeats. */
 export function createHeldMovement({ canMove, step, intervalMs = 150,
-  setTimer = setTimeout, clearTimer = clearTimeout }) {
+  setTimer = setTimeout, clearTimer = clearTimeout, now = () => performance.now() }) {
   const held = new Map();
   let timer = null;
   let inFlight = false;
@@ -13,11 +13,12 @@ export function createHeldMovement({ canMove, step, intervalMs = 150,
     if (!canMove()) { stop(); return; }
     const direction = [...held.values()].at(-1);
     inFlight = true;
+    const started = now();
     try { await step(...direction); }
     catch (error) { stop(); console.error('Exploration movement failed', error); }
     finally {
       inFlight = false;
-      if (!disposed && held.size) timer = setTimer(tick, intervalMs);
+      if (!disposed && held.size) timer = setTimer(tick, Math.max(0, intervalMs - (now() - started)));
     }
   };
   return {

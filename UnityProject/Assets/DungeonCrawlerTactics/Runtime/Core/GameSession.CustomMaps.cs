@@ -31,14 +31,15 @@ namespace DungeonCrawlerTactics
                 return null;
             Require(save.scenario == null, "A save cannot combine a boss scenario and a workshop map.");
             Require(save.encounterIndex == 0 || save.screen == "complete", "Custom encounter index is invalid.");
-            EncounterDef candidate = BuildCustomEncounter(CopyCustomMap(save.customMap));
+            EncounterDef candidate = BuildCustomEncounter(CopyCustomMap(save.customMap), save.generatedDungeon != null && save.generatedDungeon.floorPlan != null);
             ValidateGenerated(save, candidate);
             return candidate;
         }
         private void CommitCustomMap(GameSave save)
         {
             customMap = save.customMap == null ? null : CopyCustomMap(save.customMap);
-            customEncounter = customMap == null ? null : BuildCustomEncounter(customMap);
+            customEncounter = customMap == null ? null : BuildCustomEncounter(customMap, save.generatedDungeon != null && save.generatedDungeon.floorPlan != null);
+            if (save.generatedDungeon != null && save.generatedDungeon.floorPlan != null) FilterFloorEnemies(customEncounter, save.generatedDungeon);
             generatedDungeon = CopyGenerated(save.generatedDungeon);
         }
         private void ImportCustomMap(GameCommand command)
@@ -62,15 +63,15 @@ namespace DungeonCrawlerTactics
             copy.placements = Array.ConvertAll(map.placements, p => p == null ? null : new MapPlacement { id = p.id, assetId = p.assetId, layer = p.layer, x = p.x, y = p.y, rotation = p.rotation, blocksMovement = p.blocksMovement });
             if (map.visuals != null)
             {
-                Require(map.visuals.pieces != null && map.visuals.pieces.Length <= 3840, "Native map art exceeds collection limits.");
+                Require(map.visuals.pieces != null && map.visuals.pieces.Length <= 15360, "Native map art exceeds collection limits.");
                 copy.visuals = new NativeMapVisuals { schemaVersion = map.visuals.schemaVersion, styleId = map.visuals.styleId, kitId = map.visuals.kitId,
                     pieces = Array.ConvertAll(map.visuals.pieces, p => p == null ? null : new NativeMapPiece { cell = p.cell, x2 = p.x2, y2 = p.y2, rotation = p.rotation, layer = p.layer }) };
             }
             return copy;
         }
-        private EncounterDef BuildCustomEncounter(CustomMapData map)
+        private EncounterDef BuildCustomEncounter(CustomMapData map, bool largeFloor = false)
         {
-            Require(map.schemaVersion == 1 && map.width >= 6 && map.width <= 20 && map.height >= 6 && map.height <= 16, "Workshop maps must be 6–20 cells wide and 6–16 cells high.");
+            Require(map.schemaVersion == 1 && map.width >= 6 && map.width <= (largeFloor ? 40 : 20) && map.height >= 6 && map.height <= (largeFloor ? 32 : 16), largeFloor ? "Exploration floors must be 6–40 cells wide and 6–32 cells high." : "Workshop maps must be 6–20 cells wide and 6–16 cells high.");
             Require(map.label != null && map.label.Length <= 100 && map.tiles.Length <= map.width * map.height && map.placements.Length <= map.width * map.height * 5, "Custom map exceeds collection limits.");
             HashSet<string> coordinates = new HashSet<string>(), walls = new HashSet<string>();
             foreach (TileDef tile in map.tiles)
@@ -122,7 +123,7 @@ namespace DungeonCrawlerTactics
                 }
                 map.enemies = generated.ToArray();
             }
-            Require(map.enemies.Length > 0 && map.enemies.Length <= 12, "Custom map needs one to twelve enemies.");
+            Require(map.enemies.Length > 0 && map.enemies.Length <= (largeFloor ? 48 : 12), largeFloor ? "Exploration floors need one to forty-eight enemies." : "Custom map needs one to twelve enemies.");
             HashSet<string> ids = new HashSet<string>();
             foreach (SpawnDef enemy in map.enemies)
             {

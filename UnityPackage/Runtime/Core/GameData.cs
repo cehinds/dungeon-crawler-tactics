@@ -73,7 +73,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
     [Serializable] public sealed class TagRuleDef { public bool consumeOnEntry; public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, moveBonus, energyPenalty; }
-    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, castModeId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public CustomMapData customMap; public CellView entrance, exit; public int x, y; }
+    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, castModeId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public GeneratedFloorPlan floorPlan; public CustomMapData customMap; public CellView entrance, exit; public int x, y; }
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
     {

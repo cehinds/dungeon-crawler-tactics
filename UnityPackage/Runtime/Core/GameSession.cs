@@ -35,7 +35,8 @@ namespace DungeonCrawlerTactics
             engine = new RulesEngine(catalog, 64, (state, moving, entries, visual) => ApplyOccupancy(state, moving, true, entries, visual));
             Reset();
         }
-        public GameView Handle(GameCommand command)
+        public GameView Handle(GameCommand command) { return HandleCommand(command, false); }
+        private GameView HandleCommand(GameCommand command, bool compactExploration)
         {
             presentationEvents.Clear();
             try
@@ -50,7 +51,7 @@ namespace DungeonCrawlerTactics
                 if (TryJourneyCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
                 if (TryExpeditionCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
                 if (TryScenarioCommand(command)) { AwardCommittedAchievements(command); return GetView(); }
-                if (TryGeneratedCommand(command)) return GetView();
+                if (TryGeneratedCommand(command)) return CommandView(compactExploration);
                 switch (command.type)
                 {
                     case "preview_skill_node": PreviewSkillNode(command); break;
@@ -148,7 +149,7 @@ namespace DungeonCrawlerTactics
             }
             catch (ArgumentException ex) { message = ex.Message; }
             catch (InvalidOperationException ex) { message = ex.Message; }
-            return GetView();
+            return CommandView(compactExploration);
         }
         private void Reset()
         {
@@ -711,7 +712,8 @@ namespace DungeonCrawlerTactics
                     for (int i = 0; i < Math.Min(save.encounterIndex, data.encounters.Length); i++) expectedXp += data.encounters[i].xp;
                     if (save.screen == "victory" && save.expedition == null && save.scenario == null) expectedXp += data.encounters[save.encounterIndex].xp;
                 }
-                if (save.generatedDungeon != null && save.generatedDungeon.cleared) expectedXp = data.encounters[0].xp;
+                if (save.generatedDungeon != null && save.generatedDungeon.floorPlan != null) expectedXp = FloorWins(save.generatedDungeon, save.screen) * data.encounters[0].xp;
+                else if (save.generatedDungeon != null && save.generatedDungeon.cleared) expectedXp = data.encounters[0].xp;
                 Require(save.scenario != null || save.expedition != null || save.xp == expectedXp, "Save XP does not match its completed encounters.");
                 ValidateAchievements(save.achievementIds);
                 AudienceSave nextAudience = ValidateAudience(save.audience);

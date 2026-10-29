@@ -48,4 +48,14 @@ function harness(stepOverride) {
   assert.deepEqual(h.calls, [[0, -1], [1, 0], [0, -1]]);
   h.controls.dispose(); await h.advance(); assert.equal(h.calls.length, 3);
 }
+{
+  let clock = 0, finish, scheduledDelay;
+  const controls = createHeldMovement({canMove: () => true,
+    now: () => clock, intervalMs: 150,
+    step: () => new Promise(resolve => { finish = resolve; }),
+    setTimer: (_callback, delay) => { scheduledDelay = delay; return 1; }, clearTimer: () => {}});
+  controls.press('d', 1, 0); clock = 60; finish(); await flush();
+  assert.equal(scheduledDelay, 90, 'Command time counts toward walking cadence');
+  controls.dispose();
+}
 console.log('Exploration held movement tests passed');

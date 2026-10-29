@@ -118,22 +118,26 @@ def main():
             button = page.locator(selector).last
             if button.is_visible():
                 button.click()
-        page.locator('#quick-enter').click()
+        page.locator('[data-hub-station=depart]').click()
         page.locator('#generated-adventure-dialog').wait_for(state='visible')
         page.locator('#adventure-seed').fill('generated-adventure-browser-qa')
-        page.locator('#adventure-layout').select_option('hall')
+        assert page.locator('#adventure-layout').input_value() == 'chambers'
         page.locator('#begin-generated-adventure').click()
         page.wait_for_function("""window.dungeon.getView().generatedDungeon ||
           document.querySelector('#generated-adventure-status').textContent.startsWith('Could not')""", timeout=120000)
         state = view(page)
         assert state.get('generatedDungeon'), page.locator('#generated-adventure-status').inner_text()
         page.locator('#generated-adventure-dialog').wait_for(state='hidden')
-        expected = state['customMap']
-        assert state['screen'] == 'explore'
-        assert_scene(page, expected)
+        assert state['generatedDungeon'].get('floorPlan'), 'Hub launch did not import a continuous floor'
+        assert (state['customMap']['width'], state['customMap']['height']) == (40, 32)
+        # Preserve legacy generated-map hold and combat coverage with an explicit real import.
         expected_packet = page.evaluate("""async()=>{const {createGeneratedAdventure}=await import('./generated-adventure.js');
           return createGeneratedAdventure({seed:'generated-adventure-browser-qa',layout:'hall'});} """)
-        assert canonical_map(expected) == canonical_map(expected_packet['customMap']), 'UI generated a different scene/map'
+        state = command(page, 'import_generated', **expected_packet)
+        expected = state['customMap']
+        assert canonical_map(expected) == canonical_map(expected_packet['customMap']), 'Runtime imported a different scene/map'
+        assert state['screen'] == 'explore'
+        assert_scene(page, expected)
         reload_roundtrip(page, expected)
         baseline = page.evaluate('window.dungeon.getSave()')
         open_cells = {(x, y) for y in range(expected['height']) for x in range(expected['width'])}

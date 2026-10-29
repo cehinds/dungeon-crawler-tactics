@@ -8,8 +8,8 @@ namespace DungeonCrawlerTactics
         private readonly List<EquipmentSlotSave> equipped = new List<EquipmentSlotSave>();
         private int LevelAt(int experience) { int level = 1; for (int i = 1; i < data.progression.xpThresholds.Length; i++) if (experience >= data.progression.xpThresholds[i]) level = i + 1; return level; }
         private int Victories(string atScreen, int index) { return Math.Min(data.encounters.Length, index + (atScreen == "victory" ? 1 : 0)); }
-        private int LiveVictories() { return ExpeditionCampaign == null ? (generatedDungeon != null && generatedDungeon.cleared ? 1 : Victories(screen, encounterIndex)) : Victories(ExpeditionCampaign.screen, ExpeditionCampaign.encounterIndex); }
-        private int SaveVictories(GameSave save) { GameSave source = save.expedition == null ? save : save.expedition.campaign; Require(source != null, "Missing expedition campaign backup."); return source.generatedDungeon != null && source.generatedDungeon.cleared ? 1 : Victories(source.screen, source.encounterIndex); }
+        private int LiveVictories() { return generatedDungeon != null && generatedDungeon.floorPlan != null ? Math.Min(data.encounters.Length, FloorWins(generatedDungeon, screen)) : ExpeditionCampaign == null ? (generatedDungeon != null && generatedDungeon.cleared ? 1 : Victories(screen, encounterIndex)) : Victories(ExpeditionCampaign.screen, ExpeditionCampaign.encounterIndex); }
+        private int SaveVictories(GameSave save) { GameSave source = save.expedition == null ? save : save.expedition.campaign; Require(source != null, "Missing expedition campaign backup."); return source.generatedDungeon != null && source.generatedDungeon.floorPlan != null ? Math.Min(data.encounters.Length, FloorWins(source.generatedDungeon, source.screen)) : source.generatedDungeon != null && source.generatedDungeon.cleared ? 1 : Victories(source.screen, source.encounterIndex); }
         private ClassStats PlayerStats(string id, string classId, int experience, List<EquipmentSlotSave> loadout)
         {
             ClassStats basic = Stats(classId); int growth = LevelAt(experience) - 1;
@@ -56,7 +56,7 @@ namespace DungeonCrawlerTactics
         }
         private void Equip(GameCommand command, bool remove)
         {
-            Require(screen == "camp", "Change equipment in the safe room.");
+            Require(screen == "camp" || screen == "explore", "Change equipment outside combat.");
             RosterView member = GetRoster(command.unitId); Require(Definition(member.id).deployable, "Advisors do not equip field gear.");
             EquipmentDef gear = Gear(command.equipmentId);
             Require(gear.unlockEncounter <= LiveVictories(), "This equipment has not been earned yet.");

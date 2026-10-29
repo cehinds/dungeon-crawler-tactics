@@ -27,6 +27,7 @@ jobs:
           dotnet run --project Tests/GameTests/GameTests.csproj -c Release
           dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj -c Release
           dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj -c Release
+          dotnet run --project Tests/ExplorationRouteTests/ExplorationRouteTests.csproj -c Release
           dotnet run --project Tests/ExpeditionTests/ExpeditionTests.csproj -c Release
           dotnet run --project Tests/RankTests/RankTests.csproj -c Release
           dotnet run --project Tests/JourneyTests/JourneyTests.csproj -c Release
@@ -136,6 +137,7 @@ jobs:
           node Tools/test_book_tile_layout.mjs
           node Tools/test_native_map_visuals.mjs
           node Tools/test_exploration_controls.mjs
+          node Tools/test_exploration_floor.mjs
           node Tools/test_sprite_facing.mjs
           node --test Tools/test_art_lab_blocks.cjs
           node --test Tools/test_art_lab_downloads.cjs
@@ -180,6 +182,10 @@ jobs:
         run: python Tools/run_ci_browser_check.py --name "Player facing" -- python Tools/playtest_player_facing.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published Square battlefield
         run: python Tools/run_ci_browser_check.py --name "Square battlefield" -- python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check continuous exploration floor
+        run: python Tools/run_ci_browser_check.py --name "Continuous floor" -- python Tools/playtest_continuous_floor.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+      - name: Check exploration sprite motion
+        run: python Tools/run_ci_browser_check.py --name "Exploration motion" -- python Tools/playtest_exploration_motion.py
       - name: Check published Generated adventure
         run: python Tools/run_ci_browser_check.py --name "Generated adventure" -- python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published Foundry UI

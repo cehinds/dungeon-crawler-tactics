@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "width": 40,
+  "height": 32,
+  "safeRadius": 8,
+  "minimumGroupDistance": 7,
+  "zones": [
+    {
+      "id": "arrival",
+      "label": "Arrival clearing",
+      "x": 2,
+      "y": 2,
+      "width": 10,
+      "height": 8
+    },
+    {
+      "id": "workyard",
+      "label": "Abandoned workyard",
+      "x": 17,
+      "y": 2,
+      "width": 10,
+      "height": 8
+    },
+    {
+      "id": "cistern",
+      "label": "Dry cistern",
+      "x": 29,
+      "y": 13,
+      "width": 8,
+      "height": 8
+    },
+    {
+      "id": "gallery",
+      "label": "Broken gallery",
+      "x": 15,
+      "y": 23,
+      "width": 11,
+      "height": 7
+    },
+    {
+      "id": "vault",
+      "label": "Sealed archive",
+      "x": 2,
+      "y": 17,
+      "width": 9,
+      "height": 10
+    }
+  ],
+  "connections": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      1,
+      3
+    ]
+  ],
+  "groups": [
+    {
+      "id": "floor.workyard",
+      "label": "Workyard scavengers",
+      "kind": "visible",
+      "zone": 1
+    },
+    {
+      "id": "floor.cistern",
+      "label": "Cistern sentries",
+      "kind": "visible",
+      "zone": 2
+    },
+    {
+      "id": "floor.gallery",
+      "label": "Gallery patrol",
+      "kind": "visible",
+      "zone": 3
+    },
+    {
+      "id": "floor.archive",
+      "label": "Archive ambush",
+      "kind": "ambush",
+      "zone": 4
+    }
+  ],
+  "discoveries": [
+    {
+      "id": "floor.supplies",
+      "label": "Forgotten supplies",
+      "description": "Supplies tucked behind the workyard.",
+      "kind": "cache",
+      "zone": 1,
+      "itemId": "item.health_tonic",
+      "count": 2
+    },
+    {
+      "id": "floor.archive_key",
+      "label": "Archive relay",
+      "description": "Restore the relay to open the distant exit.",
+      "kind": "objective",
+      "zone": 4,
+      "itemId": null,
+      "count": 0
+    }
+  ],
+  "propLabelPattern": "crate|barrel|rubble|rock|pillar|moss|debris|pipe",
+  "enemyRecipe": [
+    {
+      "classId": "class.brawler",
+      "artId": "rat",
+      "hp": 18,
+      "energy": 12,
+      "move": 3,
+      "tags": []
+    },
+    {
+      "classId": "class.ranger",
+      "artId": "guard",
+      "hp": 18,
+      "energy": 12,
+      "move": 3,
+      "tags": []
+    }
+  ]
+}

@@ -4,6 +4,8 @@ A playable Dungeon Crawler Carl fan tactics prototype with a shared C# engine: a
 
 **Play online:** [Dungeon Crawler Tactics](https://cehinds.github.io/dungeon-crawler-tactics/).
 
+**Exploration rebuild:** enter a 40×32 continuous square-tile floor from a walkable safe room. Hold WASD/arrows or the touch pad for animated walking; find caches and the exit seal, face visible groups and danger-area ambushes, and return to the same floor after tactical combat. Party gear is available from the field menu. Home/resume and saves preserve this standalone floor; it is not yet a generated story campaign. See [implementation, references and remaining work](Docs/Exploration-Rebuild.md).
+
 **Art lab:** [Three styles, individual PNG downloads, collections and animation previews](https://cehinds.github.io/dungeon-crawler-tactics/art-lab.html). Each style contains 360 labeled components: 120 existing pieces and 240 new pieces, including 192 static illustrations and 48 source frames for eight six-frame motion studies. That is 1,080 components across all styles; normalized frames, strips, and WebP previews are derived files and are not counted again. Whole-style ZIPs download directly from the [AI-Art repository](https://github.com/cehinds/AI-Art/tree/dungeon-crawler); individual PNGs and smaller collection downloads remain on Pages. The concept-art library remains separate from the production room kit and does not add runtime abilities. See [the art pack guide](Docs/Style-Art-Packs.md) and the [expansion inventory](Docs/AssetExpansion/README.md).
 
 **Lore codex:** [Classes, rank tables, floors, enemies and housing evidence](https://cehinds.github.io/dungeon-crawler-tactics/codex.html) · [Story and housing guide](Docs/Journey-and-Home.md).

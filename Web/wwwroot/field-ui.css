@@ -1,0 +1,44 @@
+/* A field is a place to walk through: map first, one contextual interaction. */
+body[data-screen="explore"] .field-screen { --hud-height:96px; }
+body[data-screen="explore"] .field-location { position:absolute;z-index:4;left:16px;top:12px;max-width:min(48vw,450px);padding:10px 14px;background:#0a1b2eef;border:1px solid #d1b579;border-radius:3px;color:#f4e8cb;pointer-events:none; }
+.field-location small {font:10px/1.4 var(--ui);letter-spacing:1px;color:#caad78;}
+.field-location h2 {font:700 22px/1.2 Georgia,serif;margin:3px 0;}
+.field-location p {margin:3px 0;font:12px/1.4 var(--ui);}
+body[data-screen="explore"] .field-compass {position:absolute;z-index:5;right:16px;top:70px;display:flex;gap:6px;}
+.field-compass button {min-height:44px;background:#0b2037;color:#f4e1ad;border:1px solid #c1a875;padding:8px 14px;}
+body[data-screen="explore"] .field-danger {position:absolute;z-index:4;bottom:calc(var(--hud-height) + 10px);left:50%;transform:translateX(-50%);background:#0b2037ef;color:#d1dedf;padding:6px 12px;border-radius:3px;font:12px/1.3 var(--ui);white-space:nowrap;pointer-events:none;}
+body[data-screen="explore"] .field-danger.is-danger {background:#532e1bf2;color:#ffdc9c;}
+body[data-screen="explore"] .field-dock {height:var(--hud-height);padding:8px 18px;display:grid;grid-template-columns:132px minmax(0,1fr) minmax(180px,250px);grid-template-rows:1fr;gap:20px;background:#0b192d;border-top:2px solid #c3a56b;}
+body[data-screen="explore"] .field-dock .walk-pad {grid-column:auto;grid-row:auto;grid-template-columns:repeat(3,40px);grid-template-rows:repeat(2,36px);gap:2px;}
+body[data-screen="explore"] .field-dock .walk-pad button {min-width:40px;min-height:36px;padding:0;}
+body[data-screen="explore"] .field-dock .explore-party {grid-column:auto;grid-row:auto;display:flex;gap:8px;width:auto;align-items:center;}
+body[data-screen="explore"] .field-dock .explore-crawler {display:flex;flex:1;min-width:0;max-width:180px;align-items:center;gap:8px;padding:4px;border:1px solid #495972;background:#11253a;min-height:60px;}
+body[data-screen="explore"] .field-dock .explore-crawler .unit-portrait {width:42px;height:48px;flex-shrink:0;}
+body[data-screen="explore"] .field-dock .explore-crawler>span:not(.unit-portrait) {display:flex;flex-direction:column;gap:5px;font:11px/1.2 var(--ui);text-align:left;}
+.field-dock .explore-crawler small {color:#b8cbd5;}
+body[data-screen="explore"] .field-dock .explore-interactions {grid-row:auto;grid-column:auto;display:flex;justify-content:center;gap:4px;overflow:visible;}
+.field-dock .explore-interactions button {min-height:44px;font:13px/1.3 var(--ui);}
+.field-hint {font:13px/1.5 var(--ui);color:#bdcbd6;}
+.field-dialog {width:min(560px,calc(100vw - 20px));max-height:88dvh;}
+.field-menu-grid {display:grid;gap:7px;}
+.field-menu-grid button {display:flex;flex-direction:column;align-items:start;gap:5px;min-height:60px;text-align:left;}
+.field-menu-grid small {color:#c6d1dc;}
+.field-map-svg {display:block;width:100%;max-height:58dvh;background:#071019;image-rendering:pixelated;}
+@media(max-width:730px){
+ body[data-screen="explore"] .field-screen {--hud-height:132px;}
+ body[data-screen="explore"] .field-location {top:8px;left:8px;max-width:calc(100vw - 170px);padding:7px 9px;}
+ .field-location h2 {font-size:16px;}.field-location small {font-size:8px;}.field-location p {font-size:11px;}.field-location p span{display:block;}
+ body[data-screen="explore"] .field-compass{right:8px;top:60px;gap:4px;}.field-compass button{font-size:11px;padding:6px 8px;}
+ body[data-screen="explore"] .field-dock{padding:5px 8px;grid-template-columns:132px minmax(0,1fr);grid-template-rows:38px 80px;gap:3px 8px;}
+ body[data-screen="explore"] .field-dock .explore-party{grid-column:1/-1;grid-row:1;gap:5px;}
+ body[data-screen="explore"] .field-dock .explore-crawler{min-height:36px;height:36px;padding:1px;gap:3px;}
+ body[data-screen="explore"] .field-dock .explore-crawler .unit-portrait{width:25px;height:30px;}
+ body[data-screen="explore"] .field-dock .explore-crawler>span:not(.unit-portrait){font-size:9px;gap:2px;}
+ body[data-screen="explore"] .field-dock .walk-pad{grid-row:2;grid-column:1;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,38px);}
+ body[data-screen="explore"] .field-dock .walk-pad button{min-height:38px;}
+ body[data-screen="explore"] .field-dock .explore-interactions{grid-row:2;grid-column:2;}
+ body[data-screen="explore"] .field-danger{max-width:calc(100vw - 20px);font-size:10px;white-space:normal;text-align:center;}
+}
+@media(max-height:520px) and (min-width:731px){body[data-screen="explore"] .field-screen{--hud-height:86px;}body[data-screen="explore"] .field-dock{gap:6px;padding:3px 12px;grid-template-columns:128px 1fr 160px;}body[data-screen="explore"] .field-dock .explore-crawler>span:not(.unit-portrait){display:none;}}
+
+.party-setup-roster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.party-setup-roster button{display:flex;align-items:center;gap:8px;text-align:left}.party-setup-roster .unit-portrait{width:40px;height:44px;flex-shrink:0}.party-setup-roster small{display:block;font-size:11px;color:#bdcbd6}#party-setup-dialog #class-select,#party-setup-dialog #class-search{width:100%;margin:6px 0;min-height:44px}#party-setup-dialog{width:min(620px,calc(100vw - 16px))}

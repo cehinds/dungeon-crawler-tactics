@@ -5,6 +5,11 @@ namespace DungeonCrawlerTactics
 {
     [Serializable] public sealed class GeneratedDungeonState
     {
+        public GeneratedFloorPlan floorPlan;
+        public string activeGroupId;
+        public string[] defeatedGroupIds = new string[0], claimedIds = new string[0];
+        public CellView[] revealed = new CellView[0];
+        public int steps;
         public int x, y;
         public CellView entrance, exit;
         public bool cleared;
@@ -15,22 +20,35 @@ namespace DungeonCrawlerTactics
         private GeneratedDungeonState generatedDungeon;
         private static GeneratedDungeonState CopyGenerated(GeneratedDungeonState s)
         {
-            return s == null ? null : new GeneratedDungeonState { x = s.x, y = s.y, cleared = s.cleared,
+            return s == null ? null : new GeneratedDungeonState { x = s.x, y = s.y, cleared = s.cleared, floorPlan = CopyFloor(s.floorPlan), activeGroupId = s.activeGroupId, steps = s.steps, defeatedGroupIds = s.defeatedGroupIds == null ? null : (string[])s.defeatedGroupIds.Clone(), claimedIds = s.claimedIds == null ? null : (string[])s.claimedIds.Clone(), revealed = s.revealed == null ? null : Array.ConvertAll(s.revealed, CopyCell),
                 entrance = s.entrance == null ? null : new CellView { x = s.entrance.x, y = s.entrance.y },
                 exit = s.exit == null ? null : new CellView { x = s.exit.x, y = s.exit.y } };
         }
+        // Encounter geometry is authored once; exploration checks it many times per step.
+        // Weak keys release imported floor grids when a run is replaced.
+        private sealed class GeneratedWalkGrid
+        {
+            public readonly bool[,] blocked;
+            public GeneratedWalkGrid(EncounterDef map)
+            {
+                blocked = new bool[map.width, map.height];
+                foreach (TileDef tile in map.tiles) if (tile.blocked) blocked[tile.x, tile.y] = true;
+            }
+        }
+        private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<EncounterDef, GeneratedWalkGrid> generatedWalkGrids = new System.Runtime.CompilerServices.ConditionalWeakTable<EncounterDef, GeneratedWalkGrid>();
         private static bool GeneratedOpen(EncounterDef map, int x, int y)
         {
-            return x >= 0 && y >= 0 && x < map.width && y < map.height && !Array.Exists(map.tiles, t => t.x == x && t.y == y && t.blocked);
+            return x >= 0 && y >= 0 && x < map.width && y < map.height && !generatedWalkGrids.GetValue(map, m => new GeneratedWalkGrid(m)).blocked[x, y];
         }
         // Stable breadth-first order supplies both walkable detection distance and nearby party deployment.
-        private static List<CellView> GeneratedCells(EncounterDef map, int x, int y)
+        private static List<CellView> GeneratedCells(EncounterDef map, int x, int y, int maximumDistance = int.MaxValue)
         {
             List<CellView> cells = new List<CellView>(); HashSet<string> seen = new HashSet<string>();
             if (!GeneratedOpen(map, x, y)) return cells;
             cells.Add(new CellView { x = x, y = y }); seen.Add(ExploreKey(x, y));
             for (int i = 0; i < cells.Count; i++)
             {
+                if (cells[i].cost >= maximumDistance) continue;
                 int[] dx = { 0, -1, 1, 0 }, dy = { -1, 0, 0, 1 };
                 for (int d = 0; d < 4; d++)
                 {
@@ -43,6 +61,7 @@ namespace DungeonCrawlerTactics
         private void ValidateGenerated(GameSave save, EncounterDef map)
         {
             GeneratedDungeonState s = save.generatedDungeon; if (s == null) return;
+            if (s.floorPlan != null) { ValidateFloorSave(save, map); return; }
             Require(save.journey == null && save.scenario == null && save.expedition == null && save.exploration != null && save.exploration.Length == 0, "Generated exploration cannot combine campaign state.");
             Require(s.entrance != null && s.exit != null && GeneratedOpen(map, s.x, s.y) && GeneratedOpen(map, s.entrance.x, s.entrance.y) && GeneratedOpen(map, s.exit.x, s.exit.y), "Invalid generated dungeon position.");
             List<CellView> cells = GeneratedCells(map, s.entrance.x, s.entrance.y);
@@ -69,6 +88,7 @@ namespace DungeonCrawlerTactics
         }
         private bool TryGeneratedCommand(GameCommand command)
         {
+            if (TryFloorCommand(command)) return true;
             if (command.type == "import_generated")
             {
                 Require(command.customMap != null, "Choose a generated map.");
@@ -113,6 +133,7 @@ namespace DungeonCrawlerTactics
         private void FinishGeneratedBattle()
         {
             SyncRosterFromBattle();
+            if (generatedDungeon.floorPlan != null) { FinishFloorBattle(); return; }
             foreach (RosterDef member in data.roster)
             {
                 EntityState actor;
@@ -122,6 +143,7 @@ namespace DungeonCrawlerTactics
         }
         private ExplorationView GeneratedExplorationView()
         {
+            if (generatedDungeon.floorPlan != null) return FloorExplorationView();
             List<ExplorationTileView> tiles = new List<ExplorationTileView>();
             for (int y = 0; y < customMap.height; y++) for (int x = 0; x < customMap.width; x++)
                 tiles.Add(new ExplorationTileView { x = x, y = y, revealed = true, blocked = !GeneratedOpen(customEncounter, x, y), reachable = GeneratedOpen(customEncounter, x, y) && Math.Abs(x - generatedDungeon.x) + Math.Abs(y - generatedDungeon.y) == 1 });

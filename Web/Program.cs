@@ -28,6 +28,14 @@ public static class GameBridge
     }
 
     [JSInvokable]
+    public static string DispatchMovement(string commandJson)
+    {
+        if (session == null) throw new InvalidOperationException("Game not initialized.");
+        var command = JsonSerializer.Deserialize<GameCommand>(commandJson, Json) ?? throw new ArgumentException("Missing command.");
+        return JsonSerializer.Serialize(session.HandleExplorationMovement(command), Json);
+    }
+
+    [JSInvokable]
     public static string GetSave()
     {
         if (session == null) throw new InvalidOperationException("Game not initialized.");

@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "exploration-floor-rules.schema.json",
+  "title": "Continuous exploration floor rules",
+  "description": "Authored recipe. Runtime also checks region bounds, connected zone references, unique IDs, safe arrival and encounter spacing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "width",
+    "height",
+    "safeRadius",
+    "minimumGroupDistance",
+    "zones",
+    "connections",
+    "groups",
+    "discoveries",
+    "propLabelPattern",
+    "enemyRecipe"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 8,
+      "maximum": 40
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 8,
+      "maximum": 32
+    },
+    "safeRadius": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 70
+    },
+    "minimumGroupDistance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 70
+    },
+    "zones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "x",
+          "y",
+          "width",
+          "height"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "x": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 38
+          },
+          "y": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 5,
+            "maximum": 38
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 5,
+            "maximum": 30
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 32
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 31
+        },
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "minItems": 1,
+      "maxItems": 128
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "kind",
+          "zone"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "kind": {
+            "enum": [
+              "visible",
+              "ambush"
+            ]
+          },
+          "zone": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 31
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 24
+    },
+    "discoveries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "description",
+          "kind",
+          "zone",
+          "itemId",
+          "count"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "kind": {
+            "enum": [
+              "cache",
+              "objective"
+            ]
+          },
+          "zone": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 31
+          },
+          "itemId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^item\\.[a-z0-9_]+$"
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 99
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "cache"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "itemId": {
+                  "type": "string"
+                },
+                "count": {
+                  "minimum": 1
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "itemId": {
+                  "type": "null"
+                },
+                "count": {
+                  "const": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 32
+    },
+    "propLabelPattern": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "enemyRecipe": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "classId",
+          "artId",
+          "hp",
+          "energy",
+          "move",
+          "tags"
+        ],
+        "properties": {
+          "classId": {
+            "type": "string",
+            "pattern": "^class\\.[a-z0-9_]+$"
+          },
+          "artId": {
+            "enum": [
+              "rat",
+              "guard",
+              "boss"
+            ]
+          },
+          "hp": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9999
+          },
+          "energy": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 999
+          },
+          "move": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "minItems": 0,
+            "maxItems": 32
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 48
+    }
+  }
+}

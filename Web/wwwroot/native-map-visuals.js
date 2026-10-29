@@ -19,7 +19,7 @@ export function nativePick(px, py, width, height, rotation = 0) {
 }
 
 export function validateNativeVisuals(visuals, width, height, tiles) {
-  require(Number.isInteger(width) && width >= 6 && width <= 20 && Number.isInteger(height) && height >= 6 && height <= 16, 'Invalid native map dimensions.');
+  require(Number.isInteger(width) && width >= 6 && width <= 40 && Number.isInteger(height) && height >= 6 && height <= 32, 'Invalid native map dimensions.');
   require(visuals?.schemaVersion === 1 && slug(visuals.styleId) && slug(visuals.kitId), 'Invalid native map art identifier.');
   require(Array.isArray(visuals.pieces) && visuals.pieces.length > 0 && visuals.pieces.length <= width * height * 12, 'Invalid native map art count.');
   const floors = new Set();
