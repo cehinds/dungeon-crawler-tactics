@@ -81,7 +81,7 @@ namespace DungeonCrawlerTactics
             for (int i = 0; i < a.groups.Length; i++)
             {
                 GeneratedEncounterGroup x = a.groups[i], y = b.groups[i];
-                if (x == null || y == null || x.enemyIds == null || y.enemyIds == null || x.id != y.id || x.label != y.label || x.kind != y.kind || x.x != y.x || x.y != y.y || string.Join("|", x.enemyIds) != string.Join("|", y.enemyIds)) return false;
+                if (x == null || y == null || x.enemyIds == null || y.enemyIds == null || x.rewardXp != y.rewardXp || x.id != y.id || x.label != y.label || x.kind != y.kind || x.x != y.x || x.y != y.y || string.Join("|", x.enemyIds) != string.Join("|", y.enemyIds)) return false;
             }
             for (int i = 0; i < a.discoveries.Length; i++)
             {

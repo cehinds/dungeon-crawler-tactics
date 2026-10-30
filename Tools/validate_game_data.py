@@ -345,6 +345,21 @@ def validate_game(data, content):
             errors.append(path+': equipment must grant a stat bonus or ability')
         for j, ability_id in enumerate(gear['abilityIds']):
             ref(ability_id, 'abilities', f'{path}.abilityIds.{j}')
+    tiers = data.get('equipmentRewardTiers', [])
+    unique(tiers, 'id', 'equipmentRewardTiers')
+    reward_gear = {g['id']: g for g in data['equipment']}
+    tier_items, tier_wins = set(), set()
+    for tier in tiers:
+        if tier['requiredWins'] in tier_wins:
+            errors.append('equipmentRewardTiers: repeated win milestone')
+        tier_wins.add(tier['requiredWins'])
+        for item_id in tier['equipmentIds']:
+            if item_id not in reward_gear or not reward_gear[item_id].get('rewardOnly', False) or item_id in tier_items:
+                errors.append('equipmentRewardTiers: unknown, repeated or non-reward equipment '+item_id)
+            tier_items.add(item_id)
+    for gear in data['equipment']:
+        if gear.get('rewardOnly', False) and gear['id'] not in tier_items:
+            errors.append('equipmentRewardTiers: reward equipment needs a tier '+gear['id'])
     if sum(r['selected'] for r in data['roster']) > data['partySize'] or len(data['roster']) < data['partySize']:
         errors.append('roster: invalid party selection/roster size')
     player_classes = {c['id'] for c in content['classes'] if c.get('playerSelectable', True)}

@@ -257,7 +257,7 @@ static class GameTests
     {
         GameData config = Clone(Data); config.progression = new ProgressionDef { xpThresholds = new[] { 0, 30, 60, 90 }, hpPerLevel = 3, manaPerLevel = 2, movePerLevel = 1,
             skillUnlocks = new[] { new SkillUnlockDef { id = "skill.fixture_healing", label = "Healing", rosterId = "crawler.carl", abilityId = "ability.mend", level = 2 } } };
-        config.equipment = new[] {
+        config.equipmentRewardTiers = new EquipmentRewardTierDef[0]; config.equipment = new[] {
             new EquipmentDef { id = "equipment.fixture_vest", label = "Vest", slot = "armor", hpBonus = 10 },
             new EquipmentDef { id = "equipment.fixture_focus", label = "Focus", slot = "charm", manaBonus = 4, abilityIds = new[] { "ability.spark" } },
             new EquipmentDef { id = "equipment.fixture_boots", label = "Boots", slot = "charm", moveBonus = 1 },

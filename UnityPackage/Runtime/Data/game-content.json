@@ -2902,6 +2902,128 @@
       "moveBonus": 1,
       "abilityIds": [],
       "unlockEncounter": 2
+    },
+    {
+      "id": "equipment.weapon.siltglass_edge",
+      "label": "Siltglass Edge",
+      "slot": "weapon",
+      "hpBonus": 3,
+      "manaBonus": 0,
+      "moveBonus": 0,
+      "abilityIds": [
+        "ability.aimed_shot"
+      ],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A light, carefully balanced edge for deliberate ranged openings; choose it for accuracy over extra staying power."
+    },
+    {
+      "id": "equipment.armor.riveted_coat",
+      "label": "Riveted Coat",
+      "slot": "armor",
+      "hpBonus": 2,
+      "manaBonus": 0,
+      "moveBonus": 1,
+      "abilityIds": [],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A light coat that favors repositioning and a modest buffer over heavier protection."
+    },
+    {
+      "id": "equipment.charm.blue_thread_knot",
+      "label": "Blue Thread Knot",
+      "slot": "charm",
+      "hpBonus": 0,
+      "manaBonus": 3,
+      "moveBonus": 0,
+      "abilityIds": [],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A small reserve of focus for frequent ability use, with no added movement."
+    },
+    {
+      "id": "equipment.weapon.switchback_blade",
+      "label": "Switchback Blade",
+      "slot": "weapon",
+      "hpBonus": 5,
+      "manaBonus": 0,
+      "moveBonus": 1,
+      "abilityIds": [
+        "ability.backstab"
+      ],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A quick weapon for flanking and repositioning; its movement and skill access trade away the largest health cushion."
+    },
+    {
+      "id": "equipment.armor.stoneweave_harness",
+      "label": "Stoneweave Harness",
+      "slot": "armor",
+      "hpBonus": 8,
+      "manaBonus": 0,
+      "moveBonus": 0,
+      "abilityIds": [
+        "ability.bulwark"
+      ],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A heavier harness for holding a lane and recovering under pressure; it offers less flexibility than lighter gear."
+    },
+    {
+      "id": "equipment.charm.wellspring_locket",
+      "label": "Wellspring Locket",
+      "slot": "charm",
+      "hpBonus": 1,
+      "manaBonus": 5,
+      "moveBonus": 0,
+      "abilityIds": [
+        "ability.mend"
+      ],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A deep mana reserve suited to support turns; its healing skill rewards a deliberate back-line role."
+    },
+    {
+      "id": "equipment.weapon.cinderline_pike",
+      "label": "Cinderline Pike",
+      "slot": "weapon",
+      "hpBonus": 7,
+      "manaBonus": 0,
+      "moveBonus": 1,
+      "abilityIds": [
+        "ability.shatter"
+      ],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A long, forceful weapon for cracking guarded positions and changing lanes; it favors reach and impact over spell reserves."
+    },
+    {
+      "id": "equipment.armor.wayfarer_plate",
+      "label": "Wayfarer Plate",
+      "slot": "armor",
+      "hpBonus": 12,
+      "manaBonus": 0,
+      "moveBonus": 0,
+      "abilityIds": [
+        "ability.second_wind"
+      ],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A dependable defensive shell with a recovery option; pick it for endurance rather than speed or mana."
+    },
+    {
+      "id": "equipment.charm.starling_compass",
+      "label": "Starling Compass",
+      "slot": "charm",
+      "hpBonus": 2,
+      "manaBonus": 7,
+      "moveBonus": 1,
+      "abilityIds": [
+        "ability.rally"
+      ],
+      "unlockEncounter": 0,
+      "rewardOnly": true,
+      "description": "A flexible focus charm for mobile support, trading a little raw reserve for room to reposition."
     }
   ],
   "stances": [
@@ -54911,6 +55033,38 @@
       "eventType": "victory",
       "rewardItemId": "item.shock_snare",
       "rewardCount": 1
+    }
+  ],
+  "equipmentRewardTiers": [
+    {
+      "id": "equipment.reward_tier.one",
+      "label": "First Depth Cache",
+      "requiredWins": 3,
+      "equipmentIds": [
+        "equipment.weapon.siltglass_edge",
+        "equipment.armor.riveted_coat",
+        "equipment.charm.blue_thread_knot"
+      ]
+    },
+    {
+      "id": "equipment.reward_tier.two",
+      "label": "Second Depth Cache",
+      "requiredWins": 6,
+      "equipmentIds": [
+        "equipment.weapon.switchback_blade",
+        "equipment.armor.stoneweave_harness",
+        "equipment.charm.wellspring_locket"
+      ]
+    },
+    {
+      "id": "equipment.reward_tier.three",
+      "label": "Third Depth Cache",
+      "requiredWins": 9,
+      "equipmentIds": [
+        "equipment.weapon.cinderline_pike",
+        "equipment.armor.wayfarer_plate",
+        "equipment.charm.starling_compass"
+      ]
     }
   ]
 }

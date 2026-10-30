@@ -42,6 +42,7 @@ namespace DungeonCrawlerTactics
             try
             {
                 if (command == null) throw new ArgumentException("Missing command.");
+                if (command.type != "confirm_equipment") pendingEquipment = null;
                 PrepareCampaignCommand(command);
                 ClearHomePreview(command);
                 message = "";
@@ -66,6 +67,10 @@ namespace DungeonCrawlerTactics
                     case "import_map": ImportCustomMap(command); break;
                     case "new_run": Reset(); break;
                     case "safe_room_rest": Rest(); break;
+                    case "preview_equipment": PreviewEquipment(command, false); break;
+                    case "preview_unequip": PreviewEquipment(command, true); break;
+                    case "confirm_equipment": ConfirmEquipment(); break;
+                    case "cancel_equipment": pendingEquipment = null; break;
                     case "equip": Equip(command, false); break;
                     case "unequip": Equip(command, true); break;
                     case "toggle_party":
@@ -124,12 +129,7 @@ namespace DungeonCrawlerTactics
                         FinishPlayerIfNeeded(); break;
                     case "choose_reward":
                         Require(screen == "victory" && !rewardChosen, "No reward choice is available.");
-                        RewardDef reward = null;
-                        foreach (RewardDef option in data.rewards) if (option.id == command.rewardId) reward = option;
-                        Require(reward != null, "Unknown reward.");
-                        if (!string.IsNullOrEmpty(reward.itemId)) inventory[reward.itemId] += reward.count;
-                        foreach (EntityState unit in battle.Entities.Values) if (!unit.IsTile && unit.Team == "player" && unit.Hp > 0) unit.Hp = Math.Min(unit.MaxHp, unit.Hp + reward.heal);
-                        rewardChosen = true; AddLog("Sponsor delivery: " + reward.label + "."); break;
+                        ChooseReward(command.rewardId); break;
                     case "continue":
                         Require(screen == "victory", "Win the encounter to continue.");
                         Require(rewardChosen || data.rewards.Length == 0, "Choose a sponsor reward first.");
@@ -160,7 +160,7 @@ namespace DungeonCrawlerTactics
                 ClassStats initial = PlayerStats(member.id, member.classId); int hp = initial.hp;
                 roster.Add(member.id, new RosterView { id = member.id, label = member.label, classId = member.classId, selected = member.selected && member.deployable, hp = hp, maxHp = hp, energy = initial.energy, maxEnergy = initial.energy, move = initial.move, effectiveMove = initial.move, level = 1 });
             }
-            ResetHome(); ResetInventory(); battleLayoutVersion = 1; screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
+            equipmentRewardClaims.Clear(); pendingEquipment = null; ResetHome(); ResetInventory(); battleLayoutVersion = 1; screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
             message = "Choose " + data.partySize + " crawlers and their classes. Rest in the safe room to restore HP and mana between rooms.";
         }
         private void ResetInventory()
@@ -603,7 +603,7 @@ namespace DungeonCrawlerTactics
             }
             List<string> visibleLog = new List<string>(log); if (forecast != null) foreach (string entry in forecast.Log) visibleLog.Add("Forecast: " + entry); view.log = visibleLog.ToArray();
             if (screen == "victory" && !rewardChosen)
-            { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); view.rewards = rewards.ToArray(); }
+            { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); AddEquipmentRewards(rewards); view.rewards = rewards.ToArray(); }
             if (screen == "explore") view.exploration = generatedDungeon == null ? ExplorationView() : GeneratedExplorationView();
             view.home = HomeView(); view.journey = JourneyView(); if (JourneyActive) view.encounterCount = 8;
             view.neighborhood = BuildNeighborhoodView(); PopulateProgression(view); PopulateModes(view); PopulateDevelopment(view); PopulateSkillTree(view); PopulateCustomMap(view); view.scenarios = ScenarioOptions(); view.scenario = ScenarioView(); view.expeditions = ExpeditionOptions(); view.expedition = ExpeditionView();
@@ -670,7 +670,7 @@ namespace DungeonCrawlerTactics
         }
         public GameSave ExportSave()
         {
-            GameSave save = new GameSave { battleLayoutVersion = battleLayoutVersion, audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), generatedDungeon = CopyGenerated(generatedDungeon), generatedCampaign = CaptureCampaign(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
+            GameSave save = new GameSave { equipmentRewardClaims = equipmentRewardClaims.ConvertAll(c => new EquipmentRewardClaim { tierId = c.tierId, equipmentId = c.equipmentId }).ToArray(), battleLayoutVersion = battleLayoutVersion, audience = CaptureAudience(), neighborhood = CaptureNeighborhood(), home = CaptureHome(), journey = CaptureJourney(), expedition = CaptureExpedition(), skillTree = CaptureSkillTree(), development = CaptureDevelopment(), customMap = ExportCustomMap(), generatedDungeon = CopyGenerated(generatedDungeon), generatedCampaign = CaptureCampaign(), scenario = CaptureScenario(), achievementIds = achievementIds.ToArray(), activationVersion = 1, progressionVersion = 1, equipped = equipped.ConvertAll(g => new EquipmentSlotSave { unitId = g.unitId, equipmentId = g.equipmentId }).ToArray(), contentVersion = data.contentVersion, screen = screen, phase = phase, selectedUnitId = selected, encounterIndex = encounterIndex, round = round, xp = xp, rewardChosen = rewardChosen };
             save.roster = GetView(false).roster;
             List<InventoryEntry> entries = new List<InventoryEntry>(); foreach (ItemDef item in catalog.Items.Values) entries.Add(new InventoryEntry { itemId = item.id, count = inventory[item.id] }); save.inventory = entries.ToArray();
             List<SavedUnit> savedUnits = new List<SavedUnit>();
@@ -686,6 +686,7 @@ namespace DungeonCrawlerTactics
         }
         public GameView ImportSave(GameSave save)
         {
+            pendingEquipment = null;
             presentationEvents.Clear();
             try
             {
@@ -714,13 +715,14 @@ namespace DungeonCrawlerTactics
                     for (int i = 0; i < Math.Min(save.encounterIndex, data.encounters.Length); i++) expectedXp += data.encounters[i].xp;
                     if (save.screen == "victory" && save.expedition == null && save.scenario == null) expectedXp += data.encounters[save.encounterIndex].xp;
                 }
-                if (save.generatedDungeon != null && save.generatedDungeon.floorPlan != null) expectedXp = CampaignWins(save.generatedCampaign, save.generatedDungeon, save.screen) * data.encounters[0].xp;
+                if (save.generatedDungeon != null && save.generatedDungeon.floorPlan != null) expectedXp = CampaignXp(save.generatedCampaign, save.generatedDungeon, save.screen);
                 else if (save.generatedDungeon != null && save.generatedDungeon.cleared) expectedXp = data.encounters[0].xp;
                 Require(save.scenario != null || save.expedition != null || save.xp == expectedXp, "Save XP does not match its completed encounters.");
                 ValidateAchievements(save.achievementIds);
                 AudienceSave nextAudience = ValidateAudience(save.audience);
                 string[] nextAchievements = (string[])save.achievementIds.Clone();
                 save = UpgradeProgressionSave(save);
+                ValidateEquipmentClaims(save);
                 List<EquipmentSlotSave> nextEquipment = ValidateEquipment(save);
                 List<string> nextSkillNodes = ValidateSkillTree(save);
                 NeighborhoodSave nextNeighborhood = ValidateNeighborhood(save);
@@ -831,6 +833,7 @@ namespace DungeonCrawlerTactics
                 journey = save.journey == null ? null : new JourneySave { id = save.journey.id, floorIndex = save.journey.floorIndex, capturedIds = (string[])save.journey.capturedIds.Clone() };
                 neighborhoodState = nextNeighborhood; pendingNeighborhood = null; CommitHome(nextHome); CommitSkillTree(nextSkillNodes); CommitDevelopment(nextDevelopment); CommitCustomMap(save); generatedCampaign = CopyCampaign(save.generatedCampaign); pendingDescent = false; CommitScenario(save); CommitExpedition(save);
                 audienceState = nextAudience; achievementIds.Clear(); achievementIds.AddRange(nextAchievements);
+                equipmentRewardClaims.Clear(); equipmentRewardClaims.AddRange(save.equipmentRewardClaims ?? new EquipmentRewardClaim[0]); pendingEquipment = null;
                 equipped.Clear(); equipped.AddRange(nextEquipment);
                 exploration.Clear(); foreach (ExplorationSave sector in nextExploration) exploration.Add(sector.sectorId, sector);
                 roster.Clear(); foreach (var pair in nextRoster) roster.Add(pair.Key, pair.Value);

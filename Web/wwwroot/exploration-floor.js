@@ -38,6 +38,7 @@ export function validateExplorationFloorRules(rules) {
   uniqueIds(rules.groups, 'Groups');
   const occupied=new Set();
   for(const g of rules.groups) {
+    check(g.rewardXp === undefined || integer(g.rewardXp,0,500), 'group rewardXp must be an integer from 0 to 500.');
     check(label(g.label) && ['visible','ambush'].includes(g.kind), `group ${g.id} requires a label and visible or ambush kind.`);
     check(zoneRef(g.zone) && g.zone!==0 && !occupied.has(g.zone), `group ${g.id} needs a unique existing encounter zone outside arrival.`); occupied.add(g.zone);
   }

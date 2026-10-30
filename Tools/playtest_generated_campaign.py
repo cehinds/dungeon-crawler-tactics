@@ -60,9 +60,9 @@ def cells(plan):
     return {(x,y) for y in range(plan['map']['height']) for x in range(plan['map']['width'])} - {(t['x'],t['y']) for t in plan['map']['tiles'] if t.get('blocked')}
 
 
-def win_battle(page):
+def win_battle(page, finish=True):
     # Dispatch real C# previews/actions. Never alter a save or fabricate victories.
-    result = page.evaluate("""async()=>{
+    result = page.evaluate("""async(finish)=>{
       const send=async(type,args={})=>JSON.parse(await DotNet.invokeMethodAsync('DungeonCrawlerTactics.Web','Dispatch',JSON.stringify({type,...args})));
       let v=window.dungeon.getView(),ticks=0,actions=0;
       while(v.screen==='battle'&&ticks++<150){
@@ -79,11 +79,12 @@ def win_battle(page):
         v=await send('end_turn',{unitId:actor.id});
       }
       if(v.screen!=='victory')throw Error('Combat failed '+v.screen+' ticks='+ticks);
+      if(!finish){await window.dungeon.loadSave(await DotNet.invokeMethodAsync('DungeonCrawlerTactics.Web','GetSave'));return {screen:v.screen,actions};}
       if(v.rewards.length)v=await send('choose_reward',{rewardId:v.rewards[0].id});
       v=await send('continue');await window.dungeon.loadSave(await DotNet.invokeMethodAsync('DungeonCrawlerTactics.Web','GetSave'));
       return {screen:v.screen,actions};
-    }""")
-    assert result['screen']=='explore' and result['actions']>0, result
+    }""", finish)
+    assert result['screen']==('explore' if finish else 'victory') and result['actions']>0, result
 
 
 def clear_floor(page, plan):
@@ -174,7 +175,10 @@ def main():
         before=view(page);owner=next(r for r in before['roster'] if r['selected'])
         gear=next(g for g in before['equipment'] if g['owned'] and not g.get('equippedUnitId') and (g['hpBonus'] or g['manaBonus'] or g['moveBonus']))
         page.locator('#field-menu-button').click();page.locator('[data-field-action=equipment]').click()
+        page.locator(f'[data-equipment-slot="{gear["slot"]}"]').click()
         page.locator(f'[data-equip="{gear["id"]}"]').click()
+        page.locator('#equipment-confirm-dialog').wait_for(state='visible')
+        page.locator('#confirm-equipment').click()
         page.wait_for_function('id=>window.dungeon.getView().equipment.some(g=>g.id===id&&g.equippedUnitId)',arg=gear['id'])
         after=next(r for r in view(page)['roster'] if r['id']==owner['id'])
         assert (after['hp'],after['energy'])==(owner['hp'],owner['energy'])

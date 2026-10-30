@@ -57,6 +57,14 @@ namespace DungeonCrawlerTactics
             HashSet<string> skillIds = new HashSet<string>();
             foreach (SkillUnlockDef skill in data.progression.skillUnlocks) Need(skill != null && StableId(skill.id) && skillIds.Add(skill.id) && !string.IsNullOrEmpty(skill.label) && (string.IsNullOrEmpty(skill.rosterId) || roster.Contains(skill.rosterId)) && skill.abilityId != null && catalog.Abilities.ContainsKey(skill.abilityId) && skill.minimumFloor >= 1 && skill.minimumFloor <= 18 && skill.level >= 1 && skill.level <= data.progression.xpThresholds.Length, "Invalid skill unlock.");
             HashSet<string> gearIds = new HashSet<string>();
+            Need(data.equipmentRewardTiers != null && data.equipmentRewardTiers.Length <= 3, "Invalid equipment reward tiers.");
+            HashSet<string> tierIds = new HashSet<string>(), tierGear = new HashSet<string>(); HashSet<int> tierWins = new HashSet<int>();
+            foreach (EquipmentRewardTierDef tier in data.equipmentRewardTiers)
+            {
+                Need(tier != null && StableId(tier.id) && tierIds.Add(tier.id) && !string.IsNullOrEmpty(tier.label) && (tier.requiredWins == 3 || tier.requiredWins == 6 || tier.requiredWins == 9) && tierWins.Add(tier.requiredWins) && tier.equipmentIds != null && tier.equipmentIds.Length == 3, "Invalid equipment reward tier.");
+                foreach (string id in tier.equipmentIds) Need(id != null && tierGear.Add(id) && Array.Exists(data.equipment, g => g != null && g.id == id && g.rewardOnly), "Invalid equipment reward tier item.");
+            }
+            foreach (EquipmentDef gear in data.equipment) Need(gear != null && (!gear.rewardOnly || tierGear.Contains(gear.id)), "Reward equipment needs a tier.");
             foreach (EquipmentDef gear in data.equipment)
             {
                 Need(gear != null && StableId(gear.id) && gearIds.Add(gear.id) && !string.IsNullOrEmpty(gear.label) && (gear.slot == "weapon" || gear.slot == "armor" || gear.slot == "charm") && gear.hpBonus >= 0 && gear.hpBonus <= 1000 && gear.manaBonus >= 0 && gear.manaBonus <= 1000 && gear.moveBonus >= 0 && gear.moveBonus <= 5 && gear.unlockEncounter >= 0 && gear.unlockEncounter <= data.encounters.Length && gear.abilityIds != null, "Invalid equipment.");

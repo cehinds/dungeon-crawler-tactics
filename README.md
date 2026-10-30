@@ -69,7 +69,7 @@ The included playable browser build runs the actual shared C# game through .NET 
 - Start the optional story campaign from the eighteen-floor guide. Floors 1–8 include seven battles and the destroyed floor-7 bypass, with route, quadrant and capture objectives.
 - Autosave, reload, and export/import a portable JSON save.
 
-There are **142 selectable class kits (122 source-attested names plus 20 original kits), six enemy-only kits, 95 ability definitions, 1,988 class-tree nodes, 10 consumables, 6 equipment pieces, 96 base directional character frames and 36 Katia form frames**. Stat formulas, early allocation timing, skill ranks, recipes and scenario rules are tactical adaptations, not canonical book formulas. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). The catalog is a sourced survey, not an exhaustive full-text audit. Numerical rank curves and class trees are game adaptations; unknown canonical ranks stay unknown. Floors 9–18, a complete T’Ghee deck battle system, full club interiors, general summoning, area chains, elevation, a complete procedural book campaign and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
+There are **142 selectable class kits (122 source-attested names plus 20 original kits), six enemy-only kits, 95 ability definitions, 1,988 class-tree nodes, 10 consumables, 15 equipment pieces, 96 base directional character frames and 36 Katia form frames**. Stat formulas, early allocation timing, skill ranks, recipes and scenario rules are tactical adaptations, not canonical book formulas. Progression and equipment are data-driven; see [Progression](Docs/Progression.md). The catalog is a sourced survey, not an exhaustive full-text audit. Numerical rank curves and class trees are game adaptations; unknown canonical ranks stay unknown. Floors 9–18, a complete T’Ghee deck battle system, full club interiors, general summoning, area chains, elevation, a complete procedural book campaign and audio remain outside this release. The animated browser presentation uses the shared C# engine; Unity's presenter remains the earlier IMGUI implementation.
 
 ## Start here
 
@@ -135,3 +135,5 @@ python3 Tools/prepare_research.py --check
 ```
 
 New classes and combinations of supported effects can be authored in JSON. New mechanical primitives require an explicit C# effect, validation, forecast support and scenario coverage. Keep presentation and character names out of combat logic.
+
+Equipment reward tiers, comparison behavior and validation are documented in [Equipment progression](Docs/Equipment-Progression.md).

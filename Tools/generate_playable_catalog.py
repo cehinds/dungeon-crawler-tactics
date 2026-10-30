@@ -38,8 +38,13 @@ table('Party levels', ['Level', 'Cumulative XP', 'HP bonus', 'Mana bonus'],
        for level, threshold in enumerate(progression.get('xpThresholds', []))])
 table('Personal skill unlocks', ['Crawler', 'Level', 'Skill'],
       [(skill['rosterId'], skill['level'], abilities[skill['abilityId']]['label']) for skill in progression.get('skillUnlocks', [])])
+reward_win = {equipment_id: tier['requiredWins']
+              for tier in game.get('equipmentRewardTiers', [])
+              for equipment_id in tier['equipmentIds']}
 table('Equipment', ['Item', 'Slot', 'Victories required', 'HP / Mana / Move bonus', 'Granted skills'],
-      [(gear['label'], gear['slot'], gear['unlockEncounter'], f"{gear['hpBonus']} / {gear['manaBonus']} / {gear['moveBonus']}",
+      [(gear['label'], gear['slot'],
+        f"Choose at win {reward_win[gear['id']]}" if gear.get('rewardOnly') and gear['id'] in reward_win else gear['unlockEncounter'],
+        f"{gear['hpBonus']} / {gear['manaBonus']} / {gear['moveBonus']}",
         ', '.join(abilities[a]['label'] for a in gear['abilityIds']) or '—') for gear in game.get('equipment', [])])
 lines.extend(['## Art and exploration', '',
               'Each encounter has an authored fog-covered exploration sector with optional caches, notes and a battle entrance. Discoveries persist in saves.', '',

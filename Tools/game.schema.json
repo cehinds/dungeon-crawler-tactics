@@ -203,6 +203,44 @@
           }
         }
       }
+    },
+    "equipmentRewardTiers": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "requiredWins",
+          "equipmentIds"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "label": {
+            "$ref": "#/$defs/label"
+          },
+          "requiredWins": {
+            "enum": [
+              3,
+              6,
+              9
+            ]
+          },
+          "equipmentIds": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/id"
+            }
+          }
+        }
+      }
     }
   },
   "$defs": {
@@ -845,6 +883,13 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 100
+        },
+        "rewardOnly": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 1000
         }
       }
     },

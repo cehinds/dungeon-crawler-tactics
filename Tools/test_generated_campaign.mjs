@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const read=p=>JSON.parse(fs.readFileSync(new URL(p,import.meta.url)));
 const manifest=read('../Web/wwwroot/assets/room-kit/manifest.json');
-const base=read('../Web/wwwroot/assets/exploration-floor-rules.json');
-const rules=read('../Web/wwwroot/assets/generated-campaign-rules.json');
+const base=read('../Web/wwwroot/data/exploration-floor-rules.json');
+const rules=read('../Web/wwwroot/data/generated-campaign-rules.json');
 const catalog=read('../Web/wwwroot/assets/book-tiles/catalog.json');
 const moduleCache=new Map();
 async function loadModule(path) {
@@ -36,6 +36,7 @@ for(let seed=0;seed<100;seed++) {
   const blocked=new Set(room.blockedCells.map(p=>`${p.x},${p.y}`));
   for(const p of room.generation.protectedCells) assert.ok(!blocked.has(`${p.x},${p.y}`));
   assert.equal(floorPlan.discoveries.filter(d=>d.kind==='objective').length,depth+1);
+  assert.ok(floorPlan.groups.every(g=>g.rewardXp===[30,40,50][depth]));
  }
  assert.equal(fingerprints.size,3);
 }
@@ -48,6 +49,6 @@ for(const style of catalog.styles) for(const depth of rules.depths.keys()) {
  const visuals=serializeNativeVisuals(scene,{styleId:style.id,kitId,width:room.width,height:room.height,tiles:floorPlan.map.tiles});
  assert.ok(visuals.pieces.length>400);assert.deepEqual(JSON.parse(JSON.stringify(visuals)),visuals);
 }
-const mutations=[r=>r.schemaVersion=2,r=>r.depths=[],r=>r.depths[0].familyId='missing',r=>r.depths[0].kitId='missing',r=>r.depths[1].id=r.depths[0].id,r=>r.families[0].connections=[[0,1]],r=>r.depths[0].enemyRecipe[0].hp=-1,r=>r.depths[0].discoveries[0].zone=4,r=>r.depths[0].groups.forEach(g=>g.kind='visible'),r=>r.depths[0].propLabelPattern='[',r=>r.surprise=true];
+const mutations=[r=>r.depths[0].groups[0].rewardXp=-1,r=>r.depths[1].groups[0].rewardXp=501,r=>r.depths[2].groups[0].rewardXp=1.5,r=>r.schemaVersion=2,r=>r.depths=[],r=>r.depths[0].familyId='missing',r=>r.depths[0].kitId='missing',r=>r.depths[1].id=r.depths[0].id,r=>r.families[0].connections=[[0,1]],r=>r.depths[0].enemyRecipe[0].hp=-1,r=>r.depths[0].discoveries[0].zone=4,r=>r.depths[0].groups.forEach(g=>g.kind='visible'),r=>r.depths[0].propLabelPattern='[',r=>r.surprise=true];
 for(const mutate of mutations){const invalid=structuredClone(rules);mutate(invalid);assert.throws(()=>validateGeneratedCampaignRules(invalid,base,catalog));}
-console.log('Generated campaign: 300 deterministic connected floors, distinct graphs, reserved routes, all 9 square theme/style fits, serialization and 11 invalid recipes passed.');
+console.log('Generated campaign: 300 deterministic connected floors, distinct graphs, reserved routes, all 9 square theme/style fits, serialization and 14 invalid recipes passed.');

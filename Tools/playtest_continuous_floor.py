@@ -113,7 +113,10 @@ def main():
         gear=next(g for g in before['equipment'] if g['owned'] and not g.get('equippedUnitId') and (g['hpBonus'] or g['manaBonus'] or g['moveBonus']))
         page.locator('#field-menu-button').click()
         page.locator('[data-field-action=equipment]').click()
+        page.locator(f'[data-equipment-slot="{gear["slot"]}"]').click()
         page.locator(f'[data-equip="{gear["id"]}"]').click()
+        page.locator('#equipment-confirm-dialog').wait_for(state='visible')
+        page.locator('#confirm-equipment').click()
         page.wait_for_function('id=>window.dungeon.getView().equipment.some(g=>g.id===id&&g.equippedUnitId)',arg=gear['id'])
         after=next(r for r in view(page)['roster'] if r['id']==owner['id'])
         assert after['hp']==owner['hp'] and after['energy']==owner['energy'], 'Field equipment healed party'

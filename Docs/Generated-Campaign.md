@@ -42,8 +42,12 @@ The lightweight view exposes `id`, `label`, `floorIndex`, `floorNumber`, `totalF
 
 - [Shared command contract and implementation order](Pseudocode/README.md#shared-command-contract), especially [complete the adventure loop](Pseudocode/04-Implementation-Order.md#41-complete-the-adventure-loop).
 - [Exploration rebuild](Exploration-Rebuild.md) describes the generated-floor model, existing standalone behavior, and the explicit remaining campaign-progression work.
-- Campaign generation authoring is in [generated-campaign-rules.json](../Web/wwwroot/assets/generated-campaign-rules.json), with its JSON Schema at [generated-campaign-rules.schema.json](../Schemas/generated-campaign-rules.schema.json). The existing `Web/wwwroot/assets/map-generation-rules.json` and `Schemas/exploration-floor-rules.schema.json` continue to describe existing map/floor systems.
+- Campaign generation authoring is in [generated-campaign-rules.json](../Web/wwwroot/data/generated-campaign-rules.json), with its JSON Schema at [generated-campaign-rules.schema.json](../Schemas/generated-campaign-rules.schema.json). The existing `Web/wwwroot/assets/map-generation-rules.json` and `Schemas/exploration-floor-rules.schema.json` continue to describe existing map/floor systems.
 - Runtime integration is in the shared C# core, in [GeneratedCampaign](../UnityPackage/Runtime/Core/GameSession.GeneratedCampaign.cs), [GeneratedDungeon](../UnityPackage/Runtime/Core/GameSession.GeneratedDungeon.cs), and [GeneratedFloor](../UnityPackage/Runtime/Core/GameSession.GeneratedFloor.cs). Unity source was refreshed; Unity Editor execution remains unverified.
+
+## Reward pacing
+
+New default plans award 30 XP per battle in depth one, 40 in depth two and 50 in depth three. Four battles per depth yield cumulative totals of 120, 280 and 480 XP (party levels 4, 6 and 8). Previously saved plans retain their authored rewards; missing `rewardXp` uses the legacy 30 XP default. Gear choices at cumulative wins 3, 6 and 9 are described in [Equipment progression](Equipment-Progression.md). These are tactical adaptations, not verified book loot or a rebalancing of the separate story journey.
 
 ## Acceptance checklist
 
@@ -58,7 +62,7 @@ The lightweight view exposes `id`, `label`, `floorIndex`, `floorNumber`, `totalF
 
 ## Validation status
 
-The 78 campaign checks pass, as do the existing core suites (including 84 journey, 28 exploration, 65 custom-map, and 223 general-game checks). Compatibility is clean. Generator checks pass for 300 floor seeds, nine style/theme fits, 11 invalid configurations, and legacy-floor cases (200 and 18).
+The 78 campaign checks pass, as do the existing core suites (including 84 journey, 28 exploration, 65 custom-map, and 223 general-game checks). Compatibility is clean. Generator checks pass for 300 floor seeds, nine style/theme fits, 14 invalid configurations, and legacy-floor cases (200 and 18).
 
 Actual WebAssembly browser QA passes: the default three-depth route launches with distinct saved plans; movement and home/resume/reload preserve state. A small explicitly authored two-depth fixture then exercises real tactical combat, cache/objective claims, gear and practice, descent, final completion and exact resource/archive roundtrips. The full default three-depth route has not been manually played through every encounter.
 

@@ -12,6 +12,7 @@ namespace DungeonCrawlerTactics
     }
     [Serializable] public sealed class GeneratedEncounterGroup
     {
+        public int rewardXp;
         public string id, label, kind;
         public int x, y;
         public string[] enemyIds = new string[0];
@@ -38,7 +39,7 @@ namespace DungeonCrawlerTactics
         {
             if (f == null) return null;
             Require(f.groups != null && f.groups.Length > 0 && f.groups.Length <= 16 && f.discoveries != null && f.discoveries.Length <= 64, "Invalid floor collections.");
-            return new GeneratedFloorPlan { schemaVersion = f.schemaVersion, seed = f.seed, map = CopyCustomMap(f.map), entrance = CopyCell(f.entrance), exit = CopyCell(f.exit), groups = Array.ConvertAll(f.groups, g => g == null ? null : new GeneratedEncounterGroup { id = g.id, label = g.label, kind = g.kind, x = g.x, y = g.y, enemyIds = g.enemyIds == null ? null : (string[])g.enemyIds.Clone() }), discoveries = Array.ConvertAll(f.discoveries, p => p == null ? null : new ExplorationPointDef { id = p.id, label = p.label, description = p.description, kind = p.kind, itemId = p.itemId, count = p.count, x = p.x, y = p.y }) };
+            return new GeneratedFloorPlan { schemaVersion = f.schemaVersion, seed = f.seed, map = CopyCustomMap(f.map), entrance = CopyCell(f.entrance), exit = CopyCell(f.exit), groups = Array.ConvertAll(f.groups, g => g == null ? null : new GeneratedEncounterGroup { rewardXp = g.rewardXp, id = g.id, label = g.label, kind = g.kind, x = g.x, y = g.y, enemyIds = g.enemyIds == null ? null : (string[])g.enemyIds.Clone() }), discoveries = Array.ConvertAll(f.discoveries, p => p == null ? null : new ExplorationPointDef { id = p.id, label = p.label, description = p.description, kind = p.kind, itemId = p.itemId, count = p.count, x = p.x, y = p.y }) };
         }
         private static int FloorWins(GeneratedDungeonState s, string atScreen) { Require(s.defeatedGroupIds != null && s.defeatedGroupIds.Length <= 16, "Invalid defeated group receipts."); return s.defeatedGroupIds.Length + (atScreen == "victory" ? 1 : 0); }
         private static bool Has(string[] ids, string id) { return Array.IndexOf(ids, id) >= 0; }
@@ -47,6 +48,7 @@ namespace DungeonCrawlerTactics
         private static void FilterFloorEnemies(EncounterDef map, GeneratedDungeonState s)
         {
             GeneratedEncounterGroup group = Array.Find(s.floorPlan.groups, g => g.id == s.activeGroupId);
+            if (group != null && group.rewardXp > 0) map.xp = group.rewardXp;
             map.enemies = group == null ? new SpawnDef[0] : Array.FindAll(map.enemies, e => Has(group.enemyIds, e.id));
         }
         private void ValidateFloorSave(GameSave save, EncounterDef map)
@@ -63,7 +65,7 @@ namespace DungeonCrawlerTactics
             HashSet<string> ids = new HashSet<string>(), enemies = new HashSet<string>();
             foreach (GeneratedEncounterGroup g in f.groups)
             {
-                Require(g != null && !string.IsNullOrEmpty(g.id) && g.id.Length <= 100 && ids.Add(g.id) && (g.kind == "visible" || g.kind == "ambush") && g.enemyIds != null && g.enemyIds.Length > 0 && g.enemyIds.Length <= 12 && connected(g.x,g.y), "Invalid encounter group.");
+                Require(g != null && g.rewardXp >= 0 && g.rewardXp <= 500 && !string.IsNullOrEmpty(g.id) && g.id.Length <= 100 && ids.Add(g.id) && (g.kind == "visible" || g.kind == "ambush") && g.enemyIds != null && g.enemyIds.Length > 0 && g.enemyIds.Length <= 12 && connected(g.x,g.y), "Invalid encounter group.");
                 foreach (string id in g.enemyIds) Require(id != null && enemies.Add(id) && Array.Exists(original.enemies,e => e.id == id), "Unknown or repeated group enemy.");
             }
             Require(enemies.Count == original.enemies.Length, "Every enemy needs exactly one group.");

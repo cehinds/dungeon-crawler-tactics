@@ -20,6 +20,7 @@ namespace DungeonCrawlerTactics
         public int energyPerRound = 3;
         public ProgressionDef progression = new ProgressionDef();
         public TacticalModeDef[] stances = new TacticalModeDef[0], forms = new TacticalModeDef[0];
+        public EquipmentRewardTierDef[] equipmentRewardTiers = new EquipmentRewardTierDef[0];
         public EquipmentDef[] equipment = new EquipmentDef[0];
         public RosterDef[] roster = new RosterDef[0];
         public ClassStats[] classStats = new ClassStats[0];
@@ -36,11 +37,15 @@ namespace DungeonCrawlerTactics
         public SkillUnlockDef[] skillUnlocks = new SkillUnlockDef[0];
     }
     [Serializable] public sealed class SkillUnlockDef { public string id, label, rosterId, abilityId; public int minimumFloor = 1; public int level = 2; }
-    [Serializable] public sealed class EquipmentDef { public string id, label, slot; public int hpBonus, manaBonus, moveBonus, unlockEncounter; public string[] abilityIds = new string[0]; }
+    [Serializable] public sealed class EquipmentDef { public bool rewardOnly; public string description; public string id, label, slot; public int hpBonus, manaBonus, moveBonus, unlockEncounter; public string[] abilityIds = new string[0]; }
+    [Serializable] public sealed class EquipmentRewardTierDef { public string id, label; public int requiredWins; public string[] equipmentIds = new string[0]; }
+    [Serializable] public sealed class EquipmentRewardClaim { public string tierId, equipmentId; }
+    [Serializable] public sealed class EquipmentStatsView { public int maxHp, maxEnergy, move, hp, energy; }
+    [Serializable] public sealed class EquipmentPreviewView { public string unitId, equipmentId, previousGearId; public bool remove, canConfirm; public EquipmentStatsView before, after; public string[] gainedAbilityIds = new string[0], lostAbilityIds = new string[0]; }
     [Serializable] public sealed class EquipmentSlotSave { public string unitId, equipmentId; }
     [Serializable] public sealed class SkillView { public string id, label, unitId, abilityId; public int level, minimumFloor; public bool unlocked; }
     [Serializable] public sealed class ProgressionView { public int level, xp, nextLevelXp, xpIntoLevel, xpToNextLevel, maxLevel, hpBonus, manaBonus, moveBonus; public SkillView[] skills = new SkillView[0]; }
-    [Serializable] public sealed class EquipmentView { public string id, label, slot, equippedUnitId; public int hpBonus, manaBonus, moveBonus, unlockEncounter; public string[] abilityIds = new string[0]; public bool owned; }
+    [Serializable] public sealed class EquipmentView { public bool rewardOnly; public string description, unlockReason; public string id, label, slot, equippedUnitId; public int hpBonus, manaBonus, moveBonus, unlockEncounter; public string[] abilityIds = new string[0]; public bool owned; }
     [Serializable] public sealed class SafeRoomView { public string label, description; public bool available, rested; }
     [Serializable] public sealed class QuestView { public string id, label, description; public int progress, total; public bool complete; }
     [Serializable] public sealed class RosterDef { public string id, label, classId, artId, replacesId, legacyClassId; public string[] combatTags = new string[0]; public string[] specialtyClassIds = new string[0]; public int maxSkillRank = 15; public bool selected; public bool deployable = true; public string[] innateAbilityIds = new string[0]; }
@@ -94,9 +99,10 @@ namespace DungeonCrawlerTactics
         public string targetId, label; public int beforeHp, afterHp, beforeEnergy, afterEnergy, beforeMaxHp, afterMaxHp, beforeMaxEnergy, afterMaxEnergy, beforeMove, afterMove, beforeX, beforeY, afterX, afterY;
         public string[] beforeTags = new string[0], afterTags = new string[0];
     }
-    [Serializable] public sealed class RewardView { public string id, label, description; }
+    [Serializable] public sealed class RewardView { public string equipmentId, tierId; public string id, label, description; }
     [Serializable] public sealed class GameView
     {
+        public EquipmentPreviewView equipmentPreview;
         public GeneratedCampaignView generatedCampaign;
         public MapPlacement[] decorations = new MapPlacement[0];
         public TacticalModeView[] stances = new TacticalModeView[0], forms = new TacticalModeView[0];
@@ -128,6 +134,7 @@ namespace DungeonCrawlerTactics
         public NeighborhoodSave neighborhood; public HomeSave home; public JourneySave journey; public ExpeditionSave expedition; public SkillTreeSave skillTree; public DevelopmentSave development; public CustomMapData customMap; public GeneratedDungeonState generatedDungeon; public ScenarioSave scenario;
         public AudienceSave audience; public string[] achievementIds = new string[0];
         public ExplorationSave[] exploration = new ExplorationSave[0];
+        public EquipmentRewardClaim[] equipmentRewardClaims = new EquipmentRewardClaim[0];
         public int battleLayoutVersion; public int activationVersion; public int progressionVersion; public EquipmentSlotSave[] equipped = new EquipmentSlotSave[0];
         public int schemaVersion = 1; public string contentVersion, screen, phase, selectedUnitId;
         public int encounterIndex, round, xp; public bool rewardChosen;

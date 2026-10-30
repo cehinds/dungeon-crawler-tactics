@@ -17,7 +17,8 @@ namespace DungeonCrawlerTactics
             foreach (EquipmentSlotSave slot in loadout) if (slot.unitId == id) { EquipmentDef gear = Gear(slot.equipmentId); result.hp += gear.hpBonus; result.energy += gear.manaBonus; result.move += gear.moveBonus; }
             return result;
         }
-        private ClassStats PlayerStats(string id, string classId) { ClassStats stats = PlayerStats(id, classId, xp, equipped); ApplyAllocatedStats(stats, id, allocations); ApplyTreeStats(stats, id, unlockedSkillNodes); RosterView member; if (roster.TryGetValue(id, out member)) ApplyModes(stats, id, member.stanceId, member.formId); return stats; }
+        private ClassStats PlayerStats(string id, string classId) { return LoadoutStats(id, classId, equipped); }
+        private ClassStats LoadoutStats(string id, string classId, List<EquipmentSlotSave> loadout) { ClassStats stats = PlayerStats(id, classId, xp, loadout); ApplyAllocatedStats(stats, id, allocations); ApplyTreeStats(stats, id, unlockedSkillNodes); RosterView member; if (roster.TryGetValue(id, out member)) ApplyModes(stats, id, member.stanceId, member.formId); return stats; }
         private EquipmentDef Gear(string id) { EquipmentDef result = Array.Find(data.equipment, e => e.id == id); Require(result != null, "Unknown equipment."); return result; }
         private string[] Grants(string id, int experience, List<EquipmentSlotSave> loadout, List<string> skillNodes = null, string selectedClassId = null, string specialtyClassId = null, int progressionFloor = -1)
         {
@@ -59,7 +60,7 @@ namespace DungeonCrawlerTactics
             Require(screen == "camp" || screen == "explore", "Change equipment outside combat.");
             RosterView member = GetRoster(command.unitId); Require(Definition(member.id).deployable, "Advisors do not equip field gear.");
             EquipmentDef gear = Gear(command.equipmentId);
-            Require(gear.unlockEncounter <= LiveVictories(), "This equipment has not been earned yet.");
+            Require(EquipmentOwned(gear), "This equipment has not been earned yet.");
             EquipmentSlotSave owner = equipped.Find(e => e.equipmentId == gear.id);
             if (remove) { Require(owner != null && owner.unitId == member.id, "That crawler does not have this equipment."); equipped.Remove(owner); }
             else
@@ -87,7 +88,7 @@ namespace DungeonCrawlerTactics
                 AddLog("Party reached level " + after + ". Stats increased and eligible skills unlocked.");
             }
             SyncRosterFromBattle(); RefreshRosterStats(false);
-            foreach (EquipmentDef gear in data.equipment) if (gear.unlockEncounter == encounterIndex + 1) { presentationEvents.Add(new PresentationEvent { type = "equipment_unlock", tag = gear.id }); AddLog("Equipment earned: " + gear.label + ". Equip it in the safe room."); }
+            foreach (EquipmentDef gear in data.equipment) if (!gear.rewardOnly && gear.unlockEncounter == encounterIndex + 1) { presentationEvents.Add(new PresentationEvent { type = "equipment_unlock", tag = gear.id }); AddLog("Equipment earned: " + gear.label + ". Equip it in the safe room."); }
         }
         private void PopulateProgression(GameView view)
         {
@@ -95,8 +96,8 @@ namespace DungeonCrawlerTactics
             List<SkillView> skills = new List<SkillView>(); foreach (SkillUnlockDef skill in data.progression.skillUnlocks) skills.Add(new SkillView { id = skill.id, label = skill.label, unitId = skill.rosterId, abilityId = skill.abilityId, level = skill.level, minimumFloor = skill.minimumFloor, unlocked = level >= skill.level && (journey == null || journey.floorIndex + 1 >= skill.minimumFloor) });
             view.progression = new ProgressionView { level = level, xp = xp, nextLevelXp = next, xpIntoLevel = xp - data.progression.xpThresholds[level - 1], xpToNextLevel = Math.Max(0, next - xp), maxLevel = data.progression.xpThresholds.Length, hpBonus = (level - 1) * data.progression.hpPerLevel, manaBonus = (level - 1) * data.progression.manaPerLevel, moveBonus = (level - 1) * data.progression.movePerLevel, skills = skills.ToArray() };
             List<EquipmentView> gearViews = new List<EquipmentView>();
-            foreach (EquipmentDef gear in data.equipment) { EquipmentSlotSave owner = equipped.Find(e => e.equipmentId == gear.id); gearViews.Add(new EquipmentView { id = gear.id, label = gear.label, slot = gear.slot, hpBonus = gear.hpBonus, manaBonus = gear.manaBonus, moveBonus = gear.moveBonus, abilityIds = gear.abilityIds, unlockEncounter = gear.unlockEncounter, owned = gear.unlockEncounter <= (Scenario == null ? LiveVictories() : 0), equippedUnitId = owner == null ? null : owner.unitId }); }
-            view.equipment = gearViews.ToArray(); bool rested = true;
+            foreach (EquipmentDef gear in data.equipment) { EquipmentSlotSave owner = equipped.Find(e => e.equipmentId == gear.id); gearViews.Add(new EquipmentView { id = gear.id, label = gear.label, slot = gear.slot, hpBonus = gear.hpBonus, manaBonus = gear.manaBonus, moveBonus = gear.moveBonus, abilityIds = gear.abilityIds, unlockEncounter = gear.unlockEncounter, rewardOnly = gear.rewardOnly, description = gear.description, unlockReason = EquipmentUnlockReason(gear), owned = Scenario == null && EquipmentOwned(gear), equippedUnitId = owner == null ? null : owner.unitId }); }
+            view.equipment = gearViews.ToArray(); view.equipmentPreview = pendingEquipment; bool rested = true;
             foreach (RosterView member in view.roster) if (member.deployable && (member.hp < member.maxHp || member.energy < member.maxEnergy)) rested = false;
             view.safeRoom = new SafeRoomView { available = screen == "camp", rested = rested, label = "Safe Room", description = "Rest to restore HP and mana, change equipment, and inspect skills before exploring." };
             List<QuestView> quests = new List<QuestView>();
@@ -116,6 +117,7 @@ namespace DungeonCrawlerTactics
         {
             Require(source.progressionVersion == 0 || source.progressionVersion == 1, "Unknown progression save version.");
             if (source.progressionVersion == 1) return source;
+            Require(source.equipmentRewardClaims == null || source.equipmentRewardClaims.Length == 0, "Legacy saves cannot declare equipment reward claims.");
             Require(source.equipped != null && source.equipped.Length == 0, "Legacy saves cannot declare equipped gear.");
             List<RosterView> members = new List<RosterView>(); List<EquipmentSlotSave> empty = new List<EquipmentSlotSave>();
             foreach (RosterView old in source.roster)
@@ -149,7 +151,7 @@ namespace DungeonCrawlerTactics
             {
                 Require(record != null && record.unitId != null && Definition(record.unitId) != null && Definition(record.unitId).deployable, "Invalid equipment owner.");
                 EquipmentDef gear = Gear(record.equipmentId);
-                Require(gear.unlockEncounter <= SaveVictories(save) && owned.Add(gear.id) && slots.Add(record.unitId + ":" + gear.slot), "Unearned, duplicated, or conflicting equipment.");
+                Require((gear.rewardOnly ? Array.Exists(save.equipmentRewardClaims ?? new EquipmentRewardClaim[0], c => c.equipmentId == gear.id) : gear.unlockEncounter <= SaveVictories(save)) && owned.Add(gear.id) && slots.Add(record.unitId + ":" + gear.slot), "Unearned, duplicated, or conflicting equipment.");
                 result.Add(new EquipmentSlotSave { unitId = record.unitId, equipmentId = gear.id });
             }
             return result;

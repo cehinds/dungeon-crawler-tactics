@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 const { generateExplorationFloor, validateExplorationFloor } = await import(`data:text/javascript;base64,${Buffer.from(fs.readFileSync(new URL('../Web/wwwroot/exploration-floor.js', import.meta.url), 'utf8')).toString('base64')}`);
 const manifest=JSON.parse(fs.readFileSync(new URL('../Web/wwwroot/assets/room-kit/manifest.json',import.meta.url)));
-const rules=JSON.parse(fs.readFileSync(new URL('../Web/wwwroot/assets/exploration-floor-rules.json',import.meta.url)));
+const rules=JSON.parse(fs.readFileSync(new URL('../Web/wwwroot/data/exploration-floor-rules.json',import.meta.url)));
 for(let i=0;i<200;i++) {
   const {floorPlan,room}=generateExplorationFloor(manifest,rules,`fuzz-${i}`);
   const report=validateExplorationFloor(floorPlan,rules);

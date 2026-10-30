@@ -10,6 +10,7 @@ namespace DungeonCrawlerTactics
         private GameSave MigrateCompatibleSave(GameSave source)
         {
             if (source.contentVersion == data.contentVersion) return source;
+            Require(source.equipmentRewardClaims == null || source.equipmentRewardClaims.Length == 0, "Legacy content cannot declare equipment reward claims.");
             Require(source.roster != null && source.units != null && source.timedTags != null, "Missing migration collections.");
             Dictionary<string, RosterView> oldRoster = new Dictionary<string, RosterView>();
             foreach (RosterView old in source.roster)

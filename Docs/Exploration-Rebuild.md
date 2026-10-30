@@ -54,7 +54,7 @@ Validated locally on 2026-10-29 against the published shared-C# WebAssembly buil
 
 | Source | Responsibility |
 | --- | --- |
-| `Web/wwwroot/assets/exploration-floor-rules.json` | Bounded zone graph, dimensions, links, encounter recipes and discovery definitions |
+| `Web/wwwroot/data/exploration-floor-rules.json` | Bounded zone graph, dimensions, links, encounter recipes and discovery definitions |
 | `Schemas/exploration-floor-rules.schema.json` | Authoring schema; runtime additionally validates relationships |
 | `Web/wwwroot/exploration-floor.js` | Deterministic routes, placement and generation validation |
 | `UnityPackage/Runtime/Core/GameSession.GeneratedFloor.cs` | Floor imports, movement, encounters, discoveries, safe-room resume and save validation |

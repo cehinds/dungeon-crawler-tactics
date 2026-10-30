@@ -21,7 +21,7 @@ export async function createGeneratedAdventure({ seed, styleId = 'pocket-dungeon
 export async function createExplorationFloor({ seed, styleId = 'pocket-dungeon', kitId = 'starter-dungeon' } = {}) {
   const catalogURL = new URL('assets/book-tiles/catalog.json', location.href);
   const [manifest, rules, catalog] = await Promise.all([
-    fetchJSON('assets/room-kit/manifest.json'), fetchJSON('assets/exploration-floor-rules.json'), fetchJSON(catalogURL)
+    fetchJSON('assets/room-kit/manifest.json'), fetchJSON('data/exploration-floor-rules.json'), fetchJSON(catalogURL)
   ]);
   const chosenSeed = seed?.trim() || `floor-${crypto.randomUUID().slice(0, 8)}`;
   const { generateExplorationFloor } = await import('./exploration-floor.js');
@@ -48,8 +48,8 @@ export async function createExplorationFloor({ seed, styleId = 'pocket-dungeon',
 export async function createGeneratedCampaign({seed, styleId='pocket-dungeon', kitId, onProgress} = {}) {
   const catalogURL=new URL('assets/book-tiles/catalog.json',location.href);
   const [manifest,baseRules,rules,catalog]=await Promise.all([
-    fetchJSON('assets/room-kit/manifest.json'),fetchJSON('assets/exploration-floor-rules.json'),
-    fetchJSON('assets/generated-campaign-rules.json'),fetchJSON(catalogURL)
+    fetchJSON('assets/room-kit/manifest.json'),fetchJSON('data/exploration-floor-rules.json'),
+    fetchJSON('data/generated-campaign-rules.json'),fetchJSON(catalogURL)
   ]);
   const {floorSeed,validateGeneratedCampaignRules,generateCampaignFloor}=await import('./exploration-floor.js');
   validateGeneratedCampaignRules(rules,baseRules,catalog);

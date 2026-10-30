@@ -31,6 +31,8 @@ Exit condition: a continuous multi-floor run with reliable saves. Prerequisite w
 
 ## 4.2 Improve rewards and progression
 
+First implementation: [equipment progression](../Equipment-Progression.md) adds milestone choices, persisted claims, authoritative comparisons and depth-based XP. This does not complete randomized item instances, campaign-wide skill balance or every build/playthrough acceptance case below.
+
 ~~~text
 ExpandGearAndLoot():
     introduce stable item instances and reviewed modifier rules where needed
