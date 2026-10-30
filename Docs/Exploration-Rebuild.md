@@ -74,7 +74,8 @@ Validated locally on 2026-10-29 against the published shared-C# WebAssembly buil
 
 - [x] Connect generated floors into a persistent adapted expedition. The [generated campaign](Generated-Campaign.md) adds three depths with party/resource carryover and saved archives. Story floors 1–8 retain their authored route; the full procedural book campaign remains future work.
 - [x] Add three authored graph families and per-depth environment/encounter/objective recipes for connected expeditions. Seeds still operate within bounded authored layouts; broader biome systems remain future work.
-- [ ] Reusable keys/locked doors, field abilities and multi-step environmental puzzles. These are design targets above, not current generalized systems.
+- [x] Tag-matched permanent shortcuts with skill/item/manual solutions, shared cost previews and saved openings. See [environmental mechanisms](Environmental-Mechanisms.md).
+- [ ] General reusable keys, multi-step environmental puzzles, temporary portals and persistent overworld traps remain design targets.
 - [ ] More equipment drops, rarity/progression tiers, and visible equipment attachments. This pass exposes the existing six gear pieces during exploration; it does not create a new item catalog or armor overlays.
 - [ ] Distinct overworld travel, settlements and book-specific floor simulations.
 

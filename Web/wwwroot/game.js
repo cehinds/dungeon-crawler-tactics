@@ -1,3 +1,4 @@
+import { renderMechanismChoices, renderMechanismPreview } from './field-interactions.js';
 import { renderEquipmentDialog, renderEquipmentComparison, equipmentBenefits } from './equipment-ui.js';
 import { renderCampHub, bindCampHub } from './camp-hub.js';
 import { renderFieldShell, renderFieldMenu, renderFieldMap, refreshFieldStep } from './field-ui.js';
@@ -51,6 +52,8 @@ let actionTab = 'abilities';
 let endTurnActor = null;
 let animating = false;
 let campModal = null;
+let mechanismDialogId = null;
+let mechanismActorId = null;
 let equipmentSlot = 'weapon';
 let equipmentShowLocked = false;
 let hubCleanup=null, fieldMenu=false, fieldMap=false, partySetup=false;
@@ -223,6 +226,11 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
     type = 'preview_descent';
     args = {};
   }
+  if(type==='explore_interact'){
+    const point=view.exploration?.points.find(point=>point.id===args.targetId);
+    if(point?.kind==='mechanism'){mechanismDialogId=point.mechanismId;mechanismActorId=null;render();return;}
+  }
+  if(!['preview_mechanism','confirm_mechanism','cancel_mechanism'].includes(type))mechanismDialogId=null;
   busy = true;
   $('#game').setAttribute('aria-busy', 'true');
   try {
@@ -233,10 +241,10 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
     const compactStep=type==='explore_step'&&before.screen==='explore'&&before.generatedDungeon?.floorPlan;
     const result = await call(compactStep?'DispatchMovement':'Dispatch', JSON.stringify({ type, ...args }));
     const response = JSON.parse(result);
-    const after = compactStep ? (response.partial ? {...before,screen:response.view.screen,phase:response.view.phase,message:response.view.message,exploration:response.view.exploration,generatedCampaign:response.view.generatedCampaign??before.generatedCampaign,events:[],forecast:[],canConfirm:false,equipmentPreview:null,generatedDungeon:{...before.generatedDungeon,...response.view.generatedDungeon,floorPlan:before.generatedDungeon.floorPlan}} : response.view) : response;
+    const after = compactStep ? (response.partial ? {...before,screen:response.view.screen,phase:response.view.phase,message:response.view.message,exploration:response.view.exploration,generatedCampaign:response.view.generatedCampaign??before.generatedCampaign,events:[],forecast:[],canConfirm:false,equipmentPreview:null,mechanismPreview:null,mechanisms:response.view.mechanisms??before.mechanisms,generatedDungeon:{...before.generatedDungeon,...response.view.generatedDungeon,floorPlan:before.generatedDungeon.floorPlan}} : response.view) : response;
     if(before.screen!==after.screen || before.encounterName!==after.encounterName || before.expedition?.id!==after.expedition?.id || before.scenario?.id!==after.scenario?.id) clearFeedback();
     if(type!=='explore_step') narrator?.begin(actionContext,before,after);
-    if(save && !['preview','cancel','select','preview_descent','cancel_descent','preview_equipment','preview_unequip','cancel_equipment'].includes(type)) schedulePersist({movement:compactStep&&response.partial});
+    if(save && !['preview','cancel','select','preview_descent','cancel_descent','preview_equipment','preview_unequip','cancel_equipment','preview_mechanism','cancel_mechanism'].includes(type)) schedulePersist({movement:compactStep&&response.partial});
     if (before.screen === 'battle' && after.screen !== 'battle' && battlefield && after.events?.length) {
       try { await playPresentation(after.events, before, after); } catch { /* Presentation cannot prevent the committed result appearing. */ }
     }
@@ -281,6 +289,9 @@ async function dispatchCommand(type, args = {}, { preserveAction = false, save =
   }
 }
 function commandFeedback(type, args, before, after,actionLabel) {
+  if(type==='preview_mechanism'&&after.mechanismPreview?.canConfirm)return;
+  if(type==='cancel_mechanism')return;
+  if(type==='confirm_mechanism'&&before.mechanismPreview){const mechanism=after.mechanisms?.find(item=>item.id===before.mechanismPreview.mechanismId);if(mechanism?.solved){toast(`${mechanism.label} opened. Shortcut available; reviewed costs applied.`,'success');return;}}
   if(type==='preview_descent'&&after.generatedCampaign?.canConfirmDescent)return;
   if(type==='cancel_descent'){toast('Descent canceled. Keep exploring or return home to rest.','info');return;}
   if(type==='confirm_descent'&&(after.generatedCampaign?.floorIndex!==before.generatedCampaign?.floorIndex||after.generatedCampaign?.complete&&!before.generatedCampaign?.complete)){
@@ -402,10 +413,13 @@ function render() {
   if(fieldMenu&&view.screen==='explore')$('#game').insertAdjacentHTML('beforeend',renderFieldMenu(view));
   if(fieldMap&&view.screen==='explore')$('#game').insertAdjacentHTML('beforeend',renderFieldMap(view));
   if(view.generatedCampaign?.canConfirmDescent)$('#game').insertAdjacentHTML('beforeend',renderDescentReview(view,{portrait}));
+  if(mechanismDialogId&&view.screen==='explore')$('#game').insertAdjacentHTML('beforeend',renderMechanismChoices(view,{mechanismId:mechanismDialogId,actorId:mechanismActorId}));
+  if(view.mechanismPreview)$('#game').insertAdjacentHTML('beforeend',renderMechanismPreview(view));
   narrator?.mount($('#narrator-slot'));
   bindScreen();
   if(view.screen==='camp')hubCleanup=bindCampHub({onActivate:activateHub});
   bindFieldMenus();
+  bindMechanismMenus();
   const partyStrip=$('.battle-hud .party-strip');
   if(partyStrip){
     partyStrip.scrollLeft=previousPartyScroll;
@@ -528,6 +542,17 @@ function renderExploration() {
   if(view.generatedDungeon?.floorPlan)return renderFieldShell(view,{portrait,worldControls:renderWorldControls});
   const points=map.points.filter(p=>p.canInteract&&!p.claimed&&!view.neighborhood?.interactions.some(i=>i.pointId===p.id));
   return `<section class="exploration-screen square-exploration"><div class="objective-banner"><span class="objective-seal" aria-hidden="true"></span><div><small>EXPLORE THE FLOOR</small><h2>${e(view.generatedDungeon ? 'Find the exit' : map.label)}</h2>${view.generatedDungeon?'<small>'+(view.generatedDungeon.cleared?'Enemies cleared · Reach the exit':'Clear the enemies · Reach the exit')+'</small>':renderQuestTracker()}</div></div><div id="battlefield-slot" class="battlefield-slot">${renderWorldControls()}<div class="board accessible-board" style="--columns:${map.width};--rows:${map.height}" aria-label="Exploration map">${map.tiles.map(t=>`<button data-explore-cell="${t.x},${t.y}" ${!t.reachable?'disabled':''} aria-label="${t.x},${t.y}: ${!t.revealed?'unexplored':t.blocked?'wall':'passage'}"></button>`).join('')}</div><div id="map-inspect" class="map-inspect" hidden></div></div><div class="exploration-hud"><div class="walk-pad" aria-label="Walk through the dungeon"><button data-walk="north" aria-label="Walk up">↑</button><button data-walk="west" aria-label="Walk left">←</button><button data-walk="south" aria-label="Walk down">↓</button><button data-walk="east" aria-label="Walk right">→</button></div><div class="explore-party">${view.roster.filter(r=>r.selected).map(r=>`<button class="explore-crawler" data-character-sheet="${e(r.id)}" aria-label="Open ${e(r.label)} character sheet: ${r.hp}/${r.maxHp} health, ${r.energy}/${r.maxEnergy} mana" title="${e(r.label)} · ${r.hp}/${r.maxHp} HP · ${r.energy}/${r.maxEnergy} Mana">${portrait(r)}<span>${e(copyLabel(r))}</span><i class="explore-health" style="--fill:${r.maxHp?r.hp/r.maxHp*100:0}%" aria-hidden="true"></i></button>`).join('')}</div><div class="explore-copy"><strong>${e(points[0]?.label || (view.generatedDungeon ? view.generatedDungeon.cleared ? 'Reach the exit' : 'Explore the dungeon' : 'Find the encounter door'))}</strong><p>${e(points[0] ? 'E / Space to interact' : 'WASD / arrows to walk')}</p></div><div class="explore-interactions">${points.map(point=>`<button class="primary" data-explore-interact="${e(point.id)}">${point.kind==='encounter'?'Enter':'Investigate'} ${e(point.label)}</button>`).join('')}${neighborhoodVisible()?'<button data-open-neighborhood>Room choices & journal</button>':''}<button id="return-camp" class="quiet" title="Leave this dungeon and return to Mordecai">Return to camp</button></div><div id="narrator-slot" class="narrator-slot"></div></div></section>`;
+}
+function bindMechanismMenus(){
+ const close=async()=>{if(view.mechanismPreview)await command('cancel_mechanism',{}, {save:false});mechanismDialogId=null;render();};
+ $('#close-mechanism')?.addEventListener('click',close);$('#done-mechanism')?.addEventListener('click',close);
+ $('#mechanism-actor')?.addEventListener('change',event=>{mechanismActorId=event.target.value;render();});
+ document.querySelectorAll('[data-mechanism-preview]').forEach(button=>button.addEventListener('click',()=>command('preview_mechanism',{targetId:button.dataset.mechanismId,solutionId:button.dataset.mechanismPreview,unitId:button.dataset.mechanismUnit,abilityId:button.dataset.mechanismAbility||null},{save:false})));
+ const cancel=()=>command('cancel_mechanism',{}, {save:false});
+ $('#cancel-mechanism')?.addEventListener('click',cancel);$('#close-mechanism-confirm')?.addEventListener('click',cancel);
+ $('#confirm-mechanism')?.addEventListener('click',async event=>{event.currentTarget.disabled=true;await command('confirm_mechanism');if(!view.mechanismPreview){mechanismDialogId=null;render();}});
+ if($('#mechanism-dialog')){openDialog('#mechanism-dialog');$('#close-mechanism').focus();$('#mechanism-dialog').addEventListener('cancel',event=>{event.preventDefault();close();});}
+ if($('#mechanism-confirm-dialog')){openDialog('#mechanism-confirm-dialog');$('#cancel-mechanism').focus();$('#mechanism-confirm-dialog').addEventListener('cancel',event=>{event.preventDefault();cancel();});}
 }
 function bindFieldMenus() {
   const descent=$('#descent-dialog');

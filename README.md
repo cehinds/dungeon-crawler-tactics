@@ -128,6 +128,8 @@ dotnet run --project Tests/HomeTests/HomeTests.csproj
 dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj
 dotnet run --project Tests/AudienceTests/AudienceTests.csproj
 dotnet run --project Tests/SignatureTests/SignatureTests.csproj
+dotnet run --project Tests/EquipmentProgressionTests/EquipmentProgressionTests.csproj
+dotnet run --project Tests/MechanismTests/MechanismTests.csproj
 dotnet build Tools/Compatibility/Core.Compatibility.csproj
 dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
 python3 Tools/prepare_unity_project.py
@@ -137,3 +139,5 @@ python3 Tools/prepare_research.py --check
 New classes and combinations of supported effects can be authored in JSON. New mechanical primitives require an explicit C# effect, validation, forecast support and scenario coverage. Keep presentation and character names out of combat logic.
 
 Equipment reward tiers, comparison behavior and validation are documented in [Equipment progression](Docs/Equipment-Progression.md).
+
+New Connected expeditions include [tag-matched environmental shortcuts](Docs/Environmental-Mechanisms.md) with skill, consumable and manual-lever solutions.

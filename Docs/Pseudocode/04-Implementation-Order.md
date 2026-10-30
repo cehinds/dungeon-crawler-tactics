@@ -59,6 +59,8 @@ Exit condition: rewards change useful choices throughout the run without overwhe
 
 ## 4.3 Add environmental problem-solving
 
+First implementation: [generated expedition mechanisms](../Environmental-Mechanisms.md) adds tag-matched permanent shortcuts with shared cost previews and saved passage state. Temporary traversal, physical demolition and persistent overworld traps below remain separate work.
+
 ~~~text
 ImplementHoleAndDemolitionPrimitives():
     define temporary traversal and destructible navigation state

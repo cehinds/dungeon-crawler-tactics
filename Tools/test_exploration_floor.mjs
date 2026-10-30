@@ -70,3 +70,12 @@ for(const change of invalidRecipes) {
   assert.throws(()=>generateExplorationFloor(manifest,invalid,'invalid'),/Invalid exploration floor rules:/);
 }
 console.log(`Continuous floor: ${invalidRecipes.length} invalid authored recipes rejected clearly.`);
+
+// Omitted optional mechanisms preserve the original serialized floor shape.
+const legacyRules=structuredClone(rules);delete legacyRules.mechanisms;
+const legacyFloor=generateExplorationFloor(manifest,legacyRules,'legacy-mechanisms').floorPlan;
+assert.equal(Object.hasOwn(legacyFloor,'mechanisms'),false);
+const emptyMechanisms=generateExplorationFloor(manifest,{...legacyRules,mechanisms:[]},'legacy-mechanisms').floorPlan;
+assert.deepEqual(emptyMechanisms.map,legacyFloor.map);
+assert.deepEqual(emptyMechanisms.mechanisms,[]);
+console.log('Continuous floor: omitted and empty mechanism recipes preserve legacy map generation.');

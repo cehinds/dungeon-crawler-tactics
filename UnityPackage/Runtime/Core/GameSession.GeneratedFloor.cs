@@ -7,6 +7,7 @@ namespace DungeonCrawlerTactics
         public int schemaVersion = 1, seed;
         public CustomMapData map;
         public CellView entrance, exit;
+        public GeneratedMechanismDef[] mechanisms = new GeneratedMechanismDef[0];
         public GeneratedEncounterGroup[] groups = new GeneratedEncounterGroup[0];
         public ExplorationPointDef[] discoveries = new ExplorationPointDef[0];
     }
@@ -31,15 +32,15 @@ namespace DungeonCrawlerTactics
         {
             if (!compact || screen != "explore" || generatedDungeon == null || generatedDungeon.floorPlan == null) return GetView();
             GeneratedDungeonState s = generatedDungeon;
-            return new GameView { screen = screen, phase = phase, message = message, exploration = FloorExplorationView(), generatedCampaign = CampaignView(),
-                generatedDungeon = new GeneratedDungeonState { x = s.x, y = s.y, entrance = CopyCell(s.entrance), exit = CopyCell(s.exit), cleared = s.cleared, steps = s.steps, activeGroupId = s.activeGroupId, defeatedGroupIds = (string[])s.defeatedGroupIds.Clone(), claimedIds = (string[])s.claimedIds.Clone(), revealed = Array.ConvertAll(s.revealed, CopyCell) } };
+            return new GameView { screen = screen, phase = phase, message = message, exploration = FloorExplorationView(), generatedCampaign = CampaignView(), mechanisms = MechanismViews(), mechanismPreview = pendingMechanismPreview,
+                generatedDungeon = new GeneratedDungeonState { x = s.x, y = s.y, entrance = CopyCell(s.entrance), exit = CopyCell(s.exit), cleared = s.cleared, steps = s.steps, activeGroupId = s.activeGroupId, mechanismReceipts = CopyMechanismReceipts(s.mechanismReceipts), defeatedGroupIds = (string[])s.defeatedGroupIds.Clone(), claimedIds = (string[])s.claimedIds.Clone(), revealed = Array.ConvertAll(s.revealed, CopyCell) } };
         }
         private static CellView CopyCell(CellView c) { return c == null ? null : new CellView { x = c.x, y = c.y }; }
         private static GeneratedFloorPlan CopyFloor(GeneratedFloorPlan f)
         {
             if (f == null) return null;
             Require(f.groups != null && f.groups.Length > 0 && f.groups.Length <= 16 && f.discoveries != null && f.discoveries.Length <= 64, "Invalid floor collections.");
-            return new GeneratedFloorPlan { schemaVersion = f.schemaVersion, seed = f.seed, map = CopyCustomMap(f.map), entrance = CopyCell(f.entrance), exit = CopyCell(f.exit), groups = Array.ConvertAll(f.groups, g => g == null ? null : new GeneratedEncounterGroup { rewardXp = g.rewardXp, id = g.id, label = g.label, kind = g.kind, x = g.x, y = g.y, enemyIds = g.enemyIds == null ? null : (string[])g.enemyIds.Clone() }), discoveries = Array.ConvertAll(f.discoveries, p => p == null ? null : new ExplorationPointDef { id = p.id, label = p.label, description = p.description, kind = p.kind, itemId = p.itemId, count = p.count, x = p.x, y = p.y }) };
+            return new GeneratedFloorPlan { schemaVersion = f.schemaVersion, seed = f.seed, map = CopyCustomMap(f.map), entrance = CopyCell(f.entrance), exit = CopyCell(f.exit), mechanisms = CopyMechanisms(f.mechanisms), groups = Array.ConvertAll(f.groups, g => g == null ? null : new GeneratedEncounterGroup { rewardXp = g.rewardXp, id = g.id, label = g.label, kind = g.kind, x = g.x, y = g.y, enemyIds = g.enemyIds == null ? null : (string[])g.enemyIds.Clone() }), discoveries = Array.ConvertAll(f.discoveries, p => p == null ? null : new ExplorationPointDef { id = p.id, label = p.label, description = p.description, kind = p.kind, itemId = p.itemId, count = p.count, x = p.x, y = p.y }) };
         }
         private static int FloorWins(GeneratedDungeonState s, string atScreen) { Require(s.defeatedGroupIds != null && s.defeatedGroupIds.Length <= 16, "Invalid defeated group receipts."); return s.defeatedGroupIds.Length + (atScreen == "victory" ? 1 : 0); }
         private static bool Has(string[] ids, string id) { return Array.IndexOf(ids, id) >= 0; }
@@ -47,6 +48,7 @@ namespace DungeonCrawlerTactics
         private static bool Near(GeneratedDungeonState s, int x, int y) { return Math.Abs(s.x - x) + Math.Abs(s.y - y) <= 1; }
         private static void FilterFloorEnemies(EncounterDef map, GeneratedDungeonState s)
         {
+            ApplyMechanismOpenings(map, s);
             GeneratedEncounterGroup group = Array.Find(s.floorPlan.groups, g => g.id == s.activeGroupId);
             if (group != null && group.rewardXp > 0) map.xp = group.rewardXp;
             map.enemies = group == null ? new SpawnDef[0] : Array.FindAll(map.enemies, e => Has(group.enemyIds, e.id));
@@ -60,7 +62,9 @@ namespace DungeonCrawlerTactics
             Require(FloorMapEqual(authored, save.customMap), "Floor map differs from its authored plan.");
             List<CellView> cells = GeneratedCells(original, f.entrance.x, f.entrance.y);
             Func<int,int,bool> connected = (x,y) => cells.Exists(c => c.x == x && c.y == y);
-            Require(connected(s.x,s.y) && connected(f.exit.x,f.exit.y) && !Array.Exists(original.enemies,e => e.x == f.entrance.x && e.y == f.entrance.y), "Floor endpoints must connect.");
+            ValidateMechanisms(f, original, s);
+            EncounterDef traversable = BuildCustomEncounter(CopyCustomMap(authored), true); ApplyMechanismOpenings(traversable, s);
+            Require(GeneratedCells(traversable, f.entrance.x, f.entrance.y).Exists(c => c.x == s.x && c.y == s.y) && connected(f.exit.x,f.exit.y) && !Array.Exists(original.enemies,e => e.x == f.entrance.x && e.y == f.entrance.y), "Floor endpoints must connect.");
             foreach (SpawnDef enemy in original.enemies) Require(connected(enemy.x, enemy.y), "Every floor enemy must connect to the entrance.");
             HashSet<string> ids = new HashSet<string>(), enemies = new HashSet<string>();
             foreach (GeneratedEncounterGroup g in f.groups)
@@ -101,6 +105,7 @@ namespace DungeonCrawlerTactics
         }
         private bool TryFloorCommand(GameCommand command)
         {
+            if (TryMechanismCommand(command)) return true;
             if (TryCampaignCommand(command)) return true;
             if(command.type=="import_floor")
             {
@@ -145,6 +150,7 @@ namespace DungeonCrawlerTactics
             List<ExplorationPointView> points=new List<ExplorationPointView>();points.Add(new ExplorationPointView{id="generated.entrance",label="Safe-room passage",kind="entrance",x=generatedDungeon.entrance.x,y=generatedDungeon.entrance.y});
             if(seen.Contains(ExploreKey(generatedDungeon.exit.x,generatedDungeon.exit.y)))points.Add(new ExplorationPointView{id="generated.exit",label="Floor exit",description="Clear every encounter and recover the objective.",kind="exit",x=generatedDungeon.exit.x,y=generatedDungeon.exit.y,canInteract=FloorExitReady(generatedDungeon)&&Near(generatedDungeon,generatedDungeon.exit.x,generatedDungeon.exit.y)});
             foreach(ExplorationPointDef p in generatedDungeon.floorPlan.discoveries)if(seen.Contains(ExploreKey(p.x,p.y)))points.Add(new ExplorationPointView{id=p.id,label=p.label,description=p.description,kind=p.kind,x=p.x,y=p.y,claimed=Has(generatedDungeon.claimedIds,p.id),canInteract=!Has(generatedDungeon.claimedIds,p.id)&&Near(generatedDungeon,p.x,p.y)});
+            AddMechanismPoints(points);
             foreach(GeneratedEncounterGroup g in generatedDungeon.floorPlan.groups)if(!Has(generatedDungeon.defeatedGroupIds,g.id)&&seen.Contains(ExploreKey(g.x,g.y)))points.Add(new ExplorationPointView{id=g.id,label=g.label,kind=g.kind=="visible"?"enemy":"danger",description=g.kind=="visible"?"Approach to begin tactical combat.":"Danger zone: an encounter check occurs every eight steps.",x=g.x,y=g.y});
             return new ExplorationView{id="generated.floor",label=customMap.label,description="Connected passages, visible enemies and dangerous encounter zones.",width=customMap.width,height=customMap.height,x=generatedDungeon.x,y=generatedDungeon.y,tiles=tiles.ToArray(),points=points.ToArray()};
         }

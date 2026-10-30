@@ -42,6 +42,7 @@ namespace DungeonCrawlerTactics
             try
             {
                 if (command == null) throw new ArgumentException("Missing command.");
+                if (command.type != "confirm_mechanism") { pendingMechanismCommand = null; pendingMechanismPreview = null; }
                 if (command.type != "confirm_equipment") pendingEquipment = null;
                 PrepareCampaignCommand(command);
                 ClearHomePreview(command);
@@ -160,7 +161,7 @@ namespace DungeonCrawlerTactics
                 ClassStats initial = PlayerStats(member.id, member.classId); int hp = initial.hp;
                 roster.Add(member.id, new RosterView { id = member.id, label = member.label, classId = member.classId, selected = member.selected && member.deployable, hp = hp, maxHp = hp, energy = initial.energy, maxEnergy = initial.energy, move = initial.move, effectiveMove = initial.move, level = 1 });
             }
-            equipmentRewardClaims.Clear(); pendingEquipment = null; ResetHome(); ResetInventory(); battleLayoutVersion = 1; screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
+            equipmentRewardClaims.Clear(); pendingEquipment = null; pendingMechanismCommand = null; pendingMechanismPreview = null; ResetHome(); ResetInventory(); battleLayoutVersion = 1; screen = "camp"; phase = "player"; encounterIndex = 0; round = 1; xp = 0; rewardChosen = false; selected = null; ClearPreview();
             message = "Choose " + data.partySize + " crawlers and their classes. Rest in the safe room to restore HP and mana between rooms.";
         }
         private void ResetInventory()
@@ -606,6 +607,7 @@ namespace DungeonCrawlerTactics
             { List<RewardView> rewards = new List<RewardView>(); foreach (RewardDef reward in data.rewards) rewards.Add(new RewardView { id = reward.id, label = reward.label, description = reward.description }); AddEquipmentRewards(rewards); view.rewards = rewards.ToArray(); }
             if (screen == "explore") view.exploration = generatedDungeon == null ? ExplorationView() : GeneratedExplorationView();
             view.home = HomeView(); view.journey = JourneyView(); if (JourneyActive) view.encounterCount = 8;
+            view.mechanisms = MechanismViews(); view.mechanismPreview = pendingMechanismPreview;
             view.neighborhood = BuildNeighborhoodView(); PopulateProgression(view); PopulateModes(view); PopulateDevelopment(view); PopulateSkillTree(view); PopulateCustomMap(view); view.scenarios = ScenarioOptions(); view.scenario = ScenarioView(); view.expeditions = ExpeditionOptions(); view.expedition = ExpeditionView();
             return view;
         }
@@ -686,7 +688,7 @@ namespace DungeonCrawlerTactics
         }
         public GameView ImportSave(GameSave save)
         {
-            pendingEquipment = null;
+            pendingEquipment = null; pendingMechanismCommand = null; pendingMechanismPreview = null;
             presentationEvents.Clear();
             try
             {

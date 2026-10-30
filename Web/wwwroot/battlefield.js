@@ -108,6 +108,21 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   function artDescriptor(){return view?.customMap?.visuals??{styleId:'pocket-dungeon',kitId:'starter-dungeon'};}
   function project(x, y) { if(nativeActive())return nativeProject(x,y,rotation); const p=rotateVector(x,y); return {x:(p.x-p.y)*TILE_W/2, y:(p.x+p.y)*TILE_H/2}; }
   function screen(x, y) { const p=project(x,y); return {x:originX+p.x*scale,y:originY+p.y*scale}; }
+  // Only solved C# mechanism receipts may hide obstacle art or mark an open route.
+  let mechanismSource=null,mechanismCells=[],mechanismCellKeys=new Set(),mechanismFloorSource=null,mechanismFloorCells=null,mechanismFloorPatches=[];
+  function mechanismOpenCells(){if(mechanismSource!==view?.mechanisms){mechanismSource=view?.mechanisms;mechanismCells=(mechanismSource??[]).filter(item=>item.solved).flatMap(item=>item.openedCells??[]);mechanismCellKeys=new Set(mechanismCells.map(cell=>`${cell.x},${cell.y}`));}return mechanismCells;}
+  function mechanismCleared(x,y){mechanismOpenCells();const left=Math.ceil(x-.5),right=Math.floor(x+.5),top=Math.ceil(y-.5),bottom=Math.floor(y+.5);return mechanismCellKeys.has(`${left},${top}`)||mechanismCellKeys.has(`${right},${top}`)||mechanismCellKeys.has(`${left},${bottom}`)||mechanismCellKeys.has(`${right},${bottom}`);}
+  function mechanismFloor(){const cells=mechanismOpenCells();if(mechanismFloorSource!==nativeScene||mechanismFloorCells!==cells){mechanismFloorSource=nativeScene;mechanismFloorCells=cells;const floor=nativeScene?.floor??[],keys=new Set(floor.map(piece=>`${piece.px/128},${piece.py/128}`));mechanismFloorPatches=cells.filter(cell=>!keys.has(`${cell.x},${cell.y}`)).map(cell=>{const nearest=floor.reduce((best,piece)=>!best||Math.abs(piece.px-cell.x*128)+Math.abs(piece.py-cell.y*128)<Math.abs(best.px-cell.x*128)+Math.abs(best.py-cell.y*128)?piece:best,null);return nearest?{...nearest,px:cell.x*128,py:cell.y*128}:null;}).filter(Boolean);}return mechanismFloorPatches;}
+  function mechanismMarker(point){const mechanism=view.mechanisms?.find(item=>item.id===point.mechanismId),solution=mechanism?.solutions?.find(item=>item.id===point.solutionId);return {label:mechanism?.solved?'OPEN':solution?.kind==='manual'?'LEVER':'SHORTCUT',color:mechanism?.solved?'#9cdeb0':'#eed08c'};}
+  function drawMechanismRoutes(map,explore){
+    for(const mechanism of view.mechanisms??[]){
+      if(!mechanism.solved){if(explore&&map.tiles?.some(tile=>tile.x===mechanism.x&&tile.y===mechanism.y&&tile.revealed)){diamond(mechanism.x,mechanism.y,{stroke:'#eed08c',fill:'#d6aa3b33',weight:2,inset:8});const p=project(mechanism.x,mechanism.y);text('CLOSED',p.x,p.y-20,'#eed08c',11);}continue;}
+      let badge=null;
+      for(const cell of mechanism.openedCells??[]){const tile=map.tiles?.find(tile=>tile.x===cell.x&&tile.y===cell.y);if(!tile||tile.blocked||explore&&!tile.revealed)continue;diamond(cell.x,cell.y,{fill:'#70cf9824',stroke:'#9cdeb0',weight:2,inset:5});badge??=cell;}
+      if(badge){const p=project(badge.x,badge.y);text('OPEN',p.x,p.y+15,'#b4efc5',10);}
+    }
+    if(explore)for(const cell of view.mechanismPreview?.openedCells??[]){if(!map.tiles?.some(tile=>tile.x===cell.x&&tile.y===cell.y&&tile.revealed))continue;diamond(cell.x,cell.y,{fill:'#efbc5340',stroke:'#efc779',weight:3,inset:4});}
+  }
   function mapData(){return view?.screen==='explore'?view.exploration:view;}
   function cellAt(clientX,clientY) {
     const box=canvas.getBoundingClientRect();
@@ -603,6 +618,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.imageSmoothingEnabled=descriptor.styleId!=='pocket-dungeon';
     context.save();context.rotate(rotation*Math.PI/2);
     if(explore)drawExplorationFloor();else drawFloorLayer(context,nativeScene.floor,nativeArt.images);
+    for(const piece of mechanismFloor())if(!explore||map.tiles.some(tile=>tile.x===piece.px/128&&tile.y===piece.py/128&&tile.revealed))drawPiece(context,piece,nativeArt);
     context.restore();
     // Canonical collision always occupies a square cell, including authored
     // walls whose kit art is drawn on the surrounding walkable boundaries.
@@ -611,9 +627,10 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     const intent=view.scenario?.intent;
     if(intent)for(const cell of intent.cells??[])diamond(cell.x,cell.y,{stroke:'#ff9855',fill:'#ff4b293e',weight:3,inset:3});
     context.save();context.rotate(rotation*Math.PI/2);
-    nativeScene.structures.filter(pieceKnown).forEach(piece=>drawPiece(context,piece,nativeArt));
-    nativeScene.decorations.filter(pieceKnown).forEach(piece=>drawPiece(context,piece,nativeArt));
+    nativeScene.structures.filter(piece=>pieceKnown(piece)&&!mechanismCleared(piece.px/128,piece.py/128)).forEach(piece=>drawPiece(context,piece,nativeArt));
+    nativeScene.decorations.filter(piece=>pieceKnown(piece)&&!mechanismCleared(piece.px/128,piece.py/128)).forEach(piece=>drawPiece(context,piece,nativeArt));
     context.restore();
+    drawMechanismRoutes(map,explore);
     // Terrain remains canonical game state; markers keep it readable without
     // replacing any of the authored floor images selected in the preview.
     for(const tile of tiles){
@@ -632,7 +649,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         if(point.claimed||point.kind==='enemy'&&view.generatedDungeon?.cleared||!tiles.some(t=>t.x===point.x&&t.y===point.y&&t.revealed))continue;
         const p=project(point.x,point.y);
         diamond(point.x,point.y,{stroke:'#eac878',fill:'#d9ae4828',inset:12});
-        text(({encounter:'ENTER',cache:'SUPPLIES',enemy:'ENEMY',exit:'EXIT',entrance:'ENTRANCE'})[point.kind]??'INSPECT',p.x,p.y+21,point.kind==='enemy'?'#ffb2a0':'#f4dd9c',12);
+        text(point.kind==='mechanism'?mechanismMarker(point).label:({encounter:'ENTER',cache:'SUPPLIES',enemy:'ENEMY',exit:'EXIT',entrance:'ENTRANCE'})[point.kind]??'INSPECT',p.x,p.y+21,point.kind==='mechanism'?mechanismMarker(point).color:point.kind==='enemy'?'#ffb2a0':'#f4dd9c',12);
       }
       if(!view.generatedDungeon?.cleared){
         const floor=view.generatedDungeon?.floorPlan;
@@ -691,7 +708,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       }
       else if(tile.reachable)floor(tile.x,tile.y,0,.22);
     }
-    const placements=!explore?(view.customMap?.placements??[]):[];
+    const placements=!explore?(view.customMap?.placements??[]).filter(piece=>['floor','surface'].includes(piece.layer)||!mechanismCleared(piece.x,piece.y)):[];
     for(const piece of placements)if(['floor','surface'].includes(piece.layer)||piece.assetId==='moss'){
       const tags=tiles.find(t=>t.x===piece.x&&t.y===piece.y)?.tags??[];
       if(piece.assetId.startsWith('oil-')&&!tags.includes('surface.oil')||piece.assetId.startsWith('water-')&&!tags.includes('surface.water'))continue;
@@ -702,7 +719,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       if((tile.tags??[]).includes('surface.water'))component('water-overlay',tile.x,tile.y);
     }
     // An explicit empty encounter list suppresses new props on legacy saves.
-    const decorations=!explore?(view.scenario?.decorations??view.decorations??view.expedition?.decorations??[]):[];
+    const decorations=!explore?(view.scenario?.decorations??view.decorations??view.expedition?.decorations??[]).filter(piece=>['floor','surface','ground'].includes(piece.layer)||!mechanismCleared(piece.x,piece.y)):[];
     const groundDecoration=piece=>['floor','surface','ground'].includes(piece.layer)||['moss','grate'].includes(piece.assetId);
     for(const piece of decorations)if(groundDecoration(piece))component(piece.assetId,piece.x,piece.y,1,piece.rotation??0);
     if(!explore){
@@ -764,8 +781,8 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       for(const point of map.points??[]) {
         if(point.claimed||!map.tiles.some(tile=>tile.x===point.x&&tile.y===point.y&&tile.revealed))continue;
         drawables.push({depth:depth(point.x,point.y),draw:()=>{
-          prop(point.x,point.y,point.kind==='encounter'?11:point.kind==='cache'?10:8,point.kind==='encounter'?135:74);
-          const p=project(point.x,point.y);text(point.kind==='encounter'?'ENTER':point.kind==='cache'?'SUPPLIES':'INSPECT',p.x,p.y+21,'#f4dd9c',12);
+          if(point.kind!=='mechanism')prop(point.x,point.y,point.kind==='encounter'?11:point.kind==='cache'?10:8,point.kind==='encounter'?135:74);
+          const p=project(point.x,point.y);text(point.kind==='mechanism'?mechanismMarker(point).label:point.kind==='encounter'?'ENTER':point.kind==='cache'?'SUPPLIES':'INSPECT',p.x,p.y+21,point.kind==='mechanism'?mechanismMarker(point).color:'#f4dd9c',12);
         }});
       }
       const party=(view.roster??[]).filter(u=>u.selected&&(u.hp??u.maxHp??40)>0).slice(0,1);
@@ -784,6 +801,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     // Hazard flames and transient feedback always composite above the entire scene.
     for(const tile of tiles)if((!explore||tile.revealed)&&(tile.tags??[]).includes('surface.burning'))effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800);
     if(intent?.cells?.length){const cell=intent.cells[Math.floor(intent.cells.length/2)],p=project(cell.x,cell.y);text(`${intent.label} · ${intent.damage} DMG`,p.x,p.y-85,'#ffc898',14);}
+    drawMechanismRoutes(map,explore);
     drawTransient(time);
     context.restore();
     const vignette=context.createRadialGradient(width*.5,height*.48,Math.min(width,height)*.24,width*.5,height*.48,Math.max(width,height)*.68);

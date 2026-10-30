@@ -5,6 +5,7 @@ namespace DungeonCrawlerTactics
 {
     [Serializable] public sealed class GeneratedDungeonState
     {
+        public MechanismReceipt[] mechanismReceipts = new MechanismReceipt[0];
         public GeneratedFloorPlan floorPlan;
         public string activeGroupId;
         public string[] defeatedGroupIds = new string[0], claimedIds = new string[0];
@@ -20,7 +21,7 @@ namespace DungeonCrawlerTactics
         private GeneratedDungeonState generatedDungeon;
         private static GeneratedDungeonState CopyGenerated(GeneratedDungeonState s)
         {
-            return s == null ? null : new GeneratedDungeonState { x = s.x, y = s.y, cleared = s.cleared, floorPlan = CopyFloor(s.floorPlan), activeGroupId = s.activeGroupId, steps = s.steps, defeatedGroupIds = s.defeatedGroupIds == null ? null : (string[])s.defeatedGroupIds.Clone(), claimedIds = s.claimedIds == null ? null : (string[])s.claimedIds.Clone(), revealed = s.revealed == null ? null : Array.ConvertAll(s.revealed, CopyCell),
+            return s == null ? null : new GeneratedDungeonState { mechanismReceipts = CopyMechanismReceipts(s.mechanismReceipts), x = s.x, y = s.y, cleared = s.cleared, floorPlan = CopyFloor(s.floorPlan), activeGroupId = s.activeGroupId, steps = s.steps, defeatedGroupIds = s.defeatedGroupIds == null ? null : (string[])s.defeatedGroupIds.Clone(), claimedIds = s.claimedIds == null ? null : (string[])s.claimedIds.Clone(), revealed = s.revealed == null ? null : Array.ConvertAll(s.revealed, CopyCell),
                 entrance = s.entrance == null ? null : new CellView { x = s.entrance.x, y = s.entrance.y },
                 exit = s.exit == null ? null : new CellView { x = s.exit.x, y = s.exit.y } };
         }
@@ -62,6 +63,7 @@ namespace DungeonCrawlerTactics
         {
             GeneratedDungeonState s = save.generatedDungeon; if (s == null) return;
             if (s.floorPlan != null) { ValidateFloorSave(save, map); return; }
+            Require(s.mechanismReceipts == null || s.mechanismReceipts.Length == 0, "Mechanism receipts require a realized floor plan.");
             Require(save.journey == null && save.scenario == null && save.expedition == null && save.exploration != null && save.exploration.Length == 0, "Generated exploration cannot combine campaign state.");
             Require(s.entrance != null && s.exit != null && GeneratedOpen(map, s.x, s.y) && GeneratedOpen(map, s.entrance.x, s.entrance.y) && GeneratedOpen(map, s.exit.x, s.exit.y), "Invalid generated dungeon position.");
             List<CellView> cells = GeneratedCells(map, s.entrance.x, s.entrance.y);

@@ -37,6 +37,7 @@ jobs:
           dotnet run --project Tests/AudienceTests/AudienceTests.csproj -c Release
           dotnet run --project Tests/SignatureTests/SignatureTests.csproj -c Release
           dotnet run --project Tests/EquipmentProgressionTests/EquipmentProgressionTests.csproj -c Release
+          dotnet run --project Tests/MechanismTests/MechanismTests.csproj -c Release
           dotnet build Tools/Compatibility/Core.Compatibility.csproj -c Release
   build:
     needs: core
@@ -183,6 +184,8 @@ jobs:
         run: python Tools/run_ci_browser_check.py --name "Ability ranks gameplay" -- python Tools/playtest_ability_rank_gameplay.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published equipment progression
         run: python Tools/run_ci_browser_check.py --name "Equipment progression" -- python Tools/playtest_equipment_progression.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots /tmp/dct-equipment-progression
+      - name: Check published field mechanisms
+        run: python Tools/run_ci_browser_check.py --name "Field mechanisms" -- python Tools/playtest_mechanisms.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots /tmp/dct-mechanisms
       - name: Check published Player facing
         run: python Tools/run_ci_browser_check.py --name "Player facing" -- python Tools/playtest_player_facing.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published Square battlefield

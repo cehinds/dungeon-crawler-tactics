@@ -71,14 +71,14 @@ namespace DungeonCrawlerTactics
     }
     [Serializable] public sealed class ExplorationPointDef { public string id, label, description, kind, itemId; public int x, y, count; }
     [Serializable] public sealed class ExplorationTileView { public int x, y; public bool revealed, blocked, reachable; }
-    [Serializable] public sealed class ExplorationPointView { public string id, label, description, kind; public int x, y; public bool claimed, canInteract; }
+    [Serializable] public sealed class ExplorationPointView { public string mechanismId, solutionId; public string id, label, description, kind; public int x, y; public bool claimed, canInteract; }
     [Serializable] public sealed class ExplorationView { public string id, label, description; public int width, height, x, y; public ExplorationTileView[] tiles; public ExplorationPointView[] points; }
     [Serializable] public sealed class ExplorationSave { public int layoutVersion; public string sectorId; public int x, y; public CellView[] revealed = new CellView[0]; public string[] claimed = new string[0]; }
     [Serializable] public sealed class InventoryEntry { public string itemId; public int count; }
     [Serializable] public sealed class RewardDef { public string id, label, description, itemId; public int count, heal; }
     // Duration is counted at the end of a full round; 0 means persistent.
     [Serializable] public sealed class TagRuleDef { public bool consumeOnEntry; public string tag, occupantTag; public int durationRounds, entryDamage, turnDamage, movePenalty, moveBonus, energyPenalty; }
-    [Serializable] public sealed class GameCommand { public string type, unitId, targetId, abilityId, castModeId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public GeneratedCampaignPlan campaignPlan; public GeneratedFloorPlan floorPlan; public CustomMapData customMap; public CellView entrance, exit; public int x, y; }
+    [Serializable] public sealed class GameCommand { public string solutionId; public string type, unitId, targetId, abilityId, castModeId, itemId, classId, rewardId, equipmentId, stanceId, formId, statId, recipeId, lootBoxId, nodeId; public int points; public GeneratedCampaignPlan campaignPlan; public GeneratedFloorPlan floorPlan; public CustomMapData customMap; public CellView entrance, exit; public int x, y; }
     [Serializable] public sealed class CellView { public int x, y, cost; }
     [Serializable] public sealed class UnitView
     {
@@ -102,6 +102,7 @@ namespace DungeonCrawlerTactics
     [Serializable] public sealed class RewardView { public string equipmentId, tierId; public string id, label, description; }
     [Serializable] public sealed class GameView
     {
+        public MechanismView[] mechanisms = new MechanismView[0]; public MechanismPreviewView mechanismPreview;
         public EquipmentPreviewView equipmentPreview;
         public GeneratedCampaignView generatedCampaign;
         public MapPlacement[] decorations = new MapPlacement[0];

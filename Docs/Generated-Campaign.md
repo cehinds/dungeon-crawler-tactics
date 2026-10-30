@@ -49,6 +49,10 @@ The lightweight view exposes `id`, `label`, `floorIndex`, `floorNumber`, `totalF
 
 New default plans award 30 XP per battle in depth one, 40 in depth two and 50 in depth three. Four battles per depth yield cumulative totals of 120, 280 and 480 XP (party levels 4, 6 and 8). Previously saved plans retain their authored rewards; missing `rewardXp` uses the legacy 30 XP default. Gear choices at cumulative wins 3, 6 and 9 are described in [Equipment progression](Equipment-Progression.md). These are tactical adaptations, not verified book loot or a rebalancing of the separate story journey.
 
+## Environmental shortcuts
+
+New default plans include one [permanent mechanism](Environmental-Mechanisms.md) per depth. A matching elemental skill, one authored consumable, or a remote free lever opens the same optional passage. Baseline routes and all required encounters remain intact. Openings persist across combat, retry, reload and archived depths; older saved plans retain their original geometry.
+
 ## Acceptance checklist
 
 - [x] Import rejects malformed plans, unsupported schema versions, and invalid campaign configurations without replacing the active save.

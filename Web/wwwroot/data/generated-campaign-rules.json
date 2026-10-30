@@ -279,6 +279,47 @@
           "itemId": null,
           "count": 0
         }
+      ],
+      "mechanisms": [
+        {
+          "id": "works.oil_grille",
+          "label": "Oil-Bound Works Grille",
+          "description": "An oil-slicked safety grille blocks a passage through the abandoned works. A distant maintenance lever provides a slow manual route; heat can clear the binding or a Fire Bomb can cut through it. Each method permanently opens the same passage.",
+          "materialTags": [
+            "surface.oil"
+          ],
+          "solutions": [
+            {
+              "id": "manual.counterweight",
+              "label": "Pull the counterweight lever",
+              "description": "Take the longer service loop and pull the remote lever. It costs no Mana or supplies and permanently opens the passage.",
+              "kind": "manual",
+              "requiredMaterialTags": []
+            },
+            {
+              "id": "ability.ignite_oil_binding",
+              "label": "Heat the oil binding",
+              "description": "Use an available Fire ability on the oil-slicked grille. The normal Mana cost applies; the passage stays open.",
+              "kind": "ability",
+              "abilityTag": "element.fire",
+              "requiredMaterialTags": [
+                "surface.oil"
+              ]
+            },
+            {
+              "id": "item.fire_bomb",
+              "label": "Blast the oil binding",
+              "description": "Spend one Fire Bomb to cut through the binding. The passage stays open.",
+              "kind": "item",
+              "abilityTag": "element.fire",
+              "itemId": "item.fire_bomb",
+              "itemCount": 1,
+              "requiredMaterialTags": [
+                "surface.oil"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -362,6 +403,47 @@
           "zone": 3,
           "itemId": null,
           "count": 0
+        }
+      ],
+      "mechanisms": [
+        {
+          "id": "cistern.water_counterweight",
+          "label": "Cistern Counterweight Floodgate",
+          "description": "A water-marked counterweight has seized the dry cistern floodgate. A remote inspection lever opens a longer bypass; cold can contract the seized joint, or a Frost Vial can freeze its edge. Every method permanently opens the same passage.",
+          "materialTags": [
+            "surface.water"
+          ],
+          "solutions": [
+            {
+              "id": "manual.inspection_lever",
+              "label": "Work the inspection lever",
+              "description": "Follow the longer dry bypass and work the distant lever. It costs no Mana or supplies and permanently opens the passage.",
+              "kind": "manual",
+              "requiredMaterialTags": []
+            },
+            {
+              "id": "ability.freeze_counterweight",
+              "label": "Chill the counterweight joint",
+              "description": "Use an available Cold ability on the water-marked joint. The normal Mana cost applies; the passage stays open.",
+              "kind": "ability",
+              "abilityTag": "element.cold",
+              "requiredMaterialTags": [
+                "surface.water"
+              ]
+            },
+            {
+              "id": "item.frost_vial",
+              "label": "Freeze the counterweight joint",
+              "description": "Spend one Frost Vial to free the seized counterweight. The passage stays open.",
+              "kind": "item",
+              "abilityTag": "element.cold",
+              "itemId": "item.frost_vial",
+              "itemCount": 1,
+              "requiredMaterialTags": [
+                "surface.water"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -455,6 +537,47 @@
           "zone": 2,
           "itemId": null,
           "count": 0
+        }
+      ],
+      "mechanisms": [
+        {
+          "id": "vault.wet_relay_shutter",
+          "label": "Conductive Relay Shutter",
+          "description": "A damp conductor has locked the relay vault shutter. The longer service loop reaches a remote manual release; lightning can energize the release, or a Shock Tonic can charge it. Each method permanently opens the same passage.",
+          "materialTags": [
+            "status.wet"
+          ],
+          "solutions": [
+            {
+              "id": "manual.service_release",
+              "label": "Reach the service release",
+              "description": "Take the longer service loop and pull the remote release. It costs no Mana or supplies and permanently opens the passage.",
+              "kind": "manual",
+              "requiredMaterialTags": []
+            },
+            {
+              "id": "ability.energize_relay",
+              "label": "Energize the wet relay",
+              "description": "Use an available Lightning ability on the damp conductor. The normal Mana cost applies; the passage stays open.",
+              "kind": "ability",
+              "abilityTag": "element.lightning",
+              "requiredMaterialTags": [
+                "status.wet"
+              ]
+            },
+            {
+              "id": "item.thunder_flask",
+              "label": "Charge the relay with a Shock Tonic",
+              "description": "Spend one Shock Tonic to charge the damp conductor. The passage stays open.",
+              "kind": "item",
+              "abilityTag": "element.lightning",
+              "itemId": "item.thunder_flask",
+              "itemCount": 1,
+              "requiredMaterialTags": [
+                "status.wet"
+              ]
+            }
+          ]
         }
       ]
     }

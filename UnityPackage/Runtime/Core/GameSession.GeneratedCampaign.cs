@@ -65,6 +65,7 @@ namespace DungeonCrawlerTactics
         }
         private static bool FloorPlansEqual(GeneratedFloorPlan a, GeneratedFloorPlan b)
         {
+            if (!MechanismsEqual(a == null ? null : a.mechanisms, b == null ? null : b.mechanisms)) return false;
             // Compare every authoritative field; optional presentation metadata is carried by the plan.
             if (a == null || b == null || a.schemaVersion != b.schemaVersion || a.seed != b.seed || !FloorMapEqual(a.map, b.map) || a.entrance == null || b.entrance == null || a.exit == null || b.exit == null || a.entrance.x != b.entrance.x || a.entrance.y != b.entrance.y || a.exit.x != b.exit.x || a.exit.y != b.exit.y || a.groups == null || b.groups == null || a.groups.Length != b.groups.Length || a.discoveries == null || b.discoveries == null || a.discoveries.Length != b.discoveries.Length) return false;
             if (a.map.schemaVersion != b.map.schemaVersion || a.map.playerSpawns == null || b.map.playerSpawns == null || a.map.playerSpawns.Length != b.map.playerSpawns.Length || a.map.placements == null || b.map.placements == null || a.map.placements.Length != b.map.placements.Length) return false;
