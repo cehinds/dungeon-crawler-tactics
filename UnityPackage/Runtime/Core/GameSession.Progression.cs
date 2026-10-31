@@ -85,7 +85,11 @@ namespace DungeonCrawlerTactics
                     unit.GrantedAbilities.Clear(); unit.GrantedAbilities.UnionWith(Grants(id, xp, equipped));
                 }
                 presentationEvents.Add(new PresentationEvent { type = "level_up", before = before, after = after, amount = after });
-                AddLog("Party reached level " + after + ". Stats increased and eligible skills unlocked.");
+                int gained = after - before;
+                AddLog("Party level " + before + " → " + after + ": each crawler gains +" + (gained * data.progression.hpPerLevel) + " maximum HP, +" + (gained * data.progression.manaPerLevel) + " maximum Mana and " + (gained * data.development.pointsPerLevel) + " allocation points" + (JourneyAllocationUnlocked ? "." : " (banked until floor three)."));
+                foreach (SkillUnlockDef skill in data.progression.skillUnlocks)
+                    if (skill.level > before && skill.level <= after)
+                        AddLog(skill.label + (journey == null || journey.floorIndex + 1 >= skill.minimumFloor ? " unlocked." : " level met; available on floor " + skill.minimumFloor + "."));
             }
             SyncRosterFromBattle(); RefreshRosterStats(false);
             foreach (EquipmentDef gear in data.equipment) if (!gear.rewardOnly && gear.unlockEncounter == encounterIndex + 1) { presentationEvents.Add(new PresentationEvent { type = "equipment_unlock", tag = gear.id }); AddLog("Equipment earned: " + gear.label + ". Equip it in the safe room."); }

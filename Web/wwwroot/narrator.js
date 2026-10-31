@@ -8,7 +8,7 @@ const achievementLabels={
 };
 export function createNarrator({getView,content}) {
   const panel=document.createElement('section');panel.id='narrator-panel';panel.className='narrator-panel';panel.dataset.empty='true';panel.setAttribute('aria-label','Dungeon narrator game feedback');
-  const label=document.createElement('span');label.className='narrator-label';label.textContent='NARRATOR';
+  const label=document.createElement('span');label.className='narrator-label';label.textContent='SYSTEM';
   const line=document.createElement('p');line.id='narrator-line';line.setAttribute('role','status');line.setAttribute('aria-live','polite');line.textContent='';
   const historyButton=document.createElement('button');historyButton.id='narrator-history';historyButton.textContent='History';
   const dismiss=document.createElement('button');dismiss.id='narrator-dismiss';dismiss.textContent='×';dismiss.setAttribute('aria-label','Dismiss narrator message');
@@ -21,8 +21,13 @@ export function createNarrator({getView,content}) {
   const labelFor=(id)=>{const view=afterView??getView();const tile=view?.tiles.find(tile=>tile.id===id);if(tile)return `Terrain ${String.fromCharCode(65+tile.x)}${tile.y+1}`;return view?.units.find(unit=>unit.id===id)?.label??view?.roster.find(unit=>unit.id===id)?.label??id?.replace(/^[^.]+\./,'').replace(/_/g,' ')??'Target';};
   const abilityFor=id=>content.abilities.find(ability=>ability.id===id)?.label??id?.replace(/^[^.]+\./,'').replace(/_/g,' ')??'an ability';
   function drawHistory(){const list=dialog.querySelector('.narrator-history-list');list.replaceChildren();for(const entry of [...history].reverse()){const row=document.createElement('li');row.className=entry.kind==='achievement'?'narrator-achievement':'';row.textContent=entry.text;list.append(row);}}
-  function advance(){clearTimeout(timer);const entry=pending.shift();if(!entry){timer=null;panel.dataset.empty='true';line.textContent='';line.title='';return;}panel.dataset.empty='false';panel.classList.toggle('narrator-achievement',entry.kind==='achievement');line.textContent=entry.text;line.title=entry.text;timer=setTimeout(advance,entry.kind==='achievement'?4500:entry.kind==='impact'?1800:3500);}
-  function enqueue(text,kind='declaration'){if(!text)return;history.push({text,kind});history=history.slice(-80);pending.push({text,kind});if(pending.length>8){const oldestImpact=pending.findIndex(entry=>entry.kind==='impact');pending.splice(oldestImpact>=0?oldestImpact:0,1);}if(!timer)advance();if(dialog.open)drawHistory();}
+  // Keep a message readable while it is being inspected. Do not move keyboard
+  // focus by replacing or hiding a notification that contains the active control.
+  let remaining=0,started=0,hovered=false;
+  function hold(){if(!timer)return;clearTimeout(timer);timer=null;remaining=Math.max(0,remaining-(performance.now()-started));}
+  function resume(){if(panel.dataset.empty==='true'||hovered||panel.contains(document.activeElement))return;clearTimeout(timer);started=performance.now();timer=setTimeout(advance,remaining);}
+  function advance(){clearTimeout(timer);timer=null;const entry=pending.shift();if(!entry){panel.dataset.empty='true';line.textContent='';line.title='';return;}panel.dataset.empty='false';panel.classList.toggle('narrator-achievement',entry.kind==='achievement');label.textContent=entry.kind==='achievement'?'SYSTEM REWARD':entry.kind==='impact'?'COMBAT REPORT':'SYSTEM';line.textContent=entry.text;line.title=entry.text;remaining=entry.kind==='achievement'?6500:entry.kind==='impact'?3500:5000;resume();}
+  function enqueue(text,kind='declaration'){if(!text)return;history.push({text,kind});history=history.slice(-80);pending.push({text,kind});if(pending.length>8){const oldestImpact=pending.findIndex(entry=>entry.kind==='impact');pending.splice(oldestImpact>=0?oldestImpact:0,1);}if(panel.dataset.empty==='true')advance();if(dialog.open)drawHistory();}
   function onEvent(event){if(!event||event.preview)return;const key=`${batch}:${event.sequence??JSON.stringify(event)}`;if(seen.has(key))return;seen.add(key);
     const current=afterView??getView();
     if(event.type==='achievement'){if(!achievements.has(event.tag)){achievements.add(event.tag);enqueue(`NEW ACHIEVEMENT · ${current?.neighborhood?.challenges?.find(c=>c.id===(event.tag||event.targetId))?.label??achievementLabels[event.tag]??(event.tag||event.targetId||'Neighborhood challenge completed').replace(/^achievement\./,'').replace(/_/g,' ')}`,'achievement');}return;}
@@ -53,8 +58,12 @@ export function createNarrator({getView,content}) {
   function finish(){for(const event of batchEvents)onEvent(event);batchEvents=[];beforeView=null;currentContext=null;}
   function openHistory(){drawHistory();if(!dialog.open)dialog.showModal();dialog.querySelector('#close-narrator-history').focus();}
   historyButton.addEventListener('click',openHistory);
+  panel.addEventListener('pointerenter',()=>{hovered=true;hold();});
+  panel.addEventListener('pointerleave',()=>{hovered=false;resume();});
+  panel.addEventListener('focusin',hold);
+  panel.addEventListener('focusout',()=>setTimeout(resume,0));
   const close=()=>{dialog.close();(panel.dataset.empty==='true'?document.querySelector('#save-button'):historyButton)?.focus();};dialog.querySelector('#close-narrator-history').addEventListener('click',close);dialog.querySelector('#done-narrator-history').addEventListener('click',close);
   dialog.addEventListener('cancel',event=>{event.preventDefault();close();});dialog.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const first=dialog.querySelector('#close-narrator-history'),last=dialog.querySelector('#done-narrator-history');if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}});
-  dismiss.addEventListener('click',()=>{clearTimeout(timer);pending=[];timer=null;line.textContent='';line.title='';panel.dataset.empty='true';panel.classList.remove('narrator-achievement');});
+  dismiss.addEventListener('click',()=>{clearTimeout(timer);pending=[];timer=null;line.textContent='';line.title='';panel.dataset.empty='true';panel.classList.remove('narrator-achievement');document.querySelector('#save-button')?.focus();});
   return {openHistory,mount(slot){if(slot&&panel.parentElement!==slot)slot.append(panel);},begin,onEvent,finish,reset(view){achievements=new Set(view?.achievementIds??[]);pending=[];history=[];seen.clear();clearTimeout(timer);timer=null;panel.classList.remove('narrator-achievement');panel.dataset.empty='true';line.title='';line.textContent='';},dispose(){clearTimeout(timer);panel.remove();dialog.remove();}};
 }

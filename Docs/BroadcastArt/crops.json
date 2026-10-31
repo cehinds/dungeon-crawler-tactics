@@ -1,0 +1,833 @@
+{
+  "schemaVersion": 1,
+  "batches": [
+    {
+      "id": "combat",
+      "source": "combat-source.png",
+      "pieces": [
+        {
+          "id": "broadcast-combat-floor-plain",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            46,
+            54,
+            234,
+            239
+          ]
+        },
+        {
+          "id": "broadcast-combat-floor-cracked",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            295,
+            54,
+            482,
+            238
+          ]
+        },
+        {
+          "id": "broadcast-combat-floor-moss",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            544,
+            54,
+            732,
+            238
+          ]
+        },
+        {
+          "id": "broadcast-combat-floor-grate",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            801,
+            59,
+            973,
+            232
+          ]
+        },
+        {
+          "id": "broadcast-combat-wall-ew",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "none",
+            "E": "stone-wall",
+            "S": "none",
+            "W": "stone-wall"
+          },
+          "crop": [
+            0,
+            260,
+            269,
+            516
+          ]
+        },
+        {
+          "id": "broadcast-combat-wall-ns",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "stone-wall",
+            "E": "none",
+            "S": "stone-wall",
+            "W": "none"
+          },
+          "crop": [
+            269,
+            260,
+            511,
+            516
+          ]
+        },
+        {
+          "id": "broadcast-combat-wall-corner-se",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "none",
+            "E": "stone-wall",
+            "S": "stone-wall",
+            "W": "none"
+          },
+          "crop": [
+            511,
+            260,
+            759,
+            516
+          ]
+        },
+        {
+          "id": "broadcast-combat-wall-t-new",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "stone-wall",
+            "E": "stone-wall",
+            "S": "none",
+            "W": "stone-wall"
+          },
+          "crop": [
+            759,
+            260,
+            1024,
+            516
+          ]
+        },
+        {
+          "id": "broadcast-combat-wall-corner-sw",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "stone-wall",
+            "W": "stone-wall"
+          },
+          "crop": [
+            0,
+            516,
+            269,
+            766
+          ]
+        },
+        {
+          "id": "broadcast-combat-wall-cross",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "stone-wall",
+            "E": "stone-wall",
+            "S": "stone-wall",
+            "W": "stone-wall"
+          },
+          "crop": [
+            269,
+            516,
+            511,
+            766
+          ]
+        },
+        {
+          "id": "broadcast-combat-door-n-open",
+          "layer": "wall",
+          "adjacency": "threshold-study",
+          "edges": {
+            "N": "passage-open",
+            "E": "stone-wall",
+            "S": "passage-open",
+            "W": "stone-wall"
+          },
+          "crop": [
+            511,
+            516,
+            759,
+            766
+          ]
+        },
+        {
+          "id": "broadcast-combat-door-n-closed",
+          "layer": "wall",
+          "adjacency": "threshold-study",
+          "edges": {
+            "N": "passage-closed",
+            "E": "stone-wall",
+            "S": "passage-closed",
+            "W": "stone-wall"
+          },
+          "crop": [
+            759,
+            516,
+            1024,
+            766
+          ]
+        },
+        {
+          "id": "broadcast-combat-stairs-down-n",
+          "layer": "prop",
+          "adjacency": "threshold",
+          "edges": {
+            "N": "north-threshold",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            0,
+            766,
+            269,
+            995
+          ]
+        },
+        {
+          "id": "broadcast-combat-stairs-up-n",
+          "layer": "prop",
+          "adjacency": "threshold",
+          "edges": {
+            "N": "north-threshold",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            269,
+            766,
+            511,
+            995
+          ]
+        },
+        {
+          "id": "broadcast-combat-exit-n",
+          "layer": "prop",
+          "adjacency": "threshold",
+          "edges": {
+            "N": "north-threshold",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            511,
+            766,
+            759,
+            995
+          ]
+        },
+        {
+          "id": "broadcast-combat-oil-barrel",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            759,
+            766,
+            1024,
+            995
+          ]
+        },
+        {
+          "id": "broadcast-combat-floor-wet",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            46,
+            1018,
+            237,
+            1209
+          ]
+        },
+        {
+          "id": "broadcast-combat-oil-puddle",
+          "layer": "overlay",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            269,
+            995,
+            511,
+            1245
+          ]
+        },
+        {
+          "id": "broadcast-combat-relay",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            511,
+            995,
+            759,
+            1245
+          ]
+        },
+        {
+          "id": "broadcast-combat-crate",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            759,
+            995,
+            1024,
+            1245
+          ]
+        },
+        {
+          "id": "broadcast-combat-feedback-move",
+          "layer": "overlay",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            0,
+            1245,
+            269,
+            1536
+          ]
+        },
+        {
+          "id": "broadcast-combat-feedback-target",
+          "layer": "overlay",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            269,
+            1245,
+            511,
+            1536
+          ]
+        },
+        {
+          "id": "broadcast-combat-feedback-selected",
+          "layer": "overlay",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            511,
+            1245,
+            759,
+            1536
+          ]
+        },
+        {
+          "id": "broadcast-combat-drain",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            759,
+            1245,
+            1024,
+            1536
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exploration",
+      "source": "exploration-source.png",
+      "pieces": [
+        {
+          "id": "broadcast-exploration-floor-stone",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            50,
+            53,
+            235,
+            232
+          ]
+        },
+        {
+          "id": "broadcast-exploration-floor-wood",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            299,
+            54,
+            478,
+            232
+          ]
+        },
+        {
+          "id": "broadcast-exploration-road-ns",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "road",
+            "E": "stone-floor",
+            "S": "road",
+            "W": "stone-floor"
+          },
+          "crop": [
+            548,
+            49,
+            722,
+            232
+          ]
+        },
+        {
+          "id": "broadcast-exploration-road-ew",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "road",
+            "S": "stone-floor",
+            "W": "road"
+          },
+          "crop": [
+            791,
+            54,
+            975,
+            231
+          ]
+        },
+        {
+          "id": "broadcast-exploration-road-cross",
+          "layer": "overlay",
+          "adjacency": "road-network-study",
+          "edges": {
+            "N": "road",
+            "E": "road",
+            "S": "road",
+            "W": "road"
+          },
+          "crop": [
+            0,
+            254,
+            269,
+            490
+          ]
+        },
+        {
+          "id": "broadcast-exploration-road-corner-nw",
+          "layer": "overlay",
+          "adjacency": "road-network-study",
+          "edges": {
+            "N": "road",
+            "E": "none",
+            "S": "none",
+            "W": "road"
+          },
+          "crop": [
+            269,
+            254,
+            505,
+            490
+          ]
+        },
+        {
+          "id": "broadcast-exploration-road-t-new",
+          "layer": "overlay",
+          "adjacency": "road-network-study",
+          "edges": {
+            "N": "road",
+            "E": "road",
+            "S": "none",
+            "W": "road"
+          },
+          "crop": [
+            505,
+            254,
+            755,
+            490
+          ]
+        },
+        {
+          "id": "broadcast-exploration-threshold-stone-wood",
+          "layer": "terrain",
+          "adjacency": "stone-floor",
+          "edges": {
+            "N": "stone-floor",
+            "E": "stone-floor",
+            "S": "stone-floor",
+            "W": "stone-floor"
+          },
+          "crop": [
+            796,
+            282,
+            974,
+            456
+          ]
+        },
+        {
+          "id": "broadcast-exploration-wall-ew",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "none",
+            "E": "stone-wall",
+            "S": "none",
+            "W": "stone-wall"
+          },
+          "crop": [
+            0,
+            490,
+            269,
+            738
+          ]
+        },
+        {
+          "id": "broadcast-exploration-wall-ns",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "stone-wall",
+            "E": "none",
+            "S": "stone-wall",
+            "W": "none"
+          },
+          "crop": [
+            269,
+            490,
+            505,
+            738
+          ]
+        },
+        {
+          "id": "broadcast-exploration-wall-corner-se",
+          "layer": "wall",
+          "adjacency": "wall-network-study",
+          "edges": {
+            "N": "none",
+            "E": "stone-wall",
+            "S": "stone-wall",
+            "W": "none"
+          },
+          "crop": [
+            505,
+            490,
+            755,
+            738
+          ]
+        },
+        {
+          "id": "broadcast-exploration-door-house-open",
+          "layer": "wall",
+          "adjacency": "threshold-study",
+          "edges": {
+            "N": "passage-open",
+            "S": "passage-open",
+            "E": "stone-wall",
+            "W": "stone-wall"
+          },
+          "crop": [
+            755,
+            490,
+            1024,
+            738
+          ]
+        },
+        {
+          "id": "broadcast-exploration-door-house-closed",
+          "layer": "wall",
+          "adjacency": "threshold-study",
+          "edges": {
+            "N": "passage-closed",
+            "S": "passage-closed",
+            "E": "stone-wall",
+            "W": "stone-wall"
+          },
+          "crop": [
+            0,
+            738,
+            269,
+            982
+          ]
+        },
+        {
+          "id": "broadcast-exploration-door-room-open",
+          "layer": "wall",
+          "adjacency": "threshold-study",
+          "edges": {
+            "N": "passage-open",
+            "S": "passage-open",
+            "E": "stone-wall",
+            "W": "stone-wall"
+          },
+          "crop": [
+            269,
+            738,
+            505,
+            982
+          ]
+        },
+        {
+          "id": "broadcast-exploration-bed",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            505,
+            738,
+            755,
+            982
+          ]
+        },
+        {
+          "id": "broadcast-exploration-wardrobe",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            755,
+            738,
+            1024,
+            982
+          ]
+        },
+        {
+          "id": "broadcast-exploration-training-mat",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            0,
+            982,
+            269,
+            1212
+          ]
+        },
+        {
+          "id": "broadcast-exploration-training-dummy",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            269,
+            982,
+            505,
+            1212
+          ]
+        },
+        {
+          "id": "broadcast-exploration-craft-table",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            505,
+            982,
+            755,
+            1212
+          ]
+        },
+        {
+          "id": "broadcast-exploration-workshop-bench",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            755,
+            982,
+            1024,
+            1212
+          ]
+        },
+        {
+          "id": "broadcast-exploration-furnace",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            0,
+            1212,
+            269,
+            1536
+          ]
+        },
+        {
+          "id": "broadcast-exploration-alchemy-table",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            269,
+            1212,
+            505,
+            1536
+          ]
+        },
+        {
+          "id": "broadcast-exploration-supply-chest",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            505,
+            1212,
+            755,
+            1536
+          ]
+        },
+        {
+          "id": "broadcast-exploration-interaction-relay",
+          "layer": "prop",
+          "adjacency": "decorative",
+          "edges": {
+            "N": "none",
+            "E": "none",
+            "S": "none",
+            "W": "none"
+          },
+          "crop": [
+            755,
+            1212,
+            1024,
+            1536
+          ]
+        }
+      ]
+    }
+  ]
+}

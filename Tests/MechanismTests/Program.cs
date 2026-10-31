@@ -285,6 +285,7 @@ static class MechanismTests
             File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")),
             Json
         );
+        ThermalReactionChecks.Run(content);
         data = JsonSerializer.Deserialize<GameData>(
             File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "game-content.json")),
             Json

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Broadcast art gallery manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "tileSize",
+    "status",
+    "assets"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "const": "broadcast-kit"
+    },
+    "tileSize": {
+      "const": 128
+    },
+    "status": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "src",
+          "layer",
+          "anchor",
+          "tileSize",
+          "edges",
+          "adjacency",
+          "authoredRotations",
+          "sourceCrop",
+          "sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^broadcast-[a-z0-9-]+$"
+          },
+          "src": {
+            "type": "string"
+          },
+          "layer": {
+            "enum": [
+              "terrain",
+              "wall",
+              "prop",
+              "overlay"
+            ]
+          },
+          "edges": {
+            "type": "object",
+            "required": [
+              "N",
+              "E",
+              "S",
+              "W"
+            ]
+          },
+          "adjacency": {
+            "type": "string"
+          },
+          "anchor": {
+            "const": [
+              64,
+              128
+            ]
+          },
+          "tileSize": {
+            "const": [
+              128,
+              128
+            ]
+          },
+          "authoredRotations": {
+            "const": [
+              0
+            ]
+          },
+          "sourceCrop": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

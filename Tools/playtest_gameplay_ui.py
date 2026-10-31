@@ -73,7 +73,7 @@ MEASURE = """({selectors, touch}) => {
    if(e.matches('button, summary') && parseFloat(getComputedStyle(e).fontSize)<12) errors.push('Unreadable text: '+selector);
  }
  const controls=selectors.filter(s=>document.querySelector(s)?.matches('button, summary'));
- const panels=['.hud-crawler','.hud-actions','.hud-target','.world-controls','.objective-banner','.party-strip'];
+ const panels=['.hud-crawler','.hud-actions','.hud-target','.world-controls','.objective-banner','.party-strip','.broadcast-phase'];
  const overlap=(a,b)=>Math.min(a.x+a.width,b.x+b.width)-Math.max(a.x,b.x)>2 && Math.min(a.y+a.height,b.y+b.height)-Math.max(a.y,b.y)>2;
  for(let i=0;i<panels.length;i++)for(let j=i+1;j<panels.length;j++){const a=boxes[panels[i]],b=boxes[panels[j]];if(a&&b&&overlap(a,b))errors.push('Overlapping HUD panels: '+panels[i]+' / '+panels[j]);}
  for(let i=0;i<controls.length;i++)for(let j=i+1;j<controls.length;j++){
@@ -86,7 +86,7 @@ MEASURE = """({selectors, touch}) => {
  if(turn){
    if(innerHeight-(turn.y+turn.height)>10)errors.push('End turn is not at the bottom');
    const party=boxes['.party-strip'];
-   if(innerWidth<=730 && party && Math.abs(party.y+party.height-turn.y-turn.height)>4)errors.push('Phone party and End turn must share the lowest row');
+   if(party){const deck=document.querySelector('.battle-hud').getBoundingClientRect();if(party.y<deck.top-1 || party.y+party.height>deck.bottom+1)errors.push('Party rail escapes command deck');}
    const hud=document.querySelector('.battle-hud').getBoundingClientRect();
    if(hud.height>(innerWidth<=730?230:150))errors.push('Persistent HUD covers too much of the map');
  }
@@ -189,7 +189,7 @@ def main():
                     page.wait_for_function("window.layoutFixtureScene?.getNativeArtStatus().state === 'ready'", timeout=60000)
                     page.wait_for_timeout(500)
                     common = ['#camera-toggle', '#save-button', '.objective-banner', '.world-controls']
-                    selectors = common + (['#open-character-sheet', '#open-actions', '#move-mode', '#end-turn', '.hud-crawler', '.hud-actions', '.party-strip', '.party-phase'] + [f'.hud-actions [data-ability]:nth-of-type({i})' for i in (2,3)] if screen=='battle' else ['[data-walk="north"]', '[data-walk="west"]', '[data-walk="south"]', '[data-walk="east"]', '#return-camp', '.exploration-hud', '.explore-party'] + [f'.explore-crawler:nth-child({i})' for i in range(1, 5)])
+                    selectors = common + (['#open-character-sheet', '#open-actions', '#open-items', '#move-mode', '#end-turn', '.hud-crawler', '.hud-actions', '.party-strip', '.broadcast-phase', '.hud-actions [data-ability]'] + [f'.party-chip:nth-child({i})' for i in range(1, 5)] if screen=='battle' else ['[data-walk="north"]', '[data-walk="west"]', '[data-walk="south"]', '[data-walk="east"]', '#return-camp', '.exploration-hud', '.explore-party'] + [f'.explore-crawler:nth-child({i})' for i in range(1, 5)])
                     page.locator('#camera-toggle').click()
                     camera = page.evaluate(MEASURE, dict(selectors=['#zoom-in', '#zoom-out', '#rotate-left', '#rotate-right', '#center-map'], touch=width<900))
                     page.locator('#camera-toggle').click()
@@ -200,7 +200,7 @@ def main():
                     result.update(screen=screen, viewport=[width,height], screenshot=filename, runtime='presentation fixture; no C# WASM', pageErrors=list(errors))
                     results.append(result)
                     if screen=='battle':
-                        assert page.locator('.hud-actions [data-ability]').count()==2
+                        assert page.locator('.hud-actions [data-ability]').count()==1
                         quick=page.locator('.hud-actions [data-ability]').first
                         assert 'Mana' in quick.get_attribute('title')
                         quick.click()
@@ -222,6 +222,10 @@ def main():
                         page.locator('#audience-dialog').wait_for(state='visible')
                         assert not page.locator('#save-dialog').is_visible(), 'Run menu stayed open under sponsors'
                         page.locator('#done-audience').click()
+                        page.locator('#open-items').click()
+                        assert page.locator('[data-action-tab="items"]').get_attribute('aria-selected')=='true'
+                        page.locator('#cancel-actions').click()
+                        assert page.locator('#open-items').evaluate('e=>e===document.activeElement')
                         page.locator('#open-actions').click()
                         page.locator('#action-dialog').wait_for(state='visible')
                         modal = page.evaluate(MEASURE, dict(selectors=['#action-dialog', '#close-actions', '#modal-move', '#cancel-actions', '#actions-end-turn'], touch=width<900))
@@ -315,7 +319,7 @@ def main():
                         for mode in ['targeting', 'forecast', 'status-forecast', 'mana-forecast', 'heal-forecast', 'finished-fallen', 'narrator-targeting', 'long-description', 'long-command-labels', 'enemy']:
                             page.evaluate('(mode)=>window.layoutMode(mode)', mode)
                             page.wait_for_timeout(100)
-                            state_selectors = ['#end-turn', '#open-actions', '.hud-crawler', '.hud-actions', '.party-phase']
+                            state_selectors = ['#end-turn', '#open-actions', '.hud-crawler', '.hud-actions', '.broadcast-phase']
                             if mode=='enemy':
                                 assert page.locator('.hud-actions [data-ability]:enabled').count()==0
                                 assert page.locator('#end-turn').is_disabled()
@@ -348,7 +352,7 @@ def main():
                             if mode=='long-command-labels':
                                 assert page.locator('.hud-stats > strong').text_content()=='Princess Donut'
                                 labels=page.locator('.hud-actions [data-ability] strong')
-                                assert [label.text_content() for label in labels.all()]==['Magic Missile','Puddle Jumper']
+                                assert [label.text_content() for label in labels.all()]==['Magic Missile']
                                 if width in (320,390):
                                     for label in labels.all():
                                         metrics=label.evaluate('(e)=>({text:e.textContent,scrollWidth:e.scrollWidth,clientWidth:e.clientWidth,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight})')

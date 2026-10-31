@@ -86,10 +86,33 @@ static class JourneyTests
         }
         Check(game.GetView().screen == "battle", "Exploration reaches a legal encounter after required objectives");
     }
+    static void CheckLegacyPacingCompatibility()
+    {
+        GameData original = Clone(data);
+        int[] rewards = {120,550,2400,7000,18000,35000,0,55615};
+        for (int i=0;i<8;i++) if(original.journey.floors[i].encounter!=null) original.journey.floors[i].encounter.xp=rewards[i];
+        GameSession old = new GameSession(Clone(content), original); Command(old,"start_journey");
+        for(int floor=1;floor<=2;floor++)
+        {
+            Command(old,"safe_room_rest");Explore(old);PlayBattle(old);
+            GameView victory=old.GetView();if(victory.rewards.Length>0)old.Handle(new GameCommand{type="choose_reward",rewardId=victory.rewards[0].id});
+            Command(old,"continue");
+        }
+        GameSave earned=Clone(old.ExportSave());string originalSnapshot=Save(old);
+        GameSession revised=Session();GameView loaded=revised.ImportSave(earned);
+        Check(!loaded.message.StartsWith("Save rejected:")&&Save(revised)==originalSnapshot,"Original reward checkpoint preserves exact XP, levels, stats and earned state");
+        int previousLevel=loaded.progression.level,previousHp=loaded.roster.Single(r=>r.id=="crawler.carl").maxHp;
+        Command(revised,"safe_room_rest");Explore(revised);PlayBattle(revised);
+        Check(revised.GetView().xp==670+data.journey.floors[2].encounter.xp&&revised.GetView().progression.level>=previousLevel&&revised.GetView().roster.Single(r=>r.id=="crawler.carl").maxHp>=previousHp,"Continuing an original checkpoint adds revised reward without removing earned levels or stats");
+        Roundtrip(revised,"Mixed original/revised rewards");
+        GameSave forged=Clone(revised.ExportSave());forged.xp++;string intact=Save(revised);
+        Check(revised.ImportSave(forged).message.StartsWith("Save rejected:")&&Save(revised)==intact,"Arbitrary XP between valid original/revised reward sums is rejected atomically");
+    }
     static void Main()
     {
         content = JsonSerializer.Deserialize<Content>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "combat-content.json")), Json);
         data = JsonSerializer.Deserialize<GameData>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "game-content.json")), Json);
+        CheckLegacyPacingCompatibility();
         GameSession game = Session();
         Check(game.GetView().journey != null && game.GetView().journey.floors.Length == 18 && !game.GetView().journey.active, "Story is explicit and exposes eighteen-floor registry");
         Check(game.GetView().encounterCount == 3 && game.ExportSave().journey == null, "Legacy three-encounter mode remains default");
@@ -130,12 +153,33 @@ static class JourneyTests
             }
             if (floor == 6) Check(game.GetView().journey.intents.Length > 0, "Hunting Grounds declares deterministic hunter intentions");
             PlayBattle(game); Roundtrip(game, "Floor " + floor + " victory");
+            int[] expectedLevels={4,6,9,12,16,20,20,25};
+            Check(game.GetView().progression.level==expectedLevels[floor-1],"Revised floor "+floor+" reward reaches bounded level "+expectedLevels[floor-1]);
+            if (floor == 6)
+            {
+                GameSave capped=Clone(game.ExportSave());int levels=50-game.GetView().progression.level;
+                capped.xp=63070;
+                foreach(RosterView member in capped.roster)
+                {
+                    member.maxHp+=levels*data.progression.hpPerLevel;member.level=50;
+                    member.maxEnergy+=levels*data.progression.manaPerLevel;
+                }
+                foreach(SavedUnit unit in capped.units.Where(u=>u.team=="player"&&u.duplicateSourceId==null))
+                {
+                    unit.maxHp+=levels*data.progression.hpPerLevel;unit.maxEnergy+=levels*data.progression.manaPerLevel;
+                }
+                GameSession retained=Session();GameView retainedView=retained.ImportSave(capped);
+                Check(!retainedView.message.StartsWith("Save rejected:")&&retainedView.progression.level==50&&retainedView.xp==63070,"Original floor-six capped checkpoint retains level fifty and all earned XP");
+                Check(retainedView.roster.Single(r=>r.id=="crawler.carl").maxHp==capped.roster.Single(r=>r.id=="crawler.carl").maxHp,"Original capped checkpoint retains its earned maximum HP");
+            }
             if (floor == 8) Check(game.GetView().journey.cardsCaptured == 6, "Six weakened monsters were captured through real actions");
             GameView view = game.GetView(); if (view.rewards.Length > 0) game.Handle(new GameCommand { type = "choose_reward", rewardId = view.rewards[0].id });
             previousXp = game.GetView().xp; Command(game, "continue");
         }
         Check(game.GetView().screen == "complete" && game.GetView().journey.complete, "Eight-floor campaign completes after capture");
         Check(game.GetView().journey.floors.Skip(8).All(f => f.status == "locked"), "Floors nine through eighteen remain visibly locked");
+        Check(game.GetView().progression.maxLevel==50&&game.GetView().progression.level==25&&game.GetView().progression.xpToNextLevel>0,"Story completion retains twenty-five future levels and a real next threshold");
+        Check(data.progression.xpThresholds[49]==59431&&data.progression.xpThresholds.Skip(25).Zip(data.progression.xpThresholds.Skip(24),(next,prior)=>next>prior).All(r=>r),"Future growth thresholds remain increasing through unchanged cap fifty");
         Roundtrip(game, "Completed story");
         Check(!game.ImportSave(JsonSerializer.Deserialize<GameSave>(legacy, Json)).journey.active && game.GetView().encounterCount == 3, "Legacy save restores after story play");
         Console.WriteLine("Journey checks: " + checks);

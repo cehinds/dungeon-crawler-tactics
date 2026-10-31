@@ -1,0 +1,846 @@
+/* GBA Command Deck × Dungeon Broadcast: presentation only. */
+body[data-screen="battle"] .broadcast-battle {
+  --hud-height: 146px;
+  --narrator-height: 0px;
+  --deck-gold: #dfbd72;
+  --deck-cyan: #6ee7fa;
+}
+body[data-screen="battle"] .battle-hud {
+  height: var(--hud-height);
+  border: 1px solid var(--deck-gold) !important;
+  border-image: none !important;
+  background: linear-gradient(110deg,#10263d,#071321 65%);
+  box-shadow: inset 0 0 0 3px #142b40,0 -3px 14px #0009;
+  overflow: visible;
+}
+body[data-screen="battle"] .battle-hud .action-dock {
+  position: absolute;
+  inset: 46px 0 0;
+  height: auto;
+  grid-template-columns: minmax(245px,30%) minmax(300px,44%);
+  grid-template-rows: 1fr;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 20px;
+  overflow: visible;
+}
+body[data-screen="battle"] .hud-crawler {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0;
+  border: 0;
+}
+body[data-screen="battle"] .hud-character-button {
+  width: 78px;
+  height: 86px;
+  min-width: 78px;
+  padding: 3px;
+  background: #10263b;
+  border: 1px solid #b59a61;
+  box-shadow: inset 0 0 0 2px #233b4e;
+}
+body[data-screen="battle"] .hud-character-button .hud-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+body[data-screen="battle"] .hud-stats {
+  display: grid;
+  grid-template-columns: minmax(115px,1fr) 55px;
+  gap: 6px 10px;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+}
+body[data-screen="battle"] .hud-stats>strong {
+  grid-column: 1/-1;
+  color: #f4dc9d;
+  font: 700 18px/1.1 Georgia,serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body[data-screen="battle"] .deck-meter {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 2px 5px;
+  font: 11px/1.1 var(--ui);
+  min-width: 0;
+}
+body[data-screen="battle"] .deck-meter b {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  font-size: 13px;
+  color: #f3eee1;
+}
+body[data-screen="battle"] .deck-meter i {
+  grid-column: 1/-1;
+  display: block;
+  height: 6px;
+  border: 1px solid #52647b;
+  background: linear-gradient(to right,var(--meter-color) var(--fill),#07111f var(--fill));
+}
+body[data-screen="battle"] .deck-meter.health {
+  --meter-color: #ef627e;
+  grid-column: 1;
+  grid-row: 2;
+}
+.deck-meter.mana {
+  --meter-color: #3cc6ee;
+}
+body[data-screen="battle"] .deck-meter.mana {
+  grid-column: 1;
+  grid-row: 3;
+}
+body[data-screen="battle"] .deck-movement {
+  grid-column: 2;
+  grid-row: 2/4;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-left: 1px solid #3d5268;
+  padding-left: 8px;
+  font-size: 10px;
+}
+body[data-screen="battle"] .deck-movement img {
+  object-fit: contain;
+}
+.deck-movement small {
+  display: block;
+}
+body[data-screen="battle"] .deck-movement b {
+  font-size: 18px;
+  color: #f4dfac;
+  margin-left: 3px;
+}
+body[data-screen="battle"] .battle-hud .hud-actions {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 9px;
+  align-items: center;
+  padding: 0;
+  overflow: visible;
+}
+body[data-screen="battle"] .battle-hud .hud-action {
+  height: 85px;
+  min-height: 44px;
+  padding: 5px;
+  border: 1px solid #bba167;
+  border-image: none !important;
+  border-radius: 2px;
+  background: linear-gradient(#142e46,#091727);
+  box-shadow: inset 0 0 0 2px #30445a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+body[data-screen="battle"] .battle-hud .hud-action .hud-icon {
+  width: 43px;
+  height: 43px;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  object-fit: contain;
+}
+body[data-screen="battle"] .battle-hud .hud-action strong {
+  margin-top: 5px;
+  font: 700 14px/1.1 var(--ui);
+  color: #f2e1bd;
+}
+body[data-screen="battle"] .battle-hud .hud-action.active {
+  border: 1px solid var(--deck-cyan) !important;
+  background: #153a51;
+  box-shadow: inset 0 0 0 2px #2483a0,0 0 7px #39cde64d;
+}
+body[data-screen="battle"] .battle-hud .hud-action.active .hud-icon {
+  border: 0;
+  box-shadow: none;
+}
+body[data-screen="battle"] .battle-hud .hud-action:disabled {
+  opacity: .42;
+}
+body[data-screen="battle"] .command-footer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+body[data-screen="battle"] .command-footer .party-strip {
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  bottom: auto;
+  height: 40px;
+  width: auto;
+  max-width: 73%;
+  gap: 5px;
+  display: flex;
+  overflow-x: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+body[data-screen="battle"] .command-footer .party-chip {
+  height: 40px;
+  min-height: 40px;
+  min-width: 130px;
+  flex: 0 0 130px;
+  display: flex;
+  align-items: center !important;
+  gap: 5px;
+  padding: 1px 5px;
+  border: 1px solid #64738a !important;
+  border-image: none !important;
+  background: #102139;
+  box-shadow: none;
+}
+body[data-screen="battle"] .command-footer .party-chip .unit-portrait {
+  width: 34px;
+  height: 34px;
+}
+body[data-screen="battle"] .command-footer .party-chip>span:not(.unit-portrait) {
+  display: block;
+  min-width: 0;
+  font-size: 9px;
+  overflow: hidden;
+}
+body[data-screen="battle"] .command-footer .party-chip>span strong {
+  font: 10px var(--ui);
+  white-space: nowrap;
+}
+.command-footer .party-chip>span small {
+  display: none !important;
+}
+body[data-screen="battle"] .command-footer .party-chip .party-budget {
+  position: static;
+  display: flex;
+  gap: 3px;
+  font-size: 9px;
+  flex-direction: column;
+  padding: 0;
+}
+body[data-screen="battle"] .party-budget i {
+  border: 1px solid #52677e;
+  background: #163c50;
+  color: #9de8f1;
+}
+.party-budget .move-spent,.party-budget .act-spent {
+  background: #293546 !important;
+  text-decoration: line-through;
+  border-style: dashed;
+  color: #aeb7c4;
+}
+body[data-screen="battle"] .command-footer .party-chip.active {
+  border: 1px solid var(--deck-cyan) !important;
+  background: #193e53;
+  box-shadow: inset 0 0 0 1px #46879b;
+}
+body[data-screen="battle"] .command-footer .party-chip.active::after {
+  display: none;
+}
+body[data-screen="battle"] .command-footer .party-state {
+  font-size: 9px !important;
+  line-height: 11px !important;
+  width: 32px !important;
+  inset: auto auto 0 2px !important;
+}
+body[data-screen="battle"] .command-footer .end-character {
+  right: 16px;
+  bottom: 6px;
+  top: auto;
+  width: 21%;
+  min-height: 65px;
+  padding: 7px;
+  border: 2px solid #efd18a;
+  border-image: none !important;
+  border-radius: 2px;
+  background: linear-gradient(#f3d48c,#cda757);
+  color: #201c18;
+  font: 700 19px/1.2 Georgia,serif;
+  box-shadow: inset 0 0 0 2px #ffe7a9;
+  transform: none;
+}
+body[data-screen="battle"] .end-character small {
+  display: block;
+  font: 10px/1.3 var(--ui);
+  margin-top: 4px;
+  color: #3c3425;
+}
+.end-turn-short {
+  display: none;
+}
+body[data-screen="battle"] .battle-hud .hud-target {
+  left: auto;
+  right: 16px;
+  width: 310px;
+  max-width: calc(100vw - 20px);
+  padding: 8px 10px;
+  border: 1px solid #ddbe77;
+  border-image: none;
+  background: #081827f5;
+  box-shadow: 0 3px 12px #0008;
+  gap: 5px;
+}
+body[data-screen="battle"] .hud-target .target-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font: 11px/1.4 var(--ui);
+  margin: 3px 0;
+  color: #cad8e1;
+}
+.hud-target .target-result {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+body[data-screen="battle"] .hud-target .target-action-summary>.hud-icon {
+  width: 30px;
+  height: 30px;
+}
+.hud-target .target-action-copy>strong {
+  font-size: 13px !important;
+}
+body[data-screen="battle"] .hud-target button {
+  min-height: 30px;
+  font-size: 11px;
+  padding: 4px 7px;
+}
+body[data-screen="battle"] .broadcast-battle>.objective-banner {
+  top: 10px;
+  left: 12px;
+  max-width: min(380px,42vw);
+  padding: 6px 11px;
+  border: 1px solid #e6c579;
+  background: #e8d29d;
+  color: #211e19;
+  box-shadow: inset 0 0 0 2px #f9e7b4,0 3px 9px #0006;
+}
+body[data-screen="battle"] .objective-banner h2 {
+  font: 700 15px/1.2 Georgia,serif;
+}
+.objective-banner .objective-phase {
+  display: none !important;
+}
+body[data-screen="battle"] .objective-banner .quest-tracker {
+  font-size: 9px;
+  padding: 1px 0;
+  margin-top: 3px;
+  max-height: 20px;
+}
+.broadcast-phase {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  z-index: 4;
+  display: grid;
+  gap: 4px;
+  text-align: right;
+  padding: 7px 11px;
+  border: 1px solid #c4a460;
+  background: #071627ed;
+  color: #f6e5bc;
+  pointer-events: none;
+  max-width: 44vw;
+}
+.broadcast-phase>span {
+  font: 8px var(--mono);
+  letter-spacing: 1.2px;
+  color: #9bc5d4;
+}
+.broadcast-phase strong {
+  font: 700 12px var(--ui);
+}
+.broadcast-phase>div {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.broadcast-phase i {
+  display: block;
+  transform: rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: #5be1fb;
+  border: 1px solid #91edff;
+  margin: 2px;
+}
+.broadcast-phase i.acted {
+  background: #bba16a;
+  border-color: #ddcb9c;
+}
+.broadcast-phase i.finished {
+  background: #1d3046;
+  border-color: #576878;
+}
+@media(max-width:730px) {
+  body[data-screen="battle"] .broadcast-battle {
+    --hud-height: 198px;
+  }
+  body[data-screen="battle"] .battle-hud .action-dock {
+    inset: 46px 0 0;
+    padding: 5px 9px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 57px 73px;
+    gap: 7px;
+  }
+  body[data-screen="battle"] .hud-crawler {
+    gap: 8px;
+    width: 100%;
+    height: 57px;
+  }
+  .hud-character-button {
+    flex-shrink: 0;
+  }
+  body[data-screen="battle"] .hud-character-button {
+    width: 48px;
+    min-width: 48px;
+    height: 56px;
+    padding: 1px;
+  }
+  body[data-screen="battle"] .hud-stats {
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) 52px;
+    gap: 4px 10px;
+  }
+  body[data-screen="battle"] .hud-stats>strong {
+    grid-column: 1/3;
+    font-size: 15px;
+  }
+  body[data-screen="battle"] .deck-meter.health {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .deck-meter.mana {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+  }
+  body[data-screen="battle"] .deck-meter {
+    font-size: 10px;
+    grid-template-columns: 30px 1fr;
+  }
+  .deck-meter b {
+    font-size: 11px !important;
+  }
+  .deck-meter i {
+    height: 5px !important;
+  }
+  body[data-screen="battle"] .deck-movement {
+    grid-column: 3;
+    grid-row: 1/3;
+    font-size: 9px;
+    padding-left: 5px;
+  }
+  .deck-movement img {
+    width: 18px;
+    height: 18px;
+  }
+  body[data-screen="battle"] .battle-hud .hud-actions {
+    width: 72%;
+    gap: 5px;
+    grid-row: 2;
+    align-self: start;
+  }
+  body[data-screen="battle"] .battle-hud .hud-action {
+    height: 68px;
+    padding: 4px 1px;
+  }
+  body[data-screen="battle"] .battle-hud .hud-action .hud-icon {
+    width: 33px;
+    height: 33px;
+  }
+  body[data-screen="battle"] .battle-hud .hud-action strong {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  body[data-screen="battle"] .command-footer .party-strip {
+    top: 3px;
+    left: 5px;
+    width: calc(100% - 10px);
+    max-width: none;
+    display: grid;
+    grid-template-columns: repeat(var(--party-columns),minmax(0,1fr));
+    gap: 3px;
+    height: 40px;
+  }
+  body[data-screen="battle"] .command-footer .party-chip {
+    min-width: 0;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    padding: 1px 3px;
+    gap: 3px;
+    flex: auto;
+  }
+  body[data-screen="battle"] .command-footer .party-chip .unit-portrait {
+    width: 24px;
+    height: 34px;
+  }
+  body[data-screen="battle"] .command-footer .party-chip>span strong {
+    font-size: 9px;
+  }
+  body[data-screen="battle"] .command-footer .party-chip .party-budget {
+    width: 25px;
+    gap: 2px;
+  }
+  body[data-screen="battle"] .party-budget i {
+    width: 25px;
+    height: 12px;
+  }
+  body[data-screen="battle"] .command-footer .end-character {
+    bottom: 6px;
+    right: 7px;
+    width: 25%;
+    min-height: 68px;
+    font: 700 14px/1.15 Georgia,serif;
+    padding: 5px;
+  }
+  body[data-screen="battle"] .end-turn-name {
+    display: none;
+  }
+  .end-turn-short {
+    display: inline;
+  }
+  .end-character small {
+    font-size: 8px !important;
+    margin-top: 6px !important;
+  }
+  body[data-screen="battle"] .battle-hud .hud-target {
+    right: 5px;
+    bottom: calc(100% + 7px);
+    width: 260px;
+    max-height: 138px;
+    padding: 6px 8px;
+  }
+  body[data-screen="battle"] .target-action-copy small {
+    font-size: 9px !important;
+  }
+  .target-result {
+    font-size: 10px !important;
+  }
+  body[data-screen="battle"] .broadcast-battle>.objective-banner {
+    top: 7px;
+    left: 6px;
+    max-width: min(43vw,calc(100vw - 198px));
+    padding: 5px 7px;
+  }
+  body[data-screen="battle"] .objective-banner h2 {
+    font-size: 11px;
+  }
+  .objective-banner .quest-tracker {
+    font-size: 8px !important;
+    max-height: 17px !important;
+  }
+  .broadcast-phase {
+    top: 7px;
+    right: 6px;
+    padding: 5px 7px;
+    max-width: min(43vw,calc(100vw - 198px));
+    gap: 3px;
+  }
+  .broadcast-phase>span {
+    font-size: 6px;
+  }
+  .broadcast-phase strong {
+    font-size: 9px;
+  }
+  .broadcast-phase i {
+    width: 6px;
+    height: 6px;
+    margin: 1px;
+  }
+}
+@media(max-height:520px) and (min-width:731px) {
+  body[data-screen="battle"] .broadcast-battle {
+    --hud-height: 124px;
+  }
+  body[data-screen="battle"] .battle-hud .action-dock {
+    inset: 43px 0 0;
+    grid-template-columns: minmax(215px,30%) minmax(270px,44%);
+    padding: 4px 10px;
+    gap: 12px;
+  }
+  body[data-screen="battle"] .hud-character-button {
+    height: 68px;
+    width: 58px;
+    min-width: 58px;
+  }
+  .hud-crawler {
+    gap: 7px !important;
+  }
+  body[data-screen="battle"] .hud-stats>strong {
+    font-size: 14px;
+  }
+  .deck-meter {
+    font-size: 9px !important;
+  }
+  .deck-meter b {
+    font-size: 11px !important;
+  }
+  body[data-screen="battle"] .battle-hud .hud-action {
+    height: 68px;
+  }
+  .hud-action .hud-icon {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  body[data-screen="battle"] .battle-hud .hud-action strong {
+    font-size: 11px;
+  }
+  body[data-screen="battle"] .command-footer .end-character {
+    bottom: 6px;
+    right: 9px;
+    min-height: 64px;
+    font-size: 16px;
+    width: 21%;
+  }
+  body[data-screen="battle"] .command-footer .party-strip {
+    height: 40px;
+    top: 2px;
+  }
+  .command-footer .party-chip {
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+  body[data-screen="battle"] .battle-hud .hud-target {
+    width: 280px;
+    max-height: 125px;
+    padding: 5px 7px;
+  }
+  .broadcast-phase {
+    padding: 4px 7px;
+    top: 6px;
+  }
+  .broadcast-phase>span {
+    display: none;
+  }
+}
+body[data-screen="battle"] .header-tools {
+  position: fixed;
+  top: 7px;
+  right: 10px;
+  z-index: 12;
+}
+body[data-screen="battle"] .header-tools button {
+  padding: 5px 10px;
+}
+body[data-screen="battle"] .camera-menu {
+  right: 10px;
+}
+body[data-screen="battle"] .hud-stats > strong {
+  font-size: 20px;
+}
+@media (max-width: 730px) {
+  body[data-screen="battle"] .broadcast-phase {
+    top: 7px;
+  }
+  body[data-screen="battle"] .broadcast-phase > span {
+    display: none;
+  }
+  body[data-screen="battle"] .broadcast-phase strong {
+    font-size: 8px;
+  }
+  body[data-screen="battle"] .header-tools {
+    top: 6px;
+    right: 5px;
+  }
+  body[data-screen="battle"] .header-tools button {
+    min-height: 31px;
+    padding: 4px 8px;
+  }
+  body[data-screen="battle"] .camera-menu {
+    right: 6px;
+  }
+  body[data-screen="battle"] .hud-stats > strong {
+    font-size: 16px;
+  }
+  body[data-screen="battle"] .command-footer .party-chip {
+    gap: 2px;
+  }
+  body[data-screen="battle"] .command-footer .party-chip > span:not(.unit-portrait) {
+    display: none;
+  }
+  body[data-screen="battle"] .command-footer .party-chip .party-budget {
+    width: 27px;
+  }
+}
+body[data-screen="battle"] .deck-movement > span {
+  flex-direction: column;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.1;
+}
+body[data-screen="battle"] .deck-movement b {
+  margin: 0;
+}
+body[data-screen="battle"] .deck-movement small {
+  display: block;
+  font-size: 9px;
+  white-space: nowrap;
+}
+body[data-screen="battle"] .command-footer .party-chip .party-budget {
+  width: 34px;
+  flex-shrink: 0;
+}
+body[data-screen="battle"] .party-budget i {
+  width: 34px;
+  height: 13px;
+  line-height: 11px;
+  font-size: 9px;
+  text-align: center;
+}
+body[data-screen="battle"] .hud-stats {
+  height: 82px;
+  min-height: 0;
+  grid-template-rows: 22px 24px 24px;
+}
+body[data-screen="battle"] .deck-movement {
+  height: 54px;
+  min-height: 0;
+  justify-content: center;
+  gap: 1px;
+}
+body[data-screen="battle"] .deck-movement img {
+  width: 18px;
+  height: 18px;
+}
+body[data-screen="battle"] .deck-movement > span {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1px 3px;
+  align-items: center;
+  text-align: center;
+}
+body[data-screen="battle"] .deck-movement small {
+  grid-column: 1 / -1;
+}
+body[data-screen="battle"] .broadcast-phase {
+  right: 100px;
+}
+body[data-screen="battle"] .camera-menu {
+  top: 85px;
+}
+body[data-screen="battle"] .objective-banner .quest-tracker {
+  display: block;
+  width: 100%;
+  height: 16px;
+  min-height: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 16px;
+}
+body[data-screen="battle"] .battle-hud .hud-target {
+  position: fixed;
+  bottom: calc(var(--hud-height) + 8px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 174px;
+}
+body[data-screen="battle"] .hud-target .target-action-summary {
+  flex: 0 0 auto;
+  min-height: 0;
+}
+body[data-screen="battle"] .hud-target .target-action-copy {
+  min-width: 0;
+}
+body[data-screen="battle"] .hud-target .target-action-copy > strong {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body[data-screen="battle"] .hud-target .target-result {
+  flex: 0 1 auto;
+  min-height: 16px;
+  max-height: 32px;
+  overflow: auto;
+  margin: 0;
+}
+body[data-screen="battle"] .hud-target .target-controls {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 5px;
+  position: static;
+}
+body[data-screen="battle"] .hud-target .target-controls button {
+  flex: 1;
+}
+@media (max-width: 730px) {
+  body[data-screen="battle"] .hud-stats {
+    height: 49px;
+    grid-template-rows: 18px 24px;
+  }
+  body[data-screen="battle"] .deck-movement {
+    height: 46px;
+  }
+  body[data-screen="battle"] .broadcast-phase {
+    right: 72px;
+    max-width: 37vw;
+  }
+  body[data-screen="battle"] .camera-menu {
+    top: 58px;
+  }
+  body[data-screen="battle"] .battle-hud .hud-target {
+    max-height: 164px;
+  }
+  body[data-screen="battle"] .hud-target .target-description {
+    font-size: 10px;
+  }
+}
+@media (max-height: 520px) and (min-width: 731px) {
+  body[data-screen="battle"] .hud-stats {
+    height: 64px;
+    grid-template-rows: 16px 19px 19px;
+    gap: 4px 8px;
+  }
+  body[data-screen="battle"] .deck-meter {
+    min-height: 19px;
+  }
+  body[data-screen="battle"] .deck-movement {
+    height: 42px;
+  }
+  body[data-screen="battle"] .battle-hud .hud-target {
+    max-height: 164px;
+  }
+}
+body[data-screen="battle"] .battle-hud .hud-action strong {
+  white-space: normal;
+  text-align: center;
+  overflow-wrap: anywhere;
+  overflow: visible;
+}
+@media (max-width: 730px) {
+  body[data-screen="battle"] .battle-hud .hud-action {
+    height: 73px;
+    padding: 3px 1px;
+  }
+  body[data-screen="battle"] .battle-hud .hud-action .hud-icon {
+    width: 28px;
+    height: 28px;
+  }
+  body[data-screen="battle"] .battle-hud .hud-action strong {
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+    font-size: 12px;
+    line-height: 13px;
+  }
+}
+body[data-screen="battle"] .header-tools button {
+  min-height: 40px;
+  font-size: 12px;
+}
+body[data-screen="battle"] .command-footer .party-chip {
+  font-size: 12px;
+}
+body[data-screen="battle"] .hud-target .target-controls button {
+  min-height: 40px;
+  font-size: 12px;
+}

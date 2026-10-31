@@ -1,3 +1,35 @@
+# Broadcast Command Deck hybrid — 30 October 2026
+
+Scope: current browser HUD and feedback composition. Exact visual references inspected: `/workspace/generated_images/exec-b4ebbc92-4096-4fe6-88bd-7473c13a8e5e.png` (gold four-command deck) and `exec-cb4c43a0-d259-4ff8-88b5-31ca89c372e2.png` (cyan/magenta Dungeon Broadcast treatment), both 1672×941.
+
+The implementation combines the first image’s fixed bottom portrait/resources, Move/Strike/Skills/Items and named End turn with the third image’s broadcast phase/readiness and System reward treatment. Existing production portraits/icons and terrain remain in use. The concept’s dense sewer composition, exact pixel ornament, radial commands, and whole-scene pixel parity are not implemented by this UI pass.
+
+- Current production HTML/JS/CSS presentation fixtures: **70 checks passed** across 1672×941, 1440×1000, 390×844, 320×740 and 844×390; evidence `/tmp/dct-broadcast-layout-final/` and `/tmp/dct-layout-final.log`.
+- Feedback production-module fixtures: **three viewports passed**, 1440×900, 390×844, 844×390. Focus pauses the active notice, later events queue, History retains both, dismissal restores focus, and toast text remains legible. Evidence `/tmp/dct-broadcast-feedback-final/report.json`.
+- Visual inspection of the desktop fixture confirms navy/gold deck hierarchy, separate HP/Mana rows, visible command names and a clear named turn control. The square fixture floor and gameplay values differ from the references and do not establish art fidelity.
+- Fresh current WASM Release publish passed. Actual production UI capture passed Items/Skills/focus/next-ally at four viewports; a separate actual runtime check passed invalid target, pure preview/cancel, exact confirmed damage/Mana/practice, post-cast movement and End turn. Evidence: `/workspace/scratch/broadcast-deck/final/report.json` and `/workspace/scratch/broadcast-deck/fresh-runtime/report.json`. Shared RulesKernel42, GameTests223, Journey105, Rank97 and Mechanism69 checks passed; compatibility build passed. Detailed scope is recorded in the completion checklist. Presentation fixtures alone do not execute C# rules. Unity source synchronization and a .NET compatibility build do not establish Unity Editor or Unity Web validation.
+
+## Current comparison and disposition
+
+Source images: 1672×941 pixels each. Implementation: `battle-1672x941.png`, CSS viewport 1672×941, deviceScaleFactor 1, screenshot 1672×941 pixels. No density correction or browser/device chrome. Full-view combined evidence: `/workspace/scratch/broadcast-deck/final/source-implementation-comparison.png`; focused deck evidence: `deck-detail-comparison.png`, identical x=0…1672, y=710…941 crops. Both combined images were opened and compared. Source shows a rat attack preview in a sewer room; implementation shows a legal Hoarder scenario before targeting. State, content and map composition differ, so no numerical fidelity score is meaningful.
+
+- Typography: serif character/turn headings retain reference hierarchy, while sans-serif numeric/control text favors readability. Exact font, title scale and pixel typography differ (accepted P3 within this hybrid).
+- Spacing/layout: fixed portrait/resources, four commands and right-hand End turn preserve the first reference’s hierarchy. The 146px production deck is compact; party cards are smaller than reference, intentionally preserving map space. Phone commands and resources reflow without overlap in the tested captures.
+- Colors: opaque navy, cream/gold framing, cyan selection/readiness, red HP and blue Mana carry the chosen palette. Magenta System treatment is tested separately in feedback states; exact border ornament remains P3.
+- Image quality: existing PNG portraits and command icons remain sharp at tested sizes. Existing terrain and icons differ from the references; new modular exports are a separate gallery and are not substituted into gameplay. Whole-scene imagery parity is expressly unfinished.
+- Copy: commands display Move, Strike, Skills and Items; turn control identifies the active crawler and next actor where space permits. HP/Mana values and forecast changes come from the actual view/resolver, with no concept numbers hardcoded.
+
+Comparison history: earlier integration captures found overlapping header/phase controls, targeting clipped behind the party strip, and long command labels. The UI workstream separated header controls, lifted contextual targeting above the deck and wrapped/shortened visible labels while preserving accessible names. Current 70-state production fixtures include target/forecast, long-label, phone and short-landscape states; fresh WASM captures confirm menu and turn interactions. A fresh earned level-up capture then found [P2] three routine toast cards occupying the lower skill area. Feedback now queues routine notices during the gains dialog and replays them after Continue; errors stay visible. The same 1366×768 state was recaptured and opened at `/workspace/scratch/broadcast-deck/progression-queued/progression-level-up.png`; all skills and Continue remain clear. Three-width module tests verify queued achievement/sponsor replay, focus/history and visible errors. No actionable P0/P1/P2 issue remains within the accepted UI-only composition. Terrain reauthoring, exact ornament/font/icon matching and Unity parity remain separate work.
+
+- [x] Exact references and normalized combined full/deck comparisons inspected.
+- [x] Desktop/phone production UI, target/forecast fixtures and focus/notification behaviors checked.
+- [x] Fresh WASM interaction checks passed without page errors.
+- [ ] Whole-scene concept fidelity and Unity execution.
+
+final result: passed
+
+---
+
 # Ability rank progression pass
 
 The rank interface preserves the preceding fixed character/action menu controls. Actions show current rank/cap and progress; Character → Abilities shows effective current effects and a collapsed twenty-rank inspector. Book anchors and source links are separate from numeric game tuning.

@@ -3269,6 +3269,35 @@
   ],
   "reactions": [
     {
+      "id": "reaction.fire_thaws_frozen",
+      "priority": 95,
+      "incoming": {
+        "all": [
+          "element.fire"
+        ],
+        "any": [],
+        "none": []
+      },
+      "target": {
+        "all": [
+          "status.frozen"
+        ],
+        "any": [],
+        "none": []
+      },
+      "consumeTags": [
+        "status.frozen"
+      ],
+      "effects": [
+        {
+          "op": "AddTag",
+          "amount": 0,
+          "tag": "status.wet"
+        }
+      ],
+      "emitTags": []
+    },
+    {
       "id": "reaction.oil_ignites",
       "priority": 100,
       "incoming": {

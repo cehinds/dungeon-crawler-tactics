@@ -31,6 +31,28 @@ namespace DungeonCrawlerTactics
             if (save.screen == "victory" && save.expedition == null && save.scenario == null) total += data.journey.floors[save.encounterIndex].encounter.xp;
             return total;
         }
+        // Pacing revision changes only unearned rewards. A checkpoint may contain any
+        // combination of original and revised floor rewards after continuing an old run.
+        private bool JourneyXpMatchesCompletedEncounters(GameSave save)
+        {
+            int[] originalRewards = { 120, 550, 2400, 7000, 18000, 35000, 0, 55615 };
+            HashSet<int> totals = new HashSet<int> { 0 };
+            int cleared = Math.Min(save.encounterIndex, 8);
+            if (save.screen == "victory" && save.expedition == null && save.scenario == null) cleared++;
+            for (int i = 0; i < Math.Min(cleared, 8); i++)
+            {
+                JourneyFloorDef floor = data.journey.floors[i];
+                if (floor.encounter == null) continue;
+                HashSet<int> next = new HashSet<int>();
+                foreach (int total in totals)
+                {
+                    next.Add(total + floor.encounter.xp);
+                    next.Add(total + originalRewards[i]);
+                }
+                totals = next;
+            }
+            return totals.Contains(save.xp);
+        }
         private EncounterDef ValidateJourney(GameSave save)
         {
             if (save.journey == null) return null;

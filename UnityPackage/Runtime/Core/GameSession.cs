@@ -719,7 +719,7 @@ namespace DungeonCrawlerTactics
                 }
                 if (save.generatedDungeon != null && save.generatedDungeon.floorPlan != null) expectedXp = CampaignXp(save.generatedCampaign, save.generatedDungeon, save.screen);
                 else if (save.generatedDungeon != null && save.generatedDungeon.cleared) expectedXp = data.encounters[0].xp;
-                Require(save.scenario != null || save.expedition != null || save.xp == expectedXp, "Save XP does not match its completed encounters.");
+                Require(save.scenario != null || save.expedition != null || save.xp == expectedXp || (save.journey != null && JourneyXpMatchesCompletedEncounters(save)), "Save XP does not match its completed encounters.");
                 ValidateAchievements(save.achievementIds);
                 AudienceSave nextAudience = ValidateAudience(save.audience);
                 string[] nextAchievements = (string[])save.achievementIds.Clone();

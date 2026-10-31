@@ -4,8 +4,24 @@ const host = document.createElement('section');
 host.className = 'toast-region';
 host.setAttribute('aria-label', 'Notifications');
 let nextId = 0;
+const pendingLevelNotices = [];
+let pendingTimer = null;
+function flushLevelNotices() {
+  if (document.querySelector('#level-up-dialog[open]') || pendingTimer || !pendingLevelNotices.length) return;
+  const next = pendingLevelNotices.shift();
+  pendingTimer = true;
+  notify(next.message, next.severity);
+  pendingTimer = setTimeout(() => { pendingTimer = null; flushLevelNotices(); }, 6700);
+}
 export function syncFeedbackHost() {
   const dialogs = [...document.querySelectorAll('dialog[open]')];
+  const levelOpen = document.querySelector('#level-up-dialog[open]');
+  if (levelOpen) {
+    for (const entry of [...entries]) if (entry.severity !== 'error') {
+      pendingLevelNotices.push({message:entry.message,severity:entry.severity});
+      remove(entry);
+    }
+  } else flushLevelNotices();
   const parent = dialogs[dialogs.length - 1] ?? document.body;
   if (host.parentElement !== parent) parent.append(host);
 }
@@ -35,6 +51,10 @@ function resume(entry) {
 }
 export function notify(message, severity = 'info') {
   if (!message) return;
+  if (severity !== 'error' && document.querySelector('#level-up-dialog[open]')) {
+    if (!pendingLevelNotices.some(entry => entry.message === message && entry.severity === severity)) pendingLevelNotices.push({message,severity});
+    return;
+  }
   syncFeedbackHost();
   if (innerWidth <= 730 && document.body.dataset.screen === 'battle' && severity !== 'error') clearFeedback();
   const duplicate = entries.find(entry => entry.message === message && entry.severity === severity);

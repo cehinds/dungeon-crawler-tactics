@@ -19,7 +19,7 @@ The capture system implements a collection objective, not the novel’s complete
 
 ## Algorithmic progression
 
-Party XP is shared. The first five cumulative thresholds remain `0, 30, 70, 120, 200`. For level `L > 5`, add `40 + 10*(L-5) + floor(3*(L-5)^2/2)` to the previous threshold. Level 50 requires 59,431 XP, allowing a final-floor build before the last encounter. This curve and the floor rewards are game balance, not published canonical numbers.
+Party XP is shared. The first five cumulative thresholds remain `0, 30, 70, 120, 200`. For level `L > 5`, add `40 + 10*(L-5) + floor(3*(L-5)^2/2)` to the previous threshold. Level 50 requires 59,431 XP and remains the cap. Fresh authored-story rewards reach level 25 on Floor 8; older saves retain earned levels. See [progression pacing](Progression-Pacing.md). This curve and the floor rewards are game balance, not published canonical numbers.
 
 Class trees grant one point at each authored tier: 1, 5, 10, 20, 30, 40, 50. There are fourteen nodes across two branches and seven points by level 50. The selected class determines active bonuses and grants; saved ownership survives class changes. Personal crawler trees use a separate pool.
 

@@ -1,0 +1,13 @@
+# Broadcast art QA
+
+The batch contains 48 distinct generated source components (24 combat and 24 exploration) plus 13 derived structural variants. Derived variants are raster compositions of generated source art, not additional generated source components. Two separate concept scenes and two separate aligned production sheets are preserved.
+
+All 61 exports are 128×128 RGBA PNGs with stable IDs. Material terrain is normalized to alpha255 across the complete canvas. Props keep real source alpha, bottom-center `(64,128)` anchors and visible content within 112×112. Source walls, door frames, road corners/crossroads/T pieces retain their authored shapes as art studies; their individual edge intervals are reported rather than treated as compatible generator input.
+
+The 13 `broadcast-structural-wall-*` variants form the usable geometric connector subset: EW, NS, four corners, four Ts, cross, open door and closed door. Every declared `stone-wall` edge occupies exactly pixels 32–95 inclusive at alpha≥200. Half-segments come from the generated combat EW wall; the center comes from the generated combat cross-wall. The NS segment uses an explicitly authored 90° rotation of that generated strip. Doors share a 96×128 decorated frame centered between matching lateral wall endcaps. Rotation support of each exported piece remains `[0]`; different directions have their own authored IDs.
+
+`Tools/build_broadcast_art.py` asserts all 13 canonical variants pass their expected edge intervals. `edge-qa.json` includes observed intervals for every wall, including failures among the source studies. `wall-assembly-qa.png` demonstrates adjacent straight walls and a connected 2×2 corner run on real floor art. Alpha geometry now meets its connector contract. Painted stone/pipe colors can still show seams; pixel-perfect texture continuity, full WFC constraints, traversal, collision and game integration have not been certified.
+
+Visual review found the model's rows were slightly uneven despite the requested regular cells. Authored crop coordinates correct the initial relay/crate/feedback cross-row bleed. The final QA sheet shows clean isolated cells. The model authored exploration road-corner geometry connecting north/west, so its ID correctly names NW rather than preserving the prompt's requested NE label.
+
+Original source files stay unmodified in AI-Art `originals/broadcast-kit/`. Working source copies, previews, manifest and exports are mirrored under the matching ignored `Web/wwwroot/assets/broadcast-kit/` path. The exporter produces deterministic PNG bytes and SHA records from `Docs/BroadcastArt/crops.json`. No original is deleted.
