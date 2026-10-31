@@ -8,12 +8,12 @@
     "background": "#07131e"
   },
   "board": {
-    "columns": 12,
+    "columns": 20,
     "rows": 8,
     "tileSize": 64,
     "origin": [
-      350,
-      210
+      128,
+      160
     ]
   },
   "uiBounds": {
@@ -22,13 +22,14 @@
     "width": 1536,
     "height": 277
   },
-  "actorScale": 0.72,
+  "actorScale": 0.95,
   "roles": {},
   "constraints": {
     "entitySpacing": 2,
     "waterWalkable": false,
     "exactActors": 7,
-    "minimumProps": 2
+    "minimumProps": 5,
+    "entityArtPadding": 4
   },
   "state": {
     "selectedId": "carl",
@@ -113,6 +114,21 @@
       "id": "crate",
       "assetId": "prop-complete-crate",
       "kind": "prop"
+    },
+    {
+      "id": "crate-east",
+      "assetId": "prop-complete-crate",
+      "kind": "prop"
+    },
+    {
+      "id": "crate-west",
+      "assetId": "prop-complete-crate",
+      "kind": "prop"
+    },
+    {
+      "id": "barrel-reserve",
+      "assetId": "prop-complete-barrel",
+      "kind": "prop"
     }
   ],
   "provenance": "Derived reusable art with explicit source provenance. Fixed raster HUD depicts the declared state. This is an illustrative room composition, not recovered original gameplay.",
@@ -121,15 +137,30 @@
       "west",
       "east"
     ],
-    "portalMargin": 3,
+    "portalMargin": 5,
     "landmarkRows": [
       2,
-      5
+      6
     ],
     "landmarkInset": 2,
     "landmarkProbability": 0.8,
     "portalClearanceColumns": 1,
-    "portalClearanceRows": 2
+    "portalClearanceRows": 2,
+    "footprint": {
+      "profileDepths": [
+        1,
+        2,
+        3
+      ],
+      "bandRows": 2,
+      "wallThickness": 2
+    },
+    "portalApproachRows": 1,
+    "portalPadding": 12,
+    "entrancePresentation": {
+      "cropTop": 110
+    },
+    "placementAttemptLimit": 5000
   },
   "edgeRules": {
     "roleSockets": {

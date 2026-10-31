@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independently verify exported fragment coverage/replay. Semantic review stays separate."""
 
-import argparse, hashlib, io, json, zipfile
+import argparse, hashlib, io, json, math, zipfile
 from pathlib import Path
 from xml.etree import ElementTree as ET
 import numpy as np
@@ -27,6 +27,24 @@ def verify_room(data, recipe, catalog):
             if cell in walkable and cell not in seen:
                 seen.add(cell); pending.append(cell)
     assert seen == walkable and tuple(data["exit"]["cell"]) in seen, "disconnected room"
+    # Props are solid obstacles; graph coverage must hold after removing them.
+    prop_cells = {tuple(p["cell"]) for p in data["placements"] if p["kind"] == "prop"}
+    navigable = walkable - prop_cells
+    pending = [tuple(data["entrance"]["cell"])]; unblocked = set(pending)
+    assert pending[0] in navigable, "prop blocks entrance"
+    while pending:
+        x,y = pending.pop()
+        for cell in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+            if cell in navigable and cell not in unblocked:
+                unblocked.add(cell); pending.append(cell)
+    assert unblocked == navigable, "prop-obstructed navigation graph"
+    assert tuple(data["exit"]["cell"]) in unblocked, "prop blocks exit"
+    for p in data["placements"]:
+        x,y = p["cell"]
+        if p["kind"] == "actor":
+            assert (x,y) in unblocked, "actor unreachable around props"
+        else:
+            assert any(c in unblocked for c in ((x-1,y),(x+1,y),(x,y-1),(x,y+1))), "inaccessible prop"
     fixed = catalog["fixedHudState"]
     state = data["state"]
     expected_state = {"selectedId":fixed["selectedId"], "targetId":fixed["targetId"], "hp":fixed["hp"][0], "maxHp":fixed["hp"][1], "mana":fixed["mana"][0], "maxMana":fixed["mana"][1], "move":fixed["move"], "round":fixed["round"], "forecastDamage":fixed["forecastDamage"]}
@@ -48,6 +66,11 @@ def verify_room(data, recipe, catalog):
     entities = [d for d in plan if d.get("entityId")]
     assert len(entities) == len(placements) and {d["entityId"] for d in entities} == set(expected), "draw entity cardinality"
     assert [d["footY"] for d in entities] == sorted(d["footY"] for d in entities), "entity depth order"
+    for i,first in enumerate(entities):
+        for second in entities[i+1:]:
+            padding = recipe["constraints"]["entityArtPadding"]
+            assert (first["x"]+first["width"]+padding <= second["x"] or second["x"]+second["width"]+padding <= first["x"]
+                    or first["y"]+first["height"]+padding <= second["y"] or second["y"]+second["height"]+padding <= first["y"]), "entity art bounds overlap or lose readability padding"
     assert [d["layer"] for d in plan] == sorted(d["layer"] for d in plan), "layer order"
     for d in plan:
         assert d.get("assetId") in assets or d.get("primitive") == "rect", "unknown draw asset"
@@ -55,7 +78,7 @@ def verify_room(data, recipe, catalog):
         if d["layer"] < 100:
             assert d["y"] + d["height"] <= recipe["uiBounds"]["y"], "draw overlaps HUD"
     floor = {tuple(d["cell"]):d for d in plan if d["layer"] == 10 and d.get("cell") and grid[d["cell"][1]][d["cell"][0]] != "water"}
-    assert len([d for d in plan if d["layer"] == 10 and d.get("cell")]) == board["rows"]*board["columns"], "tile cardinality"
+    assert len([d for d in plan if d["layer"] == 10 and d.get("cell")]) == sum(v != "wall" for row in grid for v in row), "tile cardinality"
     for (x,y),d in floor.items():
         for dx,dy,edge,opposite in ((1,0,"east","west"),(0,1,"south","north")):
             neighbor = floor.get((x+dx,y+dy))
@@ -95,9 +118,14 @@ def verify_room(data, recipe, catalog):
             assert [d["width"],d["height"]] == [sw,sh], "squashed boundary crop"
         else:
             assert [d["width"],d["height"]] == native, "stretched cap/corner"
-        if x in (-1,board["columns"]) and y in (-1,board["rows"]):
-            expected_role = "wallCorner" + ("N" if y == -1 else "S") + ("W" if x == -1 else "E")
-            assert d["tileRole"] == expected_role, "wrong wall corner orientation"
+        assert y == -recipe["architecture"]["footprint"]["wallThickness"] or any(
+            0 <= y+dy < board["rows"] and 0 <= x < board["columns"] and grid[y+dy][x] != "wall"
+            for dy in (-1,1)), "decorative cap stripes a vertical masonry face"
+        corner_neighbors = {"wallCornerNW":((0,1),(1,0)),"wallCornerNE":((0,1),(-1,0)),
+                            "wallCornerSW":((0,-1),(1,0)),"wallCornerSE":((0,-1),(-1,0))}
+        if d["tileRole"] in corner_neighbors:
+            assert all(0 <= x+dx < board["columns"] and 0 <= y+dy < board["rows"]
+                       and grid[y+dy][x+dx] != "wall" for dx,dy in corner_neighbors[d["tileRole"]]), "corner faces away from exposed room"
     for (x,y),d in terrain.items():
         for dx,dy,edge,opposite in ((1,0,"east","west"),(0,1,"south","north")):
             neighbor = terrain.get((x+dx,y+dy))
@@ -110,7 +138,71 @@ def verify_room(data, recipe, catalog):
         assert len(ds) == 1, "portal draw cardinality"
         d = ds[0]; asset = assets[d["assetId"]]
         anchor = asset["anchor"]
-        assert [d["x"]+anchor[0],d["y"]+anchor[1]] == d["threshold"], "portal anchor alignment"
+        native = asset.get("size") or [asset["width"],asset["height"]]
+        crop_top = recipe["architecture"]["entrancePresentation"]["cropTop"] if name=="entrance" else 0
+        assert 0 <= crop_top < native[1], "invalid authored portal crop"
+        assert [d["width"],d["height"]] == [native[0],native[1]-crop_top], "portal native presentation bounds"
+        assert d.get("sourceRect") == ([0,crop_top,native[0],native[1]-crop_top] if crop_top else None), "portal source crop mismatch"
+        assert [d["x"]+anchor[0],d["y"]+anchor[1]-crop_top] == d["threshold"], "portal anchor alignment"
+    # Each solid masonry cell belongs to the perimeter, including stepped bays;
+    # an isolated pillar masquerading as a perimeter bay cannot satisfy this.
+    masonry = {(x,y) for y,row in enumerate(grid) for x,v in enumerate(row) if v == "wall"}
+    attached = {c for c in masonry if c[0] in (0,board["columns"]-1) or c[1] in (0,board["rows"]-1)}
+    pending = list(attached)
+    while pending:
+        x,y = pending.pop()
+        for c in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
+            if c in masonry and c not in attached:
+                attached.add(c); pending.append(c)
+    assert attached == masonry, "isolated masonry disconnected from perimeter"
+    wall_draw_cells = {tuple(d["cell"]) for d in plan if d.get("tileRole")=="wallFace" and d["layer"]==20}
+    assert masonry <= wall_draw_cells, "solid grid masonry lacks rendered wall face"
+    # Derive portal opening columns from actual art bounds, never from a claimed
+    # clearance boolean. Any positive-width intersection reserves a column.
+    tile = board["tileSize"]; ox,oy = board["origin"]
+    for name in ("entrance", "exit"):
+        portal = data[name]
+        d = next(d for d in plan if d.get("portal") == name)
+        columns = set(range(math.floor((d["x"]-ox)/tile), math.ceil((d["x"]+d["width"]-ox)/tile)))
+        assert columns and min(columns) >= 0 and max(columns) < board["columns"], "portal extends beyond board"
+        wall_y = board["rows"] if name == "entrance" else -1
+        approach_rows = recipe["architecture"]["portalApproachRows"]
+        approach = {"x":d["x"]-recipe["architecture"]["portalPadding"],
+                    "y":d["threshold"][1] if name=="exit" else d["y"]-approach_rows*tile,
+                    "width":d["width"]+2*recipe["architecture"]["portalPadding"],"height":approach_rows*tile}
+        def cells_in_rect(rect):
+            return {(x,y) for x in range(board["columns"]) for y in range(board["rows"])
+                    if ox+x*tile < rect["x"]+rect["width"] and ox+(x+1)*tile > rect["x"]
+                    and oy+y*tile < rect["y"]+rect["height"] and oy+(y+1)*tile > rect["y"]}
+        clearance = cells_in_rect(d) | cells_in_rect(approach)
+        assert clearance <= walkable, "portal footprint/approach blocked by terrain"
+        assert not clearance.intersection(tuple(p["cell"]) for p in placements), "entity in portal footprint/approach"
+        for entity in entities:
+            for rect in (d,approach):
+                assert not (entity["x"] < rect["x"]+rect["width"] and entity["x"]+entity["width"] > rect["x"] and
+                            entity["y"] < rect["y"]+rect["height"] and entity["y"]+entity["height"] > rect["y"]), "entity art overlaps portal/approach"
+        assert not any(d.get("cell") and tuple(d["cell"]) in {(x,wall_y) for x in columns}
+                       and d.get("tileRole", "").startswith("wall") for d in plan), "masonry obstructs portal visual width"
+        for wall in (p for p in plan if p.get("tileRole", "").startswith("wall")):
+            assert not (wall["x"] < d["x"]+d["width"] and wall["x"]+wall["width"] > d["x"] and
+                        wall["y"] < d["y"]+d["height"] and wall["y"]+wall["height"] > d["y"]), "masonry overlaps portal art at outer collar"
+    # Upright masonry and all entities share painter ordering by ground contact.
+    upright = [d for d in plan if d.get("entityId") or d.get("tileRole") == "pier" or d.get("portal")]
+    assert all(d["layer"] == entities[0]["layer"] for d in upright), "pier bypasses common upright layer"
+    for d in upright:
+        if d.get("tileRole") != "pier": continue
+        a = assets[d["assetId"]]; native = a.get("size") or [a["width"],a["height"]]
+        assert [d["width"],d["height"]] == native, "pier stretches native upright art"
+        x,y = d["cell"]
+        assert [d["x"]+a["anchor"][0],d["y"]+a["anchor"][1]] == [ox+(x+.5)*tile,oy+(y+1)*tile], "pier foot anchor mismatch"
+        assert d["footY"] == oy+(y+1)*tile, "pier depth differs from ground contact"
+    for d in entities:
+        p = next(p for p in placements if p["id"]==d["entityId"])
+        a = assets[d["assetId"]]; native = a.get("size") or [a["width"],a["height"]]
+        expected_foot = oy+(p["cell"][1]+1)*tile-4
+        assert d["footY"] == p["footY"] == expected_foot, "entity depth differs from ground contact"
+        assert abs(d["y"]+a["anchor"][1]*recipe["actorScale"]-expected_foot)<1e-8, "entity visual foot anchor mismatch"
+    assert [d["footY"] for d in upright] == sorted(d["footY"] for d in upright), "upright foot depth order"
     return {"seed":data["seed"], "reachableCells":len(seen), "entities":len(placements)}
 
 
