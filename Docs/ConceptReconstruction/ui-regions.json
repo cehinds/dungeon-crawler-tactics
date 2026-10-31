@@ -1,0 +1,2310 @@
+{
+  "schemaVersion": 1,
+  "canvas": [
+    1536,
+    1024
+  ],
+  "source": "Web/wwwroot/assets/broadcast-kit/combat-concept.png",
+  "regions": [
+    {
+      "id": "objective-frame",
+      "category": "ui-frame",
+      "label": "Objective gold perimeter",
+      "priority": 100,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            20,
+            32
+          ],
+          [
+            31,
+            28
+          ],
+          [
+            280,
+            28
+          ],
+          [
+            294,
+            34
+          ],
+          [
+            294,
+            75
+          ],
+          [
+            282,
+            82
+          ],
+          [
+            31,
+            81
+          ],
+          [
+            20,
+            74
+          ]
+        ]
+      }
+    },
+    {
+      "id": "objective-body",
+      "category": "ui-panel",
+      "label": "Objective parchment face",
+      "priority": 110,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          31,
+          35,
+          252,
+          39
+        ]
+      },
+      "parentId": "objective-frame"
+    },
+    {
+      "id": "objective-lantern",
+      "category": "ui-icon",
+      "label": "Lantern illustration and hanging loop",
+      "priority": 130,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/objective-lantern.png",
+        "bounds": [
+          41,
+          15,
+          44,
+          66
+        ]
+      },
+      "parentId": "objective-frame"
+    },
+    {
+      "id": "objective-label",
+      "category": "text",
+      "label": "OPEN THE EXIT",
+      "priority": 150,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/objective-label.png",
+        "bounds": [
+          104,
+          42,
+          170,
+          25
+        ]
+      },
+      "text": {
+        "value": "OPEN THE EXIT",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "objective-body"
+    },
+    {
+      "id": "phase-frame",
+      "category": "ui-frame",
+      "label": "Phase panel gold perimeter",
+      "priority": 100,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            1230,
+            25
+          ],
+          [
+            1516,
+            25
+          ],
+          [
+            1520,
+            31
+          ],
+          [
+            1520,
+            64
+          ],
+          [
+            1504,
+            79
+          ],
+          [
+            1497,
+            103
+          ],
+          [
+            1336,
+            103
+          ],
+          [
+            1324,
+            74
+          ],
+          [
+            1231,
+            71
+          ],
+          [
+            1227,
+            64
+          ],
+          [
+            1227,
+            33
+          ]
+        ]
+      }
+    },
+    {
+      "id": "phase-body",
+      "category": "ui-panel",
+      "label": "Phase midnight panel",
+      "priority": 110,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            1234,
+            30
+          ],
+          [
+            1513,
+            30
+          ],
+          [
+            1515,
+            63
+          ],
+          [
+            1499,
+            76
+          ],
+          [
+            1494,
+            99
+          ],
+          [
+            1341,
+            99
+          ],
+          [
+            1328,
+            70
+          ],
+          [
+            1234,
+            67
+          ]
+        ]
+      },
+      "parentId": "phase-frame"
+    },
+    {
+      "id": "phase-party",
+      "category": "text",
+      "label": "PARTY",
+      "priority": 150,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/phase-party.png",
+        "bounds": [
+          1249,
+          38,
+          69,
+          23
+        ]
+      },
+      "text": {
+        "value": "PARTY",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "phase-body"
+    },
+    {
+      "id": "phase-label",
+      "category": "text",
+      "label": "PHASE",
+      "priority": 150,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/phase-label.png",
+        "bounds": [
+          1323,
+          38,
+          64,
+          23
+        ]
+      },
+      "text": {
+        "value": "PHASE",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "phase-body"
+    },
+    {
+      "id": "phase-dot",
+      "category": "text",
+      "label": "\u2022",
+      "priority": 150,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/phase-dot.png",
+        "bounds": [
+          1396,
+          40,
+          11,
+          16
+        ]
+      },
+      "text": {
+        "value": "\u2022",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "phase-body"
+    },
+    {
+      "id": "phase-round",
+      "category": "text",
+      "label": "ROUND 2",
+      "priority": 150,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/phase-round.png",
+        "bounds": [
+          1416,
+          38,
+          86,
+          23
+        ]
+      },
+      "text": {
+        "value": "ROUND 2",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "phase-body"
+    },
+    {
+      "id": "phase-diamond-1",
+      "category": "ui-indicator",
+      "label": "Phase resource diamond 1",
+      "priority": 125,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            1378,
+            64
+          ],
+          [
+            1393,
+            80
+          ],
+          [
+            1378,
+            96
+          ],
+          [
+            1363,
+            80
+          ]
+        ]
+      },
+      "parentId": "phase-body"
+    },
+    {
+      "id": "phase-diamond-2",
+      "category": "ui-indicator",
+      "label": "Phase resource diamond 2",
+      "priority": 125,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            1420,
+            64
+          ],
+          [
+            1435,
+            80
+          ],
+          [
+            1420,
+            96
+          ],
+          [
+            1405,
+            80
+          ]
+        ]
+      },
+      "parentId": "phase-body"
+    },
+    {
+      "id": "phase-diamond-3",
+      "category": "ui-indicator",
+      "label": "Phase resource diamond 3",
+      "priority": 125,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            1461,
+            64
+          ],
+          [
+            1476,
+            80
+          ],
+          [
+            1461,
+            96
+          ],
+          [
+            1446,
+            80
+          ]
+        ]
+      },
+      "parentId": "phase-body"
+    },
+    {
+      "id": "party-carl-glow",
+      "category": "ui-glow",
+      "label": "Selected Carl portrait glow",
+      "priority": 100,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          11,
+          743,
+          122,
+          88
+        ]
+      }
+    },
+    {
+      "id": "party-carl-frame",
+      "category": "ui-frame",
+      "label": "Carl party portrait frame",
+      "priority": 110,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          18,
+          750,
+          108,
+          77
+        ]
+      }
+    },
+    {
+      "id": "party-carl-body",
+      "category": "ui-panel",
+      "label": "Carl portrait dark backing",
+      "priority": 115,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          23,
+          756,
+          98,
+          65
+        ]
+      },
+      "parentId": "party-carl-frame"
+    },
+    {
+      "id": "party-carl-portrait",
+      "category": "ui-portrait",
+      "label": "Carl portrait artwork",
+      "priority": 120,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/party-carl-portrait.png",
+        "bounds": [
+          25,
+          757,
+          88,
+          65
+        ]
+      },
+      "parentId": "party-carl-frame",
+      "note": "Visible portrait foreground isolated from navy backing; source black edge retained. Boundary silhouette is a source-cutout approximation: ambiguous one-pixel frame/art blends stay original RGB and may be assigned to backing."
+    },
+    {
+      "id": "party-carl-marker",
+      "category": "ui-indicator",
+      "label": "Carl ready marker",
+      "priority": 135,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          103,
+          756,
+          17,
+          20
+        ]
+      },
+      "parentId": "party-carl-frame"
+    },
+    {
+      "id": "party-donut-frame",
+      "category": "ui-frame",
+      "label": "Donut party portrait frame",
+      "priority": 110,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          136,
+          750,
+          122,
+          77
+        ]
+      }
+    },
+    {
+      "id": "party-donut-body",
+      "category": "ui-panel",
+      "label": "Donut portrait dark backing",
+      "priority": 115,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          141,
+          756,
+          112,
+          65
+        ]
+      },
+      "parentId": "party-donut-frame"
+    },
+    {
+      "id": "party-donut-portrait",
+      "category": "ui-portrait",
+      "label": "Donut portrait artwork",
+      "priority": 120,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/party-donut-portrait.png",
+        "bounds": [
+          143,
+          757,
+          102,
+          65
+        ]
+      },
+      "parentId": "party-donut-frame",
+      "note": "Visible portrait foreground isolated from navy backing; source black edge retained. Boundary silhouette is a source-cutout approximation: ambiguous one-pixel frame/art blends stay original RGB and may be assigned to backing."
+    },
+    {
+      "id": "party-donut-marker",
+      "category": "ui-indicator",
+      "label": "Donut ready marker",
+      "priority": 135,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          235,
+          756,
+          17,
+          20
+        ]
+      },
+      "parentId": "party-donut-frame"
+    },
+    {
+      "id": "party-katia-frame",
+      "category": "ui-frame",
+      "label": "Katia party portrait frame",
+      "priority": 110,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          271,
+          750,
+          121,
+          77
+        ]
+      }
+    },
+    {
+      "id": "party-katia-body",
+      "category": "ui-panel",
+      "label": "Katia portrait dark backing",
+      "priority": 115,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          276,
+          756,
+          111,
+          65
+        ]
+      },
+      "parentId": "party-katia-frame"
+    },
+    {
+      "id": "party-katia-portrait",
+      "category": "ui-portrait",
+      "label": "Katia portrait artwork",
+      "priority": 120,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/party-katia-portrait.png",
+        "bounds": [
+          278,
+          757,
+          101,
+          65
+        ]
+      },
+      "parentId": "party-katia-frame",
+      "note": "Visible portrait foreground isolated from navy backing; source black edge retained. Boundary silhouette is a source-cutout approximation: ambiguous one-pixel frame/art blends stay original RGB and may be assigned to backing."
+    },
+    {
+      "id": "party-katia-marker",
+      "category": "ui-indicator",
+      "label": "Katia ready marker",
+      "priority": 135,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          369,
+          756,
+          17,
+          20
+        ]
+      },
+      "parentId": "party-katia-frame"
+    },
+    {
+      "id": "party-mongo-frame",
+      "category": "ui-frame",
+      "label": "Mongo party portrait frame",
+      "priority": 110,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          404,
+          750,
+          121,
+          77
+        ]
+      }
+    },
+    {
+      "id": "party-mongo-body",
+      "category": "ui-panel",
+      "label": "Mongo portrait dark backing",
+      "priority": 115,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          409,
+          756,
+          111,
+          65
+        ]
+      },
+      "parentId": "party-mongo-frame"
+    },
+    {
+      "id": "party-mongo-portrait",
+      "category": "ui-portrait",
+      "label": "Mongo portrait artwork",
+      "priority": 120,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/party-mongo-portrait.png",
+        "bounds": [
+          411,
+          757,
+          101,
+          65
+        ]
+      },
+      "parentId": "party-mongo-frame",
+      "note": "Visible portrait foreground isolated from navy backing; source black edge retained. Boundary silhouette is a source-cutout approximation: ambiguous one-pixel frame/art blends stay original RGB and may be assigned to backing."
+    },
+    {
+      "id": "party-mongo-marker",
+      "category": "ui-indicator",
+      "label": "Mongo ready marker",
+      "priority": 135,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          502,
+          756,
+          17,
+          20
+        ]
+      },
+      "parentId": "party-mongo-frame"
+    },
+    {
+      "id": "world-hp-donut-outline",
+      "category": "world-ui-frame",
+      "label": "donut HP outline",
+      "priority": 170,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          422,
+          248,
+          61,
+          14
+        ]
+      }
+    },
+    {
+      "id": "world-hp-donut-track",
+      "category": "world-ui-track",
+      "label": "donut HP dark track",
+      "priority": 171,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          424,
+          250,
+          57,
+          10
+        ]
+      },
+      "parentId": "world-hp-donut-outline"
+    },
+    {
+      "id": "world-hp-donut-fill",
+      "category": "world-ui-fill",
+      "label": "donut HP visible fill",
+      "priority": 172,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          425,
+          251,
+          54,
+          7
+        ]
+      },
+      "parentId": "world-hp-donut-outline"
+    },
+    {
+      "id": "world-hp-katia-outline",
+      "category": "world-ui-frame",
+      "label": "katia HP outline",
+      "priority": 170,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          678,
+          212,
+          57,
+          14
+        ]
+      }
+    },
+    {
+      "id": "world-hp-katia-track",
+      "category": "world-ui-track",
+      "label": "katia HP dark track",
+      "priority": 171,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          680,
+          214,
+          53,
+          10
+        ]
+      },
+      "parentId": "world-hp-katia-outline"
+    },
+    {
+      "id": "world-hp-katia-fill",
+      "category": "world-ui-fill",
+      "label": "katia HP visible fill",
+      "priority": 172,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          681,
+          215,
+          50,
+          7
+        ]
+      },
+      "parentId": "world-hp-katia-outline"
+    },
+    {
+      "id": "world-hp-mongo-outline",
+      "category": "world-ui-frame",
+      "label": "mongo HP outline",
+      "priority": 170,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          926,
+          252,
+          59,
+          14
+        ]
+      }
+    },
+    {
+      "id": "world-hp-mongo-track",
+      "category": "world-ui-track",
+      "label": "mongo HP dark track",
+      "priority": 171,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          928,
+          254,
+          55,
+          10
+        ]
+      },
+      "parentId": "world-hp-mongo-outline"
+    },
+    {
+      "id": "world-hp-mongo-fill",
+      "category": "world-ui-fill",
+      "label": "mongo HP visible fill",
+      "priority": 172,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          929,
+          255,
+          52,
+          7
+        ]
+      },
+      "parentId": "world-hp-mongo-outline"
+    },
+    {
+      "id": "world-hp-carl-outline",
+      "category": "world-ui-frame",
+      "label": "carl HP outline",
+      "priority": 170,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          485,
+          411,
+          55,
+          14
+        ]
+      }
+    },
+    {
+      "id": "world-hp-carl-track",
+      "category": "world-ui-track",
+      "label": "carl HP dark track",
+      "priority": 171,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          487,
+          413,
+          51,
+          10
+        ]
+      },
+      "parentId": "world-hp-carl-outline"
+    },
+    {
+      "id": "world-hp-carl-fill",
+      "category": "world-ui-fill",
+      "label": "carl HP visible fill",
+      "priority": 172,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          488,
+          414,
+          48,
+          7
+        ]
+      },
+      "parentId": "world-hp-carl-outline"
+    },
+    {
+      "id": "world-hp-rat-target-outline",
+      "category": "world-ui-frame",
+      "label": "rat-target HP outline",
+      "priority": 170,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          752,
+          427,
+          59,
+          15
+        ]
+      }
+    },
+    {
+      "id": "world-hp-rat-target-track",
+      "category": "world-ui-track",
+      "label": "rat-target HP dark track",
+      "priority": 171,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          754,
+          429,
+          55,
+          11
+        ]
+      },
+      "parentId": "world-hp-rat-target-outline"
+    },
+    {
+      "id": "world-hp-rat-target-fill",
+      "category": "world-ui-fill",
+      "label": "rat-target HP visible fill",
+      "priority": 172,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          755,
+          430,
+          52,
+          8
+        ]
+      },
+      "parentId": "world-hp-rat-target-outline"
+    },
+    {
+      "id": "world-hp-rat-east-outline",
+      "category": "world-ui-frame",
+      "label": "rat-east HP outline",
+      "priority": 170,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1082,
+          418,
+          61,
+          15
+        ]
+      }
+    },
+    {
+      "id": "world-hp-rat-east-track",
+      "category": "world-ui-track",
+      "label": "rat-east HP dark track",
+      "priority": 171,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1084,
+          420,
+          57,
+          11
+        ]
+      },
+      "parentId": "world-hp-rat-east-outline"
+    },
+    {
+      "id": "world-hp-rat-east-fill",
+      "category": "world-ui-fill",
+      "label": "rat-east HP visible fill",
+      "priority": 172,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1085,
+          421,
+          54,
+          8
+        ]
+      },
+      "parentId": "world-hp-rat-east-outline"
+    },
+    {
+      "id": "world-hp-rat-south-outline",
+      "category": "world-ui-frame",
+      "label": "rat-south HP outline",
+      "priority": 170,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          867,
+          562,
+          61,
+          15
+        ]
+      }
+    },
+    {
+      "id": "world-hp-rat-south-track",
+      "category": "world-ui-track",
+      "label": "rat-south HP dark track",
+      "priority": 171,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          869,
+          564,
+          57,
+          11
+        ]
+      },
+      "parentId": "world-hp-rat-south-outline"
+    },
+    {
+      "id": "world-hp-rat-south-fill",
+      "category": "world-ui-fill",
+      "label": "rat-south HP visible fill",
+      "priority": 172,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          870,
+          565,
+          54,
+          8
+        ]
+      },
+      "parentId": "world-hp-rat-south-outline"
+    },
+    {
+      "id": "target-chevron",
+      "category": "world-ui-indicator",
+      "label": "Selected rat downward chevron",
+      "priority": 185,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            766,
+            442
+          ],
+          [
+            773,
+            442
+          ],
+          [
+            782,
+            451
+          ],
+          [
+            790,
+            442
+          ],
+          [
+            798,
+            442
+          ],
+          [
+            797,
+            450
+          ],
+          [
+            783,
+            464
+          ],
+          [
+            768,
+            451
+          ]
+        ]
+      }
+    },
+    {
+      "id": "forecast-frame",
+      "category": "ui-frame",
+      "label": "Strike forecast gold balloon perimeter",
+      "priority": 190,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            828,
+            394
+          ],
+          [
+            991,
+            394
+          ],
+          [
+            1000,
+            402
+          ],
+          [
+            1000,
+            433
+          ],
+          [
+            991,
+            440
+          ],
+          [
+            853,
+            440
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            836,
+            438
+          ],
+          [
+            820,
+            438
+          ],
+          [
+            816,
+            430
+          ],
+          [
+            816,
+            404
+          ]
+        ]
+      }
+    },
+    {
+      "id": "forecast-body",
+      "category": "ui-panel",
+      "label": "Strike forecast navy balloon face",
+      "priority": 191,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            830,
+            399
+          ],
+          [
+            990,
+            399
+          ],
+          [
+            995,
+            404
+          ],
+          [
+            995,
+            431
+          ],
+          [
+            989,
+            436
+          ],
+          [
+            849,
+            436
+          ],
+          [
+            826,
+            459
+          ],
+          [
+            841,
+            435
+          ],
+          [
+            823,
+            433
+          ],
+          [
+            822,
+            405
+          ]
+        ]
+      },
+      "parentId": "forecast-frame"
+    },
+    {
+      "id": "forecast-strike",
+      "category": "text",
+      "label": "Strike",
+      "priority": 195,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/forecast-strike.png",
+        "bounds": [
+          835,
+          405,
+          58,
+          25
+        ]
+      },
+      "text": {
+        "value": "Strike",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "forecast-body"
+    },
+    {
+      "id": "forecast-dot",
+      "category": "text",
+      "label": "\u2022",
+      "priority": 195,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/forecast-dot.png",
+        "bounds": [
+          898,
+          407,
+          10,
+          19
+        ]
+      },
+      "text": {
+        "value": "\u2022",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "forecast-body"
+    },
+    {
+      "id": "forecast-mana",
+      "category": "text",
+      "label": "2 Mana",
+      "priority": 195,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/forecast-mana.png",
+        "bounds": [
+          915,
+          405,
+          70,
+          25
+        ]
+      },
+      "text": {
+        "value": "2 Mana",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "forecast-body"
+    },
+    {
+      "id": "hud-frame",
+      "category": "ui-frame",
+      "label": "Full bottom HUD gold outer frame",
+      "priority": 200,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            22,
+            831
+          ],
+          [
+            1513,
+            831
+          ],
+          [
+            1523,
+            840
+          ],
+          [
+            1524,
+            969
+          ],
+          [
+            1513,
+            980
+          ],
+          [
+            22,
+            980
+          ],
+          [
+            12,
+            969
+          ],
+          [
+            12,
+            842
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hud-body",
+      "category": "ui-panel",
+      "label": "Bottom HUD navy face",
+      "priority": 205,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          19,
+          838,
+          1498,
+          136
+        ]
+      },
+      "parentId": "hud-frame"
+    },
+    {
+      "id": "hud-carl-frame",
+      "category": "ui-frame",
+      "label": "Carl large portrait gold border",
+      "priority": 210,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          26,
+          852,
+          112,
+          116
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-carl-backing",
+      "category": "ui-panel",
+      "label": "Carl large portrait blue backing",
+      "priority": 211,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          32,
+          860,
+          98,
+          102
+        ]
+      },
+      "parentId": "hud-carl-frame"
+    },
+    {
+      "id": "hud-carl-portrait",
+      "category": "ui-portrait",
+      "label": "Carl large portrait visible artwork",
+      "priority": 212,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-carl-portrait.png",
+        "bounds": [
+          33,
+          859,
+          98,
+          104
+        ]
+      },
+      "parentId": "hud-carl-frame",
+      "note": "Visible portrait foreground isolated from navy backing; source black edge retained. Boundary silhouette is a source-cutout approximation: ambiguous one-pixel frame/art blends stay original RGB and may be assigned to backing."
+    },
+    {
+      "id": "hud-carl-name",
+      "category": "text",
+      "label": "CARL",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-carl-name.png",
+        "bounds": [
+          150,
+          854,
+          68,
+          28
+        ]
+      },
+      "text": {
+        "value": "CARL",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-hp-label",
+      "category": "text",
+      "label": "HP",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-hp-label.png",
+        "bounds": [
+          149,
+          888,
+          31,
+          24
+        ]
+      },
+      "text": {
+        "value": "HP",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-hp-value",
+      "category": "text",
+      "label": "32 / 40",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-hp-value.png",
+        "bounds": [
+          212,
+          888,
+          74,
+          25
+        ]
+      },
+      "text": {
+        "value": "32 / 40",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-mana-label",
+      "category": "text",
+      "label": "Mana",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-mana-label.png",
+        "bounds": [
+          149,
+          930,
+          53,
+          25
+        ]
+      },
+      "text": {
+        "value": "Mana",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-mana-value",
+      "category": "text",
+      "label": "8 / 12",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-mana-value.png",
+        "bounds": [
+          214,
+          930,
+          60,
+          25
+        ]
+      },
+      "text": {
+        "value": "8 / 12",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-hp-outline",
+      "category": "ui-frame",
+      "label": "hp bar outline",
+      "priority": 215,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          213,
+          913,
+          146,
+          13
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-hp-track",
+      "category": "ui-track",
+      "label": "hp bar dark track",
+      "priority": 216,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          215,
+          915,
+          142,
+          9
+        ]
+      },
+      "parentId": "hud-hp-outline"
+    },
+    {
+      "id": "hud-hp-fill",
+      "category": "ui-fill",
+      "label": "hp bar visible fill",
+      "priority": 217,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          215,
+          915,
+          112,
+          9
+        ]
+      },
+      "parentId": "hud-hp-outline"
+    },
+    {
+      "id": "hud-mana-outline",
+      "category": "ui-frame",
+      "label": "mana bar outline",
+      "priority": 215,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          213,
+          954,
+          146,
+          13
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-mana-track",
+      "category": "ui-track",
+      "label": "mana bar dark track",
+      "priority": 216,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          215,
+          956,
+          142,
+          9
+        ]
+      },
+      "parentId": "hud-mana-outline"
+    },
+    {
+      "id": "hud-mana-fill",
+      "category": "ui-fill",
+      "label": "mana bar visible fill",
+      "priority": 217,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          215,
+          956,
+          92,
+          9
+        ]
+      },
+      "parentId": "hud-mana-outline"
+    },
+    {
+      "id": "hud-stat-separator",
+      "category": "ui-separator",
+      "label": "Vertical status/movement separator",
+      "priority": 215,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          374,
+          872,
+          2,
+          88
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-movement-boot",
+      "category": "ui-icon",
+      "label": "Movement boot icon",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-movement-boot.png",
+        "bounds": [
+          390,
+          882,
+          59,
+          56
+        ]
+      },
+      "parentId": "hud-body",
+      "note": "Visible illustration silhouette with original baked edge RGB."
+    },
+    {
+      "id": "hud-movement-count",
+      "category": "text",
+      "label": "4",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-movement-count.png",
+        "bounds": [
+          464,
+          883,
+          22,
+          32
+        ]
+      },
+      "text": {
+        "value": "4",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "hud-body"
+    },
+    {
+      "id": "hud-movement-label",
+      "category": "text",
+      "label": "Move",
+      "priority": 220,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/hud-movement-label.png",
+        "bounds": [
+          458,
+          924,
+          49,
+          26
+        ]
+      },
+      "text": {
+        "value": "Move",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "hud-body"
+    },
+    {
+      "id": "action-move-glow",
+      "category": "ui-glow",
+      "label": "Move active gold glow",
+      "priority": 218,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          526,
+          844,
+          123,
+          127
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "action-move-frame",
+      "category": "ui-button-frame",
+      "label": "Move gold button border",
+      "priority": 225,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          534,
+          853,
+          106,
+          110
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "action-move-body",
+      "category": "ui-button-body",
+      "label": "Move dark button face",
+      "priority": 226,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          540,
+          860,
+          94,
+          96
+        ]
+      },
+      "parentId": "action-move-frame"
+    },
+    {
+      "id": "action-move-icon",
+      "category": "ui-icon",
+      "label": "Move action illustration",
+      "priority": 230,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-move-icon.png",
+        "bounds": [
+          560,
+          866,
+          55,
+          59
+        ]
+      },
+      "parentId": "action-move-frame",
+      "note": "Visible illustration silhouette with original baked edge RGB."
+    },
+    {
+      "id": "action-move-label",
+      "category": "text",
+      "label": "Move",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-move-label.png",
+        "bounds": [
+          558,
+          930,
+          59,
+          27
+        ]
+      },
+      "text": {
+        "value": "Move",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "action-move-frame"
+    },
+    {
+      "id": "action-strike-frame",
+      "category": "ui-button-frame",
+      "label": "Strike gold button border",
+      "priority": 225,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          652,
+          853,
+          106,
+          110
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "action-strike-body",
+      "category": "ui-button-body",
+      "label": "Strike dark button face",
+      "priority": 226,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          658,
+          860,
+          94,
+          96
+        ]
+      },
+      "parentId": "action-strike-frame"
+    },
+    {
+      "id": "action-strike-icon",
+      "category": "ui-icon",
+      "label": "Strike action illustration",
+      "priority": 230,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-strike-icon.png",
+        "bounds": [
+          670,
+          866,
+          65,
+          57
+        ]
+      },
+      "parentId": "action-strike-frame",
+      "note": "Visible illustration silhouette with original baked edge RGB."
+    },
+    {
+      "id": "action-strike-label",
+      "category": "text",
+      "label": "Strike",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-strike-label.png",
+        "bounds": [
+          673,
+          930,
+          67,
+          26
+        ]
+      },
+      "text": {
+        "value": "Strike",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "action-strike-frame"
+    },
+    {
+      "id": "action-skills-frame",
+      "category": "ui-button-frame",
+      "label": "Skills gold button border",
+      "priority": 225,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          772,
+          853,
+          107,
+          110
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "action-skills-body",
+      "category": "ui-button-body",
+      "label": "Skills dark button face",
+      "priority": 226,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          778,
+          860,
+          95,
+          96
+        ]
+      },
+      "parentId": "action-skills-frame"
+    },
+    {
+      "id": "action-skills-icon",
+      "category": "ui-icon",
+      "label": "Skills action illustration",
+      "priority": 230,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-skills-icon.png",
+        "bounds": [
+          792,
+          866,
+          60,
+          56
+        ]
+      },
+      "parentId": "action-skills-frame",
+      "note": "Visible illustration silhouette with original baked edge RGB."
+    },
+    {
+      "id": "action-skills-label",
+      "category": "text",
+      "label": "Skills",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-skills-label.png",
+        "bounds": [
+          791,
+          930,
+          68,
+          26
+        ]
+      },
+      "text": {
+        "value": "Skills",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "action-skills-frame"
+    },
+    {
+      "id": "action-items-frame",
+      "category": "ui-button-frame",
+      "label": "Items gold button border",
+      "priority": 225,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          892,
+          853,
+          108,
+          110
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "action-items-body",
+      "category": "ui-button-body",
+      "label": "Items dark button face",
+      "priority": 226,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          898,
+          860,
+          96,
+          96
+        ]
+      },
+      "parentId": "action-items-frame"
+    },
+    {
+      "id": "action-items-icon",
+      "category": "ui-icon",
+      "label": "Items action illustration",
+      "priority": 230,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-items-icon.png",
+        "bounds": [
+          919,
+          868,
+          52,
+          57
+        ]
+      },
+      "parentId": "action-items-frame",
+      "note": "Visible illustration silhouette with original baked edge RGB."
+    },
+    {
+      "id": "action-items-label",
+      "category": "text",
+      "label": "Items",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/action-items-label.png",
+        "bounds": [
+          914,
+          930,
+          62,
+          26
+        ]
+      },
+      "text": {
+        "value": "Items",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "action-items-frame"
+    },
+    {
+      "id": "target-card-frame",
+      "category": "ui-frame",
+      "label": "Target forecast gold border",
+      "priority": 225,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            1033,
+            853
+          ],
+          [
+            1230,
+            853
+          ],
+          [
+            1242,
+            864
+          ],
+          [
+            1242,
+            944
+          ],
+          [
+            1232,
+            956
+          ],
+          [
+            1032,
+            956
+          ],
+          [
+            1020,
+            945
+          ],
+          [
+            1020,
+            864
+          ]
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "target-card-body",
+      "category": "ui-panel",
+      "label": "Target forecast navy face",
+      "priority": 226,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1026,
+          859,
+          209,
+          91
+        ]
+      },
+      "parentId": "target-card-frame"
+    },
+    {
+      "id": "target-card-portrait",
+      "category": "ui-portrait",
+      "label": "Rat target portrait",
+      "priority": 230,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/target-card-portrait.png",
+        "bounds": [
+          1035,
+          871,
+          84,
+          76
+        ]
+      },
+      "parentId": "target-card-body",
+      "note": "Visible portrait foreground isolated from navy backing; source black edge retained. Boundary silhouette is a source-cutout approximation: ambiguous one-pixel frame/art blends stay original RGB and may be assigned to backing."
+    },
+    {
+      "id": "target-card-separator",
+      "category": "ui-separator",
+      "label": "Rat portrait/text divider",
+      "priority": 235,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1118,
+          866,
+          2,
+          82
+        ]
+      },
+      "parentId": "target-card-body"
+    },
+    {
+      "id": "target-card-name",
+      "category": "text",
+      "label": "Rat",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/target-card-name.png",
+        "bounds": [
+          1130,
+          879,
+          33,
+          23
+        ]
+      },
+      "text": {
+        "value": "Rat",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "target-card-body"
+    },
+    {
+      "id": "target-card-damage-value",
+      "category": "text",
+      "label": "12",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/target-card-damage-value.png",
+        "bounds": [
+          1128,
+          902,
+          31,
+          29
+        ]
+      },
+      "text": {
+        "value": "12",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "target-card-body"
+    },
+    {
+      "id": "target-card-damage-label",
+      "category": "text",
+      "label": "damage",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/target-card-damage-label.png",
+        "bounds": [
+          1161,
+          908,
+          70,
+          23
+        ]
+      },
+      "text": {
+        "value": "damage",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "target-card-body"
+    },
+    {
+      "id": "end-turn-frame",
+      "category": "ui-button-frame",
+      "label": "End turn gold perimeter",
+      "priority": 225,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            1267,
+            859
+          ],
+          [
+            1496,
+            859
+          ],
+          [
+            1505,
+            868
+          ],
+          [
+            1505,
+            931
+          ],
+          [
+            1495,
+            941
+          ],
+          [
+            1266,
+            941
+          ],
+          [
+            1255,
+            932
+          ],
+          [
+            1255,
+            870
+          ]
+        ]
+      },
+      "parentId": "hud-body"
+    },
+    {
+      "id": "end-turn-body",
+      "category": "ui-button-body",
+      "label": "End turn parchment face",
+      "priority": 226,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1265,
+          869,
+          231,
+          63
+        ]
+      },
+      "parentId": "end-turn-frame"
+    },
+    {
+      "id": "end-turn-label",
+      "category": "text",
+      "label": "End Carl\u2019s turn",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/end-turn-label.png",
+        "bounds": [
+          1276,
+          886,
+          180,
+          32
+        ]
+      },
+      "text": {
+        "value": "End Carl\u2019s turn",
+        "confidence": 1.0,
+        "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
+        "editableOriginal": false
+      },
+      "tags": [
+        "source-visible-glyphs",
+        "baked-antialiasing"
+      ],
+      "note": "Contrast-isolated visible glyphs with one-pixel source edge fringe; no hidden glyph reconstruction.",
+      "parentId": "end-turn-body"
+    },
+    {
+      "id": "end-turn-arrow",
+      "category": "ui-icon",
+      "label": "End turn right-pointing arrow",
+      "priority": 235,
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/end-turn-arrow.png",
+        "bounds": [
+          1466,
+          885,
+          24,
+          35
+        ]
+      },
+      "parentId": "end-turn-body"
+    },
+    {
+      "id": "forecast-pointer",
+      "category": "ui-frame",
+      "label": "Strike forecast yellow pointer visible jagged fringe",
+      "priority": 196,
+      "parentId": "forecast-frame",
+      "shape": {
+        "type": "mask",
+        "src": "masks/ui/forecast-pointer.png",
+        "bounds": [
+          811,
+          436,
+          58,
+          40
+        ]
+      }
+    }
+  ]
+}

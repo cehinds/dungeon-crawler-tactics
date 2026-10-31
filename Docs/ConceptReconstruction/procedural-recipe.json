@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "source": "Web/wwwroot/assets/broadcast-kit/combat-concept.png",
+  "samples": {
+    "floor1": [
+      1059,
+      590,
+      68,
+      65
+    ],
+    "floor2": [
+      554,
+      590,
+      68,
+      65
+    ],
+    "wall": [
+      1100,
+      705,
+      67,
+      48
+    ],
+    "water": [
+      1240,
+      230,
+      65,
+      65
+    ]
+  },
+  "provenance": "Literal rectangular source samples normalized to 72px tiles; baked source lighting retained. Characters use semantic visible-fragment alpha masks. No hidden sprite content is inferred.",
+  "layout": "Source-sized 1536x1024 composition, generated 12x8 board at [350,210], dry floor palette, single contiguous side water channel, source exit architecture and torches, connected entrance/exit with isolated pillars and separated source-visible actors.",
+  "layerOrder": [
+    "masonry",
+    "dry-floor/contiguous-nonwalkable-water",
+    "source-exit-architecture-and-torches",
+    "selected-Carl-cell",
+    "actors-sorted-by-foot-y",
+    "health-bars",
+    "controlled-source-props",
+    "fixed-source-raster-UI"
+  ],
+  "ui": "Exact source raster UI components at source placement, fixed source text and values. No font replacement or variable value claim.",
+  "constraints": {
+    "entranceTags": [
+      "entrance",
+      "walkable"
+    ],
+    "exitTags": [
+      "exit",
+      "walkable"
+    ],
+    "waterWalkable": false,
+    "connectivity": "BFS verifies all dry walkable cells and entrance-to-exit connection; reject candidate walls that disconnect them.",
+    "actorSpacing": "Manhattan distance at least 3 cells",
+    "uiValues": "Fixed to source raster values; arbitrary stat editing requires explicit text replacement."
+  }
+}
