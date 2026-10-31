@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "tileSize": 64,
+  "texture": {
+    "seed": 4127,
+    "floorBase": [
+      63,
+      83,
+      100
+    ],
+    "floorLight": [
+      98,
+      112,
+      120
+    ],
+    "mortar": [
+      14,
+      27,
+      36
+    ],
+    "wallBase": [
+      28,
+      52,
+      72
+    ],
+    "wallLight": [
+      57,
+      84,
+      102
+    ],
+    "flecks": 460
+  },
+  "floor": {
+    "variants": 6,
+    "commonBorder": 1,
+    "bevel": 1,
+    "cracks": 3,
+    "sourceTextures": [
+      {
+        "componentId": "floor-slab-r03-c04",
+        "localBounds": [
+          7,
+          5,
+          69,
+          67
+        ]
+      },
+      {
+        "componentId": "floor-slab-r07-c04",
+        "localBounds": [
+          7,
+          5,
+          69,
+          67
+        ]
+      },
+      {
+        "componentId": "floor-slab-r05-c01",
+        "localBounds": [
+          7,
+          5,
+          69,
+          67
+        ]
+      },
+      {
+        "componentId": "floor-slab-r07-c05",
+        "localBounds": [
+          7,
+          5,
+          69,
+          67
+        ]
+      },
+      {
+        "componentId": "floor-slab-r06-c03",
+        "localBounds": [
+          7,
+          5,
+          69,
+          67
+        ]
+      },
+      {
+        "componentId": "floor-slab-r06-c02",
+        "localBounds": [
+          7,
+          5,
+          69,
+          67
+        ]
+      }
+    ]
+  },
+  "walls": {
+    "faceRows": 3,
+    "capHeight": 18,
+    "pierWidth": 24,
+    "cornerWidth": 22,
+    "sourceMaterialIds": [
+      "brick-northwest-top-background-r00-b06",
+      "brick-northwest-top-background-r00-b07"
+    ],
+    "capSourceBounds": [
+      310,
+      665,
+      374,
+      683
+    ]
+  },
+  "water": {
+    "base": [
+      0,
+      65,
+      91
+    ],
+    "ripple": [
+      24,
+      169,
+      204
+    ],
+    "bankWidth": 12,
+    "rippleCount": 28,
+    "sourceMaterialIds": [
+      "water-channel-1-flow-05",
+      "water-channel-1-flow-06"
+    ],
+    "sourceBounds": [
+      204,
+      420,
+      264,
+      480
+    ],
+    "sourceVariants": [
+      [
+        204,
+        420,
+        268,
+        484
+      ],
+      [
+        1220,
+        225,
+        1284,
+        289
+      ],
+      [
+        1280,
+        760,
+        1344,
+        824
+      ]
+    ],
+    "visualLimit": "Static source-material modules retain recognizable natural foam motifs; no fluid simulation.",
+    "boundaryMethod": "Source-derived periodic master, opposite7px edge neighborhoods averaged, same nonconstant sourcefoam edge profiles all variants, shared outer6px texture then7px interior blend"
+  },
+  "effects": {
+    "cyan": [
+      14,
+      219,
+      255
+    ],
+    "yellow": [
+      255,
+      222,
+      24
+    ],
+    "red": [
+      255,
+      39,
+      76
+    ],
+    "stroke": 2
+  },
+  "assemblies": {
+    "actorScale": 1.0,
+    "includeRecursiveChildren": true,
+    "excludedCategories": [
+      "world-hp-bar",
+      "world-ui-frame",
+      "world-ui-track",
+      "world-ui-fill",
+      "ground-highlight",
+      "ground-effect-edge",
+      "ground-pointer",
+      "world-pointer"
+    ],
+    "actorFootAnchorFractions": {
+      "carl": [
+        0.43,
+        1.0
+      ],
+      "donut": [
+        0.53,
+        1.0
+      ],
+      "katia": [
+        0.57,
+        1.0
+      ],
+      "mongo": [
+        0.65,
+        1.0
+      ],
+      "rat-target": [
+        0.42,
+        1.0
+      ],
+      "rat-east": [
+        0.42,
+        1.0
+      ],
+      "rat-south": [
+        0.42,
+        1.0
+      ]
+    },
+    "portalConstituents": "All exit-architecture + exit-direction-arrow; explicit visible source threshold joint [963,138,1066,139] assigned elsewhere in literal partitions",
+    "entryDirection": "Source arrow rotated180 over explicitly synthesized grille backing; active cyan hue state"
+  },
+  "fixedHudState": {
+    "character": "Carl",
+    "hp": [
+      32,
+      40
+    ],
+    "mana": [
+      8,
+      12
+    ],
+    "move": 4,
+    "round": 2,
+    "selectedCharacter": "Carl",
+    "target": "Rat",
+    "forecastDamage": 12,
+    "editableText": false,
+    "selectedId": "carl",
+    "targetId": "rat-target",
+    "selectedAssetId": "actor-carl",
+    "targetAssetId": "actor-rat-target"
+  },
+  "provenancePolicy": "Procedural modules synthesize missing surfaces using reference palette and authored geometry. Source assemblies preserve visible source pixels only; occluded pixels are never claimed recovered.",
+  "modules": {
+    "floor": [
+      "stone-a",
+      "stone-b",
+      "stone-c",
+      "stone-d",
+      "stone-e",
+      "stone-f"
+    ],
+    "wall": [
+      "face",
+      "cap",
+      "pier",
+      "corner-inner",
+      "corner-outer"
+    ],
+    "water": [
+      "surface",
+      "bank-n",
+      "bank-e",
+      "bank-s",
+      "bank-w",
+      "corner-ne",
+      "corner-nw",
+      "corner-se",
+      "corner-sw",
+      "end",
+      "outlet"
+    ],
+    "completeProps": [
+      "crate",
+      "barrel",
+      "grate"
+    ],
+    "entrances": [
+      "portal-dormant",
+      "entrance-open"
+    ]
+  }
+}

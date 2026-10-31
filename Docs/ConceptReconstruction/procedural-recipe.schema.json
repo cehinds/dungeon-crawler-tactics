@@ -1,0 +1,328 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Executable concept room recipe",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "canvas",
+    "board",
+    "uiBounds",
+    "actorScale",
+    "roles",
+    "constraints",
+    "architecture",
+    "state",
+    "entities",
+    "edgeRules"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "canvas": {
+      "type": "object",
+      "required": [
+        "width",
+        "height",
+        "background"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "background": {
+          "type": "string"
+        }
+      }
+    },
+    "board": {
+      "type": "object",
+      "required": [
+        "columns",
+        "rows",
+        "tileSize",
+        "origin"
+      ],
+      "properties": {
+        "columns": {
+          "type": "integer",
+          "minimum": 8
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 6
+        },
+        "tileSize": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "origin": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "actorScale": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "roles": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          }
+        ]
+      }
+    },
+    "uiBounds": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "x": {
+          "type": "integer"
+        },
+        "y": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "required": [
+        "entitySpacing",
+        "exactActors",
+        "minimumProps"
+      ],
+      "properties": {
+        "entitySpacing": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "exactActors": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimumProps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "waterWalkable": {
+          "const": false
+        }
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "required": [
+        "channelSides",
+        "portalMargin",
+        "landmarkRows",
+        "landmarkInset",
+        "landmarkProbability",
+        "portalClearanceColumns",
+        "portalClearanceRows"
+      ],
+      "properties": {
+        "channelSides": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "west",
+              "east"
+            ]
+          },
+          "minItems": 1
+        },
+        "portalMargin": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "landmarkRows": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "landmarkInset": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "landmarkProbability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "portalClearanceColumns": {
+          "type": "integer"
+        },
+        "portalClearanceRows": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "selectedId",
+        "targetId",
+        "hp",
+        "maxHp",
+        "mana",
+        "maxMana",
+        "move",
+        "round"
+      ],
+      "properties": {
+        "selectedId": {
+          "type": "string"
+        },
+        "targetId": {
+          "type": "string"
+        },
+        "hp": {
+          "type": "integer"
+        },
+        "maxHp": {
+          "type": "integer"
+        },
+        "mana": {
+          "type": "integer"
+        },
+        "maxMana": {
+          "type": "integer"
+        },
+        "move": {
+          "type": "integer"
+        },
+        "round": {
+          "type": "integer"
+        }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "assetId",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "assetId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "actor",
+              "prop"
+            ]
+          },
+          "hp": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxHp": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "faction": {
+            "enum": [
+              "ally",
+              "enemy"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "actor"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "hp",
+                "maxHp",
+                "faction"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "edgeRules": {
+      "type": "object",
+      "required": [
+        "roleSockets",
+        "allowedPairs"
+      ],
+      "properties": {
+        "roleSockets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "north",
+              "east",
+              "south",
+              "west"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "allowedPairs": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    }
+  }
+}

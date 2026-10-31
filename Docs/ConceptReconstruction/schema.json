@@ -1,4 +1,190 @@
 {
- "$schema":"https://json-schema.org/draft/2020-12/schema", "title":"Literal concept region inventory", "type":"object", "required":["schemaVersion","canvas","regions"],
- "properties":{"schemaVersion":{"const":1},"canvas":{"const":[1536,1024]},"regions":{"type":"array","items":{"type":"object","required":["id","category","label","priority","shape"],"properties":{"id":{"type":"string","pattern":"^[a-zA-Z0-9_-]+$"},"category":{"type":"string"},"label":{"type":"string"},"priority":{"type":"number"},"parentId":{"type":"string"},"text":{"type":"string"},"tags":{"type":"array","items":{"type":"string"}},"note":{"type":"string"},"shape":{"oneOf":[{"type":"object","required":["type","bounds"],"properties":{"type":{"const":"rect"},"bounds":{"$ref":"#/$defs/bounds"}}},{"type":"object","required":["type","points"],"properties":{"type":{"const":"polygon"},"points":{"type":"array","items":{"type":"array","items":{"type":"number"},"minItems":2,"maxItems":2}}}},{"type":"object","required":["type","src","bounds"],"properties":{"type":{"const":"mask"},"src":{"type":"string"},"bounds":{"$ref":"#/$defs/bounds"}}}]}}}}},"$defs":{"bounds":{"type":"array","items":{"type":"integer"},"minItems":4,"maxItems":4}}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Literal concept region inventory",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "canvas",
+    "regions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "canvas": {
+      "const": [
+        1536,
+        1024
+      ]
+    },
+    "regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "category",
+          "label",
+          "priority",
+          "shape"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "text": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "value",
+                  "editableOriginal"
+                ],
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "fontApproximation": {
+                    "type": "string"
+                  },
+                  "editableOriginal": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          },
+          "shape": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "type",
+                  "bounds"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "rect"
+                  },
+                  "bounds": {
+                    "$ref": "#/$defs/bounds"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": [
+                  "type",
+                  "points"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "polygon"
+                  },
+                  "points": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      },
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "minItems": 3
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "required": [
+                  "type",
+                  "src",
+                  "bounds"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "mask"
+                  },
+                  "src": {
+                    "type": "string"
+                  },
+                  "bounds": {
+                    "$ref": "#/$defs/bounds"
+                  }
+                },
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "bounds": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "type": "integer",
+          "minimum": 1
+        }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    }
+  },
+  "additionalProperties": false
 }

@@ -331,15 +331,15 @@
         81
       ],
       "parent": "ui.root",
-      "description": "Dark navy panel with gold outline, stepped/tabbed lower edge. Text: 'PARTY PHASE • ROUND 2'. Three diamond markers beneath; first two glowing cyan, third gray outline.",
+      "description": "Dark navy panel with gold outline, stepped/tabbed lower edge. Text: 'PARTY PHASE \u2022 ROUND 2'. Three diamond markers beneath; first two glowing cyan, third gray outline.",
       "text_tokens": [
         "PARTY",
         "PHASE",
-        "•",
+        "\u2022",
         "ROUND 2",
-        "◇ (cyan lit)",
-        "◇ (cyan lit)",
-        "◇ (gray inactive)"
+        "\u25c7 (cyan lit)",
+        "\u25c7 (cyan lit)",
+        "\u25c7 (gray inactive)"
       ]
     },
     {
@@ -376,10 +376,10 @@
         79
       ],
       "parent": "ui.root",
-      "description": "Dark speech panel, thin yellow border, pointed yellow tail aimed toward target. Text exactly 'Strike • 2 Mana'.",
+      "description": "Dark speech panel, thin yellow border, pointed yellow tail aimed toward target. Text exactly 'Strike \u2022 2 Mana'.",
       "text_tokens": [
         "Strike",
-        "•",
+        "\u2022",
         "2 Mana"
       ]
     },
@@ -509,7 +509,7 @@
         88
       ],
       "parent": "ui.bottom-panel",
-      "description": "Large cream parchment-like button, thick gold beveled outline and dark inset. Text exactly 'End Carl’s turn' and dark right-pointing triangular arrow at right."
+      "description": "Large cream parchment-like button, thick gold beveled outline and dark inset. Text exactly 'End Carl\u2019s turn' and dark right-pointing triangular arrow at right."
     },
     {
       "id": "ui.root",
@@ -536,7 +536,7 @@
   "annotation_sources": [
     {
       "path": "Docs/ConceptReconstruction/scene-regions.json",
-      "region_count": 1346,
+      "region_count": 1357,
       "purpose": "Detailed source-visible scene masks and polygons, including 676 mortar-landmark brick cells across 19 wall zones (659 nonempty visible masks), 380 supplemental source-texture fragments, 13 capstone rows, individually annotated floor slabs, pipe tubes/joints and mounting plates, water, actors and corrected selection-ground wedge, seven world HP bars, props, targeting and movement markers."
     },
     {
@@ -21481,6 +21481,237 @@
       "note": null
     },
     {
+      "id": "north-machine-lower-support",
+      "category": "machine-panel",
+      "label": "north machine lower support",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          350,
+          179,
+          34,
+          28
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "north-machine-west-edge",
+      "category": "pipe-tube",
+      "label": "north machine west edge",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          342,
+          179,
+          9,
+          41
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "north-machine-support-plinth",
+      "category": "wall-brick",
+      "label": "north machine support plinth",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          351,
+          207,
+          33,
+          13
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-inset-wall-face",
+      "category": "wall-brick",
+      "label": "south inset wall face",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          811,
+          730,
+          93,
+          35
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-inset-wall-cap",
+      "category": "wall-capstone",
+      "label": "south inset wall cap",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          811,
+          765,
+          93,
+          22
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-stepped-cap-edge",
+      "category": "wall-capstone",
+      "label": "south stepped cap edge",
+      "parent": null,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            904,
+            762
+          ],
+          [
+            909,
+            753
+          ],
+          [
+            945,
+            753
+          ],
+          [
+            945,
+            742
+          ],
+          [
+            974,
+            742
+          ],
+          [
+            974,
+            787
+          ],
+          [
+            904,
+            787
+          ]
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "southwest-step-wall",
+      "category": "wall-brick",
+      "label": "southwest step wall",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          598,
+          706,
+          46,
+          81
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "southwest-step-cap",
+      "category": "wall-capstone",
+      "label": "southwest step cap",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          598,
+          706,
+          46,
+          29
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-low-cap-edge",
+      "category": "wall-capstone",
+      "label": "south low cap edge",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          644,
+          785,
+          167,
+          2
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "southeast-stepped-cap-edge",
+      "category": "wall-capstone",
+      "label": "southeast stepped cap edge",
+      "parent": null,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            974,
+            704
+          ],
+          [
+            1034,
+            704
+          ],
+          [
+            1034,
+            689
+          ],
+          [
+            1072,
+            689
+          ],
+          [
+            1072,
+            735
+          ],
+          [
+            974,
+            735
+          ]
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "east-room-wall-inner-edge",
+      "category": "wall-brick",
+      "label": "east room wall inner edge",
+      "parent": null,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1216,
+          369,
+          15,
+          292
+        ]
+      },
+      "text": null,
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
       "id": "exit-left-column",
       "category": "exit-architecture",
       "label": "exit left column",
@@ -23983,7 +24214,7 @@
     {
       "id": "carl-body",
       "category": "actor-body",
-      "label": "carl body source silhouette",
+      "label": "carl visible body partition (combine actor-edge children)",
       "parent": null,
       "shape": {
         "type": "mask",
@@ -24001,7 +24232,7 @@
     {
       "id": "donut-body",
       "category": "actor-body",
-      "label": "donut body source silhouette",
+      "label": "donut visible body partition (combine actor-edge children)",
       "parent": null,
       "shape": {
         "type": "mask",
@@ -24010,7 +24241,7 @@
           415,
           266,
           98,
-          83
+          89
         ]
       },
       "text": null,
@@ -24019,7 +24250,7 @@
     {
       "id": "katia-body",
       "category": "actor-body",
-      "label": "katia body source silhouette",
+      "label": "katia visible body partition (combine actor-edge children)",
       "parent": null,
       "shape": {
         "type": "mask",
@@ -24028,7 +24259,7 @@
           641,
           231,
           118,
-          127
+          133
         ]
       },
       "text": null,
@@ -24037,7 +24268,7 @@
     {
       "id": "mongo-body",
       "category": "actor-body",
-      "label": "mongo body source silhouette",
+      "label": "mongo visible body partition (combine actor-edge children)",
       "parent": null,
       "shape": {
         "type": "mask",
@@ -24046,7 +24277,7 @@
           846,
           277,
           170,
-          107
+          111
         ]
       },
       "text": null,
@@ -24055,7 +24286,7 @@
     {
       "id": "rat-target-body",
       "category": "actor-body",
-      "label": "rat-target body source silhouette",
+      "label": "rat-target visible body partition (combine actor-edge children)",
       "parent": null,
       "shape": {
         "type": "mask",
@@ -24064,7 +24295,7 @@
           749,
           478,
           123,
-          74
+          75
         ]
       },
       "text": null,
@@ -24073,7 +24304,7 @@
     {
       "id": "rat-east-body",
       "category": "actor-body",
-      "label": "rat-east body source silhouette",
+      "label": "rat-east visible body partition (combine actor-edge children)",
       "parent": null,
       "shape": {
         "type": "mask",
@@ -24082,7 +24313,7 @@
           1074,
           440,
           110,
-          73
+          79
         ]
       },
       "text": null,
@@ -24091,7 +24322,7 @@
     {
       "id": "rat-south-body",
       "category": "actor-body",
-      "label": "rat-south body source silhouette",
+      "label": "rat-south visible body partition (combine actor-edge children)",
       "parent": null,
       "shape": {
         "type": "mask",
@@ -24100,7 +24331,7 @@
           860,
           586,
           103,
-          71
+          76
         ]
       },
       "text": null,
@@ -25901,7 +26132,7 @@
     {
       "id": "phase-dot",
       "category": "text",
-      "label": "•",
+      "label": "\u2022",
       "parent": "phase-body",
       "shape": {
         "type": "mask",
@@ -25914,7 +26145,7 @@
         ]
       },
       "text": {
-        "value": "•",
+        "value": "\u2022",
         "confidence": 1.0,
         "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
         "editableOriginal": false
@@ -26862,7 +27093,7 @@
     {
       "id": "forecast-dot",
       "category": "text",
-      "label": "•",
+      "label": "\u2022",
       "parent": "forecast-body",
       "shape": {
         "type": "mask",
@@ -26875,7 +27106,7 @@
         ]
       },
       "text": {
-        "value": "•",
+        "value": "\u2022",
         "confidence": 1.0,
         "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
         "editableOriginal": false
@@ -27865,7 +28096,7 @@
     {
       "id": "end-turn-label",
       "category": "text",
-      "label": "End Carl’s turn",
+      "label": "End Carl\u2019s turn",
       "parent": "end-turn-body",
       "shape": {
         "type": "mask",
@@ -27878,7 +28109,7 @@
         ]
       },
       "text": {
-        "value": "End Carl’s turn",
+        "value": "End Carl\u2019s turn",
         "confidence": 1.0,
         "fontApproximation": "Condensed serif display; original font unavailable in flattened source",
         "editableOriginal": false
@@ -27925,10 +28156,10 @@
   "export_snapshot": {
     "source_sha256": "414d0b05ffd1bf11a7e36538aadb4c0e2e6dcd03fc2e94739a77596c882368fe",
     "manifest": "Web/wwwroot/assets/concept-reconstruction/manifest.json",
-    "manifest_sha256": "0606b90e6466a7e51216bba0807b36d31e764cdafe4e6dd76bd85558ef072e25",
-    "annotation_rows": 1452,
+    "manifest_sha256": "0f101ff69a5e736076f4c2cb12f3d911f410dc3878a707bc55cfbe0fc66199ce",
+    "annotation_rows": 1463,
     "visible_component_pngs": 1317,
-    "fully_occluded_annotation_rows": 135,
+    "fully_occluded_annotation_rows": 146,
     "unassigned_pixels": 0,
     "changed_pixels": 0
   }

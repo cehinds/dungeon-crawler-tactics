@@ -1,57 +1,246 @@
 {
-  "schemaVersion": 1,
-  "source": "Web/wwwroot/assets/broadcast-kit/combat-concept.png",
-  "samples": {
-    "floor1": [
-      1059,
-      590,
-      68,
-      65
-    ],
-    "floor2": [
-      554,
-      590,
-      68,
-      65
-    ],
-    "wall": [
-      1100,
-      705,
-      67,
-      48
-    ],
-    "water": [
-      1240,
-      230,
-      65,
-      65
+  "$schema": "procedural-recipe.schema.json",
+  "schemaVersion": 2,
+  "catalog": "../derived/catalog.json",
+  "canvas": {
+    "width": 1536,
+    "height": 1024,
+    "background": "#07131e"
+  },
+  "board": {
+    "columns": 12,
+    "rows": 8,
+    "tileSize": 64,
+    "origin": [
+      350,
+      210
     ]
   },
-  "provenance": "Literal rectangular source samples normalized to 72px tiles; baked source lighting retained. Characters use semantic visible-fragment alpha masks. No hidden sprite content is inferred.",
-  "layout": "Source-sized 1536x1024 composition, generated 12x8 board at [350,210], dry floor palette, single contiguous side water channel, source exit architecture and torches, connected entrance/exit with isolated pillars and separated source-visible actors.",
-  "layerOrder": [
-    "masonry",
-    "dry-floor/contiguous-nonwalkable-water",
-    "source-exit-architecture-and-torches",
-    "selected-Carl-cell",
-    "actors-sorted-by-foot-y",
-    "health-bars",
-    "controlled-source-props",
-    "fixed-source-raster-UI"
-  ],
-  "ui": "Exact source raster UI components at source placement, fixed source text and values. No font replacement or variable value claim.",
+  "uiBounds": {
+    "x": 0,
+    "y": 747,
+    "width": 1536,
+    "height": 277
+  },
+  "actorScale": 0.72,
+  "roles": {},
   "constraints": {
-    "entranceTags": [
-      "entrance",
-      "walkable"
-    ],
-    "exitTags": [
-      "exit",
-      "walkable"
-    ],
+    "entitySpacing": 2,
     "waterWalkable": false,
-    "connectivity": "BFS verifies all dry walkable cells and entrance-to-exit connection; reject candidate walls that disconnect them.",
-    "actorSpacing": "Manhattan distance at least 3 cells",
-    "uiValues": "Fixed to source raster values; arbitrary stat editing requires explicit text replacement."
+    "exactActors": 7,
+    "minimumProps": 2
+  },
+  "state": {
+    "selectedId": "carl",
+    "targetId": "rat-target",
+    "hp": 32,
+    "maxHp": 40,
+    "mana": 8,
+    "maxMana": 12,
+    "move": 4,
+    "round": 2,
+    "illustrativeComposition": true,
+    "selectedAction": "move",
+    "forecastDamage": 12,
+    "objective": "open-exit",
+    "phase": "party",
+    "actionPoints": 2,
+    "maxActionPoints": 3
+  },
+  "entities": [
+    {
+      "id": "carl",
+      "assetId": "actor-carl",
+      "kind": "actor",
+      "faction": "ally",
+      "hp": 32,
+      "maxHp": 40
+    },
+    {
+      "id": "donut",
+      "assetId": "actor-donut",
+      "kind": "actor",
+      "faction": "ally",
+      "hp": 28,
+      "maxHp": 32
+    },
+    {
+      "id": "katia",
+      "assetId": "actor-katia",
+      "kind": "actor",
+      "faction": "ally",
+      "hp": 28,
+      "maxHp": 32
+    },
+    {
+      "id": "mongo",
+      "assetId": "actor-mongo",
+      "kind": "actor",
+      "faction": "ally",
+      "hp": 28,
+      "maxHp": 32
+    },
+    {
+      "id": "rat-target",
+      "assetId": "actor-rat-target",
+      "kind": "actor",
+      "faction": "enemy",
+      "hp": 12,
+      "maxHp": 16
+    },
+    {
+      "id": "rat-east",
+      "assetId": "actor-rat-east",
+      "kind": "actor",
+      "faction": "enemy",
+      "hp": 12,
+      "maxHp": 16
+    },
+    {
+      "id": "rat-south",
+      "assetId": "actor-rat-south",
+      "kind": "actor",
+      "faction": "enemy",
+      "hp": 12,
+      "maxHp": 16
+    },
+    {
+      "id": "barrel",
+      "assetId": "prop-complete-barrel",
+      "kind": "prop"
+    },
+    {
+      "id": "crate",
+      "assetId": "prop-complete-crate",
+      "kind": "prop"
+    }
+  ],
+  "provenance": "Derived reusable art with explicit source provenance. Fixed raster HUD depicts the declared state. This is an illustrative room composition, not recovered original gameplay.",
+  "architecture": {
+    "channelSides": [
+      "west",
+      "east"
+    ],
+    "portalMargin": 3,
+    "landmarkRows": [
+      2,
+      5
+    ],
+    "landmarkInset": 2,
+    "landmarkProbability": 0.8,
+    "portalClearanceColumns": 1,
+    "portalClearanceRows": 2
+  },
+  "edgeRules": {
+    "roleSockets": {
+      "wallFace": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "wallCap": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "wallCapEndWest": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "wallCapEndEast": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "wallCornerNW": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "wallCornerNE": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "wallCornerSE": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "wallCornerSW": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "pier": {
+        "north": "masonry",
+        "east": "masonry",
+        "south": "masonry",
+        "west": "masonry"
+      },
+      "waterVariants": {
+        "north": "water-v2",
+        "east": "water-v2",
+        "south": "water-v2",
+        "west": "water-v2"
+      },
+      "waterEndVariants": {
+        "north": "water-v2",
+        "east": "water-v2",
+        "south": "water-v2",
+        "west": "water-v2"
+      },
+      "waterOutletVariants": {
+        "north": "water-v2",
+        "east": "water-v2",
+        "south": "water-v2",
+        "west": "water-v2"
+      },
+      "floor": {
+        "north": "stone-mortar-v1",
+        "east": "stone-mortar-v1",
+        "south": "stone-mortar-v1",
+        "west": "stone-mortar-v1"
+      },
+      "bankEastVariants": {
+        "north": "bank-e",
+        "south": "bank-e",
+        "east": "stone-mortar-v1",
+        "west": "water-v2"
+      },
+      "bankWestVariants": {
+        "north": "bank-w",
+        "south": "bank-w",
+        "west": "stone-mortar-v1",
+        "east": "water-v2"
+      }
+    },
+    "allowedPairs": [
+      [
+        "stone-mortar-v1",
+        "masonry"
+      ],
+      [
+        "water-v2",
+        "masonry"
+      ],
+      [
+        "bank-e",
+        "masonry"
+      ],
+      [
+        "bank-w",
+        "masonry"
+      ]
+    ]
   }
 }

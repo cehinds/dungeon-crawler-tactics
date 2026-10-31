@@ -2,12 +2,41 @@
 
 from pathlib import Path
 import json
+import argparse
 from PIL import Image, ImageDraw, ImageChops, ImageFilter
 import numpy as np
 from scipy import ndimage as ndi
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "Web/wwwroot/assets/concept-reconstruction/masks/scene"
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--output", type=Path, default=ROOT / "Web/wwwroot/assets/concept-reconstruction/masks/scene")
+parser.add_argument("--regions-output", type=Path, default=ROOT / "Docs/ConceptReconstruction/scene-regions.json")
+args = parser.parse_args()
+landmark_path = ROOT / "Docs/ConceptReconstruction/brick-landmarks.json"
+silhouette_path = ROOT / "Docs/ConceptReconstruction/actor-silhouettes.json"
+landmarks = json.loads(landmark_path.read_text())
+silhouette_data = json.loads(silhouette_path.read_text())
+architecture_data = json.loads((ROOT / "Docs/ConceptReconstruction/source-architecture.json").read_text())
+if not landmarks.get("zones") or set(silhouette_data.get("actors", {})) != {"carl", "donut", "katia", "mongo", "rat-target", "rat-east", "rat-south"}:
+    raise ValueError("Required authored brick and seven actor landmarks are missing")
+for zone in landmarks["zones"]:
+    for row in zone["rows"]:
+        if not (0 <= row["y0"] < row["y1"] <= 1024 and len(row["seams"]) >= 2 and all(0 <= x <= 1536 for x in row["seams"]) and all(a < b for a, b in zip(row["seams"], row["seams"][1:]))):
+            raise ValueError("Invalid brick landmark row")
+for actor in silhouette_data["actors"].values():
+    for polygon in [actor["outer"], *actor.get("additions", [])]:
+        if len(polygon) < 3 or any(not (0 <= x < 1536 and 0 <= y < 1024) for x, y in polygon):
+            raise ValueError("Invalid actor silhouette polygon")
+if not architecture_data.get("regions"):
+    raise ValueError("Required source architecture landmarks are missing")
+for correction in architecture_data["regions"]:
+    if "bounds" in correction:
+        x, y, w, h = correction["bounds"]
+        if not (0 <= x < x + w <= 1536 and 0 <= y < y + h <= 1024):
+            raise ValueError("Invalid source architecture bounds")
+    elif len(correction.get("points", [])) < 3 or any(not (0 <= x < 1536 and 0 <= y < 1024) for x, y in correction["points"]):
+        raise ValueError("Invalid source architecture polygon")
+OUT = args.output
 OUT.mkdir(parents=True, exist_ok=True)
 regions = []
 
@@ -196,8 +225,7 @@ for index, (y0, x0, x1, y1, pixels) in enumerate(
 # into physical brick components. A brick can contain disconnected visible
 # patches around foreground objects; higher-priority object masks clip those.
 landmark_path = ROOT / "Docs/ConceptReconstruction/brick-landmarks.json"
-if landmark_path.exists():
-    landmarks = json.loads(landmark_path.read_text())
+if landmarks:
     mapped_bricks = Image.new("L", (1536, 1024))
     for zone in landmarks["zones"]:
         for row_index, row in enumerate(zone.get("rows", [])):
@@ -328,6 +356,14 @@ for ci, ch in enumerate(channels):
                 tags=["water", "reflection", "visible-source"],
             )
         )
+# Editable source-traced perimeter corrections supersede approximate arena cells.
+for correction in architecture_data["regions"]:
+    if "points" in correction:
+        poly(correction["id"], correction["category"], correction["points"], 40,
+             "Source-traced visible architecture at the arena boundary; no hidden surface inference.")
+    else:
+        rect(correction["id"], correction["category"], correction["bounds"], 40,
+             "Source-traced visible architecture at the arena boundary; no hidden surface inference.")
 # Door assembly, staircase and individual frame pieces.
 for id, b in [
     ("exit-left-column", [899, 0, 46, 184]),
@@ -765,224 +801,7 @@ for id, pts in [
 ]:
     poly(id, "vines", pts, 52)
 # Actors: manually traced visible silhouettes preserve open negative-space gaps.
-actors = {
-    "carl": [
-        (498, 437),
-        (518, 429),
-        (537, 437),
-        (545, 450),
-        (542, 462),
-        (555, 468),
-        (566, 460),
-        (575, 467),
-        (571, 479),
-        (549, 485),
-        (537, 482),
-        (532, 494),
-        (536, 514),
-        (531, 525),
-        (547, 528),
-        (543, 534),
-        (519, 533),
-        (512, 518),
-        (503, 535),
-        (490, 546),
-        (469, 545),
-        (467, 537),
-        (480, 525),
-        (484, 507),
-        (474, 496),
-        (463, 500),
-        (459, 483),
-        (464, 462),
-        (478, 450),
-        (495, 453),
-    ],
-    "donut": [
-        (427, 267),
-        (442, 266),
-        (450, 279),
-        (459, 283),
-        (466, 279),
-        (468, 270),
-        (477, 276),
-        (486, 268),
-        (491, 280),
-        (503, 276),
-        (504, 292),
-        (512, 308),
-        (504, 323),
-        (495, 330),
-        (491, 344),
-        (479, 348),
-        (471, 340),
-        (457, 340),
-        (449, 347),
-        (437, 341),
-        (439, 329),
-        (425, 329),
-        (424, 315),
-        (431, 300),
-        (417, 293),
-        (415, 278),
-    ],
-    "katia": [
-        (678, 246),
-        (691, 234),
-        (714, 231),
-        (730, 238),
-        (738, 255),
-        (734, 273),
-        (746, 279),
-        (756, 297),
-        (758, 313),
-        (747, 328),
-        (734, 324),
-        (728, 314),
-        (722, 323),
-        (730, 338),
-        (738, 341),
-        (735, 350),
-        (712, 348),
-        (704, 328),
-        (696, 331),
-        (688, 349),
-        (687, 357),
-        (665, 357),
-        (660, 350),
-        (671, 335),
-        (679, 317),
-        (670, 305),
-        (654, 304),
-        (641, 291),
-        (641, 275),
-        (651, 261),
-        (670, 258),
-    ],
-    "mongo": [
-        (858, 299),
-        (895, 287),
-        (916, 287),
-        (929, 280),
-        (944, 282),
-        (955, 288),
-        (966, 277),
-        (981, 278),
-        (992, 288),
-        (1008, 292),
-        (1015, 306),
-        (1009, 315),
-        (986, 311),
-        (980, 324),
-        (987, 342),
-        (980, 356),
-        (984, 369),
-        (981, 381),
-        (970, 378),
-        (965, 367),
-        (957, 369),
-        (953, 383),
-        (943, 382),
-        (938, 375),
-        (942, 365),
-        (934, 361),
-        (923, 370),
-        (910, 368),
-        (907, 356),
-        (899, 346),
-        (876, 344),
-        (890, 333),
-        (865, 337),
-        (877, 326),
-        (846, 343),
-        (853, 325),
-        (873, 310),
-        (849, 321),
-    ],
-    "rat-target": [
-        (766, 489),
-        (778, 485),
-        (787, 478),
-        (799, 490),
-        (816, 490),
-        (830, 499),
-        (834, 518),
-        (847, 524),
-        (859, 518),
-        (860, 504),
-        (857, 497),
-        (862, 495),
-        (871, 509),
-        (868, 528),
-        (854, 535),
-        (833, 532),
-        (823, 542),
-        (813, 546),
-        (817, 551),
-        (807, 551),
-        (801, 541),
-        (786, 543),
-        (776, 535),
-        (778, 526),
-        (766, 526),
-        (753, 514),
-        (749, 504),
-        (760, 497),
-    ],
-    "rat-east": [
-        (1088, 453),
-        (1096, 448),
-        (1105, 440),
-        (1114, 450),
-        (1132, 447),
-        (1145, 460),
-        (1151, 479),
-        (1165, 486),
-        (1174, 476),
-        (1172, 466),
-        (1177, 465),
-        (1183, 480),
-        (1176, 497),
-        (1163, 503),
-        (1145, 498),
-        (1134, 509),
-        (1124, 512),
-        (1118, 503),
-        (1108, 505),
-        (1097, 494),
-        (1101, 486),
-        (1087, 483),
-        (1076, 473),
-        (1074, 465),
-    ],
-    "rat-south": [
-        (875, 600),
-        (883, 593),
-        (891, 586),
-        (902, 599),
-        (919, 598),
-        (931, 607),
-        (936, 621),
-        (946, 625),
-        (954, 616),
-        (951, 610),
-        (956, 606),
-        (962, 620),
-        (957, 635),
-        (943, 641),
-        (929, 637),
-        (916, 646),
-        (921, 652),
-        (910, 656),
-        (900, 647),
-        (891, 648),
-        (883, 637),
-        (885, 628),
-        (870, 627),
-        (860, 617),
-        (860, 608),
-    ],
-}
+actors = {key: value["outer"] for key, value in silhouette_data["actors"].items()}
 for id, pts in actors.items():
     # Remove blue stone/shadow negative spaces inside a traced outer contour.
     # This local chromatic test retains warm bodies, purple hair, neutral armor,
@@ -998,7 +817,17 @@ for id, pts in actors.items():
     if id == "mongo":
         # Blue head is a saturated actor feature, not the muted stone substrate.
         floor_chroma[286:317, 970:1017] = False
+    for addition in silhouette_data["actors"][id].get("additions", []):
+        traced |= np.asarray(raster(addition)) > 0
     body = traced & ~floor_chroma
+    if id == "rat-target":
+        # Magenta selection substrate is distinct from warm pink feet/tail.
+        body &= ~((rr > gg * 1.5) & (bb > gg * 1.18) & (bb > 35))
+        protected_red = np.zeros(body.shape, dtype=bool)
+        protected_red[494:537, 835:873] = True  # visible tail
+        protected_red[522:553, 769:829] = True  # visible pink feet
+        protected_red[490:514, 751:784] = True  # eye and nose
+        body &= ~((rr > gg * 1.8) & (rr > bb * 1.3) & ~protected_red)
     if id == "carl":
         # Native 10x foot inspection: the selected yellow cell is not blue,
         # so the general negative-space chroma test cannot remove its wedges.
@@ -1104,7 +933,7 @@ for id, pts in actors.items():
         dict(
             id=id + "-body",
             category="actor-body",
-            label=id + " body source silhouette",
+            label=id + " visible body partition (combine actor-edge children)",
             priority=85,
             shape=dict(
                 type="mask",
@@ -1349,10 +1178,10 @@ for id, pts in [
     )
 # Landmark bricks supersede any earlier capstone rectangle in their footprint.
 # Keep only independently visible capstone portions beyond the new map.
-if landmark_path.exists():
+if landmarks:
     retained_regions = []
     for region in regions:
-        if region["category"] != "wall-capstone":
+        if region["category"] != "wall-capstone" or region["priority"] >= 40:
             retained_regions.append(region)
             continue
         x, y, width, height = region["shape"]["bounds"]
@@ -1372,7 +1201,7 @@ if landmark_path.exists():
         retained_regions.append(region)
     regions = retained_regions
 
-DOC = ROOT / "Docs/ConceptReconstruction/scene-regions.json"
+DOC = args.regions_output
 DOC.parent.mkdir(parents=True, exist_ok=True)
 DOC.write_text(
     json.dumps(dict(schemaVersion=1, canvas=[1536, 1024], regions=regions), indent=2)

@@ -4,14 +4,20 @@ Text masks retain source RGB via compositor; font metadata is descriptive only.
 """
 
 import json
+import argparse
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
-ASSET = ROOT / "Web/wwwroot/assets/concept-reconstruction"
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--output", type=Path, default=ROOT / "Web/wwwroot/assets/concept-reconstruction/masks/ui")
+parser.add_argument("--regions-output", type=Path, default=ROOT / "Docs/ConceptReconstruction/ui-regions.json")
+args = parser.parse_args()
+MASK_OUT = args.output
 SOURCE = ROOT / "Web/wwwroot/assets/broadcast-kit/combat-concept.png"
 im = Image.open(SOURCE).convert("RGB")
+MASK_OUT.mkdir(parents=True, exist_ok=True)
 regions = []
 
 
@@ -58,7 +64,7 @@ def txt(id, s, b, parent=None, mode="light", p=150):
             & ((np.maximum.reduce([r, g, bl]) - np.minimum.reduce([r, g, bl])) < 100)
         )
     mask = Image.fromarray((m * 255).astype("uint8")).filter(ImageFilter.MaxFilter(3))
-    path = ASSET / "masks/ui" / f"{id}.png"
+    path = MASK_OUT / f"{id}.png"
     mask.save(path)
     d = dict(
         id=id,
@@ -538,7 +544,7 @@ for region in regions:
         mask = Image.fromarray(
             (binary_fill_holes(np.array(mask) > 0) * 255).astype("uint8")
         )
-    path = ASSET / "masks/ui" / f"{region['id']}.png"
+    path = MASK_OUT / f"{region['id']}.png"
     mask.save(path)
     region["shape"] = dict(
         type="mask", src=f"masks/ui/{region['id']}.png", bounds=[x, y, w, h]
@@ -616,7 +622,7 @@ for region in regions:
             max(0, mx - x) : max(0, min(w, mx + mw - x)),
         ] = 0
         mask = Image.fromarray(ma)
-    mask.save(ASSET / "masks/ui" / f"{region['id']}.png")
+    mask.save(MASK_OUT / f"{region['id']}.png")
     region["shape"] = dict(
         type="mask", src=f"masks/ui/{region['id']}.png", bounds=[x, y, w, h]
     )
@@ -648,7 +654,7 @@ ImageDraw.Draw(m).polygon(
     ],
     fill=255,
 )
-m.save(ASSET / "masks/ui/objective-lantern.png")
+m.save(MASK_OUT / "objective-lantern.png")
 lantern["shape"] = dict(type="mask", src="masks/ui/objective-lantern.png", bounds=b)
 # The arrow is a dark silhouette, separately from parchment.
 arrow = next(v for v in regions if v["id"] == "end-turn-arrow")
@@ -656,7 +662,7 @@ b = [1466, 885, 24, 35]
 x, y, w, h = b
 a = np.array(im.crop((x, y, x + w, y + h)))
 m = np.max(a, axis=2) < 145
-Image.fromarray((m * 255).astype("uint8")).save(ASSET / "masks/ui/end-turn-arrow.png")
+Image.fromarray((m * 255).astype("uint8")).save(MASK_OUT / "end-turn-arrow.png")
 arrow["shape"] = dict(type="mask", src="masks/ui/end-turn-arrow.png", bounds=b)
 # Source yellow pointer has a two-pixel jagged fringe beyond the nominal polygon.
 b = [811, 436, 58, 40]
@@ -670,7 +676,7 @@ clip = Image.new(
 )  # Entire tight tail crop is floor-gray except this source yellow pointer.
 m = Image.fromarray((m * 255).astype("uint8")).filter(ImageFilter.MaxFilter(3))
 m = np.minimum(np.array(m), np.array(clip))
-Image.fromarray(m).save(ASSET / "masks/ui/forecast-pointer.png")
+Image.fromarray(m).save(MASK_OUT / "forecast-pointer.png")
 regions.append(
     dict(
         id="forecast-pointer",
@@ -681,7 +687,8 @@ regions.append(
         shape=dict(type="mask", src="masks/ui/forecast-pointer.png", bounds=b),
     )
 )
-out = ROOT / "Docs/ConceptReconstruction/ui-regions.json"
+out = args.regions_output
+out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(
     json.dumps(
         dict(

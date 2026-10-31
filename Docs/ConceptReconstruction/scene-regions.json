@@ -25416,6 +25416,226 @@
       ]
     },
     {
+      "id": "north-machine-lower-support",
+      "category": "machine-panel",
+      "label": "north machine lower support",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          350,
+          179,
+          34,
+          28
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "north-machine-west-edge",
+      "category": "pipe-tube",
+      "label": "north machine west edge",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          342,
+          179,
+          9,
+          41
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "north-machine-support-plinth",
+      "category": "wall-brick",
+      "label": "north machine support plinth",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          351,
+          207,
+          33,
+          13
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-inset-wall-face",
+      "category": "wall-brick",
+      "label": "south inset wall face",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          811,
+          730,
+          93,
+          35
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-inset-wall-cap",
+      "category": "wall-capstone",
+      "label": "south inset wall cap",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          811,
+          765,
+          93,
+          22
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-stepped-cap-edge",
+      "category": "wall-capstone",
+      "label": "south stepped cap edge",
+      "priority": 40,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            904,
+            762
+          ],
+          [
+            909,
+            753
+          ],
+          [
+            945,
+            753
+          ],
+          [
+            945,
+            742
+          ],
+          [
+            974,
+            742
+          ],
+          [
+            974,
+            787
+          ],
+          [
+            904,
+            787
+          ]
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "southwest-step-wall",
+      "category": "wall-brick",
+      "label": "southwest step wall",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          598,
+          706,
+          46,
+          81
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "southwest-step-cap",
+      "category": "wall-capstone",
+      "label": "southwest step cap",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          598,
+          706,
+          46,
+          29
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "south-low-cap-edge",
+      "category": "wall-capstone",
+      "label": "south low cap edge",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          644,
+          785,
+          167,
+          2
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "southeast-stepped-cap-edge",
+      "category": "wall-capstone",
+      "label": "southeast stepped cap edge",
+      "priority": 40,
+      "shape": {
+        "type": "polygon",
+        "points": [
+          [
+            974,
+            704
+          ],
+          [
+            1034,
+            704
+          ],
+          [
+            1034,
+            689
+          ],
+          [
+            1072,
+            689
+          ],
+          [
+            1072,
+            735
+          ],
+          [
+            974,
+            735
+          ]
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
+      "id": "east-room-wall-inner-edge",
+      "category": "wall-brick",
+      "label": "east room wall inner edge",
+      "priority": 40,
+      "shape": {
+        "type": "rect",
+        "bounds": [
+          1216,
+          369,
+          15,
+          292
+        ]
+      },
+      "note": "Source-traced visible architecture at the arena boundary; no hidden surface inference."
+    },
+    {
       "id": "exit-left-column",
       "category": "exit-architecture",
       "label": "exit left column",
@@ -27727,7 +27947,7 @@
     {
       "id": "carl-body",
       "category": "actor-body",
-      "label": "carl body source silhouette",
+      "label": "carl visible body partition (combine actor-edge children)",
       "priority": 85,
       "shape": {
         "type": "mask",
@@ -27748,7 +27968,7 @@
     {
       "id": "donut-body",
       "category": "actor-body",
-      "label": "donut body source silhouette",
+      "label": "donut visible body partition (combine actor-edge children)",
       "priority": 85,
       "shape": {
         "type": "mask",
@@ -27757,7 +27977,7 @@
           415,
           266,
           98,
-          83
+          89
         ]
       },
       "tags": [
@@ -27769,7 +27989,7 @@
     {
       "id": "katia-body",
       "category": "actor-body",
-      "label": "katia body source silhouette",
+      "label": "katia visible body partition (combine actor-edge children)",
       "priority": 85,
       "shape": {
         "type": "mask",
@@ -27778,7 +27998,7 @@
           641,
           231,
           118,
-          127
+          133
         ]
       },
       "tags": [
@@ -27790,7 +28010,7 @@
     {
       "id": "mongo-body",
       "category": "actor-body",
-      "label": "mongo body source silhouette",
+      "label": "mongo visible body partition (combine actor-edge children)",
       "priority": 85,
       "shape": {
         "type": "mask",
@@ -27799,7 +28019,7 @@
           846,
           277,
           170,
-          107
+          111
         ]
       },
       "tags": [
@@ -27811,7 +28031,7 @@
     {
       "id": "rat-target-body",
       "category": "actor-body",
-      "label": "rat-target body source silhouette",
+      "label": "rat-target visible body partition (combine actor-edge children)",
       "priority": 85,
       "shape": {
         "type": "mask",
@@ -27820,7 +28040,7 @@
           749,
           478,
           123,
-          74
+          75
         ]
       },
       "tags": [
@@ -27832,7 +28052,7 @@
     {
       "id": "rat-east-body",
       "category": "actor-body",
-      "label": "rat-east body source silhouette",
+      "label": "rat-east visible body partition (combine actor-edge children)",
       "priority": 85,
       "shape": {
         "type": "mask",
@@ -27841,7 +28061,7 @@
           1074,
           440,
           110,
-          73
+          79
         ]
       },
       "tags": [
@@ -27853,7 +28073,7 @@
     {
       "id": "rat-south-body",
       "category": "actor-body",
-      "label": "rat-south body source silhouette",
+      "label": "rat-south visible body partition (combine actor-edge children)",
       "priority": 85,
       "shape": {
         "type": "mask",
@@ -27862,7 +28082,7 @@
           860,
           586,
           103,
-          71
+          76
         ]
       },
       "tags": [
