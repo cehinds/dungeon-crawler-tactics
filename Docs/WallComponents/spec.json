@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "grid": {
+    "tileSize": 64,
+    "capWidth": 32,
+    "canvas": [
+      64,
+      96
+    ],
+    "overhang": [
+      0,
+      0,
+      0,
+      32
+    ],
+    "pivot": [
+      32,
+      32
+    ],
+    "faceProjection": [
+      0,
+      24
+    ],
+    "shadowProjection": [
+      0,
+      28
+    ],
+    "lighting": "source lighting retained, no automatic rotations"
+  },
+  "sources": [
+    {
+      "file": "Web/wwwroot/assets/map-grid-pass/expansion/components/walls/walls-capH.png",
+      "sha256": "928b81dbb172744ad4a7ff4c3e38dcdead0dbd58210a53728db97906a74021b2"
+    },
+    {
+      "file": "Web/wwwroot/assets/map-grid-pass/expansion/components/walls/walls-plain.png",
+      "sha256": "9fc94418a128605ddd25a91d1b58fca598fb5c038ce77d0e6557bf7de92386fa"
+    },
+    {
+      "file": "Web/wwwroot/assets/map-grid-pass/expansion/components/walls/walls-emptyarch.png",
+      "sha256": "665d6d1a261b4543e5fc464b527adbd82394fdbec2c93793023496aab3f43948"
+    }
+  ],
+  "moduleNames": {
+    "0": "isolated-pillar",
+    "1": "end-north",
+    "2": "end-east",
+    "3": "turn-north-east",
+    "4": "end-south",
+    "5": "straight-north-south",
+    "6": "turn-east-south",
+    "7": "junction-north-east-south",
+    "8": "end-west",
+    "9": "turn-north-west",
+    "10": "straight-east-west",
+    "11": "junction-north-east-west",
+    "12": "turn-south-west",
+    "13": "junction-north-south-west",
+    "14": "junction-east-south-west",
+    "15": "junction-cross"
+  },
+  "method": "Crop painted material into 32px texture; tile periodically in world-aligned orientation; apply cardinal union masks; separate cap, complete masonry, shadow. Imported boundary pieces retain original lighting."
+}
