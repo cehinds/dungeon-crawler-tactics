@@ -24,6 +24,8 @@ def publication_exclusion(relative):
         return 'runtime-python-cache'
     if parts and parts[0] == 'replay-inputs':
         return 'offline-replay-inputs'
+    if parts and parts[0] == 'map-grid-pass':
+        return 'offline-map-grid-pack'
     for library in REMOTE_LIBRARIES:
         directory = PurePosixPath(library)
         if library != 'reusable-gameplay':
