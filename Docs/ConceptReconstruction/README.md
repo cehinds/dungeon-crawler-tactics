@@ -32,6 +32,31 @@ This writes three reproducible room PNGs and placement JSON files under `Web/www
 
 The room studies are newly composed illustrations with normalized visible samples. They are not recovered rooms or the original game's rendering algorithm. Fixed source HUD text remains a raster image; the recipe does not generate arbitrary editable labels or stats. The BFS checks report all dry cells connected and an open entrance-to-exit path for seeds 7, 29 and 103; water cells remain nonwalkable.
 
+## Restore assets and apply attachment tags
+
+After generating or restoring art assets, run the pinned AI-Art attachment tool so generated JSON assets receive their required attachment metadata and the derived archives refresh. The game lock pins AI-Art commit `76c832bfaa17944b6609f4545bc7935fe45986f6`; use a clean checkout at that exact revision. For a new adjacent checkout:
+
+```sh
+git clone https://github.com/cehinds/AI-Art.git ../AI-Art
+git -C ../AI-Art checkout --detach 76c832bfaa17944b6609f4545bc7935fe45986f6
+```
+
+For a pre-existing clone, fetch and check out the locked revision after preserving any local work:
+
+```sh
+git -C ../AI-Art fetch origin 76c832bfaa17944b6609f4545bc7935fe45986f6
+git -C ../AI-Art checkout --detach 76c832bfaa17944b6609f4545bc7935fe45986f6
+```
+
+After the normal art restore or generation steps, apply the tags and refresh archives, then run check mode to verify the result:
+
+```sh
+python3 ../AI-Art/tools/asset_attachment_tags.py --assets Web/wwwroot/assets --apply --refresh-archives
+python3 ../AI-Art/tools/asset_attachment_tags.py --assets Web/wwwroot/assets --check --refresh-archives
+```
+
+This updates root attachment tags in eligible generated JSON and refreshes archives; it does not alter PNG bytes. The literal-source concept evidence manifest is schema-exempt, and the frozen component ZIP, OpenRaster file and reconstruction PNGs keep their recorded bytes. Keep this post-generation step after the rebuild or asset restore so regenerated JSON does not drop the required tags.
+
 ## Reading the layers and masks
 
 The [OpenRaster file](../../Web/wwwroot/assets/concept-reconstruction/combat-concept.ora) holds separate PNG layers with their original visible RGB and binary ownership masks. The [portable ZIP](../../Web/wwwroot/assets/concept-reconstruction/combat-concept-components.zip) holds the manifest, visible component PNGs, source provenance and recipe. The [browser inspector](../../Web/wwwroot/concept-reconstruction.html) can filter and solo those annotations, show the assembled image or difference view, and download the manifest and individual fragments. These are derived outputs; the original concept source is not included as a hidden layer in the ZIP. Layer names, shapes and text transcriptions are documentation authored for this reconstruction; they are not original source layer names.
