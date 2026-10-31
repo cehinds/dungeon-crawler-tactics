@@ -32,6 +32,8 @@ def publication_exclusion(relative):
         return 'offline-completed-layers-pack'
     if parts and parts[0] == 'wall-components':
         return 'offline-wall-components-pack'
+    if parts and parts[0] == 'exploration-components':
+        return 'offline-exploration-components-pack'
     for library in REMOTE_LIBRARIES:
         directory = PurePosixPath(library)
         if library != 'reusable-gameplay':
