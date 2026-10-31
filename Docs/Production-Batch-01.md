@@ -1,7 +1,8 @@
 # Production batch 01 handoff
 
-**Date:** 2026-10-30  
-**State:** local browser integration and focused checks are complete; AI-Art publication is complete; game publication and deployment are tracked separately.
+**Date:** 2026-10-30
+
+**State:** local browser integration and focused checks are complete; AI-Art and game source are published; Pages deployment verification remains pending.
 
 ## Workstreams and ownership
 
@@ -9,7 +10,8 @@ Assignments follow the repository working agreement: the coordinator and code/in
 
 | Workstream | Owner/model | Handoff state |
 |---|---|---|
-| UI hybrid, shared runtime integration, final coordination | Coordinator / GPT-6.1 Sol | Implemented and locally checked; publication pending |
+| Planning, delegation and final review | Coordinator / GPT-6.1 Sol | Planning and review only; implementation delegated |
+| UI hybrid and shared runtime integration | Code/integration specialist / GPT-6.1 Sol | Implemented, locally checked and source published |
 | Fire/thaw reaction mechanics | Code specialist / GPT-6.1 Sol | Implemented; focused and regression checks passed |
 | Story progression and rank data | Code specialist / GPT-6.1 Sol | Implemented; fresh WASM and focused suites passed |
 | Content/source audit and manager documentation | Content/docs specialist / GPT-6 Luna | Delivered; runtime monster proposals remain unimplemented |
@@ -28,7 +30,7 @@ Assignments follow the repository working agreement: the coordinator and code/in
 ## Remaining work
 
 - [x] Publish the reviewed art to AI-Art `dungeon-crawler` (`5991dabf4db68a73e5bbc4bc398f331364f4f612`) and pin the exact index digest in the game lock. All 244,061 prior index records remain unchanged; 69 new kit records were added.
-- [ ] Confirm the game Pages deployment succeeds after publication. Local browser checks do not mean a public release has happened.
+- [ ] Confirm the game Pages deployment succeeds after publication. The workflow uses runner-owned temporary directories for browser screenshots, including generated-campaign checks. Local browser checks do not mean a public release has happened.
 - [ ] Build an adapter that consumes the new kit in the room/map generator. The exports and edge metadata alone do not establish generator compatibility.
 - [ ] Review assembled terrain for pixel texture seams. Structural edge intervals pass; painted color continuity is still unreviewed for production use.
 - [ ] Expand walking, attack, and cast animation coverage for the new combatants and actions.

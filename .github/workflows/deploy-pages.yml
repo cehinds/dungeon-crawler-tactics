@@ -183,9 +183,9 @@ jobs:
       - name: Check published ability rank progression
         run: python Tools/run_ci_browser_check.py --name "Ability ranks gameplay" -- python Tools/playtest_ability_rank_gameplay.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published equipment progression
-        run: python Tools/run_ci_browser_check.py --name "Equipment progression" -- python Tools/playtest_equipment_progression.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots /tmp/dct-equipment-progression
+        run: python Tools/run_ci_browser_check.py --name "Equipment progression" -- python Tools/playtest_equipment_progression.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots "$RUNNER_TEMP/dct-equipment-progression"
       - name: Check published field mechanisms
-        run: python Tools/run_ci_browser_check.py --name "Field mechanisms" -- python Tools/playtest_mechanisms.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots /tmp/dct-mechanisms
+        run: python Tools/run_ci_browser_check.py --name "Field mechanisms" -- python Tools/playtest_mechanisms.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots "$RUNNER_TEMP/dct-mechanisms"
       - name: Check published Player facing
         run: python Tools/run_ci_browser_check.py --name "Player facing" -- python Tools/playtest_player_facing.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check published Square battlefield
@@ -193,7 +193,7 @@ jobs:
       - name: Check continuous exploration floor
         run: python Tools/run_ci_browser_check.py --name "Continuous floor" -- python Tools/playtest_continuous_floor.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
       - name: Check persistent generated campaign
-        run: python Tools/run_ci_browser_check.py --name "Generated campaign" -- python Tools/playtest_generated_campaign.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
+        run: python Tools/run_ci_browser_check.py --name "Generated campaign" -- python Tools/playtest_generated_campaign.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots "$RUNNER_TEMP/dct-generated-campaign"
       - name: Check exploration sprite motion
         run: python Tools/run_ci_browser_check.py --name "Exploration motion" -- python Tools/playtest_exploration_motion.py
       - name: Check published Generated adventure
