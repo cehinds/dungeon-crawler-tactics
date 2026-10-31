@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "source": "Web/wwwroot/assets/concept-reconstruction/derived/hud-fixed-source-state.png",
+  "fragmentManifest": "Web/wwwroot/assets/concept-reconstruction/manifest.json",
+  "canvas": [
+    1536,
+    1024
+  ],
+  "groups": [
+    {
+      "id": "objective",
+      "label": "Objective",
+      "parentId": "hud",
+      "layerIds": [
+        "objective-frame",
+        "objective-body",
+        "objective-lantern",
+        "objective-label"
+      ]
+    },
+    {
+      "id": "phase",
+      "label": "Party phase and round",
+      "parentId": "hud",
+      "layerIds": [
+        "phase-frame",
+        "phase-body",
+        "phase-party",
+        "phase-label",
+        "phase-dot",
+        "phase-round",
+        "phase-diamond-1",
+        "phase-diamond-2",
+        "phase-diamond-3"
+      ]
+    },
+    {
+      "id": "party-carl",
+      "label": "Carl party card",
+      "parentId": "hud",
+      "layerIds": [
+        "party-carl-glow",
+        "party-carl-frame",
+        "party-carl-body",
+        "party-carl-portrait",
+        "party-carl-marker"
+      ]
+    },
+    {
+      "id": "party-donut",
+      "label": "Donut party card",
+      "parentId": "hud",
+      "layerIds": [
+        "party-donut-frame",
+        "party-donut-body",
+        "party-donut-portrait",
+        "party-donut-marker"
+      ]
+    },
+    {
+      "id": "party-katia",
+      "label": "Katia party card",
+      "parentId": "hud",
+      "layerIds": [
+        "party-katia-frame",
+        "party-katia-body",
+        "party-katia-portrait",
+        "party-katia-marker"
+      ]
+    },
+    {
+      "id": "party-mongo",
+      "label": "Mongo party card",
+      "parentId": "hud",
+      "layerIds": [
+        "party-mongo-frame",
+        "party-mongo-body",
+        "party-mongo-portrait",
+        "party-mongo-marker"
+      ]
+    },
+    {
+      "id": "bottom-panel",
+      "label": "Bottom panel",
+      "parentId": "hud",
+      "layerIds": [
+        "hud-frame",
+        "hud-body"
+      ]
+    },
+    {
+      "id": "selected-carl",
+      "label": "Selected Carl",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "hud-carl-frame",
+        "hud-carl-backing",
+        "hud-carl-portrait",
+        "hud-carl-name"
+      ]
+    },
+    {
+      "id": "hp",
+      "label": "HP status",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "hud-hp-label",
+        "hud-hp-value",
+        "hud-hp-outline",
+        "hud-hp-track",
+        "hud-hp-fill"
+      ]
+    },
+    {
+      "id": "mana",
+      "label": "MANA status",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "hud-mana-label",
+        "hud-mana-value",
+        "hud-mana-outline",
+        "hud-mana-track",
+        "hud-mana-fill"
+      ]
+    },
+    {
+      "id": "movement",
+      "label": "Movement",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "hud-stat-separator",
+        "hud-movement-boot",
+        "hud-movement-count",
+        "hud-movement-label"
+      ]
+    },
+    {
+      "id": "action-move",
+      "label": "Move action",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "action-move-glow",
+        "action-move-frame",
+        "action-move-body",
+        "action-move-icon",
+        "action-move-label"
+      ]
+    },
+    {
+      "id": "action-strike",
+      "label": "Strike action",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "action-strike-frame",
+        "action-strike-body",
+        "action-strike-icon",
+        "action-strike-label"
+      ]
+    },
+    {
+      "id": "action-skills",
+      "label": "Skills action",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "action-skills-frame",
+        "action-skills-body",
+        "action-skills-icon",
+        "action-skills-label"
+      ]
+    },
+    {
+      "id": "action-items",
+      "label": "Items action",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "action-items-frame",
+        "action-items-body",
+        "action-items-icon",
+        "action-items-label"
+      ]
+    },
+    {
+      "id": "target-card",
+      "label": "Target damage forecast",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "target-card-frame",
+        "target-card-body",
+        "target-card-portrait",
+        "target-card-separator",
+        "target-card-name",
+        "target-card-damage-value",
+        "target-card-damage-label"
+      ]
+    },
+    {
+      "id": "end-turn",
+      "label": "End turn",
+      "parentId": "bottom-panel",
+      "layerIds": [
+        "end-turn-frame",
+        "end-turn-body",
+        "end-turn-label",
+        "end-turn-arrow"
+      ]
+    }
+  ],
+  "limitations": [
+    "Raster text preserves the original pixels; original editable fonts are unavailable.",
+    "Backgrounds and frames contain holes occupied by foreground fragments; hidden pixels are not reconstructed.",
+    "Portrait and icon silhouettes inherit the source extraction boundary approximations and baked edge colors."
+  ],
+  "nineSlice": {
+    "action-strike-frame": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "action-skills-frame": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "action-items-frame": [
+      8,
+      8,
+      8,
+      8
+    ]
+  }
+}
