@@ -65,35 +65,38 @@ class MultipartPublicationTests(unittest.TestCase):
             self.assertEqual(plan['survivors'], [{'path': 'release-evidence/a.json', 'bytes': 5}])
             self.assertEqual(sum(plan['excluded_bytes_by_reason'].values()), 10)
 
-    def test_map_grid_research_pack_is_offline_only_and_source_is_preserved(self):
-        self.assertEqual(publication_exclusion('map-grid-pass/manifest.json'), 'offline-map-grid-pack')
-        self.assertIsNone(publication_exclusion('map-grid-pass-extra/runtime.png'))
+    def test_offline_research_packs_are_pruned_without_changing_sources(self):
+        packs = {'map-grid-pass': 'offline-map-grid-pack', 'reference-layers': 'offline-reference-layers-pack'}
+        for pack, reason in packs.items():
+            self.assertEqual(publication_exclusion(pack + '/manifest.json'), reason)
+            self.assertIsNone(publication_exclusion(pack + '-extra/runtime.png'))
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)
             root = base / 'publish/wwwroot'
             assets = root / 'assets'
             sources = []
-            for name in ['manifest.json', 'sources/atlas.png', 'map-grid-pass.zip']:
-                source = base / 'source' / name
-                source.parent.mkdir(parents=True, exist_ok=True)
-                source.write_bytes(b'{}' if name.endswith('.json') else b'research')
-                target = assets / 'map-grid-pass' / name
-                target.parent.mkdir(parents=True, exist_ok=True)
-                os.link(source, target)
-                sources.append((source, source.read_bytes()))
-            runtime = assets / 'map-grid-pass-extra/runtime.png'
+            for pack in packs:
+                for name in ['manifest.json', 'sources/atlas.png', 'pack.zip']:
+                    source = base / 'source' / pack / name
+                    source.parent.mkdir(parents=True, exist_ok=True)
+                    source.write_bytes(b'{}' if name.endswith('.json') else b'research')
+                    target = assets / pack / name
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    os.link(source, target)
+                    sources.append((source, source.read_bytes()))
+            runtime = assets / 'reference-layers-extra/runtime.png'
             runtime.parent.mkdir(parents=True)
             runtime.write_bytes(b'runtime')
             (root / 'index.html').write_text('page')
             plan = publication_inventory(assets)
-            self.assertEqual(plan['survivors'], [{'path': 'map-grid-pass-extra/runtime.png', 'bytes': 7}])
-            self.assertEqual(plan['excluded_bytes_by_reason'], {'offline-map-grid-pack': 18})
+            self.assertEqual(plan['survivors'], [{'path': 'reference-layers-extra/runtime.png', 'bytes': 7}])
+            self.assertEqual(plan['excluded_bytes_by_reason'], {reason: 18 for reason in packs.values()})
             lock = base / 'lock.json'
             lock.write_text(json.dumps({'repository': 'https://github.com/cehinds/AI-Art.git', 'commit': 'a' * 40}))
-            self.assertEqual(prepare(root, lock)['removed_files'], 3)
+            self.assertEqual(prepare(root, lock)['removed_files'], 6)
             self.assertTrue(runtime.exists())
             self.assertTrue(all(source.read_bytes() == original for source, original in sources))
-            self.assertFalse(any(p.is_file() for p in (assets / 'map-grid-pass').rglob('*')))
+            self.assertFalse(any(p.is_file() for pack in packs for p in (assets / pack).rglob('*')))
 
     def test_refuses_source_directory(self):
         with tempfile.TemporaryDirectory() as directory:
