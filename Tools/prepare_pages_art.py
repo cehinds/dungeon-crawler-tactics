@@ -28,6 +28,8 @@ def publication_exclusion(relative):
         return 'offline-map-grid-pack'
     if parts and parts[0] == 'reference-layers':
         return 'offline-reference-layers-pack'
+    if parts and parts[0] == 'completed-layers':
+        return 'offline-completed-layers-pack'
     for library in REMOTE_LIBRARIES:
         directory = PurePosixPath(library)
         if library != 'reusable-gameplay':
