@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "sourceManifest": "Web/wwwroot/assets/hud-components/manifest.json",
+  "materials": {
+    "navy": {
+      "file": "Web/wwwroot/assets/hud-reusable/sources/generated-surfaces.png",
+      "crop": [
+        8,
+        8,
+        760,
+        1016
+      ]
+    },
+    "parchment": {
+      "file": "Web/wwwroot/assets/hud-reusable/sources/generated-surfaces.png",
+      "crop": [
+        780,
+        8,
+        1528,
+        1016
+      ]
+    }
+  },
+  "backgrounds": [
+    {
+      "groupId": "objective",
+      "frameId": "objective-frame",
+      "material": "parchment"
+    },
+    {
+      "groupId": "phase",
+      "frameId": "phase-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "party-carl",
+      "frameId": "party-carl-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "party-donut",
+      "frameId": "party-donut-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "party-katia",
+      "frameId": "party-katia-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "party-mongo",
+      "frameId": "party-mongo-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "bottom-panel",
+      "frameId": "hud-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "selected-carl",
+      "frameId": "hud-carl-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "action-move",
+      "frameId": "action-move-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "action-strike",
+      "frameId": "action-strike-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "action-skills",
+      "frameId": "action-skills-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "action-items",
+      "frameId": "action-items-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "target-card",
+      "frameId": "target-card-frame",
+      "material": "navy"
+    },
+    {
+      "groupId": "end-turn",
+      "frameId": "end-turn-frame",
+      "material": "parchment"
+    }
+  ],
+  "frameMargins": {
+    "default": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "hud-frame": [
+      16,
+      16,
+      16,
+      16
+    ],
+    "objective-frame": [
+      16,
+      12,
+      16,
+      12
+    ],
+    "phase-frame": [
+      16,
+      16,
+      16,
+      34
+    ]
+  },
+  "textTokens": {
+    "hud-hp-value": [
+      "32",
+      "/",
+      "40"
+    ],
+    "hud-mana-value": [
+      "8",
+      "/",
+      "12"
+    ],
+    "phase-round": [
+      "ROUND",
+      "2"
+    ],
+    "end-turn-label": [
+      "End",
+      "Carl’s",
+      "turn"
+    ],
+    "objective-label": [
+      "OPEN",
+      "THE",
+      "EXIT"
+    ]
+  },
+  "notes": [
+    "Reconstructed materials replace all flattened background fragments, including the whole bottom dock.",
+    "Original literal fragments remain archived for reference; reconstructed previews do not claim pixel equality with the source.",
+    "Image generation supplies new surface imagery; Python performs geometry, clipping, slicing and composition only."
+  ]
+}
