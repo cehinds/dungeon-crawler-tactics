@@ -122,7 +122,7 @@ def main():
                 pixels = np.array(Image.open(BASE/group['blankFile']).convert('RGBA')).astype(np.int16)
                 red = (pixels[:,:,0]>100) & (pixels[:,:,0]>pixels[:,:,1]*1.5) & (pixels[:,:,3]>0)
                 cyan = (pixels[:,:,1]>100) & (pixels[:,:,2]>100) & (pixels[:,:,0]<80) & (pixels[:,:,3]>0)
-                assert not np.any(red | cyan), group['id'] + ': colored stat fill contamination in blank' 
+                assert not np.any(red | cyan), group['id'] + ': colored stat fill contamination in blank'
     assert sorted(referenced) == sorted(ids)
     # All exported frame pieces, including any center residual, rejoin the literal source border.
     frame_sources = {a['sourceLayerId'] for a in assets if a['role'].startswith('border-') or (a['role'].startswith('stat-') and a.get('sourceLayerId','').endswith('-outline'))}
