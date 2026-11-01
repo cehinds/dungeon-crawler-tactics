@@ -1,0 +1,588 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "book": 1,
+    "floor": 1,
+    "panelCount": 36,
+    "batches": 6,
+    "panelsPerBatch": 6,
+    "description": "Concept-art coverage for known visited, mentioned, and reusable generic Floor 1 places in Dungeon Crawler Carl. This is not an exhaustive atlas or a claim that each panel is a separate named canon location.",
+    "visualDirection": "Consistent top-down GBA-inspired pixel art; orthogonal square architecture and square floors. Never use diamond grids or isometric projection.",
+    "artBoundary": "Concept art adapts prose details into illustrative compositions. Layouts, dimensions, connecting geometry, and details not directly described are inferred and must not be presented as canonical floorplans. No Book 2 locations or characters are in scope."
+  },
+  "sources": [
+    {
+      "id": "sample1",
+      "title": "Book 1 publisher sample",
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf",
+      "quality": "primary_publisher_direct"
+    },
+    {
+      "id": "floor1",
+      "title": "First Floor",
+      "url": "https://www.dccdatabase.com/wiki/first_floor/",
+      "quality": "secondary_wiki_direct"
+    },
+    {
+      "id": "safe",
+      "title": "Safe Rooms",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Safe_Rooms",
+      "quality": "secondary_wiki_indexed"
+    },
+    {
+      "id": "tally",
+      "title": "Tally",
+      "url": "https://www.dccdatabase.com/wiki/tally/",
+      "quality": "secondary_wiki_direct"
+    },
+    {
+      "id": "sebastian",
+      "title": "Sebastian",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Sebastian",
+      "quality": "secondary_wiki_indexed"
+    },
+    {
+      "id": "goblins",
+      "title": "Goblins",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Goblins",
+      "quality": "secondary_wiki_indexed"
+    },
+    {
+      "id": "hoarder",
+      "title": "Hoarder",
+      "url": "https://www.dccdatabase.com/wiki/hoarder/",
+      "quality": "secondary_wiki_direct"
+    },
+    {
+      "id": "juicer",
+      "title": "Juicer",
+      "url": "https://www.dccdatabase.com/wiki/juicer/",
+      "quality": "secondary_wiki_direct"
+    },
+    {
+      "id": "swine",
+      "title": "Ball of Swine",
+      "url": "https://www.dccdatabase.com/wiki/ball_of_swine/",
+      "quality": "secondary_wiki_direct"
+    },
+    {
+      "id": "chapter15",
+      "title": "Book 1 chapter 15 recap",
+      "url": "https://crawler4122.com/book-1/ch-1-15-time-to-level-collapse-three-days-and-two-hours/",
+      "quality": "secondary_chapter_recap"
+    },
+    {
+      "id": "chapter19",
+      "title": "Book 1 chapter 19 recap",
+      "url": "https://crawler4122.com/book-1/ch-1-19-time-to-level-collapse-two-days-and-18-hours/",
+      "quality": "secondary_chapter_recap"
+    },
+    {
+      "id": "rot19",
+      "title": "Book 1 chapter 19 recap",
+      "url": "https://spoilerfreecarl.com/book-1/chapter-19/",
+      "quality": "secondary_chapter_recap"
+    },
+    {
+      "id": "meadow",
+      "title": "Meadow Lark",
+      "url": "https://crawler4122.com/book-1/meadow-lark/",
+      "quality": "secondary_chapter_recap"
+    },
+    {
+      "id": "chapter22",
+      "title": "Book 1 chapter 22 recap",
+      "url": "https://spoilerfreecarl.com/book-1/chapter-22/",
+      "quality": "secondary_chapter_recap"
+    },
+    {
+      "id": "guilds",
+      "title": "Game Guide",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Game_Guide",
+      "quality": "secondary_wiki_indexed"
+    },
+    {
+      "id": "gymchapters",
+      "title": "Book 1 chapters 20–27 summary",
+      "url": "https://www.supersummary.com/dungeon-crawler-carl/part-1-chapters-20-27-summary/",
+      "quality": "secondary_chapter_summary"
+    },
+    {
+      "id": "chapter9",
+      "title": "Book 1 index, chapter 9",
+      "url": "https://crawler4122.com/book-1/",
+      "quality": "secondary_chapter_index"
+    },
+    {
+      "id": "route",
+      "title": "First Floor route",
+      "url": "https://crawler4122.com/book-1/the-first-floor/",
+      "quality": "secondary_chapter_recap"
+    },
+    {
+      "id": "frank",
+      "title": "Frank Q",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Frank_Q",
+      "quality": "secondary_wiki_indexed"
+    }
+  ],
+  "panels": [
+    {
+      "id": "entrance-stairs",
+      "batch": 1,
+      "order": 1,
+      "name": "Dungeon entrance staircase and landing",
+      "status": "visited",
+      "canonAnchor": "Broad carved descent, marble landing, and large arched Kua-tin double doors.",
+      "layout": "inferred",
+      "sourceIds": [
+        "sample1"
+      ]
+    },
+    {
+      "id": "kua-entrance-chamber",
+      "batch": 1,
+      "order": 2,
+      "name": "Kua-tin entrance chamber",
+      "status": "visited",
+      "canonAnchor": "Interior threshold beyond the carved Kua-tin doors; exact chamber plan is not established.",
+      "layout": "inferred",
+      "sourceIds": [
+        "sample1"
+      ]
+    },
+    {
+      "id": "entry-tunnel",
+      "batch": 1,
+      "order": 3,
+      "name": "First Floor entry tunnel",
+      "status": "visited",
+      "canonAnchor": "Wide, torchlit passage with branching corridors.",
+      "layout": "inferred",
+      "sourceIds": [
+        "sample1"
+      ]
+    },
+    {
+      "id": "fake-guild-alley",
+      "batch": 1,
+      "order": 4,
+      "name": "Fake Tutorial Guild alley",
+      "status": "visited",
+      "canonAnchor": "Misleading neon guild sign in an alley; not the real Tutorial Guild.",
+      "layout": "inferred",
+      "sourceIds": [
+        "sample1"
+      ],
+      "notes": "Same encounter sequence as the Murder Dozer trap panel; not a separate canonical location."
+    },
+    {
+      "id": "dozer-trap",
+      "batch": 1,
+      "order": 5,
+      "name": "Murder Dozer trap",
+      "status": "visited",
+      "canonAnchor": "Goblin Murder Dozer ambush associated with the false guild approach.",
+      "layout": "inferred",
+      "sourceIds": [
+        "sample1",
+        "goblins"
+      ],
+      "notes": "Same encounter sequence as the false guild alley panel; not a separate canonical location."
+    },
+    {
+      "id": "real-mordecai-guild",
+      "batch": 1,
+      "order": 6,
+      "name": "Mordecai’s Tutorial Guildhall",
+      "status": "visited",
+      "canonAnchor": "Real guild entrance marked TUTORIAL GUILD; classroom and living space.",
+      "layout": "inferred",
+      "sourceIds": [
+        "sample1"
+      ]
+    },
+    {
+      "id": "tally-restaurant",
+      "batch": 2,
+      "order": 7,
+      "name": "Tally’s Polish restaurant safe room",
+      "status": "visited",
+      "canonAnchor": "Earth fast-food restaurant repurposed as a protected safe room; exact chain branding is unresolved.",
+      "layout": "inferred",
+      "sourceIds": [
+        "tally",
+        "safe",
+        "chapter9"
+      ]
+    },
+    {
+      "id": "tally-play-area",
+      "batch": 2,
+      "order": 8,
+      "name": "Children’s play area in Tally’s safe room",
+      "status": "visited_sub_location",
+      "canonAnchor": "Play area within the same Tally safe room; do not depict as a separate venue.",
+      "layout": "inferred",
+      "sourceIds": [
+        "tally",
+        "safe"
+      ]
+    },
+    {
+      "id": "sebastian-peruvian-taco-bell",
+      "batch": 2,
+      "order": 9,
+      "name": "Sebastian’s Peruvian Taco Bell safe room",
+      "status": "visited",
+      "canonAnchor": "Full kitchen, sleeping area, bathrooms, coffee, and Peruvian beer.",
+      "layout": "inferred",
+      "sourceIds": [
+        "sebastian"
+      ]
+    },
+    {
+      "id": "dmv-cots-cookies",
+      "batch": 2,
+      "order": 10,
+      "name": "DMV waiting-room safe room",
+      "status": "visited",
+      "canonAnchor": "Unstaffed waiting room with curtained cots and experience cookies; Frank and Maggie encounter.",
+      "layout": "inferred",
+      "sourceIds": [
+        "safe",
+        "floor1",
+        "chapter19",
+        "frank"
+      ]
+    },
+    {
+      "id": "meadow-lark-camp",
+      "batch": 2,
+      "order": 11,
+      "name": "Meadow Lark encampment",
+      "status": "visited",
+      "canonAnchor": "Survivor camp near a borough-boss stairwell; do not imply a fixed settlement plan.",
+      "layout": "inferred",
+      "sourceIds": [
+        "meadow"
+      ]
+    },
+    {
+      "id": "hoarder-lair",
+      "batch": 2,
+      "order": 12,
+      "name": "Hoarder’s lair / Scatterer nest",
+      "status": "visited",
+      "canonAnchor": "Round high-ceiling room with rubbish piles, burst black bags, grimy signed door, and skull torches.",
+      "layout": "inferred",
+      "sourceIds": [
+        "hoarder",
+        "route"
+      ]
+    },
+    {
+      "id": "goblin-workshop",
+      "batch": 3,
+      "order": 13,
+      "name": "Goblin workshop",
+      "status": "visited",
+      "canonAnchor": "Goblin engineering and explosives workshop; dozers and chopper are associated with this place.",
+      "layout": "inferred",
+      "sourceIds": [
+        "goblins",
+        "chapter15"
+      ]
+    },
+    {
+      "id": "war-chieftain-chamber",
+      "batch": 3,
+      "order": 14,
+      "name": "Goblin War Chieftain boss chamber",
+      "status": "visited",
+      "canonAnchor": "Boss chamber adjoining the goblin workshop; do not assign unsupported dimensions.",
+      "layout": "inferred",
+      "sourceIds": [
+        "goblins"
+      ]
+    },
+    {
+      "id": "juicer-gym",
+      "batch": 3,
+      "order": 15,
+      "name": "Juicer’s gym",
+      "status": "visited",
+      "canonAnchor": "High ceiling, sliding glass entry, reception turnstile, weights, benches, mats, and red combat lighting.",
+      "layout": "inferred",
+      "sourceIds": [
+        "juicer",
+        "gymchapters"
+      ]
+    },
+    {
+      "id": "swine-spiral-maze",
+      "batch": 3,
+      "order": 16,
+      "name": "Ball of Swine spiral maze",
+      "status": "visited",
+      "canonAnchor": "Rounded tunnels wrap around a courtyard; portcullises and three gated entrances reached by short bridges.",
+      "layout": "inferred",
+      "sourceIds": [
+        "swine",
+        "route"
+      ]
+    },
+    {
+      "id": "swine-switch-chamber",
+      "batch": 3,
+      "order": 17,
+      "name": "Ball of Swine switch chamber",
+      "status": "visited_sub_location",
+      "canonAnchor": "Square switching room within the spiral route.",
+      "layout": "inferred",
+      "sourceIds": [
+        "swine"
+      ]
+    },
+    {
+      "id": "swine-speedbump-construction",
+      "batch": 3,
+      "order": 18,
+      "name": "Speedbump construction area",
+      "status": "visited_sub_location",
+      "canonAnchor": "Construction site for Speedbump within the Ball of Swine complex.",
+      "layout": "inferred",
+      "sourceIds": [
+        "swine"
+      ]
+    },
+    {
+      "id": "swine-revealed-arena",
+      "batch": 4,
+      "order": 19,
+      "name": "Revealed Ball of Swine arena",
+      "status": "visited_sub_location",
+      "canonAnchor": "Retracted maze walls expose a domed arena with purple/neon lighting.",
+      "layout": "inferred",
+      "sourceIds": [
+        "swine"
+      ]
+    },
+    {
+      "id": "swine-descent-stairs",
+      "batch": 4,
+      "order": 20,
+      "name": "Ball of Swine descent stairwell",
+      "status": "visited_sub_location",
+      "canonAnchor": "Central illuminated stair with a red barrier; final state of the same boss complex.",
+      "layout": "inferred",
+      "sourceIds": [
+        "swine"
+      ]
+    },
+    {
+      "id": "main-artery",
+      "batch": 4,
+      "order": 21,
+      "name": "First Floor main artery",
+      "status": "visited_route",
+      "canonAnchor": "Broad torchlit arteries in the rock-hewn grid.",
+      "layout": "inferred",
+      "sourceIds": [
+        "floor1",
+        "sample1"
+      ]
+    },
+    {
+      "id": "connecting-alley",
+      "batch": 4,
+      "order": 22,
+      "name": "Connecting neighborhood alley",
+      "status": "visited_route",
+      "canonAnchor": "Narrow side passage; dark red brick and glowing green growth appear in some alleys, not necessarily all.",
+      "layout": "inferred",
+      "sourceIds": [
+        "floor1",
+        "sample1"
+      ]
+    },
+    {
+      "id": "goblin-territory",
+      "batch": 4,
+      "order": 23,
+      "name": "Goblin territory",
+      "status": "mentioned_or_visited_area",
+      "canonAnchor": "Goblin neighborhood/territory; this descriptive label is not a named district.",
+      "layout": "inferred",
+      "sourceIds": [
+        "goblins",
+        "chapter15",
+        "floor1"
+      ]
+    },
+    {
+      "id": "llama-territory",
+      "batch": 4,
+      "order": 24,
+      "name": "Llama territory",
+      "status": "mentioned_area",
+      "canonAnchor": "Territory label only; no distinct named map or building plan is established.",
+      "layout": "inferred",
+      "sourceIds": [
+        "floor1"
+      ],
+      "notes": "Descriptive territory label supplied for this concept set; the cited floor reference does not establish a named district or separate map."
+    },
+    {
+      "id": "scatterer-territory",
+      "batch": 5,
+      "order": 25,
+      "name": "Scatterer territory",
+      "status": "visited_area",
+      "canonAnchor": "Neighborhood associated with Scatterers and the Hoarder; depict the lair only as a sub-area, not a second unrelated destination.",
+      "layout": "inferred",
+      "sourceIds": [
+        "hoarder",
+        "route"
+      ]
+    },
+    {
+      "id": "green-slime-territory",
+      "batch": 5,
+      "order": 26,
+      "name": "Green-slime territory",
+      "status": "mentioned_area",
+      "canonAnchor": "Carl abandons this direction; no visited slime room or detailed territory plan is established.",
+      "layout": "inferred",
+      "sourceIds": [
+        "chapter15"
+      ]
+    },
+    {
+      "id": "rot-sticker-territory",
+      "batch": 5,
+      "order": 27,
+      "name": "Rot-Sticker territory",
+      "status": "mentioned_area",
+      "canonAnchor": "Route toward the next refuge; avoid inventing a named town or exact neighborhood map.",
+      "layout": "inferred",
+      "sourceIds": [
+        "rot19",
+        "chapter19"
+      ]
+    },
+    {
+      "id": "troglodyte-territory",
+      "batch": 5,
+      "order": 28,
+      "name": "Troglodyte territory",
+      "status": "mentioned_area",
+      "canonAnchor": "Descriptive territory label associated with the Floor 1 gym encounter; do not invent a separate settlement.",
+      "layout": "inferred",
+      "sourceIds": [
+        "gymchapters",
+        "juicer"
+      ]
+    },
+    {
+      "id": "scat-thug-territory",
+      "batch": 5,
+      "order": 29,
+      "name": "Scat Thug territory",
+      "status": "mentioned_area",
+      "canonAnchor": "Descriptive territory label only; no distinct named place or plan is confirmed.",
+      "layout": "inferred",
+      "sourceIds": [
+        "floor1"
+      ],
+      "notes": "Descriptive territory label supplied for this concept set; the cited floor reference does not establish a named district or separate map."
+    },
+    {
+      "id": "human-bathroom-portal",
+      "batch": 5,
+      "order": 30,
+      "name": "Crawler-specific human restroom portal",
+      "status": "visited",
+      "canonAnchor": "Mismatched commercial doors lead to Carl’s cramped silver-toilet stall.",
+      "layout": "inferred",
+      "sourceIds": [
+        "floor1"
+      ]
+    },
+    {
+      "id": "donut-litter-portal",
+      "batch": 6,
+      "order": 31,
+      "name": "Donut’s litterbox restroom portal",
+      "status": "visited",
+      "canonAnchor": "Crawler-specific restroom portal to Donut’s litterbox stall; paired panel, not a separate public restroom building.",
+      "layout": "inferred",
+      "sourceIds": [
+        "floor1"
+      ]
+    },
+    {
+      "id": "other-descent-landings",
+      "batch": 6,
+      "order": 32,
+      "name": "Other Floor 1 descent landings",
+      "status": "generic",
+      "canonAnchor": "Reusable stairwell/landing type for descents; no additional named landing is asserted.",
+      "layout": "inferred",
+      "sourceIds": [
+        "floor1"
+      ]
+    },
+    {
+      "id": "alabama-waffle-house",
+      "batch": 6,
+      "order": 33,
+      "name": "Alabama Waffle House safe room",
+      "status": "mentioned",
+      "canonAnchor": "Earth diner shelter used by Meadow Lark survivors; Carl’s visit is not established.",
+      "layout": "inferred",
+      "sourceIds": [
+        "safe",
+        "chapter22",
+        "meadow"
+      ]
+    },
+    {
+      "id": "candy-vending-rest-area",
+      "batch": 6,
+      "order": 34,
+      "name": "Candy-vending rest area",
+      "status": "mentioned",
+      "canonAnchor": "Small rest stop with candy vending described by Brandon; Carl’s visit is not established.",
+      "layout": "inferred",
+      "sourceIds": [
+        "chapter22"
+      ]
+    },
+    {
+      "id": "other-crawler-guild",
+      "batch": 6,
+      "order": 35,
+      "name": "Other crawlers’ Tutorial Guilds",
+      "status": "generic",
+      "canonAnchor": "Reusable guild interior type for other guides; do not invent named guides, occupants, or unique room details.",
+      "layout": "inferred",
+      "sourceIds": [
+        "guilds"
+      ]
+    },
+    {
+      "id": "generic-safe-room-bedroom-bathroom",
+      "batch": 6,
+      "order": 36,
+      "name": "Generic safe-room bedroom and bathroom",
+      "status": "generic",
+      "canonAnchor": "Reusable bedroom/bathroom functions are mentioned in safe-room references; no additional named safe room or canonical room plan is asserted.",
+      "layout": "inferred",
+      "sourceIds": [
+        "safe"
+      ],
+      "notes": "Generic design concept only; do not assign it a proper name or claim a specific Floor 1 address."
+    }
+  ]
+}
