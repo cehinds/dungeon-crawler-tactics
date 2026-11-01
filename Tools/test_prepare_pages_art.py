@@ -66,7 +66,7 @@ class MultipartPublicationTests(unittest.TestCase):
             self.assertEqual(sum(plan['excluded_bytes_by_reason'].values()), 10)
 
     def test_offline_research_packs_are_pruned_without_changing_sources(self):
-        packs = {'map-grid-pass': 'offline-map-grid-pack', 'reference-layers': 'offline-reference-layers-pack', 'completed-layers': 'offline-completed-layers-pack', 'wall-components': 'offline-wall-components-pack', 'exploration-components': 'offline-exploration-components-pack', 'floor-one-concepts': 'offline-floor-one-concepts-pack', 'floor-one-concepts-top-down': 'offline-floor-one-concepts-top-down-pack', 'floor-one-concept-grids': 'offline-floor-one-concept-grids-pack', 'top-down-layer-kit': 'offline-top-down-layer-kit'}
+        packs = {'map-grid-pass': 'offline-map-grid-pack', 'reference-layers': 'offline-reference-layers-pack', 'completed-layers': 'offline-completed-layers-pack', 'wall-components': 'offline-wall-components-pack', 'exploration-components': 'offline-exploration-components-pack', 'floor-one-concepts': 'offline-floor-one-concepts-pack', 'floor-one-concepts-top-down': 'offline-floor-one-concepts-top-down-pack', 'floor-one-concept-grids': 'offline-floor-one-concept-grids-pack', 'top-down-layer-kit': 'offline-top-down-layer-kit', 'top-down-object-kit': 'offline-top-down-object-kit'}
         for pack, reason in packs.items():
             self.assertEqual(publication_exclusion(pack + '/manifest.json'), reason)
             self.assertIsNone(publication_exclusion(pack + '-extra/runtime.png'))
@@ -93,7 +93,7 @@ class MultipartPublicationTests(unittest.TestCase):
             self.assertEqual(plan['excluded_bytes_by_reason'], {reason: 18 for reason in packs.values()})
             lock = base / 'lock.json'
             lock.write_text(json.dumps({'repository': 'https://github.com/cehinds/AI-Art.git', 'commit': 'a' * 40}))
-            self.assertEqual(prepare(root, lock)['removed_files'], 27)
+            self.assertEqual(prepare(root, lock)['removed_files'], 30)
             self.assertTrue(runtime.exists())
             self.assertTrue(all(source.read_bytes() == original for source, original in sources))
             self.assertFalse(any(p.is_file() for pack in packs for p in (assets / pack).rglob('*')))

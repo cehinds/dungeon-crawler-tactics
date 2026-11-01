@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Package a frozen layer-kit receipt; split only archives above GitHub's limit."""
+"""Package a frozen review-kit receipt; split only archives above GitHub's limit."""
 import argparse
 import hashlib
 import json
@@ -66,7 +66,7 @@ def package(root=DEFAULT, limit=100 * 1024 * 1024, part_size=90 * 1024 * 1024):
     actual = {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file() and p != receipt and not download_artifact(p.relative_to(root).as_posix())}
     if set(files) != actual: raise ValueError('Payload receipt does not cover all files')
     files[receipt.name] = receipt
-    fd, temporary = tempfile.mkstemp(prefix='top-down-layer-kit-', suffix='.zip')
+    fd, temporary = tempfile.mkstemp(prefix='.packaging-', suffix='.tmp', dir=root)
     os.close(fd)
     try:
         with zipfile.ZipFile(temporary, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
@@ -102,9 +102,11 @@ def package(root=DEFAULT, limit=100 * 1024 * 1024, part_size=90 * 1024 * 1024):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--asset-root', type=Path, default=DEFAULT)
+    parser.add_argument('--archive-name', choices=('top-down-layer-kit.zip', 'top-down-object-kit.zip'), default=NAME)
     parser.add_argument('--assemble', type=Path)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
+    NAME = args.archive_name
     if args.assemble:
         if not args.output: parser.error('--output is required with --assemble')
         assemble(args.assemble, args.output)
