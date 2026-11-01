@@ -39,7 +39,7 @@ class GridTests(unittest.TestCase):
                 widths=[b-a for a,b in zip(positions,positions[1:])]
                 self.assertEqual(len(widths),14);self.assertGreater(min(widths),0);self.assertLessEqual(max(widths)-min(widths),1)
             self.assertEqual(g['columns'],list('ABCDEFGHIJKLMN'));self.assertEqual(g['rows'],list(range(1,15)))
-            self.assertEqual(g['contentRect'],[margin,margin,w,h]);self.assertEqual(p['size'],[w+2*margin,h+2*margin])
+            self.assertEqual(g['contentRect'],[margin,margin,w,h]);self.assertEqual(p['size'],[w+2*margin,h+2*margin+self.manifest['style']['legendHeight']])
 
     def test_only_grid_lines_change_native_pixels(self):
         margin=self.manifest['style']['margin'];color=self.manifest['style']['lineColor'];a=color[3]
@@ -48,8 +48,9 @@ class GridTests(unittest.TestCase):
             actual=output.crop((margin,margin,margin+source.width,margin+source.height))
             xs={min(x,source.width-1) for x in p['grid']['xBoundaries']};ys={min(y,source.height-1) for y in p['grid']['yBoundaries']}
             source_pixels=source.load();actual_pixels=actual.load()
-            unaffected_x=[x for x in range(source.width) if all(abs(x-b)>1 for b in xs)]
-            unaffected_y=[y for y in range(source.height) if all(abs(y-b)>1 for b in ys)]
+            minor_x=set(p['grid']['subgrid']['xMinorBoundaries']);minor_y=set(p['grid']['subgrid']['yMinorBoundaries'])
+            unaffected_x=[x for x in range(source.width) if all(abs(x-b)>1 for b in xs) and x not in minor_x]
+            unaffected_y=[y for y in range(source.height) if all(abs(y-b)>1 for b in ys) and y not in minor_y]
             for y in unaffected_y:
                 for x in unaffected_x:
                     if source_pixels[x,y]!=actual_pixels[x,y]:self.fail('Non-grid pixel changed: '+p['set']+'/'+p['id'])
@@ -62,10 +63,34 @@ class GridTests(unittest.TestCase):
                 expected=tuple((color[c]*a+original[c]*(255-a)+127)//255 for c in range(3))+(255,)
                 self.assertEqual(actual_pixels[x,y],expected)
 
+            minor=self.manifest['style']['minorLineColor'];alpha=minor[3]
+            for x,y in ([(x,unaffected_y[len(unaffected_y)//2]) for x in minor_x]+[(unaffected_x[len(unaffected_x)//2],y) for y in minor_y]):
+                original=source_pixels[x,y]
+                expected=tuple((minor[c]*alpha+original[c]*(255-alpha)+127)//255 for c in range(3))+(255,)
+                self.assertEqual(actual_pixels[x,y],expected)
+
+    def test_subgrids_partition_each_existing_major_cell(self):
+        self.assertEqual(self.manifest['schemaVersion'],2)
+        self.assertEqual(self.manifest['style']['subdivisions'],3)
+        self.assertLess(self.manifest['style']['minorLineColor'][3],self.manifest['style']['lineColor'][3])
+        for panel in self.manifest['panels']:
+            grid=panel['grid'];sub=grid['subgrid']
+            self.assertEqual(sub['columns'],list('abc'));self.assertEqual(sub['rows'],[1,2,3]);self.assertEqual(sub['addressExample'],'D7.b2')
+            for major_key,cells_key,minor_key in [('xBoundaries','xByMajorCell','xMinorBoundaries'),('yBoundaries','yByMajorCell','yMinorBoundaries')]:
+                major=grid[major_key];cells=sub[cells_key];self.assertEqual(len(cells),14)
+                expected=[]
+                for (start,end),cell in zip(zip(major,major[1:]),cells):
+                    self.assertEqual(cell,[start+round((end-start)*j/3) for j in range(4)])
+                    widths=[b-a for a,b in zip(cell,cell[1:])];self.assertGreater(min(widths),0);self.assertLessEqual(max(widths)-min(widths),1)
+                    expected.extend(cell[1:-1])
+                self.assertEqual(sub[minor_key],expected);self.assertEqual(len(expected),28);self.assertEqual(len(set(major+expected)),43)
+
     def test_labels_in_outside_margins(self):
         margin=self.manifest['style']['margin']
         for p in self.manifest['panels']:
             output=Image.open(OUT/p['path']).convert('RGB');g=p['grid']
+            legend=output.crop((0,margin+p['sourceSize'][1]+margin,output.width,output.height))
+            self.assertTrue(any(pixel!=tuple(self.manifest['style']['marginColor'][:3]) for pixel in legend.get_flattened_data()))
             for a,b in zip(g['xBoundaries'],g['xBoundaries'][1:]):
                 strip=output.crop((margin+a,0,margin+b,margin))
                 self.assertTrue(any(r==g==b==255 for r,g,b in strip.get_flattened_data()))

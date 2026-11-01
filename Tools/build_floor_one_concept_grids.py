@@ -47,10 +47,18 @@ def grid(image, spec, font_path):
     """Grid equal logical cells over unchanged native extent; labels occupy margins."""
     image=image.convert('RGBA');w,h=image.size;margin=spec['margin']
     xs=[round(i*w/14) for i in range(15)];ys=[round(i*h/14) for i in range(15)]
-    result=Image.new('RGBA',(w+2*margin,h+2*margin),tuple(spec['marginColor']))
+    sub_x=[[a+round((b-a)*j/3) for j in range(4)] for a,b in zip(xs,xs[1:])]
+    sub_y=[[a+round((b-a)*j/3) for j in range(4)] for a,b in zip(ys,ys[1:])]
+    minor_x=[v for cell in sub_x for v in cell[1:-1]]
+    minor_y=[v for cell in sub_y for v in cell[1:-1]]
+    result=Image.new('RGBA',(w+2*margin,h+2*margin+spec['legendHeight']),tuple(spec['marginColor']))
     result.alpha_composite(image,(margin,margin))
     overlay=Image.new('RGBA',image.size)
     draw=ImageDraw.Draw(overlay)
+    for positions,vertical in ((minor_x,True),(minor_y,False)):
+        for position in positions:
+            line=(position,0,position,h-1) if vertical else (0,position,w-1,position)
+            draw.line(line,fill=tuple(spec['minorLineColor']),width=1)
     for positions,vertical in ((xs,True),(ys,False)):
         for boundary in positions:
             position=min(boundary,(w if vertical else h)-1)
@@ -63,7 +71,10 @@ def grid(image, spec, font_path):
         cx=margin+(xs[i]+xs[i+1])/2;cy=margin+(ys[i]+ys[i+1])/2
         draw.text((cx,margin/2),chr(65+i),font=label_font,fill='white',anchor='mm')
         draw.text((margin/2,cy),str(i+1),font=label_font,fill='white',anchor='mm')
-    return result,{'columns':list('ABCDEFGHIJKLMN'),'rows':list(range(1,15)),'xBoundaries':xs,'yBoundaries':ys,'contentRect':[margin,margin,w,h],'edgeRule':'Logical extent boundaries use round(i*extent/14); outer visible stroke clamps to last pixel. Cells may differ by one pixel.'}
+    legend_font=ImageFont.truetype(str(font_path),12)
+    draw.text((margin,margin+h+margin+6),'Subcells: a-c left to right; 1-3 top to bottom',font=legend_font,fill='#d9e5f2')
+    draw.text((margin,margin+h+margin+25),'D7.b2 = main D7, subcolumn b, subrow 2',font=legend_font,fill='#d9e5f2')
+    return result,{'subgrid':{'divisions':3,'columns':list('abc'),'rows':[1,2,3],'xByMajorCell':sub_x,'yByMajorCell':sub_y,'xMinorBoundaries':minor_x,'yMinorBoundaries':minor_y,'addressExample':'D7.b2','rule':'Subdivide each rounded major-cell extent independently: start + round((end-start)*j/3).'},'columns':list('ABCDEFGHIJKLMN'),'rows':list(range(1,15)),'xBoundaries':xs,'yBoundaries':ys,'contentRect':[margin,margin,w,h],'edgeRule':'Logical extent boundaries use round(i*extent/14); outer visible stroke clamps to last pixel. Cells may differ by one pixel.'}
 
 
 def preview(records, target, title, font_path, columns=2, cell=540):
@@ -100,13 +111,13 @@ def build(sample=False):
             records.append({'id':panel['id'],'set':set_id,'order':panel['order'],'batch':panel['batch'],'sourcePath':str(source.relative_to(ROOT)),'sourceSha256':digest(source),'sourceSize':list(image.size),'path':str(destination.relative_to(OUT)),'sha256':digest(destination),'size':list(pixels.size),'grid':geometry})
     previews=OUT/'previews';previews.mkdir(exist_ok=True)
     if sample:
-        preview(records,previews/'sample-review.png','14x14 grid style sample | clean image unchanged beneath lines',font_path)
+        preview(records,previews/'sample-review.png','14x14 major grid + 3x3 subcells | external coordinate legend',font_path)
         print('Sample ready: '+str(previews/'sample-review.png'));return
     if len(records)!=72:raise ValueError('Expected72 gridded concept panels')
     for set_id in SETS:
-        for batch in range(1,7):preview([r for r in records if r['set']==set_id and r['batch']==batch],previews/f'{set_id}-group-{batch:02d}.png',f'Floor1 {set_id} concepts | 14x14 coordinate overlays | group{batch}',font_path)
+        for batch in range(1,7):preview([r for r in records if r['set']==set_id and r['batch']==batch],previews/f'{set_id}-group-{batch:02d}.png',f'Floor1 {set_id} concepts | 14x14 + 3x3 subcells | group{batch}',font_path)
         preview([r for r in records if r['set']==set_id],previews/(set_id+'-overview.png'),f'Floor1 {set_id} | all36 coordinate overlays',font_path,columns=6,cell=420)
-    write_json(OUT/'manifest.json',{'schemaVersion':1,'title':'Floor1 concept-art coordinate grids','scope':'72 deterministic overlays across original and top-down concept sets; preserves clean inputs. Grids partition full native panel extent, including any source gutters; they do not establish canonical scale, equal world tile size or seamless geometry.','style':spec,'font':{'path':str(font_path.relative_to(OUT)),'sha256':digest(font_path)},'sourceSets':source_sets,'panels':records})
+    write_json(OUT/'manifest.json',{'schemaVersion':2,'title':'Floor1 concept-art coordinate grids','scope':'72 deterministic overlays across original and top-down concept sets; preserves clean inputs. Grids partition full native panel extent, including any source gutters; they do not establish canonical scale, equal world tile size or seamless geometry.','style':spec,'font':{'path':str(font_path.relative_to(OUT)),'sha256':digest(font_path)},'sourceSets':source_sets,'panels':records})
     for name in ('README.md','spec.json'):shutil.copyfile(DOCS/name,OUT/name)
     tooling=OUT/'tools';tooling.mkdir(exist_ok=True)
     for name in ('build_floor_one_concept_grids.py','test_floor_one_concept_grids.py'):shutil.copyfile(ROOT/'Tools'/name,tooling/name)
