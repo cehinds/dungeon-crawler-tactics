@@ -98,59 +98,10 @@
             270
           ],
           "min": 0,
-          "max": 3,
-          "priority": 20,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "entry-counter",
-          "objectIds": [
-            "ab-clean-shelf-wood-empty"
-          ],
-          "footprint": [
-            3,
-            1
-          ],
-          "rotations": [
-            0,
-            180
-          ],
-          "min": 0,
-          "max": 1,
-          "priority": 30,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 1
-        },
-        {
-          "id": "entry-chair",
-          "objectIds": [
-            "ab-clean-chair-wood-blue",
-            "ef-chair-green"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
           "max": 2,
-          "priority": 10,
+          "priority": 15,
           "blocksMovement": true,
-          "placement": "anywhere",
+          "placement": "wall",
           "surfaceAffinity": [
             "floor:stone"
           ],
@@ -173,7 +124,7 @@
             270
           ],
           "min": 0,
-          "max": 2,
+          "max": 1,
           "priority": 5,
           "blocksMovement": true,
           "placement": "anywhere",
@@ -182,38 +133,84 @@
           ],
           "clearance": 0
         }
-      ]
-    },
-    {
-      "id": "guild-common",
-      "label": "Guild common room",
-      "furnishings": [
+      ],
+      "assemblies": [
         {
-          "id": "common-table",
-          "objectIds": [
-            "ab-clean-table-wood-empty",
-            "ef-wood-table"
-          ],
-          "footprint": [
-            3,
-            2
-          ],
+          "id": "entry-checkin",
+          "label": "Entry check-in",
+          "min": 1,
+          "max": 1,
+          "priority": 50,
+          "placement": "wall",
           "rotations": [
             0,
             90,
             180,
             270
           ],
-          "min": 0,
-          "max": 1,
-          "priority": 30,
-          "blocksMovement": true,
-          "placement": "center",
+          "clearance": 0,
           "surfaceAffinity": [
             "floor:stone"
           ],
-          "clearance": 1
-        },
+          "members": [
+            {
+              "id": "counter",
+              "objectIds": [
+                "ab-clean-shelf-wood-empty"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                3,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20,
+              "supportEdge": "north"
+            },
+            {
+              "id": "attendant-chair",
+              "objectIds": [
+                "ab-clean-chair-wood-blue",
+                "ef-chair-green"
+              ],
+              "offset": [
+                1,
+                1
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 180,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                2
+              ],
+              "footprint": [
+                3,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "guild-common",
+      "label": "Guild common room",
+      "furnishings": [
         {
           "id": "common-bench",
           "objectIds": [
@@ -231,36 +228,10 @@
             270
           ],
           "min": 0,
-          "max": 2,
-          "priority": 20,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "common-chair",
-          "objectIds": [
-            "ab-clean-chair-wood-blue",
-            "ef-chair-green"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 4,
+          "max": 1,
           "priority": 10,
           "blocksMovement": true,
-          "placement": "anywhere",
+          "placement": "wall",
           "surfaceAffinity": [
             "floor:stone"
           ],
@@ -282,7 +253,7 @@
             270
           ],
           "min": 0,
-          "max": 2,
+          "max": 1,
           "priority": 5,
           "blocksMovement": true,
           "placement": "wall",
@@ -291,89 +262,121 @@
           ],
           "clearance": 0
         }
+      ],
+      "assemblies": [
+        {
+          "id": "guild-table-seating",
+          "label": "Guild table seating",
+          "min": 1,
+          "max": 1,
+          "priority": 50,
+          "placement": "center",
+          "rotations": [
+            0,
+            90,
+            180,
+            270
+          ],
+          "clearance": 0,
+          "surfaceAffinity": [
+            "floor:stone"
+          ],
+          "members": [
+            {
+              "id": "table",
+              "objectIds": [
+                "ab-clean-table-wood-empty",
+                "ef-wood-table"
+              ],
+              "offset": [
+                1,
+                1
+              ],
+              "footprint": [
+                3,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "table-rug",
+              "objectIds": [
+                "ef-rug-red"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                5,
+                4
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": false,
+              "layer": "underlay",
+              "z": 0
+            },
+            {
+              "id": "chair-north",
+              "objectIds": [
+                "ab-clean-chair-wood-blue",
+                "ef-chair-green"
+              ],
+              "offset": [
+                2,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "chair-south",
+              "objectIds": [
+                "ab-clean-chair-wood-blue",
+                "ef-chair-green"
+              ],
+              "offset": [
+                2,
+                3
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 180,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                3
+              ],
+              "footprint": [
+                1,
+                1
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "id": "guild-bunk",
       "label": "Guild bunk room",
       "furnishings": [
-        {
-          "id": "bunk-cot",
-          "objectIds": [
-            "ab-clean-cot-metal-green",
-            "ab-clean-cot-metal-blue"
-          ],
-          "footprint": [
-            1,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 3,
-          "priority": 30,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "bunk-bed",
-          "objectIds": [
-            "ef-bed-red"
-          ],
-          "footprint": [
-            2,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 2,
-          "priority": 30,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "bunk-chair",
-          "objectIds": [
-            "ab-clean-chair-wood-blue",
-            "ef-chair-green"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 2,
-          "priority": 10,
-          "blocksMovement": true,
-          "placement": "anywhere",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
         {
           "id": "bunk-rug",
           "objectIds": [
@@ -399,6 +402,106 @@
           ],
           "clearance": 1
         }
+      ],
+      "assemblies": [
+        {
+          "id": "guild-cot-light",
+          "label": "Guild cot and bedside light",
+          "min": 1,
+          "max": 2,
+          "priority": 45,
+          "placement": "wall",
+          "rotations": [
+            0,
+            90,
+            180,
+            270
+          ],
+          "clearance": 0,
+          "surfaceAffinity": [
+            "floor:stone"
+          ],
+          "members": [
+            {
+              "id": "cot",
+              "objectIds": [
+                "ab-clean-cot-metal-green",
+                "ab-clean-cot-metal-blue"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                1,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20,
+              "supportEdge": "north"
+            },
+            {
+              "id": "cot-rug",
+              "objectIds": [
+                "ef-rug-red"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                2,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": false,
+              "layer": "underlay",
+              "z": 0
+            },
+            {
+              "id": "cot-lamp",
+              "objectIds": [
+                "ef-lamp-table"
+              ],
+              "offset": [
+                1,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                1,
+                1
+              ],
+              "footprint": [
+                1,
+                1
+              ]
+            },
+            {
+              "offset": [
+                0,
+                2
+              ],
+              "footprint": [
+                1,
+                1
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -419,90 +522,85 @@
             180
           ],
           "min": 0,
-          "max": 2,
-          "priority": 30,
+          "max": 1,
+          "priority": 20,
           "blocksMovement": true,
           "placement": "wall",
           "surfaceAffinity": [
             "floor:stone"
           ],
           "clearance": 1
-        },
+        }
+      ],
+      "assemblies": [
         {
-          "id": "supply-crate",
-          "objectIds": [
-            "ab-clean-crate-wood-cross",
-            "cd-crate"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 4,
-          "priority": 20,
-          "blocksMovement": true,
-          "placement": "anywhere",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "supply-barrel",
-          "objectIds": [
-            "ab-clean-barrel-wood-top"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 2,
-          "priority": 15,
-          "blocksMovement": true,
-          "placement": "anywhere",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "supply-cart",
-          "objectIds": [
-            "cd-explosive-cart"
-          ],
-          "footprint": [
-            2,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
+          "id": "stock-crate-barrel",
+          "label": "Guild storage crate and barrel",
+          "min": 1,
           "max": 1,
-          "priority": 2,
-          "blocksMovement": true,
+          "priority": 45,
           "placement": "wall",
+          "rotations": [
+            0,
+            90,
+            180,
+            270
+          ],
+          "clearance": 0,
           "surfaceAffinity": [
             "floor:stone"
           ],
-          "clearance": 0
+          "members": [
+            {
+              "id": "crate",
+              "objectIds": [
+                "ab-clean-crate-wood-cross",
+                "cd-crate"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "barrel",
+              "objectIds": [
+                "ab-clean-barrel-wood-top"
+              ],
+              "offset": [
+                1,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "footprint": [
+                2,
+                1
+              ]
+            }
+          ]
         }
       ]
     },
@@ -510,31 +608,6 @@
       "id": "rest-bunks",
       "label": "Rest bunks",
       "furnishings": [
-        {
-          "id": "rest-bed",
-          "objectIds": [
-            "ef-bed-red"
-          ],
-          "footprint": [
-            2,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 3,
-          "priority": 30,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
         {
           "id": "rest-cot",
           "objectIds": [
@@ -552,174 +625,190 @@
             270
           ],
           "min": 0,
-          "max": 2,
-          "priority": 25,
+          "max": 1,
+          "priority": 15,
           "blocksMovement": true,
           "placement": "wall",
           "surfaceAffinity": [
             "floor:stone"
           ],
           "clearance": 0
-        },
+        }
+      ],
+      "assemblies": [
         {
-          "id": "rest-rug",
-          "objectIds": [
-            "ef-rug-red"
-          ],
-          "footprint": [
-            3,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
+          "id": "rest-bedside",
+          "label": "Bedside rest station",
+          "min": 1,
           "max": 1,
-          "priority": 5,
-          "blocksMovement": false,
-          "placement": "center",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 1
-        },
-        {
-          "id": "rest-plant-lamp",
-          "objectIds": [
-            "ef-plant-green",
-            "ef-lamp-table"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
+          "priority": 50,
+          "placement": "wall",
           "rotations": [
             0,
             90,
             180,
             270
           ],
-          "min": 0,
-          "max": 2,
-          "priority": 5,
-          "blocksMovement": true,
-          "placement": "anywhere",
+          "clearance": 0,
           "surfaceAffinity": [
             "floor:stone"
           ],
-          "clearance": 0
+          "members": [
+            {
+              "id": "bed",
+              "objectIds": [
+                "ef-bed-red"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                2,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20,
+              "supportEdge": "north"
+            },
+            {
+              "id": "bed-rug",
+              "objectIds": [
+                "ef-rug-red"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                3,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": false,
+              "layer": "underlay",
+              "z": 0
+            },
+            {
+              "id": "bedside-lamp",
+              "objectIds": [
+                "ef-lamp-table"
+              ],
+              "offset": [
+                2,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                2,
+                1
+              ],
+              "footprint": [
+                1,
+                2
+              ]
+            },
+            {
+              "offset": [
+                0,
+                2
+              ],
+              "footprint": [
+                2,
+                1
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "id": "rest-lounge",
       "label": "Rest lounge",
-      "furnishings": [
+      "furnishings": [],
+      "assemblies": [
         {
-          "id": "lounge-table",
-          "objectIds": [
-            "ef-wood-table",
-            "ab-clean-table-wood-empty"
-          ],
-          "footprint": [
-            3,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
+          "id": "lounge-bench-light",
+          "label": "Rest lounge bench and light",
+          "min": 1,
           "max": 1,
-          "priority": 25,
-          "blocksMovement": true,
-          "placement": "center",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 1
-        },
-        {
-          "id": "lounge-chair",
-          "objectIds": [
-            "ef-chair-green",
-            "ab-clean-chair-wood-blue"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 4,
-          "priority": 15,
-          "blocksMovement": true,
-          "placement": "anywhere",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "lounge-bench",
-          "objectIds": [
-            "ef-wood-bench",
-            "ab-clean-bench-wood-plain"
-          ],
-          "footprint": [
-            2,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 2,
-          "priority": 10,
-          "blocksMovement": true,
+          "priority": 40,
           "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "lounge-light",
-          "objectIds": [
-            "ef-lamp-table"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
           "rotations": [
             0,
             90,
             180,
             270
           ],
-          "min": 0,
-          "max": 2,
-          "priority": 5,
-          "blocksMovement": true,
-          "placement": "anywhere",
+          "clearance": 0,
           "surfaceAffinity": [
             "floor:stone"
           ],
-          "clearance": 0
+          "members": [
+            {
+              "id": "bench",
+              "objectIds": [
+                "ef-wood-bench",
+                "ab-clean-bench-wood-plain"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                2,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20,
+              "supportEdge": "north"
+            },
+            {
+              "id": "bench-light",
+              "objectIds": [
+                "ef-lamp-table"
+              ],
+              "offset": [
+                2,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "footprint": [
+                3,
+                1
+              ]
+            }
+          ]
         }
       ]
     },
@@ -749,32 +838,77 @@
             "floor:stone"
           ],
           "clearance": 1
-        },
+        }
+      ],
+      "assemblies": [
         {
-          "id": "rest-supply-crate",
-          "objectIds": [
-            "ab-clean-crate-wood-cross",
-            "cd-crate"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
+          "id": "rest-supply-stock",
+          "label": "Rest supply crate and barrel",
+          "min": 1,
+          "max": 1,
+          "priority": 35,
+          "placement": "wall",
           "rotations": [
             0,
             90,
             180,
             270
           ],
-          "min": 0,
-          "max": 3,
-          "priority": 15,
-          "blocksMovement": true,
-          "placement": "anywhere",
+          "clearance": 0,
           "surfaceAffinity": [
             "floor:stone"
           ],
-          "clearance": 0
+          "members": [
+            {
+              "id": "crate",
+              "objectIds": [
+                "ab-clean-crate-wood-cross",
+                "cd-crate"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "barrel",
+              "objectIds": [
+                "ab-clean-barrel-wood-top"
+              ],
+              "offset": [
+                1,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "footprint": [
+                2,
+                1
+              ]
+            }
+          ]
         }
       ]
     },
@@ -799,7 +933,7 @@
           ],
           "min": 0,
           "max": 1,
-          "priority": 30,
+          "priority": 20,
           "blocksMovement": true,
           "placement": "wall",
           "surfaceAffinity": [
@@ -823,58 +957,8 @@
             270
           ],
           "min": 0,
-          "max": 2,
-          "priority": 20,
-          "blocksMovement": true,
-          "placement": "anywhere",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "workshop-gear",
-          "objectIds": [
-            "cd-gear"
-          ],
-          "footprint": [
-            2,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 2,
-          "priority": 10,
-          "blocksMovement": true,
-          "placement": "anywhere",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "workshop-lever",
-          "objectIds": [
-            "cd-lever-plinth"
-          ],
-          "footprint": [
-            2,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
           "max": 1,
-          "priority": 8,
+          "priority": 10,
           "blocksMovement": true,
           "placement": "anywhere",
           "surfaceAffinity": [
@@ -899,7 +983,7 @@
             270
           ],
           "min": 0,
-          "max": 3,
+          "max": 2,
           "priority": 5,
           "blocksMovement": true,
           "placement": "anywhere",
@@ -908,87 +992,82 @@
           ],
           "clearance": 0
         }
+      ],
+      "assemblies": [
+        {
+          "id": "gear-lever-station",
+          "label": "Gear and lever station",
+          "min": 1,
+          "max": 1,
+          "priority": 50,
+          "placement": "center",
+          "rotations": [
+            0,
+            90,
+            180,
+            270
+          ],
+          "clearance": 0,
+          "surfaceAffinity": [
+            "floor:stone"
+          ],
+          "members": [
+            {
+              "id": "gear",
+              "objectIds": [
+                "cd-gear"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                2,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "lever",
+              "objectIds": [
+                "cd-lever-plinth"
+              ],
+              "offset": [
+                2,
+                0
+              ],
+              "footprint": [
+                1,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                1,
+                2
+              ],
+              "footprint": [
+                1,
+                1
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "id": "maintenance-rail",
       "label": "Rail maintenance bay",
       "furnishings": [
-        {
-          "id": "rail-straight",
-          "objectIds": [
-            "cd-rail-straight"
-          ],
-          "footprint": [
-            5,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 2,
-          "priority": 30,
-          "blocksMovement": true,
-          "placement": "center",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 1
-        },
-        {
-          "id": "rail-junction",
-          "objectIds": [
-            "cd-rail-junction"
-          ],
-          "footprint": [
-            2,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 1,
-          "priority": 25,
-          "blocksMovement": true,
-          "placement": "center",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "rail-cart",
-          "objectIds": [
-            "cd-explosive-cart"
-          ],
-          "footprint": [
-            2,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 1,
-          "priority": 10,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
         {
           "id": "rail-torch",
           "objectIds": [
@@ -1005,7 +1084,7 @@
             270
           ],
           "min": 0,
-          "max": 2,
+          "max": 1,
           "priority": 5,
           "blocksMovement": true,
           "placement": "wall",
@@ -1013,6 +1092,76 @@
             "floor:stone"
           ],
           "clearance": 0
+        }
+      ],
+      "assemblies": [
+        {
+          "id": "rail-run-junction",
+          "label": "Straight rail and junction",
+          "min": 1,
+          "max": 1,
+          "priority": 45,
+          "placement": "wall",
+          "rotations": [
+            0,
+            90,
+            180,
+            270
+          ],
+          "clearance": 0,
+          "surfaceAffinity": [
+            "floor:stone"
+          ],
+          "members": [
+            {
+              "id": "straight-run",
+              "objectIds": [
+                "cd-rail-straight"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                3,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "junction",
+              "objectIds": [
+                "cd-rail-junction"
+              ],
+              "offset": [
+                3,
+                0
+              ],
+              "footprint": [
+                2,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "footprint": [
+                1,
+                1
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1037,65 +1186,85 @@
             270
           ],
           "min": 0,
-          "max": 3,
-          "priority": 20,
+          "max": 2,
+          "priority": 15,
           "blocksMovement": true,
           "placement": "wall",
           "surfaceAffinity": [
             "floor:stone"
           ],
           "clearance": 1
-        },
+        }
+      ],
+      "assemblies": [
         {
-          "id": "storage-trough",
-          "objectIds": [
-            "cd-hay-trough"
-          ],
-          "footprint": [
-            2,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
+          "id": "maintenance-crate-barrel",
+          "label": "Maintenance crate and barrel",
+          "min": 1,
           "max": 1,
-          "priority": 10,
-          "blocksMovement": true,
+          "priority": 35,
           "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
-        {
-          "id": "storage-crates",
-          "objectIds": [
-            "cd-crate",
-            "ab-clean-crate-wood-cross"
-          ],
-          "footprint": [
-            1,
-            1
-          ],
           "rotations": [
             0,
             90,
             180,
             270
           ],
-          "min": 0,
-          "max": 4,
-          "priority": 5,
-          "blocksMovement": true,
-          "placement": "anywhere",
+          "clearance": 0,
           "surfaceAffinity": [
             "floor:stone"
           ],
-          "clearance": 0
+          "members": [
+            {
+              "id": "crate",
+              "objectIds": [
+                "ab-clean-crate-wood-cross",
+                "cd-crate"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "barrel",
+              "objectIds": [
+                "ab-clean-barrel-wood-top"
+              ],
+              "offset": [
+                1,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "footprint": [
+                2,
+                1
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1103,60 +1272,6 @@
       "id": "commons",
       "label": "Commons",
       "furnishings": [
-        {
-          "id": "commons-table",
-          "objectIds": [
-            "ef-wood-table",
-            "ab-clean-table-wood-empty"
-          ],
-          "footprint": [
-            3,
-            2
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 2,
-          "priority": 25,
-          "blocksMovement": true,
-          "placement": "center",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 1
-        },
-        {
-          "id": "commons-seating",
-          "objectIds": [
-            "ef-wood-bench",
-            "ab-clean-bench-wood-plain",
-            "ef-chair-green",
-            "ab-clean-chair-wood-blue"
-          ],
-          "footprint": [
-            2,
-            1
-          ],
-          "rotations": [
-            0,
-            90,
-            180,
-            270
-          ],
-          "min": 0,
-          "max": 4,
-          "priority": 15,
-          "blocksMovement": true,
-          "placement": "wall",
-          "surfaceAffinity": [
-            "floor:stone"
-          ],
-          "clearance": 0
-        },
         {
           "id": "commons-vending",
           "objectIds": [
@@ -1181,31 +1296,115 @@
             "floor:stone"
           ],
           "clearance": 1
-        },
+        }
+      ],
+      "assemblies": [
         {
-          "id": "commons-rug",
-          "objectIds": [
-            "ef-rug-red"
-          ],
-          "footprint": [
-            3,
-            2
-          ],
+          "id": "commons-table-seating",
+          "label": "Commons table seating",
+          "min": 1,
+          "max": 1,
+          "priority": 45,
+          "placement": "center",
           "rotations": [
             0,
             90,
             180,
             270
           ],
-          "min": 0,
-          "max": 1,
-          "priority": 5,
-          "blocksMovement": false,
-          "placement": "center",
+          "clearance": 0,
           "surfaceAffinity": [
             "floor:stone"
           ],
-          "clearance": 1
+          "members": [
+            {
+              "id": "table",
+              "objectIds": [
+                "ab-clean-table-wood-empty",
+                "ef-wood-table"
+              ],
+              "offset": [
+                1,
+                1
+              ],
+              "footprint": [
+                3,
+                2
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "table-rug",
+              "objectIds": [
+                "ef-rug-red"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "footprint": [
+                5,
+                4
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": false,
+              "layer": "underlay",
+              "z": 0
+            },
+            {
+              "id": "chair-north",
+              "objectIds": [
+                "ab-clean-chair-wood-blue",
+                "ef-chair-green"
+              ],
+              "offset": [
+                2,
+                0
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 0,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            },
+            {
+              "id": "chair-south",
+              "objectIds": [
+                "ab-clean-chair-wood-blue",
+                "ef-chair-green"
+              ],
+              "offset": [
+                2,
+                3
+              ],
+              "footprint": [
+                1,
+                1
+              ],
+              "rotationDegrees": 180,
+              "blocksMovement": true,
+              "layer": "prop",
+              "z": 20
+            }
+          ],
+          "access": [
+            {
+              "offset": [
+                0,
+                3
+              ],
+              "footprint": [
+                1,
+                1
+              ]
+            }
+          ]
         }
       ]
     },
