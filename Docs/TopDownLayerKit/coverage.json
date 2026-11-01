@@ -1,0 +1,2278 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "title": "Floor 1 top-down semantic layer studies",
+    "book": 1,
+    "floor": 1,
+    "sceneCount": 36,
+    "batches": 6,
+    "scenesPerBatch": 6,
+    "sourceSet": "Web/wwwroot/assets/floor-one-concepts-top-down",
+    "sourceSetCamera": "Root-approved direct-overhead/top-down scene compositions; thin wall edges, prop depth and stylized readable details may remain. Not mathematically camera-verified.",
+    "sourceBoundary": "Use only approved top-down source panels and their source sheets. Do not use the earlier mixed-camera source art in this kit.",
+    "artBoundary": "Semantic layers and reconstructions are illustrative references, not canonical floorplans, tile-ready assets, or runtime maps. Hidden surfaces created beneath occlusion are interpolated/synthesized and cannot recover true source art that was never visible.",
+    "status": "reviewable-reference-layer-kit; 36 scenes imported; asset and browser HTTP QA passed",
+    "globalChecklist": {
+      "sourceArt": "all 36 approved top-down source panels retained with hashes; earlier mixed-camera art excluded",
+      "exactDecomposition": "506 exact-visible-source components across 36 scenes; central output manifest reports 0 changed source pixels for each exact reconstruction. This validates pixel recomposition, not semantic component quality.",
+      "reusableComposition": "524 reusable-mode components across 36 scenes; inferred/generated or source-derived with per-asset provenance. Composition remains interpretive and has no source-pixel fidelity metric.",
+      "hiddenSurfaceInterpolation": "inferred surfaces remain synthetic; they do not recover unseen source artwork. Fine-grained hidden props, background context, and lighting are incomplete.",
+      "referenceReconstruction": "exact-source and inferred reusable reconstructions are separately available for review",
+      "viewer": "Web/wwwroot/top-down-layers.html passed HTTP QA across 36 scenes, all four compare views, slider, source/component links, JSON/native PNG downloads, and mobile 390px without overflow; no JS/HTTP errors.",
+      "visualLimit": "reviewable reference layer kit; not production-ready, tile-ready, canonical map data, or gameplay integration",
+      "semanticInventory": "Central inventory records 119 exact category layers, 35 materials, and 33 reusable library modules; these counts do not imply exhaustive fine-grained decomposition or production readiness.",
+      "assetTests": "Six independent asset tests pass across all 36 scenes."
+    },
+    "pilotScenes": [
+      {
+        "sceneId": "real-mordecai-guild",
+        "status": "included in full 36-scene reviewable kit"
+      },
+      {
+        "sceneId": "swine-switch-chamber",
+        "status": "included in full 36-scene reviewable kit"
+      },
+      {
+        "sceneId": "other-crawler-guild",
+        "status": "included in full 36-scene reviewable kit; clean plate and detailed components retain stated limitations"
+      }
+    ],
+    "draftBatchSet": [],
+    "centralPilotManifest": "../../Web/wwwroot/assets/top-down-layer-kit/manifest.json",
+    "jsonSchema": "../../Web/wwwroot/assets/top-down-layer-kit/schema.json",
+    "description": "Reviewable semantic layer kit for all 36 root-approved top-down Floor 1 source concepts. Exact-source decomposition and inferred reusable alternatives are separate modes. This is a reference workbench, not production-ready or runtime content.",
+    "groupRollup": [
+      {
+        "set": "AB",
+        "panelOrders": [
+          1,
+          12
+        ],
+        "sceneCount": 12,
+        "exactComponentCount": 272,
+        "reusableComponentCount": 272
+      },
+      {
+        "set": "CD",
+        "panelOrders": [
+          13,
+          24
+        ],
+        "sceneCount": 12,
+        "exactComponentCount": 150,
+        "reusableComponentCount": 164
+      },
+      {
+        "set": "EF",
+        "panelOrders": [
+          25,
+          36
+        ],
+        "sceneCount": 12,
+        "exactComponentCount": 84,
+        "reusableComponentCount": 88,
+        "notes": "Terrain patches in scenes 25–29 remain labeled as patches. Other Crawlers’ Guild retains explicit component/clean-plate limitations."
+      }
+    ],
+    "componentTotals": {
+      "exactMode": 506,
+      "reusableMode": 524,
+      "modeSpecificEntries": 1030,
+      "note": "Counts are per-mode component records; the same visible object may appear in both modes and counts twice. Category layers/materials/modules are separate catalog counts.",
+      "exactCategoryLayers": 119,
+      "materials": 35,
+      "reusableLibraryModules": 33
+    },
+    "centralManifest": "../../Web/wwwroot/assets/top-down-layer-kit/manifest.json",
+    "viewerPath": "../../Web/wwwroot/top-down-layers.html"
+  },
+  "proposedLayerSchema": {
+    "schemaVersion": 1,
+    "sceneId": "existing coverage ID",
+    "source": {
+      "path": "approved top-down panel image",
+      "sha256": "source file hash",
+      "width": "source width pixels",
+      "height": "source height pixels"
+    },
+    "grid": {
+      "major": 14,
+      "sub": 3
+    },
+    "underlay": {
+      "path": "AI-generated hidden-surface interpolation",
+      "provenance": {
+        "kind": "ai-interpolated-hidden-surface",
+        "tool": "generation tool",
+        "prompt": "retained generation prompt"
+      }
+    },
+    "components": [
+      {
+        "id": "semantic component ID",
+        "category": "semantic label",
+        "assetRGBAcrop": "RGBA crop path",
+        "mask": "full-scene binary 0/255 mask path",
+        "bounds": "[x,y,w,h]",
+        "x": "scene pixel coordinate",
+        "y": "scene pixel coordinate",
+        "z": "stable layer order",
+        "gridAddress": "grid address such as D7.b2",
+        "provenance": {
+          "kind": "exact-visible-source-extraction",
+          "sourcePath": "approved source panel",
+          "method": "recorded extraction method"
+        }
+      }
+    ]
+  },
+  "reconstructionContract": {
+    "target": "restore extracted visible components over an interpolated hidden-surface underlay for reference comparison",
+    "plannedInvariant": "pixels outside the union of component masks must match the source; inpainting is confined to the union of masks; restored visible pixels are compared against the original source",
+    "verificationStatus": "not-implemented-or-verified",
+    "limitation": "The synthesized underlay does not reveal, recover, or assert what was behind an occluder in the original scene."
+  },
+  "viewer": {
+    "path": "../../Web/wwwroot/top-down-layers.html",
+    "status": "HTTP QA passed across 36 scenes; six independent asset tests pass",
+    "defaultMode": "reusable interpretation",
+    "alternateModes": [
+      "exact source decomposition",
+      "original reference"
+    ],
+    "comparisonModes": [
+      "current layers",
+      "original/current side-by-side",
+      "sliding comparison",
+      "pixel difference"
+    ],
+    "controls": [
+      "scene selection",
+      "category toggles",
+      "reference grid",
+      "coordinate display",
+      "download scene JSON",
+      "download current PNG"
+    ],
+    "gameplayIntegration": false,
+    "httpQA": {
+      "sceneCount": 36,
+      "compareModes": [
+        "current layers",
+        "original/current side-by-side",
+        "sliding comparison",
+        "pixel difference"
+      ],
+      "features": [
+        "default reusable mode",
+        "exact source mode",
+        "original reference mode",
+        "category toggles",
+        "outer-labeled reference grid",
+        "D7.b2 hover and click",
+        "JSON download",
+        "native PNG export excludes grid"
+      ],
+      "mobileWidth": 390,
+      "mobileOverflow": false,
+      "javascriptErrors": 0,
+      "httpErrors": 0
+    },
+    "previews": {
+      "desktop": "../../Web/wwwroot/assets/top-down-layer-kit/previews/workbench.png",
+      "mobile": "../../Web/wwwroot/assets/top-down-layer-kit/previews/workbench-mobile.png"
+    }
+  },
+  "sources": [
+    {
+      "id": "sheet-a",
+      "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-a.png",
+      "sha256": "4fb034174fadeb425f20999a3a66e8a73f4b18b9b6a12b935fd86898b5cc2594",
+      "size": [
+        1536,
+        1024
+      ],
+      "created": "2026-11-01",
+      "tool": "image_gen.imagegen",
+      "originalImagePath": "/workspace/scratch/floor-one-art/a/sheet-a-01-06-top-down-v2.png",
+      "cameraReview": {
+        "projection": "direct-overhead",
+        "reviewer": "root",
+        "assessment": "Coordinator visually approved parallel square floor plans, overhead prop surfaces and no frontal room vanishing point. Thin edging/shadows provide game-art depth; not a mathematical projection guarantee."
+      }
+    },
+    {
+      "id": "sheet-b",
+      "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-b.png",
+      "sha256": "b8c225bf57622f91cf9d2115b034996e968cf4face998fc6cf7c5356a5f8bfd1",
+      "size": [
+        1536,
+        1024
+      ],
+      "created": "2026-11-01",
+      "tool": "image_gen.imagegen",
+      "originalImagePath": "/workspace/scratch/floor-one-art/a/sheet-b-07-12-top-down-v2.png",
+      "cameraReview": {
+        "projection": "direct-overhead",
+        "reviewer": "root",
+        "assessment": "Coordinator visually approved parallel square floor plans, overhead prop surfaces and no frontal room vanishing point. Thin edging/shadows provide game-art depth; not a mathematical projection guarantee."
+      }
+    },
+    {
+      "id": "sheet-c",
+      "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-c.png",
+      "sha256": "ade470d4239ab7ba4a61b4564ec7d12d0a54539cf2c8c752471e80b079dffae5",
+      "size": [
+        1536,
+        1024
+      ],
+      "created": null,
+      "tool": "image_gen.imagegen",
+      "originalImagePath": "/workspace/generated_images/exec-749f81c4-656b-410c-ba46-6cd974afaad2.png",
+      "cameraReview": {
+        "projection": "direct-overhead",
+        "reviewer": "root",
+        "assessment": "Coordinator visually approved square parallel floor plans with overhead vehicle/barrel surfaces and llama backs. Thin wall sides and decorative throne back remain stylized depth; no mathematical camera guarantee. Boss is an inferred silhouette, not a claim of canonical monster accuracy."
+      }
+    },
+    {
+      "id": "sheet-d",
+      "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-d.png",
+      "sha256": "0f840ce56301ed2827e6a0e3daeee782e4598e76f9fdc29a436fb82373e46c72",
+      "size": [
+        1536,
+        1024
+      ],
+      "created": null,
+      "tool": "image_gen.imagegen",
+      "originalImagePath": "/workspace/generated_images/exec-a06bc74b-b784-4ca8-a35c-d11077798449.png",
+      "cameraReview": {
+        "projection": "direct-overhead",
+        "reviewer": "root",
+        "assessment": "Coordinator visually approved square parallel floor plans with overhead vehicle/barrel surfaces and llama backs. Thin wall sides and decorative throne back remain stylized depth; no mathematical camera guarantee. Boss is an inferred silhouette, not a claim of canonical monster accuracy."
+      }
+    },
+    {
+      "id": "sheet-e",
+      "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-e.png",
+      "sha256": "4531ebad3fbdebd57a09a01c358a4f682e4aa7a670608910250598e930497451",
+      "size": [
+        1536,
+        1024
+      ],
+      "created": null,
+      "tool": "image_gen.imagegen",
+      "originalImagePath": "/workspace/generated_images/exec-ceaf01f3-2996-4da0-b0f1-8b791b03d8d8.png",
+      "cameraReview": {
+        "projection": "direct-overhead",
+        "reviewer": "root",
+        "assessment": "Coordinator visually approved parallel square floor plans, overhead prop surfaces and no frontal room vanishing point. Thin edging/shadows provide game-art depth; not a mathematical projection guarantee."
+      }
+    },
+    {
+      "id": "sheet-f",
+      "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-f.png",
+      "sha256": "27ecd7dd9a017e02f6d27399cf53f42fe532aab0df0a958e5c0ad83b72d9ebe6",
+      "size": [
+        1536,
+        1024
+      ],
+      "created": null,
+      "tool": "image_gen.imagegen",
+      "originalImagePath": "/workspace/generated_images/exec-69ba2943-b516-41d8-b77b-59d811c3d187.png",
+      "cameraReview": {
+        "projection": "direct-overhead",
+        "reviewer": "root",
+        "assessment": "Coordinator visually approved parallel square floor plans, overhead prop surfaces and no frontal room vanishing point. Thin edging/shadows provide game-art depth; not a mathematical projection guarantee. Candy machines retain stylized readable face details inside overhead footprints."
+      }
+    }
+  ],
+  "scenes": [
+    {
+      "id": "entrance-stairs",
+      "order": 1,
+      "batch": 1,
+      "name": "Dungeon entrance staircase and landing",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/entrance-stairs.png",
+        "sha256": "7e309dd64f2e74efbcc2dd4a00647a4534f722d4349a17919363e939e31d528c",
+        "size": [
+          512,
+          478
+        ],
+        "pixelSha256": "67cad8cfc05b33acf4a9188934f594a30792b60bb63b50eb1881aa59bc358531",
+        "sourceSheetId": "sheet-a",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-a.png",
+        "sourceSheetSha256": "4fb034174fadeb425f20999a3a66e8a73f4b18b9b6a12b935fd86898b5cc2594",
+        "sourceRect": [
+          0,
+          0,
+          512,
+          478
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "sample1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/entrance-stairs/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 5,
+        "reusableMode": 5
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 244736,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "kua-entrance-chamber",
+      "order": 2,
+      "batch": 1,
+      "name": "Kua-tin entrance chamber",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/kua-entrance-chamber.png",
+        "sha256": "e1f8fb69b50ae94fc1e90e2a5ccb76b21ad6f6848cf9a75241a259105dd158a9",
+        "size": [
+          512,
+          478
+        ],
+        "pixelSha256": "b784003d0ee27b61bc7c43fef90b0d4ba56a07369816ec66fa208664fb05d745",
+        "sourceSheetId": "sheet-a",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-a.png",
+        "sourceSheetSha256": "4fb034174fadeb425f20999a3a66e8a73f4b18b9b6a12b935fd86898b5cc2594",
+        "sourceRect": [
+          512,
+          0,
+          512,
+          478
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "sample1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/kua-entrance-chamber/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 14,
+        "reusableMode": 14
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 244736,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "entry-tunnel",
+      "order": 3,
+      "batch": 1,
+      "name": "First Floor entry tunnel",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/entry-tunnel.png",
+        "sha256": "734f953903a0ece9a43b2eac788e0764ea114a5f804557af6c7e620151517dc3",
+        "size": [
+          512,
+          478
+        ],
+        "pixelSha256": "f55529099edf3eef18b2f2dfeb35927554ac98a118bc968449153c9f9d31fd55",
+        "sourceSheetId": "sheet-a",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-a.png",
+        "sourceSheetSha256": "4fb034174fadeb425f20999a3a66e8a73f4b18b9b6a12b935fd86898b5cc2594",
+        "sourceRect": [
+          1024,
+          0,
+          512,
+          478
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "sample1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/entry-tunnel/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 15,
+        "reusableMode": 15
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 244736,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "fake-guild-alley",
+      "order": 4,
+      "batch": 1,
+      "name": "Fake Tutorial Guild alley",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/fake-guild-alley.png",
+        "sha256": "b04bacf462b1104dc497b25a8994544755632bde579a5cc96946781e6af1d473",
+        "size": [
+          512,
+          546
+        ],
+        "pixelSha256": "0fd740249ad1d1c1c9332c3dafa119d6699e4cbea9067b440845fe90b0352601",
+        "sourceSheetId": "sheet-a",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-a.png",
+        "sourceSheetSha256": "4fb034174fadeb425f20999a3a66e8a73f4b18b9b6a12b935fd86898b5cc2594",
+        "sourceRect": [
+          0,
+          478,
+          512,
+          546
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "sample1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/fake-guild-alley/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 11,
+        "reusableMode": 11
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 279552,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "dozer-trap",
+      "order": 5,
+      "batch": 1,
+      "name": "Murder Dozer trap",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/dozer-trap.png",
+        "sha256": "b04918824eca334392e2b3c6989f267ecb9f4c77d15e4f13387ded7ea432f747",
+        "size": [
+          512,
+          546
+        ],
+        "pixelSha256": "0eecf36bc116f1e1a3ec1e3c202c87709c24e903e3e22d2ce5b4647c391b4f68",
+        "sourceSheetId": "sheet-a",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-a.png",
+        "sourceSheetSha256": "4fb034174fadeb425f20999a3a66e8a73f4b18b9b6a12b935fd86898b5cc2594",
+        "sourceRect": [
+          512,
+          478,
+          512,
+          546
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "sample1",
+        "goblins"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/dozer-trap/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 10,
+        "reusableMode": 10
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 279552,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "real-mordecai-guild",
+      "order": 6,
+      "batch": 1,
+      "name": "Mordecai’s Tutorial Guildhall",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/real-mordecai-guild.png",
+        "sha256": "b22ee855eabbf5066e1e1280e41a2a14cf3d2bfc2db02044a83ed1c9086df1b1",
+        "size": [
+          512,
+          546
+        ],
+        "pixelSha256": "f3bfe8adf9080644316e8a3a0c46240670ff435da82c1e34ef86b26dd8c888e6",
+        "sourceSheetId": "sheet-a",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-a.png",
+        "sourceSheetSha256": "4fb034174fadeb425f20999a3a66e8a73f4b18b9b6a12b935fd86898b5cc2594",
+        "sourceRect": [
+          1024,
+          478,
+          512,
+          546
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "sample1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/real-mordecai-guild/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 18,
+        "reusableMode": 18
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 279552,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "tally-restaurant",
+      "order": 7,
+      "batch": 2,
+      "name": "Tally’s Polish restaurant safe room",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/tally-restaurant.png",
+        "sha256": "b652fa785dbb4de202562ab785451bbe52be0f1f8a4afbe716cd453143df18ef",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "e5b7d32db76258290b1be480296d9028d0ab44764ae546bd45bb72b0b744f1b9",
+        "sourceSheetId": "sheet-b",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-b.png",
+        "sourceSheetSha256": "b8c225bf57622f91cf9d2115b034996e968cf4face998fc6cf7c5356a5f8bfd1",
+        "sourceRect": [
+          0,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "tally",
+        "safe",
+        "chapter9"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/tally-restaurant/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 41,
+        "reusableMode": 41
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "tally-play-area",
+      "order": 8,
+      "batch": 2,
+      "name": "Children’s play area in Tally’s safe room",
+      "canonStatus": "visited_sub_location",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/tally-play-area.png",
+        "sha256": "299a684718c53635ab48e15fb68c0721b1fea01034bd9fa8819bd95308d5e6e7",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "615eb14fe26d65593c9de1f93263a592841cf2e4166bf4b9167acd8e8dee6386",
+        "sourceSheetId": "sheet-b",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-b.png",
+        "sourceSheetSha256": "b8c225bf57622f91cf9d2115b034996e968cf4face998fc6cf7c5356a5f8bfd1",
+        "sourceRect": [
+          512,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "tally",
+        "safe"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/tally-play-area/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 15,
+        "reusableMode": 15
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "sebastian-peruvian-taco-bell",
+      "order": 9,
+      "batch": 2,
+      "name": "Sebastian’s Peruvian Taco Bell safe room",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/sebastian-peruvian-taco-bell.png",
+        "sha256": "a85e1ae1dfb10b893b9f2fd128e326bcf24eefb8ad19bc2e9171df1a164dca79",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "95a6b3942867790a7e06abc3ae034e7743703020f32c74deafc8f72659122e5a",
+        "sourceSheetId": "sheet-b",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-b.png",
+        "sourceSheetSha256": "b8c225bf57622f91cf9d2115b034996e968cf4face998fc6cf7c5356a5f8bfd1",
+        "sourceRect": [
+          1024,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "sebastian"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/sebastian-peruvian-taco-bell/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 35,
+        "reusableMode": 35
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "dmv-cots-cookies",
+      "order": 10,
+      "batch": 2,
+      "name": "DMV waiting-room safe room",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/dmv-cots-cookies.png",
+        "sha256": "b05c7146b9bc9dbe354588d4882f183967d96673813c31511bb5caf17a5ceb13",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "e03e85c42186bc7d29f4dcef7c4d2992d4f48e05c04d820355f2800869c43d3d",
+        "sourceSheetId": "sheet-b",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-b.png",
+        "sourceSheetSha256": "b8c225bf57622f91cf9d2115b034996e968cf4face998fc6cf7c5356a5f8bfd1",
+        "sourceRect": [
+          0,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "safe",
+        "floor1",
+        "chapter19",
+        "frank"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/dmv-cots-cookies/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 40,
+        "reusableMode": 40
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "meadow-lark-camp",
+      "order": 11,
+      "batch": 2,
+      "name": "Meadow Lark encampment",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/meadow-lark-camp.png",
+        "sha256": "ed3618c075c5a78c27e717802240d7885395211671f1210777551695b9c4395f",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "5566ed18699a2ad46691dd619f8061228d56b0a823f8b47cf6c819174f983874",
+        "sourceSheetId": "sheet-b",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-b.png",
+        "sourceSheetSha256": "b8c225bf57622f91cf9d2115b034996e968cf4face998fc6cf7c5356a5f8bfd1",
+        "sourceRect": [
+          512,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "meadow"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/meadow-lark-camp/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 32,
+        "reusableMode": 32
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "hoarder-lair",
+      "order": 12,
+      "batch": 2,
+      "name": "Hoarder’s lair / Scatterer nest",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/hoarder-lair.png",
+        "sha256": "fbced263daea67a6f7b03f46941992758b5fdbb3925c326705a6c40985e3d7f1",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "7f5b4116a2bc95322d2b4015ee5a948389c060a3482ab4d59314c361197cfc40",
+        "sourceSheetId": "sheet-b",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-b.png",
+        "sourceSheetSha256": "b8c225bf57622f91cf9d2115b034996e968cf4face998fc6cf7c5356a5f8bfd1",
+        "sourceRect": [
+          1024,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "hoarder",
+        "route"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/hoarder-lair/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 36,
+        "reusableMode": 36
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "goblin-workshop",
+      "order": 13,
+      "batch": 3,
+      "name": "Goblin workshop",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/goblin-workshop.png",
+        "sha256": "8af260b1117976aead774270f7a0267259959f9c5a1f2be5fb79f67b1ced8d20",
+        "size": [
+          512,
+          508
+        ],
+        "pixelSha256": "9a0d4d5ff01d7d32d4fad6ba6baa7c22a8b6be13ef6c73c6214150f3e88bfa42",
+        "sourceSheetId": "sheet-c",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-c.png",
+        "sourceSheetSha256": "ade470d4239ab7ba4a61b4564ec7d12d0a54539cf2c8c752471e80b079dffae5",
+        "sourceRect": [
+          0,
+          0,
+          512,
+          508
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "goblins",
+        "chapter15"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/goblin-workshop/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 13,
+        "reusableMode": 13
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 260096,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "war-chieftain-chamber",
+      "order": 14,
+      "batch": 3,
+      "name": "Goblin War Chieftain boss chamber",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/war-chieftain-chamber.png",
+        "sha256": "e98f3e980d450b5a5d8ee465f010c67b61b83a4c59f833889475bfeac9945a54",
+        "size": [
+          512,
+          508
+        ],
+        "pixelSha256": "66a5cce835a72c67dae8db27ce8e6eebe5a367ae403b679160ed3cf5790eb57d",
+        "sourceSheetId": "sheet-c",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-c.png",
+        "sourceSheetSha256": "ade470d4239ab7ba4a61b4564ec7d12d0a54539cf2c8c752471e80b079dffae5",
+        "sourceRect": [
+          512,
+          0,
+          512,
+          508
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "goblins"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/war-chieftain-chamber/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 15,
+        "reusableMode": 15
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 260096,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "juicer-gym",
+      "order": 15,
+      "batch": 3,
+      "name": "Juicer’s gym",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/juicer-gym.png",
+        "sha256": "ad99f5788298c40e059c733faa375aa01fbdbcacdb136092ca0412e99789c281",
+        "size": [
+          512,
+          508
+        ],
+        "pixelSha256": "808ae48ba8a49ea9a12b26373430afd8bb56912b461dd46a13ce869688e0ff4e",
+        "sourceSheetId": "sheet-c",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-c.png",
+        "sourceSheetSha256": "ade470d4239ab7ba4a61b4564ec7d12d0a54539cf2c8c752471e80b079dffae5",
+        "sourceRect": [
+          1024,
+          0,
+          512,
+          508
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "juicer",
+        "gymchapters"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/juicer-gym/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 15,
+        "reusableMode": 15
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 260096,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "swine-spiral-maze",
+      "order": 16,
+      "batch": 3,
+      "name": "Ball of Swine spiral maze",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/swine-spiral-maze.png",
+        "sha256": "529defb5054df88d03844a224a658100ab67188bff0878da90356b527911a3a6",
+        "size": [
+          512,
+          516
+        ],
+        "pixelSha256": "3f68d82d74455fcd4403881f59d50f2e0e8693b320779829aca5776d40063aad",
+        "sourceSheetId": "sheet-c",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-c.png",
+        "sourceSheetSha256": "ade470d4239ab7ba4a61b4564ec7d12d0a54539cf2c8c752471e80b079dffae5",
+        "sourceRect": [
+          0,
+          508,
+          512,
+          516
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "swine",
+        "route"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/swine-spiral-maze/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 8,
+        "reusableMode": 8
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 264192,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "swine-switch-chamber",
+      "order": 17,
+      "batch": 3,
+      "name": "Ball of Swine switch chamber",
+      "canonStatus": "visited_sub_location",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/swine-switch-chamber.png",
+        "sha256": "0548ece0cbf22d4306f773bb201b9872f12c9885c19140c84f1f864374d60342",
+        "size": [
+          512,
+          516
+        ],
+        "pixelSha256": "9b884f6b202f1d7a8d55918b00661c4ca7630ede10a6620607aac006b5eb9a9d",
+        "sourceSheetId": "sheet-c",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-c.png",
+        "sourceSheetSha256": "ade470d4239ab7ba4a61b4564ec7d12d0a54539cf2c8c752471e80b079dffae5",
+        "sourceRect": [
+          512,
+          508,
+          512,
+          516
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "swine"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/swine-switch-chamber/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 21,
+        "reusableMode": 37
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 264192,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "swine-speedbump-construction",
+      "order": 18,
+      "batch": 3,
+      "name": "Speedbump construction area",
+      "canonStatus": "visited_sub_location",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/swine-speedbump-construction.png",
+        "sha256": "af4e1fb8368f96d435c7c30a990ef543dd68b87c03c4840188dde9f27db70f74",
+        "size": [
+          512,
+          516
+        ],
+        "pixelSha256": "35b0882f57734a0e34355a434afabe2b67dd1d959254b6b0fdc06924683cbfd3",
+        "sourceSheetId": "sheet-c",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-c.png",
+        "sourceSheetSha256": "ade470d4239ab7ba4a61b4564ec7d12d0a54539cf2c8c752471e80b079dffae5",
+        "sourceRect": [
+          1024,
+          508,
+          512,
+          516
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "swine"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/swine-speedbump-construction/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 12,
+        "reusableMode": 12
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 264192,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "swine-revealed-arena",
+      "order": 19,
+      "batch": 4,
+      "name": "Revealed Ball of Swine arena",
+      "canonStatus": "visited_sub_location",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/swine-revealed-arena.png",
+        "sha256": "c9887e61b49ba58cd2ec000fe6120954fd19a2828dd33a13fea61b9aded3a344",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "8e7207995d31126561d7119ed5dc9a4f1054223b27950e3f665874b2f81bea94",
+        "sourceSheetId": "sheet-d",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-d.png",
+        "sourceSheetSha256": "0f840ce56301ed2827e6a0e3daeee782e4598e76f9fdc29a436fb82373e46c72",
+        "sourceRect": [
+          0,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "swine"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/swine-revealed-arena/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 12,
+        "reusableMode": 11
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "swine-descent-stairs",
+      "order": 20,
+      "batch": 4,
+      "name": "Ball of Swine descent stairwell",
+      "canonStatus": "visited_sub_location",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/swine-descent-stairs.png",
+        "sha256": "2984e2e2948dc3d24620889699ea539c71a3bfa5b0b4986e4ed6ac4e3696eea5",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "cad0347956140dd1dc84fc4422f984c08d6fea28c5faad4063d5c297c2d58b65",
+        "sourceSheetId": "sheet-d",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-d.png",
+        "sourceSheetSha256": "0f840ce56301ed2827e6a0e3daeee782e4598e76f9fdc29a436fb82373e46c72",
+        "sourceRect": [
+          512,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "swine"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/swine-descent-stairs/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 9,
+        "reusableMode": 9
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "main-artery",
+      "order": 21,
+      "batch": 4,
+      "name": "First Floor main artery",
+      "canonStatus": "visited_route",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/main-artery.png",
+        "sha256": "fab9941e170f45b08cf1b9c58b7d813c6e61d881b30969ee84d6a6852b9f35c5",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "9ed702f414a6cb1585a09e3088378b297d4f2cc6cb9d316d152d11faafc32490",
+        "sourceSheetId": "sheet-d",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-d.png",
+        "sourceSheetSha256": "0f840ce56301ed2827e6a0e3daeee782e4598e76f9fdc29a436fb82373e46c72",
+        "sourceRect": [
+          1024,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "floor1",
+        "sample1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/main-artery/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 7,
+        "reusableMode": 6
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "connecting-alley",
+      "order": 22,
+      "batch": 4,
+      "name": "Connecting neighborhood alley",
+      "canonStatus": "visited_route",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/connecting-alley.png",
+        "sha256": "276f6b6b358ca225464ad9b05be5e6451166875e6e8efbef2bd7f8691bc7f719",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "b8ca4d223a9a85987b5a0bb440f40ecaf1bb544fd6b3c0a4aec92a3b8991e336",
+        "sourceSheetId": "sheet-d",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-d.png",
+        "sourceSheetSha256": "0f840ce56301ed2827e6a0e3daeee782e4598e76f9fdc29a436fb82373e46c72",
+        "sourceRect": [
+          0,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "floor1",
+        "sample1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/connecting-alley/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 14,
+        "reusableMode": 14
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "goblin-territory",
+      "order": 23,
+      "batch": 4,
+      "name": "Goblin territory",
+      "canonStatus": "mentioned_or_visited_area",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/goblin-territory.png",
+        "sha256": "9b03d030c56840275ea26aa953a24c7b9beeef0aaf1f16654ebffbdffc416550",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "4c84667e15594ef7f668fcdde39a1dce3bf80cb082f95771cb6668b3c94b7208",
+        "sourceSheetId": "sheet-d",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-d.png",
+        "sourceSheetSha256": "0f840ce56301ed2827e6a0e3daeee782e4598e76f9fdc29a436fb82373e46c72",
+        "sourceRect": [
+          512,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "goblins",
+        "chapter15",
+        "floor1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/goblin-territory/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 10,
+        "reusableMode": 10
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "llama-territory",
+      "order": 24,
+      "batch": 4,
+      "name": "Llama territory",
+      "canonStatus": "mentioned_area",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/llama-territory.png",
+        "sha256": "b461a18c340427ba2015d4023279931870fa5ca216664866cb6d60f1189a2f41",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "cd8860afee71a3a5225efc41b8080d76004c2b2509b43672145fbcd14b57d905",
+        "sourceSheetId": "sheet-d",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-d.png",
+        "sourceSheetSha256": "0f840ce56301ed2827e6a0e3daeee782e4598e76f9fdc29a436fb82373e46c72",
+        "sourceRect": [
+          1024,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "floor1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/llama-territory/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 14,
+        "reusableMode": 14
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-generated-completed-surface",
+        "reusableBase": "ai-generated-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "scatterer-territory",
+      "order": 25,
+      "batch": 5,
+      "name": "Scatterer territory",
+      "canonStatus": "visited_area",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/scatterer-territory.png",
+        "sha256": "ed22852299f5d19f88db70f37129015635e0689b8c5565f75f8f8de9a0bbf31b",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "14675f7c1ba9a3038c16bacfa0d34bac34d84dd91c995a7a3b9a476769309bfe",
+        "sourceSheetId": "sheet-e",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-e.png",
+        "sourceSheetSha256": "4531ebad3fbdebd57a09a01c358a4f682e4aa7a670608910250598e930497451",
+        "sourceRect": [
+          0,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "hoarder",
+        "route"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "notes": "Terrain patches are permitted if explicitly categorized as terrain patches; do not label a partial patch as a completed room floor or full terrain layer.",
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/scatterer-territory/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 5,
+        "reusableMode": 5
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "green-slime-territory",
+      "order": 26,
+      "batch": 5,
+      "name": "Green-slime territory",
+      "canonStatus": "mentioned_area",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/green-slime-territory.png",
+        "sha256": "64849900882fb599d59131fb2d8c08ced967d8e97b4a5a0e195640c9c1720e7f",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "d5b684bffd941419c696a32ee497ee2aba02307bc1846803aee1c9a93a4a59d7",
+        "sourceSheetId": "sheet-e",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-e.png",
+        "sourceSheetSha256": "4531ebad3fbdebd57a09a01c358a4f682e4aa7a670608910250598e930497451",
+        "sourceRect": [
+          512,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "chapter15"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "notes": "Terrain patches are permitted if explicitly categorized as terrain patches; do not label a partial patch as a completed room floor or full terrain layer.",
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/green-slime-territory/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 4,
+        "reusableMode": 4
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "rot-sticker-territory",
+      "order": 27,
+      "batch": 5,
+      "name": "Rot-Sticker territory",
+      "canonStatus": "mentioned_area",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/rot-sticker-territory.png",
+        "sha256": "dc11f1d28255151924f518d72b298ca771524e904a0a7e8270a4d3ecb2baeb69",
+        "size": [
+          512,
+          498
+        ],
+        "pixelSha256": "8b180a76043728c690ba1d5e90c21f2ce1ebc2b4868883ed472b04c4243fd67a",
+        "sourceSheetId": "sheet-e",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-e.png",
+        "sourceSheetSha256": "4531ebad3fbdebd57a09a01c358a4f682e4aa7a670608910250598e930497451",
+        "sourceRect": [
+          1024,
+          0,
+          512,
+          498
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "rot19",
+        "chapter19"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "notes": "Terrain patches are permitted if explicitly categorized as terrain patches; do not label a partial patch as a completed room floor or full terrain layer.",
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/rot-sticker-territory/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 3,
+        "reusableMode": 3
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 254976,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "troglodyte-territory",
+      "order": 28,
+      "batch": 5,
+      "name": "Troglodyte territory",
+      "canonStatus": "mentioned_area",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/troglodyte-territory.png",
+        "sha256": "d1c2301c5c1aaa708818543eaaee13cd1aec2ca3b963b0770f6ec1a92e7ee737",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "666dfcd366807465c5939692e92efa1574ab2359f069394129567f7761b9ca14",
+        "sourceSheetId": "sheet-e",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-e.png",
+        "sourceSheetSha256": "4531ebad3fbdebd57a09a01c358a4f682e4aa7a670608910250598e930497451",
+        "sourceRect": [
+          0,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "gymchapters",
+        "juicer"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "notes": "Terrain patches are permitted if explicitly categorized as terrain patches; do not label a partial patch as a completed room floor or full terrain layer.",
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/troglodyte-territory/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 5,
+        "reusableMode": 5
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "scat-thug-territory",
+      "order": 29,
+      "batch": 5,
+      "name": "Scat Thug territory",
+      "canonStatus": "mentioned_area",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/scat-thug-territory.png",
+        "sha256": "1c9bcd53223b87c8fec8e4da2319a44245b2427b879e736c8be2f6bb6238184f",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "1455b56a2e36d6a25c61583d7539f3f30467aeaf318af30010b10731c5037600",
+        "sourceSheetId": "sheet-e",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-e.png",
+        "sourceSheetSha256": "4531ebad3fbdebd57a09a01c358a4f682e4aa7a670608910250598e930497451",
+        "sourceRect": [
+          512,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "floor1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "notes": "Terrain patches are permitted if explicitly categorized as terrain patches; do not label a partial patch as a completed room floor or full terrain layer.",
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/scat-thug-territory/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 5,
+        "reusableMode": 5
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "human-bathroom-portal",
+      "order": 30,
+      "batch": 5,
+      "name": "Crawler-specific human restroom portal",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/human-bathroom-portal.png",
+        "sha256": "1235d36203c1b5490b84dc1dbfaea995f63556762c93590164b4414368924c7e",
+        "size": [
+          512,
+          526
+        ],
+        "pixelSha256": "6290b36d90ddc6bf475a6061495d22b3cfb023a5d5f5dadc58f021e465dfc215",
+        "sourceSheetId": "sheet-e",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-e.png",
+        "sourceSheetSha256": "4531ebad3fbdebd57a09a01c358a4f682e4aa7a670608910250598e930497451",
+        "sourceRect": [
+          1024,
+          498,
+          512,
+          526
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "floor1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/human-bathroom-portal/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 6,
+        "reusableMode": 7
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 269312,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "donut-litter-portal",
+      "order": 31,
+      "batch": 6,
+      "name": "Donut’s litterbox restroom portal",
+      "canonStatus": "visited",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/donut-litter-portal.png",
+        "sha256": "764b9b1b765a818879fa3b05a1766da8e48682c80413856cfd7b4317ca3fbff2",
+        "size": [
+          512,
+          512
+        ],
+        "pixelSha256": "455c269736aa7af6a702ce267f7bdf8bc1f14b8641f4bd9439d422decc3b72af",
+        "sourceSheetId": "sheet-f",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-f.png",
+        "sourceSheetSha256": "27ecd7dd9a017e02f6d27399cf53f42fe532aab0df0a958e5c0ad83b72d9ebe6",
+        "sourceRect": [
+          0,
+          0,
+          512,
+          512
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "floor1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/donut-litter-portal/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 7,
+        "reusableMode": 7
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 262144,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "other-descent-landings",
+      "order": 32,
+      "batch": 6,
+      "name": "Other Floor 1 descent landings",
+      "canonStatus": "generic",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/other-descent-landings.png",
+        "sha256": "33a51258d944fa4ced4da8d6104af66db7d909d3dd17fe4eb060f5227727f6fb",
+        "size": [
+          512,
+          512
+        ],
+        "pixelSha256": "a3cd908c33da76b741203770dbe251be2e473df634fba16739f5b18db6c3fe03",
+        "sourceSheetId": "sheet-f",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-f.png",
+        "sourceSheetSha256": "27ecd7dd9a017e02f6d27399cf53f42fe532aab0df0a958e5c0ad83b72d9ebe6",
+        "sourceRect": [
+          512,
+          0,
+          512,
+          512
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "floor1"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/other-descent-landings/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 6,
+        "reusableMode": 6
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 262144,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "alabama-waffle-house",
+      "order": 33,
+      "batch": 6,
+      "name": "Alabama Waffle House safe room",
+      "canonStatus": "mentioned",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/alabama-waffle-house.png",
+        "sha256": "5187f5b3c06515a0040207320e7508963198ce79a393a0ac5bc55c1396f04961",
+        "size": [
+          512,
+          512
+        ],
+        "pixelSha256": "55352041deffa02f2e8e791d211939a00f4126138a313abf0f1c4140e8764d09",
+        "sourceSheetId": "sheet-f",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-f.png",
+        "sourceSheetSha256": "27ecd7dd9a017e02f6d27399cf53f42fe532aab0df0a958e5c0ad83b72d9ebe6",
+        "sourceRect": [
+          1024,
+          0,
+          512,
+          512
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "safe",
+        "chapter22",
+        "meadow"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/alabama-waffle-house/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 6,
+        "reusableMode": 6
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 262144,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "candy-vending-rest-area",
+      "order": 34,
+      "batch": 6,
+      "name": "Candy-vending rest area",
+      "canonStatus": "mentioned",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/candy-vending-rest-area.png",
+        "sha256": "8199e72f6fd38482054d652e71ade145c3c9c5b2ace2d7de8c2deba71aafabf0",
+        "size": [
+          512,
+          512
+        ],
+        "pixelSha256": "1dd4839930bb6de941286725aaff21bbdba18e6b03492759384dffe0e58b4571",
+        "sourceSheetId": "sheet-f",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-f.png",
+        "sourceSheetSha256": "27ecd7dd9a017e02f6d27399cf53f42fe532aab0df0a958e5c0ad83b72d9ebe6",
+        "sourceRect": [
+          0,
+          512,
+          512,
+          512
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "chapter22"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/candy-vending-rest-area/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 7,
+        "reusableMode": 7
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 262144,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "other-crawler-guild",
+      "order": 35,
+      "batch": 6,
+      "name": "Other crawlers’ Tutorial Guilds",
+      "canonStatus": "generic",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/other-crawler-guild.png",
+        "sha256": "107098067a773de68dcd31abf589e3dd752392dde33f90de806aaea61145e7b2",
+        "size": [
+          512,
+          512
+        ],
+        "pixelSha256": "3a58ba08b6ba50c9ac126bd817ab37326caf336b873b54d27ea88aa21f920429",
+        "sourceSheetId": "sheet-f",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-f.png",
+        "sourceSheetSha256": "27ecd7dd9a017e02f6d27399cf53f42fe532aab0df0a958e5c0ad83b72d9ebe6",
+        "sourceRect": [
+          512,
+          512,
+          512,
+          512
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "guilds"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "notes": "Root approved the generated clean plate as a concept reference only. Separate rug, wall, and floor components remain needed; exact source extraction and reusable composition remain distinct modes.",
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/other-crawler-guild/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 22,
+        "reusableMode": 25
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 262144,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "ai-interpolated-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    },
+    {
+      "id": "generic-safe-room-bedroom-bathroom",
+      "order": 36,
+      "batch": 6,
+      "name": "Generic safe-room bedroom and bathroom",
+      "canonStatus": "generic",
+      "layoutStatus": "inferred",
+      "sourcePanel": {
+        "path": "../../Web/wwwroot/assets/floor-one-concepts-top-down/panels/generic-safe-room-bedroom-bathroom.png",
+        "sha256": "7bde16ff97efd25394b066684fd8ad3283e66de21cacc319d5af665291029ab1",
+        "size": [
+          512,
+          512
+        ],
+        "pixelSha256": "2a2e2b811bc7ba5115cc94de0781d0eae6b88f960d5a507c1365c7c7fe554ee0",
+        "sourceSheetId": "sheet-f",
+        "sourceSheetPath": "../../Web/wwwroot/assets/floor-one-concepts-top-down/sources/sheet-f.png",
+        "sourceSheetSha256": "27ecd7dd9a017e02f6d27399cf53f42fe532aab0df0a958e5c0ad83b72d9ebe6",
+        "sourceRect": [
+          1024,
+          512,
+          512,
+          512
+        ],
+        "rectFormat": "xywh"
+      },
+      "sourceEvidenceIds": [
+        "safe"
+      ],
+      "layerKitStatus": {
+        "exactSourceMode": "imported-and-zero-difference-reconstruction",
+        "reusableMode": "imported-inferred-reviewable-reference",
+        "visualQuality": "component silhouettes and completed-kit quality require visual review",
+        "productionReadiness": "not-production-ready"
+      },
+      "components": [],
+      "artifactPath": "../../Web/wwwroot/assets/top-down-layer-kit/scenes/generic-safe-room-bedroom-bathroom/scene.json",
+      "componentCounts": {
+        "exactSourceMode": 8,
+        "reusableMode": 8
+      },
+      "exactPixelValidation": {
+        "differentPixels": 0,
+        "totalPixels": 262144,
+        "meanAbsoluteRgbaError": 0.0,
+        "claim": "Visible source decomposition only; zero difference is not a clean-base or completed-object quality claim."
+      },
+      "modeProvenance": {
+        "exactSourceMode": "source-derived-inferred-hidden-surface",
+        "reusableBase": "source-derived-inferred-completed-surface",
+        "reusableModeClaim": "Inferred reusable interpretation; completed surfaces/objects are not recovered hidden source pixels and are not claimed pixel-exact."
+      }
+    }
+  ],
+  "schemaDraft": {
+    "status": "implemented-in-central-schema-and-imported-for-all-36-scenes",
+    "requiredSceneKeys": [
+      "schemaVersion",
+      "sceneId",
+      "source",
+      "grid",
+      "underlay",
+      "components"
+    ],
+    "optionalSceneKeys": [
+      "reusable",
+      "limitations"
+    ],
+    "sourceFields": [
+      "path",
+      "sha256",
+      "width",
+      "height"
+    ],
+    "grid": {
+      "major": 14,
+      "sub": 3
+    },
+    "underlayProvenance": "ai-interpolated-hidden-surface; retain tool and prompt",
+    "exactComponentFields": [
+      "id",
+      "category",
+      "asset",
+      "mask",
+      "bounds",
+      "x",
+      "y",
+      "z",
+      "gridAddress",
+      "provenance"
+    ],
+    "exactComponentProvenance": "exact-visible-source-extraction",
+    "reusableMode": {
+      "baseProvenance": "preserve the actual per-asset kind; examples include source-derived-inferred-completed-surface and ai-generated-completed-surface",
+      "componentProvenance": [
+        "ai-generated-completed-component",
+        "exact-visible-source-extraction"
+      ],
+      "rule": "record the complete base and every component origin; do not use a zero-difference exact metric as a reusable quality claim"
+    },
+    "exactOutputMetrics": "Generated output manifest; all 36 current exact reconstructions report 0 changed source pixels. This does not validate semantic masks, reusable quality, or hidden-surface truth.",
+    "outputRoot": "Web/wwwroot/assets/top-down-layer-kit",
+    "viewerPath": "Web/wwwroot/top-down-layers.html",
+    "viewerDefault": "reusable mode, with an explicit toggle to exact-source decomposition",
+    "centralPilotOutputs": "Expanded to all 36 scenes; 506 exact and 524 reusable component records."
+  }
+}
