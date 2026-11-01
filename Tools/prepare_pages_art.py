@@ -38,6 +38,8 @@ def publication_exclusion(relative):
         return 'offline-floor-one-concepts-pack'
     if parts and parts[0] == 'floor-one-concepts-top-down':
         return 'offline-floor-one-concepts-top-down-pack'
+    if parts and parts[0] == 'floor-one-concept-grids':
+        return 'offline-floor-one-concept-grids-pack'
     for library in REMOTE_LIBRARIES:
         directory = PurePosixPath(library)
         if library != 'reusable-gameplay':
