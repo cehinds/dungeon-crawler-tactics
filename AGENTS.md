@@ -2,7 +2,7 @@
 
 This is a Floor One RPG with a pure C# rules engine and a .NET 8 WebAssembly browser host. Do not change the neighboring AshenSpire repository.
 
-- Read `README.md`, `Rebuild/CONTRACT.md`, and `Rebuild/ReferenceData/LORE.md` before changing gameplay. The previous implementation is archived by tag `archive/pre-rpg-reset-20261105`.
+- Read `README.md`, `Rebuild/CONTRACT.md`, and `Rebuild/LORE.md` before changing gameplay. The previous implementation is archived by tag `archive/pre-rpg-reset-20261105`.
 - The user requested a coordinator using GPT-6.1 Sol and Luna specialists. Assign Sol code/integration work and Luna content/docs/fixture work. Name exclusive file ownership; do not let multiple agents edit the same files concurrently.
 - `Rebuild/Core` is the single authority for game rules. Browser JavaScript handles rendering, input and presentation; never duplicate damage or progression formulas there. Do not claim a Unity export or Unity Editor validation.
 - Treat `Web/wwwroot/data/floor-one-rpg.json` and `world-rooms.json` as authored sources of truth. Preserve stable string IDs, explicit contracts and validated references. Do not key mechanics to display names.
