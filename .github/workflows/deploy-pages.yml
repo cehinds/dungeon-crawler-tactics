@@ -1,240 +1,38 @@
-name: Deploy browser game to GitHub Pages
-
+name: Deploy Floor One to GitHub Pages
 on:
   push:
     branches: [main]
-    # Explicitly publish a tested dev revision without changing main.
     tags: ['pages-dev-*']
   workflow_dispatch:
-
 permissions: {}
-
 concurrency:
   group: github-pages
   cancel-in-progress: true
-
 jobs:
-  core:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-      - name: Run shared C# regression tests
-        run: |
-          dotnet run --project Tests/RulesKernel.Tests.csproj -c Release
-          dotnet run --project Tests/GameTests/GameTests.csproj -c Release
-          dotnet run --project Tests/ScenarioTests/ScenarioTests.csproj -c Release
-          dotnet run --project Tests/CustomMapTests/CustomMapTests.csproj -c Release
-          dotnet run --project Tests/ExplorationRouteTests/ExplorationRouteTests.csproj -c Release
-          dotnet run --project Tests/GeneratedCampaignTests/GeneratedCampaignTests.csproj -c Release
-          dotnet run --project Tests/ExpeditionTests/ExpeditionTests.csproj -c Release
-          dotnet run --project Tests/RankTests/RankTests.csproj -c Release
-          dotnet run --project Tests/JourneyTests/JourneyTests.csproj -c Release
-          dotnet run --project Tests/HomeTests/HomeTests.csproj -c Release
-          dotnet run --project Tests/NeighborhoodTests/NeighborhoodTests.csproj -c Release
-          dotnet run --project Tests/AudienceTests/AudienceTests.csproj -c Release
-          dotnet run --project Tests/SignatureTests/SignatureTests.csproj -c Release
-          dotnet run --project Tests/EquipmentProgressionTests/EquipmentProgressionTests.csproj -c Release
-          dotnet run --project Tests/MechanismTests/MechanismTests.csproj -c Release
-          dotnet build Tools/Compatibility/Core.Compatibility.csproj -c Release
   build:
-    needs: core
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - name: Reclaim unused SDKs on the disposable Linux runner
-        run: |
-          # These SDKs are unused by the .NET/Python/Node browser build.
-          sudo rm -rf /usr/local/lib/android /usr/share/swift /usr/local/.ghcup /opt/ghc /usr/local/share/boost /opt/hostedtoolcache/CodeQL /opt/hostedtoolcache/go /opt/az /usr/local/share/powershell
-          docker image prune --all --force
-          df -h .
-          python3 Tools/ci_disk_preflight.py --required-free-gib 45
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: pip
-          cache-dependency-path: Tools/requirements.txt
-      - name: Read pinned art revision
-        id: art-lock
-        run: |
-          art_commit="$(python Tools/sync_art_assets.py --print-commit)"
-          echo "commit=$art_commit" >> "$GITHUB_OUTPUT"
-      - name: Check out pinned art assets
-        uses: actions/checkout@v4
-        with:
-          repository: cehinds/AI-Art
-          ref: ${{ steps.art-lock.outputs.commit }}
-          path: .art-source
-          persist-credentials: false
-      - name: Restore pinned art assets
-        run: python Tools/sync_art_assets.py --source .art-source
-      - name: Restore immutable First Floor component catalog
-        run: |
-          mkdir -p Web/wwwroot/assets/top-down-object-kit
-          curl --fail --location --retry 3 https://raw.githubusercontent.com/cehinds/AI-Art/a0483c7db869f28e35bf2878d22e9bc68ead77a7/dungeon-crawler-tactics/Web/wwwroot/assets/top-down-object-kit/manifest.json --output Web/wwwroot/assets/top-down-object-kit/manifest.json
-      - name: Check First Floor generation and shared-engine import
-        run: |
-          node Tools/test_book_one_playable_floor.mjs --fixture
-          node Tools/test_book_one_entry.mjs
-          node Tools/test_whole_object_components.mjs
-          dotnet run --project Tests/BookOneFloorTests/BookOneFloorTests.csproj -c Release -- /tmp/book-one-floor-plan.json
-      - name: Install content validation dependencies
-        run: python -m pip install -r Tools/requirements.txt -r .art-source/tools/pocket-requirements.txt
-      - name: Validate authored gameplay data
-        run: |
-          python Tools/validate_content.py UnityPackage/Runtime/Data/combat-content.json
-          python Tools/validate_game_data.py
-      - name: Validate reviewed Pocket STYLE library
-        run: |
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/style-packs/pocket-dungeon --self-test --require-six-views --allow-recorded-generation-blocks
-      - name: Validate reviewed Dark STYLE library
-        run: |
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/style-packs/dungeon-after-dark --self-test --require-six-views --allow-recorded-generation-blocks
-      - name: Validate reviewed Ink STYLE library
-        run: |
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/style-packs/ink-and-lanterns --self-test --require-six-views --allow-recorded-generation-blocks
-      - name: Validate reviewed Pocket BOOK library
-        run: |
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/book-tiles/pocket-dungeon --self-test --require-six-views --allow-recorded-generation-blocks
-      - name: Validate reviewed Dark BOOK library
-        run: |
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/book-tiles/dungeon-after-dark --self-test --require-six-views --allow-recorded-generation-blocks
-      - name: Validate reviewed Ink BOOK library
-        run: |
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/book-tiles/ink-and-lanterns --self-test --require-six-views --allow-recorded-generation-blocks
-      - name: Validate reviewed Gameplay library
-        run: |
-          python .art-source/tools/validate_pocket_reusable.py --pack Web/wwwroot/assets/reusable-gameplay --self-test --require-six-views --allow-recorded-generation-blocks
-      - name: Validate reviewed drainage expansion
-        run: |
-          python .art-source/tools/drainage_expansion.py --root Web/wwwroot/assets/expansions/drainage-channels-v1 --check
-          python -m unittest discover -s .art-source/tools -p test_drainage_expansion.py
-      - name: Validate recorded-block and attachment contracts
-        run: |
-          python -m unittest discover -s .art-source/tools -p test_asset_attachment_tags.py
-          python -m unittest discover -s .art-source/tools -p test_generation_block_contract.py
-          python .art-source/tools/asset_attachment_tags.py --assets Web/wwwroot/assets --check --refresh-archives
-      - name: Run Python content regressions
-        run: |
-          python -m unittest discover -s Tools -p 'test_*.py'
-          python -m unittest Tests/test_content_validators.py
-      - name: Validate pinned native packages
-        run: |
-          python Tools/package_room_kit.py --check
-          python Tools/build_style_packs.py --style all --check
-          python Tools/build_book_tiles.py --style all --check --catalog
-      - name: Validate additional authored art
-        run: |
-          python Tools/validate_directional_art.py
-          python Tools/validate_form_art.py
-          python Tools/expand_story_levels.py --check
-          python Tools/author_concept_rooms.py --check
-          python Tools/validate_scenario_art.py
-          python Tools/validate_expansion_art.py
-      - name: Run Node art and map regressions
-        run: |
-          node Tools/test_room_generator.mjs
-          node Tools/test_procedural_map.mjs
-          node Tools/test_generator_art.mjs
-          node Tools/test_tile_edge_tags.mjs
-          node Tools/test_tile_edge_solver.mjs
-          node Tools/test_tile_generation_plan.mjs
-          node Tools/test_tile_edge_preview.mjs
-          node Tools/test_book_tile_layout.mjs
-          node Tools/test_native_map_visuals.mjs
-          node Tools/test_exploration_controls.mjs
-          node Tools/test_exploration_floor.mjs
-          node Tools/test_generated_campaign.mjs
-          node Tools/test_sprite_facing.mjs
-          node --test Tools/test_art_lab_blocks.cjs
-          node --test Tools/test_art_lab_downloads.cjs
-      - name: Verify published research catalog
-        run: python Tools/prepare_research.py --check
-      - name: Release verified art checkout before publishing
-        run: |
-          # All pinned-source verification and strict Art tests finish first.
-          python Tools/sync_art_assets.py --source .art-source --check
-          test -d .art-source/.git
-          rm -rf .art-source
-          python Tools/ci_disk_preflight.py --publish-assets Web/wwwroot/assets
-      - name: Publish browser game
+      - name: Test deterministic game rules
+        run: dotnet run --project Rebuild/Tests -c Release
+      - name: Publish .NET browser host
         run: dotnet publish Web/DungeonCrawlerTactics.Web.csproj -c Release -o Web/publish
-      - name: Start published browser check server
-        run: |
-          python -m pip install playwright==1.56.0
-          python -m http.server 8765 --bind 127.0.0.1 --directory Web/publish/wwwroot > "$RUNNER_TEMP/dct-playtest-server.log" 2>&1 < /dev/null &
-          echo "$!" > "$RUNNER_TEMP/dct-playtest-server.pid"
-          for attempt in {1..30}; do
-            curl --fail --silent http://127.0.0.1:8765/index.html -o /dev/null && break
-            sleep 1
-          done
-          curl --fail --silent http://127.0.0.1:8765/index.html -o /dev/null
-      - name: Check published Gameplay HUD
-        run: python Tools/run_ci_browser_check.py --name "Gameplay HUD" -- python Tools/playtest_gameplay_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --output /tmp/dct-gameplay-ui
-      - name: Check ability rank UI
-        run: python Tools/run_ci_browser_check.py --name "Ability ranks UI" -- python Tools/playtest_ability_ranks.py
-      - name: Check cast power UI
-        run: python Tools/run_ci_browser_check.py --name "Cast power UI" -- python Tools/playtest_cast_power.py
-      - name: Check party turn readiness
-        run: python Tools/run_ci_browser_check.py --name "Turn readiness UI" -- python Tools/playtest_turn_readiness.py
-      - name: Check targeting camera
-        run: python Tools/run_ci_browser_check.py --name "Targeting camera" -- python Tools/playtest_target_camera.py
-      - name: Check compact tactics command UI
-        run: python Tools/run_ci_browser_check.py --name "Tactics command UI" -- python Tools/playtest_gba_command_ui.py
-      - name: Check published target selection and turn flow
-        run: python Tools/run_ci_browser_check.py --name "Tactics gameplay" -- python Tools/playtest_gba_gameplay.py --url http://127.0.0.1:8765
-      - name: Check published ability rank progression
-        run: python Tools/run_ci_browser_check.py --name "Ability ranks gameplay" -- python Tools/playtest_ability_rank_gameplay.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Check published equipment progression
-        run: python Tools/run_ci_browser_check.py --name "Equipment progression" -- python Tools/playtest_equipment_progression.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots "$RUNNER_TEMP/dct-equipment-progression"
-      - name: Check published field mechanisms
-        run: python Tools/run_ci_browser_check.py --name "Field mechanisms" -- python Tools/playtest_mechanisms.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots "$RUNNER_TEMP/dct-mechanisms"
-      - name: Check published Player facing
-        run: python Tools/run_ci_browser_check.py --name "Player facing" -- python Tools/playtest_player_facing.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Check published Square battlefield
-        run: python Tools/run_ci_browser_check.py --name "Square battlefield" -- python Tools/playtest_square_battlefield.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Check continuous exploration floor
-        run: python Tools/run_ci_browser_check.py --name "Continuous floor" -- python Tools/playtest_continuous_floor.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Check persistent generated campaign
-        run: python Tools/run_ci_browser_check.py --name "Generated campaign" -- python Tools/playtest_generated_campaign.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome --screenshots "$RUNNER_TEMP/dct-generated-campaign"
-      - name: Check exploration sprite motion
-        run: python Tools/run_ci_browser_check.py --name "Exploration motion" -- python Tools/playtest_exploration_motion.py
-      - name: Check published Generated adventure
-        run: python Tools/run_ci_browser_check.py --name "Generated adventure" -- python Tools/playtest_generated_adventure.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Check published Foundry UI
-        run: python Tools/run_ci_browser_check.py --name "Foundry UI" -- python Tools/playtest_foundry_ui.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Check published Procedural maps
-        run: python Tools/run_ci_browser_check.py --name "Procedural maps" -- python Tools/playtest_procedural_maps.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Check published Tile surfaces
-        run: python Tools/run_ci_browser_check.py --name "Tile surfaces" -- python Tools/playtest_tile_surfaces.py --url http://127.0.0.1:8765 --browser /usr/bin/google-chrome
-      - name: Stop published browser check server
-        if: always()
-        run: |
-          if test -f "$RUNNER_TEMP/dct-playtest-server.pid"; then
-            check_server_pid="$(cat "$RUNNER_TEMP/dct-playtest-server.pid")"
-            if ps -p "$check_server_pid" -o args= | grep -q 'http.server 8765'; then
-              kill "$check_server_pid" || true
-            fi
-          fi
-      - name: Prepare static hosting artifact
+      - name: Restore verified playable art subset
+        run: python3 Tools/prepare_hosted_assets.py Web/publish/wwwroot --remote
+      - name: Check static entry points
         run: |
           test -f Web/publish/wwwroot/index.html
           test -f Web/publish/wwwroot/_framework/blazor.webassembly.js
-          python Tools/prepare_pages_art.py Web/publish/wwwroot
+          test -f Web/publish/wwwroot/data/floor-one-rpg.json
           touch Web/publish/wwwroot/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
           path: Web/publish/wwwroot
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -246,6 +44,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/configure-pages@v5
-      - name: Deploy to GitHub Pages
+      - name: Deploy verified build
         id: deployment
         uses: actions/deploy-pages@v4

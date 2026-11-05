@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 1,
+  "title": "Dungeon Crawler Carl — Floor One",
+  "adaptationNote": "Focused playable slice of Book 1. Combat numbers, item stats, enemy variants, encounter composition, and rewards are game adaptations; this is not a canonical rules or loot table. Personal clothing and accessories are represented without combat bonuses; any item mechanics added later are adaptations.",
+  "party": [
+    {
+      "id": "crawler.carl",
+      "name": "Carl",
+      "race": "Human",
+      "appearance": "Clean-shaven and barefoot",
+      "role": "melee",
+      "skillIds": [
+        "punch",
+        "powerful-strike",
+        "bomb"
+      ],
+      "canonStatus": "book-grounded; tactical values adapted",
+      "sourceIds": [
+        "sample1",
+        "powerful-strike-secondary"
+      ]
+    },
+    {
+      "id": "crawler.donut",
+      "name": "Princess Donut",
+      "race": "Cat",
+      "appearance": "A small cat",
+      "role": "arcane",
+      "skillIds": [
+        "magic-missile",
+        "claw"
+      ],
+      "canonStatus": "book-grounded; tactical values adapted",
+      "sourceIds": [
+        "sample1",
+        "magic-missile-secondary"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "punch",
+      "name": "Punch",
+      "ownerId": "crawler.carl",
+      "cost": 0,
+      "power": 6,
+      "range": 1,
+      "element": "physical",
+      "description": "A close unarmed strike. Barefoot presentation is part of Carl's opening appearance.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "sample1"
+      ],
+      "sourceNote": "Unarmed melee is represented with a simple tactical action; its damage value is game tuning."
+    },
+    {
+      "id": "powerful-strike",
+      "name": "Powerful Strike",
+      "ownerId": "crawler.carl",
+      "cost": 1,
+      "power": 11,
+      "range": 1,
+      "element": "physical",
+      "description": "Carl channels a stronger unarmed hit. Fixed tactical damage adapts a described damage-multiplying skill.",
+      "loreStatus": "named ability; combat effect and value adapted",
+      "sourceIds": [
+        "powerful-strike-secondary"
+      ],
+      "sourceNote": "Existing source ID: ability.carl_powerful_strike. No complete canonical rank table is established."
+    },
+    {
+      "id": "bomb",
+      "name": "Improvised Bomb",
+      "ownerId": "crawler.carl",
+      "cost": 2,
+      "power": 12,
+      "range": 3,
+      "element": "fire",
+      "description": "A tactical explosive attack inspired by Carl's improvised explosives; blast radius and damage are game adaptations.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "sample1"
+      ],
+      "sourceNote": "Based on the existing ability.carl_bomb concept; exact Floor 1 tactical implementation is authored for this game."
+    },
+    {
+      "id": "magic-missile",
+      "name": "Magic Missile",
+      "ownerId": "crawler.donut",
+      "cost": 5,
+      "power": 8,
+      "range": 4,
+      "element": "arcane",
+      "description": "Donut's ranged arcane projectile. Spells spend mana; tactical damage is adapted.",
+      "loreStatus": "named ability; tactical values adapted",
+      "sourceIds": [
+        "magic-missile-secondary"
+      ],
+      "sourceNote": "Existing source ID: ability.donut_magic_missile. Secondary summaries support early mana cost; this does not assert an unsupported rank progression."
+    },
+    {
+      "id": "claw",
+      "name": "Claw",
+      "ownerId": "crawler.donut",
+      "cost": 0,
+      "power": 5,
+      "range": 1,
+      "element": "physical",
+      "description": "A basic close attack for a cat. Its inclusion and tactical value are game-authored abstractions.",
+      "loreStatus": "adaptation",
+      "sourceIds": [],
+      "sourceNote": "Generic cat action; not asserted as a named novel ability."
+    }
+  ],
+  "items": [
+    {
+      "id": "gear.carl-underpants",
+      "name": "Carl's Underpants",
+      "kind": "armor",
+      "power": 0,
+      "armor": 0,
+      "heal": 0,
+      "mp": 0,
+      "ownerId": "crawler.carl",
+      "description": "Personal starting clothing. The item depiction is lore-grounded; it provides no protective bonus.",
+      "loreStatus": "personal gear; no gameplay bonus asserted",
+      "sourceIds": [
+        "sample1"
+      ]
+    },
+    {
+      "id": "gear.carl-backpack",
+      "name": "Carl's Backpack",
+      "kind": "charm",
+      "power": 0,
+      "armor": 0,
+      "heal": 0,
+      "mp": 0,
+      "ownerId": "crawler.carl",
+      "description": "Personal carrying gear. It has no combat bonus in this adaptation.",
+      "loreStatus": "personal gear; no gameplay bonus asserted",
+      "sourceIds": [
+        "sample1"
+      ]
+    },
+    {
+      "id": "gear.donut-tiara",
+      "name": "Donut's Tiara",
+      "kind": "charm",
+      "power": 0,
+      "armor": 0,
+      "heal": 0,
+      "mp": 0,
+      "ownerId": "crawler.donut",
+      "description": "A personal accessory. It has no combat bonus in this adaptation.",
+      "loreStatus": "personal gear; no gameplay bonus asserted",
+      "sourceIds": [
+        "sample1"
+      ]
+    },
+    {
+      "id": "item.health_tonic",
+      "name": "Health Tonic",
+      "kind": "consumable",
+      "power": 0,
+      "armor": 0,
+      "heal": 14,
+      "mp": 0,
+      "description": "Restores health. Amount and availability are adapted from the archived starter catalog.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "item.health_tonic"
+      ]
+    },
+    {
+      "id": "item.mega_tonic",
+      "name": "Mega Tonic",
+      "kind": "consumable",
+      "power": 0,
+      "armor": 0,
+      "heal": 26,
+      "mp": 0,
+      "description": "Restores a larger amount of health. Amount and availability are adaptations.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "item.mega_tonic"
+      ]
+    },
+    {
+      "id": "item.mana_draught",
+      "name": "Mana Draught",
+      "kind": "consumable",
+      "power": 0,
+      "armor": 0,
+      "heal": 0,
+      "mp": 8,
+      "description": "Restores mana. This Floor 1 item and its amount are game-authored.",
+      "loreStatus": "adaptation",
+      "sourceIds": []
+    },
+    {
+      "id": "item.water_bomb",
+      "name": "Coolant Bomb",
+      "kind": "consumable",
+      "power": 0,
+      "armor": 0,
+      "heal": 0,
+      "mp": 0,
+      "description": "A small thrown coolant charge. Tactical damage and availability are adaptations. Its damage behavior is not enabled by this combat schema.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "item.water_bomb"
+      ]
+    },
+    {
+      "id": "item.oil_flask",
+      "name": "Oil Flask",
+      "kind": "consumable",
+      "power": 0,
+      "armor": 0,
+      "heal": 0,
+      "mp": 0,
+      "description": "A thrown flask adapted from the archived item catalog; tactical effect is simplified. Its damage behavior is not enabled by this combat schema.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "item.oil_flask"
+      ]
+    },
+    {
+      "id": "item.fire_bomb",
+      "name": "Fire Bomb",
+      "kind": "consumable",
+      "power": 0,
+      "armor": 0,
+      "heal": 0,
+      "mp": 0,
+      "description": "A compact explosive. Effect and availability are adapted from the archived item catalog. Its damage behavior is not enabled by this combat schema.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "item.fire_bomb"
+      ]
+    },
+    {
+      "id": "item.cleansing_tonic",
+      "name": "Cleansing Tonic",
+      "kind": "consumable",
+      "power": 0,
+      "armor": 0,
+      "heal": 6,
+      "mp": 0,
+      "description": "A restorative tonic. Its numeric effect and availability are adaptations.",
+      "loreStatus": "adaptation",
+      "sourceIds": [
+        "item.cleansing_tonic"
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "enemy.goblin",
+      "name": "Goblin",
+      "hp": 18,
+      "power": 5,
+      "armor": 0,
+      "element": "physical",
+      "loreStatus": "book-grounded type; tactical stats adapted",
+      "sourceIds": [
+        "goblins"
+      ]
+    },
+    {
+      "id": "enemy.goblin-bomber",
+      "name": "Goblin Bomber",
+      "hp": 16,
+      "power": 6,
+      "armor": 0,
+      "element": "fire",
+      "loreStatus": "adaptation of goblin explosives/workshop",
+      "sourceIds": [
+        "goblins"
+      ]
+    },
+    {
+      "id": "enemy.scatterer",
+      "name": "Scatterer",
+      "hp": 20,
+      "power": 6,
+      "armor": 1,
+      "element": "physical",
+      "loreStatus": "book-grounded creature; tactical stats adapted",
+      "sourceIds": [
+        "hoarder"
+      ]
+    },
+    {
+      "id": "enemy.juicer",
+      "name": "Juicer",
+      "hp": 24,
+      "power": 7,
+      "armor": 1,
+      "element": "physical",
+      "loreStatus": "book-grounded encounter; tactical stats adapted",
+      "sourceIds": [
+        "juicer"
+      ]
+    },
+    {
+      "id": "enemy.murder-dozer",
+      "name": "Murder Dozer",
+      "hp": 42,
+      "power": 8,
+      "armor": 2,
+      "element": "physical",
+      "loreStatus": "book-grounded threat; tactical stats adapted",
+      "sourceIds": [
+        "goblins"
+      ]
+    },
+    {
+      "id": "enemy.hoarder-elite",
+      "name": "Hoarder Elite",
+      "hp": 48,
+      "power": 8,
+      "armor": 2,
+      "element": "physical",
+      "loreStatus": "boss variant adaptation; not an asserted canonical stat block",
+      "sourceIds": [
+        "hoarder"
+      ]
+    },
+    {
+      "id": "enemy.ball-of-swine",
+      "name": "Ball of Swine",
+      "hp": 60,
+      "power": 9,
+      "armor": 3,
+      "element": "physical",
+      "loreStatus": "book-grounded boss; tactical stats adapted",
+      "sourceIds": [
+        "swine"
+      ]
+    }
+  ],
+  "dialogue": {
+    "false-guild": {
+      "speaker": "Goblin sign crew",
+      "text": "The painted guild sign promises help. Something about the alley feels staged.",
+      "note": "Original paraphrase; encounter framing follows the false guild setup."
+    },
+    "mordecai": {
+      "speaker": "Mordecai",
+      "text": "Welcome to the Tutorial Guild. Take a breath, learn the basics, then choose your route carefully.",
+      "note": "Original short NPC line; Mordecai is a guide, not a deployable party member."
+    },
+    "hoarder": {
+      "speaker": "Hoarder",
+      "text": "The nest is crowded with stolen things. Keep your eyes on the Scatterers.",
+      "note": "Original encounter prompt; no novel dialogue copied."
+    },
+    "tally": {
+      "speaker": "Tally",
+      "text": "You can rest here and sort out what you found before heading back into the halls.",
+      "note": "Original safe-room interaction."
+    },
+    "workshop": {
+      "speaker": "Workshop goblin",
+      "text": "The machines rattle, the fuses hiss, and the crew has noticed you.",
+      "note": "Original encounter prompt; room layout and combat are adaptations."
+    },
+    "juicer": {
+      "speaker": "Gym announcer",
+      "text": "The gym is still open. Step into the ring if you want to settle this the hard way.",
+      "note": "Original prompt; tactical encounter is adapted."
+    },
+    "meadow-lark": {
+      "speaker": "Meadow Lark",
+      "text": "Stay alert near the stair. The noise below carries farther than you think.",
+      "note": "Original paraphrase; encounter placement is adapted."
+    },
+    "ball-of-swine": {
+      "speaker": "Dungeon announcer",
+      "text": "The descent is open. Something enormous is waiting below.",
+      "note": "Original transition line; descent and battle pacing are adaptations."
+    }
+  },
+  "sources": [
+    {
+      "id": "sample1",
+      "title": "Dungeon Crawler Carl, authorized publisher sample",
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf",
+      "kind": "primary publisher sample; consult retained source catalog for exact excerpt locator"
+    },
+    {
+      "id": "magic-missile-secondary",
+      "title": "Magic Missile — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/magic_missile/",
+      "kind": "secondary reference; chapter citations do not replace the text"
+    },
+    {
+      "id": "powerful-strike-secondary",
+      "title": "Powerful Strike — Dungeon Crawler Carl Wiki",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Powerful_Strike_Skill",
+      "kind": "secondary reference; exact rank table is unverified"
+    },
+    {
+      "id": "goblins",
+      "title": "Goblin — DCC Database",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Goblins",
+      "kind": "secondary overview; tactical variants are adaptations"
+    },
+    {
+      "id": "hoarder",
+      "title": "The Hoarder — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/hoarder/",
+      "kind": "secondary overview"
+    },
+    {
+      "id": "juicer",
+      "title": "The Juicer — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/juicer/",
+      "kind": "secondary overview"
+    },
+    {
+      "id": "swine",
+      "title": "Ball of Swine — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/ball_of_swine/",
+      "kind": "secondary overview"
+    }
+  ],
+  "encounters": [
+    {
+      "id": "false-guild",
+      "enemyIds": [
+        "enemy.goblin",
+        "enemy.murder-dozer"
+      ],
+      "loreStatus": "Book 1 opening threat; roster and combat numbers adapted",
+      "stageNote": "False Tutorial Guild approach, before the real Tutorial Guild. Dozer is presented as an ambush encounter, not a canonical tactical map."
+    },
+    {
+      "id": "goblin-workshop",
+      "enemyIds": [
+        "enemy.goblin-bomber",
+        "enemy.goblin"
+      ],
+      "loreStatus": "Book 1 location; tactical staging adapted",
+      "stageNote": "Goblin engineering/explosives workshop; room geometry and combat timeline are invented for play."
+    },
+    {
+      "id": "hoarder",
+      "enemyIds": [
+        "enemy.scatterer",
+        "enemy.scatterer"
+      ],
+      "loreStatus": "Book 1 location and creatures; tactical staging adapted",
+      "stageNote": "Optional Hoarder lair encounter after meeting Mordecai."
+    },
+    {
+      "id": "juicer",
+      "enemyIds": [
+        "enemy.juicer"
+      ],
+      "loreStatus": "Book 1 encounter; tactical staging adapted",
+      "stageNote": "Optional gym encounter after meeting Mordecai."
+    },
+    {
+      "id": "ball-of-swine",
+      "enemyIds": [
+        "enemy.ball-of-swine"
+      ],
+      "loreStatus": "Book 1 boss; tactical staging adapted",
+      "stageNote": "Boss encounter at the descent to Floor 2. Combat turns and stat block are authored values."
+    }
+  ]
+}

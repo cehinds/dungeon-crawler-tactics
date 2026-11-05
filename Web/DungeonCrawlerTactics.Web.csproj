@@ -11,11 +11,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="publish/**" />
+    <Content Remove="wwwroot/assets/**" />
+    <EmbeddedResource Include="wwwroot/data/world-rooms.json" />
     <None Remove="publish/**" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.32" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.32" PrivateAssets="all" />
-    <Compile Include="../UnityPackage/Runtime/Core/*.cs" Link="Core/%(Filename)%(Extension)" />
-    <Content Include="../UnityPackage/Runtime/Data/combat-content.json" Link="wwwroot/data/combat-content.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
-    <Content Include="../UnityPackage/Runtime/Data/game-content.json" Link="wwwroot/data/game-content.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Compile Include="../Rebuild/Core/*.cs" Link="Core/%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>
