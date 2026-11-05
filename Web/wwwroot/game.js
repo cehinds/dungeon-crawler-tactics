@@ -1,3 +1,4 @@
+import { planBookOneEntry, createBookOneEntry, shouldResumeBookOneFloor } from './book-one-entry.js';
 import { renderLevelUp } from './progression-ui.js';
 import { renderMechanismChoices, renderMechanismPreview } from './field-interactions.js';
 import { renderEquipmentDialog, renderEquipmentComparison, equipmentBenefits } from './equipment-ui.js';
@@ -1189,6 +1190,7 @@ function verifyWorkshopImport(expected, exploring = false) {
   if (expected.enemies?.length && expected.enemies.some(enemy => !view.units.some(unit => unit.team === 'enemy' && unit.id === enemy.id && unit.x === enemy.x && unit.y === enemy.y))) throw new Error('The loaded enemies do not match the generated map.');
 }
 function consumeWorkshopRequest(request) {
+  if (request.directEntry) { const query = new URLSearchParams(location.search); query.delete('book1'); query.delete('seed'); history.replaceState(null, '', `${location.pathname}${query.size ? `?${query}` : ''}${location.hash}`); return; }
   if (request.token) sessionStorage.removeItem(request.storageKey);
   sessionStorage.removeItem(`${request.storageKey}.exploration`);
   try { if (localStorage.getItem('dct.workshop-map') === request.serialized) localStorage.removeItem('dct.workshop-map'); } catch { /* The per-tab handoff is already complete. */ }
@@ -1196,10 +1198,24 @@ function consumeWorkshopRequest(request) {
   history.replaceState(null, '', `${location.pathname}${query.size ? `?${query}` : ''}${location.hash}`);
 }
 async function boot() {
-  const isWorkshopRequest = ['workshop','book1'].some(key => new URLSearchParams(location.search).get(key) === '1');
+  const entryQuery = new URLSearchParams(location.search);
+  const directBookOne = entryQuery.get('book1') === 'start';
+  const isWorkshopRequest = directBookOne || ['workshop','book1'].some(key => entryQuery.get(key) === '1');
   let workshopCommitted = false;
   try {
-    const requestedMap = isWorkshopRequest ? workshopRequest() : null;
+    let requestedMap = !directBookOne && isWorkshopRequest ? workshopRequest() : null;
+    if (directBookOne) {
+      let saved;
+      try { saved = localStorage.getItem(saveKey); } catch { /* Storage is checked again when persisting. */ }
+      const entry = planBookOneEntry(saved, entryQuery.get('seed'));
+      if (entry.kind === 'start' && (!entry.needsConfirmation || window.confirm('Start Book 1, First Floor? This replaces your current browser run. Choose Cancel, then export your save first if you want to keep it.'))) {
+        $('#boot-status').textContent = 'Building the First Floor. You will enter on foot…';
+        const packet = await createBookOneEntry(entry.seed);
+        requestedMap = {directEntry: true, map: packet.floorPlan.map, floorPlan: packet.floorPlan, exploring: true};
+      } else {
+        consumeWorkshopRequest({directEntry: true});
+      }
+    }
     await Blazor.start();
     $('#boot-status').textContent = requestedMap ? 'Loading your generated dungeon…' : 'Loading your party and the first floor…';
     const responses = await Promise.all([fetch('data/combat-content.json'), fetch('data/game-content.json')]);
@@ -1219,12 +1235,19 @@ async function boot() {
       await persist({ strict: true });
       workshopCommitted = true;
       consumeWorkshopRequest(requestedMap);
-      toast('Your exact generated dungeon is ready.', 'success');
+      toast(requestedMap.floorPlan ? 'First Floor ready · Hold WASD or arrows to walk. Approach a discovery and press E.' : 'Your exact generated dungeon is ready.', 'success');
+      battleCanvas?.focus({preventScroll:true});
     } else {
       let saved;
       try { saved = localStorage.getItem(saveKey); } catch { /* Export remains available. */ }
       if (saved) {
-        try { await loadSerializedSave(saved); toast('Your run has been restored.'); }
+        try {
+          await loadSerializedSave(saved);
+          if (directBookOne && shouldResumeBookOneFloor(view)) {
+            await command('resume_floor');
+            toast(view.screen === 'explore' ? 'First Floor resumed · Hold WASD or arrows to walk.' : view.message, view.screen === 'explore' ? 'success' : 'warning');
+          } else toast('Your run has been restored.');
+        }
         catch (error) { render(); toast('Your stored save could not be restored. A new party is ready; the stored file has been preserved.', 'warning'); $('#save-status').textContent = 'Stored save invalid · import or start fresh'; }
       } else { render(); await persist(); }
     }
@@ -1232,7 +1255,7 @@ async function boot() {
     window.dungeon = { get scene(){return battlefield;}, cellToScreen:(x,y)=>battlefield?.cellToScreen(x,y), command, getView: () => view, getSave: () => call('GetSave'), loadSave: loadSerializedSave };
   } catch (error) {
     if (isWorkshopRequest) {
-      $('#game').innerHTML = `<section class="fatal" id="workshop-load-error" role="alert"><h1>${workshopCommitted ? 'Your dungeon was saved, but the handoff could not finish.' : 'Your generated dungeon wasn’t loaded.'}</h1><p>${workshopCommitted ? 'Your browser save now contains the generated dungeon. Open your saved run to continue.' : 'Your previous browser save has not been replaced.'}</p><pre>${e(error.message)}</pre><button class="primary" onclick="location.reload()">Retry this dungeon</button><p><a href="dungeon-generator.html">Return to the generator</a> · <a href="index.html">Open your saved run</a></p></section>`;
+      $('#game').innerHTML = `<section class="fatal" id="workshop-load-error" role="alert"><h1>${workshopCommitted ? 'Your dungeon was saved, but the handoff could not finish.' : 'Your generated dungeon wasn’t loaded.'}</h1><p>${workshopCommitted ? 'Your browser save now contains the generated dungeon. Open your saved run to continue.' : 'Your previous browser save has not been replaced.'}</p><pre>${e(error.message)}</pre><button class="primary" onclick="location.reload()">Retry this dungeon</button><p><a href="${directBookOne?'book-one-floor-one.html':'dungeon-generator.html'}">${directBookOne?'First Floor reference map':'Return to the generator'}</a> · <a href="index.html">Open your saved run</a></p></section>`;
     } else {
       $('#game').innerHTML = `<section class="fatal"><h1>The dungeon couldn’t load.</h1><p>The C# runtime or game content did not finish loading. Check your connection and reload the page.</p><pre>${e(error.message)}</pre><button class="primary" onclick="location.reload()">Try again</button></section>`;
     }

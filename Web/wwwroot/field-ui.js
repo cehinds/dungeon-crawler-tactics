@@ -1,9 +1,11 @@
+import {isBookOneFloorPlan} from './book-one-entry.js';
 // Field presentation consumes the shared C# exploration view; it awards no loot
 // and never calculates encounters, movement legality or equipment bonuses.
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const stats=view=>{const s=view.generatedDungeon,p=s.floorPlan;return {s,p,won:s.defeatedGroupIds?.length??0,total:p.groups.length,found:s.claimedIds??[]};};
 export function renderFieldShell(view,{portrait,worldControls}) {
  const map=view.exploration,{s,p,won,total,found}=stats(view);
+ const bookOne=isBookOneFloorPlan(p);
  const nearby=map.points.filter(point=>point.canInteract&&!point.claimed);
  const goals=p.discoveries.filter(d=>d.kind==='objective');
  const goal=goals.find(d=>!found.includes(d.id));
@@ -11,7 +13,7 @@ export function renderFieldShell(view,{portrait,worldControls}) {
  const danger=map.points.find(point=>point.kind==='danger'&&Math.abs(point.x-map.x)+Math.abs(point.y-map.y)<=4);
  const party=view.roster.filter(r=>r.selected);
  return `<section class="exploration-screen square-exploration field-screen" aria-label="Explore the floor">
- <header class="field-location"><small>${view.generatedCampaign?`EXPEDITION · DEPTH ${view.generatedCampaign.floorNumber} / ${view.generatedCampaign.totalFloors}`:'THE CRAWL · FLOOR EXPEDITION'}</small><h2>${esc(map.label.split(' / ')[0].replace(/^Depth \d+ · /,''))}</h2><p>${esc(instruction)} <span> · ${won}/${total} encounters</span></p></header>
+ <header class="field-location"><small>${bookOne?'BOOK 1 · FIRST FLOOR':view.generatedCampaign?`EXPEDITION · DEPTH ${view.generatedCampaign.floorNumber} / ${view.generatedCampaign.totalFloors}`:'THE CRAWL · FLOOR EXPEDITION'}</small><h2>${esc(bookOne?'The First Floor':map.label.split(' / ')[0].replace(/^Depth \d+ · /,''))}</h2><p>${esc(instruction)} <span> · ${won}/${total} encounters</span></p></header>
  <div id="battlefield-slot" class="battlefield-slot">${worldControls()}<div class="board accessible-board" aria-label="Adjacent walkable tiles">${map.tiles.filter(t=>t.reachable).map(t=>`<button data-explore-cell="${t.x},${t.y}" aria-label="Walk to ${t.x},${t.y}"></button>`).join('')}</div><div id="map-inspect" hidden></div></div>
  <aside class="field-compass"><button id="field-map-button" aria-label="Open explored floor map">Map</button><button id="field-menu-button">Party & gear</button></aside>
  <div class="field-danger ${danger?'is-danger':''}" role="status">${danger?'! Danger area · Keep moving or prepare for an encounter':'Walk freely · WASD / arrows'}</div>

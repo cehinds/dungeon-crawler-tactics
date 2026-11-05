@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" href="data:," />
-    <title>Book One · Floor One Atlas</title>
+    <title>Book One · Floor One Exploration Preview</title>
     <link rel="stylesheet" href="book-one-floor-one.css" />
   </head>
   <body>
@@ -13,14 +13,14 @@
       <nav>
         <a href="procedural-object-maps.html">Object foundry</a
         ><button id="export" disabled>Export floor JSON</button
-        ><button id="play" disabled>Play floor</button>
+        ><button id="play" disabled>Enter playable floor</button>
       </nav>
     </header>
     <main>
       <div class="title-row">
         <div>
           <h1>Floor One</h1>
-          <p>A connected atlas of the first descent.</p>
+          <p>Exploration preview · walk the first descent.</p>
         </div>
         <form id="controls">
           <label
@@ -34,8 +34,11 @@
         </form>
       </div>
       <div class="workspace">
-        <aside>
-          <h2>The route</h2>
+        <aside id="map-drawer" hidden>
+          <button id="map-close" type="button" aria-label="Close map reference">
+            Close map
+          </button>
+          <h2>Floor reference</h2>
           <p class="muted" id="progress">Preparing the floor…</p>
           <svg
             id="graph"
@@ -44,7 +47,7 @@
           ></svg>
           <div id="regions" class="region-list"></div>
           <p class="note">
-            Select a district to highlight it on the complete floor.
+            Reference only. Selecting a district never moves your party.
           </p>
         </aside>
         <section class="region-view">
@@ -53,13 +56,15 @@
               <span id="region-kind" class="muted"></span>
               <h2 id="region-name">Building the descent…</h2>
             </div>
-            <button id="return" hidden>Return to explorer</button>
+            <button id="map-toggle" type="button" aria-expanded="false">
+              Map &amp; notes</button
+            ><button id="return" hidden>Return to explorer</button>
           </div>
           <p id="description"></p>
           <div class="map-tools">
             <span id="dimensions"></span
             ><button id="zoom" type="button" aria-pressed="false">
-              Zoom map</button
+              Wider view</button
             ><span class="layers"
               ><label
                 ><input type="checkbox" id="objects" checked />Objects</label
@@ -75,9 +80,15 @@
             <canvas
               id="map"
               tabindex="0"
-              aria-label="Region map. Click an adjacent tile or use arrow keys to move your explorer."
+              aria-label="Walking exploration preview. Use WASD or arrow keys to move. E or Space interacts nearby."
             ></canvas>
             <div id="loading" role="status">Building connected regions…</div>
+          </div>
+          <div class="walking-hud">
+            <span id="walk-help">WASD / arrows · E to interact</span
+            ><button id="nearby-action" type="button" disabled>
+              Nothing nearby
+            </button>
           </div>
           <div class="map-legend">
             <span><i class="you"></i>Entrance</span
@@ -113,8 +124,8 @@
         </p>
         <p id="adaptation" class="muted"></p>
         <small
-          >Seed and selected district are saved in this browser. Explore, fight
-          and complete objectives in the game.</small
+          >Preview position is saved in this browser. Combat and game
+          progression run separately in the playable game.</small
         >
       </footer>
     </main>

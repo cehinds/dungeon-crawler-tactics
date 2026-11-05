@@ -37,6 +37,13 @@ static class BookOneFloorTests
         GameSave corrupt = JsonSerializer.Deserialize<GameSave>(saved, Json); corrupt.generatedDungeon.claimedIds = new[] { "not-an-objective" };
         restored.ImportSave(corrupt);
         Check(JsonSerializer.Serialize(restored.ExportSave(), Json) == saved, "Unknown claimed objective is rejected transactionally");
+        GameSession campResume = session();
+        campResume.ImportSave(JsonSerializer.Deserialize<GameSave>(saved, Json));
+        Check(campResume.Handle(new GameCommand { type="return_safe" }).screen=="camp", "Saved Book 1 run can visit the safe room");
+        string campSave=JsonSerializer.Serialize(campResume.ExportSave(),Json);
+        GameSession fromCamp=session();fromCamp.ImportSave(JsonSerializer.Deserialize<GameSave>(campSave,Json));
+        Check(fromCamp.Handle(new GameCommand{type="resume_floor"}).screen=="explore", "Direct Book 1 entry can resume a saved safe-room checkpoint on foot");
+        Check(JsonSerializer.Serialize(fromCamp.ExportSave(),Json)==saved, "Safe-room resume preserves the exact party resources, position and floor state");
         // Walk the actual realized corridors until C# detects the first visible group.
         CellView goal = new CellView { x = floor.groups[0].x, y = floor.groups[0].y };
         var queue = new List<CellView> { floor.entrance };

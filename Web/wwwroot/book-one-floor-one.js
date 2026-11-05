@@ -11,7 +11,9 @@ const standalone =
   "standalone";
 const $ = (id) => document.getElementById(id),
   canvas = $("map"),
-  ctx = canvas.getContext("2d");
+  worldCanvas = document.createElement("canvas"),
+  ctx = worldCanvas.getContext("2d"),
+  screenCtx = canvas.getContext("2d");
 let library,
   rules,
   canonicalManifest,
@@ -321,15 +323,15 @@ function draw() {
     width: maxX - minX + 1,
     height: maxY - minY + 1,
   };
-  canvas.width = map.viewBounds.width * tilesize;
-  canvas.height = map.viewBounds.height * tilesize;
-  canvas.style.setProperty(
+  worldCanvas.width = map.viewBounds.width * tilesize;
+  worldCanvas.height = map.viewBounds.height * tilesize;
+  worldCanvas.style.setProperty(
     "--map-ratio",
     String(map.viewBounds.width / map.viewBounds.height),
   );
   ctx.imageSmoothingEnabled = false;
   ctx.fillStyle = "#050c15";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, worldCanvas.width, worldCanvas.height);
   ctx.translate(-minX * tilesize, -minY * tilesize);
   for (const cell of map.cells) drawTile(cell);
   drawAtmosphere();
@@ -391,18 +393,19 @@ function draw() {
     for (let x = 0; x <= map.width; x++) {
       ctx.beginPath();
       ctx.moveTo(x * tilesize + 0.5, 0);
-      ctx.lineTo(x * tilesize + 0.5, canvas.height);
+      ctx.lineTo(x * tilesize + 0.5, worldCanvas.height);
       ctx.stroke();
     }
     for (let y = 0; y <= map.height; y++) {
       ctx.beginPath();
       ctx.moveTo(0, y * tilesize + 0.5);
-      ctx.lineTo(canvas.width, y * tilesize + 0.5);
+      ctx.lineTo(worldCanvas.width, y * tilesize + 0.5);
       ctx.stroke();
     }
   }
   drawAtlasMarkers();
   drawRoomLabels();
+  drawCamera(performance.now());
 }
 function region() {
   return floor.regions.find((r) => r.id === selected);
@@ -429,7 +432,7 @@ function save() {
   try {
     localStorage.setItem(
       "dct.book-one.atlas",
-      JSON.stringify({ seed: floor.seed, state, selected }),
+      JSON.stringify({ seed: floor.seed, state, selected, walk }),
     );
   } catch {
     status(
@@ -479,7 +482,7 @@ function renderGraph() {
       cy: p.y,
       r: 15,
       fill: r.id === selected ? "#d6b577" : "#182a3b",
-      stroke: state.visitedRegionIds.includes(r.id) ? "#d6b577" : "#556579",
+      stroke: walk?.visitedRegionIds.includes(r.id) ? "#d6b577" : "#556579",
       "stroke-width": 2,
     }))
       c.setAttribute(k, v);
@@ -542,49 +545,55 @@ function render() {
     (l) => l.from === selected || l.to === selected,
   )) {
     const id = link.from === selected ? link.to : link.from,
-      b = document.createElement("button");
+      b = document.createElement("span");
     b.textContent = floor.regions.find((r) => r.id === id).label;
-    b.onclick = () => select(id);
     $("passages").append(b);
   }
   renderGraph();
   draw();
+  updateNearby();
   canvas.setAttribute(
     "aria-label",
-    `Complete 40 by 32 First Floor. Selected district ${r.label}. Entrance, exit, objectives and tactical enemy positions match the playable floor.`,
+    `Walking exploration preview. Party column ${walk.position.x + 1}, row ${walk.position.y + 1}. Use WASD or arrows to move, E or Space to inspect nearby.`,
   );
 }
 function drawAtlasMarkers() {
   if (!packet) return;
   ctx.save();
   for (const b of packet.regionBounds) {
-    ctx.strokeStyle =
-      b.id === selected ? "#f3ce89" : b.safeZone ? "#7ce0ba90" : "#6e7c8a70";
-    ctx.lineWidth = b.id === selected ? 4 : 1;
-    ctx.strokeRect(
-      b.x * tilesize + 2,
-      b.y * tilesize + 2,
-      b.width * tilesize - 4,
-      b.height * tilesize - 4,
-    );
-    if (b.id === selected) {
-      ctx.fillStyle = "#dfbb7118";
-      ctx.fillRect(
-        b.x * tilesize,
-        b.y * tilesize,
-        b.width * tilesize,
-        b.height * tilesize,
+    if ($("route").checked || !$("map-drawer").hidden) {
+      ctx.strokeStyle =
+        b.id === selected ? "#f3ce89" : b.safeZone ? "#7ce0ba90" : "#6e7c8a70";
+      ctx.lineWidth = b.id === selected ? 4 : 1;
+      ctx.strokeRect(
+        b.x * tilesize + 2,
+        b.y * tilesize + 2,
+        b.width * tilesize - 4,
+        b.height * tilesize - 4,
+      );
+      if (b.id === selected) {
+        ctx.fillStyle = "#dfbb7118";
+        ctx.fillRect(
+          b.x * tilesize,
+          b.y * tilesize,
+          b.width * tilesize,
+          b.height * tilesize,
+        );
+      }
+      ctx.font = "bold 17px system-ui";
+      ctx.fillStyle = b.id === selected ? "#f3ce89" : "#b1bdca";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        String(packet.regionBounds.indexOf(b) + 1).padStart(2, "0"),
+        (b.center.x + 0.5) * tilesize,
+        (b.y + 0.7) * tilesize,
       );
     }
-    ctx.font = "bold 17px system-ui";
-    ctx.fillStyle = b.id === selected ? "#f3ce89" : "#b1bdca";
-    ctx.textAlign = "center";
-    ctx.fillText(
-      String(packet.regionBounds.indexOf(b) + 1).padStart(2, "0"),
-      (b.center.x + 0.5) * tilesize,
-      (b.y + 0.7) * tilesize,
+    dot(
+      b.objective,
+      "#c9a4ed",
+      walk?.discoveredIds.includes(b.objective.id) ? "✓" : "?",
     );
-    dot(b.objective, "#c9a4ed", "?");
   }
   for (const enemy of packet.floorPlan.map.enemies) dot(enemy, "#f29a8d", "!");
   marker(packet.floorPlan.entrance, "#7ce0ba", "IN");
@@ -592,6 +601,7 @@ function drawAtlasMarkers() {
   ctx.restore();
 }
 function select(id) {
+  stopMovement();
   selected = id;
   save();
   render();
@@ -602,6 +612,7 @@ function select(id) {
   );
 }
 async function generate() {
+  stopMovement();
   const serial = ++loadSerial;
   $("loading").hidden = false;
   for (const id of ["generate", "new-seed", "export", "play"])
@@ -659,10 +670,18 @@ async function generate() {
       clearRoute: packet.links.flatMap((l) => l.path),
     };
     state = createBookOneExploration(floor);
+    walk = {
+      position: { ...packet.floorPlan.entrance },
+      discoveredIds: [],
+      visitedRegionIds: [floor.entryRegionId],
+    };
+    movement = null;
     try {
       const saved = JSON.parse(localStorage.getItem("dct.book-one.atlas"));
-      if (saved?.seed === seed)
+      if (saved?.seed === seed) {
         state = restoreBookOneExploration(floor, saved.state);
+        if (validWalkSave(saved.walk)) walk = saved.walk;
+      }
     } catch {}
     let requested = new URLSearchParams(location.search).get("region");
     if (!requested)
@@ -673,14 +692,15 @@ async function generate() {
     selected = floor.regions.some((r) => r.id === requested)
       ? requested
       : state.regionId;
+    selected = districtAt(walk.position)?.id || floor.entryRegionId;
     $("seed").value = seed;
     $("adaptation").textContent = packet.adaptationNote;
     save();
     render();
     status(
       standalone
-        ? "Standalone atlas: inspect districts and export floor JSON. Play is available in the hosted game."
-        : "Complete floor connected and validated. Select a district to inspect; Play floor starts the game.",
+        ? "Exploration preview only. Walk with WASD, arrows or touch; interact nearby with E. Combat opens in the game."
+        : "Exploration preview only. Walk with WASD or arrows; E interacts nearby. Enter playable floor for combat and progression.",
     );
   } catch (error) {
     status(error.message, true);
@@ -691,7 +711,7 @@ async function generate() {
       for (const id of ["export", "play"])
         $(id).disabled = !floor || (standalone && id === "play");
       if (standalone) {
-        $("play").textContent = "Play in game only";
+        $("play").textContent = "Game unavailable offline";
         $("play").title =
           "Standalone atlas exports floor JSON; starting a game requires the hosted game.";
       }
@@ -699,11 +719,20 @@ async function generate() {
   }
 }
 $("zoom").onclick = () => {
-  const on = $("zoom").getAttribute("aria-pressed") !== "true";
-  $("zoom").setAttribute("aria-pressed", String(on));
-  $("zoom").textContent = on ? "Fit floor" : "Zoom map";
-  canvas.parentElement.classList.toggle("zoomed", on);
+  wideView = !wideView;
+  $("zoom").setAttribute("aria-pressed", String(wideView));
+  $("zoom").textContent = wideView ? "Closer view" : "Wider view";
+  drawCamera(performance.now());
 };
+$("map-toggle").onclick = () => {
+  stopMovement();
+  const open = $("map-drawer").hidden;
+  $("map-drawer").hidden = !open;
+  $("map-toggle").setAttribute("aria-expanded", String(open));
+  document.querySelector(".workspace").classList.toggle("reference-open", open);
+  draw();
+};
+$("map-close").onclick = () => $("map-toggle").click();
 $("controls").onsubmit = (e) => {
   e.preventDefault();
   generate();
@@ -716,19 +745,7 @@ $("new-seed").onclick = () => {
 };
 for (const id of ["objects", "route", "grid", "collision", "room-labels"])
   $(id).onchange = draw;
-canvas.onclick = (e) => {
-  const rect = canvas.getBoundingClientRect(),
-    x =
-      map.viewBounds.x +
-      ((e.clientX - rect.left) / rect.width) * map.viewBounds.width,
-    y =
-      map.viewBounds.y +
-      ((e.clientY - rect.top) / rect.height) * map.viewBounds.height,
-    b = packet.regionBounds.find(
-      (b) => x >= b.x && x < b.x + b.width && y >= b.y && y < b.y + b.height,
-    );
-  if (b) select(b.id);
-};
+canvas.onclick = () => canvas.focus();
 $("export").onclick = () => {
   const blob = new Blob(
       [JSON.stringify({ ...packet, atlas: floor }, null, 2)],
@@ -743,6 +760,7 @@ $("export").onclick = () => {
   status("Exported complete floor JSON with geometry and object metadata.");
 };
 $("play").onclick = () => {
+  stopMovement();
   if (!standalone) $("play-dialog").showModal();
 };
 $("play-dialog").addEventListener("close", () => {
@@ -761,9 +779,330 @@ window.bookOneFloorAtlas = {
   getSelected: () => selected,
   getPacket: () => packet,
   getViewport: () => structuredClone(map?.viewBounds),
+  getWalk: () => structuredClone(walk),
   generate,
   select,
 };
+// The preview owns navigation only. Combat and character progression stay in C#.
+let walk,
+  movement = null,
+  wideView = false,
+  partySprite = null,
+  partyArt = null;
+let facing = { x: 0, y: 1 },
+  lastTime = 0;
+const heldDirections = new Map();
+const directionKeys = {
+  ArrowUp: [0, -1],
+  w: [0, -1],
+  W: [0, -1],
+  ArrowDown: [0, 1],
+  s: [0, 1],
+  S: [0, 1],
+  ArrowLeft: [-1, 0],
+  a: [-1, 0],
+  A: [-1, 0],
+  ArrowRight: [1, 0],
+  d: [1, 0],
+  D: [1, 0],
+};
+function openTile(point) {
+  return packet?.floorPlan.map.tiles.some(
+    (cell) => cell.x === point?.x && cell.y === point?.y && !cell.blocked,
+  );
+}
+function validWalkSave(saved) {
+  return (
+    saved &&
+    openTile(saved.position) &&
+    Array.isArray(saved.discoveredIds) &&
+    saved.discoveredIds.every((id) =>
+      packet.floorPlan.discoveries.some((d) => d.id === id),
+    ) &&
+    Array.isArray(saved.visitedRegionIds) &&
+    saved.visitedRegionIds.every((id) => floor.regions.some((r) => r.id === id))
+  );
+}
+function districtAt(point) {
+  return packet?.regionBounds.find(
+    (b) =>
+      point.x >= b.x &&
+      point.x < b.x + b.width &&
+      point.y >= b.y &&
+      point.y < b.y + b.height,
+  );
+}
+function near(point, range = 1) {
+  return (
+    Math.abs(point.x - walk.position.x) + Math.abs(point.y - walk.position.y) <=
+    range
+  );
+}
+function nearbyInteraction() {
+  if (!walk || !packet) return null;
+  const discovery = packet.floorPlan.discoveries.find(
+    (d) => !walk.discoveredIds.includes(d.id) && near(d),
+  );
+  if (discovery)
+    return {
+      kind: "discovery",
+      point: discovery,
+      label: `Inspect · ${discovery.label}`,
+    };
+  const encounter = packet.floorPlan.groups.find((g) => near(g, 3));
+  if (encounter)
+    return {
+      kind: "encounter",
+      point: encounter,
+      label: standalone
+        ? "Encounter · game required"
+        : "Enter playable floor · encounter",
+    };
+  if (near(packet.floorPlan.exit))
+    return {
+      kind: "exit",
+      label: standalone
+        ? "Exit · game required"
+        : "Enter playable floor · exit",
+    };
+  return null;
+}
+function updateNearby() {
+  const action = nearbyInteraction();
+  $("nearby-action").disabled =
+    !action || (standalone && action.kind !== "discovery");
+  $("nearby-action").textContent = action
+    ? `${action.label} [E]`
+    : "Explore the passage";
+}
+function interactNearby() {
+  const action = nearbyInteraction();
+  if (!action) return;
+  if (action.kind === "discovery") {
+    walk.discoveredIds.push(action.point.id);
+    save();
+    draw();
+    updateNearby();
+    status(
+      `Preview discovery: ${action.point.label}. Game objectives and rewards are tracked separately.`,
+    );
+  } else if (standalone) {
+    status(
+      "This encounter belongs to the playable game. The standalone preview has no combat or game rewards.",
+    );
+  } else {
+    stopMovement();
+    $("play-dialog").showModal();
+  }
+}
+function startStep(dx, dy, time) {
+  facing = { x: dx, y: dy };
+  const next = { x: walk.position.x + dx, y: walk.position.y + dy };
+  if (!openTile(next)) return false;
+  movement = {
+    from: { ...walk.position },
+    to: next,
+    started: time,
+    duration: 170,
+  };
+  walk.position = next;
+  const district = districtAt(next);
+  if (district && !walk.visitedRegionIds.includes(district.id))
+    walk.visitedRegionIds.push(district.id);
+  if (district && selected !== district.id) {
+    selected = district.id;
+    render();
+  }
+  updateNearby();
+  save();
+  return true;
+}
+function visualPosition(time) {
+  if (!movement) return walk?.position;
+  const t = Math.min(
+    1,
+    Math.max(0, (time - movement.started) / movement.duration),
+  );
+  return {
+    x: movement.from.x + (movement.to.x - movement.from.x) * t,
+    y: movement.from.y + (movement.to.y - movement.from.y) * t,
+  };
+}
+function frameLoop(time) {
+  if (walk && packet && !$("play-dialog").open && $("map-drawer").hidden) {
+    if (movement && time - movement.started >= movement.duration)
+      movement = null;
+    if (!movement && heldDirections.size) {
+      const [dx, dy] = [...heldDirections.values()].at(-1);
+      startStep(dx, dy, time);
+    }
+    if (movement || time - lastTime > 90) {
+      drawCamera(time);
+      lastTime = time;
+    }
+  }
+  requestAnimationFrame(frameLoop);
+}
+function drawCamera(time) {
+  if (!map || !walk || !worldCanvas.width) return;
+  const box = canvas.parentElement.getBoundingClientRect(),
+    width = Math.max(1, Math.round(box.width)),
+    height = Math.max(1, Math.round(box.height));
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  if (
+    canvas.width !== Math.round(width * dpr) ||
+    canvas.height !== Math.round(height * dpr)
+  ) {
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+  }
+  screenCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  screenCtx.imageSmoothingEnabled = false;
+  screenCtx.fillStyle = "#050c15";
+  screenCtx.fillRect(0, 0, width, height);
+  const position = visualPosition(time),
+    scale = wideView ? 0.82 : width < 600 ? 1.45 : 1.8;
+  const centerX = (position.x + 0.5 - map.viewBounds.x) * tilesize,
+    centerY = (position.y + 0.5 - map.viewBounds.y) * tilesize;
+  const sourceX = centerX - width / (2 * scale),
+    sourceY = centerY - height / (2 * scale);
+  screenCtx.drawImage(
+    worldCanvas,
+    sourceX,
+    sourceY,
+    width / scale,
+    height / scale,
+    0,
+    0,
+    width,
+    height,
+  );
+  const x = width / 2,
+    y = height / 2;
+  screenCtx.fillStyle = "#0008";
+  screenCtx.beginPath();
+  screenCtx.ellipse(
+    x,
+    y + 12 * scale,
+    15 * scale,
+    6 * scale,
+    0,
+    0,
+    Math.PI * 2,
+  );
+  screenCtx.fill();
+  screenCtx.strokeStyle = "#9ce7c4";
+  screenCtx.lineWidth = 2;
+  screenCtx.beginPath();
+  screenCtx.ellipse(
+    x,
+    y + 12 * scale,
+    18 * scale,
+    8 * scale,
+    0,
+    0,
+    Math.PI * 2,
+  );
+  screenCtx.stroke();
+  if (partySprite && partyArt) {
+    const direction = facing.y < 0 ? "ne" : facing.x > 0 ? "se" : "sw";
+    const pose = movement ? `walk${1 + (Math.floor(time / 110) % 2)}` : "idle";
+    const frame = partyArt.frames[direction]?.[pose] || partyArt.frames.se.idle;
+    const targetHeight = 64 * scale,
+      ratio = targetHeight / frame.height;
+    screenCtx.drawImage(
+      partySprite,
+      frame.x,
+      frame.y,
+      frame.width,
+      frame.height,
+      x - frame.width * ratio * (frame.anchorX ?? 0.5),
+      y + 14 * scale - frame.height * ratio * (frame.anchorY ?? 0.9),
+      frame.width * ratio,
+      frame.height * ratio,
+    );
+  } else {
+    screenCtx.fillStyle = "#a6f0ce";
+    screenCtx.beginPath();
+    screenCtx.arc(x, y, 12 * scale, 0, Math.PI * 2);
+    screenCtx.fill();
+  }
+}
+async function loadPartySprite() {
+  try {
+    const base = standalone
+      ? new URL("../directional/", WHOLE_OBJECT_ASSET_BASE).href
+      : "assets/directional/";
+    const manifest = await json(base + "manifest.json");
+    partyArt = manifest.characters.carl;
+    partySprite = await new Promise((resolve, reject) => {
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.onload = () => resolve(image);
+      image.onerror = reject;
+      image.src = base + partyArt.file;
+    });
+  } catch {
+    partySprite = null;
+  }
+}
+function typingTarget(target) {
+  return (
+    ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName) ||
+    target.isContentEditable
+  );
+}
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !$("map-drawer").hidden) {
+    $("map-toggle").click();
+    return;
+  }
+  if (
+    event.ctrlKey ||
+    event.metaKey ||
+    event.altKey ||
+    typingTarget(event.target) ||
+    $("play-dialog").open ||
+    !$("map-drawer").hidden
+  )
+    return;
+  const direction = directionKeys[event.key];
+  if (direction) {
+    event.preventDefault();
+    heldDirections.set(event.code, direction);
+  }
+  if ((event.code === "Space" || event.code === "KeyE") && !event.repeat) {
+    event.preventDefault();
+    interactNearby();
+  }
+});
+document.addEventListener("focusin", (event) => {
+  if (typingTarget(event.target)) stopMovement();
+});
+document.addEventListener("keyup", (event) =>
+  heldDirections.delete(event.code),
+);
+function stopMovement() {
+  heldDirections.clear();
+  movement = null;
+  if (walk) drawCamera(performance.now());
+}
+window.addEventListener("blur", stopMovement);
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) stopMovement();
+});
+for (const button of document.querySelectorAll("[data-move]")) {
+  button.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    button.setPointerCapture(event.pointerId);
+    heldDirections.set("touch", button.dataset.move.split(",").map(Number));
+  });
+  for (const type of ["pointerup", "pointercancel", "lostpointercapture"])
+    button.addEventListener(type, () => heldDirections.delete("touch"));
+}
+$("nearby-action").onclick = interactNearby;
+window.addEventListener("resize", () => drawCamera(performance.now()));
+
 async function init() {
   try {
     [library, rules, canonicalManifest, catalog] = await Promise.all([
@@ -779,7 +1118,9 @@ async function init() {
         seed = JSON.parse(localStorage.getItem("dct.book-one.atlas"))?.seed;
       } catch {}
     if (seed) $("seed").value = seed.slice(0, 80);
+    await loadPartySprite();
     await generate();
+    requestAnimationFrame(frameLoop);
   } catch (error) {
     $("loading").hidden = true;
     status(error.message, true);

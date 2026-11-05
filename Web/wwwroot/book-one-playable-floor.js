@@ -21,7 +21,7 @@ const DISTRICT_OBJECTS = {
 };
 const cellKey = point => `${point.x},${point.y}`;
 
-function seedNumber(seed) {
+export function bookOneSeedNumber(seed) {
   let hash = 2166136261;
   for (const character of seed) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619) >>> 0;
   return hash;
@@ -147,7 +147,7 @@ export function getBookOneFloorPlayable(floor, library) {
   const tiles = Array.from({length: WIDTH * HEIGHT}, (_, index) => ({
     x: index % WIDTH, y: Math.floor(index / WIDTH), blocked: true, tags: [],
   }));
-  const hash = seedNumber(floor.seed);
+  const hash = bookOneSeedNumber(floor.seed);
   const {centers, regionBounds} = createDistricts(floor, tiles);
   const links = carveConnections(floor, centers, tiles, hash);
   const entrance = {...centers.get(floor.entryRegionId)};
