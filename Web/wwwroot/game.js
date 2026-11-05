@@ -1146,10 +1146,12 @@ async function loadSerializedSave(serialized) {
 function workshopRequest() {
   const query = new URLSearchParams(location.search), token = query.get('map');
   if (token && !/^[a-zA-Z0-9-]{8,80}$/.test(token)) throw new Error('This dungeon link is invalid. Return to the generator and choose Play again.');
-  const storageKey = token ? `dct.workshop-map.${token}` : 'dct.workshop-map';
+  const storageKey = query.get('book1') === '1' ? `dct.book1-floor.${token}` : token ? `dct.workshop-map.${token}` : 'dct.workshop-map';
   const serialized = token ? sessionStorage.getItem(storageKey) : localStorage.getItem(storageKey);
   if (!serialized) throw new Error('This dungeon handoff has expired. Your saved run is unchanged; return to the generator and choose Play again.');
   if (serialized.length > 2_000_000) throw new Error('The generated map exceeds the 2 MB import limit.');
+  const bookOne = query.get('book1') === '1';
+  if (bookOne) { const packet = JSON.parse(serialized); if (!packet.floorPlan?.map) throw new Error('First Floor plan is missing.'); return { token, storageKey, serialized, map: packet.floorPlan.map, floorPlan: packet.floorPlan, exploring: true }; }
   const exploring = query.get('explore') === '1';
   const traversal = exploring ? JSON.parse(sessionStorage.getItem(`${storageKey}.exploration`) || 'null') : null;
   if (exploring && !traversal) throw new Error('Exploration handoff expired. Return to Foundry and choose Play again.');
@@ -1190,11 +1192,11 @@ function consumeWorkshopRequest(request) {
   if (request.token) sessionStorage.removeItem(request.storageKey);
   sessionStorage.removeItem(`${request.storageKey}.exploration`);
   try { if (localStorage.getItem('dct.workshop-map') === request.serialized) localStorage.removeItem('dct.workshop-map'); } catch { /* The per-tab handoff is already complete. */ }
-  const query = new URLSearchParams(location.search); query.delete('workshop'); query.delete('map'); query.delete('explore');
+  const query = new URLSearchParams(location.search); query.delete('workshop'); query.delete('book1'); query.delete('map'); query.delete('explore');
   history.replaceState(null, '', `${location.pathname}${query.size ? `?${query}` : ''}${location.hash}`);
 }
 async function boot() {
-  const isWorkshopRequest = new URLSearchParams(location.search).get('workshop') === '1';
+  const isWorkshopRequest = ['workshop','book1'].some(key => new URLSearchParams(location.search).get(key) === '1');
   let workshopCommitted = false;
   try {
     const requestedMap = isWorkshopRequest ? workshopRequest() : null;
@@ -1211,8 +1213,9 @@ async function boot() {
       // An explicit map takes precedence over autosave. Commit the browser save only
       // after geometry, spawns and any native visual descriptor match exactly.
       render();
-      await command(requestedMap.exploring ? 'import_generated' : 'import_map', { customMap: requestedMap.map, ...requestedMap.traversal }, { save: false });
+      await command(requestedMap.floorPlan ? 'import_floor' : requestedMap.exploring ? 'import_generated' : 'import_map', requestedMap.floorPlan ? {floorPlan:requestedMap.floorPlan} : { customMap: requestedMap.map, ...requestedMap.traversal }, { save: false });
       verifyWorkshopImport(requestedMap.map, requestedMap.exploring);
+      if (requestedMap.floorPlan && !matchesWorkshopValue(view.generatedDungeon?.floorPlan, requestedMap.floorPlan)) throw new Error('The game did not retain the exact First Floor plan.');
       await persist({ strict: true });
       workshopCommitted = true;
       consumeWorkshopRequest(requestedMap);
@@ -1246,7 +1249,17 @@ $('#export-button').addEventListener('click', exportSave);
 $('#import-map-button').addEventListener('click',()=>$('#import-map-file').click());
 $('#import-map-file').addEventListener('change',async event=>{
  const file=event.target.files[0];if(!file)return;
- try{if(file.size>2000000)throw new Error('Map file exceeds 2 MB.');const customMap=JSON.parse(await file.text());const previousMap=JSON.stringify(view.customMap);await command('import_map',{customMap});if(view.customMap&&JSON.stringify(view.customMap)!==previousMap)closeDialog('#save-dialog');}
+ try {
+   if(file.size>2000000)throw new Error('Map file exceeds 2 MB.');
+   const packet=JSON.parse(await file.text()),floorPlan=packet.floorPlan,customMap=floorPlan?.map??packet;
+   const previousSave=await call('GetSave');
+   try {
+     await command(floorPlan?'import_floor':'import_map',floorPlan?{floorPlan}:{customMap},{save:false});
+     verifyWorkshopImport(customMap,Boolean(floorPlan));
+     if(floorPlan&&!matchesWorkshopValue(view.generatedDungeon?.floorPlan,floorPlan))throw new Error('The game did not retain the exact floor plan.');
+     await persist({strict:true});closeDialog('#save-dialog');toast(floorPlan?'Complete floor imported. Explore with the same party throughout.':'Workshop map imported.','success');
+   } catch(error) {view=JSON.parse(await call('LoadSave',previousSave));render();throw error;}
+ }
  catch(error){toast(`Map could not be loaded: ${error.message}`,'error');}
  event.target.value='';
 });

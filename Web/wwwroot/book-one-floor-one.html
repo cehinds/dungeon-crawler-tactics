@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Book One · Floor One Atlas</title>
+    <link rel="stylesheet" href="book-one-floor-one.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="index.html">DCT <span>/ Book One</span></a>
+      <nav>
+        <a href="procedural-object-maps.html">Object foundry</a
+        ><button id="export" disabled>Export floor JSON</button
+        ><button id="play" disabled>Play floor</button>
+      </nav>
+    </header>
+    <main>
+      <div class="title-row">
+        <div>
+          <h1>Floor One</h1>
+          <p>A connected atlas of the first descent.</p>
+        </div>
+        <form id="controls">
+          <label
+            >Floor seed<input
+              id="seed"
+              value="book-one-floor-one"
+              maxlength="80"
+              spellcheck="false" /></label
+          ><button class="primary" id="generate">Build floor</button
+          ><button type="button" id="new-seed">New seed</button>
+        </form>
+      </div>
+      <div class="workspace">
+        <aside>
+          <h2>The route</h2>
+          <p class="muted" id="progress">Preparing the floor…</p>
+          <svg
+            id="graph"
+            viewBox="0 0 280 270"
+            aria-label="Connected regional route"
+          ></svg>
+          <div id="regions" class="region-list"></div>
+          <p class="note">
+            Select a district to highlight it on the complete floor.
+          </p>
+        </aside>
+        <section class="region-view">
+          <div class="region-heading">
+            <div>
+              <span id="region-kind" class="muted"></span>
+              <h2 id="region-name">Building the descent…</h2>
+            </div>
+            <button id="return" hidden>Return to explorer</button>
+          </div>
+          <p id="description"></p>
+          <div class="map-tools">
+            <span id="dimensions"></span
+            ><button id="zoom" type="button" aria-pressed="false">
+              Zoom map</button
+            ><span class="layers"
+              ><label
+                ><input type="checkbox" id="objects" checked />Objects</label
+              ><label><input type="checkbox" id="route" />Route</label
+              ><label><input type="checkbox" id="grid" />Grid</label
+              ><label><input type="checkbox" id="collision" />Collision</label
+              ><label hidden
+                ><input type="checkbox" id="room-labels" />Rooms</label
+              ></span
+            >
+          </div>
+          <div class="map-stage">
+            <canvas
+              id="map"
+              tabindex="0"
+              aria-label="Region map. Click an adjacent tile or use arrow keys to move your explorer."
+            ></canvas>
+            <div id="loading" role="status">Building connected regions…</div>
+          </div>
+          <div class="map-legend">
+            <span><i class="you"></i>Entrance</span
+            ><span><i class="portal"></i>Floor exit</span
+            ><span><i class="objective"></i>Objective</span
+            ><span><i style="background: #f29a8d"></i>Encounter</span
+            ><span id="map-info"></span>
+          </div>
+          <div class="detail-row">
+            <div>
+              <h3>District objective</h3>
+              <p id="objective"></p>
+              <button id="interact">Inspect objective</button>
+            </div>
+            <div>
+              <h3>Connected districts</h3>
+              <div id="passages"></div>
+            </div>
+          </div>
+          <div class="direction-pad" aria-label="Explorer movement">
+            <button data-move="0,-1" aria-label="Move north">↑</button>
+            <div>
+              <button data-move="-1,0" aria-label="Move west">←</button
+              ><button data-move="0,1" aria-label="Move south">↓</button
+              ><button data-move="1,0" aria-label="Move east">→</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer>
+        <p id="status" role="status" aria-live="polite">
+          Loading the whole-object library.
+        </p>
+        <p id="adaptation" class="muted"></p>
+        <small
+          >Seed and selected district are saved in this browser. Explore, fight
+          and complete objectives in the game.</small
+        >
+      </footer>
+    </main>
+    <dialog id="play-dialog">
+      <form method="dialog">
+        <h2>Play the First Floor?</h2>
+        <p>
+          The game uses this exact complete floor layout and existing tactical
+          rules. Starting replaces the active game run. Export its save first to
+          keep it.
+        </p>
+        <div>
+          <button value="cancel">Cancel</button
+          ><button class="primary" value="play">Start floor</button>
+        </div>
+      </form>
+    </dialog>
+    <script type="module" src="book-one-floor-one.js"></script>
+  </body>
+</html>

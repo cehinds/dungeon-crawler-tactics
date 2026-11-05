@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../UnityPackage/Runtime/Core/*.cs" />
+    <Compile Include="Program.cs" />
+    <None Include="../../UnityPackage/Runtime/Data/combat-content.json" Link="combat-content.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../UnityPackage/Runtime/Data/game-content.json" Link="game-content.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
