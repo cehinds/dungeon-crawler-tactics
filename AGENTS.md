@@ -1,15 +1,13 @@
 # DungeonCrawlerTactics working agreement
 
-This is a separate Unity tactics game with a shared-C# browser delivery. Do not change the neighboring AshenSpire repository for work on this kit.
+This is a Floor One RPG with a pure C# rules engine and a .NET 8 WebAssembly browser host. Do not change the neighboring AshenSpire repository.
 
-- Read README.md and Docs/PlayableGame.md for the implemented game; Docs/DeliveryPlan.md is historical planning context.
+- Read `README.md`, `Rebuild/CONTRACT.md`, and `Rebuild/ReferenceData/LORE.md` before changing gameplay. The previous implementation is archived by tag `archive/pre-rpg-reset-20261105`.
 - The user requested a coordinator using GPT-6.1 Sol and Luna specialists. Assign Sol code/integration work and Luna content/docs/fixture work. Name exclusive file ownership; do not let multiple agents edit the same files concurrently.
-- Keep the rules pure C#. Rendering, input, saves and audio sit behind the Unity integration boundary.
-- Treat JSON as the authored source of truth. Stable string IDs, explicit schemas and validated references are mandatory. No mechanics keyed to display names, character names or class IDs.
-- New combinations of existing effects should require data only. A new effect primitive requires code, validation, forecast support and a meaningful scenario test.
-- Preserve deterministic ordering. Never use wall-clock time or UnityEngine.Random in combat resolution.
-- Preview and commit use the same resolver. Do not duplicate damage formulas in a presenter or wireframe.
-- A readable small system is preferable to custom scripting languages, reflection plugins or a universal manager.
-- Distinguish implemented behavior from design targets. Do not claim Unity or Web validation without actually running it.
-- Avoid editing Unity serialized scene/prefab YAML by hand; use Editor tooling when available.
-- Run the focused tests and content validator in README after relevant changes. Never include SDK binaries, node_modules, generated Unity Library folders or test build outputs in delivery archives.
+- `Rebuild/Core` is the single authority for game rules. Browser JavaScript handles rendering, input and presentation; never duplicate damage or progression formulas there. Do not claim a Unity export or Unity Editor validation.
+- Treat `Web/wwwroot/data/floor-one-rpg.json` and `world-rooms.json` as authored sources of truth. Preserve stable string IDs, explicit contracts and validated references. Do not key mechanics to display names.
+- Keep resolution and map generation deterministic. Preview and commit use the same resolver; use meaningful route, forecast, save and connectivity tests when rules change.
+- Run `dotnet run --project Rebuild/Tests -c Release` and publish the Web project after relevant changes. For browser changes, run `Tools/playtest_floor_one.py` against the published host as described in README.
+- Preserve all physical `Web/wwwroot/assets` files, untracked user files and scratch directories. Art is stored separately in AI-Art; hosting restores only the checksum verified subset in `Tools/hosted-assets.json`. Never clone the full art repository just to publish the game.
+- Preserve `Rebuild/ReferenceData` lore, equipment and skill references. Distinguish canonical source claims from tactical adaptations and implemented behavior from targets.
+- Do not include SDK binaries, node_modules, build outputs or the retained full art library in commits or delivery archives. Keep `main` unchanged unless explicitly authorized; development releases use `dev` and `pages-dev-*` tags.
