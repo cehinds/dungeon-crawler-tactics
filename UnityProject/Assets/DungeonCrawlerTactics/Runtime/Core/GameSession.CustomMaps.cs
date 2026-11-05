@@ -67,7 +67,8 @@ namespace DungeonCrawlerTactics
             if (map.visuals != null)
             {
                 Require(map.visuals.pieces != null && map.visuals.pieces.Length <= 15360, "Native map art exceeds collection limits.");
-                copy.visuals = new NativeMapVisuals { schemaVersion = map.visuals.schemaVersion, styleId = map.visuals.styleId, kitId = map.visuals.kitId,
+                Require(map.visuals.components != null && map.visuals.components.Length <= 512, "Invalid map component collection.");
+                copy.visuals = new NativeMapVisuals { componentLibraryId = map.visuals.componentLibraryId, components = Array.ConvertAll(map.visuals.components, CopyNativeComponent), schemaVersion = map.visuals.schemaVersion, styleId = map.visuals.styleId, kitId = map.visuals.kitId,
                     pieces = Array.ConvertAll(map.visuals.pieces, p => p == null ? null : new NativeMapPiece { cell = p.cell, x2 = p.x2, y2 = p.y2, rotation = p.rotation, layer = p.layer }) };
             }
             return copy;
@@ -177,6 +178,7 @@ namespace DungeonCrawlerTactics
                     Require(piece.x2 >= 0 && piece.y2 >= 0 && piece.x2 % 2 == 0 && piece.y2 % 2 == 0
                         && floors.Add(TileId(piece.x2, piece.y2)), "Invalid or duplicate native floor position.");
             }
+            ValidateNativeComponents(map, blocked, floors);
             Require(floors.Count > 0, "Native map art needs a floor.");
             for (int y = 0; y < map.height; y++)
                 for (int x = 0; x < map.width; x++)

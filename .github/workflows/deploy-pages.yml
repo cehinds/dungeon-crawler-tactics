@@ -3,6 +3,8 @@ name: Deploy browser game to GitHub Pages
 on:
   push:
     branches: [main]
+    # Explicitly publish a tested dev revision without changing main.
+    tags: ['pages-dev-*']
   workflow_dispatch:
 
 permissions: {}
@@ -75,6 +77,16 @@ jobs:
           persist-credentials: false
       - name: Restore pinned art assets
         run: python Tools/sync_art_assets.py --source .art-source
+      - name: Restore immutable First Floor component catalog
+        run: |
+          mkdir -p Web/wwwroot/assets/top-down-object-kit
+          curl --fail --location --retry 3 https://raw.githubusercontent.com/cehinds/AI-Art/a0483c7db869f28e35bf2878d22e9bc68ead77a7/dungeon-crawler-tactics/Web/wwwroot/assets/top-down-object-kit/manifest.json --output Web/wwwroot/assets/top-down-object-kit/manifest.json
+      - name: Check First Floor generation and shared-engine import
+        run: |
+          node Tools/test_book_one_playable_floor.mjs --fixture
+          node Tools/test_book_one_entry.mjs
+          node Tools/test_whole_object_components.mjs
+          dotnet run --project Tests/BookOneFloorTests/BookOneFloorTests.csproj -c Release -- /tmp/book-one-floor-plan.json
       - name: Install content validation dependencies
         run: python -m pip install -r Tools/requirements.txt -r .art-source/tools/pocket-requirements.txt
       - name: Validate authored gameplay data

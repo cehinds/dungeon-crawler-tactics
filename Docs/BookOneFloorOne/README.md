@@ -16,7 +16,7 @@ The regional catalog uses `scenario.hoarder`, `scenario.juicer` and `scenario.sw
 
 Corridor links are navigational and do not impose quest locks. To finish, the player must complete every required region objective and clear all five tactical encounter groups before interacting with the exit. Optional-region objectives are not required for floor completion.
 
-The gameplay preview draws the exact whole-object sprites and blocked cells in the generated playable layout. Export preserves that map layout; runtime uses the game’s existing art presentation, so its pixels can differ from the preview. The preview and runtime therefore share gameplay geometry and collision, not identical artwork. Neither represents a canonical novel floorplan.
+The gameplay preview and C# runtime now use the same saved map descriptor for whole-object props, including stable asset IDs, native footprints, rotations, layers, and collision. Floors and walls use the existing Book Location Tiles art; props use the reusable whole-object PNG library. The shared renderer preserves prop placement and collision between preview and runtime. Exported descriptors are validated against known assets and collision data; older maps without descriptors remain valid and use their existing generic presentation. This visual integration does not make the layouts or art canonical to the novel.
 
 Mordecai appears as a Tutorial Guild guide and is not a deployable party member. Katia’s presence in the broader runtime roster does not establish her involvement on Floor 1. Floor 3 class unlocks are outside this floor’s scope.
 

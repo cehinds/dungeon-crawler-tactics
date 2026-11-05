@@ -18,6 +18,33 @@ export function nativePick(px, py, width, height, rotation = 0) {
   return x >= 0 && y >= 0 && x < width && y < height ? { x: x || 0, y: y || 0 } : null;
 }
 
+export function validateNativeComponents(visuals, width, height, tiles) {
+  const components = visuals?.components ?? [];
+  require(Array.isArray(components) && components.length <= 512, 'Invalid whole-object component count.');
+  require(visuals?.componentLibraryId == null || visuals.componentLibraryId === 'top-down-object-kit', 'Unsupported whole-object component library.');
+  if (!components.length) return components;
+  require(visuals.componentLibraryId === 'top-down-object-kit', 'Unsupported whole-object component library.');
+  const ids = new Set(), occupied = new Set(), floors = new Set((visuals.pieces ?? []).filter(piece => piece.layer === 'ground').map(piece => `${piece.x2},${piece.y2}`)), blocked = new Set((tiles ?? []).filter(tile => tile.blocked).map(tile => `${tile.x},${tile.y}`));
+  for (const component of components) {
+    require(component && typeof component.id === 'string' && component.id.length > 0 && component.id.length <= 100 && !ids.has(component.id)
+      && typeof component.assetId === 'string' && /^[a-z0-9][a-z0-9-]{0,63}$/.test(component.assetId)
+      && Number.isInteger(component.x) && Number.isInteger(component.y)
+      && Number.isInteger(component.width) && component.width >= 1 && component.width <= 12 && Number.isInteger(component.height) && component.height >= 1 && component.height <= 12
+      && component.x >= 0 && component.y >= 0 && component.x + component.width <= width && component.y + component.height <= height
+      && Number.isInteger(component.rotation) && component.rotation >= 0 && component.rotation <= 3
+      && ['props', 'underlay'].includes(component.layer) && typeof component.blocksMovement === 'boolean' && (!component.blocksMovement || component.layer === 'props'), 'Invalid whole-object component placement.');
+    ids.add(component.id);
+    for (let y = component.y; y < component.y + component.height; y++) for (let x = component.x; x < component.x + component.width; x++) {
+      require(floors.has(`${x * 2},${y * 2}`), 'Whole-object components need ground beneath their complete footprint.');
+      if (component.blocksMovement) {
+        require(!occupied.has(`${x},${y}`) && (!tiles || blocked.has(`${x},${y}`)), 'Whole-object collision disagrees with the game map or overlaps another component.');
+        occupied.add(`${x},${y}`);
+      }
+    }
+  }
+  return components;
+}
+
 export function validateNativeVisuals(visuals, width, height, tiles) {
   require(Number.isInteger(width) && width >= 6 && width <= 40 && Number.isInteger(height) && height >= 6 && height <= 32, 'Invalid native map dimensions.');
   require(visuals?.schemaVersion === 1 && slug(visuals.styleId) && slug(visuals.kitId), 'Invalid native map art identifier.');
@@ -40,10 +67,11 @@ export function validateNativeVisuals(visuals, width, height, tiles) {
     const blocked = new Set(tiles.filter(tile => tile.blocked).map(tile => `${tile.x},${tile.y}`));
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) require(blocked.has(`${x},${y}`) || floors.has(`${x * 2},${y * 2}`), 'Native map art must cover every walkable cell.');
   }
+  validateNativeComponents(visuals, width, height, tiles);
   return visuals;
 }
 
-export function serializeNativeVisuals(scene, { styleId, kitId, width, height, tiles }) {
+export function serializeNativeVisuals(scene, { styleId, kitId, width, height, tiles, componentLibraryId, components }) {
   const pieces = [];
   for (const [group, layer] of [['floor', 'ground'], ['structures', 'structures'], ['decorations', 'props']]) {
     require(Array.isArray(scene?.[group]), 'The preview scene is incomplete.');
@@ -53,7 +81,7 @@ export function serializeNativeVisuals(scene, { styleId, kitId, width, height, t
       pieces.push({ cell: piece.asset.cell, x2: piece.px / 64, y2: piece.py / 64, rotation: quarter(Math.round(turns)), layer });
     }
   }
-  return validateNativeVisuals({ schemaVersion: 1, styleId, kitId, pieces }, width, height, tiles);
+  return validateNativeVisuals({ schemaVersion: 1, styleId, kitId, pieces, ...(components ? {componentLibraryId, components: components.map(component => ({...component}))} : {}) }, width, height, tiles);
 }
 
 export function nativeSceneFromVisuals(visuals, art, width, height, tiles) {

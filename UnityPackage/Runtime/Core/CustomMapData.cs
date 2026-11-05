@@ -18,7 +18,16 @@ namespace DungeonCrawlerTactics
     {
         public int schemaVersion = 1;
         public string styleId, kitId;
+        public string componentLibraryId;
+        public NativeMapComponent[] components = new NativeMapComponent[0];
         public NativeMapPiece[] pieces = new NativeMapPiece[0];
+    }
+    [Serializable]
+    public sealed class NativeMapComponent
+    {
+        public string id, assetId, layer;
+        public int x, y, width, height, rotation;
+        public bool blocksMovement;
     }
     [Serializable]
     public sealed class NativeMapPiece

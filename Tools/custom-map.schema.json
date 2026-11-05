@@ -282,6 +282,19 @@
           "items": {
             "$ref": "#/$defs/nativePiece"
           }
+        },
+        "componentLibraryId": {
+          "enum": [
+            "top-down-object-kit",
+            null
+          ]
+        },
+        "components": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "$ref": "#/$defs/nativeComponent"
+          }
         }
       }
     },
@@ -327,6 +340,112 @@
             "structures",
             "props"
           ]
+        }
+      }
+    },
+    "nativeComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "assetId",
+        "x",
+        "y",
+        "width",
+        "height",
+        "rotation",
+        "layer",
+        "blocksMovement"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "assetId": {
+          "enum": [
+            "ab-clean-barrel-wood-top",
+            "ab-clean-crate-wood-cross",
+            "ab-clean-plant-leafy-terracotta",
+            "ab-clean-chair-wood-blue",
+            "ab-clean-table-wood-empty",
+            "ab-clean-cot-metal-green",
+            "ab-clean-door-double-wood-brass",
+            "ab-clean-wall-straight-navy",
+            "ab-clean-bench-wood-plain",
+            "ab-clean-cot-metal-blue",
+            "ab-clean-wheelchair-blue",
+            "ab-clean-shelf-wood-empty",
+            "cd-gear",
+            "cd-lever-plinth",
+            "cd-rail-straight",
+            "cd-rail-junction",
+            "cd-torch",
+            "cd-crate",
+            "cd-explosive-cart",
+            "cd-dozer",
+            "cd-weight-bench",
+            "cd-barbell",
+            "cd-wall-straight",
+            "cd-throne",
+            "cd-red-carpet",
+            "cd-pipe-elbow",
+            "cd-pipe-straight",
+            "cd-hay-trough",
+            "cd-llama",
+            "cd-swine-boss",
+            "cd-trap-machine",
+            "cd-stair-module",
+            "cd-door-threshold",
+            "cd-drain-grate",
+            "ef-toilet",
+            "ef-sink-counter",
+            "ef-litter-tray",
+            "ef-litter-scoop",
+            "ef-vending-green",
+            "ef-wood-bench",
+            "ef-wood-table",
+            "ef-chair-green",
+            "ef-bed-red",
+            "ef-rug-red",
+            "ef-plant-green",
+            "ef-lamp-table"
+          ]
+        },
+        "x": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 39
+        },
+        "y": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 31
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "rotation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "layer": {
+          "enum": [
+            "underlay",
+            "props"
+          ]
+        },
+        "blocksMovement": {
+          "type": "boolean"
         }
       }
     }

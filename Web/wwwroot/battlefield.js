@@ -1,3 +1,5 @@
+import { loadWholeComponents, drawWholeComponent, componentFootprint, componentDepth, componentKnown } from './whole-object-components.js';
+import { WHOLE_OBJECT_ASSET_BASE } from './whole-object-map.js';
 import { drawFloorLayer, floorLayer } from './tile-surface-renderer.js';
 import { fetchJSON, loadArtKit, buildArtScene, drawPiece, visibleSceneCorners, environmentMood } from './generator-art.js';
 import { nativeProject, nativePick, nativeSceneFromVisuals, serializeNativeVisuals } from './native-map-visuals.js';
@@ -89,6 +91,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   const facing = new Map();
   let explorationMotion = null, explorationFrameTime = 0;
   let nativeBounds = null, nativeScenePoints = null, nativeViewport = null;
+  let nativeComponents = null, componentCells = new Set();
   let nativeKey = '', nativeState = 'none', nativeArt = null, nativeScene = null, nativeError = '', nativeRequest = 0;
   const nativeStatus = document.createElement('div'), nativeMessage = document.createElement('span'), nativeRetry = document.createElement('button');
   nativeStatus.className = 'native-map-status'; nativeStatus.setAttribute('role', 'status'); nativeStatus.setAttribute('aria-live', 'polite');
@@ -153,18 +156,21 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     canvas.setAttribute('aria-label', `${nativeActive()?'Square':'Isometric'} dungeon battlefield. Arrow keys inspect tiles; Enter selects the tile.`);
   }
   async function loadNativeArt(force=false) {
-    const descriptor = artDescriptor(), map=mapData(), suppliedVisuals=view?.customMap?.visuals;
+    const descriptor = copy(artDescriptor()), map=mapData(), suppliedVisuals=view?.customMap?.visuals;
     const key = nativeActive() ? JSON.stringify([map.width,map.height,view.customMap?.visuals??map.tiles?.filter(t=>t.blocked).map(t=>[t.x,t.y])]) : '';
     if(!force && key===nativeKey){updateNativeStatus();return;}
     nativeKey=key; const request=++nativeRequest;
-    nativeArt=null;nativeScene=null;nativeBounds=null;nativeScenePoints=null;nativeError='';
+    nativeArt=null;nativeScene=null;nativeComponents=null;componentCells=new Set();nativeBounds=null;nativeScenePoints=null;nativeError='';
     if(!key){nativeState='none';updateNativeStatus();return;}
     nativeState='loading';updateNativeStatus();
     const mapWidth=map.width,mapHeight=map.height,mapTiles=map.tiles??view.customMap?.tiles??[];
     try {
       const catalogURL=new URL('assets/book-tiles/catalog.json',document.baseURI);
       const catalog=await fetchJSON(catalogURL);
-      const art=await loadArtKit(catalog,catalogURL,descriptor.kitId,descriptor.styleId);
+      const [art, components] = await Promise.all([
+        loadArtKit(catalog,catalogURL,descriptor.kitId,descriptor.styleId),
+        loadWholeComponents(descriptor,mapWidth,mapHeight,mapTiles,WHOLE_OBJECT_ASSET_BASE)
+      ]);
       let scene;
       if(suppliedVisuals)scene=nativeSceneFromVisuals(descriptor,art,mapWidth,mapHeight,mapTiles);
       else {
@@ -178,7 +184,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         scene.decorations=[];
       }
       if(disposed || request!==nativeRequest)return;
-      nativeArt=art;nativeScene=scene;nativeBounds=null;nativeScenePoints=null;nativeState='ready';fit();if(view.screen==='explore')centerSelected();else centerAction();updateNativeStatus();
+      nativeArt=art;nativeScene=scene;nativeComponents=components;componentCells=new Set(components.components.flatMap(componentFootprint).map(cell=>`${cell.x},${cell.y}`));nativeBounds=null;nativeScenePoints=null;nativeState='ready';fit();if(view.screen==='explore')centerSelected();else centerAction();updateNativeStatus();
       canvas.dispatchEvent(new CustomEvent('nativeartready',{detail:{styleId:descriptor.styleId,kitId:descriptor.kitId,pieceCount:scene.floor.length+scene.structures.length+scene.decorations.length}}));
     } catch(error) {
       if(disposed || request!==nativeRequest)return;
@@ -606,7 +612,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
       nativeViewport={left:Math.min(...corners.map(p=>p.x)),right:Math.max(...corners.map(p=>p.x)),top:Math.min(...corners.map(p=>p.y)),bottom:Math.max(...corners.map(p=>p.y))};
       tiles=tiles.filter(tile=>nativeVisible(tile.x*128,tile.y*128,192));
     }
-    const revealed=explore?new Set(tiles.filter(t=>t.revealed).map(t=>`${t.x},${t.y}`)):null;
+    const revealed=explore?new Set(map.tiles.filter(t=>t.revealed).map(t=>`${t.x},${t.y}`)):null;
     const pieceKnown=piece=>!explore||nativeVisible(piece.px,piece.py,256)&&revealed.has(`${piece.cell?.x??Math.round(piece.px/128)},${piece.cell?.y??Math.round(piece.py/128)}`);
     const mood=environmentMood(descriptor.kitId);
     const backdrop=context.createRadialGradient(width*.5,height*.38,0,width*.5,height*.5,Math.max(width,height)*.7);
@@ -619,10 +625,13 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     context.save();context.rotate(rotation*Math.PI/2);
     if(explore)drawExplorationFloor();else drawFloorLayer(context,nativeScene.floor,nativeArt.images);
     for(const piece of mechanismFloor())if(!explore||map.tiles.some(tile=>tile.x===piece.px/128&&tile.y===piece.py/128&&tile.revealed))drawPiece(context,piece,nativeArt);
+    for(const component of nativeComponents?.components??[]) {
+      if(component.layer==='underlay'&&componentKnown(component,revealed))drawWholeComponent(context,component,nativeComponents,revealed);
+    }
     context.restore();
     // Canonical collision always occupies a square cell, including authored
     // walls whose kit art is drawn on the surrounding walkable boundaries.
-    for(const tile of tiles)if(tile.blocked&&(!explore||tile.revealed))diamond(tile.x,tile.y,{fill:'#050b0e88',stroke:'#69808055',inset:2,weight:1});
+    for(const tile of tiles)if(tile.blocked&&!componentCells.has(`${tile.x},${tile.y}`)&&(!explore||tile.revealed))diamond(tile.x,tile.y,{fill:'#050b0e88',stroke:'#69808055',inset:2,weight:1});
     highlights();
     const intent=view.scenario?.intent;
     if(intent)for(const cell of intent.cells??[])diamond(cell.x,cell.y,{stroke:'#ff9855',fill:'#ff4b293e',weight:3,inset:3});
@@ -630,6 +639,15 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
     nativeScene.structures.filter(piece=>pieceKnown(piece)&&!mechanismCleared(piece.px/128,piece.py/128)).forEach(piece=>drawPiece(context,piece,nativeArt));
     nativeScene.decorations.filter(piece=>pieceKnown(piece)&&!mechanismCleared(piece.px/128,piece.py/128)).forEach(piece=>drawPiece(context,piece,nativeArt));
     context.restore();
+    const actors=[];
+    for(const component of nativeComponents?.components??[]) {
+      if(component.layer!=='props'||!componentKnown(component,revealed)||componentFootprint(component).some(cell=>mechanismCleared(cell.x,cell.y)))continue;
+      const centerX=(component.x+(component.width-1)/2)*128,centerY=(component.y+(component.height-1)/2)*128;
+      if(!nativeVisible(centerX,centerY,Math.max(component.width,component.height)*128))continue;
+      actors.push({depth:componentDepth(component,rotation),order:component.id,draw:()=>{
+        context.save();context.rotate(rotation*Math.PI/2);drawWholeComponent(context,component,nativeComponents,revealed);context.restore();
+      }});
+    }
     drawMechanismRoutes(map,explore);
     // Terrain remains canonical game state; markers keep it readable without
     // replacing any of the authored floor images selected in the preview.
@@ -657,8 +675,10 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         const enemies=(view.customMap?.enemies?.filter(enemy=>!activeEnemyIds||activeEnemyIds.has(enemy.id)))??(map.points??[]).filter(p=>p.kind==='enemy').map(p=>({...p,artId:'rat',hp:1,maxHp:1}));
         for(const enemy of [...enemies].sort((a,b)=>depth(a.x,a.y)-depth(b.x,b.y))){
           if(!tiles.some(t=>t.x===enemy.x&&t.y===enemy.y&&t.revealed))continue;
-          sprite({...enemy,maxHp:enemy.maxHp??enemy.hp,team:'enemy',tags:enemy.tags??[]},time);
-          const p=project(enemy.x,enemy.y);text(enemy.label??'ENEMY',p.x,p.y+40,'#ffb2a0',12);
+          actors.push({depth:depth(enemy.x,enemy.y),order:enemy.id,draw:()=>{
+            sprite({...enemy,maxHp:enemy.maxHp??enemy.hp,team:'enemy',tags:enemy.tags??[]},time);
+            const p=project(enemy.x,enemy.y);text(enemy.label??'ENEMY',p.x,p.y+40,'#ffb2a0',12);
+          }});
         }
       }
       const party=(view.roster??[]).filter(u=>u.selected&&(u.hp??u.maxHp??40)>0).slice(0,1);
@@ -669,11 +689,12 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
         partyX=a[0]+(b[0]-a[0])*t;partyY=a[1]+(b[1]-a[1])*t;
         if(travel<explorationMotion.cells.length-1)for(const u of party)rememberFacing(u.id,b[0]-a[0],b[1]-a[1]);
       }
-      party.forEach((u,i)=>sprite({...u,x:partyX,y:partyY,hp:u.hp??u.maxHp??40,maxHp:u.maxHp||40,team:'player',tags:[]},time));
+      party.forEach((u,i)=>actors.push({depth:depth(partyX,partyY)+i*.02,order:u.id,draw:()=>sprite({...u,x:partyX,y:partyY,hp:u.hp??u.maxHp??40,maxHp:u.maxHp||40,team:'player',tags:[]},time)}));
     }else{
       for(const item of view.scenario?.interactables??[]){if(item.action==='garbage'&&item.hp<=0||item.action==='cover'&&item.destroyed)continue;scenarioObject(item);}
-      [...visualUnits].sort((a,b)=>depth(a.x,a.y)-depth(b.x,b.y)).forEach(unit=>sprite(unit,time));
+      visualUnits.forEach(unit=>actors.push({depth:depth(unit.x,unit.y),order:unit.id,draw:()=>sprite(unit,time)}));
     }
+    actors.sort((a,b)=>a.depth-b.depth||String(a.order).localeCompare(String(b.order))).forEach(actor=>actor.draw());
     for(const tile of tiles)if((!explore||tile.revealed)&&(tile.tags??[]).includes('surface.burning'))effectSprite('fire',tile.x,tile.y,reduced.matches?0:time%800,800);
     if(intent?.cells?.length){const cell=intent.cells[Math.floor(intent.cells.length/2)],p=project(cell.x,cell.y);text(`${intent.label} · ${intent.damage} DMG`,p.x,p.y-85,'#ffc898',14);}
     drawTransient(time);context.restore();trapTooltip();
@@ -983,7 +1004,7 @@ export function createBattlefield(canvas, {onCell, onHover} = {}) {
   const observer=new ResizeObserver(resize);observer.observe(canvas);
   ready.then(resize);resize();frameId=requestAnimationFrame(draw);
   return {setView,playEvents,resize,skipAnimations,zoom,centerSelected,rotate,getRotationLabel,getRotation:()=>rotation,screenDirection,movementDirection:screenDirection,
-    getNativeArtStatus:()=>({state:nativeState,projection:nativeActive()?'orthogonal':'isometric',styleId:nativeArt?.manifest.style??view?.customMap?.visuals?.styleId??null,kitId:nativeArt?.manifest.id??view?.customMap?.visuals?.kitId??null,pieceCount:nativeScene?nativeScene.floor.length+nativeScene.structures.length+nativeScene.decorations.length:0,error:nativeError}),
+    getNativeArtStatus:()=>({state:nativeState,projection:nativeActive()?'orthogonal':'isometric',styleId:nativeArt?.manifest.style??view?.customMap?.visuals?.styleId??null,kitId:nativeArt?.manifest.id??view?.customMap?.visuals?.kitId??null,pieceCount:nativeScene?nativeScene.floor.length+nativeScene.structures.length+nativeScene.decorations.length:0,componentCount:nativeComponents?.components.length??0,componentImageCount:nativeComponents?.images.size??0,componentAssetIds:[...nativeComponents?.images.keys()??[]],error:nativeError}),
     getNativeVisuals:()=>nativeScene&&view.customMap?.visuals?serializeNativeVisuals(nativeScene,{...artDescriptor(),width:mapData().width,height:mapData().height}):null,
     retryNativeArt:()=>loadNativeArt(true),
     // Coordinates support real pointer-based browser regression tests.

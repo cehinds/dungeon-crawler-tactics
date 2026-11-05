@@ -49,6 +49,8 @@ class MultipartPublicationTests(unittest.TestCase):
             self.assertEqual(prepare(root, lock)['rewritten_metadata'], 0)
 
     def test_lean_selection_matches_pruning(self):
+        self.assertIsNone(publication_exclusion('top-down-object-kit/manifest.json'))
+        self.assertEqual(publication_exclusion('top-down-object-kit/objects/chair.png'), 'offline-top-down-object-kit')
         self.assertEqual(publication_exclusion('reusable/__pycache__/replay.cpython-312.pyc'), 'runtime-python-cache')
         self.assertEqual(publication_exclusion('replay-inputs/receipts/a.json'), 'offline-replay-inputs')
         self.assertEqual(publication_exclusion('book-tiles/ink-and-lanterns/reusable/index.json'), 'remote-library')
@@ -68,7 +70,7 @@ class MultipartPublicationTests(unittest.TestCase):
     def test_offline_research_packs_are_pruned_without_changing_sources(self):
         packs = {'map-grid-pass': 'offline-map-grid-pack', 'reference-layers': 'offline-reference-layers-pack', 'completed-layers': 'offline-completed-layers-pack', 'wall-components': 'offline-wall-components-pack', 'exploration-components': 'offline-exploration-components-pack', 'floor-one-concepts': 'offline-floor-one-concepts-pack', 'floor-one-concepts-top-down': 'offline-floor-one-concepts-top-down-pack', 'floor-one-concept-grids': 'offline-floor-one-concept-grids-pack', 'top-down-layer-kit': 'offline-top-down-layer-kit', 'top-down-object-kit': 'offline-top-down-object-kit'}
         for pack, reason in packs.items():
-            self.assertEqual(publication_exclusion(pack + '/manifest.json'), reason)
+            self.assertEqual(publication_exclusion(pack + '/manifest.json'), None if pack == 'top-down-object-kit' else reason)
             self.assertIsNone(publication_exclusion(pack + '-extra/runtime.png'))
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)
@@ -89,14 +91,14 @@ class MultipartPublicationTests(unittest.TestCase):
             runtime.write_bytes(b'runtime')
             (root / 'index.html').write_text('page')
             plan = publication_inventory(assets)
-            self.assertEqual(plan['survivors'], [{'path': 'reference-layers-extra/runtime.png', 'bytes': 7}])
-            self.assertEqual(plan['excluded_bytes_by_reason'], {reason: 18 for reason in packs.values()})
+            self.assertEqual(plan['survivors'], [{'path': 'reference-layers-extra/runtime.png', 'bytes': 7}, {'path': 'top-down-object-kit/manifest.json', 'bytes': 2}])
+            self.assertEqual(plan['excluded_bytes_by_reason'], {reason: 16 if reason == 'offline-top-down-object-kit' else 18 for reason in packs.values()})
             lock = base / 'lock.json'
             lock.write_text(json.dumps({'repository': 'https://github.com/cehinds/AI-Art.git', 'commit': 'a' * 40}))
-            self.assertEqual(prepare(root, lock)['removed_files'], 30)
+            self.assertEqual(prepare(root, lock)['removed_files'], 29)
             self.assertTrue(runtime.exists())
             self.assertTrue(all(source.read_bytes() == original for source, original in sources))
-            self.assertFalse(any(p.is_file() for pack in packs for p in (assets / pack).rglob('*')))
+            self.assertEqual([p.relative_to(assets).as_posix() for pack in packs for p in (assets / pack).rglob('*') if p.is_file()], ['top-down-object-kit/manifest.json'])
 
     def test_refuses_source_directory(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -89,6 +89,7 @@ namespace DungeonCrawlerTactics
         // Prevent changes to encounter geometry and enemy rules inside a checkpoint.
         private static bool FloorMapEqual(CustomMapData a, CustomMapData b)
         {
+            if (!NativeVisualsEqual(a.visuals, b == null ? null : b.visuals)) return false;
             if (b == null || b.tiles == null || b.enemies == null || a.width != b.width || a.height != b.height || a.label != b.label || a.tiles.Length != b.tiles.Length || a.enemies.Length != b.enemies.Length) return false;
             for (int i=0;i<a.tiles.Length;i++) { TileDef x=a.tiles[i],y=b.tiles[i]; if(y==null||y.tags==null||x.x!=y.x||x.y!=y.y||x.blocked!=y.blocked||string.Join("|",x.tags)!=string.Join("|",y.tags)) return false; }
             for(int i=0;i<a.enemies.Length;i++) { SpawnDef x=a.enemies[i],y=b.enemies[i]; if(y==null||y.tags==null||x.id!=y.id||x.classId!=y.classId||x.x!=y.x||x.y!=y.y||x.hp!=y.hp||x.energy!=y.energy||x.move!=y.move||string.Join("|",x.tags)!=string.Join("|",y.tags)) return false; }

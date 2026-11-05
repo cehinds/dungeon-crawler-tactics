@@ -19,9 +19,32 @@ static class BookOneFloorTests
         Check(view.screen == "explore" && view.generatedDungeon != null && view.width == 40 && view.height == 32, "Complete 40 x 32 Book 1 floor imports into shared C# exploration: " + view.message);
         Check(view.customMap.tiles.Length == floor.map.tiles.Length && view.customMap.tiles.Zip(floor.map.tiles, (a,b) => a.x==b.x && a.y==b.y && a.blocked==b.blocked && a.tags.SequenceEqual(b.tags)).All(x=>x), "Preview collision survives exact floor import");
         Check(view.generatedDungeon.floorPlan.groups.Length == floor.groups.Length && view.generatedDungeon.floorPlan.discoveries.Length == floor.discoveries.Length, "Every encounter and discovery enters authoritative state");
+        Check(view.customMap.visuals != null && view.customMap.visuals.componentLibraryId=="top-down-object-kit"
+            && view.customMap.visuals.components.Length>0, "Playable floor imports its complete reusable-component descriptor");
+        Check(JsonSerializer.Serialize(view.customMap.visuals,Json)==JsonSerializer.Serialize(floor.map.visuals,Json), "Actual game retains the exact ground, wall and whole-object placements");
         string saved = JsonSerializer.Serialize(game.ExportSave(), Json);
         GameSession restored = session(); GameView loaded = restored.ImportSave(JsonSerializer.Deserialize<GameSave>(saved, Json));
         Check(loaded.screen == "explore" && JsonSerializer.Serialize(restored.ExportSave(), Json) == saved, "Complete realized floor and party save roundtrip exactly");
+        foreach (Action<GeneratedFloorPlan> corruptComponent in new Action<GeneratedFloorPlan>[] {
+            candidate=>candidate.map.visuals.components[0].assetId="not-in-the-library",
+            candidate=>candidate.map.visuals.components[0].rotation=4,
+            candidate=>candidate.map.visuals.components[0].width=40,
+            candidate=>candidate.map.visuals.components[0].x=-1,
+            candidate=>candidate.map.visuals.components[0].x=int.MaxValue,
+            candidate=>candidate.map.visuals.components[0].y=int.MaxValue,
+            candidate=>candidate.map.visuals.components=null,
+            candidate=>candidate.map.visuals.components[0].x=candidate.entrance.x,
+            candidate=>candidate.map.visuals.componentLibraryId="untrusted-library",
+            candidate=>candidate.map.visuals.components[1].id=candidate.map.visuals.components[0].id
+        }) {
+            GeneratedFloorPlan candidate=Read<GeneratedFloorPlan>(fixture);corruptComponent(candidate);
+            game.Handle(new GameCommand{type="import_floor",floorPlan=candidate});
+            Check(JsonSerializer.Serialize(game.ExportSave(),Json)==saved,"Invalid component metadata is rejected before replacing the live floor");
+        }
+        GameSave divergent=JsonSerializer.Deserialize<GameSave>(saved,Json);
+        divergent.customMap.visuals.components[0].rotation=(divergent.customMap.visuals.components[0].rotation+1)%4;
+        restored.ImportSave(divergent);
+        Check(JsonSerializer.Serialize(restored.ExportSave(),Json)==saved,"Save rejects whole-object placements that differ from the realized floor plan");
         ExplorationPointDef sideCache = floor.discoveries.First(point => point.id.StartsWith("book1.side.", StringComparison.Ordinal));
         Check(sideCache.kind=="cache" && floor.groups.Length==5, "Generated side locations add optional supplies without new combat gates");
         GameSave atCache = JsonSerializer.Deserialize<GameSave>(saved, Json);

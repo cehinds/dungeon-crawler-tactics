@@ -10,6 +10,11 @@ const manifest = read('../Web/wwwroot/assets/room-kit/manifest.json');
 const catalog = read('../Web/wwwroot/data/book-one-floor-one.json');
 const archetypes = read('../Web/wwwroot/data/book-one-location-archetypes.json');
 const content = read('../UnityPackage/Runtime/Data/combat-content.json');
+const componentSource = fs.readFileSync(new URL('../UnityPackage/Runtime/Core/GameSession.Components.cs',import.meta.url),'utf8');
+const allowed = [...componentSource.split('StringComparer.Ordinal')[0].matchAll(/"([a-z0-9]+(?:-[a-z0-9]+)+)"/g)].map(match=>match[1]);
+assert.deepEqual(allowed.sort(),library.objects.map(asset=>asset.id).sort(),'C# component allowlist exactly matches the pinned 46-object manifest');
+const schema=read('../Tools/custom-map.schema.json');
+assert.deepEqual([...schema.$defs.nativeComponent.properties.assetId.enum].sort(),[...allowed].sort(),'JSON schema asset references match the same library');
 const key = point => `${point.x},${point.y}`;
 const overlap = (a, b) => a.x < b.x + b.width && b.x < a.x + a.width
   && a.y < b.y + b.height && b.y < a.y + a.height;
@@ -26,6 +31,10 @@ for (let index = 0; index < 12; index++) {
   assert.deepEqual(getBookOneFloorPlayable(floor, library, archetypes), packet, 'Seed reproduces exact preview/import packet');
   assert.deepEqual(packet.regionBounds.filter(room => !room.generated), original.regionBounds, 'Existing district bounds and objectives remain unchanged');
   assert.equal(map.width, 40); assert.equal(map.height, 32);
+  assert.equal(map.visuals.componentLibraryId,'top-down-object-kit');
+  assert.equal(map.visuals.components.length,packet.presentationObjects.length,'Every preview component belongs to the saved playable descriptor');
+  const ground=new Set(map.visuals.pieces.filter(piece=>piece.layer==='ground').map(piece=>`${piece.x2/2},${piece.y2/2}`));
+  for(const component of map.visuals.components)for(let y=0;y<component.height;y++)for(let x=0;x<component.width;x++)assert(ground.has(key({x:component.x+x,y:component.y+y})),'Full reusable object footprint has ground below it');
   assert(locations.length >= 4 && locations.length <= 8, 'Seed produces four to eight additional places');
   assert.equal(plan.groups.length, 5, 'Optional rooms add no required combat groups');
   assert.equal(map.enemies.length, 10);

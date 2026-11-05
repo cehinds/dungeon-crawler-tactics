@@ -302,6 +302,38 @@ function addOptionalLocations(floor, library, catalog, tiles, regionBounds, pres
   return {generatedLocations, branchLinks, branchObjects};
 }
 
+/** Persist the actual reusable tile and whole-object components in one descriptor. */
+function createPlayableVisuals(tiles, objects) {
+  const componentCells = new Set();
+  const components = objects.map(object => {
+    for (let y = 0; y < object.height; y++) for (let x = 0; x < object.width; x++) {
+      componentCells.add(cellKey({x: object.x + x, y: object.y + y}));
+    }
+    return {
+      id: object.id, assetId: object.assetId, x: object.x, y: object.y,
+      width: object.width, height: object.height,
+      rotation: ((object.rotationDegrees ?? 0) / 90 + 4) % 4,
+      layer: object.layer === 'underlay' ? 'underlay' : 'props',
+      blocksMovement: object.blocksMovement === true,
+    };
+  });
+  // Solid props still occupy canonical blocked cells, but stand on ground rather
+  // than becoming synthetic walls. Structural walls bound the remaining floor.
+  const floors = tiles.filter(tile => !tile.blocked || componentCells.has(cellKey(tile)));
+  const floorKeys = new Set(floors.map(cellKey));
+  const pieces = [];
+  for (const floor of floors) {
+    pieces.push({cell: 0, x2: floor.x * 2, y2: floor.y * 2, rotation: 0, layer: 'ground'});
+    for (const [dx, dy, cell, rotation] of [[0, -1, 6, 0], [-1, 0, 7, 0], [1, 0, 7, 2], [0, 1, 7, 3]]) {
+      if (!floorKeys.has(cellKey({x: floor.x + dx, y: floor.y + dy}))) {
+        pieces.push({cell, x2: floor.x * 2 + dx, y2: floor.y * 2 + dy, rotation, layer: 'structures'});
+      }
+    }
+  }
+  return {schemaVersion: 1, styleId: 'pocket-dungeon', kitId: 'starter-dungeon', pieces,
+    componentLibraryId: 'top-down-object-kit', components};
+}
+
 export function getBookOneFloorPlayable(floor, library, archetypes) {
   if (!floor?.regions?.length || floor.regions.length > 16) throw new Error('Unsupported First Floor regions.');
   const tiles = Array.from({length: WIDTH * HEIGHT}, (_, index) => ({
@@ -329,6 +361,7 @@ export function getBookOneFloorPlayable(floor, library, archetypes) {
     schemaVersion: 1, width: WIDTH, height: HEIGHT,
     label: `Book 1 / Floor 1 / ${floor.seed}`.slice(0, 100),
     tiles, placements: [], playerSpawns, enemies,
+    visuals: createPlayableVisuals(tiles, presentationObjects),
   };
   const floorPlan = {
     schemaVersion: 1, seed: hash & 0x7fffffff, map, entrance, exit,
@@ -336,6 +369,6 @@ export function getBookOneFloorPlayable(floor, library, archetypes) {
   };
   return {
     floorPlan, regionBounds, links, presentationObjects, generatedLocations,
-    adaptationNote: 'Continuous 40 × 32 tactical scale: compact chambers and inferred connecting passages. The source-linked district route stays fixed. Seeds add optional chambers with varied positions, footprints, shapes, thematic anchor passages and supplies; these extra locations are inferred game adaptations, not newly discovered canonical places. Existing enemy kits stand in for Book 1 encounters; this does not run the separate boss scenarios. All required discoveries and tactical encounters unlock the exit. Atlas passage objective locks are not applied in this combat map. Whole PNG objects decorate this atlas; Play retains their exact blocked cells and uses the existing game art. The optional roster is a gameplay adaptation.',
+    adaptationNote: 'Continuous 40 × 32 tactical scale: compact chambers and inferred connecting passages. The source-linked district route stays fixed. Seeds add optional chambers with varied positions, footprints, shapes, thematic anchor passages and supplies; these extra locations are inferred game adaptations, not newly discovered canonical places. Existing enemy kits stand in for Book 1 encounters; this does not run the separate boss scenarios. All required discoveries and tactical encounters unlock the exit. Atlas passage objective locks are not applied in this combat map. The playable game uses these same saved whole-object components over reusable ground and wall tiles; terrain and component footprints share canonical collision. The optional roster is a gameplay adaptation.',
   };
 }
