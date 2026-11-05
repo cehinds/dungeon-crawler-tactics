@@ -18,6 +18,7 @@ let library,
   rules,
   canonicalManifest,
   catalog,
+  archetypes,
   floor,
   state,
   selected,
@@ -40,6 +41,7 @@ async function json(url) {
     "data/procedural-object-room-rules.json": "book-one-rules",
     "assets/room-kit/manifest.json": "book-one-canonical",
     "data/book-one-floor-one.json": "book-one-catalog",
+    "data/book-one-location-archetypes.json": "book-one-archetypes",
   }[url];
   if (inline && $(inline)) return JSON.parse($(inline).textContent);
   const response = await fetch(url);
@@ -407,8 +409,26 @@ function draw() {
   drawRoomLabels();
   drawCamera(performance.now());
 }
+function atlasLocations() {
+  return [...floor.regions, ...(packet.generatedLocations || [])];
+}
 function region() {
-  return floor.regions.find((r) => r.id === selected);
+  return atlasLocations().find((r) => r.id === selected);
+}
+function isGeneratedLocation(location) {
+  return (packet.generatedLocations || []).some(
+    (item) => item.id === location.id,
+  );
+}
+function locationNumber(id) {
+  const generatedIndex = (packet.generatedLocations || []).findIndex(
+    (item) => item.id === id,
+  );
+  if (generatedIndex >= 0) return `S${generatedIndex + 1}`;
+  const namedIndex = packet.regionBounds
+    .filter((b) => !isGeneratedLocation(b))
+    .findIndex((b) => b.id === id);
+  return namedIndex >= 0 ? String(namedIndex + 1).padStart(2, "0") : "N";
 }
 function dot(point, color, text) {
   const x = (point.x + 0.5) * tilesize,
@@ -450,14 +470,14 @@ function renderGraph() {
   svg.replaceChildren();
   const ns = "http://www.w3.org/2000/svg",
     points = new Map(
-      floor.regions.map((r, i) => [
+      atlasLocations().map((r, i) => [
         r.id,
         { x: 40 + (i % 3) * 95, y: 30 + Math.floor(i / 3) * 80 },
       ]),
     );
-  const height = Math.max(180, Math.ceil(floor.regions.length / 3) * 80);
+  const height = Math.max(180, Math.ceil(atlasLocations().length / 3) * 80);
   svg.setAttribute("viewBox", `0 0 280 ${height}`);
-  for (const l of floor.links) {
+  for (const l of packet.links) {
     const a = points.get(l.from),
       b = points.get(l.to),
       line = document.createElementNS(ns, "line");
@@ -472,7 +492,7 @@ function renderGraph() {
       line.setAttribute(k, v);
     svg.append(line);
   }
-  floor.regions.forEach((r, i) => {
+  atlasLocations().forEach((r, i) => {
     const p = points.get(r.id),
       g = document.createElementNS(ns, "g"),
       c = document.createElementNS(ns, "circle"),
@@ -494,8 +514,7 @@ function renderGraph() {
       "font-size": 11,
     }))
       t.setAttribute(k, v);
-    const number = packet.regionBounds.findIndex((b) => b.id === r.id);
-    t.textContent = number >= 0 ? String(number + 1) : "N";
+    t.textContent = locationNumber(r.id);
     g.append(c, t);
     g.style.cursor = "pointer";
     g.onclick = () => select(r.id);
@@ -505,48 +524,54 @@ function renderGraph() {
 function render() {
   const r = region();
   $("region-name").textContent = r.label;
-  $("region-kind").textContent = r.safeZone
-    ? "Safe district"
-    : r.optional
-      ? "Optional district"
-      : "Main route district";
+  $("region-kind").textContent = isGeneratedLocation(r)
+    ? "Generated side location · optional adaptation"
+    : r.safeZone
+      ? "Book location · safe district"
+      : r.optional
+        ? "Book location · optional district"
+        : "Book location · main route district";
   $("description").textContent = r.description;
+  $("reference-detail").textContent =
+    `${isGeneratedLocation(r) ? "Invented side location for this seed. " : "Named Book 1 location; compact tactical adaptation. "}${r.description}`;
   $("dimensions").textContent =
-    `40 × 32 · ${packet.regionBounds.length} physical districts + guild reports · exact playable layout`;
+    `40 × 32 · ${packet.regionBounds.length - (packet.generatedLocations?.length || 0)} book districts · ${packet.generatedLocations?.length || 0} generated side locations`;
   $("objective").textContent = r.objective.label;
   $("progress").textContent =
-    `${packet.regionBounds.length} districts + guild reports · ${packet.floorPlan.groups.length} tactical encounter groups`;
+    `${packet.generatedLocations?.length || 0} optional side locations for seed ${floor.seed}`;
   $("return").hidden = true;
   $("interact").hidden = true;
   $("regions").replaceChildren();
-  floor.regions.forEach((item, i) => {
+  atlasLocations().forEach((item, i) => {
     const b = document.createElement("button"),
       name = document.createElement("span"),
       tag = document.createElement("small");
-    const number = packet.regionBounds.findIndex((b) => b.id === item.id);
+    const number = locationNumber(item.id);
     name.textContent =
-      number >= 0
-        ? `${String(number + 1).padStart(2, "0")}  ${item.label}`
+      number !== "N"
+        ? `${number}  ${item.label}`
         : `Guild note · ${item.label}`;
-    tag.textContent = item.safeZone
-      ? "SAFE"
-      : item.optional
-        ? "OPTIONAL"
-        : item.encounterIds?.length
-          ? "ENCOUNTER"
-          : "";
+    tag.textContent = isGeneratedLocation(item)
+      ? "GENERATED"
+      : item.safeZone
+        ? "SAFE"
+        : item.optional
+          ? "OPTIONAL"
+          : item.encounterIds?.length
+            ? "ENCOUNTER"
+            : "";
     b.append(name, tag);
     b.className = item.id === selected ? "selected" : "";
     b.onclick = () => select(item.id);
     $("regions").append(b);
   });
   $("passages").replaceChildren();
-  for (const link of floor.links.filter(
+  for (const link of packet.links.filter(
     (l) => l.from === selected || l.to === selected,
   )) {
     const id = link.from === selected ? link.to : link.from,
       b = document.createElement("span");
-    b.textContent = floor.regions.find((r) => r.id === id).label;
+    b.textContent = atlasLocations().find((r) => r.id === id)?.label || id;
     $("passages").append(b);
   }
   renderGraph();
@@ -584,7 +609,7 @@ function drawAtlasMarkers() {
       ctx.fillStyle = b.id === selected ? "#f3ce89" : "#b1bdca";
       ctx.textAlign = "center";
       ctx.fillText(
-        String(packet.regionBounds.indexOf(b) + 1).padStart(2, "0"),
+        locationNumber(b.id),
         (b.center.x + 0.5) * tilesize,
         (b.y + 0.7) * tilesize,
       );
@@ -628,7 +653,7 @@ async function generate() {
       );
     if (!validateBookOneFloor(candidate, library).valid)
       throw new Error("Floor validation failed.");
-    const playable = getBookOneFloorPlayable(candidate, library);
+    const playable = getBookOneFloorPlayable(candidate, library, archetypes);
     await Promise.all(
       [
         ...new Set(
@@ -654,7 +679,13 @@ async function generate() {
         ...c,
         kind:
           !c.blocked ||
-          packet.presentationObjects.some((o) => o.x === c.x && o.y === c.y)
+          packet.presentationObjects.some(
+            (o) =>
+              c.x >= o.x &&
+              c.x < o.x + o.width &&
+              c.y >= o.y &&
+              c.y < o.y + o.height,
+          )
             ? "floor"
             : packet.floorPlan.map.tiles.some(
                   (n) =>
@@ -689,7 +720,7 @@ async function generate() {
         const saved = JSON.parse(localStorage.getItem("dct.book-one.atlas"));
         if (saved?.seed === seed) requested = saved.selected;
       } catch {}
-    selected = floor.regions.some((r) => r.id === requested)
+    selected = atlasLocations().some((r) => r.id === requested)
       ? requested
       : state.regionId;
     selected = districtAt(walk.position)?.id || floor.entryRegionId;
@@ -699,8 +730,8 @@ async function generate() {
     render();
     status(
       standalone
-        ? "Exploration preview only. Walk with WASD, arrows or touch; interact nearby with E. Combat opens in the game."
-        : "Exploration preview only. Walk with WASD or arrows; E interacts nearby. Enter playable floor for combat and progression.",
+        ? `Preview · ${packet.generatedLocations.length} generated side locations · WASD/arrows/touch to walk, E to inspect. Combat runs in the game.`
+        : `Preview · ${packet.generatedLocations.length} generated side locations · WASD/arrows to walk, E to inspect. Enter playable floor for combat.`,
     );
   } catch (error) {
     status(error.message, true);
@@ -730,7 +761,11 @@ $("map-toggle").onclick = () => {
   $("map-drawer").hidden = !open;
   $("map-toggle").setAttribute("aria-expanded", String(open));
   document.querySelector(".workspace").classList.toggle("reference-open", open);
-  draw();
+  if (!open) {
+    const actualDistrict = districtAt(walk.position);
+    if (actualDistrict) selected = actualDistrict.id;
+  }
+  render();
 };
 $("map-close").onclick = () => $("map-toggle").click();
 $("controls").onsubmit = (e) => {
@@ -820,7 +855,9 @@ function validWalkSave(saved) {
       packet.floorPlan.discoveries.some((d) => d.id === id),
     ) &&
     Array.isArray(saved.visitedRegionIds) &&
-    saved.visitedRegionIds.every((id) => floor.regions.some((r) => r.id === id))
+    saved.visitedRegionIds.every((id) =>
+      atlasLocations().some((r) => r.id === id),
+    )
   );
 }
 function districtAt(point) {
@@ -1105,12 +1142,14 @@ window.addEventListener("resize", () => drawCamera(performance.now()));
 
 async function init() {
   try {
-    [library, rules, canonicalManifest, catalog] = await Promise.all([
-      json(assetURL("manifest.json")),
-      json("data/procedural-object-room-rules.json"),
-      json("assets/room-kit/manifest.json"),
-      json("data/book-one-floor-one.json"),
-    ]);
+    [library, rules, canonicalManifest, catalog, archetypes] =
+      await Promise.all([
+        json(assetURL("manifest.json")),
+        json("data/procedural-object-room-rules.json"),
+        json("assets/room-kit/manifest.json"),
+        json("data/book-one-floor-one.json"),
+        json("data/book-one-location-archetypes.json"),
+      ]);
     const query = new URLSearchParams(location.search);
     let seed = query.get("seed");
     if (!seed)

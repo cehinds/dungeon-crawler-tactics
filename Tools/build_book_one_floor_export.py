@@ -11,7 +11,8 @@ MODULES = ('room-kit.js', 'procedural-map.js', 'whole-object-map.js',
            'book-one-floor.js', 'book-one-playable-floor.js', 'book-one-floor-one.js')
 DATA = {'book-one-rules': 'data/procedural-object-room-rules.json',
         'book-one-canonical': 'assets/room-kit/manifest.json',
-        'book-one-catalog': 'data/book-one-floor-one.json'}
+        'book-one-catalog': 'data/book-one-floor-one.json',
+        'book-one-archetypes': 'data/book-one-location-archetypes.json'}
 
 
 def script_json(value):

@@ -808,3 +808,26 @@ header nav #play {
     max-width: 100%;
   }
 }
+.region-list button:has(small) {
+  align-items: center;
+}
+.region-list small {
+  flex-shrink: 0;
+}
+#reference-detail {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: 12px;
+  color: #bac4d0;
+}
+#map-drawer #graph {
+  height: 205px;
+}
+@media (max-width: 800px) {
+  #dimensions {
+    max-width: 235px;
+  }
+  #map-drawer #graph {
+    height: 175px;
+  }
+}

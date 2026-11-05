@@ -142,7 +142,167 @@ function placeWholeObjects(floor, library, centers, tiles, reservedPoints) {
   return presentationObjects;
 }
 
-export function getBookOneFloorPlayable(floor, library) {
+function seededRandom(seed) {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let value = Math.imul(state ^ state >>> 15, state | 1);
+    value ^= value + Math.imul(value ^ value >>> 7, value | 61);
+    return ((value ^ value >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function shuffled(values, random) {
+  const result = [...values];
+  for (let index = result.length - 1; index > 0; index--) {
+    const other = Math.floor(random() * (index + 1));
+    [result[index], result[other]] = [result[other], result[index]];
+  }
+  return result;
+}
+
+function insideBounds(point, bounds) {
+  return point.x >= bounds.x && point.y >= bounds.y
+    && point.x < bounds.x + bounds.width && point.y < bounds.y + bounds.height;
+}
+
+function roomCells(bounds, shape) {
+  const cells = [];
+  for (let y = 0; y < bounds.height; y++) {
+    for (let x = 0; x < bounds.width; x++) {
+      if (shape === 'alcove' && x >= Math.ceil(bounds.width / 2) && y < Math.floor(bounds.height / 2)) continue;
+      if (shape === 'cross' && (x < Math.floor(bounds.width / 2) - 1 || x > Math.floor(bounds.width / 2))
+        && (y < Math.floor(bounds.height / 2) - 1 || y > Math.floor(bounds.height / 2))) continue;
+      cells.push({x: bounds.x + x, y: bounds.y + y});
+    }
+  }
+  return cells;
+}
+
+// Route only through unused stone and the chosen anchor chamber. A branch cannot
+// punch through another district, old corridor, or previously generated room.
+function branchPath(start, anchor, bounds, footprint, tiles, mainBounds, objects, random) {
+  const local = new Set(footprint.map(cellKey));
+  const solidObjects = new Set(objects.flatMap(object => {
+    const cells = [];
+    for (let y = 0; y < object.height; y++) for (let x = 0; x < object.width; x++) cells.push(cellKey({x: object.x + x, y: object.y + y}));
+    return cells;
+  }));
+  const directions = shuffled([[0, -1], [-1, 0], [1, 0], [0, 1]], random);
+  const queue = [start], parents = new Map([[cellKey(start), null]]);
+  for (let index = 0; index < queue.length; index++) {
+    const point = queue[index];
+    if (point.x === anchor.center.x && point.y === anchor.center.y) {
+      const path = [];
+      for (let cursor = point; cursor; cursor = parents.get(cellKey(cursor))) path.push(cursor);
+      return path.reverse();
+    }
+    for (const [dx, dy] of directions) {
+      const next = {x: point.x + dx, y: point.y + dy}, key = cellKey(next);
+      if (next.x < 1 || next.x >= WIDTH - 1 || next.y < 1 || next.y >= HEIGHT - 1 || parents.has(key) || solidObjects.has(key)) continue;
+      const anchorCell = insideBounds(next, anchor);
+      if (insideBounds(next, bounds) && !local.has(key)) continue;
+      if (!anchorCell && (!tiles[next.y * WIDTH + next.x].blocked || mainBounds.some(room => insideBounds(next, room)))) continue;
+      parents.set(key, point); queue.push(next);
+    }
+  }
+  return null;
+}
+
+function allOpenConnected(tiles, entrance) {
+  const seen = new Set([cellKey(entrance)]), queue = [entrance];
+  for (let index = 0; index < queue.length; index++) {
+    const point = queue[index];
+    for (const [dx, dy] of [[0, -1], [-1, 0], [1, 0], [0, 1]]) {
+      const next = {x: point.x + dx, y: point.y + dy}, key = cellKey(next);
+      if (next.x < 0 || next.x >= WIDTH || next.y < 0 || next.y >= HEIGHT || seen.has(key) || tiles[next.y * WIDTH + next.x].blocked) continue;
+      seen.add(key); queue.push(next);
+    }
+  }
+  return tiles.filter(tile => !tile.blocked).every(tile => seen.has(cellKey(tile)));
+}
+
+function addBranchObjects(location, archetype, library, tiles, reserved, entrance, random) {
+  const objects = [];
+  for (const objectId of shuffled(archetype.allowedAssetIds ?? archetype.objectIds, random).slice(0, 3)) {
+    const asset = library.objects.find(object => object.id === objectId);
+    if (!asset) throw new Error(`Unknown optional-room object: ${objectId}`);
+    const native = asset.gridFootprint.map(Math.ceil);
+    const rotations = shuffled([0, 90], random);
+    let placed = false;
+    for (const rotationDegrees of rotations) {
+      const [width, height] = rotationDegrees ? [native[1], native[0]] : native;
+      for (const point of shuffled(location.cells, random)) {
+        if (placed) break;
+        const footprint = [];
+        for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) footprint.push({x: point.x + x, y: point.y + y});
+        if (footprint.some(cell => !insideBounds(cell, location) || !location.cells.some(open => cellKey(open) === cellKey(cell)) || reserved.has(cellKey(cell)) || tiles[cell.y * WIDTH + cell.x].blocked)) continue;
+        for (const cell of footprint) tiles[cell.y * WIDTH + cell.x].blocked = true;
+        if (!allOpenConnected(tiles, entrance)) {
+          for (const cell of footprint) tiles[cell.y * WIDTH + cell.x].blocked = false;
+          continue;
+        }
+        const bounds = asset.visibleBounds;
+        objects.push({id: `${location.id}.object.${objects.length}`, assetId: asset.id, assetPath: asset.asset.path,
+          ...point, width, height, rotationDegrees, blocksMovement: true, regionId: location.id,
+          sourceVisibleBounds: [bounds[0], bounds[1], bounds[2] - bounds[0], bounds[3] - bounds[1]], fit: 'contain-uniform'});
+        footprint.forEach(cell => reserved.add(cellKey(cell))); placed = true;
+      }
+      if (placed) break;
+    }
+  }
+  return objects;
+}
+
+function addOptionalLocations(floor, library, catalog, tiles, regionBounds, presentationObjects, entrance, discoveries, hash) {
+  if (!catalog) return {generatedLocations: [], branchLinks: [], branchObjects: []};
+  if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.archetypes) || catalog.minRooms < 4 || catalog.maxRooms > 8 || catalog.minRooms > catalog.maxRooms) throw new Error('Invalid optional First Floor location catalog.');
+  const random = seededRandom(hash ^ 0x51de1001);
+  const target = catalog.minRooms + Math.floor(random() * (catalog.maxRooms - catalog.minRooms + 1));
+  const generatedLocations = [], branchLinks = [], branchObjects = [];
+  const mainBounds = [...regionBounds];
+  for (const archetype of shuffled(catalog.archetypes, random)) {
+    if (generatedLocations.length >= target) break;
+    if (!archetype.id || !Array.isArray(archetype.anchorRegionIds) || !Array.isArray(archetype.allowedAssetIds ?? archetype.objectIds) || !archetype.loot?.itemId) throw new Error('Invalid optional location archetype.');
+    const anchors = shuffled(mainBounds.filter(room => archetype.anchorRegionIds.includes(room.id)), random);
+    for (let attempt = 0; attempt < 240 && anchors.length; attempt++) {
+      const anchor = anchors[attempt % anchors.length];
+      const width = archetype.minWidth + Math.floor(random() * (archetype.maxWidth - archetype.minWidth + 1));
+      const height = archetype.minHeight + Math.floor(random() * (archetype.maxHeight - archetype.minHeight + 1));
+      if (width < 3 || width > 9 || height < 3 || height > 8) throw new Error('Optional room exceeds footprint bounds.');
+      const bounds = {x: 1 + Math.floor(random() * (WIDTH - width - 2)), y: 1 + Math.floor(random() * (HEIGHT - height - 2)), width, height};
+      const center = {x: bounds.x + Math.floor(width / 2), y: bounds.y + Math.floor(height / 2)};
+      if (Math.abs(center.x - anchor.center.x) + Math.abs(center.y - anchor.center.y) > 18) continue;
+      let unused = true;
+      for (let y = bounds.y - 1; y <= bounds.y + height; y++) for (let x = bounds.x - 1; x <= bounds.x + width; x++) {
+        if (!tiles[y * WIDTH + x].blocked || regionBounds.some(room => insideBounds({x, y}, room))) unused = false;
+      }
+      if (!unused) continue;
+      const shape = archetype.shape ?? 'rect', cells = roomCells(bounds, shape);
+      const path = branchPath(center, anchor, bounds, cells, tiles, regionBounds, [...presentationObjects, ...branchObjects], random);
+      if (!path || path.length > 32) continue;
+      const id = `book1.side.${archetype.id}`;
+      const objective = {id: `${id}.cache`, label: archetype.label, ...center};
+      const location = {...bounds, id, label: archetype.label, description: archetype.description, center,
+        generated: true, optional: true, archetypeId: archetype.id, anchorRegionId: anchor.id,
+        canonStatus: archetype.canonStatus ?? 'inferred-game-adaptation', evidenceStatus: archetype.evidenceStatus, sourceIds: archetype.sourceIds, shape, cells, objective};
+      for (const cell of [...cells, ...path]) tiles[cell.y * WIDTH + cell.x].blocked = false;
+      if (!allOpenConnected(tiles, entrance)) throw new Error('Optional room carving disconnected the floor.');
+      const reserved = new Set([center, ...path].map(cellKey));
+      branchObjects.push(...addBranchObjects(location, archetype, library, tiles, reserved, entrance, random));
+      discoveries.push({id: objective.id, label: archetype.label, description: `${archetype.description} Optional, procedurally placed game adaptation; exact rooms and supplies are invented.`,
+        kind: 'cache', itemId: archetype.loot.itemId, count: archetype.loot.count ?? 1, ...center});
+      generatedLocations.push(location); regionBounds.push(location);
+      branchLinks.push({id: `${id}.passage`, from: anchor.id, to: id, path,
+        requiredObjectiveIds: [], relation: 'game-adaptation', generated: true});
+      break;
+    }
+  }
+  if (generatedLocations.length < catalog.minRooms) throw new Error('Unable to place enough connected optional First Floor locations.');
+  return {generatedLocations, branchLinks, branchObjects};
+}
+
+export function getBookOneFloorPlayable(floor, library, archetypes) {
   if (!floor?.regions?.length || floor.regions.length > 16) throw new Error('Unsupported First Floor regions.');
   const tiles = Array.from({length: WIDTH * HEIGHT}, (_, index) => ({
     x: index % WIDTH, y: Math.floor(index / WIDTH), blocked: true, tags: [],
@@ -160,6 +320,11 @@ export function getBookOneFloorPlayable(floor, library) {
   const presentationObjects = placeWholeObjects(floor, library, centers, tiles, [
     entrance, exit, ...playerSpawns, ...enemies, ...discoveries, ...links.flatMap(link => link.path),
   ]);
+  const {generatedLocations, branchLinks, branchObjects} = addOptionalLocations(
+    floor, library, archetypes, tiles, regionBounds, presentationObjects, entrance, discoveries, hash,
+  );
+  links.push(...branchLinks);
+  presentationObjects.push(...branchObjects);
   const map = {
     schemaVersion: 1, width: WIDTH, height: HEIGHT,
     label: `Book 1 / Floor 1 / ${floor.seed}`.slice(0, 100),
@@ -170,7 +335,7 @@ export function getBookOneFloorPlayable(floor, library) {
     groups, discoveries, mechanisms: [],
   };
   return {
-    floorPlan, regionBounds, links, presentationObjects,
-    adaptationNote: 'Continuous 40 × 32 tactical scale: compact chambers and inferred connecting passages. District positions stay fixed; seeds vary corridor bends and regional enemy templates. Existing enemy kits stand in for Book 1 encounters; this does not run the separate boss scenarios. All required discoveries and tactical encounters unlock the exit. Atlas passage objective locks are not applied in this combat map. Whole PNG objects decorate this atlas; Play retains their exact blocked cells and uses the existing game art. The optional roster is a gameplay adaptation.',
+    floorPlan, regionBounds, links, presentationObjects, generatedLocations,
+    adaptationNote: 'Continuous 40 × 32 tactical scale: compact chambers and inferred connecting passages. The source-linked district route stays fixed. Seeds add optional chambers with varied positions, footprints, shapes, thematic anchor passages and supplies; these extra locations are inferred game adaptations, not newly discovered canonical places. Existing enemy kits stand in for Book 1 encounters; this does not run the separate boss scenarios. All required discoveries and tactical encounters unlock the exit. Atlas passage objective locks are not applied in this combat map. Whole PNG objects decorate this atlas; Play retains their exact blocked cells and uses the existing game art. The optional roster is a gameplay adaptation.',
   };
 }

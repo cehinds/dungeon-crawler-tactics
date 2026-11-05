@@ -1,0 +1,332 @@
+{
+  "schemaVersion": 1,
+  "minRooms": 4,
+  "maxRooms": 8,
+  "evidencePolicy": "These are reusable generated side-room concepts, not additional canon-named locations. Context/status records the supported host motif; every side-room instance, layout, furnishing arrangement, and cache is an inferred game adaptation.",
+  "sources": [
+    {
+      "id": "floor1",
+      "title": "The First Floor — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/first_floor/",
+      "supports": "Broad First Floor habitat and creature-area context; no side-room floorplans."
+    },
+    {
+      "id": "route",
+      "title": "The First Floor — Crawler 4,122",
+      "url": "https://crawler4122.com/book-1/the-first-floor/",
+      "supports": "Book 1 sequence includes goblin alley, Hoarder’s garbage room, workshop, creature territories, Juicer’s gym, and Ball of Swine route."
+    },
+    {
+      "id": "goblins",
+      "title": "Goblins — DCC Wiki",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Goblins",
+      "supports": "Goblin workshop context."
+    },
+    {
+      "id": "hoarder",
+      "title": "The Hoarder — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/hoarder/",
+      "supports": "Rubbish and Scatterer lair context."
+    },
+    {
+      "id": "safe",
+      "title": "Safe Rooms — DCC Wiki",
+      "url": "https://dungeon-crawler-carl.fandom.com/wiki/Safe_Rooms",
+      "supports": "Safe-room context; these additions are not new safe rooms."
+    },
+    {
+      "id": "tally-direct",
+      "title": "Tally — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/tally/",
+      "supports": "Tally’s restaurant safe-room anchor."
+    },
+    {
+      "id": "juicer",
+      "title": "The Juicer — DCC Database",
+      "url": "https://www.dccdatabase.com/wiki/juicer/",
+      "supports": "Gym equipment/theme context."
+    },
+    {
+      "id": "sample1",
+      "title": "Dungeon Crawler Carl publisher sample",
+      "url": "https://cdn.penguin.co.uk/dam-assets/books/9780241816264/9780241816264-sample.pdf",
+      "supports": "Opening descent and torchlit entry context only."
+    }
+  ],
+  "archetypes": [
+    {
+      "id": "side-storeroom",
+      "label": "Unmarked supply recess",
+      "theme": "stone-storage",
+      "description": "Small unmarked niche with a supply cache, dressed with crates or barrels; generic environment dressing, not a named canonical room.",
+      "anchorRegionIds": [
+        "first-floor-arteries",
+        "tutorial-guildhall",
+        "goblin-workshop",
+        "tally-safe-room",
+        "sebastian-safe-room"
+      ],
+      "minWidth": 4,
+      "maxWidth": 7,
+      "minHeight": 3,
+      "maxHeight": 5,
+      "shape": "alcove",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_generic",
+      "sourceIds": [
+        "floor1"
+      ],
+      "allowedAssetIds": [
+        "ab-clean-crate-wood-cross",
+        "ab-clean-barrel-wood-top",
+        "ab-clean-shelf-wood-empty"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.health_tonic",
+        "count": 1
+      },
+      "canonNote": "Storage clutter is generic adaptation; no specific room is asserted."
+    },
+    {
+      "id": "service-passage",
+      "label": "Narrow service passage",
+      "theme": "stone-passage",
+      "description": "Short side passage with pipe, drain, torch or crate dressing. It holds an optional supply cache, reconnects to its host district, and never adds a route gate.",
+      "anchorRegionIds": [
+        "first-floor-arteries",
+        "entry-landing",
+        "false-guild-alley",
+        "goblin-workshop",
+        "juicer-gym"
+      ],
+      "minWidth": 4,
+      "maxWidth": 7,
+      "minHeight": 3,
+      "maxHeight": 5,
+      "shape": "rect",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_generic",
+      "sourceIds": [
+        "sample1",
+        "floor1"
+      ],
+      "allowedAssetIds": [
+        "cd-pipe-elbow",
+        "cd-pipe-straight",
+        "cd-drain-grate",
+        "cd-torch"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.oil_flask",
+        "count": 1
+      },
+      "canonNote": "Branching passages are supported broadly; this service corridor is invented. Cache contents are invented game rewards."
+    },
+    {
+      "id": "refuse-pocket",
+      "label": "Rubbish pocket",
+      "theme": "garbage-lair",
+      "description": "Small rubbish-filled pocket with a cache using Hoarder/Scatterer lair visual vocabulary; not a separate nest.",
+      "anchorRegionIds": [
+        "hoarder-lair",
+        "first-floor-arteries"
+      ],
+      "minWidth": 4,
+      "maxWidth": 7,
+      "minHeight": 4,
+      "maxHeight": 6,
+      "shape": "cross",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_context",
+      "sourceIds": [
+        "hoarder",
+        "route"
+      ],
+      "allowedAssetIds": [
+        "ab-clean-crate-wood-cross",
+        "ab-clean-barrel-wood-top",
+        "cd-crate"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.health_tonic",
+        "count": 1
+      },
+      "canonNote": "Rubbish piles occur in the Hoarder’s lair; this generated pocket is not a separate canon location."
+    },
+    {
+      "id": "creature-den",
+      "label": "Unoccupied creature den",
+      "theme": "stone-den",
+      "description": "Tucked-away generic nook with sparse crate/barrel/torch dressing. It holds an optional supply cache; no creature, resident or enemy encounter is implied.",
+      "anchorRegionIds": [
+        "first-floor-arteries",
+        "hoarder-lair",
+        "goblin-workshop",
+        "juicer-gym"
+      ],
+      "minWidth": 4,
+      "maxWidth": 6,
+      "minHeight": 3,
+      "maxHeight": 5,
+      "shape": "alcove",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_generic",
+      "sourceIds": [
+        "floor1",
+        "route"
+      ],
+      "allowedAssetIds": [
+        "ab-clean-crate-wood-cross",
+        "ab-clean-barrel-wood-top",
+        "cd-torch"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.mega_tonic",
+        "count": 1
+      },
+      "canonNote": "Creature territories are referenced in Book 1; this empty generic nook is not a named den and spawns no creature. Cache contents are invented game rewards."
+    },
+    {
+      "id": "workshop-annex",
+      "label": "Workshop storage annex",
+      "theme": "machinery",
+      "description": "A small workbench-and-crate nook next to the goblin workshop, used as generated set dressing and optional cache space.",
+      "anchorRegionIds": [
+        "goblin-workshop"
+      ],
+      "minWidth": 4,
+      "maxWidth": 7,
+      "minHeight": 4,
+      "maxHeight": 6,
+      "shape": "rect",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_context",
+      "sourceIds": [
+        "goblins",
+        "route"
+      ],
+      "allowedAssetIds": [
+        "ab-clean-crate-wood-cross",
+        "ab-clean-shelf-wood-empty",
+        "cd-gear"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.oil_flask",
+        "count": 1
+      },
+      "canonNote": "The workshop itself is canonical; the annex and cache are game inventions. It adds no goblin encounter."
+    },
+    {
+      "id": "rest-nook",
+      "label": "Resting nook",
+      "theme": "stone-rest",
+      "description": "Bench-and-cot alcove beside an established safe-room district. It holds an optional supply cache; it is not protected and has no camp/resume behavior.",
+      "anchorRegionIds": [
+        "tally-safe-room",
+        "sebastian-safe-room",
+        "dmv-safe-room",
+        "meadow-lark-camp"
+      ],
+      "minWidth": 4,
+      "maxWidth": 7,
+      "minHeight": 3,
+      "maxHeight": 5,
+      "shape": "alcove",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_generic",
+      "sourceIds": [
+        "safe",
+        "tally-direct"
+      ],
+      "allowedAssetIds": [
+        "ab-clean-bench-wood-plain",
+        "ab-clean-cot-metal-green",
+        "ab-clean-cot-metal-blue"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.health_tonic",
+        "count": 1
+      },
+      "canonNote": "Host is an established safe room/camp; generated nook is not itself safe or canon."
+    },
+    {
+      "id": "gym-equipment-store",
+      "label": "Gym equipment alcove",
+      "theme": "gym",
+      "description": "A generic storage alcove with gym equipment and an optional cache near the Juicer’s gym.",
+      "anchorRegionIds": [
+        "juicer-gym",
+        "first-floor-arteries"
+      ],
+      "minWidth": 4,
+      "maxWidth": 7,
+      "minHeight": 3,
+      "maxHeight": 6,
+      "shape": "rect",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_context",
+      "sourceIds": [
+        "juicer"
+      ],
+      "allowedAssetIds": [
+        "cd-weight-bench",
+        "cd-barbell",
+        "ab-clean-crate-wood-cross"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.mega_tonic",
+        "count": 1
+      },
+      "canonNote": "Gym equipment is supported at the Juicer’s gym; a separate equipment store and cache are invented."
+    },
+    {
+      "id": "torch-maintenance",
+      "label": "Torch maintenance niche",
+      "theme": "stone-maintenance",
+      "description": "Wall-side niche with torch and crate dressing for variation along established rock passages, holding an optional cache.",
+      "anchorRegionIds": [
+        "entry-landing",
+        "first-floor-arteries",
+        "false-guild-alley",
+        "goblin-workshop"
+      ],
+      "minWidth": 4,
+      "maxWidth": 6,
+      "minHeight": 3,
+      "maxHeight": 5,
+      "shape": "alcove",
+      "safety": "neutral",
+      "discoveryType": "cache",
+      "evidenceStatus": "inferred_generic",
+      "sourceIds": [
+        "sample1",
+        "floor1"
+      ],
+      "allowedAssetIds": [
+        "cd-torch",
+        "ab-clean-crate-wood-cross",
+        "ab-clean-barrel-wood-top"
+      ],
+      "allowedEnemyTemplateIds": [],
+      "loot": {
+        "itemId": "item.oil_flask",
+        "count": 1
+      },
+      "canonNote": "Torchlit passages are supported generally; this maintenance niche is invented. Cache contents are invented game rewards."
+    }
+  ]
+}

@@ -23,14 +23,15 @@ export async function createBookOneEntry(seed, loadJSON = async path => {
   if (!response.ok) throw new Error(`First Floor content could not load: ${path}`);
   return response.json();
 }) {
-  const [{generateBookOneFloor}, {getBookOneFloorPlayable}, library, rules, manifest, catalog] = await Promise.all([
+  const [{generateBookOneFloor}, {getBookOneFloorPlayable}, library, rules, manifest, catalog, archetypes] = await Promise.all([
     import('./book-one-floor.js'), import('./book-one-playable-floor.js'),
     loadJSON('assets/top-down-object-kit/manifest.json'),
     loadJSON('data/procedural-object-room-rules.json'),
     loadJSON('assets/room-kit/manifest.json'), loadJSON('data/book-one-floor-one.json'),
+    loadJSON('data/book-one-location-archetypes.json'),
   ]);
   const floor = generateBookOneFloor(library, {seed}, rules, manifest, catalog);
-  return getBookOneFloorPlayable(floor, library);
+  return getBookOneFloorPlayable(floor, library, archetypes);
 }
 
 /** Only leave a saved safe room; battle, victory and defeat resume their phase. */

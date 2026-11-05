@@ -18,6 +18,8 @@ assert.equal(JSON.parse(saved).generatedDungeon.x,12,'Entry decision does not mo
 const packet=await createBookOneEntry('direct-entry-test',async path=>JSON.parse(fs.readFileSync(new URL(`../Web/wwwroot/${path}`,import.meta.url),'utf8')));
 assert.equal(packet.floorPlan.map.width,40);
 assert.equal(packet.floorPlan.map.label,'Book 1 / Floor 1 / direct-entry-test');
+assert(packet.generatedLocations.length>=4&&packet.generatedLocations.length<=8,'New direct entry loads the archetype catalog and generates optional places');
+assert(packet.generatedLocations.every(room=>packet.floorPlan.discoveries.some(point=>point.id===room.objective.id&&point.kind==='cache')));
 assert.equal(packet.floorPlan.entrance.x,packet.floorPlan.map.playerSpawns[0].x);
 console.log('Direct Book 1 entry: fresh start, exact resume, unrelated/malformed save protection, seed validation and real floor generation passed.');
 
@@ -28,3 +30,6 @@ for(const screen of ['battle','victory','defeat','complete','explore'])assert.eq
 const renamed=JSON.parse(saved);renamed.customMap.label='A translated display title';renamed.generatedDungeon.floorPlan.map.label='A translated display title';
 assert.deepEqual(planBookOneEntry(JSON.stringify(renamed)),{kind:'resume'},'Display text does not control mode identity');
 assert.equal(planBookOneEntry(JSON.stringify({customMap:{label},generatedDungeon:{floorPlan:{map:{label}}}})).needsConfirmation,true,'A title alone cannot identify a Book 1 run');
+
+assert.deepEqual(planBookOneEntry(saved),{kind:'resume'},'Pre-expansion realized Book 1 saves remain eligible for exact resume');
+assert.equal(JSON.stringify(JSON.parse(saved).generatedDungeon.floorPlan),JSON.stringify(floorPlan),'Old realized geometry is never regenerated or upgraded by entry planning');
