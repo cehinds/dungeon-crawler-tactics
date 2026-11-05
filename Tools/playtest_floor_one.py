@@ -37,6 +37,13 @@ with sync_playwright() as p:
 
     view = v()
     o = next(o for o in view["world"]["objects"] if o["id"] == "false-guild")
+    blocked = {
+        (x, y)
+        for prop in view["world"].get("props", [])
+        if prop.get("blocksMovement", True)
+        for x in range(prop["x"], prop["x"] + prop["width"])
+        for y in range(prop["y"], prop["y"] + prop["height"])
+    }
     start = (view["x"], view["y"])
     q = deque([start])
     prev = {start: None}
@@ -53,10 +60,12 @@ with sync_playwright() as p:
                 0 <= n[0] < m["width"]
                 and 0 <= n[1] < m["height"]
                 and n not in prev
+                and n not in blocked
                 and m["tiles"][n[1] * m["width"] + n[0]] == "."
             ):
                 prev[n] = xy
                 q.append(n)
+    assert goal is not None, "No walkable route to the first encounter"
     path = []
     while goal != start:
         path.append(goal)

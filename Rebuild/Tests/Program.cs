@@ -136,3 +136,55 @@ ai.Handle(new() { type = "endTurn" });
 ai.Handle(new() { type = "endUnit", actorId = "carl" });
 Assert(Codec.Write(av) == defeated, "defeat commands cannot advance battle");
 Console.WriteLine("PASS: null/inconsistent saves rejected transactionally; bare interact; obstacle BFS; defeat immutable.");
+
+// Whole-object concept furniture is authoritative collision, with seed-specific room geometry.
+var layouts = new HashSet<string>();
+var footprints = new HashSet<string>();
+for (int seed = -25; seed < 75; seed++)
+{
+    var world = World.Build(seed);
+    World.Validate(world);
+    Assert(Codec.Write(world) == Codec.Write(World.Build(seed)), "same seed reproduces concept assembly");
+    Assert(world.generationVersion == 2 && world.props.Length >= 12, "concept generation and furniture populated");
+    Assert(world.rooms.Length == 12 && world.rooms.Select(r => r.objectId).Distinct().Count() == 12, "lore anchors retained");
+    Assert(world.rooms.All(r => r.archetype.Length > 0), "authored room archetypes");
+    var classroom = world.props.Where(p => p.roomId == "tutorial-guildhall" && p.groupId == "teaching-table").ToArray();
+    Assert(classroom.Length >= 5 && classroom.Count(p => p.assetId == "ef-chair-green") >= 3, "complete teaching assembly exists for every seed");
+    var table = classroom.Single(p => p.assetId == "ef-wood-table");
+    var rug = classroom.Single(p => p.assetId == "ef-rug-red");
+    var chairs = classroom.Where(p => p.assetId == "ef-chair-green").ToArray();
+    Assert(chairs.Any(p => p.x == table.x - 1 && p.y == table.y) && chairs.Any(p => p.x == table.x + table.width && p.y == table.y)
+        && chairs.Any(p => p.x == table.x + 1 && p.y == table.y + table.height), "chairs stay beside authored table edges");
+    Assert(!rug.blocksMovement && rug.layer == "underlay" && rug.x == table.x && rug.y == table.y, "rug authored beneath teaching table");
+    foreach (var prop in world.props.Where(p => p.groupId.Length > 0))
+        Assert(prop.x == prop.groupX + prop.offsetX && prop.y == prop.groupY + prop.offsetY, "authored relative furniture offsets remain exact");
+    foreach (var safeId in new[] { "sebastian-safe-room" })
+    {
+        var living = world.props.Where(p => p.roomId == safeId && p.groupId == "rest-bedroom").ToArray();
+        var wash = world.props.Where(p => p.roomId == safeId && p.groupId == "washroom-fixtures").ToArray();
+        Assert(living.Length == 3 && wash.Length == 2, "complete opposing safe-room assemblies");
+        Assert(living.Max(p => p.x + p.width) <= wash.Min(p => p.x), "bedroom lies left of washroom with clear circulation");
+        Assert(living.All(p => p.anchor == "northwest" && p.zone == "living") && wash.All(p => p.anchor == "northeast" && p.zone == "washroom"), "authored safe-room zones");
+    }
+    var dining = world.props.Where(p => p.roomId == "tally-safe-room").ToArray();
+    Assert(dining.Any(p => p.groupId == "dining-cluster" && p.assetId == "ef-wood-table") && dining.Count(p => p.assetId == "ef-chair-green") == 2, "restaurant keeps dining furniture");
+    Assert(!dining.Any(p => p.assetId.Contains("bed") || p.assetId.Contains("toilet")), "restaurant identity excludes bedroom fixtures");
+    var waiting = world.props.Where(p => p.roomId == "dmv-safe-room" && p.groupId == "waiting-area").ToArray();
+    Assert(waiting.Length == 2 && waiting.Any(p => p.assetId == "ef-vending-green") && waiting.Any(p => p.assetId == "ef-wood-bench"), "DMV keeps waiting bench and vending machine");
+    var approach = world.props.Where(p => p.roomId == "entry-landing" && p.groupId == "stair-approach").ToArray();
+    Assert(approach.Length == 3 && approach.Count(p => p.assetId == "cd-torch") == 2, "stair approach preserves paired torches");
+    var stair = approach.Single(p => p.assetId == "cd-stair-module");
+    Assert(approach.Where(p => p.assetId == "cd-torch").All(p => p.x == stair.x + stair.width)
+        && approach.Where(p => p.assetId == "cd-torch").Select(p => p.y - stair.y).Order().SequenceEqual(new[] { 0, 2 }), "paired torches frame same stair approach");
+    layouts.Add(string.Join("|", world.rooms.Select(r => $"{r.x},{r.y},{r.width},{r.height}")));
+    foreach (var r in world.rooms) footprints.Add($"{r.width}x{r.height}");
+    foreach (var prop in world.props)
+    {
+        Assert(!world.objects.Any(o => o.x >= prop.x && o.x < prop.x + prop.width && o.y >= prop.y && o.y < prop.y + prop.height), "furniture reserves every interaction");
+        Assert(!(world.spawnX >= prop.x && world.spawnX < prop.x + prop.width && world.spawnY >= prop.y && world.spawnY < prop.y + prop.height), "furniture reserves player spawn");
+    }
+}
+Assert(layouts.Count > 90 && footprints.Count >= 6, "seed varies actual room positions and footprints");
+World.Validate(World.Build(int.MinValue)); World.Validate(World.Build(int.MaxValue));
+Console.WriteLine("PASS: 102 concept worlds; repeatable geometry, footprint collision, reachable interactions, distinct room layouts.");
+SaveMigrationChecks.Run(json);

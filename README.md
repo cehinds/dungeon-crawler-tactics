@@ -4,6 +4,8 @@ A new, compact Floor One RPG for Carl and Princess Donut. Explore a connected du
 
 The game rules live in pure C# under `Rebuild/Core`. The browser host runs those same rules through .NET 8 WebAssembly; JavaScript presents the map, menus and battle forecast. The authored items, skills, enemies and dialogue live in `Web/wwwroot/data/floor-one-rpg.json`. Preserved source lore and equipment/skill references are in `Rebuild/ReferenceData`.
 
+The seeded C# generator reads `Web/wwwroot/data/concept-room-rules.json` to assemble room shapes, corridors and whole-object furniture footprints. Room arrangements take composition cues from the overhead concept sheets: teaching tables, perimeter refuse, restaurant dining aisles, DMV waiting benches, and Sebastian’s separate rest/wash zones. Solid props block movement while reserved approaches keep encounters and services reachable. See `Rebuild/CONCEPT-LAYOUTS.md` for the visual references and the distinction between source lore and authored layout choices.
+
 ## Play locally
 
 Install the .NET 8 SDK, then run:
@@ -35,11 +37,17 @@ Open `http://localhost:8765`. A browser integration check is available after ins
 python3 Tools/playtest_floor_one.py --url http://localhost:8765 --browser /usr/bin/chromium
 ```
 
-It walks to the first encounter using keyboard input, selects and moves units on the canvas, confirms attacks, runs enemy turns, and checks the victory return.
+To check two generated layouts, prop collision and room screenshots:
+
+```sh
+python3 Tools/playtest_concept_layout.py --url http://localhost:8765 --browser /usr/bin/chromium
+```
+
+The encounter check walks around solid prop footprints to the first encounter using keyboard input, selects and moves units on the canvas, confirms attacks, runs enemy turns, and checks the victory return.
 
  The hosted asset manifest is `Tools/hosted-assets.json`: 60 individual files with checksums and an immutable AI-Art source revision. Publishing does not clone the full art repository or package every retained asset.
 
-GitHub Pages builds on pushes to `main`, manual workflow dispatch, and `pages-dev-*` tags. A tested development revision can therefore be published without moving `main`. The workflow runs the C# tests, publishes the WebAssembly host, and restores only the manifest subset.
+GitHub Pages builds on pushes to `main`, manual workflow dispatch, and `pages-dev-*` tags. Development tags can request a build without moving `main`; the GitHub Pages environment must also authorize that tag before deployment. The workflow runs the C# tests, publishes the WebAssembly host, and restores only the manifest subset.
 
 ## Reset scope
 

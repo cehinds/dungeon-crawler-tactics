@@ -435,7 +435,7 @@ public sealed class Game
         Require(s.mode == "explore" && s.world.objects.Any(o => o.kind == "safe" && Near(o)), "Save at a safe room.");
         return Codec.Write(new Save { state = s });
     }
-    bool ValidSave(View v)
+    bool ValidSave(View v, WorldMap trustedWorld)
     {
         if (v == null || v.mode != "explore" || v.party == null || v.party.Count != 2 || v.party.Any(u => u == null) || v.party[0].id != "carl" || v.party[1].id != "donut" || v.inventory == null || v.cleared == null || v.journal == null || v.journal.Any(x => x == null) || v.questStage < 0 || v.questStage > 4 || v.gold < 0 || v.gold > 100000 || v.turn < 1 || !v.party.Any(u => u.id == v.selectedId))
             return false;
@@ -451,7 +451,7 @@ public sealed class Game
         }
         if (v.party.Where(u => u.equipment != "").Select(u => u.equipment).Distinct().Count() != v.party.Count(u => u.equipment != ""))
             return false;
-        v.world = World.Build(v.seed);
+        v.world = trustedWorld;
         if (v.x < 0 || v.y < 0 || v.x >= v.world.width || v.y >= v.world.height || v.world.tiles[v.y * v.world.width + v.x] != "." || !v.world.objects.Any(o => o.kind == "safe" && Distance(v.x, v.y, o.x, o.y) <= 1))
             return false;
         if (v.cleared.Distinct().Count() != v.cleared.Count || v.cleared.Any(id => !v.world.objects.Any(o => o.id == id && (o.kind == "encounter" || o.kind == "boss" || o.kind == "chest"))))
@@ -466,9 +466,41 @@ public sealed class Game
         try
         {
             var save = Codec.Read<Save>(json);
-            if (save?.version != 1 || !ValidSave(save.state))
+            if (save?.version != 1 || save.state?.world == null)
                 throw new InvalidOperationException();
             var candidate = save.state;
+            var sourceWorld = candidate.world;
+            bool migrate = sourceWorld.generationVersion is 0 or 1;
+            if (!migrate && sourceWorld.generationVersion != 2)
+                throw new NotSupportedException();
+            var trustedWorld = migrate ? World.BuildLegacy(candidate.seed) : World.Build(candidate.seed);
+            // Legacy coordinates are meaningful only against the original authored map.
+            // Compare the persisted geometry before validating any checkpoint or receipt.
+            if (sourceWorld.width != trustedWorld.width || sourceWorld.height != trustedWorld.height ||
+                sourceWorld.spawnX != trustedWorld.spawnX || sourceWorld.spawnY != trustedWorld.spawnY ||
+                Codec.Write(sourceWorld.tiles) != Codec.Write(trustedWorld.tiles) ||
+                Codec.Write(sourceWorld.objects) != Codec.Write(trustedWorld.objects) ||
+                Codec.Write(sourceWorld.rooms) != Codec.Write(trustedWorld.rooms) ||
+                Codec.Write(sourceWorld.props) != Codec.Write(trustedWorld.props) ||
+                !ValidSave(candidate, trustedWorld))
+                throw new InvalidOperationException();
+            if (migrate)
+            {
+                var oldSafe = trustedWorld.objects.Where(o => o.kind == "safe" && Distance(candidate.x, candidate.y, o.x, o.y) <= 1)
+                    .OrderBy(o => Distance(candidate.x, candidate.y, o.x, o.y)).ThenBy(o => o.id, StringComparer.Ordinal).First();
+                var nextWorld = World.Build(candidate.seed);
+                var nextSafe = nextWorld.objects.SingleOrDefault(o => o.kind == "safe" && o.id == oldSafe.id);
+                if (nextSafe == null) throw new InvalidOperationException();
+                var destination = new[] { (x: nextSafe.x - 1, y: nextSafe.y), (x: nextSafe.x + 1, y: nextSafe.y),
+                    (x: nextSafe.x, y: nextSafe.y - 1), (x: nextSafe.x, y: nextSafe.y + 1) }
+                    .Where(p => p.x >= 0 && p.y >= 0 && p.x < nextWorld.width && p.y < nextWorld.height &&
+                        nextWorld.tiles[p.y * nextWorld.width + p.x] == "." && !nextWorld.objects.Any(o => o.x == p.x && o.y == p.y))
+                    .ToArray();
+                if (destination.Length == 0) throw new InvalidOperationException();
+                candidate.world = nextWorld;
+                candidate.x = destination[0].x;
+                candidate.y = destination[0].y;
+            }
             candidate.battle = null;
             candidate.forecast = null;
             foreach (var u in candidate.party)
@@ -477,11 +509,12 @@ public sealed class Game
                 u.y = 0;
                 u.moved = u.acted = u.ended = false;
             }
-            candidate.message = "Safe-room save loaded.";
+            candidate.message = migrate ? "Safe-room save upgraded to the new map. Progress preserved." : "Safe-room save loaded.";
             var nextCheckpoint = Codec.Write(candidate);
             s = candidate;
             checkpoint = nextCheckpoint;
         }
+        catch (NotSupportedException) { s.message = "Invalid save: incompatible map version. Start a fresh run or use a supported safe-room checkpoint. Your current run is unchanged."; }
         catch { s.message = "Invalid save. Your current run is unchanged."; }
         return s;
     }

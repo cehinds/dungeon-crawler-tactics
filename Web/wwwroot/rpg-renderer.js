@@ -1,7 +1,6 @@
 export const WHOLE_OBJECT_ASSET_BASE =
   "https://raw.githubusercontent.com/cehinds/AI-Art/a0483c7db869f28e35bf2878d22e9bc68ead77a7/dungeon-crawler-tactics/Web/wwwroot/assets/top-down-object-kit/";
 const remote = new URL("../", WHOLE_OBJECT_ASSET_BASE).href;
-const images = new Map();
 function load(path) {
   return new Promise((resolve) => {
     const im = new Image();
@@ -257,24 +256,30 @@ export class Renderer {
     );
     return true;
   }
-  object(id, x, y, w = 1, h = 1) {
+  object(id, x, y, w = 1, h = 1, rotation = 0) {
     const a = this.objects.get(id);
     if (!a?.image) return;
     const b = a.visibleBounds;
     const sw = b[2] - b[0],
       sh = b[3] - b[1];
-    const s = Math.min((this.tile * w) / sw, (this.tile * h) / sh);
+    const quarterTurn = rotation % 180 !== 0;
+    const rw = quarterTurn ? sh : sw, rh = quarterTurn ? sw : sh;
+    const s = Math.min((this.tile * w) / rw, (this.tile * h) / rh);
+    this.ctx.save();
+    this.ctx.translate(x + this.tile * w / 2, y + this.tile * h / 2);
+    this.ctx.rotate(rotation * Math.PI / 180);
     this.ctx.drawImage(
       a.image,
       b[0],
       b[1],
       sw,
       sh,
-      x + (this.tile * w - sw * s) / 2,
-      y + (this.tile * h - sh * s) / 2,
+      -sw * s / 2,
+      -sh * s / 2,
       sw * s,
       sh * s,
     );
+    this.ctx.restore();
   }
   frame(t) {
     const c = this.ctx,
@@ -315,13 +320,29 @@ export class Renderer {
       const tile = this.tile,
         ox = this.offsetX,
         oy = this.offsetY;
+      // Props own their collision tiles: blocked furniture still sits on floor.
+      if (!battle && this.propMap !== map) {
+        this.propMap = map;
+        this.propFloor = new Set();
+        for (const p of map.props || []) {
+          if (p.blocksMovement === false) continue;
+          for (let dy = 0; dy < p.height; dy++)
+            for (let dx = 0; dx < p.width; dx++)
+              this.propFloor.add((p.y + dy) * map.width + p.x + dx);
+        }
+      }
+      const propQueue = battle ? [] : (map.props || [])
+        .filter(p => p.layer !== "underlay")
+        .slice().sort((a, b) => a.y + a.height - b.y - b.height);
+      const drawProp = p => this.object(p.assetId, ox + p.x * tile,
+        oy + p.y * tile, p.width || 1, p.height || 1, p.rotation || 0);
       for (let y = 0; y < map.height; y++)
         for (let x = 0; x < map.width; x++) {
           const sx = ox + x * tile,
             sy = oy + y * tile;
           if (sx < -tile || sy < -tile || sx > r.width || sy > r.height)
             continue;
-          const wall = !battle && map.tiles[y * map.width + x] === "#";
+          const wall = !battle && map.tiles[y * map.width + x] === "#" && !this.propFloor.has(y * map.width + x);
           const water = !battle && map.tiles[y * map.width + x] === "~";
           if (wall) {
             c.fillStyle = "#172339";
@@ -381,57 +402,8 @@ export class Renderer {
           );
         }
       } else {
-        for (const room of map.rooms || []) {
-          const kits = {
-            entry: ["cd-door-threshold", "ab-clean-wall-straight-navy"],
-            alley: ["cd-crate", "cd-explosive-cart"],
-            guild: [
-              "ab-clean-table-wood-empty",
-              "ab-clean-chair-wood-blue",
-              "ab-clean-shelf-wood-empty",
-            ],
-            "garbage-lair": ["ab-clean-barrel-wood-top", "cd-hay-trough"],
-            safe: [
-              "ef-bed-red",
-              "ef-wood-table",
-              "ef-chair-green",
-              "ef-litter-tray",
-            ],
-            workshop: ["cd-gear", "cd-pipe-elbow", "cd-pipe-straight"],
-          };
-          const list = kits[room.theme] || [
-            "ab-clean-barrel-wood-top",
-            "cd-crate",
-            "cd-torch",
-          ];
-          list.forEach((id, i) => {
-            const px = room.x + 1 + i * 2,
-              py = room.y + 1;
-            this.object(
-              id,
-              ox + px * tile,
-              oy + py * tile,
-              id.includes("table") ? 1.8 : 1,
-              1.2,
-            );
-          });
-          this.object(
-            "cd-torch",
-            ox + (room.x + room.width - 2) * tile,
-            oy + (room.y + room.height - 2) * tile,
-            0.7,
-            0.9,
-          );
-        }
-        for (const p of map.props || []) {
-          this.object(
-            p.assetId,
-            ox + p.x * tile,
-            oy + p.y * tile,
-            p.width || 1,
-            p.height || 1,
-          );
-        }
+        for (const p of map.props || [])
+          if (p.layer === "underlay") drawProp(p);
         for (const o of map.objects || []) {
           if (
             v.cleared.includes(o.id) &&
@@ -492,6 +464,8 @@ export class Renderer {
         p.y += (u.y - p.y) * 0.22;
         const x = ox + (p.x + 0.5) * tile,
           y = oy + (p.y + 0.5) * tile;
+        while (propQueue.length && propQueue[0].y + propQueue[0].height <= p.y + 1)
+          drawProp(propQueue.shift());
         if (
           this.fx.some((f) => f.x === u.x && f.y === u.y && t - f.start < 350)
         )
@@ -518,6 +492,7 @@ export class Renderer {
           );
         }
       }
+      for (const p of propQueue) drawProp(p);
       this.fx = this.fx.filter((f) => t - f.start < 1100);
       for (const f of this.fx) {
         const age = t - f.start;

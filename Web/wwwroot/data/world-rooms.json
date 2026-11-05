@@ -160,5 +160,7 @@
       "kind": "chest",
       "description": "An adapted service store with sealed emergency supplies, beyond the borough boss approach."
     }
-  ]
+  ],
+  "generationRules": "concept-room-rules.json",
+  "layoutContract": "Room order and lore IDs are stable. The x/y/width/height fields preserve the version 1 checkpoint geometry; generation version 2 resolves seed-specific positions, footprints and furniture from generationRules within bounded sectors."
 }

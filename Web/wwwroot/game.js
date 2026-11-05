@@ -449,8 +449,11 @@ try {
     return r.json();
   });
   await Blazor.start();
+  const requestedSeed = new URLSearchParams(location.search).get("seed");
+  const seedNumber = requestedSeed === null ? 1337 : Number(requestedSeed);
+  const seed = Number.isInteger(seedNumber) && seedNumber >= -2147483648 && seedNumber <= 2147483647 ? seedNumber : 1337;
   const initial = parse(
-    await invoke("Initialize", JSON.stringify(content), 1337),
+    await invoke("Initialize", JSON.stringify(content), seed),
   );
   apply(initial);
   $("#loading").remove();
