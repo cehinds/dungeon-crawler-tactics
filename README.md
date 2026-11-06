@@ -69,21 +69,38 @@ Use `--stage baseline` or `--stage pass-01` through `--stage pass-05`; each stag
 
 The encounter check walks around solid prop footprints to the first encounter using keyboard input, selects and moves units on the canvas, confirms attacks, runs enemy turns, and checks the victory return.
 
-The masonry pass uses existing hosted stone assets to assemble broader wall blocks and courses, sparse floor wear, and a few wall-bound moss accents. It keeps floor and wall sampling aligned and does not use the clean-map reference as a whole-map background. The 91-file hosted asset manifest is unchanged. See [the masonry pass review](Rebuild/MASONRY-PASS-REVIEW.md) and its accepted seed-1337 captures in `Rebuild/MasonryPassComparison/pass-01/`. To reproduce the capture against a published host, use:
+The depth pass adds raised coping with a visible blue wall face and contact shadow, south parapet face gradients, an eastern pipe elbow joined to the channel bank, and two vine accents within blocked-cell bounds. It leaves floor proportions and room boundaries unchanged and uses the existing hosted assets. Final published-browser QA passed for the integrated inspector and map checks; the review still notes remaining source-art differences. See [the depth pass review](Rebuild/DEPTH-PASS-REVIEW.md) and the approved seed-1337 capture in `Rebuild/DepthPassComparison/pass-01/`. To reproduce the capture against a published host, use:
 
 ```sh
-python3 Tools/capture_map_passes.py --url http://localhost:8765 --browser /usr/bin/chromium --stage pass-01 --label 'Masonry pass' --output Rebuild/MasonryPassComparison
+python3 Tools/capture_map_passes.py --url http://localhost:8765 --browser /usr/bin/chromium --stage pass-01 --label 'Depth pass' --output Rebuild/DepthPassComparison
 ```
 
 For actual keyboard arena verification with doorway and full bridge crossings plus the read-only floor/wall surface identity audit, run:
 
 ```sh
-python3 Tools/capture_map_refinement.py --layered --url http://localhost:8765 --browser /usr/bin/chromium --output Rebuild/MasonryPassComparison/final-qa
+python3 Tools/capture_map_refinement.py --layered --url http://localhost:8765 --browser /usr/bin/chromium --output Rebuild/DepthPassComparison/final-qa
 ```
 
 The hosted asset manifest is `Tools/hosted-assets.json`: 91 individual files with checksums and an immutable AI-Art source revision. Publishing does not clone the full art repository or package every retained asset.
 
 GitHub Pages builds on pushes to `main`, manual workflow dispatch, and `pages-dev-*` tags. Development tags can request a build without moving `main`; the GitHub Pages environment must also authorize that tag before deployment. The workflow runs the C# tests, publishes the WebAssembly host, and restores only the manifest subset.
+
+
+## Map object scene graph
+
+`Web/wwwroot/data/map-object-rules.json` catalogs 47 scene-graph types: 27 prop types, 12 terrain/render components, and 8 world-object or interaction kinds. `Web/wwwroot/map-scene-graph.js` builds a pure JavaScript presentation graph from the generated world and catalog. The graph groups objects under rooms and surfaces, while separately showing actual runtime relationships, declared connector geometry, and advisory expected relations. A containment parent means “belongs to this room or surface”; it does not imply a gameplay or physical edge. Advisory relations describe authored placement patterns and do not require that the related object exist.
+
+Placement preview validates a candidate against catalog surface rules, runtime footprint and overlap, required relations where explicitly marked, and route preservation. The preview and placement suggestions operate on a copy of the imported world; exporting graph JSON is also read-only. The scene graph supplies renderer-facing geometry and connector relationships in JavaScript. C# remains the authority for world generation and gameplay rules; this is not a rewrite of the C# generator. Port declarations are metadata, while active pipe attachments use the catalog's geometric connector rules rather than a general compatible-port solver. See [the object placement guide](Rebuild/OBJECT-PLACEMENT.md).
+
+To inspect a generated world locally, publish and serve it as above, then open `http://localhost:8765/object-inspector.html`. The inspector uses the existing C# world generator, lets you select seed 1337 or 42, inspect placements, preview and suggest a move, and export graph JSON.
+
+The scene-graph contract and fixtures can be checked with Node.js:
+
+```sh
+node Tools/test_map_scene_graph.mjs
+```
+
+Fixtures are retained in `Tools/fixtures/object-scenes.json`. Final published-host QA passed for both seeds, including inspector previews/exports, unchanged worlds, doorways, full bridge crossings, and the refreshed seed-42 eastern-pipe battle capture. The layered-map harness reused arena evidence; the separate C# suite and full arena checks were not rerun during this affected-scope QA. See [the depth pass review](Rebuild/DEPTH-PASS-REVIEW.md) for details.
 
 ## Reset scope
 

@@ -1,0 +1,1882 @@
+{
+  "schemaVersion": 1,
+  "catalogPurpose": "Authored object placement guidance and scene-graph vocabulary. Advisory relations are not map validity constraints unless required is true. Runtime owns footprint and collision.",
+  "objectTypes": [
+    {
+      "id": "ab-clean-barrel-wood-top",
+      "label": "Wood barrel",
+      "assetIds": [
+        "ab-clean-barrel-wood-top"
+      ],
+      "tags": [
+        "container",
+        "wood",
+        "freestanding",
+        "barrel"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "crate"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "barrel"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        }
+      ]
+    },
+    {
+      "id": "ab-clean-cot-metal-green",
+      "label": "Green metal cot",
+      "assetIds": [
+        "ab-clean-cot-metal-green"
+      ],
+      "tags": [
+        "bed",
+        "rest",
+        "metal",
+        "freestanding"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 3
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "bedside-lamp"
+          ],
+          "required": false,
+          "description": "Often placed beside a bed in authored room groups."
+        }
+      ]
+    },
+    {
+      "id": "ab-clean-crate-wood-cross",
+      "label": "Cross-braced crate",
+      "assetIds": [
+        "ab-clean-crate-wood-cross"
+      ],
+      "tags": [
+        "container",
+        "wood",
+        "freestanding",
+        "crate"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "crate"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "barrel"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        }
+      ]
+    },
+    {
+      "id": "ab-clean-plant-leafy-terracotta",
+      "label": "Terracotta potted plant",
+      "assetIds": [
+        "ab-clean-plant-leafy-terracotta"
+      ],
+      "tags": [
+        "plant",
+        "decoration",
+        "freestanding"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "plant"
+          ],
+          "required": false,
+          "description": "May be grouped decoratively with other loose furnishings."
+        }
+      ]
+    },
+    {
+      "id": "ab-clean-shelf-wood-empty",
+      "label": "Empty wooden shelf",
+      "assetIds": [
+        "ab-clean-shelf-wood-empty"
+      ],
+      "tags": [
+        "storage",
+        "wood",
+        "freestanding"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "crate"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "barrel"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        }
+      ]
+    },
+    {
+      "id": "cd-barbell",
+      "label": "Barbell",
+      "assetIds": [
+        "cd-barbell"
+      ],
+      "tags": [
+        "training",
+        "freestanding",
+        "barbell"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "weight-bench"
+          ],
+          "required": false,
+          "description": "A barbell can be grouped with training equipment."
+        }
+      ]
+    },
+    {
+      "id": "cd-crate",
+      "label": "Dungeon crate",
+      "assetIds": [
+        "cd-crate"
+      ],
+      "tags": [
+        "container",
+        "wood",
+        "freestanding",
+        "crate"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "crate"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "barrel"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        }
+      ]
+    },
+    {
+      "id": "cd-stair-module",
+      "label": "Stone stair module",
+      "assetIds": [
+        "cd-stair-module"
+      ],
+      "tags": [
+        "stairs",
+        "threshold",
+        "architecture"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 3
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "torch"
+          ],
+          "required": false,
+          "description": "May provide light near a stair or machine assembly."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "door"
+          ],
+          "required": false,
+          "description": "Architectural threshold can be composed near a doorway."
+        }
+      ]
+    },
+    {
+      "id": "cd-torch",
+      "label": "Dungeon torch",
+      "assetIds": [
+        "cd-torch"
+      ],
+      "tags": [
+        "light",
+        "torch",
+        "freestanding"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "stairs"
+          ],
+          "required": false,
+          "description": "May flank an authored stair approach."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "wall"
+          ],
+          "required": false,
+          "description": "Can sit at a masonry boundary when authored as a fixture."
+        }
+      ]
+    },
+    {
+      "id": "cd-trap-machine",
+      "label": "Trap machine",
+      "assetIds": [
+        "cd-trap-machine"
+      ],
+      "tags": [
+        "machine",
+        "trap",
+        "freestanding",
+        "trap-machine"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "crate"
+          ],
+          "required": false,
+          "description": "May be composed with nearby storage or clutter props."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "wall"
+          ],
+          "required": false,
+          "description": "Can sit at a masonry boundary when authored as a fixture."
+        }
+      ]
+    },
+    {
+      "id": "cd-wall-straight",
+      "label": "Straight wall segment",
+      "assetIds": [
+        "cd-wall-straight"
+      ],
+      "tags": [
+        "wall",
+        "architecture"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "trap-machine"
+          ],
+          "required": false,
+          "description": "A straight wall may frame a trap assembly."
+        }
+      ]
+    },
+    {
+      "id": "cd-weight-bench",
+      "label": "Weight bench",
+      "assetIds": [
+        "cd-weight-bench"
+      ],
+      "tags": [
+        "training",
+        "freestanding",
+        "weight-bench"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "barbell"
+          ],
+          "required": false,
+          "description": "Can be grouped with a weight bench."
+        }
+      ]
+    },
+    {
+      "id": "ef-bed-red",
+      "label": "Red bed",
+      "assetIds": [
+        "ef-bed-red"
+      ],
+      "tags": [
+        "bed",
+        "rest",
+        "freestanding"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 3
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "bedside-lamp"
+          ],
+          "required": false,
+          "description": "Often placed beside a bed in authored room groups."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "rug"
+          ],
+          "required": false,
+          "description": "Can sit beneath furniture as an underlay."
+        }
+      ]
+    },
+    {
+      "id": "ef-chair-green",
+      "label": "Green chair",
+      "assetIds": [
+        "ef-chair-green"
+      ],
+      "tags": [
+        "seat",
+        "furniture",
+        "freestanding",
+        "chair"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "table"
+          ],
+          "required": false,
+          "description": "Chairs and benches can be grouped around a table."
+        }
+      ]
+    },
+    {
+      "id": "ef-lamp-table",
+      "label": "Table lamp",
+      "assetIds": [
+        "ef-lamp-table"
+      ],
+      "tags": [
+        "light",
+        "lamp",
+        "furniture",
+        "bedside-lamp"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "bed"
+          ],
+          "required": false,
+          "description": "Often shares a rug or bedside light in authored groups."
+        }
+      ]
+    },
+    {
+      "id": "ef-rug-red",
+      "label": "Red rug",
+      "assetIds": [
+        "ef-rug-red"
+      ],
+      "tags": [
+        "rug",
+        "underlay",
+        "soft-furnishing"
+      ],
+      "layer": "underlay",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 2
+        },
+        "blocksMovementTypical": false,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "bed"
+          ],
+          "required": false,
+          "description": "Often shares a rug or bedside light in authored groups."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "table"
+          ],
+          "required": false,
+          "description": "Chairs and benches can be grouped around a table."
+        }
+      ]
+    },
+    {
+      "id": "ef-sink-counter",
+      "label": "Sink counter",
+      "assetIds": [
+        "ef-sink-counter"
+      ],
+      "tags": [
+        "plumbing",
+        "counter",
+        "furniture",
+        "sink"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "toilet"
+          ],
+          "required": false,
+          "description": "Can share a washroom composition with a sink counter."
+        }
+      ]
+    },
+    {
+      "id": "ef-toilet",
+      "label": "Toilet",
+      "assetIds": [
+        "ef-toilet"
+      ],
+      "tags": [
+        "plumbing",
+        "fixture",
+        "toilet"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 3
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "sink"
+          ],
+          "required": false,
+          "description": "Can share a washroom composition with a toilet."
+        }
+      ]
+    },
+    {
+      "id": "ef-vending-green",
+      "label": "Green vending machine",
+      "assetIds": [
+        "ef-vending-green"
+      ],
+      "tags": [
+        "machine",
+        "service",
+        "freestanding"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "bench"
+          ],
+          "required": false,
+          "description": "Can be grouped with service furnishings."
+        }
+      ]
+    },
+    {
+      "id": "ef-wood-bench",
+      "label": "Wooden bench",
+      "assetIds": [
+        "ef-wood-bench"
+      ],
+      "tags": [
+        "seat",
+        "furniture",
+        "freestanding",
+        "bench"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 2,
+          "height": 1
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "table"
+          ],
+          "required": false,
+          "description": "Chairs and benches can be grouped around a table."
+        }
+      ]
+    },
+    {
+      "id": "ef-wood-table",
+      "label": "Wooden table",
+      "assetIds": [
+        "ef-wood-table"
+      ],
+      "tags": [
+        "table",
+        "furniture",
+        "freestanding"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "chair"
+          ],
+          "required": false,
+          "description": "Can be grouped at a table as seating."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "rug"
+          ],
+          "required": false,
+          "description": "Can sit beneath furniture as an underlay."
+        }
+      ]
+    },
+    {
+      "id": "industrial-exit",
+      "label": "Gold industrial exit",
+      "assetIds": [
+        "industrial-exit"
+      ],
+      "tags": [
+        "exit",
+        "stairs",
+        "architecture"
+      ],
+      "layer": "underlay",
+      "properties": {
+        "nominalFootprint": {
+          "width": 3,
+          "height": 3
+        },
+        "blocksMovementTypical": false,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "water"
+          ],
+          "required": false,
+          "description": "An outlet drains into adjacent channel water, and a grate may mark a drain approach."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "wall"
+          ],
+          "required": false,
+          "description": "Can sit at a masonry boundary when authored as a fixture."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "door"
+          ],
+          "required": false,
+          "description": "Architectural threshold can be composed near a doorway."
+        }
+      ]
+    },
+    {
+      "id": "industrial-grate",
+      "label": "Industrial drain grate",
+      "assetIds": [
+        "industrial-grate"
+      ],
+      "tags": [
+        "drain",
+        "underlay",
+        "industrial"
+      ],
+      "layer": "underlay",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 1
+        },
+        "blocksMovementTypical": false,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "water"
+          ],
+          "required": false,
+          "description": "An outlet drains into adjacent channel water, and a grate may mark a drain approach."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "wallfixture"
+          ],
+          "required": false,
+          "description": "A grate may mark service infrastructure near wall fixtures."
+        }
+      ]
+    },
+    {
+      "id": "industrial-machine",
+      "label": "Industrial machine",
+      "assetIds": [
+        "industrial-machine"
+      ],
+      "tags": [
+        "machine",
+        "industrial",
+        "wallfixture"
+      ],
+      "layer": "wallfixture",
+      "properties": {
+        "nominalFootprint": {
+          "width": 4,
+          "height": 2
+        },
+        "blocksMovementTypical": true,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "wall"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "pipe"
+          ],
+          "required": false,
+          "description": "Pipes can plug into machinery or meet outlets as a visual assembly."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "torch"
+          ],
+          "required": false,
+          "description": "May provide light near a stair or machine assembly."
+        }
+      ]
+    },
+    {
+      "id": "industrial-outlet",
+      "label": "Industrial water outlet",
+      "assetIds": [
+        "industrial-outlet"
+      ],
+      "tags": [
+        "outlet",
+        "water",
+        "industrial"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 2
+        },
+        "blocksMovementTypical": false,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor",
+          "water"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [
+        {
+          "id": "outlet-mouth",
+          "side": "south",
+          "kind": "fluid-output",
+          "tags": [
+            "water"
+          ],
+          "accepts": [
+            "water",
+            "industrial-pipe"
+          ]
+        }
+      ],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "water"
+          ],
+          "required": false,
+          "description": "An outlet drains into adjacent channel water, and a grate may mark a drain approach."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "pipe"
+          ],
+          "required": false,
+          "description": "Pipes can plug into machinery or meet outlets as a visual assembly."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "drain"
+          ],
+          "required": false,
+          "description": "May mark a water-drainage area."
+        }
+      ]
+    },
+    {
+      "id": "industrial-pipe",
+      "label": "Industrial pipe",
+      "assetIds": [
+        "industrial-pipe"
+      ],
+      "tags": [
+        "pipe",
+        "industrial",
+        "connector"
+      ],
+      "layer": "object",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 2
+        },
+        "blocksMovementTypical": false,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "floor",
+          "wall",
+          "water"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [
+        {
+          "id": "pipe-top",
+          "side": "north",
+          "kind": "fluid",
+          "tags": [
+            "industrial-pipe"
+          ],
+          "accepts": [
+            "fluid"
+          ]
+        },
+        {
+          "id": "pipe-bottom",
+          "side": "south",
+          "kind": "fluid",
+          "tags": [
+            "industrial-pipe"
+          ],
+          "accepts": [
+            "fluid"
+          ]
+        },
+        {
+          "id": "pipe-left",
+          "side": "west",
+          "kind": "fluid",
+          "tags": [
+            "industrial-pipe"
+          ],
+          "accepts": [
+            "fluid"
+          ]
+        },
+        {
+          "id": "pipe-right",
+          "side": "east",
+          "kind": "fluid",
+          "tags": [
+            "industrial-pipe"
+          ],
+          "accepts": [
+            "fluid"
+          ]
+        }
+      ],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "pipe"
+          ],
+          "required": false,
+          "description": "Pipes can plug into machinery or meet outlets as a visual assembly."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "machine"
+          ],
+          "required": false,
+          "description": "Pipes and lights can be composed with machinery."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "outlet"
+          ],
+          "required": false,
+          "description": "May be grouped with this object type in authored layouts."
+        }
+      ]
+    },
+    {
+      "id": "industrial-torch",
+      "label": "Industrial wall torch",
+      "assetIds": [
+        "industrial-torch"
+      ],
+      "tags": [
+        "light",
+        "torch",
+        "industrial"
+      ],
+      "layer": "wallfixture",
+      "properties": {
+        "nominalFootprint": {
+          "width": 1,
+          "height": 1
+        },
+        "blocksMovementTypical": false,
+        "footprintSource": "runtime"
+      },
+      "placement": {
+        "allowedSurfaceTags": [
+          "wall"
+        ],
+        "allowedRotations": [
+          0,
+          90,
+          180,
+          270
+        ],
+        "requiredParentTags": [],
+        "footprintSource": "runtime"
+      },
+      "ports": [],
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "machine"
+          ],
+          "required": false,
+          "description": "Pipes and lights can be composed with machinery."
+        },
+        {
+          "relation": "near",
+          "targetTags": [
+            "pipe"
+          ],
+          "required": false,
+          "description": "Pipes can plug into machinery or meet outlets as a visual assembly."
+        }
+      ]
+    }
+  ],
+  "terrainTypes": [
+    {
+      "id": "floor",
+      "label": "Walkable floor",
+      "symbols": [
+        "."
+      ],
+      "tags": [
+        "floor",
+        "walkable"
+      ],
+      "properties": {
+        "supportsMovement": true
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "masonry-wall",
+      "label": "Blocked masonry wall",
+      "symbols": [
+        "#"
+      ],
+      "tags": [
+        "wall",
+        "masonry",
+        "blocked",
+        "masonry-wall"
+      ],
+      "properties": {
+        "supportsMovement": false,
+        "canReceiveWallFixtures": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "supports",
+          "targetTags": [
+            "wallfixture"
+          ],
+          "required": false,
+          "description": "Wall fixtures are anchored to blocked masonry when authored that way."
+        }
+      ]
+    },
+    {
+      "id": "channel-water",
+      "label": "Channel water",
+      "symbols": [
+        "~"
+      ],
+      "tags": [
+        "water",
+        "channel",
+        "channel-water"
+      ],
+      "properties": {
+        "supportsMovement": false
+      },
+      "expectedRelations": [
+        {
+          "relation": "adjacent-to",
+          "targetTags": [
+            "outlet"
+          ],
+          "required": false,
+          "description": "Outlets may drain into a channel edge."
+        },
+        {
+          "relation": "spanned-by",
+          "targetTags": [
+            "bridge"
+          ],
+          "required": false,
+          "description": "A bridge deck spans channel water while landing on floor at both banks."
+        }
+      ]
+    },
+    {
+      "id": "bridge-deck",
+      "label": "Iron bridge deck",
+      "assetIds": [
+        "water-ironbridge-iron-deck"
+      ],
+      "tags": [
+        "bridge",
+        "walkable",
+        "architecture"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "spans",
+          "targetTags": [
+            "water"
+          ],
+          "required": true,
+          "description": "Bridge deck overlays a water crossing and connects walkable floor at each bank."
+        }
+      ]
+    },
+    {
+      "id": "wall-cap",
+      "label": "Wall cap and coping",
+      "assetIds": [
+        "wall-low-cap"
+      ],
+      "tags": [
+        "wall",
+        "cap",
+        "architecture"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "caps",
+          "targetTags": [
+            "masonry-wall"
+          ],
+          "required": false,
+          "description": "Rendered along exposed masonry edges."
+        }
+      ]
+    },
+    {
+      "id": "wall-face",
+      "label": "Wall face",
+      "assetIds": [
+        "wall-straight"
+      ],
+      "tags": [
+        "wall",
+        "face",
+        "architecture"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "faces",
+          "targetTags": [
+            "masonry-wall"
+          ],
+          "required": false,
+          "description": "Rendered as the vertical face of wall courses."
+        }
+      ]
+    },
+    {
+      "id": "doorway-frame",
+      "label": "Dry arch doorway frame",
+      "assetIds": [
+        "water-dryarch-left-jamb",
+        "water-dryarch-right-jamb",
+        "water-dryarch-lintel"
+      ],
+      "tags": [
+        "door",
+        "frame",
+        "architecture"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "frames",
+          "targetTags": [
+            "floor",
+            "masonry-wall"
+          ],
+          "required": false,
+          "description": "Jambs sit in masonry and preserve the clear threshold between them."
+        }
+      ]
+    },
+    {
+      "id": "hanging-moss",
+      "label": "Hanging wall moss",
+      "assetIds": [
+        "moss-hanging",
+        "floor-moss",
+        "floors-moss-edge"
+      ],
+      "tags": [
+        "moss",
+        "wall-edge",
+        "decoration"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "hangs-from",
+          "targetTags": [
+            "masonry-wall"
+          ],
+          "required": false,
+          "description": "Moss is placed on exposed wall edges or damp channel walls."
+        }
+      ]
+    },
+    {
+      "id": "surface-lighting",
+      "label": "Surface light and reflection",
+      "assetIds": [
+        "floor-reflection"
+      ],
+      "tags": [
+        "light",
+        "reflection",
+        "surface-effect"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "near",
+          "targetTags": [
+            "light"
+          ],
+          "required": false,
+          "description": "Reflections may appear near torches or other light sources."
+        }
+      ]
+    },
+    {
+      "id": "water-splash",
+      "label": "Water splash and ripple effect",
+      "assetIds": [
+        "water-surface",
+        "bank-straight"
+      ],
+      "tags": [
+        "water",
+        "splash",
+        "surface-effect"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "on",
+          "targetTags": [
+            "channel-water"
+          ],
+          "required": false,
+          "description": "Water animation and banks follow authored channel cells."
+        }
+      ]
+    },
+    {
+      "id": "floor-materials",
+      "label": "Floor material overlays",
+      "assetIds": [
+        "floor-dry",
+        "floor-wet",
+        "floors-fine",
+        "floors-worn",
+        "floors-damp",
+        "floors-hairline-crack",
+        "floors-branching-crack",
+        "floors-shallow-puddle"
+      ],
+      "tags": [
+        "floor",
+        "surface-effect"
+      ],
+      "properties": {
+        "isOverlay": true
+      },
+      "expectedRelations": [
+        {
+          "relation": "on",
+          "targetTags": [
+            "floor"
+          ],
+          "required": false,
+          "description": "Material overlays decorate walkable floor cells."
+        }
+      ]
+    },
+    {
+      "id": "wall-corner",
+      "label": "Masonry corner piece",
+      "assetIds": [],
+      "tags": [
+        "wall",
+        "corner",
+        "architecture"
+      ],
+      "properties": {
+        "isOverlay": true,
+        "source": "renderer-derived at exposed masonry corners"
+      },
+      "expectedRelations": [
+        {
+          "relation": "joins",
+          "targetTags": [
+            "masonry-wall"
+          ],
+          "required": false,
+          "description": "Corner trim is derived where wall courses meet at an exposed corner."
+        }
+      ]
+    }
+  ],
+  "worldObjectTypes": [
+    {
+      "id": "guide",
+      "label": "Guide",
+      "tags": [
+        "guide",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "safe",
+      "label": "Safe room",
+      "tags": [
+        "safe",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "encounter",
+      "label": "Encounter",
+      "tags": [
+        "encounter",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "boss",
+      "label": "Boss encounter",
+      "tags": [
+        "boss",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "exit",
+      "label": "Exit",
+      "tags": [
+        "exit",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "chest",
+      "label": "Chest/cache",
+      "tags": [
+        "chest",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "door",
+      "label": "Door/threshold",
+      "tags": [
+        "door",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    },
+    {
+      "id": "discovery",
+      "label": "Discovery",
+      "tags": [
+        "discovery",
+        "world-object"
+      ],
+      "properties": {
+        "identitySource": "world object kind",
+        "nameAndDescription": "authored per instance"
+      },
+      "expectedRelations": []
+    }
+  ],
+  "connectors": {
+    "pipeAssetIds": [
+      "industrial-pipe"
+    ],
+    "header": {
+      "layer": "wallfixture",
+      "maxGap": 6,
+      "requiredTile": "#",
+      "depthOffset": 0.17
+    },
+    "return": {
+      "excludedLayer": "wallfixture",
+      "directions": [
+        1,
+        -1
+      ],
+      "requiredTile": "#",
+      "bankHeight": 2,
+      "depthOffset": 0.18
+    }
+  }
+}

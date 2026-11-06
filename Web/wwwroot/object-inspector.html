@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Map object inspector</title>
+    <link rel="stylesheet" href="object-inspector.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <span class="eyebrow">FLOOR ONE · DEVELOPMENT TOOL</span>
+        <h1>Map object inspector</h1>
+      </div>
+      <label
+        >World seed
+        <select id="seed">
+          <option>1337</option>
+          <option>42</option>
+        </select></label
+      ><button id="export">Export graph JSON</button
+      ><a href="data/map-object-rules.json">Object catalog ↗</a
+      ><a href="index.html">Open game ↗</a>
+    </header>
+    <p id="status" role="status">Loading the C# world generator…</p>
+    <main>
+      <aside class="outline">
+        <h2>Placement tree</h2>
+        <label class="search"
+          >Find an object
+          <input id="search" placeholder="Name, ID, asset or tag"
+        /></label>
+        <label class="surface-toggle"
+          ><input id="show-surfaces" type="checkbox" /> Show surfaces &amp;
+          structure</label
+        >
+        <div id="tree" role="tree" aria-label="World placement tree"></div>
+      </aside>
+      <section class="board">
+        <div class="board-heading">
+          <div>
+            <h2 id="room-title">World overview</h2>
+            <p id="room-note">Select a room or an object in the tree.</p>
+          </div>
+          <label
+            >View
+            <select id="room">
+              <option value="">Entire world</option>
+            </select></label
+          >
+        </div>
+        <div id="map-wrap">
+          <svg
+            id="map"
+            role="img"
+            aria-label="Top down map object preview"
+          ></svg>
+        </div>
+        <div class="legend">
+          <span><i class="prop"></i>Prop footprint</span
+          ><span><i class="interaction"></i>Interaction</span
+          ><span><i class="connection"></i>Actual relation</span
+          ><span><i class="advisory"></i>Suggested proximity</span
+          ><span>Click any footprint or tile to inspect</span>
+        </div>
+        <div id="summary"></div>
+      </section>
+      <aside class="details">
+        <h2>Object properties</h2>
+        <div id="properties">
+          <p class="muted">
+            Select an object to inspect its properties and placement rules.
+          </p>
+        </div>
+        <section id="placement" hidden>
+          <h2>Test placement</h2>
+          <p class="muted">Preview only · evaluates a copy of the world</p>
+          <form id="test-form">
+            <div class="coordinates">
+              <label>X<input id="test-x" type="number" required /></label
+              ><label>Y<input id="test-y" type="number" required /></label
+              ><label
+                >Rotation<select id="test-rotation">
+                  <option>0</option>
+                  <option>90</option>
+                  <option>180</option>
+                  <option>270</option>
+                </select></label
+              >
+            </div>
+            <button type="submit">Validate candidate</button
+            ><button type="button" id="suggest">
+              Suggest placement in this room
+            </button>
+            <div id="suggestions"></div>
+          </form>
+          <div id="test-result" role="status"></div>
+        </section>
+      </aside>
+    </main>
+    <footer>
+      Runtime geometry from the existing C# generator. Catalog rules describe
+      placement intent; inferred and expected relations are labeled separately.
+    </footer>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script type="module" src="object-inspector.js"></script>
+  </body>
+</html>

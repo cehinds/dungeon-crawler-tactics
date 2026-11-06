@@ -1,3 +1,5 @@
+import { buildSceneGraph } from "./map-scene-graph.js";
+
 export const WHOLE_OBJECT_ASSET_BASE =
   "https://raw.githubusercontent.com/cehinds/AI-Art/a0483c7db869f28e35bf2878d22e9bc68ead77a7/dungeon-crawler-tactics/Web/wwwroot/assets/top-down-object-kit/";
 const remote = new URL("../", WHOLE_OBJECT_ASSET_BASE).href;
@@ -81,6 +83,23 @@ export class Renderer {
     return out;
   }
   async assets() {
+    // Optional presentation rules load once. A failed catalog keeps terrain and
+    // authored props visible, while reporting why semantic connectors are absent.
+    this.sceneGraphCache = new WeakMap();
+    try {
+      const response = await fetch("data/map-object-rules.json");
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const catalog = await response.json();
+      if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.objectTypes)
+        || !Array.isArray(catalog.terrainTypes) || !Array.isArray(catalog.worldObjectTypes))
+        throw new Error("Unsupported map object rules catalog structure");
+      this.objectRules = catalog;
+      this.sceneGraphError = null;
+    } catch (error) {
+      this.objectRules = null;
+      this.sceneGraphError = `Map object rules unavailable: ${error.message}`;
+      console.error(this.sceneGraphError, error);
+    }
     const manifest = await fetch("assets/directional/manifest.json")
       .then((r) => r.json())
       .catch(() =>
@@ -406,7 +425,19 @@ export class Renderer {
           candidates.push({kind:"moss",x,y,interior:true,hash,distance:Math.abs(dx)+Math.abs(dy)});
         }
         candidates.sort((a,b)=>a.distance-b.distance || a.hash-b.hash);
-        if(candidates.length) {const p=candidates[0];parts.push(p);mossCells.add(`${p.x},${p.y}`);}
+        if(candidates.length) {
+          const p=candidates[0];parts.push(p);mossCells.add(`${p.x},${p.y}`);
+          // A few damp southern seams trail down the same blocked face,
+          // rather than scattering more independent green islands.
+          const key=`${p.x},${p.y+1}`;
+          if(fy>.8 && p.y+1<map.height && p.y+1<r.y+r.height
+            && at(p.x,p.y+1)==="#" && !mossCells.has(key)
+            && !(map.props||[]).some(a=>p.x>=a.x && p.x<a.x+a.width
+              && p.y+1>=a.y && p.y+1<a.y+a.height)) {
+            parts.push({kind:"moss",x:p.x,y:p.y+1,interior:true,tail:true,hash:p.hash});
+            mossCells.add(key);
+          }
+        }
       }
     }
     this.assembly = parts.filter(p=>p.kind!=="front").concat(parts.filter(p=>p.kind==="front").sort((a,b)=>a.depth-b.depth));
@@ -421,11 +452,11 @@ export class Renderer {
       if(moss) {
         c.save();c.beginPath();c.rect(sx,sy,tile,tile);c.clip();
         if(p.interior) {
-          const scale=.50+(p.hash%19)/100;
-          c.translate(sx+tile*.5,sy+tile*.5);
+          const scale=p.tail ? .46 : .50+(p.hash%19)/100;
+          c.translate(sx+tile*.5,sy+tile*(p.tail ? .26 : .5));
           if(p.hash&1)c.scale(-1,1);
           c.globalAlpha=.84;
-          c.drawImage(moss,11,5,106,119,-tile*scale*.5,-tile*scale*.48,tile*scale,tile*scale);
+          c.drawImage(moss,11,5,106,119,-tile*scale*.5,-tile*scale*.48,tile*scale,tile*scale*(p.tail ? 1.65 : 1));
         } else c.drawImage(moss,11,5,106,119,sx+tile*.04,sy+tile*.10,tile*.92,tile*.96);
         c.restore();
       }
@@ -446,24 +477,32 @@ export class Renderer {
     if (p.kind === "corner") {
       const edge = tile*.26;
       const cx = sx+(p.dx===1 ? tile-edge : 0);
-      const cy = sy+(p.dy===1 ? tile*.72 : 0);
+      const cy = sy+(p.dy===1 ? tile*.46 : 0);
       c.drawImage(im,10,9,28,18,cx,cy,edge+.5,edge+.5);
       return;
     }
     if (p.kind === "front") {
-      // The coping and upright face meet at the southern masonry edge.
-      // Keep the whole cap on the blocked cell; only its shallow shadow falls
-      // onto the adjoining floor, preserving the visible movement boundary.
-      c.drawImage(im,10,47,70,48,sx,sy+tile*.70,tile+.5,tile*.40);
-      c.fillStyle="#03101c55";
-      c.fillRect(sx,sy+tile*.94,tile+.5,tile*.16);
-      c.drawImage(im,10,9,70,18,sx,sy+tile*.72,tile+.5,tile*.26);
-      const shade=c.createLinearGradient(0,sy+tile*1.08,0,sy+tile*1.19);
-      shade.addColorStop(0,"#02081080");shade.addColorStop(1,"#02081000");
-      c.fillStyle=shade;c.fillRect(sx,sy+tile*1.08,tile+.5,tile*.11);
+      // The coping sits above a readable upright blue face. Both stay on
+      // blocked masonry; only the narrow contact shadow reaches the floor.
+      c.drawImage(im,10,47,70,48,sx,sy+tile*.64,tile+.5,tile*.36);
+      const face=c.createLinearGradient(0,sy+tile*.66,0,sy+tile);
+      face.addColorStop(0,"#0b263c00");face.addColorStop(.25,"#071c3040");
+      face.addColorStop(1,"#020a16a0");
+      c.fillStyle=face;c.fillRect(sx,sy+tile*.65,tile+.5,tile*.35);
+      c.drawImage(im,10,9,70,18,sx,sy+tile*.46,tile+.5,tile*.24);
+      c.fillStyle="#020b1799";c.fillRect(sx,sy+tile*.70,tile+.5,tile*.035);
+      const shade=c.createLinearGradient(0,sy+tile,0,sy+tile*1.12);
+      shade.addColorStop(0,"#02081088");shade.addColorStop(1,"#02081000");
+      c.fillStyle=shade;c.fillRect(sx,sy+tile,tile+.5,tile*.12);
     } else if (p.dy === -1) {
+      // Near-side parapets show their face below the pale coping, as in
+      // the source's stepped southern wall. Keep the existing world courses.
+      const face=c.createLinearGradient(0,sy+tile*.23,0,sy+tile);
+      face.addColorStop(0,"#07172888");face.addColorStop(.20,"#173b5310");
+      face.addColorStop(1,"#020a1677");
+      c.fillStyle=face;c.fillRect(sx,sy+tile*.23,tile+.5,tile*.77);
       c.drawImage(im,10,9,70,18,sx,sy,tile+.5,tile*.26);
-      c.fillStyle="#020b174d";c.fillRect(sx,sy+tile*.26,tile+.5,tile*.045);
+      c.fillStyle="#020b17b0";c.fillRect(sx,sy+tile*.26,tile+.5,tile*.045);
     } else {
       c.save();c.translate(sx+(p.dx===1?tile*.87:tile*.13),sy+tile/2);c.rotate(Math.PI/2);
       c.drawImage(im,10,9,70,18,-tile/2,-tile*.13,tile+.5,tile*.26);c.restore();
@@ -608,29 +647,53 @@ export class Renderer {
     return true;
   }
   pipeConnections(map) {
-    const pipes=(map.props || []).filter(p=>p.assetId==="industrial-pipe" && p.layer==="wallfixture");
-    const rows=new Map();
-    for (const pipe of pipes) {
-      const row=rows.get(pipe.y) || [];row.push(pipe);rows.set(pipe.y,row);
-    }
-    const runs=[];
-    for (const row of rows.values()) {
-      row.sort((a,b)=>a.x-b.x);
-      for (let i=1;i<row.length;i++) {
-        const a=row[i-1],b=row[i];
-        // A header only crosses verified blocked masonry, never a gate or floor.
-        if (b.x-a.x>6) continue;
-        let blocked=true;
-        for (let x=a.x;x<=b.x;x++)
-          if (map.tiles?.[a.y*map.width+x]!=="#") blocked=false;
-        if (blocked) runs.push({a,b,depth:a.y+Math.max(a.height,b.height)+.17});
+    if (!this.objectRules) return [];
+    const world=this.view?.world, battle=this.view?.mode==="battle", seed=this.view?.seed || 0;
+    const cached=this.sceneGraphCache?.get(map);
+    if(cached && cached.catalog===this.objectRules && cached.world===world
+      && cached.battle===battle && cached.seed===seed) return cached.graph?.connections || [];
+    // Dispatch returns new JSON objects even when only a crawler moved. Compare
+    // actual geometry once per input object, then reuse the expensive node graph.
+    // Mutable unit/cleared state is omitted: this cache only supplies connectors;
+    // the inspector independently builds its graph from the current WASM view.
+    const geometry=JSON.stringify({
+      width:map.width,height:map.height,tiles:map.tiles,props:map.props,
+      rooms:map.rooms,encounterId:map.encounterId,
+      world:battle ? {width:world?.width,height:world?.height,
+        tiles:world?.tiles,rooms:world?.rooms} : null,
+    });
+    const previous=this.sceneGeometryCache;
+    let graph=null;
+    if(previous && previous.catalog===this.objectRules && previous.battle===battle
+      && previous.seed===seed && previous.geometry===geometry) graph=previous.graph;
+    else {
+      try {
+        const architecture=this.assemblyMap===map ? this.assembly : undefined;
+        graph=buildSceneGraph(map,{catalog:this.objectRules,world,battle,seed,architecture});
+        this.sceneGraphError=null;
+      } catch(error) {
+        this.sceneGraphError=`Map scene graph unavailable: ${error.message}`;
+        console.error(this.sceneGraphError,error);
       }
+      this.sceneGeometryCache={catalog:this.objectRules,battle,seed,geometry,graph};
     }
-    return runs;
+    this.sceneGraphCache ||= new WeakMap();
+    this.sceneGraphCache.set(map,{catalog:this.objectRules,world,battle,seed,graph});
+    return graph?.connections || [];
   }
   drawPipeConnection(run, ox, oy, tile) {
     const c=this.ctx,{a,b}=run,header=this.materials?.["industrial-pipeH"];
     if (!header) return;
+    if (run.pipe) {
+      const {pipe,direction}=run;
+      c.save();c.translate(ox+(pipe.x+.5)*tile,oy+pipe.y*tile);
+      // The native elbow's left inlet joins the horizontal return, while
+      // its downward neck overlays the authored vertical shaft.
+      if(direction===1)c.scale(-1,1);
+      c.drawImage(header,55,0,125,header.height,-tile*1.42,tile*.11,tile*.80,tile*.37);
+      this.object("industrial-pipe-elbow",-tile*.72,0,1,.95);
+      c.restore();return;
+    }
     const left=ox+(a.x+.5)*tile,right=ox+(b.x+.5)*tile;
     const top=oy+(a.y+.03)*tile;
     // Sample the native shaft without open end flanges: tees close every joint.
