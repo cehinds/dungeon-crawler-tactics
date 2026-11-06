@@ -1,0 +1,784 @@
+namespace DccRebuild;
+
+// Frozen generation-3 authored rules; used only to validate historical saves.
+internal static class Version3ConceptGrammar
+{
+    internal const string Json = """
+{
+  "schemaVersion": 2,
+  "rooms": [
+    {
+      "roomId": "entry-landing",
+      "archetype": "descent-landing",
+      "shape": "narrow",
+      "minWidth": 10,
+      "maxWidth": 11,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [],
+      "groups": [
+        {
+          "id": "stair-approach",
+          "anchor": "northwest",
+          "zone": "approach",
+          "members": [
+            {
+              "assetId": "cd-stair-module",
+              "width": 3,
+              "height": 3,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0
+            },
+            {
+              "assetId": "cd-torch",
+              "width": 1,
+              "height": 1,
+              "rotation": 0,
+              "offsetX": 3,
+              "offsetY": 0
+            },
+            {
+              "assetId": "cd-torch",
+              "width": 1,
+              "height": 1,
+              "rotation": 0,
+              "offsetX": 3,
+              "offsetY": 2
+            }
+          ],
+          "sourceEvidenceIds": [
+            "topdown-F-32"
+          ]
+        }
+      ]
+    },
+    {
+      "roomId": "false-guild-alley",
+      "archetype": "ambush-alley",
+      "shape": "narrow",
+      "minWidth": 5,
+      "maxWidth": 7,
+      "minHeight": 7,
+      "maxHeight": 8,
+      "assemblies": [
+        {
+          "assetId": "cd-crate",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "cd-trap-machine",
+          "width": 3,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "cd-wall-straight",
+          "width": 2,
+          "height": 1,
+          "rotation": 0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "roomId": "tutorial-guildhall",
+      "archetype": "teaching-room",
+      "shape": "rectangular",
+      "minWidth": 11,
+      "maxWidth": 11,
+      "minHeight": 8,
+      "maxHeight": 8,
+      "assemblies": [],
+      "groups": [
+        {
+          "id": "teaching-table",
+          "anchor": "northwest",
+          "zone": "classroom",
+          "members": [
+            {
+              "assetId": "ef-rug-red",
+              "width": 3,
+              "height": 2,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "underlay"
+            },
+            {
+              "assetId": "ef-wood-table",
+              "width": 3,
+              "height": 2,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-chair-green",
+              "width": 1,
+              "height": 1,
+              "rotation": 180,
+              "offsetX": -1,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-chair-green",
+              "width": 1,
+              "height": 1,
+              "rotation": 0,
+              "offsetX": 3,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-chair-green",
+              "width": 1,
+              "height": 1,
+              "rotation": 90,
+              "offsetX": 1,
+              "offsetY": 2
+            }
+          ],
+          "sourceEvidenceIds": [
+            "topdown-F-35"
+          ]
+        }
+      ]
+    },
+    {
+      "roomId": "hoarder-lair",
+      "archetype": "refuse-nest",
+      "shape": "rounded",
+      "minWidth": 8,
+      "maxWidth": 11,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [
+        {
+          "assetId": "ab-clean-barrel-wood-top",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "ab-clean-crate-wood-cross",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "cd-crate",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "cd-torch",
+          "width": 1,
+          "height": 1,
+          "rotation": 0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "roomId": "tally-safe-room",
+      "archetype": "diner-service",
+      "shape": "rectangular",
+      "minWidth": 11,
+      "maxWidth": 11,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [],
+      "groups": [
+        {
+          "id": "dining-cluster",
+          "anchor": "northwest",
+          "zone": "dining",
+          "members": [
+            {
+              "assetId": "ef-wood-table",
+              "width": 3,
+              "height": 2,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-chair-green",
+              "width": 1,
+              "height": 1,
+              "rotation": 180,
+              "offsetX": -1,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-chair-green",
+              "width": 1,
+              "height": 1,
+              "rotation": 0,
+              "offsetX": 3,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-wood-bench",
+              "width": 2,
+              "height": 1,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 2
+            }
+          ],
+          "sourceEvidenceIds": [
+            "topdown-F-33"
+          ]
+        }
+      ]
+    },
+    {
+      "roomId": "goblin-workshop",
+      "archetype": "workshop-boss-approach",
+      "shape": "rectangular",
+      "minWidth": 11,
+      "maxWidth": 11,
+      "minHeight": 8,
+      "maxHeight": 8,
+      "assemblies": [],
+      "groups": [
+        {
+          "id": "north-descent",
+          "anchor": "north",
+          "zone": "exit",
+          "members": [
+            {
+              "assetId": "cd-door-threshold",
+              "width": 3,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "underlay"
+            }
+          ]
+        },
+        {
+          "id": "northwest-machinery",
+          "anchor": "northwest",
+          "zone": "machinery",
+          "members": [
+            {
+              "assetId": "industrial-machine",
+              "width": 2,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "northeast-storage",
+          "anchor": "northeast",
+          "zone": "storage",
+          "members": [
+            {
+              "assetId": "industrial-crate",
+              "width": 2,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "southwest-service",
+          "anchor": "southwest",
+          "zone": "service",
+          "jitterX": 1,
+          "members": [
+            {
+              "assetId": "industrial-pipe",
+              "width": 2,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            },
+            {
+              "assetId": "industrial-grate",
+              "width": 2,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": -1,
+              "blocksMovement": false,
+              "layer": "underlay"
+            }
+          ]
+        },
+        {
+          "id": "southeast-storage",
+          "anchor": "southeast",
+          "zone": "storage",
+          "jitterX": 1,
+          "members": [
+            {
+              "assetId": "industrial-crate",
+              "width": 2,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "north-warm-light",
+          "anchor": "north",
+          "zone": "lighting",
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false
+            },
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 4,
+              "offsetY": 0,
+              "blocksMovement": false
+            }
+          ]
+        },
+        {
+          "id": "south-warm-light",
+          "anchor": "south",
+          "zone": "lighting",
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "channel-outlet",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetY": 2,
+          "members": [
+            {
+              "assetId": "industrial-outlet",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false
+            }
+          ]
+        }
+      ],
+      "composition": "industrial-sewer",
+      "floorStyle": "industrial-blue",
+      "sideChannels": true,
+      "reserveCenterWidth": 5,
+      "reserveCenterHeight": 4
+    },
+    {
+      "roomId": "dmv-safe-room",
+      "archetype": "waiting-room",
+      "shape": "rectangular",
+      "minWidth": 8,
+      "maxWidth": 10,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [],
+      "groups": [
+        {
+          "id": "waiting-area",
+          "anchor": "northwest",
+          "zone": "waiting",
+          "members": [
+            {
+              "assetId": "ef-wood-bench",
+              "width": 2,
+              "height": 1,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-vending-green",
+              "width": 2,
+              "height": 2,
+              "rotation": 0,
+              "offsetX": 2,
+              "offsetY": 0
+            }
+          ],
+          "sourceEvidenceIds": [
+            "topdown-F-34"
+          ]
+        }
+      ]
+    },
+    {
+      "roomId": "juicer-gym",
+      "archetype": "training-floor",
+      "shape": "rectangular",
+      "minWidth": 10,
+      "maxWidth": 11,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [
+        {
+          "assetId": "cd-weight-bench",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "cd-barbell",
+          "width": 3,
+          "height": 1,
+          "rotation": 0
+        },
+        {
+          "assetId": "cd-barbell",
+          "width": 3,
+          "height": 1,
+          "rotation": 0
+        },
+        {
+          "assetId": "ef-wood-bench",
+          "width": 2,
+          "height": 1,
+          "rotation": 0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "roomId": "sebastian-safe-room",
+      "archetype": "mixed-service-rest",
+      "shape": "rectangular",
+      "minWidth": 9,
+      "maxWidth": 11,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [],
+      "groups": [
+        {
+          "id": "rest-bedroom",
+          "anchor": "northwest",
+          "zone": "living",
+          "members": [
+            {
+              "assetId": "ef-rug-red",
+              "width": 3,
+              "height": 2,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "underlay"
+            },
+            {
+              "assetId": "ef-bed-red",
+              "width": 2,
+              "height": 3,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-lamp-table",
+              "width": 1,
+              "height": 1,
+              "rotation": 0,
+              "offsetX": 2,
+              "offsetY": 0
+            }
+          ],
+          "sourceEvidenceIds": [
+            "topdown-F-36"
+          ]
+        },
+        {
+          "id": "washroom-fixtures",
+          "anchor": "northeast",
+          "zone": "washroom",
+          "members": [
+            {
+              "assetId": "ef-toilet",
+              "width": 1,
+              "height": 3,
+              "rotation": 0,
+              "offsetX": 0,
+              "offsetY": 0
+            },
+            {
+              "assetId": "ef-sink-counter",
+              "width": 3,
+              "height": 2,
+              "rotation": 0,
+              "offsetX": 1,
+              "offsetY": 0
+            }
+          ],
+          "sourceEvidenceIds": [
+            "topdown-F-36"
+          ]
+        }
+      ]
+    },
+    {
+      "roomId": "meadow-lark-camp",
+      "archetype": "survivor-camp",
+      "shape": "rounded",
+      "minWidth": 8,
+      "maxWidth": 11,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [
+        {
+          "assetId": "ab-clean-cot-metal-green",
+          "width": 1,
+          "height": 3,
+          "rotation": 0
+        },
+        {
+          "assetId": "ab-clean-crate-wood-cross",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "ab-clean-barrel-wood-top",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "ab-clean-plant-leafy-terracotta",
+          "width": 1,
+          "height": 1,
+          "rotation": 0
+        }
+      ],
+      "groups": []
+    },
+    {
+      "roomId": "ball-of-swine-complex",
+      "archetype": "boss-arena",
+      "shape": "rectangular",
+      "minWidth": 11,
+      "maxWidth": 11,
+      "minHeight": 8,
+      "maxHeight": 8,
+      "assemblies": [],
+      "groups": [
+        {
+          "id": "north-descent",
+          "anchor": "north",
+          "zone": "exit",
+          "members": [
+            {
+              "assetId": "industrial-exit",
+              "width": 3,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "underlay"
+            }
+          ]
+        },
+        {
+          "id": "northwest-machinery",
+          "anchor": "northwest",
+          "zone": "machinery",
+          "members": [
+            {
+              "assetId": "industrial-machine",
+              "width": 2,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "northeast-storage",
+          "anchor": "northeast",
+          "zone": "storage",
+          "members": [
+            {
+              "assetId": "industrial-crate",
+              "width": 2,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "southwest-service",
+          "anchor": "southwest",
+          "zone": "service",
+          "jitterX": 1,
+          "members": [
+            {
+              "assetId": "industrial-pipe",
+              "width": 2,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            },
+            {
+              "assetId": "industrial-grate",
+              "width": 2,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": -1,
+              "blocksMovement": false,
+              "layer": "underlay"
+            }
+          ]
+        },
+        {
+          "id": "southeast-storage",
+          "anchor": "southeast",
+          "zone": "storage",
+          "jitterX": 1,
+          "members": [
+            {
+              "assetId": "industrial-crate",
+              "width": 2,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": true,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "north-warm-light",
+          "anchor": "north",
+          "zone": "lighting",
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false
+            },
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 4,
+              "offsetY": 0,
+              "blocksMovement": false
+            }
+          ]
+        },
+        {
+          "id": "south-warm-light",
+          "anchor": "south",
+          "zone": "lighting",
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "channel-outlet",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetY": 2,
+          "members": [
+            {
+              "assetId": "industrial-outlet",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false
+            }
+          ]
+        }
+      ],
+      "composition": "industrial-sewer",
+      "floorStyle": "industrial-blue",
+      "sideChannels": true,
+      "reserveCenterWidth": 5,
+      "reserveCenterHeight": 4
+    },
+    {
+      "roomId": "supplies-store",
+      "archetype": "supply-cache",
+      "shape": "rectangular",
+      "minWidth": 7,
+      "maxWidth": 9,
+      "minHeight": 6,
+      "maxHeight": 8,
+      "assemblies": [
+        {
+          "assetId": "ab-clean-crate-wood-cross",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        },
+        {
+          "assetId": "ab-clean-shelf-wood-empty",
+          "width": 3,
+          "height": 1,
+          "rotation": 0
+        },
+        {
+          "assetId": "ab-clean-barrel-wood-top",
+          "width": 2,
+          "height": 2,
+          "rotation": 0
+        }
+      ],
+      "groups": []
+    }
+  ]
+}
+
+""";
+}

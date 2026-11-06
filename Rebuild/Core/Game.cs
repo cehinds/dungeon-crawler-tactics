@@ -183,8 +183,8 @@ public sealed class Game
         for (int i = 0; i < s.party.Count; i++)
         {
             var u = s.party[i];
-            u.x = 1;
-            u.y = 2 + i * 3;
+            u.x = s.battle.composition == "industrial-sewer" ? 4 : 1;
+            u.y = (s.battle.composition == "industrial-sewer" ? 3 : 2) + i * 3;
             u.moved = u.acted = u.ended = false;
         }
         var ids = content.encounters.FirstOrDefault(e => e.id == o.id)?.enemyIds;
@@ -208,8 +208,8 @@ public sealed class Game
                 id = "enemy-" + i,
                 templateId = e.id,
                 name = e.name,
-                x = 7 + i % 2,
-                y = 1 + i * 2,
+                x = (s.battle.composition == "industrial-sewer" ? 10 : 7) + i % 2,
+                y = (s.battle.composition == "industrial-sewer" ? 3 : 1) + i * 2,
                 hp = e.hp,
                 maxHp = e.hp,
                 power = e.power,
@@ -467,10 +467,10 @@ public sealed class Game
                 throw new InvalidOperationException();
             var candidate = save.state;
             var sourceWorld = candidate.world;
-            bool migrate = sourceWorld.generationVersion is 0 or 1 or 2;
-            if (!migrate && sourceWorld.generationVersion != 3)
+            bool migrate = sourceWorld.generationVersion is 0 or 1 or 2 or 3;
+            if (!migrate && sourceWorld.generationVersion != 4)
                 throw new NotSupportedException();
-            var trustedWorld = sourceWorld.generationVersion is 0 or 1 ? World.BuildLegacy(candidate.seed) : sourceWorld.generationVersion == 2 ? World.BuildVersion2(candidate.seed) : World.Build(candidate.seed);
+            var trustedWorld = sourceWorld.generationVersion is 0 or 1 ? World.BuildLegacy(candidate.seed) : sourceWorld.generationVersion == 2 ? World.BuildVersion2(candidate.seed) : sourceWorld.generationVersion == 3 ? World.BuildVersion3(candidate.seed) : World.Build(candidate.seed);
             // Legacy coordinates are meaningful only against the original authored map.
             // Compare the persisted geometry before validating any checkpoint or receipt.
             if (sourceWorld.width != trustedWorld.width || sourceWorld.height != trustedWorld.height ||

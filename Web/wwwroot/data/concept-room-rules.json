@@ -234,147 +234,126 @@
     {
       "roomId": "goblin-workshop",
       "archetype": "workshop-boss-approach",
-      "shape": "rectangular",
-      "minWidth": 11,
-      "maxWidth": 11,
-      "minHeight": 8,
-      "maxHeight": 8,
+      "shape": "industrial-source",
+      "minWidth": 18,
+      "maxWidth": 18,
+      "minHeight": 11,
+      "maxHeight": 11,
       "assemblies": [],
       "groups": [
-        {
-          "id": "north-descent",
-          "anchor": "north",
-          "zone": "exit",
-          "members": [
-            {
-              "assetId": "cd-door-threshold",
-              "width": 3,
-              "height": 2,
-              "offsetX": 0,
-              "offsetY": 0,
-              "blocksMovement": false,
-              "layer": "underlay"
-            }
-          ]
-        },
         {
           "id": "northwest-machinery",
           "anchor": "northwest",
           "zone": "machinery",
+          "offsetX": 3,
+          "offsetY": 0,
           "members": [
             {
               "assetId": "industrial-machine",
-              "width": 2,
+              "width": 4,
               "height": 2,
               "offsetX": 0,
               "offsetY": 0,
               "blocksMovement": true,
-              "layer": "object"
-            }
-          ]
-        },
-        {
-          "id": "northeast-storage",
-          "anchor": "northeast",
-          "zone": "storage",
-          "members": [
+              "layer": "wallfixture"
+            },
             {
-              "assetId": "industrial-crate",
-              "width": 2,
+              "assetId": "industrial-pipe",
+              "width": 1,
               "height": 2,
               "offsetX": 0,
               "offsetY": 0,
-              "blocksMovement": true,
-              "layer": "object"
+              "blocksMovement": false,
+              "layer": "wallfixture"
+            },
+            {
+              "assetId": "industrial-pipe",
+              "width": 1,
+              "height": 2,
+              "offsetX": 3,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
             }
           ]
         },
         {
-          "id": "southwest-service",
-          "anchor": "southwest",
-          "zone": "service",
-          "jitterX": 1,
+          "id": "north-pipe-bank",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 7,
+          "offsetY": 0,
           "members": [
             {
               "assetId": "industrial-pipe",
-              "width": 2,
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
+            }
+          ]
+        },
+        {
+          "id": "west-floor-grate",
+          "anchor": "northwest",
+          "zone": "service",
+          "offsetX": 3,
+          "offsetY": 6,
+          "members": [
+            {
+              "assetId": "industrial-grate",
+              "width": 1,
               "height": 1,
               "offsetX": 0,
               "offsetY": 0,
-              "blocksMovement": true,
-              "layer": "object"
-            },
-            {
-              "assetId": "industrial-grate",
-              "width": 2,
-              "height": 1,
-              "offsetX": 0,
-              "offsetY": -1,
               "blocksMovement": false,
               "layer": "underlay"
             }
           ]
         },
         {
-          "id": "southeast-storage",
-          "anchor": "southeast",
-          "zone": "storage",
-          "jitterX": 1,
+          "id": "south-floor-grate",
+          "anchor": "northwest",
+          "zone": "service",
+          "offsetX": 9,
+          "offsetY": 7,
           "members": [
             {
-              "assetId": "industrial-crate",
-              "width": 2,
-              "height": 1,
-              "offsetX": 0,
-              "offsetY": 0,
-              "blocksMovement": true,
-              "layer": "object"
-            }
-          ]
-        },
-        {
-          "id": "north-warm-light",
-          "anchor": "north",
-          "zone": "lighting",
-          "members": [
-            {
-              "assetId": "industrial-torch",
-              "width": 1,
-              "height": 1,
-              "offsetX": 0,
-              "offsetY": 0,
-              "blocksMovement": false
-            },
-            {
-              "assetId": "industrial-torch",
-              "width": 1,
-              "height": 1,
-              "offsetX": 4,
-              "offsetY": 0,
-              "blocksMovement": false
-            }
-          ]
-        },
-        {
-          "id": "south-warm-light",
-          "anchor": "south",
-          "zone": "lighting",
-          "members": [
-            {
-              "assetId": "industrial-torch",
+              "assetId": "industrial-grate",
               "width": 1,
               "height": 1,
               "offsetX": 0,
               "offsetY": 0,
               "blocksMovement": false,
-              "layer": "object"
+              "layer": "underlay"
             }
           ]
         },
         {
-          "id": "channel-outlet",
+          "id": "east-floor-grate",
+          "anchor": "northwest",
+          "zone": "service",
+          "offsetX": 14,
+          "offsetY": 3,
+          "members": [
+            {
+              "assetId": "industrial-grate",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "underlay"
+            }
+          ]
+        },
+        {
+          "id": "west-outlet",
           "anchor": "northwest",
           "zone": "waterworks",
+          "offsetX": 1,
           "offsetY": 2,
           "members": [
             {
@@ -383,7 +362,116 @@
               "height": 2,
               "offsetX": 0,
               "offsetY": 0,
-              "blocksMovement": false
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "east-upper-outlet",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 15,
+          "offsetY": 1,
+          "members": [
+            {
+              "assetId": "industrial-outlet",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "east-lower-outlet",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 16,
+          "offsetY": 6,
+          "members": [
+            {
+              "assetId": "industrial-outlet",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "east-pipe-bank",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 17,
+          "offsetY": 7,
+          "members": [
+            {
+              "assetId": "industrial-pipe",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "west-pipe-bank",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 2,
+          "offsetY": 6,
+          "members": [
+            {
+              "assetId": "industrial-pipe",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "west-gate-torch",
+          "anchor": "northwest",
+          "zone": "lighting",
+          "offsetX": 10,
+          "offsetY": 0,
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
+            }
+          ]
+        },
+        {
+          "id": "east-gate-torch",
+          "anchor": "northwest",
+          "zone": "lighting",
+          "offsetX": 14,
+          "offsetY": 0,
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
             }
           ]
         }
@@ -391,8 +479,21 @@
       "composition": "industrial-sewer",
       "floorStyle": "industrial-blue",
       "sideChannels": true,
-      "reserveCenterWidth": 5,
-      "reserveCenterHeight": 4
+      "reserveCenterWidth": 12,
+      "reserveCenterHeight": 6,
+      "tileRows": [
+        "###########...####",
+        "###########...#~~#",
+        "~~~............~~#",
+        "~~~............~~#",
+        "~~~............~~~",
+        "..................",
+        "~~~............~~~",
+        "#~~............~~~",
+        "######......###~~~",
+        "########....###~~~",
+        "#########..#######"
+      ]
     },
     {
       "roomId": "dmv-safe-room",
@@ -581,22 +682,24 @@
     {
       "roomId": "ball-of-swine-complex",
       "archetype": "boss-arena",
-      "shape": "rectangular",
-      "minWidth": 11,
-      "maxWidth": 11,
-      "minHeight": 8,
-      "maxHeight": 8,
+      "shape": "industrial-source",
+      "minWidth": 18,
+      "maxWidth": 18,
+      "minHeight": 11,
+      "maxHeight": 11,
       "assemblies": [],
       "groups": [
         {
           "id": "north-descent",
-          "anchor": "north",
+          "anchor": "northwest",
           "zone": "exit",
+          "offsetX": 11,
+          "offsetY": 0,
           "members": [
             {
               "assetId": "industrial-exit",
               "width": 3,
-              "height": 2,
+              "height": 3,
               "offsetX": 0,
               "offsetY": 0,
               "blocksMovement": false,
@@ -608,120 +711,115 @@
           "id": "northwest-machinery",
           "anchor": "northwest",
           "zone": "machinery",
+          "offsetX": 3,
+          "offsetY": 0,
           "members": [
             {
               "assetId": "industrial-machine",
-              "width": 2,
+              "width": 4,
               "height": 2,
               "offsetX": 0,
               "offsetY": 0,
               "blocksMovement": true,
-              "layer": "object"
-            }
-          ]
-        },
-        {
-          "id": "northeast-storage",
-          "anchor": "northeast",
-          "zone": "storage",
-          "members": [
+              "layer": "wallfixture"
+            },
             {
-              "assetId": "industrial-crate",
-              "width": 2,
+              "assetId": "industrial-pipe",
+              "width": 1,
               "height": 2,
               "offsetX": 0,
               "offsetY": 0,
-              "blocksMovement": true,
-              "layer": "object"
+              "blocksMovement": false,
+              "layer": "wallfixture"
+            },
+            {
+              "assetId": "industrial-pipe",
+              "width": 1,
+              "height": 2,
+              "offsetX": 3,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
             }
           ]
         },
         {
-          "id": "southwest-service",
-          "anchor": "southwest",
-          "zone": "service",
-          "jitterX": 1,
+          "id": "north-pipe-bank",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 7,
+          "offsetY": 0,
           "members": [
             {
               "assetId": "industrial-pipe",
-              "width": 2,
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
+            }
+          ]
+        },
+        {
+          "id": "west-floor-grate",
+          "anchor": "northwest",
+          "zone": "service",
+          "offsetX": 3,
+          "offsetY": 6,
+          "members": [
+            {
+              "assetId": "industrial-grate",
+              "width": 1,
               "height": 1,
               "offsetX": 0,
               "offsetY": 0,
-              "blocksMovement": true,
-              "layer": "object"
-            },
-            {
-              "assetId": "industrial-grate",
-              "width": 2,
-              "height": 1,
-              "offsetX": 0,
-              "offsetY": -1,
               "blocksMovement": false,
               "layer": "underlay"
             }
           ]
         },
         {
-          "id": "southeast-storage",
-          "anchor": "southeast",
-          "zone": "storage",
-          "jitterX": 1,
+          "id": "south-floor-grate",
+          "anchor": "northwest",
+          "zone": "service",
+          "offsetX": 9,
+          "offsetY": 7,
           "members": [
             {
-              "assetId": "industrial-crate",
-              "width": 2,
-              "height": 1,
-              "offsetX": 0,
-              "offsetY": 0,
-              "blocksMovement": true,
-              "layer": "object"
-            }
-          ]
-        },
-        {
-          "id": "north-warm-light",
-          "anchor": "north",
-          "zone": "lighting",
-          "members": [
-            {
-              "assetId": "industrial-torch",
-              "width": 1,
-              "height": 1,
-              "offsetX": 0,
-              "offsetY": 0,
-              "blocksMovement": false
-            },
-            {
-              "assetId": "industrial-torch",
-              "width": 1,
-              "height": 1,
-              "offsetX": 4,
-              "offsetY": 0,
-              "blocksMovement": false
-            }
-          ]
-        },
-        {
-          "id": "south-warm-light",
-          "anchor": "south",
-          "zone": "lighting",
-          "members": [
-            {
-              "assetId": "industrial-torch",
+              "assetId": "industrial-grate",
               "width": 1,
               "height": 1,
               "offsetX": 0,
               "offsetY": 0,
               "blocksMovement": false,
-              "layer": "object"
+              "layer": "underlay"
             }
           ]
         },
         {
-          "id": "channel-outlet",
+          "id": "east-floor-grate",
+          "anchor": "northwest",
+          "zone": "service",
+          "offsetX": 14,
+          "offsetY": 3,
+          "members": [
+            {
+              "assetId": "industrial-grate",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "underlay"
+            }
+          ]
+        },
+        {
+          "id": "west-outlet",
           "anchor": "northwest",
           "zone": "waterworks",
+          "offsetX": 1,
           "offsetY": 2,
           "members": [
             {
@@ -730,7 +828,116 @@
               "height": 2,
               "offsetX": 0,
               "offsetY": 0,
-              "blocksMovement": false
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "east-upper-outlet",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 15,
+          "offsetY": 1,
+          "members": [
+            {
+              "assetId": "industrial-outlet",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "east-lower-outlet",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 16,
+          "offsetY": 6,
+          "members": [
+            {
+              "assetId": "industrial-outlet",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "east-pipe-bank",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 17,
+          "offsetY": 7,
+          "members": [
+            {
+              "assetId": "industrial-pipe",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "west-pipe-bank",
+          "anchor": "northwest",
+          "zone": "waterworks",
+          "offsetX": 2,
+          "offsetY": 6,
+          "members": [
+            {
+              "assetId": "industrial-pipe",
+              "width": 1,
+              "height": 2,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "object"
+            }
+          ]
+        },
+        {
+          "id": "west-gate-torch",
+          "anchor": "northwest",
+          "zone": "lighting",
+          "offsetX": 10,
+          "offsetY": 0,
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
+            }
+          ]
+        },
+        {
+          "id": "east-gate-torch",
+          "anchor": "northwest",
+          "zone": "lighting",
+          "offsetX": 14,
+          "offsetY": 0,
+          "members": [
+            {
+              "assetId": "industrial-torch",
+              "width": 1,
+              "height": 1,
+              "offsetX": 0,
+              "offsetY": 0,
+              "blocksMovement": false,
+              "layer": "wallfixture"
             }
           ]
         }
@@ -738,8 +945,21 @@
       "composition": "industrial-sewer",
       "floorStyle": "industrial-blue",
       "sideChannels": true,
-      "reserveCenterWidth": 5,
-      "reserveCenterHeight": 4
+      "reserveCenterWidth": 12,
+      "reserveCenterHeight": 6,
+      "tileRows": [
+        "###########...####",
+        "###########...#~~#",
+        "~~~............~~#",
+        "~~~............~~#",
+        "~~~............~~~",
+        "..................",
+        "~~~............~~~",
+        "#~~............~~~",
+        "######......###~~~",
+        "########....###~~~",
+        "#########..#######"
+      ]
     },
     {
       "roomId": "supplies-store",

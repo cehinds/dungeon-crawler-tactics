@@ -11,7 +11,7 @@ p.add_argument('--url', default='http://127.0.0.1:8773')
 p.add_argument('--browser', default='/usr/bin/chromium')
 p.add_argument('--output', type=Path, default=ROOT/'Rebuild/ReferenceArenaComparison')
 a=p.parse_args(); a.output.mkdir(parents=True,exist_ok=True)
-report={'url':a.url,'revision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'captureDisclosure':'Actual published WebAssembly state and original renderer. Workshop and boss room screenshots use a camera-only browser response override to fit the generated room. No state, gameplay, geometry, assets, or draw calls are fabricated. Combat is entered by keyboard walking and E interaction.','runs':[],'publishedFiles':{}}
+report={'url':a.url,'revision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'captureDisclosure':'Actual published WebAssembly state and original renderer. Workshop and boss room screenshots use a camera-only browser response override to fit the generated room. No state, gameplay, geometry, assets, or draw calls are fabricated. Environment-only room captures hide external DOM controls/toast/battle banner and crop to the room plus one-tile border for source aspect comparison. World objects, sprites and labels remain actual. Full UI desktop/mobile and combat captures retain controls. Combat is entered by keyboard walking and E interaction.','runs':[],'publishedFiles':{}}
 ref=ROOT/'Web/wwwroot/assets/reference-layers/clean-map.png'
 if not ref.exists(): ref=ref.with_name('original-reference.png')
 shutil.copyfile(ref,a.output/'reference.png')
@@ -46,6 +46,15 @@ with sync_playwright() as pw:
         def view(): return page.evaluate('window.rpgView')
         def key(k):
             page.keyboard.down(k); page.wait_for_timeout(25); page.keyboard.up(k); page.wait_for_timeout(190)
+        def environment_capture(path):
+            camera_room=page.evaluate('window.captureRoom')
+            assert camera_room
+            style=page.add_style_tag(content='#controls,#toast,#battle-banner{visibility:hidden!important}')
+            box=page.locator('#world').bounding_box()
+            tile=math.floor(min(box['width']/(camera_room['width']+2),box['height']/(camera_room['height']+2)))
+            cw=(camera_room['width']+2)*tile; ch=(camera_room['height']+2)*tile
+            page.screenshot(path=str(path),clip={'x':box['x']+(box['width']-cw)/2,'y':box['y']+(box['height']-ch)/2,'width':cw,'height':ch})
+            style.evaluate('(el)=>el.remove()')
         state=view(); world=state['world']; assert state['seed']==seed
         (a.output/f'seed-{seed}-world.json').write_text(json.dumps(world,indent=2)+'\n')
         def neighbors(xy):
@@ -94,16 +103,16 @@ with sync_playwright() as pw:
             assert (view()['x'],view()['y'])==adjacent,'Blocked material allowed movement: '+material
             tile_collisions.append({'tile':material,'blockedCell':blocked_cell,'approach':adjacent,'message':view()['message']})
         page.evaluate('(r)=>window.captureRoom=r',room); page.wait_for_timeout(400)
-        page.locator('#world').screenshot(path=str(a.output/f'seed-{seed}-workshop.png'))
+        environment_capture(a.output/f'seed-{seed}-workshop.png')
         page.screenshot(path=str(a.output/f'seed-{seed}-desktop.png'))
         workshop=next((r for r in world['rooms'] if 'workshop' in r['id']),None)
         if workshop:
             page.evaluate('(r)=>window.captureRoom=r',workshop); page.wait_for_timeout(300)
-            page.locator('#world').screenshot(path=str(a.output/f'seed-{seed}-goblin-workshop.png'))
+            environment_capture(a.output/f'seed-{seed}-goblin-workshop.png')
             page.evaluate('(r)=>window.captureRoom=r',room); page.wait_for_timeout(300)
         boss=next(r for r in world['rooms'] if r['id']=='ball-of-swine-complex')
         page.evaluate('(r)=>window.captureRoom=r',boss); page.wait_for_timeout(300)
-        page.locator('#world').screenshot(path=str(a.output/f'seed-{seed}-boss.png'))
+        environment_capture(a.output/f'seed-{seed}-boss.png')
         page.evaluate('(r)=>window.captureRoom=r',room); page.wait_for_timeout(300)
         page.set_viewport_size({'width':390,'height':844}); page.wait_for_timeout(400)
         page.screenshot(path=str(a.output/f'seed-{seed}-mobile-workshop.png'))
@@ -155,8 +164,21 @@ with sync_playwright() as pw:
         assert view()['questStage']>=2,view()['message']
         interact_object(next(o for o in world['objects'] if o['id']=='goblin-workshop'))
         assert view()['mode']=='battle' and view()['battle']['encounterId']=='goblin-workshop',view()['message']
-        assert view()['battle']['width']==11
-        battle=view()['battle']; actor=next(u for u in battle['units'] if u['id']==view()['selectedId'])
+        battle=view()['battle']
+        assert (battle['width'],battle['height'])==(room['width'],room['height']),'Arena dimensions diverge from generated workshop'
+        assert len(battle['tiles'])==battle['width']*battle['height']
+        blocked_cells={(o['x'],o['y']) for o in battle['obstacles']}
+        for y in range(battle['height']):
+            for x in range(battle['width']):
+                material=world['tiles'][(room['y']+y)*world['width']+room['x']+x]
+                assert battle['tiles'][y*battle['width']+x]==material,'Arena tile differs from exploration room'
+                assert ((x,y) in blocked_cells)==(material!='.'),'Arena collision differs from actual floor'
+        live=[u for u in battle['units']+battle['enemies'] if u['hp']>0]
+        assert len({(u['x'],u['y']) for u in live})==len(live),'Arena spawns overlap'
+        for u in live:
+            assert 0<=u['x']<battle['width'] and 0<=u['y']<battle['height'],'Spawn outside generated arena'
+            assert (u['x'],u['y']) not in blocked_cells,'Spawn on blocked tile'
+        actor=next(u for u in battle['units'] if u['id']==view()['selectedId'])
         old_message=view()['message']; tile(battle['width']-1,0)
         assert view()['message']!=old_message,'Rightmost column click was discarded'
         rightmost_message=view()['message']
@@ -170,7 +192,7 @@ with sync_playwright() as pw:
         page.screenshot(path=str(a.output/f'seed-{seed}-mobile-combat.png'))
         assert not errors,errors
         assert not missing,missing
-        report['runs'].append({'seed':seed,'room':room,'reachableCells':len(reachable),'solidProps':len(solids),'materialKeyboardCollisions':tile_collisions,'collisionProp':collision[0],'keyboardStepsToEncounter':steps,'actualCombat':True,'battleEncounterId':'goblin-workshop','rightmostColumnMessage':rightmost_message,'blockedArenaMovementMessage':view()['message'],'browserErrors':errors,'missingAssets':missing})
+        report['runs'].append({'seed':seed,'room':room,'reachableCells':len(reachable),'solidProps':len(solids),'materialKeyboardCollisions':tile_collisions,'collisionProp':collision[0],'keyboardStepsToEncounter':steps,'actualCombat':True,'battleEncounterId':'goblin-workshop','arenaWidth':battle['width'],'arenaHeight':battle['height'],'validatedLiveSpawns':len(live),'rightmostColumnMessage':rightmost_message,'blockedArenaMovementMessage':view()['message'],'browserErrors':errors,'missingAssets':missing})
         page.close()
     assert (a.output/'seed-1337-world.json').read_bytes()!=(a.output/'seed-42-world.json').read_bytes()
     cards=''.join(f'<section><h2>Seed {seed}: {label}</h2><div class="pair"><figure><figcaption>REFERENCE · {html.escape(ref.name)}</figcaption><img src="reference.png"></figure><figure><figcaption>ACTUAL PUBLISHED WASM · {label}</figcaption><img src="seed-{seed}-{kind}.png"></figure></div></section>' for seed in (1337,42) for label,kind in [('Generated boss arena · golden exit · camera fitted','boss'),('Generated workshop arena · camera fitted','workshop'),('Combat · actual keyboard encounter','combat')])

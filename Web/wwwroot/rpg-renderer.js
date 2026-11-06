@@ -121,7 +121,22 @@ export class Renderer {
       "industrial-outlet": "water-outlet",
     }).map(async ([id, file]) => {
       const image = await load(kit + file + ".png");
-      if (image) this.objects.set(id, { image, visibleBounds: [0, 0, image.width, image.height] });
+      // Bounds describe the complete opaque object, not its square export gutter.
+      // In particular a tall pipe must fill a 1×2 footprint instead of shrinking
+      // to one cell because of transparent space on either side.
+      const bounds = {
+        "pipe-straight": [44,5,83,124], "pipe-elbow": [11,6,116,123],
+        "machine-controls": [7,4,121,124], "torch": [34,5,94,123],
+        "grate": [5,6,123,121], "water-outlet": [21,4,113,122],
+        "crate": [13,5,114,123],
+      };
+      if (image) this.objects.set(id, { image, visibleBounds: bounds[file] || [0,0,image.width,image.height] });
+    }));
+    // Architectural overlays are complete alpha pieces; the ground remains below them.
+    await Promise.all(["water-ironbridge-iron-deck", "water-dryarch-left-jamb",
+      "water-dryarch-right-jamb", "water-dryarch-lintel"].map(async id => {
+      const image = await load("assets/map-grid-pass/expansion/native/water/" + id + ".png");
+      if (image) this.materials[id] = image;
     }));
     const exit = await load("assets/completed-layers/native/complete-gold-exit.png");
     if (exit) this.objects.set("industrial-exit", {
@@ -293,6 +308,105 @@ export class Renderer {
     );
     this.ctx.restore();
   }
+  assembleArchitecture(map) {
+    if (this.assemblyMap === map) return this.assembly;
+    this.assemblyMap = map;
+    const at = (x,y) => x < 0 || y < 0 || x >= map.width || y >= map.height
+      ? "#" : this.propFloor.has(y*map.width+x) ? "." : map.tiles?.[y*map.width+x] || ".";
+    const parts = [];
+    // A cap is one narrow connected rail at the actual wall/floor interface.
+    // The southern face may overlap floor by 0.10 cell; its depth joins actors.
+    for (let y=-1;y<=map.height;y++) for (let x=-1;x<=map.width;x++) {
+      if (at(x,y) !== "#") continue;
+      for (const [dx,dy] of [[0,1],[0,-1],[1,0],[-1,0]]) {
+        if (at(x+dx,y+dy) === "#") continue;
+        parts.push({kind: dy === 1 ? "front" : "cap", x,y,dx,dy, depth:y+1.12});
+      }
+    }
+    // Frames occur only where a chamber boundary meets an open corridor.
+    // A nearby # on both sides is mandatory: no arch is invented in open rooms.
+    const doors = new Set();
+    for (const room of map.rooms || []) {
+      const ports = [];
+      for (let x=room.x;x<room.x+room.width;x++)
+        ports.push([x,room.y-1,0],[x,room.y+room.height,0]);
+      for (let y=room.y;y<room.y+room.height;y++)
+        ports.push([room.x-1,y,1],[room.x+room.width,y,1]);
+      for (const [x,y,axis] of ports) {
+        const ax=axis ? 0:1, ay=axis ? 1:0;
+        if (at(x,y) !== "." || at(x-ax,y-ay) !== "#" || at(x+ax,y+ay) !== "#"
+          || at(x-ay,y-ax) !== "." || at(x+ay,y+ax) !== ".") continue;
+        if ((at(x,y-1)==="~" && at(x,y+1)==="~") || (at(x-1,y)==="~" && at(x+1,y)==="~")) continue;
+        // The authored gold stair already supplies its own complete doorway.
+        if ((map.props || []).some(p => p.assetId === "industrial-exit"
+          && x >= p.x-1 && x < p.x+p.width+1 && y >= p.y-1 && y < p.y+p.height+1)) continue;
+        const key=`${x},${y}`;
+        if (!doors.has(key)) {parts.push({kind:"door",x,y,axis});doors.add(key);}
+      }
+    }
+    // Six anchored green breaks per industrial chamber, never loose floor scatter.
+    // A selected cluster is clipped to a true blocked boundary tile.
+    const industrialRooms = map.rooms?.filter(r => (map.props || []).some(p =>
+      p.assetId === "industrial-machine" && p.x >= r.x && p.x < r.x+r.width
+      && p.y >= r.y && p.y < r.y+r.height)) || [];
+    if (!map.rooms && (map.props || []).some(p => p.assetId === "industrial-machine"))
+      industrialRooms.push({x:0,y:0,width:map.width,height:map.height});
+    const mossCells = new Set();
+    for (const r of industrialRooms) {
+      const anchors = [[r.x-1,r.y+1],[r.x-1,r.y+r.height-2],
+        [r.x+r.width,r.y+1],[r.x+r.width,r.y+r.height-2],
+        [r.x+1,r.y+r.height],[r.x+r.width-2,r.y+r.height]];
+      for (const [ax,ay] of anchors) {
+        const candidates=[];
+        for (let dy=-2;dy<=2;dy++) for(let dx=-2;dx<=2;dx++) {
+          const x=ax+dx,y=ay+dy,key=`${x},${y}`;
+          if(at(x,y)!=="#" || mossCells.has(key)) continue;
+          if(![[0,1],[1,0],[0,-1],[-1,0]].some(([a,b])=>[".","~"].includes(at(x+a,y+b)))) continue;
+          candidates.push({kind:"moss",x,y,distance:Math.abs(dx)+Math.abs(dy)});
+        }
+        candidates.sort((a,b)=>a.distance-b.distance || a.y-b.y || a.x-b.x);
+        if(candidates.length) {const p=candidates[0];parts.push(p);mossCells.add(`${p.x},${p.y}`);}
+      }
+    }
+    this.assembly = parts.filter(p=>p.kind!=="front").concat(parts.filter(p=>p.kind==="front").sort((a,b)=>a.depth-b.depth));
+    return this.assembly;
+  }
+  drawArchitecture(p, ox, oy, tile) {
+    const c=this.ctx, sx=ox+p.x*tile, sy=oy+p.y*tile;
+    const im=this.materials?.["wall-straight"];
+    if (!im) return;
+    if (p.kind === "moss") {
+      const moss=this.materials?.["moss-hanging"];
+      if(moss) {
+        c.save();c.beginPath();c.rect(sx,sy,tile,tile);c.clip();
+        c.drawImage(moss,11,5,106,119,sx+tile*.04,sy+tile*.10,tile*.92,tile*.96);
+        c.restore();
+      }
+      return;
+    }
+    if (p.kind === "door") {
+      // Jambs are anchored inside the enclosing wall; the center stays clear.
+      c.save(); c.translate(sx+tile/2,sy+tile/2);
+      if (p.axis) c.rotate(Math.PI/2);
+      const left=this.materials["water-dryarch-left-jamb"], right=this.materials["water-dryarch-right-jamb"];
+      const lintel=this.materials["water-dryarch-lintel"];
+      if (left) c.drawImage(left,-tile*.77,-tile*.58,tile*.27,tile*1.16);
+      if (right) c.drawImage(right,tile*.50,-tile*.58,tile*.27,tile*1.16);
+      // Lintel hugs the north wall line instead of obscuring a unit's feet.
+      if (lintel) c.drawImage(lintel,-tile*.77,-tile*.61,tile*1.54,tile*.24);
+      c.restore(); return;
+    }
+    if (p.kind === "front") {
+      c.drawImage(im,10,85,108,27,sx,sy+tile*.85,tile+.5,tile*.25);
+      c.drawImage(im,10,9,108,18,sx,sy,tile+.5,tile*.32);
+      c.fillStyle="#020a144d";c.fillRect(sx,sy+tile*1.1,tile+.5,tile*.055);
+    } else if (p.dy === -1) {
+      c.drawImage(im,10,9,108,18,sx,sy,tile+.5,tile*.32);
+    } else {
+      c.save();c.translate(sx+(p.dx===1?tile*.84:tile*.16),sy+tile/2);c.rotate(Math.PI/2);
+      c.drawImage(im,10,9,108,18,-tile/2,-tile*.16,tile+.5,tile*.32);c.restore();
+    }
+  }
   frame(t) {
     const c = this.ctx,
       canvas = this.canvas,
@@ -337,7 +451,7 @@ export class Renderer {
         this.propMap = map;
         this.propFloor = new Set();
         for (const p of map.props || []) {
-          if (p.blocksMovement === false) continue;
+          if (p.blocksMovement === false || p.layer === "wallfixture") continue;
           for (let dy = 0; dy < p.height; dy++)
             for (let dx = 0; dx < p.width; dx++)
               this.propFloor.add((p.y + dy) * map.width + p.x + dx);
@@ -360,30 +474,34 @@ export class Renderer {
           const wall = at(x, y) === "#" && (outside || !this.propFloor.has(y * map.width + x));
           const water = at(x, y) === "~";
           if (wall) {
-            c.fillStyle = "#101b2b";
-            c.fillRect(sx, sy, tile, tile);
-            // Only exposed enclosure tiles show masonry. The solid hinterland
-            // stays dark instead of becoming a field of striped wall modules.
-            const exposed = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-              .filter(([dx, dy]) => [".", "~"].includes(at(x + dx, y + dy))
-                || (x + dx >= 0 && y + dy >= 0 && x + dx < map.width && y + dy < map.height
-                  && this.propFloor.has((y + dy) * map.width + x + dx)));
-            if ((exposed.length || battle) && this.materials?.["wall-straight"]) {
-              // Keep the front face upright on every boundary: rotating this
-              // painted module would turn the masonry perspective sideways.
-              c.drawImage(this.materials["wall-straight"], 10, 10, 108, 108,
-                sx, sy, tile + 0.5, tile + 0.5);
+            // Continuous masonry field: faces and cap rails are assembled below,
+            // rather than stamping a self-contained wall square on every cell.
+            c.fillStyle = "#101c2b";
+            c.fillRect(sx, sy, tile + .5, tile + .5);
+            const exposed = [[0,1],[1,0],[0,-1],[-1,0]].some(([dx,dy]) =>
+              [".","~"].includes(at(x+dx,y+dy)) ||
+              (x+dx>=0 && y+dy>=0 && x+dx<map.width && y+dy<map.height
+                && this.propFloor.has((y+dy)*map.width+x+dx)));
+            const im = this.materials?.["wall-straight"];
+            if (im) {
+              c.save(); c.globalAlpha = exposed ? 1 : .34; c.beginPath(); c.rect(sx,sy,tile+.5,tile+.5); c.clip();
+              // Preserve the brick aspect while repeating the face texture;
+              // stretching one short face to a square makes upright stripes.
+              for (let row=0;row<2;row++)
+                c.drawImage(im,10,47,108,66,sx,sy+row*tile*.61,tile+.5,tile*.61+.5);
+              c.restore();
             }
           } else {
             const wetEdge = [[1, 0], [-1, 0], [0, 1], [0, -1]]
               .some(([dx, dy]) => at(x + dx, y + dy) === "~");
             const torch = (map.props || []).find(p => p.assetId === "industrial-torch"
               && Math.abs(p.x - x) < 0.6 && y >= p.y + 1 && y < p.y + 3);
-            const material = water ? "water-surface" : torch ? "floor-reflection"
+            const bridge = !water && at(x,y) === "." && ((at(x,y-1) === "~" && at(x,y+1) === "~") || (at(x-1,y) === "~" && at(x+1,y) === "~"));
+            const material = water || bridge ? "water-surface" : torch ? "floor-reflection"
               : wetEdge ? "floor-wet" : "floor-dry";
             const im = this.materials?.[material];
             if (im) {
-              if (water) c.drawImage(im, sx, sy, tile + 0.5, tile + 0.5);
+              if (water || bridge) c.drawImage(im, sx, sy, tile + 0.5, tile + 0.5);
               else {
                 // One movement cell is one slab. Alternate source quadrants
                 // to reconstruct the source's continuous two-by-two pattern.
@@ -394,7 +512,27 @@ export class Renderer {
               c.fillStyle = water ? "#146782" : "#39485b";
               c.fillRect(sx, sy, tile, tile);
             }
-            if (!water) {
+            if (bridge) {
+              const deck = this.materials?.["water-ironbridge-iron-deck"];
+              if (deck) {
+                c.save(); c.translate(sx+tile/2,sy+tile/2);
+                if (at(x-1,y) === "~") c.rotate(Math.PI/2);
+                // The deck overlaps the bank at each end, but stays on real floor.
+                // A multi-cell crossing is one connected deck: retain only
+                // the outside abutment rails, not a brass frame on every cell.
+                const vertical = at(x-1,y) === "~";
+                const isCrossing = (a,b) => at(a,b) === "." && (vertical
+                  ? at(a-1,b) === "~" && at(a+1,b) === "~"
+                  : at(a,b-1) === "~" && at(a,b+1) === "~");
+                const before = vertical ? isCrossing(x,y-1) : isCrossing(x-1,y);
+                const after = vertical ? isCrossing(x,y+1) : isCrossing(x+1,y);
+                const left = before ? 11 : 0, right = after ? deck.width-11 : deck.width;
+                c.drawImage(deck,left,0,right-left,deck.height,
+                  -tile*.5,-tile*.43,tile+.5,tile*.86);
+                c.restore();
+              }
+            }
+            if (!water && !bridge) {
               c.fillStyle = "rgba(9,24,45,.17)";
               c.fillRect(sx, sy, tile + 0.5, tile + 0.5);
             }
@@ -424,6 +562,12 @@ export class Renderer {
             }
           }
         }
+      const architecture = this.assembleArchitecture(map);
+      const architectureQueue = [];
+      for (const part of architecture) {
+        if (part.kind === "front") architectureQueue.push(part);
+        else this.drawArchitecture(part, ox, oy, tile);
+      }
       for (const p of map.props || [])
         if (p.layer === "underlay") drawProp(p);
       if (battle) {
@@ -467,7 +611,7 @@ export class Renderer {
           const hasExitArchitecture = o.kind === "exit" && (map.props || []).some(p =>
             p.assetId === "industrial-exit" && o.x >= p.x && o.x < p.x + p.width
             && o.y >= p.y && o.y < p.y + p.height);
-          if (!hasExitArchitecture) this.object(
+          if (!hasExitArchitecture && o.kind !== "door") this.object(
             o.assetId ||
               {
                 "false-guild": "cd-dozer",
@@ -498,6 +642,13 @@ export class Renderer {
           }
         }
       }
+      // Props and architectural fronts share one depth ordering around actors.
+      const sceneryQueue = [
+        ...propQueue.map(p => ({depth:p.y+p.height+(p.layer === "wallfixture" ? .15 : 0), prop:p})),
+        ...architectureQueue.map(part => ({depth:part.depth, part})),
+      ].sort((a,b)=>a.depth-b.depth);
+      const drawScenery = entry => entry.prop ? drawProp(entry.prop)
+        : this.drawArchitecture(entry.part,ox,oy,tile);
       const units = battle ? [...map.units, ...map.enemies] : this.explorers(v);
       for (const u of [...units].sort((a, b) => a.y - b.y)) {
         if (u.hp <= 0) continue;
@@ -511,8 +662,8 @@ export class Renderer {
         p.y += (u.y - p.y) * 0.22;
         const x = ox + (p.x + 0.5) * tile,
           y = oy + (p.y + 0.5) * tile;
-        while (propQueue.length && propQueue[0].y + propQueue[0].height <= p.y + 1)
-          drawProp(propQueue.shift());
+        while (sceneryQueue.length && sceneryQueue[0].depth <= p.y + 1)
+          drawScenery(sceneryQueue.shift());
         if (
           this.fx.some((f) => f.x === u.x && f.y === u.y && t - f.start < 350)
         )
@@ -539,7 +690,7 @@ export class Renderer {
           );
         }
       }
-      for (const p of propQueue) drawProp(p);
+      for (const entry of sceneryQueue) drawScenery(entry);
       // Local pools of warm light keep the slate floor and cyan channels legible.
       c.save();
       c.globalCompositeOperation = "screen";

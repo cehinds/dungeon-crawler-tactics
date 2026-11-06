@@ -18,7 +18,7 @@ void Fight()
             var f = Best();
             if (f == null)
             {
-                foreach (var p in Enumerable.Range(0, 80).Select(i => (x: i % 10, y: i / 10)).OrderBy(p => Math.Abs(p.x - enemy.x) + Math.Abs(p.y - enemy.y)))
+                foreach (var p in Enumerable.Range(0, v.battle.width * v.battle.height).Select(i => (x: i % v.battle.width, y: i / v.battle.width)).OrderBy(p => Math.Abs(p.x - enemy.x) + Math.Abs(p.y - enemy.y)))
                 {
                     g.Handle(new()
                     {
@@ -145,7 +145,7 @@ for (int seed = -25; seed < 75; seed++)
     var world = World.Build(seed);
     World.Validate(world);
     Assert(Codec.Write(world) == Codec.Write(World.Build(seed)), "same seed reproduces concept assembly");
-    Assert(world.generationVersion == 3 && world.props.Length >= 12, "concept generation and furniture populated");
+    Assert(world.generationVersion == 4 && world.props.Length >= 12, "concept generation and furniture populated");
     Assert(world.rooms.Length == 12 && world.rooms.Select(r => r.objectId).Distinct().Count() == 12, "lore anchors retained");
     Assert(world.rooms.All(r => r.archetype.Length > 0), "authored room archetypes");
     var classroom = world.props.Where(p => p.roomId == "tutorial-guildhall" && p.groupId == "teaching-table").ToArray();
@@ -200,15 +200,57 @@ for (int seed = 0; seed < 30; seed++)
         Assert(room.composition == "industrial-sewer" && arena.width == room.width, "industrial identity shared in combat");
         Assert(Codec.Write(arena) == Codec.Write(World.BuildArena(seed, id)), "arena deterministic");
         Assert(arena.tiles.Count(t => t == "~") >= 2, "industrial side gutters present");
-        for (int y = 2; y < 6; y++) for (int x = 3; x < 8; x++)
-            Assert(arena.tiles[y * arena.width + x] == ".", "broad central fighting floor stays clear");
+        Assert(arena.width == 18 && arena.height == 11, "source-sized industrial arena");
+        for (int y = 0; y < 2; y++) for (int x = 0; x < 15; x++)
+            Assert(arena.tiles[y * arena.width + x] == (x is >= 11 and <= 13 ? "." : "#"),
+                "north machinery bank is masonry with only the gold gate passage open");
+        foreach (var fixture in arena.props.Where(p => p.layer == "wallfixture"))
+            for (int y = fixture.y; y < fixture.y + fixture.height; y++) for (int x = fixture.x; x < fixture.x + fixture.width; x++)
+                Assert(arena.tiles[y * arena.width + x] == "#", "wall fixtures retain actual blocked masonry");
+        foreach (int x in new[] { 0, 1, 2, 15, 16, 17 })
+        {
+            Assert(arena.tiles[5 * arena.width + x] == ".", "wide water crossing is real traversable floor");
+            Assert(arena.tiles[4 * arena.width + x] == "~" && arena.tiles[6 * arena.width + x] == "~", "water continuous beneath crossing");
+        }
+        Assert(arena.tiles[9 * arena.width + 16] == "~" && arena.tiles[9 * arena.width + 1] == "#", "asymmetric lower east basin");
+        for (int x = 0; x < arena.width; x++)
+            Assert(arena.tiles[(arena.height - 1) * arena.width + x] == (x is 9 or 10 ? "." : "#"), "southern platform has tapered entrance");
+        Assert(!arena.props.Any(p => p.assetId == "industrial-crate"), "source platform avoids oversized corner crates");
+        for (int y = 2; y < 8; y++) for (int x = 3; x < 15; x++)
+            Assert(arena.tiles[y * arena.width + x] == ".", "twelve by six central fighting floor stays clear");
+        var encounterGame = new Game(json, seed); var encounterView = encounterGame.GetView();
+        var encounterObject = encounterView.world.objects.Single(o => o.id == id);
+        encounterView.questStage = id == "goblin-workshop" ? 2 : 3;
+        encounterView.x = encounterObject.x - 1; encounterView.y = encounterObject.y;
+        encounterGame.Handle(new() { type = "interact", targetId = id });
+        Assert(encounterView.mode == "battle", "industrial encounter starts");
+        var combatants = encounterView.party.Concat(encounterView.battle.enemies).ToArray();
+        Assert(combatants.Select(u => (u.x, u.y)).Distinct().Count() == combatants.Length &&
+            combatants.All(u => u.x >= 0 && u.x < arena.width && u.y >= 0 && u.y < arena.height && arena.tiles[u.y * arena.width + u.x] == "."),
+            "all industrial party and enemy spawns are distinct reachable floor");
+        var reached = new HashSet<(int x, int y)>(); var frontier = new Queue<(int x, int y)>();
+        frontier.Enqueue((combatants[0].x, combatants[0].y));
+        while (frontier.TryDequeue(out var cell))
+        {
+            if (!reached.Add(cell)) continue;
+            foreach (var d in new[] { (1, 0), (-1, 0), (0, 1), (0, -1) })
+            {
+                var next = (x: cell.x + d.Item1, y: cell.y + d.Item2);
+                if (next.x >= 0 && next.x < arena.width && next.y >= 0 && next.y < arena.height && arena.tiles[next.y * arena.width + next.x] == "." && !reached.Contains(next)) frontier.Enqueue(next);
+            }
+        }
+        Assert(reached.Count == arena.tiles.Count(t => t == ".") && combatants.All(u => reached.Contains((u.x, u.y))),
+            "battle floor, wide crossings, gate and all combatants share one connected navigation graph");
         foreach (var prop in arena.props.Where(p => p.blocksMovement))
             for (int y = prop.y; y < prop.y + prop.height; y++) for (int x = prop.x; x < prop.x + prop.width; x++)
                 Assert(arena.obstacles.Any(o => o.x == x && o.y == y), "combat prop footprints match collision");
-        Assert(arena.props.Any(p => p.zone == "machinery" && p.x == 0 && p.y == 0), "northwest machinery focal group");
+        Assert(arena.props.Any(p => p.zone == "machinery" && p.x == 3 && p.y == 0), "northwest machinery focal group");
     }
     var exit = map.objects.Single(o => o.id == "exit");
     var stair = map.props.Single(p => p.assetId == "industrial-exit");
+    var bossRoom = map.rooms.Single(r => r.objectId == "ball-of-swine");
+    Assert(map.tiles[(bossRoom.y - 1) * map.width + exit.x] == ".", "north port aligns with gate");
+    Assert(map.tiles[(bossRoom.y - 1) * map.width + bossRoom.x + bossRoom.width / 2] == "#", "no duplicate north doorway left of gate");
     Assert(exit.x >= stair.x && exit.x < stair.x + stair.width && exit.y >= stair.y && exit.y < stair.y + stair.height, "functional exit occupies visible stair");
     Assert(!map.props.Any(p => p.roomId == "goblin-workshop" && p.assetId == "industrial-exit"), "workshop does not imply a false descending exit");
 }

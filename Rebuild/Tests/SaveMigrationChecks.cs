@@ -23,7 +23,7 @@ static class SaveMigrationChecks
         var receiver = new Game(content, 9);
         receiver.LoadSave(oldSave);
         var migrated = receiver.GetView();
-        Check(migrated.world.generationVersion == 3 && migrated.message.Contains("upgraded"), "legacy checkpoint upgrades");
+        Check(migrated.world.generationVersion == 4 && migrated.message.Contains("upgraded"), "legacy checkpoint upgrades");
         Check(Progress(migrated) == expected, "legacy progress preserved exactly");
         var nextSafe = migrated.world.objects.Single(o => o.id == safe.id);
         Check(Math.Abs(migrated.x - nextSafe.x) + Math.Abs(migrated.y - nextSafe.y) == 1, "migration retains safe room identity");
@@ -64,6 +64,23 @@ static class SaveMigrationChecks
             receiver.LoadSave(broken.ToJsonString());
             Check(ReferenceEquals(previous, receiver.GetView()) && Progress(previous) == progress && previous.x == x && previous.y == y && previous.message.StartsWith("Invalid save"), "transactional rejected legacy " + corruption);
         }
+        var v3 = new Game(content, 1337);
+        var v3state = v3.GetView(); v3state.world = World.BuildVersion3(1337);
+        Check(v3state.world.generationVersion == 3 && v3state.world.width == 60 && v3state.world.height == 38 &&
+            v3state.world.rooms.Single(r => r.objectId == "ball-of-swine").width == 11, "frozen version 3 remains historical geometry");
+        var v3safe = v3state.world.objects.First(o => o.kind == "safe");
+        v3state.x = v3safe.x - 1; v3state.y = v3safe.y;
+        v3state.gold = 83;
+        var v3progress = Progress(v3state);
+        var v3receiver = new Game(content, 1); v3receiver.LoadSave(v3.GetSave());
+        Check(v3receiver.GetView().world.generationVersion == 4 && Progress(v3receiver.GetView()) == v3progress,
+            "version 3 checkpoint validates frozen rules and preserves exact progress");
+        var forgedV3 = JsonNode.Parse(v3.GetSave());
+        forgedV3["state"]["world"]["tiles"][0] = ".";
+        var priorV3 = v3receiver.GetView();
+        v3receiver.LoadSave(forgedV3.ToJsonString());
+        Check(ReferenceEquals(priorV3, v3receiver.GetView()) && priorV3.message.StartsWith("Invalid save"),
+            "forged version 3 geometry rejected before migration");
         var v2 = new Game(content, 71);
         var v2state = v2.GetView(); v2state.world = World.BuildVersion2(71);
         var v2safe = v2state.world.objects.First(o => o.kind == "safe");
@@ -78,7 +95,7 @@ static class SaveMigrationChecks
             room.AsObject().Remove("floorStyle");
         }
         var v2receiver = new Game(content, 1); v2receiver.LoadSave(historicalV2.ToJsonString());
-        Check(v2receiver.GetView().world.generationVersion == 3 && v2receiver.GetView().message.Contains("upgraded"), "version 2 checkpoints migrate explicitly");
+        Check(v2receiver.GetView().world.generationVersion == 4 && v2receiver.GetView().message.Contains("upgraded"), "version 2 checkpoints migrate explicitly");
         Check(Progress(v2receiver.GetView()) == v2progress, "version 2 exact progress retained");
         historicalV2["state"]["world"]["objects"][0]["x"] = 0;
         var priorV2 = v2receiver.GetView();

@@ -49,6 +49,7 @@ public static class World
         public bool sideChannels = false;
         public int reserveCenterWidth = 0, reserveCenterHeight = 0;
         public int minWidth = 8, maxWidth = 11, minHeight = 6, maxHeight = 8;
+        public string[] tileRows = Array.Empty<string>();
         public WorldProp[] assemblies = Array.Empty<WorldProp>();
         public PropGroup[] groups = Array.Empty<PropGroup>();
     }
@@ -66,13 +67,17 @@ public static class World
         return JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { IncludeFields = true })!;
     }
     // C# alone resolves the authored concept grammar into tiles and whole-object footprints.
-    public static WorldMap Build(int seed) => BuildConcept(seed, false);
-    public static WorldMap BuildVersion2(int seed) => BuildConcept(seed, true);
-    private static WorldMap BuildConcept(int seed, bool legacy)
+    public static WorldMap Build(int seed) => BuildConcept(seed, 4);
+    public static WorldMap BuildVersion2(int seed) => BuildConcept(seed, 2);
+    public static WorldMap BuildVersion3(int seed) => BuildConcept(seed, 3);
+    private static WorldMap BuildConcept(int seed, int version)
     {
         var definition = Read<Definition>("world-rooms.json");
-        var rules = legacy ? JsonSerializer.Deserialize<RuleSet>(LegacyConceptGrammar.Json, new JsonSerializerOptions { IncludeFields = true })! : Read<RuleSet>("concept-room-rules.json");
-        var map = new WorldMap { generationVersion = legacy ? 2 : 3, width = definition.width, height = definition.height, rooms = definition.rooms, adaptation = definition.adaptation };
+        bool legacy = version == 2;
+        var rules = legacy ? JsonSerializer.Deserialize<RuleSet>(LegacyConceptGrammar.Json, new JsonSerializerOptions { IncludeFields = true })! : version == 3 ? JsonSerializer.Deserialize<RuleSet>(Version3ConceptGrammar.Json, new JsonSerializerOptions { IncludeFields = true })! : Read<RuleSet>("concept-room-rules.json");
+        int sectorWidth = version >= 4 ? 22 : 14, sectorHeight = version >= 4 ? 16 : 12;
+        var map = new WorldMap { generationVersion = version, width = version >= 4 ? 90 : definition.width,
+            height = version >= 4 ? 52 : definition.height, rooms = definition.rooms, adaptation = definition.adaptation };
         map.tiles = Enumerable.Repeat("#", map.width * map.height).ToArray();
         uint random = unchecked((uint)seed) ^ 0xA341316Cu;
         if (random == 0) random = 1;
@@ -95,8 +100,8 @@ public static class World
             room.archetype = rule.archetype; room.shape = rule.shape; room.composition = rule.composition; room.floorStyle = rule.floorStyle;
             room.width = rule.minWidth + Next(rule.maxWidth - rule.minWidth + 1);
             room.height = rule.minHeight + Next(rule.maxHeight - rule.minHeight + 1);
-            room.x = 2 + (i % 4) * 14 + Next(13 - room.width);
-            room.y = 2 + (i / 4) * 12 + Next(10 - room.height);
+            room.x = 2 + (i % 4) * sectorWidth + Next(sectorWidth - 1 - room.width);
+            room.y = 2 + (i / 4) * sectorHeight + Next((version >= 4 ? 14 : 10) - room.height);
             for (int y = 0; y < room.height; y++) for (int x = 0; x < room.width; x++)
             {
                 bool corner = (x == 0 || x == room.width - 1) && (y < 2 || y >= room.height - 2);
@@ -115,21 +120,26 @@ public static class World
             objects.Add(new WorldObject { id = "door-" + room.id, kind = "door", name = room.name + " doorway", description = room.safe ? "A protected safe-room threshold. Rest inside." : "An open threshold leads into the chamber.", roomId = room.id, x = room.x, y = cy });
             if (i % 4 < 3)
             {
-                var east = map.rooms[i + 1]; int gutter = 15 + (i % 4) * 14;
+                var east = map.rooms[i + 1]; int gutter = sectorWidth + 1 + (i % 4) * sectorWidth;
                 Line(cx, cy, gutter, cy); Line(gutter, cy, gutter, east.y + east.height / 2); Line(gutter, east.y + east.height / 2, east.x + east.width / 2, east.y + east.height / 2);
             }
             if (i < 8 && (i % 4 == 0 || i % 4 == 2))
             {
-                var south = map.rooms[i + 4]; int gutter = 13 + (i / 4) * 12;
-                Line(cx, cy, cx, gutter); Line(cx, gutter, south.x + south.width / 2, gutter); Line(south.x + south.width / 2, gutter, south.x + south.width / 2, south.y + south.height / 2);
+                var south = map.rooms[i + 4]; int gutter = sectorHeight + 1 + (i / 4) * sectorHeight;
+                bool gatePort = version >= 4 && south.composition == "industrial-sewer";
+                int southPort = south.x + south.width / 2 + (gatePort ? 3 : 0);
+                // Turn outside the wall apron; the north opening must be directly
+                // behind the authored gold gate rather than a second center door.
+                if (gatePort) gutter = Math.Min(gutter, south.y - 2);
+                Line(cx, cy, cx, gutter); Line(cx, gutter, southPort, gutter); Line(southPort, gutter, southPort, south.y + south.height / 2);
             }
         }
         var entry = map.rooms[0]; map.spawnX = entry.x + entry.width / 2 - 1; map.spawnY = entry.y + entry.height / 2;
         var boss = map.rooms.Single(r => r.objectId == "ball-of-swine");
-        objects.Add(new WorldObject { id = "exit", kind = "exit", name = "Floor 1 descending stair", description = "The stair beyond the Ball of Swine. Clear the borough boss before descending.", roomId = boss.id, x = legacy ? boss.x + boss.width - 1 : boss.x + boss.width / 2, y = legacy ? boss.y + boss.height / 2 : boss.y + 1 });
+        objects.Add(new WorldObject { id = "exit", kind = "exit", name = "Floor 1 descending stair", description = "The stair beyond the Ball of Swine. Clear the borough boss before descending.", roomId = boss.id, x = legacy ? boss.x + boss.width - 1 : boss.x + boss.width / 2 + (version >= 4 ? 3 : 0), y = legacy ? boss.y + boss.height / 2 : boss.y + (version >= 4 ? 2 : 1) });
         for (int col = 0; col < 4; col++)
         {
-            var room = map.rooms[col]; int x = room.x + room.width / 2, y = 13;
+            var room = map.rooms[col]; int x = room.x + room.width / 2, y = sectorHeight + 1;
             Line(x, room.y + room.height / 2, x, y);
             objects.Add(new WorldObject { id = "cache-" + col, kind = "chest", name = new[] { "Rubbish salvage", "Maintenance cupboard", "Sealed supply crate", "Abandoned pantry" }[col], description = "A Floor 1 service cache along the connecting passage.", x = x, y = y });
         }
@@ -141,7 +151,14 @@ public static class World
             if (rule.reserveCenterWidth > 0)
                 for (int yy = room.y + (room.height - rule.reserveCenterHeight) / 2; yy < room.y + (room.height + rule.reserveCenterHeight) / 2; yy++)
                     for (int xx = room.x + (room.width - rule.reserveCenterWidth) / 2; xx < room.x + (room.width + rule.reserveCenterWidth) / 2; xx++) reserved.Add(yy * map.width + xx);
-            if (rule.sideChannels)
+            if (version >= 4 && rule.tileRows.Length > 0)
+            {
+                if (rule.tileRows.Length != room.height || rule.tileRows.Any(row => row.Length != room.width || row.Any(c => c is not ('#' or '.' or '~'))))
+                    throw new InvalidOperationException("Invalid authored room footprint.");
+                for (int yy = 0; yy < room.height; yy++) for (int xx = 0; xx < room.width; xx++)
+                    map.tiles[(room.y + yy) * map.width + room.x + xx] = rule.tileRows[yy][xx].ToString();
+            }
+            if (rule.sideChannels && !(version >= 4 && rule.tileRows.Length > 0))
                 foreach (int xx in new[] { room.x, room.x + room.width - 1 })
                     for (int yy = room.y + 2; yy < room.y + room.height - 2; yy++)
                     { int cell = yy * map.width + xx; if (!reserved.Contains(cell)) map.tiles[cell] = "~"; }
@@ -169,7 +186,8 @@ public static class World
                     for (int dy = 0; dy < prop.height; dy++) for (int dx = 0; dx < prop.width; dx++)
                     {
                         int cell = (prop.y + dy) * map.width + prop.x + dx;
-                        if ((map.tiles[cell] != "." && !(map.tiles[cell] == "~" && !prop.blocksMovement)) || (prop.blocksMovement && (reserved.Contains(cell) || !blocked.Add(cell)))) throw new InvalidOperationException("Group crosses reserved route or furniture: " + room.id + "/" + group.id);
+                        bool wallFixture = version >= 4 && prop.layer == "wallfixture" && map.tiles[cell] == "#";
+                        if ((!wallFixture && map.tiles[cell] != "." && !(map.tiles[cell] == "~" && !prop.blocksMovement)) || (prop.blocksMovement && (reserved.Contains(cell) || !blocked.Add(cell)))) throw new InvalidOperationException("Group crosses reserved route or furniture: " + room.id + "/" + group.id);
                     }
                 }
                 foreach (var cell in blocked) map.tiles[cell] = "#";
@@ -295,6 +313,7 @@ public static class World
             for (int dy = 0; dy < prop.height; dy++) for (int dx = 0; dx < prop.width; dx++)
             {
                 int cell = (prop.y + dy) * map.width + prop.x + dx;
+                if (prop.layer == "wallfixture" && map.tiles[cell] != "#") throw new InvalidOperationException("Wall fixture must occupy blocked masonry.");
                 if (prop.blocksMovement && (!occupied.Add(cell) || map.tiles[cell] != "#")) throw new InvalidOperationException("Overlapping or inconsistent prop collision.");
             }
         }
