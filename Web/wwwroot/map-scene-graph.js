@@ -38,6 +38,48 @@ export function rotatePorts(ports = [], rotation = 0) {
       : p.side,
   }));
 }
+// Validation is authoring advice. It does not add runtime connector geometry.
+export function validateConnection(source, target, options = {}) {
+  const reasons = [];
+  const sourcePort = source?.ports?.find((port) => port.id === options.sourcePort);
+  const targetPort = target?.ports?.find((port) => port.id === options.targetPort);
+  if (!sourcePort || !targetPort) {
+    reasons.push({ code: "missing-port", message: "Select a declared port on each object." });
+  } else {
+    if (source.id === target.id) {
+      reasons.push({ code: "self-connection", message: "Ports must belong to different objects." });
+    }
+    const accepts = (port, other) => {
+      if (!port.kind || !other.kind) return false;
+      const tokens = [other.kind, ...(other.tags || [])];
+      return port.accepts?.length
+        ? port.accepts.some((kind) => tokens.includes(kind))
+        : port.kind === other.kind;
+    };
+    if (!accepts(sourcePort, targetPort) || !accepts(targetPort, sourcePort)) {
+      reasons.push({ code: "port-kind", message: "Both ports must accept the other port's kind." });
+    }
+    const sourceSide = SIDES.indexOf(sourcePort.side);
+    const targetSide = SIDES.indexOf(targetPort.side);
+    const adapter = options.adapter;
+    // A caller must supply an explicit adapter declaration, including its allowed
+    // side pairs and kinds. A truthy flag or adapter name alone grants no bypass.
+    const adapted = adapter?.id &&
+      adapter.kinds?.includes(sourcePort.kind) &&
+      adapter.kinds?.includes(targetPort.kind) &&
+      adapter.sidePairs?.some(([a, b]) => a === sourcePort.side && b === targetPort.side);
+    if ((sourceSide < 0 || targetSide !== (sourceSide + 2) % 4) && !adapted) {
+      reasons.push({ code: "port-side", message: "Ports must face opposite sides or use a declared adapter side pair." });
+    }
+  }
+  return {
+    valid: reasons.length === 0,
+    reasons,
+    sourcePort: sourcePort?.id || null,
+    targetPort: targetPort?.id || null,
+    adapter: options.adapter?.id || null,
+  };
+}
 // C# marks solid furniture cells '#'; known furniture restores visual support only.
 function restoredSupportCells(map, catalog) {
   const restored = new Set();
@@ -421,6 +463,48 @@ export function buildSceneGraph(
       (r) => x >= r.x && y >= r.y && x < r.x + r.width && y < r.y + r.height,
     ) ||
     root;
+  // Authored membership comes only from runtime groupId and roomId. Never
+  // reconstruct it from display names, ID prefixes or nearby objects.
+  const assemblyTypes = new Map();
+  for (const type of catalog.assemblyTypes || []) {
+    assemblyTypes.set(`${type.roomId || "*"}/${type.groupId}`, type);
+  }
+  const assemblies = new Map();
+  const assemblyFor = (prop) => {
+    if (!prop.groupId || !prop.roomId) return null;
+    const key = JSON.stringify([prop.roomId, prop.groupId]);
+    if (assemblies.has(key)) return assemblies.get(key);
+    const type = assemblyTypes.get(`${prop.roomId}/${prop.groupId}`) ||
+      assemblyTypes.get(`*/${prop.groupId}`);
+    const parent = roomAt(prop.x, prop.y, prop.roomId);
+    const assembly = add({
+      id: `assembly:${encodeURIComponent(prop.roomId)}:${encodeURIComponent(prop.groupId)}`,
+      typeId: "assembly",
+      assemblyTypeId: type?.id || null,
+      label: type?.label || prop.groupId,
+      parentId: parent.id,
+      tags: ["assembly", "authored-group", prop.zone].filter(Boolean),
+      groupId: prop.groupId,
+      roomId: prop.roomId,
+      zone: prop.zone || "",
+      anchor: prop.anchor || "",
+      groupX: prop.groupX,
+      groupY: prop.groupY,
+      worldGroupX: Number.isFinite(prop.groupX) ? prop.groupX + offset.x : null,
+      worldGroupY: Number.isFinite(prop.groupY) ? prop.groupY + offset.y : null,
+      membershipSource: "runtime-groupId-roomId",
+      expectedMembers: type?.members || [],
+      memberIds: [],
+      members: [],
+      recommendations: [],
+    });
+    assemblies.set(key, assembly);
+    if (!type) {
+      diagnostics.push({ code: "unknown-assembly", severity: "warning", nodeId: assembly.id,
+        message: `No catalog assembly for ${prop.roomId}/${prop.groupId}.` });
+    }
+    return assembly;
+  };
   const tileNodes = new Map();
   for (let y = 0; y < map.height; y++)
     for (let x = 0; x < map.width; x++) {
@@ -457,17 +541,30 @@ export function buildSceneGraph(
       tileNodes.set(`${x},${y}`, n);
     }
   for (const prop of map.props || []) {
-    const type = lookup(catalog, prop.assetId),
-      parent = group(
-        roomAt(prop.x, prop.y, prop.roomId),
-        prop.layer === "wallfixture" ? "structure" : "props",
-      );
+    const type = lookup(catalog, prop.assetId);
+    const assembly = assemblyFor(prop);
+    const parent = assembly || group(
+      roomAt(prop.x, prop.y, prop.roomId),
+      prop.layer === "wallfixture" ? "structure" : "props",
+    );
+    const memberRole = assembly?.expectedMembers.find(
+      (member) => member.objectTypeId === type?.id,
+    )?.role || "member";
     const n = add({
       id: `prop:${prop.id}`,
       runtimeId: prop.id,
       typeId: type?.id || "unknown",
       label: type?.label || prop.assetId,
       assetId: prop.assetId,
+      assemblyId: assembly?.id || null,
+      groupId: prop.groupId || "",
+      memberRole,
+      zone: prop.zone || "",
+      anchor: prop.anchor || "",
+      groupX: prop.groupX,
+      groupY: prop.groupY,
+      offsetX: prop.offsetX,
+      offsetY: prop.offsetY,
       parentId: parent.id,
       tags: [...(type?.tags || [])],
       x: prop.x,
@@ -485,6 +582,11 @@ export function buildSceneGraph(
       ports: rotatePorts(type?.ports, prop.rotation),
       expectedRelations: type?.expectedRelations || [],
     });
+    if (assembly) {
+      assembly.memberIds.push(n.id);
+      assembly.members.push({ nodeId: n.id, role: memberRole, typeId: n.typeId, layer: n.layer });
+      edges.push({ source: assembly.id, target: n.id, relation: "authored-member", authored: true });
+    }
     if (!type)
       diagnostics.push({
         code: "unknown-asset",
@@ -504,6 +606,32 @@ export function buildSceneGraph(
               prop.layer === "wallfixture" ? "mounted-on" : "supported-by",
           });
       }
+  }
+  for (const assembly of assemblies.values()) {
+    const members = assembly.memberIds.map((id) => byId.get(id));
+    assembly.x = Math.min(...members.map((member) => member.x));
+    assembly.y = Math.min(...members.map((member) => member.y));
+    assembly.width = Math.max(...members.map((member) => member.x + member.width)) - assembly.x;
+    assembly.height = Math.max(...members.map((member) => member.y + member.height)) - assembly.y;
+    assembly.worldX = assembly.x + offset.x;
+    assembly.worldY = assembly.y + offset.y;
+    for (const expected of assembly.expectedMembers) {
+      const actualCount = members.filter((member) => member.typeId === expected.objectTypeId).length;
+      if (actualCount >= (expected.expectedCount ?? 1)) continue;
+      const diagnostic = {
+        code: "missing-assembly-member",
+        nodeId: assembly.id,
+        role: expected.role,
+        typeId: expected.objectTypeId,
+        expectedCount: expected.expectedCount ?? 1,
+        actualCount,
+        required: expected.required === true,
+        severity: expected.required ? "error" : "info",
+        message: `${assembly.label}: ${expected.role} expects ${expected.expectedCount ?? 1}, found ${actualCount}.`,
+      };
+      diagnostics.push(diagnostic);
+      assembly.recommendations.push(diagnostic);
+    }
   }
   for (const obj of map.objects || []) {
     const type =
@@ -656,6 +784,8 @@ export function buildSceneGraph(
           source: `prop:${a.id}`,
           target: `prop:${b.id}`,
           relation: "pipe-header",
+          actual: true,
+          validationSource: "catalog-geometric-connector-rule",
         });
       }
     }
@@ -682,13 +812,15 @@ export function buildSceneGraph(
               source: `prop:${pipe.id}`,
               target: target.id,
               relation: "pipe-return",
+              actual: true,
+              validationSource: "catalog-geometric-connector-rule",
             });
           break;
         }
   // Relations only inspect nearby cells; avoid scanning the whole world per prop.
   const nodesByCell = new Map();
   for (const node of nodes) {
-    if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) continue;
+    if (node.typeId === "assembly" || !Number.isFinite(node.x) || !Number.isFinite(node.y)) continue;
     const key = `${Math.floor(node.x)},${Math.floor(node.y)}`;
     const bucket = nodesByCell.get(key) || [];
     bucket.push(node);

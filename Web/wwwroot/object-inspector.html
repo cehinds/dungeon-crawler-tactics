@@ -49,6 +49,16 @@
             </select></label
           >
         </div>
+        <fieldset class="relation-filters">
+          <legend>Map relations</legend>
+          <label
+            ><input id="relations-actual" type="checkbox" checked />
+            Actual</label
+          ><label
+            ><input id="relations-suggestions" type="checkbox" />
+            Suggestions</label
+          ><span>Selected object or assembly only</span>
+        </fieldset>
         <div id="map-wrap">
           <svg
             id="map"
@@ -72,6 +82,28 @@
             Select an object to inspect its properties and placement rules.
           </p>
         </div>
+        <section id="connection-check" hidden>
+          <details>
+            <summary>Check attachment ports · read only</summary>
+            <p class="muted">
+              Compare declared port types and facing. This does not create a
+              wire or move an object.
+            </p>
+            <form id="connection-form">
+              <label
+                >Source port<select id="source-port" required></select
+              ></label>
+              <label
+                >Target object<select id="target-object" required></select
+              ></label>
+              <label
+                >Target port<select id="target-port" required></select
+              ></label>
+              <button type="submit">Check compatibility</button>
+            </form>
+            <p id="connection-result" role="status"></p>
+          </details>
+        </section>
         <section id="placement" hidden>
           <h2>Test placement</h2>
           <p class="muted">Preview only · evaluates a copy of the world</p>

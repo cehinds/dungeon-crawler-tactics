@@ -379,3 +379,106 @@ ul {
   stroke: #315d8c;
   stroke-width: 0.1;
 }
+
+.relation-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px;
+  padding: 7px 10px;
+  border: 1px solid #d3dce5;
+  border-radius: 5px;
+  font-size: 11px;
+}
+.relation-filters legend {
+  font-size: 10px;
+  color: #63758a;
+}
+.relation-filters span {
+  color: #6b7b8b;
+}
+.relation-filters input {
+  margin: 0;
+}
+#tree .assembly-row {
+  display: flex;
+  align-items: start;
+  margin-left: 12px;
+}
+#tree .assembly-toggle {
+  width: 26px;
+  flex: 0 0 26px;
+  padding: 7px 3px;
+}
+#tree .assembly {
+  padding-left: 3px;
+  font-weight: 600;
+}
+#tree .member {
+  padding-left: 39px;
+}
+.assembly-bounds {
+  pointer-events: none;
+}
+.assembly-members {
+  padding-left: 0;
+  list-style: none;
+}
+.assembly-members button {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.assembly-members small {
+  display: block;
+  font-size: 10px;
+  color: #63758a;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+.parent-assembly {
+  margin-bottom: 12px;
+  text-align: left;
+}
+.advisory-copy {
+  color: #916323;
+}
+#connection-form label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 11px;
+}
+#connection-form select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+}
+#connection-result {
+  font-size: 12px;
+  line-height: 1.5;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1.5;
+}
+@media (max-width: 440px) {
+  main {
+    grid-template-columns: 125px minmax(0, 1fr);
+  }
+  aside,
+  .board {
+    padding: 9px;
+  }
+  header {
+    gap: 12px;
+  }
+  .board-heading select {
+    max-width: 145px;
+  }
+}
+
+#map .relation {
+  pointer-events: none;
+}

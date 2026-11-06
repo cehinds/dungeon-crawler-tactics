@@ -14,8 +14,17 @@
       {
         "path": "Rebuild/DepthPassComparison/prior-full-validation/seed-42-battle.json",
         "sha256": "d0f6b856ccf3409f6dc62628636aae1bec370f7e5a66fd02be101895f5722e22"
+      },
+      {
+        "path": "Rebuild/AssemblyPassComparison/baseline/world.json",
+        "sha256": "d202ea6cc8bb2f3e6a375ad98c39098cea8be6f87b1939aa743be5cf38c3bd11"
+      },
+      {
+        "path": "Rebuild/AssemblyPassComparison/baseline/world-42.json",
+        "sha256": "231497350c56d4ae2d3a21a75632b0084121703274b149d4002ee58b6f167fc3"
       }
-    ]
+    ],
+    "assemblyMetadata": "Authored group fields restored by stable runtime prop ID from actual published WASM worlds. Battle groupX/groupY use the same room-origin subtraction as World.BuildArena; geometry and existing state are unchanged."
   },
   "scenes": [
     {
@@ -89,7 +98,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "stair-approach",
+            "groupX": 9,
+            "groupY": 4,
+            "zone": "approach",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "entry-landing-stair-approach-1",
@@ -101,7 +117,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "stair-approach",
+            "groupX": 9,
+            "groupY": 4,
+            "zone": "approach",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "entry-landing-stair-approach-2",
@@ -113,7 +136,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "stair-approach",
+            "groupX": 9,
+            "groupY": 4,
+            "zone": "approach",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 2
           },
           {
             "id": "false-guild-alley-prop-0",
@@ -125,7 +155,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "false-guild-alley-prop-1",
@@ -137,7 +174,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "false-guild-alley-prop-2",
@@ -149,7 +193,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-0",
@@ -161,7 +212,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "teaching-table",
+            "groupX": 55,
+            "groupY": 4,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-1",
@@ -173,7 +231,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 55,
+            "groupY": 4,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-2",
@@ -185,7 +250,14 @@
             "height": 1,
             "rotation": 180,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 55,
+            "groupY": 4,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": -1,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-3",
@@ -197,7 +269,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 55,
+            "groupY": 4,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-4",
@@ -209,7 +288,14 @@
             "height": 1,
             "rotation": 90,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 55,
+            "groupY": 4,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 1,
+            "offsetY": 2
           },
           {
             "id": "hoarder-lair-prop-0",
@@ -221,7 +307,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "hoarder-lair-prop-1",
@@ -233,7 +326,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "hoarder-lair-prop-2",
@@ -245,7 +345,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "hoarder-lair-prop-3",
@@ -257,7 +364,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-0",
@@ -269,7 +383,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 25,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-1",
@@ -281,7 +402,14 @@
             "height": 1,
             "rotation": 180,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 25,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": -1,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-2",
@@ -293,7 +421,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 25,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-3",
@@ -305,7 +440,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 25,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 2
           },
           {
             "id": "goblin-workshop-northwest-machinery-0",
@@ -317,7 +459,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "northwest-machinery",
+            "groupX": 28,
+            "groupY": 20,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-1",
@@ -329,7 +478,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 28,
+            "groupY": 20,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-2",
@@ -341,7 +497,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 28,
+            "groupY": 20,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-north-pipe-bank-0",
@@ -353,7 +516,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-pipe-bank",
+            "groupX": 32,
+            "groupY": 20,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-floor-grate-0",
@@ -365,7 +535,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-floor-grate",
+            "groupX": 28,
+            "groupY": 26,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-south-floor-grate-0",
@@ -377,7 +554,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "south-floor-grate",
+            "groupX": 34,
+            "groupY": 27,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-floor-grate-0",
@@ -389,7 +573,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-floor-grate",
+            "groupX": 39,
+            "groupY": 23,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-outlet-0",
@@ -401,7 +592,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-outlet",
+            "groupX": 26,
+            "groupY": 22,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-upper-outlet-0",
@@ -413,7 +611,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-upper-outlet",
+            "groupX": 40,
+            "groupY": 21,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-lower-outlet-0",
@@ -425,7 +630,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-lower-outlet",
+            "groupX": 41,
+            "groupY": 26,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-pipe-bank-0",
@@ -437,7 +649,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-pipe-bank",
+            "groupX": 42,
+            "groupY": 27,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-pipe-bank-0",
@@ -449,7 +668,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-pipe-bank",
+            "groupX": 27,
+            "groupY": 26,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-gate-torch-0",
@@ -461,7 +687,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-gate-torch",
+            "groupX": 35,
+            "groupY": 20,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-gate-torch-0",
@@ -473,7 +706,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-gate-torch",
+            "groupX": 39,
+            "groupY": 20,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "dmv-safe-room-waiting-area-0",
@@ -485,7 +725,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "waiting-area",
+            "groupX": 46,
+            "groupY": 19,
+            "zone": "waiting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "dmv-safe-room-waiting-area-1",
@@ -497,7 +744,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "waiting-area",
+            "groupX": 46,
+            "groupY": 19,
+            "zone": "waiting",
+            "anchor": "northwest",
+            "offsetX": 2,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-0",
@@ -509,7 +763,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-1",
@@ -521,7 +782,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-2",
@@ -533,7 +801,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-3",
@@ -545,7 +820,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-rest-bedroom-0",
@@ -557,7 +839,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "rest-bedroom",
+            "groupX": 9,
+            "groupY": 35,
+            "zone": "living",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-rest-bedroom-1",
@@ -569,7 +858,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "rest-bedroom",
+            "groupX": 9,
+            "groupY": 35,
+            "zone": "living",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-rest-bedroom-2",
@@ -581,7 +877,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "rest-bedroom",
+            "groupX": 9,
+            "groupY": 35,
+            "zone": "living",
+            "anchor": "northwest",
+            "offsetX": 2,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-washroom-fixtures-0",
@@ -593,7 +896,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "washroom-fixtures",
+            "groupX": 14,
+            "groupY": 35,
+            "zone": "washroom",
+            "anchor": "northeast",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-washroom-fixtures-1",
@@ -605,7 +915,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "washroom-fixtures",
+            "groupX": 14,
+            "groupY": 35,
+            "zone": "washroom",
+            "anchor": "northeast",
+            "offsetX": 1,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-0",
@@ -617,7 +934,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-1",
@@ -629,7 +953,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-2",
@@ -641,7 +972,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-3",
@@ -653,7 +991,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-north-descent-0",
@@ -665,7 +1010,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-descent",
+            "groupX": 57,
+            "groupY": 34,
+            "zone": "exit",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-northwest-machinery-0",
@@ -677,7 +1029,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "northwest-machinery",
+            "groupX": 49,
+            "groupY": 34,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-northwest-machinery-1",
@@ -689,7 +1048,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 49,
+            "groupY": 34,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-northwest-machinery-2",
@@ -701,7 +1067,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 49,
+            "groupY": 34,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-north-pipe-bank-0",
@@ -713,7 +1086,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-pipe-bank",
+            "groupX": 53,
+            "groupY": 34,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-floor-grate-0",
@@ -725,7 +1105,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-floor-grate",
+            "groupX": 49,
+            "groupY": 40,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-south-floor-grate-0",
@@ -737,7 +1124,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "south-floor-grate",
+            "groupX": 55,
+            "groupY": 41,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-floor-grate-0",
@@ -749,7 +1143,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-floor-grate",
+            "groupX": 60,
+            "groupY": 37,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-outlet-0",
@@ -761,7 +1162,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-outlet",
+            "groupX": 47,
+            "groupY": 36,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-upper-outlet-0",
@@ -773,7 +1181,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-upper-outlet",
+            "groupX": 61,
+            "groupY": 35,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-lower-outlet-0",
@@ -785,7 +1200,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-lower-outlet",
+            "groupX": 62,
+            "groupY": 40,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-pipe-bank-0",
@@ -797,7 +1219,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-pipe-bank",
+            "groupX": 63,
+            "groupY": 41,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-pipe-bank-0",
@@ -809,7 +1238,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-pipe-bank",
+            "groupX": 48,
+            "groupY": 40,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-gate-torch-0",
@@ -821,7 +1257,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-gate-torch",
+            "groupX": 56,
+            "groupY": 34,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-gate-torch-0",
@@ -833,7 +1276,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-gate-torch",
+            "groupX": 60,
+            "groupY": 34,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "supplies-store-prop-0",
@@ -845,7 +1295,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "supplies-store-prop-1",
@@ -857,7 +1314,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "supplies-store-prop-2",
@@ -869,7 +1333,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           }
         ],
         "rooms": [
@@ -1230,7 +1701,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "northwest-machinery",
+            "groupX": 3,
+            "groupY": 0,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-1",
@@ -1242,7 +1720,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 3,
+            "groupY": 0,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-2",
@@ -1254,7 +1739,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 3,
+            "groupY": 0,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-north-pipe-bank-0",
@@ -1266,7 +1758,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-pipe-bank",
+            "groupX": 7,
+            "groupY": 0,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-floor-grate-0",
@@ -1278,7 +1777,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-floor-grate",
+            "groupX": 3,
+            "groupY": 6,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-south-floor-grate-0",
@@ -1290,7 +1796,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "south-floor-grate",
+            "groupX": 9,
+            "groupY": 7,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-floor-grate-0",
@@ -1302,7 +1815,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-floor-grate",
+            "groupX": 14,
+            "groupY": 3,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-outlet-0",
@@ -1314,7 +1834,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-outlet",
+            "groupX": 1,
+            "groupY": 2,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-upper-outlet-0",
@@ -1326,7 +1853,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-upper-outlet",
+            "groupX": 15,
+            "groupY": 1,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-lower-outlet-0",
@@ -1338,7 +1872,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-lower-outlet",
+            "groupX": 16,
+            "groupY": 6,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-pipe-bank-0",
@@ -1350,7 +1891,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-pipe-bank",
+            "groupX": 17,
+            "groupY": 7,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-pipe-bank-0",
@@ -1362,7 +1910,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-pipe-bank",
+            "groupX": 2,
+            "groupY": 6,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-gate-torch-0",
@@ -1374,7 +1929,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-gate-torch",
+            "groupX": 10,
+            "groupY": 0,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-gate-torch-0",
@@ -1386,7 +1948,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-gate-torch",
+            "groupX": 14,
+            "groupY": 0,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           }
         ]
       }
@@ -1462,7 +2031,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "stair-approach",
+            "groupX": 6,
+            "groupY": 9,
+            "zone": "approach",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "entry-landing-stair-approach-1",
@@ -1474,7 +2050,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "stair-approach",
+            "groupX": 6,
+            "groupY": 9,
+            "zone": "approach",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "entry-landing-stair-approach-2",
@@ -1486,7 +2069,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "stair-approach",
+            "groupX": 6,
+            "groupY": 9,
+            "zone": "approach",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 2
           },
           {
             "id": "false-guild-alley-prop-0",
@@ -1498,7 +2088,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "false-guild-alley-prop-1",
@@ -1510,7 +2107,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "false-guild-alley-prop-2",
@@ -1522,7 +2126,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-0",
@@ -1534,7 +2145,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "teaching-table",
+            "groupX": 54,
+            "groupY": 7,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-1",
@@ -1546,7 +2164,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 54,
+            "groupY": 7,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-2",
@@ -1558,7 +2183,14 @@
             "height": 1,
             "rotation": 180,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 54,
+            "groupY": 7,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": -1,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-3",
@@ -1570,7 +2202,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 54,
+            "groupY": 7,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "tutorial-guildhall-teaching-table-4",
@@ -1582,7 +2221,14 @@
             "height": 1,
             "rotation": 90,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "teaching-table",
+            "groupX": 54,
+            "groupY": 7,
+            "zone": "classroom",
+            "anchor": "northwest",
+            "offsetX": 1,
+            "offsetY": 2
           },
           {
             "id": "hoarder-lair-prop-0",
@@ -1594,7 +2240,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "hoarder-lair-prop-1",
@@ -1606,7 +2259,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "hoarder-lair-prop-2",
@@ -1618,7 +2278,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "hoarder-lair-prop-3",
@@ -1630,7 +2297,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-0",
@@ -1642,7 +2316,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 23,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-1",
@@ -1654,7 +2335,14 @@
             "height": 1,
             "rotation": 180,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 23,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": -1,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-2",
@@ -1666,7 +2354,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 23,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "tally-safe-room-dining-cluster-3",
@@ -1678,7 +2373,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "dining-cluster",
+            "groupX": 7,
+            "groupY": 23,
+            "zone": "dining",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 2
           },
           {
             "id": "goblin-workshop-northwest-machinery-0",
@@ -1690,7 +2392,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "northwest-machinery",
+            "groupX": 28,
+            "groupY": 18,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-1",
@@ -1702,7 +2411,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 28,
+            "groupY": 18,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-2",
@@ -1714,7 +2430,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 28,
+            "groupY": 18,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-north-pipe-bank-0",
@@ -1726,7 +2449,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-pipe-bank",
+            "groupX": 32,
+            "groupY": 18,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-floor-grate-0",
@@ -1738,7 +2468,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-floor-grate",
+            "groupX": 28,
+            "groupY": 24,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-south-floor-grate-0",
@@ -1750,7 +2487,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "south-floor-grate",
+            "groupX": 34,
+            "groupY": 25,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-floor-grate-0",
@@ -1762,7 +2506,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-floor-grate",
+            "groupX": 39,
+            "groupY": 21,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-outlet-0",
@@ -1774,7 +2525,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-outlet",
+            "groupX": 26,
+            "groupY": 20,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-upper-outlet-0",
@@ -1786,7 +2544,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-upper-outlet",
+            "groupX": 40,
+            "groupY": 19,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-lower-outlet-0",
@@ -1798,7 +2563,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-lower-outlet",
+            "groupX": 41,
+            "groupY": 24,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-pipe-bank-0",
@@ -1810,7 +2582,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-pipe-bank",
+            "groupX": 42,
+            "groupY": 25,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-pipe-bank-0",
@@ -1822,7 +2601,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-pipe-bank",
+            "groupX": 27,
+            "groupY": 24,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-gate-torch-0",
@@ -1834,7 +2620,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-gate-torch",
+            "groupX": 35,
+            "groupY": 18,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-gate-torch-0",
@@ -1846,7 +2639,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-gate-torch",
+            "groupX": 39,
+            "groupY": 18,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "dmv-safe-room-waiting-area-0",
@@ -1858,7 +2658,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "waiting-area",
+            "groupX": 52,
+            "groupY": 19,
+            "zone": "waiting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "dmv-safe-room-waiting-area-1",
@@ -1870,7 +2677,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "waiting-area",
+            "groupX": 52,
+            "groupY": 19,
+            "zone": "waiting",
+            "anchor": "northwest",
+            "offsetX": 2,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-0",
@@ -1882,7 +2696,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-1",
@@ -1894,7 +2715,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-2",
@@ -1906,7 +2734,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "juicer-gym-prop-3",
@@ -1918,7 +2753,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-rest-bedroom-0",
@@ -1930,7 +2772,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "rest-bedroom",
+            "groupX": 2,
+            "groupY": 35,
+            "zone": "living",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-rest-bedroom-1",
@@ -1942,7 +2791,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "rest-bedroom",
+            "groupX": 2,
+            "groupY": 35,
+            "zone": "living",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-rest-bedroom-2",
@@ -1954,7 +2810,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "rest-bedroom",
+            "groupX": 2,
+            "groupY": 35,
+            "zone": "living",
+            "anchor": "northwest",
+            "offsetX": 2,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-washroom-fixtures-0",
@@ -1966,7 +2829,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "washroom-fixtures",
+            "groupX": 9,
+            "groupY": 35,
+            "zone": "washroom",
+            "anchor": "northeast",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "sebastian-safe-room-washroom-fixtures-1",
@@ -1978,7 +2848,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "washroom-fixtures",
+            "groupX": 9,
+            "groupY": 35,
+            "zone": "washroom",
+            "anchor": "northeast",
+            "offsetX": 1,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-0",
@@ -1990,7 +2867,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-1",
@@ -2002,7 +2886,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-2",
@@ -2014,7 +2905,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "meadow-lark-camp-prop-3",
@@ -2026,7 +2924,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-north-descent-0",
@@ -2038,7 +2943,14 @@
             "height": 3,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-descent",
+            "groupX": 59,
+            "groupY": 36,
+            "zone": "exit",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-northwest-machinery-0",
@@ -2050,7 +2962,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "northwest-machinery",
+            "groupX": 51,
+            "groupY": 36,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-northwest-machinery-1",
@@ -2062,7 +2981,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 51,
+            "groupY": 36,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-northwest-machinery-2",
@@ -2074,7 +3000,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 51,
+            "groupY": 36,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-north-pipe-bank-0",
@@ -2086,7 +3019,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-pipe-bank",
+            "groupX": 55,
+            "groupY": 36,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-floor-grate-0",
@@ -2098,7 +3038,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-floor-grate",
+            "groupX": 51,
+            "groupY": 42,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-south-floor-grate-0",
@@ -2110,7 +3057,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "south-floor-grate",
+            "groupX": 57,
+            "groupY": 43,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-floor-grate-0",
@@ -2122,7 +3076,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-floor-grate",
+            "groupX": 62,
+            "groupY": 39,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-outlet-0",
@@ -2134,7 +3095,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-outlet",
+            "groupX": 49,
+            "groupY": 38,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-upper-outlet-0",
@@ -2146,7 +3114,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-upper-outlet",
+            "groupX": 63,
+            "groupY": 37,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-lower-outlet-0",
@@ -2158,7 +3133,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-lower-outlet",
+            "groupX": 64,
+            "groupY": 42,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-pipe-bank-0",
@@ -2170,7 +3152,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-pipe-bank",
+            "groupX": 65,
+            "groupY": 43,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-pipe-bank-0",
@@ -2182,7 +3171,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-pipe-bank",
+            "groupX": 50,
+            "groupY": 42,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-west-gate-torch-0",
@@ -2194,7 +3190,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-gate-torch",
+            "groupX": 58,
+            "groupY": 36,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "ball-of-swine-complex-east-gate-torch-0",
@@ -2206,7 +3209,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-gate-torch",
+            "groupX": 62,
+            "groupY": 36,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "supplies-store-prop-0",
@@ -2218,7 +3228,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "supplies-store-prop-1",
@@ -2230,7 +3247,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "supplies-store-prop-2",
@@ -2242,7 +3266,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "",
+            "groupX": 0,
+            "groupY": 0,
+            "zone": "",
+            "anchor": "",
+            "offsetX": 0,
+            "offsetY": 0
           }
         ],
         "rooms": [
@@ -2603,7 +3634,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": true
+            "blocksMovement": true,
+            "groupId": "northwest-machinery",
+            "groupX": 3,
+            "groupY": 0,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-1",
@@ -2615,7 +3653,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 3,
+            "groupY": 0,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-northwest-machinery-2",
@@ -2627,7 +3672,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "northwest-machinery",
+            "groupX": 3,
+            "groupY": 0,
+            "zone": "machinery",
+            "anchor": "northwest",
+            "offsetX": 3,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-north-pipe-bank-0",
@@ -2639,7 +3691,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "north-pipe-bank",
+            "groupX": 7,
+            "groupY": 0,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-floor-grate-0",
@@ -2651,7 +3710,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-floor-grate",
+            "groupX": 3,
+            "groupY": 6,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-south-floor-grate-0",
@@ -2663,7 +3729,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "south-floor-grate",
+            "groupX": 9,
+            "groupY": 7,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-floor-grate-0",
@@ -2675,7 +3748,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "underlay",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-floor-grate",
+            "groupX": 14,
+            "groupY": 3,
+            "zone": "service",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-outlet-0",
@@ -2687,7 +3767,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-outlet",
+            "groupX": 1,
+            "groupY": 2,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-upper-outlet-0",
@@ -2699,7 +3786,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-upper-outlet",
+            "groupX": 15,
+            "groupY": 1,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-lower-outlet-0",
@@ -2711,7 +3805,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-lower-outlet",
+            "groupX": 16,
+            "groupY": 6,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-pipe-bank-0",
@@ -2723,7 +3824,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-pipe-bank",
+            "groupX": 17,
+            "groupY": 7,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-pipe-bank-0",
@@ -2735,7 +3843,14 @@
             "height": 2,
             "rotation": 0,
             "layer": "object",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-pipe-bank",
+            "groupX": 2,
+            "groupY": 6,
+            "zone": "waterworks",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-west-gate-torch-0",
@@ -2747,7 +3862,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "west-gate-torch",
+            "groupX": 10,
+            "groupY": 0,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           },
           {
             "id": "goblin-workshop-east-gate-torch-0",
@@ -2759,7 +3881,14 @@
             "height": 1,
             "rotation": 0,
             "layer": "wallfixture",
-            "blocksMovement": false
+            "blocksMovement": false,
+            "groupId": "east-gate-torch",
+            "groupX": 14,
+            "groupY": 0,
+            "zone": "lighting",
+            "anchor": "northwest",
+            "offsetX": 0,
+            "offsetY": 0
           }
         ]
       }

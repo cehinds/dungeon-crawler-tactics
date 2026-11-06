@@ -1242,7 +1242,8 @@
           "side": "south",
           "kind": "fluid-output",
           "tags": [
-            "water"
+            "water",
+            "fluid"
           ],
           "accepts": [
             "water",
@@ -1878,5 +1879,287 @@
       "bankHeight": 2,
       "depthOffset": 0.18
     }
-  }
+  },
+  "assemblyTypes": [
+    {
+      "id": "stair-approach",
+      "label": "Stair approach",
+      "groupId": "stair-approach",
+      "roomId": "entry-landing",
+      "zone": "approach",
+      "placementAnchor": "nearby suggested, authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "stair",
+          "objectTypeId": "cd-stair-module",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "light",
+          "objectTypeId": "cd-torch",
+          "expectedCount": 2,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "teaching-table",
+      "label": "Teaching table",
+      "groupId": "teaching-table",
+      "roomId": "tutorial-guildhall",
+      "zone": "classroom",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "underlay",
+          "objectTypeId": "ef-rug-red",
+          "expectedCount": 1,
+          "required": false
+        },
+        {
+          "role": "table",
+          "objectTypeId": "ef-wood-table",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "chair",
+          "objectTypeId": "ef-chair-green",
+          "expectedCount": 3,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "dining-cluster",
+      "label": "Dining table and bench",
+      "groupId": "dining-cluster",
+      "roomId": "tally-safe-room",
+      "zone": "dining",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "table",
+          "objectTypeId": "ef-wood-table",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "seat",
+          "objectTypeId": "ef-chair-green",
+          "expectedCount": 2,
+          "required": false
+        },
+        {
+          "role": "bench",
+          "objectTypeId": "ef-wood-bench",
+          "expectedCount": 1,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "rest-bedroom",
+      "label": "Bedroom",
+      "groupId": "rest-bedroom",
+      "roomId": "sebastian-safe-room",
+      "zone": "living",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "underlay",
+          "objectTypeId": "ef-rug-red",
+          "expectedCount": 1,
+          "required": false
+        },
+        {
+          "role": "bed",
+          "objectTypeId": "ef-bed-red",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "lamp",
+          "objectTypeId": "ef-lamp-table",
+          "expectedCount": 1,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "washroom-fixtures",
+      "label": "Washroom fixtures",
+      "groupId": "washroom-fixtures",
+      "roomId": "sebastian-safe-room",
+      "zone": "washroom",
+      "placementAnchor": "authored group anchor northeast",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "toilet",
+          "objectTypeId": "ef-toilet",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "sink-counter",
+          "objectTypeId": "ef-sink-counter",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "waiting-area",
+      "label": "Waiting area",
+      "groupId": "waiting-area",
+      "roomId": "dmv-safe-room",
+      "zone": "waiting",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "bench",
+          "objectTypeId": "ef-wood-bench",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "vending-machine",
+          "objectTypeId": "ef-vending-green",
+          "expectedCount": 1,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "northwest-machinery",
+      "label": "Machinery with pipe fittings",
+      "groupId": "northwest-machinery",
+      "zone": "machinery",
+      "placementAnchor": "authored group anchor northwest with group offset (3, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "machine",
+          "objectTypeId": "industrial-machine",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "pipe-fitting",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 2,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "north-pipe-bank",
+      "label": "North pipe bank",
+      "groupId": "north-pipe-bank",
+      "roomId": "goblin-workshop",
+      "zone": "waterworks",
+      "placementAnchor": "authored group anchor northwest with group offset (7, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "pipe",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "west-pipe-bank",
+      "label": "West pipe bank",
+      "groupId": "west-pipe-bank",
+      "roomId": "goblin-workshop",
+      "zone": "waterworks",
+      "placementAnchor": "authored group anchor northwest with group offset (2, 6)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "pipe",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "east-pipe-bank",
+      "label": "East pipe bank",
+      "groupId": "east-pipe-bank",
+      "roomId": "goblin-workshop",
+      "zone": "waterworks",
+      "placementAnchor": "authored group anchor northwest with group offset (17, 7)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "pipe",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "west-gate-torch",
+      "label": "West gate light",
+      "groupId": "west-gate-torch",
+      "roomId": "goblin-workshop",
+      "zone": "lighting",
+      "placementAnchor": "authored group anchor northwest with group offset (10, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "light",
+          "objectTypeId": "industrial-torch",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "east-gate-torch",
+      "label": "East gate light",
+      "groupId": "east-gate-torch",
+      "roomId": "goblin-workshop",
+      "zone": "lighting",
+      "placementAnchor": "authored group anchor northwest with group offset (14, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "light",
+          "objectTypeId": "industrial-torch",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "north-descent",
+      "label": "North descent",
+      "groupId": "north-descent",
+      "roomId": "ball-of-swine-complex",
+      "zone": "exit",
+      "placementAnchor": "authored group anchor northwest with group offset (11, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "exit",
+          "objectTypeId": "industrial-exit",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    }
+  ]
 }

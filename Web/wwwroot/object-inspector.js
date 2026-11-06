@@ -2,6 +2,7 @@ import {
   buildSceneGraph,
   validatePlacement,
   suggestPlacements,
+  validateConnection,
 } from "./map-scene-graph.js";
 const $ = (s) => document.querySelector(s),
   esc = (v) =>
@@ -33,6 +34,14 @@ const byId = (id) => nodeIndex.get(id),
       ...(catalog.worldObjectTypes || []),
     ].find((t) => t.id === n.typeId || t.assetIds?.includes(n.assetId));
 const expandedGroups = new Set();
+const isAssembly = (node) => node?.typeId === "assembly";
+const assemblyMembers = (node) =>
+  isAssembly(node) ? (node.memberIds || []).map(byId).filter(Boolean) : [];
+function relationVisible(edge) {
+  return isAdvisory(edge)
+    ? $("#relations-suggestions").checked
+    : $("#relations-actual").checked;
+}
 const isAdvisory = (edge) =>
   Boolean(edge.advisory || edge.inferred || edge.relation === "near");
 const isObject = (node) => node.runtimeId && node.typeId !== "room";
@@ -46,7 +55,10 @@ function select(id) {
   if (!selected) return;
   if (selected.typeId === "room") roomId = selected.id;
   else if (selected.id !== "world") roomId = roomFor(selected)?.id || "";
-  if (selected.typeId === "group") expandedGroups.add(selected.id);
+  if (selected.typeId === "group" || isAssembly(selected))
+    expandedGroups.add(selected.id);
+  if (isAssembly(byId(selected.parentId)))
+    expandedGroups.add(selected.parentId);
   if (selected.collision?.source === "runtime-tile") {
     $("#show-surfaces").checked = true;
     expandedGroups.add(selected.parentId);
@@ -59,7 +71,14 @@ function renderTree() {
   const query = $("#search").value.toLowerCase();
   const matches = (node) =>
     !query ||
-    JSON.stringify([node.label, node.runtimeId, node.assetId, node.tags])
+    JSON.stringify([
+      node.label,
+      node.runtimeId,
+      node.assetId,
+      node.tags,
+      node.groupId,
+      node.memberRole,
+    ])
       .toLowerCase()
       .includes(query);
   const button = (node, css, prefix = "") =>
@@ -76,6 +95,22 @@ function renderTree() {
       (node) => node.parentId === room.id,
     )) {
       const children = graph.nodes.filter((node) => node.parentId === group.id);
+      if (isAssembly(group)) {
+        const relevant = matches(group) || children.some(matches);
+        if (query && !relevant) continue;
+        const expanded = expandedGroups.has(group.id) || Boolean(query);
+        html += `<div class="assembly-row"><button class="assembly-toggle" data-group="${esc(group.id)}" aria-label="${expanded ? "Collapse" : "Expand"} ${esc(group.label)}" aria-expanded="${expanded}">${expanded ? "▾" : "▸"}</button>${button(group, "assembly", "◈ ")}</div>`;
+        if (expanded)
+          for (const node of children.filter(
+            (node) => !query || matches(group) || matches(node),
+          ))
+            html += button(
+              node,
+              "object member",
+              `${esc(node.memberRole || "member")} · `,
+            );
+        continue;
+      }
       const terrain = children.some(
         (node) => node.collision?.source === "runtime-tile",
       );
@@ -146,8 +181,11 @@ function renderMap() {
     (n) => isObject(n) && (!room || roomFor(n)?.id === roomId),
   );
   for (const n of visible) {
-    const active = n.id === selected?.id;
-    html += `<rect class="map-node" data-id="${esc(n.id)}" x="${n.x + 0.05}" y="${n.y + 0.05}" width="${Math.max(0.65, (n.width || 1) - 0.1)}" height="${Math.max(0.65, (n.height || 1) - 0.1)}" rx=".08" fill="${n.id.startsWith("object:") ? "#e8bc70" : n.layer === "wallfixture" ? "#687c92" : "#8facc0"}" stroke="${active ? "#1d4e85" : "#617c91"}" stroke-width="${active ? ".17" : ".05"}"><title>${esc(n.label)} · ${esc(n.runtimeId)}</title></rect>`;
+    const memberSelected = assemblyMembers(selected).some(
+      (member) => member.id === n.id,
+    );
+    const active = n.id === selected?.id || memberSelected;
+    html += `<rect class="map-node${memberSelected ? " assembly-member-selected" : ""}" data-id="${esc(n.id)}" x="${n.x + 0.05}" y="${n.y + 0.05}" width="${Math.max(0.65, (n.width || 1) - 0.1)}" height="${Math.max(0.65, (n.height || 1) - 0.1)}" rx=".08" fill="${n.id.startsWith("object:") ? "#e8bc70" : n.layer === "wallfixture" ? "#687c92" : "#8facc0"}" stroke="${active ? "#1d4e85" : "#617c91"}" stroke-width="${active ? ".17" : ".05"}"><title>${esc(n.label)} · ${esc(n.runtimeId)}</title></rect>`;
     if (room && active)
       for (const port of n.ports || []) {
         const px =
@@ -167,26 +205,40 @@ function renderMap() {
         html += `<circle cx="${px}" cy="${py}" r=".15" fill="#fff" stroke="#315d8c" stroke-width=".07"><title>${esc(port.id)} · ${esc(port.side)}</title></circle>`;
       }
   }
+  if (isAssembly(selected)) {
+    html += `<rect class="assembly-bounds" x="${selected.x}" y="${selected.y}" width="${selected.width}" height="${selected.height}" fill="none" stroke="#315d8c" stroke-width=".12" stroke-dasharray=".3 .15"><title>Assembly bounds · ${esc(selected.label)}</title></rect>`;
+  }
+  const relationNodes = new Set([
+    selected?.id,
+    ...assemblyMembers(selected).map((node) => node.id),
+  ]);
   if (selected && room)
     for (const edge of graph.edges.filter(
       (e) =>
         e.relation !== "contains" &&
-        (e.source === selected.id || e.target === selected.id),
+        relationVisible(e) &&
+        (relationNodes.has(e.source) || relationNodes.has(e.target)),
     )) {
       const a = byId(edge.source),
         b = byId(edge.target);
       if (a?.x == null || b?.x == null) continue;
-      html += `<line x1="${a.x + (a.width || 1) / 2}" y1="${a.y + (a.height || 1) / 2}" x2="${b.x + (b.width || 1) / 2}" y2="${b.y + (b.height || 1) / 2}" stroke="${isAdvisory(edge) ? "#bd8a36" : "#497a75"}" stroke-width=".065" ${isAdvisory(edge) ? 'stroke-dasharray=".15 .1"' : ""}><title>${isAdvisory(edge) ? "Suggested proximity: " : "Actual relation: "}${esc(edge.relation)}</title></line>`;
+      html += `<line class="relation ${isAdvisory(edge) ? "advisory-relation" : "actual-relation"}" x1="${a.x + (a.width || 1) / 2}" y1="${a.y + (a.height || 1) / 2}" x2="${b.x + (b.width || 1) / 2}" y2="${b.y + (b.height || 1) / 2}" stroke="${isAdvisory(edge) ? "#bd8a36" : "#497a75"}" stroke-width=".065" ${isAdvisory(edge) ? 'stroke-dasharray=".15 .1"' : ""}><title>${isAdvisory(edge) ? "Suggested proximity: " : "Actual relation: "}${esc(edge.relation)}</title></line>`;
     }
   if (candidate)
     html += `<rect x="${candidate.x}" y="${candidate.y}" width="${candidate.width || 1}" height="${candidate.height || 1}" fill="#f4975633" stroke="#bd5632" stroke-width=".12" stroke-dasharray=".2 .12"/>`;
   svg.innerHTML = html;
   $("#summary").textContent =
-    `${visible.length} objects in view · ${graph.nodes.length} graph nodes · ${graph.diagnostics.length} graph diagnostics · shapes show runtime footprints`;
+    `${isAssembly(selected) ? `${assemblyMembers(selected).length} selected assembly members · ` : ""}${visible.length} objects in view · ${graph.nodes.length} graph nodes · ${graph.diagnostics.length} graph diagnostics · shapes show runtime footprints`;
 }
 function renderProperties() {
   const n = selected;
   if (!n) return;
+  if (isAssembly(n)) {
+    renderAssemblyProperties(n);
+    $("#placement").hidden = true;
+    renderConnectionCheck();
+    return;
+  }
   const type = typeFor(n),
     edges = graph.edges.filter((e) => e.source === n.id || e.target === n.id),
     actualEdges = edges.filter((edge) => !isAdvisory(edge)),
@@ -211,12 +263,96 @@ function renderProperties() {
         )
         .join("") || "<li>None</li>"
     }</ul>${actualEdges.length > 12 ? `<p class="muted">${actualEdges.length - 12} further actual relations</p>` : ""}<h2>Suggested proximity · advisory</h2><ul>${advisoryEdges.map((edge) => `<li>${esc(byId(edge.source)?.label || edge.source)} — ${esc(edge.relation)} → ${esc(byId(edge.target)?.label || edge.target)} (suggested)</li>`).join("") || "<li>No advisory matches</li>"}</ul><h2>Expected relations · catalog intent</h2><pre>${esc(JSON.stringify(n.expectedRelations || [], null, 2))}</pre><h2>Attachment ports · declared</h2><pre>${esc(JSON.stringify(n.ports || [], null, 2))}</pre><h2>Validation issues</h2><p class="muted">${issues.map((i) => esc(i.message || i.code)).join("<br>") || "No graph issues reported for this node."}</p>`;
+  const assembly = byId(n.assemblyId || n.parentId);
+  if (isAssembly(assembly)) {
+    $("#properties").insertAdjacentHTML(
+      "afterbegin",
+      `<button class="parent-assembly" data-inspect="${esc(assembly.id)}">← ${esc(assembly.label)}</button>`,
+    );
+  }
+  renderConnectionCheck();
   $("#placement").hidden = !n.id.startsWith("prop:");
   $("#test-x").value = n.x ?? 0;
   $("#test-y").value = n.y ?? 0;
   $("#test-rotation").value = n.rotation || 0;
   $("#test-result").textContent = "";
   $("#suggestions").innerHTML = "";
+}
+function renderAssemblyProperties(node) {
+  const members = assemblyMembers(node);
+  const issues = graph.diagnostics.filter((issue) => issue.nodeId === node.id);
+  const missing = issues.filter(
+    (issue) => issue.code === "missing-assembly-member" && issue.required,
+  );
+  const recommendations = (node.recommendations || []).filter(
+    (issue) => !issue.required,
+  );
+  const field = (name, value) =>
+    `<dt>${esc(name)}</dt><dd>${esc(value ?? "Not specified")}</dd>`;
+  $("#properties").innerHTML =
+    `<h3>${esc(node.label)}</h3><span class="muted">${esc(node.id)}</span><p class="badge">Authored runtime assembly</p>
+    <dl>${field("Runtime group", node.groupId)}${field("Catalog assembly", node.assemblyTypeId)}${field("Anchor", typeof node.anchor === "object" ? JSON.stringify(node.anchor) : node.anchor)}${field("Zone", node.zone)}${field("World group origin", `${node.worldGroupX ?? node.x}, ${node.worldGroupY ?? node.y}`)}${field("Composite bounds", `${node.width} × ${node.height} at ${node.x}, ${node.y}`)}${field("Actual members", members.length)}</dl>
+    <h2>Actual members · runtime geometry</h2><ul class="assembly-members">${members.map((member) => `<li><button data-inspect="${esc(member.id)}">${esc(member.label)}<small>${esc(member.memberRole || node.members?.find((entry) => entry.nodeId === member.id)?.role || "member")} · ${esc(member.runtimeId)}</small></button></li>`).join("") || "<li>No runtime members</li>"}</ul>
+    <h2>Required members missing</h2><ul class="${missing.length ? "bad" : "good"}">${missing.map((issue) => `<li>${esc(issue.message)}</li>`).join("") || "<li>None reported</li>"}</ul>
+    <h2>Recommendations · advisory</h2><ul class="advisory-copy">${recommendations.map((issue) => `<li>${esc(issue.message)}</li>`).join("") || "<li>No missing optional members reported</li>"}</ul>
+    <details><summary>Authored member expectations</summary><pre>${esc(JSON.stringify(node.expectedMembers || [], null, 2))}</pre></details>`;
+}
+function renderConnectionCheck() {
+  const node = selected;
+  const section = $("#connection-check");
+  section.hidden = !node?.ports?.length || !isObject(node);
+  if (section.hidden) return;
+  const options = (ports) =>
+    ports
+      .map(
+        (port) =>
+          `<option value="${esc(port.id)}">${esc(port.id)} · ${esc(port.side)}</option>`,
+      )
+      .join("");
+  $("#source-port").innerHTML = options(node.ports);
+  const targets = graph.nodes.filter(
+    (target) =>
+      target.id !== node.id &&
+      isObject(target) &&
+      target.ports?.length &&
+      roomFor(target)?.id === roomFor(node)?.id,
+  );
+  $("#target-object").innerHTML =
+    '<option value="">Choose an object…</option>' +
+    targets
+      .map(
+        (target) =>
+          `<option value="${esc(target.id)}">${esc(target.label)} · ${esc(target.runtimeId)}</option>`,
+      )
+      .join("");
+  $("#target-port").innerHTML = "";
+  $("#connection-result").textContent =
+    "Choose a target to check declared port compatibility. Geometry and world remain unchanged.";
+}
+function updateTargetPorts() {
+  const target = byId($("#target-object").value);
+  $("#target-port").innerHTML = (target?.ports || [])
+    .map(
+      (port) =>
+        `<option value="${esc(port.id)}">${esc(port.id)} · ${esc(port.side)}</option>`,
+    )
+    .join("");
+}
+function checkConnection(event) {
+  event.preventDefault();
+  const target = byId($("#target-object").value);
+  if (!target) return;
+  const result = validateConnection(selected, target, {
+    sourcePort: $("#source-port").value,
+    targetPort: $("#target-port").value,
+  });
+  if (JSON.stringify(world) !== baseline)
+    throw Error("World snapshot changed during connection check");
+  const output = $("#connection-result");
+  output.className = result.valid ? "good" : "bad";
+  output.textContent = result.valid
+    ? "Compatible declared ports. Read-only check; no connection created."
+    : `Connection rejected: ${result.reasons.map((reason) => reason.message).join(" ")} No connection created.`;
 }
 function render() {
   renderTree();
@@ -260,6 +396,7 @@ async function loadWorld() {
         return graph;
       },
       validatePlacement,
+      validateConnection,
     };
     $("#room").innerHTML =
       '<option value="">Entire world</option>' +
@@ -385,3 +522,12 @@ $("#export").addEventListener("click", () => {
   link.click();
   URL.revokeObjectURL(url);
 });
+
+$("#properties").addEventListener("click", (event) => {
+  const button = event.target.closest("[data-inspect]");
+  if (button) select(button.dataset.inspect);
+});
+$("#relations-actual").addEventListener("change", renderMap);
+$("#relations-suggestions").addEventListener("change", renderMap);
+$("#target-object").addEventListener("change", updateTargetPorts);
+$("#connection-form").addEventListener("submit", checkConnection);

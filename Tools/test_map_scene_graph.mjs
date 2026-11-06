@@ -8,6 +8,7 @@ const {
   buildSceneGraph,
   rotatePorts,
   validatePlacement,
+  validateConnection,
   validateSceneGraph,
   suggestPlacements,
 } = await import(
@@ -500,6 +501,82 @@ assert.ok(
   ).reasons.some((reason) => reason.code === "mounting"),
   "dual-purpose pipe mounted as wallfixture cannot use floor support",
 );
+// Real authored memberships survive the same origin translation as their props.
+for (const { seed, world, battle } of scenes) {
+  const snapshot = JSON.stringify({ world, battle });
+  const worldGraph = buildSceneGraph(world, { catalog: activeCatalog });
+  const battleGraph = buildSceneGraph(battle, { catalog: activeCatalog, world, battle: true });
+  const assemblies = worldGraph.nodes.filter((node) => node.typeId === "assembly");
+  assert.ok(assemblies.length > 0, `seed ${seed} has authored assemblies`);
+  for (const roomId of ["goblin-workshop", "ball-of-swine-complex"]) {
+    const machinery = assemblies.find((node) => node.roomId === roomId && node.groupId === "northwest-machinery");
+    assert.ok(machinery, `seed ${seed} ${roomId} has authored machinery`);
+    assert.equal(machinery.assemblyTypeId, "northwest-machinery", "shared template resolves by exact group ID in both industrial rooms");
+    assert.equal(machinery.members.filter((member) => member.role === "machine" && member.typeId === "industrial-machine").length, 1);
+    assert.equal(machinery.members.filter((member) => member.role === "pipe-fitting" && member.typeId === "industrial-pipe").length, 2);
+    assert.equal(worldGraph.diagnostics.some((diagnostic) => diagnostic.nodeId === machinery.id && diagnostic.code === "unknown-assembly"), false);
+  }
+  for (const assembly of assemblies) {
+    assert.equal(assembly.parentId, `room:${assembly.roomId}`);
+    const members = worldGraph.nodes.filter((node) => assembly.memberIds.includes(node.id));
+    assert.equal(assembly.x, Math.min(...members.map((member) => member.x)));
+    assert.equal(assembly.width, Math.max(...members.map((member) => member.x + member.width)) - assembly.x);
+    assert.ok(members.every((member) => member.parentId === assembly.id));
+    assert.ok(members.every((member) => member.layer === member.runtime.layer));
+    assert.ok(members.every((member) => member.runtime.groupId === assembly.groupId));
+    assert.equal(worldGraph.edges.filter((edge) => edge.source === assembly.id && edge.relation === "authored-member").length, members.length);
+  }
+  for (const assembly of battleGraph.nodes.filter((node) => node.typeId === "assembly")) {
+    const worldAssembly = assemblies.find((node) => node.id === assembly.id);
+    assert.ok(worldAssembly, "world/battle assembly ID stable");
+    assert.deepEqual(assembly.memberIds, worldAssembly.memberIds);
+    assert.equal(assembly.worldX, worldAssembly.worldX);
+    assert.equal(assembly.worldY, worldAssembly.worldY);
+    assert.equal(assembly.worldGroupX, worldAssembly.worldGroupX);
+    assert.equal(assembly.worldGroupY, worldAssembly.worldGroupY);
+  }
+  assert.equal(JSON.stringify({ world, battle }), snapshot, "assemblies cannot mutate imported worlds");
+}
+const declaredCatalog = {
+  ...furnitureCatalog,
+  assemblyTypes: [{ id: "lesson", groupId: "lesson", roomId: "room", label: "Lesson",
+    members: [
+      { role: "table", objectTypeId: "table", expectedCount: 2, required: true },
+      { role: "optional-pipe", objectTypeId: "pipe", expectedCount: 1, required: false },
+    ] }],
+};
+const declaredMap = {
+  width: 4, height: 4, tiles: Array(16).fill("."),
+  rooms: [{ id: "room", x: 0, y: 0, width: 4, height: 4 }],
+  props: [{ id: "arbitrary", assetId: "table", roomId: "room", groupId: "lesson", groupX: 1, groupY: 1,
+    x: 1, y: 1, width: 1, height: 1, layer: "underlay", blocksMovement: false },
+    { id: "lesson-table-nearby", assetId: "table", roomId: "room", x: 2, y: 1, width: 1, height: 1 }],
+};
+const declaredGraph = buildSceneGraph(declaredMap, { catalog: declaredCatalog });
+const lesson = declaredGraph.nodes.find((node) => node.typeId === "assembly");
+assert.deepEqual(lesson.memberIds, ["prop:arbitrary"], "names and proximity cannot invent membership");
+assert.equal(lesson.members[0].role, "table");
+assert.ok(declaredGraph.diagnostics.some((d) => d.code === "missing-assembly-member" && d.severity === "error" && d.required));
+assert.ok(declaredGraph.diagnostics.some((d) => d.code === "missing-assembly-member" && d.severity === "info" && !d.required));
+const unknownMap = structuredClone(declaredMap);
+unknownMap.props[0].groupId = "uncatalogued";
+const unknownGraph = buildSceneGraph(unknownMap, { catalog: declaredCatalog });
+assert.ok(unknownGraph.nodes.some((node) => node.typeId === "assembly" && node.groupId === "uncatalogued"));
+assert.ok(unknownGraph.diagnostics.some((d) => d.code === "unknown-assembly"));
+const portNode = (id, side, kind = "fluid") => ({ id, ports: [{ id: "p", side, kind, accepts: [kind] }] });
+const portOptions = { sourcePort: "p", targetPort: "p" };
+assert.ok(validateConnection(portNode("a", "east"), portNode("b", "west"), portOptions).valid);
+assert.equal(validateConnection(portNode("a", "east"), portNode("b", "east"), portOptions).valid, false);
+assert.equal(validateConnection(portNode("a", "east"), portNode("b", "west", "power"), portOptions).valid, false);
+assert.equal(validateConnection(portNode("a", "east"), portNode("a", "west"), portOptions).valid, false);
+assert.equal(validateConnection(portNode("a", "east"), portNode("b", "west"), { ...portOptions, targetPort: "absent" }).valid, false);
+assert.equal(validateConnection(portNode("a", "east"), portNode("b", "north"), { ...portOptions, adapter: true }).valid, false);
+assert.ok(validateConnection(portNode("a", "east"), portNode("b", "north"), {
+  ...portOptions, adapter: { id: "elbow", kinds: ["fluid"], sidePairs: [["east", "north"]] },
+}).valid, "explicit adapter permits only its declared side pair");
+assert.equal(validateConnection(portNode("a", "east"), portNode("b", "south"), {
+  ...portOptions, adapter: { id: "elbow", kinds: ["fluid"], sidePairs: [["east", "north"]] },
+}).valid, false);
 console.log(
-  "Scene graph: portable seed 1337/42 connector fixtures, 132 runtime self placements, mounting/support guards, route preservation, relations, identity and immutability pass.",
+  "Scene graph: actual seed 1337/42 assemblies and connector fixtures, 132 runtime self placements, member diagnostics, typed ports/adapters, mounting/support guards, route preservation, identity and immutability pass.",
 );
