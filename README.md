@@ -69,6 +69,18 @@ Use `--stage baseline` or `--stage pass-01` through `--stage pass-05`; each stag
 
 The encounter check walks around solid prop footprints to the first encounter using keyboard input, selects and moves units on the canvas, confirms attacks, runs enemy turns, and checks the victory return.
 
+The masonry pass uses existing hosted stone assets to assemble broader wall blocks and courses, sparse floor wear, and a few wall-bound moss accents. It keeps floor and wall sampling aligned and does not use the clean-map reference as a whole-map background. The 91-file hosted asset manifest is unchanged. See [the masonry pass review](Rebuild/MASONRY-PASS-REVIEW.md) and its accepted seed-1337 captures in `Rebuild/MasonryPassComparison/pass-01/`. To reproduce the capture against a published host, use:
+
+```sh
+python3 Tools/capture_map_passes.py --url http://localhost:8765 --browser /usr/bin/chromium --stage pass-01 --label 'Masonry pass' --output Rebuild/MasonryPassComparison
+```
+
+For actual keyboard arena verification with doorway and full bridge crossings plus the read-only floor/wall surface identity audit, run:
+
+```sh
+python3 Tools/capture_map_refinement.py --layered --url http://localhost:8765 --browser /usr/bin/chromium --output Rebuild/MasonryPassComparison/final-qa
+```
+
 The hosted asset manifest is `Tools/hosted-assets.json`: 91 individual files with checksums and an immutable AI-Art source revision. Publishing does not clone the full art repository or package every retained asset.
 
 GitHub Pages builds on pushes to `main`, manual workflow dispatch, and `pages-dev-*` tags. Development tags can request a build without moving `main`; the GitHub Pages environment must also authorize that tag before deployment. The workflow runs the C# tests, publishes the WebAssembly host, and restores only the manifest subset.

@@ -388,6 +388,27 @@ export class Renderer {
         if(candidates.length) {const p=candidates[0];parts.push(p);mossCells.add(`${p.x},${p.y}`);}
       }
     }
+    // Small weathered islands on broad blocked bands, separate from the six
+    // boundary fringes. Room-local anchors survive the arena translation.
+    for(const r of industrialRooms) {
+      const anchors=[[.18,.08],[.76,.08],[.25,.91],[.83,.83]];
+      for(const [fx,fy] of anchors) {
+        const ax=r.x+Math.round((r.width-1)*fx),ay=r.y+Math.round((r.height-1)*fy);
+        const candidates=[];
+        for(let dy=-2;dy<=2;dy++) for(let dx=-2;dx<=2;dx++) {
+          const x=ax+dx,y=ay+dy,key=`${x},${y}`;
+          if(x<r.x || y<r.y || x>=r.x+r.width || y>=r.y+r.height
+            || at(x,y)!=="#" || mossCells.has(key)) continue;
+          if([[0,1],[1,0],[0,-1],[-1,0]].filter(([a,b])=>at(x+a,y+b)==="#").length<3) continue;
+          if((map.props||[]).some(p=>x>=p.x-.4 && y>=p.y-.4
+            && x<p.x+p.width+.4 && y<p.y+p.height+.4)) continue;
+          const o=this.surfaceOrigin(),hash=this.surfaceHash(x+o.x,y+o.y);
+          candidates.push({kind:"moss",x,y,interior:true,hash,distance:Math.abs(dx)+Math.abs(dy)});
+        }
+        candidates.sort((a,b)=>a.distance-b.distance || a.hash-b.hash);
+        if(candidates.length) {const p=candidates[0];parts.push(p);mossCells.add(`${p.x},${p.y}`);}
+      }
+    }
     this.assembly = parts.filter(p=>p.kind!=="front").concat(parts.filter(p=>p.kind==="front").sort((a,b)=>a.depth-b.depth));
     return this.assembly;
   }
@@ -399,7 +420,13 @@ export class Renderer {
       const moss=this.materials?.["moss-hanging"];
       if(moss) {
         c.save();c.beginPath();c.rect(sx,sy,tile,tile);c.clip();
-        c.drawImage(moss,11,5,106,119,sx+tile*.04,sy+tile*.10,tile*.92,tile*.96);
+        if(p.interior) {
+          const scale=.50+(p.hash%19)/100;
+          c.translate(sx+tile*.5,sy+tile*.5);
+          if(p.hash&1)c.scale(-1,1);
+          c.globalAlpha=.84;
+          c.drawImage(moss,11,5,106,119,-tile*scale*.5,-tile*scale*.48,tile*scale,tile*scale);
+        } else c.drawImage(moss,11,5,106,119,sx+tile*.04,sy+tile*.10,tile*.92,tile*.96);
         c.restore();
       }
       return;
@@ -427,19 +454,19 @@ export class Renderer {
       // The coping and upright face meet at the southern masonry edge.
       // Keep the whole cap on the blocked cell; only its shallow shadow falls
       // onto the adjoining floor, preserving the visible movement boundary.
-      c.drawImage(im,10,47,108,66,sx,sy+tile*.79,tile+.5,tile*.31);
+      c.drawImage(im,10,47,70,48,sx,sy+tile*.70,tile+.5,tile*.40);
       c.fillStyle="#03101c55";
       c.fillRect(sx,sy+tile*.94,tile+.5,tile*.16);
-      c.drawImage(im,10,9,108,18,sx,sy+tile*.72,tile+.5,tile*.26);
+      c.drawImage(im,10,9,70,18,sx,sy+tile*.72,tile+.5,tile*.26);
       const shade=c.createLinearGradient(0,sy+tile*1.08,0,sy+tile*1.19);
       shade.addColorStop(0,"#02081080");shade.addColorStop(1,"#02081000");
       c.fillStyle=shade;c.fillRect(sx,sy+tile*1.08,tile+.5,tile*.11);
     } else if (p.dy === -1) {
-      c.drawImage(im,10,9,108,18,sx,sy,tile+.5,tile*.26);
+      c.drawImage(im,10,9,70,18,sx,sy,tile+.5,tile*.26);
       c.fillStyle="#020b174d";c.fillRect(sx,sy+tile*.26,tile+.5,tile*.045);
     } else {
       c.save();c.translate(sx+(p.dx===1?tile*.87:tile*.13),sy+tile/2);c.rotate(Math.PI/2);
-      c.drawImage(im,10,9,108,18,-tile/2,-tile*.13,tile+.5,tile*.26);c.restore();
+      c.drawImage(im,10,9,70,18,-tile/2,-tile*.13,tile+.5,tile*.26);c.restore();
       c.fillStyle="#020b173b";
       c.fillRect(sx+(p.dx===1?tile*.70:tile*.26),sy,tile*.04,tile);
     }
@@ -491,20 +518,64 @@ export class Renderer {
       c.fillStyle=glow;c.fillRect(-1,-1,2,2);c.restore();
     }
   }
+  surfaceOrigin() {
+    const v=this.view;
+    if(v?.mode!=="battle") return {x:0,y:0};
+    const room=v.world?.rooms?.find(r=>r.objectId===v.battle?.encounterId
+      && r.width===v.battle.width && r.height===v.battle.height);
+    return room ? {x:room.x,y:room.y} : {x:0,y:0};
+  }
+  // Read-only texture identity shared by rendering and browser review probes.
+  surfaceSample(x,y) {
+    const origin=this.surfaceOrigin(), gx=x+origin.x, gy=y+origin.y;
+    const hash=this.surfaceHash(gx,gy);
+    return {x:gx,y:gy,hash,quadrant:(hash>>>5)%4,rotation:(hash>>>12)%4,
+      worn:hash%7===0,branching:hash%17===0,hairline:hash%9===0,
+      masonryRow:Math.floor(gy/.35),masonryColumn:Math.floor((gx-(Math.floor(gy/.35)&1)*.57*.5)/.57)};
+  }
+  surfaceHash(x, y, seed = this.view?.seed || 0) {
+    let n = Math.imul(x + 0x6d2b79f5, 0x45d9f3b) ^ Math.imul(y + seed, 0x27d4eb2d);
+    n = Math.imul(n ^ (n >>> 16), 0x45d9f3b);
+    return (n ^ (n >>> 16)) >>> 0;
+  }
+  drawMasonry(sx, sy, tile, x, y, exposed) {
+    const c=this.ctx, im=this.materials?.["wall-straight"];
+    if (!im) return;
+    // Individual blue stones from the existing component, rather than its full
+    // three-column face compressed twice into each cell. The world course
+    // lattice crosses tile boundaries; clipping preserves exact collision edges.
+    const stones=[[10,47,35,20],[47,47,32,20],[81,47,36,20],
+      [10,70,35,25],[47,70,32,25],[81,70,36,25]];
+    const course=.35, span=.57;
+    const origin=this.surfaceOrigin();x+=origin.x;y+=origin.y;
+    c.save();c.beginPath();c.rect(sx,sy,tile+.5,tile+.5);c.clip();
+    c.fillStyle="#061322";c.fillRect(sx,sy,tile+.5,tile+.5);
+    for(let row=Math.floor(y/course);row<=Math.floor((y+1)/course);row++) {
+      const stagger=(row&1)*span*.5;
+      for(let col=Math.floor((x-stagger)/span);col<=Math.floor((x+1-stagger)/span);col++) {
+        const h=this.surfaceHash(col,row), b=stones[h%stones.length];
+        const px=sx+(col*span+stagger-x)*tile, py=sy+(row*course-y)*tile;
+        c.globalAlpha=exposed ? .93+(h%7)*.01 : .64+(h%11)*.018;
+        c.drawImage(im,...b,px,py,span*tile-.7,course*tile-.8);
+      }
+    }
+    c.restore();
+  }
   drawFloorSlab(sx, sy, tile, x, y, map, at, wetEdge, torch) {
     const c=this.ctx,fine=this.materials?.["floors-fine"];
     if (!fine) return false;
     const wallEdge=[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dy])=>at(x+dx,y+dy)==="#");
     // Broad worn slabs carry readable fractures; stronger moisture belongs
     // to channel margins and drain approaches rather than uniform floor noise.
-    const hash=Math.abs(x*31+y*17);
+    const sample=this.surfaceSample(x,y), hash=sample.hash;
     const worn=this.materials["floors-worn"];
-    if (worn) c.drawImage(worn,5,5,153,110,sx,sy,tile+.5,tile+.5);
+    if (worn && hash%7===0) c.drawImage(worn,5,5,153,110,sx,sy,tile+.5,tile+.5);
     else c.drawImage(fine,12,12,fine.width-24,fine.height-24,sx,sy,tile+.5,tile+.5);
     const base=this.materials["floor-dry"];
     if (base) {
-      c.save();c.globalAlpha=.48;
-      c.drawImage(base,(x&1)*64+3,(y&1)*64+3,58,58,sx,sy,tile+.5,tile+.5);
+      c.save();c.globalAlpha=.32;
+      const quadrant=(hash>>>5)%4;
+      c.drawImage(base,(quadrant&1)*64+3,(quadrant>>>1)*64+3,58,58,sx,sy,tile+.5,tile+.5);
       c.restore();
     }
     const drain=(map.props || []).some(p=>p.assetId==="industrial-grate"
@@ -512,21 +583,22 @@ export class Renderer {
     const puddle=(wetEdge && hash%3!==0) || (drain && hash%2===0);
     const detail=puddle ? this.materials["floors-shallow-puddle"]
       : wetEdge || drain ? this.materials["floors-damp"]
-      : hash%4===0 ? this.materials["floors-branching-crack"]
-      : hash%3===0 || wallEdge ? this.materials["floors-hairline-crack"] : null;
+      : hash%17===0 ? this.materials["floors-branching-crack"]
+      : hash%9===0 ? this.materials["floors-hairline-crack"] : null;
     if (detail) {
       c.save();c.globalAlpha=puddle ? .83 : wetEdge || drain ? .62 : .48;
-      c.drawImage(detail,12,12,detail.width-24,detail.height-24,sx,sy,tile+.5,tile+.5);
+      c.translate(sx+tile/2,sy+tile/2);c.rotate(((hash>>>12)%4)*Math.PI/2);
+      c.drawImage(detail,12,12,detail.width-24,detail.height-24,-tile/2,-tile/2,tile+.5,tile+.5);
       c.restore();
     }
-    if (wetEdge && wallEdge && (x+y)%5===0) {
+    if (wetEdge && wallEdge && (sample.x+sample.y)%5===0) {
       const moss=this.materials["floors-moss-edge"];
       if (moss) {c.save();c.globalAlpha=.24;c.drawImage(moss,sx,sy,tile,tile);c.restore();}
     }
     if (torch) {
       const reflection=this.materials["floor-reflection"];
       if (reflection) {c.save();c.globalAlpha=.62;
-        c.drawImage(reflection,(x&1)*64,(y&1)*64,64,64,sx,sy,tile,tile);c.restore();}
+        c.drawImage(reflection,(sample.x&1)*64,(sample.y&1)*64,64,64,sx,sy,tile,tile);c.restore();}
     }
     // Every movement cell retains a straight recessed joint, without repeating
     // bright gold outlines around each slab or adding another grid scale.
@@ -684,15 +756,7 @@ export class Renderer {
               [".","~"].includes(at(x+dx,y+dy)) ||
               (x+dx>=0 && y+dy>=0 && x+dx<map.width && y+dy<map.height
                 && this.propFloor.has((y+dy)*map.width+x+dx)));
-            const im = this.materials?.["wall-straight"];
-            if (im) {
-              c.save(); c.globalAlpha = exposed ? 1 : .34; c.beginPath(); c.rect(sx,sy,tile+.5,tile+.5); c.clip();
-              // Preserve the brick aspect while repeating the face texture;
-              // stretching one short face to a square makes upright stripes.
-              for (let row=0;row<2;row++)
-                c.drawImage(im,10,47,108,66,sx,sy+row*tile*.61,tile+.5,tile*.61+.5);
-              c.restore();
-            }
+            this.drawMasonry(sx,sy,tile,x,y,exposed);
           } else {
             const wetEdge = [[1, 0], [-1, 0], [0, 1], [0, -1]]
               .some(([dx, dy]) => at(x + dx, y + dy) === "~");
