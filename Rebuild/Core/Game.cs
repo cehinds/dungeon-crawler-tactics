@@ -178,11 +178,8 @@ public sealed class Game
     {
         s.mode = "battle";
         s.turn = 1;
-        s.battle = new()
-        {
-            encounterId = o.id,
-            units = s.party
-        };
+        s.battle = World.BuildArena(s.seed, o.id);
+        s.battle.units = s.party;
         for (int i = 0; i < s.party.Count; i++)
         {
             var u = s.party[i];
@@ -222,7 +219,7 @@ public sealed class Game
         }
         s.message = "Party phase. Each crawler may move and act in either order.";
     }
-    bool Free(int x, int y, Unit self) => x >= 0 && y >= 0 && x < 10 && y < 8 && !s.battle.obstacles.Any(o => o.x == x && o.y == y) && !s.party.Concat(s.battle.enemies).Any(u => u != self && u.hp > 0 && u.x == x && u.y == y);
+    bool Free(int x, int y, Unit self) => x >= 0 && y >= 0 && x < s.battle.width && y < s.battle.height && !s.battle.obstacles.Any(o => o.x == x && o.y == y) && !s.party.Concat(s.battle.enemies).Any(u => u != self && u.hp > 0 && u.x == x && u.y == y);
     bool Reach(Unit u, int x, int y, int range)
     {
         var q = new Queue<(int x, int y, int n)>();
@@ -470,10 +467,10 @@ public sealed class Game
                 throw new InvalidOperationException();
             var candidate = save.state;
             var sourceWorld = candidate.world;
-            bool migrate = sourceWorld.generationVersion is 0 or 1;
-            if (!migrate && sourceWorld.generationVersion != 2)
+            bool migrate = sourceWorld.generationVersion is 0 or 1 or 2;
+            if (!migrate && sourceWorld.generationVersion != 3)
                 throw new NotSupportedException();
-            var trustedWorld = migrate ? World.BuildLegacy(candidate.seed) : World.Build(candidate.seed);
+            var trustedWorld = sourceWorld.generationVersion is 0 or 1 ? World.BuildLegacy(candidate.seed) : sourceWorld.generationVersion == 2 ? World.BuildVersion2(candidate.seed) : World.Build(candidate.seed);
             // Legacy coordinates are meaningful only against the original authored map.
             // Compare the persisted geometry before validating any checkpoint or receipt.
             if (sourceWorld.width != trustedWorld.width || sourceWorld.height != trustedWorld.height ||

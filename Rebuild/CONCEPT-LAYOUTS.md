@@ -35,7 +35,7 @@ The overhead sheets use a consistent square stone floor grid, narrow wall-top ou
 | Refuse / nest territory | E25 | Burrows and refuse gather in irregular edge clusters; a more open center gives combat and traversal space. This is a territory visual, not a measured Hoarder lair blueprint. Lore IDs `hoarder` and `route` establish the lair / Scatterer area, not these exact holes or piles. |
 | Service / diner | F33 | Counter separated from seating, repeated booths and tables, readable aisle gaps. This is the generic Waffle House concept (`chapter22` mention), not the canonical safe restaurant footprint. |
 | Safe-room bedroom / washroom | F36 | Separate rest and wash zones with a low visual partition and a clear passage between them. The concept is explicitly generic; match services and safety behavior from lore, not its furniture inventory. |
-| Workshop / boss chamber | No matching overhead panel in E/F | Use workshop/boss function from lore (`goblins`, `chapter15`) and invent a readable workbench/equipment zone with a clear encounter approach. Do not claim an exact machine lineup or chamber shape from these sheets. No boss arena geometry is supplied by the selected concept art. |
+| Workshop / boss chamber | Industrial combat illustration, documented in `REFERENCE-ARENA.md`; no matching overhead panel in E/F | Version 3 gives both rooms a shared industrial-sewer grammar with slate floor, water channels, machinery and grates. Each encounter uses its generated 11 × 8 room as the battle board. Workshop/boss functions have lore support (`goblins`, `chapter15`), while machinery, dimensions and arrangement are authored. |
 
 ## Visual-match checklist
 
@@ -45,3 +45,9 @@ The overhead sheets use a consistent square stone floor grid, narrow wall-top ou
 - Keep at least one legible route through the room and a distinct focal cluster. Small props should support the grouping rather than erase the floor plan.
 - Use the object kit as a source for recognizable silhouettes and approximate footprints. It is a reconstructed kit, not exact canonical source art or proof of location inventory.
 - Treat dimensions, coordinates, door locations, connectivity, hazards, and specific furniture placement as authored gameplay choices. Avoid presenting them as book-established measurements.
+
+## Current generation and verification
+
+`concept-room-rules.json` is the authored grammar for new version 3 worlds. The workshop and Ball of Swine rooms share industrial composition rules; seeded variants retain clear approaches, solid prop collision and impassable water. Their tactical boards copy the generated room tiles and props, with coordinates translated into the room. Other encounters retain 10 × 8 boards. The north-center gold exit is our composition adaptation; the supplied illustration places its exit right of center.
+
+Version 1 and version 2 layouts remain compatibility checkpoints for save validation and migration, not current layout targets. `Tools/playtest_reference_arena.py` captures published WebAssembly state for seeds 1337 and 42, verifies collision and workshop combat input, and writes a reference/runtime comparison under `Rebuild/ReferenceArenaComparison/`. The script discloses its camera-only room framing override. These captures support visual review without establishing pixel parity or canonical room geometry.

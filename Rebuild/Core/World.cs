@@ -13,7 +13,7 @@ public sealed class WorldObject
 public sealed class WorldRoom
 {
     public string id = "", name = "", theme = "", objectId = "", kind = "", description = "";
-    public string archetype = "", shape = "";
+    public string archetype = "", shape = "", composition = "", floorStyle = "";
     public int x, y, width, height;
     public bool safe;
 }
@@ -45,7 +45,9 @@ public static class World
     private sealed class RuleSet { public RoomRule[] rooms = Array.Empty<RoomRule>(); }
     private sealed class RoomRule
     {
-        public string roomId = "", archetype = "", shape = "rectangular";
+        public string roomId = "", archetype = "", shape = "rectangular", composition = "", floorStyle = "";
+        public bool sideChannels = false;
+        public int reserveCenterWidth = 0, reserveCenterHeight = 0;
         public int minWidth = 8, maxWidth = 11, minHeight = 6, maxHeight = 8;
         public WorldProp[] assemblies = Array.Empty<WorldProp>();
         public PropGroup[] groups = Array.Empty<PropGroup>();
@@ -53,6 +55,7 @@ public static class World
     private sealed class PropGroup
     {
         public string id = "", anchor = "northwest", zone = "";
+        public int offsetX = 0, offsetY = 0, jitterX = 0, jitterY = 0;
         public WorldProp[] members = Array.Empty<WorldProp>();
     }
     private static T Read<T>(string name)
@@ -63,11 +66,13 @@ public static class World
         return JsonSerializer.Deserialize<T>(stream, new JsonSerializerOptions { IncludeFields = true })!;
     }
     // C# alone resolves the authored concept grammar into tiles and whole-object footprints.
-    public static WorldMap Build(int seed)
+    public static WorldMap Build(int seed) => BuildConcept(seed, false);
+    public static WorldMap BuildVersion2(int seed) => BuildConcept(seed, true);
+    private static WorldMap BuildConcept(int seed, bool legacy)
     {
         var definition = Read<Definition>("world-rooms.json");
-        var rules = Read<RuleSet>("concept-room-rules.json");
-        var map = new WorldMap { generationVersion = 2, width = definition.width, height = definition.height, rooms = definition.rooms, adaptation = definition.adaptation };
+        var rules = legacy ? JsonSerializer.Deserialize<RuleSet>(LegacyConceptGrammar.Json, new JsonSerializerOptions { IncludeFields = true })! : Read<RuleSet>("concept-room-rules.json");
+        var map = new WorldMap { generationVersion = legacy ? 2 : 3, width = definition.width, height = definition.height, rooms = definition.rooms, adaptation = definition.adaptation };
         map.tiles = Enumerable.Repeat("#", map.width * map.height).ToArray();
         uint random = unchecked((uint)seed) ^ 0xA341316Cu;
         if (random == 0) random = 1;
@@ -87,7 +92,7 @@ public static class World
         for (int i = 0; i < map.rooms.Length; i++)
         {
             var room = map.rooms[i]; var rule = rules.rooms.Single(r => r.roomId == room.id);
-            room.archetype = rule.archetype; room.shape = rule.shape;
+            room.archetype = rule.archetype; room.shape = rule.shape; room.composition = rule.composition; room.floorStyle = rule.floorStyle;
             room.width = rule.minWidth + Next(rule.maxWidth - rule.minWidth + 1);
             room.height = rule.minHeight + Next(rule.maxHeight - rule.minHeight + 1);
             room.x = 2 + (i % 4) * 14 + Next(13 - room.width);
@@ -121,7 +126,7 @@ public static class World
         }
         var entry = map.rooms[0]; map.spawnX = entry.x + entry.width / 2 - 1; map.spawnY = entry.y + entry.height / 2;
         var boss = map.rooms.Single(r => r.objectId == "ball-of-swine");
-        objects.Add(new WorldObject { id = "exit", kind = "exit", name = "Floor 1 descending stair", description = "The stair beyond the Ball of Swine. Clear the borough boss before descending.", roomId = boss.id, x = boss.x + boss.width - 1, y = boss.y + boss.height / 2 });
+        objects.Add(new WorldObject { id = "exit", kind = "exit", name = "Floor 1 descending stair", description = "The stair beyond the Ball of Swine. Clear the borough boss before descending.", roomId = boss.id, x = legacy ? boss.x + boss.width - 1 : boss.x + boss.width / 2, y = legacy ? boss.y + boss.height / 2 : boss.y + 1 });
         for (int col = 0; col < 4; col++)
         {
             var room = map.rooms[col]; int x = room.x + room.width / 2, y = 13;
@@ -133,6 +138,14 @@ public static class World
         foreach (var room in map.rooms)
         {
             var rule = rules.rooms.Single(r => r.roomId == room.id); int serial = 0;
+            if (rule.reserveCenterWidth > 0)
+                for (int yy = room.y + (room.height - rule.reserveCenterHeight) / 2; yy < room.y + (room.height + rule.reserveCenterHeight) / 2; yy++)
+                    for (int xx = room.x + (room.width - rule.reserveCenterWidth) / 2; xx < room.x + (room.width + rule.reserveCenterWidth) / 2; xx++) reserved.Add(yy * map.width + xx);
+            if (rule.sideChannels)
+                foreach (int xx in new[] { room.x, room.x + room.width - 1 })
+                    for (int yy = room.y + 2; yy < room.y + room.height - 2; yy++)
+                    { int cell = yy * map.width + xx; if (!reserved.Contains(cell)) map.tiles[cell] = "~"; }
+
             // Authored groups keep meaningful relative relationships: teaching furniture,
             // a paired stair approach, and separated living/washroom zones.
             foreach (var group in rule.groups)
@@ -142,6 +155,10 @@ public static class World
                 int gw = group.members.Max(m => m.offsetX + m.width) - minX, gh = group.members.Max(m => m.offsetY + m.height) - minY;
                 int gx = room.x + (group.anchor.EndsWith("east", StringComparison.Ordinal) ? room.width - gw : 0) - minX;
                 int gy = room.y + (group.anchor.StartsWith("south", StringComparison.Ordinal) ? room.height - gh : 0) - minY;
+                if (group.anchor is "north" or "south" or "center") gx = room.x + (room.width - gw) / 2 - minX;
+                if (group.anchor == "center") gy = room.y + (room.height - gh) / 2 - minY;
+                gx += group.offsetX + (group.jitterX > 0 ? Next(group.jitterX + 1) * (group.anchor.EndsWith("east") ? -1 : 1) : 0);
+                gy += group.offsetY + (group.jitterY > 0 ? Next(group.jitterY + 1) : 0);
                 var candidates = group.members.Select((m, n) => new WorldProp { id = room.id + "-" + group.id + "-" + n, roomId = room.id, assetId = m.assetId,
                     x = gx + m.offsetX, y = gy + m.offsetY, width = m.width, height = m.height, rotation = m.rotation, blocksMovement = m.blocksMovement,
                     groupId = group.id, zone = group.zone, anchor = group.anchor, layer = m.layer, groupX = gx, groupY = gy, offsetX = m.offsetX, offsetY = m.offsetY }).ToArray();
@@ -152,7 +169,7 @@ public static class World
                     for (int dy = 0; dy < prop.height; dy++) for (int dx = 0; dx < prop.width; dx++)
                     {
                         int cell = (prop.y + dy) * map.width + prop.x + dx;
-                        if (map.tiles[cell] != "." || (prop.blocksMovement && (reserved.Contains(cell) || !blocked.Add(cell)))) throw new InvalidOperationException("Group crosses reserved route or furniture: " + room.id + "/" + group.id);
+                        if ((map.tiles[cell] != "." && !(map.tiles[cell] == "~" && !prop.blocksMovement)) || (prop.blocksMovement && (reserved.Contains(cell) || !blocked.Add(cell)))) throw new InvalidOperationException("Group crosses reserved route or furniture: " + room.id + "/" + group.id);
                     }
                 }
                 foreach (var cell in blocked) map.tiles[cell] = "#";
@@ -177,6 +194,26 @@ public static class World
             }
         }
         map.props = props.ToArray(); Validate(map); return map;
+    }
+    // Combat and exploration share the resolved industrial composition, not parallel obstacle sketches.
+    public static Battle BuildArena(int seed, string encounterId)
+    {
+        var battle = new Battle { encounterId = encounterId };
+        if (encounterId is not ("goblin-workshop" or "ball-of-swine")) return battle;
+        var world = Build(seed);
+        var room = world.rooms.Single(r => r.objectId == encounterId);
+        battle.width = room.width; battle.height = room.height;
+        battle.theme = room.floorStyle; battle.composition = room.composition;
+        battle.tiles = Enumerable.Range(0, room.width * room.height)
+            .Select(n => world.tiles[(room.y + n / room.width) * world.width + room.x + n % room.width]).ToArray();
+        battle.props = world.props.Where(p => p.roomId == room.id).Select(p => {
+            var copy = JsonSerializer.Deserialize<WorldProp>(JsonSerializer.Serialize(p, Codec.Options), Codec.Options)!;
+            copy.x -= room.x; copy.y -= room.y; copy.groupX -= room.x; copy.groupY -= room.y;
+            return copy;
+        }).ToArray();
+        battle.obstacles = Enumerable.Range(0, battle.tiles.Length).Where(n => battle.tiles[n] != ".")
+            .Select(n => new Point { x = n % battle.width, y = n / battle.width }).ToArray();
+        return battle;
     }
     public static WorldMap BuildLegacy(int seed)
     {

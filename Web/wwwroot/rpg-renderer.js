@@ -108,13 +108,25 @@ export class Renderer {
         });
       }),
     );
-    this.tiles = await Promise.all(
-      ["grey", "worn-grey", "cracked-grey"].map((t) =>
-        load(
-          `assets/book-tiles/pocket-dungeon/starter-dungeon/components/starter-dungeon-${t}-flagstone-floor.png`,
-        ),
-      ),
-    );
+    const kit = "assets/map-grid-pass/components/generated/";
+    this.materials = {};
+    await Promise.all([
+      "floor-dry", "floor-wet", "floor-moss", "floor-reflection",
+      "wall-straight", "wall-low-cap", "water-surface", "bank-straight", "moss-hanging",
+    ].map(async id => { this.materials[id] = await load(kit + id + ".png"); }));
+    await Promise.all(Object.entries({
+      "industrial-grate": "grate", "industrial-machine": "machine-controls",
+      "industrial-pipe": "pipe-straight", "industrial-pipe-elbow": "pipe-elbow",
+      "industrial-torch": "torch", "industrial-crate": "crate",
+      "industrial-outlet": "water-outlet",
+    }).map(async ([id, file]) => {
+      const image = await load(kit + file + ".png");
+      if (image) this.objects.set(id, { image, visibleBounds: [0, 0, image.width, image.height] });
+    }));
+    const exit = await load("assets/completed-layers/native/complete-gold-exit.png");
+    if (exit) this.objects.set("industrial-exit", {
+      image: exit, visibleBounds: [0, 0, exit.width, exit.height],
+    });
     const art = await fetch("assets/revamp/character-art.json")
       .then((r) => r.json())
       .catch(() => null);
@@ -300,7 +312,7 @@ export class Renderer {
       const battle = v.mode === "battle";
       const map = battle ? v.battle : v.world;
       const player = this.explorers(v)[0];
-      const target = battle ? { x: 4.5, y: 3.5 } : player;
+      const target = battle ? { x: (map.width - 1) / 2, y: (map.height - 1) / 2 } : player;
       const cp = this.positions.get(player.id) || player;
       if (!battle) {
         this.camera.x += (cp.x - this.camera.x) * 0.14;
@@ -309,7 +321,7 @@ export class Renderer {
         this.camera = { ...target };
       }
       this.tile = battle
-        ? Math.floor(Math.min(r.width / 10, r.height / 8))
+        ? Math.floor(Math.min(r.width / (map.width + 2), r.height / (map.height + 2)))
         : Math.floor(Math.max(r.width / 15, r.height / 11));
       this.offsetX = Math.floor(
         r.width / 2 - (this.camera.x + 0.5) * this.tile,
@@ -321,7 +333,7 @@ export class Renderer {
         ox = this.offsetX,
         oy = this.offsetY;
       // Props own their collision tiles: blocked furniture still sits on floor.
-      if (!battle && this.propMap !== map) {
+      if (this.propMap !== map) {
         this.propMap = map;
         this.propFloor = new Set();
         for (const p of map.props || []) {
@@ -331,48 +343,80 @@ export class Renderer {
               this.propFloor.add((p.y + dy) * map.width + p.x + dx);
         }
       }
-      const propQueue = battle ? [] : (map.props || [])
+      const propQueue = (map.props || [])
         .filter(p => p.layer !== "underlay")
         .slice().sort((a, b) => a.y + a.height - b.y - b.height);
       const drawProp = p => this.object(p.assetId, ox + p.x * tile,
         oy + p.y * tile, p.width || 1, p.height || 1, p.rotation || 0);
-      for (let y = 0; y < map.height; y++)
-        for (let x = 0; x < map.width; x++) {
+      for (let y = battle ? -1 : 0; y < map.height + (battle ? 1 : 0); y++)
+        for (let x = battle ? -1 : 0; x < map.width + (battle ? 1 : 0); x++) {
           const sx = ox + x * tile,
             sy = oy + y * tile;
           if (sx < -tile || sy < -tile || sx > r.width || sy > r.height)
             continue;
-          const wall = !battle && map.tiles[y * map.width + x] === "#" && !this.propFloor.has(y * map.width + x);
-          const water = !battle && map.tiles[y * map.width + x] === "~";
+          const at = (a, b) => a >= 0 && b >= 0 && a < map.width && b < map.height
+            ? map.tiles?.[b * map.width + a] : "#";
+          const outside = x < 0 || y < 0 || x >= map.width || y >= map.height;
+          const wall = at(x, y) === "#" && (outside || !this.propFloor.has(y * map.width + x));
+          const water = at(x, y) === "~";
           if (wall) {
-            c.fillStyle = "#172339";
+            c.fillStyle = "#101b2b";
             c.fillRect(sx, sy, tile, tile);
-            c.fillStyle = "#263b54";
-            c.fillRect(sx + 1, sy + 1, tile - 2, tile * 0.31);
-            c.fillStyle = "#0b1525";
-            c.fillRect(sx, sy + tile * 0.8, tile, tile * 0.2);
-            c.strokeStyle = "#0c1727";
-            c.strokeRect(sx, sy, tile, tile);
+            // Only exposed enclosure tiles show masonry. The solid hinterland
+            // stays dark instead of becoming a field of striped wall modules.
+            const exposed = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+              .filter(([dx, dy]) => [".", "~"].includes(at(x + dx, y + dy))
+                || (x + dx >= 0 && y + dy >= 0 && x + dx < map.width && y + dy < map.height
+                  && this.propFloor.has((y + dy) * map.width + x + dx)));
+            if ((exposed.length || battle) && this.materials?.["wall-straight"]) {
+              // Keep the front face upright on every boundary: rotating this
+              // painted module would turn the masonry perspective sideways.
+              c.drawImage(this.materials["wall-straight"], 10, 10, 108, 108,
+                sx, sy, tile + 0.5, tile + 0.5);
+            }
           } else {
-            const im =
-              this.tiles[
-                (x * 7 + y * 3) % 11 === 0 ? 2 : (x + y) % 5 === 0 ? 1 : 0
-              ];
-            if (im) c.drawImage(im, 64, 128, 128, 128, sx, sy, tile, tile);
-            else {
-              c.fillStyle = (x + y) % 2 ? "#394656" : "#3d4958";
+            const wetEdge = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+              .some(([dx, dy]) => at(x + dx, y + dy) === "~");
+            const torch = (map.props || []).find(p => p.assetId === "industrial-torch"
+              && Math.abs(p.x - x) < 0.6 && y >= p.y + 1 && y < p.y + 3);
+            const material = water ? "water-surface" : torch ? "floor-reflection"
+              : wetEdge ? "floor-wet" : "floor-dry";
+            const im = this.materials?.[material];
+            if (im) {
+              if (water) c.drawImage(im, sx, sy, tile + 0.5, tile + 0.5);
+              else {
+                // One movement cell is one slab. Alternate source quadrants
+                // to reconstruct the source's continuous two-by-two pattern.
+                c.drawImage(im, (x & 1) * 64, (y & 1) * 64, 64, 64,
+                  sx, sy, tile + 0.5, tile + 0.5);
+              }
+            } else {
+              c.fillStyle = water ? "#146782" : "#39485b";
               c.fillRect(sx, sy, tile, tile);
-              c.strokeStyle = "#283647";
-              c.strokeRect(sx + 1, sy + 1, tile - 2, tile - 2);
+            }
+            if (!water) {
+              c.fillStyle = "rgba(9,24,45,.17)";
+              c.fillRect(sx, sy, tile + 0.5, tile + 0.5);
             }
             if (water) {
-              c.fillStyle = "#174b68bb";
+              // Continuous low coping separates the channel from dry walkways.
+              // Only the top cap is sampled; the painted wall face stays upright.
+              const bank = this.materials?.["bank-straight"];
+              for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+                if (at(x + dx, y + dy) !== "." || !bank) continue;
+                c.save();
+                c.translate(sx + tile / 2, sy + tile / 2);
+                c.rotate(dx === 1 ? Math.PI / 2 : dx === -1 ? -Math.PI / 2
+                  : dy === 1 ? Math.PI : 0);
+                c.drawImage(bank, 10, 27, 108, 22,
+                  -tile / 2 - 0.25, -tile / 2, tile + 0.5, tile * 0.16);
+                c.restore();
+              }
+              const moss = this.materials?.["moss-hanging"];
+              if (moss && at(x, y - 1) === "#")
+                c.drawImage(moss, sx, sy - tile * 0.12, tile * 0.46, tile * 0.54);
+              c.fillStyle = `rgba(41, 192, 220, ${0.035 + Math.sin(t / 900 + y) * 0.025})`;
               c.fillRect(sx, sy, tile, tile);
-              c.strokeStyle = "#4a8194";
-              c.beginPath();
-              c.moveTo(sx + tile * 0.15, sy + tile * 0.5);
-              c.lineTo(sx + tile * 0.8, sy + tile * 0.5);
-              c.stroke();
             }
             if (battle) {
               c.strokeStyle = "#a5b4c01c";
@@ -380,9 +424,11 @@ export class Renderer {
             }
           }
         }
+      for (const p of map.props || [])
+        if (p.layer === "underlay") drawProp(p);
       if (battle) {
         for (const o of map.obstacles || [])
-          this.object(
+          if (!this.propFloor.has(o.y * map.width + o.x) && map.tiles?.[o.y * map.width + o.x] !== "~" && map.tiles?.[o.y * map.width + o.x] !== "#") this.object(
             "ab-clean-crate-wood-cross",
             ox + o.x * tile,
             oy + o.y * tile,
@@ -402,8 +448,6 @@ export class Renderer {
           );
         }
       } else {
-        for (const p of map.props || [])
-          if (p.layer === "underlay") drawProp(p);
         for (const o of map.objects || []) {
           if (
             v.cleared.includes(o.id) &&
@@ -420,7 +464,10 @@ export class Renderer {
             door: "cd-door-threshold",
             discovery: "cd-drain-grate",
           };
-          this.object(
+          const hasExitArchitecture = o.kind === "exit" && (map.props || []).some(p =>
+            p.assetId === "industrial-exit" && o.x >= p.x && o.x < p.x + p.width
+            && o.y >= p.y && o.y < p.y + p.height);
+          if (!hasExitArchitecture) this.object(
             o.assetId ||
               {
                 "false-guild": "cd-dozer",
@@ -493,6 +540,21 @@ export class Renderer {
         }
       }
       for (const p of propQueue) drawProp(p);
+      // Local pools of warm light keep the slate floor and cyan channels legible.
+      c.save();
+      c.globalCompositeOperation = "screen";
+      for (const p of map.props || []) {
+        if (!["industrial-torch", "industrial-machine"].includes(p.assetId)) continue;
+        const lx = ox + (p.x + (p.width || 1) / 2) * tile;
+        const ly = oy + (p.y + (p.height || 1) / 2) * tile;
+        const radius = tile * (p.assetId === "industrial-torch" ? 2.1 : 1.4);
+        const glow = c.createRadialGradient(lx, ly, 0, lx, ly, radius);
+        glow.addColorStop(0, "rgba(255,169,54,.19)");
+        glow.addColorStop(1, "rgba(255,140,30,0)");
+        c.fillStyle = glow;
+        c.fillRect(lx - radius, ly - radius, radius * 2, radius * 2);
+      }
+      c.restore();
       this.fx = this.fx.filter((f) => t - f.start < 1100);
       for (const f of this.fx) {
         const age = t - f.start;

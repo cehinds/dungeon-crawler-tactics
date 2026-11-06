@@ -23,7 +23,7 @@ static class SaveMigrationChecks
         var receiver = new Game(content, 9);
         receiver.LoadSave(oldSave);
         var migrated = receiver.GetView();
-        Check(migrated.world.generationVersion == 2 && migrated.message.Contains("upgraded"), "legacy checkpoint upgrades");
+        Check(migrated.world.generationVersion == 3 && migrated.message.Contains("upgraded"), "legacy checkpoint upgrades");
         Check(Progress(migrated) == expected, "legacy progress preserved exactly");
         var nextSafe = migrated.world.objects.Single(o => o.id == safe.id);
         Check(Math.Abs(migrated.x - nextSafe.x) + Math.Abs(migrated.y - nextSafe.y) == 1, "migration retains safe room identity");
@@ -64,6 +64,30 @@ static class SaveMigrationChecks
             receiver.LoadSave(broken.ToJsonString());
             Check(ReferenceEquals(previous, receiver.GetView()) && Progress(previous) == progress && previous.x == x && previous.y == y && previous.message.StartsWith("Invalid save"), "transactional rejected legacy " + corruption);
         }
+        var v2 = new Game(content, 71);
+        var v2state = v2.GetView(); v2state.world = World.BuildVersion2(71);
+        var v2safe = v2state.world.objects.First(o => o.kind == "safe");
+        v2state.x = v2safe.x - 1; v2state.y = v2safe.y;
+        v2state.questStage = 2; v2state.cleared.Add("false-guild"); v2state.gold = 99;
+        var v2progress = Progress(v2state);
+        // Historical generation-2 saves predate these room presentation fields.
+        var historicalV2 = JsonNode.Parse(v2.GetSave());
+        foreach (var room in historicalV2["state"]["world"]["rooms"].AsArray())
+        {
+            room.AsObject().Remove("composition");
+            room.AsObject().Remove("floorStyle");
+        }
+        var v2receiver = new Game(content, 1); v2receiver.LoadSave(historicalV2.ToJsonString());
+        Check(v2receiver.GetView().world.generationVersion == 3 && v2receiver.GetView().message.Contains("upgraded"), "version 2 checkpoints migrate explicitly");
+        Check(Progress(v2receiver.GetView()) == v2progress, "version 2 exact progress retained");
+        historicalV2["state"]["world"]["objects"][0]["x"] = 0;
+        var priorV2 = v2receiver.GetView();
+        var priorV2Progress = Progress(priorV2);
+        var priorV2Geometry = Codec.Write(priorV2.world);
+        v2receiver.LoadSave(historicalV2.ToJsonString());
+        Check(ReferenceEquals(priorV2, v2receiver.GetView()) && Progress(priorV2) == priorV2Progress &&
+            Codec.Write(priorV2.world) == priorV2Geometry && priorV2.message.StartsWith("Invalid save"),
+            "forged historical version 2 geometry rejected transactionally");
         Console.WriteLine("PASS: legacy checkpoint migration preserves progress; current roundtrip; forged checkpoints rejected.");
     }
 }

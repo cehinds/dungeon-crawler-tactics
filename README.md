@@ -4,7 +4,7 @@ A new, compact Floor One RPG for Carl and Princess Donut. Explore a connected du
 
 The game rules live in pure C# under `Rebuild/Core`. The browser host runs those same rules through .NET 8 WebAssembly; JavaScript presents the map, menus and battle forecast. The authored items, skills, enemies and dialogue live in `Web/wwwroot/data/floor-one-rpg.json`. Preserved source lore and equipment/skill references are in `Rebuild/ReferenceData`.
 
-The seeded C# generator reads `Web/wwwroot/data/concept-room-rules.json` to assemble room shapes, corridors and whole-object furniture footprints. Room arrangements take composition cues from the overhead concept sheets: teaching tables, perimeter refuse, restaurant dining aisles, DMV waiting benches, and Sebastian’s separate rest/wash zones. Solid props block movement while reserved approaches keep encounters and services reachable. See `Rebuild/CONCEPT-LAYOUTS.md` for the visual references and the distinction between source lore and authored layout choices.
+New worlds use generation version 3. Supported version 1 and version 2 safe-room checkpoints migrate to the current world after validation, preserving player progress. The seeded C# generator reads `Web/wwwroot/data/concept-room-rules.json` to assemble room shapes, corridors and whole-object furniture footprints. Its goblin workshop and Ball of Swine boss chamber share a generated industrial-sewer room grammar; both battle boards use that room's dimensions (11 × 8), while other tactical encounters retain the 10 × 8 board. Other room arrangements take composition cues from overhead concept sheets: teaching tables, perimeter refuse, restaurant dining aisles, DMV waiting benches, and Sebastian’s separate rest/wash zones. Solid props block movement while reserved approaches keep encounters and services reachable. See `Rebuild/CONCEPT-LAYOUTS.md` for source references, the shared industrial room, and the distinction between source lore and authored layout choices.
 
 ## Play locally
 
@@ -43,9 +43,17 @@ To check two generated layouts, prop collision and room screenshots:
 python3 Tools/playtest_concept_layout.py --url http://localhost:8765 --browser /usr/bin/chromium
 ```
 
+To capture the generated industrial workshop/boss rooms and enter the workshop battle through keyboard play:
+
+```sh
+python3 Tools/playtest_reference_arena.py --url http://localhost:8765 --browser /usr/bin/chromium
+```
+
+The reference-arena check uses seeds 1337 and 42, checks solid prop collision and the workshop board’s rightmost column, and records desktop/mobile screenshots and runtime JSON in `Rebuild/ReferenceArenaComparison/`. Exploration captures use a disclosed camera-only override to fit each room; they are review evidence, not a claim of pixel parity.
+
 The encounter check walks around solid prop footprints to the first encounter using keyboard input, selects and moves units on the canvas, confirms attacks, runs enemy turns, and checks the victory return.
 
- The hosted asset manifest is `Tools/hosted-assets.json`: 60 individual files with checksums and an immutable AI-Art source revision. Publishing does not clone the full art repository or package every retained asset.
+The hosted asset manifest is `Tools/hosted-assets.json`: 77 individual files with checksums and an immutable AI-Art source revision. Publishing does not clone the full art repository or package every retained asset.
 
 GitHub Pages builds on pushes to `main`, manual workflow dispatch, and `pages-dev-*` tags. Development tags can request a build without moving `main`; the GitHub Pages environment must also authorize that tag before deployment. The workflow runs the C# tests, publishes the WebAssembly host, and restores only the manifest subset.
 

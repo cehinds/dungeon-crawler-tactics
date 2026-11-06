@@ -145,7 +145,7 @@ for (int seed = -25; seed < 75; seed++)
     var world = World.Build(seed);
     World.Validate(world);
     Assert(Codec.Write(world) == Codec.Write(World.Build(seed)), "same seed reproduces concept assembly");
-    Assert(world.generationVersion == 2 && world.props.Length >= 12, "concept generation and furniture populated");
+    Assert(world.generationVersion == 3 && world.props.Length >= 12, "concept generation and furniture populated");
     Assert(world.rooms.Length == 12 && world.rooms.Select(r => r.objectId).Distinct().Count() == 12, "lore anchors retained");
     Assert(world.rooms.All(r => r.archetype.Length > 0), "authored room archetypes");
     var classroom = world.props.Where(p => p.roomId == "tutorial-guildhall" && p.groupId == "teaching-table").ToArray();
@@ -178,7 +178,7 @@ for (int seed = -25; seed < 75; seed++)
         && approach.Where(p => p.assetId == "cd-torch").Select(p => p.y - stair.y).Order().SequenceEqual(new[] { 0, 2 }), "paired torches frame same stair approach");
     layouts.Add(string.Join("|", world.rooms.Select(r => $"{r.x},{r.y},{r.width},{r.height}")));
     foreach (var r in world.rooms) footprints.Add($"{r.width}x{r.height}");
-    foreach (var prop in world.props)
+    foreach (var prop in world.props.Where(p => p.blocksMovement))
     {
         Assert(!world.objects.Any(o => o.x >= prop.x && o.x < prop.x + prop.width && o.y >= prop.y && o.y < prop.y + prop.height), "furniture reserves every interaction");
         Assert(!(world.spawnX >= prop.x && world.spawnX < prop.x + prop.width && world.spawnY >= prop.y && world.spawnY < prop.y + prop.height), "furniture reserves player spawn");
@@ -188,3 +188,28 @@ Assert(layouts.Count > 90 && footprints.Count >= 6, "seed varies actual room pos
 World.Validate(World.Build(int.MinValue)); World.Validate(World.Build(int.MaxValue));
 Console.WriteLine("PASS: 102 concept worlds; repeatable geometry, footprint collision, reachable interactions, distinct room layouts.");
 SaveMigrationChecks.Run(json);
+
+// Recognizable industrial composition and authoritative combat collision share one grammar.
+for (int seed = 0; seed < 30; seed++)
+{
+    var map = World.Build(seed);
+    foreach (var id in new[] { "goblin-workshop", "ball-of-swine" })
+    {
+        var room = map.rooms.Single(r => r.objectId == id);
+        var arena = World.BuildArena(seed, id);
+        Assert(room.composition == "industrial-sewer" && arena.width == room.width, "industrial identity shared in combat");
+        Assert(Codec.Write(arena) == Codec.Write(World.BuildArena(seed, id)), "arena deterministic");
+        Assert(arena.tiles.Count(t => t == "~") >= 2, "industrial side gutters present");
+        for (int y = 2; y < 6; y++) for (int x = 3; x < 8; x++)
+            Assert(arena.tiles[y * arena.width + x] == ".", "broad central fighting floor stays clear");
+        foreach (var prop in arena.props.Where(p => p.blocksMovement))
+            for (int y = prop.y; y < prop.y + prop.height; y++) for (int x = prop.x; x < prop.x + prop.width; x++)
+                Assert(arena.obstacles.Any(o => o.x == x && o.y == y), "combat prop footprints match collision");
+        Assert(arena.props.Any(p => p.zone == "machinery" && p.x == 0 && p.y == 0), "northwest machinery focal group");
+    }
+    var exit = map.objects.Single(o => o.id == "exit");
+    var stair = map.props.Single(p => p.assetId == "industrial-exit");
+    Assert(exit.x >= stair.x && exit.x < stair.x + stair.width && exit.y >= stair.y && exit.y < stair.y + stair.height, "functional exit occupies visible stair");
+    Assert(!map.props.Any(p => p.roomId == "goblin-workshop" && p.assetId == "industrial-exit"), "workshop does not imply a false descending exit");
+}
+Console.WriteLine("PASS: industrial grammar, open fighting floor, water gutters, shared arena collision and functional stair.");

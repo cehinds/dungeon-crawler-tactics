@@ -176,8 +176,8 @@ function tileClick(x, y) {
     view.mode !== "battle" ||
     x < 0 ||
     y < 0 ||
-    x >= 10 ||
-    y >= 8
+    x >= view.battle.width ||
+    y >= view.battle.height
   )
     return;
   const ally = view.battle.units.find(

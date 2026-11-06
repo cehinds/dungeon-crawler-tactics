@@ -38,6 +38,7 @@ public class Point
 }
 public class Battle
 {
+    public string theme = "", composition = ""; public string[] tiles = []; public WorldProp[] props = [];
     public int width = 10, height = 8; public string phase = "party", encounterId = ""; public List<Unit> units = []; public List<Unit> enemies = []; public Point[] obstacles = [new() { x = 4, y = 2 }, new() { x = 4, y = 3 }, new() { x = 5, y = 5 }];
 }
 public class Forecast
