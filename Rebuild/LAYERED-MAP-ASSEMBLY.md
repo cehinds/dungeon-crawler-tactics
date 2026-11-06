@@ -52,9 +52,11 @@ A walkway may overlap the top of a wall or bridge abutment in image space. Keep 
 - [x] Verify the four added hosted overlay assets against SHA-256 checksums at the manifest's immutable remote revision.
 - [x] Review final structural/layered browser capture against the reference; this accepts the structural pass, without claiming pixel parity.
 - [x] Pass C# generation, route, collision, spawn and v1/v2/v3 migration checks on the final geometry.
-- [ ] Run the complete browser combat, doorway/bridge crossing and desktop/mobile checks on the final committed wall-fixture build.
-- [ ] Inspect the final QA screenshots for native-size wall joins, door openings, bridge banks and overlap popping; retain camera-only framing disclosures.
+- [x] Run the complete browser combat, doorway/bridge crossing and desktop/mobile checks on committed wall-fixture build `920de3b8fa2bee7daeb3c41e44933c0f2e3a6865`: both seeds passed, including entire three-cell crossings, blocked water/walls/props and rightmost-column input, with no browser errors or missing assets.
+- [x] Inspect final boss comparison, doorway and bridge closeups: wall joins and openings remain clear, and actors appear above bridge grates. Camera-only framing disclosures remain attached.
 
 ## Limits
 
 These assets come from existing concept and map-art packs. Some are derived partitions or normalized overlays, and the 64px network tiles are assembled variants of those sources. Their pivots, image bounds, and socket labels support visual placement; they do not promise pixel-perfect joins for every arbitrary scale or composition. The clean-map layer pack separates this one reference composition and its inferred underpaint; it is not a general-purpose room kit. Nothing in this note establishes lore or gameplay behavior as canonical.
+
+Final browser evidence was produced by `Tools/playtest_layered_maps.py` and the arena/floor-one harnesses. The completed report and screenshots are stored separately in AI-Art under `dungeon-crawler-tactics/layered-reference-pass-20261106`; evidence is not bundled in this game commit. These checks support the accepted structural/layered pass and do not assert pixel parity with the reference illustration.
