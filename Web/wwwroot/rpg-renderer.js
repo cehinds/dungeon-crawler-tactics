@@ -117,6 +117,7 @@ export class Renderer {
     await Promise.all(Object.entries({
       "industrial-grate": "grate", "industrial-machine": "machine-controls",
       "industrial-pipe": "pipe-straight", "industrial-pipe-elbow": "pipe-elbow",
+      "industrial-pipe-tee": "pipe-tee",
       "industrial-torch": "torch", "industrial-crate": "crate",
       "industrial-outlet": "water-outlet",
     }).map(async ([id, file]) => {
@@ -126,6 +127,7 @@ export class Renderer {
       // to one cell because of transparent space on either side.
       const bounds = {
         "pipe-straight": [44,5,83,124], "pipe-elbow": [11,6,116,123],
+        "pipe-tee": [4,21,124,105],
         "machine-controls": [7,4,121,124], "torch": [34,5,94,123],
         "grate": [5,6,123,121], "water-outlet": [21,4,113,122],
         "crate": [13,5,114,123],
@@ -137,6 +139,15 @@ export class Renderer {
       "water-dryarch-right-jamb", "water-dryarch-lintel"].map(async id => {
       const image = await load("assets/map-grid-pass/expansion/native/water/" + id + ".png");
       if (image) this.materials[id] = image;
+    }));
+    await Promise.all(["industrial-pipeH","industrial-pipeV-upper-collar"].map(async id => {
+      const image=await load("assets/map-grid-pass/expansion/native/industrial/"+id+".png");
+      if (image) this.materials[id]=image;
+    }));
+    await Promise.all(["floors-fine","floors-worn","floors-hairline-crack",
+      "floors-damp","floors-moss-edge","floors-branching-crack","floors-shallow-puddle"].map(async id => {
+      const image=await load("assets/map-grid-pass/expansion/native/floors/"+id+".png");
+      if (image) this.materials[id]=image;
     }));
     const exit = await load("assets/completed-layers/native/complete-gold-exit.png");
     if (exit) this.objects.set("industrial-exit", {
@@ -314,13 +325,22 @@ export class Renderer {
     const at = (x,y) => x < 0 || y < 0 || x >= map.width || y >= map.height
       ? "#" : this.propFloor.has(y*map.width+x) ? "." : map.tiles?.[y*map.width+x] || ".";
     const parts = [];
-    // A cap is one narrow connected rail at the actual wall/floor interface.
-    // The southern face may overlap floor by 0.10 cell; its depth joins actors.
+    // Coping follows the actual blocked/open contour. Adjacent edge samples
+    // share stone corner keys so stepped boundaries read as one built wall.
     for (let y=-1;y<=map.height;y++) for (let x=-1;x<=map.width;x++) {
       if (at(x,y) !== "#") continue;
       for (const [dx,dy] of [[0,1],[0,-1],[1,0],[-1,0]]) {
         if (at(x+dx,y+dy) === "#") continue;
         parts.push({kind: dy === 1 ? "front" : "cap", x,y,dx,dy, depth:y+1.12});
+      }
+    }
+    // Join exposed perpendicular rails on the same blocked cell. These keys
+    // stay on masonry and never extend a platform over a walkable cell.
+    for (let y=-1;y<=map.height;y++) for (let x=-1;x<=map.width;x++) {
+      if (at(x,y) !== "#") continue;
+      for (const dx of [-1,1]) for (const dy of [-1,1]) {
+        if (at(x+dx,y) !== "#" && at(x,y+dy) !== "#")
+          parts.push({kind:"corner",x,y,dx,dy,depth:y+1.12});
       }
     }
     // Frames occur only where a chamber boundary meets an open corridor.
@@ -396,16 +416,192 @@ export class Renderer {
       if (lintel) c.drawImage(lintel,-tile*.77,-tile*.61,tile*1.54,tile*.24);
       c.restore(); return;
     }
-    if (p.kind === "front") {
-      c.drawImage(im,10,85,108,27,sx,sy+tile*.85,tile+.5,tile*.25);
-      c.drawImage(im,10,9,108,18,sx,sy,tile+.5,tile*.32);
-      c.fillStyle="#020a144d";c.fillRect(sx,sy+tile*1.1,tile+.5,tile*.055);
-    } else if (p.dy === -1) {
-      c.drawImage(im,10,9,108,18,sx,sy,tile+.5,tile*.32);
-    } else {
-      c.save();c.translate(sx+(p.dx===1?tile*.84:tile*.16),sy+tile/2);c.rotate(Math.PI/2);
-      c.drawImage(im,10,9,108,18,-tile/2,-tile*.16,tile+.5,tile*.32);c.restore();
+    if (p.kind === "corner") {
+      const edge = tile*.26;
+      const cx = sx+(p.dx===1 ? tile-edge : 0);
+      const cy = sy+(p.dy===1 ? tile*.72 : 0);
+      c.drawImage(im,10,9,28,18,cx,cy,edge+.5,edge+.5);
+      return;
     }
+    if (p.kind === "front") {
+      // The coping and upright face meet at the southern masonry edge.
+      // Keep the whole cap on the blocked cell; only its shallow shadow falls
+      // onto the adjoining floor, preserving the visible movement boundary.
+      c.drawImage(im,10,47,108,66,sx,sy+tile*.79,tile+.5,tile*.31);
+      c.fillStyle="#03101c55";
+      c.fillRect(sx,sy+tile*.94,tile+.5,tile*.16);
+      c.drawImage(im,10,9,108,18,sx,sy+tile*.72,tile+.5,tile*.26);
+      const shade=c.createLinearGradient(0,sy+tile*1.08,0,sy+tile*1.19);
+      shade.addColorStop(0,"#02081080");shade.addColorStop(1,"#02081000");
+      c.fillStyle=shade;c.fillRect(sx,sy+tile*1.08,tile+.5,tile*.11);
+    } else if (p.dy === -1) {
+      c.drawImage(im,10,9,108,18,sx,sy,tile+.5,tile*.26);
+      c.fillStyle="#020b174d";c.fillRect(sx,sy+tile*.26,tile+.5,tile*.045);
+    } else {
+      c.save();c.translate(sx+(p.dx===1?tile*.87:tile*.13),sy+tile/2);c.rotate(Math.PI/2);
+      c.drawImage(im,10,9,108,18,-tile/2,-tile*.13,tile+.5,tile*.26);c.restore();
+      c.fillStyle="#020b173b";
+      c.fillRect(sx+(p.dx===1?tile*.70:tile*.26),sy,tile*.04,tile);
+    }
+  }
+  surfaceLights(map) {
+    this.lightPlans ||= new WeakMap();
+    if (this.lightPlans.has(map)) return this.lightPlans.get(map);
+    const lights=[];
+    for (const p of map.props || []) {
+      const w=p.width || 1,h=p.height || 1;
+      let light;
+      if (p.assetId === "industrial-exit")
+        light={x:p.x+w/2,y:p.y+h+.55,rx:1.65,ry:2.65,color:"255,181,57",alpha:.29};
+      else if (p.assetId === "industrial-torch")
+        light={x:p.x+w/2,y:p.y+h*.75,rx:1.7,ry:2,color:"255,157,42",alpha:.22};
+      else if (p.assetId === "industrial-machine")
+        light={x:p.x+w/2,y:p.y+h*.75,rx:1.6,ry:1.5,color:"255,172,56",alpha:.17};
+      else if (p.assetId === "industrial-outlet")
+        light={x:p.x+w/2,y:p.y+h,rx:1.35,ry:1.8,color:"32,174,206",alpha:.17};
+      if (!light) continue;
+      light.cells=[];
+      for (let y=Math.max(0,Math.floor(light.y-light.ry));y<Math.min(map.height,Math.ceil(light.y+light.ry));y++)
+        for (let x=Math.max(0,Math.floor(light.x-light.rx));x<Math.min(map.width,Math.ceil(light.x+light.rx));x++) {
+          const wall=map.tiles?.[y*map.width+x]==="#";
+          // Warm sources may illuminate the immediately mounted masonry;
+          // distant blocked cells never receive a glow through their walls.
+          if (!wall || (x>=p.x-.5 && x<p.x+w+.5 && y>=p.y && y<p.y+h))
+            light.cells.push([x,y]);
+        }
+      lights.push(light);
+    }
+    this.lightPlans.set(map,lights);
+    return lights;
+  }
+  drawSurfaceLighting(map, ox, oy, tile) {
+    const c=this.ctx;
+    for (const light of this.surfaceLights(map)) {
+      const lx=ox+light.x*tile,ly=oy+light.y*tile;
+      if (lx+light.rx*tile<0 || ly+light.ry*tile<0
+        || lx-light.rx*tile>this.canvas.width || ly-light.ry*tile>this.canvas.height) continue;
+      c.save();c.beginPath();
+      for (const [x,y] of light.cells)c.rect(ox+x*tile,oy+y*tile,tile+.5,tile+.5);
+      c.clip();c.globalCompositeOperation="screen";
+      c.translate(lx,ly);c.scale(light.rx*tile,light.ry*tile);
+      const glow=c.createRadialGradient(0,0,0,0,0,1);
+      glow.addColorStop(0,`rgba(${light.color},${light.alpha})`);
+      glow.addColorStop(.45,`rgba(${light.color},${light.alpha*.55})`);
+      glow.addColorStop(1,`rgba(${light.color},0)`);
+      c.fillStyle=glow;c.fillRect(-1,-1,2,2);c.restore();
+    }
+  }
+  drawFloorSlab(sx, sy, tile, x, y, map, at, wetEdge, torch) {
+    const c=this.ctx,fine=this.materials?.["floors-fine"];
+    if (!fine) return false;
+    const wallEdge=[[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dy])=>at(x+dx,y+dy)==="#");
+    // Broad worn slabs carry readable fractures; stronger moisture belongs
+    // to channel margins and drain approaches rather than uniform floor noise.
+    const hash=Math.abs(x*31+y*17);
+    const worn=this.materials["floors-worn"];
+    if (worn) c.drawImage(worn,5,5,153,110,sx,sy,tile+.5,tile+.5);
+    else c.drawImage(fine,12,12,fine.width-24,fine.height-24,sx,sy,tile+.5,tile+.5);
+    const base=this.materials["floor-dry"];
+    if (base) {
+      c.save();c.globalAlpha=.48;
+      c.drawImage(base,(x&1)*64+3,(y&1)*64+3,58,58,sx,sy,tile+.5,tile+.5);
+      c.restore();
+    }
+    const drain=(map.props || []).some(p=>p.assetId==="industrial-grate"
+      && Math.abs(x-p.x)+Math.abs(y-p.y)<=1);
+    const puddle=(wetEdge && hash%3!==0) || (drain && hash%2===0);
+    const detail=puddle ? this.materials["floors-shallow-puddle"]
+      : wetEdge || drain ? this.materials["floors-damp"]
+      : hash%4===0 ? this.materials["floors-branching-crack"]
+      : hash%3===0 || wallEdge ? this.materials["floors-hairline-crack"] : null;
+    if (detail) {
+      c.save();c.globalAlpha=puddle ? .83 : wetEdge || drain ? .62 : .48;
+      c.drawImage(detail,12,12,detail.width-24,detail.height-24,sx,sy,tile+.5,tile+.5);
+      c.restore();
+    }
+    if (wetEdge && wallEdge && (x+y)%5===0) {
+      const moss=this.materials["floors-moss-edge"];
+      if (moss) {c.save();c.globalAlpha=.24;c.drawImage(moss,sx,sy,tile,tile);c.restore();}
+    }
+    if (torch) {
+      const reflection=this.materials["floor-reflection"];
+      if (reflection) {c.save();c.globalAlpha=.62;
+        c.drawImage(reflection,(x&1)*64,(y&1)*64,64,64,sx,sy,tile,tile);c.restore();}
+    }
+    // Every movement cell retains a straight recessed joint, without repeating
+    // bright gold outlines around each slab or adding another grid scale.
+    c.fillStyle="#06121d99";
+    c.fillRect(sx+tile-.8,sy,1,tile);c.fillRect(sx,sy+tile-.8,tile,1);
+    c.fillStyle="#90a3ac24";c.fillRect(sx,sy,tile,Math.max(.5,tile*.009));
+    return true;
+  }
+  pipeConnections(map) {
+    const pipes=(map.props || []).filter(p=>p.assetId==="industrial-pipe" && p.layer==="wallfixture");
+    const rows=new Map();
+    for (const pipe of pipes) {
+      const row=rows.get(pipe.y) || [];row.push(pipe);rows.set(pipe.y,row);
+    }
+    const runs=[];
+    for (const row of rows.values()) {
+      row.sort((a,b)=>a.x-b.x);
+      for (let i=1;i<row.length;i++) {
+        const a=row[i-1],b=row[i];
+        // A header only crosses verified blocked masonry, never a gate or floor.
+        if (b.x-a.x>6) continue;
+        let blocked=true;
+        for (let x=a.x;x<=b.x;x++)
+          if (map.tiles?.[a.y*map.width+x]!=="#") blocked=false;
+        if (blocked) runs.push({a,b,depth:a.y+Math.max(a.height,b.height)+.17});
+      }
+    }
+    return runs;
+  }
+  drawPipeConnection(run, ox, oy, tile) {
+    const c=this.ctx,{a,b}=run,header=this.materials?.["industrial-pipeH"];
+    if (!header) return;
+    const left=ox+(a.x+.5)*tile,right=ox+(b.x+.5)*tile;
+    const top=oy+(a.y+.03)*tile;
+    // Sample the native shaft without open end flanges: tees close every joint.
+    c.drawImage(header,55,0,125,header.height,left,top,right-left,tile*.43);
+    for (const pipe of [a,b]) {
+      this.object("industrial-pipe-tee",ox+(pipe.x+.07)*tile,
+        oy+(pipe.y-.015)*tile,.86,.60,180);
+    }
+  }
+  drawChannelWater(sx, sy, tile, x, y, map, at, time) {
+    const c=this.ctx;
+    // The original caustic texture remains visible below a deep, still body.
+    // Bright cyan belongs to the physical outlet sprites, not every water cell.
+    c.fillStyle="#06374770";
+    c.fillRect(sx,sy,tile+.5,tile+.5);
+    const outlet=(map.props || []).some(p => p.assetId === "industrial-outlet"
+      && Math.abs(x+.5-(p.x+(p.width || 1)/2)) < .9
+      && y >= p.y+(p.height || 1)*.65 && y < p.y+(p.height || 1)+.7);
+    if (outlet) {
+      const light=c.createRadialGradient(sx+tile*.5,sy+tile*.2,0,
+        sx+tile*.5,sy+tile*.2,tile*.85);
+      light.addColorStop(0,"#38d7e93d");light.addColorStop(1,"#12778600");
+      c.fillStyle=light;c.fillRect(sx,sy,tile,tile);
+    }
+    const bank=this.materials?.["bank-straight"];
+    for (const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]) {
+      const neighbor=at(x+dx,y+dy);
+      if (neighbor !== "." && neighbor !== "#") continue;
+      c.save();c.translate(sx+tile/2,sy+tile/2);
+      c.rotate(dx===1 ? Math.PI/2 : dx===-1 ? -Math.PI/2 : dy===1 ? Math.PI : 0);
+      // Recessed water receives a narrow contact shadow below its stone rim.
+      const shadow=c.createLinearGradient(0,-tile*.5,0,-tile*.20);
+      shadow.addColorStop(0,"#010c1699");shadow.addColorStop(1,"#010c1600");
+      c.fillStyle=shadow;c.fillRect(-tile*.5,-tile*.5,tile+.5,tile*.30);
+      if (neighbor === "." && bank)
+        c.drawImage(bank,10,27,108,22,-tile/2-.25,-tile/2,tile+.5,tile*.13);
+      c.restore();
+    }
+    const moss=this.materials?.["moss-hanging"];
+    if (moss && at(x,y-1)==="#")
+      c.drawImage(moss,sx,sy-tile*.12,tile*.46,tile*.54);
+    c.fillStyle=`rgba(25,112,132,${.018+Math.sin(time/1500+y*.6)*.01})`;
+    c.fillRect(sx,sy,tile,tile);
   }
   frame(t) {
     const c = this.ctx,
@@ -460,8 +656,14 @@ export class Renderer {
       const propQueue = (map.props || [])
         .filter(p => p.layer !== "underlay")
         .slice().sort((a, b) => a.y + a.height - b.y - b.height);
-      const drawProp = p => this.object(p.assetId, ox + p.x * tile,
-        oy + p.y * tile, p.width || 1, p.height || 1, p.rotation || 0);
+      const drawProp = p => {
+        this.object(p.assetId,ox+p.x*tile,oy+p.y*tile,p.width || 1,p.height || 1,p.rotation || 0);
+        if (p.assetId === "industrial-pipe" && p.layer === "wallfixture") {
+          const collar=this.materials?.["industrial-pipeV-upper-collar"];
+          if (collar) c.drawImage(collar,ox+(p.x+.22)*tile,
+            oy+(p.y+(p.height || 2)-.27)*tile,tile*.56,tile*.29);
+        }
+      };
       for (let y = battle ? -1 : 0; y < map.height + (battle ? 1 : 0); y++)
         for (let x = battle ? -1 : 0; x < map.width + (battle ? 1 : 0); x++) {
           const sx = ox + x * tile,
@@ -503,10 +705,8 @@ export class Renderer {
             if (im) {
               if (water || bridge) c.drawImage(im, sx, sy, tile + 0.5, tile + 0.5);
               else {
-                // One movement cell is one slab. Alternate source quadrants
-                // to reconstruct the source's continuous two-by-two pattern.
-                c.drawImage(im, (x & 1) * 64, (y & 1) * 64, 64, 64,
-                  sx, sy, tile + 0.5, tile + 0.5);
+                if (!this.drawFloorSlab(sx,sy,tile,x,y,map,at,wetEdge,torch))
+                  c.drawImage(im,(x&1)*64,(y&1)*64,64,64,sx,sy,tile+.5,tile+.5);
               }
             } else {
               c.fillStyle = water ? "#146782" : "#39485b";
@@ -536,26 +736,8 @@ export class Renderer {
               c.fillStyle = "rgba(9,24,45,.17)";
               c.fillRect(sx, sy, tile + 0.5, tile + 0.5);
             }
-            if (water) {
-              // Continuous low coping separates the channel from dry walkways.
-              // Only the top cap is sampled; the painted wall face stays upright.
-              const bank = this.materials?.["bank-straight"];
-              for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-                if (at(x + dx, y + dy) !== "." || !bank) continue;
-                c.save();
-                c.translate(sx + tile / 2, sy + tile / 2);
-                c.rotate(dx === 1 ? Math.PI / 2 : dx === -1 ? -Math.PI / 2
-                  : dy === 1 ? Math.PI : 0);
-                c.drawImage(bank, 10, 27, 108, 22,
-                  -tile / 2 - 0.25, -tile / 2, tile + 0.5, tile * 0.16);
-                c.restore();
-              }
-              const moss = this.materials?.["moss-hanging"];
-              if (moss && at(x, y - 1) === "#")
-                c.drawImage(moss, sx, sy - tile * 0.12, tile * 0.46, tile * 0.54);
-              c.fillStyle = `rgba(41, 192, 220, ${0.035 + Math.sin(t / 900 + y) * 0.025})`;
-              c.fillRect(sx, sy, tile, tile);
-            }
+            if (water)
+              this.drawChannelWater(sx,sy,tile,x,y,map,at,t);
             if (battle) {
               c.strokeStyle = "#a5b4c01c";
               c.strokeRect(sx, sy, tile, tile);
@@ -565,11 +747,12 @@ export class Renderer {
       const architecture = this.assembleArchitecture(map);
       const architectureQueue = [];
       for (const part of architecture) {
-        if (part.kind === "front") architectureQueue.push(part);
+        if (part.kind === "front" || (part.kind === "corner" && part.dy === 1)) architectureQueue.push(part);
         else this.drawArchitecture(part, ox, oy, tile);
       }
       for (const p of map.props || [])
         if (p.layer === "underlay") drawProp(p);
+      this.drawSurfaceLighting(map,ox,oy,tile);
       if (battle) {
         for (const o of map.obstacles || [])
           if (!this.propFloor.has(o.y * map.width + o.x) && map.tiles?.[o.y * map.width + o.x] !== "~" && map.tiles?.[o.y * map.width + o.x] !== "#") this.object(
@@ -646,8 +829,10 @@ export class Renderer {
       const sceneryQueue = [
         ...propQueue.map(p => ({depth:p.y+p.height+(p.layer === "wallfixture" ? .15 : 0), prop:p})),
         ...architectureQueue.map(part => ({depth:part.depth, part})),
+        ...this.pipeConnections(map).map(run=>({depth:run.depth,run})),
       ].sort((a,b)=>a.depth-b.depth);
       const drawScenery = entry => entry.prop ? drawProp(entry.prop)
+        : entry.run ? this.drawPipeConnection(entry.run,ox,oy,tile)
         : this.drawArchitecture(entry.part,ox,oy,tile);
       const units = battle ? [...map.units, ...map.enemies] : this.explorers(v);
       for (const u of [...units].sort((a, b) => a.y - b.y)) {
@@ -691,21 +876,6 @@ export class Renderer {
         }
       }
       for (const entry of sceneryQueue) drawScenery(entry);
-      // Local pools of warm light keep the slate floor and cyan channels legible.
-      c.save();
-      c.globalCompositeOperation = "screen";
-      for (const p of map.props || []) {
-        if (!["industrial-torch", "industrial-machine"].includes(p.assetId)) continue;
-        const lx = ox + (p.x + (p.width || 1) / 2) * tile;
-        const ly = oy + (p.y + (p.height || 1) / 2) * tile;
-        const radius = tile * (p.assetId === "industrial-torch" ? 2.1 : 1.4);
-        const glow = c.createRadialGradient(lx, ly, 0, lx, ly, radius);
-        glow.addColorStop(0, "rgba(255,169,54,.19)");
-        glow.addColorStop(1, "rgba(255,140,30,0)");
-        c.fillStyle = glow;
-        c.fillRect(lx - radius, ly - radius, radius * 2, radius * 2);
-      }
-      c.restore();
       this.fx = this.fx.filter((f) => t - f.start < 1100);
       for (const f of this.fx) {
         const age = t - f.start;

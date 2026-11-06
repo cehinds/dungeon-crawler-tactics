@@ -59,9 +59,17 @@ python3 Tools/playtest_layered_maps.py --url http://localhost:8765 --browser /us
 
 This runs the arena combat harness and records seeds 1337 and 42 in `Rebuild/LayeredMapComparison/`. Closeups use a disclosed camera-only override. `--skip-arena` is for visual iteration with reused arena evidence; omit it for final verification. Compare the captures with the reference before making any visual-match claim.
 
+For five sequential visual review captures of the seed-1337 industrial rooms, use:
+
+```sh
+python3 Tools/capture_map_passes.py --url http://localhost:8765 --browser /usr/bin/chromium --stage pass-01 --label 'Wall depth' --output Rebuild/MyVisualReview
+```
+
+Use `--stage baseline` or `--stage pass-01` through `--stage pass-05`; each stage can be captured once, and its folder name is fixed by `--stage`. `--label` supplies the human-readable title. Choose a fresh `--output` directory for a new review set. The screenshot uses actual published WebAssembly room state and renderer output, with a disclosed camera-only framing override and renderer frame timestamp fixed at 1000 ms for comparable lighting. These images document visual review and are distinct from normal-clock gameplay checks above. See [the five-pass review](Rebuild/FIVE-PASS-REVIEW.md). The current comparison gallery is generated locally and is not included in a fresh checkout; final approved captures and retained rejected revisions are stored in `Rebuild/FivePassComparison/` in the working review environment.
+
 The encounter check walks around solid prop footprints to the first encounter using keyboard input, selects and moves units on the canvas, confirms attacks, runs enemy turns, and checks the victory return.
 
-The hosted asset manifest is `Tools/hosted-assets.json`: 81 individual files with checksums and an immutable AI-Art source revision. Publishing does not clone the full art repository or package every retained asset.
+The hosted asset manifest is `Tools/hosted-assets.json`: 91 individual files with checksums and an immutable AI-Art source revision. Publishing does not clone the full art repository or package every retained asset.
 
 GitHub Pages builds on pushes to `main`, manual workflow dispatch, and `pages-dev-*` tags. Development tags can request a build without moving `main`; the GitHub Pages environment must also authorize that tag before deployment. The workflow runs the C# tests, publishes the WebAssembly host, and restores only the manifest subset.
 
