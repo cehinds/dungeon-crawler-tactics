@@ -12,13 +12,15 @@ static class SaveMigrationChecks
         var safe = state.world.objects.First(o => o.kind == "safe");
         state.x = safe.x - 1; state.y = safe.y;
         state.questStage = 2; state.cleared.Add("false-guild");
-        state.gold = 47; state.party[0].xp = 123; state.party[0].ranks["punch"] = 3;
+        state.gold = 47; state.party[0].level = 6; state.party[0].xp = 150; state.party[0].maxHp = 140; state.party[0].power = 24; state.party[0].ranks["punch"] = 3;
         state.journal.Add("Legacy checkpoint progress");
         var oldSave = original.GetSave();
         var oldNode = JsonNode.Parse(oldSave);
+        oldNode["version"] = 1;
         oldNode["state"]["world"].AsObject().Remove("generationVersion");
         oldSave = oldNode.ToJsonString();
-        string Progress(View v) => Codec.Write(new { v.party, v.inventory, v.cleared, v.journal, v.questStage, v.gold, v.turn });
+        string Progress(View v) => Codec.Write(new { party = v.party.Select(u => new { u.id, u.name, u.hp, u.maxHp, u.mp, u.maxMp, u.level, u.xp, u.power, u.armor, u.equipment, u.skills, u.ranks }), v.inventory, v.cleared, v.journal, v.questStage, v.gold, v.turn });
+        state.party[0].xp = 1100; // v1 level-six floor 150 rebases to the authored level-six floor.
         var expected = Progress(state);
         var receiver = new Game(content, 9);
         receiver.LoadSave(oldSave);

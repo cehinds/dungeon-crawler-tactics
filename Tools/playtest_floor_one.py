@@ -88,7 +88,7 @@ with sync_playwright() as p:
 
     def tile(x, y):
         box = page.locator("#world").bounding_box()
-        t = math.floor(min(box["width"] / 10, box["height"] / 8))
+        t = math.floor(min(box["width"] / 12, box["height"] / 10))
         page.mouse.click(
             box["x"] + math.floor(box["width"] / 2 - 5 * t) + (x + 0.5) * t,
             box["y"] + math.floor(box["height"] / 2 - 4 * t) + (y + 0.5) * t,

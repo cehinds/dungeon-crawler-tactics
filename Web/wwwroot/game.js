@@ -17,6 +17,8 @@ let view,
   busy = false,
   modal = "",
   skill = "",
+  manaSpend = 0,
+  skillsActorId = "",
   toastTimer;
 const SAVE = "dcc.rebuild.v1";
 const renderer = new Renderer($("#world"), tileClick);
@@ -44,6 +46,7 @@ async function command(type, args = {}) {
       const nextActor = view.battle.units.find((u) => u.hp > 0 && !u.ended);
       if (nextActor && nextActor.id !== view.selectedId) {
         skill = "";
+        manaSpend = 0;
         apply(
           parse(
             await invoke(
@@ -118,7 +121,19 @@ function apply(next) {
     (nearby() ? "Interact: " + esc(nearby().name) : "Interact") +
     " <kbd>E</kbd>";
   renderDeck();
-  if (next.message && next.message !== old?.message) notify(next.message);
+  const gains = old ? view.party.flatMap((p) => {
+    const before = old.party.find((x) => x.id === p.id);
+    if (!before) return [];
+    const changes = p.level > before.level ? [`${p.name} reached level ${p.level}`] : [];
+    for (const progress of p.skillProgress || []) {
+      const prior = before.skillProgress?.find((x) => x.skillId === progress.skillId);
+      if (prior && progress.trainedRank > prior.trainedRank)
+        changes.push(`${content.skills.find((x) => x.id === progress.skillId)?.name || progress.skillId} rank ${progress.trainedRank}`);
+    }
+    return changes;
+  }) : [];
+  if (gains.length) notify([next.message, ...gains].filter(Boolean).join(" · "));
+  else if (next.message && next.message !== old?.message) notify(next.message);
   if (modal) renderModal();
   if (next.mode === "defeat" || next.mode === "complete") {
     modal = next.mode;
@@ -131,8 +146,28 @@ function apply(next) {
 function portrait(u) {
   return `<img class="portrait" src="assets/directional/${u.id === "donut" ? "donut" : "carl"}-portrait.png" alt="${esc(u.name)}">`;
 }
+function progressBar(value, label, kind = "xp") {
+  return `<progress class="progress-meter ${kind}" max="100" value="${Number(value) || 0}" aria-label="${esc(label)}"></progress>`;
+}
+function characterProgress(u, compact = false) {
+  const text = u.level >= u.maxLevel ? "Maximum level" : `${u.xpToNext} XP to next level`;
+  return `<div class="character-progress" data-xp="${esc(u.id)}"><small>${compact ? "" : `XP ${u.xp} · `}${esc(text)}</small>${progressBar(u.xpProgressPercent, text)}${!compact && u.nextLevelEffect ? `<p class="next-effect">Next: ${esc(u.nextLevelEffect)}</p>` : ""}</div>`;
+}
+function skillState(u, id) {
+  return u.skillProgress?.find((p) => p.skillId === id);
+}
+function actionTooltip(p) {
+  return p ? `${p.cost} ${p.resource || "Mana"} · ${p.effect || ""}${p.disabledReason ? ` · ${p.disabledReason}` : ""}` : "";
+}
+function manaChooser() {
+  const actor = view.battle?.units.find((x) => x.id === view.selectedId);
+  const p = skillState(actor || {}, skill || actor?.skills[0]);
+  if (!p?.manaOptions?.length) return "";
+  if (!p.manaOptions.includes(manaSpend)) manaSpend = p.manaOptions[0];
+  return `<label class="mana-choice">Mana spend <select data-mana-spend aria-label="Magic Missile Mana spend" title="${esc(p.effect || "")} Select Mana to preview the resulting damage.">${p.manaOptions.map((n) => `<option value="${n}" ${n === manaSpend ? "selected" : ""}>${n} Mana</option>`).join("")}</select></label><p class="map-key">${esc(p.effect || "")} Choose Mana before forecasting.</p>`;
+}
 function mini(u) {
-  return `<div class="party-mini">${portrait(u)}<div class="unit-info"><strong>${esc(u.name)}</strong> <small>Lv ${u.level}</small><div><small>HP ${u.hp}/${u.maxHp} · MP ${u.mp}/${u.maxMp}</small></div><div class="meter"><i style="width:${(u.hp / u.maxHp) * 100}%"></i></div><div class="meter mp"><i style="width:${(u.mp / u.maxMp) * 100}%"></i></div></div></div>`;
+  return `<div class="party-mini" data-character="${esc(u.id)}">${portrait(u)}<div class="unit-info"><strong>${esc(u.name)}</strong> <small>Lv ${u.level}</small><div><small>HP ${u.hp}/${u.maxHp} · Mana ${u.mp}/${u.maxMp}</small></div><div class="meter"><i style="width:${(u.hp / u.maxHp) * 100}%"></i></div><div class="meter mp"><i style="width:${(u.mp / u.maxMp) * 100}%"></i></div>${characterProgress(u, true)}</div></div>`;
 }
 function renderDeck() {
   if (view.mode !== "battle") {
@@ -146,13 +181,14 @@ function renderDeck() {
     view.battle.units[0];
   $("#deck").innerHTML =
     mini(u) +
-    `<div><span class="turn-label">${u.moved ? "MOVE USED" : "MOVE 3"} · ${u.acted ? "ACTION USED" : "ACTION READY"} · ATK ${u.power} · DEF ${u.armor}</span><div class="actions">${u.skills.map((id) => `<button data-skill="${id}" class="${skill === id ? "active" : ""}" ${u.acted || u.ended ? "disabled" : ""}>${esc(content.skills.find((s) => s.id === id)?.name || id)}</button>`).join("")}<button data-command="endUnit" ${u.ended ? "disabled" : ""}>End ${esc(u.name)} turn</button><button data-command="endTurn">End party turn</button><button data-open="Items">Items</button></div></div>`;
+    `<div><span class="turn-label">${u.moved ? "MOVE USED" : "MOVE 3"} · ${u.acted ? "ACTION USED" : "ACTION READY"} · ATK ${u.power} · DEF ${u.armor}</span><div class="actions">${u.skills.map((id) => { const p = skillState(u, id); return `<button data-skill="${id}" title="${esc(actionTooltip(p))}" class="${skill === id ? "active" : ""}" ${u.acted || u.ended || p?.canUse === false ? "disabled" : ""}>${esc(content.skills.find((s) => s.id === id)?.name || id)}${p ? `<small class="action-cost">${p.cost} ${esc(p.resource || "Mana")}${p.disabledReason ? ` · ${esc(p.disabledReason)}` : ""}</small>` : ""}</button>`; }).join("")}<button data-command="endUnit" ${u.ended ? "disabled" : ""}>End ${esc(u.name)} turn</button><button data-command="endTurn">End party turn</button><button data-open="Items">Items</button></div></div>`;
   $("#deck")
     .querySelectorAll("[data-skill]")
     .forEach(
       (b) =>
         (b.onclick = () => {
           skill = b.dataset.skill;
+          manaSpend = 0;
           renderDeck();
           modal = "Targets";
           renderModal();
@@ -185,6 +221,7 @@ function tileClick(x, y) {
   );
   if (ally) {
     skill = "";
+    manaSpend = 0;
     command("select", { actorId: ally.id });
     return;
   }
@@ -200,6 +237,7 @@ function tileClick(x, y) {
 async function forecast(targetId) {
   await command("forecast", {
     targetId,
+    manaSpend,
     skillId:
       skill ||
       view.battle.units.find((u) => u.id === view.selectedId)?.skills[0] ||
@@ -209,6 +247,7 @@ async function forecast(targetId) {
   renderModal();
 }
 function open(name) {
+  if (name === "Skills") skillsActorId = view.selectedId || view.party[0]?.id;
   modal = name;
   renderModal();
 }
@@ -233,7 +272,7 @@ function renderModal() {
     body = view.party
       .map(
         (p) =>
-          `<div class="row">${portrait(p)}<div><strong>${esc(p.name)} · Level ${p.level}</strong><p>HP ${p.hp}/${p.maxHp} · MP ${p.mp}/${p.maxMp} · XP ${p.xp}</p><p>Power ${p.power} · Armor ${p.armor}</p><p>${esc(JSON.stringify(p.equipment))}</p></div></div>`,
+          `<div class="row">${portrait(p)}<div><strong>${esc(p.name)} · Level ${p.level}</strong><p>HP ${p.hp}/${p.maxHp} · Mana ${p.mp}/${p.maxMp}</p>${characterProgress(p)}<p>Power ${p.power} · Armor ${p.armor}</p><p>${esc(p.equipment ? (content.items.find((item) => item.id === p.equipment)?.name || p.equipment) : "No equipment equipped")}</p></div></div>`,
       )
       .join("");
   else if (modal === "Equipment")
@@ -248,14 +287,15 @@ function renderModal() {
         })
         .join("");
   else if (modal === "Skills")
-    body = view.party
+    body = `<div class="actions character-tabs" role="group" aria-label="Character skills">${view.party.map((p) => `<button data-skills-actor="${esc(p.id)}" aria-pressed="${p.id === (skillsActorId || u.id)}" class="${p.id === (skillsActorId || u.id) ? "active" : ""}">${esc(p.name)}</button>`).join("")}</div><p class="map-key">Tactical adaptation: successful skill uses earn practice toward trained ranks, separately from character XP.</p>` + view.party.filter((p) => p.id === (skillsActorId || u.id))
       .map(
-        (p) =>
-          `<h2>${esc(p.name)}</h2>` +
-          p.skills
+        (partyMember) =>
+          `<h2>${esc(partyMember.name)}</h2>` +
+          partyMember.skills
             .map((id) => {
               const s = content.skills.find((s) => s.id === id) || {};
-              return `<div class="row"><div>${esc(s.name || id)} <span class="tag">${s.cost || 0} MP · Range ${s.range || 1} · Rank ${p.ranks?.[id] || 1}</span><p>${esc(s.description)}</p></div></div>`;
+              const p = skillState(partyMember, id);
+              return `<div class="row skill-row" data-skill-progress="${esc(id)}"><div><strong>${esc(s.name || id)}</strong> <span class="tag">Trained ${p?.trainedRank ?? partyMember.ranks?.[id] ?? 1} · Effective ${p?.effectiveRank ?? partyMember.ranks?.[id] ?? 1}</span><p>${esc(s.description)}</p>${p ? `<p class="skill-effect">${esc(p.effect)} · ${p.cost} ${esc(p.resource || "Mana")}</p><p>${p.trainedRank >= p.maxRank ? "Maximum rank" : `Practice ${p.practice} · ${p.practiceToNext} to next rank`}</p>${progressBar(p.practiceProgressPercent, "Skill practice", "practice")}<p class="next-effect">Next: ${esc(p.nextEffect)}</p>${p.disabledReason ? `<p class="cost-warning">${esc(p.disabledReason)}</p>` : ""}` : ""}</div></div>`;
             })
             .join(""),
       )
@@ -287,7 +327,7 @@ function renderModal() {
       '<p>End the party turn? Crawlers with actions remaining will wait, then the enemies will move and attack.</p><button id="end-turn-confirm">End turn</button>';
   else if (modal === "Targets")
     body =
-      "<p>Select a target to preview the result.</p>" +
+      "<p>Select a target to preview the result.</p>" + manaChooser() +
       view.battle.enemies
         .filter((e) => e.hp > 0)
         .map(
@@ -298,7 +338,7 @@ function renderModal() {
   else if (modal === "Forecast") {
     const f = view.forecast;
     body = f
-      ? `<div class="forecast"><div>Damage<strong>${f.damage}</strong></div><div>MP cost<strong>${f.cost}</strong></div></div><p>${esc(f.reaction || "")}</p><div class="actions"><button id="confirm-action" ${f.valid ? "" : "disabled"}>Confirm action</button><button data-open="Targets">Choose target</button></div>`
+      ? `<div class="forecast"><div>Damage<strong>${f.damage}</strong></div><div>Mana cost<strong>${f.cost}</strong></div></div><p data-forecast-ranks>Trained rank ${f.trainedRank} · Effective rank ${f.effectiveRank} · Range ${f.range}</p><p>${esc(f.reaction || "")}</p><div class="actions"><button id="confirm-action" ${f.valid ? "" : "disabled"}>Confirm action</button><button data-open="Targets">Choose target</button></div>`
       : "<p>Select a skill and target.</p>";
   } else if (modal === "defeat")
     body =
@@ -335,6 +375,8 @@ function renderModal() {
             itemId: b.dataset.item,
           })),
     );
+  if ($("[data-mana-spend]")) $("[data-mana-spend]").onchange = (e) => { manaSpend = Number(e.target.value); };
+  $("#modal-root").querySelectorAll("[data-skills-actor]").forEach((b) => { b.onclick = () => { skillsActorId = b.dataset.skillsActor; renderModal(); }; });
   if ($("#crawler-select")) $("#crawler-select").onchange = renderModal;
   if ($("#end-turn-confirm"))
     $("#end-turn-confirm").onclick = async () => {
@@ -344,7 +386,7 @@ function renderModal() {
   if ($("#confirm-action"))
     $("#confirm-action").onclick = async () => {
       close();
-      await command("confirm");
+      await command("confirm", { manaSpend: view.forecast?.manaSpend || manaSpend });
     };
   if ($("#retry-button"))
     $("#retry-button").onclick = async () => {
@@ -358,6 +400,7 @@ function renderModal() {
         const saved = await invoke("GetSave");
         localStorage.setItem(SAVE, saved);
         $("#save-result").textContent = "Game saved.";
+        $("#load-button").disabled = false;
       } catch (e) {
         $("#save-result").textContent = e.message;
       }
@@ -365,9 +408,10 @@ function renderModal() {
   if ($("#load-button"))
     $("#load-button").onclick = async () => {
       try {
-        apply(parse(await invoke("LoadSave", localStorage.getItem(SAVE))));
-        notify("Game loaded.");
+        const loaded = parse(await invoke("LoadSave", localStorage.getItem(SAVE)));
+        apply(loaded);
         close();
+        notify(loaded.message);
       } catch (e) {
         notify(e.message);
       }

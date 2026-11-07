@@ -51,7 +51,50 @@
       "sourceIds": [
         "sample1"
       ],
-      "sourceNote": "Unarmed melee is represented with a simple tactical action; its damage value is game tuning."
+      "sourceNote": "Unarmed melee is represented with a simple tactical action; its damage value is game tuning.",
+      "startingRank": 1,
+      "ranks": [
+        {
+          "rank": 1,
+          "practiceRequired": 0,
+          "power": 6,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 2,
+          "practiceRequired": 3,
+          "power": 7,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 3,
+          "practiceRequired": 8,
+          "power": 8,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 4,
+          "practiceRequired": 15,
+          "power": 9,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 5,
+          "practiceRequired": 24,
+          "power": 10,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        }
+      ]
     },
     {
       "id": "powerful-strike",
@@ -66,7 +109,34 @@
       "sourceIds": [
         "powerful-strike-secondary"
       ],
-      "sourceNote": "Existing source ID: ability.carl_powerful_strike. No complete canonical rank table is established."
+      "sourceNote": "Existing source ID: ability.carl_powerful_strike. No complete canonical rank table is established.",
+      "startingRank": 3,
+      "ranks": [
+        {
+          "rank": 3,
+          "practiceRequired": 0,
+          "power": 11,
+          "cost": 1,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 4,
+          "practiceRequired": 6,
+          "power": 12,
+          "cost": 1,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 5,
+          "practiceRequired": 16,
+          "power": 14,
+          "cost": 1,
+          "range": 1,
+          "powerMultiplier": 1
+        }
+      ]
     },
     {
       "id": "bomb",
@@ -81,7 +151,50 @@
       "sourceIds": [
         "sample1"
       ],
-      "sourceNote": "Based on the existing ability.carl_bomb concept; exact Floor 1 tactical implementation is authored for this game."
+      "sourceNote": "Based on the existing ability.carl_bomb concept; exact Floor 1 tactical implementation is authored for this game.",
+      "startingRank": 1,
+      "ranks": [
+        {
+          "rank": 1,
+          "practiceRequired": 0,
+          "power": 12,
+          "cost": 2,
+          "range": 3,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 2,
+          "practiceRequired": 3,
+          "power": 13,
+          "cost": 2,
+          "range": 3,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 3,
+          "practiceRequired": 8,
+          "power": 14,
+          "cost": 2,
+          "range": 3,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 4,
+          "practiceRequired": 15,
+          "power": 15,
+          "cost": 2,
+          "range": 3,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 5,
+          "practiceRequired": 24,
+          "power": 16,
+          "cost": 2,
+          "range": 3,
+          "powerMultiplier": 1
+        }
+      ]
     },
     {
       "id": "magic-missile",
@@ -96,7 +209,57 @@
       "sourceIds": [
         "magic-missile-secondary"
       ],
-      "sourceNote": "Existing source ID: ability.donut_magic_missile. Secondary summaries support early mana cost; this does not assert an unsupported rank progression."
+      "sourceNote": "Existing source ID: ability.donut_magic_missile. Secondary summaries support early mana cost; this does not assert an unsupported rank progression.",
+      "startingRank": 1,
+      "ranks": [
+        {
+          "rank": 1,
+          "practiceRequired": 0,
+          "power": 8,
+          "cost": 5,
+          "range": 4,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 2,
+          "practiceRequired": 3,
+          "power": 9,
+          "cost": 5,
+          "range": 4,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 3,
+          "practiceRequired": 8,
+          "power": 10,
+          "cost": 5,
+          "range": 4,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 4,
+          "practiceRequired": 15,
+          "power": 11,
+          "cost": 5,
+          "range": 4,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 5,
+          "practiceRequired": 24,
+          "power": 10,
+          "cost": 3,
+          "range": 4,
+          "powerMultiplier": 1,
+          "manaOptions": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "manaPowerPerPoint": 1
+        }
+      ]
     },
     {
       "id": "claw",
@@ -109,7 +272,50 @@
       "description": "A basic close attack for a cat. Its inclusion and tactical value are game-authored abstractions.",
       "loreStatus": "adaptation",
       "sourceIds": [],
-      "sourceNote": "Generic cat action; not asserted as a named novel ability."
+      "sourceNote": "Generic cat action; not asserted as a named novel ability.",
+      "startingRank": 1,
+      "ranks": [
+        {
+          "rank": 1,
+          "practiceRequired": 0,
+          "power": 5,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 2,
+          "practiceRequired": 3,
+          "power": 6,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 3,
+          "practiceRequired": 8,
+          "power": 7,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 4,
+          "practiceRequired": 15,
+          "power": 8,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        },
+        {
+          "rank": 5,
+          "practiceRequired": 24,
+          "power": 9,
+          "cost": 0,
+          "range": 1,
+          "powerMultiplier": 1
+        }
+      ]
     }
   ],
   "items": [
@@ -435,7 +641,9 @@
         "enemy.murder-dozer"
       ],
       "loreStatus": "Book 1 opening threat; roster and combat numbers adapted",
-      "stageNote": "False Tutorial Guild approach, before the real Tutorial Guild. Dozer is presented as an ambush encounter, not a canonical tactical map."
+      "stageNote": "False Tutorial Guild approach, before the real Tutorial Guild. Dozer is presented as an ambush encounter, not a canonical tactical map.",
+      "xpReward": 100,
+      "goldReward": 20
     },
     {
       "id": "goblin-workshop",
@@ -444,7 +652,9 @@
         "enemy.goblin"
       ],
       "loreStatus": "Book 1 location; tactical staging adapted",
-      "stageNote": "Goblin engineering/explosives workshop; room geometry and combat timeline are invented for play."
+      "stageNote": "Goblin engineering/explosives workshop; room geometry and combat timeline are invented for play.",
+      "xpReward": 160,
+      "goldReward": 30
     },
     {
       "id": "hoarder",
@@ -453,7 +663,9 @@
         "enemy.scatterer"
       ],
       "loreStatus": "Book 1 location and creatures; tactical staging adapted",
-      "stageNote": "Optional Hoarder lair encounter after meeting Mordecai."
+      "stageNote": "Optional Hoarder lair encounter after meeting Mordecai.",
+      "xpReward": 220,
+      "goldReward": 15
     },
     {
       "id": "juicer",
@@ -461,7 +673,9 @@
         "enemy.juicer"
       ],
       "loreStatus": "Book 1 encounter; tactical staging adapted",
-      "stageNote": "Optional gym encounter after meeting Mordecai."
+      "stageNote": "Optional gym encounter after meeting Mordecai.",
+      "xpReward": 280,
+      "goldReward": 20
     },
     {
       "id": "ball-of-swine",
@@ -469,7 +683,174 @@
         "enemy.ball-of-swine"
       ],
       "loreStatus": "Book 1 boss; tactical staging adapted",
-      "stageNote": "Boss encounter at the descent to Floor 2. Combat turns and stat block are authored values."
+      "stageNote": "Boss encounter at the descent to Floor 2. Combat turns and stat block are authored values.",
+      "xpReward": 340,
+      "goldReward": 45
     }
-  ]
+  ],
+  "progression": {
+    "levels": [
+      {
+        "level": 1,
+        "totalXp": 0,
+        "hpGain": 0,
+        "manaGain": 0,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 2,
+        "totalXp": 100,
+        "hpGain": 5,
+        "manaGain": 0,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 3,
+        "totalXp": 260,
+        "hpGain": 4,
+        "manaGain": 1,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 4,
+        "totalXp": 480,
+        "hpGain": 5,
+        "manaGain": 0,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 5,
+        "totalXp": 760,
+        "hpGain": 4,
+        "manaGain": 0,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 6,
+        "totalXp": 1100,
+        "hpGain": 5,
+        "manaGain": 1,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 7,
+        "totalXp": 1500,
+        "hpGain": 4,
+        "manaGain": 0,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 8,
+        "totalXp": 1960,
+        "hpGain": 5,
+        "manaGain": 0,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 9,
+        "totalXp": 2480,
+        "hpGain": 4,
+        "manaGain": 1,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 10,
+        "totalXp": 3060,
+        "hpGain": 5,
+        "manaGain": 0,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 11,
+        "totalXp": 3700,
+        "hpGain": 4,
+        "manaGain": 0,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 12,
+        "totalXp": 4400,
+        "hpGain": 5,
+        "manaGain": 1,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 13,
+        "totalXp": 5160,
+        "hpGain": 4,
+        "manaGain": 0,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 14,
+        "totalXp": 5980,
+        "hpGain": 5,
+        "manaGain": 0,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 15,
+        "totalXp": 6860,
+        "hpGain": 4,
+        "manaGain": 1,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 16,
+        "totalXp": 7800,
+        "hpGain": 5,
+        "manaGain": 0,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 17,
+        "totalXp": 8800,
+        "hpGain": 4,
+        "manaGain": 0,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 18,
+        "totalXp": 9860,
+        "hpGain": 5,
+        "manaGain": 1,
+        "powerGain": 1,
+        "armorGain": 0
+      },
+      {
+        "level": 19,
+        "totalXp": 10980,
+        "hpGain": 4,
+        "manaGain": 0,
+        "powerGain": 0,
+        "armorGain": 0
+      },
+      {
+        "level": 20,
+        "totalXp": 12160,
+        "hpGain": 5,
+        "manaGain": 0,
+        "powerGain": 1,
+        "armorGain": 0
+      }
+    ],
+    "practicePerUse": 1
+  }
 }

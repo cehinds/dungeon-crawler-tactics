@@ -61,6 +61,7 @@ Assert(v.questStage == 0, "proximity gated");
 Interact("false-guild");
 Assert(v.mode == "battle", "first encounter");
 Fight();
+Assert(v.party.All(u => u.level == 2), "first encounter preserves level-two milestone");
 Interact("mordecai");
 Assert(v.questStage == 2, "guide progression");
 Interact("safe-room");
@@ -84,6 +85,7 @@ Interact("ball-of-swine");
 Fight();
 Interact("exit");
 Assert(v.mode == "complete", "floor complete");
+Assert(v.party.All(u => u.level == 6), "all five Floor One encounters preserve level-six milestone");
 for (int seed = 0; seed < 50; seed++) World.Validate(World.Build(seed));
 Console.WriteLine("PASS: full Floor 1 route, combat forecast/commit, save validation, 50 connected worlds.");
 // Malformed nested save fields must never replace the current session.
@@ -255,3 +257,5 @@ for (int seed = 0; seed < 30; seed++)
     Assert(!map.props.Any(p => p.roomId == "goblin-workshop" && p.assetId == "industrial-exit"), "workshop does not imply a false descending exit");
 }
 Console.WriteLine("PASS: industrial grammar, open fighting floor, water gutters, shared arena collision and functional stair.");
+
+ProgressionChecks.Run(json);

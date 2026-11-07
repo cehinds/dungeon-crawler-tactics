@@ -1,10 +1,11 @@
 namespace DccRebuild;
 public sealed class Game
 {
-    readonly Content content; View s; string checkpoint;
+    readonly Content content; readonly Progression progression; View s; string checkpoint;
     public Game(string json, int seed = 1)
     {
         content = Codec.Read<Content>(json) ?? new();
+        progression = new(content);
         s = new()
         {
             seed = seed,
@@ -15,7 +16,13 @@ public sealed class Game
         s.party = [new() { id = "carl", name = "Carl", hp = 100, maxHp = 100, mp = 12, maxMp = 12, power = 14, armor = 3, skills = ["punch", "powerful-strike", "bomb"] }, new() { id = "donut", name = "Princess Donut", hp = 65, maxHp = 65, mp = 45, maxMp = 45, power = 10, armor = 2, skills = ["magic-missile", "claw"] }];
         foreach (var p in s.party)
             foreach (var k in p.skills)
-                p.ranks[k] = 1;
+                p.ranks[k] = Skill(k).startingRank;
+        foreach (var p in s.party)
+        {
+            foreach (var k in p.skills)
+                p.skillPractice[k] = 0;
+            progression.Refresh(p);
+        }
         foreach (var i in content.items.Where(i => i.kind == "consumable").Take(2))
             s.inventory.Add(new()
             {
@@ -25,7 +32,12 @@ public sealed class Game
         s.message = "Survive the false Tutorial Guild. Move with the arrow keys and interact nearby.";
         checkpoint = Codec.Write(s);
     }
-    public View GetView() => s;
+    public View GetView()
+    {
+        foreach (var u in s.party)
+            progression.Refresh(u, s.mode == "battle");
+        return s;
+    }
     Unit Actor(string id) => s.party.FirstOrDefault(u => u.id == (id == "" ? s.selectedId : id));
     int Distance(int x, int y, int xx, int yy) => Math.Abs(x - xx) + Math.Abs(y - yy);
     bool Near(WorldObject o) => Distance(s.x, s.y, o.x, o.y) <= 1;
@@ -40,6 +52,8 @@ public sealed class Game
                 c.targetId = pending.targetId;
             if (c.skillId == "")
                 c.skillId = pending.skillId;
+            if (c.manaSpend == 0)
+                c.manaSpend = pending.manaSpend;
         }
         s.forecast = null;
         try
@@ -104,6 +118,8 @@ public sealed class Game
             }
         }
         catch (InvalidOperationException e) { s.message = e.Message; }
+        foreach (var u in s.party)
+            progression.Refresh(u, s.mode == "battle");
         return s;
     }
     void Require(bool condition, string message)
@@ -257,7 +273,10 @@ public sealed class Game
         var u = Actor(c.actorId);
         var t = s.battle?.enemies.FirstOrDefault(e => e.id == c.targetId);
         var k = Skill(c.skillId == "" ? (u?.skills.FirstOrDefault() ?? "punch") : c.skillId);
-        bool valid = s.mode == "battle" && u != null && u.hp > 0 && !u.acted && !u.ended && t != null && t.hp > 0 && u.skills.Contains(k.id) && u.mp >= k.cost && Distance(u.x, u.y, t.x, t.y) <= k.range;
+        var row = progression.Row(k, u?.ranks.GetValueOrDefault(k.id, k.startingRank) ?? k.startingRank);
+        int spend = c.manaSpend == 0 ? row.cost : c.manaSpend;
+        bool validSpend = spend == row.cost || row.manaOptions.Contains(spend);
+        bool valid = validSpend && s.mode == "battle" && u != null && u.hp > 0 && !u.acted && !u.ended && t != null && t.hp > 0 && u.skills.Contains(k.id) && u.mp >= spend && Distance(u.x, u.y, t.x, t.y) <= row.range;
         int reactionBonus = k.element == "arcane" && t?.element == "physical" ? 2 : k.element == "fire" && t?.element == "physical" ? 3 : 0;
         string reaction = reactionBonus == 2 ? "Arcane impact: +2 damage (tactical adaptation)." : reactionBonus == 3 ? "Blast shock: +3 damage (tactical adaptation)." : "";
         return new()
@@ -265,10 +284,15 @@ public sealed class Game
             actorId = u?.id ?? "",
             targetId = t?.id ?? "",
             skillId = k.id,
-            cost = k.cost,
+            cost = spend,
+            manaSpend = spend,
+            range = row.range,
+            effectRank = row.rank,
+            trainedRank = u?.ranks.GetValueOrDefault(k.id, k.startingRank) ?? k.startingRank,
+            effectiveRank = u?.ranks.GetValueOrDefault(k.id, k.startingRank) ?? k.startingRank,
             valid = valid,
             reaction = reaction,
-            damage = valid ? Math.Max(1, u.power + k.power + u.ranks.GetValueOrDefault(k.id, 1) - t.armor + reactionBonus) : 0
+            damage = valid ? Math.Max(1, (int)Math.Round(u.power * row.powerMultiplier, MidpointRounding.AwayFromZero) + row.power + (spend - row.cost) * row.manaPowerPerPoint - t.armor + reactionBonus) : 0
         };
     }
     void Attack(Command c)
@@ -280,7 +304,7 @@ public sealed class Game
         u.mp -= f.cost;
         u.acted = true;
         t.hp = Math.Max(0, t.hp - f.damage);
-        u.ranks[f.skillId] = Math.Min(20, u.ranks.GetValueOrDefault(f.skillId, 1) + 1);
+        progression.Practice(u, Skill(f.skillId));
         s.message = $"{u.name} deals {f.damage} damage. {f.reaction}";
         if (s.battle.enemies.All(e => e.hp <= 0))
             Win();
@@ -351,18 +375,10 @@ public sealed class Game
         string id = s.battle.encounterId;
         s.cleared.Add(id);
         s.questStage = Math.Max(s.questStage, id == "false-guild" ? 1 : id == "goblin-workshop" ? 3 : id == "ball-of-swine" ? 4 : s.questStage);
-        s.gold += 25;
+        var reward = content.encounters.FirstOrDefault(e => e.id == id);
+        s.gold = Math.Min(100000, s.gold + (reward?.goldReward ?? 25));
         foreach (var u in s.party)
-        {
-            u.xp += 30;
-            if (u.xp >= u.level * 30 && u.level < 20)
-            {
-                u.level++;
-                u.maxHp += 8;
-                u.hp = Math.Min(u.maxHp, u.hp + 20);
-                u.power += 2;
-            }
-        }
+            progression.Reward(u, reward?.xpReward ?? 30);
         s.mode = "explore";
         s.battle = null;
         s.message = id == "ball-of-swine" ? "Guardian defeated. Reach the stairwell to finish Floor 1." : "Victory. Rewards received; return to Mordecai or continue the objective.";
@@ -463,7 +479,7 @@ public sealed class Game
         try
         {
             var save = Codec.Read<Save>(json);
-            if (save?.version != 1 || save.state?.world == null)
+            if (save == null || (save.version != 1 && save.version != 2) || save.state?.world == null)
                 throw new InvalidOperationException();
             var candidate = save.state;
             var sourceWorld = candidate.world;
@@ -481,19 +497,28 @@ public sealed class Game
                 Codec.Write(sourceWorld.props) != Codec.Write(trustedWorld.props) ||
                 !ValidSave(candidate, trustedWorld))
                 throw new InvalidOperationException();
+            if (save.version == 1)
+                foreach (var u in candidate.party)
+                    progression.Migrate(u);
+            else if (candidate.party.Any(u => !progression.ValidMastery(u)))
+                throw new InvalidOperationException();
+            foreach (var u in candidate.party)
+                progression.Refresh(u);
             if (migrate)
             {
                 var oldSafe = trustedWorld.objects.Where(o => o.kind == "safe" && Distance(candidate.x, candidate.y, o.x, o.y) <= 1)
                     .OrderBy(o => Distance(candidate.x, candidate.y, o.x, o.y)).ThenBy(o => o.id, StringComparer.Ordinal).First();
                 var nextWorld = World.Build(candidate.seed);
                 var nextSafe = nextWorld.objects.SingleOrDefault(o => o.kind == "safe" && o.id == oldSafe.id);
-                if (nextSafe == null) throw new InvalidOperationException();
+                if (nextSafe == null)
+                    throw new InvalidOperationException();
                 var destination = new[] { (x: nextSafe.x - 1, y: nextSafe.y), (x: nextSafe.x + 1, y: nextSafe.y),
                     (x: nextSafe.x, y: nextSafe.y - 1), (x: nextSafe.x, y: nextSafe.y + 1) }
                     .Where(p => p.x >= 0 && p.y >= 0 && p.x < nextWorld.width && p.y < nextWorld.height &&
                         nextWorld.tiles[p.y * nextWorld.width + p.x] == "." && !nextWorld.objects.Any(o => o.x == p.x && o.y == p.y))
                     .ToArray();
-                if (destination.Length == 0) throw new InvalidOperationException();
+                if (destination.Length == 0)
+                    throw new InvalidOperationException();
                 candidate.world = nextWorld;
                 candidate.x = destination[0].x;
                 candidate.y = destination[0].y;
@@ -507,6 +532,8 @@ public sealed class Game
                 u.moved = u.acted = u.ended = false;
             }
             candidate.message = migrate ? "Safe-room save upgraded to the new map. Progress preserved." : "Safe-room save loaded.";
+            if (save.version == 1)
+                candidate.message += " Character XP rebased to the new curve; levels and stats preserved. Powerful Strike now starts at rank 3; legacy higher ranks retain capped early effects.";
             var nextCheckpoint = Codec.Write(candidate);
             s = candidate;
             checkpoint = nextCheckpoint;

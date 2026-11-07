@@ -389,3 +389,26 @@ canvas {
     display: none;
   }
 }
+/* Progress stays inside the existing deck and menus. */
+.character-progress { line-height: 1.15; margin-top: 4px; }
+.character-progress small { display: block; font: 10px Arial; color: #d5c18b; }
+.progress-meter { display: block; width: min(100%, 270px); height: 7px; margin-top: 4px; border: 1px solid #52617a; background: #060d1b; accent-color: #d5b568; }
+.progress-meter::-webkit-progress-bar { background: #060d1b; }
+.progress-meter::-webkit-progress-value { background: #d5b568; }
+.progress-meter::-moz-progress-bar { background: #d5b568; }
+.unit-info .progress-meter { width: 125px; height: 4px; }
+.practice { accent-color: #9abfcb; }
+.practice::-webkit-progress-value { background: #9abfcb; }
+.practice::-moz-progress-bar { background: #9abfcb; }
+.action-cost { display: block; font: 10px Arial; color: #c6d2e4; margin-top: 3px; }
+.skill-row strong { color: #f0dfb6; }
+.skill-row .skill-effect { color: #d2deeb; }
+.skill-row .next-effect { margin-top: 5px; color: #d5c18b; }
+.cost-warning { color: #f1b7a0 !important; }
+.mana-choice { display: flex; align-items: center; gap: 12px; }
+.mana-choice select { padding: 6px 10px; background: #14233f; border: 1px solid #8797b5; }
+@media (max-width: 650px) {
+  .unit-info .progress-meter { width: 85px; }
+  .character-progress small { font-size: 9px; }
+  .skill-row .tag { display: block; line-height: 1.5; }
+}
