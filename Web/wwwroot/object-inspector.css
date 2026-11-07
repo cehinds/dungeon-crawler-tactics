@@ -482,3 +482,28 @@ summary {
 #map .relation {
   pointer-events: none;
 }
+
+.readonly-badge {
+  background: #ede7f6;
+  color: #66418c;
+  font-weight: 650;
+}
+.assembly-nudges, .preview-actions {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0;
+  align-items: center;
+}
+.assembly-nudges button { min-width: 36px; min-height: 36px; }
+.assembly-nudges span { color: #63758a; font-size: 11px; }
+.preview-actions button { flex: 1; min-height: 36px; }
+.preview-actions button[type="submit"] { background: #315d8c; color: white; }
+#assembly-preview-result { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.preview-member-results > li { margin-bottom: 8px; }
+.preview-member-results ul { margin-top: 3px; }
+.preview-valid { fill: #379c7150; stroke: #21644d; }
+.preview-invalid { fill: #d6615050; stroke: #a14436; }
+@media (max-width: 440px) {
+  .coordinates label { min-width: 0; }
+  .board-heading select { max-width: 100%; }
+}

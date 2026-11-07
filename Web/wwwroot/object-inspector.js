@@ -3,6 +3,7 @@ import {
   validatePlacement,
   suggestPlacements,
   validateConnection,
+  previewAssemblyPlacement,
 } from "./map-scene-graph.js";
 const $ = (s) => document.querySelector(s),
   esc = (v) =>
@@ -24,6 +25,7 @@ let world,
   roomId = "",
   baseline = "",
   candidate = null,
+  assemblyPreview = null,
   ready = false;
 let nodeIndex = new Map();
 const byId = (id) => nodeIndex.get(id),
@@ -52,6 +54,7 @@ function roomFor(n) {
 function select(id) {
   selected = byId(id);
   candidate = null;
+  assemblyPreview = null;
   if (!selected) return;
   if (selected.typeId === "room") roomId = selected.id;
   else if (selected.id !== "world") roomId = roomFor(selected)?.id || "";
@@ -154,6 +157,15 @@ function renderMap() {
           height: room.height + 2,
         }
       : { x: 0, y: 0, width: world.width, height: world.height };
+  if (assemblyPreview?.bounds && Math.abs(assemblyPreview.bounds.x) < world.width * 3 && Math.abs(assemblyPreview.bounds.y) < world.height * 3) {
+    const preview = assemblyPreview.bounds;
+    const right = Math.max(bounds.x + bounds.width, preview.x + preview.width + 1);
+    const bottom = Math.max(bounds.y + bounds.height, preview.y + preview.height + 1);
+    bounds.x = Math.min(bounds.x, preview.x - 1);
+    bounds.y = Math.min(bounds.y, preview.y - 1);
+    bounds.width = right - bounds.x;
+    bounds.height = bottom - bounds.y;
+  }
   $("#room-title").textContent = room?.label || "World overview";
   $("#room-note").textContent = room
     ? `${room.runtime.kind} · ${room.width} × ${room.height} tiles · ${room.runtime.theme}`
@@ -226,6 +238,16 @@ function renderMap() {
     }
   if (candidate)
     html += `<rect x="${candidate.x}" y="${candidate.y}" width="${candidate.width || 1}" height="${candidate.height || 1}" fill="#f4975633" stroke="#bd5632" stroke-width=".12" stroke-dasharray=".2 .12"/>`;
+  if (assemblyPreview?.bounds && Math.abs(assemblyPreview.bounds.x) < world.width * 3 && Math.abs(assemblyPreview.bounds.y) < world.height * 3) {
+    const preview = assemblyPreview, origin = assemblyOrigin(selected);
+    html += '<g class="assembly-preview-overlay" data-testid="assembly-preview-overlay" pointer-events="none"><defs><marker id="preview-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7049a3"/></marker></defs>';
+    for (const member of preview.members) {
+      const label = byId(member.nodeId)?.label || "Assembly member";
+      html += `<rect class="preview-member ${member.valid ? "preview-valid" : "preview-invalid"}" data-preview-member="${esc(member.nodeId)}" data-valid="${member.valid}" x="${member.x}" y="${member.y}" width="${member.width}" height="${member.height}" stroke-width=".13" stroke-dasharray=".22 .1"><title>${esc(label)} · ${member.valid ? "valid" : "invalid"} preview</title></rect>`;
+    }
+    const b = preview.bounds, target = { x: preview.origin?.x ?? b.x, y: preview.origin?.y ?? b.y };
+    html += `<rect class="preview-bounds" data-testid="preview-bounds" x="${b.x}" y="${b.y}" width="${b.width}" height="${b.height}" fill="none" stroke="${preview.valid ? "#7049a3" : "#a14436"}" stroke-width=".09" stroke-dasharray=".4 .2"><title>${preview.valid ? "Group accepted" : "Group rejected; see reasons"}</title></rect><line x1="${origin.x}" y1="${origin.y}" x2="${target.x}" y2="${target.y}" stroke="#7049a3" stroke-width=".12" marker-end="url(#preview-arrow)"/><circle cx="${target.x}" cy="${target.y}" r=".18" fill="#fff" stroke="#7049a3" stroke-width=".1"><title>Preview group origin ${target.x}, ${target.y}</title></circle></g>`;
+  }
   svg.innerHTML = html;
   $("#summary").textContent =
     `${isAssembly(selected) ? `${assemblyMembers(selected).length} selected assembly members · ` : ""}${visible.length} objects in view · ${graph.nodes.length} graph nodes · ${graph.diagnostics.length} graph diagnostics · shapes show runtime footprints`;
@@ -233,8 +255,10 @@ function renderMap() {
 function renderProperties() {
   const n = selected;
   if (!n) return;
+  $("#assembly-placement").hidden = !isAssembly(n);
   if (isAssembly(n)) {
     renderAssemblyProperties(n);
+    resetAssemblyPreview(false);
     $("#placement").hidden = true;
     renderConnectionCheck();
     return;
@@ -362,6 +386,10 @@ function render() {
 // Initialize uses the existing Core generator; this page never sends gameplay commands.
 async function loadWorld() {
   ready = false;
+  candidate = null;
+  assemblyPreview = null;
+  if (graph) renderMap();
+  $("#assembly-placement").hidden = true;
   $("#status").textContent = "Generating an actual C# world…";
   try {
     if (!catalog)
@@ -397,6 +425,7 @@ async function loadWorld() {
       },
       validatePlacement,
       validateConnection,
+      previewAssemblyPlacement,
     };
     $("#room").innerHTML =
       '<option value="">Entire world</option>' +
@@ -405,6 +434,8 @@ async function loadWorld() {
         .map((n) => `<option value="${esc(n.id)}">${esc(n.label)}</option>`)
         .join("");
     roomId = "";
+    candidate = null;
+    assemblyPreview = null;
     selected = byId("world");
     ready = true;
     render();
@@ -531,3 +562,48 @@ $("#relations-actual").addEventListener("change", renderMap);
 $("#relations-suggestions").addEventListener("change", renderMap);
 $("#target-object").addEventListener("change", updateTargetPorts);
 $("#connection-form").addEventListener("submit", checkConnection);
+
+function assemblyOrigin(node) {
+  return { x: node.worldGroupX ?? node.x, y: node.worldGroupY ?? node.y };
+}
+function resetAssemblyPreview(redraw = true) {
+  assemblyPreview = null;
+  if (isAssembly(selected)) {
+    const origin = assemblyOrigin(selected);
+    $("#assembly-x").value = origin.x;
+    $("#assembly-y").value = origin.y;
+  }
+  $("#assembly-preview-result").innerHTML = '<p class="muted">Set an origin, then preview. Green ghosts pass member checks; red ghosts show rejected members. Purple marks the group bounds and origin.</p>';
+  if (redraw) renderMap();
+}
+function previewAssembly(event) {
+  event.preventDefault();
+  if (!ready || !isAssembly(selected)) return;
+  const origin = assemblyOrigin(selected);
+  const target = { x: selected.x + Number($("#assembly-x").value) - origin.x,
+    y: selected.y + Number($("#assembly-y").value) - origin.y };
+  assemblyPreview = previewAssemblyPlacement(selected, target, {
+    map: world, catalog, nodes: graph.nodes,
+  });
+  if (JSON.stringify(world) !== baseline)
+    throw Error("World snapshot changed during assembly preview");
+  const result = assemblyPreview;
+  const reasonText = (reason) => {
+    const member = byId(reason.nodeId);
+    return `${member ? member.label + ": " : ""}${reason.message || reason.code}`;
+  };
+  const memberIssues = new Set(result.members.flatMap((member) => member.reasons.map((reason) => `${member.nodeId}:${reason.code}:${reason.message}`)));
+  const globalReasons = result.reasons.filter((reason) => !memberIssues.has(`${reason.nodeId}:${reason.code}:${reason.message}`));
+  $("#assembly-preview-result").innerHTML = `<p class="${result.valid ? "good" : "bad"}" data-preview-valid="${result.valid}"><strong>${result.valid ? "Group preview accepted" : "Group preview rejected"}</strong> · ${result.members.length} members checked together.</p><p class="muted">Read only · runtime world unchanged. ${result.translation ? `Translation ${result.translation.x}, ${result.translation.y} tiles.` : "No drawable candidate geometry."}${result.bounds && (Math.abs(result.bounds.x) >= world.width * 3 || Math.abs(result.bounds.y) >= world.height * 3) ? " Preview is too far outside the world to draw." : ""}</p>${globalReasons.length ? `<ul class="bad">${globalReasons.map((reason) => `<li>${esc(reasonText(reason))}</li>`).join("")}</ul>` : ""}<ul class="preview-member-results">${result.members.map((member) => `<li class="${member.valid ? "good" : "bad"}" data-member-result="${esc(member.nodeId)}"><strong>${esc(byId(member.nodeId)?.label || "Assembly member")}</strong> · ${member.valid ? "passes member checks" : "rejected"}${member.reasons.length ? `<ul>${member.reasons.map((reason) => `<li>${esc(reason.message || reason.code)}</li>`).join("")}</ul>` : ""}</li>`).join("")}</ul>`;
+  renderMap();
+}
+$("#assembly-preview-form").addEventListener("submit", previewAssembly);
+$("#assembly-reset").addEventListener("click", () => resetAssemblyPreview());
+$("#assembly-preview-form").addEventListener("click", (event) => {
+  const button = event.target.closest("[data-nudge]");
+  if (!button) return;
+  const [dx, dy] = button.dataset.nudge.split(",").map(Number);
+  $("#assembly-x").value = Number($("#assembly-x").value) + dx;
+  $("#assembly-y").value = Number($("#assembly-y").value) + dy;
+  $("#assembly-preview-form").requestSubmit();
+});

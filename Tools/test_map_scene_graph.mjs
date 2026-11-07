@@ -9,6 +9,7 @@ const {
   rotatePorts,
   validatePlacement,
   validateConnection,
+  previewAssemblyPlacement,
   validateSceneGraph,
   suggestPlacements,
 } = await import(
@@ -507,7 +508,15 @@ for (const { seed, world, battle } of scenes) {
   const worldGraph = buildSceneGraph(world, { catalog: activeCatalog });
   const battleGraph = buildSceneGraph(battle, { catalog: activeCatalog, world, battle: true });
   const assemblies = worldGraph.nodes.filter((node) => node.typeId === "assembly");
-  assert.ok(assemblies.length > 0, `seed ${seed} has authored assemblies`);
+  assert.equal(assemblies.length, 31, `seed ${seed} has all authored assemblies`);
+  for (const assembly of assemblies) {
+    const preview = previewAssemblyPlacement(assembly, { x: assembly.x, y: assembly.y }, {
+      map: world, catalog: activeCatalog, nodes: worldGraph.nodes,
+    });
+    assert.ok(preview.valid, `seed ${seed} ${assembly.id} authored no-op: ${JSON.stringify(preview.reasons)}`);
+    assert.deepEqual(preview.members.map((member) => member.candidate),
+      world.props.filter((prop) => prop.roomId === assembly.roomId && prop.groupId === assembly.groupId));
+  }
   for (const roomId of ["goblin-workshop", "ball-of-swine-complex"]) {
     const machinery = assemblies.find((node) => node.roomId === roomId && node.groupId === "northwest-machinery");
     assert.ok(machinery, `seed ${seed} ${roomId} has authored machinery`);
@@ -577,6 +586,82 @@ assert.ok(validateConnection(portNode("a", "east"), portNode("b", "north"), {
 assert.equal(validateConnection(portNode("a", "east"), portNode("b", "south"), {
   ...portOptions, adapter: { id: "elbow", kinds: ["fluid"], sidePairs: [["east", "north"]] },
 }).valid, false);
+// Two individually harmless translated solids can jointly sever a corridor.
+const batchProp = (id, x, y, overrides = {}) => ({
+  id, assetId: "table", roomId: "batch-room", groupId: "batch", groupX: 0, groupY: 1,
+  offsetX: x, offsetY: y - 1, x, y, width: 1, height: 1, rotation: 0,
+  layer: "object", blocksMovement: true, ...overrides,
+});
+const batchAssembly = { roomId: "batch-room", groupId: "batch" };
+const batchMap = {
+  width: 7, height: 4, tiles: [..."########......#......#######"],
+  props: [batchProp("upper", 0, 1), batchProp("lower", 0, 2)], objects: [],
+};
+assert.equal(batchMap.tiles.length, 28);
+const batchSnapshot = JSON.stringify(batchMap);
+for (const original of batchMap.props) {
+  assert.ok(validatePlacement({ ...original, x: 3 }, {
+    map: batchMap, catalog: furnitureCatalog, props: batchMap.props,
+  }).valid, "one translated member leaves an alternate route");
+}
+const batchPreview = previewAssemblyPlacement(batchAssembly, { x: 3, y: 1 }, {
+  map: batchMap, catalog: furnitureCatalog,
+});
+assert.equal(batchPreview.valid, false);
+assert.ok(batchPreview.reasons.some((reason) => reason.code === "disconnected-route"), "combined footprints sever both corridor rows");
+assert.ok(batchPreview.members.every((member) => member.valid), "global route failure remains separate from per-member checks");
+assert.equal(JSON.stringify(batchMap), batchSnapshot, "batch preview cannot mutate runtime tiles or props");
+const overlayMap = {
+  width: 6, height: 5, tiles: Array(30).fill("."), objects: [],
+  props: [batchProp("table", 1, 1), batchProp("rug", 1, 1, {
+    blocksMovement: false, layer: "underlay", rotation: 90,
+  })],
+};
+overlayMap.tiles[7] = "#";
+const overlayPreview = previewAssemblyPlacement(batchAssembly, { x: 2, y: 2 }, {
+  map: overlayMap, catalog: furnitureCatalog,
+});
+assert.ok(overlayPreview.valid, JSON.stringify(overlayPreview.reasons));
+assert.deepEqual(overlayPreview.origin, { x: 1, y: 2 }, "group origin translates independently from composite bounds");
+assert.equal(overlayPreview.members[1].candidate.layer, "underlay");
+assert.equal(overlayPreview.members[1].candidate.rotation, 90);
+assert.equal(overlayPreview.members[1].candidate.offsetX, 1);
+const collisionMap = structuredClone(overlayMap);
+collisionMap.props.push(batchProp("foreign", 2, 2, { groupId: "foreign" }));
+collisionMap.tiles[14] = "#";
+assert.ok(previewAssemblyPlacement(batchAssembly, { x: 2, y: 2 }, {
+  map: collisionMap, catalog: furnitureCatalog,
+}).reasons.some((reason) => reason.code === "overlap"), "foreign solids are never ignored");
+assert.ok(previewAssemblyPlacement(batchAssembly, { x: 6, y: 2 }, {
+  map: overlayMap, catalog: furnitureCatalog,
+}).reasons.some((reason) => reason.code === "bounds"));
+assert.ok(previewAssemblyPlacement(batchAssembly, { x: 2, y: 2 }, {
+  map: overlayMap, catalog: furnitureCatalog, reservedCells: [{ x: 2, y: 2 }],
+}).reasons.some((reason) => reason.code === "reserved"), "explicit approach reservations apply to each member");
+for (const invalid of [NaN, Infinity, 0.5, Number.MAX_SAFE_INTEGER]) {
+  assert.equal(previewAssemblyPlacement(batchAssembly, { x: invalid, y: 1 }, {
+    map: overlayMap, catalog: furnitureCatalog,
+  }).valid, false);
+}
+for (const dimensions of [{ width: 0 }, { width: -1 }, { height: 0.5 }, { x: NaN }, { x: Number.MAX_SAFE_INTEGER, width: 20 }]) {
+  assert.equal(validatePlacement({ ...overlayMap.props[0], ...dimensions }, {
+    map: overlayMap, catalog: furnitureCatalog,
+  }).valid, false, "malformed or enormous footprints reject before scanning");
+}
+const accessMap = {
+  width: 5, height: 5, tiles: Array(25).fill("."),
+  props: [batchProp("north", 1, 1), batchProp("south", 1, 3)],
+  objects: [{ id: "service", kind: "safe", x: 2, y: 2 }],
+};
+for (const cell of [6, 16, 11, 12, 13]) accessMap.tiles[cell] = "#";
+const accessPreview = previewAssemblyPlacement(batchAssembly, { x: 2, y: 1 }, {
+  map: accessMap, catalog: furnitureCatalog,
+});
+assert.ok(accessPreview.reasons.some((reason) => reason.code === "interaction-access"), "union cannot consume every existing interaction approach");
+const missingMembership = previewAssemblyPlacement({ roomId: "batch-room", groupId: "absent" }, { x: 1, y: 1 }, {
+  map: overlayMap, catalog: furnitureCatalog,
+});
+assert.ok(missingMembership.reasons.some((reason) => reason.code === "assembly-membership"));
 console.log(
-  "Scene graph: actual seed 1337/42 assemblies and connector fixtures, 132 runtime self placements, member diagnostics, typed ports/adapters, mounting/support guards, route preservation, identity and immutability pass.",
+  "Scene graph: actual seed 1337/42 assemblies and connector fixtures, 132 runtime self placements, 62 authored assembly no-ops, atomic group translation, batch route/access guards, member diagnostics, typed ports/adapters, identity and immutability pass.",
 );

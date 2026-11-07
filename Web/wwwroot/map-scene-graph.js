@@ -223,9 +223,18 @@ function preservesReachability(candidate, context) {
   return valid;
 }
 export function validatePlacement(candidate, context = {}) {
-  context = preparePlacementContext(context);
   const type = lookup(context.catalog, candidate.typeId || candidate.assetId);
   const reasons = [];
+  if (![candidate.x, candidate.y, candidate.width ?? 1, candidate.height ?? 1].every(Number.isSafeInteger) ||
+      (candidate.width ?? 1) <= 0 || (candidate.height ?? 1) <= 0) {
+    return { valid: false, reasons: [{ code: "geometry", message: "Coordinates must be finite integers and footprint dimensions must be positive integers." }] };
+  }
+  if (context.map && (candidate.x < 0 || candidate.y < 0 ||
+      candidate.x + (candidate.width ?? 1) > context.map.width ||
+      candidate.y + (candidate.height ?? 1) > context.map.height)) {
+    return { valid: false, reasons: [{ code: "bounds", message: "Footprint is outside the runtime map." }] };
+  }
+  context = preparePlacementContext(context);
   if (!type)
     reasons.push({
       code: "unknown-type",
@@ -347,6 +356,171 @@ export function validatePlacement(candidate, context = {}) {
   }
   return { valid: reasons.length === 0, reasons };
 }
+// Whole-assembly proposals are translations of actual authored membership. The
+// original map is never modified, and validation never places runtime objects.
+export function previewAssemblyPlacement(assembly, destination, context = {}) {
+  const reasons = [];
+  const result = {
+    valid: false, reasons, members: [], bounds: null, candidate: null,
+    origin: null, translation: null,
+  };
+  const reject = (code, message) => {
+    reasons.push({ code, message });
+    return result;
+  };
+  const map = context.map;
+  if (!map || !assembly?.roomId || !assembly?.groupId) {
+    return reject("assembly-membership", "A runtime map and explicit assembly roomId/groupId are required.");
+  }
+  if (![destination?.x, destination?.y].every(Number.isSafeInteger)) {
+    return reject("geometry", "Assembly coordinates must be finite integers.");
+  }
+  const originals = (map.props || []).filter(
+    (prop) => prop.roomId === assembly.roomId && prop.groupId === assembly.groupId,
+  );
+  if (!originals.length) {
+    return reject("assembly-membership", "No runtime members belong to this authored assembly.");
+  }
+  if (originals.some((prop) =>
+    ![prop.x, prop.y, prop.width, prop.height].every(Number.isSafeInteger) ||
+    prop.width <= 0 || prop.height <= 0 || prop.x < 0 || prop.y < 0 ||
+    prop.x + prop.width > map.width || prop.y + prop.height > map.height)) {
+    return reject("geometry", "Every runtime assembly member needs an integer positive footprint.");
+  }
+  const minX = Math.min(...originals.map((prop) => prop.x));
+  const minY = Math.min(...originals.map((prop) => prop.y));
+  const dx = destination.x - minX;
+  const dy = destination.y - minY;
+  const bounds = {
+    x: destination.x, y: destination.y,
+    width: Math.max(...originals.map((prop) => prop.x + prop.width)) - minX,
+    height: Math.max(...originals.map((prop) => prop.y + prop.height)) - minY,
+  };
+  const translated = originals.map((prop) => ({
+    ...prop, x: prop.x + dx, y: prop.y + dy,
+    ...(Number.isSafeInteger(prop.groupX) ? { groupX: prop.groupX + dx } : {}),
+    ...(Number.isSafeInteger(prop.groupY) ? { groupY: prop.groupY + dy } : {}),
+  }));
+  result.bounds = bounds;
+  result.origin = {
+    x: Number.isSafeInteger(originals[0].groupX) ? originals[0].groupX + dx : null,
+    y: Number.isSafeInteger(originals[0].groupY) ? originals[0].groupY + dy : null,
+  };
+  result.candidate = { ...bounds, groupX: result.origin.x, groupY: result.origin.y };
+  result.translation = { x: dx, y: dy };
+  const movingIds = new Set(originals.map((prop) => prop.id));
+  const external = (map.props || []).filter((prop) => !movingIds.has(prop.id));
+  if (external.some((prop) =>
+    ![prop.x, prop.y, prop.width, prop.height].every(Number.isSafeInteger) ||
+    prop.width <= 0 || prop.height <= 0 || prop.x < 0 || prop.y < 0 ||
+    prop.x + prop.width > map.width || prop.y + prop.height > map.height)) {
+    return reject("geometry", "Stationary runtime props must have valid bounded integer footprints.");
+  }
+  const vacatedTiles = [...map.tiles];
+  const cellsFor = (prop, visit) => {
+    for (let y = prop.y; y < prop.y + prop.height; y++) {
+      for (let x = prop.x; x < prop.x + prop.width; x++) {
+        if (x >= 0 && y >= 0 && x < map.width && y < map.height) visit(y * map.width + x);
+      }
+    }
+  };
+  // Stationary solids and mounted fixtures remain authoritative. In particular,
+  // an underlay or unknown asset must never turn masonry into a vacated floor.
+  const stationaryBlocked = new Set();
+  for (const prop of external) {
+    if (prop.blocksMovement || prop.layer === "wallfixture") cellsFor(prop, (cell) => stationaryBlocked.add(cell));
+  }
+  for (const prop of originals) {
+    if (prop.layer === "wallfixture" || (prop.blocksMovement && !lookup(context.catalog, prop.assetId))) {
+      cellsFor(prop, (cell) => stationaryBlocked.add(cell));
+    }
+  }
+  for (const prop of originals) {
+    if (!prop.blocksMovement || prop.layer === "wallfixture" || !lookup(context.catalog, prop.assetId)) continue;
+    cellsFor(prop, (cell) => {
+      if (vacatedTiles[cell] === "#" && !stationaryBlocked.has(cell)) vacatedTiles[cell] = ".";
+    });
+  }
+  const proposalMap = { ...map, tiles: vacatedTiles, props: external };
+  const movedNodes = (context.nodes || []).map((node) => movingIds.has(node.runtimeId)
+    ? { ...node, x: node.x + dx, y: node.y + dy } : node);
+  const prepared = preparePlacementContext({
+    ...context, prepared: false, map: proposalMap, props: [...external, ...translated],
+    nodes: movedNodes, preserveReachability: false,
+  });
+  for (const candidate of translated) {
+    const validation = validatePlacement(candidate, prepared);
+    if (context.bounds && (candidate.x < context.bounds.x || candidate.y < context.bounds.y ||
+        candidate.x + candidate.width > context.bounds.x + context.bounds.width ||
+        candidate.y + candidate.height > context.bounds.y + context.bounds.height)) {
+      validation.reasons.push({ code: "bounds", message: "Assembly member is outside the requested placement bounds." });
+      validation.valid = false;
+    }
+    const nodeId = `prop:${candidate.id}`;
+    result.members.push({ nodeId, x: candidate.x, y: candidate.y,
+      width: candidate.width, height: candidate.height, candidate, ...validation });
+    reasons.push(...validation.reasons.map((reason) => ({ ...reason, nodeId })));
+  }
+  if (reasons.length) return result;
+  const proposedTiles = [...vacatedTiles];
+  for (const prop of translated) {
+    if (prop.blocksMovement) cellsFor(prop, (cell) => { proposedTiles[cell] = "#"; });
+  }
+  // Compare actual existing floor components, rather than the vacated floor.
+  // This guarantees an authored no-op is valid and allows a vacated old path to
+  // compensate for the translated footprint, while detecting batch-only cuts.
+  const proposedComponents = new Int32Array(map.width * map.height);
+  let nextComponent = 0;
+  for (let start = 0; start < proposedComponents.length; start++) {
+    if (proposedTiles[start] !== "." || proposedComponents[start]) continue;
+    nextComponent++;
+    proposedComponents[start] = nextComponent;
+    const queue = [start];
+    for (let i = 0; i < queue.length; i++) {
+      for (const next of adjacentCells(queue[i], map)) {
+        if (proposedTiles[next] === "." && !proposedComponents[next]) {
+          proposedComponents[next] = nextComponent;
+          queue.push(next);
+        }
+      }
+    }
+  }
+  const visited = new Set();
+  let disconnected = false;
+  for (let start = 0; start < proposedComponents.length; start++) {
+    if (map.tiles[start] !== "." || visited.has(start)) continue;
+    const queue = [start];
+    const survivingComponents = new Set();
+    visited.add(start);
+    for (let i = 0; i < queue.length; i++) {
+      const cell = queue[i];
+      if (proposedComponents[cell]) survivingComponents.add(proposedComponents[cell]);
+      for (const next of adjacentCells(cell, map)) {
+        if (map.tiles[next] === "." && !visited.has(next)) {
+          visited.add(next);
+          queue.push(next);
+        }
+      }
+    }
+    if (survivingComponents.size > 1) disconnected = true;
+  }
+  if (context.preserveReachability !== false && disconnected) {
+    reasons.push({ code: "disconnected-route", message: "The combined assembly footprint would disconnect an existing walkable route." });
+  }
+  for (const object of context.objects || map.objects || []) {
+    if (!Number.isSafeInteger(object.x) || !Number.isSafeInteger(object.y) ||
+        object.x < 0 || object.y < 0 || object.x >= map.width || object.y >= map.height) continue;
+    const approaches = adjacentCells(object.y * map.width + object.x, map)
+      .filter((cell) => map.tiles[cell] === ".");
+    if (approaches.length && !approaches.some((cell) => proposedTiles[cell] === ".")) {
+      reasons.push({ code: "interaction-access", objectId: object.id,
+        message: `The assembly would remove every existing approach to ${object.id || object.kind || "an interaction"}.` });
+    }
+  }
+  result.valid = reasons.length === 0;
+  return result;
+}
+
 export function validateSceneGraph(graph) {
   const diagnostics = [],
     ids = new Set(graph.nodes.map((n) => n.id)),

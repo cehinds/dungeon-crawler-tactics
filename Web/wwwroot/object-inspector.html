@@ -76,7 +76,27 @@
         <div id="summary"></div>
       </section>
       <aside class="details">
-        <h2>Object properties</h2>
+        <h2>Selection</h2>
+        <section id="assembly-placement" data-testid="assembly-placement" hidden>
+          <h2>Preview assembly placement</h2>
+          <span class="badge readonly-badge">Read only · no world changes</span>
+          <p class="muted">Translate the whole group by its world origin. Member offsets and rotations stay together.</p>
+          <form id="assembly-preview-form">
+            <div class="coordinates">
+              <label>Group origin X<input id="assembly-x" data-testid="assembly-origin-x" type="number" step="1" required /></label>
+              <label>Group origin Y<input id="assembly-y" data-testid="assembly-origin-y" type="number" step="1" required /></label>
+            </div>
+            <div class="assembly-nudges" aria-label="Nudge group origin one tile">
+              <button type="button" data-nudge="-1,0" aria-label="Move preview origin left one tile">←</button>
+              <button type="button" data-nudge="0,-1" aria-label="Move preview origin up one tile">↑</button>
+              <button type="button" data-nudge="0,1" aria-label="Move preview origin down one tile">↓</button>
+              <button type="button" data-nudge="1,0" aria-label="Move preview origin right one tile">→</button>
+              <span>1 tile</span>
+            </div>
+            <div class="preview-actions"><button type="submit" data-testid="preview-group">Preview group</button><button id="assembly-reset" type="button" data-testid="reset-group-preview">Reset preview</button></div>
+          </form>
+          <div id="assembly-preview-result" data-testid="assembly-preview-result" role="status" aria-live="polite"></div>
+        </section>
         <div id="properties">
           <p class="muted">
             Select an object to inspect its properties and placement rules.
