@@ -1,7 +1,7 @@
 # Rebuild contract
 All public JSON uses camelCase public fields; serializer IncludeFields=true. Namespace DccRebuild.
 Bridge Initialize(string contentJson, int seed), Dispatch(string commandJson), GetSave(), LoadSave(string).
-Command fields: type, direction, targetId, actorId, skillId, itemId, x, y, manaSpend. Types move/interact/select/moveUnit/forecast/confirm/endUnit/endTurn/rest/equip/useItem/retry.
+Command fields: type, direction, targetId, actorId, skillId, itemId, x, y, manaSpend. Types move/interact/select/moveUnit/forecast/confirm/endUnit/endTurn/rest/equip/useItem/retry/buy/acknowledgeReward/advanceEnemyTurn.
 View: mode (explore,battle,defeat,complete), message, seed, turn, selectedId, questStage, gold, party[], inventory[], world, battle, forecast, journal[], cleared[], unlockedEvents[], destroyedPropIds[], destroyedEncounterObjectIds[], floor, availability[]. Availability rows expose `{kind,id,name,available,unlocked,reason}`.
 Unit fields include id,name,x,y,hp,maxHp,mp,maxMp,level,xp,power,armor,moved,acted,ended,equipment,skills[],ranks,skillPractice,temporaryRankModifiers,statuses,tags, and skillProgress[]. Inventory entries are `{itemId,count}`.
 World API: static World.Build(int seed) returns WorldMap {width,height,tiles:string[],objects:WorldObject[],spawnX,spawnY}; tiles indexed y*width+x, '#' wall '.' floor. WorldObject {id,kind,name,x,y,description}; kind guide,safe,encounter,boss,exit,chest. Engine stores cleared object IDs. Map must include guide id mordecai, safe id safe-room, encounter ids false-guild/goblin-workshop/hoarder/juicer, boss id ball-of-swine, exit id exit. Story false-guild -> guide -> goblin-workshop -> ball-of-swine -> exit; hoarder/juicer optional after guide. World rendering receives these objects with cleared bool copied in view.
@@ -26,3 +26,16 @@ Progression content in `floor-one-rpg.json` is authored under root `progression`
 
 
 Content and asset validation commands are `dotnet run --project Rebuild/Tests -c Release -- --validate-content` and `python3 Tools/validate_assets.py --wwwroot Web/publish/wwwroot --self-test`. Run the complete core regression suite with `dotnet run --project Rebuild/Tests -c Release`.
+
+
+## Block B loop and preparation contract
+
+Root content `resupplyOffers[]` contains catalog definitions with `{id,name,itemId,quantity,goldCost,...provenance,availability}`. Each offer references an implemented restorative consumable. Offers are repeatable and share the existing safe-room adjacency check; there is no finite stock. The authored offers reuse `item.health_tonic` and `item.mana_draught` at 8 and 10 gold, one per purchase. `buy` uses `targetId` as the offer ID. `acknowledgeReward` clears a transient reward display without granting anything.
+
+Encounter `itemRewards[]` rows are `{itemId,count}` and grant once with the encounter’s existing gold and per-crawler XP. View `reward` exposes `{id,sourceId,sourceKind,name,gold,items[],party[]}`; party rows contain `{actorId,xp,levelBefore,levelAfter}`. A receipt is presentation data, excluded from save state, and cannot grant rewards on acknowledgement or load. Existing cleared IDs remain the durable reward-once authority.
+
+View `safeRoom` exposes `{safeRoomId,reason,restAllowed,saveAllowed,preparationAllowed,resupplyAllowed}`. Any adjacent runtime `safe` object qualifies in exploration; named safe places and the camp retain distinct source evidence. View `equipmentPreviews[]`, `consumablePreviews[]` and `resupplyOffers[]` come from C# validation. Equipment previews report ownership/count, equipped crawler, power/armor/rank deltas and a rejection reason. Equipment counts include equipped copies; a single copy cannot be equipped by both crawlers. Empty `itemId` on `equip` removes current gear. `ownerId` restrictions and Carl’s weapon restriction apply in the core. Restorative previews reject unavailable, exhausted or ineffective items. Purchases validate safe-room adjacency, availability, funds and inventory capacity atomically.
+
+Services, rewards, numeric effects, prices and ownership restrictions are authored adaptations. Existing item IDs and supported save migrations remain compatible. Research-only recipes, Floor 3 classes and later house systems remain outside this loop. See `BLOCK-B-CHECKLIST.md` for completed core/browser acceptance evidence and scope limits.
+
+Item `startingCount` defaults to zero and is validated from 0 through 999. New games receive the authored quantity without auto-equipping. Only Carl’s underpants/backpack and Donut’s tiara author `startingCount: 1`; their combat bonuses remain zero. Loading an existing save preserves its inventory without backfilling starting gear.

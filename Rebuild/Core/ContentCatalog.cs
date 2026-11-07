@@ -70,11 +70,13 @@ public sealed class ContentCatalog
             content.recipes = content.recipes.Concat(supplement.recipes).ToArray(); content.storyEvents = content.storyEvents.Concat(supplement.storyEvents).ToArray();
             content.temporaryModifiers = content.temporaryModifiers.Concat(supplement.temporaryModifiers).ToArray();
             content.facilities = content.facilities.Concat(supplement.facilities).ToArray(); content.classes = content.classes.Concat(supplement.classes).ToArray();
+            content.resupplyOffers = content.resupplyOffers.Concat(supplement.resupplyOffers).ToArray();
             content.sources = content.sources.Concat(supplement.sources).ToArray();
         }
         Content = content;
         Add("character", content.characters.Length > 0 ? content.characters : content.party);
         Add("location", content.locations); Add("rumor", content.rumors); Add("item", content.items); Add("skill", content.skills);
+        Add("resupplyOffer", content.resupplyOffers);
         Add("enemy", content.enemies); Add("recipe", content.recipes); Add("encounter", content.encounters);
         Add("temporaryModifier", content.temporaryModifiers); Add("storyEvent", content.storyEvents); Add("facility", content.facilities); Add("class", content.classes);
         ContentValidator.Validate(this);

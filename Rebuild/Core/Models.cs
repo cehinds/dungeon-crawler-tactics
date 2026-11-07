@@ -13,6 +13,7 @@ public class Content
     public ClassDefinition[] classes = [];
     public TemporaryModifierDefinition[] temporaryModifiers = [];
     public Item[] items = [];
+    public ResupplyOffer[] resupplyOffers = [];
     public Skill[] skills = [];
     public Enemy[] enemies = [];
     public Encounter[] encounters = [];
@@ -25,6 +26,7 @@ public class Item : CatalogDefinition
     public string kind = "";
     public Dictionary<string, int> rankModifiers = new();
     public int power, armor, heal, mp;
+    public int startingCount;
 }
 public class Skill : CatalogDefinition
 {
@@ -41,6 +43,7 @@ public class Encounter : CatalogDefinition
 {
     public string[] enemyIds = [];
     public int xpReward = 30, goldReward = 25;
+    public Stack[] itemRewards = [];
     public EffectHazard[] hazards = [];
     public EffectObject[] effectObjects = [];
 }
@@ -53,6 +56,7 @@ public class Command
 {
     public string type = "", direction = "", targetId = "", actorId = "", skillId = "", itemId = "";
     public int x, y, manaSpend;
+    public bool animateEnemyTurn;
 }
 public class Unit
 {
@@ -90,6 +94,7 @@ public class Battle
     public List<EffectHazard> hazards = [];
     public List<EffectEvent> effectEvents = [];
     public int effectRevision;
+    public EnemyIntent enemyIntent;
     public List<Unit> units = [];
     public List<Unit> enemies = [];
     public Point[] obstacles = [new() { x = 4, y = 2 }, new() { x = 4, y = 3 }, new() { x = 5, y = 5 }];
@@ -117,6 +122,14 @@ public class View
     public List<string> destroyedEncounterObjectIds = [];
     public int floor = 1;
     public AvailabilityView[] availability = [];
+    public RewardReceipt reward;
+    public InteractionView[] nearbyInteractions = [];
+    public ObjectiveView objective;
+    public SafeRouteView nearestSafe;
+    public SafeRoomPreparation safeRoom;
+    public EquipmentPreview[] equipmentPreviews = [];
+    public ConsumablePreview[] consumablePreviews = [];
+    public ResupplyPreview[] resupplyOffers = [];
 }
 public class Save
 {
@@ -134,4 +147,38 @@ public class AvailabilityView
 {
     public string kind = "", id = "", name = "", reason = "";
     public bool available, unlocked;
+}
+
+// Transient presentation receipts never grant rewards when acknowledged or loaded.
+public class RewardReceipt
+{
+    public string id = "", sourceId = "", sourceKind = "", name = "";
+    public int gold;
+    public Stack[] items = [];
+    public RewardProgress[] party = [];
+}
+public class RewardProgress
+{
+    public string actorId = "";
+    public int xp, levelBefore, levelAfter;
+}
+public class InteractionView
+{
+    public string id = "", kind = "", name = "", reason = "";
+    public bool available;
+}
+public class ObjectiveView
+{
+    public string id = "", name = "", description = "";
+}
+public class SafeRouteView
+{
+    public string id = "", name = "", direction = "";
+    public int distance;
+}
+public class EnemyIntent
+{
+    public string actorId = "", targetId = "", stage = "";
+    public Point[] path = [];
+    public int step;
 }

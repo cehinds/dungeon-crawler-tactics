@@ -4,6 +4,7 @@ public static class ContentValidator
     public static void Validate(ContentCatalog catalog)
     {
         EffectResolver.ValidateRules(catalog.Content.effectRules);
+        PreparationService.ValidateOffers(catalog.Content, catalog.Content.resupplyOffers);
         var sources = new HashSet<string>();
         foreach (var source in catalog.Content.sources)
             if (source == null || string.IsNullOrWhiteSpace(source.id) || !sources.Add(source.id))
@@ -52,6 +53,15 @@ public static class ContentValidator
                 foreach (var hazard in effectEncounter.hazards)
                     if (hazard == null || string.IsNullOrWhiteSpace(hazard.id) || string.IsNullOrWhiteSpace(hazard.tag) || hazard.x < 0 || hazard.y < 0 || !ids.Add(hazard.id) || hazard.x >= arena.width || hazard.y >= arena.height || hazard.duration < -1 || hazard.strength < 0) Fail(path + ".hazards", "invalid authored hazard");
             }
+            if (d is Encounter rewardEncounter)
+            {
+                if (rewardEncounter.xpReward is < 0 or > 100000 || rewardEncounter.goldReward is < 0 or > 100000 || rewardEncounter.itemRewards.Any(r => r == null || r.count is < 1 or > 999) || rewardEncounter.itemRewards.Select(r => r.itemId).Distinct().Count() != rewardEncounter.itemRewards.Length) Fail(path + ".rewards", "invalid or duplicate rewards");
+                foreach (var r in rewardEncounter.itemRewards)
+                {
+                    var rewardItem = catalog.Get<Item>("item", r.itemId);
+                    if (!rewardItem.availability.active || rewardItem.availability.minFloor > rewardEncounter.availability.minFloor || rewardItem.availability.maxFloor < rewardEncounter.availability.maxFloor || rewardItem.availability.requiredEvents.Any(id => !rewardEncounter.availability.requiredEvents.Contains(id))) Fail(path + ".itemRewards", "ineligible reward item " + r.itemId);
+                }
+            }
             if (d is Encounter encounterDefinition && encounterDefinition.availability.active && encounterDefinition.enemyIds.Length == 0) Fail(path + ".enemyIds", "active encounter has no enemies");
             if (d is Encounter activeEncounter && activeEncounter.availability.active && activeEncounter.availability.minFloor == 1)
                 foreach (var enemyId in activeEncounter.enemyIds)
@@ -63,6 +73,12 @@ public static class ContentValidator
                 Fail(path, "only Carl and Donut may deploy on Floor 1");
             if (kind == "class" && d.availability.minFloor < 3) Fail(path + ".availability.minFloor", "classes require Floor 3");
             if (d is Item boundedItem && (boundedItem.kind is not ("weapon" or "armor" or "charm" or "consumable") || boundedItem.power is < 0 or > 1000 || boundedItem.armor is < 0 or > 1000 || boundedItem.heal is < 0 or > 1000 || boundedItem.mp is < 0 or > 1000)) Fail(path, "invalid item kind or tactical values");
+            if (d is Item startingItem)
+            {
+                if (startingItem.startingCount is < 0 or > 999) Fail(path + ".startingCount", "starting count must be between 0 and 999");
+                if (startingItem.startingCount > 0 && (!PreparationService.IsEquipment(startingItem) || !startingItem.availability.Allows(1, []) || !catalog.Deployable(1, []).Any(c => startingItem.ownerId == "" || startingItem.ownerId == c.id)))
+                    Fail(path + ".startingCount", "starting equipment must be available on Floor 1 and owned by an eligible party member");
+            }
             if (d is Item item && item.rankModifiers.Count > 0 && d.adaptationStatus != "adapted" && d.adaptationStatus != "source-approved")
                 Fail(path + ".rankModifiers", "rank modifiers require adapted or source-approved status");
             if (d is TemporaryModifierDefinition temporary && (temporary.amount is < -20 or > 20 || temporary.duration is < 1 or > 100 || (temporary.adaptationStatus != "adapted" && temporary.adaptationStatus != "source-approved")))
@@ -107,6 +123,8 @@ public static class ContentValidator
         foreach (var r in d.references) yield return r;
         if (d is CharacterDefinition c) foreach (var id in c.skillIds) yield return new() { kind = "skill", id = id };
         if (d is Encounter e) foreach (var id in e.enemyIds) yield return new() { kind = "enemy", id = id };
+        if (d is Encounter rewardEncounter) foreach (var reward in rewardEncounter.itemRewards) yield return new() { kind = "item", id = reward.itemId };
+        if (d is ResupplyOffer offer) yield return new() { kind = "item", id = offer.itemId };
         if (d is RecipeDefinition recipe)
         {
             foreach (var id in recipe.ingredientIds) yield return new() { kind = "item", id = id };

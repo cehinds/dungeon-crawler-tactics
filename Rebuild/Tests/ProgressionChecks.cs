@@ -154,7 +154,8 @@ static class ProgressionChecks
     {
         var source = new Game(json, 71); var sv = source.GetView();
         var item = Codec.Read<Content>(json).items.First(i => i.kind == "armor" || i.kind == "charm");
-        sv.inventory.Add(new() { itemId = item.id, count = 1 });
+        if (!sv.inventory.Any(s => s.itemId == item.id && s.count > 0))
+            sv.inventory.Add(new() { itemId = item.id, count = 1 });
         source.Handle(new() { type = "equip", actorId = "carl", itemId = item.id });
         Check(sv.party[0].equipment == item.id, "roundtrip equipment fixture equipped normally");
         var save = SafeSave(source); Check(JsonNode.Parse(save)["version"].GetValue<int>() == 3, "new saves are foundation version 3");

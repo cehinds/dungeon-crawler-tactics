@@ -976,7 +976,7 @@ export class Renderer {
             oy + o.y * tile,
           );
         const u = map.units.find((u) => u.id === v.selectedId);
-        if (u) {
+        if (map.phase !== "enemy" && u) {
           c.fillStyle = "#70b5d818";
           for (const p of this.reachable(map, u))
             c.fillRect(ox + p.x * tile, oy + p.y * tile, tile, tile);
@@ -1054,6 +1054,22 @@ export class Renderer {
       const drawScenery = entry => entry.prop ? drawProp(entry.prop)
         : entry.run ? this.drawPipeConnection(entry.run,ox,oy,tile)
         : this.drawArchitecture(entry.part,ox,oy,tile);
+      if (battle && map.phase === "enemy" && map.enemyIntent) {
+        const intent = map.enemyIntent;
+        c.save();
+        c.strokeStyle = "#f1b576"; c.fillStyle = "#f1b57633"; c.lineWidth = 2;
+        for (const point of intent.path || []) {
+          c.fillRect(ox + point.x * tile + tile * .3, oy + point.y * tile + tile * .3, tile * .4, tile * .4);
+        }
+        const actor = map.enemies.find(e => e.id === intent.actorId);
+        if (actor) c.strokeRect(ox + actor.x * tile + 2, oy + actor.y * tile + 2, tile - 4, tile - 4);
+        const target = map.units.find(e => e.id === intent.targetId);
+        if (target && intent.stage === "attack") {
+          c.strokeStyle = "#fa8f79";
+          c.strokeRect(ox + target.x * tile + 2, oy + target.y * tile + 2, tile - 4, tile - 4);
+        }
+        c.restore();
+      }
       const units = battle ? [...map.units, ...map.enemies] : this.explorers(v);
       for (const u of [...units].sort((a, b) => a.y - b.y)) {
         if (u.hp <= 0) continue;

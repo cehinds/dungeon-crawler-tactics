@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "title": "Dungeon Crawler Carl — Floor One",
+  "title": "Dungeon Crawler Carl \u2014 Floor One",
   "adaptationNote": "Focused playable slice of Book 1. Combat numbers, item stats, enemy variants, encounter composition, and rewards are game adaptations; this is not a canonical rules or loot table. Personal clothing and accessories are represented without combat bonuses; any item mechanics added later are adaptations.",
   "party": [
     {
@@ -526,7 +526,8 @@
         "requiredEvents": []
       },
       "rankModifiers": {},
-      "sourceNote": "personal gear; no gameplay bonus asserted Personal starting clothing. The item depiction is lore-grounded; it provides no protective bonus."
+      "sourceNote": "personal gear; no gameplay bonus asserted Personal starting clothing. The item depiction is lore-grounded; it provides no protective bonus.",
+      "startingCount": 1
     },
     {
       "id": "gear.carl-backpack",
@@ -562,7 +563,8 @@
         "requiredEvents": []
       },
       "rankModifiers": {},
-      "sourceNote": "personal gear; no gameplay bonus asserted Personal carrying gear. It has no combat bonus in this adaptation."
+      "sourceNote": "personal gear; no gameplay bonus asserted Personal carrying gear. It has no combat bonus in this adaptation.",
+      "startingCount": 1
     },
     {
       "id": "gear.donut-tiara",
@@ -598,7 +600,8 @@
         "requiredEvents": []
       },
       "rankModifiers": {},
-      "sourceNote": "personal gear; no gameplay bonus asserted A personal accessory. It has no combat bonus in this adaptation."
+      "sourceNote": "personal gear; no gameplay bonus asserted A personal accessory. It has no combat bonus in this adaptation.",
+      "startingCount": 1
     },
     {
       "id": "item.health_tonic",
@@ -934,7 +937,7 @@
         "enemy",
         "physical"
       ],
-      "description": "A creature drawn to the Hoarder’s nest.",
+      "description": "A creature drawn to the Hoarder\u2019s nest.",
       "sourceRefs": [
         {
           "sourceId": "hoarder",
@@ -1313,37 +1316,37 @@
     },
     {
       "id": "magic-missile-secondary",
-      "title": "Magic Missile — DCC Database",
+      "title": "Magic Missile \u2014 DCC Database",
       "url": "https://www.dccdatabase.com/wiki/magic_missile/",
       "kind": "secondary reference; chapter citations do not replace the text"
     },
     {
       "id": "powerful-strike-secondary",
-      "title": "Powerful Strike — Dungeon Crawler Carl Wiki",
+      "title": "Powerful Strike \u2014 Dungeon Crawler Carl Wiki",
       "url": "https://dungeon-crawler-carl.fandom.com/wiki/Powerful_Strike_Skill",
       "kind": "secondary reference; exact rank table is unverified"
     },
     {
       "id": "goblins",
-      "title": "Goblin — DCC Database",
+      "title": "Goblin \u2014 DCC Database",
       "url": "https://dungeon-crawler-carl.fandom.com/wiki/Goblins",
       "kind": "secondary overview; tactical variants are adaptations"
     },
     {
       "id": "hoarder",
-      "title": "The Hoarder — DCC Database",
+      "title": "The Hoarder \u2014 DCC Database",
       "url": "https://www.dccdatabase.com/wiki/hoarder/",
       "kind": "secondary overview"
     },
     {
       "id": "juicer",
-      "title": "The Juicer — DCC Database",
+      "title": "The Juicer \u2014 DCC Database",
       "url": "https://www.dccdatabase.com/wiki/juicer/",
       "kind": "secondary overview"
     },
     {
       "id": "swine",
-      "title": "Ball of Swine — DCC Database",
+      "title": "Ball of Swine \u2014 DCC Database",
       "url": "https://www.dccdatabase.com/wiki/ball_of_swine/",
       "kind": "secondary overview"
     },
@@ -1393,7 +1396,19 @@
         "maxFloor": 1,
         "active": true,
         "requiredEvents": []
-      }
+      },
+      "itemRewards": [
+        {
+          "itemId": "item.health_tonic",
+          "count": 1
+        },
+        {
+          "itemId": "item.mana_draught",
+          "count": 1
+        }
+      ],
+      "sourceNote": "Named encounter context uses the retained sources; enemy roster, tactical staging, XP, gold and item reward identities/quantities are authored adaptations. Reward supplies do not establish a canonical loot table.",
+      "name": "False Tutorial Guild"
     },
     {
       "id": "goblin-workshop",
@@ -1464,7 +1479,15 @@
           ],
           "assetId": "ab-clean-crate-wood-cross"
         }
-      ]
+      ],
+      "itemRewards": [
+        {
+          "itemId": "item.health_tonic",
+          "count": 1
+        }
+      ],
+      "sourceNote": "Named encounter context uses the retained sources; enemy roster, tactical staging, XP, gold and item reward identities/quantities are authored adaptations. Reward supplies do not establish a canonical loot table.",
+      "name": "Goblin Workshop"
     },
     {
       "id": "hoarder",
@@ -1480,7 +1503,7 @@
         "encounter",
         "floor-one"
       ],
-      "description": "Scatterers defend the Hoarder’s nest.",
+      "description": "Scatterers defend the Hoarder\u2019s nest.",
       "sourceIds": [
         "hoarder"
       ],
@@ -1498,7 +1521,15 @@
         "maxFloor": 1,
         "active": true,
         "requiredEvents": []
-      }
+      },
+      "itemRewards": [
+        {
+          "itemId": "item.mega_tonic",
+          "count": 1
+        }
+      ],
+      "sourceNote": "Named encounter context uses the retained sources; enemy roster, tactical staging, XP, gold and item reward identities/quantities are authored adaptations. Reward supplies do not establish a canonical loot table.",
+      "name": "Hoarder"
     },
     {
       "id": "juicer",
@@ -1531,7 +1562,15 @@
         "maxFloor": 1,
         "active": true,
         "requiredEvents": []
-      }
+      },
+      "itemRewards": [
+        {
+          "itemId": "item.mana_draught",
+          "count": 1
+        }
+      ],
+      "sourceNote": "Named encounter context uses the retained sources; enemy roster, tactical staging, XP, gold and item reward identities/quantities are authored adaptations. Reward supplies do not establish a canonical loot table.",
+      "name": "Juicer"
     },
     {
       "id": "ball-of-swine",
@@ -1564,7 +1603,15 @@
         "maxFloor": 1,
         "active": true,
         "requiredEvents": []
-      }
+      },
+      "itemRewards": [
+        {
+          "itemId": "item.health_tonic",
+          "count": 1
+        }
+      ],
+      "sourceNote": "Named encounter context uses the retained sources; enemy roster, tactical staging, XP, gold and item reward identities/quantities are authored adaptations. Reward supplies do not establish a canonical loot table.",
+      "name": "Ball of Swine"
     }
   ],
   "progression": {
@@ -1830,5 +1877,73 @@
         "reaction": "Blast shock: +3 damage."
       }
     ]
-  }
+  },
+  "resupplyOffers": [
+    {
+      "id": "resupply.health-tonic",
+      "name": "Health Tonic",
+      "itemId": "item.health_tonic",
+      "quantity": 1,
+      "goldCost": 8,
+      "description": "Buy one Health Tonic for 8 gold at a safe room.",
+      "tags": [
+        "resupply",
+        "safe-room",
+        "floor-one"
+      ],
+      "loreStatus": "adaptation",
+      "sourceNote": "Repeatable shared safe-room purchase, quantity, price and service availability are authored tactical design; no canonical shop or merchant claim.",
+      "sourceIds": [
+        "adaptation-design"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "Block B authored preparation economy",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
+    },
+    {
+      "id": "resupply.mana-draught",
+      "name": "Mana Draught",
+      "itemId": "item.mana_draught",
+      "quantity": 1,
+      "goldCost": 10,
+      "description": "Buy one Mana Draught for 10 gold at a safe room.",
+      "tags": [
+        "resupply",
+        "safe-room",
+        "floor-one"
+      ],
+      "loreStatus": "adaptation",
+      "sourceNote": "Repeatable shared safe-room purchase, quantity, price and service availability are authored tactical design; no canonical shop or merchant claim.",
+      "sourceIds": [
+        "adaptation-design"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "Block B authored preparation economy",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
+    }
+  ]
 }

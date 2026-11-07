@@ -276,3 +276,5 @@ EffectChecks.ResourceAndMovement(json);
 EffectChecks.GameFlows(json);
 
 EffectChecks.AuthoredDamageBonus(json);
+
+BlockBChecks.Run(json);
