@@ -24,7 +24,8 @@ public sealed class EffectOperation
     // damage, heal, status, removeStatus, move, displace, resource, object, tick
     public string kind = "damage", targetId = "", tag = "", statusId = "", resource = "mp", stacking = "refresh";
     public int amount, radius, x, y, dx, dy, duration = 2, strength = 2;
-    public bool area;
+    public bool area, resolveDefense;
+    public string damageElement = "";
 }
 public sealed class EffectRequest
 {
@@ -35,11 +36,12 @@ public sealed class EffectRequest
 public sealed class EffectEvent
 {
     public string kind = "", sourceId = "", targetId = "", tag = "", detail = "";
-    public int amount, x, y;
+    public int amount, x, y, radius;
 }
 public sealed class EffectResolution
 {
     public Battle state;
+    public Point[] affectedCells = [];
     public List<EffectEvent> events = [];
     public bool valid;
     public string reason = "";

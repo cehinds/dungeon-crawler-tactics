@@ -34,6 +34,8 @@ public class Skill : CatalogDefinition
     public int permissionMaxRank = 5, rankCapacity = 20;
     public string effectTag = "", targetKind = "enemy";
     public int effectRadius;
+    public bool allowGroundTarget;
+    public string damageBasis = "power", baseSkillId = "";
     public EffectOperation[] effectOperations = [];
     public int cost, power, range = 1;
     public int startingRank = 1;
@@ -102,7 +104,9 @@ public class Battle
 public class Forecast
 {
     public string actorId = "", targetId = "", skillId = "", reaction = "";
-    public int damage, cost, manaSpend, trainedRank, effectiveRank, effectRank, range, x, y;
+    public int damage, baseDamage, cost, manaSpend, trainedRank, effectiveRank, effectRank, range, x, y;
+    public Point[] affectedCells = [];
+    public bool friendlyFire;
     public bool valid;
     public List<EffectEvent> events = [];
 }

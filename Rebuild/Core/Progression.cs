@@ -82,6 +82,7 @@ public sealed class Progression
             var trainedRow = Row(k, rank);
             int effective = EffectiveRank(u, k);
             var row = Row(k, effective);
+            bool unarmed = k.damageBasis != "unarmed" || (content.items.FirstOrDefault(i => i.id == u.equipment)?.kind != "weapon" && u.skills.Contains(k.baseSkillId));
             return new SkillProgress
             {
                 skillId = id,
@@ -95,9 +96,9 @@ public sealed class Progression
                 effectRank = row.rank,
                 cost = row.cost,
                 resource = "Mana",
-                effect = $"Power {row.power}; multiplier {row.powerMultiplier:0.##}; range {row.range}" + (rank > row.rank ? $". Trained rank {rank}; current effect rank {row.rank}." : ""),
-                canUse = u.hp > 0 && u.mp >= row.cost && (!inBattle || (!u.acted && !u.ended)),
-                disabledReason = u.hp <= 0 ? "Crawler is down" : u.mp < row.cost ? "Not enough mana" : inBattle && (u.acted || u.ended) ? "Action unavailable" : "",
+                effect = (k.damageBasis == "unarmed" ? $"Unarmed {k.baseSkillId} damage × {row.powerMultiplier:0.##}; power {row.power}; range {row.range}" : $"Power {row.power}; multiplier {row.powerMultiplier:0.##}; range {row.range}") + (rank > row.rank ? $". Trained rank {rank}; current effect rank {row.rank}." : ""),
+                canUse = unarmed && u.hp > 0 && u.mp >= row.cost && (!inBattle || (!u.acted && !u.ended)),
+                disabledReason = !unarmed ? "Requires unarmed attack and its base skill" : u.hp <= 0 ? "Crawler is down" : u.mp < row.cost ? "Not enough mana" : inBattle && (u.acted || u.ended) ? "Action unavailable" : "",
                 practiceProgressPercent = next == null ? 100 : Math.Clamp(100.0 * (practice - trainedRow.practiceRequired) / (next.practiceRequired - trainedRow.practiceRequired), 0, 100),
                 practice = practice,
                 practiceToNext = next == null ? 0 : Math.Max(0, next.practiceRequired - practice),

@@ -18,6 +18,7 @@ let view,
   modal = "",
   skill = "",
   manaSpend = 0,
+  aiming = false,
   skillsActorId = "",
   toastTimer,
   inventoryActorId = "",
@@ -89,7 +90,7 @@ function nearby() {
 function apply(next) {
   const old = view;
   view = next;
-  if (old?.selectedId !== view.selectedId) { skill = ""; manaSpend = 0; }
+  if (old?.selectedId !== view.selectedId || view.mode !== "battle" || view.battle?.phase === "enemy") { skill = ""; manaSpend = 0; aiming = false; }
   if (old?.battle?.phase === "enemy" && (view.mode !== "battle" || view.battle?.phase !== "enemy")) cancelEnemy();
   renderer.set(view);
   const room = view.world.rooms?.find(
@@ -186,6 +187,16 @@ function effectSummary(events = []) {
   const labels = { damage:"Damage", heal:"Healing", resource:"Resource", statusApplied:"Effect applied", statusRemoved:"Effect removed", move:"Move", displace:"Push", blocked:"Blocked", objectDamaged:"Object damage", objectDestroyed:"Object destroyed", explosion:"Explosion", reaction:"Reaction" };
   return events.filter((e) => !(["damage", "heal", "resource", "objectDamaged"].includes(e.kind) && e.amount === 0)).map((e) => `<li data-effect-kind="${esc(e.kind)}">${esc(e.detail || [labels[e.kind] || e.kind, names.get(e.targetId) || e.targetId, e.amount || "", e.tag?.replaceAll("-", " ")].filter(Boolean).join(" · "))}</li>`).join("");
 }
+function forecastDamage(events = []) {
+  const targets = [...(view.battle?.units || []), ...(view.battle?.enemies || []), ...(view.battle?.effectObjects || [])];
+  const rows = events.filter(e => ["damage", "objectDamaged"].includes(e.kind));
+  if (!rows.length) return "";
+  return `<ul class="forecast-damage" aria-label="Damage by target">${rows.map(e => {
+    const target = targets.find(t => t.id === e.targetId);
+    const ally = view.battle.units.some(t => t.id === e.targetId);
+    return `<li class="${ally ? "ally-damage" : ""}" data-damage-target="${esc(e.targetId)}"><span>${esc(target?.name || target?.label || e.targetId)} <small>${ally ? "ALLY" : e.kind === "objectDamaged" ? "OBJECT" : "ENEMY"}</small></span><strong>${e.amount} damage</strong></li>`;
+  }).join("")}</ul>`;
+}
 function mini(u) {
   return `<div class="party-mini" data-character="${esc(u.id)}">${portrait(u)}<div class="unit-info"><strong>${esc(u.name)}</strong> <small>Lv ${u.level}</small><div><small>HP ${u.hp}/${u.maxHp} · Mana ${u.mp}/${u.maxMp}</small></div><div class="meter"><i style="width:${(u.hp / u.maxHp) * 100}%"></i></div><div class="meter mp"><i style="width:${(u.mp / u.maxMp) * 100}%"></i></div>${characterProgress(u, true)}${statuses(u)}</div></div>`;
 }
@@ -211,12 +222,15 @@ function renderDeck() {
     view.battle.units[0];
   $("#deck").innerHTML =
     mini(u) +
-    `<div><span class="turn-label">${u.moved ? "MOVE USED" : "MOVE 3"} · ${u.acted ? "ACTION USED" : "ACTION READY"} · ATK ${u.power} · DEF ${u.armor}</span><div class="actions">${u.skills.map((id) => { const p = skillState(u, id); return `<button data-skill="${id}" title="${esc(actionTooltip(p))}" class="${skill === id ? "active" : ""}" ${u.acted || u.ended || p?.canUse === false ? "disabled" : ""}>${esc(content.skills.find((s) => s.id === id)?.name || id)}${p ? `<small class="action-cost">${p.cost} ${esc(p.resource || "Mana")}${p.disabledReason ? ` · ${esc(p.disabledReason)}` : ""}</small>` : ""}</button>`; }).join("")}<button data-command="endUnit" ${u.ended ? "disabled" : ""}>End ${esc(u.name)} turn</button><button data-command="endTurn">End party turn</button><button data-open="Items">Items</button></div></div>`;
+    `<div><span class="turn-label">${u.moved ? "MOVE USED" : "MOVE 3"} · ${u.acted ? "ACTION USED" : "ACTION READY"} · ATK ${u.power} · DEF ${u.armor}</span><div class="actions"><button data-move-mode ${!aiming && (u.moved || u.ended) ? "disabled" : ""}>${aiming ? "Cancel aim / Move" : "Move"}</button>${u.skills.map((id) => { const p = skillState(u, id); return `<button data-skill="${id}" title="${esc(actionTooltip(p))}" class="${skill === id ? "active" : ""}" ${u.acted || u.ended || p?.canUse === false ? "disabled" : ""}>${esc(content.skills.find((s) => s.id === id)?.name || id)}${p ? `<small class="action-cost">${p.cost} ${esc(p.resource || "Mana")}${p.disabledReason ? ` · ${esc(p.disabledReason)}` : ""}</small>` : ""}</button>`; }).join("")}<button data-command="endUnit" ${u.ended ? "disabled" : ""}>End ${esc(u.name)} turn</button><button data-command="endTurn">End party turn</button><button data-open="Items">Items</button></div></div>`;
+  $("#deck").querySelector("[data-move-mode]").onclick = () => { if (modal) close(); aiming = false; skill = ""; manaSpend = 0; renderDeck(); notify("Move: select an empty tile within movement range."); };
+  if (aiming) $("#deck").insertAdjacentHTML("beforeend", `<p class="aim-instruction" role="status" data-aim-instruction>Aim: select any tile on the map, including an ally’s tile. Cancel aim / Move returns to movement.</p>`);
   $("#deck")
     .querySelectorAll("[data-skill]")
     .forEach(
       (b) =>
         (b.onclick = () => {
+          aiming = false;
           skill = b.dataset.skill;
           manaSpend = 0;
           renderDeck();
@@ -247,6 +261,7 @@ function tileClick(x, y) {
     y >= view.battle.height
   )
     return;
+  if (aiming) { forecast("", x, y); return; }
   const ally = view.battle.units.find(
     (u) => u.x === x && u.y === y && u.hp > 0,
   );
@@ -255,6 +270,11 @@ function tileClick(x, y) {
     manaSpend = 0;
     command("select", { actorId: ally.id });
     return;
+  }
+  const activeSkill = content.skills.find(s => s.id === skill);
+  const object = view.battle.effectObjects?.find(o => !o.destroyed && x >= o.x && y >= o.y && x < o.x + (o.width || 1) && y < o.y + (o.height || 1));
+  if (object && ["object", "enemyOrObject"].includes(activeSkill?.targetKind)) {
+    forecast(object.id); return;
   }
   const enemy = view.battle.enemies.find(
     (u) => u.x === x && u.y === y && u.hp > 0,
@@ -275,6 +295,8 @@ async function forecast(targetId, x = 0, y = 0) {
       view.battle.units.find((u) => u.id === view.selectedId)?.skills[0] ||
       "punch",
   });
+  aiming = false;
+  renderDeck();
   modal = "Forecast";
   renderModal();
 }
@@ -287,11 +309,16 @@ function open(name) {
   renderModal();
 }
 function close() {
+  aiming = false;
+  if (["Targets", "Forecast"].includes(modal)) { skill = ""; manaSpend = 0; }
   if (modal === "Victory" && view?.reward) { command("acknowledgeReward"); }
   held.clear();
   modal = "";
+  renderer.forecastVisible = false;
+  document.body.classList.remove("forecast-open");
   $("#modal-root").innerHTML = "";
   $("#world").focus();
+  renderDeck();
 }
 function selected() {
   return (
@@ -382,14 +409,16 @@ function renderModal() {
   else if (modal === "Targets") {
     const actor = view.battle.units.find((u) => u.id === view.selectedId);
     const kind = skillState(actor || {}, skill || actor?.skills[0])?.targetKind || "enemy";
+    const groundAllowed = content.skills.find(s => s.id === (skill || actor?.skills[0]))?.allowGroundTarget;
     const targets = kind === "self" ? [actor] : kind === "ally" ? view.battle.units : kind === "object" ? (view.battle.effectObjects || []).filter((o) => !o.destroyed) : kind === "enemyOrObject" ? [...view.battle.enemies, ...(view.battle.effectObjects || []).filter((o) => !o.destroyed)] : kind === "cell" ? [] : view.battle.enemies;
     body = `<p>Select ${kind === "cell" ? "a tile" : kind === "object" ? "an object" : "a target"} to preview the result. The forecast checks range and available resources.</p>` + manaChooser() +
       (kind === "cell" ? `<div class="cell-target-grid" style="--columns:${view.battle.width}">${Array.from({length:view.battle.width * view.battle.height}, (_,i) => {const x=i % view.battle.width,y=Math.floor(i / view.battle.width); return `<button data-target-cell="${x},${y}" aria-label="Forecast tile ${x+1}, ${y+1}" title="Tile ${x+1}, ${y+1}">${x+1},${y+1}</button>`;}).join("")}</div>` : targets.filter((e) => e && e.hp > 0).map((e) => `<div class="row"><div>${esc(e.name || e.label || e.id)}<p>HP ${e.hp}${e.maxHp ? `/${e.maxHp}` : ""}${e.armor !== undefined ? ` · Armor ${e.armor}` : ""}</p>${statuses(e)}</div><button data-target="${esc(e.id)}">Forecast</button></div>`).join("") || "<p>No targets available.</p>");
+    if (groundAllowed && kind !== "cell") body += `<button data-aim-map>Aim on map</button><details class="ground-targets"><summary>Choose tile by coordinates</summary><p class="map-key">Choose the blast center. The forecast checks range and shows every affected target.</p><div class="cell-target-grid" style="--columns:${view.battle.width}">${Array.from({length:view.battle.width * view.battle.height}, (_,i) => { const x=i % view.battle.width,y=Math.floor(i / view.battle.width); return `<button data-target-cell="${x},${y}" aria-label="Forecast tile ${x+1}, ${y+1}">${x+1},${y+1}</button>`; }).join("")}</div></details>`;
   }
   else if (modal === "Forecast") {
     const f = view.forecast;
     body = f
-      ? `<div class="forecast"><div>Damage<strong>${f.damage}</strong></div><div>${esc(f.resource || "Mana")} cost<strong>${f.cost}</strong></div></div><p data-forecast-ranks>Trained rank ${f.trainedRank} · Effective rank ${f.effectiveRank} · Range ${f.range}</p><p class="${f.valid ? "" : "cost-warning"}" data-forecast-reason>${esc(f.reason || (!f.valid ? view.message : f.reaction) || "")}</p>${f.events?.length ? `<ul class="effect-list" aria-label="Forecast effects">${effectSummary(f.events)}</ul>` : ""}<div class="actions"><button id="confirm-action" ${f.valid ? "" : "disabled"}>Confirm action</button><button data-open="Targets">Choose target</button></div>`
+      ? `<div class="forecast-brief"><strong>${esc(content.skills.find(s => s.id === f.skillId)?.name || f.skillId)}</strong><span>${f.cost} ${esc(f.resource || "Mana")}${f.affectedCells?.length > 1 ? "" : ` · ${f.damage} damage`}</span></div>${f.friendlyFire ? `<p class="friendly-fire-warning" role="alert" data-friendly-fire>⚠ FRIENDLY FIRE: party members will be hit.</p>` : ""}${!f.valid ? `<p class="cost-warning" data-forecast-reason>${esc(f.reason || view.message)}</p>` : ""}<div class="forecast-scroll">${forecastDamage(f.events)}<details class="forecast-details"><summary>Skill and effect details</summary><p>${esc(content.skills.find(s => s.id === f.skillId)?.description || "")}</p><p data-forecast-ranks>Trained rank ${f.trainedRank} · Effective rank ${f.effectiveRank} · Range ${f.range}</p><p data-forecast-detail-reason>${esc(f.reason || f.reaction || "")}</p><ul class="effect-list" aria-label="Forecast effects">${effectSummary(f.events)}</ul></details></div><div class="actions forecast-actions"><button id="confirm-action" ${f.valid ? "" : "disabled"}>${f.friendlyFire ? "Confirm friendly fire" : "Confirm action"}</button><button data-open="Targets">Choose target</button><button id="close-modal" data-cancel-forecast>Cancel</button></div>`
       : "<p>Select a skill and target.</p>";
   } else if (modal === "defeat")
     body =
@@ -397,9 +426,17 @@ function renderModal() {
   else if (modal === "complete")
     body =
       '<p>Carl and Donut have reached the staircase. Floor one is cleared.</p><button data-open="Journal">Read your journal</button>';
+  renderer.forecastVisible = modal === "Forecast";
+  document.body.classList.toggle("forecast-open", modal === "Forecast");
   $("#modal-root").innerHTML =
-    `<div class="modal-backdrop"><section class="window modal" role="dialog" aria-modal="true" aria-label="${esc(modal)}"><div class="modal-head"><h1>${esc(modal === "defeat" ? "Party defeated" : modal === "complete" ? "Floor cleared" : modal === "Victory" ? (view.reward?.sourceKind === "cache" ? "Cache found" : "Victory") : modal)}</h1><button id="close-modal" aria-label="Close menu">✕</button></div><div class="modal-content">${body}</div></section></div>`;
+    `<div class="modal-backdrop ${modal === "Forecast" ? "forecast-backdrop" : ""}"><section class="window modal" role="dialog" aria-modal="true" aria-label="${esc(modal)}">${modal === "Forecast" ? "" : `<div class="modal-head"><h1>${esc(modal === "defeat" ? "Party defeated" : modal === "complete" ? "Floor cleared" : modal === "Victory" ? (view.reward?.sourceKind === "cache" ? "Cache found" : "Victory") : modal)}</h1><button id="close-modal" aria-label="Close menu">✕</button></div>`}<div class="modal-content">${body}</div></section></div>`;
   $("#close-modal").onclick = close;
+  if ($("[data-cancel-forecast]")) $("[data-cancel-forecast]").onclick = close;
+  if ($("[data-aim-map]")) $("[data-aim-map]").onclick = () => {
+    const chosenSkill = skill, chosenMana = manaSpend;
+    close(); skill = chosenSkill; manaSpend = chosenMana; aiming = true; renderDeck();
+    notify("Aim: select a map tile. Use Cancel aim / Move to return to movement.");
+  };
   $("#modal-root")
     .querySelectorAll("[data-open]")
     .forEach((b) => (b.onclick = () => open(b.dataset.open)));
@@ -510,7 +547,7 @@ let lastMove = 0;
 window.addEventListener("keydown", (e) => {
   const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
   if (k === "Escape") {
-    if (!e.repeat) { e.preventDefault(); modal ? close() : open("Menu"); }
+    if (!e.repeat) { e.preventDefault(); aiming ? (aiming = false, skill = "", manaSpend = 0, renderDeck(), notify("Aim canceled. Select an empty tile to move.")) : modal ? close() : open("Menu"); }
     return;
   }
   if (e.target.closest?.("select, input, textarea, button, [contenteditable]")) return;

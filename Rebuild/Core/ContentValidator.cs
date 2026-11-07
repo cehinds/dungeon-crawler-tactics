@@ -89,6 +89,17 @@ public static class ContentValidator
                         Fail(path + ".rankModifiers", "missing skill or invalid bonus " + modifier.Key);
             if (d is Skill effectSkill)
             {
+                if (effectSkill.targetKind is not ("enemy" or "ally" or "self" or "object" or "cell" or "enemyOrObject")) Fail(path + ".targetKind", "unknown target kind");
+                if (effectSkill.effectRadius is < 0 or > 32) Fail(path + ".effectRadius", "expected 0..32");
+                if (effectSkill.allowGroundTarget && effectSkill.targetKind is not ("enemyOrObject" or "cell")) Fail(path + ".allowGroundTarget", "ground aim requires enemyOrObject or cell targeting");
+                if (effectSkill.damageBasis is not ("power" or "unarmed")) Fail(path + ".damageBasis", "expected power or unarmed");
+                if (effectSkill.damageBasis == "unarmed")
+                {
+                    var baseline = catalog.Find("skill", effectSkill.baseSkillId) as Skill;
+                    if (baseline == null || baseline.id == effectSkill.id || baseline.damageBasis != "power" || baseline.element != "physical")
+                        Fail(path + ".baseSkillId", "unarmed damage requires a distinct physical power-based skill");
+                }
+                else if (effectSkill.baseSkillId != "") Fail(path + ".baseSkillId", "base skill is only supported for unarmed damage");
                 if (effectSkill.effectOperations == null) Fail(path + ".effectOperations", "null operations");
                 foreach (var op in effectSkill.effectOperations) EffectResolver.ValidateOperation(op, path + ".effectOperations");
             }

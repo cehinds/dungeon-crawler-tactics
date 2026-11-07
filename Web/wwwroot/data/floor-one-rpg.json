@@ -181,40 +181,41 @@
       "name": "Powerful Strike",
       "ownerId": "crawler.carl",
       "cost": 1,
-      "power": 11,
+      "power": 0,
       "range": 1,
       "element": "physical",
-      "description": "A stronger unarmed strike for a nearby target.",
+      "description": "Multiply current Punch-based unarmed damage against a nearby target.",
       "loreStatus": "named ability; combat effect and value adapted",
       "sourceIds": [
-        "powerful-strike-secondary"
+        "powerful-strike-secondary",
+        "adaptation-design"
       ],
-      "sourceNote": "Existing source ID: ability.carl_powerful_strike. No complete canonical rank table is established.",
+      "sourceNote": "Existing source ID: ability.carl_powerful_strike. Secondary evidence describes multiplying unarmed damage and a rank-3 appearance. Multipliers 1.5/1.75/2 at ranks 3/4/5 are tactical tuning, not canonical rank values.",
       "startingRank": 3,
       "ranks": [
         {
           "rank": 3,
           "practiceRequired": 0,
-          "power": 11,
+          "power": 0,
           "cost": 1,
           "range": 1,
-          "powerMultiplier": 1
+          "powerMultiplier": 1.5
         },
         {
           "rank": 4,
           "practiceRequired": 6,
-          "power": 12,
+          "power": 0,
           "cost": 1,
           "range": 1,
-          "powerMultiplier": 1
+          "powerMultiplier": 1.75
         },
         {
           "rank": 5,
           "practiceRequired": 16,
-          "power": 14,
+          "power": 0,
           "cost": 1,
           "range": 1,
-          "powerMultiplier": 1
+          "powerMultiplier": 2
         }
       ],
       "tags": [
@@ -227,6 +228,11 @@
           "sourceId": "powerful-strike-secondary",
           "locator": "secondary ability summary; exact rank table unknown",
           "confidence": "medium"
+        },
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored unarmed multiplier tuning; exact canonical factors unknown",
+          "confidence": "high"
         }
       ],
       "confidence": "medium",
@@ -238,7 +244,9 @@
         "requiredEvents": []
       },
       "permissionMaxRank": 5,
-      "rankCapacity": 20
+      "rankCapacity": 20,
+      "damageBasis": "unarmed",
+      "baseSkillId": "punch"
     },
     {
       "id": "bomb",
@@ -248,12 +256,12 @@
       "power": 12,
       "range": 3,
       "element": "fire",
-      "description": "Throw an explosive at a nearby target.",
+      "description": "Throw an explosive at a cell; its one-cell-radius blast can hit allies, enemies and destructible objects.",
       "loreStatus": "adaptation",
       "sourceIds": [
-        "sample1"
+        "adaptation-design"
       ],
-      "sourceNote": "Based on the existing ability.carl_bomb concept; exact Floor 1 tactical implementation is authored for this game.",
+      "sourceNote": "Based on the retained ability.carl_bomb concept. Radius 1, range 3, rank damage, friendly fire and the 2-mana resource cost are tactical adaptations, not publisher-sample evidence. No charges or crafting are implemented.",
       "startingRank": 1,
       "ranks": [
         {
@@ -304,8 +312,8 @@
       ],
       "sourceRefs": [
         {
-          "sourceId": "sample1",
-          "locator": "publisher sample; opening threshold / character presentation",
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; blast radius, damage, range and resource cost",
           "confidence": "high"
         }
       ],
@@ -321,7 +329,8 @@
       "rankCapacity": 20,
       "effectTag": "explosion",
       "effectRadius": 1,
-      "targetKind": "enemyOrObject"
+      "targetKind": "enemyOrObject",
+      "allowGroundTarget": true
     },
     {
       "id": "magic-missile",

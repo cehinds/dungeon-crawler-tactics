@@ -1115,6 +1115,20 @@ export class Renderer {
       }
       for (const entry of sceneryQueue) drawScenery(entry);
       this.drawEffects(t, ox, oy, tile);
+      // Core supplies every affected tile, including environmental chain reactions.
+      // Draw last so tall sprites and scenery cannot hide the forecast footprint.
+      if (battle && this.forecastVisible && v.forecast?.affectedCells?.length) {
+        c.save();
+        c.strokeStyle = v.forecast.friendlyFire ? "#ff7169" : "#ffd47c";
+        c.fillStyle = v.forecast.friendlyFire ? "#ff534326" : "#ffd47c20";
+        c.lineWidth = Math.max(2, tile * .055);
+        for (const point of v.forecast.affectedCells) {
+          const x = ox + point.x * tile, y = oy + point.y * tile;
+          c.fillRect(x + 2, y + 2, tile - 4, tile - 4);
+          c.strokeRect(x + 3, y + 3, tile - 6, tile - 6);
+        }
+        c.restore();
+      }
 
     }
     requestAnimationFrame((t) => this.frame(t));

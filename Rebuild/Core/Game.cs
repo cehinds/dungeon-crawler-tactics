@@ -131,7 +131,10 @@ public sealed class Game
         }
         if (s.battle != null && c.type != "forecast") s.battle.effectEvents = [];
         var pending = s.forecast;
-        if (c.type == "confirm" && pending != null)
+        if (c.type == "confirm" && pending != null
+            && (c.actorId == "" || c.actorId == pending.actorId)
+            && (c.skillId == "" || c.skillId == pending.skillId)
+            && (c.targetId == "" || c.targetId == pending.targetId))
         {
             if (c.actorId == "")
                 c.actorId = pending.actorId;
@@ -389,14 +392,27 @@ public sealed class Game
         var t = k.targetKind == "self" ? u : targetUnits?.FirstOrDefault(e => e.id == c.targetId);
         var obj = k.targetKind is "object" or "enemyOrObject" ? s.battle?.effectObjects.FirstOrDefault(o => o.id == c.targetId && !o.destroyed) : null;
         if (obj != null) t = new Unit { id = obj.id, name = obj.id, hp = obj.hp, x = obj.x, y = obj.y, element = "", tags = obj.tags };
-        if (k.targetKind == "cell" && s.battle != null && c.x >= 0 && c.y >= 0 && c.x < s.battle.width && c.y < s.battle.height) t = new Unit { id = "", hp = 1, x = c.x, y = c.y, element = "" };
+        if ((k.targetKind == "cell" || k.allowGroundTarget && c.targetId == "") && s.battle != null && c.x >= 0 && c.y >= 0 && c.x < s.battle.width && c.y < s.battle.height) t = new Unit { id = "", hp = 1, x = c.x, y = c.y, element = "" };
         var row = progression.Row(k, u == null ? k.startingRank : progression.EffectiveRank(u, k));
         int spend = c.manaSpend == 0 ? row.cost : c.manaSpend;
         bool validSpend = spend == row.cost || row.manaOptions.Contains(spend);
-        bool valid = validSpend && s.mode == "battle" && u != null && u.hp > 0 && !u.acted && !u.ended && t != null && t.hp > 0 && u.skills.Contains(k.id) && k.availability.Allows(s.floor, s.unlockedEvents) && u.mp >= spend && Distance(u.x, u.y, t.x, t.y) <= row.range;
+        bool unarmed = k.damageBasis != "unarmed" || (content.items.FirstOrDefault(i => i.id == u?.equipment)?.kind != "weapon" && u != null && u.skills.Contains(k.baseSkillId));
+        bool valid = unarmed && validSpend && s.mode == "battle" && u != null && u.hp > 0 && !u.acted && !u.ended && t != null && t.hp > 0 && u.skills.Contains(k.id) && k.availability.Allows(s.floor, s.unlockedEvents) && u.mp >= spend && Distance(u.x, u.y, t.x, t.y) <= row.range;
         var bonus = content.effectRules.damageBonuses.FirstOrDefault(rule => rule.incomingTag == k.element && t != null && (rule.targetTag == t.element || t.tags.Contains(rule.targetTag)));
-        int reactionBonus = bonus?.amount ?? 0;
         string reaction = bonus?.reaction ?? "";
+        bool offensive = OffensiveSkill(k);
+        int baseDamage = 0;
+        if (valid && offensive)
+        {
+            int basis = u.power;
+            if (k.damageBasis == "unarmed")
+            {
+                var baseline = Skill(k.baseSkillId);
+                var baselineRow = progression.Row(baseline, progression.EffectiveRank(u, baseline));
+                basis = (int)Math.Round(u.power * baselineRow.powerMultiplier, MidpointRounding.AwayFromZero) + baselineRow.power;
+            }
+            baseDamage = (int)Math.Round(basis * row.powerMultiplier, MidpointRounding.AwayFromZero) + row.power + (spend - row.cost) * row.manaPowerPerPoint;
+        }
         var forecast = new Forecast
         {
             actorId = u?.id ?? "",
@@ -411,20 +427,24 @@ public sealed class Game
             effectiveRank = u == null ? k.startingRank : progression.EffectiveRank(u, k),
             valid = valid,
             reaction = reaction,
-            damage = valid && k.targetKind is "enemy" or "object" or "cell" or "enemyOrObject" ? Math.Max(1, (int)Math.Round(u.power * row.powerMultiplier, MidpointRounding.AwayFromZero) + row.power + (spend - row.cost) * row.manaPowerPerPoint - t.armor + reactionBonus) : 0
+            baseDamage = baseDamage,
+            damage = valid && offensive ? (t.id == "" ? baseDamage : EffectResolver.SkillDamage(baseDamage, t, k.element, content.effectRules)) : 0
         };
         if (valid)
         {
-            var resolved = EffectResolver.Resolve(s.battle, AttackRequest(u, t, k, forecast.damage, spend), content.effectRules);
+            var resolved = EffectResolver.Resolve(s.battle, AttackRequest(u, t, k, forecast.baseDamage, spend), content.effectRules);
             forecast.valid = resolved.valid;
             forecast.events = resolved.events;
+            forecast.friendlyFire = resolved.events.Any(e => e.kind == "damage" && e.amount > 0 && s.battle.units.Any(unit => unit.id == e.targetId));
+            forecast.affectedCells = resolved.affectedCells;
         }
         return forecast;
     }
+    static bool OffensiveSkill(Skill skill) => skill.targetKind is "enemy" or "object" or "cell" or "enemyOrObject";
     EffectRequest AttackRequest(Unit actor, Unit target, Skill skill, int damage, int cost) => new()
     {
         sourceId = actor.id, targetId = target.id, x = target.x, y = target.y,
-        operations = new[] { new EffectOperation { kind = "resource", targetId = actor.id, amount = -cost }, new EffectOperation { kind = "damage", amount = damage, tag = skill.effectTag == "" ? skill.element : skill.effectTag, area = skill.effectRadius > 0, radius = skill.effectRadius } }.Concat(skill.effectOperations).ToList()
+        operations = new[] { new EffectOperation { kind = "resource", targetId = actor.id, amount = -cost }, new EffectOperation { kind = "damage", amount = damage, tag = skill.effectTag == "" ? skill.element : skill.effectTag, area = skill.effectRadius > 0, radius = skill.effectRadius, resolveDefense = OffensiveSkill(skill), damageElement = skill.element } }.Concat(skill.effectOperations).ToList()
     };
     void ApplyEffects(EffectRequest request)
     {
@@ -489,10 +509,10 @@ public sealed class Game
         Require(f.valid, "Choose a valid skill and target first.");
         var u = Actor(f.actorId);
         var t = new Unit { id = f.targetId, x = f.x, y = f.y };
-        ApplyEffects(AttackRequest(u, t, Skill(f.skillId), f.damage, f.cost));
+        ApplyEffects(AttackRequest(u, t, Skill(f.skillId), f.baseDamage, f.cost));
         u.acted = true;
         progression.Practice(Actor(f.actorId), Skill(f.skillId));
-        s.message = $"{u.name} deals {f.damage} damage. {f.reaction}";
+        s.message = $"{u.name} used {Skill(f.skillId).name}. {f.reaction}".Trim();
         if (s.party.All(unit => unit.hp <= 0))
         {
             s.mode = "defeat";

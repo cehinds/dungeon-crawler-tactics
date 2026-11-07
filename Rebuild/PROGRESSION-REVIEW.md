@@ -20,7 +20,7 @@ The authored encounter rewards preserve early pacing: false-guild 100 XP / 20 go
 
 Version-1 saves rebase their XP onto the new cumulative curve while preserving crawler level and within-level progress; prior stats are preserved. There is no version-2 legacy-XP bypass. A legacy Powerful Strike rank below 3 is raised to 3 with a migration message. Legacy ranks above 5 remain recorded, but their available authored effects are capped at rank 5; this does not imply complete rank-20 effects.
 
-Powerful Strike currently uses authored rank rows with `powerMultiplier: 1`, and its runtime attack remains fixed tactical damage. The ability name and source description do not mean the canonical unarmed-damage-multiplier behavior is implemented. Bomb remains a mana-cost, single-target tactical action. Those behaviors remain adaptations and are not represented as completed canonical identity.
+Powerful Strike now derives its unarmed basis from Carl’s current Punch rank effect, then applies adapted rank-3/4/5 multipliers of 1.5/1.75/2 before target defenses. Strike root and rank power are zero; costs, starting rank, practice and Floor One permission remain unchanged. The multiplier identity follows secondary evidence; exact factors remain tactical tuning. Bomb already authored `effectRadius: 1`; the earlier single-target description was stale. Its radius-1 blast can hit allies, enemies and destructibles, now with explicit ground targeting alongside direct enemy/object IDs. Its 2-mana cost remains an adapted resource cost; charges and crafting remain outside this pass. Combat followthrough verification is tracked separately in `COMBAT-FOLLOWTHROUGH-CHECKLIST.md`.
 
 ## Review checklist
 
@@ -32,12 +32,14 @@ Powerful Strike currently uses authored rank rows with `powerMultiplier: 1`, and
 - [x] Archived 95-skill claims are not presented as current implementation.
 - [x] Remaining campaign encounters needed for levels 1–20 are identified.
 - [x] Version-1 XP rebasing and legacy rank handling are documented.
-- [x] Current Powerful Strike and Bomb runtime limitations are stated.
+- [x] Current Powerful Strike multiplier tuning and Bomb area/resource scope are stated.
 - [ ] Build enough additional encounters and quest content to support a full level-1-to-20 campaign.
-- [ ] Next combat milestone: implement the described unarmed damage multiplier identity for Powerful Strike.
-- [ ] Next combat milestone: expand Bomb beyond its current mana-cost, single-target action.
+- [x] Combat followthrough implements the described unarmed multiplier identity with explicitly adapted factors.
+- [x] Correct the stale Bomb single-target description and expose ground targeting for its existing area blast.
 
-## Final verification
+## Prior progression milestone verification
+
+These results belong to the earlier progression milestone; they do not verify the combat followthrough changes.
 
 - [x] Core validation and progression/save migration tests passed, including all 20 XP rows, practiced ranks, rank-5 mana choices, bare-confirm behavior, migration, and rejected-save rollback.
 - [x] Browser verification passed: natural first-victory progression reached level 2 and Punch rank 2 after three successful practices; canceled/invalid actions did not award practice. A migrated v1 fixture at Magic Missile rank 5 completed load, movement, enemy turns, and casts with 3- and 6-mana forecasts. Required floor-one browser controls, forecast, enemy turns, victory, save/load, responsive tabs, Node/inspector checks, and zero browser errors passed.

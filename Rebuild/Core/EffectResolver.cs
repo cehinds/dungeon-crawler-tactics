@@ -52,7 +52,7 @@ public static class EffectResolver
         { if (!valid) throw new InvalidOperationException(path + field + ": " + message); }
         Require(operation != null, "", "missing operation.");
         Require(operation.kind is "damage" or "heal" or "status" or "removeStatus" or "move" or "displace" or "resource" or "object" or "tick", ".kind", "unknown operation kind.");
-        Require(operation.targetId != null && operation.tag != null && operation.statusId != null, "", "IDs cannot be null.");
+        Require(operation.targetId != null && operation.tag != null && operation.statusId != null && operation.damageElement != null, "", "IDs cannot be null.");
         Require(operation.amount is >= -10000 and <= 10000 && (operation.kind is "resource" || operation.amount >= 0), ".amount", "amount outside supported bounds.");
         Require(operation.radius is >= 0 and <= 32, ".radius", "expected 0..32.");
         Require(operation.x is >= -128 and <= 128 && operation.y is >= -128 and <= 128 && operation.dx is >= -128 and <= 128 && operation.dy is >= -128 and <= 128, "", "coordinates/displacement outside -128..128.");
@@ -60,6 +60,13 @@ public static class EffectResolver
         if (operation.kind == "status") Require(!string.IsNullOrWhiteSpace(operation.statusId) && operation.duration != 0 && operation.stacking is "refresh" or "add" or "replace", ".statusId", "status requires ID, nonzero duration, and refresh/add/replace stacking.");
         if (operation.kind == "removeStatus") Require(!string.IsNullOrWhiteSpace(operation.statusId), ".statusId", "missing status ID.");
         if (operation.kind == "resource") Require(operation.resource == "mp", ".resource", "only mp is supported.");
+    }
+    // Initial skill impacts resolve each occupant's defense; environmental effects keep fixed amounts.
+    public static int SkillDamage(int amount, Unit target, string element, EffectRules rules)
+    {
+        int bonus = rules.damageBonuses.FirstOrDefault(rule => rule.incomingTag == element
+            && (rule.targetTag == target.element || target.tags.Contains(rule.targetTag)))?.amount ?? 0;
+        return Math.Max(1, amount - target.armor + bonus);
     }
     public static EffectResolution Resolve(Battle source, EffectRequest request, EffectRules rules = null)
     {
@@ -80,9 +87,10 @@ public static class EffectResolver
         foreach (var operation in request.operations) queue.Enqueue((operation, request.sourceId, request.targetId, request.x, request.y));
         var reactions = new HashSet<string>();
         int steps = 0;
+        var affectedCells = new HashSet<(int x, int y)>();
         IEnumerable<Unit> Units() => state.units.Concat(state.enemies);
-        void Emit(string kind, string sourceId, string targetId, int amount, int x, int y, string tag = "") =>
-            result.events.Add(new() { kind = kind, sourceId = sourceId, targetId = targetId, amount = amount, x = x, y = y, tag = tag });
+        void Emit(string kind, string sourceId, string targetId, int amount, int x, int y, string tag = "", int radius = 0) =>
+            result.events.Add(new() { kind = kind, sourceId = sourceId, targetId = targetId, amount = amount, x = x, y = y, tag = tag, radius = radius });
         void Remove(Unit unit, string id, string sourceId)
         {
             if (unit.statuses.RemoveAll(status => status.id == id || status.tags.Contains(id)) > 0)
@@ -116,7 +124,7 @@ public static class EffectResolver
                 foreach (var operation in rule.operations)
                 {
                     if (operation.area && operation.tag == "explosion")
-                        Emit("explosion", obj.id, obj.id, operation.amount, obj.x, obj.y, operation.tag);
+                        Emit("explosion", obj.id, obj.id, operation.amount, obj.x, obj.y, operation.tag, operation.radius);
                     queue.Enqueue((operation, obj.id, obj.id, obj.x, obj.y));
                 }
             }
@@ -129,6 +137,14 @@ public static class EffectResolver
         {
             var entry = queue.Dequeue();
             var op = entry.operation;
+            if (op.area)
+            {
+                for (int y = Math.Max(0, entry.y - op.radius); y <= Math.Min(state.height - 1, entry.y + op.radius); y++)
+                    for (int x = Math.Max(0, entry.x - op.radius); x <= Math.Min(state.width - 1, entry.x + op.radius); x++)
+                        if (Math.Abs(x - entry.x) + Math.Abs(y - entry.y) <= op.radius) affectedCells.Add((x, y));
+            }
+            else if (op.kind is "damage" or "object" && entry.x >= 0 && entry.y >= 0 && entry.x < state.width && entry.y < state.height)
+                affectedCells.Add((entry.x, entry.y));
             string targetId = string.IsNullOrEmpty(op.targetId) ? entry.target : op.targetId;
             var targets = Units().Where(u => op.area ? Math.Abs(u.x - entry.x) + Math.Abs(u.y - entry.y) <= Math.Max(0, op.radius) : u.id == targetId).OrderBy(u => u.id, StringComparer.Ordinal).ToArray();
             if (op.kind == "tick") targets = Units().OrderBy(u => u.id, StringComparer.Ordinal).ToArray();
@@ -151,7 +167,8 @@ public static class EffectResolver
                 }
                 if (op.kind == "damage")
                 {
-                    int damage = Math.Min(unit.hp, Math.Max(0, op.amount)); unit.hp -= damage;
+                    int amount = op.resolveDefense ? SkillDamage(op.amount, unit, op.damageElement, rules) : Math.Max(0, op.amount);
+                    int damage = Math.Min(Math.Max(0, unit.hp), amount); unit.hp -= damage;
                     Emit("damage", entry.source, unit.id, damage, unit.x, unit.y, op.tag);
                 }
                 else if (op.kind == "heal") { int heal = Math.Min(unit.maxHp - unit.hp, Math.Max(0, op.amount)); unit.hp += heal; Emit("heal", entry.source, unit.id, heal, unit.x, unit.y); }
@@ -212,7 +229,8 @@ public static class EffectResolver
             {
                 if (op.kind is not ("damage" or "object")) continue;
                 if (rules.reactions.Count > 0 && !obj.tags.Contains("destructible")) continue;
-                int objectDamage = Math.Min(obj.hp, Math.Max(0, op.amount));
+                int amount = op.resolveDefense ? SkillDamage(op.amount, new Unit { element = "", tags = obj.tags }, op.damageElement, rules) : Math.Max(0, op.amount);
+                int objectDamage = Math.Min(obj.hp, amount);
                 obj.hp -= objectDamage;
                 Emit("objectDamaged", entry.source, obj.id, objectDamage, obj.x, obj.y, op.tag);
                 ObjectReactions(obj, "effect", op.tag, entry.source);
@@ -227,7 +245,7 @@ public static class EffectResolver
                 ObjectReactions(obj, "destroyed", op.tag, entry.source);
                 if (rules.reactions.Count == 0 && obj.tags.Contains(rules.explosiveTag) && reactions.Add("explode:" + obj.id))
                 {
-                    Emit("explosion", entry.source, obj.id, rules.explosionDamage, obj.x, obj.y, "explosion");
+                    Emit("explosion", entry.source, obj.id, rules.explosionDamage, obj.x, obj.y, "explosion", rules.explosionRadius);
                     queue.Enqueue((new() { kind = "damage", area = true, radius = Math.Clamp(rules.explosionRadius, 0, 32), amount = Math.Max(0, rules.explosionDamage), tag = "explosion" }, obj.id, "", obj.x, obj.y));
                 }
             }
@@ -239,6 +257,7 @@ public static class EffectResolver
             state.hazards.RemoveAll(hazard => hazard.duration == 0);
         }
         state.effectEvents = result.events;
+        result.affectedCells = affectedCells.OrderBy(p => p.y).ThenBy(p => p.x).Select(p => new Point { x = p.x, y = p.y }).ToArray();
         result.valid = true;
         return result;
     }
