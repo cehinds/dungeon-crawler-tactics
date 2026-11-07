@@ -6,6 +6,8 @@ This rebuild covers the opening stretch of Book 1: Carl and Princess Donut enter
 
 Carl is a human man, clean-shaven, and barefoot at the start. Princess Donut is a cat. They are the only deployable Floor 1 party members. Mordecai is a guild guide and NPC, never a party member. Katia and Mongo are not members of this Floor 1 party. Crawler class selection happens on Floor 3; Floor 1 progression must not grant those classes early.
 
+The authored location set contains twelve entries, but not all are visited: the reported rest stops remain mentioned-only, while visited rooms, safe rooms, camps, and connector regions retain their distinct evidence status. A reported or rumored place must not become a map destination solely because it has a name. The opening order is the publisher-sample threshold and false Guild setup, the adapted ambush and tutorial interaction, then the compact authored route through optional and required First Floor landmarks. Exact chapter/page locators are recorded only where the retained references establish them; otherwise the locator is `unknown`.
+
 ## Content evidence and limits
 
 The authorized publisher sample and the existing Floor One research catalogue support named people, places, and broad events. `Web/wwwroot/data/book-one-floor-one.json` and `Web/wwwroot/data/lore-catalog.json` are retained in `Rebuild/ReferenceData/` as research references, alongside their source links and confidence notes. The Floor One catalogue explicitly distinguishes visited places, inferred routes, and merely mentioned locations; retain that distinction in all future map work.
@@ -16,6 +18,10 @@ Magic Missile is included in Donut's Floor 1 usable set per the retained source 
 
 Spells spend mana. Any future rank progression should separate trained rank from gear bonuses and effective cast rank. Available evidence supports selective rank anchors for some abilities, not a universal ability progression table or universal rank-20 access. The First Floor content needs only early, playable values; class unlocks belong to Floor 3.
 
+Floor One training is permissioned through rank 5. Rank capacity and mastery permission are separate: rank capacity may be 20, but a skill can be trained beyond rank 5 only when that skill explicitly grants permission. Rank-20 access is not universal. Gear rank modifiers and temporary modifiers are separate from learned practice and are adaptations unless source-approved.
+
+Bomb manufacture may appear as a research-only recipe definition so later work can preserve its provenance. Such a row is inactive and unavailable in the Floor One runtime. Bomb attacks and item behaviors are tactical adaptations and do not imply a supported crafting system.
+
 ## Adaptation rules
 
 - Reuse source-backed identifiers from the archived catalogs when their concept is appropriate; avoid borrowing an unrelated ability's ID for a new mechanic.
@@ -24,7 +30,11 @@ Spells spend mana. Any future rank progression should separate trained rank from
 - Enemy variants may adapt documented goblins, the Murder Dozer, Hoarder/Scatterers, Juicer, and the Ball of Swine. Numerical stats, turn patterns, and the precise composition of a tactical encounter are game design.
 - Use only personal Floor 1 gear supported by the retained source review (Carl’s underpants/backpack and Donut’s tiara). These are depictions, not a canonical loot table. Do not assign them combat bonuses as book facts; any gameplay effect is an adaptation. Keep generic armor, charms, and loot from the prior game in reference archives only, not the Floor 1 runtime inventory.
 - Include only the Floor 1 slice in this file. Do not import later-book rosters, floor lists, or complete class trees into the starting campaign.
+- Bind story milestones to the runtime's stable quest events: clear `false-guild`, interact with `mordecai`, clear `goblin-workshop`, clear `ball-of-swine`, then reach `exit`. Hoarder and Juicer remain optional after the Mordecai briefing.
+- Keep tags, source references, availability, and descriptions on each content definition. Mark mechanics as implemented only when the runtime resolver supports them; intended data rules and future facilities remain authored targets until then.
 
 ## Source trail
 
 The copied references under `Rebuild/ReferenceData/` preserve the prior lore, item, skill, and class catalogs before cleanup. Particularly relevant materials include `lore-catalog.json`, `book-one-floor-one.json`, `combat-content.json`, `game-content.json`, `Ability-Rank-Audit.md`, `Research/classes-skills.json`, and the copied source catalogues in `sources/`. Their source URLs and evidence labels are retained in those files. Consult the publisher sample first, then use chapter-cited secondary databases only for claims explicitly marked secondary.
+
+See `CONTENT-AUTHORING.md` for stable IDs, source locators, adaptation labels, rank permissions, and data-driven tag authoring. `BLOCK-A-CHECKLIST.md` tracks the content foundation separately from completing a campaign through Floors 1–20.

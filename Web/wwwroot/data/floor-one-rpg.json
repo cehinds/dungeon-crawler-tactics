@@ -18,7 +18,36 @@
       "sourceIds": [
         "sample1",
         "powerful-strike-secondary"
-      ]
+      ],
+      "runtimeId": "carl",
+      "deployable": true,
+      "tags": [
+        "human",
+        "crawler",
+        "party-member"
+      ],
+      "description": "Clean-shaven and barefoot",
+      "adaptationStatus": "source-grounded",
+      "confidence": "high",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        },
+        {
+          "sourceId": "powerful-strike-secondary",
+          "locator": "secondary ability summary; exact rank table unknown",
+          "confidence": "medium"
+        }
+      ],
+      "sourceNote": "Opening appearance follows retained Book 1 research; party role is Floor One scope."
     },
     {
       "id": "crawler.donut",
@@ -34,7 +63,36 @@
       "sourceIds": [
         "sample1",
         "magic-missile-secondary"
-      ]
+      ],
+      "runtimeId": "donut",
+      "deployable": true,
+      "tags": [
+        "cat",
+        "crawler",
+        "party-member"
+      ],
+      "description": "A small cat",
+      "adaptationStatus": "source-grounded",
+      "confidence": "high",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        },
+        {
+          "sourceId": "magic-missile-secondary",
+          "locator": "secondary ability summary; exact locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "sourceNote": "Opening appearance follows retained Book 1 research; party role is Floor One scope."
     }
   ],
   "skills": [
@@ -46,7 +104,7 @@
       "power": 6,
       "range": 1,
       "element": "physical",
-      "description": "A close unarmed strike. Barefoot presentation is part of Carl's opening appearance.",
+      "description": "A close-range unarmed strike.",
       "loreStatus": "adaptation",
       "sourceIds": [
         "sample1"
@@ -94,7 +152,29 @@
           "range": 1,
           "powerMultiplier": 1
         }
-      ]
+      ],
+      "tags": [
+        "physical",
+        "skill",
+        "usable-floor-one"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "permissionMaxRank": 5,
+      "rankCapacity": 20
     },
     {
       "id": "powerful-strike",
@@ -104,7 +184,7 @@
       "power": 11,
       "range": 1,
       "element": "physical",
-      "description": "Carl channels a stronger unarmed hit. Fixed tactical damage adapts a described damage-multiplying skill.",
+      "description": "A stronger unarmed strike for a nearby target.",
       "loreStatus": "named ability; combat effect and value adapted",
       "sourceIds": [
         "powerful-strike-secondary"
@@ -136,7 +216,29 @@
           "range": 1,
           "powerMultiplier": 1
         }
-      ]
+      ],
+      "tags": [
+        "physical",
+        "skill",
+        "usable-floor-one"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "powerful-strike-secondary",
+          "locator": "secondary ability summary; exact rank table unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "permissionMaxRank": 5,
+      "rankCapacity": 20
     },
     {
       "id": "bomb",
@@ -146,7 +248,7 @@
       "power": 12,
       "range": 3,
       "element": "fire",
-      "description": "A tactical explosive attack inspired by Carl's improvised explosives; blast radius and damage are game adaptations.",
+      "description": "Throw an explosive at a nearby target.",
       "loreStatus": "adaptation",
       "sourceIds": [
         "sample1"
@@ -194,7 +296,32 @@
           "range": 3,
           "powerMultiplier": 1
         }
-      ]
+      ],
+      "tags": [
+        "fire",
+        "skill",
+        "usable-floor-one"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "permissionMaxRank": 5,
+      "rankCapacity": 20,
+      "effectTag": "explosion",
+      "effectRadius": 1,
+      "targetKind": "enemyOrObject"
     },
     {
       "id": "magic-missile",
@@ -204,7 +331,7 @@
       "power": 8,
       "range": 4,
       "element": "arcane",
-      "description": "Donut's ranged arcane projectile. Spells spend mana; tactical damage is adapted.",
+      "description": "A ranged arcane projectile.",
       "loreStatus": "named ability; tactical values adapted",
       "sourceIds": [
         "magic-missile-secondary"
@@ -259,7 +386,29 @@
           ],
           "manaPowerPerPoint": 1
         }
-      ]
+      ],
+      "tags": [
+        "arcane",
+        "skill",
+        "usable-floor-one"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "magic-missile-secondary",
+          "locator": "secondary ability summary; exact locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "permissionMaxRank": 5,
+      "rankCapacity": 20
     },
     {
       "id": "claw",
@@ -269,9 +418,11 @@
       "power": 5,
       "range": 1,
       "element": "physical",
-      "description": "A basic close attack for a cat. Its inclusion and tactical value are game-authored abstractions.",
+      "description": "A quick close-range claw attack.",
       "loreStatus": "adaptation",
-      "sourceIds": [],
+      "sourceIds": [
+        "adaptation-design"
+      ],
       "sourceNote": "Generic cat action; not asserted as a named novel ability.",
       "startingRank": 1,
       "ranks": [
@@ -315,7 +466,29 @@
           "range": 1,
           "powerMultiplier": 1
         }
-      ]
+      ],
+      "tags": [
+        "physical",
+        "skill",
+        "usable-floor-one"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "permissionMaxRank": 5,
+      "rankCapacity": 20
     }
   ],
   "items": [
@@ -328,11 +501,32 @@
       "heal": 0,
       "mp": 0,
       "ownerId": "crawler.carl",
-      "description": "Personal starting clothing. The item depiction is lore-grounded; it provides no protective bonus.",
+      "description": "Carl's starting clothing.",
       "loreStatus": "personal gear; no gameplay bonus asserted",
       "sourceIds": [
         "sample1"
-      ]
+      ],
+      "tags": [
+        "item",
+        "armor"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high",
+      "adaptationStatus": "source-grounded",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "personal gear; no gameplay bonus asserted Personal starting clothing. The item depiction is lore-grounded; it provides no protective bonus."
     },
     {
       "id": "gear.carl-backpack",
@@ -343,11 +537,32 @@
       "heal": 0,
       "mp": 0,
       "ownerId": "crawler.carl",
-      "description": "Personal carrying gear. It has no combat bonus in this adaptation.",
+      "description": "Carl's personal backpack.",
       "loreStatus": "personal gear; no gameplay bonus asserted",
       "sourceIds": [
         "sample1"
-      ]
+      ],
+      "tags": [
+        "item",
+        "charm"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high",
+      "adaptationStatus": "source-grounded",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "personal gear; no gameplay bonus asserted Personal carrying gear. It has no combat bonus in this adaptation."
     },
     {
       "id": "gear.donut-tiara",
@@ -358,11 +573,32 @@
       "heal": 0,
       "mp": 0,
       "ownerId": "crawler.donut",
-      "description": "A personal accessory. It has no combat bonus in this adaptation.",
+      "description": "Donut's tiara.",
       "loreStatus": "personal gear; no gameplay bonus asserted",
       "sourceIds": [
         "sample1"
-      ]
+      ],
+      "tags": [
+        "item",
+        "charm"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high",
+      "adaptationStatus": "source-grounded",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "personal gear; no gameplay bonus asserted A personal accessory. It has no combat bonus in this adaptation."
     },
     {
       "id": "item.health_tonic",
@@ -372,11 +608,32 @@
       "armor": 0,
       "heal": 14,
       "mp": 0,
-      "description": "Restores health. Amount and availability are adapted from the archived starter catalog.",
+      "description": "Restores a small amount of health.",
       "loreStatus": "adaptation",
       "sourceIds": [
-        "item.health_tonic"
-      ]
+        "adaptation-design"
+      ],
+      "tags": [
+        "item",
+        "consumable"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "adaptation Restores health. Amount and availability are adapted from the archived starter catalog."
     },
     {
       "id": "item.mega_tonic",
@@ -386,11 +643,32 @@
       "armor": 0,
       "heal": 26,
       "mp": 0,
-      "description": "Restores a larger amount of health. Amount and availability are adaptations.",
+      "description": "Restores a large amount of health.",
       "loreStatus": "adaptation",
       "sourceIds": [
-        "item.mega_tonic"
-      ]
+        "adaptation-design"
+      ],
+      "tags": [
+        "item",
+        "consumable"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "adaptation Restores a larger amount of health. Amount and availability are adaptations."
     },
     {
       "id": "item.mana_draught",
@@ -400,9 +678,32 @@
       "armor": 0,
       "heal": 0,
       "mp": 8,
-      "description": "Restores mana. This Floor 1 item and its amount are game-authored.",
+      "description": "Restores mana.",
       "loreStatus": "adaptation",
-      "sourceIds": []
+      "sourceIds": [
+        "adaptation-design"
+      ],
+      "tags": [
+        "item",
+        "consumable"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "adaptation Restores mana. This Floor 1 item and its amount are game-authored."
     },
     {
       "id": "item.water_bomb",
@@ -412,11 +713,33 @@
       "armor": 0,
       "heal": 0,
       "mp": 0,
-      "description": "A small thrown coolant charge. Tactical damage and availability are adaptations. Its damage behavior is not enabled by this combat schema.",
+      "description": "A thrown coolant charge.",
       "loreStatus": "adaptation",
       "sourceIds": [
-        "item.water_bomb"
-      ]
+        "adaptation-design"
+      ],
+      "tags": [
+        "item",
+        "consumable",
+        "water"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "adaptation A small thrown coolant charge. Tactical damage and availability are adaptations. Its damage behavior is not enabled by this combat schema."
     },
     {
       "id": "item.oil_flask",
@@ -426,11 +749,33 @@
       "armor": 0,
       "heal": 0,
       "mp": 0,
-      "description": "A thrown flask adapted from the archived item catalog; tactical effect is simplified. Its damage behavior is not enabled by this combat schema.",
+      "description": "A small flask of oil.",
       "loreStatus": "adaptation",
       "sourceIds": [
-        "item.oil_flask"
-      ]
+        "adaptation-design"
+      ],
+      "tags": [
+        "item",
+        "consumable",
+        "oil"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "adaptation A thrown flask adapted from the archived item catalog; tactical effect is simplified. Its damage behavior is not enabled by this combat schema."
     },
     {
       "id": "item.fire_bomb",
@@ -440,11 +785,34 @@
       "armor": 0,
       "heal": 0,
       "mp": 0,
-      "description": "A compact explosive. Effect and availability are adapted from the archived item catalog. Its damage behavior is not enabled by this combat schema.",
+      "description": "A compact explosive.",
       "loreStatus": "adaptation",
       "sourceIds": [
-        "item.fire_bomb"
-      ]
+        "adaptation-design"
+      ],
+      "tags": [
+        "item",
+        "consumable",
+        "explosive",
+        "fire"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "adaptation A compact explosive. Effect and availability are adapted from the archived item catalog. Its damage behavior is not enabled by this combat schema."
     },
     {
       "id": "item.cleansing_tonic",
@@ -454,11 +822,32 @@
       "armor": 0,
       "heal": 6,
       "mp": 0,
-      "description": "A restorative tonic. Its numeric effect and availability are adaptations.",
+      "description": "A restorative tonic.",
       "loreStatus": "adaptation",
       "sourceIds": [
-        "item.cleansing_tonic"
-      ]
+        "adaptation-design"
+      ],
+      "tags": [
+        "item",
+        "consumable"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "adaptation-design",
+          "locator": "authored game design; source locator unknown",
+          "confidence": "author-created"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "rankModifiers": {},
+      "sourceNote": "adaptation A restorative tonic. Its numeric effect and availability are adaptations."
     }
   ],
   "enemies": [
@@ -472,7 +861,29 @@
       "loreStatus": "book-grounded type; tactical stats adapted",
       "sourceIds": [
         "goblins"
-      ]
+      ],
+      "tags": [
+        "enemy",
+        "physical",
+        "goblin"
+      ],
+      "description": "A goblin attacker.",
+      "sourceRefs": [
+        {
+          "sourceId": "goblins",
+          "locator": "secondary creature/location overview; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceNote": "Identity/status follows the retained source review; all combat numbers are adapted."
     },
     {
       "id": "enemy.goblin-bomber",
@@ -484,7 +895,29 @@
       "loreStatus": "adaptation of goblin explosives/workshop",
       "sourceIds": [
         "goblins"
-      ]
+      ],
+      "tags": [
+        "enemy",
+        "fire",
+        "goblin"
+      ],
+      "description": "A goblin carrying explosives.",
+      "sourceRefs": [
+        {
+          "sourceId": "goblins",
+          "locator": "secondary creature/location overview; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceNote": "Identity/status follows the retained source review; all combat numbers are adapted."
     },
     {
       "id": "enemy.scatterer",
@@ -496,7 +929,28 @@
       "loreStatus": "book-grounded creature; tactical stats adapted",
       "sourceIds": [
         "hoarder"
-      ]
+      ],
+      "tags": [
+        "enemy",
+        "physical"
+      ],
+      "description": "A creature drawn to the Hoarder’s nest.",
+      "sourceRefs": [
+        {
+          "sourceId": "hoarder",
+          "locator": "secondary Hoarder entry; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceNote": "Identity/status follows the retained source review; all combat numbers are adapted."
     },
     {
       "id": "enemy.juicer",
@@ -508,7 +962,28 @@
       "loreStatus": "book-grounded encounter; tactical stats adapted",
       "sourceIds": [
         "juicer"
-      ]
+      ],
+      "tags": [
+        "enemy",
+        "physical"
+      ],
+      "description": "A tough opponent from the gym.",
+      "sourceRefs": [
+        {
+          "sourceId": "juicer",
+          "locator": "secondary Juicer entry; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceNote": "Identity/status follows the retained source review; all combat numbers are adapted."
     },
     {
       "id": "enemy.murder-dozer",
@@ -520,7 +995,28 @@
       "loreStatus": "book-grounded threat; tactical stats adapted",
       "sourceIds": [
         "goblins"
-      ]
+      ],
+      "tags": [
+        "enemy",
+        "physical"
+      ],
+      "description": "A dangerous goblin ambusher.",
+      "sourceRefs": [
+        {
+          "sourceId": "goblins",
+          "locator": "secondary creature/location overview; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceNote": "Identity/status follows the retained source review; all combat numbers are adapted."
     },
     {
       "id": "enemy.hoarder-elite",
@@ -532,7 +1028,28 @@
       "loreStatus": "boss variant adaptation; not an asserted canonical stat block",
       "sourceIds": [
         "hoarder"
-      ]
+      ],
+      "tags": [
+        "enemy",
+        "physical"
+      ],
+      "description": "A powerful Hoarder guard.",
+      "sourceRefs": [
+        {
+          "sourceId": "hoarder",
+          "locator": "secondary Hoarder entry; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "low",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceNote": "Identity/status follows the retained source review; all combat numbers are adapted."
     },
     {
       "id": "enemy.ball-of-swine",
@@ -544,49 +1061,247 @@
       "loreStatus": "book-grounded boss; tactical stats adapted",
       "sourceIds": [
         "swine"
-      ]
+      ],
+      "tags": [
+        "enemy",
+        "physical",
+        "boss"
+      ],
+      "description": "The guardian at the Floor One descent.",
+      "sourceRefs": [
+        {
+          "sourceId": "swine",
+          "locator": "secondary Ball of Swine entry; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "sourceNote": "Identity/status follows the retained source review; all combat numbers are adapted."
     }
   ],
   "dialogue": {
     "false-guild": {
       "speaker": "Goblin sign crew",
       "text": "The painted guild sign promises help. Something about the alley feels staged.",
-      "note": "Original paraphrase; encounter framing follows the false guild setup."
+      "note": "Original paraphrase; encounter framing follows the false guild setup.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "The painted guild sign promises help. Something about the alley feels staged.",
+      "sourceIds": [
+        "sample1"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening interaction",
+          "confidence": "high"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     "mordecai": {
       "speaker": "Mordecai",
       "text": "Welcome to the Tutorial Guild. Take a breath, learn the basics, then choose your route carefully.",
-      "note": "Original short NPC line; Mordecai is a guide, not a deployable party member."
+      "note": "Original short NPC line; Mordecai is a guide, not a deployable party member.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "Welcome to the Tutorial Guild. Take a breath, learn the basics, then choose your route carefully.",
+      "sourceIds": [
+        "sample1"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening interaction",
+          "confidence": "high"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     "hoarder": {
       "speaker": "Hoarder",
       "text": "The nest is crowded with stolen things. Keep your eyes on the Scatterers.",
-      "note": "Original encounter prompt; no novel dialogue copied."
+      "note": "Original encounter prompt; no novel dialogue copied.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "The nest is crowded with stolen things. Keep your eyes on the Scatterers.",
+      "sourceIds": [
+        "hoarder"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "hoarder",
+          "locator": "unknown",
+          "confidence": "medium"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     "tally": {
       "speaker": "Tally",
       "text": "You can rest here and sort out what you found before heading back into the halls.",
-      "note": "Original safe-room interaction."
+      "note": "Original safe-room interaction.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "You can rest here and sort out what you found before heading back into the halls.",
+      "sourceIds": [
+        "tally-direct"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "tally-direct",
+          "locator": "unknown",
+          "confidence": "medium"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     "workshop": {
       "speaker": "Workshop goblin",
       "text": "The machines rattle, the fuses hiss, and the crew has noticed you.",
-      "note": "Original encounter prompt; room layout and combat are adaptations."
+      "note": "Original encounter prompt; room layout and combat are adaptations.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "The machines rattle, the fuses hiss, and the crew has noticed you.",
+      "sourceIds": [
+        "goblins"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "goblins",
+          "locator": "unknown",
+          "confidence": "medium"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     "juicer": {
       "speaker": "Gym announcer",
       "text": "The gym is still open. Step into the ring if you want to settle this the hard way.",
-      "note": "Original prompt; tactical encounter is adapted."
+      "note": "Original prompt; tactical encounter is adapted.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "The gym is still open. Step into the ring if you want to settle this the hard way.",
+      "sourceIds": [
+        "juicer"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "juicer",
+          "locator": "unknown",
+          "confidence": "medium"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     "meadow-lark": {
       "speaker": "Meadow Lark",
       "text": "Stay alert near the stair. The noise below carries farther than you think.",
-      "note": "Original paraphrase; encounter placement is adapted."
+      "note": "Original paraphrase; encounter placement is adapted.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "Stay alert near the stair. The noise below carries farther than you think.",
+      "sourceIds": [
+        "meadow"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "meadow",
+          "locator": "unknown",
+          "confidence": "medium"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     "ball-of-swine": {
       "speaker": "Dungeon announcer",
       "text": "The descent is open. Something enormous is waiting below.",
-      "note": "Original transition line; descent and battle pacing are adaptations."
+      "note": "Original transition line; descent and battle pacing are adaptations.",
+      "tags": [
+        "dialogue",
+        "npc-beat"
+      ],
+      "description": "The descent is open. Something enormous is waiting below.",
+      "sourceIds": [
+        "swine"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "swine",
+          "locator": "unknown",
+          "confidence": "medium"
+        }
+      ],
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     }
   },
   "sources": [
@@ -631,6 +1346,12 @@
       "title": "Ball of Swine — DCC Database",
       "url": "https://www.dccdatabase.com/wiki/ball_of_swine/",
       "kind": "secondary overview"
+    },
+    {
+      "id": "adaptation-design",
+      "title": "Floor One tactical adaptation authored for this game",
+      "url": "",
+      "kind": "game design record; not a novel source"
     }
   ],
   "encounters": [
@@ -643,7 +1364,36 @@
       "loreStatus": "Book 1 opening threat; roster and combat numbers adapted",
       "stageNote": "False Tutorial Guild approach, before the real Tutorial Guild. Dozer is presented as an ambush encounter, not a canonical tactical map.",
       "xpReward": 100,
-      "goldReward": 20
+      "goldReward": 20,
+      "tags": [
+        "encounter",
+        "floor-one"
+      ],
+      "description": "A staged Tutorial Guild leads into an ambush.",
+      "sourceIds": [
+        "sample1",
+        "goblins"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "sample1",
+          "locator": "publisher sample; opening threshold / character presentation",
+          "confidence": "high"
+        },
+        {
+          "sourceId": "goblins",
+          "locator": "secondary creature/location overview; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     {
       "id": "goblin-workshop",
@@ -654,7 +1404,67 @@
       "loreStatus": "Book 1 location; tactical staging adapted",
       "stageNote": "Goblin engineering/explosives workshop; room geometry and combat timeline are invented for play.",
       "xpReward": 160,
-      "goldReward": 30
+      "goldReward": 30,
+      "tags": [
+        "encounter",
+        "floor-one"
+      ],
+      "description": "Goblin engineers defend their workshop.",
+      "sourceIds": [
+        "goblins"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "goblins",
+          "locator": "secondary creature/location overview; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      },
+      "hazards": [
+        {
+          "id": "workshop-oil-spill",
+          "tag": "oil",
+          "x": 11,
+          "y": 5,
+          "duration": -1,
+          "strength": 1
+        },
+        {
+          "id": "workshop-water-runoff",
+          "tag": "water",
+          "x": 10,
+          "y": 5,
+          "duration": -1,
+          "strength": 1
+        }
+      ],
+      "effectObjects": [
+        {
+          "id": "workshop-oil-crate",
+          "propId": "",
+          "x": 12,
+          "y": 5,
+          "width": 1,
+          "height": 1,
+          "hp": 6,
+          "blocksMovement": false,
+          "blocksSight": false,
+          "destroyed": false,
+          "tags": [
+            "destructible",
+            "explosive"
+          ],
+          "assetId": "ab-clean-crate-wood-cross"
+        }
+      ]
     },
     {
       "id": "hoarder",
@@ -665,7 +1475,30 @@
       "loreStatus": "Book 1 location and creatures; tactical staging adapted",
       "stageNote": "Optional Hoarder lair encounter after meeting Mordecai.",
       "xpReward": 220,
-      "goldReward": 15
+      "goldReward": 15,
+      "tags": [
+        "encounter",
+        "floor-one"
+      ],
+      "description": "Scatterers defend the Hoarder’s nest.",
+      "sourceIds": [
+        "hoarder"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "hoarder",
+          "locator": "secondary Hoarder entry; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     {
       "id": "juicer",
@@ -675,7 +1508,30 @@
       "loreStatus": "Book 1 encounter; tactical staging adapted",
       "stageNote": "Optional gym encounter after meeting Mordecai.",
       "xpReward": 280,
-      "goldReward": 20
+      "goldReward": 20,
+      "tags": [
+        "encounter",
+        "floor-one"
+      ],
+      "description": "The gym fight awaits challengers.",
+      "sourceIds": [
+        "juicer"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "juicer",
+          "locator": "secondary Juicer entry; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     },
     {
       "id": "ball-of-swine",
@@ -685,7 +1541,30 @@
       "loreStatus": "Book 1 boss; tactical staging adapted",
       "stageNote": "Boss encounter at the descent to Floor 2. Combat turns and stat block are authored values.",
       "xpReward": 340,
-      "goldReward": 45
+      "goldReward": 45,
+      "tags": [
+        "encounter",
+        "floor-one"
+      ],
+      "description": "Face the guardian at the descent to Floor Two.",
+      "sourceIds": [
+        "swine"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "swine",
+          "locator": "secondary Ball of Swine entry; exact chapter locator unknown",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium",
+      "adaptationStatus": "adapted",
+      "availability": {
+        "minFloor": 1,
+        "maxFloor": 1,
+        "active": true,
+        "requiredEvents": []
+      }
     }
   ],
   "progression": {
@@ -852,5 +1731,104 @@
       }
     ],
     "practicePerUse": 1
+  },
+  "effectRules": {
+    "maximumReactionSteps": 128,
+    "ignitionTags": [
+      "fire",
+      "ignition",
+      "explosion"
+    ],
+    "extinguishTags": [
+      "water",
+      "suppressant"
+    ],
+    "fuelTag": "oil",
+    "burningStatus": "burning",
+    "explosiveTag": "explosive",
+    "burningDuration": 2,
+    "burningStrength": 2,
+    "explosionDamage": 6,
+    "explosionRadius": 1,
+    "reactions": [
+      {
+        "id": "oil-ignition",
+        "priority": 10,
+        "triggerTags": [
+          "fire",
+          "ignition",
+          "explosion"
+        ],
+        "requiredTargetTags": [
+          "oil"
+        ],
+        "removeTags": [
+          "oil"
+        ],
+        "operations": [
+          {
+            "kind": "status",
+            "statusId": "burning",
+            "duration": 2,
+            "strength": 2
+          }
+        ],
+        "excludedTargetTags": [
+          "water",
+          "suppressant"
+        ]
+      },
+      {
+        "id": "water-extinguishes-burning",
+        "priority": 20,
+        "triggerTags": [
+          "water",
+          "suppressant"
+        ],
+        "requiredTargetTags": [
+          "burning"
+        ],
+        "removeTags": [
+          "burning"
+        ],
+        "operations": []
+      },
+      {
+        "id": "explosive-object-chain-reaction",
+        "targetKind": "object",
+        "trigger": "destroyed",
+        "priority": 30,
+        "triggerTags": [],
+        "requiredTargetTags": [
+          "destructible",
+          "explosive"
+        ],
+        "excludedTargetTags": [],
+        "removeTags": [],
+        "operations": [
+          {
+            "kind": "damage",
+            "amount": 6,
+            "radius": 1,
+            "area": true,
+            "tag": "explosion"
+          }
+        ]
+      }
+    ],
+    "damageBonuses": [
+      {
+        "incomingTag": "arcane",
+        "targetTag": "physical",
+        "amount": 2,
+        "reaction": "Arcane impact: +2 damage."
+      },
+      {
+        "incomingTag": "fire",
+        "targetTag": "physical",
+        "amount": 3,
+        "reaction": "Blast shock: +3 damage."
+      }
+    ]
   }
 }

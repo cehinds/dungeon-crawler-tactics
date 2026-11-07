@@ -1,0 +1,6288 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Block A asset registration; dimensions describe exports, procedural entries explicitly identify composition rather than PNG artwork.",
+  "grid": {
+    "projection": "square-top-down",
+    "tileSize": 128,
+    "directions": [
+      "N",
+      "E",
+      "S",
+      "W"
+    ],
+    "edgeRotation": "clockwise"
+  },
+  "renderLayers": [
+    "ground",
+    "ground-detail",
+    "shadow",
+    "object",
+    "actor",
+    "architecture",
+    "effect",
+    "overlay"
+  ],
+  "assets": [
+    {
+      "id": "shipped:book-tiles/pocket-dungeon/starter-dungeon/components/starter-dungeon-cracked-grey-flagstone-floor.png",
+      "kind": "png",
+      "path": "assets/book-tiles/pocket-dungeon/starter-dungeon/components/starter-dungeon-cracked-grey-flagstone-floor.png",
+      "sha256": "b3238f4ed3ec34203a573912bfde9210750cc517ecf07abc18b4fd065cf059a5",
+      "width": 256,
+      "height": 256,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:book-tiles/pocket-dungeon/starter-dungeon/components/starter-dungeon-grey-flagstone-floor.png",
+      "kind": "png",
+      "path": "assets/book-tiles/pocket-dungeon/starter-dungeon/components/starter-dungeon-grey-flagstone-floor.png",
+      "sha256": "dcdac42d9533900c98fe82c7e42db7db4ecfe41220b2292f720f975335cc9cb0",
+      "width": 256,
+      "height": 256,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:book-tiles/pocket-dungeon/starter-dungeon/components/starter-dungeon-worn-grey-flagstone-floor.png",
+      "kind": "png",
+      "path": "assets/book-tiles/pocket-dungeon/starter-dungeon/components/starter-dungeon-worn-grey-flagstone-floor.png",
+      "sha256": "991f7ad36f16a4ca91fa0ef6915769955e93c06dcd3a7e80b03d043d9ea1b5b6",
+      "width": 256,
+      "height": 256,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:boss.png",
+      "kind": "png",
+      "path": "assets/boss.png",
+      "sha256": "3ed7dd05ea6d300f60472b3972bbaf6fd7fdaa24ee7b987daef1f4907a58e1a1",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "actor",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:completed-layers/native/complete-gold-exit.png",
+      "kind": "png",
+      "path": "assets/completed-layers/native/complete-gold-exit.png",
+      "sha256": "7a386c289910d48c4056931ac5e7589e0b3d0b4dd1d6066a4595536951b4ebcd",
+      "width": 915,
+      "height": 943,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:directional/carl-portrait.png",
+      "kind": "png-atlas",
+      "path": "assets/directional/carl-portrait.png",
+      "sha256": "3b25e168fca07fb9fe12319fd3a535f27220eaea492b3d85c962b545754573af",
+      "width": 128,
+      "height": 144,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "overlay",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:directional/carl.png",
+      "kind": "png-atlas",
+      "path": "assets/directional/carl.png",
+      "sha256": "cc86160a13e02014e1e52c666ad67c5b807928ab9021b622ab7273ca577bab21",
+      "width": 512,
+      "height": 432,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "actor",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:directional/donut-portrait.png",
+      "kind": "png-atlas",
+      "path": "assets/directional/donut-portrait.png",
+      "sha256": "da9855e14a3669fe87802056e7f4b5ba7922c6c87b1ab0ae55959a1bfc4ce9f0",
+      "width": 128,
+      "height": 144,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "overlay",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:directional/donut.png",
+      "kind": "png-atlas",
+      "path": "assets/directional/donut.png",
+      "sha256": "89ad08a17ca187bf73b1a66d4bd24209090adf7304563244d999af1978a2808a",
+      "width": 512,
+      "height": 432,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "actor",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:enemy.png",
+      "kind": "png",
+      "path": "assets/enemy.png",
+      "sha256": "8489386dbcfcdf54dfbbc5a56b595878bd3d16a40d567df3d2d87edac2de5859",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "actor",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/bank-straight.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/bank-straight.png",
+      "sha256": "02d2ee7d0c5b40b25c839499aeff9fecde3f01cf5df6081ad748a7d21ad50c66",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/crate.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/crate.png",
+      "sha256": "9d82b29cf8125cbf5ed386fd5eea8846a36475b76b6d17d5805ea265350f47ed",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/floor-dry.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/floor-dry.png",
+      "sha256": "a2db5935e130322a4f405c38b64a627d1fde7db738a14e224f516572d3b0f2d7",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/floor-moss.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/floor-moss.png",
+      "sha256": "a10c264019a2ca80843f7cbf8af5ec21cbd68a3be9cc36dfd5902aaba891b301",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/floor-reflection.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/floor-reflection.png",
+      "sha256": "0315334ec7463585a93be2ee76a8f906d3d3b65898adcb591ed170d07c902409",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/floor-wet.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/floor-wet.png",
+      "sha256": "48bf32565a38757e3a94a9b6e1d30a618008d1c051aa2a386e8095795b002b5d",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/grate.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/grate.png",
+      "sha256": "ab393b79c6a08cc9c244cd7c6d4e5fdcb72442f7239bf7a07777cef91ca8fef8",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/machine-controls.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/machine-controls.png",
+      "sha256": "8a98e603d250db3f207dcbecba9f154714d5263d6eee2c4a4cae25ac9c83cee0",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/moss-hanging.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/moss-hanging.png",
+      "sha256": "e404c895b724b6578efd0e7ad0e7eb10a9e575fe4c6cfcd182eeffdb6b6a1517",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/pipe-elbow.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/pipe-elbow.png",
+      "sha256": "4f4dcbdab3f444f0ad874281903903edfd9e279595b699721593d81fb5a915e3",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/pipe-straight.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/pipe-straight.png",
+      "sha256": "c3a74ab34d3e56d2053354d2c411f3a85fb34250c161d3da4cfde649be4b8ffb",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/pipe-tee.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/pipe-tee.png",
+      "sha256": "9e3c6ae2a8d64a08b16213fc1e7856954365d09c241a7b13262318a3b4a3851f",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/torch.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/torch.png",
+      "sha256": "21664f253b16a7d353a6c6cf73237db6c92ba879dc02b146a36a0e064ac97556",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/wall-low-cap.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/wall-low-cap.png",
+      "sha256": "176e700a0145ff302fd578e2c846e025adb8986eab75aa0074d9f68480cd205c",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/wall-straight.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/wall-straight.png",
+      "sha256": "13d8f33ea80885539d3a3fbd7b21ea35a3eb6f449716cf0459ec60edf2198c0d",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/water-outlet.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/water-outlet.png",
+      "sha256": "0bbbf0cb3ad15d3d9a21503a8662d6664bc86fd376ebe3f2dd2625caa2cee292",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/components/generated/water-surface.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/water-surface.png",
+      "sha256": "36afe1d964418c80e87e934737da64437763c8bb99cad0c0e8758127c686480f",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/floors/floors-branching-crack.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/floors/floors-branching-crack.png",
+      "sha256": "d3e5c42efd8a5bf4312e23d8416e65686ae713731002df4260c81636e75fb0db",
+      "width": 212,
+      "height": 204,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/floors/floors-damp.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/floors/floors-damp.png",
+      "sha256": "9043a51eefc7ab2ff060574af2ebf444cfcf751a9fec39eb77e27fadb05556fe",
+      "width": 215,
+      "height": 206,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/floors/floors-fine.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/floors/floors-fine.png",
+      "sha256": "529690fbf36570aa40ff9e00c146af4f9000f89e985fe96a5aaab1cee38d7691",
+      "width": 212,
+      "height": 204,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/floors/floors-hairline-crack.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/floors/floors-hairline-crack.png",
+      "sha256": "a393cb39dfc1afe4fc841b3d8f6005e0fb3094dd8ac5cefbc6407bce46c49bdb",
+      "width": 214,
+      "height": 204,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/floors/floors-moss-edge.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/floors/floors-moss-edge.png",
+      "sha256": "982ece693b711cbd77c2904d757ef8bf3d1f58d22334df769fa286b3e05831cc",
+      "width": 210,
+      "height": 206,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/floors/floors-shallow-puddle.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/floors/floors-shallow-puddle.png",
+      "sha256": "b4f7b3c434fbafe825894c19e6c9e0b97125e9fec8ac8fcb46ba321a70710cf4",
+      "width": 212,
+      "height": 206,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/floors/floors-worn.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/floors/floors-worn.png",
+      "sha256": "8dbc247af292810e5cb177e0c4decb2120ee90d2a3f310ab751bdf483117b3b3",
+      "width": 215,
+      "height": 204,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/industrial/industrial-pipeH.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/industrial/industrial-pipeH.png",
+      "sha256": "b6060b3be07aa7186aac013545b96c944f145bd1b41613facb68562a8b432223",
+      "width": 235,
+      "height": 104,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/industrial/industrial-pipeV-upper-collar.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/industrial/industrial-pipeV-upper-collar.png",
+      "sha256": "e4f33c815d4cbec3892656d86fe9ca1899090bbed7c8e8af2157347d60836398",
+      "width": 100,
+      "height": 54,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/water/water-dryarch-left-jamb.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/water/water-dryarch-left-jamb.png",
+      "sha256": "1bca65cae31e2ba60847be6458a69c9df654850c0f86efa291433cdfb76db033",
+      "width": 42,
+      "height": 139,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/water/water-dryarch-lintel.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/water/water-dryarch-lintel.png",
+      "sha256": "385720bd301cb40f4adc66288a0611a9608a0c02deafda692c0c87fab5028e29",
+      "width": 216,
+      "height": 55,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/water/water-dryarch-right-jamb.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/water/water-dryarch-right-jamb.png",
+      "sha256": "f416cfb73c788763534895b9104e978e7a55611721145128a933094dc1a51acf",
+      "width": 43,
+      "height": 139,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:map-grid-pass/expansion/native/water/water-ironbridge-iron-deck.png",
+      "kind": "png",
+      "path": "assets/map-grid-pass/expansion/native/water/water-ironbridge-iron-deck.png",
+      "sha256": "748086687648c473d4b8bb5dffa90ada9b0c89a4af2a0c305d789da980b4805e",
+      "width": 119,
+      "height": 98,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:revamp/enemies.png",
+      "kind": "png-atlas",
+      "path": "assets/revamp/enemies.png",
+      "sha256": "90e2123790f0c019bf9a0fc8d8ed4472068823c56f06dddc0cd583ed0f92b6b9",
+      "width": 1448,
+      "height": 1086,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "actor",
+      "status": "preserved-shipped",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-barrel-wood-top.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-barrel-wood-top.png",
+      "sha256": "b1d0ec066efccf50eec0b210ee03d2826e2a955b7ab028c88fb39186bc79b885",
+      "width": 428,
+      "height": 425,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.53,
+        "height": 1.6
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-barrel-wood-top",
+      "visibleBounds": [
+        14,
+        14,
+        414,
+        411
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-bench-wood-plain.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-bench-wood-plain.png",
+      "sha256": "5aa65d88d0bd3ca39e36e90c6f5b11a7e6afa7abca8851ba58c55d1542fec1e1",
+      "width": 657,
+      "height": 243,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.17,
+        "height": 1.25
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-bench-wood-plain",
+      "visibleBounds": [
+        14,
+        14,
+        643,
+        229
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-chair-wood-blue.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-chair-wood-blue.png",
+      "sha256": "76ffef93a63f908c675fc61633951e3c14d73bffcd96f1edb56b195e8fb864ba",
+      "width": 221,
+      "height": 297,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.53,
+        "height": 1.6
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-chair-wood-blue",
+      "visibleBounds": [
+        14,
+        14,
+        207,
+        283
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-cot-metal-blue.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-cot-metal-blue.png",
+      "sha256": "359bc766c8526fc006c6e65dce7e0ce04b615333af19f5898b07877113d663ad",
+      "width": 171,
+      "height": 323,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.34,
+        "height": 3.03
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-cot-metal-blue",
+      "visibleBounds": [
+        14,
+        13,
+        157,
+        309
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-cot-metal-green.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-cot-metal-green.png",
+      "sha256": "0631a7147986f52e5fd22cb4a132f35d00786dd4733f0b1f4c9640d438414148",
+      "width": 167,
+      "height": 306,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.34,
+        "height": 3.03
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-cot-metal-green",
+      "visibleBounds": [
+        14,
+        13,
+        153,
+        292
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-crate-wood-cross.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-crate-wood-cross.png",
+      "sha256": "c8b806f4beda33973e600af8c1d2148f38afa42a803b4d627cc63e973c37cec4",
+      "width": 246,
+      "height": 267,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.34,
+        "height": 1.3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-crate-wood-cross",
+      "visibleBounds": [
+        14,
+        14,
+        232,
+        253
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-door-double-wood-brass.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-door-double-wood-brass.png",
+      "sha256": "f2c1855e785bdd46999e83fcf8a1308bbaa967d0318c16bf86d7f1fdbede6758",
+      "width": 408,
+      "height": 138,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5.0,
+        "height": 1.86
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-door-double-wood-brass",
+      "visibleBounds": [
+        14,
+        14,
+        394,
+        124
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-plant-leafy-terracotta.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-plant-leafy-terracotta.png",
+      "sha256": "d30cd90b539d89ce4d19e464413c86ca08b27c4463b525e42cbc5bc6a057b015",
+      "width": 266,
+      "height": 289,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.42,
+        "height": 1.6
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-plant-leafy-terracotta",
+      "visibleBounds": [
+        14,
+        14,
+        252,
+        275
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-shelf-wood-empty.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-shelf-wood-empty.png",
+      "sha256": "51f91009f65ed691bd87a92d01e1df1ba1beb0b73209b4a240b447e3903bd4b5",
+      "width": 667,
+      "height": 292,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 6.56,
+        "height": 1.17
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-shelf-wood-empty",
+      "visibleBounds": [
+        14,
+        14,
+        653,
+        278
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-table-wood-empty.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-table-wood-empty.png",
+      "sha256": "9ecf4873b6d530ff1b68c8b09fc4e089e194dd181c5252874d6bc8788700e100",
+      "width": 683,
+      "height": 403,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5.14,
+        "height": 2.77
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-table-wood-empty",
+      "visibleBounds": [
+        14,
+        14,
+        669,
+        389
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-wall-straight-navy.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-wall-straight-navy.png",
+      "sha256": "2fb447bca1c00fc9ee935a986aa52e4c43806177f4bf1172cc6b087286c36b98",
+      "width": 360,
+      "height": 170,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.86,
+        "height": 0.75
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-wall-straight-navy",
+      "visibleBounds": [
+        14,
+        14,
+        346,
+        156
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ab-clean-wheelchair-blue.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-wheelchair-blue.png",
+      "sha256": "784dd9fd468646259fd8ee8c15d7ad7d8fed6c3986c7f0a14658454fcc62540b",
+      "width": 246,
+      "height": 312,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.18,
+        "height": 1.86
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-wheelchair-blue",
+      "visibleBounds": [
+        14,
+        14,
+        232,
+        298
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-barbell.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-barbell.png",
+      "sha256": "ec1f6c4e59820f505f8cc516999cf204f42257526acb67cd4556a376b6384ada",
+      "width": 431,
+      "height": 216,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.4609375,
+        "height": 1.203125
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-barbell",
+      "visibleBounds": [
+        11,
+        8,
+        412,
+        158
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-crate.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-crate.png",
+      "sha256": "31c9352ca88436538c8e1af1245170f39edc6d82830da3ece621803c4082f762",
+      "width": 253,
+      "height": 241,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.0390625,
+        "height": 1.09375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-crate",
+      "visibleBounds": [
+        10,
+        9,
+        219,
+        233
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-door-threshold.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-door-threshold.png",
+      "sha256": "c5573d5f57c36b8deb30f522be38617b698c38d275aaef0ab813fa86b28f8217",
+      "width": 421,
+      "height": 117,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 0.4
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-door-threshold",
+      "visibleBounds": [
+        12,
+        35,
+        411,
+        99
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-dozer.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-dozer.png",
+      "sha256": "d9825382db04f95f2a94ecd7cda45cde9bee734d8259ac469319e5dc0e7aa1bc",
+      "width": 444,
+      "height": 300,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4.73046875,
+        "height": 6.37109375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-dozer",
+      "visibleBounds": [
+        14,
+        5,
+        438,
+        291
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-drain-grate.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-drain-grate.png",
+      "sha256": "b26bc330675b54a5e083b390e71157a6bc20ba6477bab774d8e0c2f7bc6bde6f",
+      "width": 299,
+      "height": 319,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-drain-grate",
+      "visibleBounds": [
+        23,
+        21,
+        294,
+        293
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-explosive-cart.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-explosive-cart.png",
+      "sha256": "4402947c473b0909230534afa4b37332d8906ccd9063c6a96342ec197e5b0c54",
+      "width": 343,
+      "height": 263,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.0234375,
+        "height": 2.4609375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-explosive-cart",
+      "visibleBounds": [
+        16,
+        9,
+        331,
+        251
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-gear.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-gear.png",
+      "sha256": "06f4922217dd37dd71fa69f5e1f406afe38ced00bf8aa0c7429f710ec15f6a35",
+      "width": 316,
+      "height": 331,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.3359375,
+        "height": 3.3359375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-gear",
+      "visibleBounds": [
+        7,
+        4,
+        311,
+        316
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-hay-trough.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-hay-trough.png",
+      "sha256": "8ab9dbdc2ac488d12a7a9619c4a70f8418ba1afbb6ad3b27ffccf46bded4289e",
+      "width": 393,
+      "height": 267,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 1.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-hay-trough",
+      "visibleBounds": [
+        15,
+        18,
+        375,
+        261
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-lever-plinth.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-lever-plinth.png",
+      "sha256": "e5c301f57cdcf6ceda1b40d039581df439b92104a1b39f3ca14a4225fa0414e6",
+      "width": 244,
+      "height": 299,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.4609375,
+        "height": 3.171875
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-lever-plinth",
+      "visibleBounds": [
+        10,
+        8,
+        234,
+        273
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-llama.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-llama.png",
+      "sha256": "fcc11bdd5c6795f922b7fb185086655dc13bd00a47b8e39df1a3e30410d5c634",
+      "width": 409,
+      "height": 249,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.5,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-llama",
+      "visibleBounds": [
+        9,
+        42,
+        388,
+        208
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-pipe-elbow.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-pipe-elbow.png",
+      "sha256": "7f67333e2e920bfefc903b38d2b1e9a6b5380642703fa6a0d1523d1593dfe041",
+      "width": 292,
+      "height": 316,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-pipe-elbow",
+      "visibleBounds": [
+        11,
+        4,
+        277,
+        286
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-pipe-straight.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-pipe-straight.png",
+      "sha256": "3e3dee02fd89bddeb8a94906ee10a5a61aadb25b556e0bf265184de80f84cc09",
+      "width": 379,
+      "height": 212,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 1.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-pipe-straight",
+      "visibleBounds": [
+        6,
+        32,
+        367,
+        185
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-rail-junction.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-rail-junction.png",
+      "sha256": "ff655251aa683e6f334a13da63d0532b6fff5b3032fb9feaf41b2fd09fbd09e7",
+      "width": 382,
+      "height": 371,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.734375,
+        "height": 2.734375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-rail-junction",
+      "visibleBounds": [
+        16,
+        7,
+        377,
+        360
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-rail-straight.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-rail-straight.png",
+      "sha256": "5e904973a8287324a78fb5ea7feedf41e39d04173149a71e1dddadca2224b09a",
+      "width": 329,
+      "height": 195,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5.7421875,
+        "height": 1.2578125
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-rail-straight",
+      "visibleBounds": [
+        8,
+        11,
+        324,
+        181
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-red-carpet.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-red-carpet.png",
+      "sha256": "58592abd77ab9e3e6cdee0b638675f72e774e140b1c2b946affbba57dd2444a8",
+      "width": 249,
+      "height": 374,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 7
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-red-carpet",
+      "visibleBounds": [
+        18,
+        13,
+        214,
+        361
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-stair-module.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-stair-module.png",
+      "sha256": "53adbacb646bf608dc744b5541d984760e4ececbd4e107e48152ad56bd8fdf42",
+      "width": 269,
+      "height": 355,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 7
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-stair-module",
+      "visibleBounds": [
+        11,
+        11,
+        264,
+        338
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-swine-boss.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-swine-boss.png",
+      "sha256": "6c680ac688deb24db8a54b936604207d3352a33dc314502e78736b28a8fb589c",
+      "width": 354,
+      "height": 301,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5,
+        "height": 5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-swine-boss",
+      "visibleBounds": [
+        12,
+        21,
+        340,
+        286
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-throne.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-throne.png",
+      "sha256": "c968e49c1d4beaeb23a66df07fcfdf17faeac258b255bfb230d3fa7b63f0944a",
+      "width": 375,
+      "height": 365,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 4
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-throne",
+      "visibleBounds": [
+        8,
+        8,
+        365,
+        348
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-torch.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-torch.png",
+      "sha256": "4cd6e79389a947f9ceced4847ed2a0e56403bddf138c928819e895be6fe11498",
+      "width": 189,
+      "height": 280,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 0.4921875,
+        "height": 1.23046875
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-torch",
+      "visibleBounds": [
+        23,
+        25,
+        162,
+        265
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-trap-machine.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-trap-machine.png",
+      "sha256": "e28bab6e3fcdf83c8186ca3bd9a62b97933545bd20e054f4856e2ea7f933c363",
+      "width": 504,
+      "height": 353,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 8,
+        "height": 5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-trap-machine",
+      "visibleBounds": [
+        27,
+        15,
+        496,
+        320
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-wall-straight.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-wall-straight.png",
+      "sha256": "1d5177f3813f406cba16510328fe9384d5d7d4a9aea1382a95b42d0b457a1eb8",
+      "width": 357,
+      "height": 168,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.9375,
+        "height": 0.8203125
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-wall-straight",
+      "visibleBounds": [
+        14,
+        13,
+        353,
+        115
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/cd-weight-bench.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-weight-bench.png",
+      "sha256": "618fc339cbcf99218f2b5b85cf2cc3866a94046497c9060a2af66a63c081f6c8",
+      "width": 283,
+      "height": 288,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.421875,
+        "height": 3.41796875
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: cd-weight-bench",
+      "visibleBounds": [
+        12,
+        5,
+        277,
+        264
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-bed-red.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-bed-red.png",
+      "sha256": "4acf82ce04d27a11a6177187616fdb188f0f128c8fd8ee9c06c92bdc8390eb48",
+      "width": 303,
+      "height": 366,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.5,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-bed-red",
+      "visibleBounds": [
+        8,
+        14,
+        296,
+        358
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-chair-green.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-chair-green.png",
+      "sha256": "2fbeb5159cf2dbab50de5b3a2fd1478c0865ec509724dad9382983c39a9ea4d6",
+      "width": 234,
+      "height": 252,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.5,
+        "height": 1.7
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-chair-green",
+      "visibleBounds": [
+        17,
+        15,
+        221,
+        245
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-lamp-table.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-lamp-table.png",
+      "sha256": "b95470e2795cbde0c9cc5e0407e9d47dc3e7a13ba76fa7973141c1da77b995d7",
+      "width": 267,
+      "height": 279,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.8,
+        "height": 1.8
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-lamp-table",
+      "visibleBounds": [
+        9,
+        5,
+        256,
+        256
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-litter-scoop.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-litter-scoop.png",
+      "sha256": "c05d0f3156bd7d5f5e206be8791b8eb92389804a8f146b5a737c279c54794443",
+      "width": 169,
+      "height": 317,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 0.8,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-litter-scoop",
+      "visibleBounds": [
+        11,
+        4,
+        156,
+        313
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-litter-tray.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-litter-tray.png",
+      "sha256": "91b3bd521c7dc716db50604ad24676b6df34558f4f8eb9eb9f94182bf8371b6d",
+      "width": 349,
+      "height": 303,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 2.4
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-litter-tray",
+      "visibleBounds": [
+        7,
+        18,
+        343,
+        285
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-plant-green.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-plant-green.png",
+      "sha256": "dd5cee60ea282c574de994f45dce942d70b0c57dedebabdd34ed0c0f9bd66de4",
+      "width": 327,
+      "height": 312,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-plant-green",
+      "visibleBounds": [
+        8,
+        6,
+        314,
+        307
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-rug-red.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-rug-red.png",
+      "sha256": "35b36c24d6a8d463e22e23f19f595f21e7a104c0cf2add5aea36f2b600831f23",
+      "width": 427,
+      "height": 316,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-rug-red",
+      "visibleBounds": [
+        13,
+        4,
+        419,
+        308
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-sink-counter.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-sink-counter.png",
+      "sha256": "db758bb9d637197cba143204544a72a9101e134742262aa275a789b369197727",
+      "width": 382,
+      "height": 255,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-sink-counter",
+      "visibleBounds": [
+        10,
+        5,
+        369,
+        237
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-toilet.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-toilet.png",
+      "sha256": "313ce068712cbab1c2524c84e0c5ce47eb4080fad314d8bcaeb222a466d48e5e",
+      "width": 243,
+      "height": 374,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.8,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-toilet",
+      "visibleBounds": [
+        24,
+        11,
+        232,
+        360
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-vending-green.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-vending-green.png",
+      "sha256": "5aed526c1002b6a63c810e7f7ba7df36a40ec593a9e0e23eeca755bcd94e350c",
+      "width": 304,
+      "height": 232,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2,
+        "height": 1.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-vending-green",
+      "visibleBounds": [
+        6,
+        7,
+        300,
+        218
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-wood-bench.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-wood-bench.png",
+      "sha256": "91cd755d226c3e564a19b53f17bf99252d57e547006e36021b58f53108ae03d7",
+      "width": 417,
+      "height": 141,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.5,
+        "height": 1
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-wood-bench",
+      "visibleBounds": [
+        11,
+        11,
+        409,
+        136
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "shipped:top-down-object-kit/objects/ef-wood-table.png",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-wood-table.png",
+      "sha256": "27097100330b4f3636e39c39492b6ee7ec0c21088cf7378815e2b36ad868aaad",
+      "width": 397,
+      "height": 240,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 2.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "placementSource": "top-down-object-kit/manifest.json: ef-wood-table",
+      "visibleBounds": [
+        15,
+        8,
+        386,
+        227
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-barrel-wood-top",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-barrel-wood-top.png",
+      "width": 428,
+      "height": 425,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.53,
+        "height": 1.6
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "b1d0ec066efccf50eec0b210ee03d2826e2a955b7ab028c88fb39186bc79b885",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-barrel-wood-top",
+      "visibleBounds": [
+        14,
+        14,
+        414,
+        411
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": "ab-clean-crate-wood-cross",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-crate-wood-cross.png",
+      "width": 246,
+      "height": 267,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.34,
+        "height": 1.3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "c8b806f4beda33973e600af8c1d2148f38afa42a803b4d627cc63e973c37cec4",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-crate-wood-cross",
+      "visibleBounds": [
+        14,
+        14,
+        232,
+        253
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": "ab-clean-plant-leafy-terracotta",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-plant-leafy-terracotta.png",
+      "width": 266,
+      "height": 289,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.42,
+        "height": 1.6
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "d30cd90b539d89ce4d19e464413c86ca08b27c4463b525e42cbc5bc6a057b015",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-plant-leafy-terracotta",
+      "visibleBounds": [
+        14,
+        14,
+        252,
+        275
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 1,
+        "height": 1
+      }
+    },
+    {
+      "id": "ab-clean-chair-wood-blue",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-chair-wood-blue.png",
+      "width": 221,
+      "height": 297,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.53,
+        "height": 1.6
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "76ffef93a63f908c675fc61633951e3c14d73bffcd96f1edb56b195e8fb864ba",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-chair-wood-blue",
+      "visibleBounds": [
+        14,
+        14,
+        207,
+        283
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-table-wood-empty",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-table-wood-empty.png",
+      "width": 683,
+      "height": 403,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5.14,
+        "height": 2.77
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "9ecf4873b6d530ff1b68c8b09fc4e089e194dd181c5252874d6bc8788700e100",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-table-wood-empty",
+      "visibleBounds": [
+        14,
+        14,
+        669,
+        389
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-cot-metal-green",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-cot-metal-green.png",
+      "width": 167,
+      "height": 306,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.34,
+        "height": 3.03
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "0631a7147986f52e5fd22cb4a132f35d00786dd4733f0b1f4c9640d438414148",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-cot-metal-green",
+      "visibleBounds": [
+        14,
+        13,
+        153,
+        292
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 1,
+        "height": 3
+      }
+    },
+    {
+      "id": "ab-clean-door-double-wood-brass",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-door-double-wood-brass.png",
+      "width": 408,
+      "height": 138,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5.0,
+        "height": 1.86
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "f2c1855e785bdd46999e83fcf8a1308bbaa967d0318c16bf86d7f1fdbede6758",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-door-double-wood-brass",
+      "visibleBounds": [
+        14,
+        14,
+        394,
+        124
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-wall-straight-navy",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-wall-straight-navy.png",
+      "width": 360,
+      "height": 170,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.86,
+        "height": 0.75
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "2fb447bca1c00fc9ee935a986aa52e4c43806177f4bf1172cc6b087286c36b98",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-wall-straight-navy",
+      "visibleBounds": [
+        14,
+        14,
+        346,
+        156
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-bench-wood-plain",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-bench-wood-plain.png",
+      "width": 657,
+      "height": 243,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.17,
+        "height": 1.25
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "5aa65d88d0bd3ca39e36e90c6f5b11a7e6afa7abca8851ba58c55d1542fec1e1",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-bench-wood-plain",
+      "visibleBounds": [
+        14,
+        14,
+        643,
+        229
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-cot-metal-blue",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-cot-metal-blue.png",
+      "width": 171,
+      "height": 323,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.34,
+        "height": 3.03
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "359bc766c8526fc006c6e65dce7e0ce04b615333af19f5898b07877113d663ad",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-cot-metal-blue",
+      "visibleBounds": [
+        14,
+        13,
+        157,
+        309
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-wheelchair-blue",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-wheelchair-blue.png",
+      "width": 246,
+      "height": 312,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.18,
+        "height": 1.86
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "784dd9fd468646259fd8ee8c15d7ad7d8fed6c3986c7f0a14658454fcc62540b",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-wheelchair-blue",
+      "visibleBounds": [
+        14,
+        14,
+        232,
+        298
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ab-clean-shelf-wood-empty",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ab-clean-shelf-wood-empty.png",
+      "width": 667,
+      "height": 292,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 6.56,
+        "height": 1.17
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "51f91009f65ed691bd87a92d01e1df1ba1beb0b73209b4a240b447e3903bd4b5",
+      "placementSource": "top-down-object-kit/manifest.json: ab-clean-shelf-wood-empty",
+      "visibleBounds": [
+        14,
+        14,
+        653,
+        278
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 3,
+        "height": 1
+      }
+    },
+    {
+      "id": "cd-gear",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-gear.png",
+      "width": 316,
+      "height": 331,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.3359375,
+        "height": 3.3359375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "06f4922217dd37dd71fa69f5e1f406afe38ced00bf8aa0c7429f710ec15f6a35",
+      "placementSource": "top-down-object-kit/manifest.json: cd-gear",
+      "visibleBounds": [
+        7,
+        4,
+        311,
+        316
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-lever-plinth",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-lever-plinth.png",
+      "width": 244,
+      "height": 299,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.4609375,
+        "height": 3.171875
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "e5c301f57cdcf6ceda1b40d039581df439b92104a1b39f3ca14a4225fa0414e6",
+      "placementSource": "top-down-object-kit/manifest.json: cd-lever-plinth",
+      "visibleBounds": [
+        10,
+        8,
+        234,
+        273
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-rail-straight",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-rail-straight.png",
+      "width": 329,
+      "height": 195,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5.7421875,
+        "height": 1.2578125
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "5e904973a8287324a78fb5ea7feedf41e39d04173149a71e1dddadca2224b09a",
+      "placementSource": "top-down-object-kit/manifest.json: cd-rail-straight",
+      "visibleBounds": [
+        8,
+        11,
+        324,
+        181
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-rail-junction",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-rail-junction.png",
+      "width": 382,
+      "height": 371,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.734375,
+        "height": 2.734375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "ff655251aa683e6f334a13da63d0532b6fff5b3032fb9feaf41b2fd09fbd09e7",
+      "placementSource": "top-down-object-kit/manifest.json: cd-rail-junction",
+      "visibleBounds": [
+        16,
+        7,
+        377,
+        360
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-torch",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-torch.png",
+      "width": 189,
+      "height": 280,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 0.4921875,
+        "height": 1.23046875
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "4cd6e79389a947f9ceced4847ed2a0e56403bddf138c928819e895be6fe11498",
+      "placementSource": "top-down-object-kit/manifest.json: cd-torch",
+      "visibleBounds": [
+        23,
+        25,
+        162,
+        265
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 1,
+        "height": 1
+      }
+    },
+    {
+      "id": "cd-crate",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-crate.png",
+      "width": 253,
+      "height": 241,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.0390625,
+        "height": 1.09375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "31c9352ca88436538c8e1af1245170f39edc6d82830da3ece621803c4082f762",
+      "placementSource": "top-down-object-kit/manifest.json: cd-crate",
+      "visibleBounds": [
+        10,
+        9,
+        219,
+        233
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": "cd-explosive-cart",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-explosive-cart.png",
+      "width": 343,
+      "height": 263,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.0234375,
+        "height": 2.4609375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "4402947c473b0909230534afa4b37332d8906ccd9063c6a96342ec197e5b0c54",
+      "placementSource": "top-down-object-kit/manifest.json: cd-explosive-cart",
+      "visibleBounds": [
+        16,
+        9,
+        331,
+        251
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-dozer",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-dozer.png",
+      "width": 444,
+      "height": 300,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4.73046875,
+        "height": 6.37109375
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "d9825382db04f95f2a94ecd7cda45cde9bee734d8259ac469319e5dc0e7aa1bc",
+      "placementSource": "top-down-object-kit/manifest.json: cd-dozer",
+      "visibleBounds": [
+        14,
+        5,
+        438,
+        291
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-weight-bench",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-weight-bench.png",
+      "width": 283,
+      "height": 288,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.421875,
+        "height": 3.41796875
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "618fc339cbcf99218f2b5b85cf2cc3866a94046497c9060a2af66a63c081f6c8",
+      "placementSource": "top-down-object-kit/manifest.json: cd-weight-bench",
+      "visibleBounds": [
+        12,
+        5,
+        277,
+        264
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": "cd-barbell",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-barbell.png",
+      "width": 431,
+      "height": 216,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.4609375,
+        "height": 1.203125
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "ec1f6c4e59820f505f8cc516999cf204f42257526acb67cd4556a376b6384ada",
+      "placementSource": "top-down-object-kit/manifest.json: cd-barbell",
+      "visibleBounds": [
+        11,
+        8,
+        412,
+        158
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 3,
+        "height": 1
+      }
+    },
+    {
+      "id": "cd-wall-straight",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-wall-straight.png",
+      "width": 357,
+      "height": 168,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.9375,
+        "height": 0.8203125
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "1d5177f3813f406cba16510328fe9384d5d7d4a9aea1382a95b42d0b457a1eb8",
+      "placementSource": "top-down-object-kit/manifest.json: cd-wall-straight",
+      "visibleBounds": [
+        14,
+        13,
+        353,
+        115
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 1
+      }
+    },
+    {
+      "id": "cd-throne",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-throne.png",
+      "width": 375,
+      "height": 365,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 4
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "c968e49c1d4beaeb23a66df07fcfdf17faeac258b255bfb230d3fa7b63f0944a",
+      "placementSource": "top-down-object-kit/manifest.json: cd-throne",
+      "visibleBounds": [
+        8,
+        8,
+        365,
+        348
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-red-carpet",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-red-carpet.png",
+      "width": 249,
+      "height": 374,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 7
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "58592abd77ab9e3e6cdee0b638675f72e774e140b1c2b946affbba57dd2444a8",
+      "placementSource": "top-down-object-kit/manifest.json: cd-red-carpet",
+      "visibleBounds": [
+        18,
+        13,
+        214,
+        361
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-pipe-elbow",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-pipe-elbow.png",
+      "width": 292,
+      "height": 316,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "7f67333e2e920bfefc903b38d2b1e9a6b5380642703fa6a0d1523d1593dfe041",
+      "placementSource": "top-down-object-kit/manifest.json: cd-pipe-elbow",
+      "visibleBounds": [
+        11,
+        4,
+        277,
+        286
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-pipe-straight",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-pipe-straight.png",
+      "width": 379,
+      "height": 212,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 1.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "3e3dee02fd89bddeb8a94906ee10a5a61aadb25b556e0bf265184de80f84cc09",
+      "placementSource": "top-down-object-kit/manifest.json: cd-pipe-straight",
+      "visibleBounds": [
+        6,
+        32,
+        367,
+        185
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-hay-trough",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-hay-trough.png",
+      "width": 393,
+      "height": 267,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 1.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "8ab9dbdc2ac488d12a7a9619c4a70f8418ba1afbb6ad3b27ffccf46bded4289e",
+      "placementSource": "top-down-object-kit/manifest.json: cd-hay-trough",
+      "visibleBounds": [
+        15,
+        18,
+        375,
+        261
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-llama",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-llama.png",
+      "width": 409,
+      "height": 249,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.5,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "fcc11bdd5c6795f922b7fb185086655dc13bd00a47b8e39df1a3e30410d5c634",
+      "placementSource": "top-down-object-kit/manifest.json: cd-llama",
+      "visibleBounds": [
+        9,
+        42,
+        388,
+        208
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-swine-boss",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-swine-boss.png",
+      "width": 354,
+      "height": 301,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 5,
+        "height": 5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "6c680ac688deb24db8a54b936604207d3352a33dc314502e78736b28a8fb589c",
+      "placementSource": "top-down-object-kit/manifest.json: cd-swine-boss",
+      "visibleBounds": [
+        12,
+        21,
+        340,
+        286
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-trap-machine",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-trap-machine.png",
+      "width": 504,
+      "height": 353,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 8,
+        "height": 5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "e28bab6e3fcdf83c8186ca3bd9a62b97933545bd20e054f4856e2ea7f933c363",
+      "placementSource": "top-down-object-kit/manifest.json: cd-trap-machine",
+      "visibleBounds": [
+        27,
+        15,
+        496,
+        320
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 3,
+        "height": 2
+      }
+    },
+    {
+      "id": "cd-stair-module",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-stair-module.png",
+      "width": 269,
+      "height": 355,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 7
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "53adbacb646bf608dc744b5541d984760e4ececbd4e107e48152ad56bd8fdf42",
+      "placementSource": "top-down-object-kit/manifest.json: cd-stair-module",
+      "visibleBounds": [
+        11,
+        11,
+        264,
+        338
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 3,
+        "height": 3
+      }
+    },
+    {
+      "id": "cd-door-threshold",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-door-threshold.png",
+      "width": 421,
+      "height": 117,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 0.4
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "c5573d5f57c36b8deb30f522be38617b698c38d275aaef0ab813fa86b28f8217",
+      "placementSource": "top-down-object-kit/manifest.json: cd-door-threshold",
+      "visibleBounds": [
+        12,
+        35,
+        411,
+        99
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "cd-drain-grate",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/cd-drain-grate.png",
+      "width": 299,
+      "height": 319,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "b26bc330675b54a5e083b390e71157a6bc20ba6477bab774d8e0c2f7bc6bde6f",
+      "placementSource": "top-down-object-kit/manifest.json: cd-drain-grate",
+      "visibleBounds": [
+        23,
+        21,
+        294,
+        293
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ef-toilet",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-toilet.png",
+      "width": 243,
+      "height": 374,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.8,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "313ce068712cbab1c2524c84e0c5ce47eb4080fad314d8bcaeb222a466d48e5e",
+      "placementSource": "top-down-object-kit/manifest.json: ef-toilet",
+      "visibleBounds": [
+        24,
+        11,
+        232,
+        360
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 1,
+        "height": 3
+      }
+    },
+    {
+      "id": "ef-sink-counter",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-sink-counter.png",
+      "width": 382,
+      "height": 255,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "db758bb9d637197cba143204544a72a9101e134742262aa275a789b369197727",
+      "placementSource": "top-down-object-kit/manifest.json: ef-sink-counter",
+      "visibleBounds": [
+        10,
+        5,
+        369,
+        237
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 3,
+        "height": 2
+      }
+    },
+    {
+      "id": "ef-litter-tray",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-litter-tray.png",
+      "width": 349,
+      "height": 303,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3,
+        "height": 2.4
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "91b3bd521c7dc716db50604ad24676b6df34558f4f8eb9eb9f94182bf8371b6d",
+      "placementSource": "top-down-object-kit/manifest.json: ef-litter-tray",
+      "visibleBounds": [
+        7,
+        18,
+        343,
+        285
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ef-litter-scoop",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-litter-scoop.png",
+      "width": 169,
+      "height": 317,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 0.8,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "c05d0f3156bd7d5f5e206be8791b8eb92389804a8f146b5a737c279c54794443",
+      "placementSource": "top-down-object-kit/manifest.json: ef-litter-scoop",
+      "visibleBounds": [
+        11,
+        4,
+        156,
+        313
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ef-vending-green",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-vending-green.png",
+      "width": 304,
+      "height": 232,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2,
+        "height": 1.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "5aed526c1002b6a63c810e7f7ba7df36a40ec593a9e0e23eeca755bcd94e350c",
+      "placementSource": "top-down-object-kit/manifest.json: ef-vending-green",
+      "visibleBounds": [
+        6,
+        7,
+        300,
+        218
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": "ef-wood-bench",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-wood-bench.png",
+      "width": 417,
+      "height": 141,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 3.5,
+        "height": 1
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "91cd755d226c3e564a19b53f17bf99252d57e547006e36021b58f53108ae03d7",
+      "placementSource": "top-down-object-kit/manifest.json: ef-wood-bench",
+      "visibleBounds": [
+        11,
+        11,
+        409,
+        136
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 1
+      }
+    },
+    {
+      "id": "ef-wood-table",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-wood-table.png",
+      "width": 397,
+      "height": 240,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 2.5
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "27097100330b4f3636e39c39492b6ee7ec0c21088cf7378815e2b36ad868aaad",
+      "placementSource": "top-down-object-kit/manifest.json: ef-wood-table",
+      "visibleBounds": [
+        15,
+        8,
+        386,
+        227
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 3,
+        "height": 2
+      }
+    },
+    {
+      "id": "ef-chair-green",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-chair-green.png",
+      "width": 234,
+      "height": 252,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.5,
+        "height": 1.7
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "2fbeb5159cf2dbab50de5b3a2fd1478c0865ec509724dad9382983c39a9ea4d6",
+      "placementSource": "top-down-object-kit/manifest.json: ef-chair-green",
+      "visibleBounds": [
+        17,
+        15,
+        221,
+        245
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 1,
+        "height": 1
+      }
+    },
+    {
+      "id": "ef-bed-red",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-bed-red.png",
+      "width": 303,
+      "height": 366,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2.5,
+        "height": 3
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "4acf82ce04d27a11a6177187616fdb188f0f128c8fd8ee9c06c92bdc8390eb48",
+      "placementSource": "top-down-object-kit/manifest.json: ef-bed-red",
+      "visibleBounds": [
+        8,
+        14,
+        296,
+        358
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 2,
+        "height": 3
+      }
+    },
+    {
+      "id": "ef-rug-red",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-rug-red.png",
+      "width": 427,
+      "height": 316,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 4,
+        "height": 3
+      },
+      "renderLayer": "ground-detail",
+      "status": "preserved-shipped",
+      "sha256": "35b36c24d6a8d463e22e23f19f595f21e7a104c0cf2add5aea36f2b600831f23",
+      "placementSource": "top-down-object-kit/manifest.json: ef-rug-red",
+      "visibleBounds": [
+        13,
+        4,
+        419,
+        308
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 3,
+        "height": 2
+      }
+    },
+    {
+      "id": "ef-plant-green",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-plant-green.png",
+      "width": 327,
+      "height": 312,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "dd5cee60ea282c574de994f45dce942d70b0c57dedebabdd34ed0c0f9bd66de4",
+      "placementSource": "top-down-object-kit/manifest.json: ef-plant-green",
+      "visibleBounds": [
+        8,
+        6,
+        314,
+        307
+      ],
+      "placement": "registered-whole-object"
+    },
+    {
+      "id": "ef-lamp-table",
+      "kind": "png",
+      "path": "assets/top-down-object-kit/objects/ef-lamp-table.png",
+      "width": 267,
+      "height": 279,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1.8,
+        "height": 1.8
+      },
+      "renderLayer": "object",
+      "status": "preserved-shipped",
+      "sha256": "b95470e2795cbde0c9cc5e0407e9d47dc3e7a13ba76fa7973141c1da77b995d7",
+      "placementSource": "top-down-object-kit/manifest.json: ef-lamp-table",
+      "visibleBounds": [
+        9,
+        5,
+        256,
+        256
+      ],
+      "placement": "registered-whole-object",
+      "nominalRuntimeFootprint": {
+        "width": 1,
+        "height": 1
+      }
+    },
+    {
+      "id": "industrial-exit",
+      "kind": "png",
+      "path": "assets/completed-layers/native/complete-gold-exit.png",
+      "width": 915,
+      "height": 943,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground-detail",
+      "status": "preserved-shipped",
+      "sha256": "7a386c289910d48c4056931ac5e7589e0b3d0b4dd1d6066a4595536951b4ebcd",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "industrial-grate",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/grate.png",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "ground",
+      "status": "preserved-shipped",
+      "sha256": "ab393b79c6a08cc9c244cd7c6d4e5fdcb72442f7239bf7a07777cef91ca8fef8",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "industrial-machine",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/machine-controls.png",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "sha256": "8a98e603d250db3f207dcbecba9f154714d5263d6eee2c4a4cae25ac9c83cee0",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "industrial-outlet",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/water-outlet.png",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "sha256": "0bbbf0cb3ad15d3d9a21503a8662d6664bc86fd376ebe3f2dd2625caa2cee292",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "industrial-pipe",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/pipe-straight.png",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "sha256": "c3a74ab34d3e56d2053354d2c411f3a85fb34250c161d3da4cfde649be4b8ffb",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    },
+    {
+      "id": "industrial-torch",
+      "kind": "png",
+      "path": "assets/map-grid-pass/components/generated/torch.png",
+      "width": 128,
+      "height": 128,
+      "pivot": null,
+      "footprint": null,
+      "renderLayer": "architecture",
+      "status": "preserved-shipped",
+      "sha256": "21664f253b16a7d353a6c6cf73237db6c92ba879dc02b146a36a0e064ac97556",
+      "placement": "no-placement",
+      "placementSource": "Source texture/atlas; renderer crops/composes or uses per-frame metadata. No direct world placement contract."
+    }
+  ],
+  "tiles": [
+    {
+      "id": "tile.floor",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "floor",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "ground",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "floor",
+        "E": "floor",
+        "S": "floor",
+        "W": "floor"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "E": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "S": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "W": [
+          "edge:floor",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    },
+    {
+      "id": "tile.wall-straight",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "wall",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "architecture",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "wall",
+        "E": "floor",
+        "S": "wall",
+        "W": "floor"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "E": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "S": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "W": [
+          "edge:floor",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    },
+    {
+      "id": "tile.wall-corner",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "corner",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "architecture",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "wall",
+        "E": "wall",
+        "S": "floor",
+        "W": "floor"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "E": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "S": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "W": [
+          "edge:floor",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    },
+    {
+      "id": "tile.door-open",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "door",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "architecture",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "wall",
+        "E": "floor",
+        "S": "wall",
+        "W": "floor"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "E": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "S": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "W": [
+          "edge:floor",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    },
+    {
+      "id": "tile.door-closed",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "door",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "architecture",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "wall",
+        "E": "blocked",
+        "S": "wall",
+        "W": "blocked"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "E": [
+          "edge:blocked",
+          "square-grid"
+        ],
+        "S": [
+          "edge:wall",
+          "square-grid"
+        ],
+        "W": [
+          "edge:blocked",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    },
+    {
+      "id": "tile.stairs",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "stair",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "ground",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "floor",
+        "E": "floor",
+        "S": "floor",
+        "W": "floor"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "E": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "S": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "W": [
+          "edge:floor",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    },
+    {
+      "id": "tile.bridge",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "bridge",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "ground",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "water",
+        "E": "floor",
+        "S": "water",
+        "W": "floor"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:water",
+          "square-grid"
+        ],
+        "E": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "S": [
+          "edge:water",
+          "square-grid"
+        ],
+        "W": [
+          "edge:floor",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    },
+    {
+      "id": "tile.bank-transition",
+      "kind": "procedural-render-component",
+      "renderer": "rpg-renderer.js",
+      "role": "transition",
+      "width": 128,
+      "height": 128,
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "renderLayer": "ground",
+      "allowedRotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "edges": {
+        "N": "water",
+        "E": "floor",
+        "S": "floor",
+        "W": "floor"
+      },
+      "edgeTags": {
+        "N": [
+          "edge:water",
+          "square-grid"
+        ],
+        "E": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "S": [
+          "edge:floor",
+          "square-grid"
+        ],
+        "W": [
+          "edge:floor",
+          "square-grid"
+        ]
+      },
+      "artStatus": "existing renderer composition; no standalone PNG claimed"
+    }
+  ],
+  "characters": [
+    {
+      "id": "carl",
+      "kind": "directional-animation",
+      "path": "assets/directional/carl.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 0,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 0,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 128,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 128,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 256,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 256,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 384,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 384,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 80,
+      "status": "preserved-shipped",
+      "identityNote": "Clean-shaven barefoot human",
+      "renderHeightTiles": 1.22,
+      "sha256": "cc86160a13e02014e1e52c666ad67c5b807928ab9021b622ab7273ca577bab21",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "donut",
+      "kind": "directional-animation",
+      "path": "assets/directional/donut.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 0,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 0,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 128,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 128,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 256,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 256,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk1": {
+            "x": 384,
+            "y": 144,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          },
+          "walk2": {
+            "x": 384,
+            "y": 288,
+            "width": 128,
+            "height": 144,
+            "drawWidth": 128,
+            "drawHeight": 144,
+            "anchorX": 0.5,
+            "anchorY": 0.8888888888888888,
+            "tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment_generated_tags": [
+              "attachment-tagged",
+              "attachment:floor",
+              "attachment:stairs",
+              "environment:unspecified",
+              "material:unspecified",
+              "role:object",
+              "style:gameplay"
+            ],
+            "attachment": {
+              "schema_version": 1,
+              "authority": "editorial-semantic-inference",
+              "space": "world",
+              "role": "object",
+              "requires": {
+                "any": [
+                  "surface:floor",
+                  "surface:stairs"
+                ],
+                "all": [],
+                "none": [
+                  "hazard:water",
+                  "hazard:lava",
+                  "hazard:void",
+                  "hazard:pit",
+                  "hazard:chasm",
+                  "surface:water",
+                  "walkability:blocked"
+                ]
+              },
+              "provides": [],
+              "exclude_self": true,
+              "compatibility_group": "gameplay--attachment-266967d8921f",
+              "reason": "Editorial semantic suggestion; does not establish runtime placement, collision, seam, scale, or support geometry."
+            }
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 50,
+      "status": "preserved-shipped",
+      "identityNote": "Long-haired tortoiseshell cat; no humanoid body",
+      "renderHeightTiles": 0.82,
+      "sha256": "89ad08a17ca187bf73b1a66d4bd24209090adf7304563244d999af1978a2808a",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "enemy.goblin",
+      "kind": "directional-animation",
+      "path": "assets/block-a/goblin.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 0,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 0,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 128,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 128,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 256,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 256,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 384,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 384,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 112,
+      "status": "root-approved-browser-validated",
+      "identityNote": "Adapted identity art from inspected approved reference; no canonical costume claim",
+      "source": "/workspace/generated_images/exec-389c87c7-5240-4861-8781-6eaf71ab7ee0.png",
+      "renderHeightTiles": 1.05,
+      "sha256": "b5fd313db4b88252aa06ca7521143b724d5dbb5afb92170a3013a50c185cc3c4",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "enemy.goblin-bomber",
+      "kind": "directional-animation",
+      "path": "assets/block-a/goblin-bomber.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 0,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 0,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 128,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 128,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 256,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 256,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 384,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 384,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 112,
+      "status": "root-approved-browser-validated",
+      "identityNote": "Adapted identity art from inspected approved reference; no canonical costume claim",
+      "source": "/workspace/generated_images/exec-3867bed6-ab1a-41ea-9ce3-c6d96367a2e2.png",
+      "renderHeightTiles": 1.05,
+      "sha256": "11c69ece26e6e9b51694a9b4fe25349e1c24ede7a4920eb00fd4c24aa1aded08",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "enemy.juicer",
+      "kind": "directional-animation",
+      "path": "assets/block-a/juicer.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 0,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 0,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 128,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 128,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 256,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 256,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 384,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 384,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 112,
+      "status": "root-approved-browser-validated",
+      "identityNote": "Adapted identity art from inspected approved reference; no canonical costume claim",
+      "source": "/workspace/generated_images/exec-08feb6c0-fe0f-4f43-8646-cc97186acd9c.png",
+      "renderHeightTiles": 1.25,
+      "sha256": "a68883c59835cf6077dc96631521abb39ff727ffaec3f024b677b7261913cf4f",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "enemy.hoarder-elite",
+      "kind": "directional-animation",
+      "path": "assets/block-a/hoarder-elite.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 0,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 0,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 128,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 128,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 256,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 256,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 384,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 384,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 112,
+      "status": "root-approved-browser-validated",
+      "identityNote": "Adapted identity art from inspected approved reference; no canonical costume claim",
+      "source": "/workspace/generated_images/exec-4a5b81ac-cb5e-4afb-b8a9-21300a2dac9f.png",
+      "renderHeightTiles": 1.28,
+      "sha256": "ba21ff749b61d29588afdb29c9aa17a3a9629e753edf2fd4739eb49d32518185",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "enemy.murder-dozer",
+      "kind": "directional-animation",
+      "path": "assets/block-a/murder-dozer.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 0,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 0,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 128,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 128,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 256,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 256,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 384,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 384,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 112,
+      "status": "root-approved-browser-validated",
+      "identityNote": "Adapted identity art from inspected approved reference; no canonical costume claim",
+      "source": "/workspace/generated_images/exec-ff140c21-1b4d-4de6-9603-cc7ef627b47d.png",
+      "renderHeightTiles": 1.45,
+      "sha256": "898512961d07373a0e8eeb6edb86eda465b1f221c698950baf9bfde03ceb0b33",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "enemy.ball-of-swine",
+      "kind": "directional-animation",
+      "path": "assets/block-a/ball-of-swine.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 0,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 0,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 128,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 128,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 256,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 256,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 384,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 384,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 112,
+      "status": "root-approved-browser-validated",
+      "identityNote": "Adapted identity art from inspected approved reference; no canonical costume claim",
+      "source": "/workspace/generated_images/exec-debc4d65-bc18-4e55-996b-e397c8349f16.png",
+      "renderHeightTiles": 1.38,
+      "sha256": "ea523479fca57a5f703c0837841a3ab411ae903a59e64abede075cae5a522cdd",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    },
+    {
+      "id": "enemy.scatterer",
+      "kind": "directional-animation",
+      "path": "assets/block-a/scatterer.png",
+      "directions": {
+        "se": {
+          "idle": {
+            "x": 0,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 0,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 0,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "sw": {
+          "idle": {
+            "x": 128,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 128,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 128,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "ne": {
+          "idle": {
+            "x": 256,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 256,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 256,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        },
+        "nw": {
+          "idle": {
+            "x": 384,
+            "y": 0,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk1": {
+            "x": 384,
+            "y": 128,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          },
+          "walk2": {
+            "x": 384,
+            "y": 256,
+            "width": 128,
+            "height": 128,
+            "anchorX": 0.5,
+            "anchorY": 0.9375
+          }
+        }
+      },
+      "renderLayer": "actor",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "bodyHeight": 112,
+      "status": "root-approved-browser-validated",
+      "identityNote": "Adapted identity art from inspected approved reference; no canonical costume claim",
+      "source": "/workspace/generated_images/exec-bf68b2d9-2d4c-43b4-9e73-0515da8c5951.png",
+      "renderHeightTiles": 0.82,
+      "sha256": "0606c2a201bc6ddcea4d0620d4cb6c32ba6ea00415416747962e2bdacd4d90ac",
+      "placement": "actor-frame",
+      "placementSource": "Per-frame normalized anchor; one tactical cell actor position, not opaque image dimensions."
+    }
+  ],
+  "objectCatalogBindings": [
+    {
+      "objectTypeId": "ab-clean-barrel-wood-top",
+      "assetIds": [
+        "ab-clean-barrel-wood-top"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ab-clean-cot-metal-green",
+      "assetIds": [
+        "ab-clean-cot-metal-green"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ab-clean-crate-wood-cross",
+      "assetIds": [
+        "ab-clean-crate-wood-cross"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ab-clean-plant-leafy-terracotta",
+      "assetIds": [
+        "ab-clean-plant-leafy-terracotta"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ab-clean-shelf-wood-empty",
+      "assetIds": [
+        "ab-clean-shelf-wood-empty"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "cd-barbell",
+      "assetIds": [
+        "cd-barbell"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "cd-crate",
+      "assetIds": [
+        "cd-crate"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "cd-stair-module",
+      "assetIds": [
+        "cd-stair-module"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "cd-torch",
+      "assetIds": [
+        "cd-torch"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "cd-trap-machine",
+      "assetIds": [
+        "cd-trap-machine"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "cd-wall-straight",
+      "assetIds": [
+        "cd-wall-straight"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "cd-weight-bench",
+      "assetIds": [
+        "cd-weight-bench"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-bed-red",
+      "assetIds": [
+        "ef-bed-red"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-chair-green",
+      "assetIds": [
+        "ef-chair-green"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-lamp-table",
+      "assetIds": [
+        "ef-lamp-table"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-rug-red",
+      "assetIds": [
+        "ef-rug-red"
+      ],
+      "renderLayer": "underlay"
+    },
+    {
+      "objectTypeId": "ef-sink-counter",
+      "assetIds": [
+        "ef-sink-counter"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-toilet",
+      "assetIds": [
+        "ef-toilet"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-vending-green",
+      "assetIds": [
+        "ef-vending-green"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-wood-bench",
+      "assetIds": [
+        "ef-wood-bench"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "ef-wood-table",
+      "assetIds": [
+        "ef-wood-table"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "industrial-exit",
+      "assetIds": [
+        "industrial-exit"
+      ],
+      "renderLayer": "underlay"
+    },
+    {
+      "objectTypeId": "industrial-grate",
+      "assetIds": [
+        "industrial-grate"
+      ],
+      "renderLayer": "underlay"
+    },
+    {
+      "objectTypeId": "industrial-machine",
+      "assetIds": [
+        "industrial-machine"
+      ],
+      "renderLayer": "wallfixture"
+    },
+    {
+      "objectTypeId": "industrial-outlet",
+      "assetIds": [
+        "industrial-outlet"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "industrial-pipe",
+      "assetIds": [
+        "industrial-pipe"
+      ],
+      "renderLayer": "object"
+    },
+    {
+      "objectTypeId": "industrial-torch",
+      "assetIds": [
+        "industrial-torch"
+      ],
+      "renderLayer": "wallfixture"
+    }
+  ],
+  "assemblies": [
+    {
+      "id": "square-wall-run",
+      "required": [
+        "tile.wall-straight"
+      ],
+      "optional": [
+        "tile.wall-corner",
+        "tile.door-open",
+        "tile.door-closed"
+      ],
+      "edgeRule": "Rotate edge tags clockwise; wall joins wall, opening joins floor."
+    },
+    {
+      "id": "square-water-crossing",
+      "required": [
+        "tile.bridge",
+        "tile.bank-transition"
+      ],
+      "optional": [
+        "tile.floor"
+      ],
+      "edgeRule": "Bridge travel edges must join floor/bank; transverse edges remain water."
+    },
+    {
+      "id": "square-descent",
+      "required": [
+        "tile.stairs",
+        "tile.floor"
+      ],
+      "optional": [
+        "tile.wall-straight"
+      ],
+      "edgeRule": "Stair landings join floor edges."
+    },
+    {
+      "id": "stair-approach",
+      "label": "Stair approach",
+      "groupId": "stair-approach",
+      "roomId": "entry-landing",
+      "zone": "approach",
+      "placementAnchor": "nearby suggested, authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "stair",
+          "objectTypeId": "cd-stair-module",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "light",
+          "objectTypeId": "cd-torch",
+          "expectedCount": 2,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "teaching-table",
+      "label": "Teaching table",
+      "groupId": "teaching-table",
+      "roomId": "tutorial-guildhall",
+      "zone": "classroom",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "underlay",
+          "objectTypeId": "ef-rug-red",
+          "expectedCount": 1,
+          "required": false
+        },
+        {
+          "role": "table",
+          "objectTypeId": "ef-wood-table",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "chair",
+          "objectTypeId": "ef-chair-green",
+          "expectedCount": 3,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "dining-cluster",
+      "label": "Dining table and bench",
+      "groupId": "dining-cluster",
+      "roomId": "tally-safe-room",
+      "zone": "dining",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "table",
+          "objectTypeId": "ef-wood-table",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "seat",
+          "objectTypeId": "ef-chair-green",
+          "expectedCount": 2,
+          "required": false
+        },
+        {
+          "role": "bench",
+          "objectTypeId": "ef-wood-bench",
+          "expectedCount": 1,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "rest-bedroom",
+      "label": "Bedroom",
+      "groupId": "rest-bedroom",
+      "roomId": "sebastian-safe-room",
+      "zone": "living",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "underlay",
+          "objectTypeId": "ef-rug-red",
+          "expectedCount": 1,
+          "required": false
+        },
+        {
+          "role": "bed",
+          "objectTypeId": "ef-bed-red",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "lamp",
+          "objectTypeId": "ef-lamp-table",
+          "expectedCount": 1,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "washroom-fixtures",
+      "label": "Washroom fixtures",
+      "groupId": "washroom-fixtures",
+      "roomId": "sebastian-safe-room",
+      "zone": "washroom",
+      "placementAnchor": "authored group anchor northeast",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "toilet",
+          "objectTypeId": "ef-toilet",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "sink-counter",
+          "objectTypeId": "ef-sink-counter",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "waiting-area",
+      "label": "Waiting area",
+      "groupId": "waiting-area",
+      "roomId": "dmv-safe-room",
+      "zone": "waiting",
+      "placementAnchor": "authored group anchor northwest",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "bench",
+          "objectTypeId": "ef-wood-bench",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "vending-machine",
+          "objectTypeId": "ef-vending-green",
+          "expectedCount": 1,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "northwest-machinery",
+      "label": "Machinery with pipe fittings",
+      "groupId": "northwest-machinery",
+      "zone": "machinery",
+      "placementAnchor": "authored group anchor northwest with group offset (3, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "machine",
+          "objectTypeId": "industrial-machine",
+          "expectedCount": 1,
+          "required": true
+        },
+        {
+          "role": "pipe-fitting",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 2,
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "north-pipe-bank",
+      "label": "North pipe bank",
+      "groupId": "north-pipe-bank",
+      "roomId": "goblin-workshop",
+      "zone": "waterworks",
+      "placementAnchor": "authored group anchor northwest with group offset (7, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "pipe",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "west-pipe-bank",
+      "label": "West pipe bank",
+      "groupId": "west-pipe-bank",
+      "roomId": "goblin-workshop",
+      "zone": "waterworks",
+      "placementAnchor": "authored group anchor northwest with group offset (2, 6)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "pipe",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "east-pipe-bank",
+      "label": "East pipe bank",
+      "groupId": "east-pipe-bank",
+      "roomId": "goblin-workshop",
+      "zone": "waterworks",
+      "placementAnchor": "authored group anchor northwest with group offset (17, 7)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "pipe",
+          "objectTypeId": "industrial-pipe",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "west-gate-torch",
+      "label": "West gate light",
+      "groupId": "west-gate-torch",
+      "roomId": "goblin-workshop",
+      "zone": "lighting",
+      "placementAnchor": "authored group anchor northwest with group offset (10, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "light",
+          "objectTypeId": "industrial-torch",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "east-gate-torch",
+      "label": "East gate light",
+      "groupId": "east-gate-torch",
+      "roomId": "goblin-workshop",
+      "zone": "lighting",
+      "placementAnchor": "authored group anchor northwest with group offset (14, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "light",
+          "objectTypeId": "industrial-torch",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "north-descent",
+      "label": "North descent",
+      "groupId": "north-descent",
+      "roomId": "ball-of-swine-complex",
+      "zone": "exit",
+      "placementAnchor": "authored group anchor northwest with group offset (11, 0)",
+      "boundsSource": "runtime member footprints",
+      "members": [
+        {
+          "role": "exit",
+          "objectTypeId": "industrial-exit",
+          "expectedCount": 1,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "audit": {
+    "hostedPhysicalFiles": 91,
+    "partyScope": [
+      "carl",
+      "donut"
+    ],
+    "excludedParty": [
+      "katia",
+      "mongo"
+    ],
+    "missingDirectionalEnemyTemplates": [],
+    "newAssetsReleaseGate": "Root contact-sheet and actual browser approved; all nine actors passed four-facing and two-walk-frame checks. AI-Art dev upload must precede hosted commit pin.",
+    "physicalInventoryNote": "Hosted subset contains 91 checksum-pinned files; retained local AI-Art library is preserved and not claimed shipped. Existing exported atlases include unused characters outside Floor One party scope."
+  }
+}

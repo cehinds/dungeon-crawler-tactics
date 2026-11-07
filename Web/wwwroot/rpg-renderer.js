@@ -22,7 +22,7 @@ export class Renderer {
     this.ctx = canvas.getContext("2d");
     this.view = null;
     this.positions = new Map();
-    this.facing = "se";
+    this.facings = new Map();
     this.fx = [];
     this.camera = { x: 0, y: 0 };
     this.tiles = [];
@@ -114,6 +114,12 @@ export class Renderer {
         };
       }),
     );
+    // Block A metadata owns pose rectangles; failure preserves shipped art.
+    const assetCatalog = await fetch("data/asset-catalog.json").then(r => r.ok ? r.json() : null).catch(() => null);
+    await Promise.all((assetCatalog?.characters || []).filter(a => a.id.startsWith("enemy.")).map(async a => {
+      const image = await load(a.path);
+      if (image) this.characters[a.id] = {...a, frames:a.directions, image};
+    }));
     const m = await fetch("assets/top-down-object-kit/manifest.json")
       .then((r) => r.json())
       .catch(() =>
@@ -203,6 +209,26 @@ export class Renderer {
     ) {
       this.follower = { x: old.x, y: old.y };
     }
+    const events = view.battle?.effectEvents || [];
+    const eventKey = view.battle ? `${view.battle.encounterId}:${view.battle.effectRevision ?? 0}` : null;
+    if (events.length && eventKey !== this.lastEffectEvents) {
+      const effectSlots = new Map();
+      const batchStart = performance.now();
+      let presentationIndex = 0;
+      for (const event of events) {
+        if (["damage", "heal", "resource", "objectDamaged"].includes(event.kind) && event.amount === 0) continue;
+        const label = {damage: `−${event.amount}`, heal: `+${event.amount}`, resource: `${event.amount >= 0 ? "+" : ""}${event.amount} MP`, statusApplied: event.tag || "Status", statusRemoved: "Cleared", blocked: "Blocked", objectDestroyed: "Destroyed", explosion: "Explosion"}[event.kind];
+        if (label) {
+          const key = `${event.x},${event.y}`;
+          const slot = effectSlots.get(key) || 0;
+          effectSlots.set(key, slot + 1);
+          this.fx.push({x:event.x,y:event.y,text:label,
+            start:batchStart + presentationIndex++ * 80 + Math.floor(slot / 3) * 480,
+            slot:slot % 3,kind:event.kind});
+        }
+      }
+    }
+    this.lastEffectEvents = eventKey;
     const units =
       view.mode === "battle"
         ? [...view.battle.units, ...view.battle.enemies]
@@ -214,7 +240,7 @@ export class Renderer {
           ? [...old.battle.units, ...old.battle.enemies]
           : old?.party || []
       ).find((x) => x.id === u.id);
-      if (prev && u.hp < prev.hp)
+      if (prev && u.hp < prev.hp && !events.some(e => e.kind === "damage" && e.targetId === u.id))
         this.fx.push({
           x: u.x,
           y: u.y,
@@ -225,7 +251,8 @@ export class Renderer {
   }
   sprite(id, x, y, t, moving, enemy = false, templateId = "") {
     const c = this.ctx;
-    const d = this.characters[id];
+    const d = this.characters[id] || this.characters[templateId];
+    const facing = this.facings.get(id) || "se";
     c.fillStyle = "#0006";
     c.beginPath();
     c.ellipse(
@@ -240,10 +267,10 @@ export class Renderer {
     c.fill();
     if (d?.image) {
       const f =
-        d.frames[this.facing]?.[
+        d.frames[facing]?.[
           moving ? "walk" + (1 + (Math.floor(t / 140) % 2)) : "idle"
         ] || d.frames.se.idle;
-      const h = this.tile * (id === "donut" ? 0.82 : 1.22),
+      const h = this.tile * (d.renderHeightTiles ?? (id === "donut" ? 0.82 : 1.22)),
         w = (h * f.width) / f.height;
       c.drawImage(
         d.image,
@@ -251,8 +278,8 @@ export class Renderer {
         f.y,
         f.width,
         f.height,
-        x - w / 2,
-        y + this.tile * 0.37 - h,
+        x - w * (f.anchorX ?? 0.5),
+        y + this.tile * 0.25 - h * (f.anchorY ?? 1),
         w,
         h,
       );
@@ -738,6 +765,63 @@ export class Renderer {
     c.fillStyle=`rgba(25,112,132,${.018+Math.sin(time/1500+y*.6)*.01})`;
     c.fillRect(sx,sy,tile,tile);
   }
+  drawEffects(t, ox, oy, tile) {
+    const c = this.ctx, lifetime = 1450;
+    this.fx = this.fx.filter(f => t - f.start < lifetime);
+    const occupied = [];
+    const fontSize = Math.max(10, Math.min(16, Math.round(tile * .25)));
+    const height = fontSize + 9;
+    c.save();
+    c.font = `bold ${fontSize}px sans-serif`;
+    c.textAlign = "center"; c.textBaseline = "middle";
+    for (const f of this.fx) {
+      const age = t - f.start;
+      if (age < 0) continue;
+      const width = Math.min(this.canvas.width - 12, c.measureText(f.text).width + 14);
+      const x = Math.max(width/2+5, Math.min(this.canvas.width-width/2-5, ox+(f.x+.5)*tile));
+      const desired = oy+f.y*tile-(f.slot || 0)*(height+3)-Math.min(14,age*.012);
+      const intersects = y => occupied.some(b => Math.abs(x-b.x)<(width+b.width)/2+4 && Math.abs(y-b.y)<height+3);
+      let y = Math.max(height/2+5, Math.min(this.canvas.height-height/2-5, desired));
+      // Resolve adjacent-cell labels as one overlay, after every sprite/scenery draw.
+      for (let step=1; intersects(y) && step<40; step++) {
+        const offset=Math.ceil(step/2)*(height+3)*(step%2 ? -1 : 1);
+        const candidate=desired+offset;
+        if (candidate>height/2+4 && candidate<this.canvas.height-height/2-4) y=candidate;
+      }
+      occupied.push({x,y,width});
+      c.globalAlpha = Math.max(0, Math.min(1, Math.min(age/90, (lifetime-age)/300)));
+      c.fillStyle="#0b1119ed";c.fillRect(x-width/2,y-height/2,width,height);
+      c.strokeStyle="#000";c.lineWidth=3;c.strokeText(f.text,x,y,width-10);
+      c.fillStyle=f.kind === "heal" ? "#8ce6b0" : f.kind === "explosion" ? "#ffb068" : "#ffe0a0";
+      c.fillText(f.text,x,y,width-10);
+    }
+    c.restore();
+  }
+  effectObjectAsset(object) {
+    const tags = new Set(object.tags || []);
+    if (tags.has("barrel") || tags.has("explosive")) return "ab-clean-barrel-wood-top";
+    // A generic destructible container uses the preserved crate, never a collision-only tile.
+    return "ab-clean-crate-wood-cross";
+  }
+  drawHazards(map, ox, oy, tile) {
+    const c = this.ctx;
+    const styles = {
+      oil:["#21172bc9","#b99a65","OIL"], water:["#267eab70","#86d6f1","WATER"],
+      burning:["#e75c2270","#ffd27b","FIRE"], fire:["#e75c2270","#ffd27b","FIRE"],
+      ice:["#9ed7e980","#d3f7ff","ICE"], poison:["#688d3270","#c3e98a","POISON"],
+      smoke:["#78738380","#e6e0ec","SMOKE"],
+    };
+    c.save();
+    for (const hazard of map.hazards || []) {
+      const [fill,stroke,label] = styles[hazard.tag] || ["#a88b4a70","#e2c77e",hazard.tag.toUpperCase()];
+      const x = ox+hazard.x*tile, y = oy+hazard.y*tile;
+      c.fillStyle=fill;c.strokeStyle=stroke;c.lineWidth=2;
+      c.beginPath();c.ellipse(x+tile*.5,y+tile*.55,tile*.43,tile*.31,0,0,Math.PI*2);c.fill();c.stroke();
+      c.fillStyle=stroke;c.textAlign="center";c.font=`bold ${Math.max(9,Math.floor(tile*.16))}px sans-serif`;
+      c.fillText(label,x+tile*.5,y+tile*.87,tile*.88);
+    }
+    c.restore();
+  }
   frame(t) {
     const c = this.ctx,
       canvas = this.canvas,
@@ -788,10 +872,12 @@ export class Renderer {
               this.propFloor.add((p.y + dy) * map.width + p.x + dx);
         }
       }
+      const destroyedPropIds = new Set((map.effectObjects || []).filter(o => o.destroyed && o.propId).map(o => o.propId));
       const propQueue = (map.props || [])
-        .filter(p => p.layer !== "underlay")
+        .filter(p => p.layer !== "underlay" && !destroyedPropIds.has(p.id))
         .slice().sort((a, b) => a.y + a.height - b.y - b.height);
       const drawProp = p => {
+        if (destroyedPropIds.has(p.id)) return;
         this.object(p.assetId,ox+p.x*tile,oy+p.y*tile,p.width || 1,p.height || 1,p.rotation || 0);
         if (p.assetId === "industrial-pipe" && p.layer === "wallfixture") {
           const collar=this.materials?.["industrial-pipeV-upper-collar"];
@@ -871,6 +957,8 @@ export class Renderer {
             }
           }
         }
+      // Rules own hazard lifetimes/reactions; this overlay only presents current state.
+      if (battle) this.drawHazards(map, ox, oy, tile);
       const architecture = this.assembleArchitecture(map);
       const architectureQueue = [];
       for (const part of architecture) {
@@ -882,7 +970,7 @@ export class Renderer {
       this.drawSurfaceLighting(map,ox,oy,tile);
       if (battle) {
         for (const o of map.obstacles || [])
-          if (!this.propFloor.has(o.y * map.width + o.x) && map.tiles?.[o.y * map.width + o.x] !== "~" && map.tiles?.[o.y * map.width + o.x] !== "#") this.object(
+          if (!(map.effectObjects || []).some(e => o.x >= e.x && o.x < e.x+(e.width || 1) && o.y >= e.y && o.y < e.y+(e.height || 1)) && !this.propFloor.has(o.y * map.width + o.x) && map.tiles?.[o.y * map.width + o.x] !== "~" && map.tiles?.[o.y * map.width + o.x] !== "#") this.object(
             "ab-clean-crate-wood-cross",
             ox + o.x * tile,
             oy + o.y * tile,
@@ -953,7 +1041,12 @@ export class Renderer {
         }
       }
       // Props and architectural fronts share one depth ordering around actors.
+      const effectProps = (map.effectObjects || []).filter(o => !o.destroyed &&
+        !(o.propId && (map.props || []).some(p => p.id === o.propId))).map(o => ({
+          ...o, layer:"object", assetId:o.assetId || this.effectObjectAsset(o),
+        }));
       const sceneryQueue = [
+        ...effectProps.map(p => ({depth:p.y+(p.height || 1),prop:p})),
         ...propQueue.map(p => ({depth:p.y+p.height+(p.layer === "wallfixture" ? .15 : 0), prop:p})),
         ...architectureQueue.map(part => ({depth:part.depth, part})),
         ...this.pipeConnections(map).map(run=>({depth:run.depth,run})),
@@ -969,6 +1062,8 @@ export class Renderer {
           p = { x: u.x, y: u.y };
           this.positions.set(u.id, p);
         }
+        const dx = u.x - p.x, dy = u.y - p.y;
+        if (Math.abs(dx) + Math.abs(dy) > .02) this.facings.set(u.id, Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "se" : "nw") : (dy > 0 ? "sw" : "ne"));
         const moving = Math.abs(p.x - u.x) + Math.abs(p.y - u.y) > 0.02;
         p.x += (u.x - p.x) * 0.22;
         p.y += (u.y - p.y) * 0.22;
@@ -1003,20 +1098,8 @@ export class Renderer {
         }
       }
       for (const entry of sceneryQueue) drawScenery(entry);
-      this.fx = this.fx.filter((f) => t - f.start < 1100);
-      for (const f of this.fx) {
-        const age = t - f.start;
-        c.globalAlpha = 1 - age / 1100;
-        c.fillStyle = "#ffe0a0";
-        c.font = "bold 24px Georgia";
-        c.textAlign = "center";
-        c.fillText(
-          f.text,
-          ox + (f.x + 0.5) * tile,
-          oy + f.y * tile - age * 0.045,
-        );
-        c.globalAlpha = 1;
-      }
+      this.drawEffects(t, ox, oy, tile);
+
     }
     requestAnimationFrame((t) => this.frame(t));
   }

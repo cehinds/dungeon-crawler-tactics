@@ -2,9 +2,11 @@
 
 A new, compact Floor One RPG for Carl and Princess Donut. Explore a connected dungeon, meet Mordecai, prepare in the safe room, and resolve small turn based tactical encounters on the way to the floor boss and exit. The interface takes its navigation cues from classic menu driven RPGs.
 
-The authored content now defines a 20-level progression curve, early ranks for the five current skills, successful-use practice thresholds, and rewards for the five current encounters. These are tactical adaptations, and the existing encounter set is only a foundation; it does not yet provide enough content for a complete level 1–20 campaign. See [the progression review](Rebuild/PROGRESSION-REVIEW.md) for source status and limits.
+The authored content defines a progression curve up to level 20, early ranks for the five current skills, successful-use practice thresholds, and rewards for the five current encounters. The current playable route reaches level 6 and Floor One skills train to rank 5; rank capacity 20 is a future ceiling, not a universal mastery grant. These are tactical adaptations, and the encounter set does not provide a complete level 1–20 campaign. See [the progression review](Rebuild/PROGRESSION-REVIEW.md) for source status and limits.
 
-The game rules live in pure C# under `Rebuild/Core`. The browser host runs those same rules through .NET 8 WebAssembly; JavaScript presents the map, menus and battle forecast. The authored items, skills, enemies and dialogue live in `Web/wwwroot/data/floor-one-rpg.json`. Preserved source lore and equipment/skill references are in `Rebuild/ReferenceData`.
+The game rules live in pure C# under `Rebuild/Core`. The browser host runs those same rules through .NET 8 WebAssembly; JavaScript presents the map, menus and battle forecast. Active items, skills, enemies, encounters, dialogue, progression, and effect rules live in `Web/wwwroot/data/floor-one-rpg.json`; the live party roster and typed locations, stories, recipes, facilities, and modifiers come from `Web/wwwroot/data/content-catalog.json`. The older `party[]` in `floor-one-rpg.json` is compatibility metadata; edit `characters[]` in `content-catalog.json` to change live membership or starting skills. The game currently covers a compact Floor One slice, not a complete Book 1 campaign or Floors 1–20. Preserved source lore and equipment/skill references are in `Rebuild/ReferenceData`. See [the content authoring guide](Rebuild/CONTENT-AUTHORING.md) and [Block A checklist](Rebuild/BLOCK-A-CHECKLIST.md) for scope and evidence rules.
+
+The canonical art library is maintained separately in AI-Art. `Web/wwwroot/data/asset-catalog.json` registers asset metadata, while `Tools/hosted-assets.json` pins the small checksum-verified hosted subset. A registration in the asset catalog does not by itself mean the file is hosted.
 
 New worlds use generation version 4 on a 90 × 52 world map. Supported version 1, version 2 and version 3 safe-room checkpoints migrate to the current world after validation, preserving player progress. The seeded C# generator reads `Web/wwwroot/data/concept-room-rules.json` to assemble room shapes, corridors and whole-object furniture footprints. Its goblin workshop and Ball of Swine boss chamber share an inset industrial-sewer room grammar with side-channel crossings and a north gate right of center; both battle boards use that room's dimensions (18 × 11), with a reserved 12 × 6 central area and three-cell-long crossings through asymmetric water wings, while other tactical encounters retain the 10 × 8 board. Other room arrangements take composition cues from overhead concept sheets: teaching tables, perimeter refuse, restaurant dining aisles, DMV waiting benches, and Sebastian’s separate rest/wash zones. Solid props block movement while reserved approaches keep encounters and services reachable. See `Rebuild/CONCEPT-LAYOUTS.md` for source references, the shared industrial room, and the distinction between source lore and authored layout choices.
 
@@ -33,10 +35,31 @@ python3 Tools/prepare_hosted_assets.py Web/publish/wwwroot
 python3 -m http.server 8765 --directory Web/publish/wwwroot
 ```
 
+Validate catalog references and asset metadata before release:
+
+```sh
+dotnet run --project Rebuild/Tests -c Release -- --validate-content
+python3 Tools/validate_assets.py --wwwroot Web/publish/wwwroot --self-test
+```
+
+With the published host running, the asset registration browser is at `http://localhost:8765/asset-browser.html`.
+
 Open `http://localhost:8765`. A browser integration check is available after installing Python Playwright and Chromium:
 
 ```sh
 python3 Tools/playtest_floor_one.py --url http://localhost:8765 --browser /usr/bin/chromium
+```
+
+To verify the authored Floor One route and load the earned version-2 safe-room checkpoint:
+
+```sh
+python3 Tools/playtest_block_a.py --url http://localhost:8765 --browser /usr/bin/chromium --checkpoint Rebuild/Tests/Fixtures/earned-safe-v2.json
+```
+
+The optional environmental check exercises the workshop oil spill, water runoff, explosive crate, and persistent encounter-object receipt in the published browser:
+
+```sh
+python3 Tools/playtest_block_a.py --environment --environment-object workshop-oil-crate --url http://localhost:8765 --browser /usr/bin/chromium
 ```
 
 To check two generated layouts, prop collision and room screenshots:

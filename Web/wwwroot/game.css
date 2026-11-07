@@ -412,3 +412,13 @@ canvas {
   .character-progress small { font-size: 9px; }
   .skill-row .tag { display: block; line-height: 1.5; }
 }
+
+/* Rules-authored effect and progression readouts. */
+.status-list { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px; }
+.status-chip { display:inline-flex; gap:5px; align-items:center; border:1px solid #b49264; border-radius:4px; padding:2px 5px; color:#f1d9a7; font-size:11px; }
+.status-chip small { color:#c9c2b4; }
+.effect-list { padding-left:20px; line-height:1.6; overflow-wrap:anywhere; }
+.cost-warning { color:#f2ad94; }
+
+.cell-target-grid { display:grid; grid-template-columns:repeat(var(--columns), minmax(26px,1fr)); gap:3px; overflow:auto; max-width:100%; }
+.cell-target-grid button { padding:5px 2px; min-width:26px; font-size:10px; }

@@ -16,12 +16,13 @@ public class SkillRank
 }
 public class SkillProgress
 {
+    public string targetKind = "enemy";
     public string skillId = "",
                 nextEffect = "",
                 resource = "Mana",
                 effect = "",
                 disabledReason = "";
-    public int trainedRank, effectiveRank, effectRank, gearBonusRank, practice, practiceToNext, maxRank, cost;
+    public int trainedRank, effectiveRank, effectRank, gearBonusRank, temporaryBonusRank, permissionMaxRank, rankCapacity, practice, practiceToNext, maxRank, cost;
     public double practiceProgressPercent;
     public bool canUse;
     public int[] manaOptions = [];
@@ -46,12 +47,19 @@ public sealed class Progression
             if (k.ranks.Length == 0)
                 k.ranks = [new() { rank = k.startingRank, power = k.power,
                 cost = k.cost, range = k.range }];
-            if (k.startingRank < 1 || k.startingRank > 5 || k.ranks[0] == null || k.ranks[0].rank != k.startingRank || k.ranks[0].practiceRequired != 0 || k.ranks.Where((r, i) => r == null || r.rank != k.startingRank + i || r.rank > 5 || r.practiceRequired < 0 || (i > 0 && r.practiceRequired <= k.ranks[i - 1].practiceRequired) || r.practiceRequired > 1000000 || r.cost is < 0 or > 100 || r.power is < 0 or > 1000 || r.range is < 1 or > 100 || !double.IsFinite(r.powerMultiplier) || r.powerMultiplier <= 0 || r.powerMultiplier > 10 || r.manaOptions == null || r.manaOptions.Any(m => m < r.cost || m > 100) || r.manaOptions.Distinct().Count() != r.manaOptions.Length || (r.manaOptions.Length > 0 && !r.manaOptions.Contains(r.cost)) || r.manaPowerPerPoint is < 0 or > 100).Any())
+            if (k.startingRank < 1 || k.startingRank > k.permissionMaxRank || k.ranks[0] == null || k.ranks[0].rank != k.startingRank || k.ranks[0].practiceRequired != 0 || k.ranks.Where((r, i) => r == null || r.rank != k.startingRank + i || r.rank > k.rankCapacity || r.practiceRequired < 0 || (i > 0 && r.practiceRequired <= k.ranks[i - 1].practiceRequired) || r.practiceRequired > 1000000 || r.cost is < 0 or > 100 || r.power is < 0 or > 1000 || r.range is < 1 or > 100 || !double.IsFinite(r.powerMultiplier) || r.powerMultiplier <= 0 || r.powerMultiplier > 10 || r.manaOptions == null || r.manaOptions.Any(m => m < r.cost || m > 100) || r.manaOptions.Distinct().Count() != r.manaOptions.Length || (r.manaOptions.Length > 0 && !r.manaOptions.Contains(r.cost)) || r.manaPowerPerPoint is < 0 or > 100).Any())
                 throw new InvalidOperationException("Invalid skill progression: " + k.id);
         }
         if (content.encounters.Any(e => e == null || e.xpReward < 0 || e.xpReward > 100000 || e.goldReward < 0 || e.goldReward > 100000))
             throw new InvalidOperationException("Invalid encounter rewards.");
     }
+    public int EffectiveRank(Unit unit, Skill skill)
+    {
+        int gear = content.items.FirstOrDefault(i => i.id == unit.equipment)?.rankModifiers.GetValueOrDefault(skill.id) ?? 0;
+        int temporary = TemporaryBonus(unit, skill.id);
+        return Math.Clamp(unit.ranks.GetValueOrDefault(skill.id, skill.startingRank) + gear + temporary, 1, skill.permissionMaxRank);
+    }
+    public int TemporaryBonus(Unit unit, string skillId) => unit.temporaryRankModifiers.GetValueOrDefault(skillId) + content.temporaryModifiers.Where(d => d.skillId == skillId && unit.statuses.Any(status => status.id == d.id && status.duration > 0)).Sum(d => d.amount);
     public SkillRank Row(Skill skill, int rank) => skill.ranks.LastOrDefault(r => r.rank <= rank) ?? new()
     {
         rank = skill.startingRank,
@@ -70,23 +78,30 @@ public sealed class Progression
             var k = content.skills.FirstOrDefault(k => k.id == id) ?? new Skill { id = id };
             int rank = u.ranks.GetValueOrDefault(id, k.startingRank),
                 practice = u.skillPractice.GetValueOrDefault(id);
-            var next = k.ranks.FirstOrDefault(r => r.rank > rank);
-            var row = Row(k, rank);
+            var next = k.ranks.FirstOrDefault(r => r.rank > rank && r.rank <= k.permissionMaxRank);
+            var trainedRow = Row(k, rank);
+            int effective = EffectiveRank(u, k);
+            var row = Row(k, effective);
             return new SkillProgress
             {
                 skillId = id,
+                targetKind = k.targetKind,
                 trainedRank = rank,
-                effectiveRank = rank,
+                temporaryBonusRank = TemporaryBonus(u, id),
+                permissionMaxRank = k.permissionMaxRank,
+                rankCapacity = k.rankCapacity,
+                effectiveRank = effective,
+                gearBonusRank = content.items.FirstOrDefault(i => i.id == u.equipment)?.rankModifiers.GetValueOrDefault(id) ?? 0,
                 effectRank = row.rank,
                 cost = row.cost,
                 resource = "Mana",
-                effect = $"Power {row.power}; multiplier {row.powerMultiplier:0.##}; range {row.range}" + (rank > row.rank ? $". Legacy trained rank {rank}; effects capped at {row.rank}." : ""),
+                effect = $"Power {row.power}; multiplier {row.powerMultiplier:0.##}; range {row.range}" + (rank > row.rank ? $". Trained rank {rank}; current effect rank {row.rank}." : ""),
                 canUse = u.hp > 0 && u.mp >= row.cost && (!inBattle || (!u.acted && !u.ended)),
                 disabledReason = u.hp <= 0 ? "Crawler is down" : u.mp < row.cost ? "Not enough mana" : inBattle && (u.acted || u.ended) ? "Action unavailable" : "",
-                practiceProgressPercent = next == null ? 100 : Math.Clamp(100.0 * (practice - row.practiceRequired) / (next.practiceRequired - row.practiceRequired), 0, 100),
+                practiceProgressPercent = next == null ? 100 : Math.Clamp(100.0 * (practice - trainedRow.practiceRequired) / (next.practiceRequired - trainedRow.practiceRequired), 0, 100),
                 practice = practice,
                 practiceToNext = next == null ? 0 : Math.Max(0, next.practiceRequired - practice),
-                maxRank = k.ranks.LastOrDefault()?.rank ?? rank,
+                maxRank = Math.Min(k.permissionMaxRank, k.ranks.LastOrDefault()?.rank ?? rank),
                 manaOptions = row.manaOptions,
                 nextEffect = next == null ? "Early mastery complete" : $"Rank {next.rank}: power {next.power}, multiplier {next.powerMultiplier:0.##}, mana {next.cost}, range {next.range}"
             };
@@ -95,7 +110,7 @@ public sealed class Progression
     public void Practice(Unit u, Skill k)
     {
         u.skillPractice[k.id] = Math.Min(1000000, u.skillPractice.GetValueOrDefault(k.id) + content.progression.practicePerUse);
-        foreach (var row in k.ranks.Where(r => r.practiceRequired <= u.skillPractice[k.id]))
+        foreach (var row in k.ranks.Where(r => r.rank <= k.permissionMaxRank && r.practiceRequired <= u.skillPractice[k.id]))
             u.ranks[k.id] = Math.Max(u.ranks.GetValueOrDefault(k.id, k.startingRank), row.rank);
         Refresh(u);
     }
@@ -127,11 +142,11 @@ public sealed class Progression
             if (k == null)
                 continue;
             int rank = u.ranks[id];
-            if (rank < k.startingRank)
+            if (rank < k.startingRank || rank > k.rankCapacity)
                 return false;
             if (u.skillPractice[id] < Row(k, rank).practiceRequired)
                 return false;
-            if (rank <= k.ranks.Last().rank && rank != k.ranks.Last(r => r.practiceRequired <= u.skillPractice[id]).rank)
+            if (rank <= k.ranks.Last().rank && rank != k.ranks.Last(r => r.rank <= k.permissionMaxRank && r.practiceRequired <= u.skillPractice[id]).rank)
                 return false;
         }
         return true;

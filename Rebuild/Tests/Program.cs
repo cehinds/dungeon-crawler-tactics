@@ -1,6 +1,12 @@
 using DccRebuild;
+if (args.Length > 0 && args[0] == "--validate-content")
+{
+    Environment.ExitCode = CatalogChecks.ValidateFile(args.Length > 1 ? args[1] : Path.Combine(AppContext.BaseDirectory, "floor-one-rpg.json"));
+    return;
+}
 void Assert(bool ok, string label) { if (!ok) throw new Exception(label); }
 var json = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "floor-one-rpg.json"));
+EffectChecks.Run();
 var g = new Game(json, 71);
 var v = g.GetView();
 void Walk(string id) { var o = v.world.objects.First(o => o.id == id); var q = new Queue<(int x, int y)>(); var prev = new Dictionary<(int, int), (int, int)>(); var start = (v.x, v.y); q.Enqueue(start); prev[start] = start; var goal = start; while (q.Count > 0) { var p = q.Dequeue(); if (Math.Abs(p.x - o.x) + Math.Abs(p.y - o.y) <= 1) { goal = p; break; } foreach (var d in new[] { (1, 0), (-1, 0), (0, 1), (0, -1) }) { var n = (p.x + d.Item1, p.y + d.Item2); if (n.Item1 >= 0 && n.Item2 >= 0 && n.Item1 < v.world.width && n.Item2 < v.world.height && v.world.tiles[n.Item2 * v.world.width + n.Item1] == "." && !prev.ContainsKey(n)) { prev[n] = p; q.Enqueue(n); } } } var path = new List<(int, int)>(); while (goal != start) { path.Add(goal); goal = prev[goal]; } path.Reverse(); foreach (var p in path) g.Handle(new() { type = "move", direction = p.Item1 > v.x ? "east" : p.Item1 < v.x ? "west" : p.Item2 > v.y ? "south" : "north" }); }
@@ -259,3 +265,14 @@ for (int seed = 0; seed < 30; seed++)
 Console.WriteLine("PASS: industrial grammar, open fighting floor, water gutters, shared arena collision and functional stair.");
 
 ProgressionChecks.Run(json);
+
+CatalogChecks.Run(json);
+
+
+FoundationSaveChecks.Run(json);
+
+EffectChecks.ResourceAndMovement(json);
+
+EffectChecks.GameFlows(json);
+
+EffectChecks.AuthoredDamageBonus(json);

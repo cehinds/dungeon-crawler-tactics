@@ -166,8 +166,16 @@ function manaChooser() {
   if (!p.manaOptions.includes(manaSpend)) manaSpend = p.manaOptions[0];
   return `<label class="mana-choice">Mana spend <select data-mana-spend aria-label="Magic Missile Mana spend" title="${esc(p.effect || "")} Select Mana to preview the resulting damage.">${p.manaOptions.map((n) => `<option value="${n}" ${n === manaSpend ? "selected" : ""}>${n} Mana</option>`).join("")}</select></label><p class="map-key">${esc(p.effect || "")} Choose Mana before forecasting.</p>`;
 }
+function statuses(u) {
+  return (u.statuses || []).length ? `<div class="status-list" aria-label="Active effects">${u.statuses.map((s) => `<span class="status-chip" title="${esc(s.tags?.join(", ") || s.id)}">◈ ${esc(s.name || s.id)} <small>${s.duration < 0 ? "ongoing" : `${s.duration} turns`}</small></span>`).join("")}</div>` : "";
+}
+function effectSummary(events = []) {
+  const names = new Map([...(view.battle?.units || view.party), ...(view.battle?.enemies || []), ...(view.battle?.effectObjects || [])].map((u) => [u.id, u.name || u.label || u.id.replaceAll("-", " ")]));
+  const labels = { damage:"Damage", heal:"Healing", resource:"Resource", statusApplied:"Effect applied", statusRemoved:"Effect removed", move:"Move", displace:"Push", blocked:"Blocked", objectDamaged:"Object damage", objectDestroyed:"Object destroyed", explosion:"Explosion", reaction:"Reaction" };
+  return events.filter((e) => !(["damage", "heal", "resource", "objectDamaged"].includes(e.kind) && e.amount === 0)).map((e) => `<li data-effect-kind="${esc(e.kind)}">${esc(e.detail || [labels[e.kind] || e.kind, names.get(e.targetId) || e.targetId, e.amount || "", e.tag?.replaceAll("-", " ")].filter(Boolean).join(" · "))}</li>`).join("");
+}
 function mini(u) {
-  return `<div class="party-mini" data-character="${esc(u.id)}">${portrait(u)}<div class="unit-info"><strong>${esc(u.name)}</strong> <small>Lv ${u.level}</small><div><small>HP ${u.hp}/${u.maxHp} · Mana ${u.mp}/${u.maxMp}</small></div><div class="meter"><i style="width:${(u.hp / u.maxHp) * 100}%"></i></div><div class="meter mp"><i style="width:${(u.mp / u.maxMp) * 100}%"></i></div>${characterProgress(u, true)}</div></div>`;
+  return `<div class="party-mini" data-character="${esc(u.id)}">${portrait(u)}<div class="unit-info"><strong>${esc(u.name)}</strong> <small>Lv ${u.level}</small><div><small>HP ${u.hp}/${u.maxHp} · Mana ${u.mp}/${u.maxMp}</small></div><div class="meter"><i style="width:${(u.hp / u.maxHp) * 100}%"></i></div><div class="meter mp"><i style="width:${(u.mp / u.maxMp) * 100}%"></i></div>${characterProgress(u, true)}${statuses(u)}</div></div>`;
 }
 function renderDeck() {
   if (view.mode !== "battle") {
@@ -234,9 +242,10 @@ function tileClick(x, y) {
   }
   command("moveUnit", { x, y });
 }
-async function forecast(targetId) {
+async function forecast(targetId, x = 0, y = 0) {
   await command("forecast", {
     targetId,
+    x, y,
     manaSpend,
     skillId:
       skill ||
@@ -272,7 +281,7 @@ function renderModal() {
     body = view.party
       .map(
         (p) =>
-          `<div class="row">${portrait(p)}<div><strong>${esc(p.name)} · Level ${p.level}</strong><p>HP ${p.hp}/${p.maxHp} · Mana ${p.mp}/${p.maxMp}</p>${characterProgress(p)}<p>Power ${p.power} · Armor ${p.armor}</p><p>${esc(p.equipment ? (content.items.find((item) => item.id === p.equipment)?.name || p.equipment) : "No equipment equipped")}</p></div></div>`,
+          `<div class="row">${portrait(p)}<div><strong>${esc(p.name)} · Level ${p.level}</strong><p>HP ${p.hp}/${p.maxHp} · Mana ${p.mp}/${p.maxMp}</p>${characterProgress(p)}<p>Power ${p.power} · Armor ${p.armor}</p>${statuses(p)}<p>${esc(p.equipment ? (content.items.find((item) => item.id === p.equipment)?.name || p.equipment) : "No equipment equipped")}</p></div></div>`,
       )
       .join("");
   else if (modal === "Equipment")
@@ -287,7 +296,7 @@ function renderModal() {
         })
         .join("");
   else if (modal === "Skills")
-    body = `<div class="actions character-tabs" role="group" aria-label="Character skills">${view.party.map((p) => `<button data-skills-actor="${esc(p.id)}" aria-pressed="${p.id === (skillsActorId || u.id)}" class="${p.id === (skillsActorId || u.id) ? "active" : ""}">${esc(p.name)}</button>`).join("")}</div><p class="map-key">Tactical adaptation: successful skill uses earn practice toward trained ranks, separately from character XP.</p>` + view.party.filter((p) => p.id === (skillsActorId || u.id))
+    body = `<div class="actions character-tabs" role="group" aria-label="Character skills">${view.party.map((p) => `<button data-skills-actor="${esc(p.id)}" aria-pressed="${p.id === (skillsActorId || u.id)}" class="${p.id === (skillsActorId || u.id) ? "active" : ""}">${esc(p.name)}</button>`).join("")}</div><p class="map-key">Successful skill uses earn practice toward trained ranks. Character XP raises your level.</p>` + view.party.filter((p) => p.id === (skillsActorId || u.id))
       .map(
         (partyMember) =>
           `<h2>${esc(partyMember.name)}</h2>` +
@@ -295,7 +304,7 @@ function renderModal() {
             .map((id) => {
               const s = content.skills.find((s) => s.id === id) || {};
               const p = skillState(partyMember, id);
-              return `<div class="row skill-row" data-skill-progress="${esc(id)}"><div><strong>${esc(s.name || id)}</strong> <span class="tag">Trained ${p?.trainedRank ?? partyMember.ranks?.[id] ?? 1} · Effective ${p?.effectiveRank ?? partyMember.ranks?.[id] ?? 1}</span><p>${esc(s.description)}</p>${p ? `<p class="skill-effect">${esc(p.effect)} · ${p.cost} ${esc(p.resource || "Mana")}</p><p>${p.trainedRank >= p.maxRank ? "Maximum rank" : `Practice ${p.practice} · ${p.practiceToNext} to next rank`}</p>${progressBar(p.practiceProgressPercent, "Skill practice", "practice")}<p class="next-effect">Next: ${esc(p.nextEffect)}</p>${p.disabledReason ? `<p class="cost-warning">${esc(p.disabledReason)}</p>` : ""}` : ""}</div></div>`;
+              return `<div class="row skill-row" data-skill-progress="${esc(id)}"><div><strong>${esc(s.name || id)}</strong> <span class="tag">Trained ${p?.trainedRank ?? partyMember.ranks?.[id] ?? 1} · Effective ${p?.effectiveRank ?? partyMember.ranks?.[id] ?? 1}</span><p>${esc(s.description)}</p>${p ? `<p class="map-key">Available cap ${p.permissionMaxRank ?? p.maxRank} · Rank capacity ${p.rankCapacity ?? 20} · Gear ${p.gearBonusRank >= 0 ? "+" : ""}${p.gearBonusRank || 0} · Temporary ${p.temporaryBonusRank >= 0 ? "+" : ""}${p.temporaryBonusRank || 0}</p><p class="skill-effect">${esc(p.effect)} · ${p.cost} ${esc(p.resource || "Mana")}</p><p>${p.trainedRank >= p.maxRank ? "Maximum rank" : `Practice ${p.practice} · ${p.practiceToNext} to next rank`}</p>${progressBar(p.practiceProgressPercent, "Skill practice", "practice")}<p class="next-effect">Next: ${esc(p.nextEffect)}</p>${p.disabledReason ? `<p class="cost-warning">${esc(p.disabledReason)}</p>` : ""}` : ""}</div></div>`;
             })
             .join(""),
       )
@@ -311,7 +320,7 @@ function renderModal() {
         })
         .join("") || "<p>No consumables.</p>";
   else if (modal === "Journal")
-    body = (view.journal || [])
+    body = (view.availability || []).filter((s) => s.kind === "storyEvent" || s.kind === "facility").map((s) => `<div class="row"><div><strong>${esc(s.name)}</strong><p>${esc(s.reason || (s.available ? "Available" : "Locked"))}</p></div></div>`).join("") + (view.journal || [])
       .map(
         (s) =>
           `<div class="row"><div>${esc(typeof s === "string" ? s : s.text || s.description)}</div></div>`,
@@ -325,20 +334,17 @@ function renderModal() {
   else if (modal === "End turn")
     body =
       '<p>End the party turn? Crawlers with actions remaining will wait, then the enemies will move and attack.</p><button id="end-turn-confirm">End turn</button>';
-  else if (modal === "Targets")
-    body =
-      "<p>Select a target to preview the result.</p>" + manaChooser() +
-      view.battle.enemies
-        .filter((e) => e.hp > 0)
-        .map(
-          (e) =>
-            `<div class="row"><div>${esc(e.name)}<p>HP ${e.hp}/${e.maxHp} · Armor ${e.armor}</p></div><button data-target="${e.id}">Forecast</button></div>`,
-        )
-        .join("");
+  else if (modal === "Targets") {
+    const actor = view.battle.units.find((u) => u.id === view.selectedId);
+    const kind = skillState(actor || {}, skill || actor?.skills[0])?.targetKind || "enemy";
+    const targets = kind === "self" ? [actor] : kind === "ally" ? view.battle.units : kind === "object" ? (view.battle.effectObjects || []).filter((o) => !o.destroyed) : kind === "enemyOrObject" ? [...view.battle.enemies, ...(view.battle.effectObjects || []).filter((o) => !o.destroyed)] : kind === "cell" ? [] : view.battle.enemies;
+    body = `<p>Select ${kind === "cell" ? "a tile" : kind === "object" ? "an object" : "a target"} to preview the result. The forecast checks range and available resources.</p>` + manaChooser() +
+      (kind === "cell" ? `<div class="cell-target-grid" style="--columns:${view.battle.width}">${Array.from({length:view.battle.width * view.battle.height}, (_,i) => {const x=i % view.battle.width,y=Math.floor(i / view.battle.width); return `<button data-target-cell="${x},${y}" aria-label="Forecast tile ${x+1}, ${y+1}" title="Tile ${x+1}, ${y+1}">${x+1},${y+1}</button>`;}).join("")}</div>` : targets.filter((e) => e && e.hp > 0).map((e) => `<div class="row"><div>${esc(e.name || e.label || e.id)}<p>HP ${e.hp}${e.maxHp ? `/${e.maxHp}` : ""}${e.armor !== undefined ? ` · Armor ${e.armor}` : ""}</p>${statuses(e)}</div><button data-target="${esc(e.id)}">Forecast</button></div>`).join("") || "<p>No targets available.</p>");
+  }
   else if (modal === "Forecast") {
     const f = view.forecast;
     body = f
-      ? `<div class="forecast"><div>Damage<strong>${f.damage}</strong></div><div>Mana cost<strong>${f.cost}</strong></div></div><p data-forecast-ranks>Trained rank ${f.trainedRank} · Effective rank ${f.effectiveRank} · Range ${f.range}</p><p>${esc(f.reaction || "")}</p><div class="actions"><button id="confirm-action" ${f.valid ? "" : "disabled"}>Confirm action</button><button data-open="Targets">Choose target</button></div>`
+      ? `<div class="forecast"><div>Damage<strong>${f.damage}</strong></div><div>${esc(f.resource || "Mana")} cost<strong>${f.cost}</strong></div></div><p data-forecast-ranks>Trained rank ${f.trainedRank} · Effective rank ${f.effectiveRank} · Range ${f.range}</p><p class="${f.valid ? "" : "cost-warning"}" data-forecast-reason>${esc(f.reason || (!f.valid ? view.message : f.reaction) || "")}</p>${f.events?.length ? `<ul class="effect-list" aria-label="Forecast effects">${effectSummary(f.events)}</ul>` : ""}<div class="actions"><button id="confirm-action" ${f.valid ? "" : "disabled"}>Confirm action</button><button data-open="Targets">Choose target</button></div>`
       : "<p>Select a skill and target.</p>";
   } else if (modal === "defeat")
     body =
@@ -355,6 +361,7 @@ function renderModal() {
   $("#modal-root")
     .querySelectorAll("[data-target]")
     .forEach((b) => (b.onclick = () => forecast(b.dataset.target)));
+  $("#modal-root").querySelectorAll("[data-target-cell]").forEach((b) => { b.onclick = () => { const [x,y] = b.dataset.targetCell.split(",").map(Number); forecast("", x, y); }; });
   $("#modal-root")
     .querySelectorAll("[data-equip]")
     .forEach(

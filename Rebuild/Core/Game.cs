@@ -1,10 +1,17 @@
 namespace DccRebuild;
 public sealed class Game
 {
-    readonly Content content; readonly Progression progression; View s; string checkpoint;
+    readonly Dictionary<int, WorldMap> originalWorlds = new();
+    WorldMap OriginalWorld(int seed)
+    {
+        if (!originalWorlds.TryGetValue(seed, out var world)) originalWorlds[seed] = world = World.Build(seed);
+        return world;
+    }
+    readonly Content content; readonly ContentCatalog catalog; readonly Progression progression; View s; string checkpoint;
     public Game(string json, int seed = 1)
     {
         content = Codec.Read<Content>(json) ?? new();
+        catalog = new(content);
         progression = new(content);
         s = new()
         {
@@ -15,6 +22,15 @@ public sealed class Game
         s.y = s.world.spawnY;
         s.party = [new() { id = "carl", name = "Carl", hp = 100, maxHp = 100, mp = 12, maxMp = 12, power = 14, armor = 3, skills = ["punch", "powerful-strike", "bomb"] }, new() { id = "donut", name = "Princess Donut", hp = 65, maxHp = 65, mp = 45, maxMp = 45, power = 10, armor = 2, skills = ["magic-missile", "claw"] }];
         foreach (var p in s.party)
+        {
+            var definition = catalog.Deployable(1, []).SingleOrDefault(c => (c.runtimeId == "" ? c.id.Replace("crawler.", "") : c.runtimeId) == p.id);
+            if (definition != null)
+            {
+                p.name = definition.name;
+                p.skills = definition.skillIds;
+            }
+        }
+        foreach (var p in s.party)
             foreach (var k in p.skills)
                 p.ranks[k] = Skill(k).startingRank;
         foreach (var p in s.party)
@@ -23,7 +39,7 @@ public sealed class Game
                 p.skillPractice[k] = 0;
             progression.Refresh(p);
         }
-        foreach (var i in content.items.Where(i => i.kind == "consumable").Take(2))
+        foreach (var i in content.items.Where(i => i.kind == "consumable" && i.availability.Allows(s.floor, s.unlockedEvents)).Take(2))
             s.inventory.Add(new()
             {
                 itemId = i.id,
@@ -36,6 +52,13 @@ public sealed class Game
     {
         foreach (var u in s.party)
             progression.Refresh(u, s.mode == "battle");
+        s.availability = catalog.Entries.Where(e => e.kind is "storyEvent" or "class" or "character" or "recipe" or "facility").Select(e => new AvailabilityView
+        {
+            kind = e.kind, id = e.definition.id, name = e.definition.name,
+            available = e.definition.availability.Allows(s.floor, s.unlockedEvents),
+            unlocked = s.unlockedEvents.Contains(e.definition.id),
+            reason = e.definition.availability.Allows(s.floor, s.unlockedEvents) ? "Available" : e.definition.availability.reason != "" ? e.definition.availability.reason : $"Requires Floor {e.definition.availability.minFloor} and story prerequisites"
+        }).ToArray();
         return s;
     }
     Unit Actor(string id) => s.party.FirstOrDefault(u => u.id == (id == "" ? s.selectedId : id));
@@ -43,6 +66,7 @@ public sealed class Game
     bool Near(WorldObject o) => Distance(s.x, s.y, o.x, o.y) <= 1;
     public View Handle(Command c)
     {
+        if (s.battle != null && c.type != "forecast") s.battle.effectEvents = [];
         var pending = s.forecast;
         if (c.type == "confirm" && pending != null)
         {
@@ -54,6 +78,7 @@ public sealed class Game
                 c.skillId = pending.skillId;
             if (c.manaSpend == 0)
                 c.manaSpend = pending.manaSpend;
+            c.x = pending.x; c.y = pending.y;
         }
         s.forecast = null;
         try
@@ -120,7 +145,7 @@ public sealed class Game
         catch (InvalidOperationException e) { s.message = e.Message; }
         foreach (var u in s.party)
             progression.Refresh(u, s.mode == "battle");
-        return s;
+        return GetView();
     }
     void Require(bool condition, string message)
     {
@@ -149,6 +174,7 @@ public sealed class Game
             s.questStage = Math.Max(2, s.questStage);
             s.message = "Mordecai: That false guild was a trap. Find supplies and learn to fight together. The goblin workshop stands between you and the Ball of Swine. Hoarder and Juicer are optional challenges. Classes unlock on Floor 3.";
             Log("Met Mordecai: a guide, not a party member.");
+            Unlock("interact", o.id);
         }
         else if (o.kind == "safe")
             Rest();
@@ -158,13 +184,14 @@ public sealed class Game
             s.mode = "complete";
             s.message = "Floor 1 cleared. Carl and Donut descend together.";
             Log(s.message);
+            Unlock("interact", o.id);
         }
         else if (o.kind == "chest")
         {
             Require(!s.cleared.Contains(o.id), "This cache is empty.");
             s.cleared.Add(o.id);
             s.gold += 20;
-            var loot = content.items.Where(i => i.kind != "consumable").ToArray();
+            var loot = content.items.Where(i => i.kind != "consumable" && i.availability.Allows(s.floor, s.unlockedEvents)).ToArray();
             if (loot.Length > 0)
             {
                 int index = (int)((uint)(s.seed + s.cleared.Count * 17) % loot.Length);
@@ -192,10 +219,25 @@ public sealed class Game
     }
     void Start(WorldObject o)
     {
+        var encounter = catalog.Get<Encounter>("encounter", o.id);
+        Require(encounter.availability.Allows(s.floor, s.unlockedEvents), "This encounter is not available yet.");
+        Require(encounter.enemyIds.All(id => catalog.Get<Enemy>("enemy", id).availability.Allows(s.floor, s.unlockedEvents)), "An encounter enemy is unavailable at this story stage.");
         s.mode = "battle";
         s.turn = 1;
         s.battle = World.BuildArena(s.seed, o.id);
         s.battle.units = s.party;
+        s.battle.hazards = encounter.hazards.ToList();
+        s.battle.effectObjects = Codec.Read<EffectObject[]>(Codec.Write(encounter.effectObjects)).Where(obj => !s.destroyedEncounterObjectIds.Contains(encounter.id + ":" + obj.id)).ToList();
+        foreach (var prop in s.battle.props.Where(p => !s.destroyedPropIds.Contains(p.id) && Destructible(p) && !s.battle.effectObjects.Any(o => o.propId == p.id)))
+            s.battle.effectObjects.Add(new() { id = prop.id, propId = prop.id, x = prop.x, y = prop.y, width = prop.width, height = prop.height, hp = 12, blocksMovement = prop.blocksMovement, tags = content.explosiveAssetIds.Contains(prop.assetId) ? ["destructible", "explosive"] : ["destructible"] });
+        foreach (var prop in s.battle.props.Where(Destructible))
+            for (int y = prop.y; y < prop.y + prop.height; y++)
+                for (int x = prop.x; x < prop.x + prop.width; x++)
+                {
+                    if (s.battle.tiles.Length > 0) s.battle.tiles[y * s.battle.width + x] = ".";
+                    s.battle.obstacles = s.battle.obstacles.Where(p => p.x != x || p.y != y).ToArray();
+                }
+        s.battle.props = s.battle.props.Where(p => !s.destroyedPropIds.Contains(p.id)).ToArray();
         for (int i = 0; i < s.party.Count; i++)
         {
             var u = s.party[i];
@@ -203,22 +245,10 @@ public sealed class Game
             u.y = (s.battle.composition == "industrial-sewer" ? 3 : 2) + i * 3;
             u.moved = u.acted = u.ended = false;
         }
-        var ids = content.encounters.FirstOrDefault(e => e.id == o.id)?.enemyIds;
-        if (ids == null || ids.Length == 0)
-            ids = o.id switch
-            {
-                "false-guild" => ["enemy.goblin", "enemy.murder-dozer"],
-                "hoarder" => ["enemy.hoarder-elite", "enemy.scatterer"],
-                "juicer" => ["enemy.juicer"],
-                "ball-of-swine" => ["enemy.ball-of-swine"],
-                _ => ["enemy.goblin", "enemy.goblin-bomber"]
-            };
+        var ids = encounter.enemyIds;
         for (int i = 0; i < ids.Length; i++)
         {
-            var e = content.enemies.FirstOrDefault(e => e.id == ids[i]) ?? content.enemies.FirstOrDefault() ?? new()
-            {
-                name = "Dungeon rat"
-            };
+            var e = catalog.Get<Enemy>("enemy", ids[i]);
             s.battle.enemies.Add(new()
             {
                 id = "enemy-" + i,
@@ -230,12 +260,13 @@ public sealed class Game
                 maxHp = e.hp,
                 power = e.power,
                 armor = e.armor,
-                element = e.element
+                element = e.element,
+                tags = e.tags
             });
         }
         s.message = "Party phase. Each crawler may move and act in either order.";
     }
-    bool Free(int x, int y, Unit self) => x >= 0 && y >= 0 && x < s.battle.width && y < s.battle.height && !s.battle.obstacles.Any(o => o.x == x && o.y == y) && !s.party.Concat(s.battle.enemies).Any(u => u != self && u.hp > 0 && u.x == x && u.y == y);
+    bool Free(int x, int y, Unit self) => x >= 0 && y >= 0 && x < s.battle.width && y < s.battle.height && !s.battle.obstacles.Any(o => o.x == x && o.y == y) && !s.battle.effectObjects.Any(o => !o.destroyed && o.blocksMovement && x >= o.x && x < o.x + o.width && y >= o.y && y < o.y + o.height) && !s.party.Concat(s.battle.enemies).Any(u => u != self && u.hp > 0 && u.x == x && u.y == y);
     bool Reach(Unit u, int x, int y, int range)
     {
         var q = new Queue<(int x, int y, int n)>();
@@ -262,24 +293,28 @@ public sealed class Game
         var u = Actor(c.actorId);
         Require(u != null && u.hp > 0 && !u.ended && !u.moved, "This crawler cannot move.");
         Require(Free(c.x, c.y, u) && Reach(u, c.x, c.y, 3), "Choose a reachable empty tile within three steps.");
-        u.x = c.x;
-        u.y = c.y;
+        ApplyEffects(new() { sourceId = u.id, targetId = u.id, x = c.x, y = c.y, operations = [new() { kind = "move", x = c.x, y = c.y }] });
         u.moved = true;
         s.message = u.name + " moved.";
     }
-    Skill Skill(string id) => content.skills.FirstOrDefault(k => k.id == id) ?? new() { id = id, name = id, power = id == "punch" ? 4 : 8, range = id == "punch" ? 1 : 6, cost = id == "punch" ? 0 : 3, element = id == "fire-bolt" ? "fire" : id == "punch" ? "physical" : "arcane" };
+    Skill Skill(string id) => catalog.Get<Skill>("skill", id);
     Forecast Predict(Command c)
     {
         var u = Actor(c.actorId);
-        var t = s.battle?.enemies.FirstOrDefault(e => e.id == c.targetId);
         var k = Skill(c.skillId == "" ? (u?.skills.FirstOrDefault() ?? "punch") : c.skillId);
-        var row = progression.Row(k, u?.ranks.GetValueOrDefault(k.id, k.startingRank) ?? k.startingRank);
+        var targetUnits = k.targetKind is "ally" or "self" ? s.party : s.battle?.enemies;
+        var t = k.targetKind == "self" ? u : targetUnits?.FirstOrDefault(e => e.id == c.targetId);
+        var obj = k.targetKind is "object" or "enemyOrObject" ? s.battle?.effectObjects.FirstOrDefault(o => o.id == c.targetId && !o.destroyed) : null;
+        if (obj != null) t = new Unit { id = obj.id, name = obj.id, hp = obj.hp, x = obj.x, y = obj.y, element = "", tags = obj.tags };
+        if (k.targetKind == "cell" && s.battle != null && c.x >= 0 && c.y >= 0 && c.x < s.battle.width && c.y < s.battle.height) t = new Unit { id = "", hp = 1, x = c.x, y = c.y, element = "" };
+        var row = progression.Row(k, u == null ? k.startingRank : progression.EffectiveRank(u, k));
         int spend = c.manaSpend == 0 ? row.cost : c.manaSpend;
         bool validSpend = spend == row.cost || row.manaOptions.Contains(spend);
-        bool valid = validSpend && s.mode == "battle" && u != null && u.hp > 0 && !u.acted && !u.ended && t != null && t.hp > 0 && u.skills.Contains(k.id) && u.mp >= spend && Distance(u.x, u.y, t.x, t.y) <= row.range;
-        int reactionBonus = k.element == "arcane" && t?.element == "physical" ? 2 : k.element == "fire" && t?.element == "physical" ? 3 : 0;
-        string reaction = reactionBonus == 2 ? "Arcane impact: +2 damage (tactical adaptation)." : reactionBonus == 3 ? "Blast shock: +3 damage (tactical adaptation)." : "";
-        return new()
+        bool valid = validSpend && s.mode == "battle" && u != null && u.hp > 0 && !u.acted && !u.ended && t != null && t.hp > 0 && u.skills.Contains(k.id) && k.availability.Allows(s.floor, s.unlockedEvents) && u.mp >= spend && Distance(u.x, u.y, t.x, t.y) <= row.range;
+        var bonus = content.effectRules.damageBonuses.FirstOrDefault(rule => rule.incomingTag == k.element && t != null && (rule.targetTag == t.element || t.tags.Contains(rule.targetTag)));
+        int reactionBonus = bonus?.amount ?? 0;
+        string reaction = bonus?.reaction ?? "";
+        var forecast = new Forecast
         {
             actorId = u?.id ?? "",
             targetId = t?.id ?? "",
@@ -287,27 +322,100 @@ public sealed class Game
             cost = spend,
             manaSpend = spend,
             range = row.range,
+            x = t?.x ?? c.x, y = t?.y ?? c.y,
             effectRank = row.rank,
             trainedRank = u?.ranks.GetValueOrDefault(k.id, k.startingRank) ?? k.startingRank,
-            effectiveRank = u?.ranks.GetValueOrDefault(k.id, k.startingRank) ?? k.startingRank,
+            effectiveRank = u == null ? k.startingRank : progression.EffectiveRank(u, k),
             valid = valid,
             reaction = reaction,
-            damage = valid ? Math.Max(1, (int)Math.Round(u.power * row.powerMultiplier, MidpointRounding.AwayFromZero) + row.power + (spend - row.cost) * row.manaPowerPerPoint - t.armor + reactionBonus) : 0
+            damage = valid && k.targetKind is "enemy" or "object" or "cell" or "enemyOrObject" ? Math.Max(1, (int)Math.Round(u.power * row.powerMultiplier, MidpointRounding.AwayFromZero) + row.power + (spend - row.cost) * row.manaPowerPerPoint - t.armor + reactionBonus) : 0
         };
+        if (valid)
+        {
+            var resolved = EffectResolver.Resolve(s.battle, AttackRequest(u, t, k, forecast.damage, spend), content.effectRules);
+            forecast.valid = resolved.valid;
+            forecast.events = resolved.events;
+        }
+        return forecast;
+    }
+    EffectRequest AttackRequest(Unit actor, Unit target, Skill skill, int damage, int cost) => new()
+    {
+        sourceId = actor.id, targetId = target.id, x = target.x, y = target.y,
+        operations = new[] { new EffectOperation { kind = "resource", targetId = actor.id, amount = -cost }, new EffectOperation { kind = "damage", amount = damage, tag = skill.effectTag == "" ? skill.element : skill.effectTag, area = skill.effectRadius > 0, radius = skill.effectRadius } }.Concat(skill.effectOperations).ToList()
+    };
+    void ApplyEffects(EffectRequest request)
+    {
+        var resolution = EffectResolver.Resolve(s.battle, request, content.effectRules);
+        Require(resolution.valid, resolution.reason);
+        // Preserve the live view's unit identities while applying the resolver's isolated result.
+        foreach (var changed in resolution.state.units.Concat(resolution.state.enemies))
+        {
+            var live = s.battle.units.Concat(s.battle.enemies).Single(u => u.id == changed.id);
+            live.hp = changed.hp; live.mp = changed.mp; live.x = changed.x; live.y = changed.y;
+            live.statuses = changed.statuses; live.tags = changed.tags;
+        }
+        s.battle.effectObjects = resolution.state.effectObjects;
+        s.battle.hazards = resolution.state.hazards;
+        s.battle.effectEvents.AddRange(resolution.events);
+        s.battle.effectRevision++;
+        s.battle.obstacles = resolution.state.obstacles;
+        s.battle.props = resolution.state.props;
+        foreach (var destroyed in s.battle.effectObjects.Where(o => o.destroyed && o.propId == ""))
+        {
+            string receipt = s.battle.encounterId + ":" + destroyed.id;
+            if (content.encounters.Any(e => e.id == s.battle.encounterId && e.effectObjects.Any(o => o.id == destroyed.id && o.tags.Contains("destructible"))) && !s.destroyedEncounterObjectIds.Contains(receipt)) s.destroyedEncounterObjectIds.Add(receipt);
+        }
+        foreach (var destroyed in s.battle.effectObjects.Where(o => o.destroyed && o.propId != ""))
+        {
+            var original = OriginalWorld(s.seed).props.SingleOrDefault(p => p.id == destroyed.propId);
+            if (original != null && Destructible(original) && !s.destroyedPropIds.Contains(original.id)) s.destroyedPropIds.Add(original.id);
+        }
+        s.world = ApplyDestroyed(Codec.Read<WorldMap>(Codec.Write(OriginalWorld(s.seed))), s.destroyedPropIds);
+    }
+    bool Destructible(WorldProp prop) => Destructible(prop, OriginalWorld(s.seed));
+    bool Destructible(WorldProp prop, WorldMap trusted)
+    {
+        if (prop.layer == "wallfixture" || !content.destructibleAssetIds.Contains(prop.assetId)) return false;
+        var original = trusted.props.SingleOrDefault(p => p.id == prop.id);
+        if (original == null) return false;
+        // Solid non-fixture props are placed only on authored floor by World.Build.
+        if (original.blocksMovement) return true;
+        for (int y = original.y; y < original.y + original.height; y++)
+            for (int x = original.x; x < original.x + original.width; x++)
+                if (trusted.tiles[y * trusted.width + x] != ".") return false;
+        return true;
+    }
+    WorldMap ApplyDestroyed(WorldMap world, List<string> receipts)
+    {
+        if (receipts == null || receipts.Count != receipts.Distinct().Count()) throw new InvalidOperationException("Invalid destroyed prop receipts.");
+        foreach (var id in receipts)
+        {
+            var prop = world.props.SingleOrDefault(p => p.id == id);
+            if (prop == null || !Destructible(prop, world)) throw new InvalidOperationException("Invalid destroyed prop receipt: " + id);
+            for (int y = prop.y; y < prop.y + prop.height; y++)
+                for (int x = prop.x; x < prop.x + prop.width; x++)
+                    if (x >= 0 && y >= 0 && x < world.width && y < world.height)
+                        world.tiles[y * world.width + x] = ".";
+        }
+        world.props = world.props.Where(p => !receipts.Contains(p.id)).ToArray();
+        return world;
     }
     void Attack(Command c)
     {
         var f = Predict(c);
         Require(f.valid, "Choose a valid skill and target first.");
         var u = Actor(f.actorId);
-        var t = s.battle.enemies.First(e => e.id == f.targetId);
-        u.mp -= f.cost;
+        var t = new Unit { id = f.targetId, x = f.x, y = f.y };
+        ApplyEffects(AttackRequest(u, t, Skill(f.skillId), f.damage, f.cost));
         u.acted = true;
-        t.hp = Math.Max(0, t.hp - f.damage);
-        progression.Practice(u, Skill(f.skillId));
+        progression.Practice(Actor(f.actorId), Skill(f.skillId));
         s.message = $"{u.name} deals {f.damage} damage. {f.reaction}";
-        if (s.battle.enemies.All(e => e.hp <= 0))
-            Win();
+        if (s.party.All(unit => unit.hp <= 0))
+        {
+            s.mode = "defeat";
+            s.message = "The run ends here. Retry from the safe checkpoint.";
+        }
+        else if (s.battle.enemies.All(e => e.hp <= 0)) Win();
     }
     List<(int x, int y)> EnemyPath(Unit enemy, Unit target)
     {
@@ -343,22 +451,35 @@ public sealed class Game
     }
     void EnemyTurn()
     {
-        foreach (var e in s.battle.enemies.Where(e => e.hp > 0))
+        foreach (var enemyId in s.battle.enemies.Where(e => e.hp > 0).Select(e => e.id).ToArray())
+        {
+            var e = s.battle.enemies.First(e => e.id == enemyId);
+            EnemyAction(e);
+        }
+        ApplyEffects(new() { operations = [new() { kind = "tick" }] });
+        FinishEnemyTurn();
+    }
+    void EnemyAction(Unit e)
+    {
+        if (e.hp > 0)
         {
             var target = s.party.Where(u => u.hp > 0).OrderBy(u => Distance(e.x, e.y, u.x, u.y)).ThenBy(u => u.id).FirstOrDefault();
             if (target == null)
-                break;
+                return;
             // Search once per enemy, preserving deterministic cardinal neighbor order.
             // The goal is any free square adjacent to the target, never its occupied tile.
             var path = EnemyPath(e, target);
             foreach (var step in path.Take(3))
             {
-                e.x = step.x;
-                e.y = step.y;
+                ApplyEffects(new() { sourceId = e.id, targetId = e.id, x = step.x, y = step.y, operations = [new() { kind = "move", x = step.x, y = step.y }] });
             }
             if (Distance(e.x, e.y, target.x, target.y) <= 1)
-                target.hp = Math.Max(0, target.hp - Math.Max(1, e.power - target.armor));
+                ApplyEffects(new() { sourceId = e.id, targetId = target.id, x = target.x, y = target.y, operations = [new() { kind = "damage", amount = Math.Max(1, e.power - target.armor), tag = e.element }] });
         }
+    }
+    void FinishEnemyTurn()
+    {
+        if (s.battle.enemies.All(e => e.hp <= 0) && s.party.Any(u => u.hp > 0)) { Win(); return; }
         if (s.party.All(u => u.hp <= 0))
         {
             s.mode = "defeat";
@@ -383,6 +504,23 @@ public sealed class Game
         s.battle = null;
         s.message = id == "ball-of-swine" ? "Guardian defeated. Reach the stairwell to finish Floor 1." : "Victory. Rewards received; return to Mordecai or continue the objective.";
         Log("Cleared " + id + ".");
+        Unlock("clear", id);
+    }
+    void Unlock(string trigger, string id)
+    {
+        foreach (var ev in content.storyEvents.Where(e => e.trigger == trigger && e.triggerId == id))
+        {
+            if (!ev.availability.Allows(s.floor, s.unlockedEvents) || s.unlockedEvents.Contains(ev.id)) continue;
+            s.unlockedEvents.Add(ev.id);
+            foreach (var skillId in ev.unlockSkillIds)
+            {
+                var skill = catalog.Get<Skill>("skill", skillId);
+                var actor = s.party.SingleOrDefault(u => skill.ownerId == "crawler." + u.id);
+                if (actor == null || actor.skills.Contains(skillId)) continue;
+                actor.skills = actor.skills.Append(skillId).ToArray();
+                actor.ranks[skillId] = skill.startingRank; actor.skillPractice[skillId] = 0;
+            }
+        }
     }
     void Rest()
     {
@@ -391,6 +529,8 @@ public sealed class Game
         {
             u.hp = u.maxHp;
             u.mp = u.maxMp;
+            u.statuses.Clear();
+            u.temporaryRankModifiers.Clear();
         }
         s.message = "Safe room: party restored and checkpoint saved.";
         checkpoint = Codec.Write(s);
@@ -413,6 +553,7 @@ public sealed class Game
         var u = Actor(c.actorId);
         var i = content.items.FirstOrDefault(i => i.id == c.itemId);
         Require(u != null && i != null && (i.kind == "weapon" || i.kind == "armor" || i.kind == "charm") && s.inventory.Any(v => v.itemId == i.id && v.count > 0), "Choose owned equipment.");
+        Require(i.availability.Allows(s.floor, s.unlockedEvents), "This equipment is not available yet.");
         Require(!s.party.Any(p => p != u && p.equipment == i.id), "That item is already equipped by the other crawler.");
         Require(u.id != "carl" || i.kind != "weapon", "Carl fights with his bare hands and feet.");
         if (u.equipment != "")
@@ -436,9 +577,21 @@ public sealed class Game
         var st = s.inventory.FirstOrDefault(v => v.itemId == c.itemId);
         Require(u != null && i != null && i.kind == "consumable" && st != null && st.count > 0, "Choose an owned consumable.");
         Require(s.mode == "explore" || (s.mode == "battle" && !u.acted && !u.ended && u.hp > 0), "This crawler cannot use an item now.");
+        Require(i.availability.Allows(s.floor, s.unlockedEvents), "This item is not available yet.");
+        if (s.mode == "battle")
+        {
+            ApplyEffects(new() { sourceId = u.id, targetId = u.id, x = u.x, y = u.y, operations = [new() { kind = "heal", amount = i.heal }, new() { kind = "resource", amount = i.mp }] });
+            u = Actor(c.actorId);
+        }
+        else
+        {
+            var temporary = new Battle { units = s.party };
+            var result = EffectResolver.Resolve(temporary, new() { sourceId = u.id, targetId = u.id, operations = [new() { kind = "heal", amount = i.heal }, new() { kind = "resource", amount = i.mp }] }, content.effectRules);
+            Require(result.valid, result.reason);
+            s.party = result.state.units;
+            u = Actor(c.actorId);
+        }
         st.count--;
-        u.hp = Math.Min(u.maxHp, u.hp + i.heal);
-        u.mp = Math.Min(u.maxMp, u.mp + i.mp);
         if (s.mode == "battle")
             u.acted = true;
         s.message = i.name + " used.";
@@ -452,14 +605,16 @@ public sealed class Game
     {
         if (v == null || v.mode != "explore" || v.party == null || v.party.Count != 2 || v.party.Any(u => u == null) || v.party[0].id != "carl" || v.party[1].id != "donut" || v.inventory == null || v.cleared == null || v.journal == null || v.journal.Any(x => x == null) || v.questStage < 0 || v.questStage > 4 || v.gold < 0 || v.gold > 100000 || v.turn < 1 || !v.party.Any(u => u.id == v.selectedId))
             return false;
-        if (v.inventory.Any(i => i == null || i.count < 0 || i.count > 999 || !content.items.Any(it => it.id == i.itemId)) || v.inventory.Select(i => i.itemId).Distinct().Count() != v.inventory.Count)
+        if (v.inventory.Any(i => i == null || i.count < 0 || i.count > 999 || !content.items.Any(it => it.id == i.itemId && it.availability.Allows(1, v.unlockedEvents ?? []))) || v.inventory.Select(i => i.itemId).Distinct().Count() != v.inventory.Count)
             return false;
         foreach (var u in v.party)
         {
-            string[] expected = u.id == "carl" ? ["punch", "powerful-strike", "bomb"] : ["magic-missile", "claw"];
+            var character = catalog.Deployable(1, v.unlockedEvents ?? []).SingleOrDefault(c => (c.runtimeId == "" ? c.id.Replace("crawler.", "") : c.runtimeId) == u.id);
+            string[] expected = character?.skillIds ?? (u.id == "carl" ? ["punch", "powerful-strike", "bomb"] : ["magic-missile", "claw"]);
+            expected = expected.Concat(content.storyEvents.Where(e => (v.unlockedEvents ?? []).Contains(e.id)).SelectMany(e => e.unlockSkillIds).Where(id => Skill(id).ownerId == "crawler." + u.id)).Distinct().ToArray();
             if (u.name == null || u.equipment == null || u.skills == null || !u.skills.SequenceEqual(expected) || u.ranks == null || u.ranks.Count != expected.Length || expected.Any(k => !u.ranks.TryGetValue(k, out var rank) || rank < 1 || rank > 20) || u.level < 1 || u.level > 20 || u.xp < 0 || u.xp > 100000 || u.maxHp <= 0 || u.maxHp > 1000 || u.maxMp < 0 || u.maxMp > 1000 || u.hp < 0 || u.hp > u.maxHp || u.mp < 0 || u.mp > u.maxMp || u.power < 0 || u.power > 1000 || u.armor < 0 || u.armor > 1000)
                 return false;
-            if (u.equipment != "" && !content.items.Any(i => i.id == u.equipment && (i.kind == "armor" || i.kind == "charm" || (i.kind == "weapon" && u.id != "carl")) && v.inventory.Any(st => st.itemId == i.id && st.count > 0)))
+            if (u.equipment != "" && !content.items.Any(i => i.id == u.equipment && i.availability.Allows(1, v.unlockedEvents ?? []) && (i.kind == "armor" || i.kind == "charm" || (i.kind == "weapon" && u.id != "carl")) && v.inventory.Any(st => st.itemId == i.id && st.count > 0)))
                 return false;
         }
         if (v.party.Where(u => u.equipment != "").Select(u => u.equipment).Distinct().Count() != v.party.Count(u => u.equipment != ""))
@@ -474,12 +629,21 @@ public sealed class Game
             return false;
         return true;
     }
+    bool ValidStatus(EffectStatus status, View state)
+    {
+        if (status == null || status.tags == null || status.tags.Length != 0 || status.duration is < 1 or > 100 || status.strength is < 0 or > 999 || status.stacking is not ("refresh" or "replace" or "add") || (status.sourceId != "" && !state.party.Any(u => u.id == status.sourceId) && !status.sourceId.StartsWith("enemy-", StringComparison.Ordinal))) return false;
+        var temporary = content.temporaryModifiers.SingleOrDefault(d => d.id == status.id);
+        if (temporary != null) return temporary.availability.Allows(state.floor, state.unlockedEvents) && status.duration <= temporary.duration;
+        var operations = content.skills.SelectMany(k => k.effectOperations).Concat(content.effectRules.reactions.SelectMany(r => r.operations));
+        return operations.Any(op => op.kind == "status" && op.statusId == status.id && status.duration <= op.duration && (op.stacking == "add" || status.strength <= op.strength))
+            || status.id == content.effectRules.burningStatus && status.duration <= content.effectRules.burningDuration && status.strength <= content.effectRules.burningStrength;
+    }
     public View LoadSave(string json)
     {
         try
         {
             var save = Codec.Read<Save>(json);
-            if (save == null || (save.version != 1 && save.version != 2) || save.state?.world == null)
+            if (save == null || (save.version != 1 && save.version != 2 && save.version != 3) || save.state?.world == null)
                 throw new InvalidOperationException();
             var candidate = save.state;
             var sourceWorld = candidate.world;
@@ -487,6 +651,10 @@ public sealed class Game
             if (!migrate && sourceWorld.generationVersion != 4)
                 throw new NotSupportedException();
             var trustedWorld = sourceWorld.generationVersion is 0 or 1 ? World.BuildLegacy(candidate.seed) : sourceWorld.generationVersion == 2 ? World.BuildVersion2(candidate.seed) : sourceWorld.generationVersion == 3 ? World.BuildVersion3(candidate.seed) : World.Build(candidate.seed);
+            if (save.version >= 3)
+                trustedWorld = ApplyDestroyed(trustedWorld, candidate.destroyedPropIds);
+            else { candidate.destroyedPropIds = []; candidate.destroyedEncounterObjectIds = []; }
+            if (candidate.destroyedEncounterObjectIds == null || candidate.destroyedEncounterObjectIds.Distinct().Count() != candidate.destroyedEncounterObjectIds.Count || candidate.destroyedEncounterObjectIds.Any(receipt => !content.encounters.Any(e => e.effectObjects.Any(obj => obj.tags.Contains("destructible") && obj.propId == "" && receipt == e.id + ":" + obj.id)))) throw new InvalidOperationException();
             // Legacy coordinates are meaningful only against the original authored map.
             // Compare the persisted geometry before validating any checkpoint or receipt.
             if (sourceWorld.width != trustedWorld.width || sourceWorld.height != trustedWorld.height ||
@@ -502,8 +670,27 @@ public sealed class Game
                     progression.Migrate(u);
             else if (candidate.party.Any(u => !progression.ValidMastery(u)))
                 throw new InvalidOperationException();
+            if (save.version < 3)
+            {
+                candidate.floor = 1;
+                candidate.unlockedEvents = [];
+                foreach (var ev in content.storyEvents)
+                    if ((ev.trigger == "clear" && candidate.cleared.Contains(ev.triggerId) || ev.trigger == "interact" && ev.triggerId == "mordecai" && candidate.questStage >= 2) && ev.availability.Allows(1, candidate.unlockedEvents)) candidate.unlockedEvents.Add(ev.id);
+                foreach (var u in candidate.party) u.temporaryRankModifiers = new();
+            }
+            if (candidate.floor != 1 || candidate.unlockedEvents == null || candidate.unlockedEvents.Distinct().Count() != candidate.unlockedEvents.Count || candidate.unlockedEvents.Any(id => catalog.Find("storyEvent", id) == null) || candidate.party.Any(u => u.temporaryRankModifiers == null || u.temporaryRankModifiers.Count != 0))
+                throw new InvalidOperationException();
+            foreach (var eventId in candidate.unlockedEvents)
+            {
+                var ev = catalog.Get<StoryEventDefinition>("storyEvent", eventId);
+                if (!ev.availability.Allows(candidate.floor, candidate.unlockedEvents) || (ev.trigger == "clear" && !candidate.cleared.Contains(ev.triggerId)) || (ev.trigger == "interact" && (ev.triggerId == "mordecai" ? candidate.questStage < 2 : true)))
+                    throw new InvalidOperationException();
+            }
             foreach (var u in candidate.party)
+            {
+                if (u.tags == null || u.tags.Length != 0 || u.statuses == null || u.statuses.Select(status => status?.id).Distinct().Count() != u.statuses.Count || u.statuses.Any(status => !ValidStatus(status, candidate))) throw new InvalidOperationException();
                 progression.Refresh(u);
+            }
             if (migrate)
             {
                 var oldSafe = trustedWorld.objects.Where(o => o.kind == "safe" && Distance(candidate.x, candidate.y, o.x, o.y) <= 1)
@@ -540,6 +727,6 @@ public sealed class Game
         }
         catch (NotSupportedException) { s.message = "Invalid save: incompatible map version. Start a fresh run or use a supported safe-room checkpoint. Your current run is unchanged."; }
         catch { s.message = "Invalid save. Your current run is unchanged."; }
-        return s;
+        return GetView();
     }
 }

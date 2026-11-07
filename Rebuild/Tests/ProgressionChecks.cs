@@ -14,7 +14,7 @@ static class ProgressionChecks
         game.Handle(new() { type = "interact", targetId = door.id });
         Check(view.mode == "battle", "fixture encounter starts normally");
         var actor = view.party.Single(u => u.id == actorId);
-        actor.x = 1; actor.y = 2; actor.mp = 1000;
+        actor.x = 1; actor.y = 2; actor.mp = actor.maxMp = 1000;
         var other = view.party.Single(u => u != actor); other.x = 1; other.y = 5;
         var target = view.battle.enemies[0]; target.x = 2; target.y = 2;
         target.hp = target.maxHp = 10000; target.power = target.armor = 0;
@@ -88,9 +88,37 @@ static class ProgressionChecks
         }
         mage.mp = 2;
         Check(!Forecast(mg, mage, mt, "magic-missile", 3).valid, "insufficient chosen mana rejected");
+        ModifierAndLevelBoundaries(json);
         Saves(json);
         Levels(json, data);
         Console.WriteLine("PASS: mastery thresholds, old-rank boundary hits, mana choices and commit parity; progression save migration/validation; level table rewards.");
+    }
+    static void ModifierAndLevelBoundaries(string json)
+    {
+        var content = Codec.Read<Content>(json);
+        var skill = content.skills.Single(s => s.id == "punch");
+        var gear = content.items[0]; gear.rankModifiers[skill.id] = 2;
+        var progression = new Progression(content);
+        var unit = new Game(json).GetView().party[0];
+        unit.ranks[skill.id] = 1; unit.equipment = gear.id; unit.temporaryRankModifiers[skill.id] = 1;
+        progression.Refresh(unit);
+        var first = unit.skillProgress.Single(p => p.skillId == skill.id);
+        Check(first.trainedRank == 1 && first.gearBonusRank == 2 && first.effectiveRank == 4, "trained/gear/temporary ranks stay distinct and apply once");
+        progression.Refresh(unit);
+        Check(unit.ranks[skill.id] == 1 && unit.skillProgress.Single(p => p.skillId == skill.id).effectiveRank == 4, "repeated refresh never adds rank modifiers again");
+        unit.temporaryRankModifiers[skill.id] = 100;
+        Check(progression.EffectiveRank(unit, skill) == skill.permissionMaxRank, "effective rank respects permission cap");
+        unit.equipment = ""; unit.temporaryRankModifiers.Clear();
+        Check(progression.EffectiveRank(unit, skill) == 1, "removing modifiers restores trained rank");
+        foreach (var row in content.progression.levels.Skip(1))
+        {
+            var below = new Game(json).GetView().party[0];
+            progression.Reward(below, row.totalXp - 1);
+            Check(below.level == row.level - 1, "one XP below level threshold " + row.level);
+            progression.Reward(below, 1);
+            Check(below.level == row.level, "exact level threshold " + row.level);
+        }
+        Check(content.skills.Select(s => s.id).Order().SequenceEqual(new[] { "bomb", "claw", "magic-missile", "powerful-strike", "punch" }), "all five existing authored skills retained");
     }
     static void Levels(string json, JsonNode data)
     {
@@ -101,6 +129,7 @@ static class ProgressionChecks
             var fixture = JsonNode.Parse(json);
             fixture["encounters"].AsArray().Single(e => e["id"].GetValue<string>() == "false-guild")["xpReward"] = reward;
             var (game, view, actor, target) = Arena(fixture.ToJsonString());
+            actor.maxMp = new Game(json).GetView().party.Single(u => u.id == actor.id).maxMp;
             actor.mp = actor.maxMp;
             var baseStats = view.party.Select(u => (u.maxHp, u.maxMp, u.power, u.armor)).ToArray();
             target.hp = 1;
@@ -128,9 +157,16 @@ static class ProgressionChecks
         sv.inventory.Add(new() { itemId = item.id, count = 1 });
         source.Handle(new() { type = "equip", actorId = "carl", itemId = item.id });
         Check(sv.party[0].equipment == item.id, "roundtrip equipment fixture equipped normally");
-        var save = SafeSave(source); Check(JsonNode.Parse(save)["version"].GetValue<int>() == 2, "new saves are progression version 2");
+        var save = SafeSave(source); Check(JsonNode.Parse(save)["version"].GetValue<int>() == 3, "new saves are foundation version 3");
         var receiver = new Game(json, 2); receiver.LoadSave(save);
         Check(!receiver.GetView().message.StartsWith("Invalid save"), "valid v2 loads");
+        var versionTwo = JsonNode.Parse(save); versionTwo["version"] = 2;
+        versionTwo["state"].AsObject().Remove("unlockedEvents");
+        versionTwo["state"].AsObject().Remove("floor");
+        foreach (var oldUnit in versionTwo["state"]["party"].AsArray()) oldUnit.AsObject().Remove("temporaryRankModifiers");
+        receiver.LoadSave(versionTwo.ToJsonString());
+        Check(!receiver.GetView().message.StartsWith("Invalid save") && receiver.GetView().floor == 1 && receiver.GetView().unlockedEvents != null && receiver.GetView().party.All(u => u.temporaryRankModifiers != null), "v2 migrates foundation state into v3");
+        Check(JsonNode.Parse(SafeSave(receiver))["version"].GetValue<int>() == 3, "migrated v2 writes v3 envelope");
         var loaded = receiver.GetView().party[0]; var equipped = sv.party[0];
         Check(loaded.power == equipped.power && loaded.armor == equipped.armor && loaded.equipment == equipped.equipment && Codec.Write(loaded.skillPractice) == Codec.Write(equipped.skillPractice), "v2 equipment/stat/practice roundtrip without doubled bonuses");
         receiver.LoadSave(SafeSave(receiver));
